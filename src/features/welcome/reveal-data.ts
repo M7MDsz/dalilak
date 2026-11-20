@@ -20,10 +20,8 @@ export interface RevealStageInfo {
 export interface RevealJobCard {
   readonly id: JobId;
   readonly title: string;
-  /** «وادي الغيم للبيانات · الرياض» (the «جهة تجريبية» tag is drawn beside it). */
+  /** «وادي الغيم للبيانات · الرياض». 21 Nov 2026 (owner): no sample or practice label is drawn beside any job. */
   readonly companyCity: string;
-  /** A real posting (no sample tag); false for the one practice job («وظيفة تدريبية»). */
-  readonly real: boolean;
   readonly field: string;
   readonly fieldId: FieldId;
   readonly stages: number;
@@ -54,7 +52,6 @@ function jobCard(id: JobId): RevealJobCard {
     id,
     title: job.title,
     companyCity: companyCityLine(id),
-    real: job.real,
     field: getField(job.field).name,
     fieldId: job.field,
     stages: summary.stages,
@@ -100,4 +97,49 @@ export function revealData(answers: OnboardingAnswers): RevealData {
       lit: field.id === recommendedField || interests.has(field.id),
     })),
   };
+}
+
+/** `k` items spread evenly through `list` (its first, its last and the ones between), in list order. */
+function spread<T>(list: readonly T[], k: number): T[] {
+  if (k <= 0) return [];
+  if (list.length <= k) return [...list];
+  return Array.from({ length: k }, (_, i) => list[Math.floor(((i + 0.5) * list.length) / k)] as T);
+}
+
+/**
+ * 21 Nov 2026 (the catalogue grew from 20 jobs to 84; drawn whole, the sweep and the narrowing filled the screen, ran
+ * under the answers, the logo and the status line): the tiles ONE scene draws, a readable sample of `count`. It always
+ * holds the three chosen jobs, then about a third that fit the answers and the rest that do not, the fitting ones spread
+ * evenly through it so the sort is seen everywhere at once. Deterministic: the same answers draw the same sample. The
+ * status line still says the real count («أقارن ملفك مع ٨٤ وظيفة»).
+ */
+export function sampleTiles(tiles: RevealData["tiles"], chosen: readonly JobId[], count: number): RevealData["tiles"] {
+  if (tiles.length <= count) return tiles;
+  const picked = new Set<JobId>(chosen);
+  const three = chosen.map((id) => tiles.find((t) => t.id === id)).filter((t): t is RevealData["tiles"][number] => t !== undefined);
+  const fitTarget = Math.max(three.length, Math.round(count * 0.35));
+  const extraFits = spread(
+    tiles.filter((t) => t.fits && !picked.has(t.id)),
+    fitTarget - three.length,
+  );
+  // the chosen three sit apart among the fitting ones (never side by side), so their gathering in the narrowing is seen
+  const fitCount = extraFits.length + three.length;
+  const threeAt = new Map(three.map((tile, i) => [Math.floor(((i + 0.5) * fitCount) / three.length), tile] as const));
+  let e = 0;
+  const fits = Array.from({ length: fitCount }, (_, j) => threeAt.get(j) ?? (extraFits[e++] as RevealData["tiles"][number]));
+  const others = spread(
+    tiles.filter((t) => !t.fits && !picked.has(t.id)),
+    count - fits.length,
+  );
+  const slots = new Set(fits.map((_, j) => Math.floor(((j + 0.5) * count) / fits.length)));
+  const out: RevealData["tiles"][number][] = [];
+  let f = 0;
+  let o = 0;
+  for (let i = 0; i < count; i++) {
+    const next = slots.has(i) ? fits[f++] : others[o++];
+    if (next) out.push(next);
+  }
+  // a short catalogue side (fewer others than slots) leaves nothing out: the rest of the fitting ones close the list
+  while (f < fits.length) out.push(fits[f++] as RevealData["tiles"][number]);
+  return out;
 }

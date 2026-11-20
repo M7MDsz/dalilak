@@ -198,11 +198,15 @@ function Station({
     const tile = document.querySelector<HTMLElement>("[data-reveal-target-tile]");
     if (!tile) return;
     const from = tile.getBoundingClientRect();
+    // the rest place, without the transform a first run left behind (Strict Mode runs this twice; a stopped flight keeps
+    // its transform), or the title would fly from where it already is
+    el.style.transform = "";
     const to = el.getBoundingClientRect();
     tile.style.visibility = "hidden";
     const dx = from.left + from.width / 2 - (to.left + to.width / 2);
     const dy = from.top + from.height / 2 - (to.top + to.height / 2);
     const s = Math.max(0.6, Math.min(1.6, from.height / Math.max(1, to.height)));
+    el.style.transform = `translateX(${dx}px) translateY(${dy}px) scale(${s})`; // on the tile from this very frame
     const flight = animate(el, { x: [dx, 0], y: [dy, 0], scale: [s, 1] }, tween.draw);
     return () => flight.stop();
   }, [titleTravels, node.kind]);

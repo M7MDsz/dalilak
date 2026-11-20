@@ -107,7 +107,9 @@ function WelcomeFlow({ user }: { user: UserState }) {
           </AnimatePresence>
         </motion.header>
 
-        <AnimatePresence initial={false} mode="wait">
+        {/* popLayout (the reveal agent's hand-off, 21 Nov 2026): the reveal mounts in the same frame the chat starts its
+            150 ms fade, so no empty paper frame shows between them */}
+        <AnimatePresence initial={false} mode="popLayout">
           {phase.kind === "chat" ? (
             <motion.div className="relative z-10" exit={{ opacity: 0, transition: tween.exit }} key="chat">
               <Conversation onDone={(rects) => setPhase({ kind: "reveal", rects, startOnResult: instant })} user={user} />

@@ -84,11 +84,15 @@ export const OVERLAY_TIMING = {
 /** Spec 3.2 / 4.5: «دليلك» "thinks" for 350-600 ms before each onboarding reply; phase 2 starts 1.2 s after the closing line. */
 export const ONBOARDING_TIMING = { thinkMinMs: 350, thinkMaxMs: 600, closingHoldMs: 1_200 } as const;
 
-/** Spec 4.7: the path-reveal sequence, 7.8 s in total. */
+/**
+ * Spec 4.7: the path-reveal sequence, 7.8 s in total. 21 Nov 2026: answers-gather 1.2 → 1.4 s (the six answers now really
+ * travel from «ملفك» to the cluster, 0.8 s each, 60 ms apart, and need a beat at rest before the jobs pass); jobs-sweep
+ * and skills-map 1.5 → 1.4 s each, so the total is unchanged.
+ */
 export const REVEAL_SEQUENCE = [
-  { id: "answers-gather", ms: 1_200 },
-  { id: "jobs-sweep", ms: 1_500 },
-  { id: "skills-map", ms: 1_500 },
+  { id: "answers-gather", ms: 1_400 },
+  { id: "jobs-sweep", ms: 1_400 },
+  { id: "skills-map", ms: 1_400 },
   { id: "narrow-to-three", ms: 1_300 },
   { id: "path-draw", ms: 1_500 },
   { id: "reveal-landing", ms: 800 },
@@ -129,13 +133,13 @@ export const ADVISOR_APPLY_STEPS = [
 
 /**
  * 20 Nov 2026 (real jobs): the simulated multi-site step is gone. When «دليلك» applies to the PRACTICE job, the
- * confirmation stays up this long (about what the four simulated sites took, so the demo's rhythm holds) and ends with
- * the honest line «وظيفة تدريبية: في الوظائف الحقيقية أفتح لك الإعلان الأصلي عشان ترسله». A REAL job's application is
+ * confirmation («تم حفظ طلبك») stays up this long (about what the four simulated sites took, so the demo's rhythm
+ * holds). A REAL job's application is
  * prepared, then the sheet stays open on «افتح الإعلان الأصلي وقدّم» until the user acts.
  */
 export const APPLY_PRACTICE_DONE_MS = 3_400;
 
-/** Spec 3.8: «جارٍ الإرسال…» when the user sends the sheet by hand. */
+/** Spec 3.8: «جارٍ الحفظ…» when the user saves the sheet by hand. */
 export const MANUAL_SEND_MS = 1_200;
 
 /** v3 3.4: `map-open` lengths. */

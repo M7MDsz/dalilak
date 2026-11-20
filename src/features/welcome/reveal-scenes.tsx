@@ -1,14 +1,16 @@
 "use client";
 // Owner: welcome. The scenes of the path reveal's first four steps (spec 4.7; playbook 3.3). Every scene shows the user's
-// real data: their six answers, the real twenty jobs (the ones the answers point at stay stronger), the real 38 skills in
-// 7 fields, and the three jobs that were really chosen. Layers live across steps where the story continues (the answers
-// stay while the jobs pass; the twenty tiles become three); only the status line rolls.
-//   answers-gather   the six answers travel from where they sat in «ملفك يتكوّن» and gather round «دليلك»'s compass
-//   jobs-sweep       twenty job tiles pass in rows under the answers; mid-pass the ones that do not fit drop back
-//   skills-map       the skill landscape: seven fields, one dot per skill; the fields light in turn and the ones the
-//                    answers point at stay lit
-//   narrow-to-three  the twenty, then seventeen leave and three glide into one row; the recommended one in the middle
-//                    (in step 5 it travels onto the trophy: path-sheet.tsx finds it by [data-reveal-target-tile])
+// real data: their six answers, real jobs of the catalogue (the ones the answers point at stay stronger), the real skills
+// in their fields, and the three jobs that were really chosen. Layers live across steps where the story continues (the
+// answers stay while the jobs pass; the grid of tiles becomes three); only the status line rolls.
+//   answers-gather   the six answers lift off where they sat in «ملفك يتكوّن» and gather round «دليلك»'s compass
+//   jobs-sweep       a few rows of job tiles (a sample of the catalogue) pass under the answers; mid-pass the ones that
+//                    do not fit drop back
+//   skills-map       the skill landscape: one hill per field, one dot per skill; the fields light in turn and the ones
+//                    the answers point at stay lit
+//   narrow-to-three  a grid of tiles, then all but three leave and the three glide into one row, the recommended one in
+//                    the middle (in step 5 it travels onto the trophy: path-sheet.tsx finds it by [data-reveal-target-tile])
+// Every scene fits inside the stage (between the top bar and the status line) on a desktop and on a phone.
 import { AnimatePresence, animate, motion } from "motion/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
@@ -33,7 +35,7 @@ import { ease, spring, tween } from "@/lib/motion";
 import type { FieldId, JobId, QuestionId } from "@/lib/types";
 
 import type { AnswerRects } from "./conversation";
-import type { RevealData } from "./reveal-data";
+import { sampleTiles, type RevealData } from "./reveal-data";
 
 
 // ------------------------------------------------------------------------------------------------ 1. answers-gather
@@ -43,24 +45,33 @@ export function AnswerCluster({ answers, rects, compact, phone }: { answers: Rev
   const refs = useRef(new Map<QuestionId, HTMLSpanElement>());
   const travels = !instant && rects !== null && Object.keys(rects).length > 0;
 
-  // FLIP: each answer starts where it sat in «ملفك يتكوّن» (measured when the conversation ended) and travels here
+  // FLIP: each answer starts where it sat in «ملفك يتكوّن» (measured when the conversation ended) and travels here.
+  // 21 Nov 2026 (owner: "buggy and not visible"): the travel never showed. The rest place was measured with the
+  // transform a first run had already put on the pill (Strict Mode runs this effect twice; a stopped animation leaves
+  // its transform behind), so every answer "travelled" zero pixels and only faded in, in the middle of an empty screen.
+  // Now the transform is cleared before measuring, and each answer starts fully visible ON its slot (it is the same
+  // word the reader just saw there), then lifts off and travels to the cluster while the night falls around it.
   useLayoutEffect(() => {
     if (!travels || !rects) return;
-    // one travel at walking pace (the draw tempo: 900 ms, eased in and out), 50 ms apart, so the eye follows each answer
+    // one travel at walking pace (800 ms, eased in and out), 60 ms apart, so the eye follows each answer; the last one
+    // lands about 1.15 s in, and answers-gather (1.4 s) holds the gathered row for a beat before the jobs pass
     const controls = answers.flatMap((a, i) => {
       const el = refs.current.get(a.question);
       const from = rects[a.question];
       if (!el) return [];
+      el.style.transform = "";
       const to = el.getBoundingClientRect();
-      if (!from) return [animate(el, { opacity: [0, 1], scale: [0.8, 1] }, { ...spring.pop, delay: 0.3 + i * 0.05 })];
+      if (!from || to.width === 0) return [animate(el, { opacity: [0, 1], scale: [0.8, 1] }, { ...spring.pop, delay: 0.3 + i * 0.06 })];
       const dx = from.left + from.width / 2 - (to.left + to.width / 2);
       const dy = from.top + from.height / 2 - (to.top + to.height / 2);
-      const s = Math.max(0.55, Math.min(1, from.height / to.height));
-      const delay = 0.04 + i * 0.05;
-      return [
-        animate(el, { x: [dx, 0], y: [dy, 0], scale: [s, 1] }, { ...tween.draw, delay }),
-        animate(el, { opacity: [0, 1] }, { duration: 0.32, ease: ease.out, delay }),
-      ];
+      // start at the size the word had on its slot: the pill's text line is about 60 % of its height, and the pill is
+      // never wider than the slot (a phone's slots sit side by side in one narrow row: wider pills overlapped there)
+      const s = Math.max(0.4, Math.min(1, from.height / (to.height * 0.6), from.width / to.width));
+      const delay = 0.06 + i * 0.06;
+      // on its slot from this very frame (the animation's first frame would come one frame late)
+      el.style.transform = `translateX(${dx}px) translateY(${dy}px) scale(${s})`;
+      el.style.opacity = "1";
+      return [animate(el, { x: [dx, 0], y: [dy, 0], scale: [s, 1] }, { duration: 0.8, ease: ease.inOut, delay })];
     });
     return () => controls.forEach((c) => c.stop());
   }, [travels, rects, answers]);
@@ -103,16 +114,26 @@ export function AnswerCluster({ answers, rects, compact, phone }: { answers: Rev
 
 // ------------------------------------------------------------------------------------------------ 2. jobs-sweep
 
-export function JobSweep({ tiles, phone }: { tiles: RevealData["tiles"]; phone: boolean }) {
-  const perRow = phone ? 5 : 7;
+/** The sweep's rows: three on a desktop, four narrower ones on a phone; each row is wider than the screen so it passes. */
+const SWEEP = { desktop: { rows: 3, perRow: 9 }, phone: { rows: 4, perRow: 5 } } as const;
+
+/**
+ * jobs-sweep: a few rows of job tiles pass once under the gathered answers (which have moved up out of their way); mid-pass
+ * the ones that do not fit drop back. 21 Nov 2026: a sample of the catalogue (sampleTiles), not all 84: drawn whole
+ * they filled the screen in twelve rows and ran under the answers, the logo and the status line. The rows bleed to the
+ * screen's edges (the stage's gutters would cut them in mid-air) and fade in as they start moving.
+ */
+export function JobSweep({ tiles, chosen, phone }: { tiles: RevealData["tiles"]; chosen: readonly JobId[]; phone: boolean }) {
+  const { rows: rowCount, perRow } = phone ? SWEEP.phone : SWEEP.desktop;
+  const sample = sampleTiles(tiles, chosen, rowCount * perRow);
   const rows: (typeof tiles)[number][][] = [];
-  tiles.forEach((tile, i) => {
+  sample.forEach((tile, i) => {
     const r = Math.floor(i / perRow);
     (rows[r] ??= []).push(tile);
   });
   return (
-    <div className="w-full translate-y-16">
-      <SweepRows distance={phone ? 180 : 260} duration={1.5} rows={rows} sortDelay={0.55} />
+    <div className={cn("w-screen max-w-none shrink-0", phone ? "translate-y-12" : "translate-y-14")}>
+      <SweepRows distance={phone ? 160 : 240} duration={1.4} rows={rows} sortDelay={0.5} />
     </div>
   );
 }
@@ -138,7 +159,7 @@ export function FieldIcon({ field, size = 20, className }: { field: FieldId; siz
   return <Icon className={className} size={size} waypoint="muted" />;
 }
 
-const PASS_S = 1.25; // the whole lighting pass (step 3 is 1.5 s)
+const PASS_S = 1.2; // the whole lighting pass (step 3 is 1.4 s)
 
 /** A closed, gently irregular ring (a contour line of a small hill), deterministic per field. */
 function islandRing(cx: number, cy: number, rx: number, ry: number, seed: number): string {
@@ -155,17 +176,19 @@ function islandRing(cx: number, cy: number, rx: number, ry: number, seed: number
 }
 
 /**
- * skills-map: the skill landscape. Seven small hills (one per field), each drawn as three contour rings with one dot per
- * skill on its middle ring (7, 6, 5, 5, 5, 5, 5 = 38). The fields light in turn as their rings are drawn; the ones the
- * answers point at stay lit, the others settle back. On a desktop the hills step up and down like a range.
+ * skills-map: the skill landscape. One small hill per field, each drawn as three contour rings with one dot per skill on
+ * its middle ring. The fields light in turn as their rings are drawn; the ones the answers point at stay lit, the others
+ * settle back. 21 Nov 2026: sized for the whole catalogue (about twenty fields, not seven): seven hills a row on a
+ * desktop, five on a phone, so the landscape fits inside the stage (on a phone it ran under the logo and the status
+ * line); the desktop's up-and-down step is gone (with three rows it read as a jumble, not a range).
  */
 export function SkillLandscape({ fields, phone }: { fields: RevealData["fields"]; phone: boolean }) {
   const instant = useInstant();
   const n = fields.length;
-  const W = phone ? 80 : 132;
-  const H = phone ? 60 : 92;
+  const W = phone ? 56 : 120;
+  const H = phone ? 42 : 80;
   return (
-    <div className={cn("flex w-full flex-wrap items-start justify-center", phone ? "max-w-[22rem] gap-x-2 gap-y-6" : "max-w-[64rem] gap-x-4")}>
+    <div className={cn("flex w-full flex-wrap items-start justify-center", phone ? "max-w-[22rem] gap-x-1.5 gap-y-3" : "max-w-[64rem] gap-x-4 gap-y-5")}>
       {fields.map((field, k) => {
         const start = 0.1 + (k / n) * (PASS_S - 0.4);
         const rest = field.lit ? 1 : 0.46;
@@ -185,7 +208,6 @@ export function SkillLandscape({ fields, phone }: { fields: RevealData["fields"]
             data-lit={field.lit ? "" : undefined}
             initial={false}
             key={field.id}
-            style={{ marginTop: !phone && k % 2 === 1 ? 44 : 0 }}
             transition={{ duration: PASS_S, times: [0, start / PASS_S, (start + 0.18) / PASS_S, (start + 0.34) / PASS_S, 1], ease: "easeOut" }}
           >
             <span className="relative block" style={{ width: W, height: H }}>
@@ -210,17 +232,17 @@ export function SkillLandscape({ fields, phone }: { fields: RevealData["fields"]
                     cy={dot.y}
                     initial={instant ? false : { scale: 0, opacity: 0 }}
                     key={i}
-                    r={phone ? 2.75 : 3.5}
+                    r={phone ? 2.25 : 3.25}
                     style={{ transformBox: "fill-box", transformOrigin: "center" }}
                     transition={{ default: spring.pop, opacity: tween.fast, delay: start + 0.22 + i * 0.03 }}
                   />
                 ))}
               </svg>
               <span className="absolute inset-0 grid place-items-center text-fg">
-                <FieldIcon field={field.id} size={phone ? 16 : 22} />
+                <FieldIcon field={field.id} size={phone ? 14 : 20} />
               </span>
             </span>
-            <span className={cn("font-medium text-fg [text-wrap:balance]", phone ? "w-20 text-caption" : "w-32 text-small")}>{field.name}</span>
+            <span className={cn("font-medium text-fg [text-wrap:balance]", phone ? "w-[3.75rem] text-caption leading-4" : "w-32 text-small")}>{field.name}</span>
           </motion.div>
         );
       })}
@@ -230,8 +252,12 @@ export function SkillLandscape({ fields, phone }: { fields: RevealData["fields"]
 
 // ------------------------------------------------------------------------------------------------ 4. narrow-to-three
 
-export function NarrowToThree({ tiles, three, recommended, phone }: { tiles: RevealData["tiles"]; three: readonly [JobId, JobId, JobId]; recommended: JobId; phone: boolean }) {
+/** The narrowing's grid (21 Nov 2026: a sample that fits the stage; the whole catalogue ran off its top and bottom). */
+const NARROW_TILES = { desktop: 20, phone: 10 } as const;
+
+export function NarrowToThree({ tiles: all, three, recommended, phone }: { tiles: RevealData["tiles"]; three: readonly [JobId, JobId, JobId]; recommended: JobId; phone: boolean }) {
   const instant = useInstant();
+  const tiles = sampleTiles(all, three, phone ? NARROW_TILES.phone : NARROW_TILES.desktop);
   const [narrowed, setNarrowed] = useState(instant);
   useEffect(() => {
     if (instant) return;

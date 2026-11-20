@@ -12,12 +12,12 @@
 // takes over directly (no leave fade: the sheet must stay on screen until the map opens out of it).
 import { AnimatePresence, LayoutGroup, motion, type Variants } from "motion/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 
 import { IconArrowForward, IconCheck, IconCompany } from "@/components/icons";
 import { RollingStatus } from "@/components/chat";
-import { useInstant, useShow, type RevealStepId, type ShowStep } from "@/components/motion";
-import { Button, Card, SampleTag, cn } from "@/components/ui";
+import { useInstant, useShow, useStill, type RevealStepId, type ShowStep } from "@/components/motion";
+import { Button, Card, cn } from "@/components/ui";
 import { REVEAL_SEQUENCE } from "@/lib/data";
 import { tween } from "@/lib/motion";
 import { hrefFor } from "@/lib/routes";
@@ -47,12 +47,19 @@ function subscribeResize(onChange: () => void) {
 const windowHeight = () => window.innerHeight;
 const serverHeight = () => 900;
 
-// the result's blocks come into focus in reading order (80 ms apart, under 480 ms), and leave together (150 ms)
+// the result's blocks arrive in reading order (80 ms apart, under 480 ms) with a short slide and fade, and leave together
+// (150 ms). 21 Nov 2026: no blur any more (a 4 px blur on every block read as the page loading, not arriving).
 const block: Variants = {
-  hidden: { opacity: 0, y: 8, filter: "blur(4px)" },
-  show: (delay: number) => ({ opacity: 1, y: 0, filter: "blur(0px)", transition: { ...tween.focus, delay } }),
-  leave: { opacity: 0, y: -4, filter: "blur(0px)", transition: tween.exit },
+  hidden: { opacity: 0, y: 12 },
+  show: (delay: number) => ({ opacity: 1, y: 0, transition: { ...tween.move, delay } }),
+  leave: { opacity: 0, y: -4, transition: tween.exit },
 };
+
+/** When the hidden result grid mounts: after the six answers have landed (about 1.15 s), before the jobs pass (1.4 s). */
+const GRID_AFTER_MS = 1_200;
+
+/** Reduced motion: no show and nothing travels; the result fades in over the paper instead of cutting in. */
+const REDUCED_FADE_MS = 220;
 
 export interface RevealFlowProps {
   readonly user: UserState;
@@ -69,6 +76,7 @@ export interface RevealFlowProps {
 export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: RevealFlowProps) {
   const router = useRouter();
   const instant = useInstant();
+  const still = useStill();
   const { desktop } = useViewport();
   const height = useSyncExternalStore(subscribeResize, windowHeight, serverHeight);
   const data = useMemo(() => revealData(user.answers), [user.answers]);
@@ -78,6 +86,14 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
   const [phase, setPhase] = useState<Phase>(startOnResult ? "result" : "show");
   const [stripStays, setStripStays] = useState(true);
   const [skipped, setSkipped] = useState(false);
+  // The result's grid (hidden until step 5) is mounted in the rest beat at the end of answers-gather, not with the show:
+  // mounted together with the chat's unmount it was one 150 ms task (dev build) that froze the hand-off's first frames.
+  const [gridDue, setGridDue] = useState(startOnResult);
+  useEffect(() => {
+    if (gridDue) return;
+    const timer = window.setTimeout(() => setGridDue(true), GRID_AFTER_MS);
+    return () => window.clearTimeout(timer);
+  }, [gridDue]);
   const markedRef = useRef(false);
   const markPlayed = () => {
     if (markedRef.current) return;
@@ -94,6 +110,17 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
   const stepId = STEPS[index]?.id;
 
   useOverlayHold("reveal", phase === "show");
+
+  // reduced motion (not still frames): one quick crossfade from the conversation to the result, opacity only (a Web
+  // Animation: Motion skips its own animations under reduced motion, and the CSS rule ends CSS ones at once)
+  const rootRef = useRef<HTMLDivElement>(null);
+  const fadedRef = useRef(false);
+  useLayoutEffect(() => {
+    const el = rootRef.current;
+    if (!instant || still || fadedRef.current || !el || typeof el.animate !== "function") return;
+    fadedRef.current = true;
+    el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: REDUCED_FADE_MS, easing: "ease-out" });
+  }, [instant, still]);
 
   // `revealPlayed` is saved when step 6 starts (spec 3.3)
   useEffect(() => {
@@ -166,6 +193,7 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
   const leaving = phase === "leaving";
   const state = leaving ? "leave" : visible ? "show" : "hidden";
   const resultTid = phase === "result";
+  const gridMounted = gridDue || instant || phase !== "show" || index >= 1;
   const maxSheet = Math.max(460, height - 72 - 24 - 136);
 
   const three: readonly [JobId, JobId, JobId] = [data.alternatives[0].id, data.recommended.id, data.alternatives[1].id];
@@ -174,119 +202,123 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
     <LayoutGroup>
       {/* during the show the page is exactly the viewport: PageTransition's resting translate makes .page the containing
           block of the fixed layers (the night, the show), so .page must not be taller than the screen while they play */}
-      <div className={cn("relative", phase === "show" && "h-[calc(100dvh-4rem)] overflow-hidden lg:h-[calc(100dvh-72px)]")}>
-        <main
-          className={cn(
-            "mx-auto grid w-full max-w-[76rem] gap-x-10 gap-y-6 px-gutter",
-            desktop ? "grid-cols-[minmax(0,1fr)_24rem_minmax(0,1fr)] grid-rows-[auto_auto_auto_1fr] items-start pt-6 pb-16" : "grid-cols-1 pt-2 pb-6",
-          )}
-          data-testid={resultTid ? TID.reveal.result : undefined}
-        >
-          {/* 1. heading and the recommended job (desktop: the inline-start column) */}
-          <div className={cn("flex min-w-0 flex-col gap-6", desktop && "col-start-1 row-start-1")} style={{ visibility: visible ? "visible" : "hidden" }}>
-            <motion.h1 animate={state} className={cn("text-fg", desktop ? "text-display" : "text-h1")} custom={0} initial={startOnResult ? false : "hidden"} variants={block}>
-              {RESULT_COPY.heading(firstName)}
-            </motion.h1>
-            <motion.div animate={state} custom={0.08} initial={startOnResult ? false : "hidden"} variants={block}>
-              <RecommendedCard company={data.company} job={data.recommended} />
-            </motion.div>
-          </div>
-
-          {/* 2. the path sheet (desktop: the middle column, both rows) */}
-          <motion.div
-            animate={{ opacity: leaving && !stripStays ? 0 : 1 }}
-            className={cn("min-w-0", desktop && "col-start-2 row-span-4 row-start-1")}
-            initial={false}
-            transition={tween.exit}
+      <div className={cn("relative", phase === "show" && "h-[calc(100dvh-4rem)] overflow-hidden lg:h-[calc(100dvh-72px)]")} ref={rootRef}>
+        {gridMounted ? (
+          <main
+            className={cn(
+              "mx-auto grid w-full max-w-[76rem] gap-x-10 gap-y-6 px-gutter",
+              desktop ? "grid-cols-[minmax(0,1fr)_24rem_minmax(0,1fr)] grid-rows-[auto_auto_auto_1fr] items-start pt-6 pb-16" : "grid-cols-1 pt-2 pb-6",
+            )}
+            data-testid={resultTid ? TID.reveal.result : undefined}
           >
-            <PathSheet
-              footer={visible && !(leaving && stripStays)}
-              landed={phase !== "show" || index >= 5}
-              layout={layout}
-              maxHeight={maxSheet}
-              mode={sheetMode}
-              sheetRef={sheetRef}
-              stages={data.stages}
-              summary={RESULT_COPY.summary(data.recommended.stages, data.recommended.hours)}
-              title={data.recommended.title}
-              titleTravels={!startOnResult && !instant && !skipped && index >= 4}
-            />
-          </motion.div>
-
-          {/* 3. the one primary action (phone: pinned above the fold's bottom edge until its place scrolls into view) */}
-          <motion.div
-            animate={state}
-            className={cn(desktop ? "col-start-1 row-start-3" : "sticky bottom-0 z-10 -mx-gutter border-t border-border bg-bg px-gutter py-3")}
-            custom={0.24}
-            initial={startOnResult ? false : "hidden"}
-            style={{ visibility: visible ? "visible" : "hidden" }}
-            variants={block}
-          >
-            <Button
-              className={desktop ? undefined : "w-full"}
-              data-testid={visible ? TID.reveal.accept : undefined}
-              disabled={leaving}
-              icon={<IconArrowForward size={20} />}
-              onClick={() => choose(data.recommended.id, true)}
-              size="lg"
-            >
-              {RESULT_COPY.accept}
-            </Button>
-          </motion.div>
-
-          {/* 4. why this path (desktop: under the card; phone: after the path and its button, so both fit the first screen) */}
-          <motion.section
-            animate={state}
-            aria-labelledby="reveal-why"
-            className={cn("flex min-w-0 flex-col gap-3", desktop && "col-start-1 row-start-2")}
-            custom={0.16}
-            initial={startOnResult ? false : "hidden"}
-            style={{ visibility: visible ? "visible" : "hidden" }}
-            variants={block}
-          >
-            <h2 className="text-title text-fg" id="reveal-why">
-              {RESULT_COPY.why}
-            </h2>
-            <ul className="flex flex-wrap gap-2">
-              {data.reasons.map((reason, i) => (
-                <li
-                  className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-border bg-surface py-1 ps-2.5 pe-3.5 text-small font-medium text-fg"
-                  data-testid={TID.reveal.reason(i)}
-                  key={reason}
-                >
-                  <IconCheck className="shrink-0 text-ok-fg" size={16} strokeWidth={2.5} waypoint="off" />
-                  {reason}
-                </li>
-              ))}
-            </ul>
-          </motion.section>
-
-          {/* 5. the two other directions (desktop: the inline-end column) */}
-          <section
-            aria-labelledby="reveal-alts"
-            className={cn("flex min-w-0 flex-col gap-4", desktop ? "col-start-3 row-span-4 row-start-1 pt-3" : "pt-2")}
-            style={{ visibility: visible ? "visible" : "hidden" }}
-          >
-            <motion.h2 animate={state} className="text-h3 text-fg" custom={0.32} id="reveal-alts" initial={startOnResult ? false : "hidden"} variants={block}>
-              {RESULT_COPY.altHeading}
-            </motion.h2>
-            {data.alternatives.map((job, i) => (
-              <motion.div animate={state} custom={0.4 + i * 0.04} initial={startOnResult ? false : "hidden"} key={job.id} variants={block}>
-                <AlternativeCard disabled={leaving} index={i as 0 | 1} job={job} onChoose={() => choose(job.id, false)} visible={visible} />
+            {/* 1. heading and the recommended job (desktop: the inline-start column) */}
+            <div className={cn("flex min-w-0 flex-col gap-6", desktop && "col-start-1 row-start-1")} style={{ visibility: visible ? "visible" : "hidden" }}>
+              <motion.h1 animate={state} className={cn("text-fg", desktop ? "text-display" : "text-h1")} custom={0} initial={startOnResult ? false : "hidden"} variants={block}>
+                {RESULT_COPY.heading(firstName)}
+              </motion.h1>
+              <motion.div animate={state} custom={0.08} initial={startOnResult ? false : "hidden"} variants={block}>
+                <RecommendedCard company={data.company} job={data.recommended} />
               </motion.div>
-            ))}
-            <motion.p animate={state} className="text-small text-fg-3" custom={0.48} initial={startOnResult ? false : "hidden"} variants={block}>
-              {RESULT_COPY.footer}
-            </motion.p>
-          </section>
-        </main>
+            </div>
 
-        {/* the show: scenes over the whole stage, one status line under them */}
+            {/* 2. the path sheet (desktop: the middle column, both rows) */}
+            <motion.div
+              animate={{ opacity: leaving && !stripStays ? 0 : 1 }}
+              className={cn("min-w-0", desktop && "col-start-2 row-span-4 row-start-1")}
+              initial={false}
+              transition={tween.exit}
+            >
+              <PathSheet
+                footer={visible && !(leaving && stripStays)}
+                landed={phase !== "show" || index >= 5}
+                layout={layout}
+                maxHeight={maxSheet}
+                mode={sheetMode}
+                sheetRef={sheetRef}
+                stages={data.stages}
+                summary={RESULT_COPY.summary(data.recommended.stages, data.recommended.hours)}
+                title={data.recommended.title}
+                titleTravels={!startOnResult && !instant && !skipped && index >= 4}
+              />
+            </motion.div>
+
+            {/* 3. the one primary action (phone: pinned above the fold's bottom edge until its place scrolls into view) */}
+            <motion.div
+              animate={state}
+              className={cn(desktop ? "col-start-1 row-start-3" : "sticky bottom-0 z-10 -mx-gutter border-t border-border bg-bg px-gutter py-3")}
+              custom={0.24}
+              initial={startOnResult ? false : "hidden"}
+              style={{ visibility: visible ? "visible" : "hidden" }}
+              variants={block}
+            >
+              <Button
+                className={desktop ? undefined : "w-full"}
+                data-testid={visible ? TID.reveal.accept : undefined}
+                disabled={leaving}
+                icon={<IconArrowForward size={20} />}
+                onClick={() => choose(data.recommended.id, true)}
+                size="lg"
+              >
+                {RESULT_COPY.accept}
+              </Button>
+            </motion.div>
+
+            {/* 4. why this path (desktop: under the card; phone: after the path and its button, so both fit the first screen) */}
+            <motion.section
+              animate={state}
+              aria-labelledby="reveal-why"
+              className={cn("flex min-w-0 flex-col gap-3", desktop && "col-start-1 row-start-2")}
+              custom={0.16}
+              initial={startOnResult ? false : "hidden"}
+              style={{ visibility: visible ? "visible" : "hidden" }}
+              variants={block}
+            >
+              <h2 className="text-title text-fg" id="reveal-why">
+                {RESULT_COPY.why}
+              </h2>
+              <ul className="flex flex-wrap gap-2">
+                {data.reasons.map((reason, i) => (
+                  <li
+                    className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-border bg-surface py-1 ps-2.5 pe-3.5 text-small font-medium text-fg"
+                    data-testid={TID.reveal.reason(i)}
+                    key={reason}
+                  >
+                    <IconCheck className="shrink-0 text-ok-fg" size={16} strokeWidth={2.5} waypoint="off" />
+                    {reason}
+                  </li>
+                ))}
+              </ul>
+            </motion.section>
+
+            {/* 5. the two other directions (desktop: the inline-end column) */}
+            <section
+              aria-labelledby="reveal-alts"
+              className={cn("flex min-w-0 flex-col gap-4", desktop ? "col-start-3 row-span-4 row-start-1 pt-3" : "pt-2")}
+              style={{ visibility: visible ? "visible" : "hidden" }}
+            >
+              <motion.h2 animate={state} className="text-h3 text-fg" custom={0.32} id="reveal-alts" initial={startOnResult ? false : "hidden"} variants={block}>
+                {RESULT_COPY.altHeading}
+              </motion.h2>
+              {data.alternatives.map((job, i) => (
+                <motion.div animate={state} custom={0.4 + i * 0.04} initial={startOnResult ? false : "hidden"} key={job.id} variants={block}>
+                  <AlternativeCard disabled={leaving} index={i as 0 | 1} job={job} onChoose={() => choose(job.id, false)} visible={visible} />
+                </motion.div>
+              ))}
+              <motion.p animate={state} className="text-small text-fg-3" custom={0.48} initial={startOnResult ? false : "hidden"} variants={block}>
+                {RESULT_COPY.footer}
+              </motion.p>
+            </section>
+          </main>
+        ) : null}
+
+        {/* the show: scenes over the whole stage, one status line under them. Clipped (21 Nov 2026): an answer starting
+            near the screen's edge, or a sweep row, must never widen the page (a phone's viewport zoomed out and the
+            whole stage slid sideways while the answers gathered) */}
         <AnimatePresence>
           {phase === "show" && !instant ? (
             <motion.section
               aria-label={lines[stepId ?? "answers-gather"]}
-              className="pointer-events-none fixed inset-0 z-20 bg-transparent"
+              className="pointer-events-none fixed inset-0 z-20 overflow-hidden bg-transparent"
               data-surface="stage"
               data-testid={TID.reveal.sequence}
               exit={{ opacity: 0, transition: tween.exit }}
@@ -301,7 +333,7 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
                   ) : null}
                   {index === 1 ? (
                     <Scene key="sweep">
-                      <JobSweep phone={!desktop} tiles={data.tiles} />
+                      <JobSweep chosen={three} phone={!desktop} tiles={data.tiles} />
                     </Scene>
                   ) : null}
                   {index === 2 ? (
@@ -334,14 +366,18 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
   );
 }
 
-/** A scene of the show: absolutely centred on the stage; it fades in after the leaving one has gone (150 ms). */
+/**
+ * A scene of the show: absolutely centred on the stage. It rises 8 px and fades in while the leaving one fades and lifts
+ * 4 px (150 ms), starting 40 ms in, so the two cross instead of leaving an empty night between them (21 Nov 2026: the
+ * old 150 ms wait read as a blank frame at every change of scene).
+ */
 function Scene({ children, immediate = false }: { children: React.ReactNode; immediate?: boolean }) {
   return (
     <motion.div
-      animate={{ opacity: 1, transition: { ...tween.enter, delay: 0.15 } }}
+      animate={{ opacity: 1, y: 0, transition: { ...tween.enter, delay: 0.04 } }}
       className="absolute inset-0 flex items-center justify-center px-gutter"
-      exit={{ opacity: 0, transition: tween.exit }}
-      initial={immediate ? false : { opacity: 0 }}
+      exit={{ opacity: 0, y: -4, transition: tween.exit }}
+      initial={immediate ? false : { opacity: 0, y: 8 }}
     >
       {children}
     </motion.div>
@@ -356,7 +392,6 @@ function RecommendedCard({ job, company }: { job: RevealJobCard; company: Reveal
         <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-fg-2">
           <IconCompany className="shrink-0 text-fg-3" size={18} waypoint="muted" />
           <span>{job.companyCity}</span>
-          {job.real ? null : <SampleTag kind="practice" />}
         </p>
         <p className="flex items-center gap-2 text-small text-fg-2">
           <FieldIcon className="shrink-0 text-fg-3" field={job.fieldId} size={18} />
@@ -385,7 +420,6 @@ function AlternativeCard({ job, index, onChoose, disabled, visible }: { job: Rev
         <h3 className="text-title text-fg">{job.title}</h3>
         <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-fg-2">
           <span>{job.companyCity}</span>
-          {job.real ? null : <SampleTag kind="practice" />}
         </p>
         <p className="flex items-center gap-2 text-small text-fg-2">
           <FieldIcon className="shrink-0 text-fg-3" field={job.fieldId} size={16} />
