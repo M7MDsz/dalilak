@@ -2,7 +2,8 @@
 #   push to main        -> production (dalilak-one.vercel.app)
 #   push to any branch  -> a preview link (shown in the run summary, and commented on the branch's open pull request)
 # Needs three repository secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID.
-# No model keys are set on Vercel, so «دليلك» answers with the built-in offline brain.
+# The Gemini key lives in the Vercel project settings (not here). Uploads go as one archive (--archive=tgz): the free
+# plan allows 5,000 uploaded files a day and the pre-built guide/job pages make thousands of files per deploy.
 name: Vercel
 
 on:
@@ -58,7 +59,7 @@ jobs:
       - name: Deploy
         id: deploy
         run: |
-          url=$(vercel deploy --prebuilt ${{ steps.target.outputs.flag }} --token="${{ secrets.VERCEL_TOKEN }}")
+          url=$(vercel deploy --prebuilt --archive=tgz ${{ steps.target.outputs.flag }} --token="${{ secrets.VERCEL_TOKEN }}")
           echo "url=${url}" >> "$GITHUB_OUTPUT"
           if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
             echo "Production: https://dalilak-one.vercel.app (this build: ${url})" >> "$GITHUB_STEP_SUMMARY"
