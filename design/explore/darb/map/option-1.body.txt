@@ -1,0 +1,136 @@
+<!doctype html>
+<!--
+  MASARI · Darb · the home map, option 1: THE CLIMB
+  (written by option-1.build.mjs from option-1.body.txt + option-1.css.txt; edit those, not this file)
+
+  THE IDEA
+    One trail that goes straight up the sheet. «البداية» at the bottom, the flag at the top. You read it the way you climb.
+    The map stands floor to ceiling beside the navigation, so six stations get real room and big type.
+
+  HOW IT READS
+    covered trail      a solid ink line from the trailhead to «أنت هنا»
+    you                the vermilion waypoint where the solid line ends, with Sara's tag (avatar · أنت هنا · 70%)
+    next leg           vermilion dots from the waypoint to station 3; station 3 is the only vermilion marker and its label is a card
+    the way ahead      ink dots through hollow dashed markers 4, 5, 6 to the summit flag
+    after the summit   two thin dashed side trails to two small peaks (the branch jobs)
+    labels             always on the same side of the marker, at the same distance, on the same short leader
+
+  WHAT STAYS DARB
+    paper and ink, one vermilion accent (waypoint, current station, the one primary button), brass only for XP,
+    solid line · waypoint · dotted line. Contours are hairline texture; the trail has a casing so no contour touches it.
+-->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مساري · الخريطة · الخيار 1 · الصعود</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/*CSS*/
+</style>
+</head>
+<body>
+
+<!--SPRITE-->
+
+<div class="cap"><b>Map option 1 · The Climb</b><i>1440 × 900 · one trail straight up: start at the bottom, flag at the top</i></div>
+<div id="home-frame">
+  <aside class="rail">
+    <div class="brand"><span class="lock-h word" style="font-size:27px;gap:8px"><svg class="mark" width="32" height="32"><use href="#mark"/></svg><span>مساري</span></span></div>
+    <nav class="nav">
+      <a class="on"><svg class="ic"><use href="#i-path"/></svg>مساري</a>
+      <a><svg class="ic"><use href="#i-tree"/></svg>المهارات</a>
+      <a><svg class="ic"><use href="#i-cv"/></svg>السيرة الذاتية</a>
+      <a><svg class="ic"><use href="#i-jobs"/></svg>الوظائف</a>
+      <a><svg class="ic"><use href="#i-courses"/></svg>الدورات</a>
+      <a><svg class="ic"><use href="#i-leaders"/></svg>المتصدرون</a>
+      <a><svg class="ic"><use href="#i-profile"/></svg>ملفي</a>
+    </nav>
+    <div class="daily">
+      <div class="hd"><svg class="ic"><use href="#i-streak"/></svg>السلسلة اليومية<b>4</b><small>أيام</small></div>
+      <div class="wk"><span class="d on"><u></u>ح</span><span class="d on"><u></u>ن</span><span class="d on"><u></u>ث</span><span class="d now"><u></u>ر</span><span class="d"><u></u>خ</span><span class="d"><u></u>ج</span><span class="d"><u></u>س</span></div>
+    </div>
+  </aside>
+
+  <main class="hmain">
+    <!-- the map: every station (and the summit, and each peak) is one <a class="st">, i.e. one button that opens its sheet -->
+    <div class="map climb">
+        <!--CLIMB-DESKTOP-->
+        <div class="sign">
+          <div class="e">مسارك نحو</div>
+          <h2>محلل بيانات</h2>
+          <div class="pg"><span>قطعتِ <b>2</b> من <b>6</b> محطات</span><span class="dots"><i class="d"></i><i class="d"></i><i class="n"></i><i></i><i></i><i></i></span></div>
+        </div>
+        <span class="seg2"><b>خريطة</b><span>قائمة</span></span>
+    </div>
+
+    <aside class="hside">
+      <header class="hhead"><h1>مساء الخير، سارة</h1><p>بقيت أربع محطات بينك وبين القمة. محطة اليوم تأخذ ست ساعات.</p></header>
+      <div class="uchip">
+        <div><!--AVATAR-50--><span><span class="v">سارة العتيبي</span><br><span class="k">المستوى 3 · متعلّمة</span></span></div>
+        <div><span><span class="k">نقاط الخبرة</span><br><span class="spot" style="font-size:15px"><svg><use href="#peak"/></svg>1,240 XP</span></span>
+          <span class="xpbar" style="width:76px"><span class="bar"><span class="seg f"></span><span class="seg f"></span><span class="seg"><i style="width:40%"></i></span><span class="seg"></span><span class="seg"></span></span></span></div>
+        <div><svg class="ic"><use href="#i-leaders"/></svg><span><span class="k">ترتيبك</span><br><span class="v num">7</span></span></div>
+      </div>
+
+      <div class="card ink nextc">
+        <div class="top"><span>الخطوة التالية</span><span>المحطة 3 من 6</span></div>
+        <div class="ttl"><i>3</i><h3>SQL للمبتدئين</h3></div>
+        <p>اكتبي أول استعلاماتك، واستخرجي ما تحتاجينه من الجداول. المهارة الأولى التي تنقصك لوظيفة محلل بيانات.</p>
+        <div class="meta"><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot"><svg><use href="#peak"/></svg>+200 XP</span></div>
+        <div class="gain">
+          <div><span class="k">مهارة SQL</span><span class="v"><span class="sk"><svg class="new"><use href="#peak"/></svg><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg></span><i>من 0 إلى 1</i></span></div>
+          <div><span class="k">تطابقك بعدها</span><span class="v num"><span class="ltr">78%</span><i class="ltr">+8</i></span></div>
+        </div>
+        <a class="btn btn-p">ابدأ الآن<svg class="ic"><use href="#i-arrow"/></svg></a>
+      </div>
+
+      <div class="card matchc">
+        <div class="ring" style="--s:92px"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><path class="prg" d="M60 10A50 50 0 1 0 107.55 75.45"/><circle class="end" cx="107.55" cy="75.45" r="7.5"/></svg><b>70<small>%</small></b></div>
+        <div><h4>تطابقك مع محلل بيانات</h4><p>ثلاث مهارات تفصلك عن القمة</p>
+          <div class="skills"><span class="chip chip-s miss">SQL</span><span class="chip chip-s miss">Python</span><span class="chip chip-s miss">Power BI</span></div></div>
+      </div>
+
+      <div class="card rankc">
+        <div class="hd">المتصدرون<a>الكل</a></div>
+        <div class="lbr me"><span class="rk">7</span><span class="av plain" style="--s:34px"><span class="face"><!--FACE--></span></span><span class="nm">سارة العتيبي<small>أنت</small></span><span class="spot"><svg><use href="#peak"/></svg>1,240</span></div>
+        <div class="hint">يفصلك <b class="ltr" style="color:var(--xpInk)">70 XP</b> عن المرتبة 6. دورة واحدة تكفي.</div>
+      </div>
+
+      <div class="launch"><span class="dal"><svg class="ic"><use href="#i-advisor"/></svg></span>اسأل دليل عن مسارك…<kbd>Ctrl K</kbd></div>
+    </aside>
+  </main>
+</div>
+
+<div class="cap" style="width:390px"><b>Phone</b><i>390 × 844</i></div>
+<div id="phone-frame">
+  <div class="p-top">
+    <div class="who"><!--AVATAR-44--><span><b>سارة العتيبي</b><small>المستوى 3 · متعلّمة</small></span></div>
+    <div class="p-stats"><span><svg class="ic"><use href="#i-streak"/></svg>4</span><span class="spot" style="font-size:13.5px"><svg><use href="#peak"/></svg>1,240</span></div>
+  </div>
+
+  <!-- the whole climb fits one phone screen at six stations; with seven or eight it scrolls and opens on «أنت هنا» -->
+  <div class="p-map climb sm">
+        <!--CLIMB-PHONE-->
+        <div class="sign"><div class="e">مسارك نحو</div><h2>محلل بيانات</h2></div>
+  </div>
+
+  <div class="card ink p-next">
+    <div class="row"><div class="ttl"><i>3</i><div><div class="e">الخطوة التالية</div><h3>SQL للمبتدئين</h3></div></div>
+      <div class="meta"><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot"><svg><use href="#peak"/></svg>+200 XP</span></div></div>
+    <a class="btn btn-p">ابدأ الآن<svg class="ic"><use href="#i-arrow"/></svg></a>
+  </div>
+
+  <nav class="p-tabs">
+    <a class="on"><svg class="ic"><use href="#i-path"/></svg>مساري</a>
+    <a><svg class="ic"><use href="#i-tree"/></svg>المهارات</a>
+    <span class="ask"><svg class="ic"><use href="#i-advisor"/></svg></span>
+    <a><svg class="ic"><use href="#i-jobs"/></svg>الوظائف</a>
+    <a><svg class="ic"><use href="#i-courses"/></svg>الدورات</a>
+  </nav>
+</div>
+
+</body>
+</html>

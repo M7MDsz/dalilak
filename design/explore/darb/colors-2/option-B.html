@@ -1,0 +1,1426 @@
+<!doctype html>
+<!-- colors-2 · option B · Coffee & Sky («قهوة وسماء»). Generated from design/explore/darb/colors/option-1.html by
+     design/explore/darb/colors-2/_scratch/build.mjs: same layout, text and sizes; only colours and the product name changed. -->
+<!--
+  MASARI · direction "darb" (trail and contour) · decisions made before drawing
+
+  THE ONE IDEA
+    Your skills are a terrain and Masari is its map. The match with the target job is ALTITUDE (70% = the 70 contour),
+    XP is a SPOT HEIGHT (a small summit mark with a number), a level is an INDEX CONTOUR, the roadmap is a TRAIL that
+    climbs across the contours to a summit flag. Covered distance is a solid ink line; the way ahead is a dotted trail.
+
+  THE SIGNATURE DETAIL
+    "The waypoint in the opening." A line is never closed all the way round: it opens once, and one coral waypoint dot
+    sits in or at that opening. The logo is that sentence (one trail folded into two contour arches, the waypoint between
+    its feet); every icon carries exactly one waypoint; the avatar's level ring opens for its number the way a contour
+    line opens for its height; progress (match ring, XP bar, roadmap) is always solid line, waypoint, dotted line.
+
+  COLOUR ROLES · colour option 1 "cool and confident": midnight navy, cool white, hot coral
+    paper / sheet / sunk   cool light working surfaces: pale blue-grey page, pure white cards and map sheet, blue-grey wells
+    ink 1-4                one midnight navy in four strengths; 1-3 are text (4.5:1 or better everywhere), 4 is locked line work only
+    night 1-3              the same navy as a stage: sign-in showcase, next-step card, path reveal, CV analysis, celebrations
+    blaze (hot coral)      the single accent: the waypoint, the current stage, the one primary action.
+                           A label ON coral is navy (onBlaze), never white. Coral as small text on light is blazeInk.
+    xp (gold)              XP and rewards only; xpInk = numerals on light, xpLine = gold drawn as a line on light, xpNight = on the stage
+    ok green: success only        warn amber: warning only
+    contour                the steel-blue hairline of the map (contour2 = index line, contourInk = its height figures;
+                           ncontour / ncontour2 = the same lines on the stage); never carries meaning by itself
+
+  TYPE PAIRING
+    Display: Fustat (700/800), a crisp modern Kufi whose long flat baseline reads like a drawn trail.
+    Text: Readex Pro (300-700), open, calm, with sturdy Latin digits for XP and percentages.
+    No letter-spacing on Arabic. Latin digits everywhere.
+
+  MOTION LANGUAGE
+    Things are DRAWN, not popped: lines travel (stroke-dashoffset), the dotted trail turns solid behind the walker,
+    a waypoint settles with one contour ripple (a 1px ring, never a glow), numbers roll like an odometer, labels slide in
+    from the line they belong to. Ease: cubic-bezier(.2,.7,.2,1). Short (180-450ms) in the product; long draws (1.2-2s)
+    only on the night stage.
+-->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دليلك · darb · colours B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4EFE7; --sheet:#FFFDF9; --sunk:#E7DFD3; --line:#DED4C6; --line2:#A79A87;
+  --contour:#DACDBA; --contour2:#C4B297; --contourInk:#74614A;
+  --ink:#241B15; --ink2:#4B4036; --ink3:#645749; --ink4:#9F917F;
+  --night:#36241A; --night2:#47302A; --night3:#6E5444; --nink:#FBF6EE; --nink2:#D9CCBA; --nink3:#B3A28D;
+  --ncontour:#46302A; --ncontour2:#5A4034;
+  --blaze:#1A92CB; --blaze2:#1A90C7; --blaze3:#198CC2; --blazeInk:#146B95; --blazeSoft:#D5EEFA; --onBlaze:#1A120D;
+  --xp:#E9A817; --xpInk:#885C00; --xpLine:#B98200; --xpSoft:#F8EAC4; --xpNight:#FFC64A;
+  --ok:#217437; --okSoft:#D8EDD9; --warn:#AA4700; --warnSoft:#FBE3CF;
+  --display:"IBM Plex Sans Arabic",sans-serif; --text:"IBM Plex Sans Arabic",sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --wp:var(--blaze);
+}
+*{box-sizing:border-box}
+html{background:#D8D0C4}
+body{margin:0;padding:48px 0 96px;background:#D8D0C4;color:var(--ink);font-family:var(--text);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p,figure{margin:0}
+svg{display:block;flex:none}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ic .wp,.wp{fill:var(--wp);stroke:none}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.disp{font-family:var(--display)}
+
+/* page scaffolding */
+.sec{width:1520px;margin:0 auto 64px;padding:0 40px}
+.cap{direction:ltr;text-align:left;font:600 12px/1.5 ui-monospace,Consolas,monospace;color:#574D43;letter-spacing:.06em;text-transform:uppercase;margin:0 0 14px;display:flex;gap:14px;align-items:baseline}
+.cap b{color:#1E1813}
+.cap i{font-style:normal;text-transform:none;letter-spacing:0;font-weight:400;color:#6E6459}
+.note{margin-right:auto;direction:ltr;text-align:left;font:400 13px/1.6 ui-monospace,Consolas,monospace;color:#574D43;margin-top:14px;max-width:1100px}
+.board{background:var(--paper);border-radius:6px;padding:36px;position:relative}
+.board.sheet{background:var(--sheet)}
+.board.night{background:var(--night);color:var(--nink)}
+.lab{font:500 11px/1.4 ui-monospace,Consolas,monospace;direction:ltr;color:var(--ink3);letter-spacing:.04em;text-transform:uppercase}
+.night .lab{color:var(--nink3)}
+.g{display:grid;gap:20px}
+.fx{display:flex;gap:16px;align-items:center}
+.col{display:flex;flex-direction:column;gap:12px}
+
+/* logo */
+.mark{color:var(--ink)}
+.night .mark,.mark.on-night{color:var(--nink)}
+.word{font-family:var(--display);font-weight:800;line-height:1.25;color:var(--ink)}
+.night .word{color:var(--nink)}
+.lock-h{display:inline-flex;align-items:center;gap:.24em}
+.lock-v{display:inline-flex;flex-direction:column;align-items:center;gap:.1em}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 22px;border-radius:12px;border:1.5px solid transparent;font:600 16px/1 var(--text);cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .18s var(--ease),transform .12s var(--ease),border-color .18s}
+.btn .ic{width:20px;height:20px;transition:transform .25s var(--ease)}
+.btn-p{background:var(--blaze);color:var(--onBlaze)}
+.btn-p:hover,.btn-p.is-hover{background:var(--blaze2)}
+.btn-p:hover .ic,.btn-p.is-hover .ic{transform:translateX(-4px)}
+.btn-p:active,.btn-p.is-press{background:var(--blaze3);transform:scale(.975)}
+.btn-s{background:var(--sheet);color:var(--ink);border-color:var(--ink)}
+.btn-s:hover,.btn-s.is-hover{background:var(--ink);color:var(--paper)}
+.btn-s:active,.btn-s.is-press{background:#130F0B;color:var(--paper);transform:scale(.975)}
+.btn-g{background:none;color:var(--ink);padding:0 6px;border-radius:6px;height:40px;background-image:linear-gradient(90deg,var(--ink3) 0 5px,transparent 5px 10px);background-size:10px 1.5px;background-repeat:repeat-x;background-position:0 calc(100% - 6px)}
+.btn-g:hover,.btn-g.is-hover{background-image:linear-gradient(var(--ink),var(--ink))}
+.btn-g:active,.btn-g.is-press{background-image:linear-gradient(var(--blaze),var(--blaze));color:var(--blazeInk)}
+.btn-sm{height:38px;padding:0 16px;font-size:14px;border-radius:10px}
+.night .btn-s{background:transparent;color:var(--nink);border-color:var(--nink2)}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;border:1.5px solid var(--line2);background:var(--sheet);font:500 15px/1 var(--text);color:var(--ink);white-space:nowrap}
+.chip.is-on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chip.is-on::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blaze)}
+.chip.is-hover{border-color:var(--ink)}
+.chip-s{height:28px;padding:0 10px;font-size:12.5px;border-radius:14px;border-width:1px;gap:6px}
+.tag{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px;border-radius:5px;font:500 11.5px/1 var(--text);color:var(--ink3);border:1px dashed var(--line2);white-space:nowrap}
+.night .tag{color:var(--nink3);border-color:var(--night3)}
+
+/* inputs */
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font:500 14px/1.4 var(--text);color:var(--ink2)}
+.input{height:52px;border-radius:12px;border:1.5px solid var(--line2);background:var(--sheet);padding:0 16px;font:400 16px/1 var(--text);color:var(--ink);display:flex;align-items:center;gap:10px}
+.input.is-focus{border-color:var(--ink);box-shadow:0 0 0 3px var(--sunk)}
+.input .ph{color:var(--ink3)}
+.caret{width:1.5px;height:22px;background:var(--blaze)}
+
+/* cards */
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:16px;padding:20px;position:relative}
+.card.ink{background:var(--night);border-color:var(--night);color:var(--nink)}
+.legend{position:absolute;top:-10px;inset-inline-start:16px;padding:0 8px;background:var(--bg,var(--paper));font:600 12.5px/20px var(--text);color:var(--ink3);display:flex;align-items:center;gap:6px}
+.legend::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blaze)}
+.eyebrow{font:600 12.5px/1.4 var(--text);color:var(--ink3)}
+.card.ink .eyebrow{color:var(--nink2)}
+.h-card{font:700 20px/1.4 var(--display)}
+.meta{display:flex;gap:14px;align-items:center;font:400 13.5px/1.4 var(--text);color:var(--ink2);flex-wrap:wrap}
+.meta .ic{width:18px;height:18px;stroke-width:1.75}
+.meta span{display:inline-flex;gap:6px;align-items:center}
+.card.ink .meta{color:var(--nink2)}
+
+/* XP as a spot height */
+.spot{display:inline-flex;align-items:center;gap:5px;font:700 14px/1 var(--text);color:var(--xpInk);direction:ltr;font-variant-numeric:tabular-nums}
+.spot svg{width:12px;height:11px}
+.spot svg path{fill:var(--xp)}
+.night .spot,.card.ink .spot{color:var(--xpNight)}
+.night .spot svg path,.card.ink .spot svg path{fill:var(--xpNight)}
+
+/* match ring */
+.ring{position:relative;width:var(--s,120px);height:var(--s,120px);flex:none}
+.ring svg{width:100%;height:100%}
+.ring .trk{fill:none;stroke:var(--line2);stroke-width:5;stroke-linecap:round;stroke-dasharray:.1 9.82}
+.ring .prg{fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round}
+.ring .end{fill:var(--blaze);stroke:var(--bg,var(--sheet));stroke-width:3.5}
+.ring b{position:absolute;inset:0;text-align:center;font:800 calc(var(--s,120px)*.27)/var(--s,120px) var(--display);direction:ltr;white-space:nowrap}
+.ring b small{font-size:.5em;font-weight:700;margin-inline-start:1px}
+.night .ring .trk,.card.ink .ring .trk{stroke:var(--nink3)}
+.night .ring .prg,.card.ink .ring .prg{stroke:var(--nink)}
+.night .ring .end,.card.ink .ring .end{stroke:var(--night)}
+
+/* XP bar = a map scale bar */
+.xpbar{direction:rtl}
+.xpbar .bar{display:flex;height:12px;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;background:var(--sheet)}
+.xpbar .seg{flex:1;border-inline-end:1.5px solid var(--ink);position:relative}
+.xpbar .seg:last-child{border:0}
+.xpbar .seg.f{background:var(--xp)}
+.xpbar .seg i{position:absolute;inset-block:0;inset-inline-start:0;background:var(--xp);border-inline-end:1.5px solid var(--ink)}
+.xpbar .ticks{display:flex;justify-content:space-between;font:400 11px/1 var(--text);color:var(--ink3);margin-top:6px;font-variant-numeric:tabular-nums}
+.xpbar .ticks span{direction:ltr}
+.night .xpbar .bar,.card.ink .xpbar .bar{border-color:var(--nink2);background:transparent}
+.night .xpbar .seg,.card.ink .xpbar .seg{border-color:var(--nink2)}
+
+/* skill level marks: three peaks */
+.sk{display:inline-flex;gap:3px;align-items:flex-end;direction:rtl}
+.sk svg{width:13px;height:12px}
+.sk path{fill:none;stroke:var(--ink4);stroke-width:1.5;stroke-linejoin:round;stroke-dasharray:1.6 1.6}
+.sk .on path{fill:var(--ink);stroke:var(--ink);stroke-dasharray:none}
+.sk .new path{fill:var(--blaze);stroke:var(--blaze);stroke-dasharray:none}
+.card.ink .sk .on path,.night .sk .on path{fill:var(--nink);stroke:var(--nink)}
+.card.ink .sk path,.night .sk path{stroke:var(--nink3)}
+
+/* avatars */
+.av{position:relative;display:inline-block;width:var(--s,48px);height:var(--s,48px);flex:none}
+.av .face{position:absolute;inset:calc(var(--s,48px)*.105);width:auto;height:auto;border-radius:50%;overflow:hidden;background:var(--sunk)}
+.av .face svg{width:100%;height:100%}
+.av.plain .face{inset:0}
+.av .rg{position:absolute;inset:0;width:100%;height:100%;transform:scaleX(-1)}
+.av .rg circle{fill:none;stroke-width:4;stroke-linecap:round}
+.av .rg .t{stroke:var(--line2)}
+.av .rg .p{stroke:var(--rc,var(--ink))}
+.av .lv{position:absolute;bottom:calc(var(--s,48px)*-.045);left:50%;transform:translateX(-50%);font:800 calc(var(--s,48px)*.2)/1 var(--display);color:var(--rcInk,var(--rc,var(--ink)));direction:ltr}
+.night .av .rg .t,.card.ink .av .rg .t{stroke:var(--night3)}
+.night .av .rg .p,.card.ink .av .rg .p{stroke:var(--rc,var(--nink))}
+.night .av .lv,.card.ink .av .lv{color:var(--rc,var(--nink))}
+
+/* streak */
+.wk{display:flex;gap:0;align-items:center;direction:rtl}
+.wk .d{display:flex;flex-direction:column;align-items:center;gap:6px;font:400 11px/1 var(--text);color:var(--ink3);width:30px;position:relative}
+.wk .d::before{content:"";position:absolute;top:7px;inset-inline-start:50%;width:30px;border-top:2px dotted var(--line2)}
+.wk .d:last-child::before{display:none}
+.wk .d.on::before{border-top:2px solid var(--ink)}
+.wk .d.now::before{border-top:2px dotted var(--line2)}
+.wk .d u{position:relative;z-index:1;width:16px;height:16px;border-radius:50%;border:2px dotted var(--line2);background:var(--bg,var(--sheet))}
+.wk .d.on u{border:0;background:var(--ink)}
+.wk .d.now u{border:0;background:var(--blaze);box-shadow:0 0 0 3px var(--bg,var(--sheet)),0 0 0 4.5px var(--blaze)}
+.wk .d.now{color:var(--ink);font-weight:600}
+
+/* badges: survey benchmark disks */
+.bdg{display:flex;flex-direction:column;align-items:center;gap:8px;width:94px;text-align:center}
+.rdg-c{stroke:var(--ctr,var(--contour));stroke-width:1}
+.rdg-i{stroke:var(--ctri,var(--contour2));stroke-width:1.4}
+.bdg svg.disk{width:76px;height:76px}
+.bdg b{font:600 13.5px/1.4 var(--text)}
+.bdg small{font:400 11.5px/1.3 var(--text);color:var(--ink3)}
+.bdg.locked b{color:var(--ink3)}
+
+/* leaderboard rows */
+.lb{display:flex;flex-direction:column}
+.lbr{display:flex;align-items:center;gap:12px;height:56px;padding:0 12px;border-radius:12px;font:500 15px/1.3 var(--text)}
+.lbr .rk{width:26px;text-align:center;font:800 17px/1 var(--display);color:var(--ink3);direction:ltr}
+.lbr .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbr .nm small{font:400 12px/1 var(--text);color:var(--ink3);margin-inline-start:6px}
+.lbr.me{background:var(--ink);color:var(--paper)}
+.lbr.me .rk{color:var(--paper)}
+.lbr.me .nm small{color:var(--nink2)}
+.lbr.me .spot{color:var(--xpNight)}
+.lbr.me .spot svg path{fill:var(--xpNight)}
+.lbr.me .av .rg .t{stroke:var(--night3)}
+.lbr.me .av .rg .p,.lbr.me .av .lv{stroke:var(--nink);color:var(--nink)}
+.lbgap{height:22px;display:flex;align-items:center;gap:10px;padding:0 12px;color:var(--ink3);font:400 11.5px/1 var(--text)}
+.lbgap::before,.lbgap::after{content:"";flex:1;border-top:2px dotted var(--line2)}
+
+/* chat */
+.dal{width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex:none}
+.dal .ic{width:22px;height:22px}
+.msg{display:flex;gap:12px;align-items:flex-start;max-width:520px}
+.msg .who{font:700 13.5px/1.4 var(--display);color:var(--ink);margin-bottom:2px}
+.msg p{font:400 15.5px/1.85 var(--text);color:var(--ink)}
+.bub{align-self:flex-end;background:var(--ink);color:var(--paper);padding:11px 18px;border-radius:20px 20px 20px 6px;font:400 15.5px/1.7 var(--text);max-width:420px}
+.status{display:flex;align-items:center;gap:10px;font:500 14px/1 var(--text);color:var(--ink3)}
+.status .ic{width:22px;height:22px;color:var(--ink)}
+.status span{background:linear-gradient(90deg,var(--ink3) 0 40%,var(--ink) 50%,var(--ink3) 60% 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sweep 2.4s linear infinite}
+@keyframes sweep{from{background-position:130% 0}to{background-position:-30% 0}}
+.composer{display:flex;align-items:center;gap:10px;height:56px;border-radius:28px;border:1.5px solid var(--line2);background:var(--sheet);padding:0 8px 0 20px;padding-inline:20px 8px;font:400 15.5px/1 var(--text);color:var(--ink3)}
+.composer .snd{margin-inline-start:auto;width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center}
+.composer .snd .ic{width:20px;height:20px}
+</style>
+</head>
+<body>
+
+<!-- ============ SPRITE: logo, icons (24 grid, 1.75 stroke, round caps and joins, one waypoint each) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mark" viewBox="0 0 64 64">
+      <path d="M56 50V38a24 24 0 0 0-48 0v6a6 6 0 0 0 12 0v-6a12 12 0 0 1 24 0v12" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="32" cy="44.5" r="5" style="fill:var(--wp,#1A92CB)"/>
+    </symbol>
+    <symbol id="peak" viewBox="0 0 13 12"><path d="M6.5 1.6 11.6 10.6H1.4z"/></symbol>
+
+    <symbol id="i-path" viewBox="0 0 24 24"><path d="M19.5 19H8.5a3 3 0 0 1 0-6h7a3 3 0 0 0 0-6H10"/><circle class="wp" cx="5.75" cy="7" r="1.75"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 20.5V11M12 14.5c0-3.4-6-2.6-6-6M12 14.5c0-3.4 6-2.6 6-6M9.5 20.5h5"/><circle cx="6" cy="6" r="2.25"/><circle cx="18" cy="6" r="2.25"/><circle class="wp" cx="12" cy="7.5" r="1.75"/></symbol>
+    <symbol id="i-cv" viewBox="0 0 24 24"><path d="M13.5 3h-6A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V10M9.5 9.5h3M9.5 13h5M9.5 16.5h5"/><circle class="wp" cx="17.25" cy="5" r="1.75"/></symbol>
+    <symbol id="i-jobs" viewBox="0 0 24 24"><path d="M3.5 13h5.5M15 13h5.5M5.5 8h13a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2zM8.75 8V6.5a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V8"/><circle class="wp" cx="12" cy="13" r="1.75"/></symbol>
+    <symbol id="i-courses" viewBox="0 0 24 24"><path d="M12 7.5c-1.8-1.4-4.2-2-7.5-2v12c3.300 0 5.700.6 7.500 2 1.800-1.400 4.200-2 7.500-2V10.500M12 7.500v12M12 7.500c1.100-.85 2.400-1.400 4-1.700"/><circle class="wp" cx="19.5" cy="6" r="1.75"/></symbol>
+    <symbol id="i-advisor" viewBox="0 0 24 24"><path d="M18 6A8.500 8.500 0 1 0 20.500 12M14.750 9.250l-1.600 4-4 1.600 1.600-4z"/><circle class="wp" cx="19.9" cy="8.7" r="1.75"/></symbol>
+    <symbol id="i-leaders" viewBox="0 0 24 24"><path d="M2.5 20v-5.500h6V9.500h7V13h6v7"/><circle class="wp" cx="12" cy="5.25" r="1.75"/></symbol>
+    <symbol id="i-profile" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.75"/><path d="M4.750 20c.4-3.600 3.300-6 7.250-6 1.600 0 3 .4 4.200 1.100"/><circle class="wp" cx="18.75" cy="18.5" r="1.75"/></symbol>
+    <symbol id="i-xp" viewBox="0 0 24 24"><path d="M10.500 7.800 4 19.500h16L13.500 7.800"/><circle class="wp" cx="12" cy="5" r="1.75"/></symbol>
+    <symbol id="i-level" viewBox="0 0 24 24"><path d="M5.500 14.500 12 9l6.500 5.500M5.500 20 12 14.500 18.500 20"/><circle class="wp" cx="12" cy="4.5" r="1.75"/></symbol>
+    <symbol id="i-streak" viewBox="0 0 24 24"><path d="M9.200 8.200C8.100 9.300 7.500 10.600 7.500 12a4.500 4.500 0 0 0 9 0c0-3.900-3.900-5.600-4.500-8.500M6 21l12-3.250M6 17.750 18 21"/><circle class="wp" cx="12" cy="12.5" r="1.75"/></symbol>
+    <symbol id="i-badge" viewBox="0 0 24 24"><path d="M15.900 12.900A5.500 5.500 0 1 0 8.100 12.900M8.750 13.500 7.500 21l4.500-2.500 4.500 2.500-1.250-7.500"/><circle class="wp" cx="12" cy="9" r="1.75"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7.500 4.250v5a4.500 4.500 0 0 0 9 0v-5M7.500 6.250H4.750c0 2.400 1.100 3.900 3 4.200M16.500 6.250h2.750c0 2.400-1.100 3.900-3 4.200M12 13.750v3.500M8.500 20.500h7M9.750 17.250h4.500"/><circle class="wp" cx="12" cy="8.25" r="1.75"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M7.500 10.500h9a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2zM8.500 10.500V8a3.500 3.500 0 0 1 7 0v2.500"/><circle class="wp" cx="12" cy="15.5" r="1.75"/></symbol>
+    <symbol id="i-done" viewBox="0 0 24 24"><path d="M14.200 3.800A8.500 8.500 0 1 0 20.200 9.800M8 12.400l2.900 2.900 5-5.800"/><circle class="wp" cx="18" cy="6" r="1.75"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l1.750 1.750"/><circle class="wp" cx="19.5" cy="19.5" r="1.75"/></symbol>
+    <symbol id="i-city" viewBox="0 0 24 24"><path d="M3 20.500h18M8 20.500V4.500c0 4 1.600 7 4 7s4-3 4-7v16M8 14.500H4.750v6M16 12.500h3.250v8"/><circle class="wp" cx="12" cy="6" r="1.75"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V8.500M8.250 11.750 12 8l3.750 3.750M4.500 14.500V18a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3.500"/><circle class="wp" cx="12" cy="4" r="1.75"/></symbol>
+    <symbol id="i-apply" viewBox="0 0 24 24"><path d="M3.500 4 20.500 10.250 14 14l-3.750 6.500zM14 14 3.500 4"/><circle class="wp" cx="19.25" cy="19.25" r="1.75"/></symbol>
+    <symbol id="i-skill" viewBox="0 0 24 24"><path d="M21.500 20 18.500 15l-2.500 3.500-3.500-7.500-2.750 5L6.500 8.250 2.500 20"/><circle class="wp" cx="6.5" cy="4.75" r="1.75"/></symbol>
+
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H6.500M11 7.500 6.500 12l4.500 4.500"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><path d="M17.300 5.400A8.500 8.500 0 1 0 20.500 12M12 7.500V12l3 2"/><circle class="wp" cx="19.6" cy="8.3" r="1.75"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V6M6.500 11.500 12 6l5.500 5.500"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M6 12.500l4 4 8-9"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M8 21V4"/><path class="wp" d="M8 4l10.500 4.250L8 12.500z" style="stroke:var(--wp);stroke-width:1.75"/></symbol>
+  </defs>
+</svg>
+<!-- ============ SPRITE: avatars (96 grid; flat shapes, cloth folds drawn as contour lines, one terrain line behind each) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- shared parts -->
+    <g id="a-eyes"><circle cx="42" cy="46.500" r="1.700" fill="#241B15"/><circle cx="54" cy="46.500" r="1.700" fill="#241B15"/></g>
+    <path id="a-smile" d="M44 53.500c2.400 2 5.600 2 8 0" fill="none" stroke="#241B15" stroke-width="1.600" stroke-linecap="round"/>
+    <g id="a-glasses" fill="none" stroke="#241B15" stroke-width="1.600"><circle cx="41.500" cy="46.500" r="4.800"/><circle cx="54.500" cy="46.500" r="4.800"/><path d="M46.300 46.500h3.400"/></g>
+    <path id="a-shoulders" d="M12 97c0-13.500 11-22.500 28-23.500h16c17 1 28 10 28 23.500z"/>
+    <path id="a-neck" d="M41.500 58h13v12.500a6.500 6.500 0 0 1-13 0z"/>
+    <ellipse id="a-head" cx="48" cy="45" rx="15" ry="17.500"/>
+    <path id="a-hijab" d="M48 14.500C31 14.500 22.500 27 22.500 43c0 15-4.500 22.500-11 29.500C17.500 85 31 97 48 97s30.500-12 36.500-24.500C78 65.500 73.500 58 73.500 43 73.500 27 65 14.500 48 14.500z"/>
+    <ellipse id="a-face" cx="48" cy="46" rx="13" ry="15.500"/>
+    <g id="a-hijab-folds" fill="none" stroke-width="1.500" stroke-linecap="round"><path d="M35.500 58c3.200 6 7.700 9 12.500 9s9.300-3 12.500-9"/><path d="M26.500 71.500c6.500 7.500 13.500 11 21.500 11s15-3.500 21.500-11"/><path d="M29 29.500c4.500-6 11-9 19-9"/></g>
+    <path id="a-ghutra" d="M48 14C32 14 24 25 24 39.500c0 17-3 30.500-9.500 43.500C23 86.500 35 88 48 88s25-1.500 33.500-5C75 70 72 56.500 72 39.500 72 25 64 14 48 14z"/>
+    <path id="a-ghutra-cap" d="M33.200 41c.4-11 6.500-17.800 14.800-17.800S62.400 30 62.800 41c-4.500-3.200-9.400-4.800-14.800-4.800S37.700 37.800 33.200 41z"/>
+    <g id="a-agal" fill="none" stroke="#241B15" stroke-width="3.400" stroke-linecap="round"><path d="M31 26.500c4.800-4 10.500-6 17-6s12.200 2 17 6"/><path d="M29 32c5.300-4.300 11.700-6.400 19-6.400S61.700 27.700 67 32"/></g>
+    <g id="a-ghutra-folds" fill="none" stroke-width="1.500" stroke-linecap="round"><path d="M28.500 46c-.8 13-3.500 25-8 36.500"/><path d="M67.500 46c.8 13 3.500 25 8 36.500"/><path d="M33.500 60c-.5 9-2.200 17.500-5 25.500"/><path d="M62.500 60c.5 9 2.200 17.500 5 25.500"/></g>
+    <path id="a-beard" d="M34.600 47.500c.5 10.500 6 17.500 13.400 17.500s12.900-7 13.400-17.500c-1.600 6-6.600 9.800-13.400 9.800s-11.800-3.800-13.400-9.800z"/>
+    <path id="a-tache" d="M42.500 52.300c1.800-1.400 3.700-1.400 5.500 0 1.800-1.400 3.700-1.400 5.500 0" fill="none" stroke-width="2.300" stroke-linecap="round"/>
+    <g id="a-collar" fill="none" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><path d="M41 72.500 48 79.500l7-7"/><path d="M48 79.500V97"/></g>
+    <path id="a-hair-m" d="M32.300 42.500C30.500 29 37.500 19.500 48 19.500S65.500 29 63.700 42.500c-1.800-5.500-4.600-8.700-8.200-9.800-5 1.600-10 1.600-15 0-3.600 1.100-6.400 4.300-8.200 9.800z"/>
+
+    <!-- 1 · Sara: navy hijab on coral-tint ground -->
+    <symbol id="av-1" viewBox="0 0 96 96"><rect width="96" height="96" fill="#D5EEFA"/><path d="M-4 34c16-12 30-12 46-3s34 8 58-9M-4 52c14-10 26-10 40-4" fill="none" stroke="#A6D8F0" stroke-width="1.500"/>
+      <use href="#a-shoulders" fill="#241B15"/><use href="#a-hijab" fill="#5A3D2B"/><use href="#a-hijab-folds" stroke="#8C6A52"/><use href="#a-face" fill="#E3AE86"/><use href="#a-eyes"/><use href="#a-smile"/></symbol>
+    <!-- 2 · Noura: cream hijab on blue tint -->
+    <symbol id="av-2" viewBox="0 0 96 96"><rect width="96" height="96" fill="#E9DDCB"/><path d="M-4 28c20 8 34 6 50-3s30-10 54-2M60 96c4-16 16-26 40-28" fill="none" stroke="#D4C1A6" stroke-width="1.500"/>
+      <use href="#a-shoulders" fill="#241B15"/><use href="#a-hijab" fill="#FBF8F2"/><use href="#a-hijab-folds" stroke="#D8D1C5"/><use href="#a-face" fill="#F0C7A2"/><use href="#a-eyes"/><use href="#a-smile"/></symbol>
+    <!-- 3 · Reem: blaze hijab, glasses, night ground -->
+    <symbol id="av-3" viewBox="0 0 96 96"><rect width="96" height="96" fill="#47302A"/><path d="M-4 30c18-10 34-8 50 0s32 6 54-8M-4 50c12-8 22-8 34-3" fill="none" stroke="#634A3E" stroke-width="1.500"/>
+      <use href="#a-shoulders" fill="#160F0B"/><use href="#a-hijab" fill="#1A92CB"/><use href="#a-hijab-folds" stroke="#167BAA"/><use href="#a-face" fill="#C98D62"/><use href="#a-eyes"/><use href="#a-glasses"/><use href="#a-smile"/></symbol>
+    <!-- 4 · Lama: open hair on gold ground -->
+    <symbol id="av-4" viewBox="0 0 96 96"><rect width="96" height="96" fill="#FBE6AE"/><path d="M-4 36c18-12 32-10 48-2s32 8 56-10M56 -4c2 10 14 18 44 18" fill="none" stroke="#EBCB78" stroke-width="1.500"/>
+      <path d="M25.500 50c0-19 8.500-31.500 22.500-31.500S70.500 31 70.500 50c0 11 2.500 19.500 6.500 26H19c4-6.500 6.500-15 6.500-26z" fill="#2B1D18"/><path d="M30 58c-.5 7-2 12.500-4.500 17M66 58c.5 7 2 12.500 4.500 17" fill="none" stroke="#4A342B" stroke-width="1.500" stroke-linecap="round"/>
+      <use href="#a-shoulders" fill="#217437"/><path d="M40 74c2 4 5 6 8 6s6-2 8-6" fill="none" stroke="#17572A" stroke-width="1.500" stroke-linecap="round"/><use href="#a-neck" fill="#D39A71"/><use href="#a-head" fill="#E3AE86"/>
+      <path d="M32.800 44c-.6-10.500 5.700-18 15.200-18s15.800 7.500 15.200 18c-6-1.600-10.500-4.800-13.400-9.600-3.600 5.400-9.200 8.600-17 9.600z" fill="#2B1D18"/><use href="#a-eyes"/><use href="#a-smile"/></symbol>
+    <!-- 5 · Faisal: coral shemagh drawn as dashed trail lines, mist ground -->
+    <symbol id="av-5" viewBox="0 0 96 96"><rect width="96" height="96" fill="#E7DFD3"/><path d="M-4 30c20-10 34-8 50 0s30 6 54-6M-4 48c10-7 20-7 30-3" fill="none" stroke="#CFC2B0" stroke-width="1.500"/>
+      <use href="#a-shoulders" fill="#FFFDF8"/><use href="#a-ghutra" fill="#FFFDF8"/><use href="#a-ghutra-folds" stroke="#1A92CB" stroke-dasharray="3 2.500"/><path d="M26 40c-.3 6-.8 11-1.800 16M70 40c.3 6 .8 11 1.800 16" fill="none" stroke="#1A92CB" stroke-width="1.500" stroke-dasharray="3 2.500" stroke-linecap="round"/>
+      <use href="#a-neck" fill="#B67B52"/><use href="#a-collar" stroke="#D8CDBE"/><use href="#a-head" fill="#C98D62"/><use href="#a-beard" fill="#2B1D18"/><use href="#a-tache" stroke="#2B1D18"/><use href="#a-ghutra-cap" fill="#FFFDF8"/><path d="M37 33.500c3.500-1.800 7.200-2.700 11-2.700s7.500.9 11 2.700" fill="none" stroke="#1A92CB" stroke-width="1.500" stroke-dasharray="3 2.500" stroke-linecap="round"/><use href="#a-agal"/><use href="#a-eyes"/></symbol>
+    <!-- 6 · Abdullah: white ghutra on mint tint -->
+    <symbol id="av-6" viewBox="0 0 96 96"><rect width="96" height="96" fill="#DDEBD5"/><path d="M-4 40c18-12 32-10 48-2s32 8 56-10M-4 22c12-6 22-6 34-2" fill="none" stroke="#B9D5AA" stroke-width="1.500"/>
+      <use href="#a-shoulders" fill="#FFFDF8"/><use href="#a-ghutra" fill="#FFFDF8"/><use href="#a-ghutra-folds" stroke="#D8CDBE"/>
+      <use href="#a-neck" fill="#D39A71"/><use href="#a-collar" stroke="#D8CDBE"/><use href="#a-head" fill="#E3AE86"/><use href="#a-tache" stroke="#3B2A22"/><path d="M44.500 60c2.300 1.300 4.700 1.300 7 0" fill="none" stroke="#3B2A22" stroke-width="2.300" stroke-linecap="round"/><use href="#a-ghutra-cap" fill="#FFFDF8"/><use href="#a-agal"/><use href="#a-eyes"/></symbol>
+    <!-- 7 · bare head, full beard, coral-tint ground -->
+    <symbol id="av-7" viewBox="0 0 96 96"><rect width="96" height="96" fill="#D5EEFA"/><path d="M-4 26c16 8 30 8 46 0s34-8 58 6M50 100c6-18 20-28 50-30" fill="none" stroke="#A6D8F0" stroke-width="1.500"/>
+      <use href="#a-shoulders" fill="#FFFDF8"/><use href="#a-neck" fill="#8B5A3A"/><use href="#a-collar" stroke="#D8CDBE"/><use href="#a-head" fill="#A06D48"/><use href="#a-beard" fill="#1E1512"/><use href="#a-tache" stroke="#1E1512"/><use href="#a-hair-m" fill="#1E1512"/><use href="#a-eyes"/></symbol>
+    <!-- 8 · young, glasses, sky top, night ground -->
+    <symbol id="av-8" viewBox="0 0 96 96"><rect width="96" height="96" fill="#47302A"/><path d="M-4 36c18-12 32-10 48-2s32 8 56-10M-4 56c12-8 20-8 30-4" fill="none" stroke="#634A3E" stroke-width="1.500"/>
+      <use href="#a-shoulders" fill="#CDE7F4"/><path d="M39 74c2.500 4.500 5.500 6.500 9 6.500s6.500-2 9-6.500" fill="none" stroke="#98C9E2" stroke-width="1.500" stroke-linecap="round"/><use href="#a-neck" fill="#DDB08B"/><use href="#a-head" fill="#F0C7A2"/><use href="#a-hair-m" fill="#3B2A22"/><use href="#a-eyes"/><use href="#a-glasses"/><use href="#a-smile"/></symbol>
+
+    <!-- badge disks -->
+    <symbol id="disk-ticks" viewBox="0 0 76 76"><circle cx="38" cy="38" r="35" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="1.500 5.830"/></symbol>
+  </defs>
+</svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <path id="blob" vector-effect="non-scaling-stroke" d="M100 0C100 45 70 85 20 95-30 105-80 80-98 30-112-10-90-60-50-85-10-108 40-100 70-75 92-55 100-30 100 0Z"/>
+  <g id="hill" fill="none">
+    <use href="#blob" transform="scale(.32)"/><use href="#blob" transform="translate(6 5) scale(.62)"/><use href="#blob" transform="translate(14 12) scale(.95)"/><use href="#blob" transform="translate(24 20) scale(1.32)"/><use href="#blob" transform="translate(36 30) scale(1.74)"/><use href="#blob" transform="translate(50 42) scale(2.22)"/><use href="#blob" transform="translate(66 56) scale(2.76)"/><use href="#blob" transform="translate(84 72) scale(3.36)"/><use href="#blob" transform="translate(104 90) scale(4.02)"/><use href="#blob" transform="translate(126 110) scale(4.74)"/><use href="#blob" transform="translate(150 132) scale(5.52)"/>
+  </g>
+</defs></svg>
+
+<style>
+#brand .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+#brand .board{display:grid;place-items:center;overflow:hidden;padding:24px}
+#brand .board>.lab{position:absolute;top:14px;left:16px}
+#brand .terrain{position:absolute;inset:0;width:100%;height:100%;stroke:var(--contour);stroke-width:1.2;opacity:.9}
+#brand .night .terrain{stroke:var(--ncontour2)}
+#brand .board>*:not(.terrain):not(.lab){position:relative}
+#brand .idea{place-items:start;align-content:center;gap:16px;padding:44px 36px 28px}
+#brand .idea p{direction:ltr;text-align:left;font:400 15px/1.75 Georgia,serif;color:var(--ink2)}
+#brand .idea p b{color:var(--ink);font-weight:700}
+.appicon{width:var(--s,128px);height:var(--s,128px);border-radius:calc(var(--s,128px)*.225);background:var(--night);display:grid;place-items:center;position:relative;overflow:hidden;color:var(--nink)}
+.appicon .tr2{position:absolute;inset:0;width:100%;height:100%;stroke:var(--ncontour2);stroke-width:1;fill:none}
+.appicon svg.m{position:relative;width:62%;height:62%}
+.sizes{display:flex;align-items:flex-end;gap:36px}
+.sizes figure{display:flex;flex-direction:column;align-items:center;gap:12px}
+</style>
+
+<section id="brand" class="sec">
+  <div class="cap"><b>01 · Brand</b><i>the mark, the wordmark «دليلك», lockups, small sizes, app icon</i></div>
+  <div class="grid">
+    <div class="board" style="grid-column:span 4;height:380px">
+      <span class="lab">mark · paper</span>
+      <svg class="terrain" viewBox="0 0 470 380" preserveAspectRatio="xMidYMid slice"><use href="#hill" transform="translate(120 130) scale(.9)"/></svg>
+      <svg class="mark" width="216" height="216"><use href="#mark"/></svg>
+    </div>
+    <div class="board night" style="grid-column:span 4;height:380px">
+      <span class="lab">mark · night</span>
+      <svg class="terrain" viewBox="0 0 470 380" preserveAspectRatio="xMidYMid slice"><use href="#hill" transform="translate(340 250) scale(.9)"/></svg>
+      <svg class="mark" width="216" height="216"><use href="#mark"/></svg>
+    </div>
+    <div class="board sheet idea" style="grid-column:span 4;height:380px">
+      <span class="lab">the idea</span>
+      <p><b>One trail, folded into two contour arches, with a waypoint between its feet.</b> The hill and the way up it are the same line: you do not look at the mountain, you walk it.</p>
+      <p>It reads as a summit seen through its contours, as a gate you step through, and as the opening letter of a path. The coral dot is «أنت هنا»: the same waypoint sits on every icon and at the end of every progress line in the product.</p>
+      <div class="fx" style="gap:20px;margin-top:6px">
+        <div class="appicon" style="--s:112px"><svg class="tr2" viewBox="0 0 128 128"><use href="#hill" transform="translate(40 44) scale(.42)"/></svg><svg class="m"><use href="#mark"/></svg></div>
+        <div class="appicon" style="--s:60px"><svg class="m"><use href="#mark"/></svg></div>
+        <div class="appicon" style="--s:60px;background:var(--blaze);--wp:#FFFDF9;color:var(--onBlaze)"><svg class="m"><use href="#mark"/></svg></div>
+        <span class="lab" style="align-self:flex-end">app icon · 112 / 60 / alt</span>
+      </div>
+    </div>
+
+    <div class="board" style="grid-column:span 3;height:210px"><span class="lab">wordmark</span><span class="word" style="font-size:88px">دليلك</span></div>
+    <div class="board night" style="grid-column:span 3;height:210px"><span class="lab">wordmark</span><span class="word" style="font-size:88px">دليلك</span></div>
+    <div class="board" style="grid-column:span 3;height:210px"><span class="lab">horizontal lockup</span>
+      <span class="lock-h word" style="font-size:66px"><svg class="mark" width="78" height="78" style="margin-top:-.02em"><use href="#mark"/></svg><span>دليلك</span></span></div>
+    <div class="board night" style="grid-column:span 3;height:210px"><span class="lab">horizontal lockup</span>
+      <span class="lock-h word" style="font-size:66px"><svg class="mark" width="78" height="78" style="margin-top:-.02em"><use href="#mark"/></svg><span>دليلك</span></span></div>
+
+    <div class="board" style="grid-column:span 3;height:260px"><span class="lab">stacked lockup</span>
+      <span class="lock-v word" style="font-size:54px"><svg class="mark" width="104" height="104"><use href="#mark"/></svg><span>دليلك</span></span></div>
+    <div class="board night" style="grid-column:span 3;height:260px"><span class="lab">stacked lockup</span>
+      <span class="lock-v word" style="font-size:54px"><svg class="mark" width="104" height="104"><use href="#mark"/></svg><span>دليلك</span></span></div>
+    <div class="board" style="grid-column:span 3;height:260px"><span class="lab">small sizes</span>
+      <div class="sizes">
+        <figure><svg class="mark" width="64" height="64"><use href="#mark"/></svg><span class="lab">64</span></figure>
+        <figure><svg class="mark" width="32" height="32"><use href="#mark"/></svg><span class="lab">32</span></figure>
+        <figure><svg class="mark" width="20" height="20"><use href="#mark"/></svg><span class="lab">20</span></figure>
+        <figure><span class="lock-h word" style="font-size:22px;gap:6px"><svg class="mark" width="26" height="26"><use href="#mark"/></svg><span>دليلك</span></span><span class="lab">nav lockup</span></figure>
+      </div></div>
+    <div class="board night" style="grid-column:span 3;height:260px"><span class="lab">small sizes</span>
+      <div class="sizes">
+        <figure><svg class="mark" width="64" height="64"><use href="#mark"/></svg><span class="lab">64</span></figure>
+        <figure><svg class="mark" width="32" height="32"><use href="#mark"/></svg><span class="lab">32</span></figure>
+        <figure><svg class="mark" width="20" height="20"><use href="#mark"/></svg><span class="lab">20</span></figure>
+        <figure><span class="lock-h word" style="font-size:22px;gap:6px"><svg class="mark" width="26" height="26"><use href="#mark"/></svg><span>دليلك</span></span><span class="lab">nav lockup</span></figure>
+      </div></div>
+  </div>
+</section>
+<style>
+#foundations .grid{display:grid;grid-template-columns:7fr 5fr;gap:16px;direction:ltr}
+#foundations .board{padding:28px 32px}
+.swg{display:grid;grid-template-columns:repeat(6,1fr);gap:12px 12px;direction:ltr}
+.swg h4{grid-column:1/-1;font:600 11px/1 ui-monospace,Consolas,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-top:12px;text-align:left}
+.swg h4:first-child{margin-top:0}
+.sw{text-align:left;font:400 11px/1.45 ui-monospace,Consolas,monospace;color:var(--ink3)}
+.sw i{display:block;height:54px;border-radius:8px;border:1px solid rgba(54,36,26,.14);margin-bottom:7px}
+.sw b{display:block;color:var(--ink);font-weight:600}
+.sw em{font-style:normal;display:block;font-family:Georgia,serif;font-size:12px;color:var(--ink2)}
+#foundations .type{direction:rtl}
+.trow{display:grid;grid-template-columns:1fr 120px;gap:16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line)}
+.trow:last-child{border:0}
+.trow .lab{text-align:left;line-height:1.5}
+.fam{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:8px}
+.fam div{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--sheet)}
+.fam .big{font-size:44px;line-height:1.3}
+.fam .wts{display:flex;gap:14px;font-size:17px;margin-top:6px;color:var(--ink2)}
+</style>
+
+<section id="foundations" class="sec">
+  <div class="cap"><b>02 · Foundations</b><i>colour tokens and typography</i></div>
+  <div class="grid">
+    <div class="board">
+      <div class="swg">
+        <h4>Light working surfaces</h4>
+        <div class="sw"><i style="background:#F4EFE7"></i><b>paper</b>#F4EFE7<em>page</em></div>
+        <div class="sw"><i style="background:#FFFDF9"></i><b>sheet</b>#FFFDF9<em>cards, the map</em></div>
+        <div class="sw"><i style="background:#E7DFD3"></i><b>sunk</b>#E7DFD3<em>wells, hover</em></div>
+        <div class="sw"><i style="background:#DED4C6"></i><b>line</b>#DED4C6<em>hairlines</em></div>
+        <div class="sw"><i style="background:#A79A87"></i><b>line-2</b>#A79A87<em>control borders</em></div>
+        <div class="sw"><i style="background:#DACDBA"></i><b>contour</b>#DACDBA<em>map lines only</em></div>
+
+        <h4>Ink levels</h4>
+        <div class="sw"><i style="background:#241B15"></i><b>ink</b>#241B15<em>type, trail, lines</em></div>
+        <div class="sw"><i style="background:#4B4036"></i><b>ink-2</b>#4B4036<em>body, meta</em></div>
+        <div class="sw"><i style="background:#645749"></i><b>ink-3</b>#645749<em>captions</em></div>
+        <div class="sw"><i style="background:#9F917F"></i><b>ink-4</b>#9F917F<em>locked line work</em></div>
+        <div class="sw" style="grid-column:span 2"><i style="background:linear-gradient(90deg,#241B15 0 25%,#4B4036 25% 50%,#645749 50% 75%,#9F917F 75%)"></i><b>one midnight navy, four strengths</b><em>no pure black, no neutral grey: the ink is navy</em></div>
+
+        <h4>Night: the stage (sign-in showcase, path reveal, CV analysis, celebrations)</h4>
+        <div class="sw"><i style="background:#36241A"></i><b>night</b>#36241A<em>stage</em></div>
+        <div class="sw"><i style="background:#47302A"></i><b>night-2</b>#47302A<em>raised on stage</em></div>
+        <div class="sw"><i style="background:#6E5444"></i><b>night-3</b>#6E5444<em>lines on stage</em></div>
+        <div class="sw"><i style="background:#FBF6EE"></i><b>n-ink</b>#FBF6EE<em>type on stage</em></div>
+        <div class="sw"><i style="background:#D9CCBA"></i><b>n-ink-2</b>#D9CCBA<em>secondary</em></div>
+        <div class="sw"><i style="background:#B3A28D"></i><b>n-ink-3</b>#B3A28D<em>captions</em></div>
+
+        <h4>Accent · rewards · states</h4>
+        <div class="sw"><i style="background:#1A92CB"></i><b>blaze</b>#1A92CB<em>waypoint, primary action</em></div>
+        <div class="sw"><i style="background:#1A90C7"></i><b>blaze-2</b>#1A90C7<em>hover</em></div>
+        <div class="sw"><i style="background:#D5EEFA"></i><b>blaze-soft</b>#D5EEFA<em>tint behind "next"</em></div>
+        <div class="sw"><i style="background:#E9A817"></i><b>gold</b>#E9A817<em>XP and rewards only</em></div>
+        <div class="sw"><i style="background:#885C00"></i><b>gold-ink</b>#885C00<em>XP numerals on light</em></div>
+        <div class="sw"><i style="background:#F8EAC4"></i><b>gold-soft</b>#F8EAC4<em>reward tint</em></div>
+        <div class="sw"><i style="background:#217437"></i><b>green</b>#217437<em>success</em></div>
+        <div class="sw"><i style="background:#D8EDD9"></i><b>green-soft</b>#D8EDD9<em>success tint</em></div>
+        <div class="sw"><i style="background:#AA4700"></i><b>amber</b>#AA4700<em>warning</em></div>
+        <div class="sw"><i style="background:#FBE3CF"></i><b>amber-soft</b>#FBE3CF<em>warning tint</em></div>
+        <div class="sw"><i style="background:#FFC64A"></i><b>gold-night</b>#FFC64A<em>XP on stage</em></div>
+        <div class="sw"><i style="background:#F4EFE7;position:relative;overflow:hidden"><svg viewBox="0 0 120 54" style="position:absolute;inset:0;width:100%;height:100%"><path d="M8 40h44" stroke="#241B15" stroke-width="4" stroke-linecap="round"/><path d="M68 40h46" stroke="#9F917F" stroke-width="4" stroke-linecap="round" stroke-dasharray=".1 9"/><circle cx="60" cy="40" r="6" fill="#1A92CB"/></svg></i><b>progress</b>solid · dot · dotted<em>covered, you, ahead</em></div>
+
+        <h4>Added by this scheme (contrast and the map)</h4>
+        <div class="sw"><i style="background:#198CC2"></i><b>blaze-3</b>#198CC2<em>pressed</em></div>
+        <div class="sw"><i style="background:#146B95"></i><b>blaze-ink</b>#146B95<em>coral as small text</em></div>
+        <div class="sw"><i style="background:#1A120D"></i><b>on-blaze</b>#1A120D<em>label on coral</em></div>
+        <div class="sw"><i style="background:#B98200"></i><b>gold-line</b>#B98200<em>gold tier ring</em></div>
+        <div class="sw"><i style="background:linear-gradient(90deg,#C4B297 0 50%,#74614A 50%)"></i><b>contour-2 · -ink</b>#C4B297 #74614A<em>index line, figures</em></div>
+        <div class="sw"><i style="background:linear-gradient(90deg,#46302A 0 50%,#5A4034 50%)"></i><b>n-contour · -2</b>#46302A #5A4034<em>contours on stage</em></div>
+      </div>
+    </div>
+
+    <div class="board type">
+      <div class="fam">
+        <div><span class="lab">Display · Fustat 700 / 800</span><div class="big disp" style="font-weight:800">دربُ المهارة</div><div class="wts disp"><span style="font-weight:500">متوسط</span><span style="font-weight:700">عريض</span><span style="font-weight:800">أعرض</span></div></div>
+        <div><span class="lab">Text · Readex Pro 300 – 700</span><div class="big" style="font-weight:500">دربُ المهارة</div><div class="wts"><span style="font-weight:300">خفيف</span><span style="font-weight:400">عادي</span><span style="font-weight:600">عريض</span></div></div>
+      </div>
+      <div class="trow"><div class="disp" style="font:800 52px/1.3 var(--display)">كل خطوة تقرّبك من وظيفتك</div><span class="lab">display 52 / 1.3<br>Fustat 800</span></div>
+      <div class="trow"><div style="font:800 34px/1.4 var(--display)">مسارك نحو محلل بيانات</div><span class="lab">h1 34 / 1.4<br>Fustat 800</span></div>
+      <div class="trow"><div style="font:700 22px/1.5 var(--display)">الخطوة التالية: SQL للمبتدئين</div><span class="lab">h2 22 / 1.5<br>Fustat 700</span></div>
+      <div class="trow"><p style="font:400 16px/1.95 var(--text);color:var(--ink2)">ارفعي سيرتك الذاتية، وسيقرأ دليل مهاراتك ويرسم لك الطريق من حيث تقفين اليوم إلى وظيفة محلل بيانات. كل دورة تكملينها ترفع مستوى مهارة، وتزيد تطابقك مع الوظيفة.</p><span class="lab">body 16 / 1.95<br>Readex 400</span></div>
+      <div class="trow"><div style="font:600 15px/1.6 var(--text)">عنصر واجهة · زر · شريحة <span style="font-weight:400;color:var(--ink3);font-size:13px">· تعليق صغير 13</span></div><span class="lab">ui 15 / 600<br>caption 13 / 400</span></div>
+      <div class="trow"><div class="num" style="font:800 40px/1.2 var(--display);direction:ltr;text-align:right">0123456789 <span style="color:var(--xpInk)">1,240</span> 70%</div><span class="lab">numerals<br>Latin, tabular</span></div>
+      <div class="trow"><div style="font:500 19px/1.8 var(--text)">أكملت دورة SQL للمبتدئين <span class="ltr" style="color:var(--xpInk);font-weight:700">+200 XP</span></div><span class="lab">mixed line<br>Arabic + Latin</span></div>
+    </div>
+  </div>
+</section>
+<style>
+#icons .set{display:grid;grid-template-columns:repeat(10,1fr);gap:12px}
+.icell{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:18px 8px 14px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.icell .pair{display:flex;align-items:flex-end;gap:14px;height:48px}
+.icell .pair .ic:first-child{width:48px;height:48px}
+.icell b{font:500 13.5px/1.4 var(--text)}
+#icons .below{display:grid;grid-template-columns:300px 1fr 1fr;gap:16px;margin-top:16px;direction:ltr}
+#icons .below>div{border-radius:14px;padding:22px 24px;direction:rtl}
+.construct{background:var(--sheet);border:1px solid var(--line);display:grid;place-items:center;position:relative}
+.construct svg{width:216px;height:216px}
+.rule{background:var(--sheet);border:1px solid var(--line);direction:ltr!important;text-align:left;font:400 14px/1.75 Georgia,serif;color:var(--ink2)}
+.rule b{color:var(--ink)}
+.rule ol{margin:8px 0 0;padding-left:18px}
+.onnight{background:var(--night);color:var(--nink);display:flex;flex-direction:column;gap:18px;justify-content:center}
+.onnight .r{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.onnight .r.dim{color:var(--nink3);--wp:var(--nink3)}
+</style>
+
+<section id="icons" class="sec">
+  <div class="cap"><b>03 · Icons</b><i>Masari's own set · 24 px grid · shown at 48 and 24</i></div>
+  <div class="board">
+    <div class="set">
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-path"/></svg><svg class="ic"><use href="#i-path"/></svg></div><b>المسار</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-tree"/></svg><svg class="ic"><use href="#i-tree"/></svg></div><b>شجرة المهارات</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-cv"/></svg><svg class="ic"><use href="#i-cv"/></svg></div><b>السيرة الذاتية</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-jobs"/></svg><svg class="ic"><use href="#i-jobs"/></svg></div><b>الوظائف</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-courses"/></svg><svg class="ic"><use href="#i-courses"/></svg></div><b>الدورات</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-advisor"/></svg><svg class="ic"><use href="#i-advisor"/></svg></div><b>المستشار</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-leaders"/></svg><svg class="ic"><use href="#i-leaders"/></svg></div><b>المتصدرون</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-profile"/></svg><svg class="ic"><use href="#i-profile"/></svg></div><b>الملف الشخصي</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-xp"/></svg><svg class="ic"><use href="#i-xp"/></svg></div><b>نقاط الخبرة XP</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-level"/></svg><svg class="ic"><use href="#i-level"/></svg></div><b>المستوى</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-streak"/></svg><svg class="ic"><use href="#i-streak"/></svg></div><b>السلسلة اليومية</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-badge"/></svg><svg class="ic"><use href="#i-badge"/></svg></div><b>وسام</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-trophy"/></svg><svg class="ic"><use href="#i-trophy"/></svg></div><b>كأس</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-lock"/></svg><svg class="ic"><use href="#i-lock"/></svg></div><b>قفل</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-done"/></svg><svg class="ic"><use href="#i-done"/></svg></div><b>تمّ</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-search"/></svg><svg class="ic"><use href="#i-search"/></svg></div><b>بحث</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-city"/></svg><svg class="ic"><use href="#i-city"/></svg></div><b>المدينة</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-upload"/></svg><svg class="ic"><use href="#i-upload"/></svg></div><b>رفع ملف</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-apply"/></svg><svg class="ic"><use href="#i-apply"/></svg></div><b>تقديم</b></div>
+      <div class="icell"><div class="pair"><svg class="ic"><use href="#i-skill"/></svg><svg class="ic"><use href="#i-skill"/></svg></div><b>مستوى المهارة</b></div>
+    </div>
+    <div class="below">
+      <div class="construct">
+        <span class="lab" style="position:absolute;top:12px;left:14px">construction · 24 grid</span>
+        <svg viewBox="0 0 24 24">
+          <g stroke="#DED4C6" stroke-width=".06"><path d="M0 0h24v24H0zM2 0v24M4 0v24M6 0v24M8 0v24M10 0v24M12 0v24M14 0v24M16 0v24M18 0v24M20 0v24M22 0v24M0 2h24M0 4h24M0 6h24M0 8h24M0 10h24M0 12h24M0 14h24M0 16h24M0 18h24M0 20h24M0 22h24" fill="none"/></g>
+          <rect x="2" y="2" width="20" height="20" fill="none" stroke="#1A92CB" stroke-width=".08" stroke-dasharray=".4 .4"/>
+          <g class="ic" style="width:auto;height:auto"><use href="#i-path"/></g>
+        </svg>
+      </div>
+      <div class="rule">
+        <b>One family, three rules.</b>
+        <ol>
+          <li><b>One weight:</b> 1.75 px stroke on a 24 px grid, 2 px margin, round caps and joins everywhere.</li>
+          <li><b>One corner:</b> radius 2 on boxes, true arcs on rings; nothing is squared off, nothing is filled.</li>
+          <li><b>One waypoint:</b> every icon carries exactly one coral dot (r 1.75), placed where the trail stops: the end of an open stroke, the summit, the keyhole, the gap in a ring. Outlines stay open wherever the object allows it, so the line reads as a trail and the dot as the place you are heading.</li>
+        </ol>
+      </div>
+      <div class="onnight">
+        <span class="lab" style="direction:ltr;text-align:left">on the night stage · and with a muted waypoint (inactive nav)</span>
+        <div class="r"><svg class="ic"><use href="#i-path"/></svg><svg class="ic"><use href="#i-tree"/></svg><svg class="ic"><use href="#i-cv"/></svg><svg class="ic"><use href="#i-jobs"/></svg><svg class="ic"><use href="#i-courses"/></svg><svg class="ic"><use href="#i-advisor"/></svg><svg class="ic"><use href="#i-leaders"/></svg><svg class="ic"><use href="#i-profile"/></svg><svg class="ic"><use href="#i-xp"/></svg><svg class="ic"><use href="#i-level"/></svg></div>
+        <div class="r dim"><svg class="ic"><use href="#i-streak"/></svg><svg class="ic"><use href="#i-badge"/></svg><svg class="ic"><use href="#i-trophy"/></svg><svg class="ic"><use href="#i-lock"/></svg><svg class="ic"><use href="#i-done"/></svg><svg class="ic"><use href="#i-search"/></svg><svg class="ic"><use href="#i-city"/></svg><svg class="ic"><use href="#i-upload"/></svg><svg class="ic"><use href="#i-apply"/></svg><svg class="ic"><use href="#i-skill"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+.av .rg circle{stroke-width:var(--rw,4)}
+.av .lv{font-size:calc(var(--s,48px)*var(--lf,.2));bottom:calc(var(--s,48px)*(.03 - var(--lf,.2)/2))}
+.av.s48{--rw:5;--lf:.25}
+.av.s32{--rw:6.5;--lf:.31}
+.av .rkm{position:absolute;top:-2px;inset-inline-start:-2px;min-width:calc(var(--s,48px)*.3);height:calc(var(--s,48px)*.3);border-radius:50%;background:var(--xp);color:var(--ink);font:800 calc(var(--s,48px)*.18)/calc(var(--s,48px)*.3) var(--display);text-align:center;box-shadow:0 0 0 2.5px var(--bg,var(--sheet));direction:ltr}
+#avatars .set{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
+.acell{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:22px 10px 14px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.acell .small{display:flex;align-items:flex-end;gap:14px}
+.acell b{font:500 13.5px/1.2 var(--text)}
+#avatars .below{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px;margin-top:16px}
+#avatars .panel{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;gap:18px;--bg:var(--sheet)}
+#avatars .panel>.lab{text-align:left}
+.tiers{display:flex;gap:26px;align-items:flex-end}
+.tiers figure{display:flex;flex-direction:column;align-items:center;gap:12px;font:500 12.5px/1.2 var(--text);color:var(--ink2)}
+.chathead{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.chathead .t{flex:1;line-height:1.35}
+.chathead .t b{font:700 15px/1.3 var(--display);display:block}
+.chathead .t small{font:400 12px/1.3 var(--text);color:var(--ink3)}
+</style>
+
+<section id="avatars" class="sec">
+  <div class="cap"><b>04 · Avatars</b><i>eight from the set · 96 / 48 / 32 · cloth folds are contour lines, the shemagh is a dashed trail, every figure stands on its own terrain line</i></div>
+  <div class="board">
+    <div class="set">
+      <div class="acell"><span class="av plain" style="--s:96px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span></span><div class="small"><span class="av plain" style="--s:48px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span></span><span class="av plain" style="--s:32px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span></span></div><b>سارة</b></div>
+      <div class="acell"><span class="av plain" style="--s:96px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-2"/></svg></span></span><div class="small"><span class="av plain" style="--s:48px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-2"/></svg></span></span><span class="av plain" style="--s:32px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-2"/></svg></span></span></div><b>نورة</b></div>
+      <div class="acell"><span class="av plain" style="--s:96px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-3"/></svg></span></span><div class="small"><span class="av plain" style="--s:48px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-3"/></svg></span></span><span class="av plain" style="--s:32px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-3"/></svg></span></span></div><b>ريم</b></div>
+      <div class="acell"><span class="av plain" style="--s:96px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-4"/></svg></span></span><div class="small"><span class="av plain" style="--s:48px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-4"/></svg></span></span><span class="av plain" style="--s:32px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-4"/></svg></span></span></div><b>لمى</b></div>
+      <div class="acell"><span class="av plain" style="--s:96px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-5"/></svg></span></span><div class="small"><span class="av plain" style="--s:48px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-5"/></svg></span></span><span class="av plain" style="--s:32px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-5"/></svg></span></span></div><b>فيصل</b></div>
+      <div class="acell"><span class="av plain" style="--s:96px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-6"/></svg></span></span><div class="small"><span class="av plain" style="--s:48px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-6"/></svg></span></span><span class="av plain" style="--s:32px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-6"/></svg></span></span></div><b>عبدالله</b></div>
+      <div class="acell"><span class="av plain" style="--s:96px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-7"/></svg></span></span><div class="small"><span class="av plain" style="--s:48px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-7"/></svg></span></span><span class="av plain" style="--s:32px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-7"/></svg></span></span></div><b>سلطان</b></div>
+      <div class="acell"><span class="av plain" style="--s:96px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-8"/></svg></span></span><div class="small"><span class="av plain" style="--s:48px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-8"/></svg></span></span><span class="av plain" style="--s:32px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-8"/></svg></span></span></div><b>يزيد</b></div>
+    </div>
+
+    <div class="below">
+      <div class="panel">
+        <span class="lab">level = an index contour: the ring opens for its number · solid part = progress to the next level · ring colour = tier</span>
+        <div class="tiers">
+          <figure><span class="av" style="--s:96px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span>96</figure>
+          <figure><span class="av s48" style="--s:48px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span>48</figure>
+          <figure><span class="av s32" style="--s:32px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span>32</figure>
+          <span style="width:1px;align-self:stretch;background:var(--line)"></span>
+          <figure><span class="av s48" style="--s:56px;--rc:var(--ink3)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-8"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="22 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">1</b></span>مبتدئ</figure>
+          <figure><span class="av s48" style="--s:56px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span>متعلّمة</figure>
+          <figure><span class="av s48" style="--s:56px;--rc:var(--xpLine);--rcInk:var(--xpInk)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-5"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="60 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">5</b></span>محترف</figure>
+          <figure><span class="av s48" style="--s:56px;--rc:var(--blaze);--rcInk:var(--blazeInk)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-2"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">7</b></span>أسطورة</figure>
+        </div>
+      </div>
+
+      <div class="panel">
+        <span class="lab">in a leaderboard row · the ring carries tier and level, the row carries rank</span>
+        <div class="lb">
+          <div class="lbr"><span class="rk">1</span><span class="av s48" style="--s:44px;--rc:var(--blaze);--rcInk:var(--blazeInk)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-2"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="70 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">6</b></span><span class="nm">نورة القحطاني</span><span class="spot"><svg><use href="#peak"/></svg>3,420</span></div>
+          <div class="lbr me"><span class="rk">7</span><span class="av s48" style="--s:44px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span><span class="nm">سارة العتيبي<small>أنت</small></span><span class="spot"><svg><use href="#peak"/></svg>1,240</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <span class="lab">in a chat header · and beside a message</span>
+        <div class="chathead"><span class="dal"><svg class="ic"><use href="#i-advisor"/></svg></span><div class="t"><b>دليل</b><small>مستشارك في منصة دليلك</small></div><span class="av s32" style="--s:36px;--bg:var(--paper)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span></div>
+        <div class="fx" style="justify-content:flex-start;flex-direction:row-reverse;gap:10px"><span class="av plain" style="--s:32px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span></span><span class="bub" style="align-self:auto">وش أتعلّم بعد SQL؟</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+/* symbol-safe colouring (paths inside <use> only inherit) */
+.sk svg{fill:none;stroke:var(--ink4);stroke-width:1.5;stroke-linejoin:round;stroke-dasharray:1.6 1.6}
+.sk svg.on{fill:var(--ink);stroke:var(--ink);stroke-dasharray:none}
+.sk svg.new{fill:var(--blaze);stroke:var(--blaze);stroke-dasharray:none}
+.card.ink .sk svg,.night .sk svg{stroke:var(--nink3)}
+.card.ink .sk svg.on,.night .sk svg.on{fill:var(--nink);stroke:var(--nink)}
+.card.ink .sk svg.new,.night .sk svg.new{fill:var(--blaze);stroke:var(--blaze)}
+.spot svg{fill:var(--xp)}
+.night .spot svg,.card.ink .spot svg,.lbr.me .spot svg{fill:var(--xpNight)}
+.ring.sm .trk{stroke-width:7;stroke-dasharray:.1 13.09}
+.ring.sm .prg{stroke-width:10}
+.ring.sm b{font-size:calc(var(--s)*.3)}
+
+#kit .board{--bg:var(--paper);padding:32px 36px 40px}
+#kit .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:36px 32px;align-items:start}
+.kit{display:flex;flex-direction:column;gap:16px;min-width:0}
+.kit>.lab{text-align:left;padding-bottom:8px;border-bottom:1px dotted var(--line2)}
+.states{display:grid;grid-template-columns:auto auto auto;gap:14px 16px;justify-content:start;align-items:center}
+.states .lab{text-align:center}
+.xpcard{display:flex;flex-direction:column;gap:12px}
+.xphead{display:flex;justify-content:space-between;align-items:baseline}
+.xphead b{font:700 17px/1.3 var(--display)}
+.xphead b small{font:400 13px/1 var(--text);color:var(--ink3);margin-inline-start:8px}
+.xphead span{font:500 13px/1 var(--text);color:var(--ink2);direction:ltr}
+.xphead span b{font:700 15px/1 var(--text);color:var(--xpInk)}
+.streak{display:flex;align-items:center;gap:18px}
+.streak .fire{width:56px;height:56px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;flex:none}
+.streak .fire .ic{width:30px;height:30px}
+.streak .n{font:800 40px/1 var(--display);direction:ltr}
+.streak .t{font:500 13.5px/1.4 var(--text);color:var(--ink2)}
+.jobcard{display:flex;flex-direction:column;gap:14px}
+.jobcard .top{display:flex;gap:14px;align-items:flex-start}
+.jobcard .top>div{flex:1;min-width:0}
+.jobcard .co{font:400 14px/1.5 var(--text);color:var(--ink2)}
+.skills{display:flex;gap:6px;flex-wrap:wrap}
+.chip-s.has{border-color:var(--ink);color:var(--ink)}
+.chip-s.has .ic{width:14px;height:14px;stroke-width:2.2;color:var(--ok)}
+.chip-s.miss{border-style:dashed;color:var(--ink3);background:transparent}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:14px;border-top:1px solid var(--line)}
+.raise{display:flex;align-items:center;gap:10px;font:400 13.5px/1.4 var(--text);color:var(--ink2);padding:10px 12px;border-radius:10px;background:var(--paper);border:1px solid var(--line)}
+.raise b{font-weight:600;color:var(--ink)}
+.podium{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:end;gap:10px;direction:rtl;padding-top:8px}
+.pod{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.pod .nm{font:600 13px/1.35 var(--text)}
+.pod .step{width:100%;border:1.5px solid var(--ink);border-bottom:0;border-radius:8px 8px 0 0;margin-top:6px;font:800 22px/1 var(--display);display:grid;place-items:center;color:var(--ink);background:var(--paper)}
+.pod.p1 .step{height:64px;background:var(--ink);color:var(--paper)}
+.pod.p2 .step{height:46px}
+.pod.p3 .step{height:34px}
+.chatcol{display:flex;flex-direction:column;gap:18px;background:var(--sheet);border:1px solid var(--line);border-radius:16px;padding:22px}
+.sk.big svg{width:17px;height:16px}
+.sklist{padding:6px 16px}
+.sklist>div{display:grid;grid-template-columns:1fr auto;gap:0 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.sklist>div:last-child{border:0}
+.sklist b{font:600 14.5px/1.4 var(--text)}
+.sklist small{grid-column:1;font:400 12px/1.5 var(--text);color:var(--ink3)}
+.sklist .sk{grid-column:2;grid-row:1/span 2}
+.sklist .none b{color:var(--ink3)}
+</style>
+
+<section id="kit" class="sec">
+  <div class="cap"><b>05 · Kit</b><i>the UI pieces, all on the paper surface</i></div>
+  <div class="board"><div class="grid">
+
+    <div class="kit" style="grid-column:span 5">
+      <span class="lab">buttons · rest / hover / pressed</span>
+      <div class="states">
+        <span class="lab">rest</span><span class="lab">hover</span><span class="lab">pressed</span>
+        <a class="btn btn-p">ابدأ الآن<svg class="ic"><use href="#i-arrow"/></svg></a><a class="btn btn-p is-hover">ابدأ الآن<svg class="ic"><use href="#i-arrow"/></svg></a><a class="btn btn-p is-press">ابدأ الآن<svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-s">عرض التفاصيل</a><a class="btn btn-s is-hover">عرض التفاصيل</a><a class="btn btn-s is-press">عرض التفاصيل</a>
+        <a class="btn btn-g">تخطَّ الآن</a><a class="btn btn-g is-hover">تخطَّ الآن</a><a class="btn btn-g is-press">تخطَّ الآن</a>
+      </div>
+      <span class="lab" style="border:0;padding:0;text-transform:none;letter-spacing:0">ghost = a dotted trail under the label; hover walks it solid</span>
+    </div>
+
+    <div class="kit" style="grid-column:span 4">
+      <span class="lab">chips · quick replies in the onboarding conversation</span>
+      <div class="fx" style="flex-wrap:wrap;gap:10px"><span class="chip is-on">الرياض</span><span class="chip">جدة</span><span class="chip is-hover">الدمام</span><span class="chip">مدينة أخرى</span></div>
+      <span class="lab" style="margin-top:6px">text input · rest / focus</span>
+      <div class="g" style="grid-template-columns:1fr 1fr;gap:14px">
+        <div class="field"><label>اسمك</label><div class="input"><span class="ph">اكتب اسمك الأول</span></div></div>
+        <div class="field"><label>اسمك</label><div class="input is-focus">سارة<span class="caret"></span></div></div>
+      </div>
+    </div>
+
+    <div class="kit" style="grid-column:span 3">
+      <span class="lab">card · the label sits in the line, like a contour height</span>
+      <div class="card" style="margin-top:6px"><span class="legend">سيرتك الذاتية</span>
+        <div class="h-card" style="margin-top:4px">وجدنا 9 مهارات</div>
+        <p style="font-size:14px;color:var(--ink2);margin:4px 0 10px">كل مهارة معها الجملة التي تثبتها من سيرتك.</p>
+        <a class="btn btn-g btn-sm" style="padding:0 2px">اعرض المهارات</a>
+      </div>
+    </div>
+
+    <div class="kit" style="grid-column:span 3">
+      <span class="lab">match ring · 70%</span>
+      <div class="fx" style="gap:24px">
+        <div class="ring" style="--s:132px"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><path class="prg" d="M60 10A50 50 0 1 0 107.55 75.45"/><circle class="end" cx="107.55" cy="75.45" r="6.5"/></svg><b>70<small>%</small></b></div>
+        <div class="col" style="gap:10px;align-items:flex-start">
+          <div class="ring sm" style="--s:56px"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><path class="prg" d="M60 10A50 50 0 1 0 107.55 75.45"/><circle class="end" cx="107.55" cy="75.45" r="10"/></svg><b>70</b></div>
+          <span style="font:400 12.5px/1.5 var(--text);color:var(--ink3)">تطابقك مع<br>محلل بيانات</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit" style="grid-column:span 4">
+      <span class="lab">XP bar · drawn as a map scale bar</span>
+      <div class="xpcard">
+        <div class="xphead"><b>المستوى 3<small>متعلّمة</small></b><span><b>1,240</b> / 1,500 XP</span></div>
+        <div class="xpbar"><div class="bar"><div class="seg f"></div><div class="seg f"></div><div class="seg"><i style="width:40%"></i></div><div class="seg"></div><div class="seg"></div></div>
+          <div class="ticks"><span>1,000</span><span>1,100</span><span>1,200</span><span>1,300</span><span>1,400</span><span>1,500</span></div></div>
+        <span style="font:400 13px/1.5 var(--text);color:var(--ink3)">باقي <span class="ltr" style="font-weight:600;color:var(--ink)">260 XP</span> للمستوى 4 «متمكّنة»</span>
+      </div>
+    </div>
+
+    <div class="kit" style="grid-column:span 5">
+      <span class="lab">streak counter · badges (two earned, one locked)</span>
+      <div class="fx" style="gap:20px;align-items:flex-start">
+        <div class="col" style="gap:16px">
+          <div class="streak"><span class="fire"><svg class="ic"><use href="#i-streak"/></svg></span><div><div class="n">4</div><div class="t">أيام متتالية</div></div></div>
+          <div class="wk"><span class="d on"><u></u>ح</span><span class="d on"><u></u>ن</span><span class="d on"><u></u>ث</span><span class="d now"><u></u>ر</span><span class="d"><u></u>خ</span><span class="d"><u></u>ج</span><span class="d"><u></u>س</span></div>
+        </div>
+        <span style="width:1px;align-self:stretch;background:var(--line)"></span>
+        <div class="fx" style="gap:6px;align-items:flex-start">
+          <div class="bdg"><svg class="disk" viewBox="0 0 76 76"><circle cx="38" cy="38" r="36" fill="none" stroke="#241B15" stroke-width="1.5" stroke-dasharray="1.5 4.783"/><circle cx="38" cy="38" r="30" fill="#E9A817"/><circle cx="38" cy="38" r="25.5" fill="none" stroke="#241B15" stroke-width="1" opacity=".4"/><g class="ic" style="--wp:#241B15;color:#241B15" transform="translate(23 23) scale(1.25)"><use href="#i-path" width="24" height="24"/></g></svg><b>الخطوة الأولى</b><small>أكملتِ أول محطة</small></div>
+          <div class="bdg"><svg class="disk" viewBox="0 0 76 76"><circle cx="38" cy="38" r="36" fill="none" stroke="#241B15" stroke-width="1.5" stroke-dasharray="1.5 4.783"/><circle cx="38" cy="38" r="30" fill="#241B15"/><circle cx="38" cy="38" r="25.5" fill="none" stroke="#FBF6EE" stroke-width="1" opacity=".3"/><g class="ic" style="color:#FBF6EE" transform="translate(23 23) scale(1.25)"><use href="#i-streak" width="24" height="24"/></g></svg><b>سلسلة 3 أيام</b><small>ثلاثة أيام متتالية</small></div>
+          <div class="bdg locked"><svg class="disk" viewBox="0 0 76 76"><circle cx="38" cy="38" r="36" fill="none" stroke="#9F917F" stroke-width="1.5" stroke-dasharray="1.5 4.783"/><circle cx="38" cy="38" r="29.25" fill="none" stroke="#9F917F" stroke-width="1.5" stroke-dasharray="3 3"/><g class="ic" style="color:#9F917F;--wp:#9F917F" transform="translate(23 23) scale(1.25)"><use href="#i-lock" width="24" height="24"/></g></svg><b>جاهزة للوظيفة</b><small>عند تطابق 100%</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kit" style="grid-column:span 4">
+      <span class="lab">job card</span>
+      <div class="card jobcard">
+        <div class="top"><div><div class="h-card">محلل بيانات</div><div class="co">شركة نخلة الرقمية</div>
+          <div class="meta" style="margin-top:8px"><span><svg class="ic"><use href="#i-city"/></svg>الرياض</span><span><svg class="ic"><use href="#i-clock"/></svg>دوام كامل</span></div></div>
+          <div class="ring sm" style="--s:64px"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><path class="prg" d="M60 10A50 50 0 1 0 107.55 75.45"/><circle class="end" cx="107.55" cy="75.45" r="10"/></svg><b>70<small>%</small></b></div></div>
+        <div class="skills"><span class="chip chip-s has"><svg class="ic"><use href="#i-check"/></svg>Excel</span><span class="chip chip-s has"><svg class="ic"><use href="#i-check"/></svg>الإحصاء</span><span class="chip chip-s miss">SQL</span><span class="chip chip-s miss">Python</span><span class="chip chip-s miss">Power BI</span></div>
+        <div class="foot"><span class="tag">بيانات تجريبية</span><a class="btn btn-s btn-sm">قدّم عبر دليل<svg class="ic"><use href="#i-apply"/></svg></a></div>
+      </div>
+    </div>
+
+    <div class="kit" style="grid-column:span 4">
+      <span class="lab">course card</span>
+      <div class="card jobcard">
+        <div><div class="eyebrow">دورة · المحطة 3 في مسارك</div><div class="h-card" style="margin-top:2px">SQL للمبتدئين</div>
+          <div class="meta" style="margin-top:8px"><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot"><svg><use href="#peak"/></svg>+200 XP</span></div></div>
+        <div class="raise"><svg class="ic" style="width:20px;height:20px"><use href="#i-skill"/></svg><span>ترفع مهارة <b>SQL</b> إلى المستوى 1</span><span class="sk" style="margin-inline-start:auto"><svg class="new"><use href="#peak"/></svg><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg></span></div>
+        <div class="foot"><span style="font:400 13px/1.4 var(--text);color:var(--ink3)">يرتفع تطابقك إلى <b class="ltr" style="color:var(--ink)">78%</b></span><a class="btn btn-p btn-sm">ابدأ الدورة<svg class="ic"><use href="#i-arrow"/></svg></a></div>
+      </div>
+    </div>
+
+    <div class="kit" style="grid-column:span 4;grid-row:span 2">
+      <span class="lab">leaderboard block</span>
+      <div class="card" style="--bg:var(--sheet);padding:20px 12px 12px">
+        <div class="podium">
+          <div class="pod p2"><span class="av s48" style="--s:52px;--rc:var(--xpLine);--rcInk:var(--xpInk)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-5"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="52 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">6</b></span><span class="nm">فيصل الحربي</span><span class="spot"><svg><use href="#peak"/></svg>3,180</span><div class="step">2</div></div>
+          <div class="pod p1"><span class="av s48" style="--s:64px;--rc:var(--blaze);--rcInk:var(--blazeInk)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-2"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="70 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">6</b></span><span class="nm">نورة القحطاني</span><span class="spot"><svg><use href="#peak"/></svg>3,420</span><div class="step">1</div></div>
+          <div class="pod p3"><span class="av s48" style="--s:52px;--rc:var(--xpLine);--rcInk:var(--xpInk)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-3"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="30 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">5</b></span><span class="nm">ريم الشهري</span><span class="spot"><svg><use href="#peak"/></svg>2,960</span><div class="step">3</div></div>
+        </div>
+        <div class="lb" style="border-top:1.5px solid var(--ink);padding-top:6px">
+          <div class="lbgap">المراتب 4 و5</div>
+          <div class="lbr"><span class="rk">6</span><span class="av plain" style="--s:36px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-6"/></svg></span></span><span class="nm">عبدالله الدوسري</span><span class="spot"><svg><use href="#peak"/></svg>1,310</span></div>
+          <div class="lbr me"><span class="rk">7</span><span class="av plain" style="--s:36px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span></span><span class="nm">سارة العتيبي<small>أنت</small></span><span class="spot"><svg><use href="#peak"/></svg>1,240</span></div>
+          <div class="lbr"><span class="rk">8</span><span class="av plain" style="--s:36px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-4"/></svg></span></span><span class="nm">لمى الزهراني</span><span class="spot"><svg><use href="#peak"/></svg>1,190</span></div>
+        </div>
+        <div style="display:flex;justify-content:center;padding-top:10px"><span class="tag">مستخدمون تجريبيون</span></div>
+      </div>
+    </div>
+
+    <div class="kit" style="grid-column:span 5">
+      <span class="lab">chat pieces · advisor message, user bubble, status line, composer</span>
+      <div class="chatcol">
+        <div class="msg"><span class="dal"><svg class="ic"><use href="#i-advisor"/></svg></span><div><div class="who">دليل</div><p>أهلًا سارة. قطعتِ محطتين من ست، وتطابقك مع محلل بيانات الآن <span class="ltr" style="font-weight:600">70%</span>. محطتك التالية «SQL للمبتدئين»: ست ساعات، وبعدها يرتفع تطابقك.</p></div></div>
+        <div class="bub">افتح لي الدورة</div>
+        <div class="status"><svg class="ic"><use href="#i-advisor"/></svg><span>دليل يراجع مسارك…</span></div>
+        <div class="composer">اسأل دليل عن مسارك…<span class="snd"><svg class="ic"><use href="#i-send"/></svg></span></div>
+      </div>
+    </div>
+
+
+    <div class="kit" style="grid-column:span 3">
+      <span class="lab">skill level marks · 0 / 1 / 2 / 3 · peaks, not stars</span>
+      <div class="fx" style="gap:18px;font:400 13px/1 var(--text);color:var(--ink2);flex-wrap:wrap">
+        <span class="fx" style="gap:7px"><span class="sk"><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg></span>0</span>
+        <span class="fx" style="gap:7px"><span class="sk"><svg class="on"><use href="#peak"/></svg><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg></span>1</span>
+        <span class="fx" style="gap:7px"><span class="sk"><svg class="on"><use href="#peak"/></svg><svg class="on"><use href="#peak"/></svg><svg><use href="#peak"/></svg></span>2</span>
+        <span class="fx" style="gap:7px"><span class="sk"><svg class="on"><use href="#peak"/></svg><svg class="on"><use href="#peak"/></svg><svg class="on"><use href="#peak"/></svg></span>3</span>
+      </div>
+      <div class="card sklist">
+        <div><b>Excel</b><small>«حلّلتُ بيانات المبيعات الشهرية…»</small><span class="sk big"><svg class="on"><use href="#peak"/></svg><svg class="on"><use href="#peak"/></svg><svg><use href="#peak"/></svg></span></div>
+        <div><b>الإحصاء</b><small>«مقرر الإحصاء التطبيقي، تقدير ممتاز»</small><span class="sk big"><svg class="on"><use href="#peak"/></svg><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg></span></div>
+        <div><b>العرض والتقديم</b><small>«قدّمتُ النتائج للإدارة كل شهر»</small><span class="sk big"><svg class="on"><use href="#peak"/></svg><svg class="on"><use href="#peak"/></svg><svg class="on"><use href="#peak"/></svg></span></div>
+        <div class="none"><b>SQL</b><small>لم تظهر في سيرتك بعد</small><span class="sk big"><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg></span></div>
+      </div>
+    </div>
+
+  </div></div>
+</section>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <!-- the home terrain: one ridge, summit at 0,0, axis tilted 8 degrees; rings are nested copies of #blob -->
+  <g id="ridge" fill="none">
+    <g class="rdg-c"><use href="#blob" transform="translate(3.3 5.6) scale(.331 .224)"/><use href="#blob" transform="translate(15.4 11.6) scale(.707 .464)"/><use href="#blob" transform="translate(33.3 19) scale(1.201 .76)"/><use href="#blob" transform="translate(59.5 28) scale(1.845 1.12)"/><use href="#blob" transform="translate(144 50) scale(3.625 2)"/><use href="#blob" transform="translate(192 60) scale(4.53 2.4)"/><use href="#blob" transform="translate(240.3 69) scale(5.396 2.76)"/><use href="#blob" transform="translate(299.7 79) scale(6.415 3.16)"/><use href="#blob" transform="translate(372 90) scale(7.605 3.6)"/><use href="#blob" transform="translate(659.3 126) scale(12.008 5.04)"/><use href="#blob" transform="translate(812 142) scale(14.21 5.68)"/><use href="#blob" transform="translate(1002 160) scale(16.88 6.4)"/></g>
+    <g class="rdg-i"><use href="#blob" transform="translate(98.1 39) scale(2.699 1.56)"/><use href="#blob" transform="translate(167.3 55) scale(4.07 2.2)"/><use href="#blob" transform="translate(444 100) scale(8.75 4)"/><use href="#blob" transform="translate(538 112) scale(10.2 4.48)"/></g>
+  </g>
+</defs></svg>
+
+<style>
+.frame{width:1440px;height:900px;overflow:hidden;position:relative;background:var(--paper);border-radius:10px;box-shadow:0 30px 60px -40px rgba(54,36,26,.45),0 0 0 1px rgba(54,36,26,.08)}
+#screen-home .frame{display:grid;grid-template-columns:232px 1fr}
+.rail{padding:26px 16px 20px;display:flex;flex-direction:column;border-inline-end:1px solid var(--line)}
+.rail .brand{padding:0 10px 26px}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav a{display:flex;align-items:center;gap:12px;height:46px;padding:0 12px;border-radius:12px;font:500 15.5px/1 var(--text);color:var(--ink2);--wp:var(--ink4);border:1px solid transparent}
+.nav a.on{background:var(--sheet);border-color:var(--line);color:var(--ink);font-weight:700;--wp:var(--blaze)}
+.nav a.on::after{content:"";margin-inline-start:auto;width:7px;height:7px;border-radius:50%;background:var(--blaze)}
+.rail .daily{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:14px 12px 12px;background:var(--sheet);--bg:var(--sheet)}
+.rail .daily .hd{display:flex;align-items:center;gap:8px;font:600 13.5px/1.2 var(--text);margin-bottom:12px}
+.rail .daily .hd b{margin-inline-start:auto;font:800 18px/1 var(--display);direction:ltr}
+.rail .daily .hd small{font:400 12px/1 var(--text);color:var(--ink3)}
+.rail .wk .d{width:25px}.rail .wk .d::before{width:25px}
+.hmain{padding:24px 28px;display:flex;flex-direction:column;gap:20px;min-width:0}
+.hhead{height:64px;display:flex;align-items:center;justify-content:space-between}
+.hhead h1{font:800 28px/1.3 var(--display)}
+.hhead p{font:400 14px/1.5 var(--text);color:var(--ink3)}
+.uchip{display:flex;align-items:center;height:64px;border:1px solid var(--line);border-radius:18px;background:var(--sheet);--bg:var(--sheet);padding:0 8px 0 0;padding-inline:6px 10px}
+.uchip>div{display:flex;align-items:center;gap:10px;padding:0 16px;height:36px;border-inline-end:1px solid var(--line)}
+.uchip>div:last-child{border:0;padding-inline-end:6px}
+.uchip .k{font:400 11.5px/1.2 var(--text);color:var(--ink3)}
+.uchip .v{font:700 15px/1.2 var(--text)}
+.uchip .ic{width:22px;height:22px}
+.hbody{display:grid;grid-template-columns:792px 340px;gap:20px;height:768px}
+.map{position:relative;width:792px;height:768px;background:var(--sheet);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.map svg.t{position:absolute;inset:0}
+.map .ht{font:600 11px var(--text);fill:var(--contourInk)}
+.ml{position:absolute;transform:translateX(-50%);text-align:center;white-space:nowrap;background:var(--sheet);padding:1px 8px 3px;border-radius:8px;line-height:1.35}
+.ml b{display:block;font:600 14.5px/1.45 var(--text);color:var(--ink)}
+.ml small{display:inline-flex;gap:5px;align-items:center;font:400 12px/1.4 var(--text);color:var(--ink3)}
+.ml small .ic{width:14px;height:14px;stroke-width:2}
+.ml.lock b{color:var(--ink3);font-weight:500}
+.ml.r{transform:none;text-align:start}
+.ml.goal{transform:none;text-align:end;white-space:normal;padding:2px 6px}
+.ml.goal b{font:800 17px/1.4 var(--display)}
+.mnext{position:absolute;transform:translateX(-50%);background:var(--sheet);border:1.5px solid var(--ink);border-radius:14px;padding:9px 14px 10px;white-space:nowrap;box-shadow:0 10px 24px -14px rgba(54,36,26,.4)}
+.mnext::after{content:"";position:absolute;bottom:-7px;left:calc(50% + 10px);width:12px;height:12px;background:var(--sheet);border:1.5px solid var(--ink);border-top:0;border-left:0;transform:rotate(45deg)}
+.mnext .e{font:600 11.5px/1.3 var(--text);color:var(--blazeInk);display:flex;gap:6px;align-items:center}
+.mnext .e::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blaze)}
+.mnext b{display:block;font:700 17px/1.45 var(--display)}
+.mnext .meta{font-size:12.5px;gap:12px;margin-top:1px}
+.mnext .meta .ic{width:15px;height:15px}
+.you{position:absolute;width:50px;height:50px;border-radius:50%;background:var(--sheet);box-shadow:0 0 0 1.5px var(--ink);padding:3px}
+.you svg{width:100%;height:100%;border-radius:50%}
+.here{position:absolute;transform:translateX(-50%);background:var(--ink);color:var(--paper);font:600 12px/1 var(--text);padding:6px 10px 7px;border-radius:8px;white-space:nowrap;display:flex;gap:6px;align-items:center}
+.here i{font-style:normal;color:var(--xpNight);direction:ltr;font-weight:700}
+.cart{position:absolute;top:22px;right:22px;width:258px;background:var(--sheet);border:1px solid var(--line2);border-radius:14px;padding:14px 16px 14px}
+.cart .e{font:500 12.5px/1.3 var(--text);color:var(--ink3)}
+.cart h2{font:800 30px/1.35 var(--display)}
+.cart .pg{display:flex;align-items:center;gap:8px;white-space:nowrap;font:400 12.5px/1.3 var(--text);color:var(--ink2);margin-top:6px}
+.cart .pg b{font-weight:700;color:var(--ink)}
+.dots{display:flex;gap:4px;direction:rtl;margin-inline-start:auto}
+.dots i{width:9px;height:9px;border-radius:50%;border:1.5px dotted var(--ink4)}
+.dots i.d{border:0;background:var(--ink)}
+.dots i.n{border:0;background:var(--blaze)}
+.cart .lg{display:flex;gap:12px;margin-top:10px;padding-top:10px;border-top:1px dotted var(--line2);font:400 11.5px/1 var(--text);color:var(--ink3)}
+.cart .lg span{display:flex;align-items:center;gap:5px}
+.cart .lg i{width:9px;height:9px;border-radius:50%;background:var(--ink)}
+.cart .lg .n i{background:var(--blaze)}
+.cart .lg .l i{background:none;border:1.5px dotted var(--ink4)}
+.seg2{position:absolute;left:18px;bottom:16px;display:flex;gap:2px;border:1px solid var(--line2);border-radius:11px;background:var(--sheet);padding:3px;font:500 12.5px/1 var(--text);color:var(--ink2)}
+.seg2>*{padding:7px 12px;border-radius:8px;font-weight:500}
+.seg2 b{background:var(--ink);color:var(--paper);font-weight:600}
+.brlab{position:absolute;white-space:nowrap;background:var(--sheet);padding:0 6px;font:600 13.5px/1.5 var(--text);color:var(--ink2)}
+.brlab small{display:block;font:400 11.5px/1.3 var(--text);color:var(--ink3)}
+.hside{display:flex;flex-direction:column;gap:16px;min-width:0}
+.nextc{padding:20px 20px 20px;display:flex;flex-direction:column;gap:12px;border-radius:20px}
+.nextc .top{display:flex;justify-content:space-between;align-items:center;font:600 12.5px/1 var(--text);color:var(--nink2)}
+.nextc .top span:first-child{display:flex;align-items:center;gap:7px;color:var(--nink)}
+.nextc .top span:first-child::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blaze)}
+.nextc h3{font:800 28px/1.3 var(--display)}
+.nextc p{font:400 14px/1.7 var(--text);color:var(--nink2)}
+.gain{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--night3);border-radius:12px}
+.gain>div{padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.gain>div+div{border-inline-start:1px solid var(--night3)}
+.gain .k{font:400 11.5px/1.2 var(--text);color:var(--nink3)}
+.gain .v{font:700 15px/1.2 var(--text);display:flex;align-items:center;gap:8px}
+.gain .v i{font-style:normal;color:var(--nink3);font-weight:400}
+.matchc{display:flex;gap:16px;align-items:center;padding:16px 18px;border-radius:20px}
+.matchc h4{font:700 16px/1.4 var(--display)}
+.matchc p{font:400 12.5px/1.5 var(--text);color:var(--ink3);margin-bottom:8px}
+.rankc{padding:14px 12px 10px;border-radius:20px}
+.rankc .hd{display:flex;justify-content:space-between;align-items:center;padding:0 8px 6px;font:700 15px/1.4 var(--display)}
+.rankc .hd a{font:500 12.5px/1 var(--text);color:var(--ink3)}
+.rankc .lbr{height:50px}
+.rankc .hint{padding:8px 8px 2px;font:400 12.5px/1.5 var(--text);color:var(--ink3)}
+.launch{margin-top:auto;display:flex;align-items:center;gap:12px;height:60px;border-radius:30px;border:1.5px solid var(--ink);background:var(--sheet);padding-inline:8px 18px;font:500 15px/1 var(--text);color:var(--ink2);box-shadow:0 14px 28px -18px rgba(54,36,26,.5)}
+.launch .dal{width:44px;height:44px}.launch .dal .ic{width:26px;height:26px}
+.launch kbd{margin-inline-start:auto;font:500 11px/1 ui-monospace,Consolas,monospace;color:var(--ink3);border:1px solid var(--line2);border-radius:6px;padding:4px 6px;direction:ltr}
+</style>
+
+<section id="screen-home" class="sec">
+  <div class="cap"><b>06 · Screen · Home</b><i>1440 × 900 · signed in · the roadmap is a map: match is altitude, the trail climbs the contours to the summit</i></div>
+  <div class="frame">
+    <aside class="rail">
+      <div class="brand"><span class="lock-h word" style="font-size:27px;gap:8px"><svg class="mark" width="32" height="32"><use href="#mark"/></svg><span>دليلك</span></span></div>
+      <nav class="nav">
+        <a class="on"><svg class="ic"><use href="#i-path"/></svg>مساري</a>
+        <a><svg class="ic"><use href="#i-tree"/></svg>المهارات</a>
+        <a><svg class="ic"><use href="#i-cv"/></svg>السيرة الذاتية</a>
+        <a><svg class="ic"><use href="#i-jobs"/></svg>الوظائف</a>
+        <a><svg class="ic"><use href="#i-courses"/></svg>الدورات</a>
+        <a><svg class="ic"><use href="#i-leaders"/></svg>المتصدرون</a>
+        <a><svg class="ic"><use href="#i-profile"/></svg>ملفي</a>
+      </nav>
+      <div class="daily">
+        <div class="hd"><svg class="ic" style="width:22px;height:22px"><use href="#i-streak"/></svg>السلسلة اليومية<b>4</b><small>أيام</small></div>
+        <div class="wk"><span class="d on"><u></u>ح</span><span class="d on"><u></u>ن</span><span class="d on"><u></u>ث</span><span class="d now"><u></u>ر</span><span class="d"><u></u>خ</span><span class="d"><u></u>ج</span><span class="d"><u></u>س</span></div>
+      </div>
+    </aside>
+
+    <main class="hmain">
+      <header class="hhead">
+        <div><h1>مساء الخير، سارة</h1><p>بقيت أربع محطات بينك وبين القمة. محطة اليوم تأخذ ست ساعات.</p></div>
+        <div class="uchip">
+          <div><svg class="ic"><use href="#i-leaders"/></svg><span><span class="k">ترتيبك</span><br><span class="v num">7</span></span></div>
+          <div><span><span class="k">نقاط الخبرة</span><br><span class="spot" style="font-size:15px"><svg><use href="#peak"/></svg>1,240 XP</span></span>
+            <span class="xpbar" style="width:92px"><span class="bar" style="height:9px"><span class="seg f"></span><span class="seg f"></span><span class="seg"><i style="width:40%"></i></span><span class="seg"></span><span class="seg"></span></span></span></div>
+          <div><span style="text-align:start"><span class="v">سارة العتيبي</span><br><span class="k">المستوى 3 · متعلّمة</span></span>
+            <span class="av s48" style="--s:50px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span></div>
+        </div>
+      </header>
+
+      <div class="hbody">
+        <div class="map">
+          <svg class="t" width="792" height="768" viewBox="0 0 792 768">
+            <use href="#ridge" transform="translate(196 196) rotate(-8)"/>
+            <!-- contour heights: the line opens for its number -->
+            <g class="ht" text-anchor="middle">
+              <g transform="translate(147 364) rotate(15)"><rect x="-17" y="-8" width="34" height="16" fill="#FFFDF9"/><text y="4">90%</text></g>
+              <g transform="translate(139 431) rotate(14)"><rect x="-17" y="-8" width="34" height="16" fill="#FFFDF9"/><text y="4">80%</text></g>
+              <g transform="translate(146 617) rotate(11)"><rect x="-17" y="-8" width="34" height="16" fill="#FFFDF9"/><text y="4">70%</text></g>
+              <g transform="translate(155 665) rotate(10)"><rect x="-17" y="-8" width="34" height="16" fill="#FFFDF9"/><text y="4">60%</text></g>
+            </g>
+            <!-- branches after the summit -->
+            <g fill="none" stroke="#645749" stroke-width="1.75" stroke-linecap="round" stroke-dasharray="2 6"><path d="M196 196C168 172 122 150 84 112"/><path d="M196 196C232 160 280 124 330 104"/></g>
+            <g fill="#FFFDF9" stroke="#4B4036" stroke-width="1.75" stroke-linejoin="round"><path d="M84 101l9 15.500H75z"/><path d="M330 93l9 15.500h-18z"/></g>
+            <!-- the trail: ahead (dotted), next leg (blaze), covered (solid) -->
+            <path d="M372 460C420 455 500 418 548 400 596 382 664 378 664 340 664 300 580 276 520 270 460 264 404 254 352 244 300 234 236 220 196 196" fill="none" stroke="#9F917F" stroke-width="3.5" stroke-linecap="round" stroke-dasharray=".1 9"/>
+            <path d="M318 598C280 594 204 596 204 560 204 528 222 492 250 480 284 466 336 464 372 460" fill="none" stroke="#1A92CB" stroke-width="3.5" stroke-linecap="round" stroke-dasharray=".1 9"/>
+            <path d="M704 704C660 700 612 680 566 664 520 648 458 622 400 612 372 607 345 601 318 598" fill="none" stroke="#241B15" stroke-width="3.5" stroke-linecap="round"/>
+            <!-- trailhead -->
+            <circle cx="704" cy="704" r="6" fill="#FFFDF9" stroke="#241B15" stroke-width="2.5"/>
+            <!-- done -->
+            <g fill="#241B15"><circle cx="566" cy="664" r="13"/><circle cx="400" cy="612" r="13"/></g>
+            <g fill="none" stroke="#FFFDF9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M560.500 664.500l3.800 3.800 7.200-8"/><path d="M394.500 612.500l3.800 3.800 7.200-8"/></g>
+            <!-- you -->
+            <path d="M318 580v12" stroke="#241B15" stroke-width="1.75"/>
+            <circle cx="318" cy="598" r="6.500" fill="#1A92CB" stroke="#FFFDF9" stroke-width="3"/>
+            <!-- next: the inviting one -->
+            <circle cx="372" cy="460" r="25" fill="#FFFDF9" stroke="#1A92CB" stroke-width="1.5"/>
+            <circle cx="372" cy="460" r="17" fill="#1A92CB"/>
+            <text x="372" y="466" text-anchor="middle" style="font:800 17px var(--display)" fill="#1A120D">3</text>
+            <!-- locked -->
+            <g fill="#FFFDF9" stroke="#9F917F" stroke-width="2" stroke-dasharray="2.500 3"><circle cx="548" cy="400" r="13"/><circle cx="520" cy="270" r="13"/><circle cx="352" cy="244" r="13"/></g>
+            <g text-anchor="middle" style="font:700 13px var(--display)" fill="#645749"><text x="548" y="404.500">4</text><text x="520" y="274.500">5</text><text x="352" y="248.500">6</text></g>
+            <!-- summit -->
+            <circle cx="196" cy="196" r="5" fill="#241B15"/>
+            <path d="M196 196v-46" stroke="#241B15" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M196 150l-30 10 30 10z" fill="#1A92CB" stroke="#1A92CB" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+
+          <div class="cart">
+            <div class="e">مسارك نحو</div>
+            <h2>محلل بيانات</h2>
+            <div class="pg"><span>قطعتِ <b>2</b> من <b>6</b> محطات</span><span class="dots"><i class="d"></i><i class="d"></i><i class="n"></i><i></i><i></i><i></i></span></div>
+            <div class="lg"><span><i></i>تمّت</span><span class="n"><i></i>التالية</span><span class="l"><i></i>مقفلة</span></div>
+          </div>
+
+          <span class="brlab" style="left:26px;top:52px">عالِم بيانات</span>
+          <span class="brlab" style="left:350px;top:84px">محلل ذكاء أعمال</span>
+          <span class="brlab" style="left:150px;top:22px;font-weight:400;font-size:12px;color:var(--ink3)">وظائف تُفتح بعد القمة</span>
+
+          <div class="ml goal" style="left:34px;top:206px;width:134px"><b>جاهزة لوظيفة محلل بيانات</b><small>القمة · تطابق <span class="ltr">100%</span></small></div>
+          <div class="ml lock" style="left:338px;top:274px"><b>مشروع تطبيقي: تحليل مبيعات</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+          <div class="ml lock" style="left:520px;top:206px"><b>Power BI ولوحات المعلومات</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+          <div class="ml lock r" style="left:520px;top:424px"><b>تحليل البيانات بـ Python</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>تُفتح بعد SQL</small></div>
+          <div class="mnext" style="left:352px;top:352px"><span class="e">محطتك التالية</span><b>SQL للمبتدئين</b><div class="meta"><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot" style="font-size:12.5px"><svg><use href="#peak"/></svg>+200 XP</span></div></div>
+          <div class="here" style="left:318px;top:498px">أنت هنا <i>70%</i></div>
+          <div class="you" style="left:293px;top:530px"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></div>
+          <div class="ml" style="left:400px;top:632px"><b>مبادئ الإحصاء</b><small><svg class="ic" style="color:var(--ok)"><use href="#i-check"/></svg>تمّت<span class="spot" style="font-size:12px;font-weight:600"><svg><use href="#peak"/></svg>+150</span></small></div>
+          <div class="ml" style="left:566px;top:604px"><b>أساسيات Excel</b><small><svg class="ic" style="color:var(--ok)"><use href="#i-check"/></svg>تمّت<span class="spot" style="font-size:12px;font-weight:600"><svg><use href="#peak"/></svg>+100</span></small></div>
+          <span class="brlab" style="left:718px;top:692px;font-size:12px;font-weight:400;color:var(--ink3)">البداية</span>
+          <span class="seg2"><b>خريطة</b><span>قائمة</span></span>
+        </div>
+
+        <aside class="hside">
+          <div class="card ink nextc">
+            <div class="top"><span>الخطوة التالية</span><span>المحطة 3 من 6</span></div>
+            <h3>SQL للمبتدئين</h3>
+            <p>اكتبي أول استعلاماتك، واستخرجي ما تحتاجينه من الجداول. المهارة الأولى التي تنقصك لوظيفة محلل بيانات.</p>
+            <div class="meta"><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot"><svg><use href="#peak"/></svg>+200 XP</span></div>
+            <div class="gain">
+              <div><span class="k">مهارة SQL</span><span class="v"><span class="sk"><svg class="new"><use href="#peak"/></svg><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg></span><i>من 0 إلى 1</i></span></div>
+              <div><span class="k">تطابقك بعدها</span><span class="v num"><span class="ltr">78%</span><i class="ltr">+8</i></span></div>
+            </div>
+            <a class="btn btn-p" style="height:54px;font-size:17px;margin-top:4px">ابدأ الآن<svg class="ic"><use href="#i-arrow"/></svg></a>
+          </div>
+
+          <div class="card matchc" style="--bg:var(--sheet)">
+            <div class="ring" style="--s:96px"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><path class="prg" d="M60 10A50 50 0 1 0 107.55 75.45"/><circle class="end" cx="107.55" cy="75.45" r="7.500"/></svg><b>70<small>%</small></b></div>
+            <div><h4>تطابقك مع محلل بيانات</h4><p>ثلاث مهارات تفصلك عن القمة</p>
+              <div class="skills"><span class="chip chip-s miss">SQL</span><span class="chip chip-s miss">Python</span><span class="chip chip-s miss">Power BI</span></div></div>
+          </div>
+
+          <div class="card rankc">
+            <div class="hd">المتصدرون<a>الكل</a></div>
+            <div class="lbr me"><span class="rk">7</span><span class="av plain" style="--s:34px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span></span><span class="nm">سارة العتيبي<small>أنت</small></span><span class="spot"><svg><use href="#peak"/></svg>1,240</span></div>
+            <div class="hint">يفصلك <b class="ltr" style="color:var(--xpInk)">70 XP</b> عن المرتبة 6. دورة واحدة تكفي.</div>
+          </div>
+
+          <div class="launch"><span class="dal"><svg class="ic"><use href="#i-advisor"/></svg></span>اسأل دليل عن مسارك…<kbd>Ctrl K</kbd></div>
+        </aside>
+      </div>
+    </main>
+  </div>
+</section>
+<style>
+#screen-signin .frame{display:grid;grid-template-columns:548px 892px;direction:ltr}
+.si-form{direction:rtl;background:var(--paper);padding:44px 64px 36px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.si-form .terrain{position:absolute;left:0;bottom:0;width:548px;height:420px;fill:none;--ctr:#E3D8C8;--ctri:#E3D8C8;pointer-events:none}
+.si-form>*:not(.terrain){position:relative}
+.si-mid{margin:auto 0;display:flex;flex-direction:column;gap:22px}
+.si-mid h1{font:800 46px/1.32 var(--display)}
+.si-mid h1 em{font-style:normal;color:var(--blaze)}
+.si-mid>p{font:400 16.5px/1.85 var(--text);color:var(--ink2);margin-top:-8px}
+.si-mid .input{height:58px;font-size:17px;border-radius:14px}
+.si-mid .btn{height:58px;font-size:18px;border-radius:14px}
+.si-hint{display:flex;align-items:center;gap:8px;font:400 13px/1.5 var(--text);color:var(--ink3)}
+.si-hint .ic{width:18px;height:18px}
+.si-foot{display:flex;justify-content:space-between;align-items:center;font:400 12px/1 var(--text);color:var(--ink3)}
+
+.si-show{direction:rtl;background:var(--night);position:relative;overflow:hidden;color:var(--nink)}
+.si-show svg.t{position:absolute;inset:0;--ctr:var(--ncontour);--ctri:var(--ncontour2)}
+.pc{position:absolute;background:var(--sheet);color:var(--ink);border-radius:16px;padding:16px 18px;box-shadow:0 24px 40px -24px rgba(15,10,6,.7);--bg:var(--sheet)}
+.pc .eyebrow{display:flex;align-items:center;gap:6px}
+.stepn{position:absolute;font:500 12.5px/1 var(--text);color:var(--nink2);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.stepn b{font:800 13px/22px var(--display);width:22px;height:22px;border-radius:50%;border:1.5px solid var(--nink3);text-align:center;color:var(--nink);direction:ltr}
+.cvline{height:7px;border-radius:4px;background:var(--sunk);margin:9px 0}
+.cvhl{font:400 13.5px/1.9 var(--text);color:var(--ink)}
+.cvhl mark{background:linear-gradient(var(--xpSoft),var(--xpSoft)) no-repeat right center/100% 78%;color:inherit;padding:0 3px}
+.cvhl mark.half{background-size:46% 78%}
+.scan{position:absolute;left:0;right:0;top:92px;height:2px;background:var(--blaze)}
+.xpfly{position:absolute;display:inline-flex;align-items:center;gap:6px;background:var(--xp);color:var(--ink);font:800 16px/1 var(--text);padding:9px 14px;border-radius:12px;direction:ltr}
+.xpfly svg{width:13px;height:12px;fill:var(--ink)}
+.rankpill{display:flex;align-items:center;gap:12px;padding:10px 16px 10px 12px;padding-inline:12px 16px;border-radius:40px}
+.rankpill .up{display:inline-flex;align-items:center;gap:3px;font:700 13px/1 var(--text);color:var(--ok);direction:ltr}
+.rankpill .up svg{width:14px;height:14px;stroke-width:2.4}
+.sumlab{position:absolute;white-space:nowrap}
+.sumlab b{display:block;font:800 21px/1.4 var(--display)}
+.sumlab small{font:400 12.5px/1.4 var(--text);color:var(--nink2)}
+</style>
+
+<section id="screen-signin" class="sec">
+  <div class="cap"><b>07 · Screen · Sign-in</b><i>1440 × 900 · form on the left, moving showcase on the right (physical sides)</i></div>
+  <div class="frame">
+    <div class="si-form">
+      <svg class="terrain" viewBox="0 0 548 420"><use href="#ridge" transform="translate(-60 470) rotate(-8) scale(.5)"/></svg>
+      <span class="lock-h word" style="font-size:34px;gap:10px"><svg class="mark" width="42" height="42"><use href="#mark"/></svg><span>دليلك</span></span>
+      <div class="si-mid">
+        <h1>طريقك من مهاراتك إلى <em>وظيفتك</em>.</h1>
+        <p>ارفع سيرتك، اختر وجهتك، وامشِ الطريق محطةً محطة. كل دورة تكملها ترفع تطابقك مع وظيفة حقيقية.</p>
+        <div class="field" style="margin-top:6px"><label>اسمك</label><div class="input is-focus">سارة<span class="caret"></span></div></div>
+        <a class="btn btn-p">ابدأ رحلتك<svg class="ic"><use href="#i-arrow"/></svg></a>
+        <div class="si-hint"><svg class="ic"><use href="#i-done"/></svg>الدخول بالاسم فقط. بلا بريد ولا كلمة مرور.</div>
+      </div>
+      <div class="si-foot"><span class="tag">نسخة تجريبية · الوظائف والدورات بيانات تجريبية</span><span>دليلك 2026</span></div>
+    </div>
+
+    <div class="si-show">
+      <svg class="t" width="892" height="900" viewBox="0 0 892 900">
+        <use href="#ridge" transform="translate(452 128) rotate(-8) scale(1.05)"/>
+        <!-- leader lines from waypoints to pieces -->
+        <g stroke="#B3A28D" stroke-width="1.25" fill="none"><path d="M572 742h46"/><path d="M372 592h-40"/><path d="M542 432h42"/><path d="M372 282h-44"/></g>
+        <!-- trail: ahead dotted, drawn solid, with the drawing head caught between 3 and 4 -->
+        <path d="M542 432C550 372 392 342 372 282 357 232 442 192 452 128" fill="none" stroke="#B3A28D" stroke-width="3.5" stroke-linecap="round" stroke-dasharray=".1 9"/>
+        <path d="M482 900C482 840 572 802 572 742 572 682 392 662 372 592 357 532 532 502 542 432" fill="none" stroke="#FBF6EE" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M542 432C546 402 510 380 474 360" fill="none" stroke="#1A92CB" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="474" cy="360" r="6" fill="#1A92CB" stroke="#36241A" stroke-width="3"/>
+        <!-- waypoints -->
+        <g fill="#FBF6EE"><circle cx="572" cy="742" r="13"/><circle cx="372" cy="592" r="13"/></g>
+        <g fill="none" stroke="#36241A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M566.500 742.500l3.800 3.800 7.200-8"/><path d="M366.500 592.500l3.800 3.800 7.200-8"/></g>
+        <circle cx="542" cy="432" r="24" fill="none" stroke="#1A92CB" stroke-width="1.5"/>
+        <circle cx="542" cy="432" r="32" fill="none" stroke="#1A92CB" stroke-width="1" opacity=".45"/>
+        <circle cx="542" cy="432" r="16" fill="#1A92CB"/>
+        <text x="542" y="438" text-anchor="middle" style="font:800 16px var(--display)" fill="#1A120D">3</text>
+        <circle cx="372" cy="282" r="13" fill="#36241A" stroke="#B3A28D" stroke-width="2" stroke-dasharray="2.500 3"/>
+        <text x="372" y="286.500" text-anchor="middle" style="font:700 13px var(--display)" fill="#D9CCBA">4</text>
+        <!-- summit -->
+        <circle cx="452" cy="128" r="5" fill="#FBF6EE"/><path d="M452 128V80" stroke="#FBF6EE" stroke-width="2.5" stroke-linecap="round"/><path d="M452 80l-32 11 32 11z" fill="#1A92CB" stroke="#1A92CB" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+
+      <div class="sumlab" style="left:476px;top:74px"><b>جاهزة لوظيفة محلل بيانات</b><small>القمة · تطابق <span class="ltr">100%</span></small></div>
+
+      <!-- 1 · CV being read -->
+      <span class="stepn" style="right:28px;top:640px"><b>1</b>نقرأ سيرتك</span>
+      <div class="pc" style="left:618px;top:668px;width:246px;padding:14px 16px 16px;overflow:hidden">
+        <div class="cvline" style="width:52%;margin-top:2px"></div>
+        <div class="cvhl">حلّلتُ <mark>بيانات المبيعات الشهرية</mark> باستخدام <mark class="half">Excel وجداول محورية</mark></div>
+        <div class="cvline" style="width:86%"></div><div class="cvline" style="width:64%"></div>
+        <div class="scan"></div>
+        <div class="skills" style="margin-top:12px"><span class="chip chip-s has">Excel<span class="sk"><svg class="on"><use href="#peak"/></svg><svg class="on"><use href="#peak"/></svg><svg><use href="#peak"/></svg></span></span><span class="chip chip-s has" style="opacity:.55;transform:scale(.92)">تحليل المبيعات<span class="sk"><svg class="on"><use href="#peak"/></svg><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg></span></span></div>
+      </div>
+
+      <!-- 2 · the match -->
+      <span class="stepn" style="right:560px;top:498px"><b>2</b>نريك أين تقف</span>
+      <div class="pc" style="left:46px;top:526px;width:286px">
+        <div class="fx" style="gap:14px;align-items:flex-start"><div style="flex:1"><div class="h-card" style="font-size:19px">محلل بيانات</div><div style="font:400 13px/1.5 var(--text);color:var(--ink2)">شركة نخلة الرقمية · الرياض</div><span class="tag" style="margin-top:10px">بيانات تجريبية</span></div>
+          <div class="ring sm" style="--s:68px"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><path class="prg" d="M60 10A50 50 0 1 0 107.55 75.45"/><circle class="end" cx="107.55" cy="75.45" r="10"/></svg><b>70<small>%</small></b></div></div>
+      </div>
+
+      <!-- 3 · XP landing -->
+      <span class="stepn" style="right:36px;top:338px"><b>3</b>كل دورة تُحسب</span>
+      <span class="xpfly" style="left:604px;top:318px;opacity:.16;transform:translate(-40px,36px) scale(.88)"><svg><use href="#peak"/></svg>+200 XP</span>
+      <span class="xpfly" style="left:604px;top:318px;opacity:.4;transform:translate(-21px,19px) scale(.94)"><svg><use href="#peak"/></svg>+200 XP</span>
+      <div class="pc" style="left:584px;top:366px;width:272px;padding:14px 16px">
+        <div class="xphead" style="margin-bottom:10px"><b style="font-size:15px">المستوى 3<small>متعلّمة</small></b><span><b>1,360</b> XP</span></div>
+        <div class="xpbar"><div class="bar"><div class="seg f"></div><div class="seg f"></div><div class="seg f"></div><div class="seg"><i style="width:60%"></i></div><div class="seg"></div></div></div>
+      </div>
+      <span class="xpfly" style="left:604px;top:318px"><svg><use href="#peak"/></svg>+200 XP</span>
+
+      <!-- 4 · rank, still arriving -->
+      <span class="stepn" style="right:596px;top:212px;opacity:.8"><b>4</b>وتتقدّم بين المتصدرين</span>
+      <div class="pc rankpill" style="left:64px;top:242px;opacity:.86;transform:translateX(-14px)">
+        <span class="rk" style="font:800 20px/1 var(--display);width:22px;text-align:center">6</span>
+        <span class="av plain" style="--s:40px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span></span>
+        <span style="font:600 15px/1.3 var(--text)">سارة العتيبي</span>
+        <span class="up"><svg class="ic"><use href="#i-send"/></svg>1</span>
+      </div>
+
+      <!-- the advisor, speaking -->
+      <div class="pc" style="left:46px;top:752px;width:316px;border-radius:20px 20px 6px 20px;padding:14px 16px">
+        <div class="msg" style="gap:10px"><span class="dal"><svg class="ic"><use href="#i-advisor"/></svg></span><div><div class="who">دليل</div><p style="font-size:14.5px;line-height:1.7">مسارك جاهز يا سارة. نبدأ بـ SQL؟</p></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="note"><b>What moves.</b> The night panel is one continuous shot of the journey, on a 14 s loop. The contour lines drift very slowly (a 40 s parallax of a few pixels). The trail DRAWS itself from the bottom edge upward (stroke-dashoffset, 1.6 s per leg): dotted first, then solid ink behind a coral drawing head. As the head reaches each waypoint the waypoint settles (scale .6 to 1, one 1 px contour ripple) and its product piece slides in 18 px along its leader line while fading in (420 ms): 1 the CV sheet, where a scan line travels down, phrases get highlighted right to left and skill chips pop one by one; 2 the job card, whose match ring is drawn to 70% while the figure counts up; 3 the XP bar, where "+200 XP" rises from the waypoint and lands on the bar, the segment fills and the number rolls; 4 the leaderboard pill, where the rank rolls from 7 to 6. Last, the flag is raised on the summit and Daleel's bubble pops out of the corner. The frame above is caught at about 8 s: the head is between waypoints 3 and 4, the XP chip is mid-flight (its two echoes are the motion trail), the second skill chip and the rank pill are still arriving. Nothing glows, nothing bounces; reduced-motion shows the finished map.</p>
+</section>
+<style>
+#screen-phone .stagephone{display:flex;gap:56px;align-items:center;justify-content:center;padding:36px;background:#CCC3B6;border-radius:6px;direction:ltr}
+.phone{width:390px;height:844px;overflow:hidden;position:relative;background:var(--paper);border-radius:40px;box-shadow:0 0 0 1px rgba(54,36,26,.1),0 40px 70px -40px rgba(54,36,26,.5);direction:rtl;display:flex;flex-direction:column}
+.p-top{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 10px}
+.p-top .who{display:flex;align-items:center;gap:10px}
+.p-top .who b{font:700 15px/1.3 var(--text);display:block}
+.p-top .who small{font:400 12px/1.3 var(--text);color:var(--ink3)}
+.p-stats{display:flex;gap:6px}
+.p-stats span{display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 10px;border-radius:17px;border:1px solid var(--line);background:var(--sheet);font:700 13.5px/1 var(--text)}
+.p-stats .ic{width:18px;height:18px}
+.p-title{display:flex;align-items:center;justify-content:space-between;padding:6px 18px 12px}
+.p-title small{font:500 12px/1.3 var(--text);color:var(--ink3)}
+.p-title h2{font:800 25px/1.35 var(--display)}
+.p-map{position:relative;flex:1;margin:0 12px;border-radius:24px;background:var(--sheet);border:1px solid var(--line);overflow:hidden}
+.p-map svg.t{position:absolute;inset:0}
+.p-map .ml b{font-size:13.5px}
+.p-map .mnext{padding:8px 12px 9px;border-radius:13px}
+.p-map .mnext b{font-size:15.5px}
+.p-map .mnext::after{left:auto;right:-7px;bottom:calc(50% - 6px);transform:rotate(-45deg)}
+.p-map .you{width:44px;height:44px}
+.p-sum{position:absolute;top:12px;left:12px;display:flex;align-items:center;gap:6px;height:30px;padding:0 10px;border-radius:15px;background:var(--sheet);border:1px solid var(--line2);font:500 12px/1 var(--text);color:var(--ink2)}
+.p-sum .ic{width:16px;height:16px}
+.p-next{margin:10px 12px 0;border-radius:24px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:10px}
+.p-next .row{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.p-next h3{font:800 22px/1.3 var(--display)}
+.p-next .e{font:600 12px/1.2 var(--text);color:var(--nink2);display:flex;align-items:center;gap:6px;margin-bottom:2px}
+.p-next .e2{font:500 12px/1.2 var(--text);color:var(--nink3)}
+.p-next .e::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blaze)}
+.p-tabs{display:grid;grid-template-columns:1fr 1fr 76px 1fr 1fr;align-items:center;padding:8px 8px 22px;height:86px}
+.p-tabs a{display:flex;flex-direction:column;align-items:center;gap:4px;font:500 11px/1 var(--text);color:var(--ink3);--wp:var(--ink4)}
+.p-tabs a.on{color:var(--ink);font-weight:700;--wp:var(--blaze)}
+.p-tabs .ask{justify-self:center;width:58px;height:58px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;margin-top:-22px;box-shadow:0 0 0 5px var(--paper),0 14px 22px -12px rgba(54,36,26,.6)}
+.p-tabs .ask .ic{width:30px;height:30px}
+.p-side{direction:ltr;max-width:420px;font:400 14px/1.75 Georgia,serif;color:#4A4138}
+.p-side b{color:#1E1813}
+.p-side ul{padding-left:18px;margin:10px 0 0}
+</style>
+
+<section id="screen-phone" class="sec">
+  <div class="cap"><b>08 · Screen · Phone</b><i>390 × 844 · the same home, one thumb</i></div>
+  <div class="stagephone">
+    <div class="phone">
+      <div class="p-top">
+        <div class="who"><span class="av s48" style="--s:46px;--bg:var(--paper)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span><span><b>سارة العتيبي</b><small>المستوى 3 · متعلّمة</small></span></div>
+        <div class="p-stats"><span><svg class="ic"><use href="#i-streak"/></svg>4</span><span class="spot" style="font-size:13.5px"><svg><use href="#peak"/></svg>1,240</span></div>
+      </div>
+      <div class="p-title">
+        <div><small>مسارك نحو</small><h2>محلل بيانات</h2></div>
+        <div class="ring sm" style="--s:58px;--bg:var(--paper)"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><path class="prg" d="M60 10A50 50 0 1 0 107.55 75.45"/><circle class="end" cx="107.55" cy="75.45" r="10"/></svg><b>70<small>%</small></b></div>
+      </div>
+
+      <div class="p-map">
+        <svg class="t" width="366" height="440" viewBox="0 0 366 440">
+          <use href="#ridge" transform="translate(30 -70) rotate(-8) scale(.72)"/>
+          <path d="M230 262C262 252 288 220 300 180 312 156 336 150 336 124 336 96 270 88 220 80 170 72 110 50 70 -10" fill="none" stroke="#9F917F" stroke-width="3.5" stroke-linecap="round" stroke-dasharray=".1 9"/>
+          <path d="M150 392C100 390 60 384 60 350 60 310 150 284 230 262" fill="none" stroke="#1A92CB" stroke-width="3.5" stroke-linecap="round" stroke-dasharray=".1 9"/>
+          <path d="M340 480C315 440 285 410 250 400 215 392 180 394 150 392" fill="none" stroke="#241B15" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="250" cy="400" r="13" fill="#241B15"/><path d="M244.500 400.500l3.800 3.800 7.200-8" fill="none" stroke="#FFFDF9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M150 374v12" stroke="#241B15" stroke-width="1.75"/><circle cx="150" cy="392" r="6.500" fill="#1A92CB" stroke="#FFFDF9" stroke-width="3"/>
+          <circle cx="230" cy="262" r="25" fill="#FFFDF9" stroke="#1A92CB" stroke-width="1.5"/><circle cx="230" cy="262" r="17" fill="#1A92CB"/><text x="230" y="268" text-anchor="middle" style="font:800 17px var(--display)" fill="#1A120D">3</text>
+          <g fill="#FFFDF9" stroke="#9F917F" stroke-width="2" stroke-dasharray="2.500 3"><circle cx="300" cy="180" r="13"/><circle cx="220" cy="80" r="13"/></g>
+          <g text-anchor="middle" style="font:700 13px var(--display)" fill="#645749"><text x="300" y="184.500">4</text><text x="220" y="84.500">5</text></g>
+        </svg>
+        <span class="p-sum"><svg class="ic"><use href="#i-flag"/></svg>القمة بعد 4 محطات</span>
+        <div class="ml lock" style="left:108px;top:60px"><b>Power BI ولوحات المعلومات</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+        <div class="ml lock r" style="left:110px;top:160px;text-align:end"><b>تحليل البيانات بـ Python</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+        <div class="mnext" style="left:100px;top:226px"><span class="e">محطتك التالية</span><b>SQL للمبتدئين</b><div class="meta"><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot" style="font-size:12.5px"><svg><use href="#peak"/></svg>+200 XP</span></div></div>
+        <div class="here" style="left:226px;top:316px">أنت هنا <i>70%</i></div>
+        <div class="you" style="left:128px;top:328px"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></div>
+        <div class="ml r" style="left:266px;top:352px;padding:1px 6px 3px"><b>مبادئ الإحصاء</b><small><svg class="ic" style="color:var(--ok)"><use href="#i-check"/></svg>تمّت</small></div>
+      </div>
+
+      <div class="card ink p-next">
+        <div class="row" style="align-items:center"><div class="e">الخطوة التالية</div><div class="e2">المحطة 3 من 6</div></div>
+        <div class="row"><h3>SQL للمبتدئين</h3>
+          <div class="meta" style="gap:10px;font-size:12.5px;padding-bottom:6px"><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot" style="font-size:13px"><svg><use href="#peak"/></svg>+200 XP</span></div></div>
+        <a class="btn btn-p" style="height:52px;font-size:17px">ابدأ الآن<svg class="ic"><use href="#i-arrow"/></svg></a>
+      </div>
+
+      <nav class="p-tabs">
+        <a class="on"><svg class="ic"><use href="#i-path"/></svg>مساري</a>
+        <a><svg class="ic"><use href="#i-tree"/></svg>المهارات</a>
+        <span class="ask"><svg class="ic"><use href="#i-advisor"/></svg></span>
+        <a><svg class="ic"><use href="#i-jobs"/></svg>الوظائف</a>
+        <a><svg class="ic"><use href="#i-courses"/></svg>الدورات</a>
+      </nav>
+    </div>
+
+    <div class="p-side">
+      <b>What changes on the phone.</b>
+      <ul>
+        <li>The map stays the screen. It opens centred on «أنت هنا» and scrolls up towards the summit; finished stations slide off the bottom.</li>
+        <li>The next step is docked above the tab bar, so the one action («ابدأ الآن») is always under the thumb.</li>
+        <li>Four tabs plus Daleel in the middle. السيرة الذاتية and المتصدرون live inside ملفي, which opens from the avatar.</li>
+        <li>Level, streak and XP shrink to the avatar ring and two pills; the match ring moves up beside the title.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<style>
+#motion .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;direction:ltr}
+.mo{border-radius:6px;padding:20px 22px 22px;display:flex;flex-direction:column;gap:14px;direction:rtl}
+.mo.paper{background:var(--paper)}
+.mo.night{background:var(--night);color:var(--nink)}
+.mo>.lab{text-align:left;direction:ltr}
+.mo .stagebox{position:relative;height:300px;border-radius:16px;background:var(--sheet);border:1px solid var(--line);overflow:hidden;--bg:var(--sheet)}
+.mo.night .stagebox{background:var(--night);border-color:var(--night3)}
+.mo p.d{direction:ltr;text-align:left;font:400 12.5px/1.6 ui-monospace,Consolas,monospace;color:var(--ink3)}
+.mo.night p.d{color:var(--nink3)}
+.mo svg.t{position:absolute;inset:0;width:100%;height:100%}
+.mo svg *{transform-box:fill-box;transform-origin:center}
+
+/* (a) a stage unlocks · 8s */
+@keyframes ua-cur{0%,10%{opacity:1}18%,90%{opacity:0}100%{opacity:1}}
+@keyframes ua-done{0%,10%{opacity:0}18%,90%{opacity:1}100%{opacity:0}}
+@keyframes ua-chk{0%,14%{stroke-dashoffset:20}22%,90%{stroke-dashoffset:0}100%{stroke-dashoffset:20}}
+@keyframes ua-leg{0%,22%{stroke-dashoffset:100;opacity:1}48%,90%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes ua-fill{0%,48%{transform:scale(0)}54%{transform:scale(1.12)}58%,90%{transform:scale(1);opacity:1}100%{transform:scale(1);opacity:0}}
+@keyframes ua-rip{0%,50%{transform:scale(.7);opacity:0}52%{opacity:.9}70%,100%{transform:scale(1.9);opacity:0}}
+@keyframes ua-num{0%,50%{fill:#645749}56%,90%{fill:#1A120D}100%{fill:#645749}}
+@keyframes ua-out{0%,48%{opacity:1;transform:translate(0,0)}54%,96%{opacity:0;transform:translate(0,-10px)}100%{opacity:1;transform:translate(0,0)}}
+@keyframes ua-in{0%,52%{opacity:0;transform:translate(0,12px);filter:blur(3px)}60%,90%{opacity:1;transform:translate(0,0);filter:blur(0)}100%{opacity:0;transform:translate(0,0)}}
+.ua *{animation-duration:8s;animation-iteration-count:infinite;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+.ua .cur{animation-name:ua-cur}.ua .done{animation-name:ua-done;opacity:0}
+.ua .chk{stroke-dasharray:20;animation-name:ua-chk}
+.ua .leg{stroke-dasharray:100;animation-name:ua-leg;animation-timing-function:linear}
+.ua .fill{animation-name:ua-fill}.ua .rip{animation-name:ua-rip}.ua .num{animation-name:ua-num}
+.ua .l-out{animation-name:ua-out}.ua .l-in{animation-name:ua-in;opacity:0}
+
+/* (b) XP lands on the bar · 8s */
+@keyframes xb-chip{0%,8%{opacity:0;transform:translateY(22px) scale(.92)}14%,30%{opacity:1;transform:translateY(0) scale(1)}40%{opacity:1;transform:translate(-64px,-112px) scale(.82)}44%,100%{opacity:0;transform:translate(-64px,-120px) scale(.7)}}
+@keyframes xb-s3{0%,40%{width:40%}46%,92%{width:100%}100%{width:40%}}
+@keyframes xb-s4{0%,46%{width:0}52%,92%{width:100%}100%{width:0}}
+@keyframes xb-s5{0%,52%{width:0}58%,92%{width:40%}100%{width:0}}
+@keyframes xb-roll{0%,40%{transform:translateY(0)}56%,92%{transform:translateY(-50%)}100%{transform:translateY(0)}}
+@keyframes xb-rem{0%,56%{opacity:0;transform:translateY(8px);filter:blur(3px)}64%,92%{opacity:1;transform:none;filter:none}100%{opacity:0}}
+@keyframes xb-row{0%,4%{opacity:0;transform:translateY(8px)}10%,92%{opacity:1;transform:none}100%{opacity:0}}
+.xb *{animation-duration:8s;animation-iteration-count:infinite;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+.xb .chipfly{position:absolute;right:54px;bottom:74px;animation-name:xb-chip}
+.xb .s3{animation-name:xb-s3}.xb .s4{animation-name:xb-s4}.xb .s5{animation-name:xb-s5}
+.xb .seg i{border-inline-end-width:0}
+.xb .odorow{display:inline-flex;align-items:center;gap:5px}
+.xb .odo{display:block;height:1.3em;line-height:1.3em;overflow:hidden}
+.xb .odo em{display:block;font-style:normal;animation-name:xb-roll}
+.xb .odo i{display:block;font-style:normal;height:1.3em;line-height:1.3em}
+.xb .rem{animation-name:xb-rem}
+.xb .donerow{position:absolute;right:22px;left:22px;bottom:22px;display:flex;align-items:center;gap:10px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);font:500 14px/1.3 var(--text);animation-name:xb-row}
+.xb .donerow .ic{width:20px;height:20px;color:var(--ok);--wp:var(--ok)}
+
+/* (c) the path reveal, on the night stage · 9s */
+@keyframes pr-ring{0%,4%{stroke-dashoffset:1500}46%,90%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes pr-trail{0%,30%{stroke-dashoffset:100}64%,90%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes pr-w1{0%,38%{transform:scale(0)}42%{transform:scale(1.15)}45%,90%{transform:scale(1);opacity:1}100%{opacity:0}}
+@keyframes pr-w2{0%,47%{transform:scale(0)}51%{transform:scale(1.15)}54%,90%{transform:scale(1);opacity:1}100%{opacity:0}}
+@keyframes pr-w3{0%,55%{transform:scale(0)}59%{transform:scale(1.15)}62%,90%{transform:scale(1);opacity:1}100%{opacity:0}}
+@keyframes pr-pole{0%,62%{transform:scaleY(0)}68%,90%{transform:scaleY(1);opacity:1}100%{opacity:0}}
+@keyframes pr-flag{0%,66%{transform:scaleX(0)}73%,90%{transform:scaleX(1);opacity:1}100%{opacity:0}}
+@keyframes pr-stat{0%,3%{opacity:0;transform:translateY(100%);filter:blur(2px)}8%,62%{opacity:1;transform:none;filter:none}68%,100%{opacity:0;transform:translateY(-100%);filter:blur(2px)}}
+@keyframes pr-title{0%,66%{opacity:0;transform:translateY(8px);filter:blur(5px)}76%,90%{opacity:1;transform:none;filter:none}100%{opacity:0}}
+.pr *{animation-duration:9s;animation-iteration-count:infinite;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+.pr .rings use{stroke-dasharray:1500;animation-name:pr-ring;animation-timing-function:linear}
+.pr .rings use:nth-child(2){animation-delay:.12s}.pr .rings use:nth-child(3){animation-delay:.24s}.pr .rings use:nth-child(4){animation-delay:.36s}.pr .rings use:nth-child(5){animation-delay:.48s}.pr .rings use:nth-child(6){animation-delay:.6s}
+.pr .trail{stroke-dasharray:100;animation-name:pr-trail;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+.pr .w1{animation-name:pr-w1}.pr .w2{animation-name:pr-w2}.pr .w3{animation-name:pr-w3}
+.pr .pole{transform-origin:bottom;animation-name:pr-pole}.pr .flag{transform-origin:right;animation-name:pr-flag}
+.pr .stat{position:absolute;left:20px;bottom:18px;height:24px;overflow:hidden}
+.pr .stat .status{height:24px;color:var(--nink3);animation-name:pr-stat}
+.pr .stat .status .ic{color:var(--nink)}
+.pr .stat .status span{background-image:linear-gradient(90deg,var(--nink3) 0 40%,var(--nink) 50%,var(--nink3) 60% 100%);animation:sweep 2.4s linear infinite}
+.pr .title{position:absolute;left:20px;bottom:16px;animation-name:pr-title}
+.pr .title b{display:block;font:800 24px/1.35 var(--display)}
+.pr .title small{font:400 12.5px/1.4 var(--text);color:var(--nink2)}
+@media (prefers-reduced-motion:reduce){.ua *,.xb *,.pr *{animation:none!important}}
+</style>
+
+<section id="motion" class="sec">
+  <div class="cap"><b>09 · Motion</b><i>three looping studies · things are drawn, not popped · ease cubic-bezier(.2,.7,.2,1)</i></div>
+  <div class="grid">
+
+    <div class="mo paper ua">
+      <span class="lab">a · a stage unlocks · 8 s loop</span>
+      <div class="stagebox">
+        <svg class="t" viewBox="0 0 440 300">
+          <g fill="none" stroke="#DACDBA" stroke-width="1"><use href="#blob" transform="translate(60 40) scale(1.6 1.1)"/><use href="#blob" transform="translate(90 60) scale(2.5 1.7)"/><use href="#blob" transform="translate(130 85) scale(3.5 2.4)"/><use href="#blob" transform="translate(180 115) scale(4.7 3.2)"/></g>
+          <path d="M440 236C400 232 372 222 330 200" fill="none" stroke="#241B15" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M330 200C270 168 220 190 170 150 150 134 140 120 132 104" fill="none" stroke="#9F917F" stroke-width="3.5" stroke-linecap="round" stroke-dasharray=".1 9"/>
+          <path class="leg" pathLength="100" d="M330 200C270 168 220 190 170 150 150 134 140 120 132 104" fill="none" stroke="#241B15" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M132 104C120 80 96 60 60 40" fill="none" stroke="#9F917F" stroke-width="3.5" stroke-linecap="round" stroke-dasharray=".1 9"/>
+          <!-- current becomes done -->
+          <g class="cur"><circle cx="330" cy="200" r="24" fill="#FFFDF9" stroke="#1A92CB" stroke-width="1.5"/><circle cx="330" cy="200" r="16" fill="#1A92CB"/><text x="330" y="206" text-anchor="middle" style="font:800 16px var(--display)" fill="#1A120D">3</text></g>
+          <g class="done"><circle cx="330" cy="200" r="14" fill="#241B15"/><path class="chk" d="M324 200.500l4 4 8-8.500" fill="none" stroke="#FFFDF9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+          <!-- locked becomes current -->
+          <circle cx="132" cy="104" r="13" fill="#FFFDF9" stroke="#9F917F" stroke-width="2" stroke-dasharray="2.500 3"/>
+          <circle class="rip" cx="132" cy="104" r="20" fill="none" stroke="#1A92CB" stroke-width="1.25"/>
+          <circle class="fill" cx="132" cy="104" r="16" fill="#1A92CB"/>
+          <text class="num" x="132" y="109.500" text-anchor="middle" style="font:800 15px var(--display)" fill="#645749">4</text>
+        </svg>
+        <div class="ml" style="left:330px;top:232px"><b>SQL للمبتدئين</b></div>
+        <div class="ml lock r l-out" style="left:158px;top:82px"><b>تحليل البيانات بـ Python</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+        <div class="ml r l-in" style="left:158px;top:82px"><b>تحليل البيانات بـ Python</b><small style="color:var(--blazeInk);font-weight:600">فُتحت الآن</small></div>
+      </div>
+      <p class="d">3 turns to ink and its tick is drawn (stroke) · the walked leg is drawn over the dotted one at walking pace · 4 fills from its centre, overshoots 12%, one 1px ripple leaves · the lock label slides up and out, the open label blurs in from below. No glow, no bounce.</p>
+    </div>
+
+    <div class="mo paper xb">
+      <span class="lab">b · XP lands on the bar · 8 s loop</span>
+      <div class="stagebox" style="padding:22px">
+        <div class="xpcard">
+          <div class="xphead"><b>المستوى 3<small>متعلّمة</small></b><span class="odorow"><b class="odo"><em><i>1,240</i><i>1,440</i></em></b> / 1,500 XP</span></div>
+          <div class="xpbar"><div class="bar" style="height:14px"><div class="seg f"></div><div class="seg f"></div><div class="seg"><i class="s3" style="width:40%"></i></div><div class="seg"><i class="s4" style="width:0"></i></div><div class="seg"><i class="s5" style="width:0"></i></div></div>
+            <div class="ticks"><span>1,000</span><span>1,100</span><span>1,200</span><span>1,300</span><span>1,400</span><span>1,500</span></div></div>
+          <span class="rem" style="font:400 13px/1.5 var(--text);color:var(--ink3)">باقي <span class="ltr" style="font-weight:600;color:var(--ink)">60 XP</span> فقط للمستوى 4</span>
+        </div>
+        <span class="xpfly chipfly"><svg><use href="#peak"/></svg>+200 XP</span>
+        <div class="donerow"><svg class="ic"><use href="#i-done"/></svg>أكملتِ دورة SQL للمبتدئين</div>
+      </div>
+      <p class="d">The reward pops out of the finished course (22px, scale .92, 440ms) · rests · travels to the bar and is absorbed · segments fill one after another, like distance on a scale bar · the figure rolls as an odometer · the "remaining" line blurs into focus.</p>
+    </div>
+
+    <div class="mo night pr">
+      <span class="lab">c · the path reveal · night stage · 9 s loop</span>
+      <div class="stagebox">
+        <svg class="t" viewBox="0 0 440 300">
+          <g class="rings" fill="none" stroke="#6E5444" stroke-width="1.1"><use href="#blob" transform="translate(120 84) rotate(-8) scale(.34 .24)"/><use href="#blob" transform="translate(136 92) rotate(-8) scale(.8 .52)"/><use href="#blob" transform="translate(160 104) rotate(-8) scale(1.4 .86)"/><use href="#blob" transform="translate(194 120) rotate(-8) scale(2.1 1.26)"/><use href="#blob" transform="translate(240 140) rotate(-8) scale(2.95 1.74)"/><use href="#blob" transform="translate(300 166) rotate(-8) scale(3.95 2.3)"/></g>
+          <path class="trail" pathLength="100" d="M424 206C384 212 352 200 322 184 290 166 262 190 232 168 208 150 250 128 240 104 232 86 168 96 120 84" fill="none" stroke="#FBF6EE" stroke-width="3.5" stroke-linecap="round"/>
+          <circle class="w1" cx="322" cy="184" r="9" fill="#FBF6EE"/>
+          <circle class="w2" cx="232" cy="168" r="9" fill="#1A92CB" stroke="#36241A" stroke-width="3"/>
+          <circle class="w3" cx="240" cy="104" r="8" fill="#36241A" stroke="#D9CCBA" stroke-width="2" stroke-dasharray="2.500 3"/>
+          <path class="pole" d="M120 84V44" stroke="#FBF6EE" stroke-width="2.5" stroke-linecap="round"/>
+          <path class="flag" d="M120 44l-28 9.500 28 9.500z" fill="#1A92CB" stroke="#1A92CB" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <div class="stat"><div class="status"><svg class="ic"><use href="#i-advisor"/></svg><span>دليل يرسم مسارك…</span></div></div>
+        <div class="title"><b>مسارك جاهز يا سارة</b><small>6 محطات إلى القمة · تبدئين من تطابق <span class="ltr">70%</span></small></div>
+      </div>
+      <p class="d">Contours are drawn outward from the summit, 120ms apart, all at one pen speed · the trail is drawn from the trailhead up · each waypoint settles as the pen passes it · the flag is raised, then unfurls · the rolling status line leaves upward and the title blurs into focus.</p>
+    </div>
+
+  </div>
+</section>
+</body>
+</html>

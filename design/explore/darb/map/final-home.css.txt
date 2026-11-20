@@ -1,0 +1,406 @@
+/* ---------- tokens: the navy scheme (src/app/globals.css holds the same values) ---------- */
+:root{
+  --paper:#EBF0F6; --sheet:#FFFFFF; --sunk:#D5DFEB; --line:#C9D3E2; --line2:#93A0B6;
+  --contour:#BCCBE3; --contour2:#9DB2D4; --contourInk:#4E6A96;
+  --ink:#0E1E3D; --ink2:#34435D; --ink3:#505E77; --ink4:#8492A9;
+  --night:#0B1B38; --night2:#142748; --night3:#2E4A7A; --nink:#F4F7FC; --nink2:#B7C4D9; --nink3:#8597B4;
+  --blaze:#F54D38; --blaze2:#F0462F; --blaze3:#EC4129; --blazeInk:#C2331F; --blazeSoft:#FFE0D9; --onBlaze:#08152F;
+  --xp:#EDAA1A; --xpInk:#926000; --xpLine:#C08500; --xpSoft:#FBECC2; --xpNight:#FFC548;
+  --ok:#0B7A53; --okSoft:#D6EFE4;
+  --display:"IBM Plex Sans Arabic",sans-serif; --text:"IBM Plex Sans Arabic",sans-serif;
+  --wp:var(--blaze);
+  /* the map's own tones */
+  --t-base:#DBE4F0; --t-cliff:#A9BAD4; --t-edge:#BCCBE3;
+  /* motion: every curve the map uses */
+  --e-cam:cubic-bezier(.22,1,.36,1);   /* the camera (opening tilt, station flight, return) */
+  --e-out:cubic-bezier(.2,.7,.2,1);    /* things arriving */
+  --e-pop:cubic-bezier(.3,1.3,.6,1);   /* a coin settling: one small overshoot, no bounce */
+}
+@property --n{syntax:"<integer>";inherits:false;initial-value:70}
+*{box-sizing:border-box}
+html{background:#CBD2DC}
+body{margin:0;padding:40px 0 88px;background:#CBD2DC;color:var(--ink);font-family:var(--text);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p,figure{margin:0}
+svg{display:block;flex:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ic .wp,.wp{fill:var(--wp);stroke:none}
+.ic.ok{color:var(--ok)}
+.ic.mut{--wp:var(--ink4)}
+.ic.navmark{stroke-width:0}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.sep{display:inline-block;width:3px;height:3px;border-radius:50%;background:currentColor;opacity:.55;margin:0 7px;vertical-align:middle;flex:none}
+.cap{width:1440px;margin:0 auto 12px;direction:ltr;text-align:left;font:600 12px/1.5 ui-monospace,Consolas,monospace;color:#56627a;display:flex;gap:14px;align-items:baseline}
+.cap b{color:#0E1E3D}
+.cap i{font-style:normal;font-weight:400}
+
+/* ---------- kit pieces used on this screen ---------- */
+.mark{color:var(--ink)}
+.word{font-family:var(--display);font-weight:700;line-height:1.25;color:var(--ink);font-size:27px}
+.lock-h{display:inline-flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 22px;border-radius:12px;border:1.5px solid transparent;font:600 16px/1 var(--text);cursor:pointer;white-space:nowrap;transition:background .18s,transform .12s}
+.btn .ic{width:20px;height:20px}
+.btn-p{background:var(--blaze);color:var(--onBlaze)}
+.btn-p:hover{background:var(--blaze2)}
+.btn-p:active{background:var(--blaze3);transform:translateY(2px)}
+.btn-s{background:var(--sheet);color:var(--ink);border-color:var(--ink)}
+.btn-s:hover{background:var(--ink);color:var(--paper)}
+.chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;border:1.5px solid var(--line2);background:var(--sheet);font:500 15px/1 var(--text);color:var(--ink);white-space:nowrap}
+.chip-s{height:28px;padding:0 10px;font-size:13px;border-radius:14px;border-width:1px;gap:6px}
+.chip-s.miss{border-style:dashed;color:var(--ink2);background:transparent}
+.skills{display:flex;gap:6px;flex-wrap:wrap}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;font:500 11.5px/1 var(--text);color:var(--ink3);border:1px dashed var(--line2);white-space:nowrap}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:16px;padding:20px;position:relative}
+.card.ink{background:var(--night);border-color:var(--night);color:var(--nink)}
+.meta{display:flex;gap:14px;align-items:center;font:400 13.5px/1.4 var(--text);color:var(--ink2);flex-wrap:wrap}
+.meta .ic{width:18px;height:18px}
+.meta span{display:inline-flex;gap:6px;align-items:center}
+.card.ink .meta{color:var(--nink2)}
+.spot{display:inline-flex;align-items:center;gap:5px;font:700 14px/1 var(--text);color:var(--xpInk);direction:ltr;font-variant-numeric:tabular-nums;white-space:nowrap}
+.spot svg{width:12px;height:11px;fill:var(--xp)}
+.card.ink .spot,.lbr.me .spot{color:var(--xpNight)}
+.card.ink .spot svg,.lbr.me .spot svg{fill:var(--xpNight)}
+/* skill stars: solid = earned, outline = an empty slot */
+.stars{display:inline-flex;gap:2px;align-items:center;direction:rtl;margin-inline-start:7px;vertical-align:-1px}
+.stars svg{width:15px;height:15px;fill:none;stroke:var(--ink3);stroke-width:1.9;stroke-linejoin:round}
+.stars svg.on{fill:var(--xp);stroke:var(--xpLine)}
+.stars.lg svg{width:19px;height:19px}
+.stars.xs{margin-inline-start:3px}.stars.xs svg{width:13px;height:13px}
+.stars.gn{margin:0}.stars.gn svg{stroke:var(--nink3)}
+.card.ink .stars svg{stroke:var(--nink2)}
+.ring{position:relative;width:var(--s,120px);height:var(--s,120px);flex:none}
+.ring svg{width:100%;height:100%}
+.ring .trk{fill:none;stroke:var(--line2);stroke-width:5;stroke-linecap:round;stroke-dasharray:.1 9.82}
+.ring .prg{fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round}
+.ring .end{fill:var(--blaze);stroke:var(--sheet);stroke-width:3.5}
+.ring b{position:absolute;inset:0;text-align:center;font:700 calc(var(--s,120px)*.27)/var(--s,120px) var(--display);direction:ltr;white-space:nowrap}
+.xpbar{direction:rtl}
+.xpbar .bar{display:flex;height:9px;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;background:var(--sheet)}
+.xpbar .seg{flex:1;border-inline-end:1.5px solid var(--ink);position:relative}
+.xpbar .seg:last-child{border:0}
+.xpbar .seg i{position:absolute;inset-block:0;inset-inline-start:0;background:var(--xp);border-inline-end:1.5px solid var(--ink)}
+.av{position:relative;display:inline-block;width:var(--s,48px);height:var(--s,48px);flex:none}
+.av .face{position:absolute;inset:calc(var(--s,48px)*.105);border-radius:50%;overflow:hidden;background:var(--sunk)}
+.av .face svg{width:100%;height:100%}
+.av.plain .face{inset:0}
+.av .rg{position:absolute;inset:0;width:100%;height:100%;transform:scaleX(-1)}
+.av .rg circle{fill:none;stroke-width:5;stroke-linecap:round}
+.av .rg .t{stroke:var(--line2)}
+.av .rg .p{stroke:var(--ink)}
+.av .lv{position:absolute;left:50%;transform:translateX(-50%);font:700 calc(var(--s,48px)*.25)/1 var(--display);bottom:calc(var(--s,48px)*-.095);color:var(--ink);direction:ltr}
+.wk{display:flex;gap:0;align-items:center;direction:rtl}
+.wk .d{display:flex;flex-direction:column;align-items:center;gap:6px;font:400 11px/1 var(--text);color:var(--ink3);width:25px;position:relative}
+.wk .d::before{content:"";position:absolute;top:7px;inset-inline-start:50%;width:25px;border-top:2px dotted var(--line2)}
+.wk .d:last-child::before{display:none}
+.wk .d u{position:relative;z-index:1;width:16px;height:16px;border-radius:50%;border:2px dotted var(--line2);background:var(--sheet)}
+.wk .d.now u{border:0;background:var(--blaze);box-shadow:0 0 0 3px var(--sheet),0 0 0 4.5px var(--blaze)}
+.wk .d.now{color:var(--ink);font-weight:600}
+.lbr{display:flex;align-items:center;gap:10px;height:36px;padding:0 10px;border-radius:10px;font:500 14.5px/1.3 var(--text)}
+.lbr .rk{width:22px;text-align:center;font:700 15.5px/1 var(--display);color:var(--ink2);direction:ltr}
+.lbr .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbr .nm small{font:400 12.5px/1 var(--text);margin-inline-start:7px;color:var(--nink2)}
+.lbr.me{background:var(--ink);color:var(--paper);height:46px;font-weight:600}
+.lbr.me .rk{color:var(--paper)}
+.dal{width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex:none}
+
+/* ---------- the home shell: the ORIGINAL Darb proportions (rail 232 · map 792 · widgets 340) ---------- */
+#home-frame{width:1440px;height:900px;overflow:hidden;position:relative;margin:0 auto 64px;background:var(--paper);border-radius:10px;box-shadow:0 30px 60px -40px rgba(11,27,56,.45),0 0 0 1px rgba(11,27,56,.08);display:grid;grid-template-columns:232px 1fr}
+.rail{padding:26px 16px 14px;display:flex;flex-direction:column;border-inline-end:1px solid var(--line)}
+.rail .brand{padding:0 10px 24px}
+.nav{display:flex;flex-direction:column;gap:3px}
+.nav a{display:flex;align-items:center;gap:12px;height:45px;padding:0 12px;border-radius:12px;font:500 15.5px/1 var(--text);color:var(--ink2);--wp:var(--ink4);border:1px solid transparent}
+.nav a.on{background:var(--sheet);border-color:var(--line);color:var(--ink);font-weight:700;--wp:var(--blaze)}
+.nav a.on::after{content:"";margin-inline-start:auto;width:7px;height:7px;border-radius:50%;background:var(--blaze)}
+.rail .daily{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:14px 12px 12px;background:var(--sheet)}
+.rail .daily .hd{display:flex;align-items:center;gap:8px;font:600 13.5px/1.2 var(--text);margin-bottom:12px}
+.rail .daily .hd .ic{width:22px;height:22px}
+.rail .daily .hd b{margin-inline-start:auto;font:700 18px/1 var(--display);direction:ltr}
+.rail .daily .hd small{font:400 12px/1 var(--text);color:var(--ink3)}
+.demo-line{font:400 12px/1.4 var(--text);color:var(--ink3);text-align:center;padding-top:10px}
+.hmain{padding:24px 28px;display:flex;flex-direction:column;gap:20px;min-width:0}
+.hhead{height:64px;display:flex;align-items:center;justify-content:space-between}
+.hhead h1{font:700 28px/1.3 var(--display)}
+.hhead p{font:400 14px/1.5 var(--text);color:var(--ink3)}
+.uchip{display:flex;align-items:center;height:64px;border:1px solid var(--line);border-radius:18px;background:var(--sheet);padding-inline:6px 10px}
+.uchip>div{display:flex;align-items:center;gap:10px;padding:0 16px;height:36px;border-inline-end:1px solid var(--line);line-height:1.25;white-space:nowrap}
+.uchip>div:last-child{border:0;padding-inline-end:6px}
+.uchip .k{font:400 12px/1.2 var(--text);color:var(--ink3)}
+.uchip .v{font:700 15px/1.2 var(--text)}
+.uchip .ic{width:22px;height:22px}
+.hbody{display:grid;grid-template-columns:792px 340px;gap:20px;height:768px}
+.hside{display:flex;flex-direction:column;gap:14px;min-width:0}
+.nextc{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;border-radius:20px}
+.nextc .top{display:flex;justify-content:space-between;align-items:center;font:600 12.5px/1 var(--text);color:var(--nink2)}
+.nextc .top span:first-child{display:flex;align-items:center;gap:7px;color:var(--nink)}
+.nextc .top span:first-child::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blaze)}
+.nextc h3{font:700 28px/1.3 var(--display);display:flex;align-items:center}
+.nextc p{font:400 14.5px/1.5 var(--text);color:var(--nink2);margin-top:-6px}
+.gain{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--night3);border-radius:12px}
+.gain>div{padding:9px 12px;display:flex;flex-direction:column;gap:6px}
+.gain>div+div{border-inline-start:1px solid var(--night3)}
+.gain .k{font:400 12px/1.2 var(--text);color:var(--nink2)}
+.gain .v{font:700 15px/1.2 var(--text);display:flex;align-items:center;gap:8px}
+.gain .v i{font-style:normal;color:var(--nink2);font-weight:400;font-size:13px}
+.nextc .btn{height:52px;font-size:17px;margin-top:2px}
+.matchc{display:flex;gap:16px;align-items:center;padding:14px 18px;border-radius:20px}
+.matchc h4{font:700 16px/1.4 var(--display)}
+.matchc p{font:400 13px/1.5 var(--text);color:var(--ink3);margin-bottom:7px}
+.rankc{padding:12px 10px 10px;border-radius:20px}
+.rankc .hd{display:flex;justify-content:space-between;align-items:center;padding:0 10px 6px;font:700 15px/1.4 var(--display)}
+.rankc .hd a{font:500 13px/1 var(--text);color:var(--ink3)}
+.rankc .gap{height:12px;display:flex;align-items:center;padding:0 20px}
+.rankc .gap i{flex:1;border-top:2px dotted var(--line2)}
+.rankc .hint{display:flex;justify-content:space-between;align-items:center;padding:8px 10px 0;font:400 13px/1.5 var(--text);color:var(--ink2)}
+.rankc .hint b{color:var(--xpInk)}
+.launch{margin-top:auto;display:flex;align-items:center;gap:12px;height:58px;border-radius:30px;border:1.5px solid var(--ink);background:var(--sheet);padding-inline:7px 18px;font:500 15px/1 var(--text);color:var(--ink2);box-shadow:0 14px 28px -18px rgba(11,27,56,.5)}
+.launch .dal{width:44px;height:44px}
+.launch .dal .ic{width:26px;height:26px}
+.launch kbd{margin-inline-start:auto;font:500 11px/1 ui-monospace,Consolas,monospace;color:var(--ink3);border:1px solid var(--line2);border-radius:6px;padding:4px 6px;direction:ltr}
+
+/* =====================================================================================================
+   THE MAP
+   .map   the window (clips)            .cam   the camera: a perspective container
+   .plane the drawn sheet, a 3D plane   .bb    a billboard: stands on the plane and always faces the camera
+   ===================================================================================================== */
+.map{position:relative;width:792px;height:768px;border-radius:20px;border:1px solid var(--line);background:var(--t-base);overflow:hidden;isolation:isolate}
+.cam{position:absolute;inset:0;perspective:1100px;perspective-origin:50% 42%}
+.plane{position:absolute;left:0;top:0;width:100%;height:100%;transform-style:preserve-3d;transform-origin:var(--ox) 100%;animation:plane-open 1.25s var(--e-cam) both}
+.terrain{position:absolute;animation:fade .5s linear both}
+.trail{position:absolute;left:0;top:0;overflow:visible}
+.bb{position:absolute;width:0;height:0;transform-origin:0 var(--r,0px);animation:bb-open 1.25s var(--e-cam) both}
+/* map-open, beat 1: the sheet is lying away from you and levels out to face you (the same camera the flight uses) */
+@keyframes plane-open{from{transform:translate3d(0,46px,0) rotateX(42deg) scale3d(.9,.9,.9)}to{transform:translate3d(0,0,0) rotateX(0deg) scale3d(1,1,1)}}
+@keyframes bb-open{from{transform:rotateX(-42deg) scale(1)}to{transform:rotateX(0deg) scale(1)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes draw{from{stroke-dashoffset:1;opacity:0}3%{opacity:1}to{stroke-dashoffset:0;opacity:1}}
+@keyframes drift{to{stroke-dashoffset:var(--p)}}
+@keyframes coin-in{from{opacity:0;transform:scale(.55)}45%{opacity:1}to{opacity:1;transform:scale(1)}}
+@keyframes rise-in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes drop-in{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pole-up{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes unfurl{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes count{from{--n:0}}
+@keyframes pulse{0%{transform:scale(1);opacity:.75}70%,100%{transform:scale(1.42);opacity:0}}
+.draw{stroke-dasharray:1;stroke-dashoffset:0;animation:draw var(--t,.4s) var(--e,linear) var(--d,0s) both}
+.fade{animation:fade .3s linear var(--d,0s) both}
+.count{font-style:normal;counter-reset:n var(--n);animation:count var(--t,.8s) var(--e-out) var(--d,0s) both}
+.count::after{content:counter(n) "%"}
+
+/* terrain: a hill of flat terraces. No gradients: five flat tones, each with a thin edge on the side facing you */
+.terrain .band{stroke:var(--t-edge);stroke-width:1}
+.terrain .cliff{fill:var(--t-cliff)}
+.terrain .hair{fill:none;stroke:var(--contour);stroke-width:1;opacity:.75}
+.terrain .svy{fill:none;stroke:var(--contour2);stroke-width:1}
+.terrain .alt rect{fill:#fff}
+.terrain .alt text{font:600 12.5px var(--text);fill:var(--contourInk);text-anchor:middle;direction:ltr}
+/* the road */
+.trail path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.trail .bed path{stroke:var(--line2)}
+.trail .bed.in path{stroke:#fff}
+.trail .cov{stroke:var(--ink)}
+.trail .leg{stroke:var(--blaze)}
+.trail .ahd{stroke:var(--ink3)}
+.trail .dots{animation:drift 1.9s linear infinite}
+.trail .brn path{stroke:var(--ink3);stroke-width:1.75;stroke-dasharray:2 6}
+.trail .gshadow ellipse{fill:var(--ink);opacity:.17}
+.trail .gshadow ellipse.fade{animation-name:fade17}
+@keyframes fade17{from{opacity:0}to{opacity:.17}}
+.trail .fshadow{fill:var(--ink);opacity:0}
+.trail .fring{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;opacity:0}
+
+/* a station = one button: coin · leader · label, always in that order, the label always on the same side */
+.st{cursor:pointer;outline:none}
+.st .coin{position:absolute;left:calc(-1*var(--r));top:calc(-1*var(--r));width:calc(2*var(--r));height:calc(2*var(--r));border-radius:50%;display:grid;place-items:center;animation:coin-in .38s var(--e-pop) var(--d,0s) both}
+.st .coin b{font:700 18px/1 var(--display);direction:ltr}
+.st .ld{position:absolute;right:calc(var(--r) + 5px);top:-1px;width:9px;border-top:2px solid var(--ink);animation:fade .2s linear calc(var(--d,0s) + .12s) both}
+.st .lb{position:absolute;right:calc(var(--r) + 18px);top:0;translate:0 -50%;white-space:nowrap;text-align:start;padding:1px 4px 3px;animation:rise-in .34s var(--e-out) calc(var(--d,0s) + .12s) both}
+.lb>b{display:flex;align-items:center;font:700 16.5px/1.45 var(--display);color:var(--ink)}
+.lb{text-shadow:0 1px 0 #fff,0 -1px 0 #fff,1px 0 0 #fff,-1px 0 0 #fff,0 0 4px #fff}
+.lb>small{display:block;font:400 13.5px/1.45 var(--text);color:var(--ink2)}
+.lb .ic{display:inline-block;width:15px;height:15px;stroke-width:2.4;margin-inline-end:4px;vertical-align:-2.5px}
+.lb>b em{font:400 13.5px/1 var(--text);font-style:normal;color:var(--ink2);margin-inline-start:12px;white-space:nowrap}
+.lb .spot{font-size:13px;margin-right:9px}
+.s-done .coin{background:var(--ink);color:#fff;box-shadow:0 3px 0 #050E22}
+.s-done .ck{position:absolute;top:-5px;left:-5px;width:19px;height:19px;border-radius:50%;background:var(--ok);border:2px solid #fff;display:grid;place-items:center;color:#fff}
+.s-done .ck .ic{width:11px;height:11px;stroke-width:3.4}
+.s-now .coin{background:var(--blaze);color:var(--onBlaze);box-shadow:0 3.5px 0 var(--blazeInk);animation-duration:.46s}
+.s-now .coin b{font-size:25px}
+.s-now .coin::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.75px solid var(--blaze);animation:pulse 2.8s var(--e-out) 3.6s infinite backwards;opacity:.75}
+.s-now .ld{border-color:var(--ink);width:8px}
+.s-next .coin,.s-lock .coin{background:#fff;color:var(--ink2);border:2px dashed var(--ink3);box-shadow:0 3px 0 var(--t-cliff)}
+.s-next .ld,.s-lock .ld,.s-start .ld{border-color:var(--ink3)}
+.s-lock .lk{position:absolute;top:-6px;left:-6px;width:21px;height:21px;border-radius:50%;background:#fff;border:1.5px solid var(--ink3);display:grid;place-items:center;color:var(--ink2);--wp:var(--ink4)}
+.s-lock .lk .ic{width:13px;height:13px;stroke-width:2.2}
+.s-next .lb>b,.s-lock .lb>b{color:var(--ink2)}
+.s-start{cursor:default}
+.s-start .coin{background:#fff;border:3px solid var(--ink)}
+.s-start .coin::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--ink)}
+.s-start .lb>b{font:600 14.5px/1.4 var(--text);color:var(--ink2)}
+.s-sum .coin{background:#fff;border:2.5px solid var(--ink);box-shadow:0 3px 0 var(--t-cliff)}
+.s-sum .coin i{width:9px;height:9px;border-radius:50%;background:var(--ink)}
+.s-sum .lb{animation-delay:var(--d)}
+.s-sum .lb>b{font-size:19px}
+/* the current station carries the invitation: the same label, as a small card */
+.st .card-lb{background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:8px 14px 10px;box-shadow:0 3px 0 var(--ink);right:calc(var(--r) + 20px)}
+.card-lb .e{display:flex;align-items:center;gap:6px;font:600 13px/1.4 var(--text);color:var(--blazeInk)}
+.card-lb .e::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blaze)}
+.card-lb>b{font-size:21px;line-height:1.4}
+.st .card-lb{text-shadow:none}
+.card-lb>small{display:flex;align-items:center;gap:13px;margin-top:1px}
+.card-lb>small>span{display:inline-flex;align-items:center;gap:5px}
+.card-lb>small .ic{width:16px;height:16px;stroke-width:1.9;margin:0}
+.card-lb>small b{font-weight:700;color:var(--ink)}
+.card-lb .spot{margin:0}
+.st:focus-visible .coin{outline:3px solid var(--ink);outline-offset:4px}
+.st:hover .lb>b{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px}
+.s-start:hover .lb>b{text-decoration:none}
+/* the flag at the summit: it stands */
+.flag svg{position:absolute;overflow:visible}
+.flag .pole{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;transform-box:fill-box;transform-origin:50% 100%;animation:pole-up .26s var(--e-out) var(--d) both}
+.flag .pen{fill:var(--blaze);stroke:var(--blaze);stroke-width:2;stroke-linejoin:round;transform-box:fill-box;transform-origin:100% 50%;animation:unfurl .3s var(--e-out) var(--d) both}
+/* you are here: the waypoint where the solid line ends, with the walker's tag */
+.you .wp{position:absolute;left:-8.5px;top:-8.5px;width:17px;height:17px;border-radius:50%;background:var(--blaze);border:3px solid #fff;box-shadow:0 0 0 1.5px var(--blaze);animation:coin-in .34s var(--e-pop) var(--d) both}
+.you .pill{position:absolute;left:22px;top:-24px;display:flex;align-items:center;gap:9px;height:48px;padding:4px 16px 4px 4px;border-radius:24px;background:var(--ink);color:var(--paper);white-space:nowrap;direction:rtl;box-shadow:0 3px 0 #050E22;animation:drop-in .42s var(--e-out) calc(var(--d) + .06s) both}
+.you .pill::before{content:"";position:absolute;left:-9px;top:50%;width:10px;border-top:2px solid var(--ink)}
+.you .pill{flex-direction:row-reverse}
+.you .tx b{display:block;font:700 15px/1.3 var(--display)}
+.you .tx small{display:block;font:400 13px/1.3 var(--text);color:var(--nink2)}
+.you .tx small i{font-weight:700;color:var(--xpNight);direction:ltr;unicode-bidi:isolate}
+.you .face{width:40px;height:40px;border-radius:50%;overflow:hidden;flex:none;box-shadow:0 0 0 1.5px var(--paper)}
+.you .face svg{width:100%;height:100%}
+/* branch jobs: small, dashed, after the summit */
+.peak svg{position:absolute;left:-12px;top:-14px;animation:fade .3s linear var(--d) both}
+.peak svg path{fill:#fff;stroke:var(--ink2);stroke-width:1.75;stroke-linejoin:round}
+.peak .lb{position:absolute;right:20px;top:-3px;translate:0 -50%;white-space:nowrap;text-align:start;padding:0 4px 2px;animation:fade .3s linear var(--d) both}
+.peak .lb>b{font:600 14.5px/1.45 var(--text);color:var(--ink2)}
+.peak .lb>small{font-size:13px;color:var(--ink3)}
+/* the trailhead sign and the view switch (screen furniture, not on the plane) */
+.sign{position:absolute;right:18px;bottom:18px;background:var(--sheet);border:1px solid var(--line2);border-radius:14px;padding:11px 14px 12px;animation:fade .4s linear .15s both}
+.sign .e{font:500 13px/1.3 var(--text);color:var(--ink3)}
+.sign h2{font:700 26px/1.35 var(--display)}
+.sign .pg{display:flex;align-items:center;gap:14px;white-space:nowrap;font:400 13px/1.3 var(--text);color:var(--ink2);margin-top:7px;padding-top:9px;border-top:1px dotted var(--line2)}
+.sign .pg b{font-weight:700;color:var(--ink)}
+.dots{display:flex;gap:4px;direction:rtl;margin-inline-start:auto}
+.dots i{width:9px;height:9px;border-radius:50%;border:1.5px dotted var(--ink3)}
+.dots i.d{border:0;background:var(--ink)}
+.dots i.n{border:0;background:var(--blaze)}
+.seg2{position:absolute;left:18px;bottom:18px;display:flex;gap:2px;border:1px solid var(--line2);border-radius:11px;background:var(--sheet);padding:3px;font:500 13px/1 var(--text);color:var(--ink2);animation:fade .4s linear .15s both}
+.seg2>*{padding:7px 12px;border-radius:8px}
+.seg2 b{background:var(--ink);color:var(--paper);font-weight:600}
+.map-back{position:absolute;right:16px;top:16px;display:flex;align-items:center;gap:8px;height:40px;padding:0 14px 0 16px;border-radius:20px;background:var(--sheet);border:1.5px solid var(--ink);font:600 14px/1 var(--text);color:var(--ink);opacity:0;pointer-events:none;z-index:6}
+.map-back .ic{width:18px;height:18px;stroke-width:2}
+.map.is-focus .map-back{pointer-events:auto}
+.map.is-focus .s-now .coin::after{animation:none;opacity:0}
+.map.is-focus .st,.map.is-focus .cam{cursor:zoom-out}
+
+/* ---------- the station card ---------- */
+.flayer{position:absolute;left:388px;top:108px;width:792px;height:768px;pointer-events:none;z-index:5}
+.fcard{position:absolute;left:22px;top:50%;translate:0 -50%;width:348px;background:var(--sheet);border:1.5px solid var(--ink);border-radius:20px;padding:16px 18px 18px;box-shadow:0 4px 0 var(--ink);display:none;flex-direction:column;gap:12px;pointer-events:auto}
+.fcard.on{display:flex}
+.fleader{position:absolute;height:0;border-top:2px dotted var(--ink);transform-origin:0 50%;opacity:0}
+.fleader::after{content:"";position:absolute;right:-4px;top:-5px;width:8px;height:8px;border-radius:50%;background:var(--ink)}
+.fcard header{position:relative;padding-inline-end:34px}
+.fcard .eye{display:flex;align-items:center;font:500 13.5px/1.4 var(--text);color:var(--ink3)}
+.fcard .eye b{font-weight:700;color:var(--ink)}
+.fcard .eye .dot{width:8px;height:8px;border-radius:50%;background:var(--ink);margin-inline-end:8px}
+.c-now .eye .dot{background:var(--blaze)}.c-now .eye b{color:var(--blazeInk)}
+.c-done .eye .dot{background:var(--ok)}.c-done .eye b{color:var(--ok)}
+.c-next .eye .dot,.c-lock .eye .dot{background:none;border:1.5px dashed var(--ink3)}
+.fcard h3{font:700 26px/1.35 var(--display);display:flex;align-items:center}
+.fcard header p{font:400 13.5px/1.5 var(--text);color:var(--ink2)}
+.fc-x{position:absolute;left:-4px;top:-2px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:var(--ink2)}
+.fc-x:hover{background:var(--paper)}
+.fc-x .ic{width:20px;height:20px;stroke-width:2}
+.blk{position:relative;border-top:1px dotted var(--line2);padding-top:11px;display:flex;flex-direction:column;gap:2px}
+.blk small{font:500 13px/1.4 var(--text);color:var(--ink3);display:flex;align-items:center}
+.blk>b{font:700 17px/1.45 var(--display)}
+.blk>span{font:400 14px/1.5 var(--text);color:var(--ink2)}
+.blk .tag{position:absolute;left:0;top:13px}
+.blk .stats{display:flex;align-items:center;gap:14px;margin-top:6px;font:500 14px/1.3 var(--text);color:var(--ink)}
+.blk .stats span{display:inline-flex;align-items:center;gap:6px}
+.blk .stats .ic{width:18px;height:18px}
+.blk .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.blk .row b{font:700 14.5px/1.4 var(--text);display:flex;align-items:center}
+.blk .row b.up{font-size:17px;color:var(--ink)}
+.blk .row.sub{font:400 13px/1.4 var(--text);color:var(--ink3);margin-top:4px}
+.blk .row.sub b{font-size:13px;color:var(--ink);display:inline}
+.mbar{display:flex;height:12px;border-radius:4px;background:var(--paper);border:1.5px solid var(--ink);overflow:hidden;margin-top:7px}
+.mbar i{display:block;height:100%}
+.mbar .pv{background:var(--contour2)}
+.mbar .th{background:var(--ink);transform-origin:100% 50%}
+.mbar.now .th{background:var(--blaze)}
+.mbar.next .th,.mbar.lock .th{background:repeating-linear-gradient(135deg,var(--ink3) 0 2px,transparent 2px 6px)}
+.les{display:flex;gap:4px;margin-top:7px}
+.les i{flex:1;height:8px;border-radius:3px;border:1.5px solid var(--line2);background:var(--sheet)}
+.les i.d{background:var(--ink);border-color:var(--ink)}
+.blk .note{font:400 13.5px/1.55 var(--text);color:var(--ink2);margin-top:6px}
+.blk.ev{padding-inline-end:78px}
+.blk q{quotes:none;font:500 14.5px/1.7 var(--text);color:var(--ink);margin-top:2px}
+.stamp{position:absolute;left:0;top:14px;width:66px;height:66px;display:grid;place-items:center;color:var(--ok);transform:rotate(-9deg)}
+.stamp svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.5}
+.stamp b{font:700 21px/1 var(--display)}
+.blk.lockb{flex-direction:row;gap:10px;align-items:flex-start}
+.blk.lockb .ic{width:22px;height:22px;margin-top:2px}
+.fcard .btn{height:50px;font-size:16.5px;margin-top:2px}
+
+/* ---------- phone ---------- */
+#phone-frame{width:390px;height:844px;overflow:hidden;position:relative;margin:0 auto;background:var(--paper);border-radius:40px;box-shadow:0 0 0 1px rgba(11,27,56,.1),0 40px 70px -40px rgba(11,27,56,.5);display:flex;flex-direction:column}
+.p-top{display:flex;align-items:center;justify-content:space-between;height:62px;padding:8px 16px 0;flex:none}
+.p-stats{display:flex;gap:6px;align-items:center}
+.p-stats>span:not(.av){display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 10px;border-radius:17px;border:1px solid var(--line);background:var(--sheet);font:700 13.5px/1 var(--text)}
+.p-stats .ic{width:18px;height:18px}
+.map.sm{flex:none;width:366px;height:600px;margin:0 12px;border-radius:24px}
+.sm .cam{perspective:820px;perspective-origin:50% 38%}
+.sm .st .coin b{font-size:16.5px}
+.sm .s-now .coin b{font-size:21px}
+.sm .st .lb{right:calc(var(--r) + 13px);padding:0 6px 2px;border-radius:7px}
+.sm .st .ld{right:calc(var(--r) + 3px);width:7px}
+.sm .lb>b{font-size:14.5px;line-height:1.4}
+.sm .lb>small{font-size:12.5px;line-height:1.35}
+.sm .lb>small .ic{width:13px;height:13px;margin-inline-end:3px}
+.sm .sep{margin:0 5px}
+.sm .stars{margin-inline-start:5px}.sm .stars svg{width:13px;height:13px}
+.sm .s-done .ck{width:17px;height:17px;top:-4px;left:-4px}
+.sm .s-start .lb>b{font-size:13px}
+.sm .s-sum .lb>b{font-size:15.5px}
+.sm .st .card-lb{padding:5px 10px 7px;border-radius:12px;right:calc(var(--r) + 15px)}
+.sm .card-lb .e{font-size:12px}
+.sm .card-lb>b{font-size:16.5px}
+.sm .you .pill{height:38px;padding:3px 11px 3px 3px;gap:7px;border-radius:19px;top:-19px;left:17px}
+.sm .you .pill::before{left:-7px;width:8px}
+.sm .you .tx b{font-size:12.5px;line-height:1.25}
+.sm .you .tx small{font-size:12px;line-height:1.2}
+.sm .you .face{width:32px;height:32px}
+.sm .you .wp{left:-7.5px;top:-7.5px;width:15px;height:15px}
+.sm .peak svg{left:-10px;top:-12px;width:20px;height:18px}
+.sm .peak .lb{right:auto;left:0;top:19px;translate:-50% 0;text-align:center;padding:0 4px 1px}
+.sm .peak .lb>b{font-size:12.5px}
+.sm .sign{right:10px;bottom:10px;padding:6px 11px 7px;border-radius:11px}
+.sm .sign .e{font-size:12px}
+.sm .sign h2{font-size:16px;line-height:1.35}
+.sm .terrain .alt text{font-size:12px}
+.sm .map-back{right:auto;left:10px;top:10px;height:36px;font-size:13px}
+.p-next{flex:none;margin:8px 12px 0;border-radius:20px;padding:8px 10px 8px 8px;display:flex;align-items:center;gap:10px;height:66px}
+.p-next .n{flex:none;width:40px;height:40px;border-radius:50%;background:var(--blaze);color:var(--onBlaze);font:700 20px/40px var(--display);text-align:center;direction:ltr}
+.p-next .t{flex:1;min-width:0}
+.p-next .e{font:500 12px/1.3 var(--text);color:var(--nink2)}
+.p-next h3{font:700 17px/1.35 var(--display);display:flex;align-items:center;white-space:nowrap}
+.p-next .btn{height:48px;font-size:15.5px;padding:0 16px;gap:8px}
+.p-tabs{flex:none;margin-top:auto;display:grid;grid-template-columns:1fr 1fr 76px 1fr 1fr;align-items:center;padding:8px 8px 20px;height:86px;position:relative;z-index:8;background:var(--paper)}
+.p-tabs a{display:flex;flex-direction:column;align-items:center;gap:4px;font:500 12px/1 var(--text);color:var(--ink3);--wp:var(--ink4)}
+.p-tabs a.on{color:var(--ink);font-weight:700;--wp:var(--blaze)}
+.p-tabs .ask{justify-self:center;width:58px;height:58px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;margin-top:-22px;box-shadow:0 0 0 5px var(--paper),0 14px 22px -12px rgba(11,27,56,.6)}
+.p-tabs .ask .ic{width:30px;height:30px}
+/* the station card on the phone: a bottom sheet that rises above the tab bar */
+.flayer.sheet{left:0;top:auto;bottom:86px;width:390px;height:470px;overflow:hidden;z-index:7}
+.sheet .fcard{left:0;right:0;top:auto;bottom:0;translate:none;width:auto;border-radius:24px 24px 0 0;border-width:1.5px 0 0;box-shadow:none;padding:22px 18px 16px;gap:10px}
+.sheet .fcard::before{content:"";position:absolute;top:8px;left:50%;width:40px;height:4px;margin-left:-20px;border-radius:2px;background:var(--line2)}
+.sheet .fcard h3{font-size:23px}
+.sheet .blk{padding-top:9px}
+.sheet .fcard .btn{height:50px}
+
+@media (prefers-reduced-motion:reduce){
+  .plane,.bb,.terrain,.draw,.fade,.count,.st .coin,.st .ld,.st .lb,.flag .pole,.flag .pen,.you .wp,.you .pill,.peak svg,.peak .lb,.sign,.seg2,.trail .dots,.s-now .coin::after{animation:none!important}
+}

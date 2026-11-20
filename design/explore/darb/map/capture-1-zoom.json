@@ -1,0 +1,9 @@
+[
+  { "viewport": "1600x1000" },
+  { "goto": "design/explore/darb/map/option-1.html" },
+  { "wait": 1200 },
+  { "eval": "document.querySelector('.map').style.height='430px'" },
+  { "shot": "design/explore/darb/map/option-1-zoom-top.png", "selector": ".map" },
+  { "eval": "(()=>{const m=document.querySelector('.map');m.scrollTop=0;[...m.children].forEach(c=>{c.style.marginTop='-422px'});})()" },
+  { "shot": "design/explore/darb/map/option-1-zoom-bottom.png", "selector": ".map" }
+]

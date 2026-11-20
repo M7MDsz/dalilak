@@ -1,0 +1,417 @@
+/* Dalilak «دليلك» design tokens and base CSS. Owned by the design-system agent; how to use them: docs/DESIGN.md.
+   The token NAMES are a contract (docs/DESIGN-BRIEF.md section 4). Values may change: a palette swap is a change of the values
+   below and nothing else. Contrast of every text token on every surface it may sit on is checked by
+   artifacts/foundation/ds/contrast.mjs (run it after any change of value). */
+@import "tailwindcss" source("..");
+@import "../components/motion/motion.css";
+/* the «لعبة» design (Lawha), switched on by data-theme="lawha" on <html>: every rule of it is scoped there */
+@import "./theme-lawha.css";
+
+/* `stage:` matches an element inside (or on) the dark surface. Prefer the semantic aliases below; use this only when a
+   component must change shape, not just colour, on the stage. `dark:` is bound to the same thing so that classes pasted from
+   component libraries never follow the laptop's OS dark mode during the demo. */
+@custom-variant stage (&:where([data-surface="stage"], [data-surface="stage"] *));
+@custom-variant dark (&:where([data-surface="stage"], [data-surface="stage"] *));
+
+@theme {
+  --color-*: initial;
+
+  /* PALETTE: "navy" (Mohammed chose colour option 1 on 18 Nov 2026: design/explore/darb/colors/option-1.html).
+     Values tuned by the design system for the contrast floor of design brief 3.1. */
+
+  /* light working surfaces */
+  --color-paper: #ebf0f6; /* the page */
+  --color-sheet: #ffffff; /* raised: cards, inputs, the map sheet */
+  --color-sunk: #d5dfeb; /* wells, pressed wells, disabled fills */
+  --color-line: #c9d3e2; /* hairlines (decoration) */
+  --color-line-strong: #7b8aa3; /* control borders: 3:1 on paper and sheet */
+  --color-contour: #bccbe3; /* the quiet map contour line */
+  --color-contour-2: #9db2d4; /* index contours */
+  --color-contour-ink: #4e6a96; /* small labels that sit on a contour */
+
+  /* text on light: ink, ink-2, ink-3 all pass 4.5:1 on paper, sheet and sunk */
+  --color-ink: #0e1e3d;
+  --color-ink-2: #34435d;
+  --color-ink-3: #505e77;
+  --color-ink-4: #8492a9; /* never for text: decoration and disabled marks only */
+
+  /* the stage: the dark surface for set pieces (sign-in showcase, next-step card, path reveal, CV analysis, celebrations) */
+  --color-stage: #0b1b38;
+  --color-stage-2: #142748;
+  --color-stage-3: #2e4a7a;
+  --color-stage-contour: #1a3058;
+  --color-stage-contour-2: #254477;
+  --color-on-stage: #f4f7fc;
+  --color-on-stage-2: #b7c4d9;
+  --color-on-stage-3: #8597b4;
+
+  /* the one accent: your position and your next action, nothing else */
+  --color-accent: #f54d38;
+  --color-accent-hover: #f0462f;
+  --color-accent-press: #ec4129;
+  --color-accent-ink: #bd301c; /* accent-coloured TEXT on light surfaces */
+  --color-accent-on-stage: #ff6b57; /* accent-coloured TEXT on the stage (passes on stage and stage-2) */
+  --color-accent-soft: #ffe0d9;
+  --color-on-accent: #08152f; /* the label on an accent button is dark navy (white fails contrast on this coral) */
+
+  /* XP and rewards only */
+  --color-xp: #edaa1a;
+  --color-xp-line: #b27b00;
+  --color-xp-ink: #926000;
+  --color-xp-soft: #fbecc2;
+  --color-xp-on-stage: #ffc548;
+
+  /* success and warning only (the accent is never an error colour: errors use warn). Warn is a burnt orange, kept apart
+     from the brass of XP (olive-gold) and from the coral accent (red). */
+  --color-ok: #0a7550;
+  --color-ok-soft: #d6efe4;
+  --color-warn: #b2410e;
+  --color-warn-soft: #fde8cd;
+  --color-warn-on-stage: #ff9e66; /* warning TEXT on the stage (passes on stage and stage-2) */
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-sans: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+
+  /* TYPE SCALE (IBM Plex Sans Arabic). Arabic needs more line-height than Latin; never letter-spacing.
+     text-display  52 / 1.3  700  sign-in headline, reveal headline (phone: use text-h1)
+     text-h1       34 / 1.4  700  page heading
+     text-h2       24 / 1.5  700  section heading, sheet title
+     text-h3       20 / 1.55 700  card title, big station name
+     text-title    17 / 1.6  600  list-row title, station title, button lg
+     text-body     16 / 1.85 400  running text (the floor for paragraphs)
+     text-small    14 / 1.7  400  meta, hints, labels, secondary lines
+     text-caption  13 / 1.6  500  the smallest text there is: tags, day letters, tick numbers */
+  --text-display: 3.25rem;
+  --text-display--line-height: 1.3;
+  --text-display--font-weight: 700;
+  --text-h1: 2.125rem;
+  --text-h1--line-height: 1.4;
+  --text-h1--font-weight: 700;
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 1.5;
+  --text-h2--font-weight: 700;
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.55;
+  --text-h3--font-weight: 700;
+  --text-title: 1.0625rem;
+  --text-title--line-height: 1.6;
+  --text-title--font-weight: 600;
+  --text-body: 1rem;
+  --text-body--line-height: 1.85;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.7;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.6;
+  --text-caption--font-weight: 500;
+
+  /* RADII: tag 6 · control 12 (buttons, inputs) · card 16 · sheet 20 (dialogs, panels, toasts) · chips use rounded-full */
+  --radius-tag: 0.375rem;
+  --radius-control: 0.75rem;
+  --radius-card: 1rem;
+  --radius-sheet: 1.25rem;
+
+  /* SPACING RHYTHM: the 4 px grid (p-1 = 4 px) used in steps of 4, 8, 12, 16, 20, 24, 32, 40, 56, 72.
+     Three named spaces so every page breathes the same way: */
+  --spacing-gutter: var(--gutter); /* page padding at the inline edges: 16 phone, 24 tablet, 32 desktop */
+  --spacing-section: var(--section); /* between the sections of a page: 32 phone, 40 desktop */
+  --spacing-card: 1.25rem; /* inside a card: 20 */
+
+  /* ONE shadow, neutral, for things that float above the page (sheets, the advisor panel, toasts, popovers). Never coloured,
+     never on cards that sit in the page, never grows on hover. */
+  --shadow-*: initial;
+  --shadow-float: 0 1px 2px rgb(8 21 47 / 0.06), 0 10px 28px -8px rgb(8 21 47 / 0.22);
+
+  --animate-run: run 900ms linear infinite; /* the running arc (StatusMark, loading button): one of the five allowed loops */
+
+  @keyframes run {
+    to {
+      rotate: 1turn;
+    }
+  }
+}
+
+:root {
+  --gutter: 1rem;
+  --section: 2rem;
+  /* Z-INDEX SCALE: z-raised, z-sticky (top bar, tab bar), z-launcher, z-panel (advisor), z-overlay (sheets, dialogs),
+     z-popover (select, tooltip, menu), z-toast, z-fly (FlyToken). */
+  --z-raised: 10;
+  --z-sticky: 20;
+  --z-launcher: 30;
+  --z-panel: 40;
+  --z-overlay: 50;
+  --z-popover: 60;
+  --z-toast: 70;
+  --z-fly: 80;
+  /* where the toasts sit: under the top bar. The shell sets --shell-top to its top bar height. */
+  --shell-top: 4rem;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 1.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --gutter: 2rem;
+    --section: 2.5rem;
+  }
+}
+
+/* SEMANTIC ALIASES: what a component uses when it can sit on paper OR on the stage. They flip inside data-surface="stage"
+   and flip back inside data-surface="paper" (a white card floating on the stage). Table and rules: docs/DESIGN.md 2. */
+:root,
+[data-surface="paper"] {
+  --bg: var(--color-paper);
+  --surface: var(--color-sheet);
+  --surface-2: var(--color-sunk);
+  --border: var(--color-line);
+  --border-strong: var(--color-line-strong);
+  --fg: var(--color-ink);
+  --fg-2: var(--color-ink-2);
+  --fg-3: var(--color-ink-3);
+  --fg-4: var(--color-ink-4);
+  --xp-fg: var(--color-xp-ink);
+  --mark: var(--color-xp-soft);
+  --track: var(--color-line);
+  --solid: var(--color-ink);
+  --on-solid: var(--color-sheet);
+  --accent-fg: var(--color-accent-ink);
+  --ok-fg: var(--color-ok);
+  --warn-fg: var(--color-warn);
+  --contour-line: var(--color-contour);
+  --contour-line-2: var(--color-contour-2);
+  --contour-label: var(--color-contour-ink);
+  --focus: var(--color-ink);
+  --halo: var(--color-contour-2); /* the 3 px halo of a focused field: visible beside the ink border, never a glow */
+  --hover: color-mix(in oklab, var(--color-sunk) 55%, var(--color-sheet));
+  --selection: var(--color-contour);
+  --scrollbar: var(--color-ink-4);
+  color-scheme: light;
+}
+
+[data-surface="stage"] {
+  --bg: var(--color-stage);
+  --surface: var(--color-stage-2);
+  /* a well on the stage sinks below the stage itself, as sunk sits below paper (disabled fields, locked medals) */
+  --surface-2: color-mix(in oklab, var(--color-stage) 70%, var(--color-black));
+  --border: var(--color-stage-3);
+  --border-strong: var(--color-on-stage-3);
+  --fg: var(--color-on-stage);
+  --fg-2: var(--color-on-stage-2);
+  --fg-3: var(--color-on-stage-3);
+  --fg-4: var(--color-stage-3);
+  --xp-fg: var(--color-xp-on-stage);
+  --mark: color-mix(in oklab, var(--color-xp) 30%, transparent);
+  --track: var(--color-stage-3);
+  --solid: var(--color-on-stage);
+  --on-solid: var(--color-stage);
+  --accent-fg: var(--color-accent-on-stage);
+  --ok-fg: var(--color-ok-soft);
+  --warn-fg: var(--color-warn-on-stage);
+  --contour-line: var(--color-stage-contour);
+  --contour-line-2: var(--color-stage-contour-2);
+  --contour-label: var(--color-on-stage-3);
+  --focus: var(--color-on-stage);
+  --halo: var(--color-stage-3);
+  --hover: color-mix(in oklab, var(--color-stage-3) 45%, var(--color-stage-2));
+  --selection: var(--color-stage-3);
+  --scrollbar: var(--color-stage-3);
+  color-scheme: dark;
+}
+
+/* The surface paints itself in the base layer, so a utility (bg-stage-2, text-fg-2) on the same element still wins. */
+@layer base {
+  [data-surface="stage"] {
+    background-color: var(--bg);
+    color: var(--fg);
+  }
+
+  [data-surface="paper"] {
+    color: var(--fg);
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
+  --color-fg-4: var(--fg-4);
+  --color-xp-fg: var(--xp-fg);
+  --color-mark: var(--mark);
+  --color-track: var(--track);
+  --color-solid: var(--solid);
+  --color-on-solid: var(--on-solid);
+  --color-accent-fg: var(--accent-fg);
+  --color-ok-fg: var(--ok-fg);
+  --color-warn-fg: var(--warn-fg);
+  --color-contour-line: var(--contour-line);
+  --color-contour-line-2: var(--contour-line-2);
+  --color-contour-label: var(--contour-label);
+  --color-focus: var(--focus);
+  --color-halo: var(--halo);
+  --color-hover: var(--hover);
+}
+
+/* z-index utilities (Tailwind 4 has no z namespace) */
+@utility z-raised {
+  z-index: var(--z-raised);
+}
+@utility z-sticky {
+  z-index: var(--z-sticky);
+}
+@utility z-launcher {
+  z-index: var(--z-launcher);
+}
+@utility z-panel {
+  z-index: var(--z-panel);
+}
+@utility z-overlay {
+  z-index: var(--z-overlay);
+}
+@utility z-popover {
+  z-index: var(--z-popover);
+}
+@utility z-toast {
+  z-index: var(--z-toast);
+}
+@utility z-fly {
+  z-index: var(--z-fly);
+}
+
+/* The focus ring that works on paper and on the stage: 2 px in the surface's own ink, 2 px away from the control. */
+@utility focus-ring {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* THE TRAIL: progress is "solid line, waypoint, dotted line". `trail` draws a dotted line under an element (the ghost
+   button, inline links); `trail-walk` draws the solid line over it from the inline-start, the way a walker covers a trail.
+   The one physical value in the kit: background-position "right" is the inline-start of this Arabic-only app. */
+@utility trail {
+  /* colours: set --trail-dots / --trail-ink on the element ([--trail-ink:var(--accent-fg)]); add a transition on
+     background-size where the walk should be seen (transition-[background-size,color]). */
+  background-image:
+    linear-gradient(var(--trail-ink, var(--fg)), var(--trail-ink, var(--fg))),
+    linear-gradient(to left, var(--trail-dots, var(--fg-3)) 0 4px, transparent 4px 8px);
+  background-size:
+    0% 2px,
+    8px 2px;
+  background-repeat: no-repeat, repeat-x;
+  background-position:
+    right bottom var(--trail-y, 0.375rem),
+    right bottom var(--trail-y, 0.375rem);
+}
+@utility trail-walk {
+  background-size:
+    100% 2px,
+    8px 2px;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    letter-spacing: normal; /* never letter-spacing on Arabic */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    position: relative; /* Base UI dialogs on iOS Safari */
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  ::selection {
+    background: var(--selection);
+    color: var(--fg);
+  }
+
+  /* One focus ring for everything a keyboard can reach. Components may move the offset; nobody removes it. */
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* Thin scrollbars in the surface's own decoration tone (Chromium and Firefox both read these). */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar) transparent;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--fg-3);
+    opacity: 1;
+  }
+
+  /* Latin runs inside Arabic (SQL, Power BI, 70%, +200 XP): isolate them so punctuation stays on the right side. */
+  bdi,
+  [dir="ltr"] {
+    unicode-bidi: isolate;
+  }
+
+  /* The waypoint dot inside every icon (see src/components/icons/icon-base.tsx). */
+  svg[data-wp] .wp {
+    fill: var(--color-accent);
+    stroke: none;
+  }
+
+  svg[data-wp="muted"] .wp {
+    fill: currentColor;
+    opacity: 0.55;
+  }
+
+  svg[data-wp="off"] .wp {
+    display: none;
+  }
+
+  /* THE WAYPOINT RULE: an icon's dot is coral only when the icon is your position or your next action. Quiet controls
+     (secondary and ghost buttons, plain and outline icon buttons, field and select adornments, chips) carry the class
+     `wp-quiet`, and their icons' dots take the icon's own colour. A quiet control that IS the user's next action or
+     position (the active navigation item, the advisor launcher) adds `data-wp-live` to keep the coral. A disabled control
+     is nobody's next action: its dot goes quiet too. */
+  .wp-quiet:not([data-wp-live]) svg[data-wp="on"] .wp,
+  :disabled svg[data-wp] .wp,
+  [aria-disabled="true"] svg[data-wp] .wp,
+  [data-disabled] svg[data-wp] .wp {
+    fill: currentColor;
+    opacity: 0.55;
+  }
+}
+
+/* ?still=1 (set on <html> by src/components/providers.tsx): every CSS animation and transition jumps to its end state, so a
+   screenshot shows settled screens. Motion-driven animation is skipped by MotionProvider. */
+html[data-still] *,
+html[data-still] *::before,
+html[data-still] *::after {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}

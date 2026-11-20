@@ -1,0 +1,183 @@
+/* Motion CSS of docs/COMPONENT-PLAYBOOK.md (1.2 tokens, 1.5 route, 1.6 reduced motion and still frames, blocks 8, 10,
+   17 and 32). Owned by the motion-blocks agent. Imported once by src/app/globals.css.
+   Colours: raw CSS here must use the RAW semantic aliases (var(--fg), var(--fg-3), var(--mark)), which
+   [data-surface="stage"] re-declares. The Tailwind names (--color-fg, ...) are `@theme inline` variables resolved once at
+   :root, so var(--color-fg) keeps its paper value on the stage. Utilities (text-fg, stroke-fg) are fine: they emit var(--fg). */
+:root {
+  --dur-exit: 150ms;
+  --dur-leave: 120ms;
+  --dur-fast: 200ms;
+  --dur-page: 260ms;
+  --dur-move: 420ms;
+  --dur-pop: 440ms;
+  --dur-focus: 560ms;
+  --dur-mark: 600ms;
+  --dur-draw: 900ms;
+  --dur-shimmer: 2400ms;
+}
+
+@theme static {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* enters, reveals (replaces Tailwind's default ease-out) */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1); /* exits */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* drawing, moves that start and end on screen */
+  --ease-pop: cubic-bezier(0.34, 1.32, 0.64, 1); /* the approved bubble pop, and nothing else */
+}
+
+@theme {
+  --animate-rise: rise var(--dur-move) var(--ease-out) both;
+  --animate-focus-in: focus-in var(--dur-focus) var(--ease-out) both;
+  --animate-pop-in: pop-in var(--dur-pop) var(--ease-pop) both;
+  --animate-breathe: breathe 1600ms var(--ease-in-out) infinite;
+  --animate-pulse-ring: pulse-ring 2000ms var(--ease-out) infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      translate: 0 8px;
+    }
+  }
+  @keyframes focus-in {
+    from {
+      opacity: 0;
+      translate: 0 8px;
+      filter: blur(4px);
+    }
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      translate: 0 22px;
+      scale: 0.92;
+    }
+  }
+  @keyframes breathe {
+    50% {
+      opacity: 0.55;
+    }
+  }
+  /* the current-stage pulse: a 1 px stroke ring that scales and fades (never a glow) */
+  @keyframes pulse-ring {
+    from {
+      scale: 1;
+      opacity: 0.5;
+    }
+    to {
+      scale: 1.6;
+      opacity: 0;
+    }
+  }
+}
+
+@layer components {
+  /* the route transition (page-transition.tsx, route-departure.ts): the new page rises 6 px in 260 ms. While the old
+     page leaves (a frozen copy of it fades and lifts 4 px in 120 ms, a Web Animation), the new page waits, held at 0;
+     page-in starts the moment data-held is removed. */
+  .page {
+    animation: page-in var(--dur-page) var(--ease-out) both;
+  }
+  .page[data-held] {
+    animation: none;
+    opacity: 0;
+  }
+  /* The leaving page's frozen copy (route-departure.ts): its CSS animations jump to their end (an entrance shows its
+     final state, a loop rests) and nothing transitions. Replaces reading every animation's clock, which forced a
+     style pass over the whole copy in the route commit (80-125 ms per page change). The copy's own fade is a Web
+     Animation on .page-ghost itself, which this does not touch. */
+  .page-ghost *,
+  .page-ghost *::before,
+  .page-ghost *::after {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition: none !important;
+  }
+
+  /* the status shimmer: one hue, two lightness steps, travelling right to left. Nothing is split, so Arabic is safe.
+     The resting text is fg-3 (5.8:1 on the stage, 5.7:1 on paper) and the travelling light is fg: light on the stage,
+     ink on paper. */
+  .shimmer-text {
+    color: transparent;
+    background:
+      linear-gradient(90deg, transparent calc(50% - 3em), var(--fg), transparent calc(50% + 3em)) 0% 0 / 250% 100% no-repeat,
+      linear-gradient(var(--fg-3), var(--fg-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shimmer var(--dur-shimmer) linear infinite;
+  }
+
+  /* the evidence marker: one flat colour drawn as a sized background, from the right, wrapping across lines */
+  .evidence {
+    background: linear-gradient(var(--mark), var(--mark)) no-repeat 100% 100% / 0% 42%;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  .evidence[data-on] {
+    background-size: 100% 42%;
+    transition: background-size var(--dur-mark) var(--ease-out); /* only on the way in: a marker never un-draws */
+  }
+
+  /* Collapse: a height that follows its content (grid rows 0fr -> 1fr); opens 420 ms ease-out, closes 260 ms ease-in */
+  .collapse-rows {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows var(--dur-page) var(--ease-in),
+      opacity var(--dur-exit) var(--ease-in);
+  }
+  .collapse-rows[data-open] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transition:
+      grid-template-rows var(--dur-move) var(--ease-out),
+      opacity var(--dur-move) var(--ease-out);
+  }
+
+  /* StatusMark running: one arc travels round the dotted ring (one of the five allowed loops) */
+  .mark-spin {
+    transform-box: view-box;
+    transform-origin: 12px 12px;
+    animation: mark-spin 1100ms linear infinite;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    translate: 0 6px;
+  }
+}
+@keyframes shimmer {
+  to {
+    background-position:
+      100% 0,
+      0 0;
+  }
+}
+@keyframes mark-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* Reduced motion: everything Motion cannot reach (keyframes, transitions, Base UI popups) ends at once; loops stop. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Still frames (?still=1, set by MotionProvider): the same, plus no delays, so screenshots show settled screens. */
+html[data-still] *,
+html[data-still] *::before,
+html[data-still] *::after {
+  animation-delay: 0s !important;
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-delay: 0s !important;
+  transition-duration: 1ms !important;
+}

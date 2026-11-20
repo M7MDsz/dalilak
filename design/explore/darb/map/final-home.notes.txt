@@ -1,0 +1,85 @@
+  DALILAK «دليلك» · the home map · final
+  (written by final-home.build.mjs from final-home.css.txt, final-home.runtime.js and final-home.notes.txt; edit those, not this file)
+
+  WHAT WAS MISSING IN OPTION 1
+    It was a list wearing a map costume: a line, circles and labels on a flat white sheet. The contours meant nothing,
+    nothing had weight or depth, nothing moved, and pressing a station could not take you anywhere because there was no "there".
+
+  THE IDEA: A HILL YOU CAN FLY OVER
+    1. The ground means something. The sheet is a hill of flat terraces (five flat tones, no gradients), and altitude is the
+       match with the job: the trail steps onto a new terrace exactly where the match rises (30%, 50%, 70% where you stand,
+       90% after the next station, the white cap at 100%). Every terrace has a thin edge on the side that faces you.
+    2. The trail is one road, not a thread: a white bed from «البداية» to the flag, filled solid navy as far as you have
+       climbed, then the accent dots of your next leg, then grey dots to the summit. Start, here, next, summit read in one look.
+    3. Things stand on the sheet. Coins have a 3 px edge and a ground shadow, the flag has a pole, the walker has a tag.
+       They are billboards: when the camera pitches they stay upright, so the map is a place and not a picture.
+    4. One camera. The opening levels the sheet toward you; pressing a station pitches it back and flies to that station.
+
+  THE LINE ("fully straight, a little move"): both readings are served.
+    The course is one straight climb, bottom to top, stations in order. The line itself has a gentle natural sway
+    (x = cx + two slow sines, about ±24 px on desktop, ±13 px on the phone). And it lives: the dots of the way ahead (and of
+    your next leg) drift slowly toward the summit, one dot spacing every 1.9 s. Nothing else moves at rest except one slow
+    pulse on the current station.
+
+  CONTENT: the demo right after the sample CV (spec 10.4 step 7): خالد · level 2 مستكشف · 180 / 350 XP · rank 18 · match 70%.
+    Stations 1-6 done (proved by the CV), 7 Power BI ★ is the next step (10 h · 5 lessons · +200 XP · 70% → 90%), 8 الإحصاء ★★ later,
+    then the summit «جاهز للوظيفة». Branches: أخصائي تقارير وبيانات 50% → 80%, محلل ذكاء الأعمال 43% → 60%.
+    Layout takes 4 to 8 stations (node final-home.build.mjs --stations 4 writes final-home-4.html, which also shows a locked station).
+
+  STRUCTURE (for the React port)
+    .map (window, clips) > .cam (perspective 1100 px; phone 820 px) > .plane (preserve-3d: terrain svg + trail svg)
+    > .bb billboards (a.st[data-station][data-x][data-y][data-r], .flag, .you, .peak). The card lives outside the camera in
+    .flayer (desktop: a card on the map; phone: a bottom sheet above the tab bar). All opening times are the object O in the
+    build script; all flight times are the object F at the top of the script below.
+
+  ====================================================================================================================
+  MAP-OPEN, full form (first visit, or after a CV analysis): 3.5 s, then rest.        CSS @keyframes, start on load.
+    beat                                   start    duration  easing
+    sheet levels toward you (42° → 0°,     0.00     1.25      cubic-bezier(.22,1,.36,1)      plane-open (+ bb-open keeps
+      scale .9 → 1, 46 px rise)                                                              every billboard upright)
+    terrain fades in                       0.00     0.50      linear
+    sign + view switch fade in             0.15     0.40      linear
+    trailhead dot                          0.30     0.38      cubic-bezier(.3,1.3,.6,1)
+    road + solid line draw from the start  0.40     1.30      cubic-bezier(.4,0,.3,1)
+      each done coin settles as the line   0.5-1.6  0.38      cubic-bezier(.3,1.3,.6,1)      (delay computed from the path)
+      passes it; its label rises 7 px      +0.12    0.34      cubic-bezier(.2,.7,.2,1)
+    «أنت هنا»: waypoint, tag drops 14 px   1.72     0.42      cubic-bezier(.2,.7,.2,1)
+    match counts 0 → 70 (tag and ring)     1.76     0.85      cubic-bezier(.2,.7,.2,1)
+    accent dots draw to the next station   2.00     0.28      linear
+    the next station answers (coin)        2.14     0.46      cubic-bezier(.3,1.3,.6,1)
+      its card label rises                 2.26     0.34      cubic-bezier(.2,.7,.2,1)
+    the way ahead draws to the summit      2.40     0.55      linear        (station 8 settles as it passes, about 2.6)
+    summit ring, pole rises, flag unfurls  2.86 / 2.92 / 3.09   0.26-0.30   cubic-bezier(.2,.7,.2,1)
+    branches and their two peaks           3.15 / 3.35   0.30   linear
+    REST from 3.5 s: the dots drift (1.9 s per spacing, linear, endless) and the current station pulses once every 2.8 s.
+
+  MAP-OPEN, short form (later visits): 1.1 s. The sheet is already level (no tilt).
+    terrain fade 0.00 / 0.20 linear · road and solid line 0.05 / 0.55 cubic-bezier(.4,0,.3,1) · all done coins and labels
+    fade in along it, 30 ms apart, 0.20 each · «أنت هنا» 0.55 / 0.25 (the number is already 70, no count) · accent dots and
+    the way ahead together 0.65 / 0.30 · next station 0.70 / 0.30 · flag 0.90 / 0.20 · branches fade 0.90 / 0.20.
+
+  ====================================================================================================================
+  STATION-FOCUS (press a station): 2.0 s to rest.                     Web Animations on transform and opacity.
+    camera, desktop: the plane's origin moves to the station, then
+      translate3d(to x 560, y 430 of the 792 × 768 window) rotateX(54deg) scale3d(1.9), perspective 1100 px
+    camera, phone:   to x 150, y 168 of the 366 × 600 window, rotateX(52deg) scale3d(1.7), perspective 820 px
+    billboards: rotateX(-pitch) scale3d(keep / scale), keep 1.05 (phone 1), same clock: upright in every frame
+    beat                                   start    duration  easing
+    labels, sign, switch clear             0        160 ms    linear
+    the flight (pitch + approach + pan)    0        1200 ms   cubic-bezier(.5,0,.15,1)   (the reference maps fly 1.2 s and
+                                                                                          land on a long ease-out; this adds a take-off)
+    the station lifts 16 px, grows 1.16,   640      560 ms    cubic-bezier(.33,1,.68,1)  (the reference's rise: 600 + 560)
+      its shadow stays, a ring draws round its foot
+    the card arrives (26 px slide + fade;  980      440 ms    cubic-bezier(.5,0,.15,1)
+      phone: the sheet rises, 500 ms)
+    a dotted leader ties card to station   1060     340 ms    (desktop only)
+    card rows come into focus, in order    1080+70n 480 ms    cubic-bezier(.2,.7,.2,1)   (9 px rise, 4 px blur → 0; small rows only)
+    the match bar grows its new part       1480     520 ms    (a done station: the «تمّ» stamp lands, 240 ms)
+    back control fades in                  980      240 ms
+
+  STATION-RETURN (the back control, Esc, the close button, a click on the map or outside it): 1.06 s.
+    card leaves (14 px + fade; phone: sheet drops 260 ms)   0     180 ms   ease-in
+    the station sits back down, ring and shadow fade        0     220 ms
+    camera back to exactly the overview (identity)          60    1000 ms  cubic-bezier(.4,0,.2,1)
+    labels, sign, switch return                             620   280 ms   linear
+    When it ends every animation is cancelled, so the overview is the untouched resting page.

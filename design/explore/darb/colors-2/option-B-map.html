@@ -1,0 +1,920 @@
+<!doctype html>
+<!-- colors-2 · option B · Coffee & Sky: a COLOUR-ONLY copy of design/explore/darb/map/final-home.html (snapshot), made by colors-2/_scratch/build-map.mjs. -->
+<!--
+  DALILAK «دليلك» · the home map · final
+  (written by final-home.build.mjs from final-home.css.txt, final-home.runtime.js and final-home.notes.txt; edit those, not this file)
+
+  WHAT WAS MISSING IN OPTION 1
+    It was a list wearing a map costume: a line, circles and labels on a flat white sheet. The contours meant nothing,
+    nothing had weight or depth, nothing moved, and pressing a station could not take you anywhere because there was no "there".
+
+  THE IDEA: A HILL YOU CAN FLY OVER
+    1. The ground means something. The sheet is a hill of flat terraces (five flat tones, no gradients), and altitude is the
+       match with the job: the trail steps onto a new terrace exactly where the match rises (30%, 50%, 70% where you stand,
+       90% after the next station, the white cap at 100%). Every terrace has a thin edge on the side that faces you.
+    2. The trail is one road, not a thread: a white bed from «البداية» to the flag, filled solid navy as far as you have
+       climbed, then the accent dots of your next leg, then grey dots to the summit. Start, here, next, summit read in one look.
+    3. Things stand on the sheet. Coins have a 3 px edge and a ground shadow, the flag has a pole, the walker has a tag.
+       They are billboards: when the camera pitches they stay upright, so the map is a place and not a picture.
+    4. One camera. The opening levels the sheet toward you; pressing a station pitches it back and flies to that station.
+
+  THE LINE ("fully straight, a little move"): both readings are served.
+    The course is one straight climb, bottom to top, stations in order. The line itself has a gentle natural sway
+    (x = cx + two slow sines, about ±24 px on desktop, ±13 px on the phone). And it lives: the dots of the way ahead (and of
+    your next leg) drift slowly toward the summit, one dot spacing every 1.9 s. Nothing else moves at rest except one slow
+    pulse on the current station.
+
+  CONTENT: the demo right after the sample CV (spec 10.4 step 7): خالد · level 2 مستكشف · 180 / 350 XP · rank 18 · match 70%.
+    Stations 1-6 done (proved by the CV), 7 Power BI ★ is the next step (10 h · 5 lessons · +200 XP · 70% → 90%), 8 الإحصاء ★★ later,
+    then the summit «جاهز للوظيفة». Branches: أخصائي تقارير وبيانات 50% → 80%, محلل ذكاء الأعمال 43% → 60%.
+    Layout takes 4 to 8 stations (node final-home.build.mjs --stations 4 writes final-home-4.html, which also shows a locked station).
+
+  STRUCTURE (for the React port)
+    .map (window, clips) > .cam (perspective 1100 px; phone 820 px) > .plane (preserve-3d: terrain svg + trail svg)
+    > .bb billboards (a.st[data-station][data-x][data-y][data-r], .flag, .you, .peak). The card lives outside the camera in
+    .flayer (desktop: a card on the map; phone: a bottom sheet above the tab bar). All opening times are the object O in the
+    build script; all flight times are the object F at the top of the script below.
+
+  ====================================================================================================================
+  MAP-OPEN, full form (first visit, or after a CV analysis): 3.5 s, then rest.        CSS @keyframes, start on load.
+    beat                                   start    duration  easing
+    sheet levels toward you (42° → 0°,     0.00     1.25      cubic-bezier(.22,1,.36,1)      plane-open (+ bb-open keeps
+      scale .9 → 1, 46 px rise)                                                              every billboard upright)
+    terrain fades in                       0.00     0.50      linear
+    sign + view switch fade in             0.15     0.40      linear
+    trailhead dot                          0.30     0.38      cubic-bezier(.3,1.3,.6,1)
+    road + solid line draw from the start  0.40     1.30      cubic-bezier(.4,0,.3,1)
+      each done coin settles as the line   0.5-1.6  0.38      cubic-bezier(.3,1.3,.6,1)      (delay computed from the path)
+      passes it; its label rises 7 px      +0.12    0.34      cubic-bezier(.2,.7,.2,1)
+    «أنت هنا»: waypoint, tag drops 14 px   1.72     0.42      cubic-bezier(.2,.7,.2,1)
+    match counts 0 → 70 (tag and ring)     1.76     0.85      cubic-bezier(.2,.7,.2,1)
+    accent dots draw to the next station   2.00     0.28      linear
+    the next station answers (coin)        2.14     0.46      cubic-bezier(.3,1.3,.6,1)
+      its card label rises                 2.26     0.34      cubic-bezier(.2,.7,.2,1)
+    the way ahead draws to the summit      2.40     0.55      linear        (station 8 settles as it passes, about 2.6)
+    summit ring, pole rises, flag unfurls  2.86 / 2.92 / 3.09   0.26-0.30   cubic-bezier(.2,.7,.2,1)
+    branches and their two peaks           3.15 / 3.35   0.30   linear
+    REST from 3.5 s: the dots drift (1.9 s per spacing, linear, endless) and the current station pulses once every 2.8 s.
+
+  MAP-OPEN, short form (later visits): 1.1 s. The sheet is already level (no tilt).
+    terrain fade 0.00 / 0.20 linear · road and solid line 0.05 / 0.55 cubic-bezier(.4,0,.3,1) · all done coins and labels
+    fade in along it, 30 ms apart, 0.20 each · «أنت هنا» 0.55 / 0.25 (the number is already 70, no count) · accent dots and
+    the way ahead together 0.65 / 0.30 · next station 0.70 / 0.30 · flag 0.90 / 0.20 · branches fade 0.90 / 0.20.
+
+  ====================================================================================================================
+  STATION-FOCUS (press a station): 2.0 s to rest.                     Web Animations on transform and opacity.
+    camera, desktop: the plane's origin moves to the station, then
+      translate3d(to x 560, y 430 of the 792 × 768 window) rotateX(54deg) scale3d(1.9), perspective 1100 px
+    camera, phone:   to x 150, y 168 of the 366 × 600 window, rotateX(52deg) scale3d(1.7), perspective 820 px
+    billboards: rotateX(-pitch) scale3d(keep / scale), keep 1.05 (phone 1), same clock: upright in every frame
+    beat                                   start    duration  easing
+    labels, sign, switch clear             0        160 ms    linear
+    the flight (pitch + approach + pan)    0        1200 ms   cubic-bezier(.5,0,.15,1)   (the reference maps fly 1.2 s and
+                                                                                          land on a long ease-out; this adds a take-off)
+    the station lifts 16 px, grows 1.16,   640      560 ms    cubic-bezier(.33,1,.68,1)  (the reference's rise: 600 + 560)
+      its shadow stays, a ring draws round its foot
+    the card arrives (26 px slide + fade;  980      440 ms    cubic-bezier(.5,0,.15,1)
+      phone: the sheet rises, 500 ms)
+    a dotted leader ties card to station   1060     340 ms    (desktop only)
+    card rows come into focus, in order    1080+70n 480 ms    cubic-bezier(.2,.7,.2,1)   (9 px rise, 4 px blur → 0; small rows only)
+    the match bar grows its new part       1480     520 ms    (a done station: the «تمّ» stamp lands, 240 ms)
+    back control fades in                  980      240 ms
+
+  STATION-RETURN (the back control, Esc, the close button, a click on the map or outside it): 1.06 s.
+    card leaves (14 px + fade; phone: sheet drops 260 ms)   0     180 ms   ease-in
+    the station sits back down, ring and shadow fade        0     220 ms
+    camera back to exactly the overview (identity)          60    1000 ms  cubic-bezier(.4,0,.2,1)
+    labels, sign, switch return                             620   280 ms   linear
+    When it ends every animation is cancelled, so the overview is the untouched resting page.
+-->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دليلك · مسارك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------- tokens: the navy scheme (src/app/globals.css holds the same values) ---------- */
+:root{
+  --paper:#F4EFE7; --sheet:#FFFDF9; --sunk:#E7DFD3; --line:#DED4C6; --line2:#A79A87;
+  --contour:#DACDBA; --contour2:#C4B297; --contourInk:#74614A;
+  --ink:#241B15; --ink2:#4B4036; --ink3:#645749; --ink4:#9F917F;
+  --night:#36241A; --night2:#47302A; --night3:#6E5444; --nink:#FBF6EE; --nink2:#D9CCBA; --nink3:#B3A28D;
+  --blaze:#1A92CB; --blaze2:#1A90C7; --blaze3:#198CC2; --blazeInk:#146B95; --blazeSoft:#D5EEFA; --onBlaze:#1A120D;
+  --xp:#E9A817; --xpInk:#885C00; --xpLine:#B98200; --xpSoft:#F8EAC4; --xpNight:#FFC64A;
+  --ok:#217437; --okSoft:#D8EDD9;
+  --display:"IBM Plex Sans Arabic",sans-serif; --text:"IBM Plex Sans Arabic",sans-serif;
+  --wp:var(--blaze);
+  /* the map's own tones */
+  --t-base:#EAE2D7; --t-cliff:#C1B4A1; --t-edge:#DACDBA;
+  /* motion: every curve the map uses */
+  --e-cam:cubic-bezier(.22,1,.36,1);   /* the camera (opening tilt, station flight, return) */
+  --e-out:cubic-bezier(.2,.7,.2,1);    /* things arriving */
+  --e-pop:cubic-bezier(.3,1.3,.6,1);   /* a coin settling: one small overshoot, no bounce */
+}
+@property --n{syntax:"<integer>";inherits:false;initial-value:70}
+*{box-sizing:border-box}
+html{background:#D8D0C4}
+body{margin:0;padding:40px 0 88px;background:#D8D0C4;color:var(--ink);font-family:var(--text);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p,figure{margin:0}
+svg{display:block;flex:none}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ic .wp,.wp{fill:var(--wp);stroke:none}
+.ic.ok{color:var(--ok)}
+.ic.mut{--wp:var(--ink4)}
+.ic.navmark{stroke-width:0}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.sep{display:inline-block;width:3px;height:3px;border-radius:50%;background:currentColor;opacity:.55;margin:0 7px;vertical-align:middle;flex:none}
+.cap{width:1440px;margin:0 auto 12px;direction:ltr;text-align:left;font:600 12px/1.5 ui-monospace,Consolas,monospace;color:#574D43;display:flex;gap:14px;align-items:baseline}
+.cap b{color:#241B15}
+.cap i{font-style:normal;font-weight:400}
+
+/* ---------- kit pieces used on this screen ---------- */
+.mark{color:var(--ink)}
+.word{font-family:var(--display);font-weight:700;line-height:1.25;color:var(--ink);font-size:27px}
+.lock-h{display:inline-flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 22px;border-radius:12px;border:1.5px solid transparent;font:600 16px/1 var(--text);cursor:pointer;white-space:nowrap;transition:background .18s,transform .12s}
+.btn .ic{width:20px;height:20px}
+.btn-p{background:var(--blaze);color:var(--onBlaze)}
+.btn-p:hover{background:var(--blaze2)}
+.btn-p:active{background:var(--blaze3);transform:translateY(2px)}
+.btn-s{background:var(--sheet);color:var(--ink);border-color:var(--ink)}
+.btn-s:hover{background:var(--ink);color:var(--paper)}
+.chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;border:1.5px solid var(--line2);background:var(--sheet);font:500 15px/1 var(--text);color:var(--ink);white-space:nowrap}
+.chip-s{height:28px;padding:0 10px;font-size:13px;border-radius:14px;border-width:1px;gap:6px}
+.chip-s.miss{border-style:dashed;color:var(--ink2);background:transparent}
+.skills{display:flex;gap:6px;flex-wrap:wrap}
+.tag{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:5px;font:500 11.5px/1 var(--text);color:var(--ink3);border:1px dashed var(--line2);white-space:nowrap}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:16px;padding:20px;position:relative}
+.card.ink{background:var(--night);border-color:var(--night);color:var(--nink)}
+.meta{display:flex;gap:14px;align-items:center;font:400 13.5px/1.4 var(--text);color:var(--ink2);flex-wrap:wrap}
+.meta .ic{width:18px;height:18px}
+.meta span{display:inline-flex;gap:6px;align-items:center}
+.card.ink .meta{color:var(--nink2)}
+.spot{display:inline-flex;align-items:center;gap:5px;font:700 14px/1 var(--text);color:var(--xpInk);direction:ltr;font-variant-numeric:tabular-nums;white-space:nowrap}
+.spot svg{width:12px;height:11px;fill:var(--xp)}
+.card.ink .spot,.lbr.me .spot{color:var(--xpNight)}
+.card.ink .spot svg,.lbr.me .spot svg{fill:var(--xpNight)}
+/* skill stars: solid = earned, outline = an empty slot */
+.stars{display:inline-flex;gap:2px;align-items:center;direction:rtl;margin-inline-start:7px;vertical-align:-1px}
+.stars svg{width:15px;height:15px;fill:none;stroke:var(--ink3);stroke-width:1.9;stroke-linejoin:round}
+.stars svg.on{fill:var(--xp);stroke:var(--xpLine)}
+.stars.lg svg{width:19px;height:19px}
+.stars.xs{margin-inline-start:3px}.stars.xs svg{width:13px;height:13px}
+.stars.gn{margin:0}.stars.gn svg{stroke:var(--nink3)}
+.card.ink .stars svg{stroke:var(--nink2)}
+.ring{position:relative;width:var(--s,120px);height:var(--s,120px);flex:none}
+.ring svg{width:100%;height:100%}
+.ring .trk{fill:none;stroke:var(--line2);stroke-width:5;stroke-linecap:round;stroke-dasharray:.1 9.82}
+.ring .prg{fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round}
+.ring .end{fill:var(--blaze);stroke:var(--sheet);stroke-width:3.5}
+.ring b{position:absolute;inset:0;text-align:center;font:700 calc(var(--s,120px)*.27)/var(--s,120px) var(--display);direction:ltr;white-space:nowrap}
+.xpbar{direction:rtl}
+.xpbar .bar{display:flex;height:9px;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;background:var(--sheet)}
+.xpbar .seg{flex:1;border-inline-end:1.5px solid var(--ink);position:relative}
+.xpbar .seg:last-child{border:0}
+.xpbar .seg i{position:absolute;inset-block:0;inset-inline-start:0;background:var(--xp);border-inline-end:1.5px solid var(--ink)}
+.av{position:relative;display:inline-block;width:var(--s,48px);height:var(--s,48px);flex:none}
+.av .face{position:absolute;inset:calc(var(--s,48px)*.105);border-radius:50%;overflow:hidden;background:var(--sunk)}
+.av .face svg{width:100%;height:100%}
+.av.plain .face{inset:0}
+.av .rg{position:absolute;inset:0;width:100%;height:100%;transform:scaleX(-1)}
+.av .rg circle{fill:none;stroke-width:5;stroke-linecap:round}
+.av .rg .t{stroke:var(--line2)}
+.av .rg .p{stroke:var(--ink)}
+.av .lv{position:absolute;left:50%;transform:translateX(-50%);font:700 calc(var(--s,48px)*.25)/1 var(--display);bottom:calc(var(--s,48px)*-.095);color:var(--ink);direction:ltr}
+.wk{display:flex;gap:0;align-items:center;direction:rtl}
+.wk .d{display:flex;flex-direction:column;align-items:center;gap:6px;font:400 11px/1 var(--text);color:var(--ink3);width:25px;position:relative}
+.wk .d::before{content:"";position:absolute;top:7px;inset-inline-start:50%;width:25px;border-top:2px dotted var(--line2)}
+.wk .d:last-child::before{display:none}
+.wk .d u{position:relative;z-index:1;width:16px;height:16px;border-radius:50%;border:2px dotted var(--line2);background:var(--sheet)}
+.wk .d.now u{border:0;background:var(--blaze);box-shadow:0 0 0 3px var(--sheet),0 0 0 4.5px var(--blaze)}
+.wk .d.now{color:var(--ink);font-weight:600}
+.lbr{display:flex;align-items:center;gap:10px;height:36px;padding:0 10px;border-radius:10px;font:500 14.5px/1.3 var(--text)}
+.lbr .rk{width:22px;text-align:center;font:700 15.5px/1 var(--display);color:var(--ink2);direction:ltr}
+.lbr .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbr .nm small{font:400 12.5px/1 var(--text);margin-inline-start:7px;color:var(--nink2)}
+.lbr.me{background:var(--ink);color:var(--paper);height:46px;font-weight:600}
+.lbr.me .rk{color:var(--paper)}
+.dal{width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex:none}
+
+/* ---------- the home shell: the ORIGINAL Darb proportions (rail 232 · map 792 · widgets 340) ---------- */
+#home-frame{width:1440px;height:900px;overflow:hidden;position:relative;margin:0 auto 64px;background:var(--paper);border-radius:10px;box-shadow:0 30px 60px -40px rgba(54,36,26,.45),0 0 0 1px rgba(54,36,26,.08);display:grid;grid-template-columns:232px 1fr}
+.rail{padding:26px 16px 14px;display:flex;flex-direction:column;border-inline-end:1px solid var(--line)}
+.rail .brand{padding:0 10px 24px}
+.nav{display:flex;flex-direction:column;gap:3px}
+.nav a{display:flex;align-items:center;gap:12px;height:45px;padding:0 12px;border-radius:12px;font:500 15.5px/1 var(--text);color:var(--ink2);--wp:var(--ink4);border:1px solid transparent}
+.nav a.on{background:var(--sheet);border-color:var(--line);color:var(--ink);font-weight:700;--wp:var(--blaze)}
+.nav a.on::after{content:"";margin-inline-start:auto;width:7px;height:7px;border-radius:50%;background:var(--blaze)}
+.rail .daily{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:14px 12px 12px;background:var(--sheet)}
+.rail .daily .hd{display:flex;align-items:center;gap:8px;font:600 13.5px/1.2 var(--text);margin-bottom:12px}
+.rail .daily .hd .ic{width:22px;height:22px}
+.rail .daily .hd b{margin-inline-start:auto;font:700 18px/1 var(--display);direction:ltr}
+.rail .daily .hd small{font:400 12px/1 var(--text);color:var(--ink3)}
+.demo-line{font:400 12px/1.4 var(--text);color:var(--ink3);text-align:center;padding-top:10px}
+.hmain{padding:24px 28px;display:flex;flex-direction:column;gap:20px;min-width:0}
+.hhead{height:64px;display:flex;align-items:center;justify-content:space-between}
+.hhead h1{font:700 28px/1.3 var(--display)}
+.hhead p{font:400 14px/1.5 var(--text);color:var(--ink3)}
+.uchip{display:flex;align-items:center;height:64px;border:1px solid var(--line);border-radius:18px;background:var(--sheet);padding-inline:6px 10px}
+.uchip>div{display:flex;align-items:center;gap:10px;padding:0 16px;height:36px;border-inline-end:1px solid var(--line);line-height:1.25;white-space:nowrap}
+.uchip>div:last-child{border:0;padding-inline-end:6px}
+.uchip .k{font:400 12px/1.2 var(--text);color:var(--ink3)}
+.uchip .v{font:700 15px/1.2 var(--text)}
+.uchip .ic{width:22px;height:22px}
+.hbody{display:grid;grid-template-columns:792px 340px;gap:20px;height:768px}
+.hside{display:flex;flex-direction:column;gap:14px;min-width:0}
+.nextc{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;border-radius:20px}
+.nextc .top{display:flex;justify-content:space-between;align-items:center;font:600 12.5px/1 var(--text);color:var(--nink2)}
+.nextc .top span:first-child{display:flex;align-items:center;gap:7px;color:var(--nink)}
+.nextc .top span:first-child::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blaze)}
+.nextc h3{font:700 28px/1.3 var(--display);display:flex;align-items:center}
+.nextc p{font:400 14.5px/1.5 var(--text);color:var(--nink2);margin-top:-6px}
+.gain{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--night3);border-radius:12px}
+.gain>div{padding:9px 12px;display:flex;flex-direction:column;gap:6px}
+.gain>div+div{border-inline-start:1px solid var(--night3)}
+.gain .k{font:400 12px/1.2 var(--text);color:var(--nink2)}
+.gain .v{font:700 15px/1.2 var(--text);display:flex;align-items:center;gap:8px}
+.gain .v i{font-style:normal;color:var(--nink2);font-weight:400;font-size:13px}
+.nextc .btn{height:52px;font-size:17px;margin-top:2px}
+.matchc{display:flex;gap:16px;align-items:center;padding:14px 18px;border-radius:20px}
+.matchc h4{font:700 16px/1.4 var(--display)}
+.matchc p{font:400 13px/1.5 var(--text);color:var(--ink3);margin-bottom:7px}
+.rankc{padding:12px 10px 10px;border-radius:20px}
+.rankc .hd{display:flex;justify-content:space-between;align-items:center;padding:0 10px 6px;font:700 15px/1.4 var(--display)}
+.rankc .hd a{font:500 13px/1 var(--text);color:var(--ink3)}
+.rankc .gap{height:12px;display:flex;align-items:center;padding:0 20px}
+.rankc .gap i{flex:1;border-top:2px dotted var(--line2)}
+.rankc .hint{display:flex;justify-content:space-between;align-items:center;padding:8px 10px 0;font:400 13px/1.5 var(--text);color:var(--ink2)}
+.rankc .hint b{color:var(--xpInk)}
+.launch{margin-top:auto;display:flex;align-items:center;gap:12px;height:58px;border-radius:30px;border:1.5px solid var(--ink);background:var(--sheet);padding-inline:7px 18px;font:500 15px/1 var(--text);color:var(--ink2);box-shadow:0 14px 28px -18px rgba(54,36,26,.5)}
+.launch .dal{width:44px;height:44px}
+.launch .dal .ic{width:26px;height:26px}
+.launch kbd{margin-inline-start:auto;font:500 11px/1 ui-monospace,Consolas,monospace;color:var(--ink3);border:1px solid var(--line2);border-radius:6px;padding:4px 6px;direction:ltr}
+
+/* =====================================================================================================
+   THE MAP
+   .map   the window (clips)            .cam   the camera: a perspective container
+   .plane the drawn sheet, a 3D plane   .bb    a billboard: stands on the plane and always faces the camera
+   ===================================================================================================== */
+.map{position:relative;width:792px;height:768px;border-radius:20px;border:1px solid var(--line);background:var(--t-base);overflow:hidden;isolation:isolate}
+.cam{position:absolute;inset:0;perspective:1100px;perspective-origin:50% 42%}
+.plane{position:absolute;left:0;top:0;width:100%;height:100%;transform-style:preserve-3d;transform-origin:var(--ox) 100%;animation:plane-open 1.25s var(--e-cam) both}
+.terrain{position:absolute;animation:fade .5s linear both}
+.trail{position:absolute;left:0;top:0;overflow:visible}
+.bb{position:absolute;width:0;height:0;transform-origin:0 var(--r,0px);animation:bb-open 1.25s var(--e-cam) both}
+/* map-open, beat 1: the sheet is lying away from you and levels out to face you (the same camera the flight uses) */
+@keyframes plane-open{from{transform:translate3d(0,46px,0) rotateX(42deg) scale3d(.9,.9,.9)}to{transform:translate3d(0,0,0) rotateX(0deg) scale3d(1,1,1)}}
+@keyframes bb-open{from{transform:rotateX(-42deg) scale(1)}to{transform:rotateX(0deg) scale(1)}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes draw{from{stroke-dashoffset:1;opacity:0}3%{opacity:1}to{stroke-dashoffset:0;opacity:1}}
+@keyframes drift{to{stroke-dashoffset:var(--p)}}
+@keyframes coin-in{from{opacity:0;transform:scale(.55)}45%{opacity:1}to{opacity:1;transform:scale(1)}}
+@keyframes rise-in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes drop-in{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pole-up{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes unfurl{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes count{from{--n:0}}
+@keyframes pulse{0%{transform:scale(1);opacity:.75}70%,100%{transform:scale(1.42);opacity:0}}
+.draw{stroke-dasharray:1;stroke-dashoffset:0;animation:draw var(--t,.4s) var(--e,linear) var(--d,0s) both}
+.fade{animation:fade .3s linear var(--d,0s) both}
+.count{font-style:normal;counter-reset:n var(--n);animation:count var(--t,.8s) var(--e-out) var(--d,0s) both}
+.count::after{content:counter(n) "%"}
+
+/* terrain: a hill of flat terraces. No gradients: five flat tones, each with a thin edge on the side facing you */
+.terrain .band{stroke:var(--t-edge);stroke-width:1}
+.terrain .cliff{fill:var(--t-cliff)}
+.terrain .hair{fill:none;stroke:var(--contour);stroke-width:1;opacity:.75}
+.terrain .svy{fill:none;stroke:var(--contour2);stroke-width:1}
+.terrain .alt rect{fill:#fff}
+.terrain .alt text{font:600 12.5px var(--text);fill:var(--contourInk);text-anchor:middle;direction:ltr}
+/* the road */
+.trail path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.trail .bed path{stroke:var(--line2)}
+.trail .bed.in path{stroke:#fff}
+.trail .cov{stroke:var(--ink)}
+.trail .leg{stroke:var(--blaze)}
+.trail .ahd{stroke:var(--ink3)}
+.trail .dots{animation:drift 1.9s linear infinite}
+.trail .brn path{stroke:var(--ink3);stroke-width:1.75;stroke-dasharray:2 6}
+.trail .gshadow ellipse{fill:var(--ink);opacity:.17}
+.trail .gshadow ellipse.fade{animation-name:fade17}
+@keyframes fade17{from{opacity:0}to{opacity:.17}}
+.trail .fshadow{fill:var(--ink);opacity:0}
+.trail .fring{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;opacity:0}
+
+/* a station = one button: coin · leader · label, always in that order, the label always on the same side */
+.st{cursor:pointer;outline:none}
+.st .coin{position:absolute;left:calc(-1*var(--r));top:calc(-1*var(--r));width:calc(2*var(--r));height:calc(2*var(--r));border-radius:50%;display:grid;place-items:center;animation:coin-in .38s var(--e-pop) var(--d,0s) both}
+.st .coin b{font:700 18px/1 var(--display);direction:ltr}
+.st .ld{position:absolute;right:calc(var(--r) + 5px);top:-1px;width:9px;border-top:2px solid var(--ink);animation:fade .2s linear calc(var(--d,0s) + .12s) both}
+.st .lb{position:absolute;right:calc(var(--r) + 18px);top:0;translate:0 -50%;white-space:nowrap;text-align:start;padding:1px 4px 3px;animation:rise-in .34s var(--e-out) calc(var(--d,0s) + .12s) both}
+.lb>b{display:flex;align-items:center;font:700 16.5px/1.45 var(--display);color:var(--ink)}
+.lb{text-shadow:0 1px 0 #fff,0 -1px 0 #fff,1px 0 0 #fff,-1px 0 0 #fff,0 0 4px #fff}
+.lb>small{display:block;font:400 13.5px/1.45 var(--text);color:var(--ink2)}
+.lb .ic{display:inline-block;width:15px;height:15px;stroke-width:2.4;margin-inline-end:4px;vertical-align:-2.5px}
+.lb>b em{font:400 13.5px/1 var(--text);font-style:normal;color:var(--ink2);margin-inline-start:12px;white-space:nowrap}
+.lb .spot{font-size:13px;margin-right:9px}
+.s-done .coin{background:var(--ink);color:#fff;box-shadow:0 3px 0 #130F0B}
+.s-done .ck{position:absolute;top:-5px;left:-5px;width:19px;height:19px;border-radius:50%;background:var(--ok);border:2px solid #fff;display:grid;place-items:center;color:#fff}
+.s-done .ck .ic{width:11px;height:11px;stroke-width:3.4}
+.s-now .coin{background:var(--blaze);color:var(--onBlaze);box-shadow:0 3.5px 0 var(--blazeInk);animation-duration:.46s}
+.s-now .coin b{font-size:25px}
+.s-now .coin::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.75px solid var(--blaze);animation:pulse 2.8s var(--e-out) 3.6s infinite backwards;opacity:.75}
+.s-now .ld{border-color:var(--ink);width:8px}
+.s-next .coin,.s-lock .coin{background:#fff;color:var(--ink2);border:2px dashed var(--ink3);box-shadow:0 3px 0 var(--t-cliff)}
+.s-next .ld,.s-lock .ld,.s-start .ld{border-color:var(--ink3)}
+.s-lock .lk{position:absolute;top:-6px;left:-6px;width:21px;height:21px;border-radius:50%;background:#fff;border:1.5px solid var(--ink3);display:grid;place-items:center;color:var(--ink2);--wp:var(--ink4)}
+.s-lock .lk .ic{width:13px;height:13px;stroke-width:2.2}
+.s-next .lb>b,.s-lock .lb>b{color:var(--ink2)}
+.s-start{cursor:default}
+.s-start .coin{background:#fff;border:3px solid var(--ink)}
+.s-start .coin::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--ink)}
+.s-start .lb>b{font:600 14.5px/1.4 var(--text);color:var(--ink2)}
+.s-sum .coin{background:#fff;border:2.5px solid var(--ink);box-shadow:0 3px 0 var(--t-cliff)}
+.s-sum .coin i{width:9px;height:9px;border-radius:50%;background:var(--ink)}
+.s-sum .lb{animation-delay:var(--d)}
+.s-sum .lb>b{font-size:19px}
+/* the current station carries the invitation: the same label, as a small card */
+.st .card-lb{background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:8px 14px 10px;box-shadow:0 3px 0 var(--ink);right:calc(var(--r) + 20px)}
+.card-lb .e{display:flex;align-items:center;gap:6px;font:600 13px/1.4 var(--text);color:var(--blazeInk)}
+.card-lb .e::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blaze)}
+.card-lb>b{font-size:21px;line-height:1.4}
+.st .card-lb{text-shadow:none}
+.card-lb>small{display:flex;align-items:center;gap:13px;margin-top:1px}
+.card-lb>small>span{display:inline-flex;align-items:center;gap:5px}
+.card-lb>small .ic{width:16px;height:16px;stroke-width:1.9;margin:0}
+.card-lb>small b{font-weight:700;color:var(--ink)}
+.card-lb .spot{margin:0}
+.st:focus-visible .coin{outline:3px solid var(--ink);outline-offset:4px}
+.st:hover .lb>b{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px}
+.s-start:hover .lb>b{text-decoration:none}
+/* the flag at the summit: it stands */
+.flag svg{position:absolute;overflow:visible}
+.flag .pole{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;transform-box:fill-box;transform-origin:50% 100%;animation:pole-up .26s var(--e-out) var(--d) both}
+.flag .pen{fill:var(--blaze);stroke:var(--blaze);stroke-width:2;stroke-linejoin:round;transform-box:fill-box;transform-origin:100% 50%;animation:unfurl .3s var(--e-out) var(--d) both}
+/* you are here: the waypoint where the solid line ends, with the walker's tag */
+.you .wp{position:absolute;left:-8.5px;top:-8.5px;width:17px;height:17px;border-radius:50%;background:var(--blaze);border:3px solid #fff;box-shadow:0 0 0 1.5px var(--blaze);animation:coin-in .34s var(--e-pop) var(--d) both}
+.you .pill{position:absolute;left:22px;top:-24px;display:flex;align-items:center;gap:9px;height:48px;padding:4px 16px 4px 4px;border-radius:24px;background:var(--ink);color:var(--paper);white-space:nowrap;direction:rtl;box-shadow:0 3px 0 #130F0B;animation:drop-in .42s var(--e-out) calc(var(--d) + .06s) both}
+.you .pill::before{content:"";position:absolute;left:-9px;top:50%;width:10px;border-top:2px solid var(--ink)}
+.you .pill{flex-direction:row-reverse}
+.you .tx b{display:block;font:700 15px/1.3 var(--display)}
+.you .tx small{display:block;font:400 13px/1.3 var(--text);color:var(--nink2)}
+.you .tx small i{font-weight:700;color:var(--xpNight);direction:ltr;unicode-bidi:isolate}
+.you .face{width:40px;height:40px;border-radius:50%;overflow:hidden;flex:none;box-shadow:0 0 0 1.5px var(--paper)}
+.you .face svg{width:100%;height:100%}
+/* branch jobs: small, dashed, after the summit */
+.peak svg{position:absolute;left:-12px;top:-14px;animation:fade .3s linear var(--d) both}
+.peak svg path{fill:#fff;stroke:var(--ink2);stroke-width:1.75;stroke-linejoin:round}
+.peak .lb{position:absolute;right:20px;top:-3px;translate:0 -50%;white-space:nowrap;text-align:start;padding:0 4px 2px;animation:fade .3s linear var(--d) both}
+.peak .lb>b{font:600 14.5px/1.45 var(--text);color:var(--ink2)}
+.peak .lb>small{font-size:13px;color:var(--ink3)}
+/* the trailhead sign and the view switch (screen furniture, not on the plane) */
+.sign{position:absolute;right:18px;bottom:18px;background:var(--sheet);border:1px solid var(--line2);border-radius:14px;padding:11px 14px 12px;animation:fade .4s linear .15s both}
+.sign .e{font:500 13px/1.3 var(--text);color:var(--ink3)}
+.sign h2{font:700 26px/1.35 var(--display)}
+.sign .pg{display:flex;align-items:center;gap:14px;white-space:nowrap;font:400 13px/1.3 var(--text);color:var(--ink2);margin-top:7px;padding-top:9px;border-top:1px dotted var(--line2)}
+.sign .pg b{font-weight:700;color:var(--ink)}
+.dots{display:flex;gap:4px;direction:rtl;margin-inline-start:auto}
+.dots i{width:9px;height:9px;border-radius:50%;border:1.5px dotted var(--ink3)}
+.dots i.d{border:0;background:var(--ink)}
+.dots i.n{border:0;background:var(--blaze)}
+.seg2{position:absolute;left:18px;bottom:18px;display:flex;gap:2px;border:1px solid var(--line2);border-radius:11px;background:var(--sheet);padding:3px;font:500 13px/1 var(--text);color:var(--ink2);animation:fade .4s linear .15s both}
+.seg2>*{padding:7px 12px;border-radius:8px}
+.seg2 b{background:var(--ink);color:var(--paper);font-weight:600}
+.map-back{position:absolute;right:16px;top:16px;display:flex;align-items:center;gap:8px;height:40px;padding:0 14px 0 16px;border-radius:20px;background:var(--sheet);border:1.5px solid var(--ink);font:600 14px/1 var(--text);color:var(--ink);opacity:0;pointer-events:none;z-index:6}
+.map-back .ic{width:18px;height:18px;stroke-width:2}
+.map.is-focus .map-back{pointer-events:auto}
+.map.is-focus .s-now .coin::after{animation:none;opacity:0}
+.map.is-focus .st,.map.is-focus .cam{cursor:zoom-out}
+
+/* ---------- the station card ---------- */
+.flayer{position:absolute;left:388px;top:108px;width:792px;height:768px;pointer-events:none;z-index:5}
+.fcard{position:absolute;left:22px;top:50%;translate:0 -50%;width:348px;background:var(--sheet);border:1.5px solid var(--ink);border-radius:20px;padding:16px 18px 18px;box-shadow:0 4px 0 var(--ink);display:none;flex-direction:column;gap:12px;pointer-events:auto}
+.fcard.on{display:flex}
+.fleader{position:absolute;height:0;border-top:2px dotted var(--ink);transform-origin:0 50%;opacity:0}
+.fleader::after{content:"";position:absolute;right:-4px;top:-5px;width:8px;height:8px;border-radius:50%;background:var(--ink)}
+.fcard header{position:relative;padding-inline-end:34px}
+.fcard .eye{display:flex;align-items:center;font:500 13.5px/1.4 var(--text);color:var(--ink3)}
+.fcard .eye b{font-weight:700;color:var(--ink)}
+.fcard .eye .dot{width:8px;height:8px;border-radius:50%;background:var(--ink);margin-inline-end:8px}
+.c-now .eye .dot{background:var(--blaze)}.c-now .eye b{color:var(--blazeInk)}
+.c-done .eye .dot{background:var(--ok)}.c-done .eye b{color:var(--ok)}
+.c-next .eye .dot,.c-lock .eye .dot{background:none;border:1.5px dashed var(--ink3)}
+.fcard h3{font:700 26px/1.35 var(--display);display:flex;align-items:center}
+.fcard header p{font:400 13.5px/1.5 var(--text);color:var(--ink2)}
+.fc-x{position:absolute;left:-4px;top:-2px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:var(--ink2)}
+.fc-x:hover{background:var(--paper)}
+.fc-x .ic{width:20px;height:20px;stroke-width:2}
+.blk{position:relative;border-top:1px dotted var(--line2);padding-top:11px;display:flex;flex-direction:column;gap:2px}
+.blk small{font:500 13px/1.4 var(--text);color:var(--ink3);display:flex;align-items:center}
+.blk>b{font:700 17px/1.45 var(--display)}
+.blk>span{font:400 14px/1.5 var(--text);color:var(--ink2)}
+.blk .tag{position:absolute;left:0;top:13px}
+.blk .stats{display:flex;align-items:center;gap:14px;margin-top:6px;font:500 14px/1.3 var(--text);color:var(--ink)}
+.blk .stats span{display:inline-flex;align-items:center;gap:6px}
+.blk .stats .ic{width:18px;height:18px}
+.blk .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.blk .row b{font:700 14.5px/1.4 var(--text);display:flex;align-items:center}
+.blk .row b.up{font-size:17px;color:var(--ink)}
+.blk .row.sub{font:400 13px/1.4 var(--text);color:var(--ink3);margin-top:4px}
+.blk .row.sub b{font-size:13px;color:var(--ink);display:inline}
+.mbar{display:flex;height:12px;border-radius:4px;background:var(--paper);border:1.5px solid var(--ink);overflow:hidden;margin-top:7px}
+.mbar i{display:block;height:100%}
+.mbar .pv{background:var(--contour2)}
+.mbar .th{background:var(--ink);transform-origin:100% 50%}
+.mbar.now .th{background:var(--blaze)}
+.mbar.next .th,.mbar.lock .th{background:repeating-linear-gradient(135deg,var(--ink3) 0 2px,transparent 2px 6px)}
+.les{display:flex;gap:4px;margin-top:7px}
+.les i{flex:1;height:8px;border-radius:3px;border:1.5px solid var(--line2);background:var(--sheet)}
+.les i.d{background:var(--ink);border-color:var(--ink)}
+.blk .note{font:400 13.5px/1.55 var(--text);color:var(--ink2);margin-top:6px}
+.blk.ev{padding-inline-end:78px}
+.blk q{quotes:none;font:500 14.5px/1.7 var(--text);color:var(--ink);margin-top:2px}
+.stamp{position:absolute;left:0;top:14px;width:66px;height:66px;display:grid;place-items:center;color:var(--ok);transform:rotate(-9deg)}
+.stamp svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.5}
+.stamp b{font:700 21px/1 var(--display)}
+.blk.lockb{flex-direction:row;gap:10px;align-items:flex-start}
+.blk.lockb .ic{width:22px;height:22px;margin-top:2px}
+.fcard .btn{height:50px;font-size:16.5px;margin-top:2px}
+
+/* ---------- phone ---------- */
+#phone-frame{width:390px;height:844px;overflow:hidden;position:relative;margin:0 auto;background:var(--paper);border-radius:40px;box-shadow:0 0 0 1px rgba(54,36,26,.1),0 40px 70px -40px rgba(54,36,26,.5);display:flex;flex-direction:column}
+.p-top{display:flex;align-items:center;justify-content:space-between;height:62px;padding:8px 16px 0;flex:none}
+.p-stats{display:flex;gap:6px;align-items:center}
+.p-stats>span:not(.av){display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 10px;border-radius:17px;border:1px solid var(--line);background:var(--sheet);font:700 13.5px/1 var(--text)}
+.p-stats .ic{width:18px;height:18px}
+.map.sm{flex:none;width:366px;height:600px;margin:0 12px;border-radius:24px}
+.sm .cam{perspective:820px;perspective-origin:50% 38%}
+.sm .st .coin b{font-size:16.5px}
+.sm .s-now .coin b{font-size:21px}
+.sm .st .lb{right:calc(var(--r) + 13px);padding:0 6px 2px;border-radius:7px}
+.sm .st .ld{right:calc(var(--r) + 3px);width:7px}
+.sm .lb>b{font-size:14.5px;line-height:1.4}
+.sm .lb>small{font-size:12.5px;line-height:1.35}
+.sm .lb>small .ic{width:13px;height:13px;margin-inline-end:3px}
+.sm .sep{margin:0 5px}
+.sm .stars{margin-inline-start:5px}.sm .stars svg{width:13px;height:13px}
+.sm .s-done .ck{width:17px;height:17px;top:-4px;left:-4px}
+.sm .s-start .lb>b{font-size:13px}
+.sm .s-sum .lb>b{font-size:15.5px}
+.sm .st .card-lb{padding:5px 10px 7px;border-radius:12px;right:calc(var(--r) + 15px)}
+.sm .card-lb .e{font-size:12px}
+.sm .card-lb>b{font-size:16.5px}
+.sm .you .pill{height:38px;padding:3px 11px 3px 3px;gap:7px;border-radius:19px;top:-19px;left:17px}
+.sm .you .pill::before{left:-7px;width:8px}
+.sm .you .tx b{font-size:12.5px;line-height:1.25}
+.sm .you .tx small{font-size:12px;line-height:1.2}
+.sm .you .face{width:32px;height:32px}
+.sm .you .wp{left:-7.5px;top:-7.5px;width:15px;height:15px}
+.sm .peak svg{left:-10px;top:-12px;width:20px;height:18px}
+.sm .peak .lb{right:auto;left:0;top:19px;translate:-50% 0;text-align:center;padding:0 4px 1px}
+.sm .peak .lb>b{font-size:12.5px}
+.sm .sign{right:10px;bottom:10px;padding:6px 11px 7px;border-radius:11px}
+.sm .sign .e{font-size:12px}
+.sm .sign h2{font-size:16px;line-height:1.35}
+.sm .terrain .alt text{font-size:12px}
+.sm .map-back{right:auto;left:10px;top:10px;height:36px;font-size:13px}
+.p-next{flex:none;margin:8px 12px 0;border-radius:20px;padding:8px 10px 8px 8px;display:flex;align-items:center;gap:10px;height:66px}
+.p-next .n{flex:none;width:40px;height:40px;border-radius:50%;background:var(--blaze);color:var(--onBlaze);font:700 20px/40px var(--display);text-align:center;direction:ltr}
+.p-next .t{flex:1;min-width:0}
+.p-next .e{font:500 12px/1.3 var(--text);color:var(--nink2)}
+.p-next h3{font:700 17px/1.35 var(--display);display:flex;align-items:center;white-space:nowrap}
+.p-next .btn{height:48px;font-size:15.5px;padding:0 16px;gap:8px}
+.p-tabs{flex:none;margin-top:auto;display:grid;grid-template-columns:1fr 1fr 76px 1fr 1fr;align-items:center;padding:8px 8px 20px;height:86px;position:relative;z-index:8;background:var(--paper)}
+.p-tabs a{display:flex;flex-direction:column;align-items:center;gap:4px;font:500 12px/1 var(--text);color:var(--ink3);--wp:var(--ink4)}
+.p-tabs a.on{color:var(--ink);font-weight:700;--wp:var(--blaze)}
+.p-tabs .ask{justify-self:center;width:58px;height:58px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;margin-top:-22px;box-shadow:0 0 0 5px var(--paper),0 14px 22px -12px rgba(54,36,26,.6)}
+.p-tabs .ask .ic{width:30px;height:30px}
+/* the station card on the phone: a bottom sheet that rises above the tab bar */
+.flayer.sheet{left:0;top:auto;bottom:86px;width:390px;height:470px;overflow:hidden;z-index:7}
+.sheet .fcard{left:0;right:0;top:auto;bottom:0;translate:none;width:auto;border-radius:24px 24px 0 0;border-width:1.5px 0 0;box-shadow:none;padding:22px 18px 16px;gap:10px}
+.sheet .fcard::before{content:"";position:absolute;top:8px;left:50%;width:40px;height:4px;margin-left:-20px;border-radius:2px;background:var(--line2)}
+.sheet .fcard h3{font-size:23px}
+.sheet .blk{padding-top:9px}
+.sheet .fcard .btn{height:50px}
+
+@media (prefers-reduced-motion:reduce){
+  .plane,.bb,.terrain,.draw,.fade,.count,.st .coin,.st .ld,.st .lb,.flag .pole,.flag .pen,.you .wp,.you .pill,.peak svg,.peak .lb,.sign,.seg2,.trail .dots,.s-now .coin::after{animation:none!important}
+}
+
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mark" viewBox="0 0 64 64"><path d="M56 50V38a24 24 0 0 0-48 0v6a6 6 0 0 0 12 0v-6a12 12 0 0 1 24 0v12" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="44.5" r="5" style="fill:var(--wp,#1A92CB)"/></symbol>
+    <symbol id="peak" viewBox="0 0 13 12"><path d="M6.5 1.6 11.6 10.6H1.4z"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 20.5V11M12 14.5c0-3.4-6-2.6-6-6M12 14.5c0-3.4 6-2.6 6-6M9.5 20.5h5"/><circle cx="6" cy="6" r="2.25"/><circle cx="18" cy="6" r="2.25"/><circle class="wp" cx="12" cy="7.5" r="1.75"/></symbol>
+    <symbol id="i-cv" viewBox="0 0 24 24"><path d="M13.5 3h-6A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V10M9.5 9.5h3M9.5 13h5M9.5 16.5h5"/><circle class="wp" cx="17.25" cy="5" r="1.75"/></symbol>
+    <symbol id="i-jobs" viewBox="0 0 24 24"><path d="M3.5 13h5.5M15 13h5.5M5.5 8h13a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2zM8.75 8V6.5a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V8"/><circle class="wp" cx="12" cy="13" r="1.75"/></symbol>
+    <symbol id="i-courses" viewBox="0 0 24 24"><path d="M12 7.5c-1.8-1.4-4.2-2-7.5-2v12c3.300 0 5.700.6 7.500 2 1.800-1.400 4.200-2 7.500-2V10.500M12 7.500v12M12 7.500c1.100-.85 2.400-1.400 4-1.700"/><circle class="wp" cx="19.5" cy="6" r="1.75"/></symbol>
+    <symbol id="i-advisor" viewBox="0 0 24 24"><path d="M18 6A8.500 8.500 0 1 0 20.500 12M14.750 9.250l-1.600 4-4 1.600 1.600-4z"/><circle class="wp" cx="19.9" cy="8.7" r="1.75"/></symbol>
+    <symbol id="i-leaders" viewBox="0 0 24 24"><path d="M2.5 20v-5.500h6V9.500h7V13h6v7"/><circle class="wp" cx="12" cy="5.25" r="1.75"/></symbol>
+    <symbol id="i-profile" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.75"/><path d="M4.750 20c.4-3.600 3.300-6 7.250-6 1.600 0 3 .4 4.200 1.100"/><circle class="wp" cx="18.75" cy="18.5" r="1.75"/></symbol>
+    <symbol id="i-streak" viewBox="0 0 24 24"><path d="M9.200 8.200C8.100 9.300 7.500 10.600 7.500 12a4.500 4.500 0 0 0 9 0c0-3.900-3.900-5.600-4.500-8.500M6 21l12-3.250M6 17.750 18 21"/><circle class="wp" cx="12" cy="12.5" r="1.75"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M7.500 10.500h9a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2zM8.500 10.500V8a3.500 3.500 0 0 1 7 0v2.500"/><circle class="wp" cx="12" cy="15.5" r="1.75"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H6.500M11 7.500 6.500 12l4.500 4.500"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><path d="M17.300 5.400A8.500 8.500 0 1 0 20.500 12M12 7.500V12l3 2"/><circle class="wp" cx="19.6" cy="8.3" r="1.75"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M6 12.500l4 4 8-9"/></symbol>
+    <symbol id="i-apply" viewBox="0 0 24 24"><path d="M3.500 4 20.500 10.250 14 14l-3.750 6.500zM14 14 3.500 4"/><circle class="wp" cx="19.25" cy="19.25" r="1.75"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.400l2.650 5.450 5.950.800-4.350 4.150 1.050 5.900L12 16.850 6.700 19.700l1.050-5.900L3.400 9.650l5.950-.800z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.500 6.500l11 11M17.500 6.500l-11 11"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M5 12h12.500M13 7.500l4.500 4.500-4.500 4.500"/></symbol>
+    <symbol id="i-lessons" viewBox="0 0 24 24"><path d="M9.500 7h10M9.500 12h10M9.500 17h6"/><circle cx="5" cy="7" r="1.250"/><circle cx="5" cy="12" r="1.250"/><circle class="wp" cx="5" cy="17" r="1.750"/></symbol>
+    <g id="a-eyes"><circle cx="42" cy="46.500" r="1.700" fill="#241B15"/><circle cx="54" cy="46.500" r="1.700" fill="#241B15"/></g>
+    <path id="a-smile" d="M44 53.500c2.400 2 5.600 2 8 0" fill="none" stroke="#241B15" stroke-width="1.600" stroke-linecap="round"/>
+    <path id="a-shoulders" d="M12 97c0-13.500 11-22.500 28-23.500h16c17 1 28 10 28 23.500z"/>
+    <path id="a-neck" d="M41.500 58h13v12.500a6.500 6.500 0 0 1-13 0z"/>
+    <ellipse id="a-head" cx="48" cy="45" rx="15" ry="17.500"/>
+    <path id="a-ghutra" d="M48 14C32 14 24 25 24 39.500c0 17-3 30.500-9.500 43.500C23 86.500 35 88 48 88s25-1.500 33.500-5C75 70 72 56.500 72 39.500 72 25 64 14 48 14z"/>
+    <path id="a-ghutra-cap" d="M33.200 41c.4-11 6.500-17.800 14.800-17.800S62.400 30 62.800 41c-4.500-3.200-9.400-4.800-14.800-4.800S37.700 37.800 33.200 41z"/>
+    <g id="a-agal" fill="none" stroke="#241B15" stroke-width="3.400" stroke-linecap="round"><path d="M31 26.500c4.800-4 10.500-6 17-6s12.200 2 17 6"/><path d="M29 32c5.300-4.300 11.700-6.400 19-6.400S61.700 27.700 67 32"/></g>
+    <g id="a-ghutra-folds" fill="none" stroke-width="1.500" stroke-linecap="round"><path d="M28.500 46c-.8 13-3.500 25-8 36.500"/><path d="M67.500 46c.8 13 3.500 25 8 36.500"/><path d="M33.500 60c-.5 9-2.200 17.500-5 25.500"/><path d="M62.500 60c.5 9 2.200 17.500 5 25.500"/></g>
+    <path id="a-beard" d="M34.600 47.500c.5 10.500 6 17.500 13.400 17.500s12.900-7 13.400-17.500c-1.600 6-6.600 9.800-13.400 9.800s-11.800-3.800-13.400-9.800z"/>
+    <path id="a-tache" d="M42.500 52.300c1.800-1.400 3.700-1.400 5.500 0 1.800-1.400 3.700-1.400 5.500 0" fill="none" stroke-width="2.300" stroke-linecap="round"/>
+    <g id="a-collar" fill="none" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><path d="M41 72.500 48 79.500l7-7"/><path d="M48 79.500V97"/></g>
+    <path id="a-hair-m" d="M32.300 42.500C30.500 29 37.500 19.500 48 19.500S65.500 29 63.700 42.500c-1.800-5.500-4.600-8.700-8.200-9.800-5 1.600-10 1.600-15 0-3.600 1.100-6.400 4.300-8.200 9.800z"/>
+    <symbol id="av-5" viewBox="0 0 96 96"><rect width="96" height="96" fill="#E7DFD3"/><path d="M-4 30c20-10 34-8 50 0s30 6 54-6M-4 48c10-7 20-7 30-3" fill="none" stroke="#CFC2B0" stroke-width="1.500"/><use href="#a-shoulders" fill="#FFFDF8"/><use href="#a-ghutra" fill="#FFFDF8"/><use href="#a-ghutra-folds" stroke="#1A92CB" stroke-dasharray="3 2.500"/><path d="M26 40c-.3 6-.8 11-1.800 16M70 40c.3 6 .8 11 1.800 16" fill="none" stroke="#1A92CB" stroke-width="1.500" stroke-dasharray="3 2.500" stroke-linecap="round"/><use href="#a-neck" fill="#B67B52"/><use href="#a-collar" stroke="#D8CDBE"/><use href="#a-head" fill="#C98D62"/><use href="#a-beard" fill="#2B1D18"/><use href="#a-tache" stroke="#2B1D18"/><use href="#a-ghutra-cap" fill="#FFFDF8"/><path d="M37 33.500c3.500-1.800 7.200-2.700 11-2.700s7.500.9 11 2.700" fill="none" stroke="#1A92CB" stroke-width="1.500" stroke-dasharray="3 2.500" stroke-linecap="round"/><use href="#a-agal"/><use href="#a-eyes"/></symbol>
+    <symbol id="av-6" viewBox="0 0 96 96"><rect width="96" height="96" fill="#DDEBD5"/><path d="M-4 40c18-12 32-10 48-2s32 8 56-10M-4 22c12-6 22-6 34-2" fill="none" stroke="#B9D5AA" stroke-width="1.500"/><use href="#a-shoulders" fill="#FFFDF8"/><use href="#a-ghutra" fill="#FFFDF8"/><use href="#a-ghutra-folds" stroke="#D8CDBE"/><use href="#a-neck" fill="#D39A71"/><use href="#a-collar" stroke="#D8CDBE"/><use href="#a-head" fill="#E3AE86"/><use href="#a-tache" stroke="#3B2A22"/><path d="M44.500 60c2.300 1.300 4.700 1.300 7 0" fill="none" stroke="#3B2A22" stroke-width="2.300" stroke-linecap="round"/><use href="#a-ghutra-cap" fill="#FFFDF8"/><use href="#a-agal"/><use href="#a-eyes"/></symbol>
+    <symbol id="av-7" viewBox="0 0 96 96"><rect width="96" height="96" fill="#D5EEFA"/><path d="M-4 26c16 8 30 8 46 0s34-8 58 6M50 100c6-18 20-28 50-30" fill="none" stroke="#A6D8F0" stroke-width="1.500"/><use href="#a-shoulders" fill="#FFFDF8"/><use href="#a-neck" fill="#8B5A3A"/><use href="#a-collar" stroke="#D8CDBE"/><use href="#a-head" fill="#A06D48"/><use href="#a-beard" fill="#1E1512"/><use href="#a-tache" stroke="#1E1512"/><use href="#a-hair-m" fill="#1E1512"/><use href="#a-eyes"/></symbol>
+    <symbol id="av-k" viewBox="0 0 96 96"><rect width="96" height="96" fill="#D5EEFA"/><path d="M-4 34c16-12 30-12 46-3s34 8 58-9M-4 52c14-10 26-10 40-4" fill="none" stroke="#A6D8F0" stroke-width="1.500"/><use href="#a-shoulders" fill="#241B15"/><path d="M39 74c2.500 4.500 5.500 6.500 9 6.500s6.500-2 9-6.500" fill="none" stroke="#6E5444" stroke-width="1.500" stroke-linecap="round"/><use href="#a-neck" fill="#D39A71"/><use href="#a-head" fill="#E3AE86"/><use href="#a-hair-m" fill="#2B1D18"/><use href="#a-eyes"/><use href="#a-smile"/></symbol>
+  </defs>
+</svg>
+
+<div class="cap"><b>Dalilak · the home map · final</b><i>1440 × 900 · press a station</i></div>
+<div id="home-frame">
+  <aside class="rail">
+    <div class="brand"><span class="lock-h word"><svg class="mark" width="32" height="32"><use href="#mark"/></svg><span>دليلك</span></span></div>
+    <nav class="nav">
+      <a class="on"><svg class="ic navmark"><use href="#mark"/></svg>مساري</a>
+      <a><svg class="ic "><use href="#i-tree"/></svg>المهارات</a>
+      <a><svg class="ic "><use href="#i-courses"/></svg>الدورات</a>
+      <a><svg class="ic "><use href="#i-cv"/></svg>سيرتي</a>
+      <a><svg class="ic "><use href="#i-jobs"/></svg>الوظائف</a>
+      <a><svg class="ic "><use href="#i-apply"/></svg>طلباتي</a>
+      <a><svg class="ic "><use href="#i-leaders"/></svg>المتصدرون</a>
+      <a><svg class="ic "><use href="#i-profile"/></svg>ملفي</a>
+    </nav>
+    <div class="daily">
+      <div class="hd"><svg class="ic "><use href="#i-streak"/></svg>السلسلة اليومية<b>1</b><small>يوم</small></div>
+      <div class="wk"><span class="d"><u></u>ح</span><span class="d"><u></u>ن</span><span class="d"><u></u>ث</span><span class="d now"><u></u>ر</span><span class="d"><u></u>خ</span><span class="d"><u></u>ج</span><span class="d"><u></u>س</span></div>
+    </div>
+    <div class="demo-line">عرض تجريبي · بيانات تجريبية</div>
+  </aside>
+
+  <main class="hmain">
+    <header class="hhead">
+      <div><h1>مساء الخير، خالد</h1><p>بقيت مرحلتان بينك وبين القمة: 22 ساعة تعلّم.</p></div>
+      <div class="uchip">
+        <div><svg class="ic "><use href="#i-leaders"/></svg><span><span class="k">ترتيبك</span><br><span class="v num">18</span></span></div>
+        <div><span><span class="k">نقاط الخبرة</span><br><span class="spot" style="font-size:15px"><svg viewBox="0 0 13 12"><use href="#peak"/></svg>180 / 350 XP</span></span>
+          <span class="xpbar" style="width:84px"><span class="bar" style="height:9px"><span class="seg"><i style="width:75%"></i></span><span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></span></span></div>
+        <div><span style="text-align:start"><span class="v">خالد</span><br><span class="k">المستوى 2 · مستكشف</span></span>
+          <span class="av s48" style="--s:50px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-k"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="12 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">2</b></span></div>
+      </div>
+    </header>
+
+    <div class="hbody">
+      
+    <div class="map" id="map-d" style="--ox:476.7px" data-fx="560" data-fy="430" data-pitch="54" data-scale="1.9" data-keep="1.05" data-current="7">
+      <div class="cam">
+        <div class="plane">
+          <svg class="terrain" width="1392" height="1688" viewBox="-300 -640 1392 1688" style="left:-300px;top:-640px" aria-hidden="true"><path class="hair" d="M3505.6 -212C3691.1 599.8 3002.1 1516.6 1620.1 2022.2C238 2527.9 -1288.3 2402.2 -2006.8 1617.4C-2570.3 986.9 -2150.2 -58.3 -1114.7 -769.5C-70.9 -1444.7 1385.3 -1625.6 2342.4 -1369.8C3051.1 -1152.2 3381.9 -753.2 3505.6 -212Z"/><path class="hair" d="M3130.3 55.5C3222.4 748.6 2554.1 1464.4 1324.1 1784.7C94.2 2105 -1207.5 1886.3 -1760.1 1176.1C-2192.1 606.6 -1744.3 -236.6 -795.2 -754.7C158.1 -1241.9 1424.9 -1285 2226.4 -999.8C2817.5 -764.9 3068.8 -406.5 3130.3 55.5Z"/><path class="hair" d="M2432.8 217.3C2474.9 808.1 1964.3 1372.4 1060.1 1568.9C155.9 1765.4 -781.1 1502.4 -1156.9 869.5C-1450.1 362.6 -1095 -322.6 -387.6 -703C321.7 -1057.1 1242.7 -1017.3 1814.3 -728.2C2235 -494.3 2404.6 -176.5 2432.8 217.3Z"/><path class="hair" d="M2377.6 24C2459.4 525.7 1995 1059.3 1117.8 1316.8C240.7 1574.3 -700 1441.6 -1113.3 936.7C-1436.7 531.7 -1133.7 -90 -462.9 -485.6C211.5 -858.8 1121.4 -915.7 1704 -724.6C2134.3 -565.9 2323 -310.5 2377.6 24Z"/><path class="hair" d="M1873.1 -24C1976.3 403.4 1677.5 877.5 1049.7 1129.5C421.9 1381.5 -286.1 1301.1 -634.9 882.8C-908.8 546.9 -737.1 2.9 -273.8 -360.1C194 -704.2 863.1 -785.3 1310.8 -642.1C1642.9 -521.2 1804.3 -308.9 1873.1 -24Z"/><path class="hair" d="M1900.9 228.4C1912.3 610.7 1519.9 962.4 851.4 1067.4C183 1172.3 -494.3 980 -748.5 562.5C-946.5 228.4 -664 -205.1 -133.5 -433.5C397.4 -644.9 1070.4 -596.9 1479.3 -396.6C1779.6 -235.5 1893.3 -26.4 1900.9 228.4Z"/><path class="hair" d="M1700.5 -41.3C1783.4 284.9 1511.5 662.7 954 881.4C396.6 1100.1 -225.3 1065.1 -524.6 755.3C-759.5 506.2 -598.2 79.4 -183.5 -218.8C234.8 -502.6 825.4 -590.8 1216.9 -497.3C1507.1 -416.7 1645.3 -258.8 1700.5 -41.3Z"/><path class="hair" d="M1478.2 176.7C1497.3 474.5 1232.9 757.3 768.2 853.5C303.5 949.7 -176.1 814.3 -366.1 494.2C-514.3 237.8 -329.2 -106.3 35.4 -295.8C400.8 -472 873.1 -449.1 1165 -301.7C1379.8 -182.5 1465.5 -21.9 1478.2 176.7Z"/><path class="hair" d="M1348.4 147.4C1373.8 414.1 1152 674.5 750.3 772.7C348.5 870.8 -73 761.6 -248 479.3C-384.7 253.1 -233.8 -60.3 78 -239.6C390.9 -407.1 802.9 -398.6 1061.5 -273.8C1252 -172.3 1331.4 -30.4 1348.4 147.4Z"/><path class="cliff" d="M1288.3 24.3C1347 258.2 1170.9 523.4 803.6 670.8C436.3 818.2 23.4 783.7 -178.7 558.1C-337.4 376.9 -235.3 74.9 36.4 -131.4C310.7 -327.3 701.5 -381.1 962.3 -308.4C1155.7 -246.4 1249.2 -131.7 1288.3 24.3Z" transform="translate(0 3.5)"/><path class="band" d="M1288.3 24.3C1347 258.2 1170.9 523.4 803.6 670.8C436.3 818.2 23.4 783.7 -178.7 558.1C-337.4 376.9 -235.3 74.9 36.4 -131.4C310.7 -327.3 701.5 -381.1 962.3 -308.4C1155.7 -246.4 1249.2 -131.7 1288.3 24.3Z" fill="#EEE7DD"/><path class="hair" d="M1276 46.4C1323.2 265.3 1139.5 508.5 773.9 638.3C408.2 768 5.9 727.5 -182 513.5C-329.2 341.6 -216.2 62.7 58.5 -123.8C335.3 -300.5 719.8 -342.7 971.7 -269.8C1158.1 -208.2 1244.5 -99.5 1276 46.4Z"/><path class="hair" d="M1256 129.9C1276.2 335.5 1073.3 540 709.7 621.8C346.2 703.6 -33.1 625.5 -188 409.9C-309 237.2 -169.5 -7.2 113.8 -150.3C397.9 -284.3 769.5 -283.9 1001.6 -191.3C1172.5 -115.7 1242.6 -7.3 1256 129.9Z"/><path class="hair" d="M1179.5 171.3C1185.6 355.4 991.8 525.7 660.9 577.8C330 629.8 -5.7 538.7 -132.2 338.1C-230.7 177.6 -91.4 -31.8 171 -143C433.7 -246 767 -224.4 969.8 -128.8C1118.7 -51.9 1175.3 48.6 1179.5 171.3Z"/><path class="cliff" d="M1061.6 98.6C1086.6 258.4 943.4 426.4 673.1 505.1C402.9 583.8 113.1 538.3 -14 376.3C-113.5 246.4 -19.9 49.9 186.8 -73.5C394.7 -189.7 674.9 -204.5 854.3 -141.7C986.8 -89.7 1044.9 -7.9 1061.6 98.6Z" transform="translate(0 3.5)"/><path class="band" d="M1061.6 98.6C1086.6 258.4 943.4 426.4 673.1 505.1C402.9 583.8 113.1 538.3 -14 376.3C-113.5 246.4 -19.9 49.9 186.8 -73.5C394.7 -189.7 674.9 -204.5 854.3 -141.7C986.8 -89.7 1044.9 -7.9 1061.6 98.6Z" fill="#F2EDE4"/><path class="cliff" d="M938.8 66C973.2 201 873.6 354.1 664.3 439.4C455.1 524.7 219 505 102.7 374.9C11.4 270.5 68.6 96.2 223.1 -23C379 -136.2 602 -167.5 751.3 -125.7C862 -90.1 915.8 -23.9 938.8 66Z" transform="translate(0 3.5)"/><path class="band" d="M938.8 66C973.2 201 873.6 354.1 664.3 439.4C455.1 524.7 219 505 102.7 374.9C11.4 270.5 68.6 96.2 223.1 -23C379 -136.2 602 -167.5 751.3 -125.7C862 -90.1 915.8 -23.9 938.8 66Z" fill="#F6F2EB"/><path class="hair" d="M853 114.5C870.5 229.9 780.2 348.7 607.6 401.2C435 453.7 248.7 416.3 165.7 297.7C100.7 202.6 158.8 62.5 290.3 -23.2C422.5 -103.6 602.2 -109.9 717.8 -61.9C803.3 -22.4 841.3 37.5 853 114.5Z"/><path class="hair" d="M806 145.5C811.5 246.8 723.5 341.8 570 372.7C416.5 403.6 258.8 355.8 197 246.3C148.7 158.6 210.7 42.4 331.4 -20.6C452.4 -79 608.1 -69.4 704 -18.2C774.5 23.1 802.3 78 806 145.5Z"/><path class="cliff" d="M763.5 147.1C766.5 233 688.1 312.3 553.5 336.1C419 359.9 282.1 316.9 230.1 223.1C189.6 148 245.7 50.4 352.2 -1.2C458.9 -48.9 594.6 -38.3 677.4 6.6C738.2 42.7 761.5 89.7 763.5 147.1Z" transform="translate(0 3.5)"/><path class="band" d="M763.5 147.1C766.5 233 688.1 312.3 553.5 336.1C419 359.9 282.1 316.9 230.1 223.1C189.6 148 245.7 50.4 352.2 -1.2C458.9 -48.9 594.6 -38.3 677.4 6.6C738.2 42.7 761.5 89.7 763.5 147.1Z" fill="#FAF6F1"/><path class="hair" d="M708 117.8C717.3 183.4 659.8 251 552.3 281.2C444.7 311.3 329.9 290.5 280.1 223.3C241.1 169.4 278.9 89.7 361.5 40.8C444.4 -5.2 555.7 -9.1 626.7 17.9C679 40.2 701.8 74.1 708 117.8Z"/><path class="cliff" d="M643.6 101.6C654.9 146.7 617.1 198.6 540 228.6C462.8 258.5 376.9 253.5 335.7 210.6C303.4 176.2 325.9 117.4 383.4 76.4C441.3 37.5 523 25.5 577 38.6C617.1 49.8 636.1 71.6 643.6 101.6Z" transform="translate(0 3.5)"/><path class="band" d="M643.6 101.6C654.9 146.7 617.1 198.6 540 228.6C462.8 258.5 376.9 253.5 335.7 210.6C303.4 176.2 325.9 117.4 383.4 76.4C441.3 37.5 523 25.5 577 38.6C617.1 49.8 636.1 71.6 643.6 101.6Z" fill="#FDFAF5"/><path class="hair" d="M589.5 111.1C596.2 141.2 569.7 175.2 516.9 194.1C464.1 213.1 406 208.6 378.9 179.7C357.7 156.4 374 117.6 413.7 91.1C453.7 66 509.2 59.1 545.6 68.4C572.5 76.4 585 91.1 589.5 111.1Z"/><path class="cliff" d="M531.6 123.1C533.4 138.2 518.8 153.5 492.1 160.2C465.4 166.9 437.3 161.8 425.5 146.3C416.3 133.8 426.1 115.6 446.8 104.6C467.5 94.3 495 93.6 512.2 100C525 105.2 530.3 113.1 531.6 123.1Z" transform="translate(0 3.5)"/><path class="band" d="M531.6 123.1C533.4 138.2 518.8 153.5 492.1 160.2C465.4 166.9 437.3 161.8 425.5 146.3C416.3 133.8 426.1 115.6 446.8 104.6C467.5 94.3 495 93.6 512.2 100C525 105.2 530.3 113.1 531.6 123.1Z" fill="#FFFDF9"/><path class="hair" d="M499.7 124.9C500.2 131.7 493.3 138.3 481.3 140.6C469.4 143 457 140 452.1 132.7C448.3 126.9 453.1 119 462.5 114.5C472 110.4 484.2 110.8 491.7 114.1C497.2 116.7 499.4 120.4 499.7 124.9Z"/><path class="svy" d="M66.3 230.4h10M71.3 225.4v10M66.3 476.2h10M71.3 471.2v10M723.6 230.4h10M728.6 225.4v10M723.6 384h10M728.6 379v10"/><g class="alt" transform="translate(493 549.5)"><rect x="0" y="-10" width="38" height="20" rx="6"/><text x="19" y="4.5">30%</text></g><g class="alt" transform="translate(481.2 490.7)"><rect x="0" y="-10" width="38" height="20" rx="6"/><text x="19" y="4.5">50%</text></g><g class="alt" transform="translate(481.4 247.4)"><rect x="0" y="-10" width="38" height="20" rx="6"/><text x="19" y="4.5">90%</text></g></svg>
+      <svg class="trail" width="792" height="768" viewBox="0 0 792 768" aria-hidden="true">
+        <defs>
+          <mask id="map-d-mleg" maskUnits="userSpaceOnUse" x="0" y="0" width="792" height="768"><path d="M439.2 349.4L439.8 346.5L440.4 343.6L441.1 340.7L441.8 337.9L442.5 335L443.3 332.1L444.1 329.2L444.9 326.3L445.7 323.4L446.6 320.5L447.4 317.7L448.2 314.8L449.1 311.9L450 309L450.8 306.1L451.7 303.2L452.5 300.4L453.3 297.5L454.2 294.6L455 291.7" pathLength="1" class="draw" style="--d:2s;--t:0.28s" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round"/></mask>
+          <mask id="map-d-mahd" maskUnits="userSpaceOnUse" x="0" y="0" width="792" height="768"><path d="M455 291.7L455.8 288.7L456.6 285.7L457.3 282.7L458.1 279.7L458.8 276.7L459.5 273.7L460.1 270.7L460.8 267.7L461.4 264.7L461.9 261.8L462.5 258.8L462.9 255.8L463.4 252.8L463.8 249.8L464.2 246.8L464.6 243.8L464.9 240.8L465.3 237.8L465.5 234.8L465.8 231.8L466 228.8L466.2 225.8L466.4 222.8L466.6 219.8L466.7 216.8L466.8 213.8L467 210.8L467.1 207.9L467.2 204.9L467.3 201.9L467.4 198.9L467.5 195.9L467.6 192.9L467.7 189.9L467.8 186.9L467.9 183.9L468 180.9L468.1 177.9L468.3 174.9L468.4 171.9L468.6 168.9L468.8 165.9L469.1 162.9L469.3 159.9L469.6 156.9L469.9 153.9L470.2 151L470.5 148L470.9 145L471.3 142L471.7 139L472.1 136L472.5 133L473 130L473.5 127L474 124" pathLength="1" class="draw" style="--d:2.4s;--t:0.55s" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round"/></mask>
+        </defs>
+        <g class="brn fade" style="--d:3.15s"><path d="M474 124Q368 93 262 62"/><path d="M474 124Q595 97 716 78"/></g>
+        <!-- ground shadows: every coin stands on the sheet -->
+        <g class="gshadow"><ellipse class="fade" style="--d:0.6s" cx="477.4" cy="715.9" rx="14.8" ry="5"/><ellipse class="fade" style="--d:0.7s" cx="474.4" cy="657.1" rx="14.8" ry="5"/><ellipse class="fade" style="--d:0.8s" cx="476.3" cy="598.2" rx="14.8" ry="5"/><ellipse class="fade" style="--d:0.9s" cx="472.2" cy="539.3" rx="14.8" ry="5"/><ellipse class="fade" style="--d:1s" cx="453.5" cy="480.5" rx="14.8" ry="5"/><ellipse class="fade" style="--d:1.2s" cx="436.8" cy="421.6" rx="14.8" ry="5"/><ellipse class="fade" style="--d:2.1s" cx="454.9" cy="319.7" rx="20" ry="5"/><ellipse class="fade" style="--d:2.7s" cx="467.2" cy="225.5" rx="15.5" ry="5"/><ellipse class="fade" style="--d:2.92s" cx="474" cy="140" rx="11.1" ry="4"/></g>
+        <!-- the road: an edged white bed from the trailhead to the summit, drawn in the three legs of the story -->
+        <g class="bed" stroke-width="14"><path d="M476.7 742L477 739L477.3 736L477.5 733L477.7 730L477.8 727L478 724L478 721L478.1 718L478.1 715L478 712L478 709L477.9 706L477.8 703L477.6 700L477.5 697L477.3 694L477.1 691.1L477 688.1L476.8 685.1L476.6 682.1L476.4 679.1L476.2 676.1L476 673.1L475.8 670.1L475.6 667.1L475.4 664.1L475.2 661.1L475.1 658.1L474.9 655.1L474.8 652.1L474.7 649.1L474.6 646.1L474.5 643.1L474.5 640.1L474.4 637.1L474.4 634.1L474.4 631.1L474.4 628.1L474.5 625.1L474.5 622.1L474.6 619.1L474.7 616.1L474.8 613.1L474.9 610.1L475 607.1L475.1 604.1L475.3 601.1L475.4 598.1L475.6 595.1L475.7 592.2L475.8 589.2L476 586.2L476.1 583.2L476.2 580.2L476.3 577.2L476.4 574.2L476.5 571.2L476.5 568.2L476.5 565.2L476.5 562.2L476.5 559.2L476.4 556.2L476.3 553.2L476.2 550.2L476 547.2L475.8 544.2L475.6 541.2L475.3 538.2L474.9 535.2L474.5 532.2L474.1 529.2L473.7 526.2L473.1 523.2L472.6 520.2L472 517.2L471.3 514.2L470.6 511.2L469.9 508.2L469.1 505.2L468.3 502.2L467.4 499.2L466.5 496.3L465.6 493.3L464.6 490.3L463.6 487.3L462.6 484.3L461.6 481.3L460.5 478.3L459.4 475.3L458.3 472.3L457.2 469.3L456.1 466.3L455 463.3L453.8 460.3L452.7 457.3L451.6 454.3L450.5 451.3L449.4 448.3L448.3 445.3L447.3 442.3L446.2 439.3L445.2 436.3L444.3 433.3L443.4 430.3L442.5 427.3L441.6 424.3L440.8 421.3L440.1 418.3L439.4 415.3L438.7 412.3L438.2 409.3L437.6 406.3L437.2 403.3L436.7 400.3L436.4 397.4L436.1 394.4L435.9 391.4L435.7 388.4L435.6 385.4L435.6 382.4L435.6 379.4L435.7 376.4L435.9 373.4L436.1 370.4L436.4 367.4L436.7 364.4L437.1 361.4L437.5 358.4L438 355.4L438.6 352.4L439.2 349.4" pathLength="1" class="draw" style="--d:0.4s;--t:1.3s;--e:cubic-bezier(0.4,0,0.3,1)"/><path d="M439.2 349.4L439.8 346.5L440.4 343.6L441.1 340.7L441.8 337.9L442.5 335L443.3 332.1L444.1 329.2L444.9 326.3L445.7 323.4L446.6 320.5L447.4 317.7L448.2 314.8L449.1 311.9L450 309L450.8 306.1L451.7 303.2L452.5 300.4L453.3 297.5L454.2 294.6L455 291.7" pathLength="1" class="draw" style="--d:2s;--t:0.28s"/><path d="M455 291.7L455.8 288.7L456.6 285.7L457.3 282.7L458.1 279.7L458.8 276.7L459.5 273.7L460.1 270.7L460.8 267.7L461.4 264.7L461.9 261.8L462.5 258.8L462.9 255.8L463.4 252.8L463.8 249.8L464.2 246.8L464.6 243.8L464.9 240.8L465.3 237.8L465.5 234.8L465.8 231.8L466 228.8L466.2 225.8L466.4 222.8L466.6 219.8L466.7 216.8L466.8 213.8L467 210.8L467.1 207.9L467.2 204.9L467.3 201.9L467.4 198.9L467.5 195.9L467.6 192.9L467.7 189.9L467.8 186.9L467.9 183.9L468 180.9L468.1 177.9L468.3 174.9L468.4 171.9L468.6 168.9L468.8 165.9L469.1 162.9L469.3 159.9L469.6 156.9L469.9 153.9L470.2 151L470.5 148L470.9 145L471.3 142L471.7 139L472.1 136L472.5 133L473 130L473.5 127L474 124" pathLength="1" class="draw" style="--d:2.4s;--t:0.55s"/></g>
+        <g class="bed in" stroke-width="11"><path d="M476.7 742L477 739L477.3 736L477.5 733L477.7 730L477.8 727L478 724L478 721L478.1 718L478.1 715L478 712L478 709L477.9 706L477.8 703L477.6 700L477.5 697L477.3 694L477.1 691.1L477 688.1L476.8 685.1L476.6 682.1L476.4 679.1L476.2 676.1L476 673.1L475.8 670.1L475.6 667.1L475.4 664.1L475.2 661.1L475.1 658.1L474.9 655.1L474.8 652.1L474.7 649.1L474.6 646.1L474.5 643.1L474.5 640.1L474.4 637.1L474.4 634.1L474.4 631.1L474.4 628.1L474.5 625.1L474.5 622.1L474.6 619.1L474.7 616.1L474.8 613.1L474.9 610.1L475 607.1L475.1 604.1L475.3 601.1L475.4 598.1L475.6 595.1L475.7 592.2L475.8 589.2L476 586.2L476.1 583.2L476.2 580.2L476.3 577.2L476.4 574.2L476.5 571.2L476.5 568.2L476.5 565.2L476.5 562.2L476.5 559.2L476.4 556.2L476.3 553.2L476.2 550.2L476 547.2L475.8 544.2L475.6 541.2L475.3 538.2L474.9 535.2L474.5 532.2L474.1 529.2L473.7 526.2L473.1 523.2L472.6 520.2L472 517.2L471.3 514.2L470.6 511.2L469.9 508.2L469.1 505.2L468.3 502.2L467.4 499.2L466.5 496.3L465.6 493.3L464.6 490.3L463.6 487.3L462.6 484.3L461.6 481.3L460.5 478.3L459.4 475.3L458.3 472.3L457.2 469.3L456.1 466.3L455 463.3L453.8 460.3L452.7 457.3L451.6 454.3L450.5 451.3L449.4 448.3L448.3 445.3L447.3 442.3L446.2 439.3L445.2 436.3L444.3 433.3L443.4 430.3L442.5 427.3L441.6 424.3L440.8 421.3L440.1 418.3L439.4 415.3L438.7 412.3L438.2 409.3L437.6 406.3L437.2 403.3L436.7 400.3L436.4 397.4L436.1 394.4L435.9 391.4L435.7 388.4L435.6 385.4L435.6 382.4L435.6 379.4L435.7 376.4L435.9 373.4L436.1 370.4L436.4 367.4L436.7 364.4L437.1 361.4L437.5 358.4L438 355.4L438.6 352.4L439.2 349.4" pathLength="1" class="draw" style="--d:0.4s;--t:1.3s;--e:cubic-bezier(0.4,0,0.3,1)"/><path d="M439.2 349.4L439.8 346.5L440.4 343.6L441.1 340.7L441.8 337.9L442.5 335L443.3 332.1L444.1 329.2L444.9 326.3L445.7 323.4L446.6 320.5L447.4 317.7L448.2 314.8L449.1 311.9L450 309L450.8 306.1L451.7 303.2L452.5 300.4L453.3 297.5L454.2 294.6L455 291.7" pathLength="1" class="draw" style="--d:2s;--t:0.28s"/><path d="M455 291.7L455.8 288.7L456.6 285.7L457.3 282.7L458.1 279.7L458.8 276.7L459.5 273.7L460.1 270.7L460.8 267.7L461.4 264.7L461.9 261.8L462.5 258.8L462.9 255.8L463.4 252.8L463.8 249.8L464.2 246.8L464.6 243.8L464.9 240.8L465.3 237.8L465.5 234.8L465.8 231.8L466 228.8L466.2 225.8L466.4 222.8L466.6 219.8L466.7 216.8L466.8 213.8L467 210.8L467.1 207.9L467.2 204.9L467.3 201.9L467.4 198.9L467.5 195.9L467.6 192.9L467.7 189.9L467.8 186.9L467.9 183.9L468 180.9L468.1 177.9L468.3 174.9L468.4 171.9L468.6 168.9L468.8 165.9L469.1 162.9L469.3 159.9L469.6 156.9L469.9 153.9L470.2 151L470.5 148L470.9 145L471.3 142L471.7 139L472.1 136L472.5 133L473 130L473.5 127L474 124" pathLength="1" class="draw" style="--d:2.4s;--t:0.55s"/></g>
+        <!-- the way ahead: dots that drift slowly toward the summit (the little living move) -->
+        <g mask="url(#map-d-mahd)"><path class="ahd dots" d="M455 291.7L455.8 288.7L456.6 285.7L457.3 282.7L458.1 279.7L458.8 276.7L459.5 273.7L460.1 270.7L460.8 267.7L461.4 264.7L461.9 261.8L462.5 258.8L462.9 255.8L463.4 252.8L463.8 249.8L464.2 246.8L464.6 243.8L464.9 240.8L465.3 237.8L465.5 234.8L465.8 231.8L466 228.8L466.2 225.8L466.4 222.8L466.6 219.8L466.7 216.8L466.8 213.8L467 210.8L467.1 207.9L467.2 204.9L467.3 201.9L467.4 198.9L467.5 195.9L467.6 192.9L467.7 189.9L467.8 186.9L467.9 183.9L468 180.9L468.1 177.9L468.3 174.9L468.4 171.9L468.6 168.9L468.8 165.9L469.1 162.9L469.3 159.9L469.6 156.9L469.9 153.9L470.2 151L470.5 148L470.9 145L471.3 142L471.7 139L472.1 136L472.5 133L473 130L473.5 127L474 124" stroke-width="4" stroke-dasharray=".1 11" style="--p:-11.1"/></g>
+        <g mask="url(#map-d-mleg)"><path class="leg dots" d="M439.2 349.4L439.8 346.5L440.4 343.6L441.1 340.7L441.8 337.9L442.5 335L443.3 332.1L444.1 329.2L444.9 326.3L445.7 323.4L446.6 320.5L447.4 317.7L448.2 314.8L449.1 311.9L450 309L450.8 306.1L451.7 303.2L452.5 300.4L453.3 297.5L454.2 294.6L455 291.7" stroke-width="5" stroke-dasharray=".1 11" style="--p:-11.1"/></g>
+        <!-- the climbed part: solid ink -->
+        <path class="cov draw" d="M476.7 742L477 739L477.3 736L477.5 733L477.7 730L477.8 727L478 724L478 721L478.1 718L478.1 715L478 712L478 709L477.9 706L477.8 703L477.6 700L477.5 697L477.3 694L477.1 691.1L477 688.1L476.8 685.1L476.6 682.1L476.4 679.1L476.2 676.1L476 673.1L475.8 670.1L475.6 667.1L475.4 664.1L475.2 661.1L475.1 658.1L474.9 655.1L474.8 652.1L474.7 649.1L474.6 646.1L474.5 643.1L474.5 640.1L474.4 637.1L474.4 634.1L474.4 631.1L474.4 628.1L474.5 625.1L474.5 622.1L474.6 619.1L474.7 616.1L474.8 613.1L474.9 610.1L475 607.1L475.1 604.1L475.3 601.1L475.4 598.1L475.6 595.1L475.7 592.2L475.8 589.2L476 586.2L476.1 583.2L476.2 580.2L476.3 577.2L476.4 574.2L476.5 571.2L476.5 568.2L476.5 565.2L476.5 562.2L476.5 559.2L476.4 556.2L476.3 553.2L476.2 550.2L476 547.2L475.8 544.2L475.6 541.2L475.3 538.2L474.9 535.2L474.5 532.2L474.1 529.2L473.7 526.2L473.1 523.2L472.6 520.2L472 517.2L471.3 514.2L470.6 511.2L469.9 508.2L469.1 505.2L468.3 502.2L467.4 499.2L466.5 496.3L465.6 493.3L464.6 490.3L463.6 487.3L462.6 484.3L461.6 481.3L460.5 478.3L459.4 475.3L458.3 472.3L457.2 469.3L456.1 466.3L455 463.3L453.8 460.3L452.7 457.3L451.6 454.3L450.5 451.3L449.4 448.3L448.3 445.3L447.3 442.3L446.2 439.3L445.2 436.3L444.3 433.3L443.4 430.3L442.5 427.3L441.6 424.3L440.8 421.3L440.1 418.3L439.4 415.3L438.7 412.3L438.2 409.3L437.6 406.3L437.2 403.3L436.7 400.3L436.4 397.4L436.1 394.4L435.9 391.4L435.7 388.4L435.6 385.4L435.6 382.4L435.6 379.4L435.7 376.4L435.9 373.4L436.1 370.4L436.4 367.4L436.7 364.4L437.1 361.4L437.5 358.4L438 355.4L438.6 352.4L439.2 349.4" pathLength="1" stroke-width="7" style="--d:0.4s;--t:1.3s;--e:cubic-bezier(0.4,0,0.3,1)"/>
+        <!-- the focus ring and the lifted coin's shadow (placed by the script) -->
+        <ellipse class="fshadow" rx="20" ry="6"/>
+        <circle class="fring" r="30" pathLength="1"/>
+      </svg>
+        
+        <span class="bb st s-start" style="left:476.7px;top:742px;--r:9px;--d:0.30000000000000004s"><span class="coin"></span><i class="ld"></i><span class="lb"><b>البداية</b></span></span>
+        <a class="bb st s-done" data-station="1" data-x="477.4" data-y="694.9" data-r="20" style="left:477.4px;top:694.9px;--r:20px;--d:0.6s" role="button" tabindex="0"><span class="coin"><b>1</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>Excel<span class="stars "><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-done" data-station="2" data-x="474.4" data-y="636.1" data-r="20" style="left:474.4px;top:636.1px;--r:20px;--d:0.7s" role="button" tabindex="0"><span class="coin"><b>2</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>SQL<span class="stars "><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-done" data-station="3" data-x="476.3" data-y="577.2" data-r="20" style="left:476.3px;top:577.2px;--r:20px;--d:0.8s" role="button" tabindex="0"><span class="coin"><b>3</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>الإحصاء<span class="stars "><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-done" data-station="4" data-x="472.2" data-y="518.3" data-r="20" style="left:472.2px;top:518.3px;--r:20px;--d:0.9s" role="button" tabindex="0"><span class="coin"><b>4</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>التواصل الفعّال<span class="stars "><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-done" data-station="5" data-x="453.5" data-y="459.5" data-r="20" style="left:453.5px;top:459.5px;--r:20px;--d:1s" role="button" tabindex="0"><span class="coin"><b>5</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>Excel<span class="stars "><svg class="on"><use href="#i-star"/></svg><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-done" data-station="6" data-x="436.8" data-y="400.6" data-r="20" style="left:436.8px;top:400.6px;--r:20px;--d:1.2s" role="button" tabindex="0"><span class="coin"><b>6</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>SQL<span class="stars "><svg class="on"><use href="#i-star"/></svg><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-now" data-station="7" data-x="454.9" data-y="291.7" data-r="27" style="left:454.9px;top:291.7px;--r:27px;--d:2.1s" role="button" tabindex="0"><span class="coin"><b>7</b></span><i class="ld"></i><span class="lb card-lb"><span class="e">مرحلتك التالية</span><b>Power BI<span class="stars "><svg><use href="#i-star"/></svg></span></b><small><span><svg class="ic "><use href="#i-clock"/></svg>10 ساعات</span><span class="spot "><svg viewBox="0 0 13 12"><use href="#peak"/></svg>+200 XP</span><span>ترفع مطابقتك إلى <b><span class="ltr">90%</span></b></span></small></span></a>
+        <a class="bb st s-next" data-station="8" data-x="467.2" data-y="203.5" data-r="21" style="left:467.2px;top:203.5px;--r:21px;--d:2.7s" role="button" tabindex="0"><span class="coin"><b>8</b></span><i class="ld"></i><span class="lb"><b>الإحصاء<span class="stars "><svg class="on"><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span></b><small>لاحقاً<i class="sep"></i>12 ساعة<span class="spot "><svg viewBox="0 0 13 12"><use href="#peak"/></svg>+240 XP</span></small></span></a>
+        <a class="bb st s-sum" data-station="summit" data-x="474" data-y="124" data-r="15" style="left:474px;top:124px;--r:15px;--d:2.86s" role="button" tabindex="0"><span class="coin"><i></i></span><i class="ld"></i><span class="lb" style="--d:3.02s"><b>جاهز للوظيفة</b><small>القمة<i class="sep"></i>مطابقة <span class="ltr">100%</span></small></span></a>
+        <span class="bb flag" style="left:474px;top:124px;--r:0px"><svg width="46" height="74" viewBox="0 0 46 74" style="left:-43px;top:-74px"><path class="pole" style="--d:2.92s" d="M43 74V3"/><path class="pen" style="--d:3.09s" d="M41.5 4L4 18L41.5 32Z"/></svg></span>
+        <span class="bb you" style="left:439.2px;top:349.4px;--r:24px;--d:1.72s"><i class="wp"></i><span class="pill"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-k"/></svg></span><span class="tx"><b>أنت هنا</b><small>مطابقتك <i class="count" style="--n:70;--d:1.76s;--t:0.85s"></i></small></span></span></span>
+        <span class="bb peak" style="left:262px;top:56px;--r:8px;--d:3.35s"><svg width="24" height="22" viewBox="0 0 24 22"><path d="M12 2.500 22 19.500H2z"/></svg><span class="lb"><b>أخصائي تقارير وبيانات</b><small>الآن <span class="ltr">50%</span><i class="sep"></i>بعد المسار <span class="ltr">80%</span></small></span></span>
+        <span class="bb peak" style="left:716px;top:72px;--r:8px;--d:3.35s"><svg width="24" height="22" viewBox="0 0 24 22"><path d="M12 2.500 22 19.500H2z"/></svg><span class="lb"><b>محلل ذكاء الأعمال</b><small>الآن <span class="ltr">43%</span><i class="sep"></i>بعد المسار <span class="ltr">60%</span></small></span></span>
+        </div>
+      </div>
+      <div class="sign"><div class="e">مسارك نحو</div><h2>محلل بيانات</h2><div class="pg"><span><b>6</b> من <b>8</b> مراحل</span><span class="dots"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="n"></i><i class=""></i></span></div></div><span class="seg2"><b>خريطة</b><span>قائمة</span></span>
+      <button class="map-back" type="button"><svg class="ic "><use href="#i-back"/></svg>رجوع للخريطة</button>
+    </div>
+
+      <aside class="hside">
+        <div class="card ink nextc">
+          <div class="top"><span>خطوتك التالية</span><span>المرحلة 7 من 8</span></div>
+          <h3>Power BI<span class="stars lg"><svg><use href="#i-star"/></svg></span></h3>
+          <p>دورة «أساسيات Power BI»</p>
+          <div class="meta"><span><svg class="ic "><use href="#i-clock"/></svg>10 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>5 دروس</span><span class="spot "><svg viewBox="0 0 13 12"><use href="#peak"/></svg>+200 XP</span></div>
+          <div class="gain">
+            <div><span class="k">مهارة Power BI</span><span class="v"><span class="stars gn"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><i>من 0 إلى 1</i></span></div>
+            <div><span class="k">مطابقتك بعدها</span><span class="v num"><span class="ltr">90%</span><i class="ltr">+20</i></span></div>
+          </div>
+          <a class="btn btn-p">ابدأ الدورة<svg class="ic "><use href="#i-arrow"/></svg></a>
+        </div>
+
+        <div class="card matchc">
+          <div class="ring" style="--s:88px"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><path class="prg draw" pathLength="1" style="--d:1.76s;--t:.85s;--e:cubic-bezier(.2,.7,.2,1)" d="M60 10A50 50 0 1 0 107.55 75.45"/><circle class="end fade" style="--d:2.5s" cx="107.55" cy="75.45" r="7.500"/></svg><b><i class="count" style="--n:70;--d:1.76s;--t:.85s"></i></b></div>
+          <div><h4>مطابقتك مع محلل بيانات</h4><p>مهارتان تفصلانك عن القمة</p>
+            <div class="skills"><span class="chip chip-s miss">Power BI</span><span class="chip chip-s miss">الإحصاء<span class="stars xs"><svg class="on"><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span></span></div></div>
+        </div>
+
+        <div class="card rankc">
+          <div class="hd">المتصدرون هذا الأسبوع<a>الكل</a></div>
+          <div class="lbr"><span class="rk">1</span><span class="av plain" style="--s:28px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-5"/></svg></span></span><span class="nm">فيصل ق.</span><span class="spot"><svg viewBox="0 0 13 12"><use href="#peak"/></svg>980</span></div>
+          <div class="lbr"><span class="rk">2</span><span class="av plain" style="--s:28px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-6"/></svg></span></span><span class="nm">سلطان م.</span><span class="spot"><svg viewBox="0 0 13 12"><use href="#peak"/></svg>910</span></div>
+          <div class="lbr"><span class="rk">3</span><span class="av plain" style="--s:28px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-7"/></svg></span></span><span class="nm">مشعل ر.</span><span class="spot"><svg viewBox="0 0 13 12"><use href="#peak"/></svg>860</span></div>
+          <div class="gap"><i></i></div>
+          <div class="lbr me"><span class="rk">18</span><span class="av plain" style="--s:32px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-k"/></svg></span></span><span class="nm">خالد<small>أنت</small></span><span class="spot"><svg viewBox="0 0 13 12"><use href="#peak"/></svg>180</span></div>
+          <div class="hint"><span>يفصلك <b class="ltr">10 XP</b> عن المركز 17</span><span class="tag">مستخدمون تجريبيون</span></div>
+        </div>
+
+        <div class="launch"><span class="dal"><svg class="ic "><use href="#i-advisor"/></svg></span>اسأل دليل عن مسارك…<kbd>Ctrl K</kbd></div>
+      </aside>
+    </div>
+  </main>
+  <div class="flayer" data-map="map-d">
+    <i class="fleader"></i>
+    <article class="fcard c-done" data-for="1"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 1 من 8<i class="sep"></i><b>مكتملة</b></div><h3>Excel<span class="stars lg"><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 1 من 3 في Excel</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«تنظيف بيانات المبيعات الأسبوعية وتلخيصها في Excel باستخدام الجداول المحورية.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>Excel من الصفر</b><span>الجداول والمعادلات</span><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>8 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>4 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar done"><i class="pv" style="width:0%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">0%</span></span><span>بعدها <b><span class="ltr">10%</span></b></span></div></div></article>
+<article class="fcard c-done" data-for="2"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 2 من 8<i class="sep"></i><b>مكتملة</b></div><h3>SQL<span class="stars lg"><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 1 من 3 في SQL</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«كتابة استعلامات SQL لاستخراج أرقام الفروع من قاعدة بيانات المبيعات.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>أساسيات SQL</b><span>الاستعلام عن البيانات</span><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>8 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>4 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar done"><i class="pv" style="width:10%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">10%</span></span><span>بعدها <b><span class="ltr">20%</span></b></span></div></div></article>
+<article class="fcard c-done" data-for="3"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 3 من 8<i class="sep"></i><b>مكتملة</b></div><h3>الإحصاء<span class="stars lg"><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 1 من 2 في الإحصاء</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«من المقررات: مبادئ الإحصاء، أساسيات البرمجة بلغة Python.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>مبادئ الإحصاء الوصفي</b><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>8 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>4 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar done"><i class="pv" style="width:20%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">20%</span></span><span>بعدها <b><span class="ltr">30%</span></b></span></div></div></article>
+<article class="fcard c-done" data-for="4"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 4 من 8<i class="sep"></i><b>مكتملة</b></div><h3>التواصل الفعّال<span class="stars lg"><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 1 من 2 في التواصل الفعّال</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«التواصل، العمل الجماعي، العرض والتقديم.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>التواصل الفعّال في بيئة العمل</b><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>6 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>3 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+20%</span></b></div><div class="mbar done"><i class="pv" style="width:30%"></i><i class="th" style="width:20%"></i></div><div class="row sub"><span>قبلها <span class="ltr">30%</span></span><span>بعدها <b><span class="ltr">50%</span></b></span></div></div></article>
+<article class="fcard c-done" data-for="5"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 5 من 8<i class="sep"></i><b>مكتملة</b></div><h3>Excel<span class="stars lg"><svg class="on"><use href="#i-star"/></svg><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 2 من 3 في Excel</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«تنظيف بيانات المبيعات الأسبوعية وتلخيصها في Excel باستخدام الجداول المحورية.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>Excel للتحليل</b><span>الجداول المحورية والدوال</span><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>10 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>5 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar done"><i class="pv" style="width:50%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">50%</span></span><span>بعدها <b><span class="ltr">60%</span></b></span></div></div></article>
+<article class="fcard c-done" data-for="6"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 6 من 8<i class="sep"></i><b>مكتملة</b></div><h3>SQL<span class="stars lg"><svg class="on"><use href="#i-star"/></svg><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 2 من 3 في SQL</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«كتابة استعلامات SQL لاستخراج أرقام الفروع من قاعدة بيانات المبيعات.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>SQL للتحليل</b><span>الربط والتجميع</span><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>12 ساعة</span><span><svg class="ic "><use href="#i-lessons"/></svg>5 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar done"><i class="pv" style="width:60%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">60%</span></span><span>بعدها <b><span class="ltr">70%</span></b></span></div></div></article>
+<article class="fcard c-now" data-for="7"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 7 من 8<i class="sep"></i><b>الآن</b></div><h3>Power BI<span class="stars lg"><svg><use href="#i-star"/></svg></span></h3><p>ترفع مهارتك إلى النجمة 1 من 3 في Power BI</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk fi"><small>الدورة</small><b>أساسيات Power BI</b><span>من البيانات إلى لوحة المعلومات</span><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>10 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>5 دروس</span><span class="spot "><svg viewBox="0 0 13 12"><use href="#peak"/></svg>+200 XP</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+20%</span></b></div><div class="mbar now"><i class="pv" style="width:70%"></i><i class="th" style="width:20%"></i></div><div class="row sub"><span>الآن <span class="ltr">70%</span></span><span>بعدها <b><span class="ltr">90%</span></b></span></div></div><div class="blk fi"><div class="row"><small>تقدّمك</small><b>لم تبدأ بعد<i class="sep"></i>0 من 5 دروس</b></div><div class="les"><i></i><i></i><i></i><i></i><i></i></div></div><a class="btn btn-p fi">ابدأ الدورة<svg class="ic "><use href="#i-arrow"/></svg></a></article>
+<article class="fcard c-next" data-for="8"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 8 من 8<i class="sep"></i><b>لاحقاً</b></div><h3>الإحصاء<span class="stars lg"><svg class="on"><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span></h3><p>ترفع مهارتك إلى النجمة 2 من 2 في الإحصاء</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk fi"><small>الدورة</small><b>الإحصاء التطبيقي للمحللين</b><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>12 ساعة</span><span><svg class="ic "><use href="#i-lessons"/></svg>5 دروس</span><span class="spot "><svg viewBox="0 0 13 12"><use href="#peak"/></svg>+240 XP</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar next"><i class="pv" style="width:90%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">90%</span></span><span>بعدها <b><span class="ltr">100%</span></b></span></div></div><div class="blk fi"><div class="row"><small>تقدّمك</small><b>لم تبدأ بعد</b></div><div class="les"><i></i><i></i><i></i><i></i><i></i></div><p class="note">متاحة لك من الآن: تحمل النجمة 1 في الإحصاء.</p></div><a class="btn btn-s fi">افتح الدورة<svg class="ic "><use href="#i-arrow"/></svg></a></article>
+<article class="fcard c-sum" data-for="summit"><header class="fi"><div class="eye"><i class="dot"></i>القمة<i class="sep"></i><b>نهاية المسار</b></div><h3>جاهز للوظيفة</h3><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header>
+    <div class="blk fi"><small>هدفك</small><b>محلل بيانات</b><span>وادي الغيم للبيانات<i class="sep"></i>الرياض</span><span class="tag">جهة تجريبية</span></div>
+    <div class="blk fi"><div class="row"><small>مطابقتك</small><b><span class="ltr">70%</span> من <span class="ltr">100%</span></b></div><div class="mbar next"><i class="pv" style="width:70%"></i><i class="th" style="width:30%"></i></div><div class="row sub"><span>الآن <span class="ltr">70%</span></span><span>عند القمة <b><span class="ltr">100%</span></b></span></div></div>
+    <div class="blk fi"><div class="row"><small>تقدّمك</small><b>6 من 8 مراحل<i class="sep"></i>بقي 22 ساعة</b></div><div class="les sm8"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class=""></i><i class=""></i></div></div>
+    <a class="btn btn-s fi">عرض الوظيفة<svg class="ic "><use href="#i-arrow"/></svg></a></article>
+  </div>
+</div>
+
+<div class="cap" style="width:390px"><b>Phone</b><i>390 × 844 · the station card is a bottom sheet</i></div>
+<div id="phone-frame">
+  <div class="p-top">
+    <span class="lock-h word" style="font-size:22px;gap:6px"><svg class="mark" width="26" height="26"><use href="#mark"/></svg><span>دليلك</span></span>
+    <div class="p-stats"><span><svg class="ic "><use href="#i-streak"/></svg>1</span><span class="spot" style="font-size:13.5px"><svg viewBox="0 0 13 12"><use href="#peak"/></svg>180</span><span class="av s48" style="--s:40px;--bg:var(--paper)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-k"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="12 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">2</b></span></div>
+  </div>
+  
+    <div class="map sm" id="map-p" style="--ox:244px" data-fx="150" data-fy="168" data-pitch="52" data-scale="1.7" data-keep="1" data-current="7">
+      <div class="cam">
+        <div class="plane">
+          <svg class="terrain" width="806" height="1260" viewBox="-220 -420 806 1260" style="left:-220px;top:-420px" aria-hidden="true"><path class="hair" d="M2199.1 2.9C2302.3 601.3 1847.7 1227.4 959.8 1517.6C71.9 1807.8 -896.3 1632.6 -1338.9 1024.4C-1685.8 536.6 -1399.8 -197.4 -728.5 -655.6C-52.6 -1087.2 876.6 -1138 1480.4 -900C1927.1 -703.2 2130.2 -396 2199.1 2.9Z"/><path class="hair" d="M2169.1 -79.2C2269.5 424.5 1815 980.7 931.1 1273.3C47.3 1565.9 -914.8 1466.7 -1352.6 972C-1695.6 574.8 -1408.4 -64.5 -739.3 -488.9C-65.6 -890.9 858.5 -981.9 1458 -810.5C1901.3 -666.1 2102.1 -415.1 2169.1 -79.2Z"/><path class="hair" d="M1638.7 -63C1742.7 363.4 1445.5 837.5 819.3 1090.6C193.1 1343.7 -514 1265.2 -863.4 848.5C-1137.6 513.8 -967.5 -29.6 -505.8 -393.2C-39.4 -737.8 628.4 -820.4 1075.8 -678.6C1407.7 -558.7 1569.4 -347.2 1638.7 -63Z"/><path class="hair" d="M1668 188.7C1680.2 568.6 1288.7 919.2 620.8 1025.1C-47 1130.9 -724.3 941.3 -979.2 526.9C-1177.7 195.2 -896.2 -236.3 -366.5 -464.6C163.7 -675.9 836.4 -629.8 1245.4 -431.6C1545.9 -272.2 1659.9 -64.6 1668 188.7Z"/><path class="hair" d="M1439.8 -71.2C1521.4 250.6 1256.8 622.1 713.1 836C169.5 1049.8 -437.6 1013.3 -730.4 707C-960.2 460.7 -803.6 40.5 -399.5 -252.2C8.2 -530.6 584.5 -615.7 966.9 -522.2C1250.3 -441.8 1385.5 -285.8 1439.8 -71.2Z"/><path class="hair" d="M1211.9 163.8C1223 455.6 961.5 725.2 511.7 807.3C61.9 889.3 -396.5 744.5 -571.7 426.5C-708.2 172 -521.5 -159.7 -165.9 -335.5C190.3 -498.4 644.5 -463.8 922 -312.1C1126 -190 1204.5 -30.6 1211.9 163.8Z"/><path class="hair" d="M1094.5 65.6C1133.6 322.5 930 587.1 541.5 704.5C153 821.9 -265.8 739.5 -452.1 475.7C-598 264.2 -466.6 -47.9 -170.6 -238.9C127.2 -418.4 531.3 -433.1 791.2 -326.5C983.3 -238.8 1068.5 -105.7 1094.5 65.6Z"/><path class="hair" d="M1049.2 -13.6C1106 212.6 930.1 470.5 565.2 615.6C200.4 760.7 -208.6 729.9 -407.6 512.7C-563.8 338.3 -460.8 45.3 -190.4 -156.2C82.5 -347.7 470 -402.3 728 -333.6C919.3 -274.8 1011.3 -164.3 1049.2 -13.6Z"/><path class="hair" d="M1033.8 68.3C1061.9 278.2 863.7 494.7 497.8 591.3C131.9 687.8 -255.8 621 -421 405.7C-550.2 233.1 -417.8 -22.1 -135.7 -178.6C147.6 -325.8 524.7 -338.4 763.6 -251.7C939.9 -180.3 1015.1 -71.7 1033.8 68.3Z"/><path class="cliff" d="M984.4 136.6C991.1 329.6 787.4 508.5 439.4 563.5C91.4 618.6 -261.9 523.5 -395.1 313.5C-499 145.3 -352.6 -74.5 -76.8 -191.4C199.4 -299.8 550.1 -277.6 763.5 -177.7C920.3 -97.3 979.9 8 984.4 136.6Z" transform="translate(0 3)"/><path class="band" d="M984.4 136.6C991.1 329.6 787.4 508.5 439.4 563.5C91.4 618.6 -261.9 523.5 -395.1 313.5C-499 145.3 -352.6 -74.5 -76.8 -191.4C199.4 -299.8 550.1 -277.6 763.5 -177.7C920.3 -97.3 979.9 8 984.4 136.6Z" fill="#EEE7DD"/><path class="hair" d="M925.1 125C933.7 304 748.5 472.5 429 527.6C109.5 582.8 -216.7 498.7 -341.9 305.3C-439.5 150.4 -307.6 -55.4 -55.2 -167.1C197.5 -271 520.4 -254.5 718 -164.3C863.2 -91.4 919.4 5.6 925.1 125Z"/><path class="hair" d="M851.7 76.2C873 240.3 720.2 408.4 438.7 482C157.2 555.6 -140.8 501.6 -267.5 332.7C-366.6 197.2 -264.3 -1.4 -47.2 -122.3C170.9 -235.9 460.9 -243.8 644.5 -175C779.9 -118.4 837.5 -33.2 851.7 76.2Z"/><path class="hair" d="M745.4 29.5C780 172.3 669.7 333.3 442.2 422C214.8 510.7 -39.6 488.4 -162.7 350.3C-259.2 239.4 -194.2 55.7 -25.3 -69.2C145.1 -187.7 386.4 -219.3 546.7 -174.2C665.5 -135.8 722.3 -65.6 745.4 29.5Z"/><path class="cliff" d="M661.3 48.5C689.5 173.6 597.5 311.3 408.6 383.1C219.7 454.9 8.9 429.3 -92.7 306.1C-172.4 207.2 -117.9 48.8 22.6 -55.9C164.3 -155.1 364.4 -176.8 497.2 -133.7C595.6 -97.4 642.5 -35 661.3 48.5Z" transform="translate(0 3)"/><path class="band" d="M661.3 48.5C689.5 173.6 597.5 311.3 408.6 383.1C219.7 454.9 8.9 429.3 -92.7 306.1C-172.4 207.2 -117.9 48.8 22.6 -55.9C164.3 -155.1 364.4 -176.8 497.2 -133.7C595.6 -97.4 642.5 -35 661.3 48.5Z" fill="#F2EDE4"/><path class="cliff" d="M599.1 95.7C610.2 204.8 520.4 311.9 356.7 353C193.1 394.2 20.8 350.4 -51.3 235.3C-107.7 143 -46.9 14.3 79.8 -59.8C207 -129.1 375.1 -126.6 481 -76.1C559 -35 591.7 22.9 599.1 95.7Z" transform="translate(0 3)"/><path class="band" d="M599.1 95.7C610.2 204.8 520.4 311.9 356.7 353C193.1 394.2 20.8 350.4 -51.3 235.3C-107.7 143 -46.9 14.3 79.8 -59.8C207 -129.1 375.1 -126.6 481 -76.1C559 -35 591.7 22.9 599.1 95.7Z" fill="#F6F2EB"/><path class="hair" d="M545.6 114C548.3 205.1 465.8 288.5 325 312.9C184.2 337.3 41.2 291 -12.7 191.3C-54.7 111.6 4.6 8.6 116.2 -45.4C228 -95.2 369.9 -83.3 456.2 -35.2C519.7 3.4 543.8 53.3 545.6 114Z"/><path class="cliff" d="M477.1 82.1C486.3 147.9 428.6 215.6 320.8 245.7C212.9 275.8 97.9 254.8 48 187.3C9 133.2 47.1 53.3 129.8 4.4C213 -41.6 324.6 -45.4 395.7 -18.2C448.2 4.2 470.9 38.3 477.1 82.1Z" transform="translate(0 3)"/><path class="band" d="M477.1 82.1C486.3 147.9 428.6 215.6 320.8 245.7C212.9 275.8 97.9 254.8 48 187.3C9 133.2 47.1 53.3 129.8 4.4C213 -41.6 324.6 -45.4 395.7 -18.2C448.2 4.2 470.9 38.3 477.1 82.1Z" fill="#FAF6F1"/><path class="hair" d="M427.1 66.2C438.8 115.7 397.3 172 313.2 203.5C229.2 235 136 228.1 91.8 180.4C57.1 142.2 82.2 78.1 145 34.2C208.3 -7.5 297.1 -19.2 355.6 -4C398.9 9 419.3 33.2 427.1 66.2Z"/><path class="cliff" d="M374.1 71.2C382.4 105.5 352.8 145.1 292.8 167.8C232.8 190.5 166.3 186.5 134.7 153.8C109.9 127.5 127.8 82.7 172.7 51.6C217.9 22 281.2 13 323 23C353.9 31.6 368.5 48.3 374.1 71.2Z" transform="translate(0 3)"/><path class="band" d="M374.1 71.2C382.4 105.5 352.8 145.1 292.8 167.8C232.8 190.5 166.3 186.5 134.7 153.8C109.9 127.5 127.8 82.7 172.7 51.6C217.9 22 281.2 13 323 23C353.9 31.6 368.5 48.3 374.1 71.2Z" fill="#FDFAF5"/><path class="cliff" d="M284.8 88.4C285.8 99.6 274.8 110.6 255.2 114.9C235.5 119.3 215 115 206.7 103.3C200.2 94 207.8 80.8 223.1 73.1C238.5 65.9 258.6 66 271.1 71.1C280.3 75.2 284.1 81 284.8 88.4Z" transform="translate(0 3)"/><path class="band" d="M284.8 88.4C285.8 99.6 274.8 110.6 255.2 114.9C235.5 119.3 215 115 206.7 103.3C200.2 94 207.8 80.8 223.1 73.1C238.5 65.9 258.6 66 271.1 71.1C280.3 75.2 284.1 81 284.8 88.4Z" fill="#FFFDF9"/><path class="hair" d="M261.4 88.8C261.7 93.9 256.6 98.6 247.8 100.3C239 101.9 230 99.7 226.4 94.3C223.7 90 227.2 84.2 234.2 81C241.1 78 250.1 78.3 255.5 80.8C259.6 82.8 261.2 85.5 261.4 88.8Z"/><path class="svy" d="M27.9 180h10M32.9 175v10M27.9 372h10M32.9 367v10M331.7 180h10M336.7 175v10M331.7 300h10M336.7 295v10"/><g class="alt" transform="translate(256.6 425.7)"><rect x="0" y="-10" width="34" height="20" rx="6"/><text x="17" y="4.5">30%</text></g><g class="alt" transform="translate(249.5 376.9)"><rect x="0" y="-10" width="34" height="20" rx="6"/><text x="17" y="4.5">50%</text></g><g class="alt" transform="translate(250.6 182.1)"><rect x="0" y="-10" width="34" height="20" rx="6"/><text x="17" y="4.5">90%</text></g></svg>
+      <svg class="trail" width="366" height="600" viewBox="0 0 366 600" aria-hidden="true">
+        <defs>
+          <mask id="map-p-mleg" maskUnits="userSpaceOnUse" x="0" y="0" width="366" height="600"><path d="M224.4 262L224.9 259L225.4 256.1L226 253.1L226.5 250.2L227.1 247.2L227.7 244.3L228.3 241.3L228.9 238.4L229.5 235.4L230.1 232.4L230.6 229.5L231.2 226.5L231.8 223.6L232.3 220.6L232.9 217.7L233.4 214.7" pathLength="1" class="draw" style="--d:2s;--t:0.28s" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round"/></mask>
+          <mask id="map-p-mahd" maskUnits="userSpaceOnUse" x="0" y="0" width="366" height="600"><path d="M233.4 214.7L233.9 211.8L234.4 208.8L234.8 205.9L235.3 202.9L235.7 200L236 197L236.4 194.1L236.7 191.1L237 188.2L237.3 185.2L237.5 182.3L237.7 179.3L237.9 176.4L238.1 173.4L238.2 170.5L238.3 167.6L238.5 164.6L238.6 161.7L238.6 158.7L238.7 155.8L238.8 152.8L238.9 149.9L238.9 146.9L239 144L239 141L239.1 138.1L239.2 135.1L239.3 132.2L239.4 129.3L239.5 126.3L239.6 123.4L239.7 120.4L239.9 117.5L240.1 114.5L240.3 111.6L240.5 108.6L240.7 105.7L241 102.7L241.2 99.8L241.5 96.8L241.8 93.9L242.2 90.9L242.5 88" pathLength="1" class="draw" style="--d:2.4s;--t:0.55s" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round"/></mask>
+        </defs>
+        <g class="brn fade" style="--d:3.15s"><path d="M242.5 88Q169.3 59.5 96 36"/><path d="M242.5 88Q280.3 60.5 318 40"/></g>
+        <!-- ground shadows: every coin stands on the sheet -->
+        <g class="gshadow"><ellipse class="fade" style="--d:0.6s" cx="244.4" cy="566.9" rx="14.8" ry="4"/><ellipse class="fade" style="--d:0.7s" cx="242.7" cy="518.2" rx="14.8" ry="4"/><ellipse class="fade" style="--d:0.8s" cx="243.8" cy="469.5" rx="14.8" ry="4"/><ellipse class="fade" style="--d:0.9s" cx="241.2" cy="420.8" rx="14.8" ry="4"/><ellipse class="fade" style="--d:1s" cx="230.4" cy="372" rx="14.8" ry="4"/><ellipse class="fade" style="--d:1.2s" cx="221.9" cy="323.3" rx="14.8" ry="4"/><ellipse class="fade" style="--d:2.1s" cx="233.4" cy="239.7" rx="17.8" ry="4"/><ellipse class="fade" style="--d:2.7s" cx="238.9" cy="167.5" rx="14.8" ry="4"/><ellipse class="fade" style="--d:2.92s" cx="242.5" cy="101" rx="8.9" ry="4"/></g>
+        <!-- the road: an edged white bed from the trailhead to the summit, drawn in the three legs of the story -->
+        <g class="bed" stroke-width="12"><path d="M244 580L244.2 577L244.3 574L244.5 571L244.6 568L244.7 565L244.7 562L244.7 559L244.7 556L244.6 553L244.6 550L244.5 547L244.4 544L244.3 541L244.1 538L244 535L243.9 532L243.7 529L243.6 526L243.5 523L243.3 520L243.2 517L243.1 514L243 511L242.9 508L242.9 505L242.8 502L242.8 499L242.7 496L242.7 493L242.7 490L242.8 487L242.8 484L242.8 481L242.9 478L243 475L243.1 472L243.2 469L243.3 466L243.3 463L243.4 460L243.5 457L243.6 454L243.7 451L243.8 448L243.8 445L243.9 442L243.9 439L243.9 436L243.8 433L243.8 430L243.7 427L243.5 424L243.4 421L243.2 418L243 415L242.7 412L242.4 409L242.1 406L241.7 403L241.3 400L240.8 397L240.3 394L239.8 391L239.2 388L238.6 385L238 382L237.3 379L236.6 376L235.9 373L235.2 370L234.4 367L233.7 364L232.9 361L232.2 358L231.4 355L230.6 352L229.9 349L229.1 346L228.4 343L227.7 340L227 337L226.4 334L225.7 331L225.1 328L224.6 325L224.1 322L223.6 319L223.2 316L222.8 313L222.5 310L222.2 307L222 304L221.9 301L221.8 298L221.7 295L221.7 292L221.8 289L221.9 286L222 283L222.3 280L222.5 277L222.8 274L223.2 271L223.6 268L224 265L224.4 262" pathLength="1" class="draw" style="--d:0.4s;--t:1.3s;--e:cubic-bezier(0.4,0,0.3,1)"/><path d="M224.4 262L224.9 259L225.4 256.1L226 253.1L226.5 250.2L227.1 247.2L227.7 244.3L228.3 241.3L228.9 238.4L229.5 235.4L230.1 232.4L230.6 229.5L231.2 226.5L231.8 223.6L232.3 220.6L232.9 217.7L233.4 214.7" pathLength="1" class="draw" style="--d:2s;--t:0.28s"/><path d="M233.4 214.7L233.9 211.8L234.4 208.8L234.8 205.9L235.3 202.9L235.7 200L236 197L236.4 194.1L236.7 191.1L237 188.2L237.3 185.2L237.5 182.3L237.7 179.3L237.9 176.4L238.1 173.4L238.2 170.5L238.3 167.6L238.5 164.6L238.6 161.7L238.6 158.7L238.7 155.8L238.8 152.8L238.9 149.9L238.9 146.9L239 144L239 141L239.1 138.1L239.2 135.1L239.3 132.2L239.4 129.3L239.5 126.3L239.6 123.4L239.7 120.4L239.9 117.5L240.1 114.5L240.3 111.6L240.5 108.6L240.7 105.7L241 102.7L241.2 99.8L241.5 96.8L241.8 93.9L242.2 90.9L242.5 88" pathLength="1" class="draw" style="--d:2.4s;--t:0.55s"/></g>
+        <g class="bed in" stroke-width="9"><path d="M244 580L244.2 577L244.3 574L244.5 571L244.6 568L244.7 565L244.7 562L244.7 559L244.7 556L244.6 553L244.6 550L244.5 547L244.4 544L244.3 541L244.1 538L244 535L243.9 532L243.7 529L243.6 526L243.5 523L243.3 520L243.2 517L243.1 514L243 511L242.9 508L242.9 505L242.8 502L242.8 499L242.7 496L242.7 493L242.7 490L242.8 487L242.8 484L242.8 481L242.9 478L243 475L243.1 472L243.2 469L243.3 466L243.3 463L243.4 460L243.5 457L243.6 454L243.7 451L243.8 448L243.8 445L243.9 442L243.9 439L243.9 436L243.8 433L243.8 430L243.7 427L243.5 424L243.4 421L243.2 418L243 415L242.7 412L242.4 409L242.1 406L241.7 403L241.3 400L240.8 397L240.3 394L239.8 391L239.2 388L238.6 385L238 382L237.3 379L236.6 376L235.9 373L235.2 370L234.4 367L233.7 364L232.9 361L232.2 358L231.4 355L230.6 352L229.9 349L229.1 346L228.4 343L227.7 340L227 337L226.4 334L225.7 331L225.1 328L224.6 325L224.1 322L223.6 319L223.2 316L222.8 313L222.5 310L222.2 307L222 304L221.9 301L221.8 298L221.7 295L221.7 292L221.8 289L221.9 286L222 283L222.3 280L222.5 277L222.8 274L223.2 271L223.6 268L224 265L224.4 262" pathLength="1" class="draw" style="--d:0.4s;--t:1.3s;--e:cubic-bezier(0.4,0,0.3,1)"/><path d="M224.4 262L224.9 259L225.4 256.1L226 253.1L226.5 250.2L227.1 247.2L227.7 244.3L228.3 241.3L228.9 238.4L229.5 235.4L230.1 232.4L230.6 229.5L231.2 226.5L231.8 223.6L232.3 220.6L232.9 217.7L233.4 214.7" pathLength="1" class="draw" style="--d:2s;--t:0.28s"/><path d="M233.4 214.7L233.9 211.8L234.4 208.8L234.8 205.9L235.3 202.9L235.7 200L236 197L236.4 194.1L236.7 191.1L237 188.2L237.3 185.2L237.5 182.3L237.7 179.3L237.9 176.4L238.1 173.4L238.2 170.5L238.3 167.6L238.5 164.6L238.6 161.7L238.6 158.7L238.7 155.8L238.8 152.8L238.9 149.9L238.9 146.9L239 144L239 141L239.1 138.1L239.2 135.1L239.3 132.2L239.4 129.3L239.5 126.3L239.6 123.4L239.7 120.4L239.9 117.5L240.1 114.5L240.3 111.6L240.5 108.6L240.7 105.7L241 102.7L241.2 99.8L241.5 96.8L241.8 93.9L242.2 90.9L242.5 88" pathLength="1" class="draw" style="--d:2.4s;--t:0.55s"/></g>
+        <!-- the way ahead: dots that drift slowly toward the summit (the little living move) -->
+        <g mask="url(#map-p-mahd)"><path class="ahd dots" d="M233.4 214.7L233.9 211.8L234.4 208.8L234.8 205.9L235.3 202.9L235.7 200L236 197L236.4 194.1L236.7 191.1L237 188.2L237.3 185.2L237.5 182.3L237.7 179.3L237.9 176.4L238.1 173.4L238.2 170.5L238.3 167.6L238.5 164.6L238.6 161.7L238.6 158.7L238.7 155.8L238.8 152.8L238.9 149.9L238.9 146.9L239 144L239 141L239.1 138.1L239.2 135.1L239.3 132.2L239.4 129.3L239.5 126.3L239.6 123.4L239.7 120.4L239.9 117.5L240.1 114.5L240.3 111.6L240.5 108.6L240.7 105.7L241 102.7L241.2 99.8L241.5 96.8L241.8 93.9L242.2 90.9L242.5 88" stroke-width="3.4" stroke-dasharray=".1 9.6" style="--p:-9.7"/></g>
+        <g mask="url(#map-p-mleg)"><path class="leg dots" d="M224.4 262L224.9 259L225.4 256.1L226 253.1L226.5 250.2L227.1 247.2L227.7 244.3L228.3 241.3L228.9 238.4L229.5 235.4L230.1 232.4L230.6 229.5L231.2 226.5L231.8 223.6L232.3 220.6L232.9 217.7L233.4 214.7" stroke-width="4.2" stroke-dasharray=".1 9.6" style="--p:-9.7"/></g>
+        <!-- the climbed part: solid ink -->
+        <path class="cov draw" d="M244 580L244.2 577L244.3 574L244.5 571L244.6 568L244.7 565L244.7 562L244.7 559L244.7 556L244.6 553L244.6 550L244.5 547L244.4 544L244.3 541L244.1 538L244 535L243.9 532L243.7 529L243.6 526L243.5 523L243.3 520L243.2 517L243.1 514L243 511L242.9 508L242.9 505L242.8 502L242.8 499L242.7 496L242.7 493L242.7 490L242.8 487L242.8 484L242.8 481L242.9 478L243 475L243.1 472L243.2 469L243.3 466L243.3 463L243.4 460L243.5 457L243.6 454L243.7 451L243.8 448L243.8 445L243.9 442L243.9 439L243.9 436L243.8 433L243.8 430L243.7 427L243.5 424L243.4 421L243.2 418L243 415L242.7 412L242.4 409L242.1 406L241.7 403L241.3 400L240.8 397L240.3 394L239.8 391L239.2 388L238.6 385L238 382L237.3 379L236.6 376L235.9 373L235.2 370L234.4 367L233.7 364L232.9 361L232.2 358L231.4 355L230.6 352L229.9 349L229.1 346L228.4 343L227.7 340L227 337L226.4 334L225.7 331L225.1 328L224.6 325L224.1 322L223.6 319L223.2 316L222.8 313L222.5 310L222.2 307L222 304L221.9 301L221.8 298L221.7 295L221.7 292L221.8 289L221.9 286L222 283L222.3 280L222.5 277L222.8 274L223.2 271L223.6 268L224 265L224.4 262" pathLength="1" stroke-width="5" style="--d:0.4s;--t:1.3s;--e:cubic-bezier(0.4,0,0.3,1)"/>
+        <!-- the focus ring and the lifted coin's shadow (placed by the script) -->
+        <ellipse class="fshadow" rx="20" ry="6"/>
+        <circle class="fring" r="30" pathLength="1"/>
+      </svg>
+        
+        <span class="bb st s-start" style="left:244px;top:580px;--r:7px;--d:0.30000000000000004s"><span class="coin"></span><i class="ld"></i><span class="lb"><b>البداية</b></span></span>
+        <a class="bb st s-done" data-station="1" data-x="244.4" data-y="545.9" data-r="20" style="left:244.4px;top:545.9px;--r:20px;--d:0.6s" role="button" tabindex="0"><span class="coin"><b>1</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>Excel<span class="stars "><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-done" data-station="2" data-x="242.7" data-y="497.2" data-r="20" style="left:242.7px;top:497.2px;--r:20px;--d:0.7s" role="button" tabindex="0"><span class="coin"><b>2</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>SQL<span class="stars "><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-done" data-station="3" data-x="243.8" data-y="448.5" data-r="20" style="left:243.8px;top:448.5px;--r:20px;--d:0.8s" role="button" tabindex="0"><span class="coin"><b>3</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>الإحصاء<span class="stars "><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-done" data-station="4" data-x="241.2" data-y="399.8" data-r="20" style="left:241.2px;top:399.8px;--r:20px;--d:0.9s" role="button" tabindex="0"><span class="coin"><b>4</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>التواصل الفعّال<span class="stars "><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-done" data-station="5" data-x="230.4" data-y="351" data-r="20" style="left:230.4px;top:351px;--r:20px;--d:1s" role="button" tabindex="0"><span class="coin"><b>5</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>Excel<span class="stars "><svg class="on"><use href="#i-star"/></svg><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-done" data-station="6" data-x="221.9" data-y="302.3" data-r="20" style="left:221.9px;top:302.3px;--r:20px;--d:1.2s" role="button" tabindex="0"><span class="coin"><b>6</b><i class="ck"><svg class="ic "><use href="#i-check"/></svg></i></span><i class="ld"></i><span class="lb"><b>SQL<span class="stars "><svg class="on"><use href="#i-star"/></svg><svg class="on"><use href="#i-star"/></svg></span><em><svg class="ic ok"><use href="#i-check"/></svg>من سيرتك</em></b></span></a>
+        <a class="bb st s-now" data-station="7" data-x="233.4" data-y="214.7" data-r="24" style="left:233.4px;top:214.7px;--r:24px;--d:2.1s" role="button" tabindex="0"><span class="coin"><b>7</b></span><i class="ld"></i><span class="lb card-lb"><span class="e">مرحلتك التالية</span><b>Power BI<span class="stars "><svg><use href="#i-star"/></svg></span></b></span></a>
+        <a class="bb st s-next" data-station="8" data-x="238.9" data-y="146.5" data-r="20" style="left:238.9px;top:146.5px;--r:20px;--d:2.7s" role="button" tabindex="0"><span class="coin"><b>8</b></span><i class="ld"></i><span class="lb"><b>الإحصاء<span class="stars "><svg class="on"><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span></b><small>لاحقاً<i class="sep"></i>12 ساعة</small></span></a>
+        <a class="bb st s-sum" data-station="summit" data-x="242.5" data-y="88" data-r="12" style="left:242.5px;top:88px;--r:12px;--d:2.86s" role="button" tabindex="0"><span class="coin"><i></i></span><i class="ld"></i><span class="lb" style="--d:3.02s"><b>جاهز للوظيفة</b><small>القمة<i class="sep"></i>مطابقة <span class="ltr">100%</span></small></span></a>
+        <span class="bb flag" style="left:242.5px;top:88px;--r:0px"><svg width="32" height="52" viewBox="0 0 32 52" style="left:-29px;top:-52px"><path class="pole" style="--d:2.92s" d="M29 52V3"/><path class="pen" style="--d:3.09s" d="M27.5 4L4 14L27.5 24Z"/></svg></span>
+        <span class="bb you" style="left:224.4px;top:262px;--r:19px;--d:1.72s"><i class="wp"></i><span class="pill"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-k"/></svg></span><span class="tx"><b>أنت هنا</b><small>مطابقتك <i class="count" style="--n:70;--d:1.76s;--t:0.85s"></i></small></span></span></span>
+        <span class="bb peak" style="left:96px;top:30px;--r:8px;--d:3.35s"><svg width="24" height="22" viewBox="0 0 24 22"><path d="M12 2.500 22 19.500H2z"/></svg><span class="lb"><b>أخصائي تقارير وبيانات</b></span></span>
+        <span class="bb peak" style="left:318px;top:34px;--r:8px;--d:3.35s"><svg width="24" height="22" viewBox="0 0 24 22"><path d="M12 2.500 22 19.500H2z"/></svg><span class="lb"><b>محلل ذكاء الأعمال</b></span></span>
+        </div>
+      </div>
+      <div class="sign"><div class="e">مسارك نحو</div><h2>محلل بيانات</h2></div>
+      <button class="map-back" type="button"><svg class="ic "><use href="#i-back"/></svg>رجوع للخريطة</button>
+    </div>
+  <div class="card ink p-next">
+    <span class="n">7</span>
+    <div class="t"><div class="e">خطوتك التالية</div><h3>Power BI<span class="stars "><svg><use href="#i-star"/></svg></span></h3></div>
+    <a class="btn btn-p">ابدأ الدورة<svg class="ic "><use href="#i-arrow"/></svg></a>
+  </div>
+  <nav class="p-tabs">
+    <a class="on"><svg class="ic navmark"><use href="#mark"/></svg>مساري</a>
+    <a><svg class="ic "><use href="#i-courses"/></svg>الدورات</a>
+    <span class="ask"><svg class="ic "><use href="#i-advisor"/></svg></span>
+    <a><svg class="ic "><use href="#i-jobs"/></svg>الوظائف</a>
+    <a><svg class="ic"><circle cx="5.500" cy="12" r="1.500"/><circle cx="12" cy="12" r="1.500"/><circle class="wp" cx="18.500" cy="12" r="1.750"/></svg>المزيد</a>
+  </nav>
+  <div class="flayer sheet" data-map="map-p">
+    <article class="fcard c-done" data-for="1"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 1 من 8<i class="sep"></i><b>مكتملة</b></div><h3>Excel<span class="stars lg"><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 1 من 3 في Excel</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«تنظيف بيانات المبيعات الأسبوعية وتلخيصها في Excel باستخدام الجداول المحورية.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>Excel من الصفر</b><span>الجداول والمعادلات</span><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>8 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>4 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar done"><i class="pv" style="width:0%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">0%</span></span><span>بعدها <b><span class="ltr">10%</span></b></span></div></div></article>
+<article class="fcard c-done" data-for="2"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 2 من 8<i class="sep"></i><b>مكتملة</b></div><h3>SQL<span class="stars lg"><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 1 من 3 في SQL</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«كتابة استعلامات SQL لاستخراج أرقام الفروع من قاعدة بيانات المبيعات.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>أساسيات SQL</b><span>الاستعلام عن البيانات</span><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>8 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>4 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar done"><i class="pv" style="width:10%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">10%</span></span><span>بعدها <b><span class="ltr">20%</span></b></span></div></div></article>
+<article class="fcard c-done" data-for="3"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 3 من 8<i class="sep"></i><b>مكتملة</b></div><h3>الإحصاء<span class="stars lg"><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 1 من 2 في الإحصاء</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«من المقررات: مبادئ الإحصاء، أساسيات البرمجة بلغة Python.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>مبادئ الإحصاء الوصفي</b><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>8 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>4 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar done"><i class="pv" style="width:20%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">20%</span></span><span>بعدها <b><span class="ltr">30%</span></b></span></div></div></article>
+<article class="fcard c-done" data-for="4"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 4 من 8<i class="sep"></i><b>مكتملة</b></div><h3>التواصل الفعّال<span class="stars lg"><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 1 من 2 في التواصل الفعّال</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«التواصل، العمل الجماعي، العرض والتقديم.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>التواصل الفعّال في بيئة العمل</b><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>6 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>3 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+20%</span></b></div><div class="mbar done"><i class="pv" style="width:30%"></i><i class="th" style="width:20%"></i></div><div class="row sub"><span>قبلها <span class="ltr">30%</span></span><span>بعدها <b><span class="ltr">50%</span></b></span></div></div></article>
+<article class="fcard c-done" data-for="5"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 5 من 8<i class="sep"></i><b>مكتملة</b></div><h3>Excel<span class="stars lg"><svg class="on"><use href="#i-star"/></svg><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 2 من 3 في Excel</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«تنظيف بيانات المبيعات الأسبوعية وتلخيصها في Excel باستخدام الجداول المحورية.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>Excel للتحليل</b><span>الجداول المحورية والدوال</span><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>10 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>5 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar done"><i class="pv" style="width:50%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">50%</span></span><span>بعدها <b><span class="ltr">60%</span></b></span></div></div></article>
+<article class="fcard c-done" data-for="6"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 6 من 8<i class="sep"></i><b>مكتملة</b></div><h3>SQL<span class="stars lg"><svg class="on"><use href="#i-star"/></svg><svg class="on"><use href="#i-star"/></svg></span></h3><p>النجمة 2 من 3 في SQL</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk ev fi"><small>تقدّمك<i class="sep"></i>أثبتتها سيرتك</small><q>«كتابة استعلامات SQL لاستخراج أرقام الفروع من قاعدة بيانات المبيعات.»</q><span class="stamp"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="34"/><circle cx="38" cy="38" r="27.500" stroke-dasharray="1.500 4.260"/></svg><b>تمّ</b></span></div><div class="blk fi"><small>الدورة المقابلة · مثبتة</small><b>SQL للتحليل</b><span>الربط والتجميع</span><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>12 ساعة</span><span><svg class="ic "><use href="#i-lessons"/></svg>5 دروس</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar done"><i class="pv" style="width:60%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">60%</span></span><span>بعدها <b><span class="ltr">70%</span></b></span></div></div></article>
+<article class="fcard c-now" data-for="7"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 7 من 8<i class="sep"></i><b>الآن</b></div><h3>Power BI<span class="stars lg"><svg><use href="#i-star"/></svg></span></h3><p>ترفع مهارتك إلى النجمة 1 من 3 في Power BI</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk fi"><small>الدورة</small><b>أساسيات Power BI</b><span>من البيانات إلى لوحة المعلومات</span><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>10 ساعات</span><span><svg class="ic "><use href="#i-lessons"/></svg>5 دروس</span><span class="spot "><svg viewBox="0 0 13 12"><use href="#peak"/></svg>+200 XP</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+20%</span></b></div><div class="mbar now"><i class="pv" style="width:70%"></i><i class="th" style="width:20%"></i></div><div class="row sub"><span>الآن <span class="ltr">70%</span></span><span>بعدها <b><span class="ltr">90%</span></b></span></div></div><div class="blk fi"><div class="row"><small>تقدّمك</small><b>لم تبدأ بعد<i class="sep"></i>0 من 5 دروس</b></div><div class="les"><i></i><i></i><i></i><i></i><i></i></div></div><a class="btn btn-p fi">ابدأ الدورة<svg class="ic "><use href="#i-arrow"/></svg></a></article>
+<article class="fcard c-next" data-for="8"><header class="fi"><div class="eye"><i class="dot"></i>المرحلة 8 من 8<i class="sep"></i><b>لاحقاً</b></div><h3>الإحصاء<span class="stars lg"><svg class="on"><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span></h3><p>ترفع مهارتك إلى النجمة 2 من 2 في الإحصاء</p><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header><div class="blk fi"><small>الدورة</small><b>الإحصاء التطبيقي للمحللين</b><div class="stats"><span><svg class="ic "><use href="#i-clock"/></svg>12 ساعة</span><span><svg class="ic "><use href="#i-lessons"/></svg>5 دروس</span><span class="spot "><svg viewBox="0 0 13 12"><use href="#peak"/></svg>+240 XP</span></div></div><div class="blk fi"><div class="row"><small>أثرها على المطابقة</small><b class="up"><span class="ltr">+10%</span></b></div><div class="mbar next"><i class="pv" style="width:90%"></i><i class="th" style="width:10%"></i></div><div class="row sub"><span>قبلها <span class="ltr">90%</span></span><span>بعدها <b><span class="ltr">100%</span></b></span></div></div><div class="blk fi"><div class="row"><small>تقدّمك</small><b>لم تبدأ بعد</b></div><div class="les"><i></i><i></i><i></i><i></i><i></i></div><p class="note">متاحة لك من الآن: تحمل النجمة 1 في الإحصاء.</p></div><a class="btn btn-s fi">افتح الدورة<svg class="ic "><use href="#i-arrow"/></svg></a></article>
+<article class="fcard c-sum" data-for="summit"><header class="fi"><div class="eye"><i class="dot"></i>القمة<i class="sep"></i><b>نهاية المسار</b></div><h3>جاهز للوظيفة</h3><button class="fc-x" type="button" aria-label="إغلاق"><svg class="ic "><use href="#i-close"/></svg></button></header>
+    <div class="blk fi"><small>هدفك</small><b>محلل بيانات</b><span>وادي الغيم للبيانات<i class="sep"></i>الرياض</span><span class="tag">جهة تجريبية</span></div>
+    <div class="blk fi"><div class="row"><small>مطابقتك</small><b><span class="ltr">70%</span> من <span class="ltr">100%</span></b></div><div class="mbar next"><i class="pv" style="width:70%"></i><i class="th" style="width:30%"></i></div><div class="row sub"><span>الآن <span class="ltr">70%</span></span><span>عند القمة <b><span class="ltr">100%</span></b></span></div></div>
+    <div class="blk fi"><div class="row"><small>تقدّمك</small><b>6 من 8 مراحل<i class="sep"></i>بقي 22 ساعة</b></div><div class="les sm8"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class=""></i><i class=""></i></div></div>
+    <a class="btn btn-s fi">عرض الوظيفة<svg class="ic "><use href="#i-arrow"/></svg></a></article>
+  </div>
+</div>
+
+<script>
+/* The station flight. Web Animations only (transforms, opacity; blur only on the card's small rows), so the
+   compositor carries it and tools/clip.mjs can step it frame by frame. No requestAnimationFrame, no canvas, no timers:
+   every beat is one animation with a delay, all created in the click. */
+(function () {
+  "use strict";
+  // ---------- station-focus / station-return: every number in one place (milliseconds) ----------
+  var F = {
+    ease: "cubic-bezier(.5,0,.15,1)", // the camera: a short take-off, the sweep, then the reference maps' long soft landing
+    easeBack: "cubic-bezier(.4,0,.2,1)",
+    easeRise: "cubic-bezier(.33,1,.68,1)", // ease-out cubic: the place rising to meet you
+    easeIn: "cubic-bezier(.5,0,.75,0)",
+    cam: 1200, // the flight
+    labelsOut: 160, // map labels and furniture clear out of the way
+    riseAt: 640, rise: 560, lift: 16, grow: 1.16, // the station lifts off the sheet; a survey ring draws round its foot
+    cardAt: 980, card: 440, // the card arrives as the camera lands
+    rowAt: 1080, rowStep: 70, row: 480, // its rows come into focus one after another
+    barAt: 1480, bar: 520, // the match bar grows its new part
+    out: { card: 180, sheet: 260, sink: 220, camAt: 60, cam: 1000, labelsAt: 620, labels: 280 },
+  };
+  var maps = [];
+
+  function setup(map) {
+    var plane = map.querySelector(".plane");
+    var layer = document.querySelector('.flayer[data-map="' + map.id + '"]');
+    var isSheet = layer.classList.contains("sheet");
+    var fx = +map.dataset.fx, fy = +map.dataset.fy, pitch = +map.dataset.pitch, scale = +map.dataset.scale, keep = +map.dataset.keep;
+    var bbs = [].slice.call(map.querySelectorAll(".bb"));
+    var quiet = [].slice.call(map.querySelectorAll(".st .lb, .st .ld, .peak .lb, .sign, .seg2"));
+    var ring = map.querySelector(".fring"), shadow = map.querySelector(".fshadow"), back = map.querySelector(".map-back");
+    var leader = layer.querySelector(".fleader");
+    var state = null;
+
+    /** A click during the opening acts on the final state: finish whatever is still drawing. */
+    function settleOpening() {
+      map.getAnimations({ subtree: true }).forEach(function (a) {
+        var t = a.effect && a.effect.getComputedTiming();
+        if (t && t.iterations !== Infinity && a.playState !== "finished") {
+          try { a.finish(); } catch (e) { /* ignore */ }
+        }
+      });
+    }
+    function maker(list) {
+      return function (el, frames, o) {
+        if (!el) return;
+        o.fill = "both";
+        if (!o.easing) o.easing = F.ease;
+        list.push(el.animate(frames, o));
+      };
+    }
+
+    function focus(st) {
+      if (state) return;
+      settleOpening();
+      var x = +st.dataset.x, y = +st.dataset.y, r = +st.dataset.r;
+      var card = layer.querySelector('.fcard[data-for="' + st.dataset.station + '"]');
+      var A = [], an = maker(A);
+      // the camera: pitch about the station, bring it to the focus point, come closer
+      var T0 = "translate3d(0px,0px,0px) rotateX(0deg) scale3d(1,1,1)";
+      var T1 = "translate3d(" + (fx - x) + "px," + (fy - y) + "px,0px) rotateX(" + pitch + "deg) scale3d(" + scale + "," + scale + "," + scale + ")";
+      // billboards: the exact opposite pitch, so coins, flag and walker stay upright at every frame
+      var q = keep / scale;
+      var B0 = "rotateX(0deg) scale3d(1,1,1)", B1 = "rotateX(-" + pitch + "deg) scale3d(" + q + "," + q + "," + q + ")";
+      plane.style.transformOrigin = x + "px " + y + "px";
+      an(plane, [{ transform: T0 }, { transform: T1 }], { duration: F.cam });
+      bbs.forEach(function (b) { an(b, [{ transform: B0 }, { transform: B1 }], { duration: F.cam }); });
+      quiet.forEach(function (q) { an(q, [{ opacity: 1 }, { opacity: 0 }], { duration: F.labelsOut, easing: "linear" }); });
+      // the place answers: it lifts off the sheet, its shadow stays down, a ring draws round its foot
+      var coin = st.querySelector(".coin");
+      var C1 = "translateY(-" + F.lift + "px) scale(" + F.grow + ")";
+      an(coin, [{ transform: "translateY(0px) scale(1)" }, { transform: C1 }], { delay: F.riseAt, duration: F.rise, easing: F.easeRise });
+      ring.setAttribute("cx", x); ring.setAttribute("cy", y + r); ring.setAttribute("r", r * 0.9 + 9);
+      shadow.setAttribute("cx", x); shadow.setAttribute("cy", y + r + 1); shadow.setAttribute("rx", r * 0.8); shadow.setAttribute("ry", r * 0.3);
+      an(ring, [{ strokeDashoffset: 1, opacity: 1 }, { strokeDashoffset: 0, opacity: 1 }], { delay: F.riseAt, duration: F.rise, easing: F.easeRise });
+      an(shadow, [{ opacity: 0 }, { opacity: 0.2 }], { delay: F.riseAt, duration: F.rise, easing: F.easeRise });
+      // the card arrives after the landing; on the phone it is a bottom sheet
+      card.classList.add("on");
+      if (isSheet) an(card, [{ transform: "translateY(100%)" }, { transform: "translateY(0%)" }], { delay: F.cardAt, duration: F.card + 60 });
+      else an(card, [{ opacity: 0, transform: "translateX(-26px)" }, { opacity: 1, transform: "translateX(0px)" }], { delay: F.cardAt, duration: F.card });
+      [].slice.call(card.querySelectorAll(".fi")).forEach(function (row, i) {
+        an(row, [{ opacity: 0, transform: "translateY(9px)", filter: "blur(4px)" }, { opacity: 1, transform: "translateY(0px)", filter: "blur(0px)" }], { delay: F.rowAt + i * F.rowStep, duration: F.row, easing: "cubic-bezier(.2,.7,.2,1)" });
+      });
+      an(card.querySelector(".mbar .th"), [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { delay: F.barAt, duration: F.bar });
+      an(card.querySelector(".stamp"), [{ opacity: 0, transform: "rotate(-9deg) scale(1.45)" }, { opacity: 1, transform: "rotate(-9deg) scale(1)" }], { delay: F.barAt + 60, duration: 240, easing: "cubic-bezier(.3,0,.2,1)" });
+      if (leader) {
+        var cos = Math.cos((pitch * Math.PI) / 180);
+        var cy = fy + r * scale * cos - (r + F.lift) * keep;
+        var x0 = 22 + 348 + 7, x1 = fx - r * keep * F.grow - 9;
+        leader.style.left = x0 + "px"; leader.style.top = cy + "px"; leader.style.width = x1 - x0 + "px";
+        an(leader, [{ opacity: 1, transform: "scaleX(0)" }, { opacity: 1, transform: "scaleX(1)" }], { delay: F.cardAt + 80, duration: 340 });
+      }
+      an(back, [{ opacity: 0 }, { opacity: 1 }], { delay: F.cardAt, duration: 240, easing: "linear" });
+      map.classList.add("is-focus");
+      state = { st: st, card: card, coin: coin, A: A, T0: T0, T1: T1, B0: B0, B1: B1, C1: C1 };
+      return state;
+    }
+
+    function unfocus() {
+      if (!state || state.leaving) return;
+      var s = state, old = s.A, A = [], an = maker(A), o = F.out;
+      s.leaving = true;
+      // the card leaves first, the station sits back down, then the camera returns to exactly the overview
+      if (isSheet) an(s.card, [{ transform: "translateY(0%)" }, { transform: "translateY(100%)" }], { duration: o.sheet, easing: F.easeIn });
+      else an(s.card, [{ opacity: 1, transform: "translateX(0px)" }, { opacity: 0, transform: "translateX(-14px)" }], { duration: o.card, easing: "ease-in" });
+      an(leader, [{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: "linear" });
+      an(back, [{ opacity: 1 }, { opacity: 0 }], { duration: 120, easing: "linear" });
+      an(s.coin, [{ transform: s.C1 }, { transform: "translateY(0px) scale(1)" }], { duration: o.sink, easing: F.easeRise });
+      an(ring, [{ strokeDashoffset: 0, opacity: 1 }, { strokeDashoffset: 0, opacity: 0 }], { duration: o.sink, easing: "linear" });
+      an(shadow, [{ opacity: 0.2 }, { opacity: 0 }], { duration: o.sink, easing: "linear" });
+      an(plane, [{ transform: s.T1 }, { transform: s.T0 }], { delay: o.camAt, duration: o.cam, easing: F.easeBack });
+      bbs.forEach(function (b) { an(b, [{ transform: s.B1 }, { transform: s.B0 }], { delay: o.camAt, duration: o.cam, easing: F.easeBack }); });
+      quiet.forEach(function (q) { an(q, [{ opacity: 0 }, { opacity: 1 }], { delay: o.labelsAt, duration: o.labels, easing: "linear" }); });
+      old.forEach(function (a) { a.cancel(); });
+      s.A = A;
+      Promise.all(A.map(function (a) { return a.finished; })).then(function () {
+        A.forEach(function (a) { a.cancel(); });
+        s.card.classList.remove("on");
+        map.classList.remove("is-focus");
+        plane.style.transformOrigin = "";
+        state = null;
+      }, function () { /* cancelled */ });
+    }
+
+    map.addEventListener("click", function (e) {
+      if (state) { unfocus(); return; }
+      var st = e.target.closest("[data-station]");
+      if (st) focus(st);
+    });
+    map.addEventListener("keydown", function (e) {
+      var st = e.target.closest && e.target.closest("[data-station]");
+      if (st && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); st.click(); }
+    });
+    layer.addEventListener("click", function (e) { if (e.target.closest(".fc-x")) unfocus(); });
+    return {
+      map: map,
+      unfocus: unfocus,
+      /** open a station with no motion (used for stills and for recording the return) */
+      show: function (id) {
+        var st = map.querySelector('[data-station="' + id + '"]');
+        var s = st && focus(st);
+        if (s) s.A.forEach(function (a) { a.finish(); });
+      },
+    };
+  }
+
+  document.querySelectorAll(".map").forEach(function (m) { maps.push(setup(m)); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") maps.forEach(function (m) { m.unfocus(); }); });
+  // a click anywhere outside the map and its card also returns to the overview
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".map") && !e.target.closest(".flayer")) maps.forEach(function (m) { m.unfocus(); });
+  });
+  window.dalilakMaps = maps; // [desktop, phone]: .show(id) opens a station with no motion, .unfocus() returns
+  var hash = /focus=(\w+)/.exec(location.hash);
+  if (hash) maps.forEach(function (m) { m.show(hash[1]); });
+})();
+
+</script>
+</body>
+</html>

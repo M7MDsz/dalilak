@@ -1,0 +1,12 @@
+[
+  { "viewport": "1600x1000" },
+  { "goto": "design/explore/darb/map/final-home.html" },
+  { "wait": 4600 },
+  { "shot": "design/explore/darb/map/final-home.png", "selector": "#home-frame" },
+  { "shot": "design/explore/darb/map/final-home-phone.png", "selector": "#phone-frame" },
+  { "click": "#home-frame [data-station=\"7\"] .coin" },
+  { "click": "#phone-frame [data-station=\"7\"] .coin" },
+  { "wait": 2800 },
+  { "shot": "design/explore/darb/map/final-station.png", "selector": "#home-frame" },
+  { "shot": "design/explore/darb/map/final-station-phone.png", "selector": "#phone-frame" }
+]

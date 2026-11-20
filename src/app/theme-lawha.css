@@ -1,0 +1,512 @@
+/* «لعبة» — the Lawha design (design/explore/lawha/index.html): the game board, switchable by the user (src/lib/theme.ts).
+   EVERY rule here is under html[data-theme="lawha"], so Darb (no attribute) renders exactly as before.
+   The idea: a board you play your career on. Every object is a piece of card with a 2 px ink edge sitting a few pixels
+   above the board, its hard shadow falling down and to the LEFT (light comes from where Arabic reading starts), zero blur;
+   pressed, a piece travels into its own shadow. Dark surfaces are the night board with a faint dot grid.
+   These rules are unlayered on purpose: they beat Tailwind's utilities (which live in @layer utilities). Markers the kit
+   carries for them: .skin-btn(-primary|-secondary|-ghost), .skin-chip, .skin-skill, .skin-iconbtn, .skin-field,
+   .skin-card, .skin-nav-active, .skin-contour, .skin-xpbar, .skin-stage (no style at all in Darb). */
+
+/* ── palette and type ───────────────────────────────────────────────────────────────────────────────────────────── */
+html[data-theme="lawha"] {
+  --color-paper: #ede4d3; /* sand: the table the board sits on */
+  --color-sheet: #fbf7ee; /* paper: cards and tiles */
+  --color-sunk: #e0d3ba;
+  --color-line: #cfc2a8;
+  --color-line-strong: #5e6484;
+  --color-contour: #ddd0b6;
+  --color-contour-2: #c7b694;
+  --color-contour-ink: #6a5c42;
+
+  --color-ink: #111837;
+  --color-ink-2: #3b4263;
+  --color-ink-3: #5e6484;
+  --color-ink-4: #9c9aa3;
+
+  --color-stage: #16204d; /* night: the board */
+  --color-stage-2: #1f2b63;
+  --color-stage-3: #34438c;
+  --color-stage-contour: #212c69;
+  --color-stage-contour-2: #2b3880;
+  --color-on-stage: #f6f1e4;
+  --color-on-stage-2: #aeb6dc;
+  --color-on-stage-3: #8d96c6;
+
+  --color-accent: #f2542d; /* ember: YOU and the one next action */
+  --color-accent-hover: #ea4b24;
+  --color-accent-press: #d43f1b;
+  --color-accent-ink: #b3310e;
+  --color-accent-on-stage: #ff7a57;
+  --color-accent-soft: #fbd3c6;
+  --color-on-accent: #111837;
+
+  --color-xp: #ffc42e; /* saffron: XP and rewards only */
+  --color-xp-line: #e3a400;
+  --color-xp-ink: #855700;
+  --color-xp-soft: #ffebb0;
+  --color-xp-on-stage: #ffc42e;
+
+  --color-ok: #0e7a4a; /* palm, darkened for text */
+  --color-ok-soft: #c4e8d5;
+  --color-warn: #a24f00; /* amber, darkened for text */
+  --color-warn-soft: #ffe2b8;
+  --color-warn-on-stage: #ffb25c;
+
+  --font-sans: "Readex Pro", "Alexandria", "Segoe UI", Tahoma, sans-serif;
+  --font-display: "Alexandria", "Readex Pro", "Segoe UI", Tahoma, sans-serif;
+
+  --radius-card: 1.125rem;
+  --radius-sheet: 1.375rem;
+
+  /* the piece language: edge and shadow colours flip on the night board */
+  --skin-edge: var(--color-ink);
+  --skin-sh: var(--color-ink);
+  --skin-deep: #090e26;
+  --skin-dots: radial-gradient(circle, rgb(246 241 228 / 0.1) 1.3px, transparent 1.6px);
+  --skin-press: 100ms steps(2, end);
+  background: var(--color-paper);
+}
+html[data-theme="lawha"] [data-surface="stage"] {
+  --skin-edge: var(--skin-deep);
+  --skin-sh: var(--skin-deep);
+}
+html[data-theme="lawha"] [data-surface="paper"] {
+  --skin-edge: var(--color-ink);
+  --skin-sh: var(--color-ink);
+}
+
+/* Alexandria for everything that is a title on a game box: headings, titles, numbers that score, buttons */
+html[data-theme="lawha"] :is(h1, h2, .text-display, .text-h1) {
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+html[data-theme="lawha"] :is(h3, .text-h2, .text-h3) {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+/* 17 px titles sit in dense rows (list titles, the profile's level line): Alexandria is ~8% wider than IBM Plex, so they
+   keep the text face at its semibold, and no row has to re-wrap */
+html[data-theme="lawha"] .text-title {
+  font-weight: 600;
+}
+html[data-theme="lawha"] :is(.tabular-nums, [data-xp-token]) {
+  font-family: var(--font-display);
+}
+
+/* ── the night board: every dark surface ─────────────────────────────────────────────────────────────────────────── */
+html[data-theme="lawha"] [data-surface="stage"] {
+  background-image: var(--skin-dots);
+  background-size: 28px 28px;
+  background-position: 12px 12px;
+}
+/* Darb's contour texture is its signature, not Lawha's: the board's dots replace it */
+html[data-theme="lawha"] .skin-contour {
+  display: none;
+}
+
+/* ── pieces: cards, sheets, tiles ───────────────────────────────────────────────────────────────────────────────── */
+html[data-theme="lawha"] :is(.skin-card, .rounded-card.border, .rounded-sheet.border):not(.border-dashed, .border-transparent, .border-0) {
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--skin-edge);
+}
+html[data-theme="lawha"] :is(.skin-card, .rounded-card.border):not(.border-dashed, .border-transparent, .border-0) {
+  box-shadow: -5px 5px 0 var(--skin-sh);
+}
+/* a piece inside a piece lies flat on it (one shadow per stack, as on the board) */
+html[data-theme="lawha"] :is(.skin-card, .rounded-card, .rounded-sheet, [data-tile]) :is(.skin-card, .rounded-card.border) {
+  box-shadow: none;
+}
+html[data-theme="lawha"] .shadow-float {
+  box-shadow: -6px 6px 0 var(--skin-sh);
+}
+html[data-theme="lawha"] .rounded-sheet.border.shadow-float {
+  border-width: 2px;
+  border-color: var(--skin-edge);
+}
+html[data-theme="lawha"] .rounded-full.border.shadow-float {
+  border-width: 2px;
+  border-color: var(--skin-edge);
+}
+
+/* the game Tile (src/components/game/tile.tsx): its plinth becomes the hard shadow down-left, and a press travels into it */
+html[data-theme="lawha"] [data-tile] > span[aria-hidden] {
+  translate: calc(var(--tile-d) * -1) 0;
+  background: var(--skin-sh);
+}
+html[data-theme="lawha"] [data-tile] > :is(button, a, div):not([aria-hidden]) {
+  border-color: var(--skin-edge);
+}
+/* a flat tile (a card you read, not press) is a piece lying on the board: full edge and its shadow */
+html[data-theme="lawha"] [data-tile] > div:not([aria-hidden]):not(.border-dashed) {
+  border-width: 2px;
+  box-shadow: -4px 4px 0 var(--skin-sh);
+}
+html[data-theme="lawha"] [data-tile] [data-tile] > div:not([aria-hidden]) {
+  box-shadow: none;
+}
+html[data-theme="lawha"] [data-tile] > :is(button, a):active,
+html[data-theme="lawha"] [data-tile] > [data-pressed] {
+  translate: calc(var(--tile-d) * -1) var(--tile-d);
+}
+
+/* ── buttons ────────────────────────────────────────────────────────────────────────────────────────────────────── */
+html[data-theme="lawha"] .skin-btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  transition:
+    translate var(--skin-press),
+    box-shadow var(--skin-press),
+    background-color 150ms ease-out,
+    color 150ms ease-out;
+}
+html[data-theme="lawha"] :is(.skin-btn-primary, .skin-btn-secondary) {
+  border: 2px solid var(--skin-edge);
+  box-shadow: -4px 4px 0 var(--skin-sh);
+}
+html[data-theme="lawha"] .skin-btn-secondary {
+  background-color: var(--color-sheet);
+  color: var(--color-ink);
+}
+html[data-theme="lawha"] [data-surface="stage"] .skin-btn-secondary {
+  background-color: var(--color-stage-2);
+  color: var(--color-on-stage);
+  border-color: var(--color-on-stage-2);
+}
+html[data-theme="lawha"] :is(.skin-btn-primary, .skin-btn-secondary):hover {
+  translate: 2px -2px;
+  box-shadow: -6px 6px 0 var(--skin-sh);
+}
+html[data-theme="lawha"] .skin-btn-secondary:hover {
+  background-color: var(--color-sheet);
+  color: var(--color-ink);
+}
+html[data-theme="lawha"] [data-surface="stage"] .skin-btn-secondary:hover {
+  background-color: var(--color-stage-2);
+  color: var(--color-on-stage);
+}
+html[data-theme="lawha"] :is(.skin-btn-primary, .skin-btn-secondary):is(:active, [data-pressed]) {
+  scale: 1;
+  translate: -3px 3px;
+  box-shadow: -1px 1px 0 var(--skin-sh);
+}
+html[data-theme="lawha"] :is(.skin-btn-primary, .skin-btn-secondary):is(:disabled, [aria-disabled="true"]) {
+  translate: 0 0;
+  box-shadow: none;
+  border-color: var(--color-line-strong);
+}
+
+/* ── chips (quick replies, filters) and skill tags ─────────────────────────────────────────────────────────────── */
+html[data-theme="lawha"] .skin-chip {
+  border-radius: 0.625rem;
+  border-width: 2px;
+  border-color: var(--skin-edge);
+  font-weight: 600;
+  box-shadow: -3px 3px 0 var(--skin-sh);
+  transition:
+    translate var(--skin-press),
+    box-shadow var(--skin-press),
+    background-color 150ms ease-out,
+    color 150ms ease-out;
+}
+html[data-theme="lawha"] .skin-chip:hover {
+  translate: 1px -1px;
+  box-shadow: -4px 4px 0 var(--skin-sh);
+}
+html[data-theme="lawha"] .skin-chip:is(:active, [data-pressed]) {
+  scale: 1;
+  translate: -2px 2px;
+  box-shadow: -1px 1px 0 var(--skin-sh);
+}
+html[data-theme="lawha"] .skin-chip[data-state="selected"] {
+  box-shadow: -1px 1px 0 var(--skin-sh);
+  translate: -2px 2px;
+}
+html[data-theme="lawha"] .skin-chip:disabled {
+  box-shadow: none;
+  translate: 0 0;
+}
+html[data-theme="lawha"] .skin-skill {
+  border-radius: 0.5rem;
+  border-width: 1.5px;
+  font-weight: 600;
+}
+html[data-theme="lawha"] .skin-skill[data-state="has"] {
+  border-color: var(--skin-edge);
+}
+
+/* ── icon buttons, fields ──────────────────────────────────────────────────────────────────────────────────────── */
+html[data-theme="lawha"] .skin-iconbtn-outline {
+  border-width: 2px;
+  border-color: var(--skin-edge);
+  box-shadow: -2px 2px 0 var(--skin-sh);
+}
+html[data-theme="lawha"] .skin-iconbtn-outline:active {
+  scale: 1;
+  translate: -2px 2px;
+  box-shadow: none;
+}
+html[data-theme="lawha"] .skin-field {
+  border-width: 2px;
+  border-color: var(--skin-edge);
+  transition: box-shadow var(--skin-press);
+}
+html[data-theme="lawha"] .skin-field:focus-within {
+  box-shadow: -4px 4px 0 var(--color-accent);
+}
+
+/* ── XP bar: chunky, in saffron ─────────────────────────────────────────────────────────────────────────────────── */
+html[data-theme="lawha"] .skin-xpbar {
+  border: 2px solid var(--skin-edge);
+  border-radius: 0.5rem;
+}
+
+/* ── the side navigation: the open item is a paper piece ──────────────────────────────────────────────────────── */
+html[data-theme="lawha"] .skin-nav-active {
+  border-width: 2px;
+  border-color: var(--skin-edge);
+  box-shadow: -3px 3px 0 var(--skin-sh);
+}
+html[data-theme="lawha"] .skin-nav {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* ── the map (/path): the night board ──────────────────────────────────────────────────────────────────────────────
+   The map's logic, geometry and camera flight are untouched (src/features/map); only its look changes here. */
+html[data-theme="lawha"] .dm {
+  --t-base: #16204d;
+  --t-0: rgb(246 241 228 / 0.015);
+  --t-1: rgb(246 241 228 / 0.03);
+  --t-2: rgb(246 241 228 / 0.045);
+  --t-3: rgb(246 241 228 / 0.06);
+  --t-4: rgb(246 241 228 / 0.075);
+  --t-5: rgb(246 241 228 / 0.09);
+  --t-cliff: transparent;
+  --t-fall: transparent;
+  --coin-edge: var(--skin-deep);
+  border: 2px solid var(--color-ink);
+  box-shadow: -6px 6px 0 var(--color-ink);
+  background-color: #16204d;
+  background-image: var(--skin-dots);
+  background-size: 28px 28px;
+  background-position: 12px 12px;
+  color: var(--color-on-stage);
+}
+html[data-theme="lawha"] .dm-terrain .dm-band {
+  stroke: #26327a;
+}
+html[data-theme="lawha"] .dm-terrain .dm-hair {
+  stroke: #212c69;
+}
+html[data-theme="lawha"] .dm-terrain .dm-svy {
+  stroke: #2b3880;
+}
+html[data-theme="lawha"] .dm-terrain .dm-alt rect {
+  fill: #1f2b63;
+}
+html[data-theme="lawha"] .dm-terrain .dm-alt text {
+  fill: var(--color-on-stage-2);
+}
+/* the road is printed on the board: a paper road with an ink edge; the walked part is ink; ahead is dotted */
+html[data-theme="lawha"] .dm-trail .dm-bed {
+  stroke: var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-trail .dm-bed-in {
+  stroke: #4a5797;
+}
+html[data-theme="lawha"] .dm-trail .dm-cov {
+  stroke: #fbf7ee;
+}
+html[data-theme="lawha"] .dm-trail .dm-ahd {
+  stroke: #fbf7ee;
+}
+html[data-theme="lawha"] .dm-trail .dm-brn path {
+  stroke: var(--color-on-stage-3);
+}
+html[data-theme="lawha"] .dm-trail :is(.dm-gshadow ellipse, .dm-fshadow) {
+  fill: var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-trail .dm-fring {
+  stroke: var(--color-on-stage);
+}
+/* stations are pegs: rounded squares with an ink edge and a hard shadow down-left */
+html[data-theme="lawha"] .dm-coin {
+  border-radius: 30%;
+}
+html[data-theme="lawha"] .dm-coin > b {
+  font-family: var(--font-display);
+}
+html[data-theme="lawha"] .dm-done .dm-coin {
+  background: #17905a;
+  color: #fbf7ee;
+  border: 2px solid var(--skin-deep);
+  box-shadow: -3px 3px 0 var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-ck {
+  background: #fbf7ee;
+  color: #17905a;
+  border: 2px solid #17905a;
+  border-radius: 6px;
+  rotate: -8deg;
+}
+html[data-theme="lawha"] .dm-now .dm-coin {
+  background: var(--color-accent);
+  color: var(--color-ink);
+  border: 2.5px solid var(--skin-deep);
+  box-shadow: -4px 4px 0 var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-now .dm-coin::after {
+  border-radius: 34%;
+}
+html[data-theme="lawha"] .dm-ahead .dm-coin {
+  background: #1f2b63;
+  color: var(--color-on-stage-2);
+  border: 2px dashed var(--color-on-stage-3);
+  box-shadow: none;
+}
+html[data-theme="lawha"] .dm-lk {
+  background: #1f2b63;
+  border-color: var(--color-on-stage-3);
+  color: var(--color-on-stage-2);
+}
+html[data-theme="lawha"] .dm-ghost {
+  background: #1f2b63;
+  color: var(--color-on-stage-2);
+  border-color: var(--color-on-stage-3);
+}
+html[data-theme="lawha"] .dm-start .dm-coin {
+  background: #fbf7ee;
+  border-color: var(--skin-deep);
+  box-shadow: -3px 3px 0 var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-start .dm-coin::after {
+  background: var(--color-ink);
+}
+html[data-theme="lawha"] .dm-sum .dm-coin {
+  background: var(--color-xp);
+  border-color: var(--skin-deep);
+  box-shadow: -4px 4px 0 var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-sum .dm-coin > i {
+  background: var(--color-ink);
+}
+html[data-theme="lawha"] .dm-pole {
+  stroke: var(--color-on-stage);
+}
+html[data-theme="lawha"] .dm-pen {
+  fill: var(--color-xp);
+  stroke: var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-ld,
+html[data-theme="lawha"] .dm-start .dm-ld {
+  border-top-color: var(--color-on-stage-2);
+}
+/* labels are paper tags laid on the board */
+html[data-theme="lawha"] .dm-lb {
+  background: #fbf7ee;
+  border: 2px solid var(--skin-deep);
+  border-radius: 9px;
+  padding: 2px 8px 4px;
+  box-shadow: -3px 3px 0 var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-lb > b {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+/* a phone's map is tight: smaller tags, and the branch names at the top read straight off the board */
+html[data-theme="lawha"] .dm[data-small] .dm-lb {
+  padding: 0 5px 2px;
+  border-width: 1.5px;
+  border-radius: 7px;
+  box-shadow: -2px 2px 0 var(--skin-deep);
+}
+html[data-theme="lawha"] .dm[data-small] .dm-lb > b {
+  font-family: var(--font-sans);
+  font-size: 15px;
+}
+html[data-theme="lawha"] .dm[data-small] .dm-peak .dm-lb {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+html[data-theme="lawha"] .dm[data-small] .dm-peak .dm-lb > b {
+  color: var(--color-on-stage);
+  font-size: 13px;
+}
+html[data-theme="lawha"] .dm[data-small] .dm-peak .dm-lb > small {
+  color: var(--color-on-stage-2);
+}
+html[data-theme="lawha"] .dm-ahead .dm-lb {
+  background: #e0d3ba;
+  box-shadow: none;
+}
+html[data-theme="lawha"] .dm-ok {
+  color: #17905a;
+}
+html[data-theme="lawha"] .dm-st .dm-card-lb {
+  border: 2px solid var(--skin-deep);
+  box-shadow: -4px 4px 0 var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-pill {
+  background: #fbf7ee;
+  color: var(--color-ink);
+  border: 2px solid var(--skin-deep);
+  box-shadow: -3px 3px 0 var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-pill::before {
+  border-top-color: var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-pill .dm-tx small {
+  color: var(--color-ink-2);
+}
+html[data-theme="lawha"] .dm-pill .dm-tx small bdi {
+  color: var(--color-ink);
+}
+html[data-theme="lawha"] .dm-peak > svg path {
+  fill: #1f2b63;
+  stroke: var(--color-on-stage-3);
+}
+html[data-theme="lawha"] .dm-sign {
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
+  box-shadow: -4px 4px 0 var(--color-ink);
+}
+html[data-theme="lawha"] .dm-sign h2 {
+  font-family: var(--font-display);
+}
+html[data-theme="lawha"] .dm-caption {
+  color: var(--color-on-stage-2);
+}
+html[data-theme="lawha"] .dm-back {
+  border: 2px solid var(--color-ink);
+  box-shadow: -3px 3px 0 var(--color-ink);
+}
+html[data-theme="lawha"] .dm-card {
+  border: 2px solid var(--color-ink);
+  box-shadow: -5px 5px 0 var(--skin-deep);
+}
+html[data-theme="lawha"] .dm-leader {
+  border-top-color: var(--color-on-stage);
+}
+html[data-theme="lawha"] .dm-leader::after {
+  background: var(--color-on-stage);
+}
+
+/* ── the sign-in showcase pieces, the chat composer, the top bar's next-step pill ────────────────────────────── */
+html[data-theme="lawha"] .skin-piece {
+  border: 2px solid var(--skin-deep);
+  box-shadow: -5px 5px 0 var(--skin-deep);
+}
+html[data-theme="lawha"] .skin-composer {
+  border-width: 2px;
+  border-color: var(--skin-edge);
+}
+html[data-theme="lawha"] .skin-composer:focus-within {
+  box-shadow: -4px 4px 0 var(--color-accent);
+}
+html[data-theme="lawha"] .skin-pill {
+  border-width: 2px;
+  border-color: var(--skin-edge);
+  box-shadow: -3px 3px 0 var(--skin-sh);
+}

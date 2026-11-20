@@ -1,0 +1,1371 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Masari / falak direction</title>
+<!--
+  MASARI · DIRECTION "FALAK" (night navigation, the astronomer's instrument)
+  Decided before drawing:
+
+  THE ONE IDEA
+    The product is an astrolabe for a career. An astrolabe does three things: it tells you where you
+    stand, it gives you a bearing, and it is read from engraved scales. So: the roadmap is plotted on
+    the instrument's plate (rings of altitude climbing to the zenith = stations climbing to the job),
+    and the plate's graduated rim is the match ring. When the rim closes, you are at the top.
+
+  THE SIGNATURE DETAIL
+    "The line never touches the star." On a star chart, constellation lines stop short of the star
+    they join. Every drawing here has one plotted point (a plain round dot, never a sparkle) and every
+    stroke that leads to it stops short, leaving a clean gap. It is in the logo (the ring stops short
+    of the star), in each icon (one brass point, strokes stop short), in the avatars (a personal
+    constellation), in the XP bar and match dial (the fill stops short of its end point) and in the
+    roadmap (segments stop short of each station). Dials carry a second, quieter trait: a tick limb.
+
+  COLOUR ROLES (flat colour only: no gradients, no glows, no coloured shadows)
+    night 950/900/800/700  dark "stage" surfaces, deep blue, never black
+    ivory ink 1-4          text and engraved line work on the stage
+    brass                  the accent: the one primary action, selection, the travelled path
+    lit brass (xp)         XP and rewards only, one step lighter, so a number of XP is never a button
+    verdigris              success / done (the patina of brass)
+    ember                  warning, rare
+    vellum                 light surface (documents, logo on light)
+
+  TYPE PAIRING
+    Display: Kufam (600/700). Astrolabes are inscribed in Kufic; Kufam is a geometric Kufic that stays
+    easy to read in a sentence, is monoline like the icons, and its round dots answer the dots of the mark.
+    (Reem Kufi was tried first and dropped after the screenshots: beautiful in one word, slow in a headline.)
+    Text: IBM Plex Sans Arabic (400/500/600). Engineered, calm, strong Latin for SQL / Python / XP,
+    tabular figures for readouts. Numerals are always Latin digits, set in Plex.
+
+  MOTION LANGUAGE: engrave, plot, settle
+    Lines are engraved (drawn at an even pace, never popped). Points are plotted (a short scale-in,
+    no bounce). Needles settle (one small damped overshoot). Things travel on arcs about a pivot
+    rather than on straight slides. The current station invites with a bezel that ticks once a second
+    like a chronometer, not with a glow. Rest is completely still.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Kufam:wght@400..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night-950:#0A111C; --night-900:#0E1726; --night-800:#152136; --night-700:#1C2B45; --night-600:#283B5C;
+  --line:#22324C; --line-2:#34496C; --engrave:#1B2A43;
+  --ink-1:#F2EDE1; --ink-2:#B7C1D0; --ink-3:#8290A8; --ink-4:#58657D;
+  --vellum:#F6F1E6; --vellum-2:#ECE5D5; --vellum-line:#D8CFBB;
+  --night-ink:#0E1726; --night-ink-2:#4A5672; --night-ink-3:#7D8799;
+  --brass:#D6AC52; --brass-hi:#E4C06F; --brass-lo:#B48B38; --brass-deep:#A87C1F; --brass-tint:#283039;
+  --xp:#F2D17C;
+  --ok:#5FB9A4; --ok-tint:#16343A;
+  --warn:#E9854C; --warn-tint:#3A2620;
+  --f-display:"Kufam","IBM Plex Sans Arabic",sans-serif;
+  --f-text:"IBM Plex Sans Arabic",system-ui,sans-serif;
+  --r-ctl:10px; --r-card:16px; --r-panel:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+html{background:#DDDBD5}
+body{font-family:var(--f-text);font-size:16px;line-height:1.7;color:var(--ink-1);min-width:1600px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+svg{display:block}
+.n{font-family:var(--f-text);font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate;display:inline-block}
+
+/* ---------- exploration page chrome ---------- */
+.sec{padding:60px 80px 76px;border-bottom:1px solid #C6C3BB}
+.cap{direction:ltr;text-align:left;font:500 12px/1.5 var(--f-text);letter-spacing:.12em;text-transform:uppercase;color:#625F58;margin-bottom:22px}
+.cap b{color:#1B1A17;font-weight:600}
+.note{direction:ltr;text-align:left;font:400 13.5px/1.65 var(--f-text);color:#55524C}
+.stage{background:var(--night-900);color:var(--ink-1)}
+.paper{background:var(--vellum);color:var(--night-ink);--star:var(--brass-deep);--pt:var(--brass-deep)}
+.tile{border-radius:18px;position:relative;display:grid;place-items:center;overflow:hidden}
+.tag{position:absolute;left:18px;top:14px;direction:ltr;font:500 10.5px/1 var(--f-text);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.paper .tag{color:var(--night-ink-3)}
+
+/* ---------- drawing primitives ---------- */
+.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.ic.s48{width:48px;height:48px}
+.ic.s20{width:20px;height:20px}
+.ic.s18{width:18px;height:18px}
+.ic.s16{width:16px;height:16px}
+.pt{fill:var(--pt,var(--brass));stroke:none}
+.mark{width:64px;height:64px;flex:none;overflow:visible}
+.mk-ring{fill:none;stroke:currentColor;stroke-width:6.4;stroke-linecap:round}
+.mk-path{fill:none;stroke:currentColor;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.mk-node{fill:currentColor}
+.mk-star{fill:var(--star,var(--brass))}
+.mk-tick{fill:none;stroke:currentColor;opacity:.42}
+.wm{font-family:var(--f-display);font-weight:700;line-height:1.2;white-space:nowrap}
+.av-eng{fill:none;stroke:#F2EDE1;stroke-opacity:.17;stroke-width:.8}
+.av-ln{fill:none;stroke:#F2EDE1;stroke-opacity:.55;stroke-width:.8;stroke-linecap:round}
+.av-pt{fill:#F2D17C}
+.av-rim{fill:none;stroke:#F2EDE1;stroke-opacity:.22;stroke-width:1.4}
+
+/* avatar component */
+.av{position:relative;display:inline-block;flex:none;width:var(--s,48px);height:var(--s,48px)}
+.av>.f{width:100%;height:100%}
+.av>.rg{position:absolute;left:-11%;top:-11%;width:122%;height:122%}
+.trk{fill:none;stroke:var(--line-2);stroke-width:4;stroke-dasharray:9 1;stroke-dashoffset:-.5}
+.lit{fill:none;stroke:var(--brass);stroke-width:4;stroke-dasharray:var(--lit,0 70);stroke-dashoffset:-.5}
+.lv1{--lit:9 61}.lv2{--lit:9 1 9 51}.lv3{--lit:9 1 9 1 9 41}.lv4{--lit:9 1 9 1 9 1 9 31}
+.lv5{--lit:9 1 9 1 9 1 9 1 9 21}.lv6{--lit:9 1 9 1 9 1 9 1 9 1 9 11}.lv7{--lit:9 1}
+.av>.lvn{position:absolute;inset-inline-start:-9%;bottom:-9%;width:36%;height:36%;border-radius:50%;background:var(--night-950);border:1.5px solid var(--brass);color:var(--ink-1);font:600 calc(var(--s,48px) * .19)/1 var(--f-text);display:grid;place-items:center}
+
+/* ---------- brand ---------- */
+.brand-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.brand-grid .hero{grid-column:span 4;min-height:400px}
+.brand-grid .hero .mark{width:232px;height:232px}
+.brand-grid .idea{grid-column:span 4;background:#EDEBE6;border-radius:18px;padding:30px 32px;display:flex;flex-direction:column;gap:18px;justify-content:space-between}
+.brand-grid .idea h3{direction:ltr;text-align:left;font:600 20px/1.3 var(--f-text);color:#1B1A17}
+.brand-grid .b3{grid-column:span 3;height:210px}
+.brand-grid .b3.tall{height:250px}
+.lock-h{display:inline-flex;align-items:center;gap:15px}
+.lock-h .mark{width:68px;height:68px}
+.lock-h .wm{font-size:50px;padding-bottom:5px}
+.lock-v{display:inline-flex;flex-direction:column;align-items:center;gap:8px}
+.lock-v .mark{width:84px;height:84px}
+.lock-v .wm{font-size:40px}
+.solo-wm{font-size:66px}
+.sizes{display:grid;grid-template-columns:1fr 1fr;width:100%;height:100%}
+.sizes>div{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding-top:18px}
+.sizes .rowm{display:flex;align-items:center;gap:22px}
+.sizes small{direction:ltr;font:500 10.5px/1 var(--f-text);letter-spacing:.08em;opacity:.6}
+.apptile{width:132px;height:132px;border-radius:31px;background:var(--night-900);display:grid;place-items:center;border:1px solid var(--line-2);color:var(--ink-1)}
+.apptile .mark{width:84px;height:84px}
+.apptile.sm{width:60px;height:60px;border-radius:14px}
+.apptile.sm .mark{width:38px;height:38px}
+.apptile.br{background:var(--brass);border-color:var(--brass);color:var(--night-950);--star:var(--night-950)}
+.construct{width:150px;height:150px;flex:none;color:#1B1A17;--star:#A87C1F}
+
+/* ---------- foundations ---------- */
+.found{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.found>.panel{border-radius:18px;padding:30px 32px;background:#EDEBE6;color:#1B1A17}
+.swgroup{direction:ltr;margin-bottom:22px}
+.swgroup h4{font:600 11px/1 var(--f-text);letter-spacing:.12em;text-transform:uppercase;color:#625F58;margin-bottom:10px}
+.sws{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.sw i{display:block;height:58px;border-radius:10px;border:1px solid rgba(10,17,28,.12)}
+.sw b{display:block;font:600 12.5px/1.3 var(--f-text);margin-top:7px;color:#1B1A17}
+.sw code{display:block;font:400 11.5px/1.3 var(--f-text);color:#625F58}
+code{font-family:var(--f-text)}
+.sw span{display:block;font:400 11.5px/1.35 var(--f-text);color:#625F58;margin-top:2px}
+.type.stage{background:var(--night-900);color:var(--ink-1)}
+.type .fam{display:flex;justify-content:space-between;align-items:baseline;direction:ltr;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:14px;font:500 11px/1.4 var(--f-text);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.type h2{font:700 42px/1.45 var(--f-display);margin-bottom:6px}
+.type .h3{font:600 25px/1.5 var(--f-display);color:var(--ink-2);margin-bottom:22px}
+.type p.body{font:400 16px/1.85 var(--f-text);color:var(--ink-2);max-width:60ch;margin-bottom:22px}
+.type .wts{display:flex;gap:22px;margin-bottom:20px;font-size:22px}
+.type .nums{font:500 40px/1.2 var(--f-text);font-variant-numeric:tabular-nums;direction:ltr;text-align:right;margin-bottom:6px}
+.type .mixed{font:500 19px/1.8 var(--f-text);padding:14px 18px;border:1px solid var(--line);border-radius:12px;display:inline-block;margin-top:6px}
+.type .mixed .xp{color:var(--xp);font-weight:600}
+.scale{direction:ltr;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:baseline;margin-top:22px;font:400 11.5px/1.4 var(--f-text);color:var(--ink-3)}
+.scale span{direction:rtl;color:var(--ink-1);text-align:right}
+
+/* ---------- icons ---------- */
+.icons-wrap{display:grid;grid-template-columns:1fr 330px;gap:16px}
+.icon-grid{border-radius:18px;display:grid;grid-template-columns:repeat(5,1fr);overflow:hidden;gap:1px;background:var(--line)}
+.icell{background:var(--night-900);padding:26px 16px 18px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.icell .pair{display:flex;align-items:center;gap:22px;height:48px}
+.icell span{font:500 13.5px/1.3 var(--f-text);color:var(--ink-2)}
+.icon-side{display:grid;gap:16px;grid-template-rows:auto 1fr}
+.icon-spec{border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px;align-items:center}
+.icon-spec .note{color:var(--ink-3);font-size:12.5px}
+.icon-paper{border-radius:18px;padding:22px;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;place-items:center;align-content:center}
+
+/* ---------- avatars ---------- */
+.av-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:18px;overflow:hidden}
+.avcell{background:var(--night-900);padding:28px 20px 20px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.avcell .trio{display:flex;align-items:flex-end;gap:18px}
+.avcell span{font:500 13.5px/1.3 var(--f-text);color:var(--ink-2)}
+.av-use{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:16px;margin-top:16px}
+.av-use>.k{min-height:210px}
+
+/* ---------- kit ---------- */
+.kit{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.k{background:var(--night-900);border-radius:18px;padding:46px 26px 26px;position:relative;color:var(--ink-1)}
+.k.c3{grid-column:span 3}.k.c4{grid-column:span 4}.k.c5{grid-column:span 5}.k.c6{grid-column:span 6}.k.c7{grid-column:span 7}.k.c8{grid-column:span 8}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 20px;border-radius:var(--r-ctl);font:600 15px/1 var(--f-text);border:1px solid transparent;white-space:nowrap}
+.btn.lg{height:52px;font-size:16px;padding:0 26px}
+.btn.sm{height:36px;font-size:13.5px;padding:0 14px}
+.btn.wide{display:flex;width:100%}
+.btn-p{background:var(--brass);color:var(--night-950);--pt:var(--night-950)}
+.btn-p::after{content:"";position:absolute;inset:3px;border:1px solid rgba(10,17,28,.2);border-radius:7px}
+.btn-p.is-hover{background:var(--brass-hi)}
+.btn-p.is-press{background:var(--brass-lo);transform:translateY(1px)}
+.btn-s{border-color:var(--line-2);color:var(--ink-1)}
+.btn-s.is-hover{background:var(--night-700);border-color:var(--ink-3)}
+.btn-s.is-press{background:var(--night-950);border-color:var(--ink-3);transform:translateY(1px)}
+.btn-g{color:var(--brass)}
+.btn-g.is-hover{background:var(--brass-tint)}
+.btn-g.is-press{background:var(--night-950);transform:translateY(1px)}
+.states{display:grid;grid-template-columns:repeat(3,auto);gap:14px 18px;justify-content:start;align-items:center}
+.states small{direction:ltr;font:500 10.5px/1 var(--f-text);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.chip{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);font:500 14px/1 var(--f-text)}
+.chip.on{border-color:var(--brass);color:var(--ink-1);background:var(--brass-tint)}
+.chip.on::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brass)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.field label{display:block;font:500 13px/1.3 var(--f-text);color:var(--ink-2);margin-bottom:8px}
+.input{display:flex;align-items:center;height:48px;border-radius:var(--r-ctl);border:1px solid var(--line-2);background:var(--night-950);color:var(--ink-3);padding:0 14px;font:400 15px/1 var(--f-text)}
+.input.focus{border-color:var(--brass);outline:1px solid var(--brass);color:var(--ink-1)}
+.input.focus::after{content:"";width:1.5px;height:20px;background:var(--brass);margin-inline-start:2px}
+.card{background:var(--night-800);border:1px solid var(--line);border-radius:var(--r-card);padding:20px}
+.eyebrow{display:flex;align-items:center;gap:6px;font:500 12.5px/1.2 var(--f-text);color:var(--ink-3)}
+.eyebrow::after{content:"";order:-2;width:6px;height:6px;border-radius:50%;background:var(--brass);flex:none}
+.eyebrow::before{content:"";order:-1;width:16px;height:1px;background:var(--ink-4);flex:none;margin-inline-end:2px}
+.h-d{font-family:var(--f-display);font-weight:600;line-height:1.4}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font:500 13.5px/1.3 var(--f-text);color:var(--ink-2)}
+.meta>span{display:inline-flex;align-items:center;gap:6px}
+.xpv{color:var(--xp);font-weight:600}
+.demo{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:6px;border:1px dashed var(--line-2);font:500 11px/1 var(--f-text);color:var(--ink-3);white-space:nowrap}
+
+/* match dial */
+.dial{position:relative;display:inline-grid;place-items:center;width:var(--d,120px);height:var(--d,120px);flex:none}
+.dial>svg{position:absolute;inset:0;width:100%;height:100%}
+.d-min{stroke:var(--line-2)} .d-maj{stroke:var(--ink-4)} .d-trk{stroke:var(--night-700)}
+.d-arc{stroke:var(--brass);stroke-dasharray:var(--pa,0) 200}
+.d-ptg{transform-origin:60px 60px;transform:rotate(calc(var(--p,0) * 3.6deg))}
+.d-pt{fill:var(--xp)}
+.dial b{position:relative;font:600 calc(var(--d,120px) * .225)/1 var(--f-text);font-variant-numeric:tabular-nums;direction:ltr}
+.dial b small{font-size:.55em;font-weight:500;color:var(--ink-2);margin-inline-start:1px}
+.dial.lbl b{transform:translateY(-6px)}
+.dial em{position:absolute;top:60%;font:500 11.5px/1 var(--f-text);font-style:normal;color:var(--ink-3)}
+
+/* xp bar */
+.xpb{display:grid;gap:9px}
+.xpb-head{display:flex;align-items:center;gap:10px;font:500 14px/1.3 var(--f-text)}
+.xpb-head .sp{flex:1}
+.lvb{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:600 13px/1 var(--f-text);border:1.5px solid var(--brass);color:var(--ink-1);background:var(--night-950);flex:none}
+.lvb.next{border-color:var(--line-2);color:var(--ink-3)}
+.xpb-track{position:relative;height:8px;border-radius:4px;background:var(--night-700)}
+.xpb-track i{position:absolute;inset-block:0;inset-inline-start:0;border-radius:4px;background:var(--xp)}
+.xpb-track b{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;background:var(--xp);border:4px solid var(--night-900);transform:translate(50%,-50%)}
+.ruler{width:100%;height:7px;stroke:var(--line-2)}
+.xpb-foot{display:flex;justify-content:space-between;font:400 12px/1.3 var(--f-text);color:var(--ink-3)}
+
+/* streak */
+.streak{display:flex;align-items:center;gap:10px}
+.streak .ic{color:var(--ink-1);--pt:var(--xp)}
+.streak b{font:600 30px/1 var(--f-text)}
+.streak span{font:500 14px/1.3 var(--f-text);color:var(--ink-2)}
+.week{margin-top:18px;width:100%;max-width:270px;height:auto;font-family:var(--f-text)}
+
+/* badges */
+.badges{display:flex;gap:26px;justify-content:space-around}
+.badge{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.seal{position:relative;width:84px;height:84px;display:grid;place-items:center;margin-bottom:8px;color:var(--ink-1)}
+.seal>svg:first-child{position:absolute;inset:0;width:100%;height:100%}
+.sl-o{fill:var(--seal-fill,var(--brass-tint));stroke:var(--seal-line,var(--brass));stroke-width:1.6;stroke-linejoin:round}
+.sl-r{fill:none;stroke:var(--seal-line,var(--brass));stroke-width:1}
+.sl-t{fill:none;stroke:var(--seal-line,var(--brass));stroke-width:2.2;opacity:.7}
+.seal .ic{position:relative;width:26px;height:26px}
+.badge b{font:600 14px/1.4 var(--f-text)}
+.badge small{font:400 12px/1.4 var(--f-text);color:var(--ink-3)}
+.badge.locked{--seal-fill:transparent;--seal-line:var(--line-2);--pt:var(--ink-4)}
+.badge.locked .seal{color:var(--ink-4)}
+.badge.locked b{color:var(--ink-3)}
+
+/* skill marks */
+.pips{width:36px;height:14px;flex:none;overflow:visible}
+.pp{stroke-width:1.2}
+.pp1{fill:var(--f1,none);stroke:var(--s1,var(--ink-4))}
+.pp2{fill:var(--f2,none);stroke:var(--s2,var(--ink-4))}
+.pp3{fill:var(--f3,none);stroke:var(--s3,var(--ink-4))}
+.pips.l1{--f1:var(--brass);--s1:var(--brass)}
+.pips.l2{--f1:var(--brass);--s1:var(--brass);--f2:var(--brass);--s2:var(--brass)}
+.pips.l3{--f1:var(--brass);--s1:var(--brass);--f2:var(--brass);--s2:var(--brass);--f3:var(--brass);--s3:var(--brass)}
+.marks{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center}
+.marks>div{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 6px;border:1px solid var(--line);border-radius:12px}
+.marks .pips{width:54px;height:21px}
+.marks b{font:600 13px/1.2 var(--f-text)}
+.marks small{font:400 12px/1.2 var(--f-text);color:var(--ink-3)}
+.skill{display:inline-flex;align-items:center;gap:10px;height:36px;padding:0 12px;border-radius:9px;border:1px solid var(--line);background:var(--night-800);font:500 13.5px/1 var(--f-text)}
+.skill.sm{height:30px;padding:0 9px;gap:7px;font-size:12.5px;background:var(--night-900)}
+.skill.sm .pips{width:30px;height:12px}
+
+/* job + course cards */
+.job{display:grid;grid-template-columns:1fr auto;gap:14px 18px;align-items:start}
+.job h4,.course h4{font:600 21px/1.45 var(--f-display)}
+.job .who{font:400 14px/1.6 var(--f-text);color:var(--ink-2);display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin-top:2px}
+.job .who span{display:inline-flex;align-items:center;gap:5px}
+.job .foot{grid-column:1/-1;display:flex;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:14px;margin-top:2px}
+.job .foot .sp{flex:1}
+.course{display:grid;gap:14px}
+.raise{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:var(--night-900);border:1px solid var(--line);font:500 13.5px/1.3 var(--f-text);color:var(--ink-2)}
+.raise .sp{flex:1}
+.raise .ic{color:var(--ink-3)}
+
+/* leaderboard */
+.podium{display:grid;grid-template-columns:1fr 1.15fr 1fr;align-items:end;gap:10px;margin-bottom:6px}
+.pod{display:flex;flex-direction:column;align-items:center;gap:3px;padding:18px 8px 14px;border-radius:14px 14px 0 0;background:var(--night-800);border:1px solid var(--line);border-bottom:0;text-align:center}
+.pod.first{padding-top:22px;padding-bottom:30px;background:var(--night-700)}
+.pod .av{margin-bottom:12px}
+.pod b{font:600 14px/1.4 var(--f-text)}
+.pod .n{font:500 13px/1.3 var(--f-text);color:var(--xp)}
+.rank{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:600 13px/1 var(--f-text);color:var(--ink-2);border:1px solid var(--line-2);flex:none}
+.rank.r1{background:var(--xp);border-color:var(--xp);color:var(--night-950)}
+.pod .rank{margin-bottom:8px}
+.lrow{display:flex;align-items:center;gap:14px;padding:10px 12px;border-top:1px solid var(--line);font:500 14.5px/1.3 var(--f-text)}
+.lrow .sp{flex:1}
+.lrow .n{color:var(--ink-2);font-size:13.5px}
+.lrow.me{background:var(--brass-tint);border:1px solid var(--brass);border-radius:12px;margin:4px 0}
+.lrow.me + .lrow{border-top:0}
+.lrow.me .n{color:var(--xp)}
+.lrow .you{font:500 11.5px/1 var(--f-text);color:var(--brass);border:1px solid var(--brass);border-radius:5px;padding:3px 6px;margin-inline-start:8px}
+.lgap{display:flex;justify-content:center;gap:6px;padding:9px 0;border-top:1px solid var(--line)}
+.lgap i{width:3px;height:3px;border-radius:50%;background:var(--ink-4)}
+
+/* chat */
+.chat{display:grid;gap:14px}
+.bubble{justify-self:start;max-width:78%;background:var(--night-700);border-radius:16px 16px 16px 5px;padding:10px 16px;font:400 15px/1.7 var(--f-text)}
+[dir=rtl] .bubble{border-radius:16px 16px 5px 16px}
+.status{display:flex;align-items:center;gap:10px;font:500 14px/1.4 var(--f-text);color:var(--ink-2)}
+.status .ic{color:var(--ink-2)}
+.status small{font:400 12px/1 var(--f-text);color:var(--ink-4)}
+.amsg{display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+.glyph{width:32px;height:32px;border-radius:50%;background:var(--night-700);display:grid;place-items:center;color:var(--ink-1);flex:none}
+.glyph .ic{width:20px;height:20px}
+.amsg .who{font:600 13.5px/32px var(--f-text);color:var(--ink-2)}
+.amsg .txt{grid-column:2;font:400 15px/1.85 var(--f-text);color:var(--ink-1)}
+.amsg .txt strong{font-weight:600;color:var(--xp)}
+.amsg .acts{grid-column:2;display:flex;gap:8px;margin-top:8px}
+.composer{display:flex;align-items:center;gap:10px;height:52px;border-radius:26px;border:1px solid var(--line-2);background:var(--night-950);padding:0 8px 0 20px;font:400 15px/1 var(--f-text);color:var(--ink-3)}
+[dir=rtl] .composer{padding:0 20px 0 8px}
+.composer .sp{flex:1}
+.send{width:36px;height:36px;border-radius:50%;background:var(--brass);color:var(--night-950);display:grid;place-items:center}
+.send .ic{width:18px;height:18px;stroke-width:1.9}
+.composer.open{display:grid;gap:10px;height:auto;border-radius:18px;padding:14px 16px 10px;border-color:var(--brass);color:var(--ink-1)}
+[dir=rtl] .composer.open{padding:14px 16px 10px}
+.composer.open>div{display:flex;align-items:center;gap:10px}
+.composer.open .tool{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 10px;border-radius:8px;border:1px solid var(--line);font:500 12.5px/1 var(--f-text);color:var(--ink-2);--pt:var(--ink-3)}
+.composer.open small{font:400 11.5px/1 var(--f-text);color:var(--ink-4)}
+.xp-gain{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:15px;background:var(--xp);color:var(--night-950);font:600 13.5px/1 var(--f-text);--pt:var(--night-950)}
+</style>
+</head>
+<body>
+
+<!-- ============ SPRITE: every drawing is hand-written SVG ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <clipPath id="avc"><circle cx="48" cy="48" r="48"/></clipPath>
+
+  <!-- LOGO, 64 grid. Ring r24, weight 6.4, open 60deg on the 135deg axis; the star r6 sits in the opening; three stations on the same axis grow as they approach it. -->
+  <symbol id="mark" viewBox="0 0 64 64">
+    <path class="mk-ring" d="M25.9 8.8A24 24 0 1 1 8.8 25.9"/>
+    <circle class="mk-node" cx="43" cy="43" r="2.2"/><circle class="mk-node" cx="36.6" cy="36.6" r="3.5"/><circle class="mk-node" cx="28.4" cy="28.4" r="5"/>
+    <circle class="mk-star" cx="15" cy="15" r="6"/>
+  </symbol>
+  <!-- small cut for 16-32 px: heavier ring, no station dots, wider opening -->
+  <symbol id="mark-s" viewBox="0 0 64 64">
+    <path d="M29.2 9.2A23 23 0 1 1 9.2 29.2" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round"/>
+    <circle class="mk-node" cx="41.6" cy="41.6" r="3.6"/><circle class="mk-node" cx="31" cy="31" r="5"/>
+    <circle class="mk-star" cx="15.7" cy="15.7" r="7"/>
+  </symbol>
+  <!-- engraved cut for large sizes: the mark inside its tick limb -->
+  <symbol id="mark-e" viewBox="-8 -8 80 80">
+    <circle class="mk-tick" cx="32" cy="32" r="35" pathLength="360" stroke-dasharray=".7 4.3" stroke-width="3"/>
+    <circle class="mk-tick" cx="32" cy="32" r="34" pathLength="360" stroke-dasharray=".9 29.1" stroke-width="5"/>
+    <use href="#mark" width="64" height="64"/>
+  </symbol>
+
+  <!-- ICONS, 24 grid, stroke 1.5, round caps, corners r2, one brass point r1.6, strokes stop >=1.6 short of it -->
+  <symbol id="i-path" viewBox="0 0 24 24"><circle cx="19" cy="19" r="2"/><path d="M16.3 18 9.5 15.5 15 9 9.04 6.02"/><circle class="pt" cx="6" cy="4.500" r="1.6"/></symbol>
+  <symbol id="i-tree" viewBox="0 0 24 24"><circle cx="12" cy="19.5" r="2"/><path d="M12 17.5V13M12 13 7.03 8.79M12 13l4.97-4.21M12 13V7.9"/><circle cx="5.5" cy="7.5" r="2"/><circle cx="18.5" cy="7.5" r="2"/><circle class="pt" cx="12" cy="4.5" r="1.6"/></symbol>
+  <symbol id="i-cv" viewBox="0 0 24 24"><path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v3a2 2 0 0 0 2 2h3"/><path d="M12.2 11.8H16M8 15h8M8 18h5"/><circle class="pt" cx="9" cy="11.8" r="1.6"/></symbol>
+  <symbol id="i-jobs" viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5M3 13h5.6M15.4 13H21"/><circle class="pt" cx="12" cy="13" r="1.6"/></symbol>
+  <symbol id="i-courses" viewBox="0 0 24 24"><path d="M10.3 8.3C8.6 7 6.3 6.6 3.5 6.9v11.5c3.1-.3 6.1.2 8.5 1.8M13.7 8.3c1.7-1.3 4-1.7 6.8-1.4v11.5c-3.1-.3-6.1.2-8.5 1.8M12 10.6v9.6"/><circle class="pt" cx="12" cy="7.2" r="1.6"/></symbol>
+  <symbol id="i-advisor" viewBox="0 0 24 24"><path d="M19 4H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h7.5l4.5 3.5V17h2a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><path d="M6.6 10.5h2M15.4 10.5h2"/><circle class="pt" cx="12" cy="10.5" r="1.6"/></symbol>
+  <symbol id="i-leaders" viewBox="0 0 24 24"><path d="M3.5 20v-5a2 2 0 0 1 2-2h3v-3a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v5h3a2 2 0 0 1 2 2v3z"/><path d="M8.5 13.2V20M15.5 15.2V20"/><circle class="pt" cx="12" cy="4.3" r="1.6"/></symbol>
+  <symbol id="i-profile" viewBox="0 0 24 24"><path d="M20.16 8.2A9 9 0 1 1 15.8 3.84"/><circle cx="12" cy="10" r="2.7"/><path d="M6.3 19c.8-3 3-4.6 5.7-4.6s4.9 1.6 5.7 4.6"/><circle class="pt" cx="18.36" cy="5.64" r="1.6"/></symbol>
+  <symbol id="i-xp" viewBox="0 0 24 24"><path d="M12 2.8 20 12l-8 9.2L4 12z"/><path d="M6.9 12h1.7M15.4 12h1.7"/><circle class="pt" cx="12" cy="12" r="1.6"/></symbol>
+  <symbol id="i-level" viewBox="0 0 24 24"><path d="M6.5 14.5 12 9.5l5.5 5M6.5 19.5l5.5-5 5.500 5"/><circle class="pt" cx="12" cy="5" r="1.6"/></symbol>
+  <symbol id="i-streak" viewBox="0 0 24 24"><path d="M12.4 3c.4 3.3 5.2 5.600 5.200 11a5.600 5.600 0 0 1-11.200 0c0-2.100.900-3.600 2-4.900.300 1.400 1.100 2.300 2.100 2.600-.300-3.200.300-6.300 1.900-8.700z"/><circle class="pt" cx="12" cy="15.2" r="1.6"/></symbol>
+  <symbol id="i-badge" viewBox="0 0 24 24"><path d="M19.4 9.6l-2.17 2.17v3.06h-3.06L12 17l-2.17-2.17H6.77v-3.06L4.6 9.6l2.17-2.17V4.37h3.06L12 2.2l2.17 2.17h3.06v3.06z"/><path d="M8.3 17.3 7.4 22l4.6-2.3 4.6 2.3-.9-4.7"/><circle class="pt" cx="12" cy="9.6" r="1.6"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7.500 4h9v5a4.500 4.500 0 0 1-9 0z"/><path d="M7.500 6h-3v1.500a3 3 0 0 0 3 3M16.500 6h3v1.500a3 3 0 0 1-3 3M12 13.500v7M8.500 20.500h7"/><circle class="pt" cx="12" cy="8" r="1.6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.500" width="14" height="10" rx="2"/><path d="M8 10.500V8a4 4 0 0 1 8 0v2.500"/><circle class="pt" cx="12" cy="15.500" r="1.6"/></symbol>
+  <symbol id="i-done" viewBox="0 0 24 24"><path d="M4.500 12.500l4.600 4.600 7.300-8.400"/><circle class="pt" cx="19.300" cy="5.400" r="1.6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.500" cy="10.500" r="6.500"/><path d="M15.400 15.400l5.100 5.100"/><circle class="pt" cx="10.500" cy="10.500" r="1.6"/></symbol>
+  <symbol id="i-city" viewBox="0 0 24 24"><path d="M12 21.200c-4.300-4.300-6.700-7.600-6.700-10.900a6.700 6.700 0 0 1 13.400 0c0 3.300-2.400 6.600-6.700 10.900z"/><circle class="pt" cx="12" cy="10.200" r="1.6"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3M12 16.500v-8M8 12.500l4-4 4 4"/><circle class="pt" cx="12" cy="4.200" r="1.6"/></symbol>
+  <symbol id="i-apply" viewBox="0 0 24 24"><path d="M7.400 5.400 20 10l-6.500 3.500L10 20 5.400 7.400M13.500 13.500 7.400 7.400"/><circle class="pt" cx="4.200" cy="4.200" r="1.6"/></symbol>
+  <symbol id="i-skill" viewBox="0 0 24 24"><circle cx="6" cy="10.700" r="3.300"/><circle cx="13.200" cy="11.600" r="2.400"/><path d="M2.700 17.800h18.600"/><circle class="pt" cx="19.400" cy="12.400" r="1.6"/></symbol>
+  <!-- utility glyphs, same rules -->
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.500"/><path d="M12 9V6.300M14.700 13.500l2 1.200"/><circle class="pt" cx="12" cy="12" r="1.6"/></symbol>
+  <symbol id="i-fwd" viewBox="0 0 24 24"><path d="M19 12H6.500M11.500 6.500 6 12l5.500 5.500"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M14.500 6l-6 6 6 6"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V6.500M6.500 12 12 6.500l5.500 5.500"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.500 6.500l11 11M17.500 6.500l-11 11"/></symbol>
+  <!-- Daleel, the advisor: a dial whose needle has found its star -->
+  <symbol id="i-daleel" viewBox="0 0 24 24"><path d="M9.800 3.790A8.500 8.500 0 1 1 3.790 9.800"/><path class="needle" d="M14.200 14.200 8.800 8.800"/><circle class="pt" cx="6" cy="6" r="1.6"/></symbol>
+
+  <!-- level ring: the avatar's limb, 7 arcs, one per level -->
+  <symbol id="lvring" viewBox="0 0 100 100"><g transform="rotate(-90 50 50)"><circle class="trk" cx="50" cy="50" r="47" pathLength="70"/><circle class="lit" cx="50" cy="50" r="47" pathLength="70"/></g></symbol>
+
+  <!-- match dial -->
+  <symbol id="dial" viewBox="0 0 120 120"><g fill="none" transform="rotate(-90 60 60)">
+    <circle class="d-min" cx="60" cy="60" r="55" pathLength="100" stroke-dasharray=".35 1.65" stroke-width="4"/>
+    <circle class="d-maj" cx="60" cy="60" r="54" pathLength="100" stroke-dasharray=".5 9.5" stroke-width="6.500"/>
+    <circle class="d-trk" cx="60" cy="60" r="44" stroke-width="5"/>
+    <circle class="d-arc" cx="60" cy="60" r="44" pathLength="100" stroke-width="5"/>
+    <g class="d-ptg"><circle class="d-pt" cx="104" cy="60" r="4.300"/></g>
+  </g></symbol>
+
+  <!-- seal: the badge frame, an eight-point khatam with a tick limb -->
+  <symbol id="seal" viewBox="0 0 64 64">
+    <path class="sl-o" d="M62 32l-8.790 8.790v12.420H40.790L32 62l-8.790-8.790H10.790V40.790L2 32l8.790-8.790V10.790h12.420L32 2l8.790 8.790h12.420v12.420z"/>
+    <circle class="sl-r" cx="32" cy="32" r="19.500"/>
+    <circle class="sl-t" cx="32" cy="32" r="16.800" pathLength="360" stroke-dasharray="1.500 13.500"/>
+  </symbol>
+
+  <!-- skill level: three magnitudes, small to large (read right to left) -->
+  <symbol id="pips" viewBox="0 0 36 14"><circle class="pp pp1" cx="32" cy="10.400" r="2.400"/><circle class="pp pp2" cx="22.300" cy="9.300" r="3.500"/><circle class="pp pp3" cx="8.700" cy="7.300" r="5.500"/></symbol>
+
+  <!-- AVATARS, 96 grid. Head, shoulders and bezel share one construction; each person has a constellation of their own. -->
+  <symbol id="av-sara" viewBox="0 0 96 96"><g clip-path="url(#avc)">
+    <rect width="96" height="96" fill="#6A3F2C"/>
+    <circle class="av-eng" cx="48" cy="48" r="42"/><path class="av-eng" d="M-6 66a54 54 0 0 1 108 0"/>
+    <path class="av-ln" d="M18.700 27.300 22.100 22M27.200 17.300l6.200-3.400"/>
+    <circle class="av-pt" cx="17" cy="30" r="1.500"/><circle class="av-pt" cx="24" cy="19" r="2.100"/><circle class="av-pt" cx="36" cy="12.500" r="1.400"/>
+    <path d="M8 100c0-19 16-29 40-29s40 10 40 29z" fill="#283B5C"/>
+    <path d="M48 19C34 19 25.500 29 25.500 44c0 11.500 3.500 20-4.500 35h54c-8-15-4.500-23.500-4.500-35C70.500 29 62 19 48 19z" fill="#63B5A4"/>
+    <ellipse cx="48" cy="46" rx="12.500" ry="15.500" fill="#E8C6A3"/>
+    <path d="M35.800 42.500C36.500 34.500 41.500 30.500 48 30.500s11.500 4 12.200 12c-2.500-4.500-6.500-7-12.200-7s-9.700 2.500-12.200 7z" fill="#3F8F80"/>
+    <path d="M59.500 56C56 64 47 70.500 33 74" fill="none" stroke="#3F8F80" stroke-width="1.300" stroke-linecap="round"/>
+  </g><circle class="av-rim" cx="48" cy="48" r="47.3"/></symbol>
+
+  <symbol id="av-noura" viewBox="0 0 96 96"><g clip-path="url(#avc)">
+    <rect width="96" height="96" fill="#1F4E49"/>
+    <circle class="av-eng" cx="48" cy="48" r="42"/><path class="av-eng" d="M-6 66a54 54 0 0 1 108 0"/>
+    <path class="av-ln" d="M71.900 18.300l3.900 4.900M76.900 29.400 75 35.200"/>
+    <circle class="av-pt" cx="70" cy="16" r="1.400"/><circle class="av-pt" cx="78" cy="26" r="2.100"/><circle class="av-pt" cx="74" cy="38" r="1.500"/>
+    <path d="M8 100c0-19 16-29 40-29s40 10 40 29z" fill="#DCC9A1"/>
+    <path d="M48 20C35.500 20 29.500 29 29.500 43c0 12 .5 22-5 34.500h47C66 65 66.500 55 66.500 43c0-14-6-23-18.500-23z" fill="#1E1613"/>
+    <path d="M42 57h12v11.500a6 6 0 0 1-12 0z" fill="#BF8E68"/>
+    <ellipse cx="48" cy="45.500" rx="13.800" ry="16.500" fill="#D9AB84"/>
+    <path d="M34.200 43C34 32.500 39.800 27 48.500 27c8 0 13.200 5 13.300 14.500-2.800-5.300-6.800-8-12-8.300-3.300 4.800-8.600 8.300-15.600 9.800z" fill="#1E1613"/>
+  </g><circle class="av-rim" cx="48" cy="48" r="47.3"/></symbol>
+
+  <symbol id="av-faisal" viewBox="0 0 96 96"><g clip-path="url(#avc)">
+    <rect width="96" height="96" fill="#2A446F"/>
+    <circle class="av-eng" cx="48" cy="48" r="42"/><path class="av-eng" d="M-6 66a54 54 0 0 1 108 0"/>
+    <path class="av-ln" d="M72.800 17.600l4.600 3.700M80.100 26.900l.9 6.300"/>
+    <circle class="av-pt" cx="70" cy="15.500" r="1.500"/><circle class="av-pt" cx="79.500" cy="23.500" r="2"/><circle class="av-pt" cx="81.500" cy="36.500" r="1.400"/>
+    <path d="M8 100c0-19 16-29 40-29s40 10 40 29z" fill="#E2DCCB"/>
+    <path d="M42 57h12v11.500a6 6 0 0 1-12 0z" fill="#B38560"/>
+    <path d="M40.500 71.500l7.500 5.500 7.500-5.500" fill="none" stroke="#B9B2A0" stroke-width="1.200" stroke-linejoin="round"/>
+    <ellipse cx="48" cy="45" rx="14.500" ry="17" fill="#CB9D76"/>
+    <path d="M36 53c2.500 6 6.800 9.300 12 9.300s9.500-3.300 12-9.300c-2.800 3.600-6.800 5.400-12 5.400s-9.200-1.800-12-5.400z" fill="#1E1613"/>
+    <path d="M48 20C35 20 27.500 28.500 27 40c-.4 9.500-3 22-8 34l14-5c1.600-9 1.800-17 1.600-24.500C34.400 36 39.500 30.500 48 30.500s13.600 5.500 13.400 14c-.2 7.500 0 15.500 1.600 24.500l14 5c-5-12-7.600-24.500-8-34C68.500 28.500 61 20 48 20z" fill="#F2EDE1"/>
+    <path d="M30.300 47c-.6 8-2.300 16-5 23.500M65.700 47c.6 8 2.300 16 5 23.500" fill="none" stroke="#CFC8B6" stroke-width="1.200" stroke-linecap="round"/>
+    <path d="M29.800 32.500C36 26 60 26 66.200 32.500M31.800 27.800C37.800 22 58.200 22 64.200 27.800" fill="none" stroke="#0A111C" stroke-width="3.200"/>
+  </g><circle class="av-rim" cx="48" cy="48" r="47.3"/></symbol>
+
+  <symbol id="av-reem" viewBox="0 0 96 96"><g clip-path="url(#avc)">
+    <rect width="96" height="96" fill="#5E4B1F"/>
+    <circle class="av-eng" cx="48" cy="48" r="42"/><path class="av-eng" d="M-6 66a54 54 0 0 1 108 0"/>
+    <path class="av-ln" d="M15.800 31.500l1.800-5.900M21 20.300l5.500-4.600M32.200 13.700l5.400.6"/>
+    <circle class="av-pt" cx="15" cy="34.500" r="1.400"/><circle class="av-pt" cx="18.800" cy="22.500" r="1.900"/><circle class="av-pt" cx="29" cy="13.500" r="1.500"/><circle class="av-pt" cx="40.500" cy="14.600" r="1.200"/>
+    <path d="M8 100c0-19 16-29 40-29s40 10 40 29z" fill="#2A446F"/>
+    <path d="M48 19C34 19 25.500 29 25.500 44c0 11.500 3.500 20-4.500 35h54c-8-15-4.500-23.500-4.500-35C70.500 29 62 19 48 19z" fill="#EFE7D4"/>
+    <ellipse cx="48" cy="46" rx="12.500" ry="15.500" fill="#EDCFAE"/>
+    <path d="M35.800 42.500C36.500 34.500 41.500 30.500 48 30.500s11.500 4 12.200 12c-2.500-4.500-6.500-7-12.200-7s-9.700 2.500-12.200 7z" fill="#CBBD9C"/>
+    <path d="M36.500 56.500c3 5.500 7 8 11.500 8s8.500-2.500 11.500-8M30 66c5 4.500 11 6.800 18 6.800s13-2.300 18-6.800" fill="none" stroke="#CBBD9C" stroke-width="1.300" stroke-linecap="round"/>
+    <g fill="none" stroke="#0E1726" stroke-width="1.300"><circle cx="42.500" cy="46" r="4.300"/><circle cx="53.500" cy="46" r="4.300"/><path d="M46.800 46h2.400"/></g>
+  </g><circle class="av-rim" cx="48" cy="48" r="47.3"/></symbol>
+
+  <symbol id="av-abdullah" viewBox="0 0 96 96"><g clip-path="url(#avc)">
+    <rect width="96" height="96" fill="#1F4E49"/>
+    <circle class="av-eng" cx="48" cy="48" r="42"/><path class="av-eng" d="M-6 66a54 54 0 0 1 108 0"/>
+    <path class="av-ln" d="M17.900 27.800l2.200-5.600M23.700 17.200l6.200-2.900"/>
+    <circle class="av-pt" cx="16.800" cy="30.800" r="1.500"/><circle class="av-pt" cx="21.500" cy="19" r="1.500"/><circle class="av-pt" cx="33.200" cy="13" r="2.100"/>
+    <path d="M8 100c0-19 16-29 40-29s40 10 40 29z" fill="#F2EDE1"/>
+    <path d="M42 57h12v11.500a6 6 0 0 1-12 0z" fill="#A27650"/>
+    <path d="M40.500 71.500l7.500 5.500 7.500-5.500" fill="none" stroke="#B9B2A0" stroke-width="1.200" stroke-linejoin="round"/>
+    <ellipse cx="48" cy="45" rx="14.500" ry="17" fill="#BC8A5E"/>
+    <path d="M33.600 47.500c.7 9.500 6.400 15.500 14.400 15.500s13.700-6 14.400-15.500c-2.400 5-7.400 7.500-14.400 7.500s-12-2.500-14.400-7.500z" fill="#1E1613"/>
+    <path d="M48 20C35 20 27.500 28.500 27 40c-.4 9.500-3 22-8 34l14-5c1.600-9 1.800-17 1.600-24.500C34.400 36 39.500 30.500 48 30.500s13.600 5.500 13.400 14c-.2 7.500 0 15.500 1.600 24.500l14 5c-5-12-7.600-24.500-8-34C68.500 28.500 61 20 48 20z" fill="#B8472F"/>
+    <path d="M22 66.500l9.500-3.400M24 59l8.300-3M25.600 51.500l7.300-2.600M26.600 44l6.700-2.400M74 66.500l-9.500-3.400M72 59l-8.300-3M70.400 51.500l-7.300-2.600M69.400 44l-6.700-2.400" fill="none" stroke="#F2EDE1" stroke-opacity=".6" stroke-width=".9" stroke-linecap="round"/>
+    <path d="M29.800 32.500C36 26 60 26 66.200 32.500M31.800 27.800C37.800 22 58.200 22 64.200 27.800" fill="none" stroke="#0A111C" stroke-width="3.200"/>
+  </g><circle class="av-rim" cx="48" cy="48" r="47.3"/></symbol>
+
+  <symbol id="av-jood" viewBox="0 0 96 96"><g clip-path="url(#avc)">
+    <rect width="96" height="96" fill="#5E4B1F"/>
+    <circle class="av-eng" cx="48" cy="48" r="42"/><path class="av-eng" d="M-6 66a54 54 0 0 1 108 0"/>
+    <path class="av-ln" d="M73.300 15.900l4.200 4.600M80 25.800l.6 5.900"/>
+    <circle class="av-pt" cx="71" cy="13.500" r="2"/><circle class="av-pt" cx="79.500" cy="22.800" r="1.400"/><circle class="av-pt" cx="81" cy="35" r="1.600"/>
+    <path d="M8 100c0-19 16-29 40-29s40 10 40 29z" fill="#283B5C"/>
+    <path d="M48 17C33 17 25 27.500 25 43c0 11 3 20-4 35h54c-7-15-4-24-4-35 0-15.500-8-26-23-26z" fill="#CF8B74"/>
+    <path d="M42 57h12v11.500a6 6 0 0 1-12 0z" fill="#C9966F"/>
+    <ellipse cx="48" cy="46" rx="13.500" ry="16" fill="#E3B992"/>
+    <path d="M34.300 42.500C34 33 39.800 28 48 28s14 5 13.700 14.500C59 37.500 54.500 35 48 35s-11 2.500-13.700 7.500z" fill="#3A241B"/>
+    <path d="M28 52c.5 9-1 17-4.500 25M61.500 57C58 65 49 71 35 74.500" fill="none" stroke="#A9634F" stroke-width="1.300" stroke-linecap="round"/>
+  </g><circle class="av-rim" cx="48" cy="48" r="47.3"/></symbol>
+
+  <symbol id="av-khalid" viewBox="0 0 96 96"><g clip-path="url(#avc)">
+    <rect width="96" height="96" fill="#6A3F2C"/>
+    <circle class="av-eng" cx="48" cy="48" r="42"/><path class="av-eng" d="M-6 66a54 54 0 0 1 108 0"/>
+    <path class="av-ln" d="M68.800 14.700l5.600 1.500M79 20.300l2.600 5.400M82.200 31.900l-1.700 5.300"/>
+    <circle class="av-pt" cx="65.800" cy="13.900" r="1.300"/><circle class="av-pt" cx="77.500" cy="17.200" r="1.900"/><circle class="av-pt" cx="83" cy="28.800" r="1.400"/><circle class="av-pt" cx="79.500" cy="40.200" r="1.600"/>
+    <path d="M8 100c0-19 16-29 40-29s40 10 40 29z" fill="#3F8F80"/>
+    <path d="M42 57h12v11.500a6 6 0 0 1-12 0z" fill="#B88A63"/>
+    <path d="M39.500 71.300c2 3.300 5 4.900 8.500 4.900s6.500-1.600 8.500-4.900" fill="none" stroke="#2B6F63" stroke-width="1.300" stroke-linecap="round"/>
+    <circle cx="33.400" cy="47" r="2.700" fill="#C2946C"/><circle cx="62.600" cy="47" r="2.700" fill="#C2946C"/>
+    <ellipse cx="48" cy="45" rx="14.500" ry="17" fill="#D4A680"/>
+    <path d="M33.300 43C32 31 38 24 48 24s16 7 14.700 19c-1.700-5.500-6.200-9-14.700-9s-13 3.500-14.700 9z" fill="#1E1613"/>
+    <path d="M33.600 48c.7 9.500 6.400 15.200 14.400 15.200S61.700 57.500 62.400 48c-2.400 5-7.400 7.500-14.400 7.500S36 53 33.600 48z" fill="#1E1613"/>
+  </g><circle class="av-rim" cx="48" cy="48" r="47.3"/></symbol>
+
+  <symbol id="av-lama" viewBox="0 0 96 96"><g clip-path="url(#avc)">
+    <rect width="96" height="96" fill="#2A446F"/>
+    <circle class="av-eng" cx="48" cy="48" r="42"/><path class="av-eng" d="M-6 66a54 54 0 0 1 108 0"/>
+    <path class="av-ln" d="M17.300 33.300l.6-5.700M20 21.600l4.100-4.300"/>
+    <circle class="av-pt" cx="17" cy="36.500" r="1.500"/><circle class="av-pt" cx="18.300" cy="24.300" r="1.400"/><circle class="av-pt" cx="26.500" cy="15" r="2.100"/>
+    <path d="M8 100c0-19 16-29 40-29s40 10 40 29z" fill="#D6AC52"/>
+    <circle cx="48" cy="19.500" r="7.800" fill="#3A241B"/>
+    <path d="M42 57h12v11.500a6 6 0 0 1-12 0z" fill="#B38560"/>
+    <path d="M39.500 71.300c2 3.300 5 4.900 8.500 4.900s6.500-1.600 8.500-4.900" fill="none" stroke="#A87C1F" stroke-width="1.300" stroke-linecap="round"/>
+    <ellipse cx="48" cy="46" rx="13.800" ry="16.500" fill="#CB9D76"/>
+    <path d="M33.800 46C32 33 38.500 26 48 26s16 7 14.200 20c-1.600-7-6-11-14.200-11s-12.600 4-14.200 11z" fill="#3A241B"/>
+    <g fill="none" stroke="#0E1726" stroke-width="1.300"><circle cx="42.300" cy="47" r="4.500"/><circle cx="53.700" cy="47" r="4.500"/><path d="M46.800 47h2.400"/></g>
+  </g><circle class="av-rim" cx="48" cy="48" r="47.3"/></symbol>
+</defs>
+</svg>
+
+<!-- ================= 1. BRAND ================= -->
+<section id="brand" class="sec">
+  <p class="cap"><b>01 · Brand</b> &nbsp; the mark, the wordmark «مساري», lockups, small sizes, app tile</p>
+  <div class="brand-grid">
+    <div class="tile stage hero"><span class="tag">Mark on stage</span><svg class="mark"><use href="#mark"/></svg></div>
+    <div class="tile paper hero"><span class="tag">Mark on vellum</span><svg class="mark"><use href="#mark"/></svg></div>
+    <div class="idea">
+      <div>
+        <h3>An astrolabe reduced to three facts.</h3>
+        <p class="note" style="margin-top:12px">A dial that is almost closed, a path of three stations that grow as they near the opening, and the star the dial is waiting for. The ring stops short of the star, the way lines on a star chart never touch the star they lead to: that gap is the signature carried into every icon, avatar and screen. Read as a progress ring it says what the product says: you are most of the way there and the next step is already plotted.</p>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:22px;direction:ltr">
+        <svg class="construct" viewBox="0 0 64 64">
+          <g fill="none" stroke="#A9A69D" stroke-width=".25"><path d="M0 16h64M0 32h64M0 48h64M16 0v64M32 0v64M48 0v64M0 0l64 64"/><circle cx="32" cy="32" r="24"/><circle cx="32" cy="32" r="20.800"/><circle cx="32" cy="32" r="27.200"/><path d="M32 32 25.900 8.800M32 32 8.800 25.900"/></g>
+          <use href="#mark"/>
+        </svg>
+        <p class="note" style="font-size:12px">64 grid · ring r 24, weight 6.4 · opening 60° on the 135° axis · star r 6 · stations r 2.2 / 3.5 / 5, all on that axis. Two optical cuts: an engraved one with its tick limb for large sizes, a heavier one without station dots for 32 px and below.</p>
+      </div>
+    </div>
+
+    <div class="tile stage b3"><span class="tag">Wordmark</span><span class="wm solo-wm">مساري</span></div>
+    <div class="tile paper b3"><span class="tag">Wordmark</span><span class="wm solo-wm">مساري</span></div>
+    <div class="tile stage b3"><span class="tag">Horizontal lockup</span><span class="lock-h"><svg class="mark"><use href="#mark"/></svg><span class="wm">مساري</span></span></div>
+    <div class="tile paper b3"><span class="tag">Horizontal lockup</span><span class="lock-h"><svg class="mark"><use href="#mark"/></svg><span class="wm">مساري</span></span></div>
+
+    <div class="tile stage b3 tall"><span class="tag">Stacked lockup</span><span class="lock-v"><svg class="mark"><use href="#mark"/></svg><span class="wm">مساري</span></span></div>
+    <div class="tile paper b3 tall"><span class="tag">Stacked lockup</span><span class="lock-v"><svg class="mark"><use href="#mark"/></svg><span class="wm">مساري</span></span></div>
+    <div class="tile b3 tall" style="background:none">
+      <div class="sizes">
+        <div class="stage" style="border-radius:18px 0 0 18px">
+          <div class="rowm"><svg class="mark" style="width:32px;height:32px"><use href="#mark-s"/></svg><svg class="mark" style="width:20px;height:20px"><use href="#mark-s"/></svg></div><small>SMALL CUT · 32 · 20</small>
+          <div class="rowm"><svg class="mark" style="width:32px;height:32px"><use href="#mark"/></svg><svg class="mark" style="width:20px;height:20px"><use href="#mark"/></svg></div><small>PRIMARY · 32 · 20</small>
+        </div>
+        <div class="paper" style="border-radius:0 18px 18px 0">
+          <div class="rowm"><svg class="mark" style="width:32px;height:32px"><use href="#mark-s"/></svg><svg class="mark" style="width:20px;height:20px"><use href="#mark-s"/></svg></div><small>SMALL CUT · 32 · 20</small>
+          <div class="rowm"><svg class="mark" style="width:32px;height:32px"><use href="#mark"/></svg><svg class="mark" style="width:20px;height:20px"><use href="#mark"/></svg></div><small>PRIMARY · 32 · 20</small>
+        </div>
+      </div>
+    </div>
+    <div class="tile b3 tall" style="background:#EDEBE6"><span class="tag" style="color:#625F58">App tile · engraved cut</span>
+      <div style="display:flex;align-items:flex-end;gap:18px">
+        <div class="apptile"><svg class="mark"><use href="#mark-e"/></svg></div>
+        <div class="apptile sm"><svg class="mark"><use href="#mark-s"/></svg></div>
+        <div class="apptile sm br"><svg class="mark"><use href="#mark-s"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. FOUNDATIONS ================= -->
+<section id="foundations" class="sec">
+  <p class="cap"><b>02 · Foundations</b> &nbsp; colour tokens and typography</p>
+  <div class="found">
+    <div class="panel">
+      <div class="swgroup"><h4>Stage (dark surfaces)</h4><div class="sws">
+        <div class="sw"><i style="background:#0A111C"></i><b>night-950</b><code>#0A111C</code><span>page, wells, inputs</span></div>
+        <div class="sw"><i style="background:#0E1726"></i><b>night-900</b><code>#0E1726</code><span>stage, sidebar, plate</span></div>
+        <div class="sw"><i style="background:#152136"></i><b>night-800</b><code>#152136</code><span>cards</span></div>
+        <div class="sw"><i style="background:#1C2B45"></i><b>night-700</b><code>#1C2B45</code><span>raised, hover, bubble</span></div>
+        <div class="sw"><i style="background:#283B5C"></i><b>night-600</b><code>#283B5C</code><span>strong fill</span></div>
+      </div></div>
+      <div class="swgroup"><h4>Ink on stage · lines</h4><div class="sws">
+        <div class="sw"><i style="background:#F2EDE1"></i><b>ink-1</b><code>#F2EDE1</code><span>text, line work</span></div>
+        <div class="sw"><i style="background:#B7C1D0"></i><b>ink-2</b><code>#B7C1D0</code><span>secondary text</span></div>
+        <div class="sw"><i style="background:#8290A8"></i><b>ink-3</b><code>#8290A8</code><span>labels, captions</span></div>
+        <div class="sw"><i style="background:#58657D"></i><b>ink-4</b><code>#58657D</code><span>locked, disabled</span></div>
+        <div class="sw"><i style="background:#0E1726;display:grid;gap:9px;padding:12px 10px"><u style="display:block;height:1px;background:#1B2A43"></u><u style="display:block;height:1px;background:#22324C"></u><u style="display:block;height:1px;background:#34496C"></u></i><b>lines</b><code>#1B2A43 #22324C #34496C</code><span>plate rings, hairlines, control borders</span></div>
+      </div></div>
+      <div class="swgroup"><h4>Signal</h4><div class="sws">
+        <div class="sw"><i style="background:#D6AC52"></i><b>brass</b><code>#D6AC52</code><span>accent: the primary action, selection, travelled path. Hover #E4C06F, pressed #B48B38</span></div>
+        <div class="sw"><i style="background:#F2D17C"></i><b>xp</b><code>#F2D17C</code><span>XP and rewards only (lit brass)</span></div>
+        <div class="sw"><i style="background:#5FB9A4"></i><b>ok</b><code>#5FB9A4</code><span>success, done (verdigris)</span></div>
+        <div class="sw"><i style="background:#E9854C"></i><b>warn</b><code>#E9854C</code><span>warning (ember), rare</span></div>
+        <div class="sw"><i style="background:#283039"></i><b>brass-tint</b><code>#283039</code><span>selected surface, own row</span></div>
+      </div></div>
+      <div class="swgroup" style="margin-bottom:0"><h4>Light surfaces</h4><div class="sws">
+        <div class="sw"><i style="background:#F6F1E6"></i><b>vellum</b><code>#F6F1E6</code><span>documents, light pages</span></div>
+        <div class="sw"><i style="background:#ECE5D5"></i><b>vellum-2</b><code>#ECE5D5</code><span>sunken on light</span></div>
+        <div class="sw"><i style="background:#D8CFBB"></i><b>vellum-line</b><code>#D8CFBB</code><span>hairline on light</span></div>
+        <div class="sw"><i style="background:#0E1726"></i><b>night-ink</b><code>#0E1726 #4A5672 #7D8799</code><span>ink 1-3 on light</span></div>
+        <div class="sw"><i style="background:#A87C1F"></i><b>brass-deep</b><code>#A87C1F</code><span>accent on light</span></div>
+      </div></div>
+    </div>
+    <div class="panel type stage">
+      <div class="fam"><span>Display · Kufam 600 / 700</span><span>42 · 38 · 25 · 21</span></div>
+      <h2>كل مهارة نجمة، وكل نجمة تقرّبك.</h2>
+      <p class="h3">طريقك إلى محلل بيانات: المحطة 3 من 6</p>
+      <div class="fam"><span>Text · IBM Plex Sans Arabic 400 / 500 / 600</span><span>18 · 16 · 14 · 12.5</span></div>
+      <p class="body">ارفع سيرتك الذاتية، فيستخرج مساري مهاراتك الحقيقية ويقارنها بما تطلبه الوظائف، ثم يرسم لك الطريق من موقعك اليوم إلى الوظيفة التي تريدها: محطةً بعد محطة، وكل دورة تكملها ترفع نسبة توافقك.</p>
+      <div class="wts"><span style="font-weight:400">مساري عادي</span><span style="font-weight:500">مساري متوسط</span><span style="font-weight:600">مساري عريض</span><span style="font-family:var(--f-display);font-weight:600">مساري كوفي</span></div>
+      <div class="fam"><span>Numerals · Latin digits, tabular, Plex</span><span>readouts</span></div>
+      <p class="nums">0123456789 &nbsp; 1,240 XP &nbsp; 70%</p>
+      <p class="mixed">أكملت دورة SQL للمبتدئين <bdi class="n xp">+200 XP</bdi></p>
+      <div class="scale">
+        <code>display 42/1.45 · 700</code><span style="font:700 34px/1.4 var(--f-display)">جاهزة لوظيفة محلل بيانات</span>
+        <code>title 25/1.45 · 600</code><span style="font:600 25px/1.45 var(--f-display)">SQL للمبتدئين</span>
+        <code>body 16/1.85 · 400</code><span style="font:400 16px/1.85 var(--f-text)">خطوتك التالية دورة من 6 ساعات.</span>
+        <code>label 13.5/1.3 · 500</code><span style="font:500 13.5px/1.4 var(--f-text);color:var(--ink-2)">المستوى 3 · متعلّمة · سلسلة 4 أيام</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. ICONS ================= -->
+<section id="icons" class="sec">
+  <p class="cap"><b>03 · Icons</b> &nbsp; 20 of Masari's own, 24 grid, shown at 48 and 24 px</p>
+  <div class="icons-wrap">
+    <div class="icon-grid">
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-path"/></svg><svg class="ic"><use href="#i-path"/></svg></div><span>المسار</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-tree"/></svg><svg class="ic"><use href="#i-tree"/></svg></div><span>شجرة المهارات</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-cv"/></svg><svg class="ic"><use href="#i-cv"/></svg></div><span>السيرة الذاتية</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-jobs"/></svg><svg class="ic"><use href="#i-jobs"/></svg></div><span>الوظائف</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-courses"/></svg><svg class="ic"><use href="#i-courses"/></svg></div><span>الدورات</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-advisor"/></svg><svg class="ic"><use href="#i-advisor"/></svg></div><span>المستشار</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-leaders"/></svg><svg class="ic"><use href="#i-leaders"/></svg></div><span>المتصدرون</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-profile"/></svg><svg class="ic"><use href="#i-profile"/></svg></div><span>الملف الشخصي</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-xp"/></svg><svg class="ic"><use href="#i-xp"/></svg></div><span>نقاط الخبرة XP</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-level"/></svg><svg class="ic"><use href="#i-level"/></svg></div><span>المستوى</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-streak"/></svg><svg class="ic"><use href="#i-streak"/></svg></div><span>السلسلة اليومية</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-badge"/></svg><svg class="ic"><use href="#i-badge"/></svg></div><span>وسام</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-trophy"/></svg><svg class="ic"><use href="#i-trophy"/></svg></div><span>كأس</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-lock"/></svg><svg class="ic"><use href="#i-lock"/></svg></div><span>قفل</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-done"/></svg><svg class="ic"><use href="#i-done"/></svg></div><span>تمّ</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-search"/></svg><svg class="ic"><use href="#i-search"/></svg></div><span>بحث</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-city"/></svg><svg class="ic"><use href="#i-city"/></svg></div><span>المدينة</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-upload"/></svg><svg class="ic"><use href="#i-upload"/></svg></div><span>رفع ملف</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-apply"/></svg><svg class="ic"><use href="#i-apply"/></svg></div><span>تقديم</span></div>
+      <div class="icell"><div class="pair"><svg class="ic s48"><use href="#i-skill"/></svg><svg class="ic"><use href="#i-skill"/></svg></div><span>مستوى المهارة</span></div>
+    </div>
+    <div class="icon-side">
+      <div class="icon-spec stage">
+        <svg viewBox="0 0 24 24" width="200" height="200" style="overflow:visible">
+          <g fill="none" stroke="#22324C" stroke-width=".06"><path d="M0 0h24v24H0zM2 0v24M4 0v24M6 0v24M8 0v24M10 0v24M12 0v24M14 0v24M16 0v24M18 0v24M20 0v24M22 0v24M0 2h24M0 4h24M0 6h24M0 8h24M0 10h24M0 12h24M0 14h24M0 16h24M0 18h24M0 20h24M0 22h24"/></g>
+          <rect x="2" y="2" width="20" height="20" fill="none" stroke="#34496C" stroke-width=".08" stroke-dasharray=".4 .4"/>
+          <circle cx="12" cy="4.500" r="3.200" fill="none" stroke="#D6AC52" stroke-width=".08" stroke-dasharray=".3 .3"/>
+          <g fill="none" stroke="#F2EDE1" stroke-width="1.500" stroke-linecap="round" stroke-linejoin="round"><use href="#i-tree"/></g>
+        </svg>
+        <p class="note">One weight (1.5). Round caps and joins, corners r 2, live area 20. One brass point (r 1.6) per icon; every stroke that leads to it stops short, so the point always sits in clear space (dashed ring).</p>
+      </div>
+      <div class="icon-paper paper">
+        <svg class="ic"><use href="#i-path"/></svg><svg class="ic"><use href="#i-cv"/></svg><svg class="ic"><use href="#i-jobs"/></svg><svg class="ic"><use href="#i-xp"/></svg><svg class="ic"><use href="#i-trophy"/></svg>
+        <svg class="ic"><use href="#i-advisor"/></svg><svg class="ic"><use href="#i-leaders"/></svg><svg class="ic"><use href="#i-streak"/></svg><svg class="ic"><use href="#i-badge"/></svg><svg class="ic"><use href="#i-apply"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4. AVATARS ================= -->
+<section id="avatars" class="sec">
+  <p class="cap"><b>04 · Avatars</b> &nbsp; 8 from the set at 96 / 48 / 32 px, then level, rank, leaderboard row, chat header</p>
+  <div class="av-grid">
+    <div class="avcell"><div class="trio"><span class="av" style="--s:96px"><svg class="f"><use href="#av-sara"/></svg></span><span class="av" style="--s:48px"><svg class="f"><use href="#av-sara"/></svg></span><span class="av" style="--s:32px"><svg class="f"><use href="#av-sara"/></svg></span></div><span>سارة</span></div>
+    <div class="avcell"><div class="trio"><span class="av" style="--s:96px"><svg class="f"><use href="#av-faisal"/></svg></span><span class="av" style="--s:48px"><svg class="f"><use href="#av-faisal"/></svg></span><span class="av" style="--s:32px"><svg class="f"><use href="#av-faisal"/></svg></span></div><span>فيصل</span></div>
+    <div class="avcell"><div class="trio"><span class="av" style="--s:96px"><svg class="f"><use href="#av-noura"/></svg></span><span class="av" style="--s:48px"><svg class="f"><use href="#av-noura"/></svg></span><span class="av" style="--s:32px"><svg class="f"><use href="#av-noura"/></svg></span></div><span>نورة</span></div>
+    <div class="avcell"><div class="trio"><span class="av" style="--s:96px"><svg class="f"><use href="#av-abdullah"/></svg></span><span class="av" style="--s:48px"><svg class="f"><use href="#av-abdullah"/></svg></span><span class="av" style="--s:32px"><svg class="f"><use href="#av-abdullah"/></svg></span></div><span>عبدالله</span></div>
+    <div class="avcell"><div class="trio"><span class="av" style="--s:96px"><svg class="f"><use href="#av-reem"/></svg></span><span class="av" style="--s:48px"><svg class="f"><use href="#av-reem"/></svg></span><span class="av" style="--s:32px"><svg class="f"><use href="#av-reem"/></svg></span></div><span>ريم</span></div>
+    <div class="avcell"><div class="trio"><span class="av" style="--s:96px"><svg class="f"><use href="#av-khalid"/></svg></span><span class="av" style="--s:48px"><svg class="f"><use href="#av-khalid"/></svg></span><span class="av" style="--s:32px"><svg class="f"><use href="#av-khalid"/></svg></span></div><span>خالد</span></div>
+    <div class="avcell"><div class="trio"><span class="av" style="--s:96px"><svg class="f"><use href="#av-jood"/></svg></span><span class="av" style="--s:48px"><svg class="f"><use href="#av-jood"/></svg></span><span class="av" style="--s:32px"><svg class="f"><use href="#av-jood"/></svg></span></div><span>جود</span></div>
+    <div class="avcell"><div class="trio"><span class="av" style="--s:96px"><svg class="f"><use href="#av-lama"/></svg></span><span class="av" style="--s:48px"><svg class="f"><use href="#av-lama"/></svg></span><span class="av" style="--s:32px"><svg class="f"><use href="#av-lama"/></svg></span></div><span>لمى</span></div>
+  </div>
+  <div class="av-use">
+    <div class="k"><span class="tag">Level: the limb has 7 arcs, one lights per level</span>
+      <div style="display:flex;align-items:center;justify-content:space-around;gap:18px;padding-top:14px">
+        <div style="display:grid;justify-items:center;gap:18px"><span class="av lv1" style="--s:64px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-jood"/></svg><b class="lvn">1</b></span><small style="color:var(--ink-3);font-size:12.5px">مبتدئة</small></div>
+        <div style="display:grid;justify-items:center;gap:18px"><span class="av lv3" style="--s:64px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-sara"/></svg><b class="lvn">3</b></span><small style="color:var(--ink-3);font-size:12.5px">متعلّمة</small></div>
+        <div style="display:grid;justify-items:center;gap:18px"><span class="av lv5" style="--s:64px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-faisal"/></svg><b class="lvn">5</b></span><small style="color:var(--ink-3);font-size:12.5px">محترف</small></div>
+        <div style="display:grid;justify-items:center;gap:18px"><span class="av lv7" style="--s:64px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-noura"/></svg><b class="lvn">7</b></span><small style="color:var(--ink-3);font-size:12.5px">أسطورة</small></div>
+        <div style="display:grid;justify-items:center;gap:18px"><span class="av lv3" style="--s:32px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-sara"/></svg></span><small style="color:var(--ink-3);font-size:12.5px" class="n">32 px</small></div>
+      </div>
+    </div>
+    <div class="k"><span class="tag">In a leaderboard row</span>
+      <div class="lrow" style="border-top:0"><span class="rank r1">1</span><span class="av lv6" style="--s:40px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-noura"/></svg></span><span>نورة القحطاني</span><span class="sp"></span><span class="n">3,420 XP</span></div>
+      <div class="lrow me"><span class="rank">7</span><span class="av lv3" style="--s:40px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-sara"/></svg></span><span>سارة العتيبي<span class="you">أنت</span></span><span class="sp"></span><span class="n">1,240 XP</span></div>
+    </div>
+    <div class="k"><span class="tag">In a chat header</span>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--night-800);margin-top:10px">
+        <span class="glyph"><svg class="ic"><use href="#i-daleel"/></svg></span>
+        <div style="line-height:1.35"><b style="font:600 15px/1.3 var(--f-text)">دليل</b><div style="font-size:12.5px;color:var(--ink-3)">مستشارك في مساري</div></div>
+        <span style="flex:1"></span>
+        <span class="av lv3" style="--s:32px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-sara"/></svg></span>
+        <svg class="ic s20" style="color:var(--ink-3)"><use href="#i-close"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. KIT ================= -->
+<section id="kit" class="sec">
+  <p class="cap"><b>05 · Kit</b> &nbsp; the UI pieces</p>
+  <div class="kit">
+    <div class="k c5"><span class="tag">Buttons · rest / hover / pressed</span>
+      <div class="states">
+        <small>Rest</small><small>Hover</small><small>Pressed</small>
+        <span class="btn btn-p">ابدأ الآن<svg class="ic s18"><use href="#i-fwd"/></svg></span><span class="btn btn-p is-hover">ابدأ الآن<svg class="ic s18"><use href="#i-fwd"/></svg></span><span class="btn btn-p is-press">ابدأ الآن<svg class="ic s18"><use href="#i-fwd"/></svg></span>
+        <span class="btn btn-s">تفاصيل الدورة</span><span class="btn btn-s is-hover">تفاصيل الدورة</span><span class="btn btn-s is-press">تفاصيل الدورة</span>
+        <span class="btn btn-g">ليس الآن</span><span class="btn btn-g is-hover">ليس الآن</span><span class="btn btn-g is-press">ليس الآن</span>
+      </div>
+    </div>
+    <div class="k c4"><span class="tag">Chips · quick replies in onboarding</span>
+      <p style="font:500 15px/1.6 var(--f-text);margin-bottom:12px">ما مجال دراستك؟</p>
+      <div class="chips"><span class="chip">علوم الحاسب</span><span class="chip on">إدارة الأعمال</span><span class="chip">الهندسة</span><span class="chip">المالية والمحاسبة</span><span class="chip">مجال آخر</span></div>
+    </div>
+    <div class="k c3"><span class="tag">Text input · rest / focus</span>
+      <div class="field" style="margin-bottom:14px"><label>اسمك</label><div class="input">مثال: سارة العتيبي</div></div>
+      <div class="field"><label>اسمك</label><div class="input focus">سارة</div></div>
+    </div>
+
+    <div class="k c3"><span class="tag">Card</span>
+      <div class="card"><p class="eyebrow">خطوتك التالية</p><h4 class="h-d" style="font-size:21px;margin:10px 0 4px">SQL للمبتدئين</h4><p style="font-size:14px;color:var(--ink-2);line-height:1.75">أول دورة تفتح لك باب الاستعلام عن البيانات بنفسك.</p></div>
+    </div>
+    <div class="k c3"><span class="tag">Match ring · 70%</span>
+      <div style="display:flex;align-items:center;gap:18px;justify-content:center">
+        <span class="dial lbl" style="--d:136px;--p:70;--pa:66.8"><svg><use href="#dial"/></svg><b>70<small>%</small></b><em>توافق</em></span>
+        <div style="display:grid;gap:12px;justify-items:center">
+          <span class="dial" style="--d:64px;--p:70;--pa:66.8"><svg><use href="#dial"/></svg><b>70</b></span>
+          <span class="dial" style="--d:44px;--p:70;--pa:66.8"><svg><use href="#dial"/></svg><b>70</b></span>
+        </div>
+      </div>
+    </div>
+    <div class="k c6"><span class="tag">XP bar with level</span>
+      <div class="xpb">
+        <div class="xpb-head"><span class="lvb">3</span><span>المستوى 3 · <b style="font-weight:600">متعلّمة</b></span><span class="sp"></span><span class="n xpv">1,240 XP</span><span class="lvb next">4</span></div>
+        <div class="xpb-track"><i style="width:48%"></i><b style="inset-inline-start:48%"></b></div>
+        <svg class="ruler"><line x1="0" y1="3.5" x2="100%" y2="3.5" stroke-width="7" stroke-dasharray="1 9"/></svg>
+        <div class="xpb-foot"><span class="n">1,000</span><span>بقي <span class="n">260 XP</span> لتصلي إلى المستوى 4 · ممارِسة</span><span class="n">1,500</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)">
+        <span class="xp-gain"><svg class="ic s16"><use href="#i-xp"/></svg><bdi class="n">+200 XP</bdi></span>
+        <span style="font-size:13px;color:var(--ink-3)">مكسب XP: يصل إلى الشريط على قوس</span>
+        <span style="flex:1"></span>
+        <div class="xpb" style="width:190px"><div class="xpb-track" style="height:6px"><i style="width:48%"></i><b style="inset-inline-start:48%;width:14px;height:14px"></b></div></div>
+        <span style="font-size:12px;color:var(--ink-3)">مضغوط</span>
+      </div>
+    </div>
+
+    <div class="k c3"><span class="tag">Streak counter</span>
+      <div class="streak"><svg class="ic" style="width:34px;height:34px"><use href="#i-streak"/></svg><b class="n">4</b><span>أيام متتالية</span></div>
+      <svg class="week" viewBox="0 0 270 50">
+        <g fill="none" stroke="var(--brass)" stroke-width="1.6" stroke-linecap="round"><path d="M243 14h-18M207 14h-18M171 14h-16"/></g>
+        <g fill="var(--xp)"><circle cx="252" cy="14" r="5"/><circle cx="216" cy="14" r="5"/><circle cx="180" cy="14" r="5"/><circle cx="144" cy="14" r="6.500"/></g>
+        <circle cx="144" cy="14" r="11" fill="none" stroke="var(--brass)" stroke-width="1.2"/>
+        <g fill="none" stroke="var(--ink-4)" stroke-width="1.3"><circle cx="108" cy="14" r="5"/><circle cx="72" cy="14" r="5"/><circle cx="36" cy="14" r="5"/></g>
+        <g font-size="12" text-anchor="middle" fill="var(--ink-3)"><text x="252" y="44">ح</text><text x="216" y="44">ن</text><text x="180" y="44">ث</text><text x="144" y="44" fill="var(--ink-1)">ر</text><text x="108" y="44">خ</text><text x="72" y="44">ج</text><text x="36" y="44">س</text></g>
+      </svg>
+    </div>
+    <div class="k c5"><span class="tag">Badges · two earned, one locked</span>
+      <div class="badges">
+        <div class="badge"><span class="seal"><svg><use href="#seal"/></svg><svg class="ic"><use href="#i-path"/></svg></span><b>الخطوة الأولى</b><small>أنشأتِ ملفك</small></div>
+        <div class="badge"><span class="seal"><svg><use href="#seal"/></svg><svg class="ic"><use href="#i-streak"/></svg></span><b>سلسلة 3 أيام</b><small>ثلاثة أيام متتالية</small></div>
+        <div class="badge locked"><span class="seal"><svg><use href="#seal"/></svg><svg class="ic"><use href="#i-lock"/></svg></span><b>جاهزة للوظيفة</b><small>عند توافق 100%</small></div>
+      </div>
+    </div>
+    <div class="k c4"><span class="tag">Skill level marks · 0 to 3</span>
+      <div class="marks">
+        <div><svg class="pips"><use href="#pips"/></svg><b class="n">0</b><small>لم تبدأ</small></div>
+        <div><svg class="pips l1"><use href="#pips"/></svg><b class="n">1</b><small>أساسي</small></div>
+        <div><svg class="pips l2"><use href="#pips"/></svg><b class="n">2</b><small>متوسط</small></div>
+        <div><svg class="pips l3"><use href="#pips"/></svg><b class="n">3</b><small>متقن</small></div>
+      </div>
+      <div class="chips" style="margin-top:14px"><span class="skill">Excel<svg class="pips l3"><use href="#pips"/></svg></span><span class="skill">الإحصاء<svg class="pips l2"><use href="#pips"/></svg></span><span class="skill">SQL<svg class="pips l1"><use href="#pips"/></svg></span></div>
+    </div>
+
+    <div class="k c6"><span class="tag">Job card</span>
+      <div class="card job">
+        <div>
+          <h4>محلل بيانات</h4>
+          <div class="who"><span>شركة نخلة الرقمية</span><span><svg class="ic s16"><use href="#i-city"/></svg>الرياض</span><span class="demo">بيانات تجريبية</span></div>
+          <div class="chips" style="margin-top:14px"><span class="skill">Excel<svg class="pips l3"><use href="#pips"/></svg></span><span class="skill">الإحصاء<svg class="pips l2"><use href="#pips"/></svg></span><span class="skill" style="color:var(--ink-3)">SQL<svg class="pips"><use href="#pips"/></svg></span></div>
+        </div>
+        <span class="dial lbl" style="--d:108px;--p:70;--pa:66.8"><svg><use href="#dial"/></svg><b>70<small>%</small></b><em>توافق</em></span>
+        <div class="foot"><span style="font-size:13.5px;color:var(--ink-2)">ينقصك لهذه الوظيفة: SQL و Power BI</span><span class="sp"></span><span class="btn btn-s sm">التفاصيل</span><span class="btn btn-p sm"><svg class="ic s16"><use href="#i-apply"/></svg>التقديم عبر دليل</span></div>
+      </div>
+    </div>
+    <div class="k c6"><span class="tag">Course card</span>
+      <div class="card course">
+        <div style="display:flex;align-items:flex-start;gap:12px"><div style="flex:1"><p class="eyebrow">دورة · المحطة 3 من 6</p><h4 style="margin-top:8px">SQL للمبتدئين</h4></div><span class="btn btn-p">ابدأ الآن<svg class="ic s18"><use href="#i-fwd"/></svg></span></div>
+        <div class="meta"><span><svg class="ic s18"><use href="#i-clock"/></svg>6 ساعات</span><span class="xpv"><svg class="ic s18" style="--pt:var(--xp)"><use href="#i-xp"/></svg><bdi class="n">+200 XP</bdi></span></div>
+        <div class="raise"><svg class="ic s18"><use href="#i-skill"/></svg><span>ترفع مهارة <b style="color:var(--ink-1);font-weight:600">SQL</b></span><span class="sp"></span><svg class="pips"><use href="#pips"/></svg><svg class="ic s16"><use href="#i-fwd"/></svg><svg class="pips l1"><use href="#pips"/></svg></div>
+      </div>
+    </div>
+
+    <div class="k c6"><span class="tag">Leaderboard block</span>
+      <div class="podium">
+        <div class="pod"><span class="rank">2</span><span class="av lv6" style="--s:52px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-faisal"/></svg></span><b>فيصل الحربي</b><span class="n">3,180 XP</span></div>
+        <div class="pod first"><span class="rank r1">1</span><span class="av lv6" style="--s:68px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-noura"/></svg></span><b>نورة القحطاني</b><span class="n">3,420 XP</span></div>
+        <div class="pod"><span class="rank">3</span><span class="av lv5" style="--s:52px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-reem"/></svg></span><b>ريم الشهري</b><span class="n">2,960 XP</span></div>
+      </div>
+      <div class="lgap"><i></i><i></i><i></i></div>
+      <div class="lrow"><span class="rank">6</span><span class="av lv3" style="--s:36px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-abdullah"/></svg></span><span>عبدالله الدوسري</span><span class="sp"></span><span class="n">1,310 XP</span></div>
+      <div class="lrow me"><span class="rank">7</span><span class="av lv3" style="--s:36px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-sara"/></svg></span><span>سارة العتيبي<span class="you">أنت</span></span><span class="sp"></span><span class="n">1,240 XP</span></div>
+      <div class="lrow"><span class="rank">8</span><span class="av lv3" style="--s:36px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-jood"/></svg></span><span>جود المطيري</span><span class="sp"></span><span class="n">1,185 XP</span></div>
+      <p style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:13px;color:var(--ink-3)"><span>يفصلك <span class="n" style="color:var(--xp)">70 XP</span> عن المركز 6</span><span class="demo">بيانات تجريبية</span></p>
+    </div>
+    <div class="k c6"><span class="tag">Chat · user bubble, status line, advisor message, composer</span>
+      <div class="chat">
+        <div class="bubble">وش أسوّي الحين؟</div>
+        <div class="status"><span class="glyph"><svg class="ic"><use href="#i-daleel"/></svg></span><span>دليل يراجع مسارك…</span><small class="n">3s</small></div>
+        <div class="amsg">
+          <span class="glyph"><svg class="ic"><use href="#i-daleel"/></svg></span><span class="who">دليل</span>
+          <p class="txt">أكملتِ محطتين من ست، وتوافقك مع وظيفة محلل بيانات <strong class="n">70%</strong>. خطوتك التالية دورة SQL للمبتدئين: 6 ساعات، وبعدها يصل توافقك إلى <strong class="n">90%</strong>.</p>
+          <div class="acts"><span class="chip">افتح الدورة</span><span class="chip">لماذا SQL أولًا؟</span></div>
+        </div>
+        <div class="composer"><span>اسأل دليل عن مسارك…</span><span class="sp"></span><span class="send"><svg class="ic"><use href="#i-send"/></svg></span></div>
+        <div class="composer open">
+          <p>ورّني وظائف محلل بيانات في الرياض</p>
+          <div><span class="tool"><svg class="ic s18"><use href="#i-upload"/></svg>إرفاق السيرة</span><span class="sp"></span><small>Enter للإرسال</small><span class="send"><svg class="ic"><use href="#i-send"/></svg></span></div>
+        </div>
+        <p class="note" style="color:var(--ink-3);font-size:12px">Composer at rest is a 52 px pill; on focus it opens into a card (height and radius on one spring). The sent bubble leaves from the send button's corner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ================= SCREENS ================= */
+.frame{width:1440px;height:900px;position:relative;overflow:hidden;background:var(--night-950);color:var(--ink-1);margin:0 auto}
+.frame .sp{flex:1}
+.fcap{width:1440px;margin:16px auto 0}
+
+/* ---------- home ---------- */
+.hm-side{position:absolute;right:0;top:0;bottom:0;width:236px;background:var(--night-900);border-left:1px solid var(--line);padding:0 16px 18px;display:flex;flex-direction:column}
+.hm-logo{height:72px;display:flex;align-items:center;gap:10px;padding:0 8px}
+.hm-logo .mark{width:34px;height:34px}
+.hm-logo .wm{font-size:25px;padding-bottom:3px}
+.nav{display:grid;gap:3px;margin-top:16px}
+.nav a{display:flex;align-items:center;gap:12px;height:44px;padding:0 12px;border-radius:10px;font:500 15px/1 var(--f-text);color:var(--ink-2);--pt:var(--ink-3)}
+.nav a.on{background:var(--night-700);color:var(--ink-1);--pt:var(--brass);font-weight:600}
+.nav a.on::after{content:"";margin-inline-start:auto;width:6px;height:6px;border-radius:50%;background:var(--brass)}
+.hm-level{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:9px;font:500 13px/1.3 var(--f-text)}
+.hm-level .xpb-track b{border-color:var(--night-900)}
+.hm-level small{font:400 12px/1.3 var(--f-text);color:var(--ink-3)}
+.hm-top{position:absolute;left:0;right:236px;top:0;height:72px;display:flex;align-items:center;gap:10px;padding:0 24px;border-bottom:1px solid var(--line)}
+.search{display:flex;align-items:center;gap:10px;width:360px;height:42px;border-radius:21px;border:1px solid var(--line);background:var(--night-900);padding:0 14px;color:var(--ink-3);font:400 14px/1 var(--f-text);--pt:var(--ink-3)}
+.stat{display:flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:21px;border:1px solid var(--line);font:600 14px/1 var(--f-text);color:var(--ink-1)}
+.stat small{font:400 12.5px/1 var(--f-text);color:var(--ink-3)}
+.stat .ic{--pt:var(--xp)}
+.user{display:flex;align-items:center;gap:13px;margin-inline-start:8px}
+.user b{display:block;font:600 14.5px/1.35 var(--f-text)}
+.user small{display:block;font:400 12.5px/1.35 var(--f-text);color:var(--ink-3)}
+.hm-main{position:absolute;left:24px;top:92px;width:1156px;height:788px}
+.hm-col{position:absolute;left:0;top:0;width:336px;height:788px;display:flex;flex-direction:column;gap:14px}
+.hm-chart{position:absolute;right:0;top:0;width:800px;height:788px}
+.hm-chart>svg{position:absolute;inset:0}
+.hm-head{position:absolute;right:0;top:0;text-align:right}
+.hm-head h1{font:700 38px/1.35 var(--f-display);margin-top:4px}
+.hm-head p.sub{font:500 13.5px/1.4 var(--f-text);color:var(--ink-2);margin-top:6px}
+.plate text{font-family:var(--f-text);font-size:10px;fill:var(--ink-4);text-anchor:middle}
+.plate .num{font-size:10.5px;font-weight:600;fill:var(--ink-3)}
+.bz{fill:none;stroke:var(--brass-lo);stroke-width:1}
+.bz-t{fill:none;stroke:var(--brass-lo);stroke-width:3;stroke-dasharray:.1 .9}
+.bz-i{transform-origin:0 0;animation:tick 60s steps(60) infinite}
+.bz-i circle{fill:var(--xp)}
+@keyframes tick{to{transform:rotate(360deg)}}
+.lb{position:absolute;white-space:nowrap}
+.lb b{display:block;font:600 14.5px/1.4 var(--f-text)}
+.lb small{display:flex;align-items:center;gap:5px;font:500 12px/1.45 var(--f-text);color:var(--ink-3)}
+.lb.r{text-align:left}.lb.r small{justify-content:flex-end}
+.lb.done small{color:var(--ok)}
+.lb.lock b{color:var(--ink-3);font-weight:500}
+.lb.goal b{font:600 15.5px/1.45 var(--f-text);color:var(--ink-1)}
+.lb.br b{font:600 13.5px/1.4 var(--f-text);color:var(--ink-2)}
+.now{position:absolute;padding:10px 14px 11px;border-radius:12px;background:var(--night-800);border:1px solid var(--brass)}
+.now .k1{font:500 11.5px/1.3 var(--f-text);color:var(--brass)}
+.now b{display:block;font:600 17.5px/1.5 var(--f-display)}
+.now .k2{display:flex;gap:10px;font:500 12.5px/1.3 var(--f-text);color:var(--ink-2);margin-top:2px}
+.here{position:absolute;display:flex;align-items:center;gap:7px;height:32px;padding-inline:4px 12px;border-radius:16px;background:var(--ink-1);color:var(--night-950);font:600 12.5px/1 var(--f-text);white-space:nowrap}
+.here::after{content:"";position:absolute;right:-5px;top:50%;width:10px;height:10px;background:var(--ink-1);transform:translateY(-50%) rotate(45deg);border-radius:2px}
+.here .av{position:relative;z-index:1}
+.readout{position:absolute;font:600 17px/1.2 var(--f-text);color:var(--xp)}
+.readout small{display:block;font:400 11px/1.3 var(--f-text);color:var(--ink-3)}
+.legend{position:absolute;display:flex;gap:16px;font:400 12px/1 var(--f-text);color:var(--ink-3)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:9px;height:9px;border-radius:50%;display:block}
+.hm-next h3{font:600 25px/1.45 var(--f-display);margin:8px 0 2px}
+.hm-next .why{font:400 13.5px/1.6 var(--f-text);color:var(--ink-2);margin-bottom:12px}
+.hm-next .raise{margin:12px 0 14px}
+.hm-match .mrow{display:flex;align-items:flex-end;gap:14px;margin:8px 0 12px}
+.hm-match .big{font:600 54px/1 var(--f-text);font-variant-numeric:tabular-nums}
+.hm-match .big small{font-size:.45em;color:var(--ink-2);font-weight:500;margin-inline-start:2px}
+.hm-match .mrow p{font:400 13px/1.55 var(--f-text);color:var(--ink-2);padding-bottom:3px}
+.hm-match .mrow p b{color:var(--xp);font-weight:600}
+.mscale{width:100%;height:auto;overflow:visible}
+.lnk{font:500 12.5px/1.2 var(--f-text);color:var(--brass)}
+.mini3{display:flex;align-items:center;gap:10px;margin:14px 0 10px;font:400 13px/1.4 var(--f-text);color:var(--ink-2)}
+.mini3 .stack{display:flex}
+.mini3 .stack .av{margin-inline-start:-8px;border-radius:50%;outline:2px solid var(--night-800)}
+.mini3 .stack .av:first-child{margin-inline-start:0}
+.hm-lead .lrow{padding:8px 10px;font-size:14px;gap:10px;margin:0}
+.hm-lead .foot{font:400 12.5px/1.4 var(--f-text);color:var(--ink-3);margin-top:9px}
+.launch{margin-top:auto;display:flex;align-items:center;gap:12px;height:60px;border-radius:30px;border:1px solid var(--line-2);background:var(--night-800);padding-inline:8px 18px}
+.launch .glyph{width:44px;height:44px;background:var(--brass);color:var(--night-950);--pt:var(--night-950)}
+.launch .glyph .ic{width:24px;height:24px;stroke-width:1.7}
+.launch b{display:block;font:600 15px/1.35 var(--f-text)}
+.launch small{display:block;font:400 12.5px/1.3 var(--f-text);color:var(--ink-3)}
+.launch>.ic{color:var(--ink-3)}
+
+/* ---------- sign-in ---------- */
+.si-left{position:absolute;left:0;top:0;bottom:0;width:580px;padding:40px 64px 36px;display:flex;flex-direction:column}
+.si-left .lock-h .mark{width:42px;height:42px}
+.si-left .lock-h{gap:11px}
+.si-left .lock-h .wm{font-size:31px;padding-bottom:3px}
+.si-form{margin:auto 0;display:grid;gap:22px}
+.si-form h1{font:700 40px/1.45 var(--f-display)}
+.si-form .field label{font-size:14px}
+.si-form .input{height:56px;font-size:16px;border-radius:12px;padding:0 18px}
+.si-form .btn{height:56px;font-size:17px;border-radius:12px}
+.si-form .btn::after{border-radius:9px}
+.si-form .hint{display:flex;align-items:center;gap:8px;font:400 13.5px/1.5 var(--f-text);color:var(--ink-3)}
+.si-foot{font:400 12.5px/1.5 var(--f-text);color:var(--ink-4)}
+.si-right{position:absolute;left:580px;right:0;top:0;bottom:0;background:var(--night-900);border-left:1px solid var(--line);overflow:hidden}
+.si-right>svg.bg{position:absolute;inset:0}
+.si-limb{transform-box:fill-box;transform-origin:center;animation:turn 240s linear infinite}
+@keyframes turn{to{transform:rotate(360deg)}}
+.pc{position:absolute;background:var(--night-800);border:1px solid var(--line-2);border-radius:14px;padding:14px 16px}
+.pc .cap2{font:500 11.5px/1.3 var(--f-text);color:var(--ink-3);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.si-dial{position:absolute;left:325px;top:345px;text-align:center}
+.si-dial p{font:500 13px/1.4 var(--f-text);color:var(--ink-2);margin-top:8px}
+.si-tok{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:15px;background:var(--xp);color:var(--night-950);font:600 13.5px/1 var(--f-text);--pt:var(--night-950);offset-path:path("M372 372 Q 262 322 214 213");offset-rotate:0deg;animation:tok 6s infinite}
+@keyframes tok{0%,12%{offset-distance:0%;opacity:0;transform:scale(.8)}16%{opacity:1;transform:scale(1)}34%{offset-distance:96%;opacity:1;transform:scale(1)}38%,100%{offset-distance:100%;opacity:0;transform:scale(.4)}}
+.si-fill{animation:sifill 6s infinite}
+@keyframes sifill{0%,36%{width:48%}60%,94%{width:88%}100%{width:48%}}
+.si-fillpt{animation:sifillpt 6s infinite}
+@keyframes sifillpt{0%,36%{inset-inline-start:48%}60%,94%{inset-inline-start:88%}100%{inset-inline-start:48%}}
+.si-rows{position:relative;height:106px}
+.si-rows .slot{position:absolute;right:0;width:22px;height:22px;font-size:12px}
+.si-rows .lrow{position:absolute;left:0;right:32px;height:46px;border:1px solid var(--line);border-radius:10px;background:var(--night-800);padding:0 10px;gap:10px;font-size:13.5px;margin:0}
+.si-rows .r6{top:0;animation:r6 6s infinite}
+.si-rows .r7{top:60px;z-index:2;animation:r7 6s infinite}
+.si-rows .lrow.me{background:var(--brass-tint);border-color:var(--brass)}
+@keyframes r7{0%,14%{transform:translate(0,0)}34%{transform:translate(-18px,-32px)}52%,94%{transform:translate(0,-60px)}100%{transform:translate(0,0)}}
+@keyframes r6{0%,34%{transform:translate(0,0);opacity:1}40%{opacity:.45}54%,94%{transform:translate(0,60px);opacity:1}100%{transform:translate(0,0)}}
+.si-cv{position:absolute;left:606px;top:584px;width:164px;border-radius:8px;background:var(--vellum);padding:16px 14px;display:grid;gap:7px;align-content:start}
+.si-cv p{font:600 10px/14px var(--f-text);color:var(--night-ink-3)}
+.si-cv i{display:block;height:5px;border-radius:3px;background:var(--vellum-line)}
+.si-cv i.hl{background:var(--brass-deep)}
+.si-cv u{position:absolute;left:0;right:0;height:1.5px;background:var(--night-ink);opacity:.5;top:40%;animation:scan 6s linear infinite}
+@keyframes scan{0%{top:12%}50%{top:82%}100%{top:12%}}
+.si-sk{position:absolute;display:flex;flex-direction:column;gap:9px;align-items:flex-start;right:312px;top:640px}
+.si-sk .skill:nth-child(3){animation:plot 6s infinite}
+@keyframes plot{0%,20%{opacity:0;transform:scale(.7)}30%,94%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.7)}}
+.si-draw{stroke-dasharray:146;animation:draw 6s infinite}
+@keyframes draw{0%,10%{stroke-dashoffset:146}40%,94%{stroke-dashoffset:0}100%{stroke-dashoffset:146}}
+
+/* ---------- phone ---------- */
+.ph{width:390px;height:844px;border-radius:38px;margin:0}
+.ph-top{height:60px;display:flex;align-items:center;gap:8px;padding:8px 18px 0}
+.ph-top .mark{width:28px;height:28px}
+.ph-top .wm{font-size:21px;padding-bottom:2px}
+.ph-top .stat{height:34px;padding:0 10px;font-size:13px;gap:6px}
+.ph-head{display:flex;align-items:center;padding:8px 20px 0}
+.ph-head h1{font:700 28px/1.35 var(--f-display)}
+.ph-xp{margin:12px 20px 0;display:grid;gap:7px;font:500 12.5px/1.3 var(--f-text)}
+.ph-xp .xpb-track{height:6px}
+.ph-xp .xpb-track b{width:14px;height:14px;border-color:var(--night-950)}
+.ph-chart{position:absolute;left:0;top:226px;width:390px;height:380px}
+.ph-chart>svg{position:absolute;inset:0}
+.ph .lb b{font-size:13.5px}
+.ph .lb small{font-size:11.5px}
+.ph-sheet{position:absolute;left:10px;right:10px;bottom:84px;border-radius:20px;background:var(--night-800);border:1px solid var(--line-2);padding:14px 16px 16px}
+.ph-sheet h3{font:600 21px/1.45 var(--f-display);margin-top:5px}
+.ph-sheet .meta{margin:4px 0 12px;font-size:13px}
+.ph-tabs{position:absolute;left:0;right:0;bottom:0;height:76px;background:var(--night-900);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:0 6px 8px}
+.ph-tabs a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font:500 11px/1 var(--f-text);color:var(--ink-3);--pt:var(--ink-4)}
+.ph-tabs a.on{color:var(--ink-1);--pt:var(--brass)}
+.ph-fab{position:absolute;left:16px;bottom:262px;width:52px;height:52px;border-radius:50%;background:var(--night-800);color:var(--ink-1);display:grid;place-items:center;border:1px solid var(--line-2)}
+.ph-fab .ic{width:26px;height:26px;stroke-width:1.7}
+
+/* ================= MOTION ================= */
+@property --xpn{syntax:"<integer>";inherits:false;initial-value:240}
+.mo{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mo>div{border-radius:18px;background:var(--night-900);padding:48px 0 0;position:relative;height:380px;overflow:hidden}
+.mo .box{position:relative;width:440px;height:280px;margin:0 auto}
+.mo .box>svg{position:absolute;inset:0}
+.mo p.note{position:absolute;left:24px;right:24px;bottom:18px;color:var(--ink-3);font-size:12.5px}
+.mo *{animation-duration:6s;animation-iteration-count:infinite;animation-fill-mode:both}
+/* (a) a stage unlocks: the line is engraved to it, its ring is cut, the lock leaves, the point is plotted */
+.ma-line{stroke-dasharray:170;animation-name:ma-line;animation-timing-function:cubic-bezier(.45,0,.55,1)}
+@keyframes ma-line{0%,12%{stroke-dashoffset:170;opacity:1}38%,94%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.ma-ring{stroke-dasharray:101;animation-name:ma-ring;animation-timing-function:cubic-bezier(.45,0,.55,1)}
+@keyframes ma-ring{0%,38%{stroke-dashoffset:101;opacity:1}52%,94%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.ma-lock{transform-box:fill-box;transform-origin:center;animation-name:ma-lock}
+@keyframes ma-lock{0%,44%{opacity:1;transform:scale(1)}52%,96%{opacity:0;transform:scale(.6)}100%{opacity:1;transform:scale(1)}}
+.ma-pt{transform-box:fill-box;transform-origin:center;animation-name:ma-pt;animation-timing-function:cubic-bezier(.2,.8,.3,1)}
+@keyframes ma-pt{0%,52%{transform:scale(0)}60%,94%{transform:scale(1);opacity:1}100%{transform:scale(1);opacity:0}}
+.ma-bez{animation-name:ma-bez}
+@keyframes ma-bez{0%,56%{opacity:0}64%,94%{opacity:1}100%{opacity:0}}
+.ma-dim{animation-name:ma-dim}
+@keyframes ma-dim{0%,56%{opacity:1}64%,96%{opacity:0}100%{opacity:1}}
+.ma-lit{animation-name:ma-lit}
+@keyframes ma-lit{0%,56%{opacity:0;filter:blur(3px)}66%,94%{opacity:1;filter:blur(0)}100%{opacity:0;filter:blur(0)}}
+.ma-tag{animation-name:ma-tag}
+@keyframes ma-tag{0%,62%{opacity:0;transform:translateY(6px)}70%,94%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(0)}}
+/* (b) XP gain: the token travels on an arc, lands on the end point, the bar is filled and the readout counts */
+.mb-tok{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:16px;background:var(--xp);color:var(--night-950);font:600 14px/1 var(--f-text);--pt:var(--night-950);offset-path:path("M318 60 Q 216 62 228 168");offset-rotate:0deg;animation-name:mb-tok;animation-timing-function:cubic-bezier(.5,0,.3,1)}
+@keyframes mb-tok{0%,10%{offset-distance:0%;opacity:0;transform:scale(.8)}14%{offset-distance:0%;opacity:1;transform:scale(1)}36%{offset-distance:94%;opacity:1;transform:scale(1)}40%,100%{offset-distance:100%;opacity:0;transform:scale(.35)}}
+.mb-fill{animation-name:mb-fill;animation-timing-function:cubic-bezier(.45,0,.2,1)}
+@keyframes mb-fill{0%,38%{width:48%}62%,94%{width:88%}100%{width:48%}}
+.mb-pt{animation-name:mb-pt;animation-timing-function:cubic-bezier(.45,0,.2,1)}
+@keyframes mb-pt{0%,38%{inset-inline-start:48%}62%,94%{inset-inline-start:88%}100%{inset-inline-start:48%}}
+.mb-cnt{animation-name:mb-cnt;animation-timing-function:cubic-bezier(.45,0,.2,1);counter-reset:x var(--xpn)}
+.mb-cnt::after{content:"1," counter(x) " XP"}
+@keyframes mb-cnt{0%,38%{--xpn:240}62%,94%{--xpn:440}100%{--xpn:240}}
+.mb-left{animation-name:mb-left;counter-reset:y var(--xpl)}
+@property --xpl{syntax:"<integer>";inherits:false;initial-value:260}
+.mb-left::after{content:counter(y) " XP"}
+@keyframes mb-left{0%,38%{--xpl:260}62%,94%{--xpl:60}100%{--xpl:260}}
+.mb-done{animation-name:mb-done}
+@keyframes mb-done{0%,4%{opacity:0;transform:translateY(6px)}10%,94%{opacity:1;transform:translateY(0)}100%{opacity:0}}
+/* (c) the path is revealed: rings engraved, stations plotted one by one, joined, then the dial settles on the reading */
+.mc-arc{animation-name:mc-arc;animation-timing-function:cubic-bezier(.45,0,.55,1)}
+@keyframes mc-arc{0%,2%{stroke-dashoffset:var(--len)}18%,94%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.mc-p{transform-box:fill-box;transform-origin:center;animation-timing-function:cubic-bezier(.2,.8,.3,1)}
+.mc-p1{animation-name:mc-p1}.mc-p2{animation-name:mc-p2}.mc-p3{animation-name:mc-p3}.mc-p4{animation-name:mc-p4}
+@keyframes mc-p1{0%,12%{transform:scale(0)}17%,94%{transform:scale(1);opacity:1}100%{transform:scale(1);opacity:0}}
+@keyframes mc-p2{0%,26%{transform:scale(0)}31%,94%{transform:scale(1);opacity:1}100%{transform:scale(1);opacity:0}}
+@keyframes mc-p3{0%,38%{transform:scale(0)}43%,94%{transform:scale(1);opacity:1}100%{transform:scale(1);opacity:0}}
+@keyframes mc-p4{0%,50%{transform:scale(0)}56%,94%{transform:scale(1);opacity:1}100%{transform:scale(1);opacity:0}}
+.mc-l{stroke-dasharray:90;animation-timing-function:cubic-bezier(.45,0,.55,1)}
+.mc-l1{animation-name:mc-l1}.mc-l2{animation-name:mc-l2}.mc-l3{animation-name:mc-l3}
+@keyframes mc-l1{0%,17%{stroke-dashoffset:90}26%,94%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes mc-l2{0%,31%{stroke-dashoffset:90}38%,94%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes mc-l3{0%,43%{stroke-dashoffset:90}50%,94%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.mc-dial{stroke-dasharray:0 100;animation-name:mc-dial;animation-timing-function:cubic-bezier(.3,0,.2,1)}
+@keyframes mc-dial{0%,52%{stroke-dasharray:0 100}68%,94%{stroke-dasharray:67 100;opacity:1}100%{stroke-dasharray:67 100;opacity:0}}
+.mc-needle{transform-origin:86px 150px;animation-name:mc-needle;animation-timing-function:cubic-bezier(.3,0,.2,1)}
+@keyframes mc-needle{0%,52%{transform:rotate(0deg);opacity:0}54%{opacity:1}68%{transform:rotate(258deg)}71%{transform:rotate(250deg)}74%,94%{transform:rotate(252deg);opacity:1}100%{transform:rotate(252deg);opacity:0}}
+.mc-num{animation-name:mc-num}
+@keyframes mc-num{0%,70%{opacity:0;filter:blur(4px);transform:translateY(4px)}78%,94%{opacity:1;filter:blur(0);transform:translateY(0)}100%{opacity:0}}
+</style>
+
+<!-- ================= 6. HOME ================= -->
+<section id="screen-home" class="sec">
+  <p class="cap"><b>06 · Home, signed in</b> &nbsp; 1440 × 900 · the roadmap is plotted on the instrument's plate; the plate's rim is the match ring</p>
+  <div class="frame">
+    <aside class="hm-side">
+      <div class="hm-logo"><svg class="mark"><use href="#mark-s"/></svg><span class="wm">مساري</span></div>
+      <nav class="nav">
+        <a class="on"><svg class="ic"><use href="#i-path"/></svg>مساري</a>
+        <a><svg class="ic"><use href="#i-tree"/></svg>المهارات</a>
+        <a><svg class="ic"><use href="#i-cv"/></svg>السيرة الذاتية</a>
+        <a><svg class="ic"><use href="#i-jobs"/></svg>الوظائف</a>
+        <a><svg class="ic"><use href="#i-courses"/></svg>الدورات</a>
+        <a><svg class="ic"><use href="#i-leaders"/></svg>المتصدرون</a>
+        <a><svg class="ic"><use href="#i-profile"/></svg>ملفي</a>
+      </nav>
+      <div class="hm-level">
+        <div style="display:flex;align-items:center;gap:8px"><span class="lvb" style="width:26px;height:26px;font-size:12px">3</span><span>المستوى 3 · متعلّمة</span></div>
+        <div class="xpb-track"><i style="width:48%"></i><b style="inset-inline-start:48%"></b></div>
+        <small>بقي <span class="n">260 XP</span> للمستوى 4</small>
+      </div>
+    </aside>
+    <header class="hm-top">
+      <div class="search"><svg class="ic s20"><use href="#i-search"/></svg>ابحث عن وظيفة أو دورة أو مهارة</div>
+      <span class="sp"></span>
+      <div class="stat"><svg class="ic s20"><use href="#i-streak"/></svg><span class="n">4</span><small>أيام</small></div>
+      <div class="stat"><svg class="ic s20" style="color:var(--xp)"><use href="#i-xp"/></svg><span class="n">1,240</span><small class="n">XP</small></div>
+      <div class="user"><div><b>سارة العتيبي</b><small>المستوى 3 · متعلّمة</small></div><span class="av lv3" style="--s:40px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-sara"/></svg></span></div>
+    </header>
+    <main class="hm-main">
+      <div class="hm-chart">
+        <svg class="plate" viewBox="0 0 800 788" width="800" height="788">
+          <defs><clipPath id="pc"><circle cx="400" cy="404" r="320"/></clipPath></defs>
+          <circle cx="400" cy="404" r="340" fill="var(--night-900)"/>
+          <g clip-path="url(#pc)" fill="none" stroke="var(--engrave)" stroke-width="1">
+            <circle cx="400" cy="320" r="380" stroke="var(--line)"/>
+            <circle cx="400" cy="290" r="346"/><circle cx="400" cy="257" r="287"/><circle cx="400" cy="229" r="229"/><circle cx="400" cy="206" r="172"/><circle cx="400" cy="188" r="116"/><circle cx="400" cy="175" r="62"/>
+            <path d="M400 84V724"/>
+            <path d="M400 168C340 300 262 470 170 690M400 168C460 300 538 470 630 690M400 168C300 240 190 300 70 370M400 168C500 240 610 300 730 370"/>
+          </g>
+          <g fill="none" transform="rotate(-90 400 404)">
+            <circle cx="400" cy="404" r="330" stroke="var(--line-2)" stroke-width="8" pathLength="100" stroke-dasharray=".05 .95"/>
+            <circle cx="400" cy="404" r="328" stroke="var(--line-2)" stroke-width="12" pathLength="100" stroke-dasharray=".06 4.94"/>
+            <circle cx="400" cy="404" r="326" stroke="var(--ink-4)" stroke-width="16" pathLength="100" stroke-dasharray=".08 9.92"/>
+            <circle cx="400" cy="404" r="340" stroke="var(--line-2)" stroke-width="1.5"/>
+            <circle cx="400" cy="404" r="340" stroke="var(--brass)" stroke-width="3.5" pathLength="100" stroke-dasharray="69.3 100"/>
+          </g>
+          <circle cx="400" cy="404" r="320" fill="none" stroke="var(--line)"/>
+          <circle cx="76.6" cy="509.1" r="6" fill="var(--xp)"/>
+          <circle cx="200.2" cy="128.9" r="5" fill="var(--night-950)" stroke="var(--brass)" stroke-width="1.5"/>
+          <path d="M400 73l-4.500-8h9z" fill="var(--ink-3)"/>
+          <g><text x="582.8" y="156">10</text><text x="695.8" y="311.500">20</text><text x="695.8" y="503.600">30</text><text x="582.8" y="659">40</text><text x="217.2" y="659">60</text><text x="104.2" y="503.600">70</text><text x="104.2" y="311.500">80</text><text x="217.2" y="156">90</text></g>
+          <!-- travelled path: engraved brass, each segment stops short of its station -->
+          <g fill="none" stroke="var(--brass)" stroke-width="2.5" stroke-linecap="round">
+            <path d="M404.8 692.4 433.1 647.8M430 621.5 357.4 550.6M358.4 528 428.2 471"/>
+          </g>
+          <!-- the way ahead: a dotted route -->
+          <g fill="none" stroke="var(--ink-4)" stroke-width="2" stroke-linecap="round" stroke-dasharray=".1 7">
+            <path d="M428.3 433.1 364.2 380.8M364.1 361.6 430.1 306M430.7 286 381.8 240M377.3 216.1 386.3 196.9"/>
+            <path d="M371.6 153.3 185.7 57.5M385.7 139.4 335.4 38.7" stroke="var(--line-2)"/>
+          </g>
+          <circle cx="400" cy="700" r="4" fill="var(--night-900)" stroke="var(--brass)" stroke-width="2"/>
+          <g transform="translate(442.2 633.4)"><circle r="11" fill="var(--brass)"/><path d="M-4.500 .3l3 3 6-6.500" stroke="var(--night-950)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+          <g transform="translate(345.2 538.7)"><circle r="11" fill="var(--brass)"/><path d="M-4.500 .3l3 3 6-6.500" stroke="var(--night-950)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+          <g transform="translate(451.5 452.1)"><circle class="bz" r="23.500"/><circle class="bz-t" r="21" pathLength="12"/><g class="bz-i"><circle cy="-23.500" r="3"/></g><circle r="15" fill="var(--night-950)" stroke="var(--brass)" stroke-width="2"/><circle r="5.500" fill="var(--xp)"/></g>
+          <g transform="translate(352.6 371.3)"><circle r="10.500" fill="var(--night-900)" stroke="var(--ink-4)" stroke-width="1.5"/><text class="num" y="3.800">4</text></g>
+          <g transform="translate(441.6 296.3)"><circle r="10.500" fill="var(--night-900)" stroke="var(--ink-4)" stroke-width="1.5"/><text class="num" y="3.800">5</text></g>
+          <g transform="translate(370.9 229.7)"><circle r="10.500" fill="var(--night-900)" stroke="var(--ink-4)" stroke-width="1.5"/><text class="num" y="3.800">6</text></g>
+          <g transform="translate(400 168)"><circle class="bz" r="32"/><circle class="bz-t" r="29.500" pathLength="12"/><circle r="24" fill="var(--night-950)" stroke="var(--brass)" stroke-width="1.5"/>
+            <g fill="none" stroke="var(--ink-1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-trophy" x="-14" y="-14" width="28" height="28"/></g></g>
+          <g fill="var(--night-950)" stroke="var(--ink-3)" stroke-width="1.5"><circle cx="175" cy="52" r="7"/><circle cx="330" cy="28" r="7"/></g>
+          <g fill="var(--ink-3)"><circle cx="175" cy="52" r="2"/><circle cx="330" cy="28" r="2"/></g>
+        </svg>
+        <div class="hm-head"><p class="eyebrow">طريقك إلى</p><h1>محلل بيانات</h1><p class="sub">المحطة <span class="n">3</span> من <span class="n">6</span></p></div>
+        <div class="lb r done" style="left:464px;top:615px"><b>أساسيات Excel</b><small>تمّت</small></div>
+        <div class="lb done" style="right:477px;top:521px"><b>مبادئ الإحصاء</b><small>تمّت</small></div>
+        <div class="here" style="right:383px;top:436px"><span class="av" style="--s:24px"><svg class="f"><use href="#av-sara"/></svg></span>أنت هنا</div>
+        <div class="now" style="left:488px;top:412px"><p class="k1">المحطة <span class="n">3</span> · الحالية</p><b>SQL للمبتدئين</b><p class="k2"><span>6 ساعات</span><bdi class="n xpv">+200 XP</bdi></p></div>
+        <div class="lb lock" style="right:468px;top:353px"><b>تحليل البيانات بـ Python</b><small><svg class="ic" style="width:13px;height:13px;--pt:var(--ink-4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+        <div class="lb r lock" style="left:463px;top:278px"><b>Power BI ولوحات المعلومات</b><small><svg class="ic" style="width:13px;height:13px;--pt:var(--ink-4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+        <div class="lb lock" style="right:450px;top:212px"><b>مشروع تطبيقي: تحليل مبيعات</b><small><svg class="ic" style="width:13px;height:13px;--pt:var(--ink-4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+        <div class="lb r goal" style="left:440px;top:146px"><b>جاهزة لوظيفة<br>محلل بيانات</b></div>
+        <div class="lb br" style="right:639px;top:33px"><b>عالِم بيانات</b><small>يفتح بعد القمّة</small></div>
+        <div class="lb br" style="right:484px;top:9px"><b>محلل ذكاء أعمال</b><small>يفتح بعد القمّة</small></div>
+        <div class="readout" style="left:10px;top:497px"><span class="n">70%</span><small>توافقك</small></div>
+        <div class="readout" style="right:626px;top:104px;color:var(--ink-3);font-weight:500;font-size:12px"><span class="n">90%</span> بعد SQL</div>
+        <div class="legend" style="right:0;bottom:4px"><span><i style="background:var(--brass)"></i>تمّت</span><span><i style="border:2px solid var(--brass);background:var(--night-950)"></i>الحالية</span><span><i style="border:1.5px solid var(--ink-4)"></i>مقفلة</span></div>
+      </div>
+
+      <div class="hm-col">
+        <div class="card hm-next">
+          <p class="eyebrow">خطوتك التالية</p>
+          <h3>SQL للمبتدئين</h3>
+          <p class="why">المهارة الأولى التي تنقصك لوظيفة محلل بيانات.</p>
+          <div class="meta"><span><svg class="ic s18"><use href="#i-clock"/></svg>6 ساعات</span><span class="xpv"><svg class="ic s18" style="--pt:var(--xp)"><use href="#i-xp"/></svg><bdi class="n">+200 XP</bdi></span></div>
+          <div class="raise"><svg class="ic s18"><use href="#i-skill"/></svg><span>ترفع مهارة <b style="color:var(--ink-1);font-weight:600">SQL</b></span><span class="sp"></span><svg class="pips"><use href="#pips"/></svg><svg class="ic s16"><use href="#i-fwd"/></svg><svg class="pips l1"><use href="#pips"/></svg></div>
+          <span class="btn btn-p lg wide">ابدأ الآن<svg class="ic s20"><use href="#i-fwd"/></svg></span>
+        </div>
+        <div class="card hm-match">
+          <p class="eyebrow">توافقك مع محلل بيانات</p>
+          <div class="mrow"><span class="big n">70<small>%</small></span><p>بعد دورة SQL يصل إلى <b class="n">90%</b></p></div>
+          <svg class="mscale" viewBox="0 0 296 22">
+            <path d="M0 7h296" stroke="var(--night-700)" stroke-width="5" stroke-linecap="round"/>
+            <path d="M296 7H100" stroke="var(--brass)" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="88.8" cy="7" r="5" fill="var(--xp)"/>
+            <circle cx="29.6" cy="7" r="4.500" fill="var(--night-800)" stroke="var(--brass)" stroke-width="1.5"/>
+            <path d="M1 18.500h295" stroke="var(--line-2)" stroke-width="5" stroke-dasharray="1 28.500"/>
+          </svg>
+          <div class="chips" style="margin-top:10px;gap:6px"><span class="skill sm">Excel<svg class="pips l3"><use href="#pips"/></svg></span><span class="skill sm">الإحصاء<svg class="pips l2"><use href="#pips"/></svg></span><span class="skill sm" style="color:var(--ink-3)">SQL<svg class="pips"><use href="#pips"/></svg></span></div>
+        </div>
+        <div class="card hm-lead">
+          <div style="display:flex;align-items:center;gap:10px"><p class="eyebrow">المتصدرون</p><span class="demo">بيانات تجريبية</span><span class="sp"></span><span class="lnk">عرض الكل</span></div>
+          <div class="mini3"><span class="stack"><span class="av" style="--s:28px"><svg class="f"><use href="#av-noura"/></svg></span><span class="av" style="--s:28px"><svg class="f"><use href="#av-faisal"/></svg></span><span class="av" style="--s:28px"><svg class="f"><use href="#av-reem"/></svg></span></span><span>نورة وفيصل وريم في الصدارة</span></div>
+          <div class="lrow me"><span class="rank">7</span><span class="av" style="--s:30px"><svg class="f"><use href="#av-sara"/></svg></span><span>سارة العتيبي<span class="you">أنت</span></span><span class="sp"></span><span class="n">1,240 XP</span></div>
+          <p class="foot">يفصلك <span class="n" style="color:var(--xp)">70 XP</span> عن المركز 6</p>
+        </div>
+        <div class="launch"><span class="glyph"><svg class="ic"><use href="#i-daleel"/></svg></span><div><b>اسأل دليل</b><small>مستشارك، ويفتح لك أي صفحة</small></div><span class="sp"></span><svg class="ic s20"><use href="#i-chev"/></svg></div>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- ================= 7. SIGN-IN ================= -->
+<section id="screen-signin" class="sec">
+  <p class="cap"><b>07 · Sign-in</b> &nbsp; 1440 × 900 · sign-in on the left, the moving showcase on the right</p>
+  <div class="frame">
+    <div class="si-left">
+      <span class="lock-h" style="align-self:flex-start"><svg class="mark"><use href="#mark"/></svg><span class="wm">مساري</span></span>
+      <div class="si-form">
+        <h1>اعرف خطوتك التالية<br>نحو وظيفتك.</h1>
+        <div class="field"><label>اسمك</label><div class="input focus">سارة العتيبي</div></div>
+        <span class="btn btn-p wide">ابدأ رحلتك<svg class="ic s20"><use href="#i-fwd"/></svg></span>
+        <p class="hint"><svg class="ic s18" style="color:var(--ink-3)"><use href="#i-done"/></svg>الدخول بالاسم فقط، بلا بريد ولا كلمة مرور.</p>
+      </div>
+      <p class="si-foot">نسخة عرض. الوظائف والدورات والمتصدرون بيانات تجريبية.</p>
+    </div>
+    <div class="si-right">
+      <svg class="bg" viewBox="0 0 860 900" width="860" height="900">
+        <g fill="none" stroke="var(--engrave)">
+          <circle cx="430" cy="450" r="150"/><circle cx="430" cy="450" r="262"/><circle cx="430" cy="450" r="372" stroke="var(--line)"/>
+          <path d="M430 60V840M40 450h780"/>
+        </g>
+        <g class="si-limb" fill="none">
+          <circle cx="430" cy="450" r="381" stroke="var(--line-2)" stroke-width="8" pathLength="360" stroke-dasharray=".25 1.75"/>
+          <circle cx="430" cy="450" r="379" stroke="var(--ink-4)" stroke-width="13" pathLength="360" stroke-dasharray=".3 9.7"/>
+        </g>
+        <!-- trajectory of the XP token -->
+        <path d="M372 372 Q 262 322 214 213" fill="none" stroke="var(--ink-4)" stroke-width="2" stroke-linecap="round" stroke-dasharray=".1 7"/>
+        <!-- roadmap fragment -->
+        <g fill="none" stroke-linecap="round">
+          <path d="M700.5 360 651.6 281.6" stroke="var(--line-2)" stroke-width="2.5"/>
+          <path class="si-draw" d="M700.5 360 651.6 281.6" stroke="var(--brass)" stroke-width="2.5"/>
+          <path d="M612 238 554 195" stroke="var(--ink-4)" stroke-width="2" stroke-dasharray=".1 7"/>
+        </g>
+        <g transform="translate(710 375)"><circle r="11" fill="var(--brass)"/><path d="M-4.500 .3l3 3 6-6.500" stroke="var(--night-950)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <g transform="translate(636 256)"><circle class="bz" r="23.500"/><circle class="bz-t" r="21" pathLength="12"/><g class="bz-i"><circle cy="-23.500" r="3"/></g><circle r="15" fill="var(--night-950)" stroke="var(--brass)" stroke-width="2"/><circle r="5.500" fill="var(--xp)"/></g>
+        <g transform="translate(542 186)"><circle r="10.500" fill="var(--night-900)" stroke="var(--ink-4)" stroke-width="1.5"/></g>
+        <!-- evidence: each highlighted CV line leads to the skill it proves -->
+        <g fill="none" stroke="var(--ink-3)" stroke-width="1.2" stroke-linecap="round"><path d="M596 658.500h-38M596 703.500h-38M596 748.500h-38"/></g>
+      </svg>
+      <div class="lb r done" style="left:732px;top:357px"><b>مبادئ الإحصاء</b><small>تمّت</small></div>
+      <div class="now" style="left:672px;top:218px"><p class="k1">المحطة <span class="n">3</span> · الحالية</p><b>SQL للمبتدئين</b><p class="k2"><span>6 ساعات</span><bdi class="n xpv">+200 XP</bdi></p></div>
+      <div class="lb lock" style="right:338px;top:168px"><b>تحليل البيانات بـ Python</b><small><svg class="ic" style="width:13px;height:13px;--pt:var(--ink-4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+
+      <div class="si-dial"><span class="dial lbl" style="--d:210px;--p:70;--pa:66.8"><svg><use href="#dial"/></svg><b>70<small>%</small></b><em style="font-size:13px">توافق</em></span><p>مع وظيفة محلل بيانات</p></div>
+
+      <div class="pc" style="left:56px;top:150px;width:300px">
+        <div class="xpb">
+          <div class="xpb-head" style="font-size:13px"><span class="lvb" style="width:26px;height:26px;font-size:12px">3</span><span>المستوى 3 · متعلّمة</span><span class="sp"></span><span class="n xpv">1,240 XP</span></div>
+          <div class="xpb-track"><i class="si-fill" style="width:48%"></i><b class="si-fillpt" style="inset-inline-start:48%;border-color:var(--night-800)"></b></div>
+        </div>
+      </div>
+      <span class="si-tok"><svg class="ic s16"><use href="#i-xp"/></svg><bdi class="n">+200 XP</bdi></span>
+
+      <div class="pc" style="left:50px;top:486px;width:286px">
+        <p class="cap2"><svg class="ic s16"><use href="#i-leaders"/></svg>المتصدرون</p>
+        <div class="si-rows">
+          <span class="rank slot" style="top:12px">6</span><span class="rank slot" style="top:72px">7</span>
+          <div class="lrow r6"><span class="av" style="--s:28px"><svg class="f"><use href="#av-abdullah"/></svg></span><span>عبدالله الدوسري</span><span class="sp"></span><span class="n">1,310</span></div>
+          <div class="lrow me r7"><span class="av" style="--s:28px"><svg class="f"><use href="#av-sara"/></svg></span><span>سارة العتيبي</span><span class="sp"></span><span class="n">1,440</span></div>
+        </div>
+      </div>
+
+      <div class="si-cv"><p>السيرة الذاتية</p><i style="width:58%;height:7px;background:var(--night-ink-2)"></i><i style="width:38%"></i><i class="hl" style="margin-top:9px;width:74%"></i><i style="width:88%"></i><i style="width:52%"></i><i class="hl" style="margin-top:9px;width:66%"></i><i></i><i style="width:80%"></i><i class="hl" style="margin-top:9px;width:46%"></i><i style="width:90%"></i><u></u></div>
+      <div class="si-sk"><span class="skill">Excel<svg class="pips l3"><use href="#pips"/></svg></span><span class="skill">الإحصاء<svg class="pips l2"><use href="#pips"/></svg></span><span class="skill">SQL<svg class="pips l1"><use href="#pips"/></svg></span></div>
+
+      <div class="status pc" style="left:306px;top:782px;padding:8px 16px 8px 10px;border-radius:26px"><span class="glyph"><svg class="ic"><use href="#i-daleel"/></svg></span><span>دليل يراجع مسارك…</span></div>
+      <div class="badge" style="position:absolute;left:118px;top:690px"><span class="seal"><svg><use href="#seal"/></svg><svg class="ic"><use href="#i-streak"/></svg></span><b style="font-size:13px">سلسلة 3 أيام</b></div>
+    </div>
+  </div>
+  <p class="note fcap"><b>What moves.</b> Nothing slides in a straight line. The tick limb turns very slowly, the way a sky turns (one revolution in four minutes). Every six seconds one story plays, piece by piece, then rests: the brass line is engraved from the finished station to the current one; the <span class="n">+200 XP</span> token leaves the dial and travels along its dotted arc to the XP bar; the bar fills and its end point moves; Sara's row rises one place past the row above it; the scan line crosses the CV and the third skill chip is plotted in. The current station's bezel ticks once a second. This frame is caught at 1.5 s: the token is mid-arc, the rows are mid-swap, the line is half engraved.</p>
+</section>
+
+<!-- ================= 8. PHONE ================= -->
+<section id="screen-phone" class="sec">
+  <p class="cap"><b>08 · Home on a phone</b> &nbsp; 390 × 844</p>
+  <div style="display:flex;justify-content:center">
+  <div class="frame ph">
+    <div class="ph-top"><svg class="mark"><use href="#mark-s"/></svg><span class="wm">مساري</span><span class="sp"></span>
+      <div class="stat"><svg class="ic s18"><use href="#i-streak"/></svg><span class="n">4</span></div>
+      <div class="stat"><svg class="ic s18" style="color:var(--xp)"><use href="#i-xp"/></svg><span class="n">1,240</span></div>
+      <span class="av lv3" style="--s:34px;margin-inline-start:6px"><svg class="rg"><use href="#lvring"/></svg><svg class="f"><use href="#av-sara"/></svg></span>
+    </div>
+    <div class="ph-head"><div><p class="eyebrow">طريقك إلى</p><h1>محلل بيانات</h1></div><span class="sp"></span><span class="dial lbl" style="--d:84px;--p:70;--pa:66.8"><svg><use href="#dial"/></svg><b>70<small>%</small></b><em style="font-size:10px;top:63%">توافق</em></span></div>
+    <div class="ph-xp"><div style="display:flex"><span>المستوى 3 · متعلّمة</span><span class="sp"></span><span style="color:var(--ink-3)">بقي <span class="n">260 XP</span> للمستوى 4</span></div><div class="xpb-track"><i style="width:48%"></i><b style="inset-inline-start:48%"></b></div></div>
+    <div class="ph-chart">
+      <svg class="plate" viewBox="0 0 390 380" width="390" height="380">
+        <g fill="none" stroke="var(--engrave)"><circle cx="195" cy="-300" r="330"/><circle cx="195" cy="-300" r="400"/><circle cx="195" cy="-300" r="484"/><circle cx="195" cy="-300" r="574"/><circle cx="195" cy="-300" r="644"/><path d="M195 0v380"/></g>
+        <g fill="none" stroke="var(--brass)" stroke-width="2.5" stroke-linecap="round"><path d="M219.300 331.800 162.700 283.300M161.800 259.700 215.300 203.900"/></g>
+        <g fill="none" stroke="var(--ink-4)" stroke-width="2" stroke-linecap="round" stroke-dasharray=".1 7"><path d="M214.800 161.200 162.600 108.400M163.100 87.500 216.900 38.500"/></g>
+        <g transform="translate(232 343)"><circle r="11" fill="var(--brass)"/><path d="M-4.500 .3l3 3 6-6.500" stroke="var(--night-950)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <g transform="translate(150 272.200)"><circle r="11" fill="var(--brass)"/><path d="M-4.500 .3l3 3 6-6.500" stroke="var(--night-950)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <g transform="translate(236 182.300)"><circle class="bz" r="23.500"/><circle class="bz-t" r="21" pathLength="12"/><g class="bz-i"><circle cy="-23.500" r="3"/></g><circle r="15" fill="var(--night-950)" stroke="var(--brass)" stroke-width="2"/><circle r="5.500" fill="var(--xp)"/></g>
+        <g transform="translate(152 97.700)"><circle r="10.500" fill="var(--night-950)" stroke="var(--ink-4)" stroke-width="1.5"/><text class="num" y="3.800">4</text></g>
+        <g transform="translate(228 28.300)"><circle r="10.500" fill="var(--night-950)" stroke="var(--ink-4)" stroke-width="1.5"/><text class="num" y="3.800">5</text></g>
+      </svg>
+      <div class="lb r done" style="left:253px;top:325px"><b>أساسيات Excel</b><small>تمّت</small></div>
+      <div class="lb done" style="right:261px;top:254px"><b>مبادئ الإحصاء</b><small>تمّت</small></div>
+      <div class="lb r" style="left:270px;top:164px"><b>SQL للمبتدئين</b><small style="color:var(--brass)">الحالية</small></div>
+      <div class="here" style="right:188px;top:166px"><span class="av" style="--s:24px"><svg class="f"><use href="#av-sara"/></svg></span>أنت هنا</div>
+      <div class="lb r lock" style="left:174px;top:80px"><b>تحليل البيانات بـ Python</b><small><svg class="ic" style="width:13px;height:13px;--pt:var(--ink-4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+      <div class="lb lock" style="right:184px;top:3px"><b>Power BI ولوحات المعلومات</b><small><svg class="ic" style="width:13px;height:13px;--pt:var(--ink-4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+    </div>
+    <span class="ph-fab"><svg class="ic"><use href="#i-daleel"/></svg></span>
+    <div class="ph-sheet">
+      <p class="eyebrow">خطوتك التالية</p>
+      <h3>SQL للمبتدئين</h3>
+      <div class="meta"><span><svg class="ic s18"><use href="#i-clock"/></svg>6 ساعات</span><span class="xpv"><svg class="ic s18" style="--pt:var(--xp)"><use href="#i-xp"/></svg><bdi class="n">+200 XP</bdi></span><span>ترفع توافقك إلى <span class="n">90%</span></span></div>
+      <span class="btn btn-p lg wide">ابدأ الآن<svg class="ic s20"><use href="#i-fwd"/></svg></span>
+    </div>
+    <nav class="ph-tabs">
+      <a class="on"><svg class="ic"><use href="#i-path"/></svg>مساري</a>
+      <a><svg class="ic"><use href="#i-tree"/></svg>المهارات</a>
+      <a><svg class="ic"><use href="#i-jobs"/></svg>الوظائف</a>
+      <a><svg class="ic"><use href="#i-courses"/></svg>الدورات</a>
+      <a><svg class="ic"><use href="#i-profile"/></svg>ملفي</a>
+    </nav>
+  </div>
+  </div>
+</section>
+
+<!-- ================= 9. MOTION ================= -->
+<section id="motion" class="sec">
+  <p class="cap"><b>09 · Motion</b> &nbsp; engrave, plot, settle · three studies, each a 6 s loop with a rest</p>
+  <div class="mo">
+    <div><span class="tag">A · A stage unlocks</span>
+      <div class="box">
+        <svg viewBox="0 0 440 280" width="440" height="280">
+          <g fill="none" stroke="var(--engrave)"><circle cx="220" cy="-190" r="300"/><circle cx="220" cy="-190" r="400"/></g>
+          <path d="M313.300 191.800 180.700 124.200" fill="none" stroke="var(--ink-4)" stroke-width="2" stroke-linecap="round" stroke-dasharray=".1 7"/>
+          <path class="ma-line" d="M313.300 191.800 180.700 124.200" fill="none" stroke="var(--brass)" stroke-width="2.5" stroke-linecap="round"/>
+          <g transform="translate(330 200)"><circle r="11" fill="var(--brass)"/><path d="M-4.500 .3l3 3 6-6.500" stroke="var(--night-950)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+          <g transform="translate(155 111)">
+            <g class="ma-bez"><circle class="bz" r="23.500"/><circle class="bz-t" r="21" pathLength="12"/><circle cy="-23.500" r="3" fill="var(--xp)"/></g>
+            <circle r="16" fill="var(--night-950)" stroke="var(--ink-4)" stroke-width="1.5"/>
+            <circle class="ma-ring" r="16" fill="none" stroke="var(--brass)" stroke-width="2" transform="rotate(-90)"/>
+            <g class="ma-lock" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="--pt:var(--ink-4)"><use href="#i-lock" x="-9" y="-9.500" width="18" height="18"/></g>
+            <circle class="ma-pt" r="5.500" fill="var(--xp)"/>
+          </g>
+        </svg>
+        <div class="lb r done" style="left:352px;top:182px"><b>SQL</b><small>تمّت</small></div>
+        <div class="lb r lock ma-dim" style="left:190px;top:92px"><b>تحليل البيانات بـ Python</b><small><svg class="ic" style="width:13px;height:13px;--pt:var(--ink-4)"><use href="#i-lock"/></svg>مقفلة</small></div>
+        <div class="lb r ma-lit" style="left:190px;top:92px"><b>تحليل البيانات بـ Python</b><small style="color:var(--brass)">المحطة التالية</small></div>
+        <span class="chip on ma-tag" style="position:absolute;left:190px;top:52px;height:30px;font-size:12.5px">فُتحت الآن</span>
+      </div>
+      <p class="note">The brass line is engraved from the finished station (linear pace, 1.5 s). The ring is cut once round, the lock shrinks away, the point is plotted without a bounce, then the name comes into focus.</p>
+    </div>
+    <div><span class="tag">B · XP lands on the bar</span>
+      <div class="box">
+        <span class="chip mb-done" style="position:absolute;left:262px;top:42px;border-color:var(--ok);color:var(--ink-1);height:34px"><svg class="ic s16" style="color:var(--ok);--pt:var(--ok)"><use href="#i-done"/></svg>أكملتِ دورة SQL</span>
+        <svg viewBox="0 0 440 280" width="440" height="280"><path d="M318 60 Q 216 62 228 168" fill="none" stroke="var(--ink-4)" stroke-width="2" stroke-linecap="round" stroke-dasharray=".1 7"/></svg>
+        <div class="xpb" style="position:absolute;left:30px;right:30px;top:126px">
+          <div class="xpb-head"><span class="lvb">3</span><span>المستوى 3 · متعلّمة</span><span class="sp"></span><span class="n xpv mb-cnt"></span><span class="lvb next">4</span></div>
+          <div class="xpb-track"><i class="mb-fill" style="width:48%"></i><b class="mb-pt" style="inset-inline-start:48%"></b></div>
+          <svg class="ruler"><line x1="0" y1="3.5" x2="100%" y2="3.5" stroke-width="7" stroke-dasharray="1 9"/></svg>
+          <div class="xpb-foot"><span class="n">1,000</span><span>بقي <span class="n mb-left"></span> للمستوى 4</span><span class="n">1,500</span></div>
+        </div>
+        <span class="mb-tok"><svg class="ic s16"><use href="#i-xp"/></svg><bdi class="n">+200 XP</bdi></span>
+      </div>
+      <p class="note">The token follows an arc, never a straight line, and shrinks into the bar's end point. Only then does the bar fill and the readout count from 1,240 to 1,440.</p>
+    </div>
+    <div><span class="tag">C · The path is revealed</span>
+      <div class="box">
+        <svg viewBox="0 0 440 280" width="440" height="280">
+          <g fill="none" stroke="var(--line)">
+            <path class="mc-arc" style="--len:330;stroke-dasharray:330" d="M196 232A210 210 0 0 1 432 96"/>
+            <path class="mc-arc" style="--len:250;stroke-dasharray:250;animation-delay:.15s" d="M236 196A150 150 0 0 1 432 150"/>
+            <path class="mc-arc" style="--len:520;stroke-dasharray:520;animation-delay:.3s" d="M160 262A274 274 0 0 1 432 30"/>
+          </g>
+          <g fill="none" stroke="var(--brass)" stroke-width="2.5" stroke-linecap="round">
+            <path class="mc-l mc-l1" d="M218.200 226.500 263.800 207.500"/>
+            <path class="mc-l mc-l2" d="M286.700 187.200 300.300 136.800"/>
+            <path class="mc-l mc-l3" d="M319.700 109.600 368.300 76.400"/>
+          </g>
+          <circle class="mc-p mc-p1" cx="205" cy="232" r="6" fill="var(--brass)"/>
+          <circle class="mc-p mc-p2" cx="279" cy="201" r="7.500" fill="var(--brass)"/>
+          <circle class="mc-p mc-p3" cx="305" cy="119" r="9" fill="var(--brass)"/>
+          <circle class="mc-p mc-p4" cx="385" cy="65" r="11" fill="var(--xp)"/>
+          <g fill="none" transform="rotate(-90 86 150)">
+            <circle cx="86" cy="150" r="54" stroke="var(--line-2)" stroke-width="4" pathLength="100" stroke-dasharray=".35 1.65"/>
+            <circle cx="86" cy="150" r="43" stroke="var(--night-700)" stroke-width="5"/>
+            <circle class="mc-dial" cx="86" cy="150" r="43" stroke="var(--brass)" stroke-width="5" pathLength="100"/>
+          </g>
+          <g class="mc-needle"><circle cx="86" cy="107" r="4.500" fill="var(--xp)"/></g>
+        </svg>
+        <b class="n mc-num" style="position:absolute;left:58px;top:135px;width:56px;text-align:center;font:600 24px/1.2 var(--f-text)">70%</b>
+      </div>
+      <p class="note">Onboarding ends here. Rings are engraved, stations are plotted one by one and each grows (the logo, performed), then the dial sweeps to the reading and settles with one small overshoot.</p>
+    </div>
+  </div>
+</section>
+</body>
+</html>

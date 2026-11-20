@@ -1,0 +1,1165 @@
+/* Owner: map. The map sheet of /path («مساري»), ported from design/explore/darb/map/final-home.css.txt (the approved page).
+   .dm        the window (clips)                 .dm-cam   the camera: a perspective container
+   .dm-plane  the drawn sheet, a 3D plane        .dm-bb    a billboard: stands on the plane and always faces the camera
+   Colours are tokens only. Positions ON THE PLANE are physical (left / top / right in sheet pixels): the sheet is a
+   drawing with its own geometry and is never mirrored by the page direction (playbook 3.4); everything outside the plane
+   uses logical properties. Motion: the opening, the flight and the return are Web Animations created in choreography.ts
+   (transforms and opacity only); this file holds the resting look and the two loops (the drifting dots, the pulse). */
+
+.dm {
+  /* the map's own tones: five flat terraces between the ground and the white cap, all mixed from the palette */
+  --t-base: color-mix(in srgb, var(--color-sunk) 72%, var(--color-paper));
+  --t-0: color-mix(in srgb, var(--color-sheet) 31%, var(--color-sunk));
+  --t-1: color-mix(in srgb, var(--color-sheet) 48%, var(--color-sunk));
+  --t-2: color-mix(in srgb, var(--color-sheet) 64%, var(--color-sunk));
+  --t-3: color-mix(in srgb, var(--color-sheet) 79%, var(--color-sunk));
+  --t-4: color-mix(in srgb, var(--color-sheet) 91%, var(--color-sunk));
+  --t-5: var(--color-sheet);
+  --t-cliff: color-mix(in srgb, var(--color-contour-2) 62%, var(--color-contour));
+  --t-fall: color-mix(in srgb, var(--color-ink) 6%, transparent);
+  --coin-edge: color-mix(in srgb, var(--color-ink) 62%, var(--color-black));
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sheet);
+  background: var(--t-base);
+  color: var(--color-ink);
+}
+.dm[data-small] {
+  border-radius: 1.5rem;
+}
+.dm-cam {
+  position: absolute;
+  inset: 0;
+  perspective: 1100px;
+  perspective-origin: 50% 42%;
+}
+.dm[data-small] .dm-cam {
+  perspective: 820px;
+  perspective-origin: 50% 38%;
+}
+.dm-plane {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+  transform-origin: 0 0;
+}
+/* the opening waits (a due daily reward): nothing of the sheet is shown until it starts */
+.dm[data-phase="wait"] .dm-plane,
+.dm[data-phase="wait"] .dm-furniture {
+  visibility: hidden;
+}
+.dm[data-flying] .dm-plane {
+  will-change: transform;
+}
+.dm svg {
+  display: block;
+  flex: none;
+}
+.dm-terrain {
+  position: absolute;
+}
+.dm-trail {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: visible;
+}
+
+/* terrain: a hill of flat terraces. No gradients: flat tones, each with a thin cliff on the side that faces you and the
+   flat fall of its own shade on the terrace below */
+.dm-terrain .dm-band {
+  stroke: var(--color-contour);
+  stroke-width: 1;
+}
+.dm-terrain .dm-cliff {
+  fill: var(--t-cliff);
+}
+.dm-terrain .dm-fall {
+  fill: var(--t-fall);
+}
+.dm-terrain .dm-hair {
+  fill: none;
+  stroke: var(--color-contour);
+  stroke-width: 1;
+  opacity: 0.75;
+}
+.dm-terrain .dm-svy {
+  fill: none;
+  stroke: var(--color-contour-2);
+  stroke-width: 1;
+}
+.dm-terrain .dm-alt rect {
+  fill: var(--color-sheet);
+}
+.dm-terrain .dm-alt text {
+  font: 600 14px var(--font-sans);
+  fill: var(--color-contour-ink);
+  text-anchor: middle;
+  direction: ltr;
+}
+
+/* the road */
+.dm-trail path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.dm-trail .dm-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+.dm-trail .dm-bed {
+  stroke: var(--color-line-strong);
+}
+.dm-trail .dm-bed-in {
+  stroke: var(--color-sheet);
+}
+.dm-trail .dm-cov {
+  stroke: var(--color-ink);
+}
+.dm-trail .dm-leg {
+  stroke: var(--color-accent);
+}
+.dm-trail .dm-ahd {
+  stroke: var(--color-ink-3);
+}
+/* the little living move: the dots of the way ahead drift toward the summit, one spacing every 1.9 s */
+@keyframes dm-drift {
+  to {
+    stroke-dashoffset: var(--p);
+  }
+}
+.dm[data-phase="rest"]:not([data-focus]) .dm-dots {
+  animation: dm-drift 1.9s linear infinite;
+}
+.dm-trail .dm-brn path {
+  stroke: var(--color-ink-3);
+  stroke-width: 1.75;
+  stroke-dasharray: 2 6;
+}
+.dm-trail .dm-gshadow ellipse {
+  fill: var(--color-ink);
+  opacity: 0.17;
+}
+.dm-trail .dm-fshadow {
+  fill: var(--color-ink);
+  opacity: 0;
+}
+.dm-trail .dm-fring {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+
+/* ── billboards ── */
+.dm-bb {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: start;
+  transform-origin: 0 var(--r, 0px);
+}
+/* a station = one button: coin · leader · label, always in that order, the label always on the same side */
+/* the button's own box is its coin (a real box, so it can be pressed and pointed at); it stands on the coin's foot */
+.dm-st {
+  outline: none;
+  width: calc(2 * var(--r));
+  height: calc(2 * var(--r));
+  transform-origin: 50% 100%;
+}
+.dm-coin {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.dm-coin > b {
+  font: 700 clamp(14px, calc(var(--r) * 0.9), 18px) / 1 var(--font-sans);
+  direction: ltr;
+  font-variant-numeric: tabular-nums;
+}
+.dm-ld {
+  position: absolute;
+  right: calc(100% + 5px);
+  top: calc(50% - 1px);
+  width: 9px;
+  border-top: 2px solid var(--color-ink);
+}
+.dm-lb {
+  position: absolute;
+  right: calc(100% + 18px);
+  top: 50%;
+  translate: 0 -50%;
+  white-space: nowrap;
+  text-align: start;
+  padding: 1px 6px 3px;
+  /* a paper backing: no contour line, terrace edge or branch line runs through a label (flat, never a wash) */
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--color-sheet) 90%, transparent);
+}
+.dm-lb > b {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font: 700 16.5px/1.45 var(--font-sans);
+  color: var(--color-ink);
+}
+.dm-lb > b > .dm-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: var(--name-max, 15rem);
+}
+.dm-lb > small {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 400 14px/1.45 var(--font-sans);
+  color: var(--color-ink-2);
+}
+.dm-lb em {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: 5px;
+  font: 400 14px/1 var(--font-sans);
+  font-style: normal;
+  color: var(--color-ink-2);
+  white-space: nowrap;
+}
+.dm-lb em.dm-inline {
+  display: none;
+}
+.dm-sep {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.55;
+  margin: 0 3px;
+  flex: none;
+}
+.dm-ok {
+  color: var(--color-ok);
+}
+
+.dm-done .dm-coin {
+  background: var(--color-ink);
+  color: var(--color-sheet);
+  box-shadow: 0 3px 0 var(--coin-edge);
+}
+.dm-ck {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--color-ok);
+  border: 2px solid var(--color-sheet);
+  display: grid;
+  place-items: center;
+  color: var(--color-sheet);
+}
+.dm-now .dm-coin {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: 0 3.5px 0 var(--color-accent-ink);
+}
+.dm-now .dm-coin > b {
+  font-size: clamp(19px, calc(var(--r) * 0.92), 25px);
+}
+/* current-pulse: one 1.75 px ring that widens and fades (never a glow), once every 2.8 s */
+@keyframes dm-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  70%,
+  100% {
+    transform: scale(1.42);
+    opacity: 0;
+  }
+}
+.dm-now .dm-coin::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.75px solid var(--color-accent);
+  opacity: 0;
+}
+.dm[data-phase="rest"]:not([data-focus]) .dm-now .dm-coin::after {
+  animation: dm-pulse 2.8s var(--ease-out) 0.2s infinite backwards;
+}
+.dm-now .dm-ld {
+  width: 8px;
+}
+.dm-ahead .dm-coin {
+  background: var(--color-sheet);
+  color: var(--color-ink-2);
+  border: 2px dashed var(--color-ink-3);
+  box-shadow: 0 3px 0 var(--t-cliff);
+}
+.dm-ahead .dm-ld,
+.dm-start .dm-ld {
+  border-color: var(--color-ink-3);
+}
+.dm-lk {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: var(--color-sheet);
+  border: 1.5px solid var(--color-ink-3);
+  display: grid;
+  place-items: center;
+  color: var(--color-ink-2);
+}
+.dm-ahead .dm-lb > b {
+  color: var(--color-ink-2);
+}
+/* catch-up only: the look a done station had before the CV proved it (it leaves as the covered line passes) */
+.dm-ghost {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-sheet);
+  color: var(--color-ink-2);
+  border: 2px dashed var(--color-ink-3);
+  opacity: 0;
+  pointer-events: none;
+}
+.dm-ghost > b {
+  font: 700 clamp(14px, calc(var(--r) * 0.9), 18px) / 1 var(--font-sans);
+  direction: ltr;
+}
+.dm-start .dm-coin {
+  background: var(--color-sheet);
+  border: 3px solid var(--color-ink);
+}
+.dm-start .dm-coin::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-ink);
+}
+.dm-start .dm-lb > b {
+  font: 600 14.5px/1.4 var(--font-sans);
+  color: var(--color-ink-2);
+}
+.dm-sum .dm-coin {
+  background: var(--color-sheet);
+  border: 2.5px solid var(--color-ink);
+  box-shadow: 0 3px 0 var(--t-cliff);
+}
+.dm-sum .dm-coin > i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--color-ink);
+}
+.dm-sum[data-state="lit"] .dm-coin {
+  background: var(--color-accent);
+  border-color: var(--color-sheet);
+  box-shadow:
+    0 0 0 1.5px var(--color-accent),
+    0 4px 0 var(--color-accent-ink);
+}
+.dm-sum[data-state="lit"] .dm-coin > i {
+  background: var(--color-on-accent);
+}
+.dm-sum .dm-lb > b {
+  font-size: 19px;
+}
+/* the current station carries the invitation: the same label, as a small card */
+.dm-st .dm-card-lb {
+  background: var(--color-sheet);
+  border: 1.5px solid var(--color-ink);
+  border-radius: 14px;
+  padding: 8px 14px 10px;
+  box-shadow: 0 3px 0 var(--color-ink);
+  right: calc(100% + 20px);
+  text-shadow: none;
+}
+.dm-card-lb .dm-e {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 14px/1.4 var(--font-sans);
+  color: var(--color-accent-ink);
+}
+.dm-card-lb .dm-e::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+.dm-card-lb > b {
+  font-size: 21px;
+  line-height: 1.4;
+}
+.dm-card-lb > small {
+  gap: 13px;
+  margin-top: 1px;
+}
+.dm-card-lb > small > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.dm-card-lb > small b {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+.dm-st:focus-visible .dm-coin {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 4px;
+}
+button.dm-st:hover .dm-lb > b > .dm-name,
+a.dm-peak:hover .dm-lb > b {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 5px;
+}
+/* the flag at the summit: it stands */
+.dm-flag {
+  pointer-events: none;
+}
+.dm-flag svg {
+  position: absolute;
+  overflow: visible;
+}
+.dm-pole {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+/* the goal's flag is ink: the accent marks only your position and your next action (DESIGN 3.1); the goal lights when
+   the user stands on it (trophy-light: the lit summit coin and «أنت هنا») */
+.dm-pen {
+  fill: var(--color-ink);
+  stroke: var(--color-ink);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transform-box: fill-box;
+  transform-origin: 100% 50%;
+}
+/* you are here: the waypoint where the solid line ends, with the walker's tag */
+.dm-you {
+  pointer-events: none;
+}
+.dm-wp {
+  position: absolute;
+  left: -8.5px;
+  top: -8.5px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-sheet);
+  box-shadow: 0 0 0 1.5px var(--color-accent);
+}
+.dm-pill {
+  position: absolute;
+  left: 22px;
+  top: -24px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 9px;
+  height: 48px;
+  padding: 4px 16px 4px 4px;
+  border-radius: 24px;
+  background: var(--color-stage);
+  color: var(--color-on-stage);
+  white-space: nowrap;
+  direction: rtl;
+  box-shadow: 0 3px 0 var(--coin-edge);
+}
+.dm-pill::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 50%;
+  width: 10px;
+  border-top: 2px solid var(--color-stage);
+}
+.dm-you[data-summit] .dm-pill {
+  left: calc(var(--sr) + 14px);
+}
+.dm-pill .dm-tx b {
+  display: block;
+  font: 700 15px/1.3 var(--font-sans);
+}
+.dm-pill .dm-tx small {
+  display: block;
+  font: 400 14px/1.3 var(--font-sans);
+  color: var(--color-on-stage-2);
+}
+/* the match: the same number as the ring, in the stage's ink (brass is XP only, DESIGN 3.2) */
+.dm-pill .dm-tx small bdi {
+  font-weight: 700;
+  color: var(--color-on-stage);
+}
+/* branch jobs: small, dashed, after the summit */
+.dm-peak {
+  width: 24px;
+  height: 22px;
+  transform-origin: 50% 100%;
+}
+.dm-peak > svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.dm-peak > svg path {
+  fill: var(--color-sheet);
+  stroke: var(--color-ink-2);
+  stroke-width: 1.75;
+  stroke-linejoin: round;
+}
+.dm-peak .dm-lb {
+  right: calc(100% + 8px);
+  top: 11px;
+  padding: 0 4px 2px;
+}
+.dm-peak .dm-lb > b {
+  font: 600 14.5px/1.45 var(--font-sans);
+  color: var(--color-ink-2);
+}
+.dm-peak .dm-lb > small {
+  font-size: 14px;
+  color: var(--color-ink-3);
+}
+.dm-peak:focus-visible {
+  outline: none;
+}
+.dm-peak:focus-visible > svg {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── screen furniture (not on the plane): the trailhead sign, the branches caption, the back control ── */
+/* the trailhead sign has ONE place: the bottom-right corner of a wide sheet (geometry.ts shows it only when that corner
+   is free, and gives it the room there as its max-width) */
+.dm-sign {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  max-width: 17rem;
+  background: var(--color-sheet);
+  border: 1px solid var(--color-line-strong);
+  border-radius: 14px;
+  padding: 11px 14px 12px;
+}
+.dm-sign .dm-e {
+  font: 500 14px/1.3 var(--font-sans);
+  color: var(--color-ink-3);
+}
+.dm-sign h2 {
+  margin: 0;
+  font: 700 26px/1.35 var(--font-sans);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dm-sign .dm-pg {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+  font: 400 14px/1.3 var(--font-sans);
+  color: var(--color-ink-2);
+  margin-top: 7px;
+  padding-top: 9px;
+  border-top: 1px dotted var(--color-line-strong);
+}
+.dm-sign .dm-pg b {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+.dm-pips {
+  display: flex;
+  gap: 4px;
+  margin-inline-start: auto;
+}
+.dm-pips i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px dotted var(--color-ink-3);
+}
+.dm-pips i[data-s="done"] {
+  border: 0;
+  background: var(--color-ink);
+}
+.dm-pips i[data-s="now"] {
+  border: 0;
+  background: var(--color-accent);
+}
+.dm-caption {
+  position: absolute;
+  inset-inline-end: 18px;
+  top: 14px;
+  margin: 0;
+  font: 500 14px/1.4 var(--font-sans);
+  color: var(--color-contour-ink);
+}
+.dm-back {
+  position: absolute;
+  inset-inline-start: 16px;
+  top: 16px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding-inline: 14px 16px;
+  border-radius: 20px;
+  background: var(--color-sheet);
+  border: 1.5px solid var(--color-ink);
+  font: 600 14px/1 var(--font-sans);
+  color: var(--color-ink);
+  opacity: 0;
+  pointer-events: none;
+}
+.dm[data-focus] .dm-back {
+  pointer-events: auto;
+}
+.dm[data-focus] .dm-cam,
+.dm[data-focus] .dm-st {
+  cursor: zoom-out;
+}
+.dm[data-focus] button.dm-st[data-key] {
+  cursor: pointer;
+}
+/* reduced motion and still frames: no flight, the card opens in place; the labels stay, the pressed station is ringed */
+.dm[data-focus][data-instant] .dm-back {
+  opacity: 1;
+}
+
+/* ── the phone sheet ── */
+.dm[data-small] .dm-coin > b {
+  font-size: clamp(14px, calc(var(--r) * 0.85), 16.5px);
+}
+.dm[data-small] .dm-now .dm-coin > b {
+  font-size: 21px;
+}
+.dm[data-small] .dm-lb {
+  right: calc(100% + 13px);
+  padding: 0 6px 2px;
+}
+.dm[data-small] .dm-ld {
+  right: calc(100% + 3px);
+  width: 7px;
+}
+.dm[data-small] .dm-lb > b {
+  font-size: 14.5px;
+  line-height: 1.4;
+  gap: 5px;
+}
+.dm[data-small] .dm-lb > small,
+.dm[data-small] .dm-lb em {
+  font-size: 13px;
+}
+.dm[data-small] .dm-ck {
+  width: 17px;
+  height: 17px;
+  top: -4px;
+  left: -4px;
+}
+.dm[data-small] .dm-start .dm-lb > b {
+  font-size: 13px;
+}
+.dm[data-small] .dm-sum .dm-lb > b {
+  font-size: 15.5px;
+}
+.dm[data-small] .dm-st .dm-card-lb {
+  padding: 5px 10px 7px;
+  border-radius: 12px;
+  right: calc(100% + 15px);
+}
+.dm[data-small] .dm-card-lb .dm-e {
+  font-size: 14px;
+}
+.dm[data-small] .dm-card-lb > b {
+  font-size: 16.5px;
+}
+.dm[data-small] .dm-pill {
+  height: 38px;
+  padding: 3px 9px 3px 3px;
+  gap: 5px;
+  border-radius: 19px;
+  top: -19px;
+  left: 14px;
+}
+.dm[data-small] .dm-pill::before {
+  left: -7px;
+  width: 8px;
+}
+.dm[data-small] .dm-pill .dm-tx b {
+  font-size: 13px;
+  line-height: 1.25;
+}
+.dm[data-small] .dm-pill .dm-tx small {
+  font-size: 13px;
+  line-height: 1.2;
+}
+.dm[data-small] .dm-wp {
+  left: -7.5px;
+  top: -7.5px;
+  width: 15px;
+  height: 15px;
+}
+.dm[data-small] .dm-peak > svg {
+  left: 2px;
+  top: 2px;
+  width: 20px;
+  height: 18px;
+}
+.dm[data-small] .dm-peak .dm-lb {
+  right: auto;
+  left: 50%;
+  top: 33px;
+  translate: -50% 0;
+  text-align: center;
+  padding: 0 4px 1px;
+}
+.dm[data-small] .dm-peak .dm-lb > b {
+  font-size: 13px;
+}
+.dm[data-small] .dm-back {
+  inset-inline-start: auto;
+  inset-inline-end: 10px;
+  top: 10px;
+  height: 36px;
+}
+/* many stations: one line per label; the second line folds into the first */
+.dm[data-dense] .dm-st:not(.dm-now):not(.dm-sum) .dm-lb > small {
+  display: none;
+}
+.dm[data-dense] .dm-lb em.dm-inline {
+  display: inline-flex;
+}
+.dm[data-dense][data-small] .dm-lb em.dm-src > span {
+  display: none;
+}
+
+/* ── the station card (desktop: a card on the map; phone: a bottom sheet above the tab bar) ── */
+.dm-card {
+  position: absolute;
+  inset-inline-end: 22px;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 5;
+  width: 348px;
+  max-height: calc(100% - 32px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 18px 18px;
+  background: var(--color-sheet);
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-sheet);
+  box-shadow: 0 4px 0 var(--color-ink);
+  outline: none;
+}
+.dm-leader {
+  position: absolute;
+  z-index: 4;
+  height: 0;
+  border-top: 2px dotted var(--color-ink);
+  transform-origin: 0 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+.dm-leader::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: -5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-ink);
+}
+.dm-card header {
+  position: relative;
+  padding-inline-end: 38px;
+}
+.dm-eye {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font: 500 14px/1.4 var(--font-sans);
+  color: var(--color-ink-3);
+}
+.dm-eye b {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+.dm-eye .dm-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  margin-inline-end: 1px;
+}
+.dm-card[data-state="current"] .dm-eye .dm-dot {
+  background: var(--color-accent);
+}
+.dm-card[data-state="current"] .dm-eye b {
+  color: var(--color-accent-ink);
+}
+.dm-card[data-state="done"] .dm-eye .dm-dot {
+  background: var(--color-ok);
+}
+.dm-card[data-state="done"] .dm-eye b {
+  color: var(--color-ok);
+}
+.dm-card[data-state="upcoming"] .dm-eye .dm-dot,
+.dm-card[data-state="locked"] .dm-eye .dm-dot {
+  background: none;
+  border: 1.5px dashed var(--color-ink-3);
+}
+.dm-card h3 {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 9px;
+  font: 700 24px/1.4 var(--font-sans);
+}
+.dm-card h3 .dm-pre {
+  font: 600 17px/1.5 var(--font-sans);
+  color: var(--color-ink-2);
+}
+/* «المرحلة 7: Power BI ★»: the stage number, then the skill and its stars kept together */
+.dm-card h3 .dm-ttl {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 9px;
+}
+/* one row «الدورة: أساسيات Power BI» */
+.dm-crs {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 6px;
+}
+.dm-blk .dm-crs .dm-k {
+  display: inline;
+}
+.dm-crs b {
+  font: 700 17px/1.5 var(--font-sans);
+}
+.dm-card header p {
+  margin: 0;
+  font: 400 14px/1.6 var(--font-sans);
+  color: var(--color-ink-2);
+}
+.dm-x {
+  position: absolute;
+  inset-inline-end: -8px;
+  top: -6px;
+}
+.dm-blk {
+  position: relative;
+  border-top: 1px dotted var(--color-line-strong);
+  padding-top: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dm-blk .dm-k {
+  font: 500 14px/1.4 var(--font-sans);
+  color: var(--color-ink-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dm-blk > b {
+  font: 700 17px/1.5 var(--font-sans);
+}
+.dm-blk > span.dm-sub {
+  font: 400 14px/1.6 var(--font-sans);
+  color: var(--color-ink-2);
+}
+.dm-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin-top: 6px;
+  font: 500 14px/1.4 var(--font-sans);
+  color: var(--color-ink);
+}
+.dm-stats > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.dm-stats .dm-k {
+  font-weight: 400;
+  color: var(--color-ink-3);
+}
+.dm-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+.dm-row > b {
+  font: 700 15px/1.4 var(--font-sans);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dm-row > b.dm-up {
+  font-size: 17px;
+}
+.dm-row.dm-rsub {
+  font: 400 14px/1.4 var(--font-sans);
+  color: var(--color-ink-3);
+  margin-top: 4px;
+}
+.dm-row.dm-rsub b {
+  color: var(--color-ink);
+}
+.dm-mbar {
+  display: flex;
+  height: 12px;
+  border-radius: 4px;
+  background: var(--color-paper);
+  border: 1.5px solid var(--color-ink);
+  overflow: hidden;
+  margin-top: 7px;
+}
+.dm-mbar i {
+  display: block;
+  height: 100%;
+}
+.dm-mbar .dm-pv {
+  background: var(--color-contour-2);
+}
+.dm-mbar .dm-th {
+  background: var(--color-ink);
+  transform-origin: 100% 50%;
+}
+.dm-mbar[data-state="current"] .dm-th {
+  background: var(--color-accent);
+}
+/* a gain not yet in reach: hatched, drawn with two flat tones (a pattern, not a wash) */
+.dm-mbar[data-state="upcoming"] .dm-th,
+.dm-mbar[data-state="locked"] .dm-th,
+.dm-mbar[data-state="summit"] .dm-th {
+  background: repeating-linear-gradient(135deg, var(--color-ink-3) 0 2px, transparent 2px 6px);
+}
+.dm-les {
+  display: flex;
+  gap: 4px;
+  margin-top: 7px;
+}
+.dm-les i {
+  flex: 1;
+  height: 8px;
+  border-radius: 3px;
+  border: 1.5px solid var(--color-line-strong);
+  background: var(--color-sheet);
+}
+.dm-les i[data-on] {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+}
+.dm-note {
+  margin: 6px 0 0;
+  font: 400 14px/1.6 var(--font-sans);
+  color: var(--color-ink-2);
+}
+.dm-ev {
+  padding-inline-end: 74px;
+  min-height: 78px;
+}
+.dm-ev q {
+  quotes: none;
+  font: 500 15px/1.75 var(--font-sans);
+  color: var(--color-ink);
+  margin-top: 2px;
+}
+.dm-stamp {
+  position: absolute;
+  inset-inline-end: 0;
+  top: 12px;
+  rotate: -9deg;
+}
+.dm-lockb {
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+}
+.dm-lockb b {
+  font: 700 16px/1.5 var(--font-sans);
+}
+.dm-card .dm-go {
+  margin-top: 2px;
+}
+
+/* the phone: a bottom sheet fixed above the tab bar (portaled into #app-content, so it is fixed to the viewport) */
+.dm-sheet-layer {
+  position: fixed;
+  inset-inline: 0;
+  bottom: var(--shell-bottom, 0px);
+  z-index: 30;
+  overflow: hidden;
+  pointer-events: none;
+}
+.dm-sheet-layer .dm-card {
+  position: relative;
+  inset: auto;
+  translate: none;
+  width: auto;
+  max-height: min(31rem, calc(100dvh - var(--shell-top, 4rem) - var(--shell-bottom, 0px) - 13.5rem));
+  border-radius: 24px 24px 0 0;
+  border-width: 1.5px 0 0;
+  box-shadow: none;
+  padding: 22px 18px 16px;
+  gap: 10px;
+  pointer-events: auto;
+}
+.dm-sheet-layer .dm-card::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  inset-inline-start: 50%;
+  width: 40px;
+  height: 4px;
+  margin-inline-start: -20px;
+  border-radius: 2px;
+  background: var(--color-line-strong);
+}
+.dm-sheet-layer .dm-card h3 {
+  font-size: 22px;
+}
+.dm-sheet-layer .dm-blk {
+  padding-top: 9px;
+}
+
+/* ── the hand-over from the reveal: the strip's nodes travel to their stations ── */
+.dm-handover {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+}
+/* each node travels as the strip drew it: a point at its centre carrying the ring and the label beside it */
+.dm-ho {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  direction: rtl;
+}
+.dm-ho-ring {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--color-ink);
+  background: var(--color-sheet);
+  color: var(--color-ink);
+}
+.dm-ho-ring > b {
+  font: 700 14px/1 var(--font-sans);
+  direction: ltr;
+  font-variant-numeric: tabular-nums;
+}
+.dm-ho-wp {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+.dm-ho-lb {
+  position: absolute;
+  top: 0;
+  transform: translate(0, -50%);
+  white-space: nowrap;
+  padding: 1px 6px 3px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--color-sheet) 90%, transparent);
+  color: var(--color-ink);
+}
+.dm-ho-lb > b {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 16px/1.5 var(--font-sans);
+}
+.dm-ho[data-kind="goal"] .dm-ho-lb > b {
+  font: 700 18px/1.45 var(--font-sans);
+}
+.dm-ho-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+.dm-ho-start {
+  font: 600 14px/1.5 var(--font-sans);
+  color: var(--color-ink-2);
+}
+
+/* while the camera is at a station the cleared labels and furniture are not there to be pressed */
+.dm[data-focus]:not([data-instant]) .dm-q {
+  pointer-events: none;
+}
+
+/* phone: each branch label hangs from its own side, so a long job title never leaves the sheet */
+.dm[data-small] .dm-peak[data-side="a"] .dm-lb {
+  left: -14px;
+  translate: none;
+  text-align: start;
+}
+.dm[data-small] .dm-peak[data-side="b"] .dm-lb {
+  left: auto;
+  right: -14px;
+  translate: none;
+  text-align: end;
+}
+.dm[data-small] .dm-peak .dm-lb > b {
+  max-width: 9.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.dm[data-small] .dm-lk,
+.dm[data-dense] .dm-lk {
+  top: -9px;
+  left: -10px;
+}

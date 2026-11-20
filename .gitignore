@@ -1,0 +1,32 @@
+# session runner (not part of the product)
+.session/
+
+# secrets
+.env
+.env.*
+!.env.example
+
+# dependencies and build output
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# tooling scratch
+.locks/
+artifacts/
+design/explore/**/shots/
+*.log
+
+# internal working notes, QA captures and third-party research screenshots: kept on the build laptop and in the
+# private archive repo, not in the public repo
+/BRIEF.md
+/STATUS.md
+/docs/RESUME-NOTES.md
+/docs/TEAM-BRIEF.md
+/artifacts/
+/design/explore/**/_research/
+/design/explore/**/_scratch*/
+/tsconfig.tsbuildinfo

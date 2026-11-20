@@ -1,0 +1,701 @@
+// Owner: data. Spec 9.8 checks 1, 2, 3, 7, 8 and 9 on the catalogue, the demo aliases of 9.2, prerequisites inside
+// their field, the sample CV text, the onboarding questions, levels and badges. Check 4 (the sample CV read by the
+// analyser) belongs to brain-cv and check 5 / 6 (matches, fit) to the engine; here the aliases are only sanity-checked
+// against the sample CV so brain-cv's acceptance test cannot fail because of the data.
+import { describe, expect, it } from "vitest";
+
+import {
+  BADGES,
+  CATALOGUE_COUNTS,
+  COURSES,
+  FIELDS,
+  JOB_CITIES,
+  JOBS,
+  LEADERBOARD_USERS,
+  LESSONS_BY_HOURS,
+  LEVEL_THRESHOLDS,
+  LEVELS,
+  ONBOARDING_QUESTIONS,
+  SAMPLE_CV_BODY,
+  SKILLS,
+  getBadge,
+  getCourse,
+  getField,
+  getJob,
+  getJobCity,
+  getLeaderboardUser,
+  getLevel,
+  getQuestion,
+  getSkill,
+  optionLabel,
+  sampleCvText,
+} from "@/lib/data";
+import {
+  BADGE_IDS,
+  COURSE_IDS,
+  FIELD_IDS,
+  JOB_CITY_IDS,
+  JOB_IDS,
+  LEADERBOARD_USER_IDS,
+  OPTIONS_BY_QUESTION,
+  QUESTION_IDS,
+  SKILL_IDS,
+  courseIdFor,
+} from "@/lib/ids";
+import type { CourseId, FieldId, Job, JobId, SkillId } from "@/lib/types";
+
+// ─── helpers ──────────────────────────────────────────────────────────────────────────────────────────────────────
+
+/** Spec 4.3 normalisation, enough for the checks here (the engine owns the real one). */
+function norm(text: string): string {
+  return text
+    .normalize("NFKC")
+    .replace(/[ً-ٰٟـ‌-‏‪-‮]/g, "")
+    .replace(/[أإآ]/g, "ا")
+    .replace(/ى/g, "ي")
+    .replace(/ة/g, "ه")
+    .toLowerCase();
+}
+
+function words(text: string): string[] {
+  return norm(text)
+    .split(/[^\p{L}\p{N}+#]+/u)
+    .filter((w) => w.length > 0);
+}
+
+/** A word without «ال», «لل» or one one-letter prefix (و، ف، ب، ل، ك), in every way it could be read. */
+function readings(word: string): string[] {
+  const out = new Set<string>([word]);
+  const stripAl = (w: string) => (w.startsWith("ال") && w.length > 3 ? w.slice(2) : w);
+  out.add(stripAl(word));
+  if (word.startsWith("لل") && word.length > 3) out.add(word.slice(2));
+  if (/^[وفبلك]/.test(word) && word.length > 2) {
+    out.add(word.slice(1));
+    out.add(stripAl(word.slice(1)));
+  }
+  return [...out];
+}
+
+/** Whole-word match of a (multi-word) alias in a text, «ال» and a one-letter prefix allowed on every word (lenient). */
+function aliasOccurs(alias: string, textWords: readonly string[]): boolean {
+  const aliasWords = words(alias).map((w) => (w.startsWith("ال") && w.length > 3 ? w.slice(2) : w));
+  if (aliasWords.length === 0) return false;
+  for (let i = 0; i + aliasWords.length <= textWords.length; i++) {
+    const ok = aliasWords.every((aw, j) => {
+      const tw = textWords[i + j];
+      return tw !== undefined && readings(tw).includes(aw);
+    });
+    if (ok) return true;
+  }
+  return false;
+}
+
+function wordCount(text: string): number {
+  return text.trim().split(/\s+/).length;
+}
+
+/** Every string inside a value (deep). */
+function allStrings(value: unknown): string[] {
+  if (typeof value === "string") return [value];
+  if (Array.isArray(value)) return value.flatMap(allStrings);
+  if (value && typeof value === "object") return Object.values(value).flatMap(allStrings);
+  return [];
+}
+
+/** Spec 3.4 / 9.3: one stage per required star, plus a prep stage (first star) for each unlisted prerequisite. */
+function stagesOf(job: Job): { courses: CourseId[]; preps: number } {
+  const listed = new Set<SkillId>(job.requirements.map((r) => r.skill));
+  const courses: CourseId[] = [];
+  const preps = new Set<SkillId>();
+  for (const r of job.requirements) {
+    for (const p of getSkill(r.skill).prereqs) if (!listed.has(p)) preps.add(p);
+    for (let star = 1; star <= r.stars; star++) {
+      const id = courseIdFor(r.skill, star);
+      if (id) courses.push(id);
+    }
+  }
+  for (const p of preps) {
+    const id = courseIdFor(p, 1);
+    if (id) courses.push(id);
+  }
+  return { courses, preps: preps.size };
+}
+
+// ─── 9.8 check 1: fields and skills ───────────────────────────────────────────────────────────────────────────────
+
+describe("fields and skills (9.1, 9.2, 9.8 check 1)", () => {
+  it("has the seven fields in display order, only `professional` without jobs", () => {
+    expect(FIELDS.map((f) => f.id)).toEqual([...FIELD_IDS]);
+    expect(FIELDS.filter((f) => !f.hasJobs).map((f) => f.id)).toEqual(["professional"]);
+    expect(getField("data").name).toBe("البيانات والتحليل");
+    expect(getField("professional").name).toBe("المهارات المهنية");
+  });
+
+  it("has 38 skills in table order, split 7/6/5/5/5/5/5, with 59 star slots (14/9/8/7/7/7/7)", () => {
+    expect(SKILLS.map((s) => s.id)).toEqual([...SKILL_IDS]);
+    const perField = (field: FieldId) => SKILLS.filter((s) => s.field === field);
+    expect(FIELD_IDS.map((f) => perField(f).length)).toEqual([7, 6, 5, 5, 5, 5, 5]);
+    expect(FIELD_IDS.map((f) => perField(f).reduce((sum, s) => sum + s.maxStars, 0))).toEqual([14, 9, 8, 7, 7, 7, 7]);
+    expect(SKILLS.reduce((sum, s) => sum + s.maxStars, 0)).toBe(59);
+    expect(CATALOGUE_COUNTS.skills).toBe(SKILLS.length);
+    expect(CATALOGUE_COUNTS.starSlots).toBe(59);
+  });
+
+  it("gives three slots to five skills and two to eleven (9.2)", () => {
+    const withSlots = (n: number) => SKILLS.filter((s) => s.maxStars === n).map((s) => s.id);
+    expect(withSlots(3)).toEqual(["excel", "sql", "powerbi", "javascript", "figma"]);
+    expect(withSlots(2).sort()).toEqual(
+      [
+        "statistics",
+        "programming",
+        "ui-design",
+        "content",
+        "social-media",
+        "project-management",
+        "financial-analysis",
+        "hr-basics",
+        "recruitment",
+        "communication",
+        "english",
+      ].sort(),
+    );
+    expect(withSlots(1)).toHaveLength(22);
+  });
+
+  it("keeps every prerequisite inside its skill's field, listed earlier, never itself", () => {
+    for (const skill of SKILLS) {
+      for (const p of skill.prereqs) {
+        expect(getSkill(p).field, `${skill.id} → ${p}`).toBe(skill.field);
+        expect(SKILL_IDS.indexOf(p), `${skill.id} → ${p}`).toBeLessThan(SKILL_IDS.indexOf(skill.id));
+      }
+    }
+    expect(getSkill("python-data").prereqs).toEqual(["sql", "statistics"]);
+    expect(getSkill("apis").prereqs).toEqual(["programming", "git"]);
+  });
+
+  it("writes a one-line description of under 15 words for every skill", () => {
+    for (const skill of SKILLS) {
+      expect(skill.description.includes("\n"), skill.id).toBe(false);
+      expect(wordCount(skill.description), skill.id).toBeLessThan(15);
+    }
+  });
+});
+
+// ─── aliases (9.2) ────────────────────────────────────────────────────────────────────────────────────────────────
+
+const DEMO_ALIASES: Readonly<Partial<Record<SkillId, readonly string[]>>> = {
+  excel: ["Excel", "إكسل", "اكسل", "الجداول المحورية", "Pivot"],
+  sql: ["SQL", "MySQL", "PostgreSQL", "قاعدة بيانات", "قواعد البيانات", "استعلامات"],
+  statistics: ["الإحصاء", "إحصاء", "إحصائي", "statistics", "SPSS"],
+  programming: ["البرمجة", "برمجة", "Python", "بايثون", "Java", "C++", "C#"],
+  english: ["الإنجليزية", "الانجليزية", "English", "IELTS", "TOEFL"],
+  communication: ["التواصل", "مهارات الاتصال", "communication"],
+  presentation: ["العرض والتقديم", "مهارات العرض", "الإلقاء", "عروض تقديمية", "PowerPoint"],
+  teamwork: ["العمل الجماعي", "العمل ضمن فريق", "روح الفريق", "teamwork"],
+  powerbi: ["Power BI", "PowerBI", "باور بي آي"],
+  dataviz: ["تصوير البيانات", "لوحة معلومات", "لوحات المعلومات", "رسوم بيانية", "dashboard", "Tableau"],
+  "python-data": ["pandas", "NumPy", "تحليل البيانات بـ Python"],
+  "social-media": ["التواصل الاجتماعي", "وسائل التواصل", "social media"],
+  "training-dev": ["التدريب والتطوير", "البرامج التدريبية", "تطوير الموظفين"],
+  content: ["كتابة المحتوى", "صناعة المحتوى", "copywriting"],
+  "project-management": ["إدارة المشاريع", "إدارة مشروع", "PMP"],
+};
+
+/** Spec 9.2: never an alias on their own (with or without «ال»). */
+const BARE_WORDS = ["تحليل", "بيانات", "تصميم", "مشروع", "إدارة", "كتابة", "تقارير", "تطوير", "تدريب", "مبيعات", "نظام", "عرض", "تقديم", "عمل", "فريق"];
+
+/** Spec 6.2: the eight skills the sample CV must give. */
+const SAMPLE_SKILLS: readonly SkillId[] = [
+  "excel",
+  "sql",
+  "statistics",
+  "programming",
+  "english",
+  "communication",
+  "presentation",
+  "teamwork",
+];
+
+describe("aliases (9.2)", () => {
+  it("uses the demo aliases of the 9.2 table exactly", () => {
+    expect(Object.keys(DEMO_ALIASES)).toHaveLength(15);
+    for (const [id, aliases] of Object.entries(DEMO_ALIASES)) {
+      expect(getSkill(id as SkillId).aliases, id).toEqual(aliases);
+    }
+  });
+
+  it("gives every skill Arabic aliases, and an English one wherever the spec did not fix the list", () => {
+    for (const skill of SKILLS) {
+      expect(skill.aliases.some((a) => /[؀-ۿ]/.test(a)), skill.id).toBe(true);
+      if (DEMO_ALIASES[skill.id] === undefined) {
+        expect(skill.aliases.some((a) => /[A-Za-z]/.test(a)), skill.id).toBe(true);
+      }
+    }
+  });
+
+  it("never uses a bare word of 9.2 as an alias", () => {
+    const bare = new Set(BARE_WORDS.flatMap((w) => [norm(w), norm(`ال${w}`)]));
+    for (const skill of SKILLS) {
+      for (const alias of skill.aliases) expect(bare.has(norm(alias.trim())), `${skill.id}: ${alias}`).toBe(false);
+    }
+  });
+
+  it("never gives the same alias to two skills", () => {
+    const owner = new Map<string, SkillId>();
+    for (const skill of SKILLS) {
+      for (const alias of skill.aliases) {
+        // The spec's own lists hold spellings that normalise alike («إكسل», «اكسل»): only another skill is a clash.
+        const key = norm(alias.trim());
+        expect(owner.get(key) ?? skill.id, `${alias} in ${skill.id} and ${owner.get(key) ?? ""}`).toBe(skill.id);
+        owner.set(key, skill.id);
+      }
+    }
+  });
+
+  it("lets the sample CV name exactly its eight skills (sanity check for brain-cv's 9.8 check 4)", () => {
+    const text = words(SAMPLE_CV_BODY);
+    for (const skill of SKILLS) {
+      const found = skill.aliases.filter((a) => aliasOccurs(a, text));
+      if (SAMPLE_SKILLS.includes(skill.id)) expect(found.length, skill.id).toBeGreaterThan(0);
+      else expect(found, skill.id).toEqual([]);
+    }
+  });
+});
+
+// ─── 9.8 check 2: courses ─────────────────────────────────────────────────────────────────────────────────────────
+
+/** Spec 9.4 hours, in table order. */
+const COURSE_HOURS: Readonly<Record<CourseId, number>> = {
+  "c-excel-1": 8,
+  "c-excel-2": 10,
+  "c-excel-3": 14,
+  "c-sql-1": 8,
+  "c-sql-2": 12,
+  "c-sql-3": 16,
+  "c-statistics-1": 8,
+  "c-statistics-2": 12,
+  "c-powerbi-1": 10,
+  "c-powerbi-2": 12,
+  "c-powerbi-3": 16,
+  "c-dataviz-1": 6,
+  "c-python-data-1": 10,
+  "c-ml-1": 10,
+  "c-programming-1": 10,
+  "c-programming-2": 12,
+  "c-html-css-1": 8,
+  "c-git-1": 6,
+  "c-javascript-1": 10,
+  "c-javascript-2": 12,
+  "c-javascript-3": 16,
+  "c-react-1": 10,
+  "c-apis-1": 10,
+  "c-design-basics-1": 8,
+  "c-figma-1": 8,
+  "c-figma-2": 10,
+  "c-figma-3": 14,
+  "c-ux-research-1": 8,
+  "c-ui-design-1": 10,
+  "c-ui-design-2": 12,
+  "c-prototyping-1": 8,
+  "c-marketing-basics-1": 8,
+  "c-content-1": 8,
+  "c-content-2": 10,
+  "c-social-media-1": 8,
+  "c-social-media-2": 10,
+  "c-seo-1": 8,
+  "c-ads-1": 10,
+  "c-project-management-1": 8,
+  "c-project-management-2": 12,
+  "c-agile-1": 6,
+  "c-business-analysis-1": 8,
+  "c-accounting-1": 8,
+  "c-financial-analysis-1": 10,
+  "c-financial-analysis-2": 12,
+  "c-hr-basics-1": 8,
+  "c-hr-basics-2": 10,
+  "c-recruitment-1": 8,
+  "c-recruitment-2": 10,
+  "c-labor-law-1": 8,
+  "c-payroll-1": 8,
+  "c-training-dev-1": 8,
+  "c-communication-1": 6,
+  "c-communication-2": 10,
+  "c-english-1": 10,
+  "c-english-2": 12,
+  "c-presentation-1": 6,
+  "c-teamwork-1": 6,
+  "c-problem-solving-1": 6,
+};
+
+describe("courses (9.4, 8.2, 9.8 check 2)", () => {
+  it("has 59 courses in table order, one per star slot, ids c-{skill}-{star}", () => {
+    expect(COURSES).toHaveLength(59);
+    expect(COURSES.map((c) => c.id)).toEqual([...COURSE_IDS]);
+    for (const course of COURSES) expect(course.id).toBe(`c-${course.skill}-${course.star}`);
+    for (const skill of SKILLS) {
+      const stars = COURSES.filter((c) => c.skill === skill.id).map((c) => c.star);
+      expect(stars, skill.id).toEqual(Array.from({ length: skill.maxStars }, (_, i) => i + 1));
+    }
+    expect(CATALOGUE_COUNTS.courses).toBe(COURSES.length);
+  });
+
+  it("has the hours as listed: 566 hours and 11,320 XP in total", () => {
+    for (const course of COURSES) expect(course.hours, course.id).toBe(COURSE_HOURS[course.id]);
+    const hours = COURSES.reduce((sum, c) => sum + c.hours, 0);
+    expect(hours).toBe(566);
+    expect(hours).toBe(CATALOGUE_COUNTS.courseHours);
+    expect(hours * 20).toBe(11_320);
+  });
+
+  it("has as many lessons as 8.2 gives for the hours, each a short title, none repeated in a course", () => {
+    for (const course of COURSES) {
+      expect(course.lessons, course.id).toHaveLength(LESSONS_BY_HOURS[course.hours]);
+      expect(new Set(course.lessons).size, course.id).toBe(course.lessons.length);
+      for (const lesson of course.lessons) {
+        expect(lesson.trim(), course.id).toBe(lesson);
+        expect(lesson.length, course.id).toBeGreaterThan(0);
+        expect(wordCount(lesson), `${course.id}: ${lesson}`).toBeLessThanOrEqual(7);
+        expect(lesson.endsWith("."), `${course.id}: ${lesson}`).toBe(false);
+      }
+    }
+  });
+
+  it("describes every course in exactly two sentences", () => {
+    for (const course of COURSES) {
+      expect(course.description.endsWith("."), course.id).toBe(true);
+      expect(course.description.split(".").length - 1, course.id).toBe(2);
+    }
+  });
+
+  it("gives the two demo courses exactly as 9.4 writes them", () => {
+    const powerbi = getCourse("c-powerbi-1");
+    expect(powerbi.title).toBe("أساسيات Power BI: من البيانات إلى لوحة المعلومات");
+    expect(powerbi.hours).toBe(10);
+    expect(powerbi.description).toBe(
+      "تتعلّم ربط البيانات وتنظيفها وبناء تقارير تفاعلية في Power BI. تخرج منها بلوحة معلومات كاملة تستطيع عرضها.",
+    );
+    expect(powerbi.lessons).toEqual([
+      "التعرّف على واجهة Power BI",
+      "ربط مصادر البيانات وتنظيفها",
+      "بناء أول تقرير تفاعلي",
+      "المقاييس والحسابات الأساسية",
+      "نشر لوحة المعلومات ومشاركتها",
+    ]);
+    const statistics = getCourse("c-statistics-2");
+    expect(statistics.title).toBe("الإحصاء التطبيقي للمحللين");
+    expect(statistics.hours).toBe(12);
+    expect(statistics.description).toBe(
+      "تنتقل من وصف البيانات إلى الاستنتاج منها بثقة. تخرج منها قادراً على اختبار فرضية وشرح نتيجتها.",
+    );
+    expect(statistics.lessons).toEqual([
+      "التوزيعات ومقاييس التشتت",
+      "العيّنات وفترات الثقة",
+      "اختبار الفرضيات",
+      "الارتباط والانحدار البسيط",
+      "عرض النتائج لغير المختصين",
+    ]);
+  });
+});
+
+// ─── 9.8 checks 3 and 9: jobs ─────────────────────────────────────────────────────────────────────────────────────
+
+/** Spec 9.3: requirements in roadmap order, and the stage count before any CV (prep stages). */
+const JOB_TABLE: Readonly<Record<JobId, { reqs: string; stages: number; preps: number }>> = {
+  "data-analyst-riyadh": { reqs: "excel:2 sql:2 powerbi:1 statistics:2 communication:1", stages: 8, preps: 0 },
+  "bi-analyst-riyadh": { reqs: "excel:2 sql:3 powerbi:3 dataviz:1 statistics:2", stages: 11, preps: 0 },
+  "reporting-specialist-jeddah": { reqs: "excel:2 powerbi:1 statistics:2 dataviz:1 communication:1", stages: 7, preps: 0 },
+  "junior-data-scientist-remote": { reqs: "sql:2 statistics:2 python-data:1 ml:1 problem-solving:1", stages: 8, preps: 1 },
+  "frontend-developer-riyadh": { reqs: "html-css:1 javascript:2 react:1 git:1 english:1", stages: 7, preps: 1 },
+  "backend-developer-riyadh": { reqs: "programming:2 git:1 apis:1 sql:2 problem-solving:1", stages: 8, preps: 1 },
+  "web-app-developer-remote": { reqs: "javascript:3 react:1 git:1 apis:1 teamwork:1", stages: 10, preps: 3 },
+  "qa-tester-dammam": { reqs: "programming:2 git:1 problem-solving:1 english:1 teamwork:1", stages: 7, preps: 1 },
+  "ui-ux-designer-riyadh": { reqs: "design-basics:1 figma:2 ui-design:1 ux-research:1 presentation:1", stages: 7, preps: 1 },
+  "product-designer-jeddah": { reqs: "figma:3 ui-design:2 prototyping:1 ux-research:1 communication:2", stages: 10, preps: 1 },
+  "ux-researcher-remote": { reqs: "design-basics:1 ux-research:1 figma:1 statistics:1 presentation:1", stages: 7, preps: 2 },
+  "digital-marketing-specialist-riyadh": { reqs: "marketing-basics:1 social-media:2 content:1 ads:1 excel:1", stages: 6, preps: 0 },
+  "content-writer-jeddah": { reqs: "marketing-basics:1 content:2 seo:1 english:2 communication:1", stages: 7, preps: 0 },
+  "digital-ads-specialist-dammam": { reqs: "marketing-basics:1 social-media:2 ads:1 seo:1 excel:2", stages: 8, preps: 1 },
+  "business-analyst-riyadh": { reqs: "project-management:1 business-analysis:1 excel:2 sql:1 english:2", stages: 7, preps: 0 },
+  "project-coordinator-jeddah": { reqs: "project-management:2 agile:1 communication:2 teamwork:1 excel:1", stages: 7, preps: 0 },
+  "financial-analyst-riyadh": { reqs: "accounting:1 financial-analysis:2 excel:3 presentation:1 english:2", stages: 10, preps: 1 },
+  "hr-specialist-riyadh": { reqs: "hr-basics:2 labor-law:1 payroll:1 communication:2 excel:1", stages: 7, preps: 0 },
+  "recruiter-jeddah": { reqs: "hr-basics:1 recruitment:2 communication:2 english:2 teamwork:1", stages: 8, preps: 0 },
+  "training-coordinator-dammam": { reqs: "hr-basics:1 training-dev:1 recruitment:1 communication:2 presentation:1", stages: 6, preps: 0 },
+};
+
+describe("jobs (9.3, 9.8 checks 3 and 9)", () => {
+  it("has 20 jobs in data order with five requirements each, as listed", () => {
+    expect(JOBS.map((j) => j.id)).toEqual([...JOB_IDS]);
+    expect(CATALOGUE_COUNTS.jobs).toBe(JOBS.length);
+    for (const job of JOBS) {
+      expect(job.requirements, job.id).toHaveLength(5);
+      expect(job.requirements.map((r) => `${r.skill}:${r.stars}`).join(" "), job.id).toBe(JOB_TABLE[job.id].reqs);
+      expect(new Set(job.requirements.map((r) => r.skill)).size, job.id).toBe(5);
+    }
+  });
+
+  it("never asks for more stars than a skill has", () => {
+    for (const job of JOBS) {
+      for (const r of job.requirements) expect(r.stars, `${job.id} ${r.skill}`).toBeLessThanOrEqual(getSkill(r.skill).maxStars);
+    }
+  });
+
+  it("requires every one of the 38 skills in at least one job", () => {
+    const required = new Set(JOBS.flatMap((j) => j.requirements.map((r) => r.skill)));
+    expect(SKILL_IDS.filter((s) => !required.has(s))).toEqual([]);
+  });
+
+  it("splits the jobs by field 4/4/3/3/3/3, by city 9/5/3/3 and by band 12/6/2", () => {
+    const count = <K extends string>(key: (j: Job) => K, value: K) => JOBS.filter((j) => key(j) === value).length;
+    expect(["data", "software", "design", "marketing", "business", "hr"].map((f) => count((j) => j.field, f))).toEqual([
+      4, 4, 3, 3, 3, 3,
+    ]);
+    expect(JOB_CITY_IDS.map((c) => count((j) => j.city, c))).toEqual([9, 5, 3, 3]);
+    expect(["entry", "junior", "mid"].map((b) => count((j) => j.band, b))).toEqual([12, 6, 2]);
+  });
+
+  it("gives every job's stage count and prep count of 9.3 (the reveal's three: 8/74, 7/60, 7/64)", () => {
+    for (const job of JOBS) {
+      const { courses, preps } = stagesOf(job);
+      expect(courses.length, job.id).toBe(JOB_TABLE[job.id].stages);
+      expect(preps, job.id).toBe(JOB_TABLE[job.id].preps);
+    }
+    const hours = (id: JobId) => stagesOf(getJob(id)).courses.reduce((sum, c) => sum + getCourse(c).hours, 0);
+    expect(hours("data-analyst-riyadh")).toBe(74);
+    expect(hours("reporting-specialist-jeddah")).toBe(60);
+    expect(hours("business-analyst-riyadh")).toBe(64);
+    expect(Math.min(...JOBS.map((j) => stagesOf(j).courses.length))).toBe(6);
+    expect(Math.max(...JOBS.map((j) => stagesOf(j).courses.length))).toBe(11);
+  });
+
+  it("keeps the demo job's text exactly as 9.3 writes it", () => {
+    const job = getJob("data-analyst-riyadh");
+    expect(job.title).toBe("محلل بيانات");
+    expect(job.company).toBe("وادي الغيم للبيانات");
+    expect(job.summary).toBe("تحوّل بيانات المبيعات والعمليات إلى تقارير ولوحات معلومات تساعد الفرق على اتخاذ القرار.");
+    expect(job.tasks).toEqual([
+      "استخراج البيانات بـ SQL وتنظيفها في Excel",
+      "بناء لوحات معلومات بـ Power BI ومتابعتها أسبوعياً",
+      "عرض النتائج على الفرق بلغة واضحة",
+    ]);
+  });
+
+  it("writes one summary sentence of at most 25 words and three task lines of at most 10 words, with no numbers", () => {
+    for (const job of JOBS) {
+      expect(job.summary.endsWith("."), job.id).toBe(true);
+      expect(job.summary.split(".").length - 1, job.id).toBe(1);
+      expect(wordCount(job.summary), job.id).toBeLessThanOrEqual(25);
+      expect(job.tasks, job.id).toHaveLength(3);
+      for (const task of job.tasks) {
+        expect(wordCount(task), `${job.id}: ${task}`).toBeLessThanOrEqual(10);
+        expect(task.endsWith("."), `${job.id}: ${task}`).toBe(false);
+      }
+      for (const text of [job.title, job.company, job.summary, ...job.tasks]) {
+        expect(/[0-9٠-٩]/.test(text), `${job.id}: ${text}`).toBe(false);
+      }
+    }
+  });
+
+  it("names the cities and bands of 9.3", () => {
+    expect(JOB_CITIES.map((c) => c.id)).toEqual([...JOB_CITY_IDS]);
+    expect(JOB_CITIES.map((c) => c.name)).toEqual(["الرياض", "جدة", "الدمام", "عن بُعد"]);
+    expect(getJobCity("remote").name).toBe("عن بُعد");
+  });
+});
+
+// ─── 9.8 check 8: honest sample data ──────────────────────────────────────────────────────────────────────────────
+
+/** Spec 9.7: never in a company name (compared word by word, with «ال» and one-letter prefixes removed). */
+const FORBIDDEN_COMPANY_WORDS = [
+  "السعودية",
+  "الوطنية",
+  "العربية",
+  "الخليج",
+  "المملكة",
+  "ديوان",
+  "مجلس",
+  "مرصد",
+  "هيئة",
+  "وزارة",
+  "صندوق",
+  "أمانة",
+  "بنك",
+  "مصرف",
+  "مصرفية",
+  "اتصالات",
+  "تمويل",
+  "السنبلة",
+  "المرجان",
+  "سدرة",
+  "جسر",
+  "فنار",
+  "البرق",
+  "السديم",
+  "النيزك",
+  "رواق",
+  "ندى",
+  "السنديان",
+];
+
+describe("honest sample data (9.7, 9.8 check 8)", () => {
+  const catalogue = { FIELDS, SKILLS, JOBS, COURSES, LEADERBOARD_USERS, LEVELS, BADGES, ONBOARDING_QUESTIONS, JOB_CITIES, SAMPLE_CV_BODY };
+
+  it("uses no forbidden word in a company name, and every company once", () => {
+    const withoutAl = (w: string) => (w.startsWith("ال") && w.length > 3 ? w.slice(2) : w);
+    const forbidden = new Set(FORBIDDEN_COMPANY_WORDS.flatMap((w) => [norm(w), withoutAl(norm(w))]));
+    for (const job of JOBS) {
+      for (const word of words(job.company)) {
+        for (const reading of readings(word)) expect(forbidden.has(reading), `${job.company}: ${word}`).toBe(false);
+      }
+    }
+    expect(new Set(JOBS.map((j) => j.company)).size).toBe(20);
+  });
+
+  it("mentions no money, salary or currency anywhere in the jobs", () => {
+    for (const job of JOBS) {
+      for (const text of [job.summary, ...job.tasks, job.company, job.title]) {
+        expect(/ريال|راتب|SAR|salary/i.test(text), text).toBe(false);
+      }
+    }
+    for (const text of allStrings(catalogue)) expect(text.includes("ريال"), text).toBe(false);
+  });
+
+  it("marks the two organisations inside the sample CV as fictional", () => {
+    expect(SAMPLE_CV_BODY).toContain("جامعة التلال السبع (جهة تجريبية)");
+    expect(SAMPLE_CV_BODY).toContain("متجر الفانوس النحاسي (جهة تجريبية)");
+  });
+});
+
+// ─── 9.8 check 7: leaderboard ─────────────────────────────────────────────────────────────────────────────────────
+
+/** Spec 9.5 level and weekly-rank columns, u01..u24. */
+const LEVEL_COLUMN = [7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 3, 3, 3, 3, 2, 2, 2, 1];
+const RANK_COLUMN = [7, 1, 9, 4, 14, 2, 11, 6, 17, 3, 20, 5, 12, 8, 22, 10, 15, 13, 18, 16, 19, 21, 23, 24];
+
+function levelOf(totalXp: number): number {
+  return LEVEL_THRESHOLDS.filter((t) => totalXp >= t).length;
+}
+
+describe("leaderboard users (9.5, 9.8 check 7)", () => {
+  const byWeekly = [...LEADERBOARD_USERS].sort((a, b) => b.weeklyXp - a.weeklyXp);
+
+  it("has 24 users with all totals different and all weekly values different and never above the total", () => {
+    expect(LEADERBOARD_USERS.map((u) => u.id)).toEqual([...LEADERBOARD_USER_IDS]);
+    expect(CATALOGUE_COUNTS.leaderboardUsers).toBe(24);
+    expect(new Set(LEADERBOARD_USERS.map((u) => u.totalXp)).size).toBe(24);
+    expect(new Set(LEADERBOARD_USERS.map((u) => u.weeklyXp)).size).toBe(24);
+    for (const u of LEADERBOARD_USERS) expect(u.weeklyXp, u.id).toBeLessThanOrEqual(u.totalXp);
+  });
+
+  it("derives the levels of the table from 8.3", () => {
+    expect(LEADERBOARD_USERS.map((u) => levelOf(u.totalXp))).toEqual(LEVEL_COLUMN);
+  });
+
+  it("ranks by weekly XP as the table says, فيصل ق. · سلطان م. · مشعل ر. on top", () => {
+    expect(LEADERBOARD_USERS.map((u) => byWeekly.indexOf(u) + 1)).toEqual(RANK_COLUMN);
+    expect(byWeekly.slice(0, 3).map((u) => u.name)).toEqual(["فيصل ق.", "سلطان م.", "مشعل ر."]);
+    expect(byWeekly.slice(0, 3).map((u) => u.weeklyXp)).toEqual([980, 910, 860]);
+  });
+
+  it("never gives two weekly neighbours the same avatar, and never av-01..av-04", () => {
+    for (let i = 1; i < byWeekly.length; i++) {
+      expect(byWeekly[i]?.avatar, `${byWeekly[i - 1]?.id} / ${byWeekly[i]?.id}`).not.toBe(byWeekly[i - 1]?.avatar);
+    }
+    for (const u of LEADERBOARD_USERS) expect(["av-01", "av-02", "av-03", "av-04"]).not.toContain(u.avatar);
+    for (const avatar of ["av-05", "av-06", "av-07", "av-08", "av-09", "av-10", "av-11", "av-12"]) {
+      expect(LEADERBOARD_USERS.filter((u) => u.avatar === avatar), avatar).toHaveLength(3);
+    }
+  });
+
+  it("puts the demo's ranks where 8.8 says (more weekly XP than the user, plus one)", () => {
+    const rankAt = (xp: number) => LEADERBOARD_USERS.filter((u) => u.weeklyXp > xp).length + 1;
+    expect([0, 50, 80, 180, 380, 420, 480, 660].map(rankAt)).toEqual([25, 23, 22, 18, 10, 10, 8, 6]);
+    expect(getLeaderboardUser("u14").weeklyXp).toBe(480);
+  });
+});
+
+// ─── levels, badges, onboarding, sample CV ────────────────────────────────────────────────────────────────────────
+
+describe("levels and badges (8.3, 8.6)", () => {
+  it("has the seven levels of 8.3", () => {
+    expect(LEVELS.map((l) => [l.level, l.title, l.from])).toEqual([
+      [1, "مبتدئ", 0],
+      [2, "مستكشف", 150],
+      [3, "مجتهد", 350],
+      [4, "متمكّن", 600],
+      [5, "محترف", 1000],
+      [6, "خبير", 1600],
+      [7, "أسطورة", 2500],
+    ]);
+    expect(getLevel(3).title).toBe("مجتهد");
+  });
+
+  it("has the twelve badges of 8.6 in table order, each with a name, a description and a hint", () => {
+    expect(BADGES.map((b) => b.id)).toEqual([...BADGE_IDS]);
+    expect(CATALOGUE_COUNTS.badges).toBe(12);
+    for (const b of BADGES) {
+      expect(b.name.length * b.description.length * b.hint.length, b.id).toBeGreaterThan(0);
+    }
+    expect(getBadge("first-steps")).toEqual({
+      id: "first-steps",
+      name: "الخطوة الأولى",
+      description: "أكملت التعارف مع دليل.",
+      hint: "أكمل التعارف مع دليل.",
+    });
+    expect(getBadge("top-ten").name).toBe("ضمن العشرة الأوائل");
+  });
+});
+
+describe("onboarding questions (4.2, 3.2)", () => {
+  it("asks the six questions in order, with the 3.2 slot labels", () => {
+    expect(ONBOARDING_QUESTIONS.map((q) => q.id)).toEqual([...QUESTION_IDS]);
+    expect(ONBOARDING_QUESTIONS.map((q) => q.n)).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(ONBOARDING_QUESTIONS.map((q) => q.slot)).toEqual(["المدينة", "المؤهل", "التخصص", "الخبرة", "الاهتمام", "الأولوية"]);
+    expect(getQuestion("city").text).toBe("في أي مدينة أنت الحين؟");
+    expect(getQuestion("priority").text).toBe("وآخر سؤال، وش أولويتك الحين؟");
+  });
+
+  it("offers each question's chips in the order of the ids, and only question 3 has a variant", () => {
+    for (const q of ONBOARDING_QUESTIONS) {
+      expect(q.options.map((o) => o.id), q.id).toEqual([...OPTIONS_BY_QUESTION[q.id]]);
+      expect(q.textAfterSecondary === null, q.id).toBe(q.id !== "major");
+    }
+    expect(getQuestion("major").textAfterSecondary).toBe("طيب، وش أقرب مجال لك، دراسة أو تدريب؟");
+  });
+
+  it("reads option labels", () => {
+    expect(optionLabel("city", "riyadh")).toBe("الرياض");
+    expect(optionLabel("major", "mis")).toBe("نظم معلومات إدارية");
+    expect(optionLabel("experience", "1to3")).toBe("من سنة إلى 3 سنوات");
+    expect(optionLabel("interest", "data")).toBe("الأرقام والبيانات");
+    expect(optionLabel("priority", "first-job")).toBe("أول وظيفة بأسرع وقت");
+    expect(optionLabel("city", "abha")).toBeNull();
+  });
+});
+
+describe("sample CV (6.2)", () => {
+  it("stores lines 2.. of 6.2 with LF line endings, and puts the user's name on top", () => {
+    const lines = SAMPLE_CV_BODY.split("\n");
+    expect(lines).toHaveLength(26);
+    expect(lines[0]).toBe("الرياض");
+    expect(lines[1]).toBe("");
+    expect(lines[2]).toBe("نبذة");
+    expect(lines.at(-1)).toBe("الإنجليزية: جيد جداً.");
+    expect(SAMPLE_CV_BODY.includes("\r")).toBe(false);
+    expect(lines).toContain("- تنظيف بيانات المبيعات الأسبوعية وتلخيصها في Excel باستخدام الجداول المحورية.");
+    expect(lines).toContain("من المقررات: مبادئ الإحصاء، أساسيات البرمجة بلغة Python.");
+    expect(lines).toContain("التواصل، العمل الجماعي، العرض والتقديم.");
+    expect(sampleCvText("خالد")).toBe(`خالد\n${SAMPLE_CV_BODY}`);
+  });
+});
+
+describe("lookups", () => {
+  it("find by id and throw on an unknown id (ids are typed, so that is a bug)", () => {
+    expect(getSkill("powerbi").name).toBe("Power BI");
+    expect(getJob("bi-analyst-riyadh").title).toBe("محلل ذكاء الأعمال");
+    expect(getCourse("c-git-1").hours).toBe(6);
+    expect(() => getSkill("nope" as string as SkillId)).toThrow();
+    expect(() => getJob("nope" as string as JobId)).toThrow();
+    expect(() => getCourse("nope" as string as CourseId)).toThrow();
+  });
+});

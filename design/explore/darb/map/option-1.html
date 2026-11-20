@@ -1,0 +1,522 @@
+<!doctype html>
+<!--
+  MASARI · Darb · the home map, option 1: THE CLIMB
+  (written by option-1.build.mjs from option-1.body.txt + option-1.css.txt; edit those, not this file)
+
+  THE IDEA
+    One trail that goes straight up the sheet. «البداية» at the bottom, the flag at the top. You read it the way you climb.
+    The map stands floor to ceiling beside the navigation, so six stations get real room and big type.
+
+  HOW IT READS
+    covered trail      a solid ink line from the trailhead to «أنت هنا»
+    you                the vermilion waypoint where the solid line ends, with Sara's tag (avatar · أنت هنا · 70%)
+    next leg           vermilion dots from the waypoint to station 3; station 3 is the only vermilion marker and its label is a card
+    the way ahead      ink dots through hollow dashed markers 4, 5, 6 to the summit flag
+    after the summit   two thin dashed side trails to two small peaks (the branch jobs)
+    labels             always on the same side of the marker, at the same distance, on the same short leader
+
+  WHAT STAYS DARB
+    paper and ink, one vermilion accent (waypoint, current station, the one primary button), brass only for XP,
+    solid line · waypoint · dotted line. Contours are hairline texture; the trail has a casing so no contour touches it.
+-->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مساري · الخريطة · الخيار 1 · الصعود</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------- Darb tokens (copied from design/explore/darb/index.html; one family for display and text) ---------- */
+:root{
+  --paper:#F4EFE4; --sheet:#FCFAF4; --sunk:#EBE4D5; --line:#DDD4C1; --line2:#C4B9A1; --contour:#D9CBAC;
+  --ink:#13231F; --ink2:#3F4E48; --ink3:#6F7B74; --ink4:#A3A99F;
+  --night:#0F201D; --night2:#172D29; --night3:#27443E; --nink:#F4EFE4; --nink2:#A9B8B0; --nink3:#6E857C;
+  --blaze:#DB4325; --blaze2:#BE3619; --blazeSoft:#F7DDD2;
+  --xp:#DC9A1B; --xpInk:#8A5A00; --xpSoft:#F5E5BC; --xpNight:#F0B53E;
+  --ok:#2E7D5B; --okSoft:#D9EADF; --warn:#B4600F; --warnSoft:#F4E1C6;
+  --display:"IBM Plex Sans Arabic",sans-serif; --text:"IBM Plex Sans Arabic",sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --wp:var(--blaze);
+}
+*{box-sizing:border-box}
+html{background:#D9D7D1}
+body{margin:0;padding:40px 0 88px;background:#D9D7D1;color:var(--ink);font-family:var(--text);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p,figure{margin:0}
+svg{display:block;flex:none}
+a{color:inherit;text-decoration:none}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ic .wp,.wp{fill:var(--wp);stroke:none}
+.ic.ok{color:var(--ok)}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.cap{width:1440px;margin:0 auto 12px;direction:ltr;text-align:left;font:600 12px/1.5 ui-monospace,Consolas,monospace;color:#5d5b55;letter-spacing:.06em;text-transform:uppercase;display:flex;gap:14px;align-items:baseline}
+.cap b{color:#1b1a17}
+.cap i{font-style:normal;text-transform:none;letter-spacing:0;font-weight:400;color:#77746c}
+
+/* ---------- Darb kit pieces used on this screen ---------- */
+.mark{color:var(--ink)}
+.word{font-family:var(--display);font-weight:700;line-height:1.25;color:var(--ink)}
+.lock-h{display:inline-flex;align-items:center;gap:.24em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 22px;border-radius:12px;border:1.5px solid transparent;font:600 16px/1 var(--text);cursor:pointer;white-space:nowrap}
+.btn .ic{width:20px;height:20px}
+.btn-p{background:var(--blaze);color:#FFF8F2}
+.chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;border:1.5px solid var(--line2);background:var(--sheet);font:500 15px/1 var(--text);color:var(--ink);white-space:nowrap}
+.chip-s{height:28px;padding:0 10px;font-size:12.5px;border-radius:14px;border-width:1px;gap:6px}
+.chip-s.miss{border-style:dashed;color:var(--ink3);background:transparent}
+.skills{display:flex;gap:6px;flex-wrap:wrap}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:16px;padding:20px;position:relative}
+.card.ink{background:var(--night);border-color:var(--night);color:var(--nink)}
+.meta{display:flex;gap:14px;align-items:center;font:400 13.5px/1.4 var(--text);color:var(--ink2);flex-wrap:wrap}
+.meta .ic{width:18px;height:18px}
+.meta span{display:inline-flex;gap:6px;align-items:center}
+.card.ink .meta{color:var(--nink2)}
+/* XP as a spot height */
+.spot{display:inline-flex;align-items:center;gap:5px;font:700 14px/1 var(--text);color:var(--xpInk);direction:ltr;font-variant-numeric:tabular-nums}
+.spot svg{width:12px;height:11px;fill:var(--xp)}
+.card.ink .spot,.lbr.me .spot{color:var(--xpNight)}
+.card.ink .spot svg,.lbr.me .spot svg{fill:var(--xpNight)}
+/* match ring */
+.ring{position:relative;width:var(--s,120px);height:var(--s,120px);flex:none}
+.ring svg{width:100%;height:100%}
+.ring .trk{fill:none;stroke:var(--line2);stroke-width:5;stroke-linecap:round;stroke-dasharray:.1 9.82}
+.ring .prg{fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round}
+.ring .end{fill:var(--blaze);stroke:var(--bg,var(--sheet));stroke-width:3.5}
+.ring b{position:absolute;inset:0;text-align:center;font:700 calc(var(--s,120px)*.27)/var(--s,120px) var(--display);direction:ltr;white-space:nowrap}
+.ring b small{font-size:.5em;font-weight:700;margin-inline-start:1px}
+/* XP bar = a map scale bar */
+.xpbar{direction:rtl}
+.xpbar .bar{display:flex;height:9px;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;background:var(--sheet)}
+.xpbar .seg{flex:1;border-inline-end:1.5px solid var(--ink);position:relative}
+.xpbar .seg:last-child{border:0}
+.xpbar .seg.f{background:var(--xp)}
+.xpbar .seg i{position:absolute;inset-block:0;inset-inline-start:0;background:var(--xp);border-inline-end:1.5px solid var(--ink)}
+/* skill level marks: three peaks */
+.sk{display:inline-flex;gap:3px;align-items:flex-end;direction:rtl}
+.sk svg{width:13px;height:12px;fill:none;stroke:var(--nink3);stroke-width:1.5;stroke-linejoin:round;stroke-dasharray:1.6 1.6}
+.sk svg.new{fill:var(--blaze);stroke:var(--blaze);stroke-dasharray:none}
+/* avatar with its level ring */
+.av{position:relative;display:inline-block;width:var(--s,48px);height:var(--s,48px);flex:none}
+.av .face{position:absolute;inset:calc(var(--s,48px)*.105);width:auto;height:auto;border-radius:50%;overflow:hidden;background:var(--sunk)}
+.av .face svg{width:100%;height:100%}
+.av.plain .face{inset:0}
+.av .rg{position:absolute;inset:0;width:100%;height:100%;transform:scaleX(-1)}
+.av .rg circle{fill:none;stroke-width:var(--rw,4);stroke-linecap:round}
+.av .rg .t{stroke:var(--line2)}
+.av .rg .p{stroke:var(--ink)}
+.av .lv{position:absolute;left:50%;transform:translateX(-50%);font:700 calc(var(--s,48px)*var(--lf,.2))/1 var(--display);bottom:calc(var(--s,48px)*(.03 - var(--lf,.2)/2));color:var(--ink);direction:ltr}
+.av.s48{--rw:5;--lf:.25}
+/* streak week */
+.wk{display:flex;gap:0;align-items:center;direction:rtl}
+.wk .d{display:flex;flex-direction:column;align-items:center;gap:6px;font:400 11px/1 var(--text);color:var(--ink3);width:25px;position:relative}
+.wk .d::before{content:"";position:absolute;top:7px;inset-inline-start:50%;width:25px;border-top:2px dotted var(--line2)}
+.wk .d:last-child::before{display:none}
+.wk .d.on::before{border-top:2px solid var(--ink)}
+.wk .d.now::before{border-top:2px dotted var(--line2)}
+.wk .d u{position:relative;z-index:1;width:16px;height:16px;border-radius:50%;border:2px dotted var(--line2);background:var(--bg,var(--sheet))}
+.wk .d.on u{border:0;background:var(--ink)}
+.wk .d.now u{border:0;background:var(--blaze);box-shadow:0 0 0 3px var(--bg,var(--sheet)),0 0 0 4.5px var(--blaze)}
+.wk .d.now{color:var(--ink);font-weight:600}
+/* leaderboard row */
+.lbr{display:flex;align-items:center;gap:12px;height:50px;padding:0 12px;border-radius:12px;font:500 15px/1.3 var(--text)}
+.lbr .rk{width:26px;text-align:center;font:700 17px/1 var(--display);direction:ltr}
+.lbr .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbr .nm small{font:400 12px/1 var(--text);margin-inline-start:6px;color:var(--nink2)}
+.lbr.me{background:var(--ink);color:var(--paper)}
+.dal{width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex:none}
+
+/* ---------- the home shell, re-proportioned: the map stands floor to ceiling beside the rail ---------- */
+#home-frame{width:1440px;height:900px;overflow:hidden;position:relative;margin:0 auto 64px;background:var(--paper);border-radius:10px;box-shadow:0 30px 60px -40px rgba(20,28,24,.45),0 0 0 1px rgba(20,28,24,.08);display:grid;grid-template-columns:232px 1fr}
+.rail{padding:26px 16px 20px;display:flex;flex-direction:column;border-inline-end:1px solid var(--line)}
+.rail .brand{padding:0 10px 26px}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav a{display:flex;align-items:center;gap:12px;height:46px;padding:0 12px;border-radius:12px;font:500 15.5px/1 var(--text);color:var(--ink2);--wp:var(--ink4);border:1px solid transparent}
+.nav a.on{background:var(--sheet);border-color:var(--line);color:var(--ink);font-weight:700;--wp:var(--blaze)}
+.nav a.on::after{content:"";margin-inline-start:auto;width:7px;height:7px;border-radius:50%;background:var(--blaze)}
+.rail .daily{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:14px 12px 12px;background:var(--sheet);--bg:var(--sheet)}
+.rail .daily .hd{display:flex;align-items:center;gap:8px;font:600 13.5px/1.2 var(--text);margin-bottom:12px}
+.rail .daily .hd .ic{width:22px;height:22px}
+.rail .daily .hd b{margin-inline-start:auto;font:700 18px/1 var(--display);direction:ltr}
+.rail .daily .hd small{font:400 12px/1 var(--text);color:var(--ink3)}
+.hmain{padding:24px 28px;display:grid;grid-template-columns:672px 460px;gap:20px;min-width:0}
+.map{width:672px;height:852px;border-radius:20px}
+.hside{display:flex;flex-direction:column;gap:16px;min-width:0;height:852px}
+.hhead{padding:2px 4px 0}
+.hhead h1{font:700 28px/1.3 var(--display)}
+.hhead p{font:400 14px/1.5 var(--text);color:var(--ink3);white-space:nowrap}
+.uchip{display:flex;align-items:center;height:64px;border:1px solid var(--line);border-radius:18px;background:var(--sheet);--bg:var(--sheet);padding-inline:6px 2px}
+.uchip>div{display:flex;align-items:center;gap:10px;padding:0 14px;height:36px;border-inline-end:1px solid var(--line);white-space:nowrap;line-height:1.25}
+.uchip>div:first-child{padding-inline-start:2px;flex:1}
+.uchip>div:last-child{border:0}
+.uchip .k{font:400 11.5px/1.2 var(--text);color:var(--ink3)}
+.uchip .v{font:700 15px/1.2 var(--text)}
+.uchip .ic{width:22px;height:22px}
+.nextc{padding:20px 22px 22px;display:flex;flex-direction:column;gap:12px;border-radius:20px}
+.nextc .top{display:flex;justify-content:space-between;align-items:center;font:600 12.5px/1 var(--text);color:var(--nink2)}
+.nextc .top span:first-child{color:var(--nink)}
+.nextc .ttl{display:flex;align-items:center;gap:12px}
+.nextc .ttl i{flex:none;width:38px;height:38px;border-radius:50%;background:var(--blaze);color:#FFF8F2;font:700 19px/38px var(--display);font-style:normal;text-align:center;direction:ltr}
+.nextc h3{font:700 29px/1.3 var(--display)}
+.nextc p{font:400 14px/1.7 var(--text);color:var(--nink2)}
+.gain{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--night3);border-radius:12px}
+.gain>div{padding:10px 14px;display:flex;flex-direction:column;gap:6px}
+.gain>div+div{border-inline-start:1px solid var(--night3)}
+.gain .k{font:400 11.5px/1.2 var(--text);color:var(--nink3)}
+.gain .v{font:700 15px/1.2 var(--text);display:flex;align-items:center;gap:8px}
+.gain .v i{font-style:normal;color:var(--nink3);font-weight:400}
+.nextc .btn{height:54px;font-size:17px;margin-top:4px}
+.matchc{display:flex;gap:18px;align-items:center;padding:14px 20px;border-radius:20px;--bg:var(--sheet)}
+.matchc h4{font:700 16px/1.4 var(--display)}
+.matchc p{font:400 12.5px/1.5 var(--text);color:var(--ink3);margin-bottom:8px}
+.rankc{padding:14px 12px 10px;border-radius:20px}
+.rankc .hd{display:flex;justify-content:space-between;align-items:center;padding:0 8px 6px;font:700 15px/1.4 var(--display)}
+.rankc .hd a{font:500 12.5px/1 var(--text);color:var(--ink3)}
+.rankc .hint{padding:8px 8px 2px;font:400 12.5px/1.5 var(--text);color:var(--ink3)}
+.launch{margin-top:auto;display:flex;align-items:center;gap:12px;height:60px;border-radius:30px;border:1.5px solid var(--ink);background:var(--sheet);padding-inline:8px 18px;font:500 15px/1 var(--text);color:var(--ink2);box-shadow:0 14px 28px -18px rgba(19,35,31,.5)}
+.launch .dal{width:44px;height:44px}
+.launch .dal .ic{width:26px;height:26px}
+.launch kbd{margin-inline-start:auto;font:500 11px/1 ui-monospace,Consolas,monospace;color:var(--ink3);border:1px solid var(--line2);border-radius:6px;padding:4px 6px;direction:ltr}
+
+/* ---------- THE CLIMB ---------- */
+.climb{position:relative;background:var(--sheet);border:1px solid var(--line);overflow:hidden}
+.climb svg.t{position:absolute;top:0;left:0}
+/* terrain is texture: hairlines two steps lighter than the Darb contour, and never the darkest thing near the trail */
+.climb .ctr{fill:none;stroke:#E5DAC2;stroke-width:1}
+.climb .ctr .ix{stroke:#D8CAA9;stroke-width:1.25}
+.climb .svy{fill:none;stroke:#CDBB95;stroke-width:1}
+/* the trail */
+.climb .case{fill:none;stroke:var(--sheet);stroke-linecap:round}
+.climb .cov{fill:none;stroke:var(--ink);stroke-linecap:round}
+.climb .leg{fill:none;stroke:var(--blaze);stroke-linecap:round}
+.climb .ahd{fill:none;stroke:#66736C;stroke-linecap:round}
+.climb .brn{fill:none;stroke:var(--ink3);stroke-width:1.75;stroke-linecap:round;stroke-dasharray:2 6}
+.climb .pk{fill:var(--sheet);stroke:var(--ink2);stroke-width:1.75;stroke-linejoin:round}
+.climb .ldr{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round}
+.climb .ldr.q{stroke:var(--ink3)}
+/* markers */
+.climb .halo{fill:var(--sheet)}
+.climb .m-done{fill:var(--ink)}
+.climb .m-lock{fill:var(--sheet);stroke:#66736C;stroke-width:2}
+.climb .m-ring{fill:var(--sheet);stroke:var(--blaze);stroke-width:1.5}
+.climb .m-now{fill:var(--blaze)}
+.climb .m-start{fill:var(--sheet);stroke:var(--ink);stroke-width:3}
+.climb .m-sum{fill:var(--sheet);stroke:var(--ink);stroke-width:2.25}
+.climb .m-dot{fill:var(--ink)}
+.climb .m-you{fill:var(--blaze);stroke:var(--sheet);stroke-width:3}
+.climb .stem{fill:none;stroke:var(--ink);stroke-width:2}
+.climb .pole{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.climb .pen{fill:var(--blaze);stroke:var(--blaze);stroke-width:2;stroke-linejoin:round}
+.climb text{font-family:var(--display);font-weight:700;text-anchor:middle;direction:ltr}
+.climb .n-done{fill:var(--sheet)}
+.climb .n-now{fill:#FFF8F2}
+.climb .n-lock{fill:var(--ink2)}
+/* a station = one button: the marker (drawn under the empty <i>), its leader and its label */
+.st{position:absolute;display:flex;align-items:center;transform:translate(-100%,-50%);cursor:pointer}
+.st>i{flex:none;align-self:stretch;min-height:44px}
+.lb{background:var(--sheet);border-radius:9px;padding:1px 8px 3px;white-space:nowrap;text-align:start}
+.lb>b{display:block;font:700 17.5px/1.4 var(--display);color:var(--ink)}
+.lb>small{display:flex;align-items:center;gap:6px;font:400 13px/1.45 var(--text);color:var(--ink3)}
+.lb>small .ic{width:15px;height:15px;stroke-width:2.2}
+.lb .spot{font-size:12.5px;font-weight:600;margin-inline-start:4px}
+.st.lock .lb>b{font-weight:600;color:var(--ink2)}
+.st.start .lb>b{font:600 14.5px/1.4 var(--text);color:var(--ink2)}
+.st.goal .lb>b{font-size:21px;line-height:1.35}
+.st.goal .lb>small{font-size:13.5px;color:var(--ink2)}
+.st.goal .lb>small b{font-weight:700;color:var(--ink)}
+.st.peak .lb{padding:0 6px 2px}
+.st.peak .lb>b{font:600 14.5px/1.4 var(--text);color:var(--ink2)}
+.st.peak .lb>small{font-size:12px;line-height:1.3}
+/* the current station carries the invitation: the same label, as a card */
+.st.now .lb{border:1.5px solid var(--ink);border-radius:14px;padding:9px 16px 11px;box-shadow:0 12px 22px -18px rgba(19,35,31,.5)}
+.st.now .e{display:flex;align-items:center;gap:6px;font:600 12.5px/1.4 var(--text);color:var(--blaze2)}
+.st.now .e::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blaze)}
+.st.now .lb>b{font-size:21px;line-height:1.4}
+.st.now .lb>small{color:var(--ink2);gap:14px;margin-top:2px}
+.st.now .lb>small>span{display:inline-flex;align-items:center;gap:5px}
+.st.now .lb>small b{font-weight:700;color:var(--ink)}
+.st.now .lb .spot{margin:0;font-size:13px;font-weight:700}
+/* you are here: the walker's tag, tied to the waypoint */
+.you{position:absolute;transform:translateY(-50%);display:flex;align-items:center;gap:10px;height:54px;padding:5px;padding-inline-start:16px;border-radius:27px;background:var(--ink);color:var(--paper);white-space:nowrap}
+.you b{display:block;font:700 15px/1.3 var(--display)}
+.you small{display:block;font:400 12.5px/1.3 var(--text);color:var(--nink2)}
+.you small i{font-style:normal;font-weight:700;color:var(--paper);direction:ltr;unicode-bidi:isolate}
+.you .face{width:44px;height:44px;border-radius:50%;overflow:hidden;flex:none;box-shadow:0 0 0 1.5px var(--paper)}
+.you .face svg{width:100%;height:100%}
+/* the trailhead sign: what this trail is, where you would read it before setting off */
+.sign{position:absolute;right:18px;bottom:18px;background:var(--sheet);border:1px solid var(--line2);border-radius:14px;padding:11px 14px 12px}
+.sign .e{font:500 12.5px/1.3 var(--text);color:var(--ink3)}
+.sign h2{font:700 26px/1.35 var(--display)}
+.sign .pg{display:flex;align-items:center;gap:12px;white-space:nowrap;font:400 12.5px/1.3 var(--text);color:var(--ink2);margin-top:7px;padding-top:9px;border-top:1px dotted var(--line2)}
+.sign .pg b{font-weight:700;color:var(--ink)}
+.dots{display:flex;gap:4px;direction:rtl;margin-inline-start:auto}
+.dots i{width:9px;height:9px;border-radius:50%;border:1.5px dotted var(--ink3)}
+.dots i.d{border:0;background:var(--ink)}
+.dots i.n{border:0;background:var(--blaze)}
+.seg2{position:absolute;left:18px;bottom:18px;display:flex;gap:2px;border:1px solid var(--line2);border-radius:11px;background:var(--sheet);padding:3px;font:500 12.5px/1 var(--text);color:var(--ink2)}
+.seg2>*{padding:7px 12px;border-radius:8px;font-weight:500}
+.seg2 b{background:var(--ink);color:var(--paper);font-weight:600}
+
+/* ---------- phone ---------- */
+#phone-frame{width:390px;height:844px;overflow:hidden;position:relative;margin:0 auto;background:var(--paper);border-radius:40px;box-shadow:0 0 0 1px rgba(20,28,24,.1),0 40px 70px -40px rgba(20,28,24,.5);display:flex;flex-direction:column}
+.p-top{display:flex;align-items:center;justify-content:space-between;height:64px;padding:6px 18px 0;flex:none}
+.p-top .who{display:flex;align-items:center;gap:10px}
+.p-top .who b{font:700 15px/1.3 var(--text);display:block}
+.p-top .who small{font:400 12px/1.3 var(--text);color:var(--ink3)}
+.p-stats{display:flex;gap:6px}
+.p-stats span{display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 10px;border-radius:17px;border:1px solid var(--line);background:var(--sheet);font:700 13.5px/1 var(--text)}
+.p-stats .ic{width:18px;height:18px}
+.p-map{flex:none;height:553px;margin:0 12px;border-radius:24px}
+.sm .lb{padding:1px 6px 2px;border-radius:7px}
+.sm .lb>b{font-size:14px;line-height:1.4}
+.sm .lb>small{font-size:11.5px;gap:4px}
+.sm .lb>small .ic{width:13px;height:13px}
+.sm .lb .spot{font-size:11.5px;margin-inline-start:3px}
+.sm .lb .spot svg{width:10px;height:9px}
+.sm .st>i{min-height:40px}
+.sm .st.start .lb>b{font-size:12.5px}
+.sm .st.goal .lb>b{font-size:15.5px}
+.sm .st.goal .lb>small{font-size:12px}
+.sm .st.peak .lb{padding:0 4px 1px}
+.sm .st.peak .lb>b{font-size:12.5px}
+.sm .st.peak .lb>small{font-size:10.5px}
+.sm .st.now .lb{padding:6px 11px 8px;border-radius:12px}
+.sm .st.now .e{font-size:11px}
+.sm .st.now .lb>b{font-size:16px;line-height:1.35}
+.sm .you{height:38px;padding:3px;padding-inline-start:10px;gap:7px;border-radius:19px}
+.sm .you b{font-size:12px;line-height:1.25}
+.sm .you small{font-size:11px;line-height:1.2}
+.sm .you .face{width:32px;height:32px}
+.sm .sign{right:10px;bottom:10px;padding:6px 10px 7px;border-radius:11px}
+.sm .sign .e{font-size:11px}
+.sm .sign h2{font-size:15.5px;line-height:1.35}
+.p-next{flex:none;margin:10px 12px 0;border-radius:24px;padding:14px 16px 14px;display:flex;flex-direction:column;gap:10px}
+.p-next .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.p-next .ttl{display:flex;align-items:center;gap:10px}
+.p-next .ttl i{flex:none;width:38px;height:38px;border-radius:50%;background:var(--blaze);color:#FFF8F2;font:700 19px/38px var(--display);font-style:normal;text-align:center;direction:ltr}
+.p-next h3{font:700 20px/1.3 var(--display)}
+.p-next .e{font:600 11.5px/1.3 var(--text);color:var(--nink2)}
+.p-next .meta{flex-direction:column;align-items:flex-end;gap:5px;font-size:12.5px}
+.p-next .meta .ic{width:16px;height:16px}
+.p-next .spot{font-size:13px}
+.p-next .btn{height:50px;font-size:17px}
+.p-tabs{flex:none;margin-top:auto;display:grid;grid-template-columns:1fr 1fr 76px 1fr 1fr;align-items:center;padding:8px 8px 22px;height:86px}
+.p-tabs a{display:flex;flex-direction:column;align-items:center;gap:4px;font:500 11px/1 var(--text);color:var(--ink3);--wp:var(--ink4)}
+.p-tabs a.on{color:var(--ink);font-weight:700;--wp:var(--blaze)}
+.p-tabs .ask{justify-self:center;width:58px;height:58px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;margin-top:-22px;box-shadow:0 0 0 5px var(--paper),0 14px 22px -12px rgba(19,35,31,.6)}
+.p-tabs .ask .ic{width:30px;height:30px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mark" viewBox="0 0 64 64"><path d="M56 50V38a24 24 0 0 0-48 0v6a6 6 0 0 0 12 0v-6a12 12 0 0 1 24 0v12" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="44.5" r="5" style="fill:var(--wp,#DB4325)"/></symbol>
+    <symbol id="peak" viewBox="0 0 13 12"><path d="M6.5 1.6 11.6 10.6H1.4z"/></symbol>
+    <symbol id="i-path" viewBox="0 0 24 24"><path d="M19.5 19H8.5a3 3 0 0 1 0-6h7a3 3 0 0 0 0-6H10"/><circle class="wp" cx="5.75" cy="7" r="1.75"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 20.5V11M12 14.5c0-3.4-6-2.6-6-6M12 14.5c0-3.4 6-2.6 6-6M9.5 20.5h5"/><circle cx="6" cy="6" r="2.25"/><circle cx="18" cy="6" r="2.25"/><circle class="wp" cx="12" cy="7.5" r="1.75"/></symbol>
+    <symbol id="i-cv" viewBox="0 0 24 24"><path d="M13.5 3h-6A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V10M9.5 9.5h3M9.5 13h5M9.5 16.5h5"/><circle class="wp" cx="17.25" cy="5" r="1.75"/></symbol>
+    <symbol id="i-jobs" viewBox="0 0 24 24"><path d="M3.5 13h5.5M15 13h5.5M5.5 8h13a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2zM8.75 8V6.5a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V8"/><circle class="wp" cx="12" cy="13" r="1.75"/></symbol>
+    <symbol id="i-courses" viewBox="0 0 24 24"><path d="M12 7.5c-1.8-1.4-4.2-2-7.5-2v12c3.300 0 5.700.6 7.500 2 1.800-1.400 4.200-2 7.500-2V10.500M12 7.500v12M12 7.500c1.100-.85 2.400-1.400 4-1.700"/><circle class="wp" cx="19.5" cy="6" r="1.75"/></symbol>
+    <symbol id="i-advisor" viewBox="0 0 24 24"><path d="M18 6A8.500 8.500 0 1 0 20.500 12M14.750 9.250l-1.600 4-4 1.600 1.600-4z"/><circle class="wp" cx="19.9" cy="8.7" r="1.75"/></symbol>
+    <symbol id="i-leaders" viewBox="0 0 24 24"><path d="M2.5 20v-5.500h6V9.500h7V13h6v7"/><circle class="wp" cx="12" cy="5.25" r="1.75"/></symbol>
+    <symbol id="i-profile" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.75"/><path d="M4.750 20c.4-3.600 3.300-6 7.250-6 1.600 0 3 .4 4.200 1.100"/><circle class="wp" cx="18.75" cy="18.5" r="1.75"/></symbol>
+    <symbol id="i-streak" viewBox="0 0 24 24"><path d="M9.200 8.200C8.100 9.300 7.500 10.600 7.500 12a4.500 4.500 0 0 0 9 0c0-3.900-3.900-5.600-4.500-8.500M6 21l12-3.250M6 17.750 18 21"/><circle class="wp" cx="12" cy="12.5" r="1.75"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M7.500 10.500h9a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2zM8.500 10.500V8a3.500 3.500 0 0 1 7 0v2.500"/><circle class="wp" cx="12" cy="15.5" r="1.75"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H6.500M11 7.500 6.500 12l4.500 4.500"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><path d="M17.300 5.400A8.500 8.500 0 1 0 20.500 12M12 7.500V12l3 2"/><circle class="wp" cx="19.6" cy="8.3" r="1.75"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M6 12.500l4 4 8-9"/></symbol>
+    <g id="a-eyes"><circle cx="42" cy="46.500" r="1.700" fill="#13231F"/><circle cx="54" cy="46.500" r="1.700" fill="#13231F"/></g>
+    <path id="a-smile" d="M44 53.500c2.400 2 5.600 2 8 0" fill="none" stroke="#13231F" stroke-width="1.600" stroke-linecap="round"/>
+    <path id="a-shoulders" d="M12 97c0-13.500 11-22.500 28-23.500h16c17 1 28 10 28 23.500z"/>
+    <path id="a-hijab" d="M48 14.500C31 14.500 22.500 27 22.500 43c0 15-4.500 22.500-11 29.500C17.500 85 31 97 48 97s30.500-12 36.500-24.500C78 65.500 73.500 58 73.500 43 73.500 27 65 14.500 48 14.500z"/>
+    <ellipse id="a-face" cx="48" cy="46" rx="13" ry="15.500"/>
+    <g id="a-hijab-folds" fill="none" stroke-width="1.500" stroke-linecap="round"><path d="M35.500 58c3.200 6 7.700 9 12.500 9s9.300-3 12.500-9"/><path d="M26.500 71.500c6.500 7.500 13.500 11 21.500 11s15-3.500 21.500-11"/><path d="M29 29.500c4.500-6 11-9 19-9"/></g>
+    <symbol id="av-1" viewBox="0 0 96 96"><rect width="96" height="96" fill="#F1D6C6"/><path d="M-4 34c16-12 30-12 46-3s34 8 58-9M-4 52c14-10 26-10 40-4" fill="none" stroke="#E2BBA6" stroke-width="1.500"/><use href="#a-shoulders" fill="#13231F"/><use href="#a-hijab" fill="#1D4038"/><use href="#a-hijab-folds" stroke="#3A655A"/><use href="#a-face" fill="#E3AE86"/><use href="#a-eyes"/><use href="#a-smile"/></symbol>
+    <path id="blob" vector-effect="non-scaling-stroke" d="M100 0C100 45 70 85 20 95-30 105-80 80-98 30-112-10-90-60-50-85-10-108 40-100 70-75 92-55 100-30 100 0Z"/>
+  </defs>
+</svg>
+
+<div class="cap"><b>Map option 1 · The Climb</b><i>1440 × 900 · one trail straight up: start at the bottom, flag at the top</i></div>
+<div id="home-frame">
+  <aside class="rail">
+    <div class="brand"><span class="lock-h word" style="font-size:27px;gap:8px"><svg class="mark" width="32" height="32"><use href="#mark"/></svg><span>مساري</span></span></div>
+    <nav class="nav">
+      <a class="on"><svg class="ic"><use href="#i-path"/></svg>مساري</a>
+      <a><svg class="ic"><use href="#i-tree"/></svg>المهارات</a>
+      <a><svg class="ic"><use href="#i-cv"/></svg>السيرة الذاتية</a>
+      <a><svg class="ic"><use href="#i-jobs"/></svg>الوظائف</a>
+      <a><svg class="ic"><use href="#i-courses"/></svg>الدورات</a>
+      <a><svg class="ic"><use href="#i-leaders"/></svg>المتصدرون</a>
+      <a><svg class="ic"><use href="#i-profile"/></svg>ملفي</a>
+    </nav>
+    <div class="daily">
+      <div class="hd"><svg class="ic"><use href="#i-streak"/></svg>السلسلة اليومية<b>4</b><small>أيام</small></div>
+      <div class="wk"><span class="d on"><u></u>ح</span><span class="d on"><u></u>ن</span><span class="d on"><u></u>ث</span><span class="d now"><u></u>ر</span><span class="d"><u></u>خ</span><span class="d"><u></u>ج</span><span class="d"><u></u>س</span></div>
+    </div>
+  </aside>
+
+  <main class="hmain">
+    <!-- the map: every station (and the summit, and each peak) is one <a class="st">, i.e. one button that opens its sheet -->
+    <div class="map climb">
+        <svg class="t" width="672" height="852" viewBox="0 0 672 852" aria-hidden="true">
+          <!-- terrain: quiet texture only; the trail has a casing, so no contour ever touches it -->
+          <g class="ctr"><use href="#blob" transform="translate(385.2 180) rotate(-8) scale(0.323 0.208)"/><use href="#blob" transform="translate(386.8 182.6) rotate(-8) scale(0.743 0.479)"/><use href="#blob" transform="translate(388.7 185.8) rotate(-8) scale(1.259 0.813)"/><use href="#blob" class="ix" transform="translate(391 189.6) rotate(-8) scale(1.873 1.208)"/><use href="#blob" transform="translate(393.6 194) rotate(-8) scale(2.583 1.667)"/><use href="#blob" transform="translate(396.6 199) rotate(-8) scale(3.391 2.188)"/><use href="#blob" transform="translate(400 204.6) rotate(-8) scale(4.295 2.771)"/><use href="#blob" class="ix" transform="translate(403.7 210.8) rotate(-8) scale(5.296 3.417)"/><use href="#blob" transform="translate(407.8 217.6) rotate(-8) scale(6.394 4.125)"/><use href="#blob" transform="translate(412.2 225) rotate(-8) scale(7.589 4.896)"/><use href="#blob" transform="translate(417 233) rotate(-8) scale(8.880 5.729)"/><use href="#blob" class="ix" transform="translate(422.2 241.6) rotate(-8) scale(10.269 6.625)"/><use href="#blob" transform="translate(427.7 250.8) rotate(-8) scale(11.754 7.583)"/><use href="#blob" transform="translate(433.6 260.6) rotate(-8) scale(13.336 8.604)"/></g>
+          <path class="svy" d="M51 250h10M56 245v10M51 430h10M56 425v10M611 250h10M616 245v10M611 430h10M616 425v10"/>
+          <!-- after the summit: two short side trails to neighbouring peaks -->
+          <g class="brn"><path d="M373 167C350 142 312 100 276 72"/><path d="M398 172C440 160 506 130 530 80"/></g>
+          <path class="pk" d="M270 50l10.5 18h-21z"/><path class="pk" d="M530 60l10.5 18h-21z"/>
+          <!-- the trail: casing, then the way ahead (dotted), the next leg (vermilion dots), the covered part (solid ink) -->
+          <path class="case" stroke-width="15" d="M370 806C370.3 795.5 369.7 767.8 372 743C374.3 718.2 378.3 693.8 384 657C389.7 620.2 400.7 558.8 406 522C411.3 485.2 415.7 464.7 416 436C416.3 407.3 412 378.7 408 350C404 321.3 396 292.7 392 264C388 235.3 385.3 192.3 384 178"/>
+          <path class="ahd" stroke-width="5.2" stroke-dasharray=".1 12" d="M406 522C411.3 485.2 415.7 464.7 416 436C416.3 407.3 412 378.7 408 350C404 321.3 396 292.7 392 264C388 235.3 385.3 192.3 384 178"/>
+          <path class="leg" stroke-width="5.6000000000000005" stroke-dasharray=".1 12" d="M391.2 613C396.5 581.4 402.5 546.3 406 522"/>
+          <path class="cov" stroke-width="5" d="M370 806C370.3 795.5 369.7 767.8 372 743C374.3 718.2 378.3 693.8 384 657C385.9 644.5 388.5 629.2 391.2 613"/>
+          <!-- leaders: the same short stroke, the same side, for every station -->
+          <path class="ldr q" d="M356 806H316"/><path class="ldr" d="M346 743H318"/><path class="ldr" d="M358 657H330"/><path class="ldr" d="M369 522H352"/><path class="ldr q" d="M390 436H362"/><path class="ldr q" d="M382 350H354"/><path class="ldr q" d="M366 264H338"/><path class="ldr" d="M366 178H330"/>
+          <!-- trailhead -->
+          <circle class="m-start" cx="370" cy="806" r="11"/><circle class="m-dot" cx="370" cy="806" r="3.5"/>
+          <!-- stations -->
+          <circle class="m-done" cx="372" cy="743" r="23"/><text class="n-done" x="372" y="750.1" font-size="20">1</text>
+          <circle class="m-done" cx="384" cy="657" r="23"/><text class="n-done" x="384" y="664.1" font-size="20">2</text>
+          <circle class="m-ring" cx="406" cy="522" r="34"/><circle class="m-now" cx="406" cy="522" r="27"/><text class="n-now" x="406" y="530.9" font-size="25">3</text>
+          <circle class="halo" cx="416" cy="436" r="27"/><circle class="m-lock" cx="416" cy="436" r="23" stroke-dasharray="3.2 3.7"/><text class="n-lock" x="416" y="443.1" font-size="20">4</text>
+          <circle class="halo" cx="408" cy="350" r="27"/><circle class="m-lock" cx="408" cy="350" r="23" stroke-dasharray="3.2 3.7"/><text class="n-lock" x="408" y="357.1" font-size="20">5</text>
+          <circle class="halo" cx="392" cy="264" r="27"/><circle class="m-lock" cx="392" cy="264" r="23" stroke-dasharray="3.2 3.7"/><text class="n-lock" x="392" y="271.1" font-size="20">6</text>
+          <!-- you are here: the waypoint where the solid line ends -->
+          <path class="stem" d="M391.2 613h24"/>
+          <circle class="m-you" cx="391.2" cy="613" r="7.5"/>
+          <!-- summit: the end -->
+          <circle class="m-sum" cx="384" cy="178" r="15"/><circle class="m-dot" cx="384" cy="178" r="5.4"/>
+          <path class="pole" d="M384 178V110"/>
+          <path class="pen" d="M385.5 111l42 14.5l-42 14.5z"/>
+          <circle class="m-dot" cx="384" cy="109" r="2.8"/>
+        </svg>
+        <a class="st start" style="left:381px;top:806px"><i style="width:65px"></i><span class="lb"><b>البداية</b></span></a>
+        <a class="st done" style="left:395px;top:743px"><i style="width:77px"></i><span class="lb"><b>أساسيات Excel</b><small><svg class="ic ok"><use href="#i-check"/></svg>تمّت<span class="spot"><svg><use href="#peak"/></svg>+100 XP</span></small></span></a>
+        <a class="st done" style="left:407px;top:657px"><i style="width:77px"></i><span class="lb"><b>مبادئ الإحصاء</b><small><svg class="ic ok"><use href="#i-check"/></svg>تمّت<span class="spot"><svg><use href="#peak"/></svg>+150 XP</span></small></span></a>
+        <a class="st now" style="left:440px;top:522px"><i style="width:88px"></i><span class="lb"><span class="e">محطتك التالية</span><b>SQL للمبتدئين</b><small><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot"><svg><use href="#peak"/></svg>+200 XP</span><span>يرفع تطابقك إلى <b class="ltr">78%</b></span></small></span></a>
+        <a class="st lock" style="left:439px;top:436px"><i style="width:77px"></i><span class="lb"><b>تحليل البيانات بـ Python</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>تُفتح بعد SQL</small></span></a>
+        <a class="st lock" style="left:431px;top:350px"><i style="width:77px"></i><span class="lb"><b>Power BI ولوحات المعلومات</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>مقفلة</small></span></a>
+        <a class="st lock" style="left:415px;top:264px"><i style="width:77px"></i><span class="lb"><b>مشروع تطبيقي: تحليل مبيعات</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>مقفلة</small></span></a>
+        <a class="st goal" style="left:399px;top:178px"><i style="width:69px"></i><span class="lb"><b>جاهزة لوظيفة محلل بيانات</b><small>القمة · تطابق <b class="ltr">100%</b></small></span></a>
+        <a class="st peak" style="left:280.5px;top:62px"><i style="width:29px"></i><span class="lb"><b>عالِم بيانات</b><small>بعد القمة</small></span></a>
+        <a class="st peak" style="left:540.5px;top:72px"><i style="width:29px"></i><span class="lb"><b>محلل ذكاء أعمال</b><small>بعد القمة</small></span></a>
+        <div class="you" style="left:415.2px;top:613px"><span class="tx"><b>أنت هنا</b><small>تطابقك <i>70%</i></small></span><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span></div>
+        <div class="sign">
+          <div class="e">مسارك نحو</div>
+          <h2>محلل بيانات</h2>
+          <div class="pg"><span>قطعتِ <b>2</b> من <b>6</b> محطات</span><span class="dots"><i class="d"></i><i class="d"></i><i class="n"></i><i></i><i></i><i></i></span></div>
+        </div>
+        <span class="seg2"><b>خريطة</b><span>قائمة</span></span>
+    </div>
+
+    <aside class="hside">
+      <header class="hhead"><h1>مساء الخير، سارة</h1><p>بقيت أربع محطات بينك وبين القمة. محطة اليوم تأخذ ست ساعات.</p></header>
+      <div class="uchip">
+        <div><span class="av s48" style="--s:50px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span><span><span class="v">سارة العتيبي</span><br><span class="k">المستوى 3 · متعلّمة</span></span></div>
+        <div><span><span class="k">نقاط الخبرة</span><br><span class="spot" style="font-size:15px"><svg><use href="#peak"/></svg>1,240 XP</span></span>
+          <span class="xpbar" style="width:76px"><span class="bar"><span class="seg f"></span><span class="seg f"></span><span class="seg"><i style="width:40%"></i></span><span class="seg"></span><span class="seg"></span></span></span></div>
+        <div><svg class="ic"><use href="#i-leaders"/></svg><span><span class="k">ترتيبك</span><br><span class="v num">7</span></span></div>
+      </div>
+
+      <div class="card ink nextc">
+        <div class="top"><span>الخطوة التالية</span><span>المحطة 3 من 6</span></div>
+        <div class="ttl"><i>3</i><h3>SQL للمبتدئين</h3></div>
+        <p>اكتبي أول استعلاماتك، واستخرجي ما تحتاجينه من الجداول. المهارة الأولى التي تنقصك لوظيفة محلل بيانات.</p>
+        <div class="meta"><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot"><svg><use href="#peak"/></svg>+200 XP</span></div>
+        <div class="gain">
+          <div><span class="k">مهارة SQL</span><span class="v"><span class="sk"><svg class="new"><use href="#peak"/></svg><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg></span><i>من 0 إلى 1</i></span></div>
+          <div><span class="k">تطابقك بعدها</span><span class="v num"><span class="ltr">78%</span><i class="ltr">+8</i></span></div>
+        </div>
+        <a class="btn btn-p">ابدأ الآن<svg class="ic"><use href="#i-arrow"/></svg></a>
+      </div>
+
+      <div class="card matchc">
+        <div class="ring" style="--s:92px"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><path class="prg" d="M60 10A50 50 0 1 0 107.55 75.45"/><circle class="end" cx="107.55" cy="75.45" r="7.5"/></svg><b>70<small>%</small></b></div>
+        <div><h4>تطابقك مع محلل بيانات</h4><p>ثلاث مهارات تفصلك عن القمة</p>
+          <div class="skills"><span class="chip chip-s miss">SQL</span><span class="chip chip-s miss">Python</span><span class="chip chip-s miss">Power BI</span></div></div>
+      </div>
+
+      <div class="card rankc">
+        <div class="hd">المتصدرون<a>الكل</a></div>
+        <div class="lbr me"><span class="rk">7</span><span class="av plain" style="--s:34px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span></span><span class="nm">سارة العتيبي<small>أنت</small></span><span class="spot"><svg><use href="#peak"/></svg>1,240</span></div>
+        <div class="hint">يفصلك <b class="ltr" style="color:var(--xpInk)">70 XP</b> عن المرتبة 6. دورة واحدة تكفي.</div>
+      </div>
+
+      <div class="launch"><span class="dal"><svg class="ic"><use href="#i-advisor"/></svg></span>اسأل دليل عن مسارك…<kbd>Ctrl K</kbd></div>
+    </aside>
+  </main>
+</div>
+
+<div class="cap" style="width:390px"><b>Phone</b><i>390 × 844</i></div>
+<div id="phone-frame">
+  <div class="p-top">
+    <div class="who"><span class="av s48" style="--s:44px;--bg:var(--paper)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span><span><b>سارة العتيبي</b><small>المستوى 3 · متعلّمة</small></span></div>
+    <div class="p-stats"><span><svg class="ic"><use href="#i-streak"/></svg>4</span><span class="spot" style="font-size:13.5px"><svg><use href="#peak"/></svg>1,240</span></div>
+  </div>
+
+  <!-- the whole climb fits one phone screen at six stations; with seven or eight it scrolls and opens on «أنت هنا» -->
+  <div class="p-map climb sm">
+        <svg class="t" width="366" height="553" viewBox="0 0 366 553" aria-hidden="true">
+          <!-- terrain: quiet texture only; the trail has a casing, so no contour ever touches it -->
+          <g class="ctr"><use href="#blob" transform="translate(226.8 105.3) rotate(-8) scale(0.210 0.135)"/><use href="#blob" transform="translate(227.8 107) rotate(-8) scale(0.484 0.313)"/><use href="#blob" transform="translate(229.1 109.1) rotate(-8) scale(0.823 0.531)"/><use href="#blob" class="ix" transform="translate(230.6 111.6) rotate(-8) scale(1.227 0.792)"/><use href="#blob" transform="translate(232.2 114.4) rotate(-8) scale(1.679 1.083)"/><use href="#blob" transform="translate(234.2 117.7) rotate(-8) scale(2.212 1.427)"/><use href="#blob" transform="translate(236.4 121.3) rotate(-8) scale(2.793 1.802)"/><use href="#blob" class="ix" transform="translate(238.8 125.3) rotate(-8) scale(3.439 2.219)"/><use href="#blob" transform="translate(241.4 129.7) rotate(-8) scale(4.149 2.677)"/><use href="#blob" transform="translate(244.3 134.5) rotate(-8) scale(4.924 3.177)"/><use href="#blob" transform="translate(247.4 139.7) rotate(-8) scale(5.764 3.719)"/><use href="#blob" class="ix" transform="translate(250.8 145.3) rotate(-8) scale(6.668 4.302)"/><use href="#blob" transform="translate(254.4 151.3) rotate(-8) scale(7.637 4.927)"/><use href="#blob" transform="translate(258.2 157.7) rotate(-8) scale(8.670 5.594)"/></g>
+          <path class="svy" d="M333 170h10M338 165v10M333 290h10M338 285v10"/>
+          <!-- after the summit: two short side trails to neighbouring peaks -->
+          <g class="brn"><path d="M219 96C206 80 180 56 151 39"/><path d="M236 99C268 92 310 72 326 40"/></g>
+          <path class="pk" d="M146 22l8.4 14.4h-16.8z"/><path class="pk" d="M326 24l8.4 14.4h-16.8z"/>
+          <!-- the trail: casing, then the way ahead (dotted), the next leg (vermilion dots), the covered part (solid ink) -->
+          <path class="case" stroke-width="12" d="M219 529C219.2 522.3 218.8 504.8 220 489C221.2 473.2 223 461.5 226 434C229 406.5 235.3 351.5 238 324C240.7 296.5 242 287.3 242 269C242 250.7 240 232.3 238 214C236 195.7 232 177.3 230 159C228 140.7 226.7 113.2 226 104"/>
+          <path class="ahd" stroke-width="4.4" stroke-dasharray=".1 9.8" d="M238 324C240.7 296.5 242 287.3 242 269C242 250.7 240 232.3 238 214C236 195.7 232 177.3 230 159C228 140.7 226.7 113.2 226 104"/>
+          <path class="leg" stroke-width="4.800000000000001" stroke-dasharray=".1 9.8" d="M230.2 396C233.1 370.3 236.3 341.6 238 324"/>
+          <path class="cov" stroke-width="4.4" d="M219 529C219.2 522.3 218.8 504.8 220 489C221.2 473.2 223 461.5 226 434C227.1 424.1 228.6 410.5 230.2 396"/>
+          <!-- leaders: the same short stroke, the same side, for every station -->
+          <path class="ldr q" d="M207.5 529H179"/><path class="ldr" d="M197 489H180"/><path class="ldr" d="M203 434H186"/><path class="ldr" d="M206.5 324H198"/><path class="ldr q" d="M219 269H202"/><path class="ldr q" d="M215 214H198"/><path class="ldr q" d="M207 159H190"/><path class="ldr" d="M212 104H186"/>
+          <!-- trailhead -->
+          <circle class="m-start" cx="219" cy="529" r="8.5"/><circle class="m-dot" cx="219" cy="529" r="2.7"/>
+          <!-- stations -->
+          <circle class="m-done" cx="220" cy="489" r="20"/><text class="n-done" x="220" y="495" font-size="17">1</text>
+          <circle class="m-done" cx="226" cy="434" r="20"/><text class="n-done" x="226" y="440" font-size="17">2</text>
+          <circle class="m-ring" cx="238" cy="324" r="28.5"/><circle class="m-now" cx="238" cy="324" r="23"/><text class="n-now" x="238" y="331.5" font-size="21">3</text>
+          <circle class="halo" cx="242" cy="269" r="24"/><circle class="m-lock" cx="242" cy="269" r="20" stroke-dasharray="3.2 3.8"/><text class="n-lock" x="242" y="275" font-size="17">4</text>
+          <circle class="halo" cx="238" cy="214" r="24"/><circle class="m-lock" cx="238" cy="214" r="20" stroke-dasharray="3.2 3.8"/><text class="n-lock" x="238" y="220" font-size="17">5</text>
+          <circle class="halo" cx="230" cy="159" r="24"/><circle class="m-lock" cx="230" cy="159" r="20" stroke-dasharray="3.2 3.8"/><text class="n-lock" x="230" y="165" font-size="17">6</text>
+          <!-- you are here: the waypoint where the solid line ends -->
+          <path class="stem" d="M230.2 396h18"/>
+          <circle class="m-you" cx="230.2" cy="396" r="6"/>
+          <!-- summit: the end -->
+          <circle class="m-sum" cx="226" cy="104" r="11"/><circle class="m-dot" cx="226" cy="104" r="4"/>
+          <path class="pole" d="M226 104V60"/>
+          <path class="pen" d="M227.5 61l27 9.5l-27 9.5z"/>
+          <circle class="m-dot" cx="226" cy="59" r="2.2"/>
+        </svg>
+        <a class="st start" style="left:227.5px;top:529px"><i style="width:48.5px"></i><span class="lb"><b>البداية</b></span></a>
+        <a class="st done" style="left:240px;top:489px"><i style="width:60px"></i><span class="lb"><b>أساسيات Excel</b><small><svg class="ic ok"><use href="#i-check"/></svg>تمّت<span class="spot"><svg><use href="#peak"/></svg>+100 XP</span></small></span></a>
+        <a class="st done" style="left:246px;top:434px"><i style="width:60px"></i><span class="lb"><b>مبادئ الإحصاء</b><small><svg class="ic ok"><use href="#i-check"/></svg>تمّت<span class="spot"><svg><use href="#peak"/></svg>+150 XP</span></small></span></a>
+        <a class="st now" style="left:266.5px;top:324px"><i style="width:68.5px"></i><span class="lb"><span class="e">محطتك التالية</span><b>SQL للمبتدئين</b></span></a>
+        <a class="st lock" style="left:262px;top:269px"><i style="width:60px"></i><span class="lb"><b>تحليل البيانات بـ Python</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>تُفتح بعد SQL</small></span></a>
+        <a class="st lock" style="left:258px;top:214px"><i style="width:60px"></i><span class="lb"><b>Power BI ولوحات المعلومات</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>مقفلة</small></span></a>
+        <a class="st lock" style="left:250px;top:159px"><i style="width:60px"></i><span class="lb"><b>مشروع تطبيقي: تحليل مبيعات</b><small><svg class="ic" style="--wp:var(--ink4)"><use href="#i-lock"/></svg>مقفلة</small></span></a>
+        <a class="st goal" style="left:237px;top:104px"><i style="width:51px"></i><span class="lb"><b>جاهزة لوظيفة محلل بيانات</b><small>القمة · تطابق <b class="ltr">100%</b></small></span></a>
+        <a class="st peak" style="left:154.4px;top:31px"><i style="width:22.8px"></i><span class="lb"><b>عالِم بيانات</b><small>بعد القمة</small></span></a>
+        <a class="st peak" style="left:334.4px;top:33px"><i style="width:22.8px"></i><span class="lb"><b>محلل ذكاء أعمال</b><small>بعد القمة</small></span></a>
+        <div class="you" style="left:248.2px;top:396px"><span class="tx"><b>أنت هنا</b><small>تطابقك <i>70%</i></small></span><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span></div>
+        <div class="sign"><div class="e">مسارك نحو</div><h2>محلل بيانات</h2></div>
+  </div>
+
+  <div class="card ink p-next">
+    <div class="row"><div class="ttl"><i>3</i><div><div class="e">الخطوة التالية</div><h3>SQL للمبتدئين</h3></div></div>
+      <div class="meta"><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot"><svg><use href="#peak"/></svg>+200 XP</span></div></div>
+    <a class="btn btn-p">ابدأ الآن<svg class="ic"><use href="#i-arrow"/></svg></a>
+  </div>
+
+  <nav class="p-tabs">
+    <a class="on"><svg class="ic"><use href="#i-path"/></svg>مساري</a>
+    <a><svg class="ic"><use href="#i-tree"/></svg>المهارات</a>
+    <span class="ask"><svg class="ic"><use href="#i-advisor"/></svg></span>
+    <a><svg class="ic"><use href="#i-jobs"/></svg>الوظائف</a>
+    <a><svg class="ic"><use href="#i-courses"/></svg>الدورات</a>
+  </nav>
+</div>
+
+</body>
+</html>

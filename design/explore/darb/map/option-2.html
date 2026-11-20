@@ -1,0 +1,564 @@
+<!doctype html>
+<!--
+  MASARI · direction "darb" · the home map, option 2 · THE ELEVATION PROFILE
+
+  The roadmap is a hiker's elevation chart. Altitude IS the match with the target job.
+  - One trail, one way: it starts low on the right («البداية») and rises to the left, in reading order, to the summit flag.
+  - SKY: quiet horizontal altitude lines, each opening for its match percentage. The user stands on the 70% line.
+  - GROUND: the mountain under the trail. Covered ground is a tone darker. Only vertical drop lines live in it.
+  - Every station is a 44 px numbered marker on the trail; its name hangs in ONE place: the strip under the chart,
+    straight below the marker, joined by a drop line to a small node with the same number.
+  - Covered trail = solid ink. The leg being climbed now = vermilion dots. The way ahead = ink dots, with the gain
+    each leg will add written under it.
+  - After the summit: two smaller peaks (the branch jobs), outline only, no trail.
+  Phone: the same chart, opened on «أنت هنا» (three stations at full size), under a small whole-route profile with a
+  bracket that shows which part is magnified.
+-->
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مساري · darb · الخريطة 2 · ملف الارتفاع</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4EFE4; --sheet:#FCFAF4; --sunk:#EBE4D5; --line:#DDD4C1; --line2:#C4B9A1; --contour:#D9CBAC;
+  --ink:#13231F; --ink2:#3F4E48; --ink3:#6F7B74; --ink4:#A3A99F;
+  --night:#0F201D; --night2:#172D29; --night3:#27443E; --nink:#F4EFE4; --nink2:#A9B8B0; --nink3:#6E857C;
+  --blaze:#DB4325; --blaze2:#BE3619; --blazeSoft:#F7DDD2;
+  --xp:#DC9A1B; --xpInk:#8A5A00; --xpSoft:#F5E5BC; --xpNight:#F0B53E;
+  --ok:#2E7D5B; --okSoft:#D9EADF; --warn:#B4600F; --warnSoft:#F4E1C6;
+  --display:"IBM Plex Sans Arabic",sans-serif; --text:"IBM Plex Sans Arabic",sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --wp:var(--blaze);
+}
+*{box-sizing:border-box}
+html{background:#D9D7D1}
+body{margin:0;padding:50px 0 90px;background:#D9D7D1;color:var(--ink);font-family:var(--text);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;align-items:center;gap:64px;min-width:1500px}
+h1,h2,h3,h4,p,figure{margin:0}
+a{text-decoration:none;color:inherit}
+svg{display:block;flex:none}
+svg text{direction:ltr}
+.ic{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ic .wp,.wp{fill:var(--wp);stroke:none}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+/* ---------- Darb kit (copied from the direction, fonts swapped) ---------- */
+.mark{color:var(--ink)}
+.word{font-family:var(--display);font-weight:700;line-height:1.25;color:var(--ink)}
+.lock-h{display:inline-flex;align-items:center;gap:.24em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 22px;border-radius:12px;border:1.5px solid transparent;font:600 16px/1 var(--text);cursor:pointer;white-space:nowrap}
+.btn .ic{width:20px;height:20px}
+.btn-p{background:var(--blaze);color:#FFF8F2}
+.chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;border:1.5px solid var(--line2);background:var(--sheet);font:500 15px/1 var(--text);color:var(--ink);white-space:nowrap}
+.chip-s{height:28px;padding:0 10px;font-size:12.5px;border-radius:14px;border-width:1px;gap:6px}
+.chip-s.miss{border-style:dashed;color:var(--ink2);background:transparent}
+.skills{display:flex;gap:6px;flex-wrap:wrap}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:16px;padding:20px;position:relative}
+.card.ink{background:var(--night);border-color:var(--night);color:var(--nink)}
+.meta{display:flex;gap:14px;align-items:center;font:400 13.5px/1.4 var(--text);color:var(--ink2);flex-wrap:wrap}
+.meta .ic{width:18px;height:18px}
+.meta span{display:inline-flex;gap:6px;align-items:center}
+.card.ink .meta{color:var(--nink2)}
+.spot{display:inline-flex;align-items:center;gap:5px;font:700 14px/1 var(--text);color:var(--xpInk);direction:ltr;font-variant-numeric:tabular-nums}
+.spot svg{width:12px;height:11px;fill:var(--xp)}
+.card.ink .spot,.lbr.me .spot{color:var(--xpNight)}
+.card.ink .spot svg,.lbr.me .spot svg{fill:var(--xpNight)}
+.ring{position:relative;width:var(--s,120px);height:var(--s,120px);flex:none}
+.ring svg{width:100%;height:100%}
+.ring .trk{fill:none;stroke:var(--line2);stroke-width:5;stroke-linecap:round;stroke-dasharray:.1 9.82}
+.ring .prg{fill:none;stroke:var(--ink);stroke-width:7;stroke-linecap:round}
+.ring .end{fill:var(--blaze);stroke:var(--bg,var(--sheet));stroke-width:3.5}
+.ring b{position:absolute;inset:0;text-align:center;font:700 calc(var(--s,120px)*.27)/var(--s,120px) var(--display);direction:ltr;white-space:nowrap}
+.ring b small{font-size:.5em;font-weight:700;margin-inline-start:1px}
+.ring.sm .trk{stroke-width:7;stroke-dasharray:.1 13.09}
+.ring.sm .prg{stroke-width:10}
+.ring.sm b{font-size:calc(var(--s)*.3)}
+.xpbar{direction:rtl}
+.xpbar .bar{display:flex;height:12px;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;background:var(--sheet)}
+.xpbar .seg{flex:1;border-inline-end:1.5px solid var(--ink);position:relative}
+.xpbar .seg:last-child{border:0}
+.xpbar .seg.f{background:var(--xp)}
+.xpbar .seg i{position:absolute;inset-block:0;inset-inline-start:0;background:var(--xp);border-inline-end:1.5px solid var(--ink)}
+.sk{display:inline-flex;gap:3px;align-items:flex-end;direction:rtl}
+.sk svg{width:13px;height:12px;fill:none;stroke:var(--nink3);stroke-width:1.5;stroke-linejoin:round;stroke-dasharray:1.6 1.6}
+.sk svg.new{fill:var(--blaze);stroke:var(--blaze);stroke-dasharray:none}
+.av{position:relative;display:inline-block;width:var(--s,48px);height:var(--s,48px);flex:none}
+.av .face{position:absolute;inset:calc(var(--s,48px)*.105);width:auto;height:auto;border-radius:50%;overflow:hidden;background:var(--sunk)}
+.av .face svg{width:100%;height:100%}
+.av.plain .face{inset:0}
+.av .rg{position:absolute;inset:0;width:100%;height:100%;transform:scaleX(-1)}
+.av .rg circle{fill:none;stroke-width:4;stroke-linecap:round}
+.av .rg .t{stroke:var(--line2)}
+.av .rg .p{stroke:var(--ink)}
+.av .lv{position:absolute;bottom:calc(var(--s,48px)*-.045);left:50%;transform:translateX(-50%);font:700 calc(var(--s,48px)*.2)/1 var(--display);color:var(--ink);direction:ltr}
+.wk{display:flex;gap:0;align-items:center;direction:rtl}
+.wk .d{display:flex;flex-direction:column;align-items:center;gap:6px;font:400 11px/1 var(--text);color:var(--ink3);width:25px;position:relative}
+.wk .d::before{content:"";position:absolute;top:7px;inset-inline-start:50%;width:25px;border-top:2px dotted var(--line2)}
+.wk .d:last-child::before{display:none}
+.wk .d.on::before{border-top:2px solid var(--ink)}
+.wk .d.now::before{border-top:2px dotted var(--line2)}
+.wk .d u{position:relative;z-index:1;width:16px;height:16px;border-radius:50%;border:2px dotted var(--line2);background:var(--bg,var(--sheet))}
+.wk .d.on u{border:0;background:var(--ink)}
+.wk .d.now u{border:0;background:var(--blaze);box-shadow:0 0 0 3px var(--bg,var(--sheet)),0 0 0 4.5px var(--blaze)}
+.wk .d.now{color:var(--ink);font-weight:600}
+.lbr{display:flex;align-items:center;gap:12px;height:50px;padding:0 12px;border-radius:12px;font:500 15px/1.3 var(--text)}
+.lbr .rk{width:26px;text-align:center;font:700 17px/1 var(--display);color:var(--ink3);direction:ltr}
+.lbr .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbr .nm small{font:400 12px/1 var(--text);color:var(--ink3);margin-inline-start:6px}
+.lbr.me{background:var(--ink);color:var(--paper)}
+.lbr.me .rk{color:var(--paper)}
+.lbr.me .nm small{color:var(--nink2)}
+.dal{width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex:none}
+.dal .ic{width:22px;height:22px}
+
+/* ---------- the home shell ---------- */
+#home-frame{width:1440px;height:900px;overflow:hidden;position:relative;background:var(--paper);border-radius:10px;box-shadow:0 30px 60px -40px rgba(20,28,24,.45),0 0 0 1px rgba(20,28,24,.08);display:grid;grid-template-columns:232px 1fr}
+.rail{padding:26px 16px 20px;display:flex;flex-direction:column;border-inline-end:1px solid var(--line)}
+.rail .brand{padding:0 10px 26px}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav a{display:flex;align-items:center;gap:12px;height:46px;padding:0 12px;border-radius:12px;font:500 15.5px/1 var(--text);color:var(--ink2);--wp:var(--ink4);border:1px solid transparent}
+.nav a.on{background:var(--sheet);border-color:var(--line);color:var(--ink);font-weight:700;--wp:var(--blaze)}
+.nav a.on::after{content:"";margin-inline-start:auto;width:7px;height:7px;border-radius:50%;background:var(--blaze)}
+.rail .daily{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:14px 12px 12px;background:var(--sheet);--bg:var(--sheet)}
+.rail .daily .hd{display:flex;align-items:center;gap:8px;font:600 13.5px/1.2 var(--text);margin-bottom:12px}
+.rail .daily .hd b{margin-inline-start:auto;font:700 18px/1 var(--display);direction:ltr}
+.rail .daily .hd small{font:400 12px/1 var(--text);color:var(--ink3)}
+.hmain{padding:22px 28px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.hhead{height:64px;display:flex;align-items:center;justify-content:space-between}
+.hhead h1{font:700 28px/1.3 var(--display)}
+.hhead p{font:400 14px/1.5 var(--text);color:var(--ink3)}
+.uchip{display:flex;align-items:center;height:64px;border:1px solid var(--line);border-radius:18px;background:var(--sheet);--bg:var(--sheet);padding-inline:6px 10px}
+.uchip>div{display:flex;align-items:center;gap:10px;padding:0 16px;height:36px;border-inline-end:1px solid var(--line)}
+.uchip>div:last-child{border:0;padding-inline-end:6px}
+.uchip .k{font:400 11.5px/1.2 var(--text);color:var(--ink3)}
+.uchip .v{font:700 15px/1.2 var(--text)}
+.uchip .ic{width:22px;height:22px}
+
+/* ---------- THE ELEVATION PROFILE ---------- */
+.prof{position:relative;width:1152px;height:556px;background:var(--sheet);border-radius:20px;box-shadow:0 0 0 1px var(--line);overflow:hidden;flex:none}
+.prof svg.t{position:absolute;inset:0}
+.alt{fill:none;stroke:var(--contour);stroke-width:1}
+.alt .now{stroke:#A8946B;stroke-width:1.25}
+.altn text{font:600 12px var(--text);fill:#A8946B;text-anchor:middle}
+.altn text.now{font-weight:700;font-size:13.5px;fill:var(--ink)}
+.drop{fill:none;stroke:#A99E86;stroke-width:1.25;stroke-dasharray:2 4;stroke-linecap:round}
+.mk text{font:700 20px var(--display);text-anchor:middle}
+.nd text{font:700 12.5px var(--display);text-anchor:middle}
+.gn text{font:700 13px var(--text);text-anchor:middle;fill:var(--ink2)}
+.gn text.d{fill:var(--ink3);font-weight:600}
+.gn text.n{fill:var(--blaze2)}
+
+.ptitle{position:absolute;top:18px;right:28px}
+.ptitle .e{font:500 13px/1.4 var(--text);color:var(--ink3)}
+.ptitle h2{font:700 31px/1.3 var(--display)}
+.ptitle .pg{display:flex;align-items:center;gap:10px;white-space:nowrap;font:400 13px/1.3 var(--text);color:var(--ink2);margin-top:4px}
+.ptitle .pg b{font-weight:700;color:var(--ink)}
+.dots{display:flex;gap:4px;direction:rtl}
+.dots i{width:9px;height:9px;border-radius:50%;border:1.5px dotted var(--ink3)}
+.dots i.d{border:0;background:var(--ink)}
+.dots i.n{border:0;background:var(--blaze)}
+.axt{position:absolute;font:500 11.5px/1 var(--text);color:#A8946B;white-space:nowrap}
+.seg2{position:absolute;left:20px;top:18px;display:flex;gap:2px;border:1px solid var(--line2);border-radius:11px;background:var(--sheet);padding:3px;font:500 12.5px/1 var(--text);color:var(--ink2)}
+.seg2>*{padding:7px 12px;border-radius:8px;font-weight:500}
+.seg2 b{background:var(--ink);color:var(--paper);font-weight:600}
+
+.you{position:absolute;width:52px;height:52px;border-radius:50%;background:var(--sheet);box-shadow:0 0 0 1.75px var(--ink);padding:3px}
+.you svg{width:100%;height:100%;border-radius:50%}
+.here{position:absolute;transform:translateX(-50%);background:var(--ink);color:var(--paper);font:600 12.5px/1 var(--text);padding:7px 11px 8px;border-radius:9px;white-space:nowrap;display:flex;gap:7px;align-items:center}
+.here i{font-style:normal;direction:ltr;font-weight:700;padding-inline-start:7px;border-inline-start:1px solid var(--night3)}
+.summit{position:absolute;background:var(--sheet);border:1.5px solid var(--ink);color:var(--ink);font:600 12.5px/1 var(--text);padding:6px 10px 7px;border-radius:9px;white-space:nowrap;display:flex;gap:7px;align-items:center}
+.summit i{font-style:normal;direction:ltr;font-weight:700;padding-inline-start:7px;border-inline-start:1px solid var(--line2)}
+.pk{position:absolute;transform:translateX(-50%);white-space:nowrap;font:600 13.5px/1.4 var(--text);color:var(--ink2)}
+
+/* the strip: one caption per station, straight below its marker */
+.sc{position:absolute;top:456px;width:118px;transform:translateX(-50%);text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px}
+.sc b{font:600 14.5px/1.38 var(--text);color:var(--ink);text-wrap:balance}
+.sc small{display:inline-flex;gap:5px;align-items:center;font:400 12.5px/1.4 var(--text);color:var(--ink3);white-space:nowrap}
+.sc small .ic{width:14px;height:14px;stroke-width:2.2}
+.sc small .spot{font-size:12.5px;font-weight:600}
+.sc.lock b{color:var(--ink2);font-weight:500}
+.sc.lock small{color:var(--ink3)}
+.sc.start b{font-weight:500;color:var(--ink2);font-size:13.5px}
+.sc.goal b{font:700 15px/1.38 var(--display)}
+.sc.goal small{color:var(--ink2)}
+.sc.next{top:451px;width:152px;background:var(--sheet);border:1.5px solid var(--ink);border-radius:14px;padding:7px 10px 10px;box-shadow:0 10px 22px -14px rgba(19,35,31,.45);gap:1px}
+.sc.next .e{font:600 11.5px/1.4 var(--text);color:var(--blaze2)}
+.sc.next b{font:700 17px/1.45 var(--display)}
+.sc.next small{color:var(--ink2);gap:9px}
+.sc.next small span{display:inline-flex;gap:4px;align-items:center}
+.sc.note{width:150px;gap:2px}
+.sc.note b{font:600 13px/1.4 var(--text);color:var(--ink2)}
+.sc.note small{white-space:normal;line-height:1.45;text-wrap:balance;display:block}
+
+/* ---------- the row under the map ---------- */
+.hrow{display:grid;grid-template-columns:520px 296px 304px;gap:16px;height:204px}
+.nextc{display:grid;grid-template-columns:1fr 208px;gap:22px;padding:20px 22px;border-radius:20px;align-items:stretch}
+.nextc .top{display:flex;gap:10px;align-items:center;font:600 12.5px/1 var(--text);color:var(--nink2)}
+.nextc .top span:first-child{display:flex;align-items:center;gap:7px;color:var(--nink)}
+.nextc .top span:first-child::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--blaze)}
+.nextc .top span+span{padding-inline-start:10px;border-inline-start:1px solid var(--night3)}
+.nextc h3{font:700 29px/1.3 var(--display);margin-top:9px}
+.nextc p{font:400 13.5px/1.7 var(--text);color:var(--nink2);margin-top:4px}
+.nextc .meta{margin-top:10px}
+.nx-act{display:flex;flex-direction:column;gap:12px;justify-content:space-between}
+.gain{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--night3);border-radius:12px;flex:1}
+.gain>div{padding:10px 12px;display:flex;flex-direction:column;justify-content:center;gap:7px}
+.gain>div+div{border-inline-start:1px solid var(--night3)}
+.gain .k{font:400 11.5px/1.2 var(--text);color:var(--nink2)}
+.gain .v{font:700 16px/1.2 var(--text);display:flex;align-items:center;gap:7px}
+.gain .v i{font-style:normal;color:var(--nink2);font-weight:500;font-size:12.5px}
+.matchc{display:flex;flex-direction:column;justify-content:center;gap:14px;padding:18px 20px;border-radius:20px;--bg:var(--sheet)}
+.matchc .r1{display:flex;gap:16px;align-items:center}
+.matchc h4{font:700 16.5px/1.4 var(--display)}
+.matchc p{font:400 13px/1.5 var(--text);color:var(--ink3);margin-top:2px}
+.matchc .r2{display:flex;align-items:center;gap:8px;padding-top:12px;border-top:1px dotted var(--line2)}
+.matchc .r2>span:first-child{font:500 12px/1 var(--text);color:var(--ink3);white-space:nowrap}
+.hleft{display:flex;flex-direction:column;gap:12px;min-width:0}
+.rankc{padding:12px 12px 10px;border-radius:20px;flex:1}
+.rankc .hd{display:flex;justify-content:space-between;align-items:center;padding:0 8px 6px;font:700 15px/1.4 var(--display)}
+.rankc .hd a{font:500 12.5px/1 var(--text);color:var(--ink3)}
+.rankc .hint{padding:8px 8px 0;font:400 12.5px/1.5 var(--text);color:var(--ink3)}
+.launch{display:flex;align-items:center;gap:12px;height:56px;border-radius:28px;border:1.5px solid var(--ink);background:var(--sheet);padding-inline:7px 18px;font:500 15px/1 var(--text);color:var(--ink2);box-shadow:0 14px 28px -18px rgba(19,35,31,.5);flex:none}
+.launch .dal{width:42px;height:42px}.launch .dal .ic{width:25px;height:25px}
+.launch kbd{margin-inline-start:auto;font:500 11px/1 ui-monospace,Consolas,monospace;color:var(--ink3);border:1px solid var(--line2);border-radius:6px;padding:4px 6px;direction:ltr}
+
+/* ---------- phone ---------- */
+#phone-frame{width:390px;height:844px;overflow:hidden;position:relative;background:var(--paper);border-radius:40px;box-shadow:0 0 0 1px rgba(20,28,24,.1),0 40px 70px -40px rgba(20,28,24,.5);direction:rtl;display:flex;flex-direction:column}
+.p-top{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 10px}
+.p-top .who{display:flex;align-items:center;gap:10px}
+.p-top .who b{font:700 15px/1.3 var(--text);display:block}
+.p-top .who small{font:400 12px/1.3 var(--text);color:var(--ink3)}
+.p-stats{display:flex;gap:6px}
+.p-stats span{display:inline-flex;align-items:center;gap:5px;height:34px;padding:0 10px;border-radius:17px;border:1px solid var(--line);background:var(--sheet);font:700 13.5px/1 var(--text)}
+.p-stats .ic{width:18px;height:18px}
+.p-title{display:flex;align-items:center;justify-content:space-between;padding:4px 18px 12px}
+.p-title small{font:500 12px/1.3 var(--text);color:var(--ink3)}
+.p-title h2{font:700 25px/1.35 var(--display)}
+.p-map{position:relative;flex:1;margin:0 12px;border-radius:24px;background:var(--sheet);box-shadow:0 0 0 1px var(--line);overflow:hidden}
+.p-map svg.t{position:absolute;inset:0}
+.p-map .ov{position:absolute;top:9px;right:14px;font:500 11.5px/1.3 var(--text);color:var(--ink3)}
+.p-map .sc{top:372px;width:110px}
+.p-map .sc b{font-size:14px}
+.p-map .sc.next{top:366px;width:136px;padding:6px 8px 9px}
+.p-map .sc.next b{font-size:16px}
+.p-map .sc.next small{gap:7px}
+.p-map .you{width:46px;height:46px}
+.p-map .mk text{font-size:19px}
+.p-next{margin:10px 12px 0;border-radius:24px;padding:16px 16px 14px;display:flex;flex-direction:column;gap:10px}
+.p-next .row{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.p-next h3{font:700 22px/1.3 var(--display)}
+.p-next .e{font:600 12px/1.2 var(--text);color:var(--nink);display:flex;align-items:center;gap:6px}
+.p-next .e2{font:500 12px/1.2 var(--text);color:var(--nink2)}
+.p-next .e::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blaze)}
+.p-tabs{display:grid;grid-template-columns:1fr 1fr 76px 1fr 1fr;align-items:center;padding:8px 8px 22px;height:86px;flex:none}
+.p-tabs a{display:flex;flex-direction:column;align-items:center;gap:4px;font:500 11px/1 var(--text);color:var(--ink3);--wp:var(--ink4)}
+.p-tabs a.on{color:var(--ink);font-weight:700;--wp:var(--blaze)}
+.p-tabs .ask{justify-self:center;width:58px;height:58px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;margin-top:-22px;box-shadow:0 0 0 5px var(--paper),0 14px 22px -12px rgba(19,35,31,.6)}
+.p-tabs .ask .ic{width:30px;height:30px}
+</style>
+</head>
+<body>
+
+<!-- sprite: logo, icons, avatar, marker badges -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mark" viewBox="0 0 64 64">
+      <path d="M56 50V38a24 24 0 0 0-48 0v6a6 6 0 0 0 12 0v-6a12 12 0 0 1 24 0v12" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="32" cy="44.5" r="5" style="fill:var(--wp,#DB4325)"/>
+    </symbol>
+    <symbol id="peak" viewBox="0 0 13 12"><path d="M6.5 1.6 11.6 10.6H1.4z"/></symbol>
+    <symbol id="i-path" viewBox="0 0 24 24"><path d="M19.5 19H8.5a3 3 0 0 1 0-6h7a3 3 0 0 0 0-6H10"/><circle class="wp" cx="5.75" cy="7" r="1.75"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 20.5V11M12 14.5c0-3.4-6-2.6-6-6M12 14.5c0-3.4 6-2.6 6-6M9.5 20.5h5"/><circle cx="6" cy="6" r="2.25"/><circle cx="18" cy="6" r="2.25"/><circle class="wp" cx="12" cy="7.5" r="1.75"/></symbol>
+    <symbol id="i-cv" viewBox="0 0 24 24"><path d="M13.5 3h-6A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V10M9.5 9.5h3M9.5 13h5M9.5 16.5h5"/><circle class="wp" cx="17.25" cy="5" r="1.75"/></symbol>
+    <symbol id="i-jobs" viewBox="0 0 24 24"><path d="M3.5 13h5.5M15 13h5.5M5.5 8h13a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2zM8.75 8V6.5a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V8"/><circle class="wp" cx="12" cy="13" r="1.75"/></symbol>
+    <symbol id="i-courses" viewBox="0 0 24 24"><path d="M12 7.5c-1.8-1.4-4.2-2-7.5-2v12c3.3 0 5.7.6 7.5 2 1.8-1.4 4.2-2 7.5-2V10.5M12 7.5v12M12 7.5c1.1-.85 2.4-1.4 4-1.7"/><circle class="wp" cx="19.5" cy="6" r="1.75"/></symbol>
+    <symbol id="i-advisor" viewBox="0 0 24 24"><path d="M18 6A8.5 8.5 0 1 0 20.5 12M14.75 9.25l-1.6 4-4 1.6 1.6-4z"/><circle class="wp" cx="19.9" cy="8.7" r="1.75"/></symbol>
+    <symbol id="i-leaders" viewBox="0 0 24 24"><path d="M2.5 20v-5.5h6V9.5h7V13h6v7"/><circle class="wp" cx="12" cy="5.25" r="1.75"/></symbol>
+    <symbol id="i-profile" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.75"/><path d="M4.75 20c.4-3.6 3.3-6 7.25-6 1.6 0 3 .4 4.2 1.1"/><circle class="wp" cx="18.75" cy="18.5" r="1.75"/></symbol>
+    <symbol id="i-streak" viewBox="0 0 24 24"><path d="M9.2 8.2C8.1 9.3 7.5 10.6 7.5 12a4.5 4.5 0 0 0 9 0c0-3.9-3.9-5.6-4.5-8.5M6 21l12-3.25M6 17.75 18 21"/><circle class="wp" cx="12" cy="12.5" r="1.75"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path d="M7.5 10.5h9a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2zM8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/><circle class="wp" cx="12" cy="15.5" r="1.75"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M19 12H6.5M11 7.5 6.5 12l4.5 4.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><path d="M17.3 5.4A8.5 8.5 0 1 0 20.5 12M12 7.5V12l3 2"/><circle class="wp" cx="19.6" cy="8.3" r="1.75"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></symbol>
+
+    <g id="a-eyes"><circle cx="42" cy="46.5" r="1.7" fill="#13231F"/><circle cx="54" cy="46.5" r="1.7" fill="#13231F"/></g>
+    <path id="a-smile" d="M44 53.5c2.4 2 5.6 2 8 0" fill="none" stroke="#13231F" stroke-width="1.6" stroke-linecap="round"/>
+    <path id="a-shoulders" d="M12 97c0-13.5 11-22.5 28-23.5h16c17 1 28 10 28 23.5z"/>
+    <path id="a-hijab" d="M48 14.5C31 14.5 22.5 27 22.5 43c0 15-4.5 22.5-11 29.5C17.5 85 31 97 48 97s30.5-12 36.5-24.5C78 65.500 73.500 58 73.500 43 73.500 27 65 14.500 48 14.500z"/>
+    <ellipse id="a-face" cx="48" cy="46" rx="13" ry="15.5"/>
+    <g id="a-hijab-folds" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M35.5 58c3.2 6 7.7 9 12.5 9s9.3-3 12.5-9"/><path d="M26.5 71.5c6.5 7.5 13.5 11 21.5 11s15-3.5 21.5-11"/><path d="M29 29.5c4.5-6 11-9 19-9"/></g>
+    <symbol id="av-1" viewBox="0 0 96 96"><rect width="96" height="96" fill="#F1D6C6"/><path d="M-4 34c16-12 30-12 46-3s34 8 58-9M-4 52c14-10 26-10 40-4" fill="none" stroke="#E2BBA6" stroke-width="1.5"/>
+      <use href="#a-shoulders" fill="#13231F"/><use href="#a-hijab" fill="#1D4038"/><use href="#a-hijab-folds" stroke="#3A655A"/><use href="#a-face" fill="#E3AE86"/><use href="#a-eyes"/><use href="#a-smile"/></symbol>
+
+    <!-- marker badges -->
+    <g id="b-done"><circle r="9.5" fill="#FCFAF4" stroke="#13231F" stroke-width="1.5"/><path d="M-4.2 .3l2.9 2.9 5.4-6" fill="none" stroke="#2E7D5B" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="b-lock"><circle r="9.5" fill="#FCFAF4" stroke="#6F7B74" stroke-width="1.5"/><rect x="-3.7" y="-1.1" width="7.4" height="5.6" rx="1.3" fill="#56635D"/><path d="M-2.2 -1.1v-1.5a2.2 2.2 0 0 1 4.4 0v1.5" fill="none" stroke="#56635D" stroke-width="1.5"/></g>
+    <g id="b-peak"><path d="M0 -9 9.5 7.5h-19z" fill="#FCFAF4" stroke="#3F4E48" stroke-width="1.75" stroke-linejoin="round"/></g>
+  </defs>
+</svg>
+
+<!-- =====================================================  1440 x 900  ===================================================== -->
+<div id="home-frame">
+  <aside class="rail">
+    <div class="brand"><span class="lock-h word" style="font-size:27px;gap:8px"><svg class="mark" width="32" height="32"><use href="#mark"/></svg><span>مساري</span></span></div>
+    <nav class="nav">
+      <a class="on"><svg class="ic"><use href="#i-path"/></svg>مساري</a>
+      <a><svg class="ic"><use href="#i-tree"/></svg>المهارات</a>
+      <a><svg class="ic"><use href="#i-cv"/></svg>السيرة الذاتية</a>
+      <a><svg class="ic"><use href="#i-jobs"/></svg>الوظائف</a>
+      <a><svg class="ic"><use href="#i-courses"/></svg>الدورات</a>
+      <a><svg class="ic"><use href="#i-leaders"/></svg>المتصدرون</a>
+      <a><svg class="ic"><use href="#i-profile"/></svg>ملفي</a>
+    </nav>
+    <div class="daily">
+      <div class="hd"><svg class="ic" style="width:22px;height:22px"><use href="#i-streak"/></svg>السلسلة اليومية<b>4</b><small>أيام</small></div>
+      <div class="wk"><span class="d on"><u></u>ح</span><span class="d on"><u></u>ن</span><span class="d on"><u></u>ث</span><span class="d now"><u></u>ر</span><span class="d"><u></u>خ</span><span class="d"><u></u>ج</span><span class="d"><u></u>س</span></div>
+    </div>
+  </aside>
+
+  <main class="hmain">
+    <header class="hhead">
+      <div><h1>مساء الخير، سارة</h1><p>بقيت أربع محطات بينك وبين القمة. محطة اليوم تأخذ ست ساعات.</p></div>
+      <div class="uchip">
+        <div><svg class="ic"><use href="#i-leaders"/></svg><span><span class="k">ترتيبك</span><br><span class="v num">7</span></span></div>
+        <div><span><span class="k">نقاط الخبرة</span><br><span class="spot" style="font-size:15px"><svg><use href="#peak"/></svg>1,240 XP</span></span>
+          <span class="xpbar" style="width:92px"><span class="bar" style="height:9px"><span class="seg f"></span><span class="seg f"></span><span class="seg"><i style="width:40%"></i></span><span class="seg"></span><span class="seg"></span></span></span></div>
+        <div><span style="text-align:start"><span class="v">سارة العتيبي</span><br><span class="k">المستوى 3 · متعلّمة</span></span>
+          <span class="av" style="--s:50px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span></div>
+      </div>
+    </header>
+
+    <!-- the map -->
+    <section class="prof">
+      <svg class="t" width="1152" height="556" viewBox="0 0 1152 556">
+        <!-- SKY: altitude lines, each opening for its match percentage -->
+        <g class="alt">
+          <path d="M1152 148h-10M1102 148H371"/>
+          <path d="M1152 200h-10M1102 200H255"/>
+          <path d="M1152 252h-10M1102 252H255"/>
+          <path class="now" d="M1152 304h-10M1102 304H797"/>
+          <path d="M1152 356h-10M1102 356H255"/>
+          <path d="M1152 408h-10M1102 408H1068"/>
+        </g>
+        <g class="altn"><text x="1122" y="152">100%</text><text x="1122" y="204">90%</text><text x="1122" y="256">80%</text><text class="now" x="1122" y="309">70%</text><text x="1122" y="360">60%</text><text x="1122" y="412">50%</text></g>
+
+        <!-- GROUND: covered (a tone darker), ahead, far side with the two smaller peaks -->
+        <path d="M1104 408H1068V434H1104z" fill="#F4EFE4"/>
+        <path d="M1068 408C1046 406 1018 366 977 356C943 348 902 310 859 304C839 301.500 818 304 797 304V434H1068z" fill="#EBE4D5"/>
+        <path d="M797 304C775 304 757 270 733 262C703 252 648 228 607 221C569 214.500 530 190 489 184C451 178.500 412 150 371 148H240C222 148 214 236 196 266C188 280 172 240 158 240C144 240 136 318 122 322C110 326 98 300 86 300C66 300 54 400 34 434H797z" fill="#F4EFE4"/>
+        <!-- far side outline: terrain, not a trail -->
+        <path d="M240 148C222 148 214 236 196 266C188 280 172 240 158 240C144 240 136 318 122 322C110 326 98 300 86 300C66 300 54 400 34 434" fill="none" stroke="#A3A99F" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- the distance axis -->
+        <path d="M1104 434H24" fill="none" stroke="#C4B9A1" stroke-width="1.5" stroke-linecap="round"/>
+
+        <!-- drop lines: marker to its node on the axis -->
+        <g class="drop"><path d="M1068 418v10"/><path d="M977 384v36"/><path d="M859 332v88"/><path d="M733 297v123"/><path d="M607 249v171"/><path d="M489 212v208"/><path d="M371 176v244"/><path d="M255 158v262"/></g>
+
+        <!-- how much each leg raises the match -->
+        <g class="gn"><text class="d" x="1020" y="414">+10%</text><text class="d" x="916" y="362">+10%</text><text class="n" x="766" y="318">+8%</text><text x="668" y="272">+8%</text><text x="547" y="234">+7%</text><text x="429" y="198">+7%</text></g>
+
+        <!-- THE TRAIL: ahead (ink dots), the leg being climbed (vermilion dots), covered (solid ink) -->
+        <path d="M733 262C703 252 648 228 607 221C569 214.500 530 190 489 184C451 178.500 412 150 371 148H255" fill="none" stroke="#3F4E48" stroke-width="4.5" stroke-linecap="round" stroke-dasharray=".1 10.500"/>
+        <path d="M797 304C775 304 757 270 733 262" fill="none" stroke="#DB4325" stroke-width="5" stroke-linecap="round" stroke-dasharray=".1 10"/>
+        <path d="M1068 408C1046 406 1018 366 977 356C943 348 902 310 859 304C839 301.500 818 304 797 304" fill="none" stroke="#13231F" stroke-width="5" stroke-linecap="round"/>
+
+        <!-- trailhead -->
+        <circle cx="1068" cy="408" r="8" fill="#FCFAF4" stroke="#13231F" stroke-width="3"/>
+
+        <!-- the two smaller peaks after the summit -->
+        <use href="#b-peak" x="158" y="221"/><use href="#b-peak" x="86" y="281"/>
+
+        <!-- stations -->
+        <g class="mk">
+          <circle cx="977" cy="356" r="22" fill="#13231F"/><text x="977" y="363" fill="#FCFAF4">1</text><use href="#b-done" x="994" y="338"/>
+          <circle cx="859" cy="304" r="22" fill="#13231F"/><text x="859" y="311" fill="#FCFAF4">2</text><use href="#b-done" x="876" y="286"/>
+          <circle cx="733" cy="262" r="29" fill="#FCFAF4" stroke="#DB4325" stroke-width="1.5"/><circle cx="733" cy="262" r="22" fill="#DB4325"/><text x="733" y="269" fill="#FFF8F2">3</text>
+          <circle cx="607" cy="221" r="21" fill="#FCFAF4" stroke="#6F7B74" stroke-width="2" stroke-dasharray="4 3.500"/><text x="607" y="228" fill="#3F4E48">4</text><use href="#b-lock" x="624" y="203"/>
+          <circle cx="489" cy="184" r="21" fill="#FCFAF4" stroke="#6F7B74" stroke-width="2" stroke-dasharray="4 3.500"/><text x="489" y="191" fill="#3F4E48">5</text><use href="#b-lock" x="506" y="166"/>
+          <circle cx="371" cy="148" r="21" fill="#FCFAF4" stroke="#6F7B74" stroke-width="2" stroke-dasharray="4 3.500"/><text x="371" y="155" fill="#3F4E48">6</text><use href="#b-lock" x="388" y="130"/>
+        </g>
+
+        <!-- the summit flag: the end -->
+        <path d="M255 148V78" stroke="#13231F" stroke-width="3" stroke-linecap="round"/>
+        <path d="M255 79l-40 14 40 14z" fill="#DB4325" stroke="#DB4325" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="255" cy="148" r="5.500" fill="#13231F"/>
+
+        <!-- you are here -->
+        <path d="M797 296v-28" stroke="#13231F" stroke-width="1.75"/>
+        <circle cx="797" cy="304" r="7.500" fill="#DB4325" stroke="#FCFAF4" stroke-width="3"/>
+
+        <!-- nodes on the axis: the same number, the same state -->
+        <g class="nd">
+          <circle cx="1068" cy="434" r="5" fill="#FCFAF4" stroke="#13231F" stroke-width="2"/>
+          <circle cx="977" cy="434" r="11" fill="#13231F"/><text x="977" y="438.500" fill="#FCFAF4">1</text>
+          <circle cx="859" cy="434" r="11" fill="#13231F"/><text x="859" y="438.500" fill="#FCFAF4">2</text>
+          <circle cx="733" cy="434" r="11" fill="#DB4325"/><text x="733" y="438.500" fill="#FFF8F2">3</text>
+          <circle cx="607" cy="434" r="10.500" fill="#FCFAF4" stroke="#6F7B74" stroke-width="1.5"/><text x="607" y="438.500" fill="#3F4E48">4</text>
+          <circle cx="489" cy="434" r="10.500" fill="#FCFAF4" stroke="#6F7B74" stroke-width="1.5"/><text x="489" y="438.500" fill="#3F4E48">5</text>
+          <circle cx="371" cy="434" r="10.500" fill="#FCFAF4" stroke="#6F7B74" stroke-width="1.5"/><text x="371" y="438.500" fill="#3F4E48">6</text>
+          <circle cx="255" cy="434" r="10.500" fill="#FCFAF4" stroke="#13231F" stroke-width="1.5"/><path d="M252.500 440v-12" stroke="#13231F" stroke-width="1.5" stroke-linecap="round"/><path d="M252.500 428l7 2.800-7 2.800z" fill="#DB4325" stroke="#DB4325" stroke-width="1" stroke-linejoin="round"/>
+        </g>
+      </svg>
+
+      <div class="ptitle">
+        <div class="e">مسارك نحو</div>
+        <h2>محلل بيانات</h2>
+        <div class="pg"><span>قطعتِ <b>2</b> من <b>6</b> محطات</span><span class="dots"><i class="d"></i><i class="d"></i><i class="n"></i><i></i><i></i><i></i></span></div>
+      </div>
+      <span class="axt" style="right:14px;top:124px">نسبة التطابق</span>
+      <span class="seg2"><b>خريطة</b><span>قائمة</span></span>
+
+      <div class="summit" style="left:272px;top:84px">القمة <i>100%</i></div>
+      <span class="pk" style="left:158px;top:184px">عالِم بيانات</span>
+      <span class="pk" style="left:86px;top:244px">محلل ذكاء أعمال</span>
+
+      <div class="here" style="left:797px;top:178px">أنت هنا <i>70%</i></div>
+      <div class="you" style="left:771px;top:216px"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></div>
+
+      <!-- the strip -->
+      <a class="sc start" style="left:1068px"><b>البداية</b></a>
+      <a class="sc" style="left:977px"><b>أساسيات Excel</b><small><svg class="ic" style="color:var(--ok)"><use href="#i-check"/></svg>تمّت<span class="spot"><svg><use href="#peak"/></svg>+100</span></small></a>
+      <a class="sc" style="left:859px"><b>مبادئ الإحصاء</b><small><svg class="ic" style="color:var(--ok)"><use href="#i-check"/></svg>تمّت<span class="spot"><svg><use href="#peak"/></svg>+150</span></small></a>
+      <a class="sc next" style="left:733px"><span class="e">محطتك التالية</span><b>SQL للمبتدئين</b><small><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot"><svg><use href="#peak"/></svg>+200</span></small></a>
+      <a class="sc lock" style="left:607px"><b>تحليل البيانات بـ Python</b><small><svg class="ic" style="--wp:var(--ink3)"><use href="#i-lock"/></svg>تُفتح بعد SQL</small></a>
+      <a class="sc lock" style="left:489px"><b>Power BI ولوحات المعلومات</b><small><svg class="ic" style="--wp:var(--ink3)"><use href="#i-lock"/></svg>مقفلة</small></a>
+      <a class="sc lock" style="left:371px"><b>مشروع تطبيقي: تحليل مبيعات</b><small><svg class="ic" style="--wp:var(--ink3)"><use href="#i-lock"/></svg>مقفلة</small></a>
+      <a class="sc goal" style="left:255px"><b>جاهزة لوظيفة محلل بيانات</b><small>القمة · تطابق <span class="ltr">100%</span></small></a>
+      <div class="sc note" style="left:104px"><b>بعد القمة</b><small>وظيفتان تُفتحان لك</small></div>
+    </section>
+
+    <!-- the row under the map -->
+    <div class="hrow">
+      <div class="card ink nextc">
+        <div>
+          <div class="top"><span>الخطوة التالية</span><span>المحطة 3 من 6</span></div>
+          <h3>SQL للمبتدئين</h3>
+          <p>اكتبي أول استعلاماتك، واستخرجي ما تحتاجينه من الجداول.</p>
+          <div class="meta"><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot"><svg><use href="#peak"/></svg>+200 XP</span></div>
+        </div>
+        <div class="nx-act">
+          <div class="gain">
+            <div><span class="k">مهارة SQL</span><span class="v"><span class="sk"><svg class="new"><use href="#peak"/></svg><svg><use href="#peak"/></svg><svg><use href="#peak"/></svg></span></span></div>
+            <div><span class="k">تطابقك بعدها</span><span class="v num"><span class="ltr">78%</span><i class="ltr">+8</i></span></div>
+          </div>
+          <a class="btn btn-p" style="height:54px;font-size:17px">ابدأ الآن<svg class="ic"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+
+      <div class="card matchc">
+        <div class="r1">
+          <div class="ring" style="--s:88px"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><path class="prg" d="M60 10A50 50 0 1 0 107.55 75.45"/><circle class="end" cx="107.55" cy="75.45" r="7.5"/></svg><b>70<small>%</small></b></div>
+          <div><h4>تطابقك مع محلل بيانات</h4><p>ثلاث مهارات تفصلك عن القمة</p></div>
+        </div>
+        <div class="r2"><span>ينقصك</span><div class="skills"><span class="chip chip-s miss">SQL</span><span class="chip chip-s miss">Python</span><span class="chip chip-s miss">Power BI</span></div></div>
+      </div>
+
+      <div class="hleft">
+        <div class="card rankc">
+          <div class="hd">المتصدرون<a>الكل</a></div>
+          <div class="lbr me"><span class="rk">7</span><span class="av plain" style="--s:34px"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span></span><span class="nm">سارة العتيبي<small>أنت</small></span><span class="spot"><svg><use href="#peak"/></svg>1,240</span></div>
+          <div class="hint">يفصلك <b class="ltr" style="color:var(--xpInk)">70 XP</b> عن المرتبة 6. دورة واحدة تكفي.</div>
+        </div>
+        <div class="launch"><span class="dal"><svg class="ic"><use href="#i-advisor"/></svg></span>اسأل دليل عن مسارك…<kbd>Ctrl K</kbd></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- =====================================================  390 x 844  ===================================================== -->
+<div id="phone-frame">
+  <div class="p-top">
+    <div class="who"><span class="av" style="--s:46px;--bg:var(--paper)"><span class="face"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></span><svg class="rg" viewBox="0 0 100 100"><circle class="t" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="81 19" transform="rotate(124.2 50 50)"/><circle class="p" cx="50" cy="50" r="47" pathLength="100" stroke-dasharray="39 100" transform="rotate(124.2 50 50)"/></svg><b class="lv">3</b></span><span><b>سارة العتيبي</b><small>المستوى 3 · متعلّمة</small></span></div>
+    <div class="p-stats"><span><svg class="ic"><use href="#i-streak"/></svg>4</span><span class="spot" style="font-size:13.5px"><svg><use href="#peak"/></svg>1,240</span></div>
+  </div>
+  <div class="p-title">
+    <div><small>مسارك نحو</small><h2>محلل بيانات</h2></div>
+    <div class="ring sm" style="--s:58px;--bg:var(--paper)"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="50"/><path class="prg" d="M60 10A50 50 0 1 0 107.55 75.45"/><circle class="end" cx="107.55" cy="75.45" r="10"/></svg><b>70<small>%</small></b></div>
+  </div>
+
+  <div class="p-map">
+    <svg class="t" width="366" height="452" viewBox="0 0 366 452">
+      <!-- the whole route, small -->
+      <path d="M338 80C326 79 314 72 300 70C286 68 274 61 260 60H240V90H338z" fill="#EBE4D5"/>
+      <path d="M240 60C232 60 226 53 216 52C202 49 188 45 174 44C160 42 146 38 132 37C118 35 104 30 90 30H46V90H240z" fill="#F4EFE4"/>
+      <path d="M352 90H30" stroke="#C4B9A1" stroke-width="1.25" stroke-linecap="round"/>
+      <path d="M216 52C202 49 188 45 174 44C160 42 146 38 132 37C118 35 104 30 90 30H46" fill="none" stroke="#3F4E48" stroke-width="2.5" stroke-linecap="round" stroke-dasharray=".1 5.500"/>
+      <path d="M240 60C232 60 226 53 216 52" fill="none" stroke="#DB4325" stroke-width="2.5" stroke-linecap="round" stroke-dasharray=".1 5.500"/>
+      <path d="M338 80C326 79 314 72 300 70C286 68 274 61 260 60H240" fill="none" stroke="#13231F" stroke-width="2.75" stroke-linecap="round"/>
+      <circle cx="338" cy="80" r="4" fill="#FCFAF4" stroke="#13231F" stroke-width="2"/>
+      <g class="nd" style="font-size:10.5px">
+        <circle cx="300" cy="70" r="9" fill="#13231F"/><text x="300" y="74" fill="#FCFAF4" style="font-size:11px">1</text>
+        <circle cx="260" cy="60" r="9" fill="#13231F"/><text x="260" y="64" fill="#FCFAF4" style="font-size:11px">2</text>
+        <circle cx="216" cy="52" r="9.500" fill="#DB4325"/><text x="216" y="56" fill="#FFF8F2" style="font-size:11px">3</text>
+        <circle cx="174" cy="44" r="8.500" fill="#FCFAF4" stroke="#6F7B74" stroke-width="1.5"/><text x="174" y="48" fill="#3F4E48" style="font-size:11px">4</text>
+        <circle cx="132" cy="37" r="8.500" fill="#FCFAF4" stroke="#6F7B74" stroke-width="1.5"/><text x="132" y="41" fill="#3F4E48" style="font-size:11px">5</text>
+        <circle cx="90" cy="30" r="8.500" fill="#FCFAF4" stroke="#6F7B74" stroke-width="1.5"/><text x="90" y="34" fill="#3F4E48" style="font-size:11px">6</text>
+      </g>
+      <circle cx="240" cy="60" r="4" fill="#DB4325" stroke="#FCFAF4" stroke-width="2"/>
+      <path d="M46 30V9" stroke="#13231F" stroke-width="2" stroke-linecap="round"/><path d="M46 10l-14 5 14 5z" fill="#DB4325" stroke="#DB4325" stroke-width="1.5" stroke-linejoin="round"/><circle cx="46" cy="30" r="3" fill="#13231F"/>
+      <!-- the bracket: this part is magnified below -->
+      <rect x="150" y="17" width="136" height="78" rx="12" fill="none" stroke="#13231F" stroke-width="1.5"/>
+      <path d="M152 93.500 1 112M284 93.500 365 112" fill="none" stroke="#A3A99F" stroke-width="1"/>
+      <path d="M0 112H366" stroke="#DDD4C1" stroke-width="1"/>
+
+      <!-- magnified: sky -->
+      <g class="alt">
+        <path d="M366 134h-6M330 134H0"/>
+        <path d="M366 186h-6M330 186H0"/>
+        <path d="M366 238h-6M330 238H0"/>
+        <path class="now" d="M366 290h-6M332 290H247"/>
+      </g>
+      <g class="altn" style="font-size:11px"><text x="345" y="138" style="font-size:11px">100%</text><text x="345" y="190" style="font-size:11px">90%</text><text x="345" y="242" style="font-size:11px">80%</text><text class="now" x="346" y="294.500" style="font-size:12px">70%</text></g>
+      <!-- ground -->
+      <path d="M384 324C356 304 334 294 305 290C287 287.500 266 290 247 290V350H384z" fill="#EBE4D5"/>
+      <path d="M247 290C226 290 208 256 184 248C154 238 104 214 63 207C40 203 14 192 -16 180V350H247z" fill="#F4EFE4"/>
+      <path d="M366 350H0" stroke="#C4B9A1" stroke-width="1.5"/>
+      <g class="drop"><path d="M305 318v18"/><path d="M184 283v53"/><path d="M63 235v101"/></g>
+      <g class="gn"><text class="n" x="218" y="306">+8%</text><text x="123" y="258">+8%</text></g>
+      <!-- trail -->
+      <path d="M184 248C154 238 104 214 63 207C40 203 14 192 -16 180" fill="none" stroke="#3F4E48" stroke-width="4.5" stroke-linecap="round" stroke-dasharray=".1 10.500"/>
+      <path d="M247 290C226 290 208 256 184 248" fill="none" stroke="#DB4325" stroke-width="5" stroke-linecap="round" stroke-dasharray=".1 10"/>
+      <path d="M384 324C356 304 334 294 305 290C287 287.500 266 290 247 290" fill="none" stroke="#13231F" stroke-width="5" stroke-linecap="round"/>
+      <g class="mk">
+        <circle cx="305" cy="290" r="22" fill="#13231F"/><text x="305" y="297" fill="#FCFAF4">2</text><use href="#b-done" x="322" y="272"/>
+        <circle cx="184" cy="248" r="29" fill="#FCFAF4" stroke="#DB4325" stroke-width="1.5"/><circle cx="184" cy="248" r="22" fill="#DB4325"/><text x="184" y="255" fill="#FFF8F2">3</text>
+        <circle cx="63" cy="207" r="21" fill="#FCFAF4" stroke="#6F7B74" stroke-width="2" stroke-dasharray="4 3.500"/><text x="63" y="214" fill="#3F4E48">4</text><use href="#b-lock" x="80" y="189"/>
+      </g>
+      <path d="M247 282v-26" stroke="#13231F" stroke-width="1.75"/>
+      <circle cx="247" cy="290" r="7.500" fill="#DB4325" stroke="#FCFAF4" stroke-width="3"/>
+      <g class="nd">
+        <circle cx="305" cy="350" r="11" fill="#13231F"/><text x="305" y="354.500" fill="#FCFAF4">2</text>
+        <circle cx="184" cy="350" r="11" fill="#DB4325"/><text x="184" y="354.500" fill="#FFF8F2">3</text>
+        <circle cx="63" cy="350" r="10.500" fill="#FCFAF4" stroke="#6F7B74" stroke-width="1.5"/><text x="63" y="354.500" fill="#3F4E48">4</text>
+      </g>
+    </svg>
+    <span class="ov">المسار كاملًا</span>
+    <div class="here" style="left:247px;top:172px">أنت هنا <i>70%</i></div>
+    <div class="you" style="left:224px;top:208px"><svg viewBox="0 0 96 96"><use href="#av-1"/></svg></div>
+    <a class="sc" style="left:305px"><b>مبادئ الإحصاء</b><small><svg class="ic" style="color:var(--ok)"><use href="#i-check"/></svg>تمّت<span class="spot"><svg><use href="#peak"/></svg>+150</span></small></a>
+    <a class="sc next" style="left:184px"><span class="e">محطتك التالية</span><b>SQL للمبتدئين</b><small><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot"><svg><use href="#peak"/></svg>+200</span></small></a>
+    <a class="sc lock" style="left:63px"><b>تحليل البيانات بـ Python</b><small><svg class="ic" style="--wp:var(--ink3)"><use href="#i-lock"/></svg>مقفلة</small></a>
+  </div>
+
+  <div class="card ink p-next">
+    <div class="row" style="align-items:center"><div class="e">الخطوة التالية</div><div class="e2">المحطة 3 من 6</div></div>
+    <div class="row"><h3>SQL للمبتدئين</h3>
+      <div class="meta" style="gap:10px;font-size:12.5px;padding-bottom:6px"><span><svg class="ic"><use href="#i-clock"/></svg>6 ساعات</span><span class="spot" style="font-size:13px"><svg><use href="#peak"/></svg>+200 XP</span></div></div>
+    <a class="btn btn-p" style="height:52px;font-size:17px">ابدأ الآن<svg class="ic"><use href="#i-arrow"/></svg></a>
+  </div>
+
+  <nav class="p-tabs">
+    <a class="on"><svg class="ic"><use href="#i-path"/></svg>مساري</a>
+    <a><svg class="ic"><use href="#i-tree"/></svg>المهارات</a>
+    <span class="ask"><svg class="ic"><use href="#i-advisor"/></svg></span>
+    <a><svg class="ic"><use href="#i-jobs"/></svg>الوظائف</a>
+    <a><svg class="ic"><use href="#i-courses"/></svg>الدورات</a>
+  </nav>
+</div>
+
+</body>
+</html>

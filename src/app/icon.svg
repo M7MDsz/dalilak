@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="none">
+  <!-- Dalilak favicon: the mark on a navy tile, so it reads on light and dark tab strips alike. The 16 drawing; the 32
+       drawing when the browser rasters it above 24 px.
+       A favicon cannot read CSS variables, so this file, and only this file in src, carries hex values: the CURRENT tokens
+       color-stage #0b1b38, color-on-stage #f4f7fc and color-accent #f54d38.
+       Generated 2026-11-18; if the palette changes, regenerate it with: node artifacts/foundation/brand/tools/export.mjs -->
+  <style>
+    .c32 { display: none; }
+    @media (min-width: 25px) { .c16 { display: none; } .c32 { display: inline; } }
+  </style>
+  <g class="c16"><rect height="16" rx="3.5" width="16" fill="#0b1b38" stroke="none"></rect><g><path d="M14 12.5V9.5a6 6 0 0 0-12 0V11a1.5 1.5 0 0 0 3 0V9.5a3 3 0 0 1 6 0v3" fill="none" stroke="#f4f7fc" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><circle cx="8" cy="11.2" r="1.25" fill="#f54d38" stroke="none"></circle></g></g>
+  <g class="c32" transform="scale(0.5)"><rect height="32" rx="7" width="32" fill="#0b1b38" stroke="none"></rect><g><path d="M26.5 23.5V18a10.5 10.5 0 0 0-21 0v2.5a2.5 2.5 0 0 0 5 0V18a5.5 5.5 0 0 1 11 0v5.5" fill="none" stroke="#f4f7fc" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path><circle cx="16" cy="21.4" r="2.2" fill="#f54d38" stroke="none"></circle></g></g>
+</svg>

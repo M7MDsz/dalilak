@@ -1,0 +1,7 @@
+[
+  { "viewport": "1600x1000" },
+  { "goto": "design/explore/darb/map/option-2.html" },
+  { "wait": 1500 },
+  { "shot": "design/explore/darb/map/option-2.png", "selector": "#home-frame" },
+  { "shot": "design/explore/darb/map/option-2-phone.png", "selector": "#phone-frame" }
+]
