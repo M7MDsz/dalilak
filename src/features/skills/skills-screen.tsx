@@ -37,9 +37,13 @@ import { useTreeReplay } from "./use-replay";
 
 type FieldChoice = FieldId | "all";
 
-/** The landscape's placement (three columns, ≥ 1060 px of content): rows read in display order, heights balanced. */
+/**
+ * The landscape's placement (three columns, ≥ 1060 px of content): rows read in display order, heights balanced; wave 2's
+ * nine fields add three rows of three (engineering · project controls · tourism, health · education · banking, legal ·
+ * media · gaming).
+ */
 const LANDSCAPE =
-  "@min-[1060px]/content:grid-cols-3 @min-[1060px]/content:[grid-template-areas:'data_software_design'_'data_software_design'_'data_software_design'_'data_business_design'_'marketing_business_hr'_'marketing_professional_hr'_'marketing_professional_hr'_'product_cyber-cloud_sales-supply'_'product_cyber-cloud_sales-supply']";
+  "@min-[1060px]/content:grid-cols-3 @min-[1060px]/content:[grid-template-areas:'data_software_design'_'data_software_design'_'data_software_design'_'data_business_design'_'marketing_business_hr'_'marketing_professional_hr'_'marketing_professional_hr'_'product_cyber-cloud_sales-supply'_'product_cyber-cloud_sales-supply'_'engineering_project-controls_tourism-hospitality'_'engineering_project-controls_tourism-hospitality'_'health-admin_education_banking-risk'_'health-admin_education_banking-risk'_'legal_media_gaming'_'legal_media_gaming']";
 const AREA: Readonly<Record<FieldId, string>> = {
   data: "@min-[1060px]/content:[grid-area:data]",
   software: "@min-[1060px]/content:[grid-area:software]",
@@ -50,6 +54,16 @@ const AREA: Readonly<Record<FieldId, string>> = {
   product: "@min-[1060px]/content:[grid-area:product]",
   "cyber-cloud": "@min-[1060px]/content:[grid-area:cyber-cloud]",
   "sales-supply": "@min-[1060px]/content:[grid-area:sales-supply]",
+  // wave 2: three more rows of three, in display order
+  engineering: "@min-[1060px]/content:[grid-area:engineering]",
+  "project-controls": "@min-[1060px]/content:[grid-area:project-controls]",
+  "tourism-hospitality": "@min-[1060px]/content:[grid-area:tourism-hospitality]",
+  "health-admin": "@min-[1060px]/content:[grid-area:health-admin]",
+  education: "@min-[1060px]/content:[grid-area:education]",
+  "banking-risk": "@min-[1060px]/content:[grid-area:banking-risk]",
+  legal: "@min-[1060px]/content:[grid-area:legal]",
+  media: "@min-[1060px]/content:[grid-area:media]",
+  gaming: "@min-[1060px]/content:[grid-area:gaming]",
   professional: "@min-[1060px]/content:[grid-area:professional]",
 };
 

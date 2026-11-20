@@ -8,6 +8,7 @@ import { COURSE_IDS } from "@/lib/ids";
 import type { Course, CourseId } from "@/lib/types";
 
 import { EXPANSION_COURSES } from "./expansion/courses";
+import { WAVE2_COURSES } from "./wave2/courses";
 
 /** The 59 courses of spec 9.4. */
 const SPEC_COURSES: readonly Course[] = [
@@ -876,8 +877,8 @@ const SPEC_COURSES: readonly Course[] = [
   },
 ];
 
-/** Every course (the 59 of spec 9.4 and the expansion's 21 in ./expansion/courses.ts), in COURSE_IDS order. */
-export const COURSES: readonly Course[] = [...SPEC_COURSES, ...EXPANSION_COURSES].sort(
+/** Every course (the 59 of spec 9.4, the expansion's 21 and wave 2's 68 in ./wave2/courses.ts), in COURSE_IDS order. */
+export const COURSES: readonly Course[] = [...SPEC_COURSES, ...EXPANSION_COURSES, ...WAVE2_COURSES].sort(
   (a, b) => COURSE_IDS.indexOf(a.id) - COURSE_IDS.indexOf(b.id),
 );
 

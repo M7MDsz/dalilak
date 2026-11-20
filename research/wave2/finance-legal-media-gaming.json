@@ -1,0 +1,4184 @@
+{
+ "checkedAt": "2026-11-20",
+ "note": "Wave 2 (finance, legal, media, gaming): ready-to-merge research data in the shape of research/expansion/expansion.json, not wired into the app. App «دليل», chatbot «دليلك». Course stubs (`courses`) are Dalil's own in-app titles written from the guideline topics; everything else carries a source URL opened on 2026-11-20.",
+ "fields": [
+  {
+   "id": "banking-risk",
+   "name": "البنوك والمخاطر والتدقيق"
+  },
+  {
+   "id": "legal",
+   "name": "القانون والحوكمة"
+  },
+  {
+   "id": "media",
+   "name": "الإعلام والإنتاج المرئي"
+  },
+  {
+   "id": "gaming",
+   "name": "الألعاب والرياضات الإلكترونية"
+  }
+ ],
+ "skills": [
+  {
+   "id": "banking-basics",
+   "name": "أساسيات العمل المصرفي",
+   "field": "banking-risk",
+   "maxStars": 1,
+   "prereqs": [],
+   "description": "فهم القطاع المصرفي السعودي ومنتجاته وحماية العملاء وأساسيات مكافحة الاحتيال.",
+   "aliases": [
+    "أساسيات مصرفية الأفراد",
+    "الخدمات المصرفية للأفراد",
+    "المنتجات المصرفية",
+    "retail banking",
+    "banking fundamentals",
+    "RBF",
+    "banking operations"
+   ]
+  },
+  {
+   "id": "credit-analysis",
+   "name": "تحليل الائتمان",
+   "field": "banking-risk",
+   "maxStars": 2,
+   "prereqs": [
+    "banking-basics"
+   ],
+   "description": "تقييم الجدارة الائتمانية للأفراد والمنشآت وقياس مخاطر التعثر والتحصيل.",
+   "aliases": [
+    "تحليل الائتمان",
+    "المخاطر الائتمانية",
+    "مخاطر الائتمان",
+    "الجدارة الائتمانية",
+    "المستشار الائتماني",
+    "credit analysis",
+    "credit risk",
+    "credit underwriting",
+    "creditworthiness",
+    "credit memo",
+    "CAPE"
+   ]
+  },
+  {
+   "id": "aml-compliance",
+   "name": "الالتزام ومكافحة غسل الأموال",
+   "field": "banking-risk",
+   "maxStars": 2,
+   "prereqs": [
+    "banking-basics"
+   ],
+   "description": "تطبيق أنظمة ساما ومكافحة غسل الأموال وتمويل الإرهاب داخل المنشأة المالية.",
+   "aliases": [
+    "مكافحة غسل الأموال",
+    "تمويل الإرهاب",
+    "إدارة الالتزام",
+    "مسؤول الالتزام",
+    "اعرف عميلك",
+    "الجرائم المالية",
+    "AML",
+    "AML/CFT",
+    "KYC",
+    "CAMS",
+    "compliance officer",
+    "regulatory compliance",
+    "financial crime",
+    "sanctions screening"
+   ]
+  },
+  {
+   "id": "internal-audit",
+   "name": "المراجعة الداخلية",
+   "field": "banking-risk",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "تخطيط مهام المراجعة واختبار الضوابط الداخلية وكتابة الملاحظات والتوصيات.",
+   "aliases": [
+    "المراجعة الداخلية",
+    "التدقيق الداخلي",
+    "الرقابة الداخلية",
+    "المراجعة الخارجية",
+    "internal audit",
+    "external audit",
+    "internal controls",
+    "audit associate",
+    "CIA"
+   ]
+  },
+  {
+   "id": "legal-research",
+   "name": "البحث القانوني والأنظمة السعودية",
+   "field": "legal",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "البحث في الأنظمة السعودية واللوائح والسوابق وكتابة مذكرة رأي قانوني مختصرة.",
+   "aliases": [
+    "البحث القانوني",
+    "الأنظمة السعودية",
+    "مذكرة قانونية",
+    "رأي قانوني",
+    "مساعد قانوني",
+    "legal research",
+    "legal memo",
+    "paralegal"
+   ]
+  },
+  {
+   "id": "contract-drafting",
+   "name": "صياغة العقود ومراجعتها",
+   "field": "legal",
+   "maxStars": 2,
+   "prereqs": [
+    "legal-research"
+   ],
+   "description": "صياغة العقود التجارية ومراجعتها وتتبع تجديدها: اتفاقيات السرية والخدمات والموردين.",
+   "aliases": [
+    "صياغة العقود",
+    "مراجعة العقود",
+    "إدارة العقود",
+    "اتفاقية عدم إفصاح",
+    "contract drafting",
+    "contract review",
+    "contract management",
+    "NDA",
+    "MSA"
+   ]
+  },
+  {
+   "id": "corporate-governance",
+   "name": "حوكمة الشركات",
+   "field": "legal",
+   "maxStars": 1,
+   "prereqs": [
+    "legal-research"
+   ],
+   "description": "قرارات مجالس الإدارة والجمعيات وسجلات الشركة والالتزام بلائحة حوكمة الشركات.",
+   "aliases": [
+    "حوكمة الشركات",
+    "لائحة حوكمة الشركات",
+    "قرارات مجلس الإدارة",
+    "أمانة سر مجلس الإدارة",
+    "corporate governance",
+    "board resolutions",
+    "company secretary"
+   ]
+  },
+  {
+   "id": "video-editing",
+   "name": "المونتاج وتحرير الفيديو",
+   "field": "media",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "تركيب اللقطات والصوت والنصوص وتصدير فيديو جاهز لكل منصة.",
+   "aliases": [
+    "المونتاج",
+    "مونتير",
+    "تحرير الفيديو",
+    "video editing",
+    "video editor",
+    "Premiere Pro",
+    "Adobe Premiere",
+    "DaVinci Resolve",
+    "Final Cut Pro",
+    "CapCut"
+   ]
+  },
+  {
+   "id": "motion-graphics",
+   "name": "الموشن جرافيك",
+   "field": "media",
+   "maxStars": 2,
+   "prereqs": [
+    "video-editing"
+   ],
+   "description": "تحريك التصاميم والنصوص والشعارات بالإطارات المفتاحية والمؤثرات.",
+   "aliases": [
+    "موشن جرافيك",
+    "موشن جرافيكس",
+    "motion graphics",
+    "motion design",
+    "motion designer",
+    "After Effects",
+    "Adobe After Effects",
+    "Cinema 4D",
+    "explainer video"
+   ]
+  },
+  {
+   "id": "translation",
+   "name": "الترجمة بين العربية والإنجليزية",
+   "field": "media",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "نقل المعنى بدقة بين الإنجليزية والعربية بنبرة تناسب الجمهور.",
+   "aliases": [
+    "الترجمة",
+    "مترجم",
+    "الترجمة التحريرية",
+    "translation",
+    "translator",
+    "English-Arabic translation",
+    "التعريب",
+    "localization",
+    "machine translation post-editing",
+    "Trados",
+    "memoQ"
+   ]
+  },
+  {
+   "id": "arabic-editing",
+   "name": "التدقيق والتحرير اللغوي العربي",
+   "field": "media",
+   "maxStars": 1,
+   "prereqs": [
+    "translation"
+   ],
+   "description": "تصحيح النص العربي نحوياً وإملائياً وتوحيد أسلوبه.",
+   "aliases": [
+    "التدقيق اللغوي",
+    "مدقق لغوي",
+    "التحرير اللغوي",
+    "proofreading",
+    "proofreader",
+    "copy editing",
+    "copyeditor",
+    "Arabic editing"
+   ]
+  },
+  {
+   "id": "game-design",
+   "name": "تصميم الألعاب",
+   "field": "gaming",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "بناء قواعد اللعب والتقدم وتجربة اللاعب ونماذج أولية قابلة للعب.",
+   "aliases": [
+    "تصميم الألعاب",
+    "مصمم ألعاب",
+    "game design",
+    "game designer",
+    "level design",
+    "Unity",
+    "Unreal Engine",
+    "game design document",
+    "GDD"
+   ]
+  },
+  {
+   "id": "game-testing",
+   "name": "اختبار الألعاب",
+   "field": "gaming",
+   "maxStars": 2,
+   "prereqs": [
+    "game-design"
+   ],
+   "description": "اكتشاف أخطاء الألعاب وتوثيقها وإعادة اختبار إصلاحاتها على الأجهزة.",
+   "aliases": [
+    "اختبار الألعاب",
+    "مختبر ألعاب",
+    "game testing",
+    "game tester",
+    "game QA",
+    "ISTQB CT-GaMe"
+   ]
+  },
+  {
+   "id": "esports-community",
+   "name": "الرياضات الإلكترونية وإدارة المجتمعات",
+   "field": "gaming",
+   "maxStars": 1,
+   "prereqs": [],
+   "description": "تنظيم بطولات وفعاليات الألعاب وإدارة مجتمعات اللاعبين.",
+   "aliases": [
+    "الرياضات الإلكترونية",
+    "esports",
+    "إدارة مجتمعات اللاعبين",
+    "Discord",
+    "تنظيم البطولات",
+    "tournament operations"
+   ]
+  }
+ ],
+ "courses": [
+  {
+   "id": "c-banking-basics-1",
+   "skill": "banking-basics",
+   "star": 1,
+   "title": "أساسيات العمل المصرفي: الحسابات والمنتجات والأنظمة",
+   "hours": 8
+  },
+  {
+   "id": "c-credit-analysis-1",
+   "skill": "credit-analysis",
+   "star": 1,
+   "title": "تحليل الائتمان: الجدارة الائتمانية وقراءة طلب التمويل",
+   "hours": 8
+  },
+  {
+   "id": "c-credit-analysis-2",
+   "skill": "credit-analysis",
+   "star": 2,
+   "title": "مخاطر الائتمان: المذكرة الائتمانية والضمانات والمتابعة",
+   "hours": 12
+  },
+  {
+   "id": "c-aml-compliance-1",
+   "skill": "aml-compliance",
+   "star": 1,
+   "title": "أساسيات الالتزام ومكافحة غسل الأموال واعرف عميلك",
+   "hours": 8
+  },
+  {
+   "id": "c-aml-compliance-2",
+   "skill": "aml-compliance",
+   "star": 2,
+   "title": "برنامج الالتزام: تقييم المخاطر والرقابة والإبلاغ",
+   "hours": 12
+  },
+  {
+   "id": "c-internal-audit-1",
+   "skill": "internal-audit",
+   "star": 1,
+   "title": "أساسيات المراجعة الداخلية: الحوكمة والرقابة والمخاطر",
+   "hours": 8
+  },
+  {
+   "id": "c-internal-audit-2",
+   "skill": "internal-audit",
+   "star": 2,
+   "title": "تنفيذ مهمة مراجعة: التخطيط والاختبار والتقرير",
+   "hours": 12
+  },
+  {
+   "id": "c-legal-research-1",
+   "skill": "legal-research",
+   "star": 1,
+   "title": "قراءة الأنظمة السعودية والبحث في منصة الأنظمة",
+   "hours": 8
+  },
+  {
+   "id": "c-legal-research-2",
+   "skill": "legal-research",
+   "star": 2,
+   "title": "المذكرة القانونية: من السؤال إلى الرأي المستند للنص",
+   "hours": 12
+  },
+  {
+   "id": "c-contract-drafting-1",
+   "skill": "contract-drafting",
+   "star": 1,
+   "title": "صياغة العقود: أركان العقد واتفاقية عدم الإفصاح",
+   "hours": 8
+  },
+  {
+   "id": "c-contract-drafting-2",
+   "skill": "contract-drafting",
+   "star": 2,
+   "title": "التفاوض على العقود وإدارة دورة حياتها",
+   "hours": 12
+  },
+  {
+   "id": "c-corporate-governance-1",
+   "skill": "corporate-governance",
+   "star": 1,
+   "title": "حوكمة الشركات: قرارات المجلس والجمعيات والسجلات",
+   "hours": 8
+  },
+  {
+   "id": "c-video-editing-1",
+   "skill": "video-editing",
+   "star": 1,
+   "title": "المونتاج: من المشروع الأول إلى التصدير",
+   "hours": 8
+  },
+  {
+   "id": "c-video-editing-2",
+   "skill": "video-editing",
+   "star": 2,
+   "title": "المونتاج: الصوت والألوان وسرعة سير العمل",
+   "hours": 12
+  },
+  {
+   "id": "c-motion-graphics-1",
+   "skill": "motion-graphics",
+   "star": 1,
+   "title": "الموشن جرافيك: الطبقات والحركة الأساسية",
+   "hours": 8
+  },
+  {
+   "id": "c-motion-graphics-2",
+   "skill": "motion-graphics",
+   "star": 2,
+   "title": "الموشن جرافيك: التحريك المتقدم للنصوص والشعارات",
+   "hours": 12
+  },
+  {
+   "id": "c-translation-1",
+   "skill": "translation",
+   "star": 1,
+   "title": "أساسيات الترجمة بين العربية والإنجليزية",
+   "hours": 8
+  },
+  {
+   "id": "c-translation-2",
+   "skill": "translation",
+   "star": 2,
+   "title": "الترجمة والتعريب: أدوات الترجمة وضمان الجودة",
+   "hours": 12
+  },
+  {
+   "id": "c-arabic-editing-1",
+   "skill": "arabic-editing",
+   "star": 1,
+   "title": "التدقيق اللغوي: الإملاء وعلامات الترقيم",
+   "hours": 8
+  },
+  {
+   "id": "c-game-design-1",
+   "skill": "game-design",
+   "star": 1,
+   "title": "تصميم الألعاب: الآليات والمتعة ووثيقة التصميم",
+   "hours": 8
+  },
+  {
+   "id": "c-game-design-2",
+   "skill": "game-design",
+   "star": 2,
+   "title": "من الفكرة إلى نموذج لعبة في Unity",
+   "hours": 12
+  },
+  {
+   "id": "c-game-testing-1",
+   "skill": "game-testing",
+   "star": 1,
+   "title": "أساسيات الاختبار: الحالات والعيوب والتقارير",
+   "hours": 8
+  },
+  {
+   "id": "c-game-testing-2",
+   "skill": "game-testing",
+   "star": 2,
+   "title": "اختبار الألعاب: الأداء والتوافق وتجربة اللاعب",
+   "hours": 12
+  },
+  {
+   "id": "c-esports-community-1",
+   "skill": "esports-community",
+   "star": 1,
+   "title": "الرياضات الإلكترونية: المجتمعات والبطولات",
+   "hours": 8
+  }
+ ],
+ "jobs": [
+  {
+   "id": "tamara-collections-advisor-riyadh",
+   "title": "أخصائي تحصيل",
+   "titleEn": "Collections Advisor",
+   "field": "banking-risk",
+   "city": "riyadh",
+   "place": "Riyadh, Saudi Arabia",
+   "band": "entry",
+   "company": "تمارا",
+   "companyEn": "Tamara",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف تمارا (Greenhouse)",
+    "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/5005774101",
+    "postedAt": "2026-10-15",
+    "checkedAt": "2026-11-20",
+    "note": "Listed on Tamara's Greenhouse board on 2026-11-20 (first published 2026-10-15). Collections is the back end of the BNPL credit cycle; no open Saudi credit-analyst posting was found on company boards, so this is the closest open credit-operations role. Rotational shifts; 300-350 calls a day."
+   },
+   "requirements": [
+    {
+     "skill": "credit-analysis",
+     "stars": 1,
+     "evidence": "Good understanding of collection tactics to convince the customer"
+    },
+    {
+     "skill": "customer-success",
+     "stars": 1,
+     "evidence": "1–2 years of experience in debt collection, customer service, or telecalling roles."
+    },
+    {
+     "skill": "aml-compliance",
+     "stars": 1,
+     "evidence": "Ensure all communications are compliant with SAMA collection guidelines and Tamara's internal policies."
+    },
+    {
+     "skill": "english",
+     "stars": 1,
+     "evidence": "Fluency in Arabic and English is mandatory"
+    },
+    {
+     "skill": "excel",
+     "stars": 1,
+     "evidence": "Understanding of MS Excel is strong plus"
+    }
+   ],
+   "summary": "تحصيل الأقساط المتأخرة من عملاء «اشترِ الآن وادفع لاحقًا» وفق تعليمات ساما للتحصيل.",
+   "tasks": [
+    "التواصل مع العملاء بالاتصال وواتساب والبريد لتذكيرهم بالمبالغ المستحقة.",
+    "توثيق كل تواصل وتحديث نظام إدارة العملاء فورًا.",
+    "تصعيد الحالات عالية المخاطر وتحقيق أهداف التحصيل اليومية والشهرية."
+   ],
+   "family": "credit-risk"
+  },
+  {
+   "id": "tamara-compliance-officer-riyadh",
+   "title": "مسؤول التزام",
+   "titleEn": "Compliance Officer",
+   "field": "banking-risk",
+   "city": "riyadh",
+   "place": "Riyadh, Saudi Arabia",
+   "band": "junior",
+   "company": "تمارا",
+   "companyEn": "Tamara",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف تمارا (Greenhouse)",
+    "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/4969685101",
+    "postedAt": "2026-10-22",
+    "checkedAt": "2026-11-20",
+    "note": "Listed on Tamara's Greenhouse board on 2026-11-20. Asks for 1-2 years in compliance at a SAMA-regulated payments entity. Body text calls the role 'Senior Compliance Associate'."
+   },
+   "requirements": [
+    {
+     "skill": "aml-compliance",
+     "stars": 2,
+     "evidence": "Solid understanding of SAMA’s regulatory framework for payment services."
+    },
+    {
+     "skill": "banking-basics",
+     "stars": 1,
+     "evidence": "Ensure compliance with all applicable SAMA regulations related to payment services (e.g., EMI, PSP, wallet providers)."
+    },
+    {
+     "skill": "internal-audit",
+     "stars": 1,
+     "evidence": "Support regulatory inspections, audits, and remediation actions as needed."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Fluent in English and Arabic (spoken and written)."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Strong communication, coordination, and analytical skills."
+    }
+   ],
+   "summary": "متابعة التزام شركة مدفوعات بأنظمة ساما ومراجعة المنتجات الجديدة ورفع التقارير الرقابية.",
+   "tasks": [
+    "تتبع تعاميم ساما وتطبيق تغييراتها على السياسات والإجراءات.",
+    "مراجعة المنتجات الجديدة قبل إطلاقها والتأكد من توافقها مع متطلبات ساما.",
+    "إعداد التقارير الرقابية لساما ودعم عمليات التفتيش والمراجعة."
+   ],
+   "family": "compliance-aml"
+  },
+  {
+   "id": "tamara-compliance-senior-associate-riyadh",
+   "title": "مشارك أول في الالتزام",
+   "titleEn": "Compliance Senior Associate",
+   "field": "banking-risk",
+   "city": "riyadh",
+   "place": "Riyadh, Saudi Arabia",
+   "band": "mid",
+   "company": "تمارا",
+   "companyEn": "Tamara",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف تمارا (Greenhouse)",
+    "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/4969694101",
+    "postedAt": "2026-10-22",
+    "checkedAt": "2026-11-20",
+    "note": "Listed on Tamara's Greenhouse board on 2026-11-20. Same duties as the Compliance Officer role but 3-5 years required."
+   },
+   "requirements": [
+    {
+     "skill": "aml-compliance",
+     "stars": 2,
+     "evidence": "Minimum 3-5 years of experience in a compliance role at a SAMA-regulated entity operating in the payments sector."
+    },
+    {
+     "skill": "banking-basics",
+     "stars": 1,
+     "evidence": "Solid understanding of SAMA’s regulatory framework for payment services."
+    },
+    {
+     "skill": "internal-audit",
+     "stars": 1,
+     "evidence": "Support regulatory inspections, audits, and remediation actions as needed."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Fluent in English and Arabic (spoken and written)."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Strong communication, coordination, and analytical skills."
+    }
+   ],
+   "summary": "دور التزام أعلى خبرة في شركة مدفوعات مرخصة من ساما يجمع الاستشارة والرقابة.",
+   "tasks": [
+    "مراقبة العمليات الداخلية وهياكل المنتجات للتأكد من الالتزام بالأنظمة.",
+    "مراجعة السياسات الداخلية وتحديثها وفق أنظمة ساما الحالية.",
+    "تقديم الاستشارة للإدارات في مسائل الالتزام المتعلقة بالمدفوعات."
+   ],
+   "family": "compliance-aml"
+  },
+  {
+   "id": "tamara-fraud-investigator-riyadh",
+   "title": "محقق احتيال",
+   "titleEn": "Fraud Investigator",
+   "field": "banking-risk",
+   "city": "riyadh",
+   "place": "Riyadh, Saudi Arabia",
+   "band": "junior",
+   "company": "تمارا",
+   "companyEn": "Tamara",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف تمارا (Greenhouse)",
+    "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/4897236101",
+    "postedAt": "2026-07-02",
+    "checkedAt": "2026-11-20",
+    "note": "Listed on Tamara's Greenhouse board on 2026-11-20 (first published 2026-07-02). Trust and Safety team; shifts incl. weekends and nights."
+   },
+   "requirements": [
+    {
+     "skill": "aml-compliance",
+     "stars": 2,
+     "evidence": "2-3 years of experience in fraud prevention or investigation."
+    },
+    {
+     "skill": "excel",
+     "stars": 1,
+     "evidence": "Knowledge of Excel, SQL and Python is preferred."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong analytical skills and attention to detail."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Excellent communication and interpersonal skills."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Fluency in English and Arabic."
+    }
+   ],
+   "summary": "رصد العمليات المشبوهة والتحقيق في الاحتيال وغسل الأموال في منصة مدفوعات.",
+   "tasks": [
+    "مراقبة العمليات وتحليلها لاكتشاف الاحتيال أو غسل الأموال.",
+    "التحقيق في الأنشطة المشبوهة وإعداد تقارير مفصلة بالنتائج.",
+    "الاتصال بالعملاء والتجار للتحقق من البيانات."
+   ],
+   "family": "compliance-aml"
+  },
+  {
+   "id": "lean-senior-compliance-manager-riyadh",
+   "title": "مدير أول للالتزام",
+   "titleEn": "Senior Compliance Manager",
+   "field": "banking-risk",
+   "city": "riyadh",
+   "place": "Riyadh, Saudi Arabia",
+   "band": "senior",
+   "company": "لين تكنولوجيز",
+   "companyEn": "Lean Technologies",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف لين (Ashby)",
+    "url": "https://jobs.ashbyhq.com/LeanTech/b32337e5-d3a0-4f35-be2a-b2646a86c7c1",
+    "postedAt": "2026-09-10",
+    "checkedAt": "2026-11-20",
+    "note": "Listed on Lean's Ashby board on 2026-11-20. Saudi national required (AML/CFT function holder under SAMA rules); 6+ years. Shown as the senior end of the compliance ladder."
+   },
+   "requirements": [
+    {
+     "skill": "aml-compliance",
+     "stars": 2,
+     "evidence": "Relevant compliance certification (for example CAMS) or an equivalent AML / financial crime qualification."
+    },
+    {
+     "skill": "banking-basics",
+     "stars": 1,
+     "evidence": "6+ years of compliance experience in financial services, including direct experience inside a SAMA-regulated entity."
+    },
+    {
+     "skill": "internal-audit",
+     "stars": 2,
+     "evidence": "Direct experience managing SAMA inspections and audits, and liaising with regulators."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Excellent analytical skills and attention to detail, with the ability to interpret complex regulations and turn them into workable controls."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Clear written and verbal communication in Arabic and English."
+    }
+   ],
+   "summary": "قيادة الالتزام ومكافحة غسل الأموال في شركة مدفوعات ومصرفية مفتوحة مرخصة من ساما.",
+   "tasks": [
+    "الإشراف على برنامج مكافحة غسل الأموال: العناية الواجبة وفحص العقوبات ومراقبة العمليات.",
+    "قيادة زيارات التفتيش من ساما ومعالجة الملاحظات.",
+    "إعداد سياسات الالتزام والتقارير الرقابية الدورية لساما ووحدة التحريات المالية."
+   ],
+   "family": "compliance-aml"
+  },
+  {
+   "id": "pwc-assurance-coop-2027-riyadh",
+   "title": "تدريب تعاوني في التدقيق (COOP)",
+   "titleEn": "Assurance, COOP and Summer Internship Programme 2027 - Middle East",
+   "field": "banking-risk",
+   "city": "riyadh",
+   "place": "Riyadh, Jeddah, Dhahran, Al Khobar",
+   "band": "entry",
+   "company": "برايس ووترهاوس كوبرز الشرق الأوسط",
+   "companyEn": "PwC Middle East",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف PwC (own site)",
+    "url": "https://careers.pwc.com/job/Middle-East-Assurance%2C-COOP-and-Summer-Internship-Programme-2027-Middle-East-Midd/1455545833/",
+    "postedAt": "2026-11-09",
+    "checkedAt": "2026-11-20",
+    "note": "Open on careers.pwc.com on 2026-11-20; page shows 'Date: Nov 9, 2026'. COOP = 4-6 month full-time internship for final-semester students in Riyadh, Jeddah, Dhahran and Al Khobar; intakes January and August. GPA 3.0/4.0 track."
+   },
+   "requirements": [
+    {
+     "skill": "internal-audit",
+     "stars": 1,
+     "evidence": "Participating in audits and assurance engagements, ensuring the highest standards of quality and integrity"
+    },
+    {
+     "skill": "accounting",
+     "stars": 1,
+     "evidence": "Basic understanding of accounting principles and willingness to develop technical knowledge"
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Effective communication and teamwork skills"
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Analyzing data and identifying key risks to provide actionable insights for clients"
+    },
+    {
+     "skill": "english",
+     "stars": 1,
+     "evidence": "Fluency in English; Arabic language skills are a plus"
+    }
+   ],
+   "summary": "تدريب تعاوني مدفوع في قسم التدقيق بـPwC لطلاب الفصل الأخير في المحاسبة والمالية.",
+   "tasks": [
+    "المشاركة في مهام التدقيق والتأكيد.",
+    "تحليل البيانات وتحديد المخاطر الرئيسية.",
+    "دعم تنفيذ مشاريع العملاء مع الفريق باستخدام الأدوات الرقمية."
+   ],
+   "family": "audit"
+  },
+  {
+   "id": "pwc-risk-internal-audit-senior-associate-jeddah",
+   "title": "مشارك أول - المراجعة الداخلية",
+   "titleEn": "PwC Risk Internal Audit -Senior Associate - Jeddah",
+   "field": "banking-risk",
+   "city": "jeddah",
+   "place": "Jeddah",
+   "band": "mid",
+   "company": "برايس ووترهاوس كوبرز الشرق الأوسط",
+   "companyEn": "PwC Middle East",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف PwC (own site)",
+    "url": "https://careers.pwc.com/job/Jeddah-PwC-Risk-Internal-Audit-Senior-Associate-Jeddah/1439162033/",
+    "postedAt": "2026-11-15",
+    "checkedAt": "2026-11-20",
+    "note": "Open on careers.pwc.com on 2026-11-20; page shows 'Date: Nov 15, 2026'. 3-6 years internal audit; frequent travel."
+   },
+   "requirements": [
+    {
+     "skill": "internal-audit",
+     "stars": 2,
+     "evidence": "Progressive experience at the Senior Associate level or at least 3-6 years  working in internal audit preferably in one of the big 4 professional services firm."
+    },
+    {
+     "skill": "accounting",
+     "stars": 1,
+     "evidence": "A degree in Accounting, Finance, Risk Management, Governance Industrial Engineer, or any related discipline."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Having strong report writing, and analytical skills."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Excellent communication, presentation, and interpersonal skills that allow you to thrive in a team environment."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Bilingual proficiency in Arabic and English (oral and written)."
+    }
+   ],
+   "summary": "تنفيذ مهام المراجعة الداخلية لعملاء PwC واختبار فعالية الضوابط وكتابة الملاحظات.",
+   "tasks": [
+    "تنفيذ مهام مراجعة داخلية تركز على الالتزام والجوانب المالية والتشغيلية.",
+    "اختبار تصميم الضوابط الداخلية وفعالية تشغيلها.",
+    "صياغة ملاحظات المراجعة وأثرها ومخاطرها والتوصيات."
+   ],
+   "family": "audit"
+  },
+  {
+   "id": "ey-senior-auditor-gcc-nationals-riyadh",
+   "title": "مراجع أول (لمواطني الخليج)",
+   "titleEn": "Senior Auditor - GCC Nationals",
+   "field": "banking-risk",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "إرنست ويونغ",
+   "companyEn": "EY",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف EY (own site)",
+    "url": "https://careers.ey.com/ey/job/Riyadh-Senior-Auditor-GCC-Nationals-11461/1374703333/",
+    "postedAt": "2026-11-13",
+    "checkedAt": "2026-11-20",
+    "note": "Open on careers.ey.com on 2026-11-20; page date 13 Nov 2026. External audit; GCC nationals only; 3.5 years experience."
+   },
+   "requirements": [
+    {
+     "skill": "internal-audit",
+     "stars": 2,
+     "evidence": "3.5 years of external Audit experience"
+    },
+    {
+     "skill": "accounting",
+     "stars": 1,
+     "evidence": "Have started or completed a professional qualification, such as ACCA, CPA, CA"
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "working effectively as a team member, sharing responsibility, providing support"
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Dealing with competing priorities, understanding how to manage resources and communicating effectively are key skills."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "With a clear focus on anticipating and identifying risks, you'll escalate issues as appropriate."
+    }
+   ],
+   "summary": "المشاركة في مهام المراجعة الخارجية لعملاء EY في الرياض.",
+   "tasks": [
+    "المشاركة في مهام المراجعة وتحديث كبار الفريق بالتقدم.",
+    "إعداد التقارير والجداول المقدمة للعملاء.",
+    "رصد المخاطر وتصعيدها وضمان مراجعة العمل قبل تسليمه."
+   ],
+   "family": "audit"
+  },
+  {
+   "id": "webook-legal-analyst-riyadh",
+   "title": "محلل قانوني",
+   "titleEn": "Legal Analyst",
+   "field": "legal",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "junior",
+   "company": "ويبوك",
+   "companyEn": "webook.com",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف ويبوك (Workable)",
+    "url": "https://apply.workable.com/webook/j/6DADF20462/",
+    "postedAt": "2026-04-28",
+    "checkedAt": "2026-11-20",
+    "note": "On site. Asks 1-2 years in a paralegal role; still published on the company's Workable board on 2026-11-20 (read via its public JSON)."
+   },
+   "requirements": [
+    {
+     "skill": "legal-research",
+     "stars": 1,
+     "evidence": "Researching legal precedents and existing laws, and create a reports with all necessary information"
+    },
+    {
+     "skill": "contract-drafting",
+     "stars": 1,
+     "evidence": "Drafting briefs, contracts, and any other legal documents."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Excellent communication and time management skills"
+    },
+    {
+     "skill": "english",
+     "stars": 1,
+     "evidence": "Strong oral and written communication skills both in English and in Arabic"
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Analytical thinker with strong conceptual and research skills"
+    }
+   ],
+   "summary": "يساعد الفريق القانوني في منصة تذاكر الفعاليات: يبحث في الأنظمة ويصوغ العقود ويتابع تغيّر اللوائح.",
+   "tasks": [
+    "صياغة العقود والمذكرات القانونية",
+    "البحث في الأنظمة والسوابق وكتابة تقرير",
+    "متابعة تغيّر الأنظمة المحلية وتنبيه الفريق"
+   ],
+   "family": "legal-paralegal-contracts"
+  },
+  {
+   "id": "mozn-legal-specialist-riyadh",
+   "title": "أخصائي قانوني",
+   "titleEn": "Legal Specialist",
+   "field": "legal",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "junior",
+   "company": "موزن",
+   "companyEn": "MOZN",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف موزن (Workable)",
+    "url": "https://apply.workable.com/mozn-ai/j/BB6A394FBC/",
+    "postedAt": "2026-11-10",
+    "checkedAt": "2026-11-20",
+    "note": "On site. Minimum 2 years of legal experience; legal-research and contract-drafting at 2 because the posting asks 'Strong legal research' and drafting, review and negotiation of a wide range of agreements."
+   },
+   "requirements": [
+    {
+     "skill": "legal-research",
+     "stars": 2,
+     "evidence": "Strong legal research and analytical ability."
+    },
+    {
+     "skill": "contract-drafting",
+     "stars": 2,
+     "evidence": "Draft, review, negotiate, and finalize a wide range of commercial agreements, including customer contracts, SaaS agreements, MSAs, SOWs, NDAs, vendor and supplier agreements, partnership agreements, and amendments."
+    },
+    {
+     "skill": "corporate-governance",
+     "stars": 1,
+     "evidence": "Support corporate governance matters, including preparation and maintenance of shareholder and board resolutions, corporate records, powers of attorney, authorizations, and constitutional documents."
+    },
+    {
+     "skill": "aml-compliance",
+     "stars": 1,
+     "evidence": "Assist with compliance activities, including KYC, AML, UBO, customer and vendor due diligence, regulatory questionnaires, and related documentation."
+    },
+    {
+     "skill": "english",
+     "stars": 1,
+     "evidence": "Good command of English, both written and spoken."
+    }
+   ],
+   "summary": "يدعم الفريق القانوني في شركة ذكاء اصطناعي: عقود العملاء والموردين، قرارات مجلس الإدارة، والامتثال.",
+   "tasks": [
+    "صياغة عقود SaaS واتفاقيات السرية ومراجعتها",
+    "تجهيز قرارات الشركاء ومجلس الإدارة والوكالات",
+    "بحث قانوني ومذكرات رأي مختصرة للإدارة"
+   ],
+   "family": "legal-paralegal-contracts"
+  },
+  {
+   "id": "webook-legal-associate-riyadh",
+   "title": "مساعد قانوني أول",
+   "titleEn": "Legal Associate",
+   "field": "legal",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "ويبوك",
+   "companyEn": "webook.com",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف ويبوك (Workable)",
+    "url": "https://apply.workable.com/webook/j/88B8DF3B2B/",
+    "postedAt": "2026-04-28",
+    "checkedAt": "2026-11-20",
+    "note": "On site. Asks 3-5 years; still published on the company's Workable board on 2026-11-20 (read via its public JSON)."
+   },
+   "requirements": [
+    {
+     "skill": "legal-research",
+     "stars": 2,
+     "evidence": "Ability to conduct legal research and prepare clear, well-structured legal memos and advisory notes."
+    },
+    {
+     "skill": "contract-drafting",
+     "stars": 2,
+     "evidence": "Strong drafting and negotiation skills across a variety of commercial agreements (NDAs, MSAs, vendor contracts, licensing, etc.)."
+    },
+    {
+     "skill": "corporate-governance",
+     "stars": 1,
+     "evidence": "Assist in corporate governance matters including drafting board resolutions, maintaining corporate records, and supporting subsidiary management"
+    },
+    {
+     "skill": "labor-law",
+     "stars": 1,
+     "evidence": "Solid understanding of data protection laws, employment regulations, IP, and general corporate law."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Collaborate cross-functionally with business units to align legal terms with operational needs"
+    }
+   ],
+   "summary": "يدير العقود التجارية ودورة حياتها، ويدعم الحوكمة والنزاعات والامتثال في منصة فعاليات تنمو بسرعة.",
+   "tasks": [
+    "صياغة العقود التجارية والتفاوض عليها",
+    "تتبّع دورة حياة العقود وتجديدها",
+    "مذكرات رأي قانوني وقوالب للفرق"
+   ],
+   "family": "legal-paralegal-contracts"
+  },
+  {
+   "id": "qiddiya-governance-reporting-senior-specialist-riyadh",
+   "title": "أخصائي أول حوكمة (التقارير)",
+   "titleEn": "Senior Specialist - Governance (Reporting)",
+   "field": "legal",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "senior",
+   "company": "شركة القدية للاستثمار",
+   "companyEn": "Qiddiya Investment Company",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف شركة القدية للاستثمار (Workable)",
+    "url": "https://apply.workable.com/qiddiya-investment-company-1/j/C75049779E/",
+    "postedAt": "2026-11-05",
+    "checkedAt": "2026-11-20",
+    "note": "On site. Asks 5-8 years; prefers GRCP, CGI/ICSA Governance Qualification, CRMA or PMP. Kept as the governance example: a law degree is one of the accepted degrees."
+   },
+   "requirements": [
+    {
+     "skill": "corporate-governance",
+     "stars": 1,
+     "evidence": "Prepare and maintain governance reports, dashboards, scorecards, and management information for governance committees and leadership teams."
+    },
+    {
+     "skill": "excel",
+     "stars": 1,
+     "evidence": "Microsoft Excel and reporting tools"
+    },
+    {
+     "skill": "dataviz",
+     "stars": 1,
+     "evidence": "Dashboard and report preparation"
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Support the preparation of governance committee reports, executive summaries, presentations, and briefing materials."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Communication and presentation skills"
+    }
+   ],
+   "summary": "يجهّز تقارير الحوكمة ولوحاتها للجان والإدارة العليا ويتابع قراراتها ومؤشراتها.",
+   "tasks": [
+    "تقارير ولوحات مؤشرات للجان الحوكمة",
+    "متابعة قرارات اللجان وخطط العمل",
+    "دعم المراجعات والتدقيق بوثائق الحوكمة"
+   ],
+   "family": "legal-paralegal-contracts"
+  },
+  {
+   "id": "mozn-creative-design-motion-riyadh",
+   "title": "أخصائي تصميم إبداعي وموشن",
+   "titleEn": "Creative Design & Motion Specialist",
+   "field": "media",
+   "city": "riyadh",
+   "place": "Riyadh, Riyadh Province, Saudi Arabia",
+   "band": "mid",
+   "company": "موزن",
+   "companyEn": "Mozn",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف موزن (Workable)",
+    "url": "https://apply.workable.com/mozn-ai/j/6C9854E659",
+    "postedAt": "2026-10-21",
+    "checkedAt": "2026-11-20",
+    "note": "On-site; state 'published' on the Workable API on 2026-11-20. Asks 4+ years and creative-lead experience; portfolio required."
+   },
+   "requirements": [
+    {
+     "skill": "motion-graphics",
+     "stars": 2,
+     "evidence": "4+ years of experience in graphic design, visual design, creative design, or creative production, with strong hands-on motion graphics experience."
+    },
+    {
+     "skill": "video-editing",
+     "stars": 2,
+     "evidence": "Adobe Premiere Pro"
+    },
+    {
+     "skill": "design-basics",
+     "stars": 1,
+     "evidence": "Strong understanding of visual storytelling, typography, layout, composition, branding, and motion design principles."
+    },
+    {
+     "skill": "figma",
+     "stars": 1,
+     "evidence": "Figma"
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Excellent collaboration and communication skills."
+    }
+   ],
+   "summary": "يصمم أصولاً بصرية لعلامة موزن ثم يحرّكها في فيديوهات شرح وحملات وفعاليات.",
+   "tasks": [
+    "يحوّل التصاميم الثابتة إلى موشن جرافيك وحركة",
+    "ينتج فيديوهات شرح تبسّط مفاهيم الذكاء الاصطناعي",
+    "يجهّز مواد مرئية للمؤتمرات والعروض التنفيذية"
+   ],
+   "family": "video-editor-motion"
+  },
+  {
+   "id": "chainreaction-multimedia-designer-riyadh",
+   "title": "مصمم وسائط متعددة",
+   "titleEn": "Multimedia Designer",
+   "field": "media",
+   "city": "riyadh",
+   "place": "Riyadh, Riyadh Province, Saudi Arabia",
+   "band": "junior",
+   "company": "تشين رياكشن",
+   "companyEn": "Chain Reaction",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف Chain Reaction (Workable)",
+    "url": "https://apply.workable.com/chain-reaction-1/j/679DB1F805",
+    "postedAt": "2026-10-02",
+    "checkedAt": "2026-11-20",
+    "note": "Digital marketing agency; on-site Riyadh; no years stated (band is a judgement). Bilingual Arabic/English design wanted."
+   },
+   "requirements": [
+    {
+     "skill": "video-editing",
+     "stars": 2,
+     "evidence": "Strong video editing skills with DaVinci Resolve"
+    },
+    {
+     "skill": "motion-graphics",
+     "stars": 1,
+     "evidence": "Good understanding of motion, pacing, transitions, and social-first video editing"
+    },
+    {
+     "skill": "design-basics",
+     "stars": 1,
+     "evidence": "Strong proficiency in Adobe Photoshop and Adobe Illustrator"
+    },
+    {
+     "skill": "social-media",
+     "stars": 1,
+     "evidence": "Experience creating content for Instagram, TikTok, Snapchat, X, Facebook, and YouTube"
+    },
+    {
+     "skill": "content",
+     "stars": 1,
+     "evidence": "Ability to create static posts, carousels, Stories, Reels, and short-form videos"
+    }
+   ],
+   "summary": "يصمم ويمنتج محتوى قصيراً لمنصات التواصل لعملاء وكالة تسويق رقمي.",
+   "tasks": [
+    "يمنتج الفيديو ويعيد تقطيعه لكل منصة",
+    "يكيّف التصميم الرئيسي لمقاسات ومواضع متعددة",
+    "يصمم منشورات وقصص وريلز بالعربية والإنجليزية"
+   ],
+   "family": "video-editor-motion"
+  },
+  {
+   "id": "platinumlist-en-ar-content-manager-riyadh",
+   "title": "مدير محتوى عربي وإنجليزي",
+   "titleEn": "English & Arabic Content Manager",
+   "field": "media",
+   "city": "riyadh",
+   "place": "Riyadh, Riyadh Province, Saudi Arabia",
+   "band": "mid",
+   "company": "بلاتينوم ليست",
+   "companyEn": "Platinumlist",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف Platinumlist (Workable)",
+    "url": "https://apply.workable.com/platinum-list/j/5387F51063",
+    "postedAt": "2026-10-08",
+    "checkedAt": "2026-11-20",
+    "note": "On-site Riyadh; 3+ years; asks for 100% human-written content and translations."
+   },
+   "requirements": [
+    {
+     "skill": "translation",
+     "stars": 2,
+     "evidence": "Translate and adapt content from English to Arabic, including events, attractions, venues, FAQs, artist names, and UX texts"
+    },
+    {
+     "skill": "arabic-editing",
+     "stars": 1,
+     "evidence": "Strong editing, proofreading, and copywriting skills in both languages with the ability to adapt content to different audiences while maintaining the brand's tone of voice."
+    },
+    {
+     "skill": "content",
+     "stars": 2,
+     "evidence": "3+ years of experience writing and editing English and Arabic content"
+    },
+    {
+     "skill": "seo",
+     "stars": 1,
+     "evidence": "Knowledge of SEO best practices is a plus"
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Review and edit English content, ensure originality through plagiarism checks, and rewrite it to align with our brand tone of voice."
+    }
+   ],
+   "summary": "يترجم ويحرّر محتوى منصة تذاكر الفعاليات بالعربية والإنجليزية.",
+   "tasks": [
+    "يترجم الفعاليات والأسئلة الشائعة ونصوص الواجهة إلى العربية",
+    "يراجع الترجمات الحالية للدقة والنبرة والنحو",
+    "يكتب العناوين ونصوص الأزرار والتصنيفات"
+   ],
+   "family": "translator-ar-en"
+  },
+  {
+   "id": "naphora-qa-specialist-saudi",
+   "title": "أخصائي اختبار جودة الألعاب",
+   "titleEn": "QA Specialist",
+   "field": "gaming",
+   "city": null,
+   "place": "Saudi Arabia",
+   "band": "junior",
+   "company": "مجموعة نافورة للألعاب",
+   "companyEn": "Naphora Games Group",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف Naphora Games Group (Greenhouse)",
+    "url": "https://job-boards.eu.greenhouse.io/alemnafora/jobs/4974299101",
+    "postedAt": "2026-09-11",
+    "checkedAt": "2026-11-20",
+    "note": "Posting location is only 'Saudi Arabia' (no city); city 'riyadh' is NOT stated, verify. Mobile games; 2+ years QA; page shows an application form and no closure notice."
+   },
+   "requirements": [
+    {
+     "skill": "game-testing",
+     "stars": 2,
+     "evidence": "Experience with manual testing, regression testing, bug reporting, and test cases"
+    },
+    {
+     "skill": "game-design",
+     "stars": 1,
+     "evidence": "Good understanding of mobile games and the player experience"
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Curious, methodical, and comfortable digging into problems to understand their root cause"
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Strong communication and collaboration skills"
+    },
+    {
+     "skill": "english",
+     "stars": 1,
+     "evidence": "Fluent in English"
+    }
+   ],
+   "summary": "يختبر نسخ ألعاب الجوال ويوثق الأخطاء قبل أن تصل إلى اللاعبين.",
+   "tasks": [
+    "يختبر النسخ والميزات والإصدارات على أجهزة وأنظمة مختلفة",
+    "يكتب حالات الاختبار ويوثق الأخطاء بخطوات واضحة",
+    "يختبر التقدم والاقتصاد والإعلانات والشراء داخل اللعبة"
+   ],
+   "family": "game-qa-design-esports"
+  },
+  {
+   "id": "qiddiya-gaming-esports-strategy-am-riyadh",
+   "title": "مساعد مدير دعم استراتيجية الألعاب والرياضات الإلكترونية",
+   "titleEn": "Assistant Manager - Gaming & Esports Strategy Support",
+   "field": "gaming",
+   "city": "riyadh",
+   "place": "Riyadh, Riyadh Province, Saudi Arabia",
+   "band": "mid",
+   "company": "شركة القدية للاستثمار",
+   "companyEn": "Qiddiya Investment Company",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف Qiddiya Investment Company (Workable)",
+    "url": "https://apply.workable.com/qiddiya-investment-company-1/j/321B61693D",
+    "postedAt": "2026-09-01",
+    "checkedAt": "2026-11-20",
+    "note": "On-site; asks a minimum of 5 years in gaming, esports or event management."
+   },
+   "requirements": [
+    {
+     "skill": "esports-community",
+     "stars": 1,
+     "evidence": "Strong understanding of the gaming and esports landscape, including market dynamics and audience engagement strategies."
+    },
+    {
+     "skill": "project-management",
+     "stars": 2,
+     "evidence": "Support the planning and execution of gaming and esports events, ensuring logistical efficiency and participant satisfaction."
+    },
+    {
+     "skill": "business-analysis",
+     "stars": 1,
+     "evidence": "Conduct market research and analysis to identify industry trends and competitive benchmarks that inform strategy development."
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Prepare presentations and reports for senior management, highlighting strategic recommendations and project progress."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Foster relationships with gaming and esports stakeholders, including developers, teams, and sponsors, to enhance collaboration and engagement."
+    }
+   ],
+   "summary": "يدعم وضع استراتيجية مشاريع وفعاليات الألعاب والرياضات الإلكترونية في القدية وتنفيذها.",
+   "tasks": [
+    "يدعم تخطيط فعاليات الألعاب والرياضات الإلكترونية وتنفيذها",
+    "يبحث في السوق واتجاهات القطاع",
+    "يتابع مؤشرات الأداء ويعد تقارير للإدارة"
+   ],
+   "family": "game-qa-design-esports"
+  }
+ ],
+ "guides": [
+  {
+   "skill": "banking-basics",
+   "depth": "full",
+   "topPick": {
+    "title": "أساسيات العمل المصرفي",
+    "provider": "الأكاديمية المالية",
+    "url": "https://www.fa.gov.sa/Services/ProgramDetails/fcc5165c-a569-ea11-80d6-005056981173",
+    "lang": "ar",
+    "price": "paid",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "برنامج للموظفين الجدد بخبرة مصرفية أقل من سنتين: حسابات الإيداع ودور البنك المركزي والحوالات والسويفت وأساسيات الائتمان.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [],
+   "people": [
+    {
+     "name": "الأكاديمية المالية",
+     "platform": "YouTube و X (الحسابات الرسمية)",
+     "url": "https://www.youtube.com/@thefaksa",
+     "why": "القناة الرسمية للأكاديمية المالية التي تقدم اختبار أساسيات مصرفية الأفراد وبرنامج أساسيات العمل المصرفي.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://www.youtube.com/@thefaksa",
+      "x": "https://x.com/thefaksa",
+      "linkedin": "https://www.linkedin.com/company/thefaksa",
+      "website": "https://fa.gov.sa/"
+     },
+     "linkedinSource": "https://fa.gov.sa/en/Services/ExamDetails/f0ff4673-6827-44b8-9c4d-ade3011277bb"
+    },
+    {
+     "name": "البنك المركزي السعودي (ساما)",
+     "platform": "الموقع الرسمي",
+     "url": "https://www.sama.gov.sa/ar-sa/Pages/default.aspx",
+     "why": "الجهة المنظمة للبنوك؛ موقعه ينشر المنشورات والمؤشرات الاقتصادية وأسعار الصرف وخدمات الأفراد.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.sama.gov.sa/ar-sa/Pages/default.aspx"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "منهج شهادة أساسيات مصرفية الأفراد - النسخة الرابعة (ديسمبر 2023)",
+     "author": "الأكاديمية المالية",
+     "site": "fa.gov.sa",
+     "url": "https://fa.gov.sa/ar/Documents/finalRetailBanking20231207.pdf",
+     "lang": "ar",
+     "why": "الكتاب الرسمي المجاني للاختبار: عشرة فصول من هيكل القطاع المصرفي حتى مكافحة غسل الأموال.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اختر بنكًا سعوديًا وقارن ثلاثة من منتجاته للأفراد (حساب جارٍ، تمويل شخصي، بطاقة ائتمانية) في جدول من صفحة واحدة: الشروط والرسوم وحقوق العميل وفق مبادئ حماية عملاء البنوك.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "الاختبار المهني لأساسيات مصرفية الأفراد (RBF)",
+    "short": "RBF الأكاديمية المالية",
+    "issuer": "الأكاديمية المالية (Financial Academy)",
+    "code": "RBF",
+    "type": "exam",
+    "url": "https://fa.gov.sa/en/Services/ExamDetails/adbe83a7-c98d-410e-a4c6-b10900850475",
+    "fee": {
+     "amount": 1000,
+     "currency": "SAR",
+     "qualifier": null,
+     "per": null,
+     "note": "fa.gov.sa: «رسوم الامتحان 1000.00 ريال»"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.fa.gov.sa/Services/ProgramDetails/fcc5165c-a569-ea11-80d6-005056981173",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "اختبار الأكاديمية المالية لموظفي الصفوف الأمامية في البنوك السعودية، بلا متطلبات مسبقة للتسجيل.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "credit-analysis",
+   "depth": "full",
+   "topPick": {
+    "title": "البرنامج التحضيري للاختبار المهني للمستشار الائتماني",
+    "provider": "الأكاديمية المالية",
+    "url": "https://fa.gov.sa/Services/ProgramDetails/30e25e2a-2a37-4570-95fa-af030097c286",
+    "lang": "ar",
+    "price": "paid",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "يؤهل لاجتياز الاختبار الإلزامي للمستشار الائتماني: أنواع التمويل والتمويل العقاري ونظام «سمة» والمخاطر الائتمانية والتشغيلية.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Credit Risk Modeling",
+     "provider": "EDUCBA (Coursera)",
+     "url": "https://www.coursera.org/learn/credit-risk-modeling",
+     "lang": "en",
+     "price": null,
+     "hours": 6,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: احتمال التعثر PD والخسارة LGD ونموذج Altman Z-Score وبناء تصنيف ائتماني داخلي من القوائم المالية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "الأكاديمية المالية",
+     "platform": "YouTube و X (الحسابات الرسمية)",
+     "url": "https://www.youtube.com/@thefaksa",
+     "why": "القناة الرسمية للأكاديمية المالية التي تقدم اختبار المستشار الائتماني CAPE وبرنامجه التحضيري.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://www.youtube.com/@thefaksa",
+      "x": "https://x.com/thefaksa",
+      "linkedin": "https://www.linkedin.com/company/thefaksa",
+      "website": "https://fa.gov.sa/"
+     },
+     "linkedinSource": "https://fa.gov.sa/en/Services/ExamDetails/f0ff4673-6827-44b8-9c4d-ade3011277bb"
+    },
+    {
+     "name": "Corporate Finance Institute (CFI)",
+     "platform": "Free articles and YouTube",
+     "url": "https://corporatefinanceinstitute.com/resources/commercial-lending/5-cs-of-credit/",
+     "why": "تنشر مقالات مجانية في الإقراض التجاري مثل «5 Cs of Credit» وقناة يوتيوب.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://www.youtube.com/c/Corporatefinanceinstitute-CFI",
+      "linkedin": "https://www.linkedin.com/school/corporate-finance-institute-cfi/",
+      "website": "https://corporatefinanceinstitute.com/"
+     },
+     "linkedinSource": "https://corporatefinanceinstitute.com/resources/commercial-lending/5-cs-of-credit/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "منهج شهادة المستشار الائتماني - الإصدار الرابع (يوليو 2022)",
+     "author": "الأكاديمية المالية",
+     "site": "fa.gov.sa",
+     "url": "https://fa.gov.sa/ar/Documents/CreditAdvisor6_09112023.pdf",
+     "lang": "ar",
+     "why": "المرجع الرسمي لاختبار المستشار الائتماني: خمسة فصول تبدأ بالمنتجات التمويلية وضوابطها في المملكة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "5 Cs of Credit",
+     "author": "Kyle Peterdy",
+     "site": "corporatefinanceinstitute.com",
+     "url": "https://corporatefinanceinstitute.com/resources/commercial-lending/5-cs-of-credit/",
+     "lang": "en",
+     "why": "للنجمة الثانية: إطار تقييم المقترض بخمسة معايير: Character وCapacity وCapital وCollateral وConditions.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "خذ القوائم المالية المنشورة لشركة مدرجة في تداول، احسب نسب السيولة والمديونية وتغطية الفوائد وAltman Z-Score، ثم اكتب مذكرة ائتمانية من صفحتين: التوصية، والمخاطر، والضمانات المقترحة.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "الاختبار المهني للمستشار الائتماني (CAPE)",
+    "short": "CAPE الأكاديمية المالية",
+    "issuer": "الأكاديمية المالية (Financial Academy)",
+    "code": "CAPE",
+    "type": "exam",
+    "url": "https://fa.gov.sa/en/Services/ExamDetails/4a2a54d3-0d1a-4e5b-85e9-ab41007db586",
+    "fee": {
+     "amount": 1200,
+     "currency": "SAR",
+     "qualifier": null,
+     "per": null,
+     "note": "fa.gov.sa: «رسوم الامتحان 1200.00 ريال»"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://fa.gov.sa/Services/ProgramDetails/30e25e2a-2a37-4570-95fa-af030097c286",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "اختبار الأكاديمية المالية لموظفي البنوك وشركات التمويل المعنيين مباشرة بمنح الائتمان.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "aml-compliance",
+   "depth": "full",
+   "topPick": {
+    "title": "أساسيات مكافحة غسل الأموال وتمويل الإرهاب",
+    "provider": "الأكاديمية المالية",
+    "url": "https://www.fa.gov.sa/Services/ProgramDetails/8d6f5618-c9a4-4856-a1ae-b05500c7ff8d",
+    "lang": "ar",
+    "price": "paid",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "وحدات تبدأ بمفهوم غسل الأموال ومراحله ثم الجهود الدولية ثم الإطار التشريعي والرقابي في المملكة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "مكافحة غسل الأموال",
+     "provider": "Alfaisal.KLD (Coursera)",
+     "url": "https://www.coursera.org/learn/anti-money-laundering",
+     "lang": "ar",
+     "price": null,
+     "hours": 3,
+     "certificate": true,
+     "star": 1,
+     "why": "دورة عربية للمبتدئين من جامعة الفيصل: وحدة واحدة و10 تقييمات وشهادة قابلة للمشاركة، تقييم 4.8.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "الشهادة المهنية لمسؤول الالتزام المعتمد – CCO",
+     "provider": "الأكاديمية المالية",
+     "url": "https://fa.gov.sa/Services/ProgramDetails/75264457-13d8-4a75-a953-adf8009ac53d",
+     "lang": "ar",
+     "price": "paid",
+     "hours": null,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: برامج مكافحة غسل الأموال المبنية على المخاطر والسياسات الرقابية، وينتهي باختبار مهني.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "الإدارة العامة للتحريات المالية (SAFIU)",
+     "platform": "الموقع الرسمي - المركز المعرفي",
+     "url": "https://safiu.gov.sa/",
+     "why": "وحدة التحريات المالية برئاسة أمن الدولة؛ تنشر الدليل الاسترشادي للجهات المبلغة واللوائح التنفيذية لنظام مكافحة غسل الأموال.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://safiu.gov.sa/"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "الأكاديمية المالية",
+     "platform": "YouTube و X (الحسابات الرسمية)",
+     "url": "https://www.youtube.com/@thefaksa",
+     "why": "القناة الرسمية للأكاديمية المالية التي تقدم اختبار أساسيات الالتزام وبرنامج مكافحة غسل الأموال.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://www.youtube.com/@thefaksa",
+      "x": "https://x.com/thefaksa",
+      "linkedin": "https://www.linkedin.com/company/thefaksa",
+      "website": "https://fa.gov.sa/"
+     },
+     "linkedinSource": "https://fa.gov.sa/en/Services/ExamDetails/f0ff4673-6827-44b8-9c4d-ade3011277bb"
+    }
+   ],
+   "articles": [
+    {
+     "title": "منهج الشهادة المهنية في أساسيات الالتزام - النسخة الثالثة (أكتوبر 2023)",
+     "author": "الأكاديمية المالية",
+     "site": "fa.gov.sa",
+     "url": "https://fa.gov.sa/Content/Downloads/Exams/RevisedVersion_A7BasicsOfCommitment.pdf",
+     "lang": "ar",
+     "why": "كتاب رسمي مجاني من خمسة فصول يبدأ بدور الجهات التنظيمية في القطاع المالي السعودي ويشمل مكافحة الجرائم المالية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اكتب دليلًا مختصرًا لإجراءات «اعرف عميلك» لمحفظة رقمية سعودية: مستويات العناية الواجبة، وعشرة مؤشرات اشتباه، وخطوات رفع البلاغ إلى الإدارة العامة للتحريات المالية، مع ثلاث حالات افتراضية وتحليلها.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "الاختبار المهني لأساسيات الالتزام - النسخة الثانية",
+    "short": "أساسيات الالتزام",
+    "issuer": "الأكاديمية المالية (Financial Academy)",
+    "code": null,
+    "type": "exam",
+    "url": "https://fa.gov.sa/en/Services/ExamDetails/f0ff4673-6827-44b8-9c4d-ade3011277bb",
+    "fee": {
+     "amount": 632.5,
+     "currency": "SAR",
+     "qualifier": null,
+     "per": null,
+     "note": "fa.gov.sa: «رسوم الامتحان 632.50 ريال»"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.fa.gov.sa/Services/ProgramDetails/8d6f5618-c9a4-4856-a1ae-b05500c7ff8d",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "اختبار تأسيسي للمنضمين حديثًا لإدارات الالتزام في البنوك والتأمين والسوق المالية وشركات التمويل.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "internal-audit",
+   "depth": "full",
+   "topPick": {
+    "title": "أساسيات المراجعة الداخلية",
+    "provider": "الأكاديمية المالية",
+    "url": "https://www.fa.gov.sa/Services/ProgramDetails/aeb85dec-3e6e-41d0-a47e-adf7015aa5bd",
+    "lang": "ar",
+    "price": "paid",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "من المفهوم الحديث للمراجعة إلى تقييم الرقابة الداخلية وفق COSO وإعداد خطة المراجعة وأوراق العمل والتقارير.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "البرنامج التحضيري لاختبار المدقق الداخلي المعتمد (CIA) - الجزء الأول",
+     "provider": "الأكاديمية المالية",
+     "url": "https://betaportal.fa.gov.sa/Services/ProgramDetails/982aca6b-d4ae-453a-9a86-ae2900cdca64",
+     "lang": "ar",
+     "price": "paid",
+     "hours": null,
+     "certificate": null,
+     "star": 2,
+     "why": "للنجمة الثانية: أسس التدقيق الداخلي والاستقلالية والموضوعية والعناية المهنية الواجبة، تمهيدًا لاختبار CIA.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Richard Chambers",
+     "platform": "Blog and podcast (Speaking of Risk and Audit)",
+     "url": "https://www.richardchambers.com/",
+     "why": "قائد خبير في المراجعة الداخلية، يقول موقعه إنه يضم أكثر من 600 تدوينة كتبها، وله بودكاست.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.richardchambers.com/"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "The Institute of Internal Auditors (IIA)",
+     "platform": "Podcast, YouTube and Statements of Position",
+     "url": "https://www.theiia.org/en/resources/statements-of-position/",
+     "why": "الجهة المانحة لشهادة CIA؛ تنشر بودكاست «Getting Started With» وقناة يوتيوب وبيانات موقف مثل نموذج الخطوط الثلاثة.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://www.youtube.com/@IIAGlobalHQ",
+      "x": "https://twitter.com/TheIIA",
+      "linkedin": "https://www.linkedin.com/company/the-institute-of-internal-auditors-inc",
+      "website": "https://www.theiia.org/"
+     },
+     "linkedinSource": "https://www.theiia.org/en/resources/statements-of-position/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Statements of Position: Three Lines Model (July 8, 2026)",
+     "author": "The IIA",
+     "site": "theiia.org",
+     "url": "https://www.theiia.org/en/resources/statements-of-position/",
+     "lang": "en",
+     "why": "بيان الموقف الحالي لنموذج الخطوط الثلاثة، نُشر في 8 يوليو 2026 ويحل محل ورقة 2020.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "The IIA's Refreshed Three Lines Model (Getting Started With podcast)",
+     "author": "The IIA",
+     "site": "theiia.org",
+     "url": "https://www.theiia.org/en/content/podcast/getting-started-with/2026/ep-0040/",
+     "lang": "en",
+     "why": "حلقة مبسطة تشرح أدوار الخطوط الثلاثة والفرق بين التأكيد والاستشارة واستقلالية المراجعة الداخلية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اختر عملية بسيطة (مثل صرف العهد النقدية في جمعية أو متجر)، ارسم خطواتها، واكتب مصفوفة مخاطر وضوابط من 8 أسطر، ثم برنامج اختبار لكل ضابط وتقرير ملاحظات من صفحة واحدة بصيغة: الملاحظة، الأثر، التوصية.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Certified Internal Auditor (CIA)",
+    "short": "IIA CIA",
+    "issuer": "The Institute of Internal Auditors (IIA)",
+    "code": "CIA",
+    "type": "exam",
+    "url": "https://www.theiia.org/en/certifications/cia/exam-prep-resources/exam-syllabus/exam-syllabus-part-1/",
+    "fee": null,
+    "feeVaries": true,
+    "prepUrl": "https://www.fa.gov.sa/Services/ProgramDetails/aeb85dec-3e6e-41d0-a47e-adf7015aa5bd",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "الشهادة العالمية للمدققين الداخليين، وتذكرها إعلانات PwC للمراجعة الداخلية ميزةً إضافية.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "legal-research",
+   "depth": "full",
+   "topPick": {
+    "title": "A Law Student's Toolkit",
+    "provider": "Yale University (Coursera, Ian Ayres)",
+    "url": "https://www.coursera.org/learn/law-student",
+    "lang": "en",
+    "price": null,
+    "hours": null,
+    "certificate": true,
+    "star": 1,
+    "why": "أدوات قراءة النظام وتفسيره («Tools to Read a Statute») والمصطلحات القانونية، وتقييمها 4.7 من 1,595 مراجعة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "AI in Law: Research, Risk, and Legal Drafting Specialization",
+     "provider": "Coursera (5 instructors incl. Paweł Mielniczek, Starweaver)",
+     "url": "https://www.coursera.org/specializations/ai-in-law-research-risk-and-legal-drafting",
+     "lang": "en",
+     "price": null,
+     "hours": null,
+     "certificate": true,
+     "star": 2,
+     "why": "تسع دورات قصيرة بعد الأساسيات: تحليل القضايا والبحث القانوني وإدارة الوثائق بالذكاء الاصطناعي، وتقييمها 4.3 من 108 مراجعات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Bryan A. Garner",
+     "platform": "LawProse (website)",
+     "url": "https://www.lawprose.org/lawprose-lessons/",
+     "why": "صاحب LawProse، ينشر دروساً مجانية قصيرة في الكتابة القانونية الواضحة.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.lawprose.org/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "الوثائق النظامية (منصة الأنظمة السعودية)",
+     "author": "هيئة الخبراء بمجلس الوزراء",
+     "site": "laws.boe.gov.sa",
+     "url": "https://laws.boe.gov.sa/BoeLaws/Laws/",
+     "lang": "ar",
+     "why": "المصدر الرسمي لنصوص الأنظمة واللوائح مصنّفة حسب الموضوع، وفيها بحث في الوثائق النظامية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "نظام المعاملات المدنية",
+     "author": "جريدة أم القرى",
+     "site": "uqn.gov.sa",
+     "url": "https://uqn.gov.sa/details?p=23125",
+     "lang": "ar",
+     "why": "النص المنشور للنظام: الباب التمهيدي ثم مصادر الالتزام وأولها «الفصل الأول: العقد».",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اختر سؤالاً عملياً (مثلاً: متى يبطل العقد؟) وابحث عنه في منصة الأنظمة ونظام المعاملات المدنية، ثم اكتب مذكرة رأي من صفحة واحدة: الوقائع، النص النظامي برقم المادة، التحليل، والتوصية.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "none",
+    "proof": "مذكرة رأي قانوني من صفحة واحدة تستشهد بمواد نظامية من منصة الأنظمة، تعرضها في المقابلة.",
+    "proofUrl": "https://www.coursera.org/learn/law-student",
+    "why": "ما فيه شهادة مستقلة معترف بها للبحث القانوني؛ الطريق الرسمي هو التدريب لدى محامٍ مرخّص ثم رخصة المحاماة من وزارة العدل.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "contract-drafting",
+   "depth": "full",
+   "topPick": {
+    "title": "A Paralegal's Guide to Drafting Business Contracts",
+    "provider": "National Business Institute (Coursera)",
+    "url": "https://www.coursera.org/learn/nbi-a-paralegals-guide-to-drafting-business-contracts",
+    "lang": "en",
+    "price": null,
+    "hours": 10,
+    "certificate": true,
+    "star": 1,
+    "why": "مستوى مبتدئ في 10 ساعات: صياغة العقود التجارية وأخطاؤها الشائعة وإدارة الوثائق للمساعد القانوني.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "CCMA Individual Training Modules",
+     "provider": "NCMA / CCM Institute",
+     "url": "https://ncmahq.org/Web/Learning/CCMA_Individual_Training_Modules.aspx",
+     "lang": "en",
+     "price": "paid",
+     "hours": null,
+     "certificate": null,
+     "star": 2,
+     "why": "ثماني وحدات على معيار إدارة العقود CMS: من أساسيات العقد إلى التفاوض وإدارة التنفيذ، الوحدة بـ 125 دولاراً لغير الأعضاء.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [],
+   "articles": [
+    {
+     "title": "نظام المعاملات المدنية: الفصل الأول: العقد",
+     "author": "جريدة أم القرى",
+     "site": "uqn.gov.sa",
+     "url": "https://uqn.gov.sa/details?p=23125",
+     "lang": "ar",
+     "why": "أركان العقد وإبطاله والنيابة فيه وآثاره وتفسيره وفسخه، في النص الرسمي المنشور.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "صغ اتفاقية عدم إفصاح (NDA) من صفحتين بالعربي والإنجليزي لشركتين تجريبيتين، ثم راجع عقد خدمات منشوراً كنموذج وعلّم 5 مخاطر مع تعديل مقترح لكل منها.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Commercial and Contract Management Associate (CCMA)",
+    "short": "CCMA",
+    "issuer": "NCMA / World Commerce & Contracting (CCM Institute)",
+    "code": "CCMA",
+    "type": "exam",
+    "url": "https://www.ncmahq.org/ccma",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/nbi-a-paralegals-guide-to-drafting-business-contracts",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "الشهادة العالمية للمبتدئين في إدارة العقود («No prior experience is required»)، تجمع تدريباً إلزامياً واختباراً.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "corporate-governance",
+   "depth": "full",
+   "topPick": {
+    "title": "Corporate Governance",
+    "provider": "Coursera (Paweł Mielniczek, Starweaver)",
+    "url": "https://www.coursera.org/learn/corporate-governance-1",
+    "lang": "en",
+    "price": null,
+    "hours": 2,
+    "certificate": true,
+    "star": 1,
+    "why": "دورة قصيرة للمبتدئين (ساعتان) في مسؤوليات مجلس الإدارة والالتزام والمخاطر، وتقييمها 4.7 من 356 مراجعة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [],
+   "people": [],
+   "articles": [
+    {
+     "title": "لائحة حوكمة الشركات",
+     "author": "هيئة السوق المالية",
+     "site": "cma.gov.sa",
+     "url": "https://cma.gov.sa/RulesRegulations/Regulations/Pages/details.aspx?code=2",
+     "lang": "ar",
+     "why": "«تبين هذه اللائحة القواعد والمعايير المنظمة لإدارة الشركة»: المرجع النظامي لقرارات المجلس والجمعيات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "جهّز لشركة تجريبية محضر اجتماع مجلس إدارة وقراراً واحداً وسجلاً لمتابعة القرارات، مع جدول يربط كل بند بمادة من لائحة حوكمة الشركات.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "GRC Professional (GRCP)",
+    "short": "GRCP",
+    "issuer": "OCEG",
+    "code": "GRCP",
+    "type": "exam",
+    "url": "https://www.oceg.org/certifications/grcp/",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/corporate-governance-1",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "اختبار 100 سؤال لا يشترط خبرة («We do not require specific experience»)، وتذكره القدية ضمن الشهادات المفضّلة للحوكمة.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "video-editing",
+   "depth": "full",
+   "topPick": {
+    "title": "Premiere Pro Pt. 1 — Getting Started & Editing Basics",
+    "provider": "Skillshare (Coursera), instructor Jordy Vandeput",
+    "url": "https://www.coursera.org/learn/premiere-pro-pt-1--getting-started-editing-basics",
+    "lang": "en",
+    "price": null,
+    "hours": 6,
+    "certificate": true,
+    "star": 1,
+    "why": "للمبتدئين بلا خبرة: بدء المشروع ومساحة العمل ثم سير المونتاج والتحسينات، تقييم 4.7.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Adobe Premiere Pro for Beginners Specialization",
+     "provider": "Skillshare (Coursera)",
+     "url": "https://www.coursera.org/specializations/adobe-premiere-pro-for-beginners",
+     "lang": "en",
+     "price": null,
+     "hours": null,
+     "certificate": true,
+     "star": 2,
+     "why": "ثلاث دورات تكمل الجزء الأول: الانتقالات والجرافيك والتحريك، ثم الصوت والألوان والتصدير (6 و5 و5 ساعات).",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Jordy Vandeput",
+     "platform": "Cinecom (courses and free tutorials)",
+     "url": "https://www.cinecom.net/",
+     "why": "مدرّب دورات Premiere Pro وAfter Effects في Cinecom، وينشر دروساً مجانية في المونتاج والتصوير.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.cinecom.net/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "12 Premiere Pro Tips for Beginners You'll Actually Use",
+     "author": "Jordy Vandeput",
+     "site": "cinecom.net",
+     "url": "https://www.cinecom.net/adobe-premiere-pro-tutorials/tips-tricks/premiere-pro-tips-for-beginners/",
+     "lang": "en",
+     "why": "12 حيلة مدمجة في Premiere: التحرير من الشاشة والمؤثرات السريعة وعادات أسرع في الخط الزمني وحل تقطع التشغيل.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "خذ مقابلة أو فيديو خام مدته 10 دقائق ومنتجه إلى نسختين: فيديو أفقي دقيقتين ليوتيوب، وريل عمودي 30 ثانية بترجمة نصية عربية وصوت مضبوط.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Adobe Certified Professional: Digital Video Using Adobe Premiere",
+    "short": "Adobe ACP Premiere",
+    "issuer": "Adobe (Certiport)",
+    "code": null,
+    "type": "exam",
+    "url": "https://certifiedprofessional.adobe.com/premiere-pro",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/premiere-pro-pt-1--getting-started-editing-basics",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 2,
+    "why": "أدوبي تقول إنها تتطلب عادة 150 ساعة تدريب وخبرة عملية، وتغطي المونتاج من الإعداد حتى النشر.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "motion-graphics",
+   "depth": "full",
+   "topPick": {
+    "title": "Adobe After Effects for Beginners: Motion Design Essentials",
+    "provider": "Coursera guided project, instructor Sara Roma",
+    "url": "https://www.coursera.org/learn/adobe-after-effects",
+    "lang": "en",
+    "price": null,
+    "hours": null,
+    "certificate": true,
+    "star": 1,
+    "why": "مشروع موجّه قصير: إنشاء تركيبة والخط الزمني وتحريك نص لبطاقة عنوان ثم المؤثرات، تقييم 4.4.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Master Motion Graphics in After Effects: Create & Animate",
+     "provider": "EDUCBA (Coursera)",
+     "url": "https://www.coursera.org/learn/master-motion-graphics-after-effects-create-animate",
+     "lang": "en",
+     "price": null,
+     "hours": 5,
+     "certificate": true,
+     "star": 2,
+     "why": "خطوة بعد الأساسيات: تحريك الأشكال والتسهيل (Easy Ease) وبناء Lower Third ونصوص متحركة، 5 ساعات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Ben Marriott",
+     "platform": "benmarriott.com (motion design courses)",
+     "url": "https://www.benmarriott.com/",
+     "why": "مدرّب دورات Motion Foundation وMaster Motion Design ودورة التصميم Design Breakthrough.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.benmarriott.com/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [],
+   "proof": {
+    "task": "صمّم شعاراً أو عنواناً متحركاً من 10 ثوانٍ لعلامة سعودية خيالية، ثم Lower Third بالعربية والإنجليزية، وصدّرهما بصيغة MP4 مع ملف المشروع.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Adobe Certified Professional: Visual Effects & Motion Graphics Using Adobe After Effects",
+    "short": "Adobe ACP After Effects",
+    "issuer": "Adobe (Certiport)",
+    "code": null,
+    "type": "exam",
+    "url": "https://certifiedprofessional.adobe.com/after-effects",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/adobe-after-effects",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "تغطي التركيبات والطبقات والإطارات المفتاحية والأقنعة وتحريك النص، وتتطلب عادة 150 ساعة تدريب.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "translation",
+   "depth": "full",
+   "topPick": {
+    "title": "Translation in Practice",
+    "provider": "Nanjing University (Coursera)",
+    "url": "https://www.coursera.org/learn/translation-in-practice",
+    "lang": "en",
+    "price": "paid",
+    "hours": 25,
+    "certificate": true,
+    "star": 1,
+    "why": "للمبتدئين: من عملية الترجمة إلى معنى الكلمة وترتيب الجملة والعناصر الثقافية وأنواع النصوص، تقييم 4.4.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Localization Essentials",
+     "provider": "Udacity, from experts at Google",
+     "url": "https://www.udacity.com/course/localization-essentials--ud610",
+     "lang": "en",
+     "price": "free",
+     "hours": null,
+     "certificate": null,
+     "star": 2,
+     "why": "مجانية: مفاهيم التوطين وأنواع المحتوى والأدوار والعمليات والأدوات، للانتقال من الترجمة إلى توطين المنتجات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Mona Baker",
+     "platform": "monabaker.org (blog)",
+     "url": "https://www.monabaker.org/",
+     "why": "أستاذة متعاونة في جامعة أوسلو، تنشر في دراسات الترجمة ومقالات وإعلانات وظائف ومؤتمرات للمترجمين.",
+     "arab": null,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.monabaker.org/",
+      "x": "https://twitter.com/MonaBaker11/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [],
+   "proof": {
+    "task": "ترجم صفحة فعالية حقيقية (وصف، أسئلة شائعة، أزرار) من الإنجليزية إلى العربية، وأرفق قائمة مصطلحات من 20 كلمة وملاحظة تشرح ثلاثة قرارات ترجمة.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "ATA Certification",
+    "short": "ATA",
+    "issuer": "American Translators Association",
+    "code": null,
+    "type": "exam",
+    "url": "https://www.atanet.org/certification/",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/translation-in-practice",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "advanced",
+    "star": 2,
+    "why": "اختبار مراقب مدته ثلاث ساعات بكتب مفتوحة، نتيجته نجاح أو رسوب، ويتطلب تعليماً مستمراً.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "arabic-editing",
+   "depth": "full",
+   "topPick": {
+    "title": "الإملاء",
+    "provider": "منصة معارف (m3aarf.com)",
+    "url": "https://www.m3aarf.com/certificate/16197",
+    "lang": "ar",
+    "price": "free",
+    "hours": 2.5,
+    "certificate": true,
+    "star": 1,
+    "why": "دورة عربية مجانية من 28 درساً (ساعتان و29 دقيقة): التاء المربوطة والهمزات والألف اللينة والتنوين.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [],
+   "people": [
+    {
+     "name": "حسام مصطفى إبراهيم",
+     "platform": "YouTube (قناة اكتب صح)",
+     "url": "https://www.youtube.com/c/Ektebsa7",
+     "why": "صحفي يقدّم قناة «اكتب صح» لتصحيح الأخطاء اللغوية الشائعة، بحسب دليل شبكة الصحفيين الدوليين.",
+     "arab": true,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://www.youtube.com/c/Ektebsa7"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "50 أداة: دليل التدقيق اللغوي لكتابة صحفية سليمة ومحتوى احترافي",
+     "author": "عمرو أحمد الأنصاري",
+     "site": "ijnet.org",
+     "url": "https://ijnet.org/ar/story/50-%D8%A3%D8%AF%D8%A7%D8%A9-%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D8%AA%D8%AF%D9%82%D9%8A%D9%82-%D8%A7%D9%84%D9%84%D8%BA%D9%88%D9%8A-%D9%84%D9%83%D8%AA%D8%A7%D8%A8%D8%A9-%D8%B5%D8%AD%D9%81%D9%8A%D8%A9-%D8%B3%D9%84%D9%8A%D9%85%D8%A9-%D9%88%D9%85%D8%AD%D8%AA%D9%88%D9%89-%D8%A7%D8%AD%D8%AA%D8%B1%D8%A7%D9%81%D9%8A%C2%A0%C2%A0",
+     "lang": "ar",
+     "why": "يجمع اختبارات المستوى وأدوات التدقيق الإملائي والنحوي والتشكيل للعربية، وقنوات تعليمية في التصحيح اللغوي.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "خذ مقالاً عربياً من 500 كلمة فيه أخطاء (أو ترجمة آلية)، صحّحه وقدّم نسخة «قبل/بعد» مع جدول بعشرة أخطاء وسبب كل تصحيح.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "none",
+    "proof": "ملف أعمال فيه 3 نصوص «قبل/بعد» تصحيح، مع جدول الأخطاء وأسبابها.",
+    "proofUrl": null,
+    "why": "لم نتحقق من شهادة معروفة للتدقيق العربي من صفحة جهتها؛ دبلوم مجمع الملك سلمان للتصحيح اللغوي ظهر في الأخبار فقط.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "game-design",
+   "depth": "full",
+   "topPick": {
+    "title": "Introduction to Game Design",
+    "provider": "California Institute of the Arts (Coursera)",
+    "url": "https://www.coursera.org/learn/game-design",
+    "lang": "en",
+    "price": "paid",
+    "hours": 6,
+    "certificate": true,
+    "star": 1,
+    "why": "من CalArts: أربعة أسابيع من أبسط الألعاب إلى القواعد والقصة، تقييم 4.7 من 2,940 مراجعة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Game Design and Development with Unity Specialization",
+     "provider": "Michigan State University (Coursera)",
+     "url": "https://www.coursera.org/specializations/game-design-and-development",
+     "lang": "en",
+     "price": null,
+     "hours": 78,
+     "certificate": true,
+     "star": 2,
+     "why": "خمس دورات تبني أربع ألعاب (2D و3D) في Unity ثم مشروع تخرج، نحو 78 ساعة، تقييم 4.7.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Unity Essentials",
+     "provider": "Unity Learn",
+     "url": "https://learn.unity.com/pathway/unity-essentials",
+     "lang": "en",
+     "price": null,
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "مسار تأسيسي بلا متطلبات: المحرر ثم المشاهد ثلاثية الأبعاد والصوت والبرمجة وينتهي بنشر لعبة WebGL في معرض أعمالك.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Rami Ismail",
+     "platform": "ramiismail.com (newsletter, talks, The Habibis podcast)",
+     "url": "https://ramiismail.com/",
+     "why": "مستشار ومتحدث في صناعة الألعاب بخبرة 15 عاماً، ويشارك في بودكاست The Habibis مع مطورين عرب.",
+     "arab": true,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://ramiismail.com/",
+      "linkedin": "https://linkedin.com/in/ramiismail",
+      "x": "https://twitter.com/tha_rami",
+      "youtube": "https://youtube.com/@tha_rami"
+     },
+     "linkedinSource": "https://ramiismail.com/"
+    },
+    {
+     "name": "Mark Brown",
+     "platform": "Game Maker's Toolkit (YouTube)",
+     "url": "https://gamemakerstoolkit.com/",
+     "why": "مصمم ألعاب وصحفي يشرح تصميم الألعاب في فيديوهات GMTK وينظم GMTK Game Jam السنوية.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://gamemakerstoolkit.com/",
+      "youtube": "https://www.youtube.com/@GMTK"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "MDA: A Formal Approach to Game Design and Game Research",
+     "author": "Robin Hunicke, Marc LeBlanc, Robert Zubek",
+     "site": "users.cs.northwestern.edu",
+     "url": "https://users.cs.northwestern.edu/~hunicke/MDA.pdf",
+     "lang": "en",
+     "why": "إطار الآليات والديناميكيات والجماليات، دُرّس في ورشة تصميم الألعاب بمؤتمر GDC من 2001 إلى 2004.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "صمّم لعبة صغيرة في Unity بمرحلة واحدة: اكتب وثيقة تصميم من صفحة (الهدف، القواعد، الفوز والخسارة)، ثم انشرها على WebGL مع فيديو 30 ثانية.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Unity Certified Associate: Game Developer",
+    "short": "Unity Associate",
+    "issuer": "Unity Technologies",
+    "code": null,
+    "type": "exam",
+    "url": "https://unity.com/products/unity-certifications/associate-game-developer",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/game-design",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "تغطي مبادئ تصميم الألعاب وإدارة الأصول والفيزياء والبرمجة في Unity.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "game-testing",
+   "depth": "full",
+   "topPick": {
+    "title": "ISTQB Certified Tester Foundation Level (CTFL) v4.0 syllabus",
+    "provider": "ISTQB",
+    "url": "https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/",
+    "lang": "en",
+    "price": null,
+    "hours": null,
+    "certificate": false,
+    "star": 1,
+    "why": "ستة فصول من أساسيات الاختبار حتى أدواته، وهي شرط قبل اختبار الألعاب CT-GaMe.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "ISTQB Certified Tester Game Testing (CT-GaMe) v2.0 syllabus",
+     "provider": "ISTQB",
+     "url": "https://istqb.org/certifications/certified-tester-game-testing-ct-game/",
+     "lang": "en",
+     "price": null,
+     "hours": null,
+     "certificate": false,
+     "star": 2,
+     "why": "ثمانية فصول خاصة بالألعاب: آليات اللعب والمراحل والرسوميات والصوت والذكاء الاصطناعي والفيزياء والتعريب وأدوات التحكم.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "James Bach",
+     "platform": "Satisfice (blog, Rapid Software Testing)",
+     "url": "https://www.satisfice.com/",
+     "why": "مؤسس منهجية Rapid Software Testing، ويكتب عن الاختبار الاستكشافي منذ عقود.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.satisfice.com/",
+      "youtube": "https://www.youtube.com/@rapid_software_testing"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Michael Bolton",
+     "platform": "DevelopSense (blog)",
+     "url": "https://www.developsense.com/",
+     "why": "شريك James Bach في تأليف Rapid Software Testing، ويدوّن عن الاختبار وكتابة التقارير.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.developsense.com/",
+      "linkedin": "https://www.linkedin.com/in/michael-bolton-08847/"
+     },
+     "linkedinSource": "https://www.developsense.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Exploratory Testing",
+     "author": "James Bach",
+     "site": "satisfice.com",
+     "url": "https://www.satisfice.com/exploratory-testing",
+     "lang": "en",
+     "why": "يعرّف الاختبار الاستكشافي بأنه تنفيذ الاختبارات أثناء التعلّم، بحيث يوجّه ما تتعلمه خطوتك التالية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اختر لعبة جوال مجانية، اكتب 15 حالة اختبار لمسار التسجيل والمرحلة الأولى، ونفّذها على جهازين (iOS وAndroid)، ثم اكتب 5 تقارير أخطاء بخطوات وصور.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "ISTQB Certified Tester Game Testing (CT-GaMe)",
+    "short": "ISTQB CT-GaMe",
+    "issuer": "ISTQB",
+    "code": "CT-GaMe",
+    "type": "exam",
+    "url": "https://istqb.org/certifications/certified-tester-game-testing-ct-game/",
+    "fee": null,
+    "feeVaries": true,
+    "prepUrl": "https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "40 سؤالاً في 60 دقيقة، ويشترط شهادة CTFL وخبرة عملية؛ الرسوم تحددها جهات الاختبار المحلية.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "esports-community",
+   "depth": "partial",
+   "topPick": {
+    "title": "Game Developers and Esports Organizations",
+    "provider": "University of California, Irvine (Coursera)",
+    "url": "https://www.coursera.org/learn/game-developers-esports-organizations",
+    "lang": "en",
+    "price": null,
+    "hours": 4,
+    "certificate": true,
+    "star": 1,
+    "why": "للمبتدئين: كيف يبني مطورو الألعاب رياضاتهم الإلكترونية وكيف تُنظَّم مؤسساتها، تقييم 4.6.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Esports Teams and Professional Players",
+     "provider": "University of California, Irvine (Coursera)",
+     "url": "https://www.coursera.org/learn/esports-teams-professional-players",
+     "lang": "en",
+     "price": null,
+     "hours": 6,
+     "certificate": true,
+     "star": 1,
+     "why": "الفرق التنافسية وإعلام الرياضات الإلكترونية، مع مقابلات ومهام مراجعة الأقران، تقييم 4.6.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [],
+   "articles": [],
+   "proof": {
+    "task": "خطّط بطولة مجتمعية صغيرة (16 لاعباً) للعبة شائعة: القوانين، جدول المباريات، خادم Discord بقنوات وأدوار، وخطة نشر، ثم قِس الحضور والتفاعل بعدها.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "none",
+    "proof": "ملف يوثق بطولة أو مجتمع أدرته: الأرقام (مشاركون، حضور، تفاعل) وما تعلمته.",
+    "proofUrl": null,
+    "why": "لم نجد شهادة معترفاً بها لإدارة مجتمعات الرياضات الإلكترونية؛ دورات UC Irvine تمنح شهادة إتمام فقط.",
+    "checkedAt": "2026-11-20"
+   }
+  }
+ ],
+ "knowledge": {
+  "entryRoutes": [
+   {
+    "id": "fa-securities-gdp",
+    "nameAr": "رواد قطاع الأوراق المالية - برنامج تطوير الخريجين (GDP)",
+    "nameEn": "Securities Sector Pioneers - Graduate Development Programme",
+    "owner": "الأكاديمية المالية بالتعاون مع صندوق تنمية الموارد البشرية (هدف)",
+    "url": "https://fa.gov.sa/Services/ProgramDetails/3863fdfd-db76-4dd2-b0fb-b4c700d38760",
+    "line": "برنامج مبتدئ بالتوظيف مدته 9 أشهر للخريجين الجدد، يشمل مكافحة غسل الأموال والالتزام والتدقيق الداخلي، مدعوم بالكامل.",
+    "eligibility": [
+     "أن يكون المتقدم سعودي/سعودية الجنسية.",
+     "حاصل على درجة البكالوريوس حديث التخرج، وأن يكون في أحد التخصصات التالية أو ما يعادلها: المالية، المحاسبة، الاستثمار، الاقتصاد، تقنية المعلومات، الأمن السيبراني، هندسة البرمجيات، نظم المعلومات الإدارية، الرياضيات، الإحصاء، إدارة المخاطر، القانون والقانون الدولي، الهندسة.",
+     "تحقيق معدل تراكمي لا يقل عن 4.0 من 5.0، أو 3.2 من 4.0، أو 80%.",
+     "إجادة اللغة الإنجليزية، بما لا يقل عن 6 في اختبار الآيلتس أو ما يعادلها"
+    ],
+    "benefit": "مدعوم بالكامل (الرسوم المعلنة 81,696.00 ريال)",
+    "fits": "compliance-aml, audit",
+    "checkedAt": "2026-11-20",
+    "note": "Read the FA programme page: date 11 April 2027, 205 days, Arabic-English, in-person Riyadh, fully funded by HRDF and FA; securities-sector track whose technical modules include AML/CFT, KYC, compliance and internal audit."
+   },
+   {
+    "id": "pwc-assurance-coop",
+    "nameAr": "برنامج التدريب التعاوني في التدقيق - PwC الشرق الأوسط",
+    "nameEn": "PwC Assurance COOP Programme 2027",
+    "owner": "برايس ووترهاوس كوبرز الشرق الأوسط",
+    "url": "https://careers.pwc.com/job/Middle-East-Assurance%2C-COOP-and-Summer-Internship-Programme-2027-Middle-East-Midd/1455545833/",
+    "line": "تدريب تعاوني بدوام كامل من 4 إلى 6 أشهر لطلاب الفصل الأخير في الرياض وجدة والظهران والخبر، بدفعتين في يناير وأغسطس.",
+    "eligibility": [
+     "Currently enrolled in an undergraduate program in Accounting, Finance, Business, or related field",
+     "You will be on track to achieve a GPA of 3.0/4.0 or equivalent in your undergraduate degree",
+     "Fluency in English; Arabic language skills are a plus"
+    ],
+    "benefit": null,
+    "fits": "audit",
+    "checkedAt": "2026-11-20",
+    "note": "Read the PwC posting dated Nov 9, 2026: COOP for final-semester students in Riyadh, Jeddah, Dhahran, Al Khobar; intakes January and August."
+   },
+   {
+    "id": "moj-trainee-lawyer",
+    "nameAr": "المحامي المتدرب",
+    "nameEn": "Trainee lawyer (Ministry of Justice)",
+    "owner": "وزارة العدل",
+    "url": "https://www.moj.gov.sa/ar/Ministry/Departments/Mohammah/Pages/LawyersTraining3.aspx",
+    "line": "خريج الشريعة أو الأنظمة يتدرب متفرغاً لدى محامٍ مرخّص قبل أن يحصل على رخصة المحاماة.",
+    "eligibility": [
+     "أن يكون المتدرب سعودي الجنسية.",
+     "أن يكون حاصلا على شهادة كلية الشريعة أو شهادة البكالوريوس تخصص أنظمة من إحدى جامعات المملكة",
+     "أن يكون المحامي المتدرب لديه قد أمضى خمس سنوات في ممارسة مهنة المحاماة ، و تصريحه ساري المفعول.",
+     "أن يتفرغ المتدرب للتدريب طيلة فترة التدريب .",
+     "أن يكون مقيماً في المملكة العربية السعودية.",
+     "وتكون مدة التدريب للحاصلين على شهادة البكالوريوس ثلاث سنوات",
+     "أما الحاصلين على درجة الماجستير سنة وحده"
+    ],
+    "benefit": null,
+    "fits": "legal-paralegal-contracts",
+    "checkedAt": "2026-11-20",
+    "note": "Read from the Ministry of Justice page «تدريب المحامين» on 2026-11-20. The page may predate the Saudi Bar Association's current process; the conditions are quoted as the page states them."
+   }
+  ],
+  "reusedEntryRoutes": [
+   "doroob",
+   "hrdf-coop",
+   "hrdf-professional-certificates",
+   "tamheer"
+  ],
+  "families": [
+   {
+    "id": "credit-risk",
+    "title": "محلل ائتمان ومخاطر ائتمانية",
+    "titleEn": "Credit Analyst / Credit Risk",
+    "fields": [
+     "banking-risk"
+    ],
+    "isNew": true,
+    "what": "يقيّم قدرة الأفراد والمنشآت على السداد، ويوصي بمنح التمويل أو رفضه، ويتابع التعثر والتحصيل.",
+    "dayToDay": [
+     "مراجعة طلبات التمويل والقوائم المالية والسجل الائتماني للعميل.",
+     "حساب نسب المديونية والسيولة وكتابة مذكرة ائتمانية بالتوصية.",
+     "متابعة المحفظة ورصد مؤشرات التعثر المبكرة.",
+     "التنسيق مع فرق التحصيل والالتزام وفق تعليمات ساما."
+    ],
+    "path": {
+     "skills": [
+      "banking-basics",
+      "credit-analysis",
+      "aml-compliance"
+     ],
+     "basedOnLine": "المسار مبني على: اختبارات الأكاديمية المالية المهنية (أساسيات مصرفية الأفراد، أساسيات تمويل الأفراد، المستشار الائتماني CAPE)",
+     "basedOnLinks": [
+      "https://fa.gov.sa/en/Services/ExamDetails/adbe83a7-c98d-410e-a4c6-b10900850475",
+      "https://fa.gov.sa/en/Services/ExamDetails/efa6040a-f4ae-459b-9e96-af4200c2b9ef",
+      "https://fa.gov.sa/en/Services/ExamDetails/4a2a54d3-0d1a-4e5b-85e9-ab41007db586"
+     ],
+     "orderNote": "banking-basics follows the Financial Academy RBF exam (sector structure, products, consumer protection, fraud, AML). credit-analysis follows IFFE (retail-finance rules, products, borrowers) then CAPE (financing products, credit process, operational risk, customer credit risk), so banking-basics is its prerequisite.",
+     "guidelines": [
+      {
+       "name": "الاختبار المهني لأساسيات مصرفية الأفراد (RBF)",
+       "provider": "الأكاديمية المالية (Financial Academy)",
+       "url": "https://fa.gov.sa/en/Services/ExamDetails/adbe83a7-c98d-410e-a4c6-b10900850475",
+       "orderedTopics": [
+        "الفصل الأول: هيكل قطاع الخدمات المصرفية للأفراد في المملكة العربية السعودية: 8%",
+        "الفصل الثاني: المنتجات والخدمات المصرفية للأفراد داخل المملكة العربية السعودية: 25%",
+        "الفصل الثالث: مبادئ التمويل المسؤول: 6%",
+        "الفصل الرابع: مبادئ الشريعة الإسلامية وأثرها على الخدمات المصرفية للأفراد: 11%",
+        "الفصل الخامس: مبادئ خدمة العملاء الفعالة في قطاع الخدمات المصرفية للأفراد: 7%",
+        "الفصل السادس: مبادئ حماية عملاء المصارف: 11%",
+        "الفصل السابع: قواعد سلوك الأعمال: 4%",
+        "الفصل الثامن: مبادئ الالتزام وتأثيرها على قطاع الخدمات المصرفية للأفراد: 7%",
+        "الفصل التاسع: تحديد ووصف مفهوم الاحتيال، وتأثير ذلك على الخدمات المصرفية للأفراد: 8%",
+        "الفصل العاشر: مكافحة غسل الأموال وتمويل الإرهاب في المملكة العربية السعودية: 13%"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "الاختبار المهني في أساسيات تمويل الأفراد (IFFE)",
+       "provider": "الأكاديمية المالية (Financial Academy)",
+       "url": "https://fa.gov.sa/en/Services/ExamDetails/efa6040a-f4ae-459b-9e96-af4200c2b9ef",
+       "orderedTopics": [
+        "الفصل الأول: النظام المصرفي في المملكة العربية السعودية: 5%",
+        "الفصل الثاني: التشريعات الحاكمة المرتبطة بتمويل الأفراد: 25%",
+        "الفصل الثالث: مُنتِجو الخدمات التمويلية: 10%",
+        "الفصل الرابع: المنتجات التمويلية للأفراد: 25%",
+        "الفصل الخامس: المشترون الأفراد: 20%",
+        "الفصل السادس: الجدارات المهنية: 5%",
+        "الفصل السابع: التمويل الإسلامي: 5%",
+        "الفصل الثامن: الشمول المالي: 5%"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "الاختبار المهني للمستشار الائتماني (CAPE)",
+       "provider": "الأكاديمية المالية (Financial Academy)",
+       "url": "https://fa.gov.sa/en/Services/ExamDetails/4a2a54d3-0d1a-4e5b-85e9-ab41007db586",
+       "orderedTopics": [
+        "الفصل الأول: المنتجات التمويلية: 40%",
+        "الفصل الثاني: آلية الحصول على التمويل: 13%",
+        "الفصل الثالث: مقدمة في إدارة المخاطر التشغيلية: 13%",
+        "الفصل الرابع: المخاطر الائتمانية المتعلقة بالعملاء: 14%",
+        "الفصل الخامس: إدارة الذات وأخلاقيات العمل في المؤسسات المالية: 20%"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "tamara-collections-advisor-riyadh"
+    ],
+    "jobsThin": true,
+    "jobsThinNote": "Only one real posting could be found on company boards on 2026-11-20; see unverified.",
+    "employers": [
+     {
+      "name": "تمارا",
+      "nameEn": "Tamara",
+      "careersUrl": "https://job-boards.eu.greenhouse.io/tamara",
+      "checkedAt": "2026-11-20",
+      "note": "Compliance, fraud and collections roles in Riyadh on 2026-11-20"
+     },
+     {
+      "name": "بنك الرياض",
+      "nameEn": "Riyad Bank",
+      "careersUrl": "https://careers.riyadbank.com/",
+      "checkedAt": "2026-11-20",
+      "note": "Own careers site opened; job list loads by script, no credit/compliance title could be read"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates"
+    ],
+    "certificates": [
+     {
+      "name": "الاختبار المهني لأساسيات مصرفية الأفراد (RBF)",
+      "issuer": "الأكاديمية المالية",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/adbe83a7-c98d-410e-a4c6-b10900850475",
+      "level": "entry",
+      "priceText": "رسوم الامتحان 1000.00 ريال",
+      "arabicAvailable": true,
+      "why": "أساس العمل في أي بنك سعودي: المنتجات وحماية العملاء والاحتيال ومكافحة غسل الأموال.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "الاختبار المهني في أساسيات تمويل الأفراد (IFFE)",
+      "issuer": "الأكاديمية المالية",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/efa6040a-f4ae-459b-9e96-af4200c2b9ef",
+      "level": "entry",
+      "priceText": "رسوم الامتحان 1150.00 ريال",
+      "arabicAvailable": true,
+      "why": "للمنضمين حديثًا لقطاع التمويل: التشريعات والمنتجات التمويلية والمشترون الأفراد.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "الاختبار المهني للمستشار الائتماني (CAPE)",
+      "issuer": "الأكاديمية المالية",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/4a2a54d3-0d1a-4e5b-85e9-ab41007db586",
+      "level": "associate",
+      "priceText": "رسوم الامتحان 1200.00 ريال",
+      "arabicAvailable": true,
+      "why": "للموظفين المعنيين مباشرة بمنح الائتمان في البنوك وشركات التمويل.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": {
+     "role": "Credit Controller",
+     "minSAR": 18000,
+     "maxSAR": 25000,
+     "avgSAR": 22000,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 32, table «Accountancy & finance» (Monthly salary ranges and average values (SAR))",
+     "quote": "Credit Controller | 18,000 - 25,000 | 22,000. Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025.",
+     "checkedAt": "2026-11-20",
+     "note": "أقرب مسمى في دليل Hays 2026 لوظائف الائتمان والتحصيل؛ الدليل ما فيه صف «محلل ائتمان». الراتب الشهري الثابت الإجمالي بالريال (الربع الأخير 2025)."
+    },
+    "salaryNote": null,
+    "interviewQuestions": [
+     "ما الفرق بين التمويل الشخصي والتمويل العقاري من حيث المخاطر والضمانات؟",
+     "كيف تحسب نسبة الاستقطاع من الراتب، ولماذا تهم في قرار التمويل؟",
+     "ما الذي تبحث عنه في السجل الائتماني قبل الموافقة على التمويل؟",
+     "عميل متأخر في قسطين: ما خطواتك وفق ضوابط التحصيل؟",
+     "اشرح احتمال التعثر (PD) والخسارة عند التعثر (LGD) بمثال بسيط."
+    ],
+    "first30Days": [
+     "الأسبوع 1: تعلّم سياسة الائتمان في المنشأة وأنواع المنتجات التمويلية وصلاحيات الموافقة.",
+     "الأسبوع 2: راجع ملفات تمويل معتمدة سابقًا مع زميل أقدم وافهم سبب كل قرار.",
+     "الأسبوع 3: جهّز أول مذكرة ائتمانية تحت الإشراف واعرض حساباتك.",
+     "الأسبوع 4: تابع تقرير المحفظة الأسبوعي وحدد ثلاثة عملاء تظهر عليهم مؤشرات تعثر مبكرة."
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "دليلك يقول لك: ابدأ باختبار أساسيات مصرفية الأفراد من الأكاديمية المالية، هذا بابك لأي بنك.",
+     "دليلك يقول لك: محلل الائتمان شغلته يقرأ أرقام العميل زين قبل لا يقول نعم أو لا.",
+     "دليلك ينبهك: وظائف محلل الائتمان المفتوحة قليلة هالحين، والتحصيل في شركات «اشترِ الآن وادفع لاحقًا» بداية تقربك منها."
+    ],
+    "sources": [
+     {
+      "label": "الاختبار المهني لأساسيات مصرفية الأفراد (RBF)",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/adbe83a7-c98d-410e-a4c6-b10900850475",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "الاختبار المهني في أساسيات تمويل الأفراد (IFFE)",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/efa6040a-f4ae-459b-9e96-af4200c2b9ef",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "الاختبار المهني للمستشار الائتماني (CAPE)",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/4a2a54d3-0d1a-4e5b-85e9-ab41007db586",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Financial Academy: retail banking fundamentals exam, third edition (fee 550.00)",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/3dc42178-c00e-434b-871f-ade300fc6774",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Tamara Collections Advisor posting",
+      "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/5005774101",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "FA programme: أساسيات العمل المصرفي",
+      "url": "https://www.fa.gov.sa/Services/ProgramDetails/fcc5165c-a569-ea11-80d6-005056981173",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "FA programme: CAPE preparation",
+      "url": "https://fa.gov.sa/Services/ProgramDetails/30e25e2a-2a37-4570-95fa-af030097c286",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Coursera: Credit Risk Modeling",
+      "url": "https://www.coursera.org/learn/credit-risk-modeling",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "FA Credit Advisor curriculum (4th edition)",
+      "url": "https://fa.gov.sa/ar/Documents/CreditAdvisor6_09112023.pdf",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "FA RBF curriculum (4th edition)",
+      "url": "https://fa.gov.sa/ar/Documents/finalRetailBanking20231207.pdf",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "CFI: 5 Cs of Credit",
+      "url": "https://corporatefinanceinstitute.com/resources/commercial-lending/5-cs-of-credit/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "compliance-aml",
+    "title": "مسؤول الالتزام ومكافحة غسل الأموال",
+    "titleEn": "Compliance & AML Officer",
+    "fields": [
+     "banking-risk"
+    ],
+    "isNew": true,
+    "what": "يتأكد أن البنك أو شركة المدفوعات تلتزم بأنظمة ساما، ويكشف العمليات المشبوهة ويبلغ عنها.",
+    "dayToDay": [
+     "متابعة تعاميم ساما وتحديث السياسات والإجراءات الداخلية.",
+     "مراجعة المنتجات الجديدة قبل إطلاقها من ناحية نظامية.",
+     "فحص العملاء والعمليات بحثًا عن مؤشرات غسل الأموال والاحتيال.",
+     "إعداد التقارير الرقابية لساما ودعم زيارات التفتيش."
+    ],
+    "path": {
+     "skills": [
+      "aml-compliance",
+      "banking-basics",
+      "internal-audit",
+      "english",
+      "communication",
+      "problem-solving"
+     ],
+     "basedOnLine": "المسار مبني على: اختبار أساسيات مصرفية الأفراد واختبار أساسيات الالتزام من الأكاديمية المالية",
+     "basedOnLinks": [
+      "https://fa.gov.sa/en/Services/ExamDetails/adbe83a7-c98d-410e-a4c6-b10900850475",
+      "https://fa.gov.sa/en/Services/ExamDetails/f0ff4673-6827-44b8-9c4d-ade3011277bb"
+     ],
+     "orderNote": "banking-basics (RBF, which ends with fraud and AML chapters) comes first; aml-compliance follows the Financial Academy Compliance Fundamentals exam order (sector structure, supervision and compliance, financial crime, Shariah compliance, regulators), with the FA CCO programme as the star-2 step.",
+     "guidelines": [
+      {
+       "name": "الاختبار المهني لأساسيات مصرفية الأفراد (RBF)",
+       "provider": "الأكاديمية المالية (Financial Academy)",
+       "url": "https://fa.gov.sa/en/Services/ExamDetails/adbe83a7-c98d-410e-a4c6-b10900850475",
+       "orderedTopics": [
+        "الفصل الأول: هيكل قطاع الخدمات المصرفية للأفراد في المملكة العربية السعودية: 8%",
+        "الفصل الثاني: المنتجات والخدمات المصرفية للأفراد داخل المملكة العربية السعودية: 25%",
+        "الفصل الثالث: مبادئ التمويل المسؤول: 6%",
+        "الفصل الرابع: مبادئ الشريعة الإسلامية وأثرها على الخدمات المصرفية للأفراد: 11%",
+        "الفصل الخامس: مبادئ خدمة العملاء الفعالة في قطاع الخدمات المصرفية للأفراد: 7%",
+        "الفصل السادس: مبادئ حماية عملاء المصارف: 11%",
+        "الفصل السابع: قواعد سلوك الأعمال: 4%",
+        "الفصل الثامن: مبادئ الالتزام وتأثيرها على قطاع الخدمات المصرفية للأفراد: 7%",
+        "الفصل التاسع: تحديد ووصف مفهوم الاحتيال، وتأثير ذلك على الخدمات المصرفية للأفراد: 8%",
+        "الفصل العاشر: مكافحة غسل الأموال وتمويل الإرهاب في المملكة العربية السعودية: 13%"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "الاختبار المهني لأساسيات الالتزام - النسخة الثانية",
+       "provider": "الأكاديمية المالية (Financial Academy)",
+       "url": "https://fa.gov.sa/en/Services/ExamDetails/f0ff4673-6827-44b8-9c4d-ade3011277bb",
+       "orderedTopics": [
+        "الفصل الأول: هيكل قطاع الخدمات المالية: 5%",
+        "الفصل الثاني: مبادئ وتأثير الرقابة والالتزام: 15%",
+        "الفصل الثالث: مبادئ مكافحة الجرائم المالية: 30%",
+        "الفصل الرابع: مبادئ الالتزام بالمتطلبات الشرعية في تقديم الخدمات المالية: 30%",
+        "الفصل الخامس: دور الجهات التنظيمية في مجال تقديم الخدمات المالية: 20%"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "tamara-compliance-officer-riyadh",
+     "tamara-compliance-senior-associate-riyadh",
+     "tamara-fraud-investigator-riyadh",
+     "lean-senior-compliance-manager-riyadh"
+    ],
+    "jobsThin": false,
+    "jobsThinNote": null,
+    "employers": [
+     {
+      "name": "تمارا",
+      "nameEn": "Tamara",
+      "careersUrl": "https://job-boards.eu.greenhouse.io/tamara",
+      "checkedAt": "2026-11-20",
+      "note": "Compliance, fraud and collections roles in Riyadh on 2026-11-20"
+     },
+     {
+      "name": "لين تكنولوجيز",
+      "nameEn": "Lean Technologies",
+      "careersUrl": "https://jobs.ashbyhq.com/LeanTech",
+      "checkedAt": "2026-11-20",
+      "note": "SAMA-licensed payment institution; compliance role in Riyadh"
+     },
+     {
+      "name": "PwC الشرق الأوسط",
+      "nameEn": "PwC Middle East",
+      "careersUrl": "https://careers.pwc.com/search/?q=audit&locationsearch=Saudi+Arabia",
+      "checkedAt": "2026-11-20",
+      "note": "Internal audit, IT audit and assurance COOP roles in Riyadh, Jeddah, Dhahran"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "fa-securities-gdp"
+    ],
+    "certificates": [
+     {
+      "name": "الاختبار المهني لأساسيات الالتزام - النسخة الثانية",
+      "issuer": "الأكاديمية المالية",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/f0ff4673-6827-44b8-9c4d-ade3011277bb",
+      "level": "entry",
+      "priceText": "رسوم الامتحان 632.50 ريال",
+      "arabicAvailable": true,
+      "why": "الاختبار التأسيسي لمن ينضم لإدارة الالتزام في أي قطاع مالي.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "الشهادة المهنية لمسؤول الالتزام المعتمد – CCO",
+      "issuer": "الأكاديمية المالية",
+      "url": "https://fa.gov.sa/Services/ProgramDetails/75264457-13d8-4a75-a953-adf8009ac53d",
+      "level": "professional",
+      "priceText": null,
+      "arabicAvailable": true,
+      "why": "برنامج ينتهي باختبار مهني لمن يدير مخاطر عدم الالتزام وبرامج مكافحة غسل الأموال.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": {
+     "role": "Head of Compliance",
+     "minSAR": 55000,
+     "maxSAR": 85000,
+     "avgSAR": 75000,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 33, table «Banking & financial services» (Monthly salary ranges and average values (SAR))",
+     "quote": "Head of Compliance | 55,000 - 85,000 | 75,000. Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025.",
+     "checkedAt": "2026-11-20",
+     "note": "دليل Hays 2026 يذكر رئيس الالتزام فقط (منصب قيادي)، ما فيه صف لمسؤول التزام مبتدئ؛ اعتبره سقف المسار لا راتب البداية."
+    },
+    "salaryNote": null,
+    "interviewQuestions": [
+     "ما مراحل غسل الأموال الثلاث؟ أعطِ مثالًا لكل مرحلة.",
+     "ما الفرق بين العناية الواجبة العادية والمعززة، ومتى تستخدم كل واحدة؟",
+     "وصلك تعميم جديد من ساما: كيف تتأكد أن الإدارات طبقته في الوقت المحدد؟",
+     "منتج جديد يريد الفريق إطلاقه الأسبوع القادم: ما أسئلتك النظامية قبل الموافقة؟",
+     "متى ترفع بلاغ اشتباه إلى الإدارة العامة للتحريات المالية؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: اقرأ سياسة الالتزام وسياسة مكافحة غسل الأموال وأهم تعاميم ساما الخاصة بنشاط المنشأة.",
+     "الأسبوع 2: احضر مراجعة منتج جديد ولاحظ كيف تُكتب الملاحظات النظامية.",
+     "الأسبوع 3: راجع تنبيهات مراقبة العمليات مع زميل أقدم ووثّق قراراتك.",
+     "الأسبوع 4: جهّز مسودة أحد التقارير الدورية لساما وقائمة بالتعاميم الجديدة وحالة تطبيقها."
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "دليلك يقول لك: الالتزام شغلته يحمي البنك من المخالفات قبل لا تصير.",
+     "دليلك يقول لك: اختبار أساسيات الالتزام من الأكاديمية المالية رسومه 632.50 ريال، وهو أول خطوة.",
+     "دليلك ينبهك: أغلب الإعلانات تطلب عربي وإنجليزي بطلاقة، فاشتغل على لغتك من الحين."
+    ],
+    "sources": [
+     {
+      "label": "الاختبار المهني لأساسيات مصرفية الأفراد (RBF)",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/adbe83a7-c98d-410e-a4c6-b10900850475",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "الاختبار المهني لأساسيات الالتزام - النسخة الثانية",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/f0ff4673-6827-44b8-9c4d-ade3011277bb",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Tamara Compliance Officer posting",
+      "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/4969685101",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Tamara Compliance Senior Associate posting",
+      "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/4969694101",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Tamara Fraud Investigator posting",
+      "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/4897236101",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Lean Senior Compliance Manager posting",
+      "url": "https://jobs.ashbyhq.com/LeanTech/b32337e5-d3a0-4f35-be2a-b2646a86c7c1",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "FA programme: أساسيات مكافحة غسل الأموال وتمويل الإرهاب",
+      "url": "https://www.fa.gov.sa/Services/ProgramDetails/8d6f5618-c9a4-4856-a1ae-b05500c7ff8d",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "FA programme: CCO",
+      "url": "https://fa.gov.sa/Services/ProgramDetails/75264457-13d8-4a75-a953-adf8009ac53d",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Coursera: مكافحة غسل الأموال (Alfaisal)",
+      "url": "https://www.coursera.org/learn/anti-money-laundering",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "FA Securities Sector Pioneers GDP",
+      "url": "https://fa.gov.sa/Services/ProgramDetails/3863fdfd-db76-4dd2-b0fb-b4c700d38760",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "FA Compliance Fundamentals curriculum (3rd edition)",
+      "url": "https://fa.gov.sa/Content/Downloads/Exams/RevisedVersion_A7BasicsOfCommitment.pdf",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "SAFIU (General Directorate of Financial Investigations)",
+      "url": "https://safiu.gov.sa/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "audit",
+    "title": "مراجع داخلي وخارجي",
+    "titleEn": "Internal / External Audit Associate",
+    "fields": [
+     "banking-risk"
+    ],
+    "isNew": true,
+    "what": "يفحص عمليات المنشأة وقوائمها المالية، ويختبر الضوابط الداخلية، ويكتب الملاحظات والتوصيات.",
+    "dayToDay": [
+     "تخطيط مهمة المراجعة وتحديد المخاطر الرئيسية للعملية.",
+     "اختبار عينات من العمليات للتحقق من تصميم الضوابط وفعاليتها.",
+     "توثيق الأدلة في أوراق العمل.",
+     "صياغة الملاحظات وأثرها والتوصيات ومتابعة تنفيذها."
+    ],
+    "path": {
+     "skills": [
+      "internal-audit",
+      "accounting",
+      "communication",
+      "problem-solving",
+      "english"
+     ],
+     "basedOnLine": "المسار مبني على: منهج اختبار المدقق الداخلي المعتمد CIA (الجزء الأول) من معهد المدققين الداخليين IIA",
+     "basedOnLinks": [
+      "https://www.theiia.org/en/certifications/cia/exam-prep-resources/exam-syllabus/exam-syllabus-part-1/"
+     ],
+     "orderNote": "internal-audit star 1 covers CIA Part 1 domains I-IV (foundations, independence, proficiency, quality) through the FA 'أساسيات المراجعة الداخلية' programme; star 2 adds domains V-VI (governance, risk and control; fraud risks) through the FA CIA Part 1 preparation programme. Accounting (existing skill) is the cross-field base and is cited in job requirements.",
+     "guidelines": [
+      {
+       "name": "CIA Exam Syllabus Part 1",
+       "provider": "The Institute of Internal Auditors (IIA)",
+       "url": "https://www.theiia.org/en/certifications/cia/exam-prep-resources/exam-syllabus/exam-syllabus-part-1/",
+       "orderedTopics": [
+        "I. Foundations of Internal Auditing (15%)",
+        "II. Independence and Objectivity (15%)",
+        "III. Proficiency and Due Professional Care (18%)",
+        "IV. Quality Assurance and Improvement Program (7%)",
+        "V. Governance, Risk Management, and Control (35%)",
+        "VI. Fraud Risks (10%)"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "pwc-assurance-coop-2027-riyadh",
+     "pwc-risk-internal-audit-senior-associate-jeddah",
+     "ey-senior-auditor-gcc-nationals-riyadh"
+    ],
+    "jobsThin": false,
+    "jobsThinNote": null,
+    "employers": [
+     {
+      "name": "PwC الشرق الأوسط",
+      "nameEn": "PwC Middle East",
+      "careersUrl": "https://careers.pwc.com/search/?q=audit&locationsearch=Saudi+Arabia",
+      "checkedAt": "2026-11-20",
+      "note": "Internal audit, IT audit and assurance COOP roles in Riyadh, Jeddah, Dhahran"
+     },
+     {
+      "name": "إرنست ويونغ",
+      "nameEn": "EY",
+      "careersUrl": "https://careers.ey.com/ey/search/?q=audit&locationsearch=Saudi+Arabia",
+      "checkedAt": "2026-11-20",
+      "note": "Audit, forensics and tech-risk roles for GCC nationals"
+     },
+     {
+      "name": "فودكس",
+      "nameEn": "Foodics",
+      "careersUrl": "https://apply.workable.com/foodics/",
+      "checkedAt": "2026-11-20",
+      "note": "Senior Risk And BCM Specialist, Riyadh"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "pwc-assurance-coop",
+     "fa-securities-gdp"
+    ],
+    "certificates": [
+     {
+      "name": "Certified Internal Auditor (CIA)",
+      "issuer": "The Institute of Internal Auditors (IIA)",
+      "url": "https://www.theiia.org/en/certifications/cia/exam-prep-resources/exam-syllabus/exam-syllabus-part-1/",
+      "level": "professional",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "تذكرها PwC ضمن المؤهلات المفضلة للمراجعة الداخلية، وتوفر الأكاديمية المالية برنامجًا تحضيريًا عربيًا لها.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": {
+     "role": "Audit Manager",
+     "minSAR": 30000,
+     "maxSAR": 45000,
+     "avgSAR": 40000,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 32, table «Accountancy & finance» (Monthly salary ranges and average values (SAR))",
+     "quote": "Audit Manager | 30,000 - 45,000 | 40,000. Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025.",
+     "checkedAt": "2026-11-20",
+     "note": "مدير مراجعة حسب دليل Hays 2026 (منصب متوسط إلى أعلى)، ما فيه صف لمراجع مبتدئ."
+    },
+    "salaryNote": null,
+    "interviewQuestions": [
+     "ما الفرق بين المراجعة الداخلية والمراجعة الخارجية؟",
+     "اذكر مكونات الرقابة الداخلية الخمسة في إطار COSO.",
+     "كيف تختار عينة لاختبار ضابط اعتماد المصروفات؟",
+     "وجدت ملاحظة جوهرية والمدير المسؤول يرفضها: كيف تتصرف وتحافظ على استقلاليتك؟",
+     "اكتب ملاحظة مراجعة قصيرة: الملاحظة، والأثر، والتوصية."
+    ],
+    "first30Days": [
+     "الأسبوع 1: تعرّف على منهجية المراجعة في المنشأة وأدوات أوراق العمل ومعايير الجودة.",
+     "الأسبوع 2: شارك في اجتماع تخطيط مهمة واقرأ سجل المخاطر للعملية.",
+     "الأسبوع 3: نفّذ اختبار عينات لضابط أو ضابطين ووثّق الأدلة.",
+     "الأسبوع 4: اكتب مسودة ملاحظة واحدة على الأقل واعرضها على المشرف للمراجعة."
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "دليلك يقول لك: التدريب التعاوني في شركات المراجعة الكبرى أقصر طريق للوظيفة، قدّم قبل تخرجك.",
+     "دليلك يقول لك: المراجع الشاطر يسأل «وش الدليل؟» قبل أي استنتاج.",
+     "دليلك ينبهك: شهادة CIA تفرق معك، والأكاديمية المالية عندها برنامج تحضيري بالعربي."
+    ],
+    "sources": [
+     {
+      "label": "CIA Exam Syllabus Part 1",
+      "url": "https://www.theiia.org/en/certifications/cia/exam-prep-resources/exam-syllabus/exam-syllabus-part-1/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "PwC Risk Internal Audit Senior Associate Jeddah",
+      "url": "https://careers.pwc.com/job/Jeddah-PwC-Risk-Internal-Audit-Senior-Associate-Jeddah/1439162033/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "EY Senior Auditor GCC Nationals Riyadh",
+      "url": "https://careers.ey.com/ey/job/Riyadh-Senior-Auditor-GCC-Nationals-11461/1374703333/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "PwC Assurance COOP 2027",
+      "url": "https://careers.pwc.com/job/Middle-East-Assurance%2C-COOP-and-Summer-Internship-Programme-2027-Middle-East-Midd/1455545833/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "FA programme: أساسيات المراجعة الداخلية",
+      "url": "https://www.fa.gov.sa/Services/ProgramDetails/aeb85dec-3e6e-41d0-a47e-adf7015aa5bd",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "FA programme: CIA Part 1 preparation",
+      "url": "https://betaportal.fa.gov.sa/Services/ProgramDetails/982aca6b-d4ae-453a-9a86-ae2900cdca64",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "IIA Statements of Position",
+      "url": "https://www.theiia.org/en/resources/statements-of-position/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "IIA podcast: The IIA's Refreshed Three Lines Model",
+      "url": "https://www.theiia.org/en/content/podcast/getting-started-with/2026/ep-0040/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Richard Chambers",
+      "url": "https://www.richardchambers.com/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "legal-paralegal-contracts",
+    "title": "باحث قانوني / أخصائي عقود وحوكمة",
+    "titleEn": "Legal Researcher / Paralegal / Contracts & Governance",
+    "fields": [
+     "legal"
+    ],
+    "isNew": true,
+    "what": "يساعد الإدارة القانونية في الشركة: يبحث في الأنظمة، ويصوغ العقود ويراجعها، ويجهّز قرارات مجلس الإدارة وسجلات الحوكمة.",
+    "dayToDay": [
+     "يبحث في الأنظمة واللوائح السعودية ويكتب مذكرة رأي مختصرة",
+     "يصوغ اتفاقيات السرية وعقود الخدمات والموردين ويراجعها",
+     "يتابع تواريخ تجديد العقود والتراخيص في سجل منظم",
+     "يجهّز قرارات الشركاء ومجلس الإدارة ومحاضرها"
+    ],
+    "path": {
+     "skills": [
+      "legal-research",
+      "contract-drafting",
+      "corporate-governance",
+      "communication",
+      "english"
+     ],
+     "basedOnLine": "المسار مبني على: نظام المعاملات المدنية (العقد أول مصادر الالتزام)، ووحدات شهادة CCMA لإدارة العقود من NCMA، ولائحة حوكمة الشركات من هيئة السوق المالية واختبار GRCP من OCEG",
+     "basedOnLinks": [
+      "https://ncmahq.org/Web/Learning/CCMA_Individual_Training_Modules.aspx",
+      "https://uqn.gov.sa/details?p=23125",
+      "https://cma.gov.sa/RulesRegulations/Regulations/Pages/details.aspx?code=2",
+      "https://www.oceg.org/certifications/grcp/",
+      "https://www.moj.gov.sa/ar/Ministry/Departments/Mohammah/Pages/LawyersTraining3.aspx"
+     ],
+     "orderNote": "legal-research first: reading the law (the Civil Transactions Law opens with the preliminary chapter, then sources of obligation, contract first) is what every later skill rests on, and both junior postings ask it. contract-drafting second: CCMA modules 2 (Contract - Essentials) to 8 (Manage Operations) build on reading the law; star 1 = drafting/reviewing standard NDAs and service contracts (CCMA modules 2-5), star 2 = negotiation and managing the contract lifecycle (modules 6-8). corporate-governance last and at one star: the CMA Corporate Governance Regulations and GRCP; junior postings ask only support for board resolutions and records.",
+     "guidelines": [
+      {
+       "name": "CCMA Individual Training Modules (Commercial and Contract Management Associate, aligned with the Contract Management Standard)",
+       "provider": "NCMA / CCM Institute (with World Commerce & Contracting)",
+       "url": "https://ncmahq.org/Web/Learning/CCMA_Individual_Training_Modules.aspx",
+       "orderedTopics": [
+        "1 Strategic Contracting in a Complex Business Environment: Building Relationships that Last",
+        "2 Contract - Essentials",
+        "3 Preparing to Contract: From Market to Signature - Initiate",
+        "4 Bidding and Pricing Strategies - Bid",
+        "5 Building Blocks of Business Contracts -Develop",
+        "6 Negotiate with Confidence",
+        "7 Keeping Contracts on Track – Manage Transformation and Change",
+        "8 Managing Contracts: From Performance to Resolution – Manage Operations"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "نظام المعاملات المدنية (1444-12-01 هـ / 19-06-2023)",
+       "provider": "جريدة أم القرى (uqn.gov.sa)",
+       "url": "https://uqn.gov.sa/details?p=23125",
+       "orderedTopics": [
+        "باب تمهيدي: تطبيق النظام، الأشخاص، الأشياء والأموال، أنواع الحقوق، استعمال الحق",
+        "القسم الأول: الالتزامات: الباب الأول: مصادر الالتزام: الفصل الأول: العقد (أركان العقد، إبطاله وبطلانه، النيابة في التعاقد، آثاره، تفسيره، فسخه وانفساخه)",
+        "الباب الثاني: آثار الالتزام · الثالث: الأوصاف العارضة · الرابع: انتقال الالتزام · الخامس: انقضاء الالتزام",
+        "القسم الثاني: العقود المسماة (يبدأ بعقد البيع)"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "لائحة حوكمة الشركات",
+       "provider": "هيئة السوق المالية",
+       "url": "https://cma.gov.sa/RulesRegulations/Regulations/Pages/details.aspx?code=2",
+       "orderedTopics": [
+        "«تبين هذه اللائحة القواعد والمعايير المنظمة لإدارة الشركة لضمان الالتزام بأفضل ممارسات حوكمة الشركات» (amended 2023/01/18; the page lists no chapter titles)"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "GRC Professional (GRCP) exam outline",
+       "provider": "OCEG",
+       "url": "https://www.oceg.org/certifications/grcp/",
+       "orderedTopics": [
+        "GRC Key Concepts (30%)",
+        "GRC Capability Model Details (70%): Learn 15% · Align 20% · Perform 25% · Review 10%"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "تدريب المحامين (شروط تسجيل المحامي المتدرب)",
+       "provider": "وزارة العدل",
+       "url": "https://www.moj.gov.sa/ar/Ministry/Departments/Mohammah/Pages/LawyersTraining3.aspx",
+       "orderedTopics": [
+        "شروط المتدرب: سعودي، شهادة الشريعة أو بكالوريوس الأنظمة، متفرغ، مقيم",
+        "مدة التدريب: ثلاث سنوات للبكالوريوس، سنة للماجستير",
+        "المستندات: الهوية، المؤهل، عقد التدريب"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "webook-legal-analyst-riyadh",
+     "mozn-legal-specialist-riyadh",
+     "webook-legal-associate-riyadh",
+     "qiddiya-governance-reporting-senior-specialist-riyadh"
+    ],
+    "jobsThin": false,
+    "jobsThinNote": null,
+    "employers": [
+     {
+      "name": "ويبوك",
+      "nameEn": "webook.com",
+      "careersUrl": "https://apply.workable.com/webook/",
+      "checkedAt": "2026-11-20",
+      "note": null
+     },
+     {
+      "name": "موزن",
+      "nameEn": "MOZN",
+      "careersUrl": "https://apply.workable.com/mozn-ai/",
+      "checkedAt": "2026-11-20",
+      "note": null
+     },
+     {
+      "name": "شركة القدية للاستثمار",
+      "nameEn": "Qiddiya Investment Company",
+      "careersUrl": "https://apply.workable.com/qiddiya-investment-company-1/",
+      "checkedAt": "2026-11-20",
+      "note": null
+     },
+     {
+      "name": "لوسيديا",
+      "nameEn": "Lucidya",
+      "careersUrl": "https://apply.workable.com/lucidya/",
+      "checkedAt": "2026-11-20",
+      "note": "Head of Legal & Compliance opening only (senior)"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "moj-trainee-lawyer"
+    ],
+    "certificates": [
+     {
+      "name": "Commercial and Contract Management Associate (CCMA)",
+      "issuer": "NCMA / World Commerce & Contracting",
+      "url": "https://www.ncmahq.org/ccma",
+      "level": "entry",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "شهادة المبتدئين في إدارة العقود، بلا خبرة سابقة، على معيار CMS.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "GRC Professional (GRCP)",
+      "issuer": "OCEG",
+      "url": "https://www.oceg.org/certifications/grcp/",
+      "level": "entry",
+      "priceText": "Everything is included for no additional fees. The Nonrenewing Pro All Access Pass costs $875.",
+      "arabicAvailable": null,
+      "why": "أساسيات الحوكمة والمخاطر والالتزام، تذكرها القدية في وظيفة الحوكمة.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "رخصة المحاماة (بعد التدريب لدى محامٍ)",
+      "issuer": "وزارة العدل",
+      "url": "https://www.moj.gov.sa/ar/Ministry/Departments/Mohammah/Pages/LawyersTraining3.aspx",
+      "level": "professional",
+      "priceText": null,
+      "arabicAvailable": true,
+      "why": "لخريج الأنظمة: ثلاث سنوات تدريب لدى محامٍ مرخّص (سنة لحامل الماجستير) قبل الترخيص.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": {
+     "role": "Paralegal",
+     "minSAR": 18000,
+     "maxSAR": 25000,
+     "avgSAR": 21500,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 36, table «Legal» (Monthly salary ranges and average values (SAR))",
+     "quote": "Paralegal | 18,000 - 25,000 | 21,500. Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025.",
+     "checkedAt": "2026-11-20",
+     "note": "المساعد القانوني (Paralegal) حسب دليل Hays 2026: الراتب الشهري الثابت الإجمالي بالريال (الربع الأخير 2025)."
+    },
+    "salaryNote": null,
+    "interviewQuestions": [
+     "وين تبحث عن نص نظام سعودي ساري، وكيف تتأكد إنه آخر تعديل؟",
+     "وش أركان العقد في نظام المعاملات المدنية؟",
+     "عطيتك اتفاقية عدم إفصاح من العميل: وش أول ثلاث بنود تراجعها؟",
+     "وش الفرق بين قرار مجلس الإدارة وقرار الجمعية العامة؟",
+     "كيف تتابع تواريخ تجديد عشرات العقود بدون ما يفوتك شي؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: منصة الأنظمة (laws.boe.gov.sa): ابحث وصنّف 5 أنظمة تخص الشركات",
+     "الأسبوع 2: نظام المعاملات المدنية: فصل العقد، واكتب ملخص صفحة لكل فرع",
+     "الأسبوع 3: صياغة اتفاقية عدم إفصاح وعقد خدمات بسيط، ومراجعة عقد نموذجي",
+     "الأسبوع 4: لائحة حوكمة الشركات: محضر اجتماع وقرار مجلس وسجل متابعة"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "دليلك يقول لك: الباحث القانوني في الشركات شغله بحث في الأنظمة وصياغة عقود ومتابعة قرارات المجلس، مو بس محاكم.",
+     "ابدأ بالبحث القانوني، بعدين صياغة العقود، وآخر شي الحوكمة. هذا الترتيب نفس ترتيب العقد في نظام المعاملات المدنية ووحدات شهادة CCMA.",
+     "لو ودك تصير محامي مرخّص، وزارة العدل تطلب تدريب ثلاث سنوات عند محامي مرخّص بعد البكالوريوس."
+    ],
+    "sources": [
+     {
+      "label": "MOZN: Legal Specialist (Workable)",
+      "url": "https://apply.workable.com/mozn-ai/j/BB6A394FBC/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "webook.com: Legal Analyst (Workable)",
+      "url": "https://apply.workable.com/webook/j/6DADF20462/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "webook.com: Legal Associate (Workable)",
+      "url": "https://apply.workable.com/webook/j/88B8DF3B2B/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Qiddiya: Senior Specialist - Governance (Reporting) (Workable)",
+      "url": "https://apply.workable.com/qiddiya-investment-company-1/j/C75049779E/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "NCMA: CCMA Individual Training Modules",
+      "url": "https://ncmahq.org/Web/Learning/CCMA_Individual_Training_Modules.aspx",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "NCMA: Commercial and Contract Management Associate (CCMA)",
+      "url": "https://www.ncmahq.org/ccma",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "جريدة أم القرى: نظام المعاملات المدنية",
+      "url": "https://uqn.gov.sa/details?p=23125",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "هيئة السوق المالية: لائحة حوكمة الشركات",
+      "url": "https://cma.gov.sa/RulesRegulations/Regulations/Pages/details.aspx?code=2",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "OCEG: GRC Professional (GRCP)",
+      "url": "https://www.oceg.org/certifications/grcp/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "وزارة العدل: تدريب المحامين",
+      "url": "https://www.moj.gov.sa/ar/Ministry/Departments/Mohammah/Pages/LawyersTraining3.aspx",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "هيئة الخبراء: الوثائق النظامية",
+      "url": "https://laws.boe.gov.sa/BoeLaws/Laws/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "video-editor-motion",
+    "title": "مونتير ومصمم موشن جرافيك",
+    "titleEn": "Video Editor / Motion Designer",
+    "fields": [
+     "media"
+    ],
+    "isNew": true,
+    "what": "يحوّل المادة المصوّرة والتصاميم الثابتة إلى فيديوهات وحركات جاهزة للنشر على المنصات والحملات.",
+    "dayToDay": [
+     "يقطّع اللقطات ويركّب التسلسل ويضبط الصوت والألوان",
+     "يحرّك التصاميم والنصوص بالإطارات المفتاحية (Keyframes)",
+     "يجهّز نسخاً بمقاسات كل منصة (ريلز، ستوري، يوتيوب)",
+     "يصدّر الملفات ويؤرشف المشروع"
+    ],
+    "path": {
+     "skills": [
+      "video-editing",
+      "motion-graphics",
+      "design-basics"
+     ],
+     "basedOnLine": "المسار مبني على: أهداف اختبار Adobe Certified Professional في الفيديو (Premiere) ثم في الموشن جرافيك (After Effects)",
+     "basedOnLinks": [
+      "https://certifiedprofessional.adobe.com/premiere-pro",
+      "https://certifiedprofessional.adobe.com/after-effects"
+     ],
+     "orderNote": "video-editing first: the Premiere objectives cover project setup, sequences, keyframes, audio and export. motion-graphics second and requires video-editing: the After Effects objectives repeat project setup and publishing and add compositions, layers, masks and text animation on top.",
+     "guidelines": [
+      {
+       "name": "Adobe Certified Professional: Digital Video Using Adobe Premiere (July 2025 objectives)",
+       "provider": "Adobe (delivered by Certiport)",
+       "url": "https://certifiedprofessional.adobe.com/premiere-pro",
+       "orderedTopics": [
+        "1 Working in the Video Industry",
+        "2 Project Setup and Interface",
+        "3 Organizing Video Projects",
+        "4 Creating and Modifying Elements (4.6 Use keyframes to control video properties over time; 4.7 Manage audio in a sequence)",
+        "5 Publishing Digital Media"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "Adobe Certified Professional: Visual Effects & Motion Graphics Using Adobe After Effects (2025 objectives)",
+       "provider": "Adobe (delivered by Certiport)",
+       "url": "https://certifiedprofessional.adobe.com/after-effects",
+       "orderedTopics": [
+        "1 Working in the Visual Effects and Motion Graphics Industry",
+        "2 Project Setup and Interface",
+        "3 Organizing Compositions",
+        "4 Creating and Modifying Visual Elements",
+        "5 Animating Visual Elements",
+        "6 Publishing Digital Media"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "mozn-creative-design-motion-riyadh",
+     "chainreaction-multimedia-designer-riyadh"
+    ],
+    "jobsThin": false,
+    "jobsThinNote": null,
+    "employers": [
+     {
+      "name": "موزن",
+      "nameEn": "Mozn",
+      "careersUrl": "https://apply.workable.com/mozn-ai/",
+      "checkedAt": "2026-11-20",
+      "note": "Saudi enterprise-AI company; in-house creative role"
+     },
+     {
+      "name": "تشين رياكشن",
+      "nameEn": "Chain Reaction",
+      "careersUrl": "https://apply.workable.com/chain-reaction-1/",
+      "checkedAt": "2026-11-20",
+      "note": "Digital marketing agency with a Riyadh office"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates"
+    ],
+    "certificates": [
+     {
+      "name": "Adobe Certified Professional: Digital Video Using Adobe Premiere",
+      "issuer": "Adobe (Certiport)",
+      "url": "https://certifiedprofessional.adobe.com/premiere-pro",
+      "level": "entry",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "يثبت أنك تعرف مراحل المونتاج كاملة من إعداد المشروع حتى التصدير.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "Adobe Certified Professional: Visual Effects & Motion Graphics Using Adobe After Effects",
+      "issuer": "Adobe (Certiport)",
+      "url": "https://certifiedprofessional.adobe.com/after-effects",
+      "level": "entry",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "يثبت مهارة التحريك بالإطارات المفتاحية والأقنعة وتحريك النصوص.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": null,
+    "salaryNote": "Hays Saudi Arabia Salary Guide 2026 (opened, all tables read) has no row for this role, and no other published Saudi source with a page and date was found; left empty rather than estimated.",
+    "interviewQuestions": [
+     "اعرض علينا فيديو من أعمالك واشرح لماذا قطعت في هذه اللحظات بالذات.",
+     "كيف تحوّل فيديو أفقياً مدته دقيقتان إلى ريل عمودي مدته 20 ثانية؟",
+     "ما الفرق بين التحريك بالإطارات المفتاحية والتحريك بالمؤثرات الجاهزة، ومتى تستخدم كلاً منهما؟",
+     "كيف تتأكد من حقوق الموسيقى والصور التي تستخدمها في الفيديو؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: تعرّف على دليل الهوية البصرية وقوالب المشاريع وطريقة تسمية الملفات وأرشفتها.",
+     "الأسبوع 2: نفّذ نسخاً مختصرة (cutdowns) لمنصات مختلفة من فيديو جاهز تحت إشراف زميل.",
+     "الأسبوع 3: سلّم أول فيديو كامل من المادة الخام حتى التصدير، واجمع الملاحظات.",
+     "الأسبوع 4: أضف عنصر موشن بسيطاً (عنوان متحرك أو شعار) وابنِ قالباً يعيد الفريق استخدامه."
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "دليلك يقول لك: ابدأ بالمونتاج قبل الموشن، الحركة تنبني على قص اللقطات والصوت.",
+     "دليلك ينصحك: سوّ ريل قصير من فيديو طويل وحطه في معرض أعمالك، الشركات تطلب البورتفوليو قبل السيرة.",
+     "دليلك يذكّرك: أدوبي تقول شهادتها تبي تقريباً 150 ساعة تدريب وشغل عملي، لا تستعجل."
+    ],
+    "sources": [
+     {
+      "label": "Adobe ACP Premiere exam guide",
+      "url": "https://certifiedprofessional.adobe.com/premiere-pro",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Adobe ACP After Effects exam guide",
+      "url": "https://certifiedprofessional.adobe.com/after-effects",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Mozn job posting",
+      "url": "https://apply.workable.com/mozn-ai/j/6C9854E659",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Chain Reaction job posting",
+      "url": "https://apply.workable.com/chain-reaction-1/j/679DB1F805",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Premiere Pro Pt. 1 (Coursera)",
+      "url": "https://www.coursera.org/learn/premiere-pro-pt-1--getting-started-editing-basics",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "After Effects Motion Design Essentials (Coursera)",
+      "url": "https://www.coursera.org/learn/adobe-after-effects",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "translator-ar-en",
+    "title": "مترجم ومحرر محتوى عربي-إنجليزي",
+    "titleEn": "EN-AR Translator / Arabic Content Editor",
+    "fields": [
+     "media"
+    ],
+    "isNew": true,
+    "what": "ينقل النصوص بين الإنجليزية والعربية ويحرّرها ويدقّقها لتناسب الجمهور ونبرة العلامة.",
+    "dayToDay": [
+     "يترجم صفحات وأوصافاً ونصوص واجهات من الإنجليزية إلى العربية",
+     "يراجع ترجمات قائمة ويصحح الأخطاء اللغوية",
+     "يكتب عناوين ونصوصاً قصيرة للأزرار والحملات",
+     "يرفع المحتوى إلى نظام إدارة المحتوى"
+    ],
+    "path": {
+     "skills": [
+      "translation",
+      "arabic-editing"
+     ],
+     "basedOnLine": "المسار مبني على: شهادة جمعية المترجمين الأمريكية (ATA) ومحاور دورة Translation in Practice",
+     "basedOnLinks": [
+      "https://www.atanet.org/certification/",
+      "https://www.coursera.org/learn/translation-in-practice"
+     ],
+     "orderNote": "translation first: the ATA exam tests translating to a standard, and the course moves from process to word, sentence, culture and genre. arabic-editing second: the posting asks for editing and proofreading on top of translation, and reviewing translations comes after producing them. The ATA page lists exam steps, not a topic syllabus, so the order is only weakly grounded.",
+     "guidelines": [
+      {
+       "name": "ATA Certification exam",
+       "provider": "American Translators Association",
+       "url": "https://www.atanet.org/certification/",
+       "orderedTopics": [
+        "Practice test (optional, to gauge readiness)",
+        "Register (online exams on demand)",
+        "Three-hour, open-book, proctored exam",
+        "Pass/fail grading",
+        "Continuing education to keep the credential"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "Translation in Practice (course modules)",
+       "provider": "Nanjing University on Coursera",
+       "url": "https://www.coursera.org/learn/translation-in-practice",
+       "orderedTopics": [
+        "A Brief Introduction to Translation",
+        "The Process of Translation",
+        "Understanding and Expressing Word Meaning",
+        "Sentence Translation: Word Order, Division, and Combination",
+        "Cultural Elements in Translation",
+        "Translation of Different Genres of Writing"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "platinumlist-en-ar-content-manager-riyadh"
+    ],
+    "jobsThin": true,
+    "jobsThinNote": "Only one real posting could be found on company boards on 2026-11-20; see unverified.",
+    "employers": [
+     {
+      "name": "بلاتينوم ليست",
+      "nameEn": "Platinumlist",
+      "careersUrl": "https://apply.workable.com/platinum-list/",
+      "checkedAt": "2026-11-20",
+      "note": "Event-ticketing platform hiring in Riyadh"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates"
+    ],
+    "certificates": [
+     {
+      "name": "ATA Certification",
+      "issuer": "American Translators Association",
+      "url": "https://www.atanet.org/certification/",
+      "level": "professional",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "شهادة معروفة للمترجمين ذوي الخبرة، اختبار مراقب مدته ثلاث ساعات.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": null,
+    "salaryNote": "Hays Saudi Arabia Salary Guide 2026 (opened, all tables read) has no row for this role, and no other published Saudi source with a page and date was found; left empty rather than estimated.",
+    "interviewQuestions": [
+     "ترجم هذه الجملة التسويقية إلى العربية بنبرة قريبة من الجمهور السعودي، واشرح اختياراتك.",
+     "كيف تتعامل مع أسماء الفنانين والعلامات التي لا تُترجم؟",
+     "ما الفرق عندك بين الترجمة الحرفية وتكييف النص (transcreation)؟",
+     "كيف تراجع ترجمة زميل دون أن تغيّر أسلوبه بلا داعٍ؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: اقرأ دليل الأسلوب والنبرة وقائمة المصطلحات المعتمدة.",
+     "الأسبوع 2: ترجم نصوصاً قصيرة (أزرار، عناوين) وراجعها مع محرر أقدم.",
+     "الأسبوع 3: تولّ ترجمة صفحة كاملة ورفعها على نظام المحتوى.",
+     "الأسبوع 4: راجع ترجمات قديمة وسجّل الأخطاء المتكررة في قائمة المصطلحات."
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "دليلك يقول لك: الترجمة مو كلمة بكلمة، المعنى والنبرة أهم.",
+     "دليلك ينصحك: سوّ لك قائمة مصطلحات من أول يوم، توفر عليك نص الشغل."
+    ],
+    "sources": [
+     {
+      "label": "ATA certification page",
+      "url": "https://www.atanet.org/certification/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Platinumlist job posting",
+      "url": "https://apply.workable.com/platinum-list/j/5387F51063",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Translation in Practice (Coursera)",
+      "url": "https://www.coursera.org/learn/translation-in-practice",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Localization Essentials (Udacity)",
+      "url": "https://www.udacity.com/course/localization-essentials--ud610",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "IJNet Arabic proofreading guide",
+      "url": "https://ijnet.org/ar/story/50-%D8%A3%D8%AF%D8%A7%D8%A9-%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D8%AA%D8%AF%D9%82%D9%8A%D9%82-%D8%A7%D9%84%D9%84%D8%BA%D9%88%D9%8A-%D9%84%D9%83%D8%AA%D8%A7%D8%A8%D8%A9-%D8%B5%D8%AD%D9%81%D9%8A%D8%A9-%D8%B3%D9%84%D9%8A%D9%85%D8%A9-%D9%88%D9%85%D8%AD%D8%AA%D9%88%D9%89-%D8%A7%D8%AD%D8%AA%D8%B1%D8%A7%D9%81%D9%8A%C2%A0%C2%A0",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "game-qa-design-esports",
+    "title": "اختبار وتصميم الألعاب والرياضات الإلكترونية",
+    "titleEn": "Game QA / Game Design / Esports",
+    "fields": [
+     "gaming"
+    ],
+    "isNew": true,
+    "what": "يختبر الألعاب ويحسّن تجربة اللاعب، أو يخطط فعاليات الرياضات الإلكترونية ومجتمعاتها.",
+    "dayToDay": [
+     "يجرّب نسخ اللعبة على أجهزة iOS وAndroid ويكتب تقارير الأخطاء",
+     "يكتب حالات اختبار ويعيد اختبار الإصلاحات",
+     "يتابع تجربة اللاعب في التقدم والاقتصاد والإعلانات",
+     "يدعم تخطيط بطولات وفعاليات الرياضات الإلكترونية"
+    ],
+    "path": {
+     "skills": [
+      "game-design",
+      "game-testing",
+      "esports-community",
+      "communication"
+     ],
+     "basedOnLine": "المسار مبني على: مجالات اختبار Unity Certified Associate: Game Developer ومسار Unity Essentials ومنهجي ISTQB (CTFL ثم CT-GaMe)",
+     "basedOnLinks": [
+      "https://unity.com/products/unity-certifications/associate-game-developer",
+      "https://learn.unity.com/pathway/unity-essentials",
+      "https://istqb.org/certifications/certified-tester-game-testing-ct-game/",
+      "https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/"
+     ],
+     "orderNote": "game-design first, because the Unity Associate topic areas centre on game design principles and Unity Essentials starts from building a playable scene. game-testing second: ISTQB says CT-GaMe candidates must hold CTFL, and CT-GaMe chapters test mechanics, levels, graphics, audio, AI/physics, localization and controllers, so you need to know how a game is built first. Star 1 = CTFL basics (test design, defect reporting); star 2 = game-specific CT-GaMe chapters. esports-community is separate and has no prerequisite.",
+     "guidelines": [
+      {
+       "name": "Unity Certified Associate: Game Developer (exam topic areas)",
+       "provider": "Unity Technologies",
+       "url": "https://unity.com/products/unity-certifications/associate-game-developer",
+       "orderedTopics": [
+        "Animation",
+        "Asset management",
+        "Audio",
+        "Employment preparedness",
+        "Game art principles",
+        "Game design principles",
+        "Industry awareness",
+        "Lighting",
+        "Materials and effects",
+        "Physics",
+        "Programming",
+        "Project management",
+        "Services"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "Unity Essentials pathway",
+       "provider": "Unity Learn",
+       "url": "https://learn.unity.com/pathway/unity-essentials",
+       "orderedTopics": [
+        "Editor Essentials",
+        "3D Essentials",
+        "Audio Essentials",
+        "Programming Essentials",
+        "2D Essentials",
+        "Publishing Essentials"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "ISTQB Certified Tester Game Testing (CT-GaMe) v2.0",
+       "provider": "ISTQB",
+       "url": "https://istqb.org/certifications/certified-tester-game-testing-ct-game/",
+       "orderedTopics": [
+        "The Specifics of Video Game Testing",
+        "Testing Video Game Mechanics",
+        "Video Game Level Testing",
+        "Graphics Testing",
+        "Audio Testing",
+        "AI and Physics Testing",
+        "Localization Testing",
+        "Game Controllers Testing"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "ISTQB Certified Tester Foundation Level (CTFL) v4.0",
+       "provider": "ISTQB",
+       "url": "https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/",
+       "orderedTopics": [
+        "Fundamentals of Testing",
+        "Testing Throughout the Software Development Lifecycle",
+        "Static Testing",
+        "Test Analysis & Design",
+        "Managing The Test Activities",
+        "Test Tools"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "naphora-qa-specialist-saudi",
+     "qiddiya-gaming-esports-strategy-am-riyadh"
+    ],
+    "jobsThin": false,
+    "jobsThinNote": null,
+    "employers": [
+     {
+      "name": "شركة القدية للاستثمار",
+      "nameEn": "Qiddiya Investment Company",
+      "careersUrl": "https://apply.workable.com/qiddiya-investment-company-1/",
+      "checkedAt": "2026-11-20",
+      "note": null
+     },
+     {
+      "name": "مجموعة نافورة للألعاب",
+      "nameEn": "Naphora Games Group",
+      "careersUrl": "https://job-boards.eu.greenhouse.io/alemnafora",
+      "checkedAt": "2026-11-20",
+      "note": "Mobile games studio"
+     },
+     {
+      "name": "ميراي",
+      "nameEn": "Mirai Arabian International Company",
+      "careersUrl": "https://apply.workable.com/playmirai/",
+      "checkedAt": "2026-11-20",
+      "note": "Riyadh game studio"
+     },
+     {
+      "name": "مؤسسة كأس العالم للرياضات الإلكترونية",
+      "nameEn": "Esports World Cup Foundation",
+      "careersUrl": "https://careers.esportsfoundation.com/",
+      "checkedAt": "2026-11-20",
+      "note": "Recruitee board; mostly experienced/manager roles"
+     },
+     {
+      "name": "مجموعة سافي للألعاب",
+      "nameEn": "Savvy Games Group",
+      "careersUrl": "https://evth.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/savvy-careers",
+      "checkedAt": "2026-11-20",
+      "note": "Oracle board API returned 0 open requisitions on 2026-11-20"
+     },
+     {
+      "name": "ستير ستوديوز",
+      "nameEn": "Steer Studios",
+      "careersUrl": "https://steerstudios.com/careers",
+      "checkedAt": "2026-11-20",
+      "note": "Oracle board API returned 0 open requisitions on 2026-11-20"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates"
+    ],
+    "certificates": [
+     {
+      "name": "Unity Certified Associate: Game Developer",
+      "issuer": "Unity Technologies",
+      "url": "https://unity.com/products/unity-certifications/associate-game-developer",
+      "level": "associate",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "تغطي مبادئ تصميم الألعاب والبرمجة والفيزياء والصوت في Unity.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": null,
+    "salaryNote": "Hays Saudi Arabia Salary Guide 2026 (opened, all tables read) has no row for this role, and no other published Saudi source with a page and date was found; left empty rather than estimated.",
+    "interviewQuestions": [
+     "اكتب لنا تقرير خطأ لمشكلة لاحظتها في لعبة جوال تلعبها: الخطوات والنتيجة المتوقعة والفعلية.",
+     "ما الفرق بين الاختبار الاستكشافي واختبار التراجع (regression)؟",
+     "كيف تختبر عملية شراء داخل اللعبة دون أن تدفع فعلاً؟",
+     "اقترح فعالية مجتمعية لبطولة ألعاب في الرياض، وكيف تقيس نجاحها؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: العب ألعاب الشركة كلاعب عادي وتعرّف على أداة تتبع الأخطاء.",
+     "الأسبوع 2: نفّذ حالات اختبار جاهزة واكتب أول تقارير أخطاء بإشراف قائد الجودة.",
+     "الأسبوع 3: تولّ اختبار ميزة واحدة على عدة أجهزة وأعد اختبار إصلاحاتها.",
+     "الأسبوع 4: أضف حالات اختبار جديدة لمسار لاعب (التسجيل أو الشراء) وشاركها مع الفريق."
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "دليلك يقول لك: تقرير الخطأ الزين فيه خطوات واضحة يقدر أي أحد يكررها.",
+     "دليلك ينصحك: جرّب اللعبة على أكثر من جوال، كثير من الأخطاء تطلع من فرق الأجهزة."
+    ],
+    "sources": [
+     {
+      "label": "Unity Certified Associate: Game Developer",
+      "url": "https://unity.com/products/unity-certifications/associate-game-developer",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Unity Essentials",
+      "url": "https://learn.unity.com/pathway/unity-essentials",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Introduction to Game Design (Coursera)",
+      "url": "https://www.coursera.org/learn/game-design",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Naphora QA Specialist",
+      "url": "https://job-boards.eu.greenhouse.io/alemnafora/jobs/4974299101",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Qiddiya gaming strategy posting",
+      "url": "https://apply.workable.com/qiddiya-investment-company-1/j/321B61693D",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "ISTQB CT-GaMe",
+      "url": "https://istqb.org/certifications/certified-tester-game-testing-ct-game/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "ISTQB CTFL v4.0",
+      "url": "https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "UC Irvine Esports course (Coursera)",
+      "url": "https://www.coursera.org/learn/game-developers-esports-organizations",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Michigan State Unity specialization (Coursera)",
+      "url": "https://www.coursera.org/specializations/game-design-and-development",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   }
+  ]
+ },
+ "demandEvidence": {
+  "credit-risk": [
+   "Tamara: 1 matching opening seen on https://job-boards.eu.greenhouse.io/tamara (Collections Advisor, Riyadh)",
+   "No open Saudi credit-analyst posting was found on company boards on 2026-11-20: HALA's Greenhouse board is gone (404), GIB's Credit Analyst - Private Banking expired 2025-04-12, Tabby's careers page lists no open roles."
+  ],
+  "compliance-aml": [
+   "Tamara: 3 matching openings (distinct titles) seen on https://job-boards.eu.greenhouse.io/tamara (Compliance Officer; Compliance Senior Associate; Fraud Investigator), all Riyadh",
+   "Lean Technologies: 1 matching opening seen on https://jobs.ashbyhq.com/LeanTech (Senior Compliance Manager, Riyadh)",
+   "PwC Middle East: 1 matching opening seen on https://careers.pwc.com/search/?q=compliance&locationsearch=Saudi+Arabia (Integrity & Compliance - Senior Associate - Deals, Riyadh)",
+   "EY: 1 related opening seen on https://careers.ey.com/ey/search/?q=compliance&locationsearch=Saudi+Arabia (Senior - Forensics - GCC National, Al Khobar)"
+  ],
+  "audit": [
+   "PwC Middle East: 6 matching openings (distinct titles) seen on https://careers.pwc.com/search/?q=audit&locationsearch=Saudi+Arabia (PwC Risk Internal Audit -Senior Associate - Jeddah; Risk IT Audit Senior Associate - Riyadh; PwC Risk - IT Audit Manager- Riyadh; Assurance - Digital Audit - IT Audit Senior Associate - Dhahran, KSA; PwC Risk - Implementation & Support TeamMate - Senior Associate Riyadh; Assurance, COOP and Summer Internship Programme 2027 - Middle East)",
+   "EY: 2 matching openings seen on https://careers.ey.com/ey/search/?q=audit&locationsearch=Saudi+Arabia (Senior Auditor - GCC Nationals, Riyadh; Senior - Tech Risk - GCC National, Al Khobar)",
+   "Foodics: 1 related opening seen on https://apply.workable.com/foodics/ (Senior Risk And BCM Specialist, Riyadh)"
+  ],
+  "legal-paralegal-contracts": [
+   "webook.com: 4 matching openings (distinct titles) seen on apply.workable.com/webook (Legal Analyst; Legal Associate; Legal Director; Director of Governance, Risk, and Compliance)",
+   "Qiddiya Investment Company: 20 matching openings (distinct titles) on apply.workable.com/qiddiya-investment-company-1 with legal, contracts, governance or compliance in the title (e.g. Senior Legal Counsel - Land and RE transactions; Manager - Contracts & Performance; Senior Specialist - Governance (Reporting); Manager - Governance Risk & Compliance)",
+   "MOZN: 1 matching opening seen on apply.workable.com/mozn-ai (Legal Specialist)",
+   "Lucidya: 1 matching opening seen on apply.workable.com/lucidya (Head of Legal & Compliance)"
+  ],
+  "video-editor-motion": [
+   "Chain Reaction: 2 Saudi openings seen on https://apply.workable.com/chain-reaction-1/ (Multimedia Designer, Riyadh; Junior Executive / Content Creator - KSA, Riyadh), plus Video Editor roles in Cairo and Amman",
+   "Mozn: 1 matching opening seen on https://apply.workable.com/mozn-ai/ (Creative Design & Motion Specialist, Riyadh)",
+   "Eram Talent (a recruiter, not the employer): 1 matching title seen on https://apply.workable.com/eramtalent-1/ (Video Content Producer (Saudi Arabia), listed for Riyadh and Jeddah)"
+  ],
+  "translator-ar-en": [
+   "Platinumlist: 1 matching opening seen on https://apply.workable.com/platinum-list/ (English & Arabic Content Manager, Riyadh)"
+  ],
+  "game-qa-design-esports": [
+   "Qiddiya Investment Company: 4 gaming/esports openings seen on https://apply.workable.com/qiddiya-investment-company-1/ (Assistant Manager - Gaming & Esports Strategy Support; Director - Gaming & Esports Asset Strategy; Director - Gaming & Esports Innovation Product Strategy; Manager - Gaming IP Partnerships)",
+   "Naphora Games Group: 1 Saudi opening seen on https://job-boards.eu.greenhouse.io/alemnafora (QA Specialist)",
+   "Mirai Arabian International Company: 1 QA opening seen on https://apply.workable.com/playmirai/ (QA Automation Lead, Riyadh)",
+   "Esports World Cup Foundation: 6 Riyadh openings on https://careers.esportsfoundation.com/ (none entry-level gaming; e.g. Senior Manager Editorial; Manager Media Partnerships)"
+  ]
+ },
+ "heldJobs": [],
+ "fixLog": [
+  "alias «collections» removed from credit-analysis: generic word; a collections CV is not credit analysis",
+  "alias «assurance» removed from internal-audit: would match 'quality assurance' in software-QA CVs",
+  "alias «QA tester» removed from game-testing: would match software-QA CVs",
+  "alias «regression testing» removed from game-testing: generic software-testing term",
+  "alias «bug report» removed from game-testing: generic software-testing term",
+  "alias «community manager» removed from esports-community: Hays lists 'Community Manager' as a real-estate role; too broad",
+  "naphora-qa-specialist-saudi: city set to null; the posting says only 'Saudi Arabia' (the part file had assumed Riyadh)",
+  "tamara-fraud-investigator-riyadh: problem-solving capped from 2 to 1 star(s), the skill's maxStars in the live catalogue",
+  "lean-senior-compliance-manager-riyadh: problem-solving capped from 2 to 1 star(s), the skill's maxStars in the live catalogue",
+  "pwc-risk-internal-audit-senior-associate-jeddah: problem-solving capped from 2 to 1 star(s), the skill's maxStars in the live catalogue",
+  "ey-senior-auditor-gcc-nationals-riyadh: accounting capped from 2 to 1 star(s), the skill's maxStars in the live catalogue",
+  "mozn-creative-design-motion-riyadh: design-basics capped from 2 to 1 star(s), the skill's maxStars in the live catalogue",
+  "chainreaction-multimedia-designer-riyadh: design-basics capped from 2 to 1 star(s), the skill's maxStars in the live catalogue",
+  "qiddiya-gaming-esports-strategy-am-riyadh: presentation capped from 2 to 1 star(s), the skill's maxStars in the live catalogue"
+ ],
+ "unverified": [
+  "[finance] No open Saudi credit-analyst / credit-risk-analyst posting found on a company board on 2026-11-20. HALA's Greenhouse board returns 404 (https://job-boards.greenhouse.io/hala); GIB 'Credit Analyst - Private Banking' expired 2025-04-12 (https://careers.gib.com/en/saudi-arabia/jobs/credit-analyst-private-banking-1100062204/); Tamara 'Credit Risk Manager' (4771867101) is no longer on its board; Tabby careers (https://tabby.ai/en-AE/careers) shows no open roles; Lendo's Recruitee page is not hosted (https://lendo.recruitee.com/). The credit family therefore has only one job (Tamara Collections Advisor).",
+  "[finance] BSF 'Credit Analyst, Financial Institutions' (https://www.bsfcareers.sa/en/saudi-arabia/jobs/credit-analyst-financial-institutions-4284571/) could not be opened (TLS certificate mismatch); not checked.",
+  "[finance] Riyad Bank careers (https://careers.riyadbank.com/) opened but its job search loads by script; credit/compliance/audit titles could not be read.",
+  "[finance] ACAMS CAMS page (https://www.acams.org/en/certifications/cams) returned 403; CAMS fee, domains and Arabic availability not verified. Lean's posting names CAMS as a desired certification.",
+  "[finance] IIA CIA fee not verified. The opened IIA Part 1 page lists six domains (15/15/18/7/35/10%); a 2025 Part 1 syllabus PDF (https://www.theiia.org/globalassets/site/certifications/internal-audit-practitioner/2025-cia-part-1--syllabus.pdf), seen only in search results, shows different sections (A Foundations 35%, B Ethics and Professionalism 20%, C Governance, Risk Management, and Control 30%); not opened.",
+  "[finance] Financial Academy has two retail-banking exam pages with different fees: RBF 1000.00 SAR (https://fa.gov.sa/en/Services/ExamDetails/adbe83a7-c98d-410e-a4c6-b10900850475) and the third edition 550.00 SAR (https://fa.gov.sa/en/Services/ExamDetails/3dc42178-c00e-434b-871f-ade300fc6774); which one is current was not verified.",
+  "[finance] FA training programme prices and hours were not in the page text (loaded by script); price set to 'paid' only because the pages show 'شراء البرنامج'. Coursera prices not read (set null).",
+  "[finance] Bank graduate development programmes (SNB, Al Rajhi, Riyad Bank, Alinma, SAB) were not opened; no route objects added for them.",
+  "[finance] No separate risk-management skill was created: no opened guideline page for it in the time box (FA CAPE chapter 3 'مقدمة في إدارة المخاطر التشغيلية' is the nearest).",
+  "[finance] People: Arab/Saudi individual educators were not found with verifiable own pages in the time box, so the Arabic 'people' are official bodies (Financial Academy channel, SAMA, SAFIU). The Financial Academy social links come from the footer of fa.gov.sa; SAFIU's and SAMA's pages showed no social links. ACAMS pages return 403, so no ACAMS Today author was added.",
+  "[finance] FA curriculum PDFs (RBF 4th ed., Credit Advisor 4th ed. July 2022, Compliance Fundamentals 3rd ed. Oct 2023) were opened and their cover pages read. The Compliance curriculum is the 3rd edition while the exam page used is titled 'النسخة الثانية'; the edition match was not verified. SAMA's AML/CTF Guide PDF (https://www.sama.gov.sa/en-US/Laws/BankingRules/The%20Anti-Money%20Laundering%20and%20Counter-Terrorism%20Financing%20AML%20-%20CTF%20Guide.pdf) returned an error page, so it is not cited.",
+  "[finance] Follow-up credit search (2026-11-20): no public Greenhouse, Lever, Ashby or SmartRecruiters board found for Emkan, Nayifat, Tamweel Aloula, Saudi EXIM, SIDF, Social Development Bank, ALJ Finance, Sanabil, Raqamyah, Lendo, Erad, Tabby; Al Rajhi careers search returns 404 (https://careers.alrajhibank.com.sa/). Tamara and Lendo credit roles appear only on aggregators. The Tamara Collections Advisor stand-in is kept.",
+  "[legal] Saudi Bar Association (sba.gov.sa) trainee or academy programme pages did not appear in search; the Ministry of Justice trainee page was used instead and may predate the current SBA process.",
+  "[legal] No Arabic Saudi course for legal research or contract drafting could be opened: Edraak shows no law course in search, Qadha Academy (qadha.org.sa) lists «لا توجد برامج في الوقت الحالي».",
+  "[legal] CCMA exam fee: not stated on ncmahq.org/ccma (only module prices $99 member / $125 non-member and recertification fees).",
+  "[legal] Ken Adams (adamsdrafting.com) and Michael Rasmussen (grc2020.com) returned HTTP 403, so they are not listed as people.",
+  "[legal] Coursera 'Corporate Governance' and the NBI paralegal course pages do not state a price, so price is null.",
+  "[legal] The CMA Corporate Governance Regulations page lists no chapter titles; the governance step is ordered by GRCP's outline only at a high level.",
+  "[media-gaming] Guide gaps: people are 1 per guide for video-editing, motion-graphics, translation and arabic-editing, and 0 for esports-community; articles missing for motion-graphics, translation and esports-community. No Arab/Saudi video, motion or esports creator page was verified. Adobe's own tutorials (https://helpx.adobe.com/premiere-pro/tutorials.html, https://www.adobe.com/learn/premiere-pro) returned 403; Udemy game-testing pages returned 403; Training for Translators page did not name its owner (Corinne McKay not confirmed); School of Motion principles article 404; PwC/Al Arabiya esports-strategy articles returned 403.",
+  "[media-gaming] Course prices: Coursera pages opened did not state price/audit options, so price is null; the Coursera hours for the Premiere and After Effects specializations are per-course figures from the pages.",
+  "[media-gaming] Arabic-editing person: the channel page https://www.youtube.com/c/Ektebsa7 did not show the presenter; the name Hossam Mostafa Ibrahim comes from the IJNet article. King Salman Global Academy 'الدبلوم العالي للتصحيح اللغوي' seen only in Sabq/Okaz news, official page not opened.",
+  "[media-gaming] ISTQB CT-GaMe fee not stated by ISTQB (set by local exam providers); third-party prices seen in search (GASQ 265 EUR, iSQI) were not used.",
+  "[media-gaming] Translation family has only 1 verified Saudi posting (Platinumlist). Arabic.AI 'Junior Translator - Saudi Nationals' no longer on https://apply.workable.com/arabicai/; EY 'Translator (AR/EN) - 12 Months Contract' Riyadh page says 'The Job is no longer available'; Roland Berger translator page 404.",
+  "[media-gaming] Naphora QA Specialist (https://job-boards.eu.greenhouse.io/alemnafora/jobs/4974299101): location is 'Saudi Arabia' only; city riyadh is an assumption.",
+  "[media-gaming] Savvy Games Group and Steer Studios Oracle boards returned 0 open requisitions; ESL FACEIT Group Greenhouse board (eslfaceitgrouplimited) had only a Procurement Manager in Riyadh; Tamatem 'Community & Partnerships Manager' (Riyadh) no longer on https://apply.workable.com/tamatem/.",
+  "[media-gaming] Thmanyah careers (thmanyah.com/careers) returned HTTP 429/403; MBC Group Oracle board had only 'Production Supervisor' in Riyadh; Telfaz11 Workable board empty; SRMG, Manga Productions careers not reached.",
+  "[media-gaming] ATA certification page does not list language pairs or the fee; whether English>Arabic or Arabic>English is offered was not verified.",
+  "[media-gaming] No official Saudi Esports Federation academy page or Literature, Publishing and Translation Commission programme page with eligibility lines was opened; only news/encyclopedia mentions were seen (Codelize digital-localization bootcamp by the Commission, June 2026; Saudi Esports Academy). No new entryRoute objects added.",
+  "[media-gaming] Hypemasters 'QA Manual Tester (Gaming) Saudi Nationals Only' and 'Partnerships & Community Manager (Gaming) Saudi Nationals Only' seen only on aggregator sabbar.com; the company's own board was not found."
+ ],
+ "warnings": [
+  "guide contract-drafting: no people",
+  "guide corporate-governance: no people",
+  "guide motion-graphics: no articles",
+  "guide translation: no articles",
+  "guide esports-community: no people",
+  "guide esports-community: no articles"
+ ],
+ "partFiles": [
+  "finance (sub-agent)",
+  "legal (coordinator)",
+  "media-gaming (sub-agent)"
+ ]
+}

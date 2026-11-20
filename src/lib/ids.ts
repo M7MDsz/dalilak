@@ -10,16 +10,23 @@ function guard<T extends string>(list: readonly T[]): (value: unknown) => value 
 /**
  * Spec 9.1, in display order (tree, filters, CV results). 20 Nov 2026 expansion: «إدارة المنتجات» (product), «الأمن
  * السيبراني والسحابة» (cyber-cloud) and «المبيعات وسلاسل الإمداد» (sales-supply) after hr, so the seven original fields
- * keep their places (src/lib/data/expansion).
+ * keep their places (src/lib/data/expansion). Wave 2 (20 Nov 2026, src/lib/data/wave2): nine more fields (engineering,
+ * project controls, tourism, health administration, education, banking and risk, legal, media, gaming) before professional.
  */
 export const FIELD_IDS = [
-  "data", "software", "design", "marketing", "business", "hr", "product", "cyber-cloud", "sales-supply", "professional",
+  "data", "software", "design", "marketing", "business", "hr", "product", "cyber-cloud", "sales-supply",
+  // wave 2 (src/lib/data/wave2)
+  "engineering", "project-controls", "tourism-hospitality", "health-admin", "education", "banking-risk", "legal", "media", "gaming",
+  "professional",
 ] as const;
 export type FieldId = (typeof FIELD_IDS)[number];
 export const isFieldId = guard(FIELD_IDS);
 
 /** The fields that have jobs (spec 7.1 field filter): all but `professional`. */
-export const JOB_FIELD_IDS = ["data", "software", "design", "marketing", "business", "hr", "product", "cyber-cloud", "sales-supply"] as const;
+export const JOB_FIELD_IDS = [
+  "data", "software", "design", "marketing", "business", "hr", "product", "cyber-cloud", "sales-supply",
+  "engineering", "project-controls", "tourism-hospitality", "health-admin", "education", "banking-risk", "legal", "media", "gaming",
+] as const;
 export type JobFieldId = (typeof JOB_FIELD_IDS)[number];
 export const isJobFieldId = guard(JOB_FIELD_IDS);
 
@@ -37,7 +44,14 @@ export const SKILL_IDS = [
   "hr-basics", "recruitment", "labor-law", "training-dev", "payroll",
   "product-discovery", "product-roadmap", "product-specs", "product-analytics",
   "linux", "networking", "security-fundamentals", "soc-analysis", "cloud", "devops",
-  "sales", "customer-success", "procurement", "supply-chain",
+  "sales", "customer-success", "procurement", "supply-chain", "contact-center-ops", "cx-quality", "cx-analytics",
+  // wave 2 (src/lib/data/wave2/skills.ts)
+  "engineering-drawings", "hse", "quality-control", "site-execution", "mep-systems", "saudi-building-code",
+  "planning-scheduling", "quantity-surveying", "bim-revit", "cost-control", "construction-contracts", "guest-service",
+  "front-office", "event-planning", "tour-guiding", "medical-terminology", "medical-coding", "health-claims",
+  "health-informatics", "instructional-design", "elearning-dev", "training-delivery", "banking-basics", "credit-analysis",
+  "aml-compliance", "internal-audit", "legal-research", "contract-drafting", "corporate-governance", "video-editing",
+  "motion-graphics", "translation", "arabic-editing", "game-design", "game-testing", "esports-community",
   "communication", "english", "problem-solving", "presentation", "teamwork",
 ] as const;
 export type SkillId = (typeof SKILL_IDS)[number];
@@ -61,9 +75,11 @@ export const JOB_IDS = [
   // design
   "horizontal-graduate-designer-riyadh", "flyakeed-product-designer-riyadh", "lucidya-product-designer-riyadh",
   "hungerstation-senior-product-designer-riyadh",
+  "almosafer-product-designer-riyadh",
   // marketing
   "salla-marketing-specialist-tamheer-jeddah", "salla-mahally-seo-manager-jeddah", "lucidya-social-media-analyst-riyadh",
   "platinumlist-content-manager-riyadh",
+  "mrsool-creative-copywriter-riyadh",
   // business
   "syarah-financial-analyst-tamheer-riyadh", "foodics-accountant-erp-riyadh", "master-works-ai-business-analyst-riyadh",
   "maharah-business-development-specialist-riyadh", "maharah-qa-analyst-riyadh",
@@ -80,11 +96,55 @@ export const JOB_IDS = [
   "petroapp-customer-success-specialist-riyadh",
   "qiddiya-procurement-specialist-riyadh", "ninja-procurement-cost-control-specialist-riyadh",
   "hungerstation-junior-3pl-account-manager-riyadh",
+  "rentokil-customer-experience-specialist-riyadh", "mrsool-customer-care-representative-riyadh", "ninja-live-operations-supervisor-riyadh",
+  // wave 2 (src/lib/data/wave2/jobs.ts): its postings of the old fields sit after each field's own (above), then the new fields
+  // engineering
+  "teefnajd-site-engineer-riyadh",
+  "rawafid-site-civil-engineer-jeddah",
+  "matar-albaqmi-site-engineer-hvac-dammam",
+  "hanmiglobal-mechanical-engineer-riyadh",
+  "teefnajd-quality-control-engineer-riyadh",
+  "hanmiglobal-quality-inspector-electrical-riyadh",
+  "hanmiglobal-hse-engineer-riyadh",
+  "fuku-hse-engineer-dammam",
+  // project-controls
+  "aljomaih-graduate-development-engineering-riyadh",
+  "matar-albaqmi-planning-engineer-dammam",
+  "teefnajd-contract-engineer-riyadh",
+  "rawafid-erp-projects-cost-controller-jeddah",
+  // tourism-hospitality
+  "gathern-guest-relations-associate-riyadh",
+  "seven-guest-service-associate-riyadh",
+  "eram-event-management-coordinator-jeddah",
+  // health-admin
+  "waseel-rcm-specialist-riyadh",
+  // education
+  "eram-associate-instructional-designer-dhahran",
+  "abis-industrial-skills-trainer-computer-dhahran",
+  "qiddiya-training-administration-senior-specialist-riyadh",
+  // banking-risk
+  "tamara-collections-advisor-riyadh",
+  "tamara-compliance-officer-riyadh",
+  "tamara-compliance-senior-associate-riyadh",
+  "tamara-fraud-investigator-riyadh",
+  "pwc-assurance-coop-2027-riyadh",
+  "pwc-risk-internal-audit-senior-associate-jeddah",
+  "ey-senior-auditor-gcc-nationals-riyadh",
+  // legal
+  "webook-legal-analyst-riyadh",
+  "mozn-legal-specialist-riyadh",
+  "webook-legal-associate-riyadh",
+  // media
+  "mozn-creative-design-motion-riyadh",
+  "chainreaction-multimedia-designer-riyadh",
+  "platinumlist-en-ar-content-manager-riyadh",
+  // gaming
+  "qiddiya-gaming-esports-strategy-am-riyadh",
 ] as const;
 export type JobId = (typeof JOB_IDS)[number];
 export const isJobId = guard(JOB_IDS);
 
-/** Spec 9.4: one course per star slot, `c-{skill}-{star}`, in table order. 59 ids, plus the expansion's 21 (80). */
+/** Spec 9.4: one course per star slot, `c-{skill}-{star}`, in table order. 59 ids, plus the expansion's 21 and wave 2's 68 (148). */
 export const COURSE_IDS = [
   "c-excel-1", "c-excel-2", "c-excel-3", "c-sql-1", "c-sql-2", "c-sql-3", "c-statistics-1", "c-statistics-2",
   "c-powerbi-1", "c-powerbi-2", "c-powerbi-3", "c-dataviz-1", "c-python-data-1", "c-ml-1", "c-deep-learning-1",
@@ -101,6 +161,21 @@ export const COURSE_IDS = [
   "c-linux-1", "c-networking-1", "c-security-fundamentals-1", "c-security-fundamentals-2", "c-soc-analysis-1",
   "c-cloud-1", "c-cloud-2", "c-devops-1",
   "c-sales-1", "c-sales-2", "c-customer-success-1", "c-procurement-1", "c-supply-chain-1", "c-supply-chain-2",
+  "c-contact-center-ops-1", "c-cx-quality-1", "c-cx-quality-2", "c-cx-analytics-1", "c-cx-analytics-2",
+  // wave 2 (src/lib/data/wave2/courses.ts)
+  "c-engineering-drawings-1", "c-engineering-drawings-2", "c-hse-1", "c-hse-2", "c-quality-control-1",
+  "c-quality-control-2", "c-site-execution-1", "c-site-execution-2", "c-mep-systems-1", "c-mep-systems-2",
+  "c-saudi-building-code-1", "c-planning-scheduling-1", "c-planning-scheduling-2", "c-quantity-surveying-1", "c-quantity-surveying-2",
+  "c-bim-revit-1", "c-bim-revit-2", "c-cost-control-1", "c-cost-control-2", "c-construction-contracts-1",
+  "c-guest-service-1", "c-front-office-1", "c-front-office-2", "c-event-planning-1", "c-event-planning-2",
+  "c-tour-guiding-1", "c-tour-guiding-2", "c-medical-terminology-1", "c-medical-coding-1", "c-medical-coding-2",
+  "c-health-claims-1", "c-health-informatics-1", "c-health-informatics-2", "c-instructional-design-1", "c-instructional-design-2",
+  "c-elearning-dev-1", "c-elearning-dev-2", "c-training-delivery-1", "c-training-delivery-2", "c-banking-basics-1",
+  "c-credit-analysis-1", "c-credit-analysis-2", "c-aml-compliance-1", "c-aml-compliance-2", "c-internal-audit-1",
+  "c-internal-audit-2", "c-legal-research-1", "c-legal-research-2", "c-contract-drafting-1", "c-contract-drafting-2",
+  "c-corporate-governance-1", "c-video-editing-1", "c-video-editing-2", "c-motion-graphics-1", "c-motion-graphics-2",
+  "c-translation-1", "c-translation-2", "c-arabic-editing-1", "c-game-design-1", "c-game-design-2",
+  "c-game-testing-1", "c-game-testing-2", "c-esports-community-1",
   "c-communication-1", "c-communication-2", "c-english-1", "c-english-2", "c-presentation-1", "c-teamwork-1",
   "c-problem-solving-1",
 ] as const;
@@ -169,6 +244,16 @@ export const COMPANY_IDS = [
   "jeeny", "ninja", "master-works", "almajed-oud", "horizontal-digital", "flyakeed", "platinumlist", "syarah", "atheer",
   "sdaia", "alrajhi", "snb", "riyad-bank", "sab", "elm", "red-sea-global", "maaden", "jahez",
   "maharah",
+  // wave 2 (research/wave2/companies.json)
+  "alinma", "anb", "bank-albilad", "bank-aljazira", "bsf", "d360", "saib", "stc-bank",
+  "barq", "geidea", "hala", "lean-tech", "moyasar", "rasan", "wafeq", "alrajhi-takaful",
+  "bupa-arabia", "tawuniya", "careem", "mozn", "mrsool", "nana", "rewaa", "sary",
+  "tahakom", "takamol", "tamkeen-tech", "thiqah", "unifonic", "zid", "acwa-power", "advanced-petrochem",
+  "sipchem", "tasnee", "nwc", "sar", "sec", "diriyah", "king-salman-park", "new-murabba",
+  "rcu", "soudah", "sta", "almosafer", "flyadeal", "flynas", "riyadh-air", "saudia",
+  "seera", "americana", "bindawood", "extra", "jarir", "nahdi", "savola", "dallah-health",
+  "hmg", "lean-health", "mouwasat", "nupco", "saudi-german-health", "hrdf", "monshaat", "nhc",
+  "efg", "manga-productions", "mbc", "savvy-games", "srmg",
 ] as const;
 export type CompanyId = (typeof COMPANY_IDS)[number];
 export const isCompanyId = guard(COMPANY_IDS);

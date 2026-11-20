@@ -1,6 +1,6 @@
 // Owner: brain-advisor. «دليلك» knows the career families (20 Nov 2026): what a job is, how to become one, its
 // certificates, its published pay WITH the source, interview questions, a first-30-days plan, employers and the entry
-// routes (Tamheer, Doroob, Tuwaiq…), all read from the expansion agent's src/lib/data/expansion/knowledge.ts (never
+// routes (Tamheer, Doroob, Tuwaiq…), all read from src/lib/data/careers.ts (the expansion's families and wave 2's; never
 // restated here). Two users: the router (a family named, or the user's target family for a few specific asks) and the
 // model's get_career tool (its result carries the pay figure, so rule 8 accepts it only when that tool was called). Pure.
 import { JOBS, getJob, getSkill } from "@/lib/data";
@@ -16,7 +16,7 @@ import {
   type CareerFamilyId,
   type EntryRoute,
   type EntryRouteId,
-} from "@/lib/data/expansion/knowledge";
+} from "@/lib/data/careers";
 import { normalizeText, tokenize } from "@/lib/text/normalize";
 import type { Chip, JobId, NavTarget, SkillId } from "@/lib/types";
 import type { ToolError } from "@/lib/brain/protocol";
@@ -27,8 +27,30 @@ import * as W from "./words";
 
 // ── How people name a family (Arabic, English, common spellings; whole words after 4.3 normalisation) ─────────────
 
-/** Checked in this order (ux-research before the designer, so «باحث تجربة المستخدم» is the researcher). */
+/**
+ * Checked in this order (ux-research before the designer, so «باحث تجربة المستخدم» is the researcher). Wave 2's families
+ * (src/lib/data/wave2/knowledge.ts) come first with phrases no older family uses.
+ */
 const FAMILY_SAYINGS: readonly (readonly [CareerFamilyId, readonly string[]])[] = [
+  // ── wave 2 (20 Nov 2026) ──
+  ["civil-site-engineer", ["مهندس موقع", "مهندس مدني", "مهندسة مدنية", "الهندسة المدنية", "هندسة مدنية", "site engineer", "civil engineer"]],
+  ["mep-engineer", ["مهندس ميكانيكا", "مهندس ميكانيكي", "مهندس كهرباء", "مهندس تكييف", "مهندس mep", "mep engineer", "mep", "hvac"]],
+  ["qa-qc-engineer", ["مهندس جودة", "مراقب جودة", "ضبط الجودة", "quality engineer", "quality control", "qc engineer"]],
+  ["hse-officer", ["السلامة المهنية", "الصحة والسلامة", "مهندس سلامة", "أخصائي سلامة", "hse", "safety officer", "safety engineer"]],
+  ["planning-engineer", ["مهندس تخطيط", "مهندس جدولة", "بريمافيرا", "primavera", "planning engineer", "scheduling engineer"]],
+  ["quantity-surveyor", ["حاسب كميات", "حصر الكميات", "حساب الكميات", "مهندس تكاليف", "مهندس عقود", "quantity surveyor", "cost engineer", "cost controller"]],
+  ["guest-experience", ["الضيافة", "ضيافة", "الفنادق", "فندق", "موظف استقبال", "خدمة الضيوف", "hospitality", "front desk", "guest relations"]],
+  ["events", ["تنظيم الفعاليات", "منظم فعاليات", "منسق فعاليات", "إدارة الفعاليات", "الفعاليات", "event planner", "event management", "events coordinator"]],
+  ["medical-coding-rcm", ["الترميز الطبي", "ترميز طبي", "مرمز طبي", "المطالبات الطبية", "دورة الإيرادات", "medical coding", "medical coder", "rcm"]],
+  ["learning-design", ["التصميم التعليمي", "مصمم تعليمي", "مصممة تعليمية", "مدرب", "مدربة", "instructional designer", "instructional design", "trainer"]],
+  ["cx-quality", ["تجربة العملاء", "تجربة العميل", "خدمة العملاء", "مركز الاتصال", "كول سنتر", "customer experience", "call center", "contact center", "cx"]],
+  ["credit-risk", ["محلل ائتمان", "الائتمان", "ائتمان", "مخاطر ائتمانية", "مخاطر الائتمان", "credit analyst", "credit risk"]],
+  ["compliance-aml", ["مسؤول التزام", "مسؤول الالتزام", "الامتثال", "غسل الأموال", "مكافحة غسل الأموال", "compliance officer", "compliance", "aml"]],
+  ["audit", ["مراجع داخلي", "المراجعة الداخلية", "التدقيق الداخلي", "مدقق حسابات", "مراجع حسابات", "auditor", "internal audit", "audit"]],
+  ["legal-paralegal-contracts", ["محامي", "محامية", "محاماة", "مستشار قانوني", "باحث قانوني", "قانوني", "القانون", "lawyer", "legal", "paralegal"]],
+  ["video-editor-motion", ["مونتير", "مونتاج", "المونتاج", "موشن جرافيك", "محرر فيديو", "video editor", "video editing", "motion designer", "motion graphics"]],
+  ["translator-ar-en", ["مترجم", "مترجمة", "الترجمة", "مدقق لغوي", "translator", "translation"]],
+  ["game-qa-design-esports", ["الألعاب", "مصمم ألعاب", "تصميم الألعاب", "مختبر ألعاب", "الرياضات الإلكترونية", "قيمنق", "game designer", "game tester", "gaming", "esports"]],
   ["ux-research", ["باحث تجربة المستخدم", "باحث تجربة مستخدم", "بحث تجربة المستخدم", "بحث المستخدم", "ux research", "ux researcher", "user research"]],
   [
     "ui-ux-product-design",

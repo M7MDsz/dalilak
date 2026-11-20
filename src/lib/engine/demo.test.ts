@@ -250,8 +250,8 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
     ]);
   });
 
-  it("step 13: skill tree 9 of 54 · 12 of 80 (38 · 59 before the 20 Nov expansion), Power BI fills and «تصوير البيانات» opens; profile 6 of 12 badges, history +40 +200 +100 +30 +50", () => {
-    expect(skillTreeSummary(s11)).toEqual({ skillsHeld: 9, skillsTotal: 54, starsHeld: 12, starsTotal: 80 });
+  it("step 13: skill tree 9 of 93 · 12 of 148 (38 · 59 before the 20 Nov expansion, 54 · 80 before wave 2), Power BI fills and «تصوير البيانات» opens; profile 6 of 12 badges, history +40 +200 +100 +30 +50", () => {
+    expect(skillTreeSummary(s11)).toEqual({ skillsHeld: 9, skillsTotal: 93, starsHeld: 12, starsTotal: 148 });
     const baseline = starsBeforeLatestStar(s11);
     expect([baseline.powerbi, totalStars(baseline)]).toEqual([0, 11]);
     expect(skillNode("dataviz", s11).state).toBe("available");

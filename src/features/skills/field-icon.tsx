@@ -11,6 +11,7 @@ import {
   IconFieldProduct,
   IconFieldProfessional,
   IconFieldSalesSupply,
+  WAVE2_FIELD_ICONS,
   IconFieldSoftware,
   type IconProps,
 } from "@/components/icons";
@@ -26,6 +27,7 @@ const ICONS = {
   product: IconFieldProduct,
   "cyber-cloud": IconFieldCyberCloud,
   "sales-supply": IconFieldSalesSupply,
+  ...WAVE2_FIELD_ICONS,
   professional: IconFieldProfessional,
 } as const satisfies Record<FieldId, (props: IconProps) => ReactNode>;
 

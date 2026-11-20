@@ -13,7 +13,8 @@ describe("rankJobs (spec 7.2)", () => {
   it("after the sample CV, the first eight in order (the practice job first, then the real postings)", () => {
     const ranked = rankJobs(cvAnalysedFacts());
     expect(ranked).toHaveLength(JOB_IDS.length);
-    // 20 Nov 2026 expansion: two new sales postings at 50% come in after the two 53% jobs; the top three (demo step 6) hold
+    // 20 Nov 2026 expansion: two new sales postings at 50% come in after the two 53% jobs; wave 2's fraud investigator
+    // (Tamara, 50%) follows them; the top three (demo step 6) hold
     expect(ranked.slice(0, 8).map((r) => [getJob(r.jobId).title, r.match])).toEqual([
       ["محلل بيانات", 70],
       ["محلل مالي (برنامج تمهير)", 60],
@@ -21,8 +22,8 @@ describe("rankJobs (spec 7.2)", () => {
       ["محاسب - أنظمة ERP", 53],
       ["مندوب مبيعات ميداني", 50],
       ["تنفيذي تطوير أعمال مبتدئ", 50],
+      ["محقق احتيال", 50],
       ["مدير نمو - رؤى وتحليلات", 47],
-      ["محلل أداء عقاري", 43],
     ]);
     expect(ranked[0]).toMatchObject({ jobId: "data-analyst-riyadh", isTarget: true, applied: false, missing: ["powerbi", "statistics"] });
     expect(ranked.find((r) => r.jobId === "syarah-financial-analyst-tamheer-riyadh")?.missing).toEqual(["accounting", "financial-analysis"]);
@@ -43,7 +44,19 @@ describe("rankJobs (spec 7.2)", () => {
       "lucidya-talent-acquisition-lead-riyadh",
       "taj-hr-cybersecurity-engineer-riyadh",
       "mullers-solutions-soc-l2-specialist-riyadh",
+      // wave 2's Riyadh postings at 40%, in data order, then the Jeddah and Dammam ones
+      "rentokil-customer-experience-specialist-riyadh",
+      "ninja-live-operations-supervisor-riyadh",
+      "hanmiglobal-hse-engineer-riyadh",
+      "gathern-guest-relations-associate-riyadh",
+      "seven-guest-service-associate-riyadh",
+      "qiddiya-training-administration-senior-specialist-riyadh",
+      "tamara-collections-advisor-riyadh",
+      "pwc-assurance-coop-2027-riyadh",
+      "webook-legal-analyst-riyadh",
       "salla-mahally-seo-manager-jeddah",
+      "fuku-hse-engineer-dammam",
+      "matar-albaqmi-planning-engineer-dammam",
     ]);
     // living in Jeddah with an interest in marketing: Jeddah first; then the marketing jobs; then data order
     const jeddah = { ...f, answers: { ...f.answers, city: { value: "jeddah" as const, label: "جدة" }, interest: ["marketing"] as const } };
@@ -59,6 +72,18 @@ describe("rankJobs (spec 7.2)", () => {
       "lucidya-talent-acquisition-lead-riyadh",
       "taj-hr-cybersecurity-engineer-riyadh",
       "mullers-solutions-soc-l2-specialist-riyadh",
+      // wave 2's postings at 40% (none in Jeddah or in marketing), in data order
+      "rentokil-customer-experience-specialist-riyadh",
+      "ninja-live-operations-supervisor-riyadh",
+      "hanmiglobal-hse-engineer-riyadh",
+      "fuku-hse-engineer-dammam",
+      "matar-albaqmi-planning-engineer-dammam",
+      "gathern-guest-relations-associate-riyadh",
+      "seven-guest-service-associate-riyadh",
+      "qiddiya-training-administration-senior-specialist-riyadh",
+      "tamara-collections-advisor-riyadh",
+      "pwc-assurance-coop-2027-riyadh",
+      "webook-legal-analyst-riyadh",
     ]);
     // the target beats everything at the same match
     expect(at40({ ...f, targetJobId: "salla-mahally-seo-manager-jeddah" })[0]).toBe("salla-mahally-seo-manager-jeddah");
@@ -135,10 +160,19 @@ describe("searchJobs (spec 7.1)", () => {
         "ninja-real-estate-performance-analyst-riyadh",
         "qiddiya-hr-analytics-analyst-riyadh",
         "qiddiya-hris-specialist-riyadh",
+        "qiddiya-training-administration-senior-specialist-riyadh",
       ].sort(),
     );
     expect(searchJobs(f, { q: "مصمّم" }).map((r) => r.jobId).sort()).toEqual(
-      ["horizontal-graduate-designer-riyadh", "hungerstation-senior-product-designer-riyadh", "lucidya-product-designer-riyadh"].sort(),
+      [
+        "horizontal-graduate-designer-riyadh",
+        "hungerstation-senior-product-designer-riyadh",
+        "lucidya-product-designer-riyadh",
+        // wave 2
+        "almosafer-product-designer-riyadh",
+        "eram-associate-instructional-designer-dhahran",
+        "chainreaction-multimedia-designer-riyadh",
+      ].sort(),
     );
     expect(searchJobs(f, { q: "محلل زرافة" })).toEqual([]);
     expect(searchJobs(f, { q: "  " })).toHaveLength(JOB_IDS.length);
@@ -165,6 +199,7 @@ describe("searchJobs (spec 7.1)", () => {
       "jeeny-growth-insights-analytics-riyadh",
       "ninja-real-estate-performance-analyst-riyadh",
       "qiddiya-hr-analytics-analyst-riyadh",
+      "qiddiya-training-administration-senior-specialist-riyadh",
       "qiddiya-hris-specialist-riyadh",
     ]);
     expect(searchJobs(f, { skill: "seo", city: "jeddah" }).map((r) => r.jobId)).toEqual(["salla-mahally-seo-manager-jeddah"]);
@@ -180,6 +215,7 @@ describe("jobsRequiringSkill (spec 3.5)", () => {
       "ninja-real-estate-performance-analyst-riyadh",
       "master-works-data-senior-engineer-riyadh",
       "qiddiya-hris-specialist-riyadh",
+      "qiddiya-training-administration-senior-specialist-riyadh",
     ]);
     expect(jobsRequiringSkill("python-data")).toEqual(["salla-senior-data-scientist-remote", "lamdax-ai-engineer-remote"]);
     expect(jobsRequiringSkill("ml")).toEqual(["lamdax-ai-engineer-remote", "mozn-ai-engineer-riyadh", "salla-product-manager-storefront-jeddah"]);

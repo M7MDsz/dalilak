@@ -21,7 +21,7 @@ export function revealLines(firstName: string): Record<RevealStepId, string> {
   return {
     "answers-gather": `أجمع إجاباتك يا ${firstName}…`,
     "jobs-sweep": `أقارن ملفك مع ${formatNumber(CATALOGUE_COUNTS.jobs)} وظيفة…`,
-    "skills-map": `أراجع ${formatNumber(CATALOGUE_COUNTS.skills)} مهارة في ${formatNumber(CATALOGUE_COUNTS.fields)} مجالات…`,
+    "skills-map": `أراجع ${formatNumber(CATALOGUE_COUNTS.skills)} مهارة في ${formatNumber(CATALOGUE_COUNTS.fields)} ${CATALOGUE_COUNTS.fields <= 10 ? "مجالات" : "مجالاً"}…`,
     "narrow-to-three": "أختار أنسب ثلاث وظائف لك…",
     "path-draw": "أرسم مسارك خطوة بخطوة…",
     "reveal-landing": "مسارك جاهز.",

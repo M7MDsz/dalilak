@@ -1,0 +1,116 @@
+{
+  "checkedAt": "2026-11-20",
+  "note": "Real postings kept out of the app by research/wave2/build.py, with why.",
+  "held": [
+    {
+      "id": "moyasar-accounts-receivable-specialist-riyadh",
+      "from": "companies-jobs.json",
+      "why": "The posting names 4 of the app's skills; every job in «دليل» has exactly five (spec 9.3, the Job type) and none may be invented."
+    },
+    {
+      "id": "moyasar-fraud-specialist-riyadh",
+      "from": "companies-jobs.json",
+      "why": "The posting names 3 of the app's skills; every job in «دليل» has exactly five (spec 9.3, the Job type) and none may be invented."
+    },
+    {
+      "id": "moyasar-legal-specialist-riyadh",
+      "from": "companies-jobs.json",
+      "why": "The posting names 1 of the app's skills; every job in «دليل» has exactly five (spec 9.3, the Job type) and none may be invented."
+    },
+    {
+      "id": "d360-app-ops-engineer-payments-riyadh",
+      "from": "companies-jobs.json",
+      "why": "The company's or the title's own name carries digits («بنك D360», «مهندس عمليات تطبيقات (المدفوعات)»), and no job text in «دليل» may carry a number (data.test); held for the coordinator's decision."
+    },
+    {
+      "id": "d360-cloud-engineer-riyadh",
+      "from": "companies-jobs.json",
+      "why": "The company's or the title's own name carries digits («بنك D360», «مهندس سحابة»), and no job text in «دليل» may carry a number (data.test); held for the coordinator's decision."
+    },
+    {
+      "id": "mozn-revenue-operations-analyst-riyadh",
+      "from": "companies-jobs.json",
+      "why": "The posting names 4 of the app's skills; every job in «دليل» has exactly five (spec 9.3, the Job type) and none may be invented."
+    },
+    {
+      "id": "mozn-cloud-platform-engineer-riyadh",
+      "from": "companies-jobs.json",
+      "why": "Already in the app (the 20 Nov expansion added the same posting)."
+    },
+    {
+      "id": "nahdi-pharmacist-riyadh",
+      "from": "companies-jobs.json",
+      "why": "The posting names 3 of the app's skills; every job in «دليل» has exactly five (spec 9.3, the Job type) and none may be invented."
+    },
+    {
+      "id": "nahdi-regional-it-support-specialist-riyadh",
+      "from": "companies-jobs.json",
+      "why": "The posting names 4 of the app's skills; every job in «دليل» has exactly five (spec 9.3, the Job type) and none may be invented."
+    },
+    {
+      "id": "nahdi-accounting-coop",
+      "from": "companies-jobs.json",
+      "why": "The posting names 4 of the app's skills; every job in «دليل» has exactly five (spec 9.3, the Job type) and none may be invented."
+    },
+    {
+      "id": "almosafer-marketing-communications-officer-riyadh",
+      "from": "companies-jobs.json",
+      "why": "The posting names 4 of the app's skills; every job in «دليل» has exactly five (spec 9.3, the Job type) and none may be invented."
+    },
+    {
+      "id": "almosafer-arabic-copywriting-specialist-riyadh",
+      "from": "companies-jobs.json",
+      "why": "The posting names 4 of the app's skills; every job in «دليل» has exactly five (spec 9.3, the Job type) and none may be invented."
+    },
+    {
+      "id": "jasara-quantity-surveyor-riyadh",
+      "from": "engineering.json",
+      "why": "Asks 10 years (senior). Real and open, but the app's bands stop at mid; held for the coordinator's decision."
+    },
+    {
+      "id": "sixflags-qiddiya-entry-operations-host-riyadh",
+      "from": "tourism-health-education.json",
+      "why": "The demo's sample CV would match it at 60%, which changes the jobs list after the CV (only the practice job may reach 70%, and «مهندس بيانات أول» at 53% must stay third)."
+    },
+    {
+      "id": "sixflags-qiddiya-entertainment-events-team-leader-riyadh",
+      "from": "tourism-health-education.json",
+      "why": "The demo's sample CV would match it at 60%, which changes the jobs list after the CV (only the practice job may reach 70%, and «مهندس بيانات أول» at 53% must stay third)."
+    },
+    {
+      "id": "waseel-rcm-specialist-abha",
+      "from": "tourism-health-education.json",
+      "why": "Its city (Abha) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "madar-customer-experience-manager-riyadh",
+      "from": "tourism-health-education.json",
+      "why": "Real and on-topic (CSAT, NPS, journey mapping) but asks 5+ years, above the app's bands (entry, junior, mid). Kept as demand evidence."
+    },
+    {
+      "id": "qiddiya-manager-learning-design-delivery-riyadh",
+      "from": "tourism-health-education.json",
+      "why": "Real and on-topic but asks 6-10 years. Kept as demand evidence."
+    },
+    {
+      "id": "seven-reception-supervisor-riyadh",
+      "from": "tourism-health-education.json",
+      "why": "Asks a minimum of 8 years. Kept as demand evidence."
+    },
+    {
+      "id": "lean-senior-compliance-manager-riyadh",
+      "from": "finance-legal-media-gaming.json",
+      "why": "A senior posting (band «senior»); the app's bands stop at mid (entry, junior, mid)."
+    },
+    {
+      "id": "qiddiya-governance-reporting-senior-specialist-riyadh",
+      "from": "finance-legal-media-gaming.json",
+      "why": "A senior posting (band «senior»); the app's bands stop at mid (entry, junior, mid)."
+    },
+    {
+      "id": "naphora-qa-specialist-saudi",
+      "from": "finance-legal-media-gaming.json",
+      "why": "Its city (Saudi Arabia) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    }
+  ]
+}

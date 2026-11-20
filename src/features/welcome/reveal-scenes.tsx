@@ -23,6 +23,7 @@ import {
   IconFieldProduct,
   IconFieldProfessional,
   IconFieldSalesSupply,
+  WAVE2_FIELD_ICONS,
   IconFieldSoftware,
 } from "@/components/icons";
 import type { IconProps } from "@/components/icons/icon-base";
@@ -128,6 +129,7 @@ const FIELD_ICON: Record<FieldId, (props: IconProps) => React.ReactNode> = {
   product: IconFieldProduct,
   "cyber-cloud": IconFieldCyberCloud,
   "sales-supply": IconFieldSalesSupply,
+  ...WAVE2_FIELD_ICONS,
   professional: IconFieldProfessional,
 };
 

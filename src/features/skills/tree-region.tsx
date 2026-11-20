@@ -35,6 +35,16 @@ const TERRAIN: Readonly<Record<FieldId, { seed: number; x: number; y: number }>>
   product: { seed: 83, x: 0.35, y: 0.55 },
   "cyber-cloud": { seed: 97, x: 0.68, y: 0.4 },
   "sales-supply": { seed: 101, x: 0.45, y: 0.78 },
+  // wave 2
+  engineering: { seed: 107, x: 0.3, y: 0.3 },
+  "project-controls": { seed: 113, x: 0.66, y: 0.62 },
+  "tourism-hospitality": { seed: 127, x: 0.42, y: 0.72 },
+  "health-admin": { seed: 131, x: 0.7, y: 0.28 },
+  education: { seed: 137, x: 0.28, y: 0.6 },
+  "banking-risk": { seed: 139, x: 0.58, y: 0.45 },
+  legal: { seed: 149, x: 0.36, y: 0.38 },
+  media: { seed: 151, x: 0.74, y: 0.7 },
+  gaming: { seed: 157, x: 0.5, y: 0.25 },
 };
 
 const f = (n: number) => n.toFixed(1);

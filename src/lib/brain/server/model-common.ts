@@ -10,7 +10,7 @@ import { COURSE_IDS, FIELD_IDS, JOB_CITY_IDS, JOB_FIELD_IDS, JOB_IDS, LEARN_TABS
 import type { ProtocolMessage } from "@/lib/brain/protocol";
 import type { ToolName } from "@/lib/types";
 
-import { CAREER_FAMILY_IDS } from "@/lib/data/expansion/knowledge";
+import { CAREER_FAMILY_IDS } from "@/lib/data/careers";
 
 import { CAREER_TOOL, careersIndex } from "../advisor/careers";
 import type { AdvisorCtx } from "../advisor/context";

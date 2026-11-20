@@ -362,3 +362,110 @@ export function IconFieldSalesSupply(props: IconProps) {
     </IconBase>
   );
 }
+
+/* The nine fields of wave 2 (20 Nov 2026, src/lib/data/wave2) */
+
+// A building crane: mast, jib and the hanging load; the waypoint is the hook's load.
+export function IconFieldEngineering(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M7 20.5V4.5M3.5 20.5h7M7 4.5h12.5M7 8l3.5-3.5M16.5 4.5v6" />
+      <circle className="wp" cx="16.5" cy="12.5" r="1.75" />
+    </IconBase>
+  );
+}
+
+// A schedule: three bars of a Gantt chart in steps; the waypoint is the milestone.
+export function IconFieldProjectControls(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M4 4.5v15h16M7 8h5M9.5 12h6M12 16h5" />
+      <circle className="wp" cx="18.5" cy="8" r="1.75" />
+    </IconBase>
+  );
+}
+
+// A concierge bell on its counter; the waypoint is the bell's button.
+export function IconFieldTourism(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M5 16.5a7 7 0 0 1 14 0zM3.5 19.5h17M12 9.5V8" />
+      <circle className="wp" cx="12" cy="6.25" r="1.75" />
+    </IconBase>
+  );
+}
+
+// A clipboard with a medical cross; the waypoint is the clip at the top.
+export function IconFieldHealth(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <rect height="16" rx="2" width="14" x="5" y="5" />
+      <path d="M12 10v6M9 13h6" />
+      <circle className="wp" cx="12" cy="4.5" r="1.75" />
+    </IconBase>
+  );
+}
+
+// An open book; the waypoint is the bookmark where the reader stopped.
+export function IconFieldEducation(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M12 6.5c-2-1.5-5-2-8.5-1.5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5c-3.5-.5-6.5 0-8.5 1.5zM12 6.5v13" />
+      <circle className="wp" cx="16.25" cy="10" r="1.5" />
+    </IconBase>
+  );
+}
+
+// A bank's portico: pediment, three columns and the base; the waypoint is the seal in the pediment.
+export function IconFieldBanking(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M3.5 9 12 4l8.5 5zM6 11.5v6M12 11.5v6M18 11.5v6M3.5 20.5h17" />
+      <circle className="wp" cx="12" cy="7.25" r="1.25" />
+    </IconBase>
+  );
+}
+
+// The scales: a beam on its stand with two pans; the waypoint is the pivot.
+export function IconFieldLegal(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M12 6.5v14M8 20.5h8M4.5 8h15M6.5 8 4 14h5zM17.5 8 15 14h5" />
+      <circle className="wp" cx="12" cy="5" r="1.75" />
+    </IconBase>
+  );
+}
+
+// A clapperboard: its striped arm lifted over the slate; the waypoint is the take being recorded.
+export function IconFieldMedia(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <rect height="10" rx="2" width="17" x="3.5" y="10" />
+      <path d="M3.5 10 19 5.5M8 8.6l1.5 1.4M13 7.1l1.5 1.4" />
+      <circle className="wp" cx="12" cy="15" r="1.75" />
+    </IconBase>
+  );
+}
+
+// A game controller: its body, the cross pad on one side; the waypoint is the action button.
+export function IconFieldGaming(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M7.5 7.5h9a4.5 4.5 0 0 1 4.3 5.8l-1 3.4a2.3 2.3 0 0 1-3.9.9L14.5 16h-5l-1.4 1.6a2.3 2.3 0 0 1-3.9-.9l-1-3.4a4.5 4.5 0 0 1 4.3-5.8zM8 10.5v3M6.5 12h3" />
+      <circle className="wp" cx="16" cy="12" r="1.5" />
+    </IconBase>
+  );
+}
+
+/** The wave-2 field icons by field id, spread into every field-icon map (cv-results, jobs, learn, skills, the reveal). */
+export const WAVE2_FIELD_ICONS = {
+  engineering: IconFieldEngineering,
+  "project-controls": IconFieldProjectControls,
+  "tourism-hospitality": IconFieldTourism,
+  "health-admin": IconFieldHealth,
+  education: IconFieldEducation,
+  "banking-risk": IconFieldBanking,
+  legal: IconFieldLegal,
+  media: IconFieldMedia,
+  gaming: IconFieldGaming,
+} as const;

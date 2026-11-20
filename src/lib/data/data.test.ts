@@ -144,15 +144,18 @@ describe("fields and skills (9.1, 9.2, 9.8 check 1)", () => {
     expect(getField("professional").name).toBe("المهارات المهنية");
   });
 
-  it("has 54 skills in table order (spec 9.2's 38 and the expansion's 16), with 80 star slots", () => {
+  it("has 93 skills in table order (spec 9.2's 38, the expansion's 16 and wave 2's 39), with 148 star slots", () => {
     expect(SKILLS.map((s) => s.id)).toEqual([...SKILL_IDS]);
     const perField = (field: FieldId) => SKILLS.filter((s) => s.field === field);
-    // data, software, design, marketing, business, hr, product, cyber-cloud, sales-supply, professional
-    expect(FIELD_IDS.map((f) => perField(f).length)).toEqual([8, 7, 5, 5, 5, 5, 4, 6, 4, 5]);
-    expect(FIELD_IDS.map((f) => perField(f).reduce((sum, s) => sum + s.maxStars, 0))).toEqual([15, 10, 8, 7, 7, 7, 5, 8, 6, 7]);
-    expect(SKILLS.reduce((sum, s) => sum + s.maxStars, 0)).toBe(80);
+    // data, software, design, marketing, business, hr, product, cyber-cloud, sales-supply, then wave 2's engineering,
+    // project-controls, tourism-hospitality, health-admin, education, banking-risk, legal, media, gaming, and professional
+    expect(FIELD_IDS.map((f) => perField(f).length)).toEqual([8, 7, 5, 5, 5, 5, 4, 6, 7, 6, 5, 4, 4, 3, 4, 3, 4, 3, 5]);
+    expect(FIELD_IDS.map((f) => perField(f).reduce((sum, s) => sum + s.maxStars, 0))).toEqual([
+      15, 10, 8, 7, 7, 7, 5, 8, 11, 11, 9, 7, 6, 6, 7, 5, 7, 5, 7,
+    ]);
+    expect(SKILLS.reduce((sum, s) => sum + s.maxStars, 0)).toBe(148);
     expect(CATALOGUE_COUNTS.skills).toBe(SKILLS.length);
-    expect(CATALOGUE_COUNTS.starSlots).toBe(80);
+    expect(CATALOGUE_COUNTS.starSlots).toBe(148);
   });
 
   it("gives three slots to five skills and two to eleven (9.2)", () => {
@@ -177,9 +180,20 @@ describe("fields and skills (9.1, 9.2, 9.8 check 1)", () => {
         "cloud",
         "sales",
         "supply-chain",
+        // wave 2's
+        "cx-quality", "cx-analytics",
+        "engineering-drawings", "hse", "quality-control", "site-execution", "mep-systems",
+        "planning-scheduling", "quantity-surveying", "bim-revit", "cost-control",
+        "front-office", "event-planning", "tour-guiding",
+        "medical-coding", "health-informatics",
+        "instructional-design", "elearning-dev", "training-delivery",
+        "credit-analysis", "aml-compliance", "internal-audit",
+        "legal-research", "contract-drafting",
+        "video-editing", "motion-graphics", "translation",
+        "game-design", "game-testing",
       ].sort(),
     );
-    expect(withSlots(1)).toHaveLength(33);
+    expect(withSlots(1)).toHaveLength(43);
   });
 
   it("keeps every prerequisite inside its skill's field, listed earlier, never itself", () => {
@@ -367,11 +381,80 @@ const COURSE_HOURS: Readonly<Record<CourseId, number>> = {
   "c-procurement-1": 8,
   "c-supply-chain-1": 10,
   "c-supply-chain-2": 12,
+  // wave 2 (src/lib/data/wave2/courses.ts)
+  "c-engineering-drawings-1": 10,
+  "c-engineering-drawings-2": 16,
+  "c-hse-1": 10,
+  "c-hse-2": 16,
+  "c-quality-control-1": 10,
+  "c-quality-control-2": 16,
+  "c-site-execution-1": 12,
+  "c-site-execution-2": 16,
+  "c-mep-systems-1": 12,
+  "c-mep-systems-2": 16,
+  "c-saudi-building-code-1": 8,
+  "c-planning-scheduling-1": 16,
+  "c-planning-scheduling-2": 16,
+  "c-quantity-surveying-1": 12,
+  "c-quantity-surveying-2": 16,
+  "c-bim-revit-1": 16,
+  "c-bim-revit-2": 16,
+  "c-cost-control-1": 10,
+  "c-cost-control-2": 12,
+  "c-construction-contracts-1": 10,
+  "c-guest-service-1": 6,
+  "c-front-office-1": 8,
+  "c-front-office-2": 10,
+  "c-event-planning-1": 8,
+  "c-event-planning-2": 10,
+  "c-tour-guiding-1": 8,
+  "c-tour-guiding-2": 10,
+  "c-contact-center-ops-1": 8,
+  "c-cx-quality-1": 8,
+  "c-cx-quality-2": 10,
+  "c-cx-analytics-1": 8,
+  "c-cx-analytics-2": 10,
+  "c-medical-terminology-1": 8,
+  "c-medical-coding-1": 12,
+  "c-medical-coding-2": 14,
+  "c-health-claims-1": 10,
+  "c-health-informatics-1": 10,
+  "c-health-informatics-2": 12,
+  "c-instructional-design-1": 8,
+  "c-instructional-design-2": 12,
+  "c-elearning-dev-1": 10,
+  "c-elearning-dev-2": 12,
+  "c-training-delivery-1": 8,
+  "c-training-delivery-2": 10,
+  "c-banking-basics-1": 8,
+  "c-credit-analysis-1": 8,
+  "c-credit-analysis-2": 12,
+  "c-aml-compliance-1": 8,
+  "c-aml-compliance-2": 12,
+  "c-internal-audit-1": 8,
+  "c-internal-audit-2": 12,
+  "c-legal-research-1": 8,
+  "c-legal-research-2": 12,
+  "c-contract-drafting-1": 8,
+  "c-contract-drafting-2": 12,
+  "c-corporate-governance-1": 8,
+  "c-video-editing-1": 8,
+  "c-video-editing-2": 12,
+  "c-motion-graphics-1": 8,
+  "c-motion-graphics-2": 12,
+  "c-translation-1": 8,
+  "c-translation-2": 12,
+  "c-arabic-editing-1": 8,
+  "c-game-design-1": 8,
+  "c-game-design-2": 12,
+  "c-game-testing-1": 8,
+  "c-game-testing-2": 12,
+  "c-esports-community-1": 8,
 };
 
 describe("courses (9.4, 8.2, 9.8 check 2)", () => {
-  it("has 80 courses in table order (59 + the expansion's 21), one per star slot, ids c-{skill}-{star}", () => {
-    expect(COURSES).toHaveLength(80);
+  it("has 148 courses in table order (59 + the expansion's 21 + wave 2's 68), one per star slot, ids c-{skill}-{star}", () => {
+    expect(COURSES).toHaveLength(148);
     expect(COURSES.map((c) => c.id)).toEqual([...COURSE_IDS]);
     for (const course of COURSES) expect(course.id).toBe(`c-${course.skill}-${course.star}`);
     for (const skill of SKILLS) {
@@ -381,12 +464,12 @@ describe("courses (9.4, 8.2, 9.8 check 2)", () => {
     expect(CATALOGUE_COUNTS.courses).toBe(COURSES.length);
   });
 
-  it("has the hours as listed: 784 hours (566 + 218) and 15,680 XP in total", () => {
+  it("has the hours as listed: 1,512 hours (566 + 218 + 728) and 30,240 XP in total", () => {
     for (const course of COURSES) expect(course.hours, course.id).toBe(COURSE_HOURS[course.id]);
     const hours = COURSES.reduce((sum, c) => sum + c.hours, 0);
-    expect(hours).toBe(784);
+    expect(hours).toBe(1512);
     expect(hours).toBe(CATALOGUE_COUNTS.courseHours);
-    expect(hours * 20).toBe(15_680);
+    expect(hours * 20).toBe(30_240);
   });
 
   it("has as many lessons as 8.2 gives for the hours, each a short title, none repeated in a course", () => {
@@ -493,6 +576,45 @@ const JOB_TABLE: Readonly<Record<JobId, { reqs: string; stages: number; preps: n
   "qiddiya-procurement-specialist-riyadh": { reqs: "procurement:1 financial-analysis:1 communication:1 problem-solving:1 supply-chain:2", stages: 7, preps: 1 },
   "ninja-procurement-cost-control-specialist-riyadh": { reqs: "accounting:1 financial-analysis:1 procurement:1 excel:3 problem-solving:1", stages: 7, preps: 0 },
   "hungerstation-junior-3pl-account-manager-riyadh": { reqs: "procurement:1 dataviz:1 supply-chain:1 problem-solving:1 communication:2", stages: 8, preps: 2 },
+  // wave 2 (src/lib/data/wave2/jobs.ts)
+  "almosafer-product-designer-riyadh": { reqs: "figma:2 ux-research:1 prototyping:1 ui-design:2 communication:2", stages: 9, preps: 1 },
+  "mrsool-creative-copywriter-riyadh": { reqs: "content:2 seo:1 communication:2 project-management:1 teamwork:1", stages: 8, preps: 1 },
+  "rentokil-customer-experience-specialist-riyadh": { reqs: "sales:1 customer-success:1 cx-analytics:1 communication:1 english:1", stages: 5, preps: 0 },
+  "mrsool-customer-care-representative-riyadh": { reqs: "sales:1 customer-success:1 contact-center-ops:1 cx-analytics:1 communication:1", stages: 5, preps: 0 },
+  "ninja-live-operations-supervisor-riyadh": { reqs: "cx-quality:1 contact-center-ops:1 excel:2 problem-solving:1 english:2", stages: 9, preps: 2 },
+  "teefnajd-site-engineer-riyadh": { reqs: "engineering-drawings:1 site-execution:1 quality-control:1 hse:1 communication:1", stages: 5, preps: 0 },
+  "rawafid-site-civil-engineer-jeddah": { reqs: "engineering-drawings:2 site-execution:2 hse:1 project-management:1 teamwork:1", stages: 8, preps: 1 },
+  "matar-albaqmi-site-engineer-hvac-dammam": { reqs: "engineering-drawings:1 mep-systems:2 site-execution:1 quality-control:1 planning-scheduling:1", stages: 6, preps: 0 },
+  "hanmiglobal-mechanical-engineer-riyadh": { reqs: "engineering-drawings:2 mep-systems:2 site-execution:1 quantity-surveying:1 problem-solving:1", stages: 7, preps: 0 },
+  "teefnajd-quality-control-engineer-riyadh": { reqs: "engineering-drawings:1 quality-control:1 site-execution:1 teamwork:1 problem-solving:1", stages: 6, preps: 1 },
+  "hanmiglobal-quality-inspector-electrical-riyadh": { reqs: "engineering-drawings:1 quality-control:2 mep-systems:1 hse:1 communication:1", stages: 6, preps: 0 },
+  "hanmiglobal-hse-engineer-riyadh": { reqs: "hse:1 quality-control:1 problem-solving:1 communication:1 presentation:1", stages: 5, preps: 0 },
+  "fuku-hse-engineer-dammam": { reqs: "hse:2 saudi-building-code:1 problem-solving:1 communication:1 english:2", stages: 8, preps: 1 },
+  "aljomaih-graduate-development-engineering-riyadh": { reqs: "planning-scheduling:1 construction-contracts:1 hse:1 project-management:1 communication:1", stages: 6, preps: 1 },
+  "matar-albaqmi-planning-engineer-dammam": { reqs: "planning-scheduling:2 project-management:1 dataviz:1 communication:1 teamwork:1", stages: 8, preps: 2 },
+  "teefnajd-contract-engineer-riyadh": { reqs: "engineering-drawings:1 quantity-surveying:1 construction-contracts:1 planning-scheduling:1 communication:2", stages: 6, preps: 0 },
+  "rawafid-erp-projects-cost-controller-jeddah": { reqs: "cost-control:2 financial-analysis:1 dataviz:1 project-management:1 communication:1", stages: 10, preps: 4 },
+  "gathern-guest-relations-associate-riyadh": { reqs: "guest-service:1 front-office:1 customer-success:1 communication:1 teamwork:1", stages: 6, preps: 1 },
+  "seven-guest-service-associate-riyadh": { reqs: "guest-service:1 front-office:1 sales:1 communication:1 teamwork:1", stages: 5, preps: 0 },
+  "eram-event-management-coordinator-jeddah": { reqs: "event-planning:2 project-management:1 procurement:1 communication:1 guest-service:1", stages: 6, preps: 0 },
+  "waseel-rcm-specialist-riyadh": { reqs: "medical-coding:1 health-claims:1 health-informatics:1 problem-solving:1 communication:1", stages: 6, preps: 1 },
+  "eram-associate-instructional-designer-dhahran": { reqs: "instructional-design:2 elearning-dev:2 project-management:1 training-dev:1 communication:1", stages: 8, preps: 1 },
+  "abis-industrial-skills-trainer-computer-dhahran": { reqs: "training-delivery:2 instructional-design:1 elearning-dev:1 presentation:1 problem-solving:1", stages: 7, preps: 1 },
+  "qiddiya-training-administration-senior-specialist-riyadh": { reqs: "elearning-dev:1 training-dev:1 excel:1 powerbi:1 english:2", stages: 8, preps: 2 },
+  "tamara-collections-advisor-riyadh": { reqs: "credit-analysis:1 customer-success:1 aml-compliance:1 english:1 excel:1", stages: 7, preps: 2 },
+  "tamara-compliance-officer-riyadh": { reqs: "banking-basics:1 aml-compliance:2 internal-audit:1 english:2 communication:2", stages: 8, preps: 0 },
+  "tamara-compliance-senior-associate-riyadh": { reqs: "banking-basics:1 aml-compliance:2 internal-audit:1 english:2 communication:2", stages: 8, preps: 0 },
+  "tamara-fraud-investigator-riyadh": { reqs: "aml-compliance:2 excel:1 problem-solving:1 communication:2 english:2", stages: 9, preps: 1 },
+  "pwc-assurance-coop-2027-riyadh": { reqs: "internal-audit:1 accounting:1 communication:1 problem-solving:1 english:1", stages: 5, preps: 0 },
+  "pwc-risk-internal-audit-senior-associate-jeddah": { reqs: "internal-audit:2 accounting:1 problem-solving:1 communication:2 english:2", stages: 8, preps: 0 },
+  "ey-senior-auditor-gcc-nationals-riyadh": { reqs: "internal-audit:2 accounting:1 communication:2 teamwork:1 problem-solving:1", stages: 7, preps: 0 },
+  "webook-legal-analyst-riyadh": { reqs: "legal-research:1 contract-drafting:1 communication:1 english:1 problem-solving:1", stages: 5, preps: 0 },
+  "mozn-legal-specialist-riyadh": { reqs: "legal-research:2 contract-drafting:2 corporate-governance:1 aml-compliance:1 english:1", stages: 8, preps: 1 },
+  "webook-legal-associate-riyadh": { reqs: "legal-research:2 contract-drafting:2 corporate-governance:1 labor-law:1 teamwork:1", stages: 9, preps: 2 },
+  "mozn-creative-design-motion-riyadh": { reqs: "video-editing:2 motion-graphics:2 design-basics:1 figma:1 communication:2", stages: 8, preps: 0 },
+  "chainreaction-multimedia-designer-riyadh": { reqs: "video-editing:2 motion-graphics:1 design-basics:1 social-media:1 content:1", stages: 7, preps: 1 },
+  "platinumlist-en-ar-content-manager-riyadh": { reqs: "translation:2 arabic-editing:1 content:2 seo:1 english:2", stages: 9, preps: 1 },
+  "qiddiya-gaming-esports-strategy-am-riyadh": { reqs: "esports-community:1 project-management:2 business-analysis:1 communication:2 presentation:1", stages: 7, preps: 0 },
 };
 
 /** The snapshots the real jobs were written from (20 Nov 2026): the job boards, and Maharah's own careers board. */
@@ -508,16 +630,48 @@ const readSnapshot = (file: string) => JSON.parse(readFileSync(path.join(import.
     readonly requirements: readonly { readonly skill: string; readonly stars: number; readonly evidence: string }[];
   }[];
 };
+/** Wave 2's career files keep their jobs in the app's shape (research/expansion/expansion.json); read as snapshot rows. */
+const WAVE2_CAREER_FILES = ["engineering.json", "tourism-health-education.json", "finance-legal-media-gaming.json"];
+function readWave2CareerJobs(file: string): ReturnType<typeof readSnapshot>["jobs"] {
+  const data = JSON.parse(readFileSync(path.join(import.meta.dirname, "../../../research/wave2", file), "utf8")) as {
+    readonly jobs: readonly {
+      readonly id: string;
+      readonly title: string;
+      readonly titleEn: string;
+      readonly company: string;
+      readonly companyEn: string;
+      readonly source: { readonly url: string; readonly postedAt: string };
+      readonly requirements: readonly { readonly skill: string; readonly stars: number; readonly evidence: string }[];
+    }[];
+  };
+  return data.jobs.map((j) => ({
+    id: j.id,
+    title: j.titleEn,
+    titleAr: j.title,
+    url: j.source.url,
+    postedAt: j.source.postedAt,
+    company: { en: j.companyEn, ar: j.company },
+    requirements: j.requirements,
+  }));
+}
 const SNAPSHOT = {
   checkedAt: readSnapshot("jobs-snapshot.json").checkedAt,
-  jobs: [...readSnapshot("jobs-snapshot.json").jobs, ...readSnapshot("maharah.json").jobs, ...readSnapshot("../expansion/raw/jobs.json").jobs],
+  jobs: [
+    ...readSnapshot("jobs-snapshot.json").jobs,
+    ...readSnapshot("maharah.json").jobs,
+    ...readSnapshot("../expansion/raw/jobs.json").jobs,
+    // wave 2: the career files first (their postings are in the app's shape; two of them also sit, with fewer of the app's
+    // skills, in companies-jobs.json), then the companies' roles
+    ...WAVE2_CAREER_FILES.flatMap(readWave2CareerJobs),
+    ...readSnapshot("../wave2/companies-jobs.json").jobs,
+  ],
 };
 
 describe("jobs (9.3, 9.8 checks 3 and 9; real postings of 20 Nov 2026)", () => {
-  it("has 46 jobs in data order (28 + the expansion's 18) with five requirements each, as listed", () => {
+  it("has 84 jobs in data order (28 + the expansion's 18 + wave 2's 38) with five requirements each, as listed", () => {
     expect(JOBS.map((j) => j.id)).toEqual([...JOB_IDS]);
     expect(CATALOGUE_COUNTS.jobs).toBe(JOBS.length);
-    expect(JOBS).toHaveLength(46);
+    expect(JOBS).toHaveLength(84);
     for (const job of JOBS) {
       expect(job.requirements, job.id).toHaveLength(5);
       expect(job.requirements.map((r) => `${r.skill}:${r.stars}`).join(" "), job.id).toBe(JOB_TABLE[job.id].reqs);
@@ -525,12 +679,12 @@ describe("jobs (9.3, 9.8 checks 3 and 9; real postings of 20 Nov 2026)", () => {
     }
   });
 
-  it("keeps ONE practice job (the demo's «محلل بيانات») and 45 real postings", () => {
+  it("keeps ONE practice job (the demo's «محلل بيانات») and 83 real postings", () => {
     expect(JOBS.filter((j) => !j.real).map((j) => j.id)).toEqual(["data-analyst-riyadh"]);
     const practice = getJob("data-analyst-riyadh");
     expect(practice.source).toBeUndefined();
     expect(practice.requirements.every((r) => r.evidence === undefined)).toBe(true);
-    expect(JOBS.filter((j) => j.real)).toHaveLength(45);
+    expect(JOBS.filter((j) => j.real)).toHaveLength(83);
   });
 
   it("gives every real job its source, link, dates, both names and the posting's own sentence per requirement, as in the snapshot", () => {
@@ -577,20 +731,20 @@ describe("jobs (9.3, 9.8 checks 3 and 9; real postings of 20 Nov 2026)", () => {
     }
   });
 
-  it("requires 53 of the 54 skills in at least one job (no posting asks for paid ads)", () => {
+  it("requires 87 of the 93 skills in at least one job (no posting asks for paid ads; five wave-2 skills have no open posting yet)", () => {
     const required = new Set(JOBS.flatMap((j) => j.requirements.map((r) => r.skill)));
-    expect(SKILL_IDS.filter((s) => !required.has(s))).toEqual(["ads"]);
+    expect(SKILL_IDS.filter((s) => !required.has(s))).toEqual(["ads", "bim-revit", "tour-guiding", "medical-terminology", "game-design", "game-testing"]);
   });
 
-  it("splits the jobs by field 8/5/4/4/5/5/3/6/6, by city 38/3/1/4 and by band 8/15/23", () => {
+  it("splits the jobs by field 8/5/5/5/5/5/3/6/9, by city 67/7/6/4 and by band 12/27/45 (wave 2 included)", () => {
     const count = <K extends string>(key: (j: Job) => K, value: K) => JOBS.filter((j) => key(j) === value).length;
     expect(
       ["data", "software", "design", "marketing", "business", "hr", "product", "cyber-cloud", "sales-supply"].map((f) =>
         count((j) => j.field, f),
       ),
-    ).toEqual([8, 5, 4, 4, 5, 5, 3, 6, 6]);
-    expect(JOB_CITY_IDS.map((c) => count((j) => j.city, c))).toEqual([38, 3, 1, 4]);
-    expect(["entry", "junior", "mid"].map((b) => count((j) => j.band, b))).toEqual([8, 15, 23]);
+    ).toEqual([8, 5, 5, 5, 5, 5, 3, 6, 9]);
+    expect(JOB_CITY_IDS.map((c) => count((j) => j.city, c))).toEqual([67, 7, 6, 4]);
+    expect(["entry", "junior", "mid"].map((b) => count((j) => j.band, b))).toEqual([12, 27, 45]);
   });
 
   it("gives every job's stage count and prep count (the reveal's three: 8/74, 8/64, 5/38)", () => {

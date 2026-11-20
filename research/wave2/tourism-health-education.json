@@ -1,0 +1,3893 @@
+{
+ "checkedAt": "2026-11-20",
+ "note": "Wave 2 research (tourism & hospitality, healthcare non-clinical, education & training, CX): ready-to-merge data in the expansion.json shape, not wired into the app. App «دليل», chatbot «دليلك».",
+ "fields": [
+  {
+   "id": "tourism-hospitality",
+   "name": "السياحة والضيافة والفعاليات"
+  },
+  {
+   "id": "health-admin",
+   "name": "الإدارة والمعلوماتية الصحية"
+  },
+  {
+   "id": "education",
+   "name": "التعليم والتدريب"
+  }
+ ],
+ "skills": [
+  {
+   "id": "guest-service",
+   "name": "خدمة الضيوف",
+   "field": "tourism-hospitality",
+   "maxStars": 1,
+   "prereqs": [],
+   "description": "استقبال الضيوف وتلبية طلباتهم وحل شكاواهم بلباقة من أول لحظة.",
+   "aliases": [
+    "خدمة الضيوف",
+    "علاقات الضيوف",
+    "استقبال الضيوف",
+    "guest service",
+    "guest relations",
+    "guest experience",
+    "CGSP"
+   ]
+  },
+  {
+   "id": "front-office",
+   "name": "عمليات الاستقبال الفندقي",
+   "field": "tourism-hospitality",
+   "maxStars": 2,
+   "prereqs": [
+    "guest-service"
+   ],
+   "description": "الحجوزات وتسجيل الدخول والخروج ونظام إدارة الفندق ومتابعة الإشغال.",
+   "aliases": [
+    "المكتب الأمامي",
+    "الاستقبال الفندقي",
+    "موظف استقبال",
+    "front office",
+    "front desk",
+    "Opera PMS",
+    "receptionist"
+   ]
+  },
+  {
+   "id": "event-planning",
+   "name": "تنظيم الفعاليات",
+   "field": "tourism-hospitality",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "تخطيط الفعالية وجدولها والموردين والتشغيل يوم الحدث ثم تقييمها.",
+   "aliases": [
+    "تنظيم الفعاليات",
+    "إدارة الفعاليات",
+    "تنظيم المؤتمرات",
+    "منسق فعاليات",
+    "event planning",
+    "event management",
+    "event coordinator",
+    "CMP"
+   ]
+  },
+  {
+   "id": "tour-guiding",
+   "name": "الإرشاد السياحي",
+   "field": "tourism-hospitality",
+   "maxStars": 2,
+   "prereqs": [
+    "guest-service"
+   ],
+   "description": "مرافقة السياح وشرح المواقع والتراث بدقة، برخصة من وزارة السياحة.",
+   "aliases": [
+    "الإرشاد السياحي",
+    "مرشد سياحي",
+    "رخصة مرشد سياحي",
+    "tour guide",
+    "tour guiding",
+    "tourist guide"
+   ]
+  },
+  {
+   "id": "contact-center-ops",
+   "name": "تشغيل مراكز الاتصال",
+   "field": "sales-supply",
+   "maxStars": 1,
+   "prereqs": [
+    "customer-success"
+   ],
+   "description": "مؤشرات مركز الاتصال وجدولة المناوبات ومتابعة أداء الفريق يومياً.",
+   "aliases": [
+    "مركز الاتصال",
+    "مراكز الاتصال",
+    "إدارة القوى العاملة",
+    "contact center",
+    "call center",
+    "call centre",
+    "workforce management",
+    "WFM",
+    "AHT"
+   ]
+  },
+  {
+   "id": "cx-quality",
+   "name": "جودة الخدمة ومراقبة المكالمات",
+   "field": "sales-supply",
+   "maxStars": 2,
+   "prereqs": [
+    "customer-success"
+   ],
+   "description": "تقييم المكالمات والمحادثات ببطاقة جودة وتوجيه الموظفين لتحسينها.",
+   "aliases": [
+    "جودة الخدمة",
+    "مراقبة جودة المكالمات",
+    "تقييم المكالمات",
+    "quality monitoring",
+    "call quality",
+    "QA scorecard",
+    "COPC"
+   ]
+  },
+  {
+   "id": "cx-analytics",
+   "name": "قياس تجربة العملاء",
+   "field": "sales-supply",
+   "maxStars": 2,
+   "prereqs": [
+    "customer-success"
+   ],
+   "description": "قياس رضا العملاء وصوتهم ورحلتهم وتحويل النتائج إلى تحسينات.",
+   "aliases": [
+    "تجربة العملاء",
+    "قياس رضا العملاء",
+    "صوت العميل",
+    "رحلة العميل",
+    "customer experience",
+    "voice of the customer",
+    "customer journey mapping",
+    "NPS",
+    "CSAT",
+    "CCXP"
+   ]
+  },
+  {
+   "id": "medical-terminology",
+   "name": "المصطلحات الطبية",
+   "field": "health-admin",
+   "maxStars": 1,
+   "prereqs": [],
+   "description": "لغة الملف الطبي: المصطلحات وأجهزة الجسم والاختصارات لغير السريريين.",
+   "aliases": [
+    "المصطلحات الطبية",
+    "مصطلحات طبية",
+    "medical terminology",
+    "anatomy and physiology"
+   ]
+  },
+  {
+   "id": "medical-coding",
+   "name": "الترميز الطبي",
+   "field": "health-admin",
+   "maxStars": 2,
+   "prereqs": [
+    "medical-terminology"
+   ],
+   "description": "تحويل التشخيصات والإجراءات إلى رموز ICD-10-AM و ACHI المعتمدة في المملكة.",
+   "aliases": [
+    "الترميز الطبي",
+    "ترميز طبي",
+    "الترميز السريري",
+    "medical coding",
+    "clinical coding",
+    "ICD-10",
+    "ICD-10-AM",
+    "ACHI",
+    "AR-DRG",
+    "CCP-KSA"
+   ]
+  },
+  {
+   "id": "health-claims",
+   "name": "المطالبات الطبية ودورة الإيرادات",
+   "field": "health-admin",
+   "maxStars": 1,
+   "prereqs": [
+    "medical-coding"
+   ],
+   "description": "الموافقات والمطالبات التأمينية ومعالجة المرفوضات ومنصة نفيس.",
+   "aliases": [
+    "المطالبات الطبية",
+    "المطالبات التأمينية",
+    "دورة الإيرادات",
+    "الموافقات الطبية",
+    "نفيس",
+    "NPHIES",
+    "RCM",
+    "revenue cycle management",
+    "medical billing",
+    "CRCR"
+   ]
+  },
+  {
+   "id": "health-informatics",
+   "name": "المعلوماتية الصحية والسجل الطبي الإلكتروني",
+   "field": "health-admin",
+   "maxStars": 2,
+   "prereqs": [
+    "medical-terminology"
+   ],
+   "description": "أنظمة السجل الطبي الإلكتروني وتدفق بيانات المرضى ومعايير تبادلها.",
+   "aliases": [
+    "المعلوماتية الصحية",
+    "السجل الطبي الإلكتروني",
+    "الملف الطبي الإلكتروني",
+    "نظم المعلومات الصحية",
+    "health informatics",
+    "EHR",
+    "EMR",
+    "HL7",
+    "FHIR",
+    "Cerner"
+   ]
+  },
+  {
+   "id": "instructional-design",
+   "name": "التصميم التعليمي",
+   "field": "education",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "تحويل الاحتياج إلى أهداف ومحتوى وأنشطة وتقييم بنموذج ADDIE.",
+   "aliases": [
+    "التصميم التعليمي",
+    "مصمم تعليمي",
+    "تصميم المناهج التدريبية",
+    "instructional design",
+    "instructional designer",
+    "learning design",
+    "ADDIE"
+   ]
+  },
+  {
+   "id": "elearning-dev",
+   "name": "تطوير المحتوى الإلكتروني",
+   "field": "education",
+   "maxStars": 2,
+   "prereqs": [
+    "instructional-design"
+   ],
+   "description": "بناء دروس تفاعلية بأدوات التأليف ونشرها على منصات التعلم بمعيار SCORM.",
+   "aliases": [
+    "التعليم الإلكتروني",
+    "المحتوى الإلكتروني",
+    "المحتوى التفاعلي",
+    "e-learning",
+    "eLearning",
+    "Articulate Storyline",
+    "Articulate 360",
+    "Adobe Captivate",
+    "SCORM",
+    "LMS",
+    "Moodle"
+   ]
+  },
+  {
+   "id": "training-delivery",
+   "name": "تقديم التدريب",
+   "field": "education",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "إدارة القاعة الحضورية أو الافتراضية وتيسير النقاش وإيصال المحتوى للكبار.",
+   "aliases": [
+    "تقديم الدورات",
+    "تقديم الدورات التدريبية",
+    "مدرب معتمد",
+    "تدريب المدربين",
+    "facilitation",
+    "train the trainer",
+    "classroom management"
+   ]
+  }
+ ],
+ "courses": [
+  {
+   "id": "c-guest-service-1",
+   "skill": "guest-service",
+   "star": 1,
+   "title": "خدمة الضيوف: من الترحيب إلى حل الشكوى",
+   "hours": 6,
+   "handWritten": true
+  },
+  {
+   "id": "c-front-office-1",
+   "skill": "front-office",
+   "star": 1,
+   "title": "الاستقبال الفندقي: الحجز وتسجيل الدخول والخروج",
+   "hours": 8,
+   "handWritten": true
+  },
+  {
+   "id": "c-front-office-2",
+   "skill": "front-office",
+   "star": 2,
+   "title": "قيادة نوبة الاستقبال: الإشغال والبيع الإضافي وتقارير الليل",
+   "hours": 10,
+   "handWritten": true
+  },
+  {
+   "id": "c-event-planning-1",
+   "skill": "event-planning",
+   "star": 1,
+   "title": "تنظيم الفعاليات: الخطة والجدول والموردون",
+   "hours": 8,
+   "handWritten": true
+  },
+  {
+   "id": "c-event-planning-2",
+   "skill": "event-planning",
+   "star": 2,
+   "title": "ميزانية الفعالية ومخاطرها وتقييمها",
+   "hours": 10,
+   "handWritten": true
+  },
+  {
+   "id": "c-tour-guiding-1",
+   "skill": "tour-guiding",
+   "star": 1,
+   "title": "أساسيات الإرشاد السياحي: القصة والمجموعة والسلامة",
+   "hours": 8,
+   "handWritten": true
+  },
+  {
+   "id": "c-tour-guiding-2",
+   "skill": "tour-guiding",
+   "star": 2,
+   "title": "الإرشاد في المواقع التراثية السعودية",
+   "hours": 10,
+   "handWritten": true
+  },
+  {
+   "id": "c-contact-center-ops-1",
+   "skill": "contact-center-ops",
+   "star": 1,
+   "title": "مركز الاتصال من الداخل: المؤشرات والجدولة",
+   "hours": 8,
+   "handWritten": true
+  },
+  {
+   "id": "c-cx-quality-1",
+   "skill": "cx-quality",
+   "star": 1,
+   "title": "جودة المكالمات: بطاقة التقييم والمعايرة",
+   "hours": 8,
+   "handWritten": true
+  },
+  {
+   "id": "c-cx-quality-2",
+   "skill": "cx-quality",
+   "star": 2,
+   "title": "برنامج الجودة: التوجيه وتحسين الأداء",
+   "hours": 10,
+   "handWritten": true
+  },
+  {
+   "id": "c-cx-analytics-1",
+   "skill": "cx-analytics",
+   "star": 1,
+   "title": "قياس تجربة العملاء: NPS و CSAT وصوت العميل",
+   "hours": 8,
+   "handWritten": true
+  },
+  {
+   "id": "c-cx-analytics-2",
+   "skill": "cx-analytics",
+   "star": 2,
+   "title": "رحلة العميل واستراتيجية التجربة",
+   "hours": 10,
+   "handWritten": true
+  },
+  {
+   "id": "c-medical-terminology-1",
+   "skill": "medical-terminology",
+   "star": 1,
+   "title": "المصطلحات الطبية لغير الأطباء",
+   "hours": 8,
+   "handWritten": true
+  },
+  {
+   "id": "c-medical-coding-1",
+   "skill": "medical-coding",
+   "star": 1,
+   "title": "الترميز الطبي: ICD-10-AM للعيادات الخارجية",
+   "hours": 12,
+   "handWritten": true
+  },
+  {
+   "id": "c-medical-coding-2",
+   "skill": "medical-coding",
+   "star": 2,
+   "title": "ترميز التنويم و AR-DRG",
+   "hours": 14,
+   "handWritten": true
+  },
+  {
+   "id": "c-health-claims-1",
+   "skill": "health-claims",
+   "star": 1,
+   "title": "المطالبات الطبية: من الموافقة إلى التحصيل عبر نفيس",
+   "hours": 10,
+   "handWritten": true
+  },
+  {
+   "id": "c-health-informatics-1",
+   "skill": "health-informatics",
+   "star": 1,
+   "title": "المعلوماتية الصحية: السجل الطبي الإلكتروني",
+   "hours": 10,
+   "handWritten": true
+  },
+  {
+   "id": "c-health-informatics-2",
+   "skill": "health-informatics",
+   "star": 2,
+   "title": "تبادل البيانات الصحية: HL7 و FHIR",
+   "hours": 12,
+   "handWritten": true
+  },
+  {
+   "id": "c-instructional-design-1",
+   "skill": "instructional-design",
+   "star": 1,
+   "title": "التصميم التعليمي بنموذج ADDIE",
+   "hours": 8,
+   "handWritten": true
+  },
+  {
+   "id": "c-instructional-design-2",
+   "skill": "instructional-design",
+   "star": 2,
+   "title": "تصميم برنامج تدريبي كامل وتقييم أثره",
+   "hours": 12,
+   "handWritten": true
+  },
+  {
+   "id": "c-elearning-dev-1",
+   "skill": "elearning-dev",
+   "star": 1,
+   "title": "أول درس تفاعلي: أداة تأليف و SCORM",
+   "hours": 10,
+   "handWritten": true
+  },
+  {
+   "id": "c-elearning-dev-2",
+   "skill": "elearning-dev",
+   "star": 2,
+   "title": "سيناريوهات تفاعلية وإتاحة المحتوى",
+   "hours": 12,
+   "handWritten": true
+  },
+  {
+   "id": "c-training-delivery-1",
+   "skill": "training-delivery",
+   "star": 1,
+   "title": "تقديم التدريب: إدارة القاعة وتعليم الكبار",
+   "hours": 8,
+   "handWritten": true
+  },
+  {
+   "id": "c-training-delivery-2",
+   "skill": "training-delivery",
+   "star": 2,
+   "title": "تيسير ورش العمل والتدريب الافتراضي",
+   "hours": 10,
+   "handWritten": true
+  }
+ ],
+ "jobs": [
+  {
+   "id": "gathern-guest-relations-associate-riyadh",
+   "title": "أخصائي علاقات الضيوف (حديثو التخرج)",
+   "titleEn": "Guest Relations Associate (Fresh Graduates)",
+   "titleArTranslated": true,
+   "field": "tourism-hospitality",
+   "family": "guest-experience",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "entry",
+   "company": "جاذر إن",
+   "companyEn": "Gathern",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف جاذر إن (Workable)",
+    "url": "https://jobs.workable.com/view/b99fMpqmXfwDRZ4tbU1Ujg/guest-relations-associate-(fresh-graduates)-in-riyadh-at-gathern",
+    "postedAt": "2026-11-02",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "Title says «Fresh Graduates»; the posting's body calls the role «Guest Care Specialist». Flexible hours incl. weekends."
+   },
+   "bandEvidence": "Bachelor's/Diploma degree.",
+   "requirements": [
+    {
+     "skill": "guest-service",
+     "stars": 1,
+     "evidence": "Act as the main point of contact for guest inquiries and ensure timely resolution of any issues or complaints."
+    },
+    {
+     "skill": "front-office",
+     "stars": 1,
+     "evidence": "Assist guests with booking reservations and provide product recommendations."
+    },
+    {
+     "skill": "customer-success",
+     "stars": 1,
+     "evidence": "Provide exceptional customer service to all guests."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Excellent communication and interpersonal skills."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Collaborate with team members to improve guest satisfaction and contribute to the overall success of the company."
+    }
+   ],
+   "summary": "تكون نقطة التواصل الأولى لضيوف منصة حجز الشاليهات والاستراحات: ترد على استفساراتهم وتساعدهم في الحجز وتحل مشاكلهم.",
+   "tasks": [
+    "الرد على استفسارات الضيوف وحل الشكاوى",
+    "مساعدة الضيوف في الحجز",
+    "تحديث سجلات الضيوف"
+   ]
+  },
+  {
+   "id": "seven-guest-service-associate-riyadh",
+   "title": "مساعد خدمة الضيوف - ترانسفورمرز",
+   "titleEn": "Guest Service Associate - Transformers",
+   "titleArTranslated": true,
+   "field": "tourism-hospitality",
+   "family": "guest-experience",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "junior",
+   "company": "سفن (الاستثمارات الترفيهية السعودية)",
+   "companyEn": "SEVEN",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف سفن (الاستثمارات الترفيهية السعودية) (Workable)",
+    "url": "https://jobs.workable.com/view/cPSLAYg1q2m8F2S14sN9Yz/guest-service-associate---transformers-in-riyadh-at-seven",
+    "postedAt": "2026-07-30",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "SEVEN = Saudi Entertainment Ventures (company name as shown on Workable: «SEVEN»). sales capped at 1: it is promoting add-on services, not a sales target."
+   },
+   "bandEvidence": "1-2 years of experience in a guest service or guest-facing role, preferably in the hospitality or entertainment industry.",
+   "requirements": [
+    {
+     "skill": "guest-service",
+     "stars": 1,
+     "evidence": "Resolve guest complaints or concerns in a professional and courteous manner, escalating issues to the Shift Supervisor when necessary."
+    },
+    {
+     "skill": "front-office",
+     "stars": 1,
+     "evidence": "Assist with the daily operations of the front desk, including managing check-ins and check-outs, processing payments, and maintaining an organized work environment."
+    },
+    {
+     "skill": "sales",
+     "stars": 1,
+     "evidence": "Promote additional services and amenities offered at the facility to enhance the guest experience."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Strong interpersonal and communication skills, with the ability to handle guest inquiries and complaints effectively."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Maintain clear and effective communication with other team members to ensure a seamless guest experience."
+    }
+   ],
+   "summary": "تستقبل الزوار في وجهة ترفيهية من سفن، تدير الحجوزات والدخول والخروج والدفع، وتحل طلباتهم وشكاواهم.",
+   "tasks": [
+    "استقبال الزوار والرد على استفساراتهم",
+    "تسجيل الدخول والخروج والدفع في مكتب الاستقبال",
+    "رفع ملاحظات الزوار للمشرف"
+   ]
+  },
+  {
+   "id": "sixflags-qiddiya-entry-operations-host-riyadh",
+   "title": "مضيف عمليات الدخول (أكوارابيا)",
+   "titleEn": "Host I - Entry Operations (Aquarabia)",
+   "titleArTranslated": true,
+   "field": "tourism-hospitality",
+   "family": "guest-experience",
+   "city": "riyadh",
+   "place": "Riyadh (Qiddiya City)",
+   "band": "junior",
+   "company": "سكس فلاجز مدينة القدية وأكوارابيا",
+   "companyEn": "Six Flags Qiddiya City and Aquarabia",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف سكس فلاجز مدينة القدية وأكوارابيا (Workable)",
+    "url": "https://jobs.workable.com/view/tHeMVCuDm8oYWtqFNHoNCK/host-i---entry-operations-(aquarabia)-in-riyadh-at-six-flags-qiddiya-city-and-aquarabia",
+    "postedAt": "2026-06-04",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "Education: High School/ Diploma. problem-solving at 1 is a judgement call (handling peak guest flow under pressure)."
+   },
+   "bandEvidence": "Experience: 1-2 years’ experience in Entry Operations, Access Control, Crowed Control, Guest Services or similar roles, preferably within a water theme park or event setting.",
+   "requirements": [
+    {
+     "skill": "guest-service",
+     "stars": 1,
+     "evidence": "Warmly greet and welcome guests upon arrival, creating a positive and friendly first impression while ensuring the overall safety of all guests and colleagues within and while visiting Six Flags & Aquarabia Qiddiya City."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Strong communication and interpersonal skills with a welcoming demeanor."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Fluent in Arabic, Excellent English."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Team-oriented and collaborative mindset"
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Ability to handle high-pressure situations and manage Guest flows efficiently."
+    }
+   ],
+   "summary": "تستقبل زوار حديقة أكوارابيا المائية في القدية وتدير بوابات الدخول والتذاكر وطوابير الانتظار بسلاسة وأمان.",
+   "tasks": [
+    "الترحيب بالزوار ومسح التذاكر",
+    "تنظيم الطوابير وحركة الدخول والخروج",
+    "الرد على استفسارات الزوار وملاحظاتهم"
+   ]
+  },
+  {
+   "id": "eram-event-management-coordinator-jeddah",
+   "title": "منسق إدارة الفعاليات",
+   "titleEn": "Event Management Coordinator (Saudi Arabia)",
+   "titleArTranslated": true,
+   "field": "tourism-hospitality",
+   "family": "events",
+   "city": "jeddah",
+   "place": "Jeddah",
+   "band": "junior",
+   "company": "إرم للمواهب (توظيف)",
+   "companyEn": "Eram Talent",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف إرم للمواهب (Workable)",
+    "url": "https://jobs.workable.com/view/jce2fPpppy7CEyf1daVFcS/event-management-coordinator-(saudi-arabia)-in-jeddah-at-eram-talent",
+    "postedAt": "2026-10-08",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "Posted by a recruitment/staffing firm on its own Workable board; the hiring client is not named. event-planning at 2 because the posting also asks «Experience in budget management and financial tracking for events.»"
+   },
+   "bandEvidence": "At least two (2) years of experience in event planning, logistics coordination, or a similar role, preferably in an academic or research environment.",
+   "requirements": [
+    {
+     "skill": "event-planning",
+     "stars": 2,
+     "evidence": "Coordinate the end-to-end planning and execution of academic conferences, workshops, symposiums, and visits."
+    },
+    {
+     "skill": "project-management",
+     "stars": 1,
+     "evidence": "Develop detailed event timelines, floor plans, and run-of-show documents."
+    },
+    {
+     "skill": "procurement",
+     "stars": 1,
+     "evidence": "Manage event-related procurement and financial processes, including raising purchase requisitions (PR), processing purchase orders (PO), completing service entry sheets (SES), handling invoice processing, supporting vendor onboarding and registration, tracking event budgets, and conducting post-event financial reconciliation."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Serve as a liaison between internal departments and external vendors/service providers (e.g., catering, transport, event agencies) to coordinate event requirements and ensure successful execution."
+    },
+    {
+     "skill": "guest-service",
+     "stars": 1,
+     "evidence": "The role ensures exceptional attendee experience, seamless logistics, effective communication, and strong stakeholder engagement."
+    }
+   ],
+   "summary": "تنسق مؤتمرات وورش وزيارات رسمية لجهة أكاديمية في جدة من التخطيط إلى التشغيل يوم الحدث وتسوية الميزانية بعده.",
+   "tasks": [
+    "إعداد جدول الفعالية ومخطط القاعة وسير البرنامج",
+    "التنسيق مع موردي الضيافة والنقل",
+    "طلبات الشراء ومتابعة ميزانية الفعالية"
+   ]
+  },
+  {
+   "id": "sixflags-qiddiya-entertainment-events-team-leader-riyadh",
+   "title": "قائد فريق الترفيه والفعاليات",
+   "titleEn": "Team Leader - Entertainment & Events",
+   "titleArTranslated": true,
+   "field": "tourism-hospitality",
+   "family": "events",
+   "city": "riyadh",
+   "place": "Riyadh (Qiddiya City)",
+   "band": "junior",
+   "company": "سكس فلاجز مدينة القدية وأكوارابيا",
+   "companyEn": "Six Flags Qiddiya City and Aquarabia",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف سكس فلاجز مدينة القدية وأكوارابيا (Workable)",
+    "url": "https://jobs.workable.com/view/hCpVjDbQL2dgYoYhudaYqS/team-leader---entertainment-%26-events-in-riyadh-at-six-flags-qiddiya-city-and-aquarabia",
+    "postedAt": "2026-06-29",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "Education: High School Diploma or equivalent (minimum)."
+   },
+   "bandEvidence": "1–3 years of experience in an entertainment, hospitality, or customer service role, with leadership experience preferred",
+   "requirements": [
+    {
+     "skill": "event-planning",
+     "stars": 1,
+     "evidence": "Support the setup and strike of shows, events, and entertainment offerings, ensuring efficient execution"
+    },
+    {
+     "skill": "guest-service",
+     "stars": 1,
+     "evidence": "Enthusiasm for creating exceptional guest experiences and memorable moments"
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Excellent communication skills, both verbal and written"
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Promote a positive work environment by fostering teamwork and motivation among performers and staff"
+    },
+    {
+     "skill": "english",
+     "stars": 1,
+     "evidence": "Proficiency in English, fluency in Arabic is a plus"
+    }
+   ],
+   "summary": "تساعد مشرف الترفيه في تشغيل العروض والفعاليات اليومية في سكس فلاجز القدية وتقود الفريق الميداني في المناوبة.",
+   "tasks": [
+    "إحاطة الفريق قبل المناوبة",
+    "تجهيز العروض والفعاليات وتفكيكها",
+    "حل ملاحظات الزوار الصغيرة ورفع الباقي"
+   ]
+  },
+  {
+   "id": "waseel-rcm-specialist-riyadh",
+   "title": "أخصائي دورة الإيرادات الصحية",
+   "titleEn": "RCM Specialist",
+   "titleArTranslated": true,
+   "field": "health-admin",
+   "family": "medical-coding-rcm",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "وصيل",
+   "companyEn": "Waseel",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف وصيل (Workable)",
+    "url": "https://jobs.workable.com/view/5eetFxYCkwmDyAAHdHAh2t/rcm-specialist-in-riyadh-at-waseel",
+    "postedAt": "2026-07-14",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "«Naphies» is the posting's spelling of NPHIES. The posting says the role is «in different regions around the Kingdom». health-informatics at 1 is a judgement call (entering patient and coverage data in hospital systems)."
+   },
+   "bandEvidence": "Mid-level positions require +2 years of experience",
+   "requirements": [
+    {
+     "skill": "health-claims",
+     "stars": 1,
+     "evidence": "worked on the Naphies platform with a highly skilled professional team."
+    },
+    {
+     "skill": "medical-coding",
+     "stars": 1,
+     "evidence": "Provided medical guidance to the claims processing team, assisted with ICD coding, and reviewed insurance claim forms and supporting documents to ensure completeness and continuity in the claims process."
+    },
+    {
+     "skill": "health-informatics",
+     "stars": 1,
+     "evidence": "Validated and entered patient information and insurance coverage into the appropriate computer systems."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong analytical and problem-solving skills with the ability to identify and resolve billing issues."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Excellent communication and interpersonal skills, enabling effective collaboration with multidisciplinary teams."
+    }
+   ],
+   "summary": "تدير دورة الإيرادات لمستشفيات ومراكز تستخدم حلول وصيل: الموافقات والمطالبات على نفيس ومراجعة الترميز قبل الإرسال.",
+   "tasks": [
+    "إرسال الموافقات والمطالبات لشركات التأمين",
+    "مراجعة نماذج المطالبات والترميز",
+    "متابعة الالتزام بسياسات مجلس الضمان الصحي"
+   ]
+  },
+  {
+   "id": "waseel-rcm-specialist-abha",
+   "title": "أخصائي دورة الإيرادات الصحية",
+   "titleEn": "RCM Specialist",
+   "titleArTranslated": true,
+   "field": "health-admin",
+   "family": "medical-coding-rcm",
+   "city": null,
+   "place": "Abha",
+   "band": "mid",
+   "company": "وصيل",
+   "companyEn": "Waseel",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف وصيل (Workable)",
+    "url": "https://jobs.workable.com/view/uVi9Lrp3ijjKTpzeiTg4oi/rcm-specialist-in-abha-at-waseel",
+    "postedAt": "2026-07-21",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "City id is null: Abha is not in the app's city list (riyadh, jeddah, dammam, remote). Degree list in the posting includes Health Informatics and Healthcare Administration."
+   },
+   "bandEvidence": "Experience: Years: 2 – 3 Years",
+   "requirements": [
+    {
+     "skill": "health-claims",
+     "stars": 1,
+     "evidence": "Hands-on experience managing the full Revenue Cycle Management (RCM) process end-to-end (A-Z), including registration, eligibility, pre-authorization, charging, coding, billing, claims submission, rejection management, follow-up, and collections."
+    },
+    {
+     "skill": "health-informatics",
+     "stars": 1,
+     "evidence": "Good knowledge of Hospital Information Systems (HIS) and Claims Management Systems."
+    },
+    {
+     "skill": "excel",
+     "stars": 2,
+     "evidence": "Advanced Excel skills and data analysis."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Fluent in English (spoken & written)."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong analytical, communication, and problem-solving skills."
+    }
+   ],
+   "summary": "تدير دورة الإيرادات كاملة لمقدم خدمة صحية في أبها: من التسجيل والأهلية والموافقة المسبقة إلى المطالبة والتحصيل.",
+   "tasks": [
+    "متابعة المطالبات من التسجيل إلى التحصيل",
+    "تحليل أسباب رفض المطالبات وتصحيحها",
+    "الالتزام بأنظمة مجلس الضمان الصحي ومعايير سباهي"
+   ]
+  },
+  {
+   "id": "eram-associate-instructional-designer-dhahran",
+   "title": "مصمم تعليمي مشارك",
+   "titleEn": "Associate Instructional Designer",
+   "titleArTranslated": true,
+   "field": "education",
+   "family": "learning-design",
+   "city": "dammam",
+   "place": "Dhahran",
+   "band": "mid",
+   "company": "إرم للمواهب (توظيف)",
+   "companyEn": "Eram Talent",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف إرم للمواهب (Workable)",
+    "url": "https://jobs.workable.com/view/62nbxmgLKZeqKDcYxYvbY2/associate-instructional-designer-in-dhahran-at-eram-talent",
+    "postedAt": "2026-08-18",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "Posted by a recruitment/staffing firm on its own Workable board; the hiring client is not named. Contract role. Dhahran mapped to the dammam city id (Dammam metropolitan area, Eastern Province). Preferred certificates named: CPTD, CIPD Level 5, TESOL."
+   },
+   "bandEvidence": "Professional Experience: 3 to 5 years of direct experience in instructional design, program development, and training evaluation, specifically within a large-scale corporate environment.",
+   "requirements": [
+    {
+     "skill": "instructional-design",
+     "stars": 2,
+     "evidence": "Apply adult learning theory and established instructional design models (such as ADDIE and SAM) to conceptualize, structure, and deliver effective training solutions."
+    },
+    {
+     "skill": "elearning-dev",
+     "stars": 2,
+     "evidence": "Build highly engaging, interactive e-learning modules, simulations, and blended learning materials using industry-standard authoring tools, specifically Articulate 360 and Adobe Captivate."
+    },
+    {
+     "skill": "project-management",
+     "stars": 1,
+     "evidence": "Independently manage the end-to-end lifecycle of multiple training projects in a fast-paced environment, ensuring timely delivery amidst competing priorities and deadlines."
+    },
+    {
+     "skill": "training-dev",
+     "stars": 1,
+     "evidence": "Partner with Subject Matter Experts (SMEs) and cross-functional teams to conduct needs analyses, gather content, and ensure learning objectives are effectively met."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Act as a central point of contact for project updates, maintaining excellent communication and collaboration with all stakeholders throughout the design process."
+    }
+   ],
+   "summary": "تصمم وتبني برامج تدريب إلكترونية ومدمجة لفريق تعلّم وتطوير في شركة كبيرة بالظهران، من تحليل الاحتياج إلى قياس الأثر.",
+   "tasks": [
+    "تحليل الاحتياج مع خبراء المحتوى",
+    "بناء دروس تفاعلية بـ Articulate 360 و Captivate",
+    "تقييم أثر البرامج وتحسينها"
+   ]
+  },
+  {
+   "id": "abis-industrial-skills-trainer-computer-dhahran",
+   "title": "مدرب مهارات صناعية - حاسب",
+   "titleEn": "Industrial Skills Trainer - Computer (SMP)",
+   "titleArTranslated": true,
+   "field": "education",
+   "family": "learning-design",
+   "city": "dammam",
+   "place": "Dhahran",
+   "band": "mid",
+   "company": "أبيس (ABIS)",
+   "companyEn": "ABIS",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف أبيس (ABIS) (Workable)",
+    "url": "https://jobs.workable.com/view/sMBBZx4b5HUXGN8EhbjoMT/industrial-skills-trainer---computer-(smp)-in-dhahran-at-abis",
+    "postedAt": "2026-11-11",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "Dhahran mapped to the dammam city id. Arabic company name is a transliteration of «ABIS» as shown on Workable."
+   },
+   "bandEvidence": "Experience: 3–5 years of practical experience in Computer Science, Information Technology, Artificial Intelligence, Data Science, Cloud Computing, Cybersecurity, Programming, or related technology areas.",
+   "requirements": [
+    {
+     "skill": "training-delivery",
+     "stars": 2,
+     "evidence": "Deliver engaging and effective learning experiences through practical demonstrations, hands-on activities, case studies, and digital learning methods."
+    },
+    {
+     "skill": "instructional-design",
+     "stars": 1,
+     "evidence": "Develop technical training materials, presentations, practical exercises, and assessments using appropriate learning technologies and digital tools."
+    },
+    {
+     "skill": "elearning-dev",
+     "stars": 1,
+     "evidence": "Ability to develop and deliver technical training content using virtual learning platforms and digital tools."
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Excellent presentation, facilitation, communication, and interpersonal skills."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong organizational, time management, problem-solving, and classroom management skills."
+    }
+   ],
+   "summary": "تقدّم دورات تقنية عملية (حاسب، ذكاء اصطناعي، سحابة، أمن) لمتدربين بمستويات مختلفة وتعد موادها وتقييماتها.",
+   "tasks": [
+    "تقديم الدورات والورش بالتطبيق العملي",
+    "إعداد المواد والتمارين والاختبارات",
+    "إدارة القاعة وتكييف الشرح لمستوى المتدربين"
+   ]
+  },
+  {
+   "id": "qiddiya-training-administration-senior-specialist-riyadh",
+   "title": "أخصائي أول - إدارة التدريب",
+   "titleEn": "Senior Specialist - Training Administration - (CDU-029) 50012690",
+   "titleArTranslated": true,
+   "field": "education",
+   "family": "learning-design",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "شركة القدية للاستثمار",
+   "companyEn": "Qiddiya Investment Company",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف شركة القدية للاستثمار (Workable)",
+    "url": "https://jobs.workable.com/view/pHv7KKVD7q4jzp4uQ7XVxC/senior-specialist---training-administration---(cdu-029)-50012690-in-riyadh-at-qiddiya-investment-company",
+    "postedAt": "2026-08-03",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "Title says «Senior Specialist» but the experience asked is 3-5 years, so band mid."
+   },
+   "bandEvidence": "Minimum 3 to 5 years of professional experience in a learning administration, LMS/LXP management, or digital learning operations role, preferably in a large organization.",
+   "requirements": [
+    {
+     "skill": "elearning-dev",
+     "stars": 1,
+     "evidence": "Experience uploading, configuring, and troubleshooting SCORM content within an LMS/LXP environment."
+    },
+    {
+     "skill": "training-dev",
+     "stars": 1,
+     "evidence": "Coordinate and manage the QREL training calendar, scheduling live learning sessions, instructor-led workshops, onboarding events, and assessment windows across all cohorts and BU audiences."
+    },
+    {
+     "skill": "powerbi",
+     "stars": 1,
+     "evidence": "Proficiency in building and maintaining dashboards and reports using LMS/LXP Insights, Power BI, or equivalent data visualisation tools."
+    },
+    {
+     "skill": "excel",
+     "stars": 1,
+     "evidence": "High proficiency in Microsoft 365 including SharePoint, Teams, Excel, and PowerPoint."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Excellent written and verbal communication skills in English. Arabic proficiency is an advantage."
+    }
+   ],
+   "summary": "تشغّل منصة التعلم الرقمية لأكاديمية المبيعات والتأجير في القدية: حسابات المتعلمين والمحتوى والجدول ولوحات المتابعة.",
+   "tasks": [
+    "إدارة حسابات المتعلمين والتسجيل في البرامج",
+    "نشر محتوى SCORM وحل مشاكله",
+    "جدولة الجلسات وتقارير الحضور والإكمال"
+   ]
+  },
+  {
+   "id": "rentokil-customer-experience-specialist-riyadh",
+   "title": "أخصائي تجربة العملاء (دوام جزئي)",
+   "titleEn": "Customer Experience Specialist - Part Time",
+   "titleArTranslated": true,
+   "field": "sales-supply",
+   "family": "cx-quality",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "junior",
+   "company": "رينتوكيل إنيشال",
+   "companyEn": "Rentokil Initial",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف رينتوكيل إنيشال (Workable)",
+    "url": "https://jobs.workable.com/view/ogUkyzqLYDdbx84GRcWF8z/customer-experience-specialist---part-time-in-riyadh-at-rentokil-initial",
+    "postedAt": "2026-10-22",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "Part time; «Has to be a Saudi Candidate». The posting's body calls the role «Customer Success Telesales at Rentokil Boecker»."
+   },
+   "bandEvidence": "At least 1 year of experience in customer success, telesales, inside sales, customer service, or account management.",
+   "requirements": [
+    {
+     "skill": "customer-success",
+     "stars": 1,
+     "evidence": "At least 1 year of experience in customer success, telesales, inside sales, customer service, or account management."
+    },
+    {
+     "skill": "cx-analytics",
+     "stars": 1,
+     "evidence": "Should be able to share the monthly dashboard with the analysis and recommendations"
+    },
+    {
+     "skill": "sales",
+     "stars": 1,
+     "evidence": "To support the branches for retention, and renewals & increase the branch revenue via price increase & up-selling"
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Strong communication and telephone selling skills."
+    },
+    {
+     "skill": "english",
+     "stars": 1,
+     "evidence": "Good command of English and Arabic."
+    }
+   ],
+   "summary": "تتابع عملاء رينتوكيل بوكر بالهاتف: تحل الشكاوى في وقتها وتعيد الحسابات المتعثرة وتشارك لوحة شهرية بالتحليل والتوصيات.",
+   "tasks": [
+    "حل شكاوى العملاء في المدة المحددة",
+    "متابعة التجديدات والحسابات المتعثرة",
+    "لوحة شهرية بالتحليل والتوصيات"
+   ]
+  },
+  {
+   "id": "mrsool-customer-care-representative-riyadh",
+   "title": "ممثل خدمة العملاء",
+   "titleEn": "Representative, Customer Care",
+   "titleArTranslated": true,
+   "field": "sales-supply",
+   "family": "cx-quality",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "junior",
+   "company": "مرسول",
+   "companyEn": "Mrsool",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف مرسول (Workable)",
+    "url": "https://jobs.workable.com/view/fd6746eHwCm4Am62AKHoB4/representative%2C-customer-care-in-riyadh-at-mrsool",
+    "postedAt": "2026-10-04",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "sales at 1 only for the CRM line (the skill «المبيعات وإدارة علاقات العملاء» carries the CRM aliases); it is not a selling role."
+   },
+   "bandEvidence": "Experience: At least one year of experience in customer service, preferably in delivery apps or the tech industry.",
+   "requirements": [
+    {
+     "skill": "customer-success",
+     "stars": 1,
+     "evidence": "Handle complaints and issues customers face, working to find effective and timely solutions to ensure customer satisfaction."
+    },
+    {
+     "skill": "contact-center-ops",
+     "stars": 1,
+     "evidence": "Work towards meeting performance objectives such as response time, customer satisfaction levels, and key performance indicators (KPIs)."
+    },
+    {
+     "skill": "cx-analytics",
+     "stars": 1,
+     "evidence": "Record and document customer interactions and create regular reports on recurring issues or improvement suggestions."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Strong communication skills, both verbal and written."
+    },
+    {
+     "skill": "sales",
+     "stars": 1,
+     "evidence": "Proficiency in using computer applications and CRM software."
+    }
+   ],
+   "summary": "ترد على عملاء تطبيق مرسول بالهاتف والبريد والمحادثة، تحل مشاكل الطلبات وتتابعها وتحقق مؤشرات زمن الرد والرضا.",
+   "tasks": [
+    "الرد على العملاء بالهاتف والمحادثة",
+    "متابعة الطلبات المتأخرة وحلها",
+    "تقارير عن المشاكل المتكررة واقتراحات التحسين"
+   ]
+  },
+  {
+   "id": "ninja-live-operations-supervisor-riyadh",
+   "title": "مشرف العمليات المباشرة",
+   "titleEn": "Live Operations Supervisor",
+   "titleArTranslated": true,
+   "field": "sales-supply",
+   "family": "cx-quality",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "نينجا",
+   "companyEn": "Ninja",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف نينجا (Workable)",
+    "url": "https://jobs.workable.com/view/9XpzThnEH3VdKapbsEK25e/live-operations-supervisor-in-riyadh-at-ninja",
+    "postedAt": "2026-11-11",
+    "checkedAt": "2026-11-20",
+    "urlStatusOnCheck": 200,
+    "note": "Also asks «Hands-on experience with ticketing and call center systems.»"
+   },
+   "bandEvidence": "3–5 years of experience in operations, partner/vendor performance, customer operations, or a similar environment.",
+   "requirements": [
+    {
+     "skill": "cx-quality",
+     "stars": 1,
+     "evidence": "Review tickets, calls, and operational interactions to maintain service quality and compliance with agreed response and resolution times."
+    },
+    {
+     "skill": "contact-center-ops",
+     "stars": 1,
+     "evidence": "Plan weekly schedules and ensure adequate staffing and shift coverage."
+    },
+    {
+     "skill": "excel",
+     "stars": 2,
+     "evidence": "Build and maintain performance reports and dashboards using Google Sheets or Excel."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong analytical and problem-solving skills, with the ability to translate data into practical improvements."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Fluency in Arabic and strong professional English, both written and spoken."
+    }
+   ],
+   "summary": "تقود فريق العمليات المباشرة في قسم المطاعم بنينجا: تراقب المؤشرات وجودة التذاكر والمكالمات وتجدول المناوبات.",
+   "tasks": [
+    "مراجعة التذاكر والمكالمات لضبط الجودة",
+    "جدولة الفريق والمناوبات الأسبوعية",
+    "تقارير ولوحات أداء في Excel أو Google Sheets"
+   ]
+  }
+ ],
+ "guides": [
+  {
+   "skill": "guest-service",
+   "depth": "full",
+   "topPick": {
+    "title": "Service Foundations for Dubai's Hospitality Sector",
+    "provider": "Dubai College of Tourism (Coursera), «Hospitality Excellence in Service, Operations and Leadership»",
+    "url": "https://www.coursera.org/learn/service-foundations-for-dubai-hospitality-sector",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 2,
+    "certificate": true,
+    "star": 1,
+    "why": "ساعتان للمبتدئ: عقلية الخدمة، توقعات الضيف، الانطباع الأول، والتعامل مع المواقف البسيطة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Guest Service Gold®: Golden Opportunities Online Course and Exam",
+     "provider": "American Hotel & Lodging Educational Institute (AHLEI)",
+     "url": "https://shopahlei.servsafebrands.com/guest-service-gold-golden-opportunities-online-course-and-exam-second-edition",
+     "lang": "en",
+     "price": "paid",
+     "hours": null,
+     "certificate": true,
+     "star": 1,
+     "why": "دورة AHLEI الرسمية مع اختبارها بـ60 دولاراً، وتقود إلى شهادة CGSP لخدمة الضيوف.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Basics of Hospitality Management",
+     "provider": "almentor (المدرّب: عنان الجلالي، مؤسس فنادق هلنان)",
+     "url": "https://www.almentor.net/en/certificate/1nkiklj4k",
+     "lang": "ar",
+     "price": null,
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "بالعربي: الفرق بين العميل والضيف، وعوامل نجاح الفندق، والتعامل مع الشخصيات المختلفة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Shep Hyken",
+     "platform": "Blog, Amazing Business Radio podcast and YouTube",
+     "url": "https://hyken.com/",
+     "why": "خبير خدمة عملاء وكاتب ثمانية كتب، مقالاته عن معالجة الشكاوى واستعادة رضا العميل عملية ومباشرة.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/shephyken",
+      "x": "https://twitter.com/Hyken",
+      "youtube": "https://www.youtube.com/@ShepHykenSpeaker/"
+     },
+     "linkedinSource": "https://hyken.com/"
+    },
+    {
+     "name": "Micah Solomon",
+     "platform": "Website, books and articles",
+     "url": "https://www.micahsolomon.com/",
+     "why": "مستشار ضيافة وخدمة، مؤلف The Heart of Hospitality، ويتيح كتيباً مجانياً عن كسب العميل الغاضب.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {},
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Train Your Front Desk Team On The \"5 Pillars Of Hospitality Excellence\"",
+     "author": "Doug Kennedy",
+     "site": "hospitalitynet.org",
+     "url": "https://www.hospitalitynet.org/opinion/4089963.html",
+     "lang": "en",
+     "why": "خمس ركائز: الترحيب، آداب الهاتف، معرفة المنتج، حل الشكوى، ووداع الضيف عند المغادرة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Complaints and Problems Are Opportunities to Show How Good You Are",
+     "author": "Shep Hyken",
+     "site": "hyken.com",
+     "url": "https://hyken.com/customer-service-strategies/complaints-and-problems-are-opportunities/",
+     "lang": "en",
+     "why": "خمس خطوات للشكوى: اعتذر، أقرّ بالمشكلة، أصلحها، تحمّل المسؤولية، وتصرّف بسرعة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اكتب سيناريو خدمة ضيف من الوصول إلى المغادرة، ثم سجّل لعب أدوار لثلاث شكاوى شائعة (غرفة غير جاهزة، إزعاج، خطأ في الفاتورة) بخطوات الاعتذار والإصلاح والمتابعة، واطلب من زميل تقييمك بقائمة من 10 بنود.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Certified Guest Service Professional (CGSP)",
+    "short": "CGSP",
+    "issuer": "American Hotel & Lodging Educational Institute (AHLEI)",
+    "code": "CGSP",
+    "type": "exam",
+    "url": "https://ahlei.servsafebrands.com/lodging/",
+    "fee": {
+     "amount": 60,
+     "currency": "USD",
+     "qualifier": null,
+     "per": null,
+     "note": "shopahlei.servsafebrands.com, 'Guest Service Gold®: Golden Opportunities Online Course and Exam': $60.00 (course + CGSP exam bundle; the lodging page says the programme leads to the CGSP designation)"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://shopahlei.servsafebrands.com/guest-service-gold-golden-opportunities-online-course-and-exam-second-edition",
+    "prepLabel": "دورة Guest Service Gold مع الاختبار",
+    "level": "beginner",
+    "star": 1,
+    "why": "شهادة AHLEI لموظفي الصفوف الأمامية في الضيافة، تُنال بدورة Guest Service Gold واختبارها.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "front-office",
+   "depth": "full",
+   "topPick": {
+    "title": "Hotel Front Office Operations",
+    "provider": "Dubai College of Tourism (Coursera), «Hospitality Excellence in Service, Operations and Leadership»",
+    "url": "https://www.coursera.org/learn/hotel-front-office-operations",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 3,
+    "certificate": true,
+    "star": 1,
+    "why": "هيكل الاستقبال ومهامه وتقنياته، آداب الهاتف، والبيع الإضافي وتوزيع الغرف. تقييم 4.7 من 73 مراجعة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "START Certified Front Desk Representative (CFDR) Online Course and Exam",
+     "provider": "American Hotel & Lodging Educational Institute (AHLEI)",
+     "url": "https://shopahlei.servsafebrands.com/start-cfdr-online-course-and-exam",
+     "lang": "en",
+     "price": "paid",
+     "hours": null,
+     "certificate": true,
+     "star": 1,
+     "why": "دورة AHLEI لموظف مكتب الاستقبال مع اختبار شهادة CFDR بـ61.50 دولاراً.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Introduction to Hospitality Revenue Management",
+     "provider": "Dubai College of Tourism (Coursera)",
+     "url": "https://www.coursera.org/learn/introduction-to-hospitality-revenue-management",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": 3,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: دور مدير الإيرادات ومؤشرات الإشغال وADR وRevPAR ومقارنة الفندق بمنافسيه.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Doug Kennedy",
+     "platform": "Kennedy Training Network (articles, webcasts, podcast)",
+     "url": "https://www.kennedytrainingnetwork.com/",
+     "why": "مدرّب فنادق في الاستقبال والحجوزات والبيع الإضافي، ينشر مقالاً شهرياً وندوات مجانية.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/company/kennedy-training-network-inc",
+      "youtube": "https://www.youtube.com/@KennedyTrainingNetwork"
+     },
+     "linkedinSource": "https://www.kennedytrainingnetwork.com/"
+    },
+    {
+     "name": "Larry Mogelonsky",
+     "platform": "Hotel Mogel (articles and podcasts)",
+     "url": "https://www.hotelmogel.com/",
+     "why": "شريك في Hotel Mogel لإدارة الأصول الفندقية، والشركة نشرت أكثر من 1,500 مقال عن تشغيل الفنادق.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/larrymogelonsky/"
+     },
+     "linkedinSource": "https://www.hotelmogel.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Night Audit And All You Need To Know About It",
+     "author": "Hotelogix Editorial Desk",
+     "site": "hospitalitynet.org",
+     "url": "https://www.hospitalitynet.org/news/4103800.html",
+     "lang": "en",
+     "why": "التدقيق الليلي في عشر خطوات: الترحيلات، حالة الغرف، الأسعار، عدم الحضور، والتقارير.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "جهّز في Excel ليلة تشغيل لفندق من 40 غرفة (حجوزات، وصول، مغادرة، عدم حضور)، ونفّذ خطوات التدقيق الليلي، ثم احسب الإشغال وADR وRevPAR، واكتب نص بيع إضافي لترقية الغرفة عند تسجيل الوصول.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "START Certified Front Desk Representative (CFDR)",
+    "short": "CFDR",
+    "issuer": "American Hotel & Lodging Educational Institute (AHLEI)",
+    "code": "CFDR",
+    "type": "exam",
+    "url": "https://info.ahlei.org/start/",
+    "fee": {
+     "amount": 61.5,
+     "currency": "USD",
+     "qualifier": null,
+     "per": null,
+     "note": "shopahlei.servsafebrands.com, 'START Certified Front Desk Representative (CFDR) Online Course and Exam': $61.50 (course + exam; info.ahlei.org/start says exams are always packaged with the training)"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/hotel-front-office-operations",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "شهادة AHLEI لموظف مكتب الاستقبال ضمن برنامج START، بدورة واختبار عبر الإنترنت.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "event-planning",
+   "depth": "full",
+   "topPick": {
+    "title": "إدارة الفعاليات | Events Management",
+    "provider": "Alfaisal University | KLD (Coursera)",
+    "url": "https://www.coursera.org/learn/events-management",
+    "lang": "ar",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 6,
+    "certificate": true,
+    "star": 1,
+    "why": "بالعربي من جامعة الفيصل: تخطيط الفعالية ومتطلباتها وميزانيتها وتقييمها. تقييم 4.7 من 124 مراجعة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "أساسيات إدارة الفعاليات",
+     "provider": "صندوق تنمية الموارد البشرية «هدف» (منصة إرشاد)",
+     "url": "https://irshad.hrdf.org.sa/en/learn/courses/7550",
+     "lang": "ar",
+     "price": null,
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "دورة سعودية بالعربي: التخطيط المسبق والتنفيذ وما بعد الفعالية وإدارة الأزمات، واختبار نهائي بنسبة 70%.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Event Management, Finance, and Leadership Specialization",
+     "provider": "Dubai College of Tourism (Coursera)",
+     "url": "https://www.coursera.org/specializations/event-management-finance-and-leadership",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": 40,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: ميزانيات الفعاليات والعائد عليها وقيادة الفرق، مع دراسة حالة إكسبو 2020.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Julius Solaris",
+     "platform": "Boldpush (newsletter and event research)",
+     "url": "https://boldpush.com/",
+     "why": "مؤسس EventMB، يحلل صناعة الفعاليات في نشرة يتابعها نحو 40 ألف مشترك.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/juliussolaris",
+      "website": "https://juliussolaris.com/"
+     },
+     "linkedinSource": "https://boldpush.com/"
+    },
+    {
+     "name": "Adrian Segar",
+     "platform": "Conferences That Work (blog and books)",
+     "url": "https://www.conferencesthatwork.com/",
+     "why": "مصمم مؤتمرات تشاركية، مدونته وكتبه الثلاثة تعلّم تصميم فعاليات يتفاعل فيها الحضور.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/adriansegar/",
+      "x": "https://twitter.com/asegar/"
+     },
+     "linkedinSource": "https://www.conferencesthatwork.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Run of Show: How to Create, Distribute & Optimize Your Event Schedule",
+     "author": "Emily Bauer",
+     "site": "eventmobi.com",
+     "url": "https://www.eventmobi.com/blog/run-of-show/",
+     "lang": "en",
+     "why": "خطوات بناء جدول الفعالية بالدقيقة: المكونات، الموردون، البروفة، وخطط الطوارئ.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "خطّط فعالية لـ100 شخص (ملتقى أو ورشة): ميزانية بالبنود، قائمة موردين مع بدائل، جدول run of show بالدقيقة، وخطة طوارئ لثلاثة مخاطر، ثم اعرضها على شخص نظّم فعاليات من قبل.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Certified Meeting Professional (CMP)",
+    "short": "CMP",
+    "issuer": "Events Industry Council (EIC)",
+    "code": "CMP",
+    "type": "exam",
+    "url": "https://www.eventscouncil.org/CMP",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://online.flippingbook.com/view/535932121/",
+    "prepLabel": "دليل CMP الرسمي",
+    "level": "advanced",
+    "star": 2,
+    "why": "أشهر شهادة في الفعاليات، يحملها أكثر من 12 ألف محترف في 55 دولة، وتتطلب خبرة سابقة واختباراً.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "tour-guiding",
+   "depth": "full",
+   "topPick": {
+    "title": "Fundamentals of Tour Guiding",
+    "provider": "TripSchool (The Trip School)",
+    "url": "https://thetripschool.com/online-tour-guide-training/",
+    "lang": "en",
+    "price": "paid",
+    "hours": 40,
+    "certificate": true,
+    "star": 1,
+    "why": "14 وحدة: تصميم الجولة، السرد القصصي، إدارة المجموعات، السلامة والطوارئ، وشهادة في النهاية.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Culture & Heritage (Saudi eLearning)",
+     "provider": "الهيئة السعودية للسياحة (Saudi Tourism Authority)",
+     "url": "https://learning.visitsaudi.com/learning/courses/culture-heritage/",
+     "lang": "en",
+     "price": null,
+     "hours": 0.75,
+     "certificate": null,
+     "star": 1,
+     "why": "من الهيئة السعودية للسياحة: تاريخ المملكة ومواقعها الأثرية ومطبخها وآداب الضيافة في 45 دقيقة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Hands-On Tourist Guide Training (HOT)",
+     "provider": "World Federation of Tourist Guide Associations (WFTGA)",
+     "url": "https://wftga.org/academy/courses/",
+     "lang": "en",
+     "price": null,
+     "hours": null,
+     "certificate": null,
+     "star": 2,
+     "why": "للنجمة الثانية: التدريب العملي من الاتحاد الدولي لجمعيات المرشدين السياحيين.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Mitch Bach & Alan Armijo (TripSchool)",
+     "platform": "Online courses, blog and Travel Careers Podcast",
+     "url": "https://thetripschool.com/",
+     "why": "مؤسسا TripSchool لتدريب المرشدين ومديري الجولات، ومدونتهما تشرح السرد القصصي في الجولة.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {},
+     "linkedinSource": null
+    },
+    {
+     "name": "Rick Steves",
+     "platform": "TV, guidebooks, tours and YouTube",
+     "url": "https://www.ricksteves.com/",
+     "why": "صاحب برامج سفر وكتب إرشاد وجولات جماعية، وفيديوهاته نموذج لشرح المواقع بأسلوب قصصي.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://www.youtube.com/ricksteves",
+      "x": "https://twitter.com/RickStevesEur"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "4 Ways to Elevate Your Storytelling as a Tour Guide",
+     "author": "Mitch Bach",
+     "site": "thetripschool.com",
+     "url": "https://thetripschool.com/blog/4-ways-to-elevate-your-storytelling-as-a-tour-guide/",
+     "lang": "en",
+     "why": "اربط بالعاطفة لا بالمعلومة، ابدأ بخطاف، اختر فكرة رئيسية، وتجنّب سرد التواريخ فقط.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "10 Tips for Being a Good Tour Guide",
+     "author": "Emily Potter (National Trust for Historic Preservation)",
+     "site": "savingplaces.org",
+     "url": "https://savingplaces.org/stories/10-tuesday-tips-good-tour-guide",
+     "lang": "en",
+     "why": "عشر نصائح عملية: واجه المجموعة، احكِ قصصاً، ابدأ بسرعة، وأنهِ الجولة في وقتها.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "صمّم جولة مشي مدتها 45 دقيقة في موقع تراثي قريب منك (مثل الدرعية أو جدة التاريخية) بخمس محطات وفكرة رئيسية لكل محطة، ثم قدّمها لثلاثة أصدقاء وصوّرها واجمع تقييمهم.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "رخصة الإرشاد السياحي",
+    "short": "رخصة مرشد سياحي",
+    "issuer": "وزارة السياحة (المملكة العربية السعودية)",
+    "code": null,
+    "type": "exam",
+    "url": "https://cdn.mt.gov.sa/files/TourGuide/index.html",
+    "fee": {
+     "amount": 500,
+     "currency": "SAR",
+     "qualifier": "from",
+     "per": null,
+     "note": "Fee schedule of the Ministry of Tourism Tour Guide Regulations (ministry PDF at cdn.mt.gov.sa, Tour-Guide-Regulations-Ar-V012, and the updated regulation on uqn.gov.sa/decisions-and-regulations/4001829, 11-09-2026): issuance 500 SAR for 1 year, 750 for 2 years, 1,000 for 3 years; renewal 250/500/750"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://thetripschool.com/online-tour-guide-training/",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "رخصة إلزامية لممارسة الإرشاد في المملكة: للسعوديين من 18 سنة بعد اجتياز دورات واختبارات ومقابلات الوزارة.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "contact-center-ops",
+   "depth": "full",
+   "topPick": {
+    "title": "COPC® High-Performance Management Techniques (HPMT) Training (On-Demand)",
+    "provider": "COPC Inc.",
+    "url": "https://www.copc.com/what-we-do/training/hpmt-on-demand/",
+    "lang": "en",
+    "price": "paid",
+    "hours": null,
+    "certificate": true,
+    "star": 1,
+    "why": "لمشرفي مراكز الاتصال: الإدارة بالمؤشرات، التنبؤ والجدولة، إدارة الغياب، وتوجيه الموظفين.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Foundations of Workforce Management",
+     "provider": "COPC Inc.",
+     "url": "https://www.copc.com/class-listing/foundations-of-workforce-management/",
+     "lang": "en",
+     "price": null,
+     "hours": 8,
+     "certificate": null,
+     "star": 1,
+     "why": "مدخل في 8 ساعات إلى إدارة القوى العاملة: التنبؤ بحجم الاتصالات والتخطيط والجدولة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Foundations in Contact Center Metrics",
+     "provider": "ICMI",
+     "url": "https://www.icmi.com/Training/Courses/Foundations-in-Contact-Center-Metrics",
+     "lang": "en",
+     "price": "paid",
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "يومان افتراضيان مع مدرب: فئات مؤشرات الأداء، المؤشرات القائدة والتابعة، وتحليل الأسباب الجذرية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Brad Cleveland",
+     "platform": "CX Insights Blog, newsletter and courses",
+     "url": "https://bradcleveland.com/",
+     "why": "مؤلف سلسلة On Fast Forward في إدارة مراكز الاتصال، وعمل مستشاراً في أكثر من 60 دولة.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/bradcleveland1",
+      "x": "https://x.com/bradcleveland",
+      "youtube": "https://www.youtube.com/user/BradClevelandCo"
+     },
+     "linkedinSource": "https://bradcleveland.com/"
+    },
+    {
+     "name": "Jonty Pearce",
+     "platform": "Call Centre Helper (articles, Erlang calculator)",
+     "url": "https://www.callcentrehelper.com/",
+     "why": "يكتب في Call Centre Helper عن معايير مستوى الخدمة وAHT وFCR والتخطيط بحاسبة Erlang.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/company/call-centre-helper/",
+      "youtube": "https://www.youtube.com/user/CallCentreHelper"
+     },
+     "linkedinSource": "https://www.callcentrehelper.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "What Are the Industry Standards for Call Centre Metrics?",
+     "author": "Jonty Pearce",
+     "site": "callcentrehelper.com",
+     "url": "https://www.callcentrehelper.com/industry-standards-metrics-125584.htm",
+     "lang": "en",
+     "why": "أرقام مرجعية: مستوى خدمة 80/20، حل من أول اتصال 70-75%، ومتوسط مدة المكالمة نحو 6 دقائق.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "أنشئ في Excel سجلاً تجريبياً من 200 مكالمة ليوم واحد، واحسب مستوى الخدمة (80/20) وAHT وFCR والإشغال لكل ساعة، وقدّر عدد الموظفين اللازم لساعة الذروة، واكتب روتين قائد فريق لبداية الوردية ومنتصفها ونهايتها.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "COPC® High-Performance Management Techniques (HPMT) certification",
+    "short": "COPC HPMT",
+    "issuer": "COPC Inc.",
+    "code": null,
+    "type": "program",
+    "url": "https://www.copc.com/class-listing/copc-high-performance-management-techniques-hpmt-training/",
+    "fee": {
+     "amount": 899,
+     "currency": "USD",
+     "qualifier": null,
+     "per": null,
+     "note": "copc.com HPMT class page: 'On-demand registration is $899' (individual); the on-demand page lists 'Exam-based certification to verify knowledge'"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.copc.com/what-we-do/training/hpmt-on-demand/",
+    "prepLabel": "دورة HPMT عند الطلب",
+    "level": "beginner",
+    "star": 1,
+    "why": "شهادة من COPC لمشرفي مراكز الاتصال الجدد والطامحين للإشراف، باختبار بعد دورة HPMT.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "cx-quality",
+   "depth": "full",
+   "topPick": {
+    "title": "Foundations of Quality in Contact Centers",
+    "provider": "COPC Inc.",
+    "url": "https://www.copc.com/class-listing/copc-foundations-of-quality-in-contact-centers/",
+    "lang": "en",
+    "price": null,
+    "hours": 8,
+    "certificate": null,
+    "star": 1,
+    "why": "مبادئ الجودة في مراكز الاتصال: أنواع الأخطاء، نموذج التقييم، المقاييس، العيّنات والمعايرة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "COPC® Best Practices for Quality Management",
+     "provider": "COPC Inc.",
+     "url": "https://www.copc.com/class-listing/copc-best-practices-for-quality-management/",
+     "lang": "en",
+     "price": null,
+     "hours": 14,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: تصميم نموذج التقييم، الأخطاء الحرجة، حجم العيّنة، خطوات المعايرة، وخطط التحسين.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Jeff Toister",
+     "platform": "Toister Solutions (blog, books, LinkedIn Learning courses)",
+     "url": "https://www.toistersolutions.com/",
+     "why": "مؤلف خمسة كتب في خدمة العملاء، ينشر خطط تدريب جاهزة ودراسات عن جودة التحية الهاتفية.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {},
+     "linkedinSource": null
+    },
+    {
+     "name": "Jonty Pearce",
+     "platform": "Call Centre Helper (articles)",
+     "url": "https://www.callcentrehelper.com/",
+     "why": "يكتب في Call Centre Helper، أكبر موقع لمحترفي مراكز الاتصال، عن مقاييس الجودة ومعاييرها.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/company/call-centre-helper/",
+      "youtube": "https://www.youtube.com/user/CallCentreHelper"
+     },
+     "linkedinSource": "https://www.callcentrehelper.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Customer Quality Assurance – Call Calibration: Comprehensive Guide",
+     "author": "SQM Staff Writers",
+     "site": "sqmgroup.com",
+     "url": "https://sqmgroup.com/resources/library/blog/call-calibration-comprehensive-guide",
+     "lang": "en",
+     "why": "عشر خطوات لجلسة معايرة: تقييم مستقل للمكالمة نفسها، ميسّر، وهدف فرق لا يتجاوز 5%.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "صمّم نموذج تقييم مكالمات من 10 بنود (منها خطآن حرجان)، وقيّم به 5 مكالمات خدمة مسجّلة أو تمثيلية، ثم اطلب من زميل تقييم المكالمات نفسها واحسب الفرق بينكما، واكتب خطة تدريب قصيرة لأضعف بندين.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Certified Professional Manager in COPC® Best Practices for Quality Management",
+    "short": "COPC Quality Management",
+    "issuer": "COPC Inc.",
+    "code": null,
+    "type": "exam",
+    "url": "https://www.copc.com/class-listing/copc-best-practices-for-quality-management/",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://www.copc.com/class-listing/copc-foundations-of-quality-in-contact-centers/",
+    "prepLabel": "ابدأ بأساسيات الجودة من COPC",
+    "level": "intermediate",
+    "star": 2,
+    "why": "شهادة من COPC، صاحبة معيار تجربة العملاء لمراكز الاتصال، تُنال باختبار بعد دورة إدارة الجودة.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "cx-analytics",
+   "depth": "full",
+   "topPick": {
+    "title": "Voice of the Customer (VoC): Enhancing Experiences",
+    "provider": "Starweaver (Coursera), «AI-Powered Customer Success»",
+    "url": "https://www.coursera.org/learn/voice-of-the-customer-voc-enhancing-experiences",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 3,
+    "certificate": true,
+    "star": 1,
+    "why": "جمع صوت العميل بالاستبيانات والمقابلات، ومقياسا NPS وCSAT، والعمل على النتائج. تقييم 4.8 من 181.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Introduction to Experience Management",
+     "provider": "Qualtrics XM Institute (edX)",
+     "url": "https://www.edx.org/learn/management/qualtrics-xm-institute-introduction-to-experience-management",
+     "lang": "en",
+     "price": "free_to_audit",
+     "hours": null,
+     "certificate": true,
+     "star": 1,
+     "why": "من معهد XM التابع لـQualtrics: أساسيات إدارة التجربة، مجانية للحضور والشهادة برسوم.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "COPC® Service Journey Thinking",
+     "provider": "COPC Inc.",
+     "url": "https://www.copc.com/class-listing/copc-service-journey-thinking/",
+     "lang": "en",
+     "price": null,
+     "hours": 15,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: رسم رحلة الخدمة ومخطط الخدمة، جهد العميل، وأسباب عدم الرضا وقياسها.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Annette Franz",
+     "platform": "CX Journey (blog, books, newsletter)",
+     "url": "https://cx-journey.com/",
+     "why": "مؤلفة Customer Understanding، تكتب منذ سنوات عن رسم رحلة العميل وصوت العميل.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "x": "http://twitter.com/annettefranz"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Jeanne Bliss",
+     "platform": "Customer Bliss (books, podcast, blog, videos)",
+     "url": "https://www.customerbliss.com/",
+     "why": "أول Chief Customer Officer في شركات مثل مايكروسوفت، وتشرح تحويل رحلة العميل إلى أهدافه.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/jeannebliss/",
+      "x": "https://twitter.com/jeannebliss",
+      "youtube": "https://www.youtube.com/c/JeanneBliss"
+     },
+     "linkedinSource": "https://www.customerbliss.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Journey Mapping Definitions Bring Clarity",
+     "author": "Annette Franz",
+     "site": "cx-journey.com",
+     "url": "https://cx-journey.com/2019/09/journey-mapping-definitions-bring-clarity.html",
+     "lang": "en",
+     "why": "الفرق بين خريطة الرحلة الحالية والمستقبلية ونقاط التماس ولحظات الحقيقة ومخطط الخدمة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "حمّل بيانات Airline Passenger Satisfaction، واحسب نسبة الرضا حسب فئة السفر وثلاثة عناصر خدمة، ثم ارسم خريطة رحلة مسافر من الحجز إلى الوصول تحدد فيها أضعف نقطتي تماس، واقترح سؤال NPS أو CES لكل منهما.",
+    "dataset": {
+     "name": "Airline Passenger Satisfaction",
+     "provider": "Kaggle (dataset by teejmahal20)",
+     "url": "https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Certified Customer Experience Professional (CCXP)",
+    "short": "CCXP",
+    "issuer": "Customer Experience Professionals Association (CXPA)",
+    "code": "CCXP",
+    "type": "exam",
+    "url": "https://cxpaglobal.org/earn-your-ccxp/about-ccxp",
+    "fee": {
+     "amount": 645,
+     "currency": "USD",
+     "qualifier": null,
+     "per": null,
+     "note": "CXPA CCXP Candidate Handbook (March 2026, cxpaglobal.org/storage/app/media/CCXP/CCXP_Handbook_March_2026.pdf): 'CCXP Application Fee $645.00 U.S. Dollars (CXPA Members: $495.00 U.S. Dollars)'; includes application review and first exam attempt"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://cxpaglobal.org/get-certified/prep-resources",
+    "prepLabel": "مصادر التحضير الرسمية من CXPA",
+    "level": "advanced",
+    "star": 2,
+    "why": "شهادة CXPA الدولية لمحترفي تجربة العملاء: 100 سؤال في 3 ساعات، وتتطلب 3 سنوات خبرة مع البكالوريوس.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "medical-terminology",
+   "depth": "full",
+   "topPick": {
+    "title": "Medical Terminology I",
+    "provider": "Rice University (Coursera)",
+    "url": "https://www.coursera.org/learn/medical-terminology-1",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 20,
+    "certificate": true,
+    "star": 1,
+    "why": "من جامعة رايس: بناء المصطلح الطبي وتفكيكه بالجذور والسوابق واللواحق، ثم الجلد والعظام والجهاز البولي. تقييم 4.9.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Medical Terminology and the Human Body Fundamentals",
+     "provider": "MedCerts (Coursera)",
+     "url": "https://www.coursera.org/learn/medical-terminology-human-body-fundamentals",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": 11,
+     "certificate": true,
+     "star": 1,
+     "why": "أقصر في نحو 11 ساعة: أجزاء الكلمة الطبية، ثم الخلايا والأنسجة وأجهزة الجسم ومصطلحات التشخيص.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Zach Murphy (Ninja Nerd)",
+     "platform": "YouTube and lecture site",
+     "url": "https://www.ninjanerd.org/",
+     "why": "محاضرات تشريح ووظائف أعضاء مشروحة بالرسم خطوة بخطوة: أكثر من 713 محاضرة مع ملاحظات واختبارات.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://www.youtube.com/channel/UC6QYFutt9cluQ3uSM963_KQ",
+      "x": "https://twitter.com/ninjanerdsci",
+      "linkedin": "https://www.linkedin.com/company/ninja-nerd/"
+     },
+     "linkedinSource": "https://www.ninjanerd.org/"
+    },
+    {
+     "name": "Armando Hasudungan",
+     "platform": "YouTube and website",
+     "url": "https://armandoh.org/",
+     "why": "فيديوهات رسم توضيحي مجانية تبسّط علوم الطب: تشريح وأمراض وأدوية، مع ملاحظات مكتوبة ورسوم.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://www.youtube.com/@armandohasudungan"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Understanding Medical Words Tutorial",
+     "author": "MedlinePlus, U.S. National Library of Medicine (NIH)",
+     "site": "medlineplus.gov",
+     "url": "https://medlineplus.gov/medicalwords.html",
+     "lang": "en",
+     "why": "درس قصير من المكتبة الوطنية الأمريكية للطب: كيف تُركّب الكلمة الطبية من أجزائها، مع اختبارات قصيرة وملف PDF.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اختر 40 مصطلحاً من تقرير خروج أو نشرة دواء (بلا أي بيانات شخصية)، فكّك كل مصطلح إلى جذر وسابقة ولاحقة، واكتب معناه بالعربي في جدول، ثم راجعها ببطاقات حتى تصيب 90% في اختبار ذاتي.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "none",
+    "proof": "شهادة إتمام دورة المصطلحات الطبية، مع جدول 100 مصطلح فكّكته وشرحته بالعربي تعرضه في المقابلة.",
+    "proofUrl": "https://www.coursera.org/learn/medical-terminology-1",
+    "why": "لا توجد شهادة مهنية مستقلة للمصطلحات الطبية وحدها؛ تُختبر ضمن شهادات الترميز مثل CCA وCCP-KSA.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "medical-coding",
+   "depth": "full",
+   "topPick": {
+    "title": "Foundations of Medical Coding and ICD-10-CM",
+    "provider": "SkillUp (Coursera)",
+    "url": "https://www.coursera.org/learn/foundations-of-medical-coding-and-icd-10-cm",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 7,
+    "certificate": true,
+    "star": 1,
+    "why": "مدخل عملي في 7 ساعات: مصطلحات للمرمّز، أنظمة الترميز، وإيجاد رمز التشخيص في ICD-10 (النسخة الأمريكية CM).",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Clinical Coding Professional - Kingdom of Saudi Arabia (CCP-KSA) Training Course",
+     "provider": "AAPC",
+     "url": "https://www.aapc.com/education/exam-preparation/clinical-coding-professional-kingdom-of-saudi-arabia-ccp-ksa-training-course",
+     "lang": "en",
+     "price": "paid",
+     "hours": null,
+     "certificate": null,
+     "star": 2,
+     "why": "للنجمة الثانية وبالنظام السعودي: ICD-10-AM وACHI وAR-DRG ونظام الفوترة السعودي SBS، 14 أسبوعاً مباشرة مع مدرب.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Brian Cui (Medical Coding Geek)",
+     "platform": "Website, blog, free CEUs and podcast archive",
+     "url": "https://medicalcodinggeek.com/",
+     "why": "موقع Medical Coding Geek: مدونة وساعات تعليم مستمر مجانية، وأرشيف بودكاست Not Elsewhere Classified (114 حلقة) عن الترميز والتوثيق السريري.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://www.youtube.com/medicalcodinggeekvideos",
+      "linkedin": "https://www.linkedin.com/company/medicalcodinggeek"
+     },
+     "linkedinSource": "https://medicalcodinggeek.com/"
+    },
+    {
+     "name": "CCO (Certification Coaching Organization)",
+     "platform": "Blog, podcast and YouTube",
+     "url": "https://www.cco.us/",
+     "why": "جهة تدريب على الترميز تنشر مقالات وبودكاست وأدلة توثيق سريري مجانية لحالات مثل السكري والانسداد الرئوي المزمن.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://youtube.com/medicalcodingcert",
+      "linkedin": "http://www.linkedin.com/company/ccous"
+     },
+     "linkedinSource": "https://www.cco.us/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "What Is Medical Coding?",
+     "author": "AAPC Thought Leadership Team",
+     "site": "aapc.com",
+     "url": "https://www.aapc.com/resources/what-is-medical-coding",
+     "lang": "en",
+     "why": "ما الترميز الطبي ولماذا يحتاجه الدافع، والفرق بين المرمّز ومسؤول الفوترة، وأشهر أنظمة الرموز.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Saudi Billing System (SBS)",
+     "author": "Council of Health Insurance (CHI)",
+     "site": "chi.gov.sa",
+     "url": "https://www.chi.gov.sa/en/knowledge-center/Pages/Saudi-Billing-Systems.aspx",
+     "lang": "en",
+     "why": "الصفحة الرسمية لنظام الفوترة السعودي المبني على ACHI: معايير الترميز SBSCS V2.0 وقائمة الرموز للتنزيل.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "نزّل قائمة رموز SBS V2 ومعايير الترميز من صفحة مجلس الضمان الصحي، واكتب 10 حالات خروج مختصرة (تشخيص وإجراء)، ثم رمّز إجراء كل حالة من قائمة SBS وحدّد التشخيص الرئيسي والثانوي، وبرّر كل اختيار بسطر من المعايير.",
+    "dataset": {
+     "name": "SBS V2 Code list and SBS Coding Standards V2.0",
+     "provider": "Council of Health Insurance (CHI)",
+     "url": "https://www.chi.gov.sa/en/knowledge-center/Pages/Saudi-Billing-Systems.aspx"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Clinical Coding Professional - Kingdom of Saudi Arabia",
+    "short": "CCP-KSA",
+    "issuer": "AAPC",
+    "code": "CCP-KSA",
+    "type": "exam",
+    "url": "https://www.aapc.com/certifications/clinical-coding-professional-kingdom-of-saudi-arabia-ccp-ksa-certification",
+    "fee": {
+     "amount": 11390,
+     "currency": "SAR",
+     "qualifier": null,
+     "per": null,
+     "note": "aapc.com CCP-KSA page: «The cost of this bundle is 11,390 SAR + 15% VAT applicable» (bundle = training course, exam voucher with two attempts, code lookup tool, AAPC membership; the exam is sold only as this bundle)"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.aapc.com/education/exam-preparation/clinical-coding-professional-kingdom-of-saudi-arabia-ccp-ksa-training-course",
+    "prepLabel": "دورة AAPC التحضيرية (14 أسبوعاً)",
+    "level": "intermediate",
+    "star": 2,
+    "why": "شهادة مصممة للسعودية فقط: ترميز ICD-10-AM وACHI وAR-DRG ونظام SBS، اختبار 4 ساعات بأداة بحث بدل كتب الرموز.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "health-claims",
+   "depth": "full",
+   "topPick": {
+    "title": "Revenue Cycle, Billing, and Coding",
+    "provider": "Johns Hopkins University (Coursera)",
+    "url": "https://www.coursera.org/learn/revenue-cycle-billing-and-coding",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 6,
+    "certificate": true,
+    "star": 1,
+    "why": "من جونز هوبكنز في 6 ساعات: التسجيل والتأمين والفوترة، ثم رفض المطالبات والتحصيل وخطة لتحسين دورة الإيرادات.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "ICD-10 to Clean Claims: Medical Billing and Coding Specialization",
+     "provider": "Coursera (Professionals in the Industry)",
+     "url": "https://www.coursera.org/specializations/icd-10-to-clean-claims-medical-billing-coding",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": null,
+     "certificate": true,
+     "star": 1,
+     "why": "4 دورات قصيرة من الترميز إلى رفع مطالبة نظيفة، هدفها تقليل الرفض من أول تقديم.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Vanessa Moldovan",
+     "platform": "Podcast: For the Love of Revenue Cycle",
+     "url": "https://podcasts.apple.com/bf/podcast/for-the-love-of-revenue-cycle/id1592520973",
+     "why": "خبيرة دورة إيرادات العيادات لأكثر من 20 سنة؛ بودكاست من 116 حلقة عن الرفض والموافقات المسبقة والأتمتة.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {},
+     "linkedinSource": null
+    },
+    {
+     "name": "Chad Mulvany",
+     "platform": "Achieving Health podcast (Forvis Mazars)",
+     "url": "https://www.forvismazars.us/forsights/2025/10/navigating-denial-management-strategies-for-financial-resilience",
+     "why": "يقدّم بودكاست Achieving Health في Forvis Mazars ويناقش إدارة رفض المطالبات ومؤشراته مع خبراء الأداء.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {},
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Navigating Denial Management: Strategies for Financial Resilience",
+     "author": "Chad Mulvany and Deb Kozlowski (Forvis Mazars)",
+     "site": "forvismazars.us",
+     "url": "https://www.forvismazars.us/forsights/2025/10/navigating-denial-management-strategies-for-financial-resilience",
+     "lang": "en",
+     "why": "لماذا تُرفض المطالبات وكيف تمنعه من البداية: الأهلية والموافقة المسبقة، فرز الاعتراضات، ومؤشرات الرفض.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "منصة نفيس (NPHIES)",
+     "author": "منصة نفيس",
+     "site": "nphies.sa",
+     "url": "https://www.nphies.sa/",
+     "lang": "ar",
+     "why": "الصفحة الرسمية لمنصة نفيس: كيف يتحقق مقدم الخدمة من أهلية المريض ويطلب الموافقة المسبقة من شركة التأمين.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "ارسم في Excel مسار مطالبة كاملاً لزيارة عيادة افتراضية: التحقق من الأهلية، طلب الموافقة المسبقة، رموز الخدمة، ثم 5 أسباب رفض محتملة مع إجراء تصحيح ونص اعتراض قصير لكل سبب.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Certified Revenue Cycle Representative (CRCR) – GCC",
+    "short": "CRCR-GCC",
+    "issuer": "Healthcare Financial Management Association (HFMA)",
+    "code": "CRCR",
+    "type": "exam",
+    "url": "https://www.hfma.org/course/certified-revenue-cycle-representative-crcr-gcc/",
+    "fee": {
+     "amount": 399,
+     "currency": "USD",
+     "qualifier": null,
+     "per": null,
+     "note": "hfma.org CRCR – GCC page: Members $299, Non-members $399"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.hfma.org/course/certified-revenue-cycle-representative-crcr-gcc/",
+    "prepLabel": "دليل المفاهيم ووحدات البرنامج نفسه",
+    "level": "intermediate",
+    "star": 1,
+    "why": "نسخة خليجية من شهادة دورة الإيرادات من HFMA تشمل السعودية: 75 سؤالاً في 90 دقيقة عبر الإنترنت.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "health-informatics",
+   "depth": "full",
+   "topPick": {
+    "title": "Health Informatics Specialization",
+    "provider": "Johns Hopkins University (Coursera)",
+    "url": "https://www.coursera.org/specializations/health-informatics",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": null,
+    "certificate": true,
+    "star": 1,
+    "why": "5 دورات من جونز هوبكنز: سياق المعلوماتية الصحية، السجل الطبي الإلكتروني، التشغيل البيني وجودة البيانات، ومشروع ختامي.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Healthcare Data Management and Interfaces",
+     "provider": "Illinois Tech (Coursera)",
+     "url": "https://www.coursera.org/learn/healthcare-data-management-and-interoperability",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": null,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: معايير تبادل البيانات HL7 v2 وCDA وFHIR وSMART on FHIR ونماذج البيانات المشتركة، مع مشروع بوابة مريض.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Grahame Grieve",
+     "platform": "Blog (Health Intersections)",
+     "url": "https://www.healthintersections.com.au/",
+     "why": "مؤسس معيار FHIR وقائد مجتمعه، يكتب عن التشغيل البيني وتطبيق المعايير الصحية.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {},
+     "linkedinSource": null
+    },
+    {
+     "name": "John Halamka",
+     "platform": "Blog archive: Life as a Healthcare CIO",
+     "url": "https://geekdoctor.blogspot.com/",
+     "why": "رئيس Mayo Clinic Platform؛ أرشيف مدونته (حتى 2021) مرجع في السجلات الإلكترونية والصحة الرقمية.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {},
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "FHIR Overview (FHIR R5)",
+     "author": "HL7 International, FHIR Infrastructure Work Group",
+     "site": "hl7.org",
+     "url": "https://hl7.org/fhir/overview.html",
+     "lang": "en",
+     "why": "خريطة معيار FHIR من مصدره: الموارد (Resources) وحدة تبادل البيانات، وكيف تُركَّب، ومن أين تبدأ القراءة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "ارسم سير عمل زيارة عيادة خارجية في نظام سجل إلكتروني من الحجز إلى الوصفة، ثم اقرأ مثال مورد Patient ومورد Observation في مواصفة FHIR واشرح كل حقل بالعربي، واكتب صفحة عن ضوابط الخصوصية والصلاحيات في كل خطوة.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "none",
+    "proof": "ملف عملي: مخطط سير عمل سريري ومورد FHIR شرحته، مع شهادة إتمام تخصص جونز هوبكنز.",
+    "proofUrl": "https://www.coursera.org/specializations/health-informatics",
+    "why": "الشهادة المعروفة للنجمة الثانية هي CAHIMS من HIMSS، لكن موقع HIMSS رفض فتح صفحاته اليوم فلم نتحقق منها.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "instructional-design",
+   "depth": "full",
+   "topPick": {
+    "title": "Learning and Development",
+    "provider": "HRCI (Coursera)",
+    "url": "https://www.coursera.org/learn/learning-and-development",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 20,
+    "certificate": true,
+    "star": 1,
+    "why": "تقييم 4.8: نموذج ADDIE وتصنيف بلوم ونموذج كيركباتريك للتقييم، ومشروع تصمم فيه تجربة تدريبية كاملة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Instructional Design Foundations and Applications",
+     "provider": "University of Illinois Urbana-Champaign (Coursera)",
+     "url": "https://www.coursera.org/learn/instructional-design-foundations-applications",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": 13,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: أسس التصميم التعليمي المنهجي، وتحليل الاحتياج والمتعلم وسياق التعلم بعمق قبل تصميم برنامج كامل.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Cathy Moore",
+     "platform": "Training design blog",
+     "url": "https://blog.cathy-moore.com/",
+     "why": "صاحبة نموذج Action Mapping: تبدأ التصميم من هدف العمل لا من المحتوى، وتعلّم بناء السيناريوهات.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {},
+     "linkedinSource": null
+    },
+    {
+     "name": "Connie Malamed",
+     "platform": "The eLearning Coach (blog and podcast)",
+     "url": "https://theelearningcoach.com/",
+     "why": "مقالات وبودكاست عن تصميم تجارب التعلم وعلم الإدراك، وموارد مجانية مثل نماذج القصص المصورة (Storyboards).",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {},
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Action mapping: A visual approach to training design",
+     "author": "Cathy Moore",
+     "site": "blog.cathy-moore.com",
+     "url": "https://blog.cathy-moore.com/action-mapping-a-visual-approach-to-training-design/",
+     "lang": "en",
+     "why": "ابدأ بهدف عمل قابل للقياس، ثم اسأل هل التدريب هو الحل أصلاً، ثم صمّم تمارين واقعية بدل عرض المعلومات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اختر مهارة عمل واحدة (مثل التعامل مع شكوى عميل) وصمّم وحدة تدريبية 20 دقيقة: تحليل احتياج قصير، 3 أهداف بأفعال بلوم قابلة للقياس، قصة مصورة (Storyboard) من 8 شاشات، وخطة تقييم على مستويات كيركباتريك الأربعة.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Professional Certificate in Designing eLearning Experiences",
+    "short": "eLXD",
+    "issuer": "National eLearning Center (NELC)",
+    "code": "eLXD",
+    "type": "exam",
+    "url": "https://nelc.gov.sa/en/services/pc/elxd",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/learning-and-development",
+    "prepLabel": "ابدأ بالدورة المقترحة ثم جهة تدريب معتمدة",
+    "level": "beginner",
+    "star": 1,
+    "why": "شهادة سعودية من المركز الوطني للتعليم الإلكتروني في تحليل الاحتياج ونماذج التصميم التعليمي؛ الرسوم تحددها جهة التدريب ويدعمها صندوق هدف.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "elearning-dev",
+   "depth": "full",
+   "topPick": {
+    "title": "E-Learning Course Creation and Authoring",
+    "provider": "EDUCBA (Coursera)",
+    "url": "https://www.coursera.org/learn/e-learning-course-creation-authoring",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 8,
+    "certificate": true,
+    "star": 1,
+    "why": "تطبيق على أداة EasyGenerator: شاشات ووسائط، أسئلة سحب وإفلات ونقاط ساخنة، ثم نشر حزمة SCORM لنظام إدارة التعلم.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Introduction to Moodle",
+     "provider": "Moodle Academy",
+     "url": "https://moodle.academy/course/view.php?id=46",
+     "lang": "en",
+     "price": "free",
+     "hours": 1,
+     "certificate": null,
+     "star": 1,
+     "why": "مدخل مجاني في ساعة من أكاديمية Moodle الرسمية إلى نظام إدارة التعلم المفتوح المصدر.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Digital Accessibility Foundations",
+     "provider": "W3C Web Accessibility Initiative (edX)",
+     "url": "https://www.w3.org/WAI/courses/foundations-course/",
+     "lang": "en",
+     "price": "free_to_audit",
+     "hours": null,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: إتاحة المحتوى الرقمي لذوي الإعاقة ومبادئ معايير W3C، من W3C نفسها، مجانية مع شهادة اختيارية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Tom Kuhlmann",
+     "platform": "The Rapid E-Learning Blog (Articulate)",
+     "url": "https://blogs.articulate.com/rapid-elearning/",
+     "why": "يدير مجتمع Articulate ومدونة Rapid E-Learning بخبرة تزيد على 20 سنة: نصائح عملية وموارد مجانية لبناء دورات تفاعلية.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/tomkuhlmann/",
+      "x": "https://twitter.com/tomkuhlmann"
+     },
+     "linkedinSource": "https://blogs.articulate.com/rapid-elearning/"
+    },
+    {
+     "name": "Devlin Peck",
+     "platform": "Website and YouTube",
+     "url": "https://www.devlinpeck.com/",
+     "why": "أكثر من 100 مقال و300 فيديو مجاني عن التصميم التعليمي وبناء ملف أعمال eLearning وسيناريوهات التعلم.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/devlinpeck/",
+      "youtube": "https://www.youtube.com/@DevlinPeckYT"
+     },
+     "linkedinSource": "https://www.devlinpeck.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "SCORM Explained 201: A deeper dive into SCORM",
+     "author": "Rustici Software",
+     "site": "scorm.com",
+     "url": "https://scorm.com/scorm-explained/",
+     "lang": "en",
+     "why": "كيف يتحدث المحتوى مع نظام إدارة التعلم: الحزمة وملف imsmanifest، وتبادل الدرجات والإكمال، والفرق بين SCORM 1.2 و2004 وxAPI.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "حوّل وحدة قصيرة من عملك إلى دورة تفاعلية 10 دقائق بأداة تأليف (نسخة تجريبية من Storyline أو Rise أو EasyGenerator) فيها سيناريو قرار واختبار، ثم صدّرها SCORM وارفعها على موقع Moodle تجريبي وتحقق من تسجيل الدرجة والإكمال.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Moodle Educator Qualification (formerly Moodle Educator Certification, MEC)",
+    "short": "MEQ",
+    "issuer": "Moodle",
+    "code": null,
+    "type": "program",
+    "url": "https://moodle.com/meq",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://moodle.academy/",
+    "prepLabel": "دورات أكاديمية Moodle المجانية",
+    "level": "intermediate",
+    "star": 2,
+    "why": "مؤهل Moodle الرسمي في 22 كفاءة رقمية للمعلّم (إطار DigCompEdu) عبر 6 دورات؛ يُشترط تدريس سنة على Moodle.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "training-delivery",
+   "depth": "full",
+   "topPick": {
+    "title": "الشهادة المهنية الاحترافية في تقديم التعليم والتدريب الإلكتروني (OTT)",
+    "provider": "بكه للتعليم (جهة تدريب؛ الشهادة يمنحها المركز الوطني للتعليم الإلكتروني)",
+    "url": "https://bakkah.com/ar/sessions/professional-certification-in-delivering-online-education-and-training-ott",
+    "lang": "ar",
+    "price": null,
+    "hours": 35,
+    "certificate": true,
+    "star": 1,
+    "why": "بالعربي وغير متزامنة حتى 35 ساعة: تجهّزك لشهادة OTT السعودية في إدارة الصف الافتراضي والتقييم الرقمي.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Virtual Teacher Specialization",
+     "provider": "University of California, Irvine (Coursera)",
+     "url": "https://www.coursera.org/specializations/virtual-teacher",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": null,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: استراتيجيات تدريس افتراضي متقدمة وتقييم الأداء ومشروع ختامي، تقييم 4.6 (موجّهة أصلاً لمعلمي المدارس).",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Cindy Huggett",
+     "platform": "Website and blog",
+     "url": "https://www.cindyhuggett.com/",
+     "why": "خبيرة التدريب الافتراضي لأكثر من 20 سنة وتحمل CPTD، تساعد المدربين على الانتقال من القاعة إلى الصف الافتراضي.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "http://www.linkedin.com/in/cindyhuggett",
+      "x": "https://twitter.com/cindyhugg/"
+     },
+     "linkedinSource": "https://www.cindyhuggett.com/"
+    },
+    {
+     "name": "The Bob Pike Group (Creative Training Techniques)",
+     "platform": "Trainer blog, free webinars and podcast",
+     "url": "https://www.bobpikegroup.com/",
+     "why": "خبراء تدريب المدربين بمنهج Creative Training Techniques المتمحور حول المتدرب: مدونة وندوات وأدلة مجانية.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/company/the-bob-pike-group/",
+      "x": "https://twitter.com/TheBobPikeGroup",
+      "youtube": "https://www.youtube.com/user/theBobPikeGroup"
+     },
+     "linkedinSource": "https://www.bobpikegroup.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Three Tips for Using Whiteboards in Virtual Events",
+     "author": "Cindy Huggett",
+     "site": "cindyhuggett.com",
+     "url": "https://www.cindyhuggett.com/blog/whiteboardtips/",
+     "lang": "en",
+     "why": "ثلاث حيل لإدارة نشاط السبورة في الجلسة الافتراضية: الصمت أثناء العمل، إشارة رفع اليد، ودع المتدربين يناقشون نتائجهم.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "صمّم وقدّم ورشة 45 دقيقة (حضورية أو عبر Zoom) لخمسة زملاء: افتتاحية لكسر الجمود، نشاط تطبيقي واحد على الأقل، سؤال تقييم سريع في المنتصف، واستبانة رضا في النهاية؛ سجّلها واكتب ثلاثة أشياء ستغيّرها.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Professional Certificate in Providing eLearning and eTraining",
+    "short": "OTT",
+    "issuer": "National eLearning Center (NELC)",
+    "code": "OTT",
+    "type": "exam",
+    "url": "https://nelc.gov.sa/en/services/pc/ott",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://bakkah.com/ar/sessions/professional-certification-in-delivering-online-education-and-training-ott",
+    "prepLabel": "دورة OTT المعتمدة بالعربي",
+    "level": "beginner",
+    "star": 1,
+    "why": "شهادة سعودية بلا شروط مسبقة: منصات التعلم واستراتيجيات التدريب عن بعد والتقييم الرقمي؛ يدعمها صندوق هدف.",
+    "checkedAt": "2026-11-20"
+   }
+  }
+ ],
+ "knowledge": {
+  "entryRoutes": [
+   {
+    "id": "mt-tour-guide-licence",
+    "nameAr": "رخصة الإرشاد السياحي",
+    "nameEn": "Ministry of Tourism tour-guide licence",
+    "owner": "وزارة السياحة",
+    "url": "https://cdn.mt.gov.sa/files/TourGuide/index.html",
+    "line": "رخصة من وزارة السياحة تتيح لك ترشد السياح في المواقع السياحية، بثلاث فئات: مرشد موقع ومسار ومتخصص.",
+    "eligibility": [
+     "أن يكون سعودي الجنسية.",
+     "ألا يقل عمره عن (18) سنة.",
+     "ألا يكون لديه أي عائق صحي يمنعه من تقديم الخدمة.",
+     "أن يجتاز الدورات والاختبارات والمقابلات التي تعتمدها الوزارة للترخيص حسب الفئة المطلوبة."
+    ],
+    "benefit": null,
+    "fits": [
+     "guest-experience"
+    ],
+    "checkedAt": "2026-11-20",
+    "note": "Requirements copied from the licence page. Fees (500 SAR for 1 year, per the regulation's fee table) are in the tour-guiding guide's certificate. The ministry's qualification-programme page (mt.gov.sa/human-capital/...) answered 403 and was not read."
+   },
+   {
+    "id": "qiddiya-cultural-programming-upskilling",
+    "nameAr": "برنامج القدية لتأهيل البرمجة الثقافية",
+    "nameEn": "Qiddiya Cultural Programming Upskilling Program",
+    "owner": "شركة القدية للاستثمار",
+    "url": "https://jobs.workable.com/view/rod5wfWuE1NjXT91G6gWoh/cultural-programming-upskilling-program-in-riyadh-at-qiddiya-investment-company",
+    "line": "برنامج 6 أشهر في الرياض يبدأ ديسمبر 2026، يدرّبك على البرامج الثقافية وتنظيم الفعاليات وينتهي بوظيفة في أحد أصول القدية الثقافية.",
+    "eligibility": [
+     "Nationality: Saudi National",
+     "Education: Bachelor’s degree in Arts & Culture, Cultural Management, Heritage Studies, Museum Studies, Event Management, Tourism, Communications, Marketing, Media, Public Relations, Education, or a related field",
+     "Language: Proficiency in English is preferred"
+    ],
+    "benefit": null,
+    "fits": [
+     "events"
+    ],
+    "checkedAt": "2026-11-20",
+    "note": "Posted 19 Nov 2026 on Qiddiya's Workable listing. Target position: «Full-time roles supporting cultural programming and experiences within one of Qiddiya’s cultural assets.» Pay during the programme is not stated."
+   }
+  ],
+  "entryRoutesReused": [
+   "tamheer",
+   "doroob",
+   "hrdf-coop",
+   "hrdf-professional-certificates",
+   "hrdf-strategic-partnership-institutes",
+   "misk-career-essentials"
+  ],
+  "families": [
+   {
+    "id": "guest-experience",
+    "title": "الضيافة وتجربة الضيوف",
+    "titleEn": "Guest Experience / Front Office",
+    "fields": [
+     "tourism-hospitality"
+    ],
+    "isNew": true,
+    "what": "يستقبل الضيوف في فندق أو منتجع أو وجهة ترفيهية أو منصة حجز، يخدمهم ويحل مشاكلهم ويخلّي زيارتهم تمشي بسلاسة.",
+    "dayToDay": [
+     "يستقبل الضيوف ويرد على استفساراتهم",
+     "يسجّل الدخول والخروج والحجوزات والدفع",
+     "يحل الشكاوى ويرفع الملاحظات للمشرف",
+     "ينسق مع التشغيل والنظافة والصيانة عشان راحة الضيف"
+    ],
+    "path": {
+     "skills": [
+      "communication",
+      "guest-service",
+      "front-office",
+      "english",
+      "teamwork"
+     ],
+     "basedOnLine": "المسار مبني على: برامج AHLEI للضيافة (Guest Service Gold ثم برامج START للوظائف الميدانية مثل موظف الاستقبال)",
+     "basedOnLinks": [
+      "https://ahlei.servsafebrands.com/lodging/",
+      "https://info.ahlei.org/start/",
+      "https://cdn.mt.gov.sa/files/TourGuide/index.html"
+     ],
+     "orderNote": "guest-service → front-office follows AHLEI: Guest Service Gold is for «any field requiring customer-facing skills», while START's Front Desk Representative is a role-specific line-level programme; AHLEI does not state a required order, so this is a judgement call. tour-guiding (a second branch after guest-service) is not on this path: no open Saudi tour-guide posting was found, but the licence is official and the skill and guide are included.",
+     "guidelines": [
+      {
+       "name": "AHLEI lodging training and certification (Guest Service Gold® → CGSP; START line-level programmes)",
+       "provider": "American Hotel & Lodging Educational Institute (AHLEI)",
+       "url": "https://ahlei.servsafebrands.com/lodging/",
+       "orderedTopics": [
+        "Guest Service Gold® → Certified Guest Service Professional (CGSP): «anticipate guest needs, deliver exceptional experiences, and confidently handle challenging situations»; «applicable to any field requiring customer-facing skills»",
+        "Guest Service Gold®: Tourism version: «applicable to any business that participates in the tourism industry»",
+        "START (Skills, Tasks, and Results Training): «six line-level training programs … for front-line positions at lodging properties», including Certified Front Desk Representative"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "START: Skills, Tasks and Results Training",
+       "provider": "AHLEI",
+       "url": "https://info.ahlei.org/start/",
+       "orderedTopics": [
+        "«general foundational knowledge and soft skills training needed in the hospitality industry»",
+        "Each course: instructions to perform «16 key tasks correctly»",
+        "Certified Front Desk Representative: online course + exam («the exam is always packaged with the training material»)"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "ترخيص الإرشاد السياحي: متطلبات الترخيص وفئاته",
+       "provider": "وزارة السياحة",
+       "url": "https://cdn.mt.gov.sa/files/TourGuide/index.html",
+       "orderedTopics": [
+        "الفئات: مرشد موقع، مرشد مسار، مرشد متخصص",
+        "المتطلبات: سعودي الجنسية، لا يقل عمره عن 18 سنة، بلا عائق صحي",
+        "«أن يجتاز الدورات والاختبارات والمقابلات التي تعتمدها الوزارة للترخيص حسب الفئة المطلوبة»"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "gathern-guest-relations-associate-riyadh",
+     "seven-guest-service-associate-riyadh",
+     "sixflags-qiddiya-entry-operations-host-riyadh"
+    ],
+    "employers": [
+     {
+      "name": "جاذر إن",
+      "nameEn": "Gathern",
+      "careersUrl": "https://jobs.workable.com/view/b99fMpqmXfwDRZ4tbU1Ujg/guest-relations-associate-(fresh-graduates)-in-riyadh-at-gathern",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "سفن (الاستثمارات الترفيهية السعودية)",
+      "nameEn": "SEVEN",
+      "careersUrl": "https://jobs.workable.com/view/cPSLAYg1q2m8F2S14sN9Yz/guest-service-associate---transformers-in-riyadh-at-seven",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "سكس فلاجز مدينة القدية وأكوارابيا",
+      "nameEn": "Six Flags Qiddiya City and Aquarabia",
+      "careersUrl": "https://jobs.workable.com/view/tHeMVCuDm8oYWtqFNHoNCK/host-i---entry-operations-(aquarabia)-in-riyadh-at-six-flags-qiddiya-city-and-aquarabia",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "hrdf-strategic-partnership-institutes",
+     "misk-career-essentials",
+     "mt-tour-guide-licence"
+    ],
+    "certificates": [
+     {
+      "name": "Certified Guest Service Professional (CGSP)",
+      "issuer": "American Hotel & Lodging Educational Institute (AHLEI)",
+      "url": "https://ahlei.servsafebrands.com/lodging/",
+      "level": "beginner",
+      "star": 1,
+      "skill": "guest-service",
+      "priceText": "60 USD",
+      "arabicAvailable": null,
+      "why": "شهادة AHLEI لموظفي الصفوف الأمامية في الضيافة، تُنال بدورة Guest Service Gold واختبارها.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "START Certified Front Desk Representative (CFDR)",
+      "issuer": "American Hotel & Lodging Educational Institute (AHLEI)",
+      "url": "https://info.ahlei.org/start/",
+      "level": "beginner",
+      "star": 1,
+      "skill": "front-office",
+      "priceText": "61.5 USD",
+      "arabicAvailable": null,
+      "why": "شهادة AHLEI لموظف مكتب الاستقبال ضمن برنامج START، بدورة واختبار عبر الإنترنت.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "رخصة الإرشاد السياحي",
+      "issuer": "وزارة السياحة (المملكة العربية السعودية)",
+      "url": "https://cdn.mt.gov.sa/files/TourGuide/index.html",
+      "level": "beginner",
+      "star": 1,
+      "skill": "tour-guiding",
+      "priceText": "from 500 SAR",
+      "arabicAvailable": null,
+      "why": "رخصة إلزامية لممارسة الإرشاد في المملكة: للسعوديين من 18 سنة بعد اجتياز دورات واختبارات ومقابلات الوزارة.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": null,
+    "interviewQuestions": [
+     "ضيف زعلان لأن غرفته ما جهزت وقت الوصول: وش تسوي؟",
+     "كيف تتعامل مع طابور طويل وكل واحد مستعجل؟",
+     "عطنا مثال على خدمة سويتها فوق المتوقع.",
+     "وش تسوي لو الضيف طلب شي خارج سياسة المكان؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: أساسيات خدمة الضيوف: الترحيب والإنصات وحل الشكوى",
+     "الأسبوع 2: دورة الاستقبال الفندقي: الحجز وتسجيل الدخول والخروج",
+     "الأسبوع 3: تدرّب على مواقف صعبة مع صديق وسجّل نفسك بالإنجليزي",
+     "الأسبوع 4: قدّم على وظائف خدمة الضيوف في الوجهات الترفيهية والفنادق"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "الضيافة شغلها ابتسامة وصبر وحل سريع: تستقبل الضيف وتخلّي تجربته تمشي بدون كدر.",
+     "المسار عند دليلك: خدمة الضيوف، بعدها الاستقبال الفندقي، والإنجليزي مهم لأن ضيوفك من كل مكان.",
+     "تحب الميدان والتاريخ؟ فيه فرع الإرشاد السياحي، بس يبيله رخصة من وزارة السياحة بعد دوراتها واختباراتها."
+    ],
+    "sources": [
+     {
+      "label": "American Hotel & Lodging Educational Institute (AHLEI): AHLEI lodging training and certification (Guest Service Gold® → CGSP; START line-level programmes)",
+      "url": "https://ahlei.servsafebrands.com/lodging/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "AHLEI: START: Skills, Tasks and Results Training",
+      "url": "https://info.ahlei.org/start/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "وزارة السياحة: ترخيص الإرشاد السياحي: متطلبات الترخيص وفئاته",
+      "url": "https://cdn.mt.gov.sa/files/TourGuide/index.html",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Gathern: وظيفة gathern-guest-relations-associate-riyadh",
+      "url": "https://jobs.workable.com/view/b99fMpqmXfwDRZ4tbU1Ujg/guest-relations-associate-(fresh-graduates)-in-riyadh-at-gathern",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "SEVEN: وظيفة seven-guest-service-associate-riyadh",
+      "url": "https://jobs.workable.com/view/cPSLAYg1q2m8F2S14sN9Yz/guest-service-associate---transformers-in-riyadh-at-seven",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Six Flags Qiddiya City and Aquarabia: وظيفة sixflags-qiddiya-entry-operations-host-riyadh",
+      "url": "https://jobs.workable.com/view/tHeMVCuDm8oYWtqFNHoNCK/host-i---entry-operations-(aquarabia)-in-riyadh-at-six-flags-qiddiya-city-and-aquarabia",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salaryNote": "Not set: the Hays KSA 2026 guide has no hospitality table; its nearest row is «Receptionist 10,000 - 15,000 (avg 13,000)» in the Office support tables (pp. 39-40), which is office reception, not hotel front desk."
+   },
+   {
+    "id": "events",
+    "title": "تنظيم الفعاليات",
+    "titleEn": "Events Coordinator",
+    "fields": [
+     "tourism-hospitality"
+    ],
+    "isNew": true,
+    "what": "يخطط للفعالية من الفكرة إلى يوم التشغيل: الجدول والمكان والموردين والضيوف والميزانية، ثم يقيس نجاحها.",
+    "dayToDay": [
+     "يجهز جدول الفعالية ومخطط المكان وسير البرنامج",
+     "يتابع الموردين: الضيافة والنقل والصوتيات",
+     "يدير التسجيل والتشغيل في يوم الحدث",
+     "يتابع الميزانية ويقيّم الفعالية بعدها"
+    ],
+    "path": {
+     "skills": [
+      "communication",
+      "event-planning",
+      "project-management",
+      "guest-service",
+      "procurement"
+     ],
+     "basedOnLine": "المسار مبني على: دورة جامعة الفيصل «إدارة الفعاليات» بالعربي، وتخصص كلية دبي للسياحة في إدارة الفعاليات والمالية، وشهادة CMP من مجلس صناعة الفعاليات",
+     "basedOnLinks": [
+      "https://www.coursera.org/learn/events-management",
+      "https://www.coursera.org/specializations/event-management-finance-and-leadership",
+      "https://www.eventscouncil.org/CMP"
+     ],
+     "orderNote": "Star 1 = planning and running (Alfaisal modules 1-3), star 2 = finance and evaluation (modules 4-5; Dubai College of Tourism course 2 «Introduction to Budgeting for Events»). The CMP International Standards page on eventscouncil.org loads its domain list by script and could not be read, so CMP-IS domains are not used. project-management and procurement are existing skills in other fields (path only, not prerequisites).",
+     "guidelines": [
+      {
+       "name": "إدارة الفعاليات | Events Management (بالعربي)",
+       "provider": "جامعة الفيصل (Coursera)",
+       "url": "https://www.coursera.org/learn/events-management",
+       "orderedTopics": [
+        "1 أسس إدارة الفعاليات",
+        "2 خطوات عملية لتخطيط الفعاليات",
+        "3 متطلبات تنظيم فعاليات ناجحة",
+        "4 إدارة الأمور المالية للفعاليات",
+        "5 تقييم الفعاليات"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "Event Management, Finance, and Leadership Specialization",
+       "provider": "Dubai College of Tourism (Coursera)",
+       "url": "https://www.coursera.org/specializations/event-management-finance-and-leadership",
+       "orderedTopics": [
+        "1 Building a Career in Dubai's Event Industry",
+        "2 Introduction to Budgeting for Events",
+        "3 Introduction to Hospitality Revenue Management",
+        "4 Cross-Cultural Communication in the Hospitality Sector",
+        "5 Building High-Performance Teams in Hospitality",
+        "6 Dubai Expo 2020 - A Case Study"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "Certified Meeting Professional (CMP)",
+       "provider": "Events Industry Council",
+       "url": "https://www.eventscouncil.org/CMP",
+       "orderedTopics": [
+        "«The qualifications for certification are based on professional experience, education and a rigorous exam.»",
+        "CMP-HC (healthcare subspecialty): «Those seeking this certification must first pass the CMP exam.»"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "eram-event-management-coordinator-jeddah",
+     "sixflags-qiddiya-entertainment-events-team-leader-riyadh"
+    ],
+    "employers": [
+     {
+      "name": "إرم للمواهب (توظيف)",
+      "nameEn": "Eram Talent",
+      "careersUrl": "https://jobs.workable.com/view/jce2fPpppy7CEyf1daVFcS/event-management-coordinator-(saudi-arabia)-in-jeddah-at-eram-talent",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "سكس فلاجز مدينة القدية وأكوارابيا",
+      "nameEn": "Six Flags Qiddiya City and Aquarabia",
+      "careersUrl": "https://jobs.workable.com/view/hCpVjDbQL2dgYoYhudaYqS/team-leader---entertainment-%26-events-in-riyadh-at-six-flags-qiddiya-city-and-aquarabia",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "hrdf-strategic-partnership-institutes",
+     "misk-career-essentials",
+     "qiddiya-cultural-programming-upskilling"
+    ],
+    "certificates": [
+     {
+      "name": "Certified Meeting Professional (CMP)",
+      "issuer": "Events Industry Council (EIC)",
+      "url": "https://www.eventscouncil.org/CMP",
+      "level": "advanced",
+      "star": 2,
+      "skill": "event-planning",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "أشهر شهادة في الفعاليات، يحملها أكثر من 12 ألف محترف في 55 دولة، وتتطلب خبرة سابقة واختباراً.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": null,
+    "interviewQuestions": [
+     "احكِ لنا عن فعالية نظمتها: وش اللي صار غلط وكيف تصرفت؟",
+     "المورد تأخر ساعتين قبل الافتتاح: وش خطتك؟",
+     "كيف تبني ميزانية فعالية لـ 200 شخص؟",
+     "وش المؤشرات اللي تقيس فيها نجاح الفعالية؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: دورة «إدارة الفعاليات» بالعربي: الأسس وخطوات التخطيط",
+     "الأسبوع 2: خطط فعالية صغيرة (لقاء نادي أو ورشة): جدول وسير برنامج ومخطط مكان",
+     "الأسبوع 3: ميزانية من ثلاثة عروض أسعار وخطة طوارئ من صفحة",
+     "الأسبوع 4: تطوّع في فعالية كبيرة في مدينتك وسجّل وش تعلمت"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "الفعاليات شغلها تخطيط دقيق ويوم حدث حماسي: جدول وموردين وضيوف وميزانية.",
+     "المسار عند دليلك: التواصل، ثم تنظيم الفعاليات، وبعدها إدارة المشاريع والمشتريات للميزانية والموردين.",
+     "القدية فاتحة برنامج تأهيل ثقافي للخريجين السعوديين يبدأ ديسمبر 2026 وينتهي بوظيفة، شيّك عليه."
+    ],
+    "sources": [
+     {
+      "label": "جامعة الفيصل (Coursera): إدارة الفعاليات | Events Management (بالعربي)",
+      "url": "https://www.coursera.org/learn/events-management",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Dubai College of Tourism (Coursera): Event Management, Finance, and Leadership Specialization",
+      "url": "https://www.coursera.org/specializations/event-management-finance-and-leadership",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Events Industry Council: Certified Meeting Professional (CMP)",
+      "url": "https://www.eventscouncil.org/CMP",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Eram Talent: وظيفة eram-event-management-coordinator-jeddah",
+      "url": "https://jobs.workable.com/view/jce2fPpppy7CEyf1daVFcS/event-management-coordinator-(saudi-arabia)-in-jeddah-at-eram-talent",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Six Flags Qiddiya City and Aquarabia: وظيفة sixflags-qiddiya-entertainment-events-team-leader-riyadh",
+      "url": "https://jobs.workable.com/view/hCpVjDbQL2dgYoYhudaYqS/team-leader---entertainment-%26-events-in-riyadh-at-six-flags-qiddiya-city-and-aquarabia",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salaryNote": "Not set: the Hays KSA 2026 guide has no events table."
+   },
+   {
+    "id": "medical-coding-rcm",
+    "title": "الترميز الطبي والمطالبات",
+    "titleEn": "Medical Coder / RCM Specialist",
+    "fields": [
+     "health-admin"
+    ],
+    "isNew": true,
+    "what": "يترجم ملف المريض إلى رموز طبية معتمدة ويتابع الموافقات والمطالبات مع شركات التأمين لين تتحصل قيمتها.",
+    "dayToDay": [
+     "يراجع التشخيصات والإجراءات ويرمّزها بـ ICD-10-AM و ACHI",
+     "يرسل الموافقات والمطالبات عبر منصة نفيس",
+     "يحلل أسباب رفض المطالبات ويصححها",
+     "يتابع الالتزام بأنظمة مجلس الضمان الصحي"
+    ],
+    "path": {
+     "skills": [
+      "medical-terminology",
+      "medical-coding",
+      "health-claims",
+      "health-informatics",
+      "excel"
+     ],
+     "basedOnLine": "المسار مبني على: شهادة AAPC للترميز السريري في السعودية (CCP-KSA)، وبرنامج HFMA لممثل دورة الإيرادات في الخليج (CRCR – GCC)",
+     "basedOnLinks": [
+      "https://www.aapc.com/certifications/clinical-coding-professional-kingdom-of-saudi-arabia-ccp-ksa-certification",
+      "https://www.hfma.org/course/certified-revenue-cycle-representative-crcr-gcc/"
+     ],
+     "orderNote": "medical-terminology → medical-coding follows AAPC CCP-KSA's stated requirement («A high-level knowledge of medical terminology, human anatomy, and pathophysiology»). medical-coding → health-claims is a judgement call: HFMA's CRCR-GCC outline runs pre-service → time of service → post-service, and Waseel's Abha posting lists the cycle as «registration, eligibility, pre-authorization, charging, coding, billing, claims submission, rejection management…» (coding before claims). health-informatics has no dedicated family: no Saudi EHR/informatics posting at entry or mid level was found on 20 Nov, and HIMSS (CAHIMS) pages answered 403.",
+     "guidelines": [
+      {
+       "name": "Clinical Coding Professional — Kingdom of Saudi Arabia (CCP-KSA)",
+       "provider": "AAPC",
+       "url": "https://www.aapc.com/certifications/clinical-coding-professional-kingdom-of-saudi-arabia-ccp-ksa-certification",
+       "orderedTopics": [
+        "Before: «A high-level knowledge of medical terminology, human anatomy, and pathophysiology.» (else the prerequisite course «Fundamentals of Medicine»)",
+        "«Understand and apply the official ICD-10-AM coding guidelines»; outpatient and admitted care (inpatient, day cases)",
+        "Saudi billing system procedure classification, ICD-10-AM and AR-DRG; SFDA/GMDN/GTIN, ADA dental, KSA service/transport/lab classifications",
+        "«Understand Saudi Health Insurance system and regulatory requirements»; MOH-MDS data requirements",
+        "Exam: 40 multiple-choice questions and 9 case studies, 4 hours"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "Certified Revenue Cycle Representative (CRCR) – GCC",
+       "provider": "Healthcare Financial Management Association (HFMA)",
+       "url": "https://www.hfma.org/course/certified-revenue-cycle-representative-crcr-gcc/",
+       "orderedTopics": [
+        "Section 1: Revenue Cycle in Health Care",
+        "Section 2: Pre-Service – Financial Care",
+        "Section 3: Time of Service – Financial Care",
+        "Section 4: Post-Service – Financial Care",
+        "Objectives include «Explore the most effective ways to reduce denials and simplify collections»"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "waseel-rcm-specialist-riyadh",
+     "waseel-rcm-specialist-abha"
+    ],
+    "employers": [
+     {
+      "name": "وصيل",
+      "nameEn": "Waseel",
+      "careersUrl": "https://jobs.workable.com/view/5eetFxYCkwmDyAAHdHAh2t/rcm-specialist-in-riyadh-at-waseel",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "hrdf-strategic-partnership-institutes",
+     "misk-career-essentials"
+    ],
+    "certificates": [
+     {
+      "name": "Clinical Coding Professional - Kingdom of Saudi Arabia",
+      "issuer": "AAPC",
+      "url": "https://www.aapc.com/certifications/clinical-coding-professional-kingdom-of-saudi-arabia-ccp-ksa-certification",
+      "level": "intermediate",
+      "star": 2,
+      "skill": "medical-coding",
+      "priceText": "11,390 SAR",
+      "arabicAvailable": null,
+      "why": "شهادة مصممة للسعودية فقط: ترميز ICD-10-AM وACHI وAR-DRG ونظام SBS، اختبار 4 ساعات بأداة بحث بدل كتب الرموز.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "Certified Revenue Cycle Representative (CRCR) – GCC",
+      "issuer": "Healthcare Financial Management Association (HFMA)",
+      "url": "https://www.hfma.org/course/certified-revenue-cycle-representative-crcr-gcc/",
+      "level": "intermediate",
+      "star": 1,
+      "skill": "health-claims",
+      "priceText": "399 USD",
+      "arabicAvailable": null,
+      "why": "نسخة خليجية من شهادة دورة الإيرادات من HFMA تشمل السعودية: 75 سؤالاً في 90 دقيقة عبر الإنترنت.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": null,
+    "interviewQuestions": [
+     "وش الفرق بين رمز التشخيص ورمز الإجراء؟",
+     "مطالبة رجعت مرفوضة: وش أول شي تشيّك عليه؟",
+     "كيف تتأكد إن الترميز مطابق لتوثيق الطبيب؟",
+     "وش تعرف عن منصة نفيس؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: المصطلحات الطبية: البادئات واللواحق وأجهزة الجسم",
+     "الأسبوع 2: أساسيات ICD-10 وقواعد اختيار الرمز",
+     "الأسبوع 3: دورة الإيرادات: من الموافقة المسبقة إلى المطالبة والرفض",
+     "الأسبوع 4: رمّز 10 حالات تدريبية وسجّل أخطاءك وسببها"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "الترميز الطبي يحوّل ملف المريض إلى رموز، والمطالبات تحوّل الرموز إلى فلوس من التأمين.",
+     "المسار عند دليلك: المصطلحات الطبية، ثم الترميز (ICD-10-AM و ACHI المعتمدة عندنا)، ثم المطالبات ونفيس.",
+     "شركات مثل وصيل توظف أخصائيين دورة إيرادات في الرياض ومناطق ثانية، وتطلب خبرة سنتين تقريباً."
+    ],
+    "sources": [
+     {
+      "label": "AAPC: Clinical Coding Professional — Kingdom of Saudi Arabia (CCP-KSA)",
+      "url": "https://www.aapc.com/certifications/clinical-coding-professional-kingdom-of-saudi-arabia-ccp-ksa-certification",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Healthcare Financial Management Association (HFMA): Certified Revenue Cycle Representative (CRCR) – GCC",
+      "url": "https://www.hfma.org/course/certified-revenue-cycle-representative-crcr-gcc/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Waseel: وظيفة waseel-rcm-specialist-riyadh",
+      "url": "https://jobs.workable.com/view/5eetFxYCkwmDyAAHdHAh2t/rcm-specialist-in-riyadh-at-waseel",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Waseel: وظيفة waseel-rcm-specialist-abha",
+      "url": "https://jobs.workable.com/view/uVi9Lrp3ijjKTpzeiTg4oi/rcm-specialist-in-abha-at-waseel",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salaryNote": "Not set: the Hays KSA 2026 guide has no healthcare administration table."
+   },
+   {
+    "id": "learning-design",
+    "title": "التصميم التعليمي والتدريب",
+    "titleEn": "Instructional Designer / Trainer",
+    "fields": [
+     "education"
+    ],
+    "isNew": true,
+    "what": "يصمم برامج تدريب حضورية وإلكترونية تخلي الموظفين يتعلمون شي يقدرون يطبقونه، ويقدّمها أو يشغّل منصتها ويقيس أثرها.",
+    "dayToDay": [
+     "يحلل احتياج التدريب مع خبراء المحتوى",
+     "يكتب الأهداف ويصمم الأنشطة والتقييم بنموذج ADDIE",
+     "يبني دروس تفاعلية بأدوات التأليف وينشرها على منصة التعلم",
+     "يقدّم ورش أو يدير جدول التدريب ويقيس الأثر"
+    ],
+    "path": {
+     "skills": [
+      "instructional-design",
+      "training-delivery",
+      "elearning-dev",
+      "communication",
+      "project-management"
+     ],
+     "basedOnLine": "المسار مبني على: المخطط التفصيلي لاختبار APTD من جمعية تطوير المواهب (ATD)، وشهادات المركز الوطني للتعليم الإلكتروني",
+     "basedOnLinks": [
+      "https://assets.td.org/m/1db17e40338e8d55/original/APTD-Certification-Handbook-January-2026.pdf",
+      "https://nelc.gov.sa/en/services/pc/elxd"
+     ],
+     "orderNote": "ATD's outline: Learning Sciences → Instructional Design → Training Delivery & Facilitation → Technology Application → Evaluating Impact, so instructional-design comes first, then training-delivery and elearning-dev (Technology Application). training-delivery has no prerequisite (a trainer can start by delivering others' material, as the ABIS posting shows). td.org pages answered 403/429; only the handbook PDF on assets.td.org was read (by the guide researcher).",
+     "guidelines": [
+      {
+       "name": "APTD Certification Handbook (January 2026): Detailed Content Outline",
+       "provider": "Association for Talent Development (ATD)",
+       "url": "https://assets.td.org/m/1db17e40338e8d55/original/APTD-Certification-Handbook-January-2026.pdf",
+       "orderedTopics": [
+        "1 Building Personal Capability (20%): communication, collaboration, project management, compliance",
+        "2 Developing Professional Capability (50%): 2.1 Learning Sciences → 2.2 Instructional Design («instructional design models and processes, for example ADDIE and SAM») → 2.3 Training Delivery & Facilitation → 2.4 Technology Application → 2.8 Evaluating Impact",
+        "3 Impacting Organizational Capability (30%): business insight, needs assessment, performance, data & analytics"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "Professional Certificate in Designing eLearning Experiences (eLXD)",
+       "provider": "المركز الوطني للتعليم الإلكتروني (NELC)",
+       "url": "https://nelc.gov.sa/en/services/pc/elxd",
+       "orderedTopics": [
+        "Saudi professional certificate for e-learning experience design (opened by the guide researcher; NELC says the training provider sets the fee)"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "eram-associate-instructional-designer-dhahran",
+     "abis-industrial-skills-trainer-computer-dhahran",
+     "qiddiya-training-administration-senior-specialist-riyadh"
+    ],
+    "employers": [
+     {
+      "name": "إرم للمواهب (توظيف)",
+      "nameEn": "Eram Talent",
+      "careersUrl": "https://jobs.workable.com/view/62nbxmgLKZeqKDcYxYvbY2/associate-instructional-designer-in-dhahran-at-eram-talent",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "أبيس (ABIS)",
+      "nameEn": "ABIS",
+      "careersUrl": "https://jobs.workable.com/view/sMBBZx4b5HUXGN8EhbjoMT/industrial-skills-trainer---computer-(smp)-in-dhahran-at-abis",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "شركة القدية للاستثمار",
+      "nameEn": "Qiddiya Investment Company",
+      "careersUrl": "https://jobs.workable.com/view/pHv7KKVD7q4jzp4uQ7XVxC/senior-specialist---training-administration---(cdu-029)-50012690-in-riyadh-at-qiddiya-investment-company",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "hrdf-strategic-partnership-institutes",
+     "misk-career-essentials"
+    ],
+    "certificates": [
+     {
+      "name": "Professional Certificate in Designing eLearning Experiences",
+      "issuer": "National eLearning Center (NELC)",
+      "url": "https://nelc.gov.sa/en/services/pc/elxd",
+      "level": "beginner",
+      "star": 1,
+      "skill": "instructional-design",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "شهادة سعودية من المركز الوطني للتعليم الإلكتروني في تحليل الاحتياج ونماذج التصميم التعليمي؛ الرسوم تحددها جهة التدريب ويدعمها صندوق هدف.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "Professional Certificate in Providing eLearning and eTraining",
+      "issuer": "National eLearning Center (NELC)",
+      "url": "https://nelc.gov.sa/en/services/pc/ott",
+      "level": "beginner",
+      "star": 1,
+      "skill": "training-delivery",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "شهادة سعودية بلا شروط مسبقة: منصات التعلم واستراتيجيات التدريب عن بعد والتقييم الرقمي؛ يدعمها صندوق هدف.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "Moodle Educator Qualification (formerly Moodle Educator Certification, MEC)",
+      "issuer": "Moodle",
+      "url": "https://moodle.com/meq",
+      "level": "intermediate",
+      "star": 2,
+      "skill": "elearning-dev",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "مؤهل Moodle الرسمي في 22 كفاءة رقمية للمعلّم (إطار DigCompEdu) عبر 6 دورات؛ يُشترط تدريس سنة على Moodle.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": {
+     "role": "Learning & Development Manager",
+     "minSAR": 35000,
+     "maxSAR": 50000,
+     "avgSAR": 45000,
+     "period": "monthly",
+     "level": "manager (Hays lists job titles only; no specialist row exists)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 35, table «Human resources» (Monthly salary ranges and average values (SAR))",
+     "checkedAt": "2026-11-20",
+     "note": "الراتب الشهري الثابت الإجمالي بالريال حسب دليل Hays للرواتب في السعودية 2026 (الربع الأخير من 2025)، بلا تقسيم حسب الخبرة. هذا راتب مدير تعلّم وتطوير، أعلى بكثير من بداية المصمم التعليمي."
+    },
+    "interviewQuestions": [
+     "كيف تحوّل دليل سياسة من 40 صفحة إلى تدريب يتعلم منه الموظف فعلاً؟",
+     "اشرح ADDIE بمثال سويته.",
+     "كيف تعرف إن التدريب أثّر على الأداء مو بس عجب الحضور؟",
+     "وش أداة التأليف اللي تعرفها، ووش آخر شي بنيته فيها؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: ADDIE وكتابة أهداف تعليمية قابلة للقياس (بلوم)",
+     "الأسبوع 2: صمّم درس 15 دقيقة: لوحة قصة ونشاط وتقييم",
+     "الأسبوع 3: ابنه بأداة تأليف مجانية وصدّره SCORM وجرّبه على Moodle",
+     "الأسبوع 4: قدّمه لخمسة أشخاص وقِس فهمهم قبل وبعد"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "التصميم التعليمي يحوّل المعلومة إلى تجربة تعلّم: هدف واضح ونشاط وتقييم.",
+     "المسار عند دليلك: التصميم التعليمي بنموذج ADDIE، ثم تقديم التدريب، ثم تطوير المحتوى الإلكتروني ونشره.",
+     "المركز الوطني للتعليم الإلكتروني عنده شهادات مهنية سعودية في تصميم وتقديم التعلم الإلكتروني."
+    ],
+    "sources": [
+     {
+      "label": "Association for Talent Development (ATD): APTD Certification Handbook (January 2026): Detailed Content Outline",
+      "url": "https://assets.td.org/m/1db17e40338e8d55/original/APTD-Certification-Handbook-January-2026.pdf",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "المركز الوطني للتعليم الإلكتروني (NELC): Professional Certificate in Designing eLearning Experiences (eLXD)",
+      "url": "https://nelc.gov.sa/en/services/pc/elxd",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Eram Talent: وظيفة eram-associate-instructional-designer-dhahran",
+      "url": "https://jobs.workable.com/view/62nbxmgLKZeqKDcYxYvbY2/associate-instructional-designer-in-dhahran-at-eram-talent",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "ABIS: وظيفة abis-industrial-skills-trainer-computer-dhahran",
+      "url": "https://jobs.workable.com/view/sMBBZx4b5HUXGN8EhbjoMT/industrial-skills-trainer---computer-(smp)-in-dhahran-at-abis",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Qiddiya Investment Company: وظيفة qiddiya-training-administration-senior-specialist-riyadh",
+      "url": "https://jobs.workable.com/view/pHv7KKVD7q4jzp4uQ7XVxC/senior-specialist---training-administration---(cdu-029)-50012690-in-riyadh-at-qiddiya-investment-company",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "cx-quality",
+    "title": "تجربة العملاء وجودة الخدمة",
+    "titleEn": "CX / Contact Centre Quality",
+    "fields": [
+     "sales-supply"
+    ],
+    "isNew": true,
+    "what": "يخلي خدمة العملاء تمشي بجودة ثابتة: يرد ويحل، ويراقب المكالمات والتذاكر، ويقيس رضا العملاء ويحوّله إلى تحسينات.",
+    "dayToDay": [
+     "يرد على العملاء بالهاتف والمحادثة ويحل مشاكلهم",
+     "يراجع المكالمات والتذاكر ببطاقة جودة",
+     "يتابع مؤشرات مثل زمن الرد ورضا العملاء ويجدول المناوبات",
+     "يحلل الشكاوى ويرفع توصيات للتحسين"
+    ],
+    "path": {
+     "skills": [
+      "communication",
+      "customer-success",
+      "contact-center-ops",
+      "cx-quality",
+      "cx-analytics"
+     ],
+     "basedOnLine": "المسار مبني على: إطار CXPA لتجربة العملاء (شهادة CCXP)، ودورات COPC لمعيار تجربة العملاء ومراكز الاتصال",
+     "basedOnLinks": [
+      "https://cxpaglobal.org/storage/app/media/CCXP/CCXP_Handbook_March_2026.pdf",
+      "https://www.copc.com/class-listing/"
+     ],
+     "orderNote": "customer-success (existing) comes first because every contact-centre posting asks for service experience; then contact-center-ops and cx-quality (COPC's Foundations of Workforce Management and of Quality, both 8-hour entry classes), then cx-analytics (CCXP's insights, metrics and strategy areas; CCXP itself needs 3+ years of CX work). COPC lists no fixed order; this is a judgement call.",
+     "guidelines": [
+      {
+       "name": "CCXP Candidate Handbook (March 2026): CXPA CX Framework",
+       "provider": "Customer Experience Professionals Association (CXPA)",
+       "url": "https://cxpaglobal.org/storage/app/media/CCXP/CCXP_Handbook_March_2026.pdf",
+       "orderedTopics": [
+        "Customer Insights and Understanding (22 questions)",
+        "Customer Experience Strategy (20)",
+        "Metrics, Measurements, and ROI (20)",
+        "Design, Implementation, and Innovation (19)",
+        "Culture and Accountability (19)"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "COPC class listing (CX Standard training)",
+       "provider": "COPC Inc.",
+       "url": "https://www.copc.com/class-listing/",
+       "orderedTopics": [
+        "Foundations of Workforce Management (8 hours): «why the basics of workforce management are essential»",
+        "Foundations of Quality in Contact Centers (8 hours): «fundamental principles of quality management applied to contact centers»",
+        "Quality Management (14 hours): «Transform quality programs into a trusted asset»",
+        "Courses for the COPC CX Standard: «best practices, metrics and improvement approaches»"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "rentokil-customer-experience-specialist-riyadh",
+     "mrsool-customer-care-representative-riyadh",
+     "ninja-live-operations-supervisor-riyadh"
+    ],
+    "employers": [
+     {
+      "name": "رينتوكيل إنيشال",
+      "nameEn": "Rentokil Initial",
+      "careersUrl": "https://jobs.workable.com/view/ogUkyzqLYDdbx84GRcWF8z/customer-experience-specialist---part-time-in-riyadh-at-rentokil-initial",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "مرسول",
+      "nameEn": "Mrsool",
+      "careersUrl": "https://jobs.workable.com/view/fd6746eHwCm4Am62AKHoB4/representative%2C-customer-care-in-riyadh-at-mrsool",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "نينجا",
+      "nameEn": "Ninja",
+      "careersUrl": "https://jobs.workable.com/view/9XpzThnEH3VdKapbsEK25e/live-operations-supervisor-in-riyadh-at-ninja",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "hrdf-strategic-partnership-institutes",
+     "misk-career-essentials"
+    ],
+    "certificates": [
+     {
+      "name": "COPC® High-Performance Management Techniques (HPMT) certification",
+      "issuer": "COPC Inc.",
+      "url": "https://www.copc.com/class-listing/copc-high-performance-management-techniques-hpmt-training/",
+      "level": "beginner",
+      "star": 1,
+      "skill": "contact-center-ops",
+      "priceText": "899 USD",
+      "arabicAvailable": null,
+      "why": "شهادة من COPC لمشرفي مراكز الاتصال الجدد والطامحين للإشراف، باختبار بعد دورة HPMT.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "Certified Professional Manager in COPC® Best Practices for Quality Management",
+      "issuer": "COPC Inc.",
+      "url": "https://www.copc.com/class-listing/copc-best-practices-for-quality-management/",
+      "level": "intermediate",
+      "star": 2,
+      "skill": "cx-quality",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "شهادة من COPC، صاحبة معيار تجربة العملاء لمراكز الاتصال، تُنال باختبار بعد دورة إدارة الجودة.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "Certified Customer Experience Professional (CCXP)",
+      "issuer": "Customer Experience Professionals Association (CXPA)",
+      "url": "https://cxpaglobal.org/earn-your-ccxp/about-ccxp",
+      "level": "advanced",
+      "star": 2,
+      "skill": "cx-analytics",
+      "priceText": "645 USD",
+      "arabicAvailable": null,
+      "why": "شهادة CXPA الدولية لمحترفي تجربة العملاء: 100 سؤال في 3 ساعات، وتتطلب 3 سنوات خبرة مع البكالوريوس.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": {
+     "role": "Customer Service",
+     "minSAR": 9000,
+     "maxSAR": 15000,
+     "avgSAR": 12000,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 40, table «Office support – Industrial» (Monthly salary ranges and average values (SAR))",
+     "checkedAt": "2026-11-20",
+     "note": "الراتب الشهري الثابت الإجمالي بالريال حسب دليل Hays للرواتب في السعودية 2026 (الربع الأخير من 2025)، بلا تقسيم حسب الخبرة. الأرقام قُرئت من صورة الصفحة لأن نص الملف يخلط الصفوف."
+    },
+    "interviewQuestions": [
+     "عميل معصب ثالث مرة يتصل على نفس المشكلة: كيف تتعامل؟",
+     "وش الفرق بين NPS و CSAT؟",
+     "كيف تقيّم مكالمة زميلك بعدل؟",
+     "زمن الانتظار ارتفع فجأة: وش أول شي تشوفه؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: مؤشرات مركز الاتصال: زمن الرد، الحل من أول اتصال، مستوى الخدمة",
+     "الأسبوع 2: صمّم بطاقة جودة من 10 بنود وقيّم فيها 5 مكالمات خدمة عملاء مسجلة",
+     "الأسبوع 3: استبيان NPS و CSAT لخدمة تستخدمها وحلل 30 رد",
+     "الأسبوع 4: لوحة Excel شهرية: الشكاوى حسب السبب وتوصيتين"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور؛ ليست من شركة بعينها.",
+    "botLines": [
+     "تجربة العملاء مو بس رد على الهاتف: جودة ثابتة وأرقام تقيس رضا الناس وتحسينات تنفذ.",
+     "المسار عند دليلك: التواصل ونجاح العملاء، ثم تشغيل مراكز الاتصال وجودة المكالمات، ثم قياس تجربة العملاء.",
+     "وظائف خدمة العملاء في تطبيقات التوصيل والخدمات باب دخول، ومنها تكبر لمشرف جودة أو محلل تجربة عملاء."
+    ],
+    "sources": [
+     {
+      "label": "Customer Experience Professionals Association (CXPA): CCXP Candidate Handbook (March 2026): CXPA CX Framework",
+      "url": "https://cxpaglobal.org/storage/app/media/CCXP/CCXP_Handbook_March_2026.pdf",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "COPC Inc.: COPC class listing (CX Standard training)",
+      "url": "https://www.copc.com/class-listing/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Rentokil Initial: وظيفة rentokil-customer-experience-specialist-riyadh",
+      "url": "https://jobs.workable.com/view/ogUkyzqLYDdbx84GRcWF8z/customer-experience-specialist---part-time-in-riyadh-at-rentokil-initial",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Mrsool: وظيفة mrsool-customer-care-representative-riyadh",
+      "url": "https://jobs.workable.com/view/fd6746eHwCm4Am62AKHoB4/representative%2C-customer-care-in-riyadh-at-mrsool",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Ninja: وظيفة ninja-live-operations-supervisor-riyadh",
+      "url": "https://jobs.workable.com/view/9XpzThnEH3VdKapbsEK25e/live-operations-supervisor-in-riyadh-at-ninja",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   }
+  ]
+ },
+ "skillsWithoutFamily": {
+  "tour-guiding": "Skill and guide included; no family: no open Saudi tour-guide posting was found on 20 Nov 2026 (Workable search for «tour guide», «tour», «heritage guide», «guide»; Red Sea Global, Diriyah and RCU boards were not opened). The licence route (mt-tour-guide-licence) is attached to guest-experience.",
+  "health-informatics": "Skill and guide included; used by both Waseel postings at star 1; no dedicated family because no entry/mid Saudi EHR or informatics posting was found (only Qiddiya's «Senior Manager, Digital Health & Technology»). Its certificate is kind «none» only because himss.org answered 403: CAHIMS is the recognised entry credential and should replace it once the HIMSS page can be opened."
+ },
+ "demandEvidence": {
+  "guest-experience": [
+   "SEVEN (Workable search, Saudi Arabia, 20 Nov 2026): Guest Service Associate - Transformers; Reception Supervisor; Head Hostess; Attraction Supervisor / Assistant Manager (Taif, Jazan, «Future Career Opportunity»)",
+   "Six Flags Qiddiya City and Aquarabia: Host I - Entry Operations; Team Leader II - Entry Operations (Aquarabia)",
+   "Gathern: Guest Relations Associate (Fresh Graduates)",
+   "Rotana Hotels (Makkah, Riyadh, Al Khobar, Al Jubail): housekeeping, sales, accounts and management postings seen; no front-desk posting open on 20 Nov"
+  ],
+  "events": [
+   "Six Flags Qiddiya City and Aquarabia: Team Leader / Supervisor / Technician - Entertainment & Events; Cast Member - Entertainment & Events",
+   "Qiddiya Investment Company: Director, Public Realm Event Operations; Executive Director - Asian Games Planning and Coordination; Cultural Programming Upskilling Program (Saudi graduates, Dec 2026 - May 2027)",
+   "Eram Talent [staffing]: Event Management Coordinator (Jeddah)",
+   "THA by ARMONIA: Senior Logistics Manager - Events; F&B Manager - Events (Riyadh)"
+  ],
+  "medical-coding-rcm": [
+   "Waseel: RCM Specialist (Riyadh; Abha); RCM Project Lead (Abha)",
+   "Eram Talent [staffing]: Healthcare Finance & Revenue Cycle Specialist and Finance & RCM Specialist (Riyadh, Jeddah, Dammam, Al Khobar, Madinah, Yanbu, Tabuk), all 6+ years"
+  ],
+  "learning-design": [
+   "Qiddiya Investment Company: Manager - Learning Design and Delivery (6-10 years); Senior Specialist - Training Administration",
+   "Eram Talent [staffing]: Associate Instructional Designer (Dhahran); Associate Program Development & Evaluation Analyst (Instructional Design) in five cities; Training & Development Manager",
+   "ABIS: Industrial Skills Trainer - Computer; Safety Trainer; Drafting Trainer (Dhahran, SMP)",
+   "Müller`s Solutions [staffing]: Instructional Designer; E-Learning Systems Developer / Administrator; E-Learning QA Specialist (Jan 2026)"
+  ],
+  "cx-quality": [
+   "Madar (owned by Elm): Customer Experience Manager (5+ years)",
+   "Rentokil Initial: Customer Experience Specialist - Part Time (Riyadh, Jeddah, Al Khobar); Contact Center Specialist (Riyadh, Jeddah, Al Khobar)",
+   "Mrsool: Representative, Customer Care; TheChefz: Customer Care Specialist; Ninja: Live Operations Supervisor",
+   "Qiddiya Investment Company: Senior Manager - Digital CX & Research; Senior Specialist - Loyalty Program Experience"
+  ]
+ },
+ "heldJobs": [
+  {
+   "id": "madar-customer-experience-manager-riyadh",
+   "url": "https://jobs.workable.com/view/h6kP1huz7EWqbXLY3fezoV/customer-experience-manager-in-riyadh-at-madar",
+   "why": "Real and on-topic (CSAT, NPS, journey mapping) but asks 5+ years, above the app's bands (entry, junior, mid). Kept as demand evidence."
+  },
+  {
+   "id": "qiddiya-manager-learning-design-delivery-riyadh",
+   "url": "https://jobs.workable.com/view/svueYUhncS43WvGoyafNDm/manager---learning-design-and-delivery-in-riyadh-at-qiddiya-investment-company",
+   "why": "Real and on-topic but asks 6-10 years. Kept as demand evidence."
+  },
+  {
+   "id": "seven-reception-supervisor-riyadh",
+   "url": "https://jobs.workable.com/view/58x3QkKFe7BC6h6qGu4mpS/reception-supervisor-in-riyadh-at-seven",
+   "why": "Asks a minimum of 8 years. Kept as demand evidence."
+  }
+ ],
+ "method": "1) Workable's public job-search JSON (the one jobs.workable.com uses; GET /api/v1/jobs?query=<kw>&location=Saudi Arabia) with ~60 keywords across the four areas (hospitality, events, tour guide, revenue, medical coding, health informatics, patient experience, instructional design, e-learning, trainer, CX, quality, contact centre…). 2) Chose entry/junior/mid postings, preferring direct employers; two are from a staffing firm's own board (Eram Talent) and say so. 3) Every chosen posting URL re-requested on 20 Nov 2026 (HTTP 200). 4) Every evidence and bandEvidence string is asserted by this build script to occur verbatim in the posting text (HTML stripped, whitespace collapsed). 5) Guides: two guide researchers opened every course, person, article and certificate page themselves (their notOpened lists are merged below). 6) Guidelines: opened directly (AHLEI, Ministry of Tourism licence page, Alfaisal and Dubai College of Tourism course pages, EIC CMP page, AAPC CCP-KSA, HFMA CRCR-GCC, COPC class listing) or read from the issuer PDF the guide researcher downloaded (ATD APTD handbook, CXPA CCXP handbook). 7) Salary: Hays Saudi Arabia Salary Guide 2026 PDF, numbers read from page renders. No LinkedIn, Indeed or Bayt pages; no logins; no forms.",
+ "editsToGuideParts": [
+  "tour-guiding certificate: age «18» re-checked on the licence page itself (cdn.mt.gov.sa/files/TourGuide/index.html: «ألا يقل عمره عن (18) سنة»).",
+  "medical-coding certificate CCP-KSA: AAPC's page says the exam is «only available to take online at home with a live remote proctor» and, in the same block, «Only available in the U.S., U.S. Territories, Bahamas, and Jamaica»; that contradicts a Saudi credential, so check with AAPC before showing it as bookable from Saudi Arabia. Price «11,390 SAR + 15% VAT» re-read on the page (bundle with the training course)."
+ ],
+ "guideNotes": {
+  "tourism-cx": "All 7 guides complete (guest-service, front-office, event-planning, tour-guiding, cx-analytics, cx-quality, contact-center-ops). Arabic/Saudi items used where real and readable: Alfaisal University's Arabic 'Events Management' on Coursera (event-planning top pick), HRDF Irshad 'أساسيات إدارة الفعاليات' (Arabic), almentor 'Basics of Hospitality Management' (Arabic; price/hours not on page), the Saudi Tourism Authority's Saudi eLearning course (English only) and the Ministry of Tourism tour-guide licence page as the tour-guiding certificate. No readable Arabic course was found for front office, tour guiding, CX analytics, QA or contact-centre ops; Doroob/Edraak listings did not surface in searches for these topics. Fees: CGSP $60 and CFDR $61.50 are AHLEI's own course+exam bundle prices (AHLEI: exam always packaged with the training); CCXP $645 non-member ($495 member) from CXPA's March 2026 handbook; HPMT $899 on-demand from COPC's class page; tour-guide licence 500 SAR for 1 year (750/2y, 1,000/3y) from the ministry's regulation fee schedule (qualifier 'from'). CMP and COPC Quality Management fees are null: not stated on any issuer page that opened. Hours for COPC classes (8, 14, 15) come from copc.com/class-listing. The Event Management, Finance and Leadership specialization hours=40 is the page's '4 weeks at 10 hours a week'. HPMT on-demand hours left null (the page lists module minutes, about 8 h in total, but states no total). Coursera price set to 'paid' with financialAid true (pages say financial aid available), matching the existing guides' convention. Jonty Pearce (Call Centre Helper) appears in both cx-quality and contact-center-ops; his links are the site's company LinkedIn/YouTube printed on callcentrehelper.com. Micah Solomon, Jeff Toister and TripSchool pages show no social links, so links are empty. Rick Steves' YouTube/X are the Rick Steves' Europe links printed on ricksteves.com (no LinkedIn). Annette Franz: only an X link is printed on cx-journey.com (no LinkedIn). CCXP level 'advanced' because it requires 3 years of CX work (with a bachelor's) or 5 years. CMP eligibility (36 months experience, or 24 + degree) read on EIC's CMP Scholarship page.",
+  "health-education": "All 7 guides complete (medical-terminology, medical-coding, health-claims, health-informatics, instructional-design, elearning-dev, training-delivery). Editorial calls: (1) medical-coding certificate = AAPC CCP-KSA (star 2), chosen over AHIMA CCA/CCS because it is built for Saudi codes (ICD-10-AM/ACHI/AR-DRG/SBS). AHIMA pages also opened: CCA $199 member / $299 non-member (ahima.org/certification-careers/certifications-overview/cca/), CCS $299 / $399 (.../ccs/), if a US credential is preferred. (2) health-claims certificate = HFMA CRCR-GCC (Gulf version incl. Saudi Arabia); the main CRCR page labels the programme level Intermediate and recommends 1+ year of revenue-cycle experience. (3) health-informatics certification is kind none ONLY because himss.org blocked every request (403); CAHIMS is the recognised star-2 credential and should replace this if someone can open the HIMSS page. (4) instructional-design and training-delivery use the Saudi NELC professional certificates eLXD and OTT (nelc.gov.sa pages say fees are set by the training provider; NELC's /en/services/pc page says Hadaf reimburses costs under its terms). type 'exam' for OTT comes from the Bakkah page (80 questions, 60% pass, exam fee 131.66 SAR paid to the exam provider; not used as a fee because it is not the issuer's page); for eLXD the exam step is assumed by analogy (the NELC eLXD page lists a 'Service delivery procedure' with no text). ATD options if wanted: APTD Handbook Jan 2026 (https://assets.td.org/m/1db17e40338e8d55/original/APTD-Certification-Handbook-January-2026.pdf): $525 member / $800 nonmember, 3 years' experience; CPTD Handbook 2025 (https://assets.td.org/m/46c02013e61dd631/original/CI-CPTD-Certification-Handbook-2025.pdf): $999 member / $1,500 nonmember, 5 years' experience (search snippets suggest td.org now shows $1,099 for members; not verified). (5) elearning-dev certificate = Moodle MEQ (formerly MEC); moodle.com/meq states no fee. No official Articulate certificate could be verified (Articulate pages 403 or script-only). (6) Some 'people' entries are brands, not single persons: CCO (Certification Coaching Organization) and The Bob Pike Group; the Ninja Nerd and Medical Coding Geek LinkedIn links are company pages printed on their own sites. Brian Cui is named as host on the Apple Podcasts listing of Not Elsewhere Classified (last episode Dec 2021); medicalcodinggeek.com itself does not print his name. John Halamka's Blogger blog is an archive (last post Nov 2021). Chad Mulvany's url is the Forvis Mazars podcast page that is also the health-claims article. arab/saudiBased left null everywhere (no evidence on the pages). (7) hours set to null where the Coursera page gives inconsistent totals (JHU Health Informatics, Illinois Tech HL7/FHIR, ICD-10 to Clean Claims, Virtual Teacher) and for W3C (16-20 h range). Bakkah OTT price left null: the page does not list the training fee. No Arabic course was found for medical terminology, coding, claims or informatics (FutureX 403; Rwaq catalogue had none visible; Edraak and Doroob not readable in the time available); the only Arabic course used is Bakkah's NELC-accredited OTT course, and the NPHIES homepage is the Arabic article for health-claims."
+ },
+ "notOpened": [
+  {
+   "url": "https://www.cxpa.org/ccxp",
+   "why": "403 via WebFetch, 404 via curl; CXPA now lives on cxpaglobal.org, which was used instead"
+  },
+  {
+   "url": "https://www.cxpaglobal.org/ccxp-apply",
+   "why": "404"
+  },
+  {
+   "url": "https://www.cxpaglobal.org/eligibility",
+   "why": "404 (eligibility taken from cxpaglobal.org/earn-your-ccxp/about-ccxp instead)"
+  },
+  {
+   "url": "https://mt.gov.sa/human-capital/programs/qualification-program-of-tourism-guidance?programCategoryType=individuals",
+   "why": "Ministry of Tourism tour-guide qualification programme (linked from the licence page as the pre-requisite courses): 403; the page says it is reachable only from the ministry's internal network. Not cited."
+  },
+  {
+   "url": "https://sabq.org/article/nqdv7ws",
+   "why": "403 (news on the Ministry of Tourism + HRDF programme to train 3,500 tour guides). Not cited."
+  },
+  {
+   "url": "https://learn.qualtrics.com/page/xm-fundamentals-certification",
+   "why": "403 (Qualtrics XM Fundamentals certification). Not cited."
+  },
+  {
+   "url": "https://online.flippingbook.com/view/535932121/",
+   "why": "CMP Handbook 2025 (linked from eventscouncil.org/CMP): flipbook text not readable, so CMP fees could not be verified; used only as prepUrl because EIC links it as the official handbook"
+  },
+  {
+   "url": "https://www.edx.org/certificates/professional-certificate/experience-management-xm-fundamentals",
+   "why": "opened but showed no length/price/topics. Not cited (the edX Qualtrics XM Institute school page was used instead)"
+  },
+  {
+   "url": "https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction",
+   "why": "opened but only the title 'Airline Passenger Satisfaction' was readable (script page); columns not verified"
+  },
+  {
+   "url": "https://www.kennedytraininginternational.com/",
+   "why": "DNS failure; the correct site kennedytrainingnetwork.com was used"
+  },
+  {
+   "url": "https://www.himss.org/resources-certifications/cahims",
+   "why": "HTTP 403 for WebFetch and curl; every himss.org page tried (health-it-certification/cahims, what-we-do-solutions/certifications/cahims, homepage, arizona.himss.org chapter) returned 403. CAHIMS/CPHIMS therefore not cited."
+  },
+  {
+   "url": "https://www.td.org/certification/aptd/exam",
+   "why": "HTTP 403 (WebFetch) / 429 (curl); same for td.org/certification/cptd/exam, td.org/certification/pricing-guide and the APTD product page. Only ATD handbook PDFs on assets.td.org opened (see notes)."
+  },
+  {
+   "url": "https://community.articulate.com/kb/storyline-360-onboarding/beginners-guide-to-articulate-360/1215960",
+   "why": "HTTP 403."
+  },
+  {
+   "url": "https://training.articulate.com/",
+   "why": "Opened but no readable text (script-only page)."
+  },
+  {
+   "url": "https://blogs.articulate.com/rapid-elearning/7-ideas-to-help-make-an-online-course-less-boring/",
+   "why": "301 redirect to an unrelated domain (tipsqueak.com); not followed, not cited."
+  },
+  {
+   "url": "https://moodle.academy/course/view.php?id=57",
+   "why": "HTTP 403 (Moodle Teaching Basics). The moodle.academy homepage itself opened and lists Introduction to Moodle (1 hour) as a free course."
+  },
+  {
+   "url": "https://futurex.sa/ar/courses",
+   "why": "HTTP 403."
+  },
+  {
+   "url": "https://www.rwaq.org/courses",
+   "why": "Opened; the visible part of the catalogue had no instructional-design, train-the-trainer, e-learning or medical-terminology course."
+  },
+  {
+   "url": "https://www.moh.gov.sa/en/HICC/ICD10AM/Pages/Introduction.aspx",
+   "why": "HTTP 404."
+  },
+  {
+   "url": "https://international.ahima.org/international-blog/via-blog/developing-the-next-generation-of-medical-coders-in-the-kingdom-of-saudi-arabia/",
+   "why": "HTTP 404."
+  },
+  {
+   "url": "https://icd.who.int/training/icd10training/",
+   "why": "Redirects to a script host (icdtraining.z16.web.core.windows.net); not followed."
+  },
+  {
+   "url": "https://nelc.gov.sa/en/services/pc/elxdf",
+   "why": "Opened but only navigation text (eLXD Foundation level); same for /en/services/pc/elxda. Used /en/services/pc/elxd instead."
+  },
+  {
+   "url": "https://medicalacademy.org/en/course/FundamentalsofClinicalCodingICD-10-AMACHIandACS10thEdition--52024",
+   "why": "Opened; SCFHS-accredited ICD-10-AM course but it ran in March 2021 and has ended, so not cited."
+  },
+  {
+   "url": "https://www.hfma.org/wp-content/uploads/2026/01/HFMA-Certification-Programs-Overview-2026.pdf",
+   "why": "Image-only PDF; no readable text."
+  },
+  {
+   "url": "https://www.mayoclinicplatform.org/blog/",
+   "why": "HTTP 403 (John Halamka's current blog); his archived Blogger blog was used instead."
+  },
+  {
+   "url": "https://bowperson.com/",
+   "why": "Opened; the page does not mention Sharon Bowman or publish an article, so not cited."
+  },
+  {
+   "url": "https://www.healthit.gov/faq/what-electronic-health-record-ehr",
+   "why": "Lands on the ONC homepage with no EHR definition; not cited."
+  },
+  {
+   "url": "https://www.eventscouncil.org/CMP/CMP-International-Standards",
+   "why": "Opened (200) but the domain list loads by script; CMP-IS domains not read."
+  },
+  {
+   "url": "https://www.himss.org/resources-certification/cahims",
+   "why": "403 (curl) on re-check, same as the guide researcher found."
+  },
+  {
+   "url": "https://www.ahlei.org/certifications/",
+   "why": "404; AHLEI's certification info read on ahlei.servsafebrands.com/lodging/ and info.ahlei.org/start/ instead."
+  }
+ ]
+}

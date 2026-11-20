@@ -28,6 +28,7 @@ import {
   IconFieldProduct,
   IconFieldProfessional,
   IconFieldSalesSupply,
+  WAVE2_FIELD_ICONS,
   IconFieldSoftware,
   IconRetry,
   IconStarFilled,
@@ -67,6 +68,7 @@ const FIELD_ICON = {
   product: IconFieldProduct,
   "cyber-cloud": IconFieldCyberCloud,
   "sales-supply": IconFieldSalesSupply,
+  ...WAVE2_FIELD_ICONS,
   professional: IconFieldProfessional,
 } as const satisfies Record<FieldId, ComponentType<IconProps>>;
 

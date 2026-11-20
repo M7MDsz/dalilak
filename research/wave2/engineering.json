@@ -1,0 +1,3254 @@
+{
+ "checkedAt": "2026-11-20",
+ "note": "Wave 2 research, engineering / construction project controls (6 families, 11 skills, 13 real postings). Ready-to-merge data in the shape of research/expansion/expansion.json; not wired into the app. App «دليل», chatbot «دليلك». `courses` titles are Dalil's own (hand-written course names, not real providers); every other item has a source URL opened on 2026-11-20.",
+ "fields": [
+  {
+   "id": "engineering",
+   "name": "الهندسة والإنشاءات"
+  },
+  {
+   "id": "project-controls",
+   "name": "التخطيط وضبط المشاريع"
+  }
+ ],
+ "skills": [
+  {
+   "id": "engineering-drawings",
+   "name": "المخططات الهندسية و AutoCAD",
+   "field": "engineering",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "قراءة المخططات الإنشائية والمعمارية ورسمها وتعديلها في AutoCAD.",
+   "aliases": [
+    "AutoCAD",
+    "أوتوكاد",
+    "اوتوكاد",
+    "المخططات الهندسية",
+    "قراءة المخططات",
+    "Civil 3D",
+    "shop drawings"
+   ]
+  },
+  {
+   "id": "hse",
+   "name": "الصحة والسلامة المهنية (HSE)",
+   "field": "engineering",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "تقييم مخاطر الموقع وتطبيق إجراءات السلامة والتحقيق في الحوادث.",
+   "aliases": [
+    "HSE",
+    "الصحة والسلامة المهنية",
+    "السلامة المهنية",
+    "NEBOSH",
+    "OSHA",
+    "IOSH",
+    "ISO 45001"
+   ]
+  },
+  {
+   "id": "quality-control",
+   "name": "ضبط الجودة وضمانها (QA/QC)",
+   "field": "engineering",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "فحص الأعمال مقابل المواصفات وخطط الفحص وتقارير عدم المطابقة وفق ISO 9001.",
+   "aliases": [
+    "QA/QC",
+    "ضبط الجودة",
+    "ضمان الجودة",
+    "ISO 9001",
+    "تقرير عدم المطابقة",
+    "NCR",
+    "inspection and test plan"
+   ]
+  },
+  {
+   "id": "site-execution",
+   "name": "تنفيذ الأعمال والإشراف على الموقع",
+   "field": "engineering",
+   "maxStars": 2,
+   "prereqs": [
+    "engineering-drawings"
+   ],
+   "description": "متابعة تنفيذ الأعمال في الموقع حسب المخططات والمواصفات وتنسيق المقاولين.",
+   "aliases": [
+    "مهندس موقع",
+    "الإشراف على التنفيذ",
+    "الإشراف على الموقع",
+    "site engineer",
+    "site supervision",
+    "method statement"
+   ]
+  },
+  {
+   "id": "mep-systems",
+   "name": "أنظمة MEP (تكييف وكهرباء وسباكة)",
+   "field": "engineering",
+   "maxStars": 2,
+   "prereqs": [
+    "engineering-drawings"
+   ],
+   "description": "أنظمة التكييف والكهرباء والسباكة ومكافحة الحريق في المباني: تصميمها ومتابعة تركيبها.",
+   "aliases": [
+    "MEP",
+    "HVAC",
+    "أنظمة التكييف",
+    "التمديدات الكهربائية",
+    "مكافحة الحريق",
+    "plumbing",
+    "fire fighting"
+   ]
+  },
+  {
+   "id": "saudi-building-code",
+   "name": "كود البناء السعودي (SBC)",
+   "field": "engineering",
+   "maxStars": 1,
+   "prereqs": [
+    "engineering-drawings"
+   ],
+   "description": "تطبيق متطلبات كود البناء السعودي في التصميم والتنفيذ والفحص.",
+   "aliases": [
+    "كود البناء السعودي",
+    "SBC",
+    "Saudi Building Code",
+    "الكود السعودي"
+   ]
+  },
+  {
+   "id": "planning-scheduling",
+   "name": "التخطيط والجدولة (Primavera P6)",
+   "field": "project-controls",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "بناء الجدول الزمني للمشروع في Primavera P6 وتحديثه ومتابعة المسار الحرج.",
+   "aliases": [
+    "Primavera",
+    "Primavera P6",
+    "بريمافيرا",
+    "المسار الحرج",
+    "critical path",
+    "الجدول الزمني للمشروع",
+    "planning engineer"
+   ]
+  },
+  {
+   "id": "quantity-surveying",
+   "name": "حساب الكميات والتسعير",
+   "field": "project-controls",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "حصر الكميات من المخططات وتسعيرها وإعداد جداول الكميات والمستخلصات.",
+   "aliases": [
+    "حساب الكميات",
+    "حصر الكميات",
+    "جداول الكميات",
+    "BOQ",
+    "quantity surveying",
+    "quantity take-off",
+    "المستخلصات"
+   ]
+  },
+  {
+   "id": "bim-revit",
+   "name": "BIM و Revit",
+   "field": "project-controls",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "بناء نماذج معلومات المباني في Revit وتنسيقها وكشف التعارضات بين التخصصات.",
+   "aliases": [
+    "Revit",
+    "ريفت",
+    "BIM",
+    "نمذجة معلومات البناء",
+    "Navisworks",
+    "ISO 19650",
+    "clash detection"
+   ]
+  },
+  {
+   "id": "cost-control",
+   "name": "ضبط التكاليف والقيمة المكتسبة",
+   "field": "project-controls",
+   "maxStars": 2,
+   "prereqs": [
+    "quantity-surveying"
+   ],
+   "description": "مقارنة المصروف بالميزانية بطريقة القيمة المكتسبة والتنبؤ بالتكلفة النهائية للمشروع.",
+   "aliases": [
+    "ضبط التكاليف",
+    "مراقبة التكاليف",
+    "القيمة المكتسبة",
+    "earned value",
+    "EVM",
+    "cost control",
+    "cost controller"
+   ]
+  },
+  {
+   "id": "construction-contracts",
+   "name": "عقود الإنشاء و FIDIC",
+   "field": "project-controls",
+   "maxStars": 1,
+   "prereqs": [
+    "quantity-surveying"
+   ],
+   "description": "فهم عقود فيديك وأوامر التغيير والمطالبات ونظام المنافسات والمشتريات الحكومية.",
+   "aliases": [
+    "FIDIC",
+    "فيديك",
+    "عقود الإنشاء",
+    "أوامر التغيير",
+    "variation orders",
+    "contract administration",
+    "مهندس عقود"
+   ]
+  }
+ ],
+ "courses": [
+  {
+   "id": "c-engineering-drawings-1",
+   "skill": "engineering-drawings",
+   "star": 1,
+   "title": "قراءة المخططات الإنشائية والمعمارية: الرموز والمقاييس والمقاطع",
+   "hours": 10
+  },
+  {
+   "id": "c-engineering-drawings-2",
+   "skill": "engineering-drawings",
+   "star": 2,
+   "title": "AutoCAD عملي: من الرسم إلى لوحات التنفيذ",
+   "hours": 20
+  },
+  {
+   "id": "c-hse-1",
+   "skill": "hse",
+   "star": 1,
+   "title": "أساسيات السلامة في المواقع: المخاطر وتصاريح العمل والحوادث",
+   "hours": 10
+  },
+  {
+   "id": "c-hse-2",
+   "skill": "hse",
+   "star": 2,
+   "title": "إدارة السلامة المهنية: تقييم المخاطر والتدقيق والتحقيق في الحوادث",
+   "hours": 20
+  },
+  {
+   "id": "c-quality-control-1",
+   "skill": "quality-control",
+   "star": 1,
+   "title": "ضبط الجودة في الموقع: خطط الفحص وطلبات الاستلام وتقارير عدم المطابقة",
+   "hours": 10
+  },
+  {
+   "id": "c-quality-control-2",
+   "skill": "quality-control",
+   "star": 2,
+   "title": "نظام إدارة الجودة ISO 9001 والتدقيق الداخلي",
+   "hours": 16
+  },
+  {
+   "id": "c-site-execution-1",
+   "skill": "site-execution",
+   "star": 1,
+   "title": "مهندس الموقع: طرق التنفيذ وبيانات الأعمال والتقارير اليومية",
+   "hours": 12
+  },
+  {
+   "id": "c-site-execution-2",
+   "skill": "site-execution",
+   "star": 2,
+   "title": "إدارة الموقع: تنسيق المقاولين والتسليم والاستلام",
+   "hours": 16
+  },
+  {
+   "id": "c-mep-systems-1",
+   "skill": "mep-systems",
+   "star": 1,
+   "title": "أنظمة المباني: التكييف والكهرباء والسباكة ومكافحة الحريق",
+   "hours": 12
+  },
+  {
+   "id": "c-mep-systems-2",
+   "skill": "mep-systems",
+   "star": 2,
+   "title": "تنسيق أعمال MEP في الموقع: المخططات التنفيذية والاختبار والتشغيل",
+   "hours": 16
+  },
+  {
+   "id": "c-saudi-building-code-1",
+   "skill": "saudi-building-code",
+   "star": 1,
+   "title": "كود البناء السعودي: الأجزاء والمتطلبات الأساسية للمهندس",
+   "hours": 8
+  },
+  {
+   "id": "c-planning-scheduling-1",
+   "skill": "planning-scheduling",
+   "star": 1,
+   "title": "Primavera P6 من الصفر: الأنشطة والعلاقات والمسار الحرج",
+   "hours": 16
+  },
+  {
+   "id": "c-planning-scheduling-2",
+   "skill": "planning-scheduling",
+   "star": 2,
+   "title": "إدارة الجدول الزمني: التحديث والتأخير وتمديد المدة",
+   "hours": 16
+  },
+  {
+   "id": "c-quantity-surveying-1",
+   "skill": "quantity-surveying",
+   "star": 1,
+   "title": "حصر الكميات من المخططات وإعداد جدول الكميات",
+   "hours": 12
+  },
+  {
+   "id": "c-quantity-surveying-2",
+   "skill": "quantity-surveying",
+   "star": 2,
+   "title": "التسعير والمستخلصات وتقييم الأعمال",
+   "hours": 16
+  },
+  {
+   "id": "c-bim-revit-1",
+   "skill": "bim-revit",
+   "star": 1,
+   "title": "Revit للمبتدئين: نموذج مبنى من المخطط",
+   "hours": 16
+  },
+  {
+   "id": "c-bim-revit-2",
+   "skill": "bim-revit",
+   "star": 2,
+   "title": "تنسيق BIM: دمج النماذج وكشف التعارضات و ISO 19650",
+   "hours": 16
+  },
+  {
+   "id": "c-cost-control-1",
+   "skill": "cost-control",
+   "star": 1,
+   "title": "ضبط التكاليف: الميزانية والمصروف والانحرافات",
+   "hours": 10
+  },
+  {
+   "id": "c-cost-control-2",
+   "skill": "cost-control",
+   "star": 2,
+   "title": "القيمة المكتسبة والتنبؤ بالتكلفة النهائية",
+   "hours": 12
+  },
+  {
+   "id": "c-construction-contracts-1",
+   "skill": "construction-contracts",
+   "star": 1,
+   "title": "عقود الإنشاء: فيديك وأوامر التغيير والمطالبات",
+   "hours": 10
+  }
+ ],
+ "jobs": [
+  {
+   "id": "teefnajd-site-engineer-riyadh",
+   "title": "مهندس موقع",
+   "titleEn": "Site Engineer",
+   "field": "engineering",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "junior",
+   "company": "مجموعة طيف نجد",
+   "companyEn": "Teef Najd Group",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/aYWC1XNbAjevKNg3TjhcU4/site-engineer-in-riyadh-at-teef-najd-group",
+    "postedAt": "2026-10-25",
+    "checkedAt": "2026-11-20",
+    "note": "Saudi Nationals Only. Finishing and façade works (stone, marble, cladding). Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "2–3 years of relevant experience in finishing and façade works.",
+   "requirements": [
+    {
+     "skill": "engineering-drawings",
+     "stars": 1,
+     "evidence": "Ability to read and interpret engineering drawings."
+    },
+    {
+     "skill": "site-execution",
+     "stars": 1,
+     "evidence": "Coordinate with subcontractors and project teams"
+    },
+    {
+     "skill": "quality-control",
+     "stars": 1,
+     "evidence": "Ensure compliance with approved drawings, project specifications, quality standards, and safety requirements"
+    },
+    {
+     "skill": "hse",
+     "stars": 1,
+     "evidence": "Experience with the full site delivery process, including QA/QC inspections, material submittals, method statements, and HSE/site safety procedures."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Strong coordination, communication, and problem-solving skills."
+    }
+   ],
+   "summary": "يشرف على أعمال التشطيبات والواجهات يومياً ويتأكد إنها مطابقة للمخططات والمواصفات ومعايير الجودة والسلامة.",
+   "tasks": [
+    "الإشراف اليومي على أعمال الموقع",
+    "مراجعة المخططات الهندسية مع المقاولين",
+    "متابعة التقدم وحل مشاكل الموقع الفنية"
+   ],
+   "family": "civil-site-engineer"
+  },
+  {
+   "id": "rawafid-site-civil-engineer-jeddah",
+   "title": "مهندس مدني موقع",
+   "titleEn": "Site Civil Engineer",
+   "field": "engineering",
+   "city": "jeddah",
+   "place": "Jeddah",
+   "band": "mid",
+   "company": "روافد",
+   "companyEn": "Rawafid",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/xteTw1ZjdYrQyKBgVQ6oG1/site-civil-engineer-in-jeddah-at-rawafid",
+    "postedAt": "2026-03-05",
+    "checkedAt": "2026-11-20",
+    "note": "Also asks «Saudi Council of Engineers (SCE) Certification.», PMP and CCM. Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "Min. 5 years of experience in civil engineering, preferably in construction projects.",
+   "requirements": [
+    {
+     "skill": "engineering-drawings",
+     "stars": 2,
+     "evidence": "Proficiency in AutoCAD, Civil 3D, Aconex, SharePoint, Excel, and Word."
+    },
+    {
+     "skill": "site-execution",
+     "stars": 2,
+     "evidence": "Conduct site inspections and assessments to evaluate project feasibility and compliance with design specifications."
+    },
+    {
+     "skill": "hse",
+     "stars": 1,
+     "evidence": "Familiarity with relevant regulatory and safety standards in construction."
+    },
+    {
+     "skill": "project-management",
+     "stars": 1,
+     "evidence": "Monitor project progress, manage budgets, and ensure that construction adheres to scheduled timelines."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Excellent communication and teamwork skills to collaborate with multidisciplinary teams."
+    }
+   ],
+   "summary": "ينفّذ ويتابع مشاريع إنشائية من التصميم والتفتيش إلى التقارير الفنية ومتابعة الجدول والميزانية.",
+   "tasks": [
+    "التفتيش على الموقع ومطابقة التصميم",
+    "إعداد المخططات والتقارير الفنية",
+    "متابعة التقدم والجدول الزمني"
+   ],
+   "family": "civil-site-engineer"
+  },
+  {
+   "id": "matar-albaqmi-site-engineer-hvac-dammam",
+   "title": "مهندس موقع ومسؤول مشروع (تكييف)",
+   "titleEn": "Project In charge - Site Engineer",
+   "field": "engineering",
+   "city": "dammam",
+   "place": "Dammam",
+   "band": "mid",
+   "company": "شركة مطر البقمي القابضة",
+   "companyEn": "Matar Al Baqmi Holding Company",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/rboEJcX5SgouHcAVKCgWZW/project-in-charge---site-engineer-in-dammam-at-matar-al-baqmi-holding-company",
+    "postedAt": "2026-04-19",
+    "checkedAt": "2026-11-20",
+    "note": "Needs a valid KSA driving licence. Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "Experience: 6–7 years of proven experience in site installation, specifically within HVAC or mechanical systems.",
+   "requirements": [
+    {
+     "skill": "engineering-drawings",
+     "stars": 1,
+     "evidence": "Ability to read and understand complex engineering schematics and layouts."
+    },
+    {
+     "skill": "mep-systems",
+     "stars": 2,
+     "evidence": "Directly oversee the on-site installation of HVAC coils and related mechanical components."
+    },
+    {
+     "skill": "site-execution",
+     "stars": 1,
+     "evidence": "Coordinate effectively with clients, subcontractors, technical teams, and internal production departments to ensure seamless execution."
+    },
+    {
+     "skill": "quality-control",
+     "stars": 1,
+     "evidence": "Monitor the quality of all installation work through regular on-site inspections."
+    },
+    {
+     "skill": "planning-scheduling",
+     "stars": 1,
+     "evidence": "Develop and monitor detailed installation schedules and timelines."
+    }
+   ],
+   "summary": "يدير تركيب أنظمة التكييف وملفاتها في مواقع العملاء حسب المخططات ومعايير الجودة والسلامة وفي وقتها.",
+   "tasks": [
+    "قراءة المخططات ونطاق العمل",
+    "الإشراف على تركيب ملفات التكييف",
+    "تقارير التقدم والفحص والتسليم"
+   ],
+   "family": "mep-engineer"
+  },
+  {
+   "id": "hanmiglobal-mechanical-engineer-riyadh",
+   "title": "مهندس ميكانيكا",
+   "titleEn": "Mechanical Engineer",
+   "field": "engineering",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "هانمي جلوبال السعودية",
+   "companyEn": "HanmiGlobal Saudi",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/d2YPHF8qPHWidHFttFEDYu/mechanical-engineer-in-riyadh-at-hanmiglobal-saudi",
+    "postedAt": "2026-10-19",
+    "checkedAt": "2026-11-20",
+    "note": "Asks 7 years: above the usual mid band; kept because the app has no senior band. Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "Proven 7 years of experience in mechanical engineering within construction or infrastructure projects.",
+   "requirements": [
+    {
+     "skill": "engineering-drawings",
+     "stars": 2,
+     "evidence": "Proficiency in CAD and mechanical design software."
+    },
+    {
+     "skill": "mep-systems",
+     "stars": 2,
+     "evidence": "Develop mechanical designs, specifications, and drawings for construction projects."
+    },
+    {
+     "skill": "site-execution",
+     "stars": 1,
+     "evidence": "Perform site visits to monitor installation and troubleshooting of mechanical equipment."
+    },
+    {
+     "skill": "quantity-surveying",
+     "stars": 1,
+     "evidence": "Assist in preparing technical reports, cost estimates, and project documentation."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Excellent problem-solving, communication, and teamwork skills."
+    }
+   ],
+   "summary": "يصمم أنظمة ميكانيكية لمشاريع البناء والبنية التحتية ويتابع تركيبها واختبارها وتشغيلها.",
+   "tasks": [
+    "إعداد التصاميم والمواصفات الميكانيكية",
+    "زيارات الموقع لمتابعة التركيب",
+    "دعم الاختبار والتشغيل"
+   ],
+   "family": "mep-engineer"
+  },
+  {
+   "id": "teefnajd-quality-control-engineer-riyadh",
+   "title": "مهندس ضبط جودة",
+   "titleEn": "Quality Control Engineer",
+   "field": "engineering",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "مجموعة طيف نجد",
+   "companyEn": "Teef Najd Group",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/s5JZeYhMMjDcswhdZWDpmE/quality-control-engineer-in-riyadh-at-teef-najd-group",
+    "postedAt": "2026-10-15",
+    "checkedAt": "2026-11-20",
+    "note": "Prefers «ISO 9001 internal auditor certification» and SCE registration. Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "Minimum 3–5 years of experience in construction quality control, preferably in finishing, interior fit-out, and high-end architectural projects.",
+   "requirements": [
+    {
+     "skill": "engineering-drawings",
+     "stars": 1,
+     "evidence": "Proficiency in reading construction drawings and using AutoCAD and Microsoft Office is preferred."
+    },
+    {
+     "skill": "quality-control",
+     "stars": 1,
+     "evidence": "Raise Non-Conformance Reports (NCRs) for defective or non-compliant works and follow up on corrective and preventive actions."
+    },
+    {
+     "skill": "site-execution",
+     "stars": 1,
+     "evidence": "Monitor stone and marble installation, ensuring correct setting-out, alignment, levelness, joint width, lippage control, fixing systems, adhesive application, and anchoring methods."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Experience coordinating with consultants, clients, subcontractors, and fabrication workshops."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Monitor workmanship during execution and provide technical guidance to prevent recurring quality defects."
+    }
+   ],
+   "summary": "يفحص أعمال التشطيبات والحجر والرخام قبل التسليم ويوثّق عدم المطابقة ويتابع التصحيح.",
+   "tasks": [
+    "فحص الأعمال مقابل المخططات والعينات المعتمدة",
+    "طلبات الفحص وتقارير عدم المطابقة",
+    "قوائم الملاحظات والتسليم النهائي"
+   ],
+   "family": "qa-qc-engineer"
+  },
+  {
+   "id": "hanmiglobal-quality-inspector-electrical-riyadh",
+   "title": "مفتش جودة (كهرباء)",
+   "titleEn": "Quality Inspector - Electrical",
+   "field": "engineering",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "هانمي جلوبال السعودية",
+   "companyEn": "HanmiGlobal Saudi",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/5dWWFwLa5EBwdGAMC6sbfB/quality-inspector---electrical-in-riyadh-at-hanmiglobal-saudi",
+    "postedAt": "2026-03-17",
+    "checkedAt": "2026-11-20",
+    "note": "Posted 17 Mar 2026, still open on 20 Nov 2026. Bachelor's or diploma. Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "5–10 years of relevant experience, preferably within a Project Management Consultancy (PMC) environment.",
+   "requirements": [
+    {
+     "skill": "engineering-drawings",
+     "stars": 1,
+     "evidence": "Ability to read and interpret electrical drawings, technical specifications, and method statements."
+    },
+    {
+     "skill": "quality-control",
+     "stars": 2,
+     "evidence": "Support the Quality Manager (QM) in preparing and executing quality audits related to electrical work."
+    },
+    {
+     "skill": "mep-systems",
+     "stars": 1,
+     "evidence": "Strong understanding of electrical systems, installations, testing, and commissioning."
+    },
+    {
+     "skill": "hse",
+     "stars": 1,
+     "evidence": "Monitor and review contractor practices related to electrical quality and safety to ensure compliance with project requirements."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Strong communication skills and a proactive approach to resolving quality issues."
+    }
+   ],
+   "summary": "يراقب الأعمال الكهربائية يومياً مقابل خطط الفحص والمواصفات ويشهد الاختبارات ويغلق طلبات الاستلام.",
+   "tasks": [
+    "جولات فحص يومية حسب خطط الفحص",
+    "شهود اختبارات الكابلات واللوحات والتأريض",
+    "تقرير جودة يومي لمدير الجودة"
+   ],
+   "family": "qa-qc-engineer"
+  },
+  {
+   "id": "hanmiglobal-hse-engineer-riyadh",
+   "title": "مهندس صحة وسلامة وبيئة",
+   "titleEn": "HSE Engineer",
+   "field": "engineering",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "junior",
+   "company": "هانمي جلوبال السعودية",
+   "companyEn": "HanmiGlobal Saudi",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/mdq549AzYdwWFGnYj13tpR/hse-engineer-in-riyadh-at-hanmiglobal-saudi",
+    "postedAt": "2026-10-13",
+    "checkedAt": "2026-11-20",
+    "note": "No number of years stated (band set to junior from «Proven experience as an HSE Officer»). Travels across sites. Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "Proven experience as an HSE Officer, preferably across multiple sites.",
+   "requirements": [
+    {
+     "skill": "hse",
+     "stars": 1,
+     "evidence": "OSHA certification is mandatory."
+    },
+    {
+     "skill": "quality-control",
+     "stars": 1,
+     "evidence": "Issue Non-Conformance Reports (NCRs) for any violations and follow up on corrective actions."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Support incident investigations and prepare reports with root cause analysis."
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Promote HSE awareness through toolbox talks and on-site guidance."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Strong communication and reporting skills."
+    }
+   ],
+   "summary": "يفتش على عدة مواقع ليكشف مخاطر السلامة ويطبّق خطط HSE ويتابع الإجراءات التصحيحية والتحقيق في الحوادث.",
+   "tasks": [
+    "جولات تفتيش سلامة على المواقع",
+    "إصدار تقارير المخالفات ومتابعة التصحيح",
+    "محاضرات السلامة القصيرة (toolbox talks)"
+   ],
+   "family": "hse-officer"
+  },
+  {
+   "id": "fuku-hse-engineer-dammam",
+   "title": "مهندس صحة وسلامة وبيئة",
+   "titleEn": "HSE Engineer",
+   "field": "engineering",
+   "city": "dammam",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "فوكو",
+   "companyEn": "Fuku",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/kaPQv1DYRejxZwsEJ8NW3U/hse-engineer-in-riyadh-at-fuku",
+    "postedAt": "2026-05-29",
+    "checkedAt": "2026-11-20",
+    "note": "Listed under Riyadh on Workable, but the posting says «Work Location: Dammam, Saudi Arabia», so city = dammam. Posted 29 May 2026, still open on 20 Nov 2026. Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "At least 3 years of formal HSE management working experience in infrastructure, building construction, or municipal engineering projects.",
+   "requirements": [
+    {
+     "skill": "hse",
+     "stars": 2,
+     "evidence": "Priority will be given to candidates holding Saudi government-approved safety certificates, OSHA, NEBOSH, ISO45001, and other authoritative safety certification qualifications."
+    },
+    {
+     "skill": "saudi-building-code",
+     "stars": 1,
+     "evidence": "Familiarity with Saudi Building Code (SBC) and local project safety approval and filing processes is required."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Conduct on-site investigation of safety accidents and near-miss incidents."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Possess outstanding risk identification ability, on-site execution, and cross-department communication and coordination capabilities."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Fluent in English (used as the daily working language)."
+    }
+   ],
+   "summary": "يدير السلامة والصحة والبيئة في موقع إنشاء بالدمام: خطط السلامة والتدريب والجولات والتحقيق في الحوادث.",
+   "tasks": [
+    "خطة HSE وخطة الطوارئ للمشروع",
+    "تدريب الدخول والتمارين الدورية",
+    "جولات يومية وتقارير الحوادث"
+   ],
+   "family": "hse-officer"
+  },
+  {
+   "id": "aljomaih-graduate-development-engineering-riyadh",
+   "title": "برنامج تطوير الخريجين: هندسة (للسعوديين)",
+   "titleEn": "Graduate Development Program - Engineering - Saudi Nationals",
+   "field": "project-controls",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "entry",
+   "company": "الجميح للطاقة والمياه",
+   "companyEn": "Al Jomaih Energy and Water",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/4cnPv2CivxuVyTyngVeK7s/graduate-development-program---engineering---saudi-nationals-in-riyadh-at-al-jomaih-energy-and-water",
+    "postedAt": "2026-05-18",
+    "checkedAt": "2026-11-20",
+    "note": "Energy and water developer (conventional and solar power plants, desalination). Rotations in project delivery and asset management. Posted 18 May 2026, still open on 20 Nov 2026. Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "Recent graduate or up to 1–2 years of internship/work experience.",
+   "requirements": [
+    {
+     "skill": "planning-scheduling",
+     "stars": 1,
+     "evidence": "Gain exposure to project planning and scheduling concepts and assist in the same."
+    },
+    {
+     "skill": "construction-contracts",
+     "stars": 1,
+     "evidence": "Learn and understand various types of contracts, shareholder structure etc."
+    },
+    {
+     "skill": "hse",
+     "stars": 1,
+     "evidence": "Learn and contribute towards company’s HSE commitments."
+    },
+    {
+     "skill": "project-management",
+     "stars": 1,
+     "evidence": "Learn about project management principles and participate in project management activities."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Good communication and teamwork abilities."
+    }
+   ],
+   "summary": "برنامج دوري للخريجين في شركة طاقة ومياه: تخطيط وجدولة المشاريع والعقود والسلامة وإدارة الأصول.",
+   "tasks": [
+    "المساعدة في تخطيط وجدولة المشاريع",
+    "التعرّف على أنواع العقود ومستندات المشروع",
+    "دعم متابعة أداء المحطات وصيانتها"
+   ],
+   "family": "planning-engineer"
+  },
+  {
+   "id": "matar-albaqmi-planning-engineer-dammam",
+   "title": "مهندس تخطيط",
+   "titleEn": "Planning Engineer",
+   "field": "project-controls",
+   "city": "dammam",
+   "place": "Dammam",
+   "band": "mid",
+   "company": "شركة مطر البقمي القابضة",
+   "companyEn": "Matar Al Baqmi Holding Company",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/hWRsAMEiW2zyAyEMV75xk3/planning-engineer-in-dammam-at-matar-al-baqmi-holding-company",
+    "postedAt": "2025-12-23",
+    "checkedAt": "2026-11-20",
+    "note": "Fabrication of pressure vessels and heat exchangers. Posted 23 Dec 2025, still open on 20 Nov 2026 (re-requested: HTTP 200). Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "3–6 years of experience in project planning within pressure vessel, heat exchanger, or heavy fabrication industry.",
+   "requirements": [
+    {
+     "skill": "planning-scheduling",
+     "stars": 2,
+     "evidence": "Prepare detailed project schedules (Level 1–4) covering engineering, procurement, fabrication, welding, NDT, painting, and dispatch."
+    },
+    {
+     "skill": "project-management",
+     "stars": 1,
+     "evidence": "Develop work breakdown structures (WBS) for each project."
+    },
+    {
+     "skill": "dataviz",
+     "stars": 1,
+     "evidence": "Update dashboards and KPIs for management review."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Coordinate with Engineering, Procurement, Production, QC, and Supply Chain teams for smooth workflow."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Communicate schedule delays, risks, and impacts to management and propose corrective actions."
+    }
+   ],
+   "summary": "يبني جداول المشاريع (المستوى 1-4) ويتابع تقدم التصنيع والموارد ويرفع تقارير التأخير وخطط الاستدراك.",
+   "tasks": [
+    "جداول زمنية وهيكل تجزئة العمل",
+    "تحديث التقدم أسبوعياً",
+    "لوحات المؤشرات وتقارير الإدارة"
+   ],
+   "family": "planning-engineer"
+  },
+  {
+   "id": "teefnajd-contract-engineer-riyadh",
+   "title": "مهندس عقود",
+   "titleEn": "Contract Engineer",
+   "field": "project-controls",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "مجموعة طيف نجد",
+   "companyEn": "Teef Najd Group",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/hrppang9cYXebiuRKCKgy6/contract-engineer-in-riyadh-at-teef-najd-group",
+    "postedAt": "2026-10-25",
+    "checkedAt": "2026-11-20",
+    "note": "Asks 6+ years: above the usual mid band; kept because the app has no senior band. Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "6+ years of relevant experience in construction/project contracts, preferably on major infrastructure, building, or development projects.",
+   "requirements": [
+    {
+     "skill": "engineering-drawings",
+     "stars": 1,
+     "evidence": "Strong understanding of construction drawings, specifications, BOQs, schedules, and project documentation."
+    },
+    {
+     "skill": "quantity-surveying",
+     "stars": 1,
+     "evidence": "Review and interpret contracts, specifications, drawings, BOQs, and project documentation."
+    },
+    {
+     "skill": "construction-contracts",
+     "stars": 1,
+     "evidence": "Strong practical knowledge and experience with FIDIC contracts, including Red, Yellow, and Silver Books."
+    },
+    {
+     "skill": "planning-scheduling",
+     "stars": 1,
+     "evidence": "Proficiency in Microsoft Office; experience with Primavera is an advantage"
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Excellent contractual writing, negotiation, communication, and analytical skills."
+    }
+   ],
+   "summary": "يدير عقود الإنشاء والتشطيب وفق فيديك: أوامر التغيير والمطالبات وتمديد المدة والمستخلصات والمراسلات التعاقدية.",
+   "tasks": [
+    "مراجعة العقود وجداول الكميات",
+    "تقييم أوامر التغيير والمطالبات",
+    "سجلات العقود والمراسلات"
+   ],
+   "family": "quantity-surveyor"
+  },
+  {
+   "id": "rawafid-erp-projects-cost-controller-jeddah",
+   "title": "مراقب تكاليف المشاريع وأنظمة ERP",
+   "titleEn": "ERP & Projects Cost Controller",
+   "field": "project-controls",
+   "city": "jeddah",
+   "place": "Jeddah",
+   "band": "mid",
+   "company": "روافد",
+   "companyEn": "Rawafid",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/iEqjLnSF6bPpDsXrNcevvJ/erp-%26-projects-cost-controller-in-jeddah-at-rawafid",
+    "postedAt": "2026-04-21",
+    "checkedAt": "2026-11-20",
+    "note": "Finance team; also leads ERP work (Dynamics, Xpedeon). Posted 21 Apr 2026, still open on 20 Nov 2026. Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "Min. 5 years of experience in cost control, project accounting, or financial management within the construction industry.",
+   "requirements": [
+    {
+     "skill": "cost-control",
+     "stars": 2,
+     "evidence": "Certified Cost Professional (CCP) or relevant certification in cost control is preferred."
+    },
+    {
+     "skill": "financial-analysis",
+     "stars": 1,
+     "evidence": "Excellent analytical skills with the ability to interpret complex financial data and provide actionable insights."
+    },
+    {
+     "skill": "dataviz",
+     "stars": 1,
+     "evidence": "Integrate real-time project and financial dashboards for executive visibility and performance monitoring."
+    },
+    {
+     "skill": "project-management",
+     "stars": 1,
+     "evidence": "Result-oriented with strong organizational skills and attention to detail, with the capacity to manage multiple tasks and projects simultaneously."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Effective communication and interpersonal skills with the ability to work collaboratively with cross-functional teams."
+    }
+   ],
+   "summary": "يتابع تكاليف وميزانيات وتوقعات المشاريع الإنشائية عبر نظام ERP ويبني لوحات مالية للإدارة.",
+   "tasks": [
+    "متابعة تكاليف المشاريع وانحرافاتها",
+    "التوقعات المالية للمشاريع",
+    "لوحات مالية وتقارير للإدارة"
+   ],
+   "family": "quantity-surveyor"
+  },
+  {
+   "id": "jasara-quantity-surveyor-riyadh",
+   "title": "حاسب كميات (للسعوديين)",
+   "titleEn": "Quantity Surveyor (Saudi National)",
+   "field": "project-controls",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "جسارة لإدارة المشاريع",
+   "companyEn": "JASARA PMC",
+   "real": true,
+   "source": {
+    "site": "Workable",
+    "url": "https://jobs.workable.com/view/nZFP3tCequ4irsCVLeMKWq/quantity-surveyor-(saudi-national)-in-riyadh-at-jasara-pmc",
+    "postedAt": "2026-10-22",
+    "checkedAt": "2026-11-20",
+    "note": "SENIOR: asks 10 years; band «mid» only because the app has no senior band. Coordinator may prefer to hold it (see heldJobs). «Saudi applicants will be given high priority for this role.» Arabic company name is Dalil's transliteration (the posting gives the English name only)."
+   },
+   "bandEvidence": "10 years of experience in quantity surveying within the construction industry, buildings, mixed-use projects.",
+   "requirements": [
+    {
+     "skill": "quantity-surveying",
+     "stars": 2,
+     "evidence": "Prepare comprehensive cost estimates and detailed budgets for construction projects."
+    },
+    {
+     "skill": "cost-control",
+     "stars": 1,
+     "evidence": "Monitor project costs, analyzing variances to ensure budget compliance."
+    },
+    {
+     "skill": "procurement",
+     "stars": 1,
+     "evidence": "Manage procurement processes and contract negotiations."
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Generate regular financial reports and present findings to stakeholders."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Strong communication and interpersonal skills."
+    }
+   ],
+   "summary": "يعدّ تقديرات التكلفة والميزانيات ويقيّم عروض المقاولين ويراقب تكاليف المشاريع الإنشائية.",
+   "tasks": [
+    "تقديرات التكلفة والميزانيات",
+    "تقييم عروض المقاولين",
+    "تقارير مالية دورية"
+   ],
+   "family": "quantity-surveyor"
+  }
+ ],
+ "guides": [
+  {
+   "skill": "engineering-drawings",
+   "depth": "full",
+   "topPick": {
+    "title": "Plan Reading and Specifications",
+    "provider": "University of California, Davis (Coursera)",
+    "url": "https://www.coursera.org/learn/plan-reading-and-specifications",
+    "lang": "en",
+    "price": "paid",
+    "hours": 20,
+    "certificate": true,
+    "star": 1,
+    "why": "قراءة لوحات المعماري والإنشائي والـMEP والمواصفات والرموز والمقاييس، 7 وحدات من UC Davis.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "AutoCAD Fundamentals: Drawing and Precision Tools",
+     "provider": "John Wiley & Sons (Coursera)",
+     "url": "https://www.coursera.org/learn/wiley-autocad-fundamentals-drawing-and-precision-tools",
+     "lang": "en",
+     "price": "paid",
+     "hours": 8,
+     "certificate": true,
+     "star": 1,
+     "why": "أساسيات AutoCAD للمبتدئ: الواجهة والرسم الدقيق والخصائص وأوامر التعديل، 8 ساعات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [],
+   "articles": [
+    {
+     "title": "How to read technical drawings",
+     "author": null,
+     "site": "designingbuildings.co.uk",
+     "url": "https://www.designingbuildings.co.uk/wiki/How_to_read_technical_drawings",
+     "lang": "en",
+     "why": "يشرح المقياس وجدول العنوان والرموز والمساقط والقطاعات بلغة بسيطة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "How to read construction documents [A step-by-step guide]",
+     "author": "Onetrace Marketing Team",
+     "site": "onetrace.com",
+     "url": "https://onetrace.com/journal/how-to-read-construction-documents",
+     "lang": "en",
+     "why": "عشر خطوات: من سجل اللوحات والرموز إلى ربط المخططات بالجداول والمواصفات وآخر مراجعة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "ارسم في AutoCAD مخطط شقة (غرفتان وصالة ومطبخ) بمقياس 1:50 بطبقات منفصلة للجدران والأبواب والأبعاد مع جدول عنوان، وأخرجه PDF بمقياس صحيح، ثم أرفق صفحة تقرأ فيها لوحة إنشائية لفيلا حقيقية.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Autodesk Certified Professional in AutoCAD for Design and Drafting",
+    "short": "Autodesk ACP AutoCAD",
+    "issuer": "Autodesk (يصدرها Certiport من Pearson VUE)",
+    "code": null,
+    "type": "exam",
+    "url": "https://www.credly.com/org/certiport/badge/autodesk-certified-professional-in-autocad-for-desi",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/wiley-autocad-fundamentals-drawing-and-precision-tools",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "اختبار مراقب يثبت الرسم الدقيق والتعديل المتقدم والتعليقات وإخراج اللوحات في AutoCAD.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "hse",
+   "depth": "full",
+   "topPick": {
+    "title": "IOSH Managing Safely",
+    "provider": "IOSH (عبر مزودي التدريب المعتمدين)",
+    "url": "https://iosh.com/qualifications-and-courses/courses/managing-safely",
+    "lang": "en",
+    "price": "paid",
+    "hours": null,
+    "certificate": true,
+    "star": 1,
+    "why": "دورة ثلاثة أيام للمشرفين بلا خبرة سابقة، حضورياً أو عن بعد، وشهادتها قابلة للتحقق.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "NEBOSH International General Certificate in Occupational Health and Safety",
+     "provider": "British Safety Council (Saudi Arabia)",
+     "url": "https://www.britsafe.org/sa/training-and-learning/nebosh-international-general-certificate",
+     "lang": "en",
+     "price": "paid",
+     "hours": null,
+     "certificate": true,
+     "star": 2,
+     "why": "تحضير لشهادة NEBOSH IGC ذاتياً أو بفصل افتراضي؛ أغلب الطلاب ينهونها خلال 6 أشهر.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Sidney Dekker",
+     "platform": "sidneydekker.com",
+     "url": "https://sidneydekker.com/",
+     "why": "أستاذ علوم السلامة في جامعة Griffith، ومؤلف The Field Guide to Understanding Human Error.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://sidneydekker.com/",
+      "youtube": "https://www.youtube.com/@sidneydekkercom"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Managing risks and risk assessment at work: Overview",
+     "author": "Health and Safety Executive (HSE)",
+     "site": "hse.gov.uk",
+     "url": "https://www.hse.gov.uk/simple-health-safety/risk/index.htm",
+     "lang": "en",
+     "why": "ثلاث خطوات واضحة لتقييم المخاطر: حدّد مصدر الأذى، قدّر احتماله وشدته، ثم أزله أو تحكم فيه.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Outreach Training Program (OSHA 10-Hour & 30-Hour Cards)",
+     "author": "OSHA",
+     "site": "osha.gov",
+     "url": "https://www.osha.gov/training/outreach",
+     "lang": "en",
+     "why": "يوضح الفرق بين بطاقة 10 و30 ساعة، وأنها بطاقة إتمام وليست شهادة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "زر موقع بناء (أو استخدم صور موقع حقيقي في مدينتك) واكتب تقييم مخاطر لأعمال العمل على ارتفاع والحفريات: 10 مخاطر، احتمال وشدة لكل منها، وإجراءات تحكم حسب تسلسل الضوابط، في جدول من صفحتين.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "International General Certificate in Occupational Health and Safety",
+    "short": "NEBOSH IGC",
+    "issuer": "NEBOSH",
+    "code": null,
+    "type": "exam",
+    "url": "https://www.nebosh.org.uk/qualifications/international-general-certificate/",
+    "fee": null,
+    "feeVaries": true,
+    "prepUrl": "https://www.britsafe.org/sa/training-and-learning/nebosh-international-general-certificate",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "شهادة سلامة دولية معروفة بتقييم رقمي قائم على سيناريو، والرسوم يحددها مزود التدريب.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "quality-control",
+   "depth": "full",
+   "topPick": {
+    "title": "ISO 9001 Foundations Course",
+    "provider": "Advisera",
+    "url": "https://advisera.com/training/iso-9001-foundations-course/",
+    "lang": "en",
+    "price": "free",
+    "hours": 8,
+    "certificate": true,
+    "star": 1,
+    "why": "الدورة مجانية: متطلبات ISO 9001 وعدم المطابقة والتدقيق الداخلي؛ الاختبار والشهادة 349 دولاراً.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [],
+   "people": [],
+   "articles": [
+    {
+     "title": "How to create a nonconformance report – The 5-step guide",
+     "author": "Iciar Gallo",
+     "site": "advisera.com",
+     "url": "https://advisera.com/articles/how-to-create-a-nonconformance-report-the-5-step-guide/",
+     "lang": "en",
+     "why": "خمس خطوات لكتابة تقرير عدم مطابقة (NCR): الوصف والمتطلب المخالف وخطة التصحيح والإغلاق والمتابعة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Complete guide to corrective action vs. preventive action",
+     "author": "Mark Hammar",
+     "site": "advisera.com",
+     "url": "https://advisera.com/9001academy/blog/2016/09/20/how-to-proceed-once-qms-corrective-action-is-defined/",
+     "lang": "en",
+     "why": "الفرق بين التصحيح والإجراء التصحيحي والوقائي، وخطوات الوصول للسبب الجذري في ISO 9001.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اكتب خطة فحص واختبار (ITP) لصبّ سقف خرساني في فيلا: نقاط الفحص قبل وأثناء وبعد الصب، ومعايير القبول، ونقاط التوقف، ونموذج تقرير عدم مطابقة (NCR) معبأ لحالة تعشيش في الخرسانة.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Certified Quality Improvement Associate",
+    "short": "ASQ CQIA",
+    "issuer": "ASQ",
+    "code": "CQIA",
+    "type": "exam",
+    "url": "https://www.asq.org/cert/quality-improvement-associate",
+    "fee": {
+     "amount": 434,
+     "currency": "USD",
+     "qualifier": null,
+     "per": null,
+     "note": "asq.org/cert/quality-improvement-associate: «Exam Fee $434» و«ASQ Members Save $100 on Initial Examination Fee»"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://advisera.com/training/iso-9001-foundations-course/",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "شهادة مبتدئة في أدوات الجودة، اختبار مفتوح الكتاب؛ تشترط سنتي خبرة أو دبلوماً أو سنتي دراسة عليا.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "site-execution",
+   "depth": "full",
+   "topPick": {
+    "title": "Construction Project Management",
+    "provider": "Columbia University (Coursera)",
+    "url": "https://www.coursera.org/learn/construction-project-management",
+    "lang": "en",
+    "price": "paid",
+    "hours": 30,
+    "certificate": true,
+    "star": 1,
+    "why": "مدخل لدور مدير الإنشاء وطرق التسليم والسلامة والتخطيط، تقييمها 4.8 من 7,448 مراجعة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Plan Reading and Specifications",
+     "provider": "University of California, Davis (Coursera)",
+     "url": "https://www.coursera.org/learn/plan-reading-and-specifications",
+     "lang": "en",
+     "price": "paid",
+     "hours": 20,
+     "certificate": true,
+     "star": 1,
+     "why": "قراءة المواصفات والمخططات حسب التخصص وتنسيق الحِرف، وهي أساس عمل مهندس الموقع.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [],
+   "articles": [
+    {
+     "title": "Method statement for construction",
+     "author": null,
+     "site": "designingbuildings.co.uk",
+     "url": "https://www.designingbuildings.co.uk/wiki/Method_statement",
+     "lang": "en",
+     "why": "ماذا يحتوي بيان طريقة العمل: المسؤول والتسلسل والمعدات والوقاية، وعلاقته بتقييم المخاطر RAMS.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اكتب بيان طريقة عمل (Method Statement) من 3 صفحات لصبّ قواعد منفصلة في فيلا بالرياض: تسلسل الأعمال، والمعدات، والمقاول المسؤول، ونقاط الفحص، والمخاطر وضوابطها، مع جدول زمني أسبوعي بسيط.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Certified Associate Constructor (CAC) Level I",
+    "short": "AIC CAC",
+    "issuer": "American Institute of Constructors (AIC)",
+    "code": "CAC",
+    "type": "exam",
+    "url": "https://aic-builds.org/certifications/ac-level-one/",
+    "fee": {
+     "amount": 235,
+     "currency": "USD",
+     "qualifier": null,
+     "per": null,
+     "note": "aic-builds.org: «$235 for the online exam through PointLeader» لغير الطلاب، و«$200 for an Online proctored exam at a university test site» للطلاب"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/construction-project-management",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "أول مستوى من شهادة المقاول المحترف، لخريجي إدارة الإنشاء أو من لديه 4 سنوات خبرة وتعليم.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "mep-systems",
+   "depth": "full",
+   "topPick": {
+    "title": "Introduction to MEP Construction Management",
+    "provider": "ASCE (Anthony E. Sparkling, Ph.D.)",
+    "url": "https://www.asce.org/education-and-events/explore-education/on-demand-courses/introduction-to-mep-construction-management",
+    "lang": "en",
+    "price": null,
+    "hours": 16,
+    "certificate": true,
+    "star": 1,
+    "why": "التكييف والسباكة والكهرباء والإنذار والرشاشات في دورة واحدة، 16 ساعة PDH وشهادة بعد اختبار.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [],
+   "people": [
+    {
+     "name": "Paul Evans",
+     "platform": "The Engineering Mindset",
+     "url": "https://theengineeringmindset.com/about/",
+     "why": "مؤسس The Engineering Mindset منذ 2015: شروحات مجانية مصورة للتكييف والكهرباء والتبريد.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://theengineeringmindset.com/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Building services",
+     "author": null,
+     "site": "designingbuildings.co.uk",
+     "url": "https://www.designingbuildings.co.uk/wiki/Building_services",
+     "lang": "en",
+     "why": "ما أنظمة المبنى من تكييف وسباكة وطاقة وحريق، ولماذا يمنع التنسيق المبكر تعارضها في الموقع.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "خذ مخطط دور متكرر لمبنى سكني واعمل عليه تنسيق MEP مبسطاً: مسار مجرى تكييف رئيسي، وخط تغذية مياه، ونقاط رشاشات حريق، وحدد 5 تعارضات مع الكمرات أو الأسقف واقترح حلاً لكل تعارض.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "none",
+    "proof": "مخطط تنسيق MEP لدور واحد يوضح التعارضات وحلولها، مع تقرير قصير منشور في ملف أعمالك.",
+    "proofUrl": "https://www.asce.org/education-and-events/explore-education/on-demand-courses/introduction-to-mep-construction-management",
+    "why": "ما تحققنا من شهادة MEP معترف بها تناسب حديث التخرج؛ الشهادات المعروفة تطلب خبرة عملية.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "saudi-building-code",
+   "depth": "full",
+   "topPick": {
+    "title": "Saudi Building Code 201 - Essentials",
+    "provider": "International Code Council (ICC)",
+    "url": "https://shop.iccsafe.org/training/international/saudi-code-training/saudi-building-codes-201-essentials.html",
+    "lang": "en",
+    "price": "paid",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "دورة ذاتية من ICC على أساسيات SBC 201: الإشغال والحماية من الحريق ومسارات الهروب، 350 دولاراً.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [],
+   "people": [],
+   "articles": [
+    {
+     "title": "Engineers Authority, in Collaboration with Various Entities, Launches Guideline Manuals for the Saudi Building Code",
+     "author": "Saudi Council of Engineers",
+     "site": "saudieng.sa",
+     "url": "https://www.saudieng.sa/English/MediaCenter/News/Pages/codsaudieng2023.aspx",
+     "lang": "en",
+     "why": "إطلاق أدلة إرشادية للكود بالرسومات والمعادلات للمكاتب الهندسية والمقاولين والمفتشين.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "New Saudi Arabian building code to be based on I-Codes",
+     "author": "International Code Council",
+     "site": "iccsafe.org",
+     "url": "https://www.iccsafe.org/building-safety-journal/press-releases/new-saudi-arabian-building-code-to-be-based-on-i-codes/",
+     "lang": "en",
+     "why": "خلفية تاريخية: كود البناء السعودي بُني على الأكواد الدولية I-Codes باتفاقية مع اللجنة الوطنية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اختر مخطط فيلا سكنية حقيقية واكتب تقرير مطابقة من صفحتين لـ SBC 201: تصنيف الإشغال، ونوع الإنشاء، وعدد المخارج، وعرض الدرج، وأقصى مسافة هروب، مع ذكر رقم البند لكل نقطة.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "none",
+    "proof": "تقرير مطابقة لـ SBC 201 على مخطط حقيقي مع أرقام البنود، منشور في ملف أعمالك.",
+    "proofUrl": "https://www.sbc.gov.sa/ar/BC/Pages/BuildingCode/BC.aspx?year=2024",
+    "why": "ما لقينا اختباراً معتمداً لكود البناء السعودي مفتوحاً لحديثي التخرج؛ الدورات تمنح شهادة حضور.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "planning-scheduling",
+   "depth": "full",
+   "topPick": {
+    "title": "كورس Learning Primavera (P6) 2017 دورة بريمافيرا مهندس عمر عبدالعزيز",
+    "provider": "معارف (m3aarf.com)",
+    "url": "https://www.m3aarf.com/certificate/2713",
+    "lang": "ar",
+    "price": "free",
+    "hours": 15.8,
+    "certificate": true,
+    "star": 1,
+    "why": "مجانية بالعربي، 18 درساً (15 ساعة و49 دقيقة): بناء جدول المشروع في P6 وتوزيع الموارد والتحديث ومتابعة الانحرافات، وتقييمها 4.6 من 84 تقييماً.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Primavera for Project Management",
+     "provider": "almentor (Ahmed Hussein, Sr. Project Controls Engineer)",
+     "url": "https://www.almentor.net/en/courses/Primavera-For-Project-Management",
+     "lang": "ar",
+     "price": "paid",
+     "hours": 6.1,
+     "certificate": true,
+     "star": 1,
+     "why": "بالعربي في 39 درساً: WBS والأنشطة والعلاقات والمسار الحرج ثم خط الأساس (Baseline) وأربعة دروس للتحديث؛ ضمن اشتراك المنصة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Construction Scheduling",
+     "provider": "Columbia University (Coursera) - Ibrahim Odeh",
+     "url": "https://www.coursera.org/learn/construction-scheduling",
+     "lang": "en",
+     "price": "free_to_audit",
+     "hours": 30,
+     "certificate": true,
+     "star": 2,
+     "why": "نظرية الجدولة كاملة: الحساب الأمامي والخلفي وأنواع الفائض وPERT وخط التوازن والجدول الرئيسي المتكامل والمخاطر، وفيها وحدة عن P6؛ تقييمها 4.8 من 2,349.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Ibrahim Odeh",
+     "platform": "Columbia University / Coursera (Thinkers360 profile)",
+     "url": "https://www.thinkers360.com/tl/profiles/view/12870",
+     "why": "أستاذ في جامعة كولومبيا ومؤسس برنامج GLCM، يدرّس الجدولة وضبط التكاليف الإنشائية على Coursera لأكثر من 175 ألف متعلم.",
+     "arab": null,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/ibrahim-odeh-phd-mba-3310025/",
+      "website": "http://www.glcm.info"
+     },
+     "linkedinSource": "https://www.thinkers360.com/tl/profiles/view/12870"
+    },
+    {
+     "name": "Ron Winter",
+     "platform": "Ron Winter Consulting (website)",
+     "url": "https://www.ronwinterconsulting.com/",
+     "why": "متخصص في الجدولة الإنشائية ومراجعة تحديثات الجداول والمطالبات، وموقعه فيه أدوات تحليل الجداول وقسم مقالات.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.ronwinterconsulting.com/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "طريقة المسار الحرج - CPM",
+     "author": "أمجد حوامدة",
+     "site": "e3arabi.com",
+     "url": "https://e3arabi.com/%D8%A7%D9%84%D9%87%D9%86%D8%AF%D8%B3%D8%A9/%D8%B7%D8%B1%D9%8A%D9%82%D8%A9-%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%B1-%D8%A7%D9%84%D8%AD%D8%B1%D8%AC-cpm/",
+     "lang": "ar",
+     "why": "مقال عربي قصير: المسار الحرج والحساب الأمامي والخلفي ومعادلات الفائض الكلي والحر، ثم احتمالية PERT.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Updating the schedule",
+     "author": "Oracle (P6 Professional User Guide)",
+     "site": "docs.oracle.com",
+     "url": "https://docs.oracle.com/cd/G18296_01/English/User_Guides/p6_pro_user/updating_the_schedule.htm",
+     "lang": "en",
+     "why": "من دليل أوراكل الرسمي: تحديث الجدول بتاريخ البيانات تلقائياً أو يدوياً أو بالطريقتين معاً.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "ابنِ في Primavera P6 جدولاً لفيلا سكنية دورين (60-80 نشاطاً): WBS ومدد وعلاقات وتقويم عمل سعودي (الجمعة والسبت عطلة)، استخرج المسار الحرج واحفظ Baseline، ثم سوِّ تحديثاً شهرياً بتاريخ بيانات جديد وتأخير في نشاط حرج، وانشر تقريراً من صفحتين يقارن الجدول بخط الأساس.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Planning & Scheduling Professional (PSP)",
+    "short": "AACE PSP",
+    "issuer": "AACE International",
+    "code": "PSP",
+    "type": "exam",
+    "url": "https://web.aacei.org/certification/certification-information/certifications-offered/professional-certifications/psp-details",
+    "fee": {
+     "amount": 690,
+     "currency": "USD",
+     "qualifier": "non-members",
+     "per": null,
+     "note": "web.aacei.org PSP details: «US$525 for members» / «US$690 for non-members» / «US$260 resit fee (member and non-members)»"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/construction-scheduling",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "advanced",
+    "star": 2,
+    "why": "شهادة AACE للتخطيط والجدولة: اختبار 5 ساعات، وتشترط 8 سنوات خبرة أو 4 سنوات مع بكالوريوس، فهي هدف بعد سنوات من العمل.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "quantity-surveying",
+   "depth": "full",
+   "topPick": {
+    "title": "الحصر الإنشائي والمعماري",
+    "provider": "معارف (m3aarf.com)",
+    "url": "https://www.m3aarf.com/certificate/22360/%D8%A7%D9%84%D8%AD%D8%B5%D8%B1-%D8%A7%D9%84%D8%A5%D9%86%D8%B4%D8%A7%D8%A6%D9%8A-%D9%88%D8%A7%D9%84%D9%85%D8%B9%D9%85%D8%A7%D8%B1%D9%8A-video",
+    "lang": "ar",
+    "price": "free",
+    "hours": 4.7,
+    "certificate": true,
+    "star": 1,
+    "why": "مجانية بالعربي في 5 دروس (4 ساعات و42 دقيقة): حصر الخرسانة والحديد والأساسات والتشطيبات وإعداد جداول الكميات بـExcel وAutoCAD. لا تقييمات عليها بعد.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "حصر كميات المشاريع الهندسية",
+     "provider": "معارف (m3aarf.com)",
+     "url": "https://www.m3aarf.com/certificate/21756/%D8%AD%D8%B5%D8%B1-%D9%83%D9%85%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D8%B4%D8%A7%D8%B1%D9%8A%D8%B9-%D8%A7%D9%84%D9%87%D9%86%D8%AF%D8%B3%D9%8A%D8%A9-video",
+     "lang": "ar",
+     "price": "free",
+     "hours": 1.6,
+     "certificate": true,
+     "star": 1,
+     "why": "مجانية بالعربي وقصيرة (3 دروس): الحصر من المخططات للقواعد والأعمدة والبلاطات والمباني، ثم إعداد BOQ وتقدير التكلفة. تقييمها 3.0 من تقييم واحد.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Certificate in Quantity Surveying Practice",
+     "provider": "RICS",
+     "url": "https://www.rics.org/training-events/online-training/on-demand/certificate-in-quantity-surveying-practice",
+     "lang": "en",
+     "price": "paid",
+     "hours": 150,
+     "certificate": true,
+     "star": 2,
+     "why": "شهادة RICS متوسطة المستوى (150 ساعة) على كفاءات مسار QS: جداول الكميات والتسعير وطلبات الدفع المرحلية وتقارير التكلفة؛ السعر «From £1173 + VAT».",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Ibrahim Odeh",
+     "platform": "Columbia University / Coursera (Thinkers360 profile)",
+     "url": "https://www.thinkers360.com/tl/profiles/view/12870",
+     "why": "دورته في تقدير التكاليف الإنشائية على Coursera تشمل حصر الكميات والتسعير والتدفق النقدي.",
+     "arab": null,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/ibrahim-odeh-phd-mba-3310025/",
+      "website": "http://www.glcm.info"
+     },
+     "linkedinSource": "https://www.thinkers360.com/tl/profiles/view/12870"
+    }
+   ],
+   "articles": [
+    {
+     "title": "مستخلص المقاولات: ما هو وأنواعه وخطوات إعداده مع أمثلة",
+     "author": null,
+     "site": "qoyod.com",
+     "url": "https://www.qoyod.com/blog/business-management/%d9%85%d8%b3%d8%aa%d8%ae%d9%84%d8%b5-%d8%a7%d9%84%d9%85%d9%82%d8%a7%d9%88%d9%84%d8%a7%d8%aa/",
+     "lang": "ar",
+     "why": "من موقع قيود السعودي: المستخلص التراكمي وربطه بجدول الكميات وحجز 5% ضماناً واسترداد الدفعة المقدمة، ومثال بالريال وضريبة 15%.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Pathway guide: Quantity surveying and construction (December 2025)",
+     "author": "RICS",
+     "site": "rics.org",
+     "url": "https://www.rics.org/content/dam/ricsglobal/documents/join-rics/QS-and-construction_December-2025.pdf",
+     "lang": "en",
+     "why": "دليل RICS الرسمي لمسار QS: كفاءة الحصر والتسعير وجداول الكميات وتقييم الأعمال المرحلية، وهو قائمة ما ستُختبر فيه.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "خذ مخططات فيلا سكنية دورين (إنشائي ومعماري)، واحصر منها في Excel الخرسانة والحديد والبلوك واللياسة والبلاط مع ورقة حساب لكل بند، ثم اكتب جدول كميات مسعّراً بأسعار السوق السعودي، وجهّز مستخلصاً جارياً أول بنسبة إنجاز 30% مع حجز 5% واسترداد دفعة مقدمة 10% وضريبة 15%.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Associate RICS (AssocRICS) - Quantity surveying and construction pathway",
+    "short": "AssocRICS",
+    "issuer": "RICS",
+    "code": null,
+    "type": "program",
+    "url": "https://www.rics.org/join-rics/apply-to-join-rics/associate-assessment-before-you-enrol",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://www.rics.org/training-events/online-training/on-demand/certificate-in-quantity-surveying-practice",
+    "prepLabel": "دورة RICS المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "عضوية مشارك من RICS بتقييم: تشترط سنة خبرة مع بكالوريوس ذي صلة ومشرفاً من أعضاء RICS، والرسوم في صفحة منفصلة لم نفتحها.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "bim-revit",
+   "depth": "full",
+   "topPick": {
+    "title": "الريفيت المعمارى الهندسي",
+    "provider": "معارف (m3aarf.com) - محمود قحطان",
+    "url": "https://www.m3aarf.com/certificate/111",
+    "lang": "ar",
+    "price": "free",
+    "hours": 2.75,
+    "certificate": true,
+    "star": 1,
+    "why": "مجانية بالعربي في 21 درساً: المحاور والمناسيب والجدران والأبواب والنوافذ وجداول الكميات وتصدير اللوحات؛ تقييمها 4.6 من 117 وسجّل فيها 2,227.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "BIM Fundamentals for Engineers",
+     "provider": "National Taiwan University (Coursera)",
+     "url": "https://www.coursera.org/learn/bim-fundamentals",
+     "lang": "en",
+     "price": null,
+     "hours": 20,
+     "certificate": true,
+     "star": 1,
+     "why": "مفاهيم BIM ومستوى التطوير LOD ثم نمذجة عملية في Revit (أعمدة وكمرات وبلاطات وسلالم وجداول)؛ تقييمها 4.7 من 2,033 مراجعة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "BIM Coordination",
+     "provider": "L&T EduTech (Coursera)",
+     "url": "https://www.coursera.org/learn/bim-coordination",
+     "lang": "en",
+     "price": null,
+     "hours": 10,
+     "certificate": true,
+     "star": 2,
+     "why": "مستوى متوسط: النموذج الموحّد ومفاهيم ISO 19650 ثم كشف التعارضات (أنواعها ومصفوفة الأولوية والتقارير) وLOD؛ تستخدم Revit لا Navisworks، وتقييمها 4.7 من 46.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Paul F. Aubin",
+     "platform": "paulaubin.com (website)",
+     "url": "https://paulaubin.com/",
+     "why": "مؤلف كتب Revit (سلسلة Aubin Academy وRenaissance Revit) ومدرّب Revit Essential Training على LinkedIn Learning، وله قناة يوتيوب.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/paulaubin/",
+      "youtube": "https://www.youtube.com/@PaulAubin",
+      "website": "https://paulaubin.com/"
+     },
+     "linkedinSource": "https://paulaubin.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Information Management according to BS EN ISO 19650 - Guidance Part 1: Concepts (1st Edition, April 2019)",
+     "author": "UK BIM Alliance",
+     "site": "cdbb.cam.ac.uk",
+     "url": "https://www.cdbb.cam.ac.uk/system/files/documents/InformationManagementaccordingtoBSENISO19650GuidancePart1Concepts.pdf",
+     "lang": "en",
+     "why": "الدليل البريطاني المجاني لمفاهيم ISO 19650: متطلبات المعلومات وبيئة البيانات المشتركة CDE ومستوى الحاجة للمعلومات وتسمية الملفات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "نمذج في Revit فيلا سعودية دورين (معماري وإنشائي) واربط معها نموذج تكييف أو صحي بسيط، ثم شغّل كشف التعارضات وصدّر تقريراً بأهم 10 تعارضات وحلّها المقترح، وأرفق صفحة واحدة بتسمية الملفات وحالاتها في بيئة البيانات المشتركة حسب ISO 19650، وانشر الصور والتقرير في ملف أعمالك.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Revit Architecture Certified Professional (Autodesk Certified Professional)",
+    "short": "Autodesk Revit ACP",
+    "issuer": "Autodesk (exam via Certiport)",
+    "code": null,
+    "type": "exam",
+    "url": "https://www.credly.com/org/autodesk/badge/revit-architecture-certified-professional",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/bim-fundamentals",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "شهادة Autodesk المعتمدة لـRevit: اختبار مراقَب في مركز Certiport بعد نحو 400 ساعة استخدام فعلي. صفحة autodesk.com رفضت الفتح فاعتمدنا صفحة الشارة في Credly، والرسوم غير مذكورة فيها.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "cost-control",
+   "depth": "full",
+   "topPick": {
+    "title": "Construction Cost Estimating and Cost Control",
+    "provider": "Columbia University (Coursera) - Ibrahim Odeh",
+    "url": "https://www.coursera.org/learn/construction-cost-estimating",
+    "lang": "en",
+    "price": "free_to_audit",
+    "hours": 20,
+    "certificate": true,
+    "star": 1,
+    "why": "تقدير التكلفة وحصر الكميات والتسعير والتدفق النقدي، ثم ضبط التكاليف بطريقة القيمة المكتسبة (EVM)؛ تقييمها 4.7 من 2,269 مراجعة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "CCP Review Course",
+     "provider": "AACE International",
+     "url": "https://web.aacei.org/conferences-events/online-learning/ccp-review",
+     "lang": "en",
+     "price": "paid",
+     "hours": 40,
+     "certificate": true,
+     "star": 2,
+     "why": "دورة AACE الرسمية ذاتية السرعة (40 وحدة): هندسة التكاليف وقياس الأداء والتنبؤ وضبط المشروع؛ السعر 2200 دولار للعضو و2500 لغير العضو، والوحدة الواحدة 65/75.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Ibrahim Odeh",
+     "platform": "Columbia University / Coursera (Thinkers360 profile)",
+     "url": "https://www.thinkers360.com/tl/profiles/view/12870",
+     "why": "مدرّس دورة تقدير وضبط التكاليف الإنشائية في كولومبيا على Coursera، ومؤسس برنامج GLCM لقيادات إدارة الإنشاء.",
+     "arab": null,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/ibrahim-odeh-phd-mba-3310025/",
+      "website": "http://www.glcm.info"
+     },
+     "linkedinSource": "https://www.thinkers360.com/tl/profiles/view/12870"
+    },
+    {
+     "name": "Walt Lipke",
+     "platform": "Earned Schedule (website)",
+     "url": "https://www.earnedschedule.com/",
+     "why": "صاحب طريقة الجدول المكتسب (Earned Schedule) التي تحوّل مؤشرات القيمة المكتسبة إلى وقت، وموقعه فيه ورقات وحاسبة Excel.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.earnedschedule.com/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "كيف تحسب القيمة المكتسبة في إدارة المشاريع؟",
+     "author": "PMO Team (ClickUp)",
+     "site": "clickup.com",
+     "url": "https://clickup.com/ar/blog/160963/earned-value-in-project-management/",
+     "lang": "ar",
+     "why": "بالعربي ومع مثال بالأرقام: PV وAC وEV ثم CPI وSPI وفروقات التكلفة والجدول لمشروع ميزانيته 200 ألف.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "11.3 Earned Value Management (EVM)",
+     "author": "Abdullah Oguz",
+     "site": "pressbooks.ulib.csuohio.edu",
+     "url": "https://pressbooks.ulib.csuohio.edu/projectmanagement2ndedition/chapter/11-3-earned-value-management-evm/",
+     "lang": "en",
+     "why": "فصل من كتاب مفتوح فيه مثال محلول كامل: CPI وSPI ثم EAC وETC وVAC وTCPI.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "خذ مشروعاً صغيراً (ملحق مدرسة مثلاً) بميزانية 2 مليون ريال و8 بنود، وابنِ في Excel سجل متابعة 6 أشهر: القيمة المخططة والمكتسبة والفعلية لكل شهر، ثم CPI وSPI وEAC ومنحنى S، واكتب صفحة توصيات لمدير المشروع بناءً على الأرقام.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "Certified Cost Technician (CCT)",
+    "short": "AACE CCT",
+    "issuer": "AACE International",
+    "code": "CCT",
+    "type": "exam",
+    "url": "https://web.aacei.org/certification/certification-information/certifications-offered/technician-certifications/cct-details",
+    "fee": {
+     "amount": 390,
+     "currency": "USD",
+     "qualifier": "non-members",
+     "per": null,
+     "note": "web.aacei.org CCT details: «US$260 for members» / «US$390 for non-members» / «US$185 resit fee (member and non-members)»"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://web.aacei.org/conferences-events/education/online-learning/cct-review",
+    "prepLabel": "دورة المراجعة الرسمية من AACE (13 ساعة، مدفوعة)",
+    "level": "beginner",
+    "star": 1,
+    "why": "تقبل شهادة بكالوريوس 4 سنوات بدل الخبرة، فتناسب الخريج الجديد: 100 سؤال في 3 ساعات بكتاب مفتوح، وصالحة 4 سنوات. الخطوة الأعلى بعدها CCP.",
+    "checkedAt": "2026-11-20"
+   }
+  },
+  {
+   "skill": "construction-contracts",
+   "depth": "full",
+   "topPick": {
+    "title": "Construction Project Management",
+    "provider": "Columbia University (Coursera) - Ibrahim Odeh",
+    "url": "https://www.coursera.org/learn/construction-project-management",
+    "lang": "en",
+    "price": "free_to_audit",
+    "hours": 30,
+    "certificate": true,
+    "star": 1,
+    "why": "أنواع العقود وطرق تسليم المشاريع والمناقصات وجداول المفاضلة، ودرس كامل عن إدارة أوامر التغيير والمطالبات؛ تقييمها 4.8 من 7,448 مراجعة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "FIDIC Claims Management",
+     "provider": "CIOB Academy",
+     "url": "https://www.ciobacademy.org/courses/fidic-claims-management/",
+     "lang": "en",
+     "price": null,
+     "hours": 6,
+     "certificate": null,
+     "star": 1,
+     "why": "ست جلسات مباشرة (ساعة لكل أسبوع) عن مبادئ عقود فيديك وتوزيع المخاطر وتقييم المطالبات؛ لا توجد جلسات مجدولة حالياً والسعر غير معلن في الصفحة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Jeremy Glover",
+     "platform": "Fenwick Elliott (firm profile)",
+     "url": "https://www.fenwickelliott.com/team/glover",
+     "why": "شريك في Fenwick Elliott ومؤلف مشارك لشرح بنود الكتابين الأحمر والأصفر لفيديك، ويدرّس قضايا فيديك في King's College London ومدرسة فيديك الصيفية.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/jeremy-glover-30491b19/",
+      "x": "https://x.com/jeremyrglover",
+      "website": "https://www.fenwickelliott.com/team/glover"
+     },
+     "linkedinSource": "https://www.fenwickelliott.com/team/glover"
+    },
+    {
+     "name": "Thomas Young",
+     "platform": "Fenwick Elliott (firm profile)",
+     "url": "https://www.fenwickelliott.com/people/thomas-young/",
+     "why": "شريك متخصص في نزاعات الإنشاء وعقود فيديك والتحكيم، وله قضايا في مشاريع بنية تحتية ومترو في الشرق الأوسط، وكاتب مقال مطالبات الكتاب الأحمر 2017.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "linkedin": "https://www.linkedin.com/in/thomasyoungfe/",
+      "website": "https://www.fenwickelliott.com/people/thomas-young/"
+     },
+     "linkedinSource": "https://www.fenwickelliott.com/people/thomas-young/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Changes to the Claims provisions in the 2017 FIDIC Red Book",
+     "author": "Thomas Young",
+     "site": "fenwickelliott.com",
+     "url": "https://www.fenwickelliott.com/knowledge-hub/international-quarterlies/issue-25/changes-to-the-claims-provisions-in-the-2017-fidic-red-book/",
+     "lang": "en",
+     "why": "مواعيد المطالبة في الكتاب الأحمر 2017: إشعار خلال 28 يوماً ومطالبة مفصلة خلال 84 يوماً، وما يحدث إن لم يرد المهندس خلال 14 يوماً.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "الموافقة على نظام المنافسات والمشتريات الحكومية",
+     "author": "جريدة أم القرى",
+     "site": "uqn.gov.sa",
+     "url": "https://www.uqn.gov.sa/decisions-and-regulations/4001760",
+     "lang": "ar",
+     "why": "الجريدة الرسمية: قرار مجلس الوزراء رقم 199 وتاريخه 1448/02/21هـ بالموافقة على النظام الجديد، وكيف يعامل العقود السابقة وطلبات التمديد.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "افترض أنك مهندس مقاول في مشروع مدرسة حكومية بعقد مبني على الكتاب الأحمر لفيديك 2017، وتأخر تسليم الموقع 40 يوماً. اكتب إشعار مطالبة (خلال 28 يوماً) ثم مطالبة مفصلة بتمديد المدة وتكلفته مع الأساس التعاقدي، وأضف صفحة تلخص فيها ما يقوله نظام المنافسات والمشتريات الحكومية عن أوامر التغيير والتمديد بعد قراءة نصه الرسمي.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20",
+   "certification": {
+    "kind": "official",
+    "name": "FIDIC Certified Contract Manager (FCCM)",
+    "short": "FIDIC FCCM",
+    "issuer": "FIDIC Credentialing Limited (FCL)",
+    "code": "FCCM",
+    "type": "exam",
+    "url": "https://fcl.fidic.org/a-guide-to-becoming-a-fidic-certified-contract-manager/",
+    "fee": null,
+    "feeVaries": true,
+    "prepUrl": "https://www.coursera.org/learn/construction-project-management",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "advanced",
+    "star": 1,
+    "why": "اختبار فيديك الرسمي بكتاب مفتوح (100 سؤال في 250 دقيقة)، ويشترط مؤهلاً ذا صلة و3-10 سنوات خبرة ومعرفة بالكتب الأحمر والأصفر والفضي؛ الرسوم تقل حسب بلد الإقامة.",
+    "checkedAt": "2026-11-20"
+   }
+  }
+ ],
+ "knowledge": {
+  "entryRoutes": [
+   {
+    "id": "sce-accreditation",
+    "nameAr": "التسجيل والاعتماد المهني في الهيئة السعودية للمهندسين",
+    "nameEn": "Saudi Council of Engineers registration and professional accreditation",
+    "owner": "الهيئة السعودية للمهندسين",
+    "url": "https://saudieng.sa/Admin/NPDepartmentsDocs/Professional-Accreditation-Guide-for-Engineering-Categories-En.pdf",
+    "line": "تسجّل في الهيئة وتأخذ درجة «مهندس» ببكالوريوس هندسة معتمد، وبعدها «مشارك» باختبار أساسيات الهندسة (FE).",
+    "eligibility": [
+     "Engineer/Architect Grade: «Hold a Bachelor's degree from an accredited academic program in one of the engineering/architectural specializations from a recognized college/university or program that meets the Authority's registration standards.»",
+     "Associate Grade: «Be a registered member of the Authority» · «Pass the Fundamentals of Engineering/Architecture exam (FE/FA)» · «Pay classification fees»",
+     "Professional Grade: «Have a minimum experience of five years in a similar role proved» · «Pass the Professional Engineering/Architecture Practice Exam (PE/PA)»"
+    ],
+    "benefit": null,
+    "fits": "engineering",
+    "checkedAt": "2026-11-20",
+    "note": "English edition of the guide (Version (1), 1446 AH / 2024 AD), pp. 25-27, downloaded from saudieng.sa on 2026-11-20 and read from its text layer. Postings ask it: Rawafid «Saudi Council of Engineers (SCE) Certification.», Teef Najd «Saudi Council of Engineers registration … is preferred.» The Arabic accreditation web page (saudieng.sa/Arabic/Services/Pages/Accreditation.aspx) returned 404."
+   }
+  ],
+  "entryRoutesReused": [
+   "tamheer",
+   "doroob",
+   "hrdf-coop",
+   "hrdf-professional-certificates"
+  ],
+  "families": [
+   {
+    "id": "civil-site-engineer",
+    "title": "مهندس موقع (مدني)",
+    "titleEn": "Site / Civil Engineer",
+    "fields": [
+     "engineering"
+    ],
+    "isNew": true,
+    "what": "يكون في الموقع كل يوم: يتأكد إن البناء ماشي حسب المخططات والمواصفات، وينسّق مع المقاولين، ويحل مشاكل التنفيذ قبل ما تأخّر المشروع.",
+    "dayToDay": [
+     "يراجع المخططات وبيانات الأعمال قبل التنفيذ",
+     "يشرف على المقاولين ويتابع التقدم اليومي",
+     "يطلب الفحص ويتابع ملاحظات الجودة والسلامة",
+     "يكتب التقرير اليومي ويرفع المشاكل للإدارة"
+    ],
+    "path": {
+     "skills": [
+      "engineering-drawings",
+      "site-execution",
+      "saudi-building-code",
+      "quality-control",
+      "hse",
+      "communication"
+     ],
+     "basedOnLine": "المسار مبني على: مواد اختبار المنشئ المشارك CAC Level I من AIC، ودرجات الاعتماد المهني في دليل الهيئة السعودية للمهندسين",
+     "basedOnLinks": [
+      "https://aic-builds.org/certifications/ac-level-one/",
+      "https://saudieng.sa/Admin/NPDepartmentsDocs/Professional-Accreditation-Guide-for-Engineering-Categories-En.pdf"
+     ],
+     "orderNote": "AIC CAC Level I lists «Materials, Methods & Project Modeling» before «Construction Safety» and «Project Administration»; reading drawings comes first because every posting checked asks it before site supervision (Teef Najd: «Ability to read and interpret engineering drawings.»). The Saudi Building Code is placed after drawings (Dalil's call: it is applied to what is drawn and built; no guideline orders it). QA/QC and HSE sit beside the trunk, not after it: both postings ask them at ★1 alongside site work.",
+     "guidelines": [
+      {
+       "name": "Certified Associate Constructor (CAC) Level I: exam content areas",
+       "provider": "American Institute of Constructors (AIC)",
+       "url": "https://aic-builds.org/certifications/ac-level-one/",
+       "orderedTopics": [
+        "1 Communication Skills",
+        "2 Engineering Management",
+        "3 Management Concepts",
+        "4 Materials, Methods & Project Modeling",
+        "5 Bidding and Estimating",
+        "6 Budgeting, Costs & Cost Control",
+        "7 Planning, Scheduling & Schedule Control",
+        "8 Construction Safety",
+        "9 Construction Geomatics",
+        "10 Project Administration"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "Professional Accreditation Guide for Engineering Categories, Version (1) 1446 AH / 2024 AD: professional grades",
+       "provider": "الهيئة السعودية للمهندسين (Saudi Council of Engineers)",
+       "url": "https://saudieng.sa/Admin/NPDepartmentsDocs/Professional-Accreditation-Guide-for-Engineering-Categories-En.pdf",
+       "orderedTopics": [
+        "1 Engineer/Architect Grade: «Hold a Bachelor's degree from an accredited academic program in one of the engineering/architectural specializations…»",
+        "2 Associate Grade: «Be a registered member of the Authority» · «Pass the Fundamentals of Engineering/Architecture exam (FE/FA)» · «Pay classification fees»",
+        "3 Professional Grade: «Have a minimum experience of five years in a similar role proved» · «Pass the Professional Engineering/Architecture Practice Exam (PE/PA)»",
+        "4 Consultant Grade: «practicing at the professional level for at least five years, or a minimum of ten years of professional practice»"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "teefnajd-site-engineer-riyadh",
+     "rawafid-site-civil-engineer-jeddah"
+    ],
+    "employers": [
+     {
+      "name": "مجموعة طيف نجد",
+      "nameEn": "Teef Najd Group",
+      "careersUrl": "https://jobs.workable.com/company/7t2M4nJpYZgZaEW452vRQa/jobs-at-teef-najd-group",
+      "checkedAt": "2026-11-20",
+      "note": "صفحة وظائفها على Workable"
+     },
+     {
+      "name": "روافد",
+      "nameEn": "Rawafid",
+      "careersUrl": "https://jobs.workable.com/view/xteTw1ZjdYrQyKBgVQ6oG1/site-civil-engineer-in-jeddah-at-rawafid",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "هانمي جلوبال السعودية",
+      "nameEn": "HanmiGlobal Saudi",
+      "careersUrl": "https://jobs.workable.com/view/5geVcTy1ENEu4czTTiwDGZ/site-engineer-in-riyadh-at-hanmiglobal-saudi",
+      "checkedAt": "2026-11-20",
+      "note": "وظيفة مهندس موقع مفتوحة (تطلب 12 سنة خبرة)"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "sce-accreditation"
+    ],
+    "certificates": [
+     {
+      "name": "Certified Associate Constructor (CAC) Level I",
+      "issuer": "American Institute of Constructors (AIC)",
+      "url": "https://aic-builds.org/certifications/ac-level-one/",
+      "level": "entry",
+      "priceText": "University students: $200 (online proctored exam at a university test site); non-students: $235 (online exam through PointLeader)",
+      "arabicAvailable": null,
+      "why": "اختبار للخريجين يغطي طرق التنفيذ والتقدير والتكاليف والجدولة والسلامة وإدارة المشروع.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "Autodesk Certified Professional in AutoCAD for Design and Drafting",
+      "issuer": "Autodesk (Certiport)",
+      "url": "https://www.credly.com/org/certiport/badge/autodesk-certified-professional-in-autocad-for-desi",
+      "level": "associate",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "يثبت إتقانك لـ AutoCAD في الرسم والتعديل وإخراج اللوحات.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": {
+     "role": "Construction Manager",
+     "minSAR": 25000,
+     "maxSAR": 45000,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 34, table «Construction & property» (Monthly salary ranges and average values (SAR)); average 35,000",
+     "checkedAt": "2026-11-20",
+     "note": "الراتب الشهري الثابت الإجمالي بالريال حسب دليل Hays للرواتب في السعودية 2026 (الربع الأخير من 2025)، بلا تقسيم حسب الخبرة، والمسمى المذكور فيه مسمى قيادي أو أول (Senior)، فهو سقف للمسار لا راتب خريج."
+    },
+    "interviewQuestions": [
+     "وش تسوي إذا لقيت المقاول ينفّذ شي يخالف المخطط المعتمد؟",
+     "وش الفرق بين المخطط التنفيذي (shop drawing) والمخطط التصميمي؟",
+     "كيف تكتب تقرير يومي مفيد للموقع؟",
+     "وش أول شي تتأكد منه قبل صب الخرسانة؟",
+     "كيف توازن بين سرعة التنفيذ ومتطلبات الجودة والسلامة؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: اقرأ مخطط فيلا كامل (معماري وإنشائي) وطلّع منه الأبعاد والمقاطع",
+     "الأسبوع 2: AutoCAD: ارسم مسقط دور ومقطعاً وأخرج لوحة بمقياس",
+     "الأسبوع 3: اكتب بيان أعمال (method statement) لبند واحد مثل صب سقف",
+     "الأسبوع 4: اقرأ أساسيات كود البناء السعودي وسجّل في الهيئة السعودية للمهندسين"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "مهندس الموقع هو عين المشروع: كل يوم في الموقع يتأكد إن الشغل مطابق للمخطط والمواصفات، وينسّق مع المقاولين، ويحل المشاكل أول بأول.",
+     "المسار: قراءة المخططات و AutoCAD، بعدها تنفيذ الأعمال والإشراف، وكود البناء السعودي، ومعها أساسيات الجودة والسلامة. أنا «دليلك» رتّبته على مواد اختبار AIC للمنشئ المشارك.",
+     "لا تنسى: لازم تسجّل في الهيئة السعودية للمهندسين، ودرجة «مهندس» تبي بس بكالوريوس معتمد."
+    ],
+    "sources": [
+     {
+      "label": "AIC: Certified Associate Constructor (CAC) Level I",
+      "url": "https://aic-builds.org/certifications/ac-level-one/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Saudi Council of Engineers: Professional Accreditation Guide for Engineering Categories (2024), pp. 25-27",
+      "url": "https://saudieng.sa/Admin/NPDepartmentsDocs/Professional-Accreditation-Guide-for-Engineering-Categories-En.pdf",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Teef Najd Group: وظيفة teefnajd-site-engineer-riyadh",
+      "url": "https://jobs.workable.com/view/aYWC1XNbAjevKNg3TjhcU4/site-engineer-in-riyadh-at-teef-najd-group",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Rawafid: وظيفة rawafid-site-civil-engineer-jeddah",
+      "url": "https://jobs.workable.com/view/xteTw1ZjdYrQyKBgVQ6oG1/site-civil-engineer-in-jeddah-at-rawafid",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "mep-engineer",
+    "title": "مهندس MEP (ميكانيكا وكهرباء المباني)",
+    "titleEn": "MEP Engineer (Mechanical / Electrical)",
+    "fields": [
+     "engineering"
+    ],
+    "isNew": true,
+    "what": "مسؤول عن «أعصاب» المبنى: التكييف والكهرباء والسباكة ومكافحة الحريق؛ يراجع مخططاتها ويتابع تركيبها واختبارها لين تشتغل صح.",
+    "dayToDay": [
+     "يراجع مخططات MEP التنفيذية والمواد المقدّمة",
+     "يتابع تركيب التكييف والكهرباء في الموقع",
+     "ينسّق مع المدني والمعماري لتفادي التعارضات",
+     "يشهد الاختبار والتشغيل قبل التسليم"
+    ],
+    "path": {
+     "skills": [
+      "engineering-drawings",
+      "mep-systems",
+      "site-execution",
+      "quality-control",
+      "bim-revit",
+      "communication"
+     ],
+     "basedOnLine": "المسار مبني على: مواد اختبار المنشئ المشارك CAC Level I من AIC، ودرجات الاعتماد المهني في دليل الهيئة السعودية للمهندسين، ومتطلبات إعلانات MEP المفتوحة",
+     "basedOnLinks": [
+      "https://aic-builds.org/certifications/ac-level-one/",
+      "https://saudieng.sa/Admin/NPDepartmentsDocs/Professional-Accreditation-Guide-for-Engineering-Categories-En.pdf"
+     ],
+     "orderNote": "Drawings before MEP systems: both postings ask drawing reading or CAD («Ability to read and understand complex engineering schematics and layouts.», «Proficiency in CAD and mechanical design software.»). No single published guideline orders MEP topics for graduates; the CLEAR «MEP Engineer» posting (Riyadh, 10+ years, not used as a job) lists «Proficiency in AutoCAD, Revit MEP, Navisworks, and Microsoft Office.», which is why BIM/Revit is on this path. Order beyond that is Dalil's call.",
+     "guidelines": [
+      {
+       "name": "Certified Associate Constructor (CAC) Level I: exam content areas",
+       "provider": "American Institute of Constructors (AIC)",
+       "url": "https://aic-builds.org/certifications/ac-level-one/",
+       "orderedTopics": [
+        "1 Communication Skills",
+        "2 Engineering Management",
+        "3 Management Concepts",
+        "4 Materials, Methods & Project Modeling",
+        "5 Bidding and Estimating",
+        "6 Budgeting, Costs & Cost Control",
+        "7 Planning, Scheduling & Schedule Control",
+        "8 Construction Safety",
+        "9 Construction Geomatics",
+        "10 Project Administration"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "Professional Accreditation Guide for Engineering Categories, Version (1) 1446 AH / 2024 AD: professional grades",
+       "provider": "الهيئة السعودية للمهندسين (Saudi Council of Engineers)",
+       "url": "https://saudieng.sa/Admin/NPDepartmentsDocs/Professional-Accreditation-Guide-for-Engineering-Categories-En.pdf",
+       "orderedTopics": [
+        "1 Engineer/Architect Grade: «Hold a Bachelor's degree from an accredited academic program in one of the engineering/architectural specializations…»",
+        "2 Associate Grade: «Be a registered member of the Authority» · «Pass the Fundamentals of Engineering/Architecture exam (FE/FA)» · «Pay classification fees»",
+        "3 Professional Grade: «Have a minimum experience of five years in a similar role proved» · «Pass the Professional Engineering/Architecture Practice Exam (PE/PA)»",
+        "4 Consultant Grade: «practicing at the professional level for at least five years, or a minimum of ten years of professional practice»"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "matar-albaqmi-site-engineer-hvac-dammam",
+     "hanmiglobal-mechanical-engineer-riyadh"
+    ],
+    "employers": [
+     {
+      "name": "شركة مطر البقمي القابضة",
+      "nameEn": "Matar Al Baqmi Holding Company",
+      "careersUrl": "https://jobs.workable.com/view/rboEJcX5SgouHcAVKCgWZW/project-in-charge---site-engineer-in-dammam-at-matar-al-baqmi-holding-company",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "هانمي جلوبال السعودية",
+      "nameEn": "HanmiGlobal Saudi",
+      "careersUrl": "https://jobs.workable.com/view/d2YPHF8qPHWidHFttFEDYu/mechanical-engineer-in-riyadh-at-hanmiglobal-saudi",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "كلير",
+      "nameEn": "CLEAR",
+      "careersUrl": "https://jobs.workable.com/view/ffUccWhffSi9eM2hzH4oNg/mep-engineer-in-riyadh-at-clear",
+      "checkedAt": "2026-11-20",
+      "note": "وظيفة MEP مفتوحة (تطلب 10 سنوات وأكثر)"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "sce-accreditation"
+    ],
+    "certificates": [],
+    "salary": null,
+    "salaryNote": "Hays Saudi Arabia Salary Guide 2026 has no MEP or mechanical/electrical engineer row (pp. 34, 37 checked).",
+    "interviewQuestions": [
+     "وش الفرق بين نظام التكييف المركزي (Chiller) ونظام الوحدات المنفصلة؟",
+     "كيف تكتشف تعارض بين مجاري التكييف والأعمدة قبل التنفيذ؟",
+     "وش الاختبارات اللي تطلبها قبل تشغيل لوحة كهرباء؟",
+     "مقاول سلّم مواد غير المعتمدة: وش تسوي؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: اقرأ مخطط تكييف وكهرباء لمبنى صغير وحدد مسارات المجاري والكابلات",
+     "الأسبوع 2: احسب حمل تبريد تقريبي لغرفة وقارن بالوحدة المركّبة",
+     "الأسبوع 3: Revit MEP: نمذج دوراً واحداً بمجاري التكييف",
+     "الأسبوع 4: اكتب قائمة فحص (checklist) لاستلام تمديدات كهرباء"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "مهندس MEP يشتغل على التكييف والكهرباء والسباكة ومكافحة الحريق في المبنى: يراجع المخططات ويتابع التركيب لين يشتغل كل شي صح.",
+     "أنا «دليلك» أنصحك تبدأ بقراءة المخططات و AutoCAD، بعدها أنظمة MEP نفسها، وبعدين Revit عشان التنسيق بين التخصصات.",
+     "الإعلانات المفتوحة اللي شفتها كلها تبي خبرة، فابدأ بتمهير أو برنامج خريجين وخذ شغل الموقع بجدية."
+    ],
+    "sources": [
+     {
+      "label": "AIC: Certified Associate Constructor (CAC) Level I",
+      "url": "https://aic-builds.org/certifications/ac-level-one/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "CLEAR: MEP Engineer (Riyadh), Workable",
+      "url": "https://jobs.workable.com/view/ffUccWhffSi9eM2hzH4oNg/mep-engineer-in-riyadh-at-clear",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Saudi Council of Engineers: Professional Accreditation Guide (2024)",
+      "url": "https://saudieng.sa/Admin/NPDepartmentsDocs/Professional-Accreditation-Guide-for-Engineering-Categories-En.pdf",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Matar Al Baqmi Holding Company: وظيفة matar-albaqmi-site-engineer-hvac-dammam",
+      "url": "https://jobs.workable.com/view/rboEJcX5SgouHcAVKCgWZW/project-in-charge---site-engineer-in-dammam-at-matar-al-baqmi-holding-company",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "HanmiGlobal Saudi: وظيفة hanmiglobal-mechanical-engineer-riyadh",
+      "url": "https://jobs.workable.com/view/d2YPHF8qPHWidHFttFEDYu/mechanical-engineer-in-riyadh-at-hanmiglobal-saudi",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "qa-qc-engineer",
+    "title": "مهندس جودة (QA/QC)",
+    "titleEn": "QA/QC Engineer",
+    "fields": [
+     "engineering"
+    ],
+    "isNew": true,
+    "what": "يتأكد إن كل بند في المشروع ينفّذ حسب المواصفات قبل ما ينغطّى: يفحص، يوثّق، ويطلب التصحيح إذا فيه خلل.",
+    "dayToDay": [
+     "يفحص الأعمال حسب خطط الفحص والاختبار (ITP)",
+     "يستلم طلبات الفحص ويوقّع أو يرفض",
+     "يكتب تقارير عدم المطابقة ويتابع التصحيح",
+     "يحدّث سجلات الجودة ويشارك في اجتماعات الجودة"
+    ],
+    "path": {
+     "skills": [
+      "engineering-drawings",
+      "quality-control",
+      "site-execution",
+      "hse",
+      "communication"
+     ],
+     "basedOnLine": "المسار مبني على: شهادة ASQ لمساعد تحسين الجودة (CQIA)، ونظام إدارة الجودة ISO 9001 الذي تطلبه الإعلانات، ودرجات الاعتماد المهني في الهيئة السعودية للمهندسين",
+     "basedOnLinks": [
+      "https://www.asq.org/cert/quality-improvement-associate",
+      "https://saudieng.sa/Admin/NPDepartmentsDocs/Professional-Accreditation-Guide-for-Engineering-Categories-En.pdf"
+     ],
+     "orderNote": "Quality control at ★1 (inspection, ITPs, NCRs) before ★2 (audits): HanmiGlobal's inspector posting asks daily ITP surveillance and only support in «quality audits», and Teef Najd prefers «ISO 9001 internal auditor certification» on top of NCR work. Drawings first because both postings ask drawing reading. The CQIA body of knowledge itself was not opened (PDF link only), so it is cited for level and eligibility, not for topic order.",
+     "guidelines": [
+      {
+       "name": "ASQ Certified Quality Improvement Associate (CQIA)",
+       "provider": "ASQ",
+       "url": "https://www.asq.org/cert/quality-improvement-associate",
+       "orderedTopics": [
+        "Eligibility: two years of work experience, or an associate degree or two years of higher education (full-time paid role)",
+        "Exam: «one-part, 110-question exam» (computer-based, English), open book; Body of Knowledge in a linked PDF (not opened)"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "Professional Accreditation Guide for Engineering Categories, Version (1) 1446 AH / 2024 AD: professional grades",
+       "provider": "الهيئة السعودية للمهندسين (Saudi Council of Engineers)",
+       "url": "https://saudieng.sa/Admin/NPDepartmentsDocs/Professional-Accreditation-Guide-for-Engineering-Categories-En.pdf",
+       "orderedTopics": [
+        "1 Engineer/Architect Grade: «Hold a Bachelor's degree from an accredited academic program in one of the engineering/architectural specializations…»",
+        "2 Associate Grade: «Be a registered member of the Authority» · «Pass the Fundamentals of Engineering/Architecture exam (FE/FA)» · «Pay classification fees»",
+        "3 Professional Grade: «Have a minimum experience of five years in a similar role proved» · «Pass the Professional Engineering/Architecture Practice Exam (PE/PA)»",
+        "4 Consultant Grade: «practicing at the professional level for at least five years, or a minimum of ten years of professional practice»"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "teefnajd-quality-control-engineer-riyadh",
+     "hanmiglobal-quality-inspector-electrical-riyadh"
+    ],
+    "employers": [
+     {
+      "name": "مجموعة طيف نجد",
+      "nameEn": "Teef Najd Group",
+      "careersUrl": "https://jobs.workable.com/company/7t2M4nJpYZgZaEW452vRQa/jobs-at-teef-najd-group",
+      "checkedAt": "2026-11-20",
+      "note": "صفحة وظائفها على Workable"
+     },
+     {
+      "name": "هانمي جلوبال السعودية",
+      "nameEn": "HanmiGlobal Saudi",
+      "careersUrl": "https://jobs.workable.com/view/5dWWFwLa5EBwdGAMC6sbfB/quality-inspector---electrical-in-riyadh-at-hanmiglobal-saudi",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "sce-accreditation"
+    ],
+    "certificates": [
+     {
+      "name": "Certified Quality Improvement Associate (CQIA)",
+      "issuer": "ASQ",
+      "url": "https://www.asq.org/cert/quality-improvement-associate",
+      "level": "entry",
+      "priceText": "Exam Fee $434; Retake $234; ASQ members save $100 on the initial exam fee",
+      "arabicAvailable": false,
+      "why": "شهادة دخول في الجودة؛ تشترط سنتين خبرة أو دبلوم مشارك أو سنتين تعليم عالٍ.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": {
+     "role": "Quality Manager",
+     "minSAR": 22000,
+     "maxSAR": 30000,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 37, table «Manufacturing» (Monthly salary ranges and average values (SAR)); average 27,500",
+     "checkedAt": "2026-11-20",
+     "note": "الراتب الشهري الثابت الإجمالي بالريال حسب دليل Hays للرواتب في السعودية 2026 (الربع الأخير من 2025)، بلا تقسيم حسب الخبرة، والمسمى المذكور فيه مسمى قيادي أو أول (Senior)، فهو سقف للمسار لا راتب خريج."
+    },
+    "interviewQuestions": [
+     "وش الفرق بين ضبط الجودة (QC) وضمان الجودة (QA)؟",
+     "وش تكتب في تقرير عدم المطابقة (NCR)؟",
+     "وش هي خطة الفحص والاختبار (ITP) ومين يعتمدها؟",
+     "المقاول يبي يكمل والفحص ما خلص: وش تسوي؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: اقرأ عن ISO 9001 ومبادئ إدارة الجودة السبعة",
+     "الأسبوع 2: اكتب خطة فحص واختبار (ITP) لبند بلاط أو لياسة",
+     "الأسبوع 3: اكتب 3 تقارير عدم مطابقة تجريبية بصور وأسباب جذرية",
+     "الأسبوع 4: قائمة فحص استلام كاملة لبند تشطيب، واجمعها في ملف أعمال"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "مهندس الجودة يفحص كل بند قبل ما ينغطّى، ويوثّق الملاحظات، ويطلب التصحيح لين يصير مطابق.",
+     "أنا «دليلك» أقول لك: ابدأ بقراءة المخططات، بعدين أدوات الجودة: خطط الفحص وتقارير عدم المطابقة، وبعدها ISO 9001 والتدقيق.",
+     "شهادة المدقق الداخلي ISO 9001 تجي مطلوبة كثير كميزة إضافية في إعلانات الجودة."
+    ],
+    "sources": [
+     {
+      "label": "ASQ: Certified Quality Improvement Associate",
+      "url": "https://www.asq.org/cert/quality-improvement-associate",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Teef Najd Group: وظيفة teefnajd-quality-control-engineer-riyadh",
+      "url": "https://jobs.workable.com/view/s5JZeYhMMjDcswhdZWDpmE/quality-control-engineer-in-riyadh-at-teef-najd-group",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "HanmiGlobal Saudi: وظيفة hanmiglobal-quality-inspector-electrical-riyadh",
+      "url": "https://jobs.workable.com/view/5dWWFwLa5EBwdGAMC6sbfB/quality-inspector---electrical-in-riyadh-at-hanmiglobal-saudi",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "hse-officer",
+    "title": "أخصائي صحة وسلامة مهنية (HSE)",
+    "titleEn": "HSE Officer / Engineer",
+    "fields": [
+     "engineering"
+    ],
+    "isNew": true,
+    "what": "يحمي الناس في الموقع: يكتشف المخاطر قبل ما تصير حوادث، يطبّق إجراءات السلامة، ويدرّب العمال، ويحقق في أي حادث.",
+    "dayToDay": [
+     "جولة سلامة يومية في الموقع",
+     "يراجع تقييم المخاطر وتصاريح العمل",
+     "يقدّم محاضرة سلامة قصيرة (toolbox talk)",
+     "يحقق في الحوادث ويكتب التقارير"
+    ],
+    "path": {
+     "skills": [
+      "hse",
+      "saudi-building-code",
+      "quality-control",
+      "communication",
+      "presentation"
+     ],
+     "basedOnLine": "المسار مبني على: برنامج OSHA Outreach (بطاقات 10 و30 ساعة)، وشهادة NEBOSH الدولية العامة (IGC)",
+     "basedOnLinks": [
+      "https://www.osha.gov/training/outreach",
+      "https://www.nebosh.org.uk/qualifications/international-general-certificate/"
+     ],
+     "orderNote": "★1 is the OSHA outreach level (HanmiGlobal: «OSHA certification is mandatory.»), ★2 the NEBOSH IGC level (Fuku lists «OSHA, NEBOSH, ISO45001» for a 3-year role). NEBOSH's own page orders its topics as managing health and safety, then hazards and controls, then measuring success. SBC after HSE because Fuku asks «Familiarity with Saudi Building Code (SBC)» for site safety approvals.",
+     "guidelines": [
+      {
+       "name": "OSHA Outreach Training Program (10-hour and 30-hour cards)",
+       "provider": "U.S. OSHA",
+       "url": "https://www.osha.gov/training/outreach",
+       "orderedTopics": [
+        "10-hour (entry-level workers) before 30-hour (supervisors / workers with safety responsibility), in Construction and General Industry"
+       ],
+       "checkedAt": "2026-11-20",
+       "note": "Page opened by the guides research sub-agent (listed as an hse article); the 10/30-hour split is how the page presents the cards."
+      },
+      {
+       "name": "NEBOSH International General Certificate in Occupational Health and Safety",
+       "provider": "NEBOSH",
+       "url": "https://www.nebosh.org.uk/qualifications/international-general-certificate/",
+       "orderedTopics": [
+        "Units: IG1 (equivalent to GIC1) and GIC2; GIC1 is «a digital, scenario-based assessment» completed within 24 hours",
+        "«How to effectively manage health and safety»",
+        "«How to identify and control common workplace hazards»",
+        "«How to measure if you've been successful»",
+        "«Relevant key international standards»"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "hanmiglobal-hse-engineer-riyadh",
+     "fuku-hse-engineer-dammam"
+    ],
+    "employers": [
+     {
+      "name": "هانمي جلوبال السعودية",
+      "nameEn": "HanmiGlobal Saudi",
+      "careersUrl": "https://jobs.workable.com/view/mdq549AzYdwWFGnYj13tpR/hse-engineer-in-riyadh-at-hanmiglobal-saudi",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "فوكو",
+      "nameEn": "Fuku",
+      "careersUrl": "https://jobs.workable.com/view/kaPQv1DYRejxZwsEJ8NW3U/hse-engineer-in-riyadh-at-fuku",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "sce-accreditation"
+    ],
+    "certificates": [
+     {
+      "name": "NEBOSH International General Certificate in Occupational Health and Safety",
+      "issuer": "NEBOSH",
+      "url": "https://www.nebosh.org.uk/qualifications/international-general-certificate/",
+      "level": "associate",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "أشهر شهادة سلامة يطلبها أصحاب العمل في الخليج؛ رسومها يحددها مركز التدريب.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "IOSH Managing Safely",
+      "issuer": "IOSH",
+      "url": "https://iosh.com/qualifications-and-courses/courses/managing-safely",
+      "level": "entry",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "دورة قصيرة (3 أيام) لأساسيات إدارة السلامة؛ تكلفتها يحددها مزوّد التدريب.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": {
+     "role": "Senior HSEQ Manager",
+     "minSAR": 35000,
+     "maxSAR": 50000,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 34, table «Construction & property» (Monthly salary ranges and average values (SAR)); average 45,000",
+     "checkedAt": "2026-11-20",
+     "note": "الراتب الشهري الثابت الإجمالي بالريال حسب دليل Hays للرواتب في السعودية 2026 (الربع الأخير من 2025)، بلا تقسيم حسب الخبرة، والمسمى المذكور فيه مسمى قيادي أو أول (Senior)، فهو سقف للمسار لا راتب خريج."
+    },
+    "interviewQuestions": [
+     "وش الفرق بين الخطر (hazard) والمخاطرة (risk)؟",
+     "رتّب لي هرم ضوابط المخاطر (hierarchy of controls)",
+     "عامل رافض يلبس حزام الأمان على ارتفاع: وش تسوي؟",
+     "وش تكتب في تقرير حادث؟ وكيف توصل للسبب الجذري؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: اقرأ أساسيات تقييم المخاطر وهرم الضوابط",
+     "الأسبوع 2: سوّ تقييم مخاطر لنشاط العمل على ارتفاع في موقع بناء",
+     "الأسبوع 3: حضّر محاضرة سلامة من 5 دقائق عن الحفريات",
+     "الأسبوع 4: اكتب تقرير حادث تجريبي بتحليل «لماذا الخمسة»، وقارن دورة OSHA 30 مع NEBOSH IGC"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "أخصائي السلامة يحمي الناس في الموقع: يشوف الخطر قبل ما يصير حادث، ويطبّق الإجراءات، ويدرّب العمال.",
+     "أنا «دليلك»: ابدأ بمستوى OSHA (بطاقة 30 ساعة للإنشاءات)، وبعدها NEBOSH IGC، وهذا اللي تطلبه إعلانات السلامة اللي شفتها.",
+     "إعلان في الدمام يطلب بعد معرفة بكود البناء السعودي، فلا تهمله."
+    ],
+    "sources": [
+     {
+      "label": "OSHA: Outreach Training Program",
+      "url": "https://www.osha.gov/training/outreach",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "NEBOSH: International General Certificate",
+      "url": "https://www.nebosh.org.uk/qualifications/international-general-certificate/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "HanmiGlobal Saudi: وظيفة hanmiglobal-hse-engineer-riyadh",
+      "url": "https://jobs.workable.com/view/mdq549AzYdwWFGnYj13tpR/hse-engineer-in-riyadh-at-hanmiglobal-saudi",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Fuku: وظيفة fuku-hse-engineer-dammam",
+      "url": "https://jobs.workable.com/view/kaPQv1DYRejxZwsEJ8NW3U/hse-engineer-in-riyadh-at-fuku",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "planning-engineer",
+    "title": "مهندس تخطيط وجدولة (Primavera P6)",
+    "titleEn": "Planning / Scheduling Engineer",
+    "fields": [
+     "project-controls"
+    ],
+    "isNew": true,
+    "what": "يحوّل المشروع إلى جدول زمني: أنشطة وتسلسل ومدد ومسار حرج، ويتابع التقدم أسبوعياً وينبّه الإدارة لأي تأخير قبل ما يكبر.",
+    "dayToDay": [
+     "يبني الجدول الزمني في Primavera P6",
+     "يجمع التقدم الأسبوعي من الموقع ويحدّث الجدول",
+     "يحلل المسار الحرج والتأخيرات",
+     "يرفع تقارير وخطط استدراك للإدارة"
+    ],
+    "path": {
+     "skills": [
+      "planning-scheduling",
+      "project-management",
+      "cost-control",
+      "construction-contracts",
+      "communication"
+     ],
+     "basedOnLine": "المسار مبني على: مجالات اختبار AACE للتخطيط والجدولة (PSP)، ومواد اختبار المنشئ المشارك CAC Level I من AIC",
+     "basedOnLinks": [
+      "https://web.aacei.org/certification/certification-information/certifications-offered/professional-certifications/psp-details",
+      "https://aic-builds.org/certifications/ac-level-one/"
+     ],
+     "orderNote": "AACE PSP: «Planning (36 questions) and Scheduling (83 questions)» then «Communication.»; AIC lists «Planning, Scheduling & Schedule Control» next to «Budgeting, Costs & Cost Control» and before «Project Administration». The graduate posting (Al Jomaih) asks planning concepts, contract types and project-management principles at the same entry level, so they are on the path; PSP itself needs 8 years (or 4 + degree), so it is the ★2 goal, not a start.",
+     "guidelines": [
+      {
+       "name": "AACE Planning & Scheduling Professional (PSP)",
+       "provider": "AACE International",
+       "url": "https://web.aacei.org/certification/certification-information/certifications-offered/professional-certifications/psp-details",
+       "orderedTopics": [
+        "«2 Domains: Planning (36 questions) and Scheduling (83 questions)»",
+        "«1 Domain: Communication.»",
+        "Eligibility: «8 years industry related experience» or «4 years industry related experience + 4-year industry related college degree»"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "Certified Associate Constructor (CAC) Level I: exam content areas",
+       "provider": "American Institute of Constructors (AIC)",
+       "url": "https://aic-builds.org/certifications/ac-level-one/",
+       "orderedTopics": [
+        "1 Communication Skills",
+        "2 Engineering Management",
+        "3 Management Concepts",
+        "4 Materials, Methods & Project Modeling",
+        "5 Bidding and Estimating",
+        "6 Budgeting, Costs & Cost Control",
+        "7 Planning, Scheduling & Schedule Control",
+        "8 Construction Safety",
+        "9 Construction Geomatics",
+        "10 Project Administration"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "aljomaih-graduate-development-engineering-riyadh",
+     "matar-albaqmi-planning-engineer-dammam"
+    ],
+    "employers": [
+     {
+      "name": "الجميح للطاقة والمياه",
+      "nameEn": "Al Jomaih Energy and Water",
+      "careersUrl": "https://jobs.workable.com/view/4cnPv2CivxuVyTyngVeK7s/graduate-development-program---engineering---saudi-nationals-in-riyadh-at-al-jomaih-energy-and-water",
+      "checkedAt": "2026-11-20",
+      "note": "برنامج الخريجين المفتوح على Workable"
+     },
+     {
+      "name": "شركة مطر البقمي القابضة",
+      "nameEn": "Matar Al Baqmi Holding Company",
+      "careersUrl": "https://jobs.workable.com/view/hWRsAMEiW2zyAyEMV75xk3/planning-engineer-in-dammam-at-matar-al-baqmi-holding-company",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "هانمي جلوبال السعودية",
+      "nameEn": "HanmiGlobal Saudi",
+      "careersUrl": "https://jobs.workable.com/view/hHR4jKjqVC2qhLrfDDG4HX/planning-and-scheduling-engineer-in-riyadh-at-hanmiglobal-saudi",
+      "checkedAt": "2026-11-20",
+      "note": "وظيفة تخطيط مفتوحة (تطلب 15 سنة)"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "sce-accreditation"
+    ],
+    "certificates": [
+     {
+      "name": "Planning & Scheduling Professional (PSP)",
+      "issuer": "AACE International",
+      "url": "https://web.aacei.org/certification/certification-information/certifications-offered/professional-certifications/psp-details",
+      "level": "associate",
+      "priceText": "US$525 for members; US$690 for non-members; US$260 resit fee",
+      "arabicAvailable": false,
+      "why": "شهادة التخطيط والجدولة المعروفة؛ تشترط 8 سنوات أو 4 سنوات مع شهادة جامعية، فهي هدف لاحق.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": null,
+    "salaryNote": "Hays Saudi Arabia Salary Guide 2026 has no planner / planning engineer row (construction table p. 34 checked).",
+    "interviewQuestions": [
+     "وش هو المسار الحرج؟ وكيف تحسب الفائض (float)؟",
+     "وش الفرق بين العلاقات FS و SS و FF؟",
+     "النشاط تأخر أسبوع: كيف تعرف هل يأخّر المشروع؟",
+     "كيف تجمع التقدم من الموقع وتتأكد إنه صحيح؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: أساسيات طريقة المسار الحرج: احسبها يدوياً لعشرة أنشطة",
+     "الأسبوع 2: Primavera P6: ابنِ جدول فيلا بـ 40 نشاطاً وعلاقاتها",
+     "الأسبوع 3: حمّل الموارد وحدد خط الأساس، ثم حدّث الجدول بتقدم تجريبي",
+     "الأسبوع 4: تقرير تأخير من صفحة: وش تأخر وليش وخطة الاستدراك"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "مهندس التخطيط يحوّل المشروع لجدول: أنشطة ومدد ومسار حرج، ويتابع كل أسبوع وين وصلنا وش اللي متأخر.",
+     "أنا «دليلك»: الأداة اللي تنطلب في كل إعلان تقريباً هي Primavera P6، فابدأ فيها، وبعدها العقود والتكاليف.",
+     "فيه برنامج خريجين في الرياض عند شركة طاقة ومياه يعلّمك التخطيط والجدولة من الصفر، فراقب برامج الخريجين."
+    ],
+    "sources": [
+     {
+      "label": "AACE International: Planning & Scheduling Professional (PSP)",
+      "url": "https://web.aacei.org/certification/certification-information/certifications-offered/professional-certifications/psp-details",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "AIC: Certified Associate Constructor (CAC) Level I",
+      "url": "https://aic-builds.org/certifications/ac-level-one/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Al Jomaih Energy and Water: وظيفة aljomaih-graduate-development-engineering-riyadh",
+      "url": "https://jobs.workable.com/view/4cnPv2CivxuVyTyngVeK7s/graduate-development-program---engineering---saudi-nationals-in-riyadh-at-al-jomaih-energy-and-water",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Matar Al Baqmi Holding Company: وظيفة matar-albaqmi-planning-engineer-dammam",
+      "url": "https://jobs.workable.com/view/hWRsAMEiW2zyAyEMV75xk3/planning-engineer-in-dammam-at-matar-al-baqmi-holding-company",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   },
+   {
+    "id": "quantity-surveyor",
+    "title": "حاسب كميات ومهندس تكاليف وعقود",
+    "titleEn": "Quantity Surveyor / Cost & Contracts",
+    "fields": [
+     "project-controls"
+    ],
+    "isNew": true,
+    "what": "مسؤول عن فلوس المشروع: يحصر الكميات من المخططات ويسعّرها، يعدّ المستخلصات، يراقب التكاليف، ويتعامل مع أوامر التغيير والمطالبات حسب العقد.",
+    "dayToDay": [
+     "يحصر الكميات من المخططات ويحدّث جدول الكميات",
+     "يجهّز المستخلص الشهري ويراجعه مع الاستشاري",
+     "يتابع التكاليف مقابل الميزانية",
+     "يقيّم أوامر التغيير والمطالبات حسب العقد"
+    ],
+    "path": {
+     "skills": [
+      "engineering-drawings",
+      "quantity-surveying",
+      "cost-control",
+      "construction-contracts",
+      "planning-scheduling",
+      "communication"
+     ],
+     "basedOnLine": "المسار مبني على: مواد اختبار المنشئ المشارك CAC Level I من AIC، وشهادة AACE لفني التكاليف (CCT)، ودليل مسار حساب الكميات من RICS",
+     "basedOnLinks": [
+      "https://aic-builds.org/certifications/ac-level-one/",
+      "https://web.aacei.org/certification/certification-information/certifications-offered/technician-certifications/cct-details",
+      "https://www.rics.org/content/dam/ricsglobal/documents/join-rics/QS-and-construction_December-2025.pdf"
+     ],
+     "orderNote": "AIC CAC Level I orders «Bidding and Estimating» before «Budgeting, Costs & Cost Control», so quantity surveying (take-off and pricing) comes before cost control; contracts follow quantity surveying because the contract engineer posting asks BOQs together with FIDIC administration. AACE CCT accepts «4 years industry related degree.» instead of experience, so it is the realistic graduate certificate; RICS and FIDIC FCCM need experience.",
+     "guidelines": [
+      {
+       "name": "Certified Associate Constructor (CAC) Level I: exam content areas",
+       "provider": "American Institute of Constructors (AIC)",
+       "url": "https://aic-builds.org/certifications/ac-level-one/",
+       "orderedTopics": [
+        "1 Communication Skills",
+        "2 Engineering Management",
+        "3 Management Concepts",
+        "4 Materials, Methods & Project Modeling",
+        "5 Bidding and Estimating",
+        "6 Budgeting, Costs & Cost Control",
+        "7 Planning, Scheduling & Schedule Control",
+        "8 Construction Safety",
+        "9 Construction Geomatics",
+        "10 Project Administration"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "AACE Certified Cost Technician (CCT)",
+       "provider": "AACE International",
+       "url": "https://web.aacei.org/certification/certification-information/certifications-offered/technician-certifications/cct-details",
+       "orderedTopics": [
+        "«Supporting Skills & Knowledge (50) and Process & Technical Skills Knowledge (50)»",
+        "Eligibility: «4 years of industry related experience, or» «4 years industry related degree.»"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "RICS Pathway guide: Quantity surveying and construction (December 2025)",
+       "provider": "RICS",
+       "url": "https://www.rics.org/content/dam/ricsglobal/documents/join-rics/QS-and-construction_December-2025.pdf",
+       "orderedTopics": [
+        "Opened by the guides research sub-agent (listed as a quantity-surveying article); competency list not extracted into this file"
+       ],
+       "checkedAt": "2026-11-20"
+      },
+      {
+       "name": "A guide to becoming a FIDIC Certified Contract Manager (FCCM)",
+       "provider": "FIDIC",
+       "url": "https://fcl.fidic.org/a-guide-to-becoming-a-fidic-certified-contract-manager/",
+       "orderedTopics": [
+        "Opened by the guides research sub-agent: FCCM needs 3–10 years of experience, so it is a later goal, not a graduate certificate"
+       ],
+       "checkedAt": "2026-11-20"
+      }
+     ]
+    },
+    "jobs": [
+     "teefnajd-contract-engineer-riyadh",
+     "rawafid-erp-projects-cost-controller-jeddah",
+     "jasara-quantity-surveyor-riyadh"
+    ],
+    "employers": [
+     {
+      "name": "مجموعة طيف نجد",
+      "nameEn": "Teef Najd Group",
+      "careersUrl": "https://jobs.workable.com/company/7t2M4nJpYZgZaEW452vRQa/jobs-at-teef-najd-group",
+      "checkedAt": "2026-11-20",
+      "note": "صفحة وظائفها على Workable"
+     },
+     {
+      "name": "روافد",
+      "nameEn": "Rawafid",
+      "careersUrl": "https://jobs.workable.com/view/iEqjLnSF6bPpDsXrNcevvJ/erp-%26-projects-cost-controller-in-jeddah-at-rawafid",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     },
+     {
+      "name": "جسارة لإدارة المشاريع",
+      "nameEn": "JASARA PMC",
+      "careersUrl": "https://jobs.workable.com/view/nZFP3tCequ4irsCVLeMKWq/quantity-surveyor-(saudi-national)-in-riyadh-at-jasara-pmc",
+      "checkedAt": "2026-11-20",
+      "note": "رابط وظيفته المفتوحة على Workable"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates",
+     "sce-accreditation"
+    ],
+    "certificates": [
+     {
+      "name": "Certified Cost Technician (CCT)",
+      "issuer": "AACE International",
+      "url": "https://web.aacei.org/certification/certification-information/certifications-offered/technician-certifications/cct-details",
+      "level": "entry",
+      "priceText": "US$260 for members; US$390 for non-members; US$185 resit fee",
+      "arabicAvailable": false,
+      "why": "شهادة دخول في التكاليف؛ الشهادة الجامعية الهندسية تكفي بدل الخبرة.",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "name": "Associate RICS (AssocRICS): Quantity surveying and construction pathway",
+      "issuer": "RICS",
+      "url": "https://www.rics.org/join-rics/apply-to-join-rics/associate-assessment-before-you-enrol",
+      "level": "associate",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "عضوية RICS المشاركة في مسار حساب الكميات؛ رسومها في صفحة منفصلة لم نفتحها.",
+      "checkedAt": "2026-11-20"
+     }
+    ],
+    "salary": {
+     "role": "Senior Quantity Surveyor",
+     "minSAR": 25000,
+     "maxSAR": 40000,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 34, table «Construction & property» (Monthly salary ranges and average values (SAR)); average 35,000",
+     "checkedAt": "2026-11-20",
+     "note": "الراتب الشهري الثابت الإجمالي بالريال حسب دليل Hays للرواتب في السعودية 2026 (الربع الأخير من 2025)، بلا تقسيم حسب الخبرة، والمسمى المذكور فيه مسمى قيادي أو أول (Senior)، فهو سقف للمسار لا راتب خريج."
+    },
+    "interviewQuestions": [
+     "كيف تحصر كمية الخرسانة لقاعدة منفصلة؟",
+     "وش الفرق بين المستخلص الجاري والختامي؟",
+     "وش هي القيمة المكتسبة؟ وش يعني CPI أقل من 1؟",
+     "المقاول طلب أمر تغيير: وش تراجع قبل ما توافق؟",
+     "وش الفرق بين الكتاب الأحمر والأصفر في فيديك؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: احصر كميات الخرسانة والحديد لفيلا من مخططاتها في Excel",
+     "الأسبوع 2: سعّر جدول الكميات وجهّز مستخلصاً تجريبياً",
+     "الأسبوع 3: احسب القيمة المكتسبة (PV وEV وAC) لمشروع افتراضي",
+     "الأسبوع 4: لخّص بنود أوامر التغيير والمطالبات في فيديك 2017، واقرأ نظام المنافسات والمشتريات الحكومية"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "حاسب الكميات مسؤول عن فلوس المشروع: يحصر ويسعّر ويجهّز المستخلصات ويراقب التكاليف وأوامر التغيير.",
+     "أنا «دليلك»: ابدأ بحصر الكميات من المخططات، بعدها ضبط التكاليف والقيمة المكتسبة، وبعدها عقود فيديك؛ هذا ترتيب مواد اختبار AIC.",
+     "شهادة CCT من AACE تقبل شهادتك الجامعية بدل الخبرة، فهي بداية واقعية لك."
+    ],
+    "sources": [
+     {
+      "label": "AIC: Certified Associate Constructor (CAC) Level I",
+      "url": "https://aic-builds.org/certifications/ac-level-one/",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "AACE International: Certified Cost Technician (CCT)",
+      "url": "https://web.aacei.org/certification/certification-information/certifications-offered/technician-certifications/cct-details",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "RICS: Pathway guide: Quantity surveying and construction (Dec 2025)",
+      "url": "https://www.rics.org/content/dam/ricsglobal/documents/join-rics/QS-and-construction_December-2025.pdf",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Teef Najd Group: وظيفة teefnajd-contract-engineer-riyadh",
+      "url": "https://jobs.workable.com/view/hrppang9cYXebiuRKCKgy6/contract-engineer-in-riyadh-at-teef-najd-group",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "Rawafid: وظيفة rawafid-erp-projects-cost-controller-jeddah",
+      "url": "https://jobs.workable.com/view/iEqjLnSF6bPpDsXrNcevvJ/erp-%26-projects-cost-controller-in-jeddah-at-rawafid",
+      "checkedAt": "2026-11-20"
+     },
+     {
+      "label": "JASARA PMC: وظيفة jasara-quantity-surveyor-riyadh",
+      "url": "https://jobs.workable.com/view/nZFP3tCequ4irsCVLeMKWq/quantity-surveyor-(saudi-national)-in-riyadh-at-jasara-pmc",
+      "checkedAt": "2026-11-20"
+     }
+    ]
+   }
+  ]
+ },
+ "demandEvidence": {
+  "_method": "Workable's public job-search JSON (jobs.workable.com/api/v1/jobs?query=<keyword>&location=Saudi Arabia), 34 keywords, first page (20 results) each, 20 Nov 2026. totalSize is Workable's own count for the keyword in Saudi Arabia (includes non-engineering matches and recruitment firms).",
+  "civil-site-engineer": [
+   "«civil engineer»: totalSize 65; «site engineer»: 35 (many are software «site reliability» roles)",
+   "Direct employers seen: Teef Najd Group (Site Engineer, Riyadh), HanmiGlobal Saudi (Site Engineer, Riyadh), Rawafid (Site Civil Engineer, Jeddah), JASARA PMC (Senior Civil / Transportation Design Engineer, Tabuk), Alomar Holding Company (Site Project Manager - Civil / Residential, Riyadh)",
+   "Recruitment firms (not used): Eram Talent (Civil Engineer - Fresher, Makkah; Civil Engineer, several cities), Maharah Human Resources (مهندس مدني، Riyadh)"
+  ],
+  "mep-engineer": [
+   "«mechanical engineer»: totalSize 89; «electrical engineer»: 81",
+   "Direct employers seen: HanmiGlobal Saudi (Mechanical Engineer, Electrical Engineer, Senior Electrical Engineer, MEP Engineer Makkah), CLEAR (MEP / HVAC / Electrical Engineer, Riyadh), Matar Al Baqmi (HVAC site engineer, Dammam), JASARA PMC (Mechanical Engineer, Jeddah), Al Jomaih Energy and Water (Maintenance Lead Engineer - Electrical / Mechanical, Ash Shimasiyah)"
+  ],
+  "qa-qc-engineer": [
+   "«QA/QC»: totalSize 44; «quality engineer»: 67 (many are software QA)",
+   "Direct employers seen: Teef Najd Group (Quality Control Engineer), HanmiGlobal Saudi (Quality Inspectors: Electrical, Mechanical, Architect, Safety, Testing & Commissioning), Matar Al Baqmi (QC Manager / QA/QC In Charge, Dammam), ABIS (QA/QC Supervisor, Jubail)"
+  ],
+  "hse-officer": [
+   "«HSE»: totalSize 140; «safety engineer»: 30; «HSE officer»: 12",
+   "Direct employers seen: HanmiGlobal Saudi (HSE Engineer), Fuku (HSE Engineer, Dammam site), Al Jomaih Energy and Water (Sr. HSE Officer), Qiddiya (Senior Manager - Health and Safety), Eva Pharma (HSE Specialist, Sudair), ABIS (Safety Manager, Khobar)",
+   "Hays 2026 intro (construction): «the sector still requires a large workforce of engineers, project managers, planners and HSE specialists»"
+  ],
+  "planning-engineer": [
+   "«Primavera»: totalSize 68; «planning engineer»: 31; «project control»: 95",
+   "Direct employers seen: HanmiGlobal Saudi (Planning and scheduling Engineer), Matar Al Baqmi (Planning Engineer, Dammam and Jubail), JASARA PMC (Senior Planning Engineer; Project Controls Engineer, Jeddah), Qiddiya (Director - Project Control), ABIS (Planner, Lead Planner, Khobar), Al Jomaih Energy and Water (Graduate Development Program - Engineering)"
+  ],
+  "quantity-surveyor": [
+   "«quantity surveyor»: totalSize 8 (7 at JASARA PMC); «cost engineer»: 24; «cost control»: 63",
+   "Direct employers seen: JASARA PMC (Quantity Surveyor (Saudi National), Senior QS, QS Manager), Teef Najd Group (Contract Engineer), Rawafid (ERP & Projects Cost Controller), Qiddiya (Senior Manager - Cost Planning, several), ABIS (Cost Controller, QS for Scaffolding)"
+  ],
+  "energy-renewables": [
+   "NOT ADDED AS A FAMILY: «solar» and «photovoltaic» returned 0 Saudi postings on Workable, «PV» 2, «wind» 1, «renewable» 5 (none a renewables engineering role). Energy employers seen are conventional/utility: Al Jomaih Energy and Water (graduate program, control-room operators, shift charge engineer, maintenance engineers, Ash Shimasiyah and Jubail). ACWA Power, SEC, Aramco and other renewables developers were not checked (time)."
+  ],
+  "bim": [
+   "«BIM»: totalSize 22, almost all senior (Qiddiya BIM directors/managers, JASARA Senior BIM Specialist Tabuk); «Revit»: 29 (architects, CLEAR, Teef Najd Junior Architect Engineer). BIM is a skill on the MEP path, not a family."
+  ]
+ },
+ "heldJobs": [
+  {
+   "id": "jasara-quantity-surveyor-riyadh",
+   "why": "Asks 10 years (senior). Real and open, but the app's bands stop at mid; held for the coordinator's decision."
+  }
+ ],
+ "notOpened": [
+  {
+   "url": "https://www.autodesk.com/certification/all-certifications/autocad-design-drafting-professional",
+   "why": "HTTP 403 (WebFetch and curl); fee and duration not verified, so fee left null and the Certiport badge page on Credly used instead"
+  },
+  {
+   "url": "https://www.autodesk.com/learn/ondemand/course/autocad-design-drafting-cert-prep",
+   "why": "HTTP 403"
+  },
+  {
+   "url": "https://asq.org/cert/quality-improvement-associate",
+   "why": "HTTP 403 without www; opened fine at www.asq.org"
+  },
+  {
+   "url": "https://www.futurelearn.com/courses/quality-management-system-construction-projects",
+   "why": "HTTP 403 (Coventry Univ. construction QMS course not verified)"
+  },
+  {
+   "url": "https://www.nfpa.org/education-and-research/certification/certified-fire-protection-specialist",
+   "why": "HTTP 404; CFPS eligibility not verified on NFPA's own page"
+  },
+  {
+   "url": "https://oxebridge.com/about/",
+   "why": "HTTP 404"
+  },
+  {
+   "url": "https://hvacrschool.com/about/",
+   "why": "HTTP 404"
+  },
+  {
+   "url": "https://www.designingbuildings.co.uk/wiki/Inspection_and_test_plan_ITP",
+   "why": "HTTP 404 (guessed URL)"
+  },
+  {
+   "url": "https://www.ellenfinkelstein.com/",
+   "why": "opened; now PowerPoint-only, no AutoCAD content, so not used"
+  },
+  {
+   "url": "https://sourcecad.com/",
+   "why": "opened; no founder name or bio on the page, so not used as a person"
+  },
+  {
+   "url": "https://www.sbc.gov.sa/",
+   "why": "opened; homepage lists no training, courses or exams"
+  },
+  {
+   "url": "https://training.saudieng.sa/",
+   "why": "opened page 1 of 2 only (no SBC course listed); page 2 is a postback, not reachable"
+  },
+  {
+   "url": "https://www.pmi.org/certifications/scheduling-sp",
+   "why": "HTTP 403 to WebFetch and curl; PMI-SP fee and eligibility not verified, so AACE PSP used instead"
+  },
+  {
+   "url": "https://www.oracle.com/ae-ar/construction-engineering/construction-scheduling-techniques/",
+   "why": "HTTP 403 (Arabic Oracle article on construction scheduling techniques)"
+  },
+  {
+   "url": "https://www.udemy.com/course/planning-primavera-p6-professional/",
+   "why": "HTTP 403 (Arabic P6 course by Ahmed Zakaria)"
+  },
+  {
+   "url": "https://www.autodesk.com/blogs/construction/cpm-schedule-construction-critical-path-method/",
+   "why": "HTTP 403"
+  },
+  {
+   "url": "https://training.saudieng.sa/",
+   "why": "Opened; page 1 of course list had no planning/cost/QS/contract/BIM course (only seminars); page 2 not reachable without script"
+  },
+  {
+   "url": "https://pathlms.com/aace/product_bundles/2492",
+   "why": "HTTP 403 (AACE learning platform)"
+  },
+  {
+   "url": "https://www.coursera.org/learn/project-controls",
+   "why": "HTTP 404"
+  },
+  {
+   "url": "https://futurelearn.com/courses/principles-measurement-bill-of-quantities",
+   "why": "HTTP 403 to WebFetch; curl got a Cloudflare JavaScript challenge (Coventry BOQ course)"
+  },
+  {
+   "url": "https://academy.rics.org/node/745",
+   "why": "Empty page body (script-only)"
+  },
+  {
+   "url": "https://rics.org/join-rics/apply-to-join-rics/associate-assessment-before-you-enrol",
+   "why": "HTTP 403 to WebFetch; opened with curl instead (eligibility read, fee is on a linked page not opened)"
+  },
+  {
+   "url": "https://onlineacademy.ucem.ac.uk/shop/uncategorized/quantity-surveying-fundamentals/",
+   "why": "Opened but stale: Autumn 2023 cohort, out of stock; not used"
+  },
+  {
+   "url": "https://fidic.org/certification",
+   "why": "HTTP 404"
+  },
+  {
+   "url": "https://academy.fidic.org/",
+   "why": "Script-only page (body shows only 'Loading')"
+  },
+  {
+   "url": "https://www.udemy.com/course/the-arabic-explanation-of-contract-related-to-fidic-1999/",
+   "why": "HTTP 403 to curl (Arabic FIDIC 1999 course; Udemy blocks all fetches)"
+  },
+  {
+   "url": "https://laws.boe.gov.sa/BoeLaws/Laws/LawDetails/f0eaae1e-8ae0-4d05-a0d6-aa1e00f80226/1",
+   "why": "Redirected to the site's error page (code 500); official law text not read"
+  },
+  {
+   "url": "https://www.mof.gov.sa/Knowledgecenter/newGovTendandProcLow/Pages/decisions.aspx",
+   "why": "HTTP 404"
+  },
+  {
+   "url": "https://www.alwatan.com.sa/article/21066",
+   "why": "Opened but not used: 2014 article citing article 36 of the OLD procurement law (10%/20% change-order limits), superseded"
+  },
+  {
+   "url": "https://autodesk.com/certification/all-certifications/revit-architectural-design-professional",
+   "why": "HTTP 403 to WebFetch and curl; fee and exam details not verified (Credly badge page used instead)"
+  },
+  {
+   "url": "https://www.autodesk.com/learn/ondemand/course/revit-architectural-design-cert-prep",
+   "why": "HTTP 403 (free Autodesk Revit cert-prep course)"
+  },
+  {
+   "url": "https://www.coursera.org/learn/autodesk-revit-architectural-design",
+   "why": "HTTP 404 (guessed URL of Autodesk's Coursera exam-prep course; real page not found)"
+  },
+  {
+   "url": "https://www.buildingsmart.org/education/professional-certification/",
+   "why": "Redirected to buildingsmart.org 404 page; buildingSMART Professional Certification not verified"
+  },
+  {
+   "url": "https://ukbimframework.org/guidance/",
+   "why": "301 to a Notion site (script-only); not opened"
+  },
+  {
+   "url": "https://bimpure.com/about",
+   "why": "HTTP 404"
+  }
+ ],
+ "method": "Jobs: Workable public job-search JSON with 34 engineering keywords (Saudi Arabia), direct employers only (recruitment firms Eram Talent, Maharah HR, Taj HR, Hire Fellows, Apt Resources left out); each chosen posting re-requested on 20 Nov 2026 (HTTP 200) and every evidence / bandEvidence string checked by script as a verbatim substring of the posting text. No LinkedIn, Indeed or Bayt. Guides: two web-only research sub-agents (parts merged here). Salary: Hays Saudi Arabia Salary Guide 2026 PDF (text layer). SCE accreditation: the authority's English PDF guide."
+}

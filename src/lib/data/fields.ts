@@ -2,7 +2,12 @@
 // results). Pure module.
 import type { Field, FieldId } from "@/lib/types";
 
-/** Display order: data, software, design, marketing, business, hr, product, cyber-cloud, sales-supply, professional. */
+import { WAVE2_FIELDS } from "./wave2/skills";
+
+/**
+ * Display order: data, software, design, marketing, business, hr, product, cyber-cloud, sales-supply, the nine of wave 2
+ * (./wave2/skills.ts: engineering … gaming), professional.
+ */
 export const FIELDS: readonly Field[] = [
   { id: "data", name: "البيانات والتحليل", hasJobs: true },
   { id: "software", name: "تطوير البرمجيات", hasJobs: true },
@@ -14,6 +19,8 @@ export const FIELDS: readonly Field[] = [
   { id: "product", name: "إدارة المنتجات", hasJobs: true },
   { id: "cyber-cloud", name: "الأمن السيبراني والسحابة", hasJobs: true },
   { id: "sales-supply", name: "المبيعات وسلاسل الإمداد", hasJobs: true },
+  // wave 2 (./wave2/skills.ts)
+  ...WAVE2_FIELDS,
   { id: "professional", name: "المهارات المهنية", hasJobs: false },
 ];
 

@@ -106,8 +106,8 @@ describe("skill tree nodes (spec 3.5)", () => {
     expect(SKILL_IDS.filter((s) => skillNodes(newFacts())[s].inPath)).toEqual([]);
   });
 
-  it("summarises: 8 of 54 skills · 11 of 80 stars, then 9 · 12", () => {
-    expect(skillTreeSummary(cvAnalysedFacts())).toEqual({ skillsHeld: 8, skillsTotal: 54, starsHeld: 11, starsTotal: 80 });
-    expect(skillTreeSummary(courseDoneFacts())).toEqual({ skillsHeld: 9, skillsTotal: 54, starsHeld: 12, starsTotal: 80 });
+  it("summarises: 8 of 93 skills · 11 of 148 stars, then 9 · 12 (54 · 80 before wave 2)", () => {
+    expect(skillTreeSummary(cvAnalysedFacts())).toEqual({ skillsHeld: 8, skillsTotal: 93, starsHeld: 11, starsTotal: 148 });
+    expect(skillTreeSummary(courseDoneFacts())).toEqual({ skillsHeld: 9, skillsTotal: 93, starsHeld: 12, starsTotal: 148 });
   });
 });

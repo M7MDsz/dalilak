@@ -29,7 +29,7 @@ export const COPY = {
 
 /** «38 مهارة في 7 مجالات. كل نجمة تقرّبك من وظيفة.» */
 export function subline(skills: number, fields: number): string {
-  return `${countNoun(skills, "skill")} في ${formatNumber(fields)} مجالات. كل نجمة تقرّبك من وظيفة.`;
+  return `${countNoun(skills, "skill")} في ${formatNumber(fields)} ${fields >= 3 && fields <= 10 ? "مجالات" : "مجالاً"}. كل نجمة تقرّبك من وظيفة.`;
 }
 
 /** «من دليل Power BI» (the guide's title, guideTitle: the course itself is internal). */

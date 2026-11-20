@@ -1,0 +1,3235 @@
+{
+  "checkedAt": "2026-11-20",
+  "label": "جُمعت في 20 نوفمبر 2026",
+  "note": "Wave 2: more Saudi employers for «دليل». Every careersUrl, about line, logo and posting was opened on 2026-11-20 on the company's own site or its own ATS board (no LinkedIn, Indeed, Bayt or Glassdoor; no login; bot checks skipped). verified=false: the company's own site did not open (bot check), so the record is a name the app can recognise, with no about line. 'fields' uses the app's 9 field ids plus new areas (engineering, tourism, health, education, finance, legal, media, gaming); appFields keeps only the app's current ids. fieldsBasis says where the fields come from: careers-page, postings, or business (inferred from what the company does). aliasesAlone: spellings that are also an everyday word, to count only when typed alone (as in companies.ts). Nothing here is a number about a company.",
+  "existingIdsNotRepeated": [
+    "almajed-oud",
+    "almarai",
+    "alrajhi",
+    "aramco",
+    "atheer",
+    "ejada",
+    "elm",
+    "flyakeed",
+    "foodics",
+    "horizontal-digital",
+    "hungerstation",
+    "jahez",
+    "jeeny",
+    "lucidya",
+    "maaden",
+    "maharah",
+    "master-works",
+    "misk",
+    "mobily",
+    "neom",
+    "ninja",
+    "pif",
+    "platinumlist",
+    "qiddiya",
+    "red-sea-global",
+    "riyad-bank",
+    "roshn",
+    "sab",
+    "sabic",
+    "salla",
+    "sdaia",
+    "snb",
+    "stc",
+    "syarah",
+    "tabby",
+    "tamara",
+    "zain",
+    "zatca"
+  ],
+  "countBySector": {
+    "banking": 8,
+    "fintech": 7,
+    "insurance-markets": 3,
+    "tech": 12,
+    "energy-industry": 4,
+    "utilities-transport": 3,
+    "giga-tourism": 6,
+    "travel": 6,
+    "retail-food": 6,
+    "health": 6,
+    "government": 3,
+    "gaming-media": 5
+  },
+  "sectors": {
+    "banking": "بنوك",
+    "fintech": "تقنية مالية",
+    "insurance-markets": "تأمين وأسواق مالية",
+    "tech": "تقنية",
+    "telecom": "اتصالات",
+    "energy-industry": "طاقة وصناعة",
+    "utilities-transport": "مرافق ونقل",
+    "giga-tourism": "مشاريع كبرى وسياحة",
+    "travel": "طيران وسفر",
+    "retail-food": "تجزئة وأغذية",
+    "health": "صحة",
+    "government": "جهات حكومية",
+    "gaming-media": "ألعاب وإعلام"
+  },
+  "companies": [
+    {
+      "id": "alinma",
+      "name": "مصرف الإنماء",
+      "short": "الإنماء",
+      "en": "Alinma Bank",
+      "aliases": [
+        "مصرف الإنماء",
+        "بنك الإنماء",
+        "الإنماء",
+        "الانماء",
+        "مصرف الانماء",
+        "بنك الانماء",
+        "alinma",
+        "alinma bank"
+      ],
+      "aliasesAlone": [],
+      "sector": "banking",
+      "fields": [
+        "finance",
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "appFields": [
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred from what the company does (retail/corporate banking); careers page lists no job families publicly",
+      "careersUrl": "https://career.alinma.com/",
+      "careersStatus": "200; script-only Angular app (no listings in HTML); linked from alinma.com home",
+      "about": "نُعدّ في الإنماء من أبرز مقدمي الخدمات المالية في المملكة العربية السعودية، إذ نلتزم بتقديم حلول ومنتجات مصرفية متوافقة مع الأحكام والضوابط الشرعية.",
+      "aboutSource": "https://www.alinma.com/",
+      "aboutTranslated": false,
+      "source": "https://www.alinma.com/",
+      "verified": true,
+      "logo": "/logos/alinma.png",
+      "checkedAt": "2026-11-20",
+      "note": "about = the home page meta description (cut after its first clause)."
+    },
+    {
+      "id": "anb",
+      "name": "البنك العربي الوطني",
+      "short": "العربي الوطني",
+      "en": "Arab National Bank",
+      "aliases": [
+        "البنك العربي الوطني",
+        "العربي الوطني",
+        "البنك العربي",
+        "بنك العربي الوطني",
+        "anb",
+        "arab national bank",
+        "anb bank"
+      ],
+      "aliasesAlone": [
+        "العربي"
+      ],
+      "sector": "banking",
+      "fields": [
+        "finance",
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "appFields": [
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred from what the company does (retail/corporate banking); careers page lists no job families publicly",
+      "careersUrl": "https://careers.anb.sa/",
+      "careersStatus": "200; ANB careers site (Talentera ATS, a Bayt product); roles not collected because of the no-Bayt rule",
+      "about": "البنك العربي الوطني (anb) شركة مساهمة سعودية مقرها الرياض، تقدم خدماتها المصرفية للأفراد والشركات.",
+      "aboutSource": "https://anb.com.sa/ar/web/anb",
+      "aboutTranslated": false,
+      "source": "https://anb.com.sa/web/anb",
+      "verified": true,
+      "logo": "/logos/anb.png",
+      "checkedAt": "2026-11-20",
+      "note": "anb.com.sa answers some URLs with a 'website under maintenance' page (e.g. its og:image URL); /ar/web/anb works. about condensed from its footer."
+    },
+    {
+      "id": "bank-albilad",
+      "name": "بنك البلاد",
+      "short": "بنك البلاد",
+      "en": "Bank Albilad",
+      "aliases": [
+        "بنك البلاد",
+        "مصرف البلاد",
+        "bank albilad",
+        "albilad",
+        "albilad bank",
+        "al bilad bank"
+      ],
+      "aliasesAlone": [
+        "البلاد"
+      ],
+      "sector": "banking",
+      "fields": [
+        "finance",
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "appFields": [
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred from what the company does (retail/corporate banking); careers page lists no job families publicly",
+      "careersUrl": "https://www.bankalbilad.com.sa/ar/about/Pages/e-careers.aspx",
+      "careersStatus": "200; careers page; its jobs page (/ar/about/pages/jobs.aspx) says «عذراً، لا يوجد وظائف متاحة للعرض»; applications go through its Oracle iRecruitment site irecruitment.bankalbilad.com.sa (not opened)",
+      "about": "مصرفية يرتاح لها بالك وفق أسس شرعية من خلال شبكة واسعة من الفروع وأجهزة الصراف الآلي المنتشرة في أرجاء المملكة.",
+      "aboutSource": "https://www.bankalbilad.com.sa/ar/personal/Pages/home.aspx",
+      "aboutTranslated": false,
+      "source": "https://www.bankalbilad.com.sa/ar/personal/Pages/home.aspx",
+      "verified": true,
+      "logo": "/logos/bank-albilad.png",
+      "checkedAt": "2026-11-20",
+      "note": "«البلاد» alone = everyday word (the country), so only in aliasesAlone. bankalbilad.com redirects to bankalbilad.com.sa."
+    },
+    {
+      "id": "bank-aljazira",
+      "name": "بنك الجزيرة",
+      "short": "بنك الجزيرة",
+      "en": "Bank AlJazira",
+      "aliases": [
+        "بنك الجزيرة",
+        "مصرف الجزيرة",
+        "bank aljazira",
+        "aljazira bank",
+        "bank al jazira",
+        "baj"
+      ],
+      "aliasesAlone": [
+        "الجزيرة"
+      ],
+      "sector": "banking",
+      "fields": [
+        "finance",
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "appFields": [
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred from what the company does (retail/corporate banking); careers page lists no job families publicly",
+      "careersUrl": "https://career.aljazirabank.com.sa/jobs",
+      "careersStatus": "200; 'Career portal' (Elevatus ATS, script-only, listings not in HTML)",
+      "about": null,
+      "aboutSource": null,
+      "aboutTranslated": false,
+      "source": null,
+      "verified": false,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "bankaljazira.com redirects to aljazirabank.com.sa/en-us, which serves an obfuscated JavaScript bot challenge instead of content: skipped (no about, no logo, source null). Arabic name «بنك الجزيرة» NOT verified on its own site. «الجزيرة» alone = everyday word + Al Jazeera channel."
+    },
+    {
+      "id": "bsf",
+      "name": "البنك السعودي الفرنسي",
+      "short": "السعودي الفرنسي",
+      "en": "Banque Saudi Fransi",
+      "aliases": [
+        "البنك السعودي الفرنسي",
+        "السعودي الفرنسي",
+        "البنك الفرنسي",
+        "بنك الفرنسي",
+        "bsf",
+        "banque saudi fransi",
+        "saudi fransi",
+        "alfransi",
+        "al fransi"
+      ],
+      "aliasesAlone": [
+        "الفرنسي"
+      ],
+      "sector": "banking",
+      "fields": [
+        "finance",
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "appFields": [
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred from what the company does (retail/corporate banking); careers page lists no job families publicly",
+      "careersUrl": "https://fa-epje-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/BSFCareers/",
+      "careersStatus": "200; BSF's own Oracle Recruiting Cloud site (linked from bsf.sa home); 0 open jobs on check (site API TotalJobsCount 0)",
+      "about": "البنك السعودي الفرنسي شركة مساهمة عامة مرخّصة بموجب مرسوم ملكي، مقرها الرياض، وتقدم خدماتها المصرفية للأفراد والشركات.",
+      "aboutSource": "https://bsf.sa/",
+      "aboutTranslated": false,
+      "source": "https://bsf.sa/",
+      "verified": true,
+      "logo": "/logos/bsf.svg",
+      "checkedAt": "2026-11-20",
+      "note": "alfransi.com.sa redirects to bsf.sa. about condensed from the home-page footer (public company, licensed by royal decree, Riyadh) and its menus (personal/corporate banking)."
+    },
+    {
+      "id": "d360",
+      "name": "بنك D360",
+      "short": "D360",
+      "en": "D360 Bank",
+      "aliases": [
+        "بنك D360",
+        "بنك دي 360",
+        "دي 360",
+        "d360",
+        "d360 bank",
+        "d360bank"
+      ],
+      "aliasesAlone": [],
+      "sector": "banking",
+      "fields": [
+        "software",
+        "cyber-cloud",
+        "finance",
+        "legal",
+        "design"
+      ],
+      "appFields": [
+        "software",
+        "cyber-cloud",
+        "design"
+      ],
+      "newFields": [
+        "finance",
+        "legal"
+      ],
+      "fieldsBasis": "careers-page",
+      "fieldsEvidence": "Job-family facets on its Oracle careers site (2026-11-20): Technology (8), Risk Management (3), Operations (1), Compliance, AML, & Control (1); postings include Lead UX Designer, Cloud Engineer, Manager - SIEM and Threat Intelligence, Senior Manager - Market Risk",
+      "careersUrl": "https://fa-erqw-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/D360BankCareerPage",
+      "careersStatus": "200; D360's own Oracle Recruiting Cloud site (linked from d360.com); 13 open roles on check, all Riyadh",
+      "about": "بنك D360 أول بنك رقمي سعودي متوافق مع الشريعة الإسلامية، يقدّم حوالات دولية سريعة وبطاقات رقمية فورية.",
+      "aboutSource": "https://d360.com/ar",
+      "aboutTranslated": false,
+      "source": "https://d360.com/",
+      "verified": true,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "about combines its page title («أول بنك رقمي سعودي متوافق مع الشريعة») and meta description."
+    },
+    {
+      "id": "saib",
+      "name": "البنك السعودي للاستثمار",
+      "short": "السعودي للاستثمار",
+      "en": "The Saudi Investment Bank",
+      "aliases": [
+        "البنك السعودي للاستثمار",
+        "السعودي للاستثمار",
+        "بنك السعودي للاستثمار",
+        "saib",
+        "saudi investment bank",
+        "the saudi investment bank"
+      ],
+      "aliasesAlone": [],
+      "sector": "banking",
+      "fields": [
+        "finance",
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "appFields": [
+        "data",
+        "software",
+        "cyber-cloud",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred from what the company does (retail/corporate banking); careers page lists no job families publicly",
+      "careersUrl": "https://careers.saib.com.sa/",
+      "careersStatus": "200; SAIB careers site (Talentera ATS, a Bayt product); roles not collected because of the no-Bayt rule",
+      "about": "يقدم البنك السعودي للاستثمار خدمات مصرفية متنوعة تشمل حلول التمويل وفتح الحسابات وصناديق الاستثمار والخدمات البنكية الإلكترونية.",
+      "aboutSource": "https://www.saib.com.sa/ar",
+      "aboutTranslated": false,
+      "source": "https://www.saib.com.sa/ar",
+      "verified": true,
+      "logo": "/logos/saib.png",
+      "checkedAt": "2026-11-20",
+      "note": null
+    },
+    {
+      "id": "stc-bank",
+      "name": "بنك إس.تي.سي",
+      "short": "STC Bank",
+      "en": "STC Bank",
+      "aliases": [
+        "بنك إس.تي.سي",
+        "بنك اس تي سي",
+        "بنك إس تي سي",
+        "بنك stc",
+        "stc bank",
+        "stcbank",
+        "اس تي سي بنك"
+      ],
+      "aliasesAlone": [],
+      "sector": "banking",
+      "fields": [
+        "software",
+        "data",
+        "cyber-cloud",
+        "product",
+        "finance",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "cyber-cloud",
+        "product",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (digital bank); its careers page is an application form with no job families",
+      "careersUrl": "https://stcbank.com.sa/web/guest/job-application",
+      "careersStatus": "200; «التقديم لوظيفة في STC Bank» application form (no listings)",
+      "about": "STC Bank بنك رقمي خاضع لرقابة وإشراف البنك المركزي السعودي، يتيح إدارة الأموال والتحويلات المحلية والدولية والبطاقات من الجوال.",
+      "aboutSource": "https://stcbank.com.sa/ar",
+      "aboutTranslated": false,
+      "source": "https://stcbank.com.sa/",
+      "verified": true,
+      "logo": "/logos/stc-bank.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Formerly stc pay (site links a 'notice of transformation to STC Bank'). Do not add a bare «stc» alias (clashes with existing id stc). Arabic name from its footer «© 2026 بنك إس.تي.سي»."
+    },
+    {
+      "id": "barq",
+      "name": "برق",
+      "short": "برق",
+      "en": "barq",
+      "aliases": [
+        "تطبيق برق",
+        "برق المالية",
+        "شركة براق المالية",
+        "barq app",
+        "barq.com"
+      ],
+      "aliasesAlone": [
+        "برق",
+        "barq"
+      ],
+      "sector": "fintech",
+      "fields": [
+        "software",
+        "data",
+        "product",
+        "cyber-cloud",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "product",
+        "cyber-cloud",
+        "business"
+      ],
+      "newFields": [],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (payments / money-transfer app); no careers page found",
+      "careersUrl": null,
+      "careersStatus": "no careers link on barq.com home (/careers = 404); none found by web search",
+      "about": "برق تطبيق تقنية مالية للمدفوعات والتحويلات، تشغّله شركة براق المالية، شركة مساهمة مقفلة مقرها الرياض.",
+      "aboutSource": "https://www.barq.com/ar",
+      "aboutTranslated": false,
+      "source": "https://www.barq.com/",
+      "verified": true,
+      "logo": "/logos/barq.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Legal entity per its footer: «شركة براق المالية» (closed joint-stock, Riyadh). «برق» alone = lightning (everyday word)."
+    },
+    {
+      "id": "geidea",
+      "name": "جيديا",
+      "short": "جيديا",
+      "en": "Geidea",
+      "aliases": [
+        "جيديا",
+        "جيدية",
+        "geidea",
+        "geidea.net"
+      ],
+      "aliasesAlone": [],
+      "sector": "fintech",
+      "fields": [
+        "software",
+        "data",
+        "sales-supply",
+        "business",
+        "cyber-cloud"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "sales-supply",
+        "business",
+        "cyber-cloud"
+      ],
+      "newFields": [],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (payment terminals and business solutions); no careers link on its site",
+      "careersUrl": null,
+      "careersStatus": "no careers link on geidea.net/ksa/ar home; /ksa/ar/careers = 404",
+      "about": "جيديا توفر حلول الدفع والأعمال في المملكة العربية السعودية لرواد الأعمال والمنشآت القائمة.",
+      "aboutSource": "https://www.geidea.net/ksa/ar",
+      "aboutTranslated": false,
+      "source": "https://www.geidea.net/",
+      "verified": true,
+      "logo": "/logos/geidea.svg",
+      "checkedAt": "2026-11-20",
+      "note": null
+    },
+    {
+      "id": "hala",
+      "name": "هلا",
+      "short": "هلا",
+      "en": "HALA",
+      "aliases": [
+        "تطبيق هلا",
+        "هلا للمدفوعات",
+        "هلا للشركات",
+        "هلا بلس",
+        "hala.com",
+        "hala app",
+        "hala payments"
+      ],
+      "aliasesAlone": [
+        "هلا",
+        "hala"
+      ],
+      "sector": "fintech",
+      "fields": [
+        "software",
+        "data",
+        "product",
+        "sales-supply",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "product",
+        "sales-supply",
+        "business"
+      ],
+      "newFields": [],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (SME accounts/payments platform); careers board is script-only and its jobs API needs a client header",
+      "careersUrl": "https://careers.hala.com/",
+      "careersStatus": "200; script-only app (listings load from an API that requires a client header: not used)",
+      "about": "هلا منصة تقنية مالية رائدة تهتم بتمكين المنشآت الصغيرة والمتوسطة من إدارة إيراداتها ومدفوعاتها بطريقة سهلة وآمنة.",
+      "aboutSource": "https://hala.com/ar",
+      "aboutTranslated": false,
+      "source": "https://hala.com/",
+      "verified": true,
+      "logo": "/logos/hala.svg",
+      "checkedAt": "2026-11-20",
+      "note": "«هلا»/«hala» alone = everyday greeting, so only in aliasesAlone."
+    },
+    {
+      "id": "lean-tech",
+      "name": "لين تكنولوجيز",
+      "short": "لين تك",
+      "en": "Lean Technologies",
+      "aliases": [
+        "لين تكنولوجيز",
+        "لين تك",
+        "لين للتقنية",
+        "lean technologies",
+        "lean tech",
+        "leantech",
+        "leantech.me"
+      ],
+      "aliasesAlone": [
+        "لين",
+        "lean"
+      ],
+      "sector": "fintech",
+      "fields": [
+        "software",
+        "data",
+        "legal",
+        "hr"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "hr"
+      ],
+      "newFields": [
+        "legal"
+      ],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "8 open roles on its Ashby board (2026-11-20): Senior Data Scientist (Riyadh), Senior Compliance Manager (Riyadh), Staff Engineer (Riyadh, Dubai), Senior Software Engineer, Senior Backend Engineer, Software Engineering Manager, Talent Acquisition Manager (Dubai)",
+      "careersUrl": "https://leantech.me/uae/en/careers",
+      "careersStatus": "200; careers page lists 8 open roles on its Ashby board (jobs.ashbyhq.com/LeanTech); the 3 Riyadh roles are all senior/staff, so no roles recorded",
+      "about": "تساعد لين الشركات على تحويل الأموال والتحقق من الهويات وفهم البيانات المالية لعملائها عبر منصة واحدة ملتزمة بالأنظمة.",
+      "aboutSource": "https://leantech.me/uae/en",
+      "aboutTranslated": true,
+      "source": "https://leantech.me/",
+      "verified": true,
+      "logo": "/logos/lean-tech.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Open-banking fintech (NOT Lean health / Lean Business Services). Site is English-only: Arabic name/short are transliterations, not from its site. «لين»/«lean» alone also = Lean health and an everyday word, so only in aliasesAlone. leantech.me redirects by region (/uae/en, /ksa/en)."
+    },
+    {
+      "id": "moyasar",
+      "name": "ميسر",
+      "short": "ميسر",
+      "en": "Moyasar",
+      "aliases": [
+        "بوابة ميسر",
+        "ميسر للمدفوعات",
+        "شركة ميسر المالية",
+        "moyasar"
+      ],
+      "aliasesAlone": [
+        "ميسر"
+      ],
+      "sector": "fintech",
+      "fields": [
+        "finance",
+        "legal",
+        "software",
+        "design",
+        "sales-supply",
+        "marketing"
+      ],
+      "appFields": [
+        "software",
+        "design",
+        "sales-supply",
+        "marketing"
+      ],
+      "newFields": [
+        "finance",
+        "legal"
+      ],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "Workable board (2026-11-20): Fraud Specialist, AML Specialist, Accounts Receivable Specialist, Legal Specialist, Senior Software Engineer - Full Stack, UI/UX Designer (remote, Egypt), Technical Copywriter (remote), Customer Relationship Manager, Sales Account Manager, Executive Office Manager",
+      "careersUrl": "https://moyasar.com/en/careers/",
+      "careersStatus": "200; careers page lists open roles; its Workable board reports 11 open roles, mostly Riyadh",
+      "about": "منصة مدفوعات إلكترونية مرخّصة من البنك المركزي السعودي، تمكّن الأعمال من قبول المدفوعات وإدارة المعاملات.",
+      "aboutSource": "https://moyasar.com/ar/",
+      "aboutTranslated": false,
+      "source": "https://moyasar.com/",
+      "verified": true,
+      "logo": "/logos/moyasar.png",
+      "checkedAt": "2026-11-20",
+      "note": "«ميسر» alone = everyday word (easy / facilitated), so only in aliasesAlone."
+    },
+    {
+      "id": "rasan",
+      "name": "رسن",
+      "short": "رسن",
+      "en": "Rasan",
+      "aliases": [
+        "رسن لتقنية المعلومات",
+        "شركة رسن",
+        "rasan",
+        "rasan.co"
+      ],
+      "aliasesAlone": [
+        "رسن"
+      ],
+      "sector": "fintech",
+      "fields": [
+        "software",
+        "data",
+        "product",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "product",
+        "business"
+      ],
+      "newFields": [],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (fintech/insurtech platforms such as Tameeni); careers board not read for roles (time box)",
+      "careersUrl": "https://careers.rasan.co/",
+      "careersStatus": "200; 'Shape the Future with Us - Rasan' (Teamtailor career site; jobs at careers.rasan.co/jobs, not opened)",
+      "about": "رسن تقود التحول الرقمي في السعودية من خلال حلول تقنية ومالية متقدمة للأفراد والشركات في مجالات التأمين والخدمات المالية.",
+      "aboutSource": "https://rasan.co/ar",
+      "aboutTranslated": false,
+      "source": "https://rasan.co/",
+      "verified": true,
+      "logo": "/logos/rasan.png",
+      "checkedAt": "2026-11-20",
+      "note": "Extra. rasan.co redirects to /en. «رسن» alone is also an everyday word (halter), so only in aliasesAlone."
+    },
+    {
+      "id": "wafeq",
+      "name": "وافِق",
+      "short": "وافق",
+      "en": "Wafeq",
+      "aliases": [
+        "برنامج وافق",
+        "wafeq"
+      ],
+      "aliasesAlone": [
+        "وافق"
+      ],
+      "sector": "fintech",
+      "fields": [
+        "software",
+        "finance",
+        "product",
+        "sales-supply",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "product",
+        "sales-supply",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (AI accounting and ZATCA phase-2 e-invoicing software). Careers board lists 1 opening (Partner Success Manager).",
+      "careersUrl": "https://careers.wafeq.com/",
+      "careersStatus": "200; Teamtailor career site linked from wafeq.com; 1 job seen (Partner Success Manager)",
+      "about": "برنامج محاسبة مدعوم بالذكاء الاصطناعي يصدر فواتير إلكترونية متوافقة مع المرحلة الثانية من هيئة الزكاة والضريبة والجمارك ومرتبطة بمنصة فاتورة.",
+      "aboutSource": "https://www.wafeq.com/ar-sa",
+      "aboutTranslated": false,
+      "source": "https://www.wafeq.com/ar-sa",
+      "verified": true,
+      "logo": "/logos/wafeq.png",
+      "checkedAt": "2026-11-20",
+      "note": "«وافق» = 'agreed' (everyday word) -> aliasesAlone. Sector fintech (accounting software); change to tech if preferred."
+    },
+    {
+      "id": "alrajhi-takaful",
+      "name": "شركة الراجحي للتأمين التكافلي",
+      "short": "تكافل الراجحي",
+      "en": "Al Rajhi Takaful",
+      "aliases": [
+        "تكافل الراجحي",
+        "الراجحي تكافل",
+        "الراجحي للتأمين التكافلي",
+        "شركة الراجحي للتأمين التكافلي",
+        "al rajhi takaful",
+        "alrajhi takaful"
+      ],
+      "aliasesAlone": [],
+      "sector": "insurance-markets",
+      "fields": [
+        "finance",
+        "business",
+        "data",
+        "software"
+      ],
+      "appFields": [
+        "business",
+        "data",
+        "software"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (takaful insurance: motor, medical malpractice, travel)",
+      "careersUrl": "https://careers.alrajhitakaful.com/",
+      "careersStatus": "200; script-only app (same platform shell as career.alinma.com; no listings in HTML); linked from alrajhitakaful.com home",
+      "about": "تكافل الراجحي تقدّم حلول التأمين للسيارات والأخطاء الطبية والسفر وغيرها للأفراد والشركات.",
+      "aboutSource": "https://www.alrajhitakaful.com/ar",
+      "aboutTranslated": false,
+      "source": "https://www.alrajhitakaful.com/",
+      "verified": true,
+      "logo": "/logos/alrajhi-takaful.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Extra. Name as in its title «شركة الراجحي للتأمين التكافلى» (site spells final ى; normalised to ي). Keep separate from existing id alrajhi (the bank): do not add bare «الراجحي»."
+    },
+    {
+      "id": "bupa-arabia",
+      "name": "بوبا العربية",
+      "short": "بوبا",
+      "en": "Bupa Arabia",
+      "aliases": [
+        "بوبا العربية",
+        "بوبا",
+        "بوبا للتأمين",
+        "بوبا العربية للتأمين",
+        "bupa arabia",
+        "bupa",
+        "bupa.com.sa"
+      ],
+      "aliasesAlone": [],
+      "sector": "insurance-markets",
+      "fields": [
+        "health",
+        "finance",
+        "data",
+        "software",
+        "business"
+      ],
+      "appFields": [
+        "data",
+        "software",
+        "business"
+      ],
+      "newFields": [
+        "health",
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (medical insurance); its careers site is Talentera (Bayt product) so roles were not read",
+      "careersUrl": "https://careers.bupa.com.sa/en/",
+      "careersStatus": "200; 'Careers at Bupa Arabia' (Talentera ATS, a Bayt product); roles not collected because of the no-Bayt rule",
+      "about": "تجمع بوبا العربية بين خبرة تمتد لعقود في مجال الرعاية الصحية وأفضل الممارسات العالمية، وتقدم خطط تأمين طبي للأفراد والشركات والعمالة المنزلية.",
+      "aboutSource": "https://www.bupa.com.sa/ar/home",
+      "aboutTranslated": false,
+      "source": "https://www.bupa.com.sa/",
+      "verified": true,
+      "logo": "/logos/bupa-arabia.svg",
+      "checkedAt": "2026-11-20",
+      "note": "bupa.com.sa/ar/careers exists as a route but renders client-side only; careers.bupa.com.sa found via web search and opened."
+    },
+    {
+      "id": "tawuniya",
+      "name": "التعاونية للتأمين",
+      "short": "التعاونية",
+      "en": "Tawuniya",
+      "aliases": [
+        "التعاونية للتأمين",
+        "شركة التعاونية للتأمين",
+        "تأمين التعاونية",
+        "التعاونيه للتأمين",
+        "tawuniya",
+        "tawuniya insurance"
+      ],
+      "aliasesAlone": [
+        "التعاونية",
+        "التعاونيه"
+      ],
+      "sector": "insurance-markets",
+      "fields": [
+        "finance",
+        "data",
+        "business",
+        "health",
+        "software"
+      ],
+      "appFields": [
+        "data",
+        "business",
+        "software"
+      ],
+      "newFields": [
+        "finance",
+        "health"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (insurance: medical, motor, home, travel)",
+      "careersUrl": null,
+      "careersStatus": "tawuniya.com is a script-only app; /ar/careers returns the same app shell (no content); no own careers board found",
+      "about": "التعاونية إحدى الشركات الرائدة في قطاع التأمين التعاوني في المملكة العربية السعودية، وتقدم تأمين المركبات والتأمين الطبي وتأمين المنازل والسفر.",
+      "aboutSource": "https://www.tawuniya.com/",
+      "aboutTranslated": false,
+      "source": "https://www.tawuniya.com/",
+      "verified": true,
+      "logo": "/logos/tawuniya.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Official name on its site: «شركة التعاونية للتأمين». «التعاونية» alone = everyday word (cooperative)."
+    },
+    {
+      "id": "careem",
+      "name": "كريم",
+      "short": "كريم",
+      "en": "Careem",
+      "aliases": [
+        "تطبيق كريم",
+        "كريم السعودية",
+        "careem",
+        "careem ksa"
+      ],
+      "aliasesAlone": [
+        "كريم"
+      ],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "product",
+        "business",
+        "marketing"
+      ],
+      "appFields": [
+        "software",
+        "product",
+        "business",
+        "marketing"
+      ],
+      "newFields": [],
+      "fieldsBasis": "careers-page",
+      "fieldsEvidence": "Saudi Arabic careers page: «اكتشف الوظائف الشاغرة في كريم في الهندسة والمنتج والعمليات والتسويق».",
+      "careersUrl": "https://www.careem.com/en-sa/careers/",
+      "careersStatus": "200; Saudi careers page (also /ar-sa/careers/), links to jobs.careem.com (200, script-only app; roles not read)",
+      "about": "احجز التاكسي والمشاوير في أي مكان في المملكة العربية السعودية مع كريم. وصول سريع، أسعار محددة مسبقاً، وكباتن موثوقون وآمنون.",
+      "aboutSource": "https://www.careem.com/ar-sa/",
+      "aboutTranslated": false,
+      "source": "https://www.careem.com/en-sa/",
+      "verified": true,
+      "logo": "/logos/careem.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Regional company (UAE-based) with a Saudi site. «كريم» = generous / common first name -> aliasesAlone. Logo is the favicon mark (dark green)."
+    },
+    {
+      "id": "mozn",
+      "name": "مُزن",
+      "short": "مزن",
+      "en": "MOZN",
+      "aliases": [
+        "شركة مزن",
+        "مزن للذكاء الاصطناعي",
+        "mozn",
+        "mozn ai"
+      ],
+      "aliasesAlone": [
+        "مزن",
+        "مُزن"
+      ],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "data",
+        "cyber-cloud",
+        "legal",
+        "sales-supply",
+        "design",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "cyber-cloud",
+        "sales-supply",
+        "design",
+        "business"
+      ],
+      "newFields": [
+        "legal"
+      ],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "Open roles on its Workable board (2026-11-20, departments Focal, Applied AI, Commercial, Corporate): Senior Full-Stack Software Engineer, Cloud Platform Engineer, FinCrime Technical Consultant, Legal Specialist, Revenue Operations Analyst, Presales Consultant (Applied AI), Procurement Officer, Creative Design & Motion Specialist.",
+      "careersUrl": "https://apply.workable.com/mozn-ai/",
+      "careersStatus": "200; Workable board linked from mozn.ai/careers; API total 18 openings (mostly Riyadh)",
+      "about": "مُزن شركة ذكاء اصطناعي مؤسسي للمجالات عالية الحساسية، تثق بها المؤسسات المالية والقطاع العام، ومن حلولها «اعرف عميلك» ومكافحة غسل الأموال وإدارة الاحتيال.",
+      "aboutSource": "https://www.mozn.ai/ar",
+      "aboutTranslated": true,
+      "source": "https://www.mozn.ai/",
+      "verified": true,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "mozn.sa redirects to mozn.ai. Arabic name «مُزن» seen on its Arabic page. About line partly translated from the English meta description, with the KYC/AML line from the Arabic page. «مزن» = rain clouds -> aliasesAlone. No logo: header logo is white/cyan on dark (text near-white)."
+    },
+    {
+      "id": "mrsool",
+      "name": "مرسول",
+      "short": "مرسول",
+      "en": "Mrsool",
+      "aliases": [
+        "تطبيق مرسول",
+        "mrsool",
+        "mrsool app"
+      ],
+      "aliasesAlone": [
+        "مرسول"
+      ],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "data",
+        "cyber-cloud",
+        "marketing",
+        "hr",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "cyber-cloud",
+        "marketing",
+        "hr",
+        "business"
+      ],
+      "newFields": [],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "Open roles on its Workable board (2026-11-20): Data Analyst, Data Scientist II, Data Engineer II, SDE III Backend Engineer, Site Reliability Engineer II (Technology); Creative Copywriter (Marketing, Riyadh); Senior People Operations (People); Customer Care / Courier Operations (Operations).",
+      "careersUrl": "https://apply.workable.com/mrsool-3/",
+      "careersStatus": "200; Workable board linked from mrsool.co footer; API total 12 openings (Riyadh, Cairo, remote India)",
+      "about": "نشأ مرسول من سؤال بسيط: ماذا لو كان لك أخ في كل ركن من المدينة؟ واستُلهمت فكرته من تحديات قضاء المشاوير اليومية.",
+      "aboutSource": "https://mrsool.co/home/",
+      "aboutTranslated": true,
+      "source": "https://mrsool.co/home/",
+      "verified": true,
+      "logo": "/logos/mrsool.png",
+      "checkedAt": "2026-11-20",
+      "note": "No Arabic site found (mrsool.co/ar/ is 404); about line translated/condensed from the English home-page description. Arabic name «مرسول» appears once in its home-page HTML. «مرسول» = messenger -> aliasesAlone."
+    },
+    {
+      "id": "nana",
+      "name": "نعناع",
+      "short": "نعناع",
+      "en": "Nana",
+      "aliases": [
+        "تطبيق نعناع",
+        "نانا",
+        "nana",
+        "nana app"
+      ],
+      "aliasesAlone": [
+        "نعناع"
+      ],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "data",
+        "product",
+        "sales-supply",
+        "marketing",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "product",
+        "sales-supply",
+        "marketing",
+        "business"
+      ],
+      "newFields": [],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (quick-commerce grocery delivery app; its own keywords: «توصيل بقالة، تجارة سريعة»). Careers page lists no job families.",
+      "careersUrl": "https://www.nana.sa/arabic/careers",
+      "careersStatus": "200; Arabic careers page («انضم لعائلة نعناع»), 'استكشف الوظائف' links to https://hiring.nana.co/jobs which timed out (no response) twice",
+      "about": "نبحث عن المواهب المميزة للانضمام إلى فريقنا. كن جزءاً من التغيير وساهم في تطوير مستقبل التوصيل في المملكة.",
+      "aboutSource": "https://www.nana.sa/arabic/careers",
+      "aboutTranslated": false,
+      "source": "https://www.nana.sa/",
+      "verified": true,
+      "logo": "/logos/nana.png",
+      "checkedAt": "2026-11-20",
+      "note": "Brand writes itself «Nana نعناع». «نعناع» = mint (everyday word) -> aliasesAlone. «نانا» kept in aliases per the caller's note (it can also be a nickname; move to aliasesAlone if it misfires). About line is the careers page's own description (home page only has a slogan)."
+    },
+    {
+      "id": "rewaa",
+      "name": "رواء التقنية لتقنية المعلومات",
+      "short": "رواء",
+      "en": "Rewaa",
+      "aliases": [
+        "رواء التقنية",
+        "شركة رواء",
+        "برنامج رواء",
+        "rewaa",
+        "rewaatech",
+        "rewaa tech"
+      ],
+      "aliasesAlone": [
+        "رواء"
+      ],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "product",
+        "sales-supply",
+        "marketing",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "product",
+        "sales-supply",
+        "marketing",
+        "business"
+      ],
+      "newFields": [],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (POS, accounting, inventory and e-invoicing SaaS for merchants). Careers page embeds an empty Lever board (no categories, no open roles).",
+      "careersUrl": "https://rewaa.com/careers/",
+      "careersStatus": "200; Arabic careers page «وظائف | رواء» embeds Lever board jobs.lever.co/rewaatech, which answers 404 and its API returns [] (0 openings)",
+      "about": "حلول متكاملة تجمع الكاشير، والمحاسبة، والمخزون، والفوترة الإلكترونية في نظام واحد لإدارة نشاطك التجاري.",
+      "aboutSource": "https://rewaa.com/",
+      "aboutTranslated": false,
+      "source": "https://rewaa.com/",
+      "verified": true,
+      "logo": "/logos/rewaa.png",
+      "checkedAt": "2026-11-20",
+      "note": "Home www.rewaatech.com redirects to rewaa.com. Legal name from its footer: «شركة رواء التقنية لتقنية المعلومات». «رواء» is also a word/female name -> aliasesAlone. Logo is the favicon mark (SECONDARY_LOGO.png is white-only)."
+    },
+    {
+      "id": "sary",
+      "name": "ساري",
+      "short": "ساري",
+      "en": "Sary",
+      "aliases": [
+        "تطبيق ساري",
+        "ساري للجملة",
+        "sary",
+        "sary app"
+      ],
+      "aliasesAlone": [
+        "ساري"
+      ],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "sales-supply",
+        "data",
+        "marketing",
+        "finance",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "sales-supply",
+        "data",
+        "marketing",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (B2B wholesale marketplace with procurement, POS and 30-day financing). No working careers page.",
+      "careersUrl": null,
+      "careersStatus": "sary.com footer links to https://sary.zenats.com/en/careers_page, which answers 404 (the zenats.com root is the ATS vendor's marketing page)",
+      "about": "ساري يربط المحلات والمنشآت والبقالات والمقاهي والفنادق والمكاتب في السعودية ومصر بشبكة واسعة من موردين وموزعين سوق الجملة في مكان واحد.",
+      "aboutSource": "https://sary.com/",
+      "aboutTranslated": false,
+      "source": "https://sary.com/",
+      "verified": true,
+      "logo": "/logos/sary.svg",
+      "checkedAt": "2026-11-20",
+      "note": "The prompt's sary.sa is NOT this company (it is an events firm 'Saryevent'); Sary's own site is sary.com. «ساري» = valid/running -> aliasesAlone."
+    },
+    {
+      "id": "tahakom",
+      "name": "تحكم",
+      "short": "تحكم",
+      "en": "Tahakom",
+      "aliases": [
+        "شركة تحكم",
+        "tahakom",
+        "saudi technology and security"
+      ],
+      "aliasesAlone": [
+        "تحكم"
+      ],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "data",
+        "cyber-cloud",
+        "engineering",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "cyber-cloud",
+        "business"
+      ],
+      "newFields": [
+        "engineering"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (urban intelligence: sovereign AI and connected infrastructure). Careers site (SuccessFactors) offers Coop training, Graduate Development Program and Tamheer.",
+      "careersUrl": "https://careers.tahakom.com/",
+      "careersStatus": "200; 'Saudi Technology and Security Careers' SuccessFactors site with Graduate Development Program, Cooperative Training and Tamheer pages; its job search (careers.tahakom.com/search/?q=) shows no open positions today",
+      "about": "تحكم رائدة في الذكاء الحضري، تجمع بين الذكاء الاصطناعي السيادي والبنية التحتية المتصلة لمساعدة المنظومات الحضرية على اتخاذ قرارات أفضل وتحسين جودة الحياة.",
+      "aboutSource": "https://www.tahakom.com/",
+      "aboutTranslated": true,
+      "source": "https://www.tahakom.com/",
+      "verified": true,
+      "logo": "/logos/tahakom.png",
+      "checkedAt": "2026-11-20",
+      "note": "Arabic name «تحكم» read from its logo image (tahakom.com/ar is 404). «تحكم» = 'control' (everyday word) -> aliasesAlone. About translated from the English meta description."
+    },
+    {
+      "id": "takamol",
+      "name": "تكامل القابضة",
+      "short": "تكامل",
+      "en": "Takamol Holding",
+      "aliases": [
+        "تكامل القابضة",
+        "شركة تكامل القابضة",
+        "takamol",
+        "takamol holding"
+      ],
+      "aliasesAlone": [
+        "تكامل"
+      ],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "data",
+        "hr",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "hr",
+        "business"
+      ],
+      "newFields": [],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (digital labour-market platforms, compliance solutions, human-capital training). Join-us page lists no job families; mentions the «تكاملي طموح» graduate program.",
+      "careersUrl": "https://takamolholding.com/ar/join-us",
+      "careersStatus": "200; Arabic 'التوظيف في تكامل القابضة' page with the «تكاملي طموح» fresh-graduate program; no ATS link found in its HTML",
+      "about": "نُمكن التحول الرقمي والاقتصادي عبر ابتكارات شاملة، لنقدم حلولاً متكاملة تعزز الكفاءات البشرية وتحقق تطلعات مختلف القطاعات.",
+      "aboutSource": "https://takamolholding.com/ar",
+      "aboutTranslated": false,
+      "source": "https://takamolholding.com/ar",
+      "verified": true,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "«تكامل» = 'integration' (everyday word) -> aliasesAlone. No logo: its logo SVG is white-only (fill #fff)."
+    },
+    {
+      "id": "tamkeen-tech",
+      "name": "تمكين للتقنيات",
+      "short": "تمكين للتقنيات",
+      "en": "Tamkeen Technologies",
+      "aliases": [
+        "تمكين للتقنيات",
+        "شركة تمكين للتقنيات",
+        "tamkeen technologies",
+        "tamkeen tech",
+        "tamkeentech"
+      ],
+      "aliasesAlone": [
+        "تمكين"
+      ],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "cyber-cloud",
+        "data",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "cyber-cloud",
+        "data",
+        "business"
+      ],
+      "newFields": [],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (its Arabic page: digital transformation, cloud IaaS/PaaS/SaaS, cybersecurity services, software development, managed services, AI). Careers page has 'Open opportunities' and 'Training' sections (not read).",
+      "careersUrl": "https://tamkeentech.sa/careers",
+      "careersStatus": "200; 'Careers at Tamkeen Technologies' with sub-pages ./careers/open-opportunities and ./careers/training (not opened)",
+      "about": "تمكين للتقنيات هي شركة رائدة في تقديم الحلول التقنية في المملكة العربية السعودية، حيث توفر خدمات التحول الرقمي المتقدمة، والحوسبة السحابية، وتطوير البرمجيات.",
+      "aboutSource": "https://tamkeentech.sa/ar/",
+      "aboutTranslated": false,
+      "source": "https://tamkeentech.sa/",
+      "verified": true,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "«تمكين» alone is an everyday word (empowerment) -> aliasesAlone. No logo saved (header logo not found as a file; not checked further)."
+    },
+    {
+      "id": "thiqah",
+      "name": "ثقة",
+      "short": "ثقة",
+      "en": "Thiqah Business Services",
+      "aliases": [
+        "ثقة لخدمات الأعمال",
+        "شركة ثقة",
+        "thiqah",
+        "thiqah business services"
+      ],
+      "aliasesAlone": [
+        "ثقة"
+      ],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "data",
+        "business",
+        "finance",
+        "sales-supply"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "business",
+        "sales-supply"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "careers-page",
+      "fieldsEvidence": "Careers page: «نمنح في \"ثقة\" أولوية كبيرة لمجالات الأعمال والتقنية»; home page: two business lines «الحلول الذكية وحلول خدمات الأعمال» from «الخدمات المالية وخدمات المحاسبة وصولاً إلى الخدمات اللوجستية».",
+      "careersUrl": "https://www.thiqah.sa/careers/",
+      "careersStatus": "200; Arabic careers page; its 'jobs' link https://careers.thiqah.sa/?langcode=ar timed out (no response) twice",
+      "about": "نقدم في ثقة حلولنا عبر مجالي عمل رئيسين تتمثل في الحلول الذكية وحلول خدمات الأعمال.",
+      "aboutSource": "https://www.thiqah.sa/",
+      "aboutTranslated": false,
+      "source": "https://www.thiqah.sa/",
+      "verified": true,
+      "logo": "/logos/thiqah.png",
+      "checkedAt": "2026-11-20",
+      "note": "Arabic site writes the name as «ثقة»; «ثقة لخدمات الأعمال» not seen verbatim on the pages read (from the English name). «ثقة» = trust -> aliasesAlone."
+    },
+    {
+      "id": "unifonic",
+      "name": "يونيفونك",
+      "short": "يونيفونك",
+      "en": "Unifonic",
+      "aliases": [
+        "يونيفونك",
+        "يونيفونيك",
+        "unifonic"
+      ],
+      "aliasesAlone": [],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "cyber-cloud",
+        "product",
+        "sales-supply",
+        "finance",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "cyber-cloud",
+        "product",
+        "sales-supply",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "Departments of the open roles on its Recruitee board: Products & Engineering, Revenue, Strategy & Finance, Marketing & Operations (e.g. Infrastructure Engineering Manager, Account Executive, Senior Treasury Specialist, Implementation Project Manager).",
+      "careersUrl": "https://www.unifonic.com/en/careers",
+      "careersStatus": "200; careers page loads its list from its Recruitee board (jobs.unifonic.com, 200); API shows 13 openings (Riyadh, Amman, Cairo)",
+      "about": "توفر يونيفونك منصة واحدة تجمع محادثاتك وتساعدك في التفاعل مع عملائك بكفاءة عالية عبر الرسائل النصية القصيرة والواتساب ومحادثات الويب والماسنجر.",
+      "aboutSource": "https://www.unifonic.com/ar/",
+      "aboutTranslated": false,
+      "source": "https://www.unifonic.com/en/",
+      "verified": true,
+      "logo": "/logos/unifonic.png",
+      "checkedAt": "2026-11-20",
+      "note": null
+    },
+    {
+      "id": "zid",
+      "name": "زد",
+      "short": "زد",
+      "en": "Zid",
+      "aliases": [
+        "تطبيق زد",
+        "منصة زد",
+        "متاجر زد",
+        "zid",
+        "zid.sa"
+      ],
+      "aliasesAlone": [
+        "زد"
+      ],
+      "sector": "tech",
+      "fields": [
+        "software",
+        "product",
+        "design",
+        "data",
+        "marketing",
+        "sales-supply"
+      ],
+      "appFields": [
+        "software",
+        "product",
+        "design",
+        "data",
+        "marketing",
+        "sales-supply"
+      ],
+      "newFields": [],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (e-commerce store platform with payments, shipping, inventory and marketing). No careers page found.",
+      "careersUrl": null,
+      "careersStatus": "No careers link in zid.sa header/footer; https://zid.sa/careers redirects to /ar/careers/ which serves a generic page (title 'Zid | Create your online store...'), not a careers page",
+      "about": "زد هي منصتك المتكاملة لإنشاء متجر إلكتروني في دقائق، مع حلول شاملة للدفع، الشحن المحلي والدولي، وإدارة المخزون والتسويق الفعّال.",
+      "aboutSource": "https://zid.sa/ar/",
+      "aboutTranslated": false,
+      "source": "https://zid.sa/ar/",
+      "verified": true,
+      "logo": "/logos/zid.svg",
+      "checkedAt": "2026-11-20",
+      "note": "«زد» = 'add' (everyday word) -> aliasesAlone. Logo is the icon mark (the full Arabic wordmark logo-ar.svg is white-only)."
+    },
+    {
+      "id": "acwa-power",
+      "name": "أكوا",
+      "short": "أكوا",
+      "en": "ACWA Power",
+      "aliases": [
+        "أكوا باور",
+        "اكوا باور",
+        "أكوا",
+        "اكوا",
+        "شركة أكوا",
+        "acwa power",
+        "acwa",
+        "acwapower"
+      ],
+      "aliasesAlone": [],
+      "sector": "energy-industry",
+      "fields": [
+        "engineering",
+        "sales-supply"
+      ],
+      "appFields": [
+        "sales-supply"
+      ],
+      "newFields": [
+        "engineering"
+      ],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "Openings seen on careers.acwapower.com search (88 results): Electrical Engineer, SCADA Operator, Shift Engineer, HSSE Officer, Electrical Technician, Store Keeper",
+      "careersUrl": "https://careers.acwapower.com/",
+      "careersStatus": "200; SAP SuccessFactors career site, search shows 88 openings (many in SA, also UZ/OM)",
+      "about": "الشركة الرائدة في توفير حلول متكاملة للبنى الأساسية الداعمة للاستدامة، وتقدّم حلولًا مسؤولة للطاقة والمياه حول العالم.",
+      "aboutSource": "https://www.acwapower.com/ar/",
+      "aboutTranslated": false,
+      "source": "https://www.acwapower.com/ar/",
+      "verified": true,
+      "logo": "/logos/acwa-power.png",
+      "checkedAt": "2026-11-20",
+      "note": "Site now brands itself «أكوا» / 'Acwa' (page title 'Acwa | Home'); about line condensed from two sentences on the Arabic home page."
+    },
+    {
+      "id": "advanced-petrochem",
+      "name": "الشركة المتقدمة للبتروكيماويات",
+      "short": "المتقدمة",
+      "en": "Advanced Petrochemical Company",
+      "aliases": [
+        "الشركة المتقدمة للبتروكيماويات",
+        "المتقدمة للبتروكيماويات",
+        "advanced petrochemical",
+        "advanced petrochemical company",
+        "advanced petrochem"
+      ],
+      "aliasesAlone": [
+        "المتقدمة"
+      ],
+      "sector": "energy-industry",
+      "fields": [
+        "engineering"
+      ],
+      "appFields": [],
+      "newFields": [
+        "engineering"
+      ],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "Only opening on careers.advancedpetrochem.com: Utility Process Engineer (Jubail Industrial City)",
+      "careersUrl": "https://careers.advancedpetrochem.com/?lang=en",
+      "careersStatus": "200; SuccessFactors career site linked from advancedpetrochem.com/career/; 1 opening (Utility Process Engineer, Jubail)",
+      "about": "شركة كيميائية تنمو وتعمل بمسؤولية تجاه كافة الشركاء، ومنتجها مادة البولي بروبيلين.",
+      "aboutSource": "https://advancedpetrochem.com/ar/",
+      "aboutTranslated": false,
+      "source": "https://advancedpetrochem.com/",
+      "verified": true,
+      "logo": "/logos/advanced-petrochem.svg",
+      "checkedAt": "2026-11-20",
+      "note": "www.advancedpetrochem.com timed out; bare domain works. «المتقدمة» alone is an everyday word -> aliasesAlone. About line combines the vision line and product line on the Arabic home page."
+    },
+    {
+      "id": "sipchem",
+      "name": "سبكيم",
+      "short": "سبكيم",
+      "en": "Sipchem (Saudi International Petrochemical Company)",
+      "aliases": [
+        "سبكيم",
+        "سبكم",
+        "الشركة السعودية العالمية للبتروكيماويات",
+        "العالمية للبتروكيماويات",
+        "sipchem",
+        "saudi international petrochemical company"
+      ],
+      "aliasesAlone": [],
+      "sector": "energy-industry",
+      "fields": [
+        "engineering"
+      ],
+      "appFields": [],
+      "newFields": [
+        "engineering"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (petrochemicals manufacturer, Jubail); own site not readable",
+      "careersUrl": null,
+      "careersStatus": "www.sipchem.com/ar -> 403 Cloudflare 'Just a moment...'; skipped. careers.sipchem.com and sipchem.is.sa (seen in search results) did not resolve",
+      "about": null,
+      "aboutSource": null,
+      "aboutTranslated": false,
+      "source": null,
+      "verified": false,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "Own site behind a Cloudflare bot check: Arabic name and aliases are the widely used public names, NOT verified on its own site; integrator may drop or keep with care."
+    },
+    {
+      "id": "tasnee",
+      "name": "التصنيع",
+      "short": "التصنيع",
+      "en": "Tasnee (National Industrialization Company)",
+      "aliases": [
+        "الشركة الوطنية للتصنيع",
+        "التصنيع الوطنية",
+        "tasnee",
+        "national industrialization company"
+      ],
+      "aliasesAlone": [
+        "التصنيع"
+      ],
+      "sector": "energy-industry",
+      "fields": [
+        "engineering"
+      ],
+      "appFields": [],
+      "newFields": [
+        "engineering"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (industrial and petrochemical group); its SuccessFactors board shows 0 open positions",
+      "careersUrl": "https://www.tasnee.com/ar/about-us/careers",
+      "careersStatus": "200; careers page with 'استكشف الوظائف الشاغرة' linking to https://jobs.tasnee.com/search (200, 'There are currently no open positions')",
+      "about": "أول شركة صناعية سعودية مساهمة مملوكة بالكامل للقطاع الخاص، وواحدة من أكبر الشركات الصناعية والبتروكيماوية السعودية.",
+      "aboutSource": "https://www.tasnee.com/ar",
+      "aboutTranslated": false,
+      "source": "https://www.tasnee.com/ar",
+      "verified": true,
+      "logo": "/logos/tasnee.png",
+      "checkedAt": "2026-11-20",
+      "note": "Site brands itself «التصنيع» (title); the long form «الشركة الوطنية للتصنيع» was not seen on the pages read (English board says 'National Industrialization Company (Tasnee)'). «التصنيع» = 'manufacturing' -> aliasesAlone; «تصنيع» in aliases may be too generic - integrator may drop it."
+    },
+    {
+      "id": "nwc",
+      "name": "شركة المياه الوطنية",
+      "short": "المياه الوطنية",
+      "en": "National Water Company",
+      "aliases": [
+        "شركة المياه الوطنية",
+        "المياه الوطنية",
+        "national water company",
+        "nwc"
+      ],
+      "aliasesAlone": [],
+      "sector": "utilities-transport",
+      "fields": [
+        "engineering",
+        "business",
+        "finance"
+      ],
+      "appFields": [
+        "business"
+      ],
+      "newFields": [
+        "engineering",
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (water and wastewater services); careers page links to an Oracle candidate site whose public API returned 0 requisitions",
+      "careersUrl": "https://www.nwc.com.sa/AR/OurCompany/Careers/Pages/default.aspx",
+      "careersStatus": "200; company careers page linking to Oracle Recruiting site (CX_1 -> CX_1001, 'NWC Career Site'), 0 open requisitions via its public API",
+      "about": "عائلةٌ واحدة تتشارك الشغف، وضعت خططًا متكاملة للارتقاء بخدمات المياه في المملكة وتعزيز البنى التحتية بمشاريع حيويةٍ نوعيّة.",
+      "aboutSource": "https://www.nwc.com.sa/AR/OurCompany/Careers/Pages/default.aspx",
+      "aboutTranslated": false,
+      "source": "https://www.nwc.com.sa/AR/Pages/default.aspx",
+      "verified": true,
+      "logo": "/logos/nwc.svg",
+      "checkedAt": "2026-11-20",
+      "note": "About line trimmed from the careers page meta description."
+    },
+    {
+      "id": "sar",
+      "name": "الشركة السعودية للخطوط الحديدية",
+      "short": "سار",
+      "en": "Saudi Arabia Railways (SAR)",
+      "aliases": [
+        "الشركة السعودية للخطوط الحديدية",
+        "الخطوط الحديدية السعودية",
+        "سار للقطارات",
+        "قطار سار",
+        "saudi arabia railways",
+        "saudi railway company",
+        "sar railways"
+      ],
+      "aliasesAlone": [
+        "سار"
+      ],
+      "sector": "utilities-transport",
+      "fields": [
+        "engineering",
+        "sales-supply",
+        "business"
+      ],
+      "appFields": [
+        "sales-supply",
+        "business"
+      ],
+      "newFields": [
+        "engineering"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (passenger and freight rail operation and maintenance); no careers page found on sar.com.sa",
+      "careersUrl": null,
+      "careersStatus": "No careers link in sar.com.sa menu/footer; /careers/ falls back to the home page (SPA). Not recorded.",
+      "about": "نقل السكك الحديدية والركاب والبضائع",
+      "aboutSource": "https://www.sar.com.sa/ar/",
+      "aboutTranslated": false,
+      "source": "https://www.sar.com.sa/",
+      "verified": true,
+      "logo": "/logos/sar.png",
+      "checkedAt": "2026-11-20",
+      "note": "About line is the site's own short Arabic meta description. Arabic legal name seen once on the Arabic site. «سار» alone is also a verb/word -> aliasesAlone."
+    },
+    {
+      "id": "sec",
+      "name": "السعودية للطاقة",
+      "short": "السعودية للطاقة",
+      "en": "Saudi Energy (Saudi Electricity Company)",
+      "aliases": [
+        "الشركة السعودية للكهرباء",
+        "السعودية للكهرباء",
+        "شركة الكهرباء",
+        "السعودية للطاقة",
+        "saudi electricity company",
+        "saudi electricity",
+        "saudi energy",
+        "sec"
+      ],
+      "aliasesAlone": [],
+      "sector": "utilities-transport",
+      "fields": [
+        "engineering",
+        "business",
+        "finance"
+      ],
+      "appFields": [
+        "business"
+      ],
+      "newFields": [
+        "engineering",
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (power generation, transmission, distribution); careers page lists programmes (fresh graduates, experienced, cooperative training, Industrial Training Program ITP 2026) but no job families; job search on jobs.se.com.sa returned no listed rows",
+      "careersUrl": "https://jobs.se.com.sa/?locale=ar_SA",
+      "careersStatus": "200; SuccessFactors career site 'التوظيف لدى السعودية للطاقة'; search page showed no rows. Company careers page https://www.se.com.sa/ar-SA/Careers (200) advertises ITP: application 2026/11/15-2026/12/15",
+      "about": "تعد السعودية للطاقة مصدر الطاقة في المملكة العربية السعودية، فمنذ تأسيسها وهي تمد الوطن بالطاقة بمعايير موثوقة ومعتمدة تعزز الاستدامة.",
+      "aboutSource": "https://www.se.com.sa/ar-sa",
+      "aboutTranslated": false,
+      "source": "https://www.se.com.sa/ar-sa",
+      "verified": true,
+      "logo": "/logos/sec.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Saudi Electricity Company has rebranded as «السعودية للطاقة» / 'Saudi Energy' (site title); legal name «الشركة السعودية للكهرباء» still appears on its pages. Kept id 'sec'. «سعودي إلكتريك»-style bare names avoided."
+    },
+    {
+      "id": "diriyah",
+      "name": "شركة الدرعية",
+      "short": "الدرعية",
+      "en": "Diriyah Company",
+      "aliases": [
+        "شركة الدرعية",
+        "شركة تطوير الدرعية",
+        "diriyah company",
+        "diriyah co"
+      ],
+      "aliasesAlone": [
+        "الدرعية"
+      ],
+      "sector": "giga-tourism",
+      "fields": [
+        "engineering",
+        "tourism",
+        "business"
+      ],
+      "appFields": [
+        "business"
+      ],
+      "newFields": [
+        "engineering",
+        "tourism"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (developer of the New Diriyah project: construction, hospitality, culture); careers page links to a SuccessFactors portal that requires login",
+      "careersUrl": "https://www.diriyahcompany.sa/ar/careers",
+      "careersStatus": "200; careers page links to SAP SuccessFactors (career23.sapsf.com, company=thediriyah, loginFlowRequired) - no public list read",
+      "about": "شركة الدرعية المطورة لمشروع الدرعية الجديد في الرياض، أحد أكبر مشاريع التطوير والوجهات الثقافية في المملكة.",
+      "aboutSource": "https://www.diriyahcompany.sa/ar",
+      "aboutTranslated": false,
+      "source": "https://www.diriyahcompany.sa/ar",
+      "verified": true,
+      "logo": "/logos/diriyah.png",
+      "checkedAt": "2026-11-20",
+      "note": "diriyah.sa is the visitor destination site; corporate site is diriyahcompany.sa. careers.diriyah.sa is a deactivated site (410). «الدرعية» is a place -> aliasesAlone."
+    },
+    {
+      "id": "king-salman-park",
+      "name": "حديقة الملك سلمان",
+      "short": "حديقة الملك سلمان",
+      "en": "King Salman Park",
+      "aliases": [
+        "حديقة الملك سلمان",
+        "مؤسسة حديقة الملك سلمان",
+        "king salman park",
+        "ksp"
+      ],
+      "aliasesAlone": [],
+      "sector": "giga-tourism",
+      "fields": [
+        "engineering",
+        "business",
+        "tourism"
+      ],
+      "appFields": [
+        "business"
+      ],
+      "newFields": [
+        "engineering",
+        "tourism"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (park development and operation in Riyadh); careers page links to an Oracle site whose public API returned 0 requisitions",
+      "careersUrl": "https://kingsalmanpark.sa/ar/blooming-oasis",
+      "careersStatus": "200; careers page ('التوظيف' in menu) links to Oracle Recruiting CX_1 (fa-euri-saasfaprod1); 0 open requisitions via its public API",
+      "about": "واحة خضراء، ملاذ مليء بالحياة، يجمع الرياض معًا ويلهم جيلنا المستقبلي.",
+      "aboutSource": "https://kingsalmanpark.sa/ar",
+      "aboutTranslated": false,
+      "source": "https://kingsalmanpark.sa/ar",
+      "verified": true,
+      "logo": "/logos/king-salman-park.svg",
+      "checkedAt": "2026-11-20",
+      "note": "www.kingsalmanpark.sa does not resolve; bare domain works. About line trimmed from home meta description."
+    },
+    {
+      "id": "new-murabba",
+      "name": "شركة تطوير المربع الجديد",
+      "short": "المربع الجديد",
+      "en": "New Murabba Development Company",
+      "aliases": [
+        "شركة تطوير المربع الجديد",
+        "المربع الجديد",
+        "مشروع المربع الجديد",
+        "new murabba",
+        "newmurabba"
+      ],
+      "aliasesAlone": [],
+      "sector": "giga-tourism",
+      "fields": [
+        "engineering",
+        "business"
+      ],
+      "appFields": [
+        "business"
+      ],
+      "newFields": [
+        "engineering"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (master developer of the New Murabba downtown, Riyadh); Oracle board shows 0 requisitions",
+      "careersUrl": "https://newmurabba.com/ar/careers",
+      "careersStatus": "200; careers page linking to Oracle 'New Murabba Career Website' (careers.newmurabba.com, CX_3001); 0 open requisitions via its public API",
+      "about": "شركة تطوير المربع الجديد إحدى شركات صندوق الاستثمارات العامة، وهي المطور الرئيسي للمربع الجديد، داون تاون الرياض العصري الذي يتوسطه المكعب.",
+      "aboutSource": "https://newmurabba.com/ar",
+      "aboutTranslated": false,
+      "source": "https://newmurabba.com/ar",
+      "verified": true,
+      "logo": "/logos/new-murabba.svg",
+      "checkedAt": "2026-11-20",
+      "note": "«المكعب» (The Mukaab, its flagship building) = 'the cube' -> aliasesAlone only; drop if unwanted."
+    },
+    {
+      "id": "rcu",
+      "name": "الهيئة الملكية لمحافظة العلا",
+      "short": "هيئة العلا",
+      "en": "Royal Commission for AlUla",
+      "aliases": [
+        "الهيئة الملكية لمحافظة العلا",
+        "الهيئة الملكية للعلا",
+        "هيئة العلا",
+        "royal commission for alula",
+        "rcu"
+      ],
+      "aliasesAlone": [
+        "العلا"
+      ],
+      "sector": "giga-tourism",
+      "fields": [
+        "tourism",
+        "engineering",
+        "business"
+      ],
+      "appFields": [
+        "business"
+      ],
+      "newFields": [
+        "tourism",
+        "engineering"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (heritage, environment, tourism and infrastructure development of AlUla); careers page text is an invitation with no job families",
+      "careersUrl": "https://www.rcu.gov.sa/contact/careers",
+      "careersStatus": "200; 'ندعوك لاستكشاف وظائف الهيئة الملكية لمحافظة العلا' - listing not in page HTML",
+      "about": "نحن نحافظ على محافظة العلا ونحميها ونطورها، وهي منطقة غنية بالثقافة والتراث والجمال الطبيعي المتميز في المملكة.",
+      "aboutSource": "https://www.rcu.gov.sa/",
+      "aboutTranslated": false,
+      "source": "https://www.rcu.gov.sa/",
+      "verified": true,
+      "logo": "/logos/rcu.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Government body. «العلا» is a place -> aliasesAlone."
+    },
+    {
+      "id": "soudah",
+      "name": "السودة للتطوير",
+      "short": "السودة للتطوير",
+      "en": "Soudah Development",
+      "aliases": [
+        "السودة للتطوير",
+        "شركة السودة للتطوير",
+        "soudah development",
+        "soudah"
+      ],
+      "aliasesAlone": [
+        "السودة"
+      ],
+      "sector": "giga-tourism",
+      "fields": [
+        "tourism",
+        "engineering"
+      ],
+      "appFields": [],
+      "newFields": [
+        "tourism",
+        "engineering"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (PIF mountain-tourism developer in Asir); own site not readable",
+      "careersUrl": null,
+      "careersStatus": "soudah.sa -> 403 Cloudflare 'Just a moment...'; careers.soudah.sa did not resolve; skipped",
+      "about": null,
+      "aboutSource": null,
+      "aboutTranslated": false,
+      "source": null,
+      "verified": false,
+      "nameFromShort": true,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "Own site behind Cloudflare: official Arabic name not verified (name left null). «السودة» is a place -> aliasesAlone."
+    },
+    {
+      "id": "sta",
+      "name": "الهيئة السعودية للسياحة",
+      "short": "هيئة السياحة",
+      "en": "Saudi Tourism Authority",
+      "aliases": [
+        "الهيئة السعودية للسياحة",
+        "هيئة السياحة",
+        "saudi tourism authority",
+        "sta"
+      ],
+      "aliasesAlone": [],
+      "sector": "giga-tourism",
+      "fields": [
+        "tourism",
+        "marketing",
+        "business"
+      ],
+      "appFields": [
+        "marketing",
+        "business"
+      ],
+      "newFields": [
+        "tourism"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (destination marketing for Saudi Arabia); careers page is a script shell ('There was an Error from API side')",
+      "careersUrl": "https://www.sta.gov.sa/ar/main-career-page",
+      "careersStatus": "200; page shell, job list loads from an API (errored in raw HTML); nothing listed",
+      "about": "الهيئة السعودية للسياحة تنشر التحديثات والمعلومات الرسمية والأخبار السياحية الموثوقة حول السياحة في السعودية.",
+      "aboutSource": "https://www.sta.gov.sa/ar/home",
+      "aboutTranslated": false,
+      "source": "https://www.sta.gov.sa/ar/home",
+      "verified": true,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "About line paraphrased from the Arabic home meta description (site has little Arabic about text in raw HTML)."
+    },
+    {
+      "id": "almosafer",
+      "name": "المسافر",
+      "short": "المسافر",
+      "en": "Almosafer",
+      "aliases": [
+        "تطبيق المسافر",
+        "المسافر للسفر",
+        "almosafer",
+        "al mosafer"
+      ],
+      "aliasesAlone": [
+        "المسافر",
+        "مسافر"
+      ],
+      "sector": "travel",
+      "fields": [
+        "software",
+        "design",
+        "product",
+        "marketing",
+        "finance",
+        "data",
+        "sales-supply"
+      ],
+      "appFields": [
+        "software",
+        "design",
+        "product",
+        "marketing",
+        "data",
+        "sales-supply"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "18 openings on jobs.almosafer.com: Product Designer, Marketing Communications Officer, Copywriting Specialist, FP&A Assistant Manager, QA/DevOps/Backend engineers, Commercial Data Intelligence, Branch Sales Officer, Assistant Manager - Products",
+      "careersUrl": "https://jobs.almosafer.com/?locale=ar_SA",
+      "careersStatus": "200; SuccessFactors board linked from corporate.almosafer.com/ar/careers; 18 openings (Riyadh, Unaizah, Amman, Cairo)",
+      "about": "المسافر، شركة السفر الرائدة في منطقة الشرق الأوسط وشمال أفريقيا، لحجز رحلات الطيران والفنادق والأنشطة والباقات السياحية.",
+      "aboutSource": "https://www.almosafer.com/ar",
+      "aboutTranslated": false,
+      "source": "https://www.almosafer.com/ar",
+      "verified": true,
+      "logo": "/logos/almosafer.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Part of Seera Group. «المسافر» = 'the traveller' -> aliasesAlone. About line trimmed from the home page meta description."
+    },
+    {
+      "id": "flyadeal",
+      "name": "طيران أديل",
+      "short": "طيران أديل",
+      "en": "flyadeal",
+      "aliases": [
+        "طيران أديل",
+        "طيران اديل",
+        "فلاي أديل",
+        "فلاي اديل",
+        "flyadeal",
+        "fly adeal"
+      ],
+      "aliasesAlone": [
+        "أديل",
+        "اديل"
+      ],
+      "sector": "travel",
+      "fields": [
+        "engineering",
+        "tourism",
+        "business"
+      ],
+      "appFields": [
+        "business"
+      ],
+      "newFields": [
+        "engineering",
+        "tourism"
+      ],
+      "fieldsBasis": "careers-page",
+      "fieldsEvidence": "careers.flyadeal.com meta: 'We are hiring local and international talent, including pilots, cabin crew, corporate professional[s]...'",
+      "careersUrl": "https://careers.flyadeal.com/",
+      "careersStatus": "200; Elevatus-powered career portal 'Careers at flyadeal / الوظائف في طيران أديل'; job list loads by script (none read)",
+      "about": "طيران أديل، شركة الطيران الاقتصادي في السعودية.",
+      "aboutSource": "https://careers.flyadeal.com/",
+      "aboutTranslated": false,
+      "source": null,
+      "verified": false,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "www.flyadeal.com/ar -> 403 Cloudflare; only the careers subdomain was readable. About line and Arabic name taken from the careers page title «الوظائف في طيران أديل – انضم إلى شركة الطيران الاقتصادي في السعودية». Logo there is white-only."
+    },
+    {
+      "id": "flynas",
+      "name": "طيران ناس",
+      "short": "طيران ناس",
+      "en": "flynas",
+      "aliases": [
+        "طيران ناس",
+        "فلاي ناس",
+        "flynas",
+        "fly nas"
+      ],
+      "aliasesAlone": [
+        "ناس"
+      ],
+      "sector": "travel",
+      "fields": [
+        "engineering",
+        "tourism",
+        "business"
+      ],
+      "appFields": [
+        "business"
+      ],
+      "newFields": [
+        "engineering",
+        "tourism"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (low-cost airline); own pages not readable",
+      "careersUrl": null,
+      "careersStatus": "www.flynas.com/ar and career.flynas.com -> 403 Cloudflare 'Just a moment...'; skipped",
+      "about": null,
+      "aboutSource": null,
+      "aboutTranslated": false,
+      "source": null,
+      "verified": false,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "Own site behind Cloudflare; Arabic name not verified on its site. «ناس» = 'people' -> aliasesAlone."
+    },
+    {
+      "id": "riyadh-air",
+      "name": "طيران الرياض",
+      "short": "طيران الرياض",
+      "en": "Riyadh Air",
+      "aliases": [
+        "طيران الرياض",
+        "riyadh air",
+        "riyadhair"
+      ],
+      "aliasesAlone": [],
+      "sector": "travel",
+      "fields": [
+        "engineering",
+        "tourism",
+        "business"
+      ],
+      "appFields": [
+        "business"
+      ],
+      "newFields": [
+        "engineering",
+        "tourism"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (new national airline); own pages not readable",
+      "careersUrl": null,
+      "careersStatus": "www.riyadhair.com -> 403 Akamai 'Access Denied'; its iCIMS board careers-riyadhair.icims.com -> 405 'Human Verification'. Both skipped",
+      "about": null,
+      "aboutSource": null,
+      "aboutTranslated": false,
+      "source": null,
+      "verified": false,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "All own pages behind bot checks; Arabic name is the public name, not verified on its site."
+    },
+    {
+      "id": "saudia",
+      "name": "الخطوط الجوية العربية السعودية",
+      "short": "الخطوط السعودية",
+      "en": "Saudia",
+      "aliases": [
+        "الخطوط السعودية",
+        "الخطوط الجوية العربية السعودية",
+        "الخطوط الجوية السعودية",
+        "مجموعة السعودية",
+        "saudia",
+        "saudia airlines",
+        "saudi airlines",
+        "saudia group"
+      ],
+      "aliasesAlone": [],
+      "sector": "travel",
+      "fields": [
+        "engineering",
+        "tourism"
+      ],
+      "appFields": [],
+      "newFields": [
+        "engineering",
+        "tourism"
+      ],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "Openings on careers.saudia.com: Saudia Cadet Program, Flight Attendant, Aircraft Maintenance Support Technician / Technician, Aircraft Maintenance (Saudia Technic, Jeddah)",
+      "careersUrl": "https://careers.saudia.com/?locale=ar_SA",
+      "careersStatus": "200; 'Jobs at Saudia Group' SuccessFactors site (Saudia Airlines, Saudia Technic, etc.); several openings listed",
+      "about": null,
+      "aboutSource": null,
+      "aboutTranslated": false,
+      "source": null,
+      "verified": false,
+      "logo": "/logos/saudia.png",
+      "checkedAt": "2026-11-20",
+      "note": "www.saudia.com serves an Imperva 'Pardon Our Interruption' bot page -> home/about not read; Arabic name not verified on its own site. Bare «السعودية» (country name) deliberately NOT added, per brief. «مجموعة السعودية» is the group name used on the careers site ('Saudia Group')."
+    },
+    {
+      "id": "seera",
+      "name": "سيرا",
+      "short": "سيرا",
+      "en": "Seera Group",
+      "aliases": [
+        "مجموعة سيرا",
+        "سيرا القابضة",
+        "مجموعة الطيار",
+        "مجموعة الطيار للسفر",
+        "seera",
+        "seera group"
+      ],
+      "aliasesAlone": [
+        "سيرا"
+      ],
+      "sector": "travel",
+      "fields": [
+        "tourism",
+        "business",
+        "sales-supply",
+        "finance"
+      ],
+      "appFields": [
+        "business",
+        "sales-supply"
+      ],
+      "newFields": [
+        "tourism",
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (travel group: Almosafer, hospitality, car rental, B2B travel); seera.sa careers link points only to LinkedIn (not used)",
+      "careersUrl": null,
+      "careersStatus": "seera.sa has no own careers page (/ar/careers/ = 404); the only careers link is LinkedIn, which we do not use",
+      "about": "سيرا، مجموعة الطيار سابقاً، هي الاسم الأكبر في قطاع السفر في الشرق الأوسط، وحلقة الوصل بين المملكة والمنطقة والعالم بأسره.",
+      "aboutSource": "https://www.seera.sa/ar/",
+      "aboutTranslated": false,
+      "source": "https://www.seera.sa/ar/",
+      "verified": true,
+      "logo": "/logos/seera.svg",
+      "checkedAt": "2026-11-20",
+      "note": "«سيرا» is also an everyday word (= biography/conduct) -> aliasesAlone. Almosafer (its brand) is a separate record."
+    },
+    {
+      "id": "americana",
+      "name": "أمريكانا للمطاعم",
+      "short": "أمريكانا",
+      "en": "Americana Restaurants",
+      "aliases": [
+        "أمريكانا للمطاعم",
+        "أمريكانا",
+        "امريكانا",
+        "امريكانا للمطاعم",
+        "americana",
+        "americana restaurants"
+      ],
+      "aliasesAlone": [],
+      "sector": "retail-food",
+      "fields": [
+        "business",
+        "sales-supply",
+        "finance"
+      ],
+      "appFields": [
+        "business",
+        "sales-supply"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (multi-brand restaurant operator: KFC, Hardee's, Pizza Hut, Krispy Kreme...); its global Oracle career site showed only 1 requisition (Senior Accountant - Tax, Egypt)",
+      "careersUrl": "https://www.americanarestaurants.com/careers/",
+      "careersStatus": "200; 'Careers at Americana Restaurants' page linking to Oracle 'Americana Global Career Site' (CX_3002), 1 open requisition via its public API (Egypt)",
+      "about": "أمريكانا للمطاعم، مُشغل المطاعم الرائد في منطقة الشرق الأوسط وشمال أفريقيا وكازاخستان.",
+      "aboutSource": "https://www.americanarestaurants.com/ar",
+      "aboutTranslated": false,
+      "source": "https://www.americanarestaurants.com/ar",
+      "verified": true,
+      "logo": "/logos/americana.svg",
+      "checkedAt": "2026-11-20",
+      "note": "americana-restaurants.com (with hyphen) is a parked/redirect domain (JS redirect to /lander) - do NOT use it; the real site is americanarestaurants.com. About line trimmed from a news sentence on the Arabic home page."
+    },
+    {
+      "id": "bindawood",
+      "name": "بن داود القابضة",
+      "short": "بن داود",
+      "en": "BinDawood Holding",
+      "aliases": [
+        "بن داود",
+        "بن داوود",
+        "بن داود القابضة",
+        "أسواق بن داود",
+        "الدانوب",
+        "اسواق الدانوب",
+        "bindawood",
+        "bin dawood",
+        "bindawood holding",
+        "danube"
+      ],
+      "aliasesAlone": [],
+      "sector": "retail-food",
+      "fields": [
+        "sales-supply",
+        "marketing",
+        "business",
+        "finance",
+        "hr"
+      ],
+      "appFields": [
+        "sales-supply",
+        "marketing",
+        "business",
+        "hr"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (supermarket/hypermarket retailer: BinDawood and Danube, 87 stores in 16 cities). Careers page lists no job families.",
+      "careersUrl": "https://www.bindawoodholding.com/careers/",
+      "careersStatus": "200; careers page; its 'Careers' menu link goes to the Mehan online application (mehan.bindawood.com, 200, script-only 'Online Application / VACANCIES' page); roles not read",
+      "about": "تمتلك بن داود القابضة علامتين تجاريتين للبيع بالتجزئة، هما بن داود والدانوب، مع سلسلة من الفروع تبلغ 87 متجرًا في 16 مدينة في جميع أنحاء المملكة العربية السعودية والبحرين.",
+      "aboutSource": "https://www.bindawoodholding.com/ar/",
+      "aboutTranslated": false,
+      "source": "https://www.bindawoodholding.com/",
+      "verified": true,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "«الدانوب»/«danube» is its second store brand (Danube), owned by BinDawood Holding per its Arabic page; drop those aliases if Danube should be separate. About line lightly corrected for grammar (site: «علاماتان تجاريتان فريدتان من نوعهما»). No logo: header logo SVG is white except a tiny blue part; favicon 32 px."
+    },
+    {
+      "id": "extra",
+      "name": "الشركة المتحدة للإلكترونيات – اكسترا",
+      "short": "إكسترا",
+      "en": "eXtra (United Electronics Company)",
+      "aliases": [
+        "متجر اكسترا",
+        "إكسترا للإلكترونيات",
+        "اكسترا للالكترونيات",
+        "إكسترا السعودية",
+        "الشركة المتحدة للإلكترونيات",
+        "extra stores",
+        "united electronics",
+        "united electronics company",
+        "extra.com"
+      ],
+      "aliasesAlone": [
+        "اكسترا",
+        "إكسترا",
+        "extra"
+      ],
+      "sector": "retail-food",
+      "fields": [
+        "sales-supply",
+        "marketing",
+        "business",
+        "finance"
+      ],
+      "appFields": [
+        "sales-supply",
+        "marketing",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (electronics and home-appliance retailer with online store and delivery). No careers page found.",
+      "careersUrl": null,
+      "careersStatus": "No careers link in the extra.com home-page HTML; https://www.extra.com/ar-sa/careers answers 404; careers.extra.com gave no response",
+      "about": "تقدّم إكسترا السعودية أرقى العلامات التجارية في الهواتف المحمولة والأجهزة المنزلية وأجهزة التلفزيون وأجهزة الكمبيوتر المحمولة، مع خدمة توصيل سريعة وضمان المصنع الرسمي.",
+      "aboutSource": "https://www.extra.com/ar-sa",
+      "aboutTranslated": false,
+      "source": "https://www.extra.com/ar-sa",
+      "verified": true,
+      "logo": "/logos/extra.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Legal name from its footer: «الشركة المتحدة للإلكترونيات – اكسترا». «اكسترا»/«extra» are everyday words -> aliasesAlone. About line condensed from its Arabic meta description."
+    },
+    {
+      "id": "jarir",
+      "name": "مكتبة جرير",
+      "short": "جرير",
+      "en": "Jarir Bookstore",
+      "aliases": [
+        "جرير",
+        "مكتبة جرير",
+        "شركة جرير للتسويق",
+        "jarir",
+        "jarir bookstore"
+      ],
+      "aliasesAlone": [],
+      "sector": "retail-food",
+      "fields": [
+        "sales-supply",
+        "marketing",
+        "business",
+        "finance"
+      ],
+      "appFields": [
+        "sales-supply",
+        "marketing",
+        "business"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (retailer of books, computers, tablets, printers and office supplies). No careers page found.",
+      "careersUrl": null,
+      "careersStatus": "No careers link in the jarir.com home-page HTML; https://www.jarir.com/sa-ar/careers answers 404; careers.jarir.com gave no response",
+      "about": "مكتبة جرير، ليست مجرد مكتبة: تبيع الكتب العربية والإنجليزية وأجهزة الكمبيوتر والأجهزة اللوحية والطابعات.",
+      "aboutSource": "https://www.jarir.com/",
+      "aboutTranslated": false,
+      "source": "https://www.jarir.com/",
+      "verified": true,
+      "logo": "/logos/jarir.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Footer: «جميع الحقوق محفوظة لمكتبة جرير ... (شركة جرير للتسويق)». About line built from its own title and (truncated) meta description. www.jarir.com/sa-ar/ answers 404; the root www.jarir.com serves the Arabic store."
+    },
+    {
+      "id": "nahdi",
+      "name": "شركة النهدي الطبية",
+      "short": "النهدي",
+      "en": "Nahdi Medical Company",
+      "aliases": [
+        "النهدي",
+        "صيدليات النهدي",
+        "صيدلية النهدي",
+        "النهدي الطبية",
+        "nahdi",
+        "al nahdi",
+        "nahdi medical",
+        "nahdi pharmacy"
+      ],
+      "aliasesAlone": [],
+      "sector": "retail-food",
+      "fields": [
+        "health",
+        "software",
+        "cyber-cloud",
+        "data",
+        "finance",
+        "sales-supply",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "cyber-cloud",
+        "data",
+        "sales-supply",
+        "business"
+      ],
+      "newFields": [
+        "health",
+        "finance"
+      ],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "Open roles on its Oracle board (22, 2026-11-20): Pharmacist (Riyadh, Riyadh & Jeddah, Afif), Physiotherapist, dental registrars, Paramedic; Regional IT Support Specialist, Applications QA & DevOps Senior Specialist, Reconciliation & Data Integrity Manager; Information Technology / Commercial / Operations / Accounting Co-op; category and private-label managers.",
+      "careersUrl": "https://efan.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1",
+      "careersStatus": "200; Oracle Recruiting board linked from nahdi.sa as 'Careers' / «التوظيف»; public API shows 22 openings",
+      "about": "عطفًا على تواجدها في شتّى أنحاء المملكة، رسخت النهدي مكانتها عبر الاستثمار في ابتكارات وتقنيات حديثة حولتها من مجموعة صيدليات إلى بوابة رعاية أولية متكاملة.",
+      "aboutSource": "https://www.nahdi.sa/ar",
+      "aboutTranslated": false,
+      "source": "https://www.nahdi.sa/",
+      "verified": true,
+      "logo": "/logos/nahdi.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Sector set to retail-food as the caller asked (could also be health). Its Arabic page writes «النهدي»; the form «شركة النهدي الطبية» was not seen verbatim (from the English 'Nahdi Medical Company'). nahdimedical.com only redirects to /lander (not used)."
+    },
+    {
+      "id": "savola",
+      "name": "مجموعة صافولا",
+      "short": "صافولا",
+      "en": "Savola Group",
+      "aliases": [
+        "مجموعة صافولا",
+        "صافولا",
+        "صافوله",
+        "savola",
+        "savola group"
+      ],
+      "aliasesAlone": [],
+      "sector": "retail-food",
+      "fields": [
+        "sales-supply",
+        "engineering",
+        "marketing",
+        "finance"
+      ],
+      "appFields": [
+        "sales-supply",
+        "marketing"
+      ],
+      "newFields": [
+        "engineering",
+        "finance"
+      ],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "82 requisitions on Savola's Oracle career site (newest 25 read): Merchandisers, E-Commerce Specialist, Logistics Support Associate, Demand Planning Specialist, Electrical & Instruments Supervisor (KSA), Van Salesman (KSA), procurement supervisors, Material Planning, maintenance roles; mostly UAE and Egypt",
+      "careersUrl": "https://fa-ewxl-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/ar/sites/CX_1001/",
+      "careersStatus": "200; Oracle Recruiting site titled «موقع توظيف صافولا» linked from savola.com; public API: 82 open requisitions (few in Saudi Arabia)",
+      "about": "صافولا هي شركة الاستثمار الاستراتيجي الرائدة في المملكة العربية السعودية ومنطقة الشرق الأوسط وشمال أفريقيا وتركيا.",
+      "aboutSource": "https://www.savola.com/ar",
+      "aboutTranslated": false,
+      "source": "https://www.savola.com/ar",
+      "verified": true,
+      "logo": "/logos/savola.svg",
+      "checkedAt": "2026-11-20",
+      "note": "'finance' and 'marketing' are thin in postings (E-Commerce Specialist, Material Planning); no Saudi entry-level roles in the newest 25, so no roles recorded."
+    },
+    {
+      "id": "dallah-health",
+      "name": "دله الصحية",
+      "short": "دله",
+      "en": "Dallah Health",
+      "aliases": [
+        "دله الصحية",
+        "دلة الصحية",
+        "مستشفى دله",
+        "مستشفى دلة",
+        "مستشفيات دله",
+        "شركة دله للخدمات الصحية",
+        "dallah health",
+        "dallah hospital",
+        "dallah healthcare",
+        "dallah"
+      ],
+      "aliasesAlone": [
+        "دله",
+        "دلة"
+      ],
+      "sector": "health",
+      "fields": [
+        "health",
+        "business"
+      ],
+      "appFields": [
+        "business"
+      ],
+      "newFields": [
+        "health"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (hospitals, pharmaceuticals «دله فارما», management and investments); careers portal is script-only",
+      "careersUrl": "https://careers.dallahhealth.com/",
+      "careersStatus": "200; 'Career portal' (Elevatus ATS, script-only, listings not in HTML); linked from dallahhealth.com home",
+      "about": "دله الصحية شركة رعاية صحية متخصصة تشمل قطاعاتها المستشفيات والأدوية والإدارة والتشغيل والاستثمار.",
+      "aboutSource": "https://www.dallahhealth.com/english/home",
+      "aboutTranslated": true,
+      "source": "https://www.dallahhealth.com/",
+      "verified": true,
+      "logo": "/logos/dallah-health.png",
+      "checkedAt": "2026-11-20",
+      "note": "about translated from its meta description (the Arabic page carries the same English line). Name as in its footer «جميع الحقوق محفوظة لدله الصحية». dallah-hospital.com is its hospitals site (title «مستشفى دله»)."
+    },
+    {
+      "id": "hmg",
+      "name": "مجموعة الدكتور سليمان الحبيب الطبية",
+      "short": "سليمان الحبيب",
+      "en": "Dr. Sulaiman Al Habib Medical Group",
+      "aliases": [
+        "مجموعة الدكتور سليمان الحبيب الطبية",
+        "مستشفى الحبيب",
+        "مستشفى سليمان الحبيب",
+        "سليمان الحبيب",
+        "د. سليمان الحبيب",
+        "الدكتور سليمان الحبيب",
+        "مجموعة الحبيب الطبية",
+        "hmg",
+        "dr sulaiman al habib",
+        "sulaiman al habib",
+        "al habib medical group"
+      ],
+      "aliasesAlone": [
+        "الحبيب"
+      ],
+      "sector": "health",
+      "fields": [
+        "health",
+        "software",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "business"
+      ],
+      "newFields": [
+        "health"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (hospital group; its home page also lists IT subsidiary «حلول السحابة» and medical-equipment maintenance subsidiaries); careers portal is script-only",
+      "careersUrl": "https://talents.hmg.com/",
+      "careersStatus": "200; 'Career portal' (Elevatus ATS, script-only, listings not in HTML). Found via web search, not linked from the hmg.com home page HTML",
+      "about": "مجموعة الدكتور سليمان الحبيب الطبية إحدى المستشفيات الرائدة في الشرق الأوسط بخبرة أكثر من 30 عامًا وبأحدث التقنيات الطبية.",
+      "aboutSource": "https://hmg.com/ar/Pages/home.aspx",
+      "aboutTranslated": false,
+      "source": "https://hmg.com/",
+      "verified": true,
+      "logo": "/logos/hmg.svg",
+      "checkedAt": "2026-11-20",
+      "note": "hmg.com/ar/Pages/Careers.aspx = 404. «الحبيب» alone = common family name / everyday word, so only in aliasesAlone."
+    },
+    {
+      "id": "lean-health",
+      "name": "لين لخدمات الأعمال",
+      "short": "لين",
+      "en": "Lean Business Services",
+      "aliases": [
+        "لين لخدمات الأعمال",
+        "شركة لين لخدمات الأعمال",
+        "لين الصحية",
+        "lean business services",
+        "lean health",
+        "lean.sa"
+      ],
+      "aliasesAlone": [],
+      "sector": "health",
+      "fields": [
+        "health",
+        "software",
+        "data",
+        "product"
+      ],
+      "appFields": [
+        "software",
+        "data",
+        "product"
+      ],
+      "newFields": [
+        "health"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (national digital-health enabler / health-tech); careers page has no job families and its job board says to contact them",
+      "careersUrl": "https://lean.sa/ar/careers",
+      "careersStatus": "200; careers page «ابدأ رحلتك المهنية معنا»; its job board careers.lean.sa/jobs (Odoo) lists no openings: 'Contact us for job opportunities.'",
+      "about": "لين الممكّن الرقمي للصحة في المملكة، وتعمل على تطوير الحلول الرقمية الصحية التي تُسهم في تحسين جودة الحياة.",
+      "aboutSource": "https://lean.sa/ar/careers",
+      "aboutTranslated": false,
+      "source": "https://lean.sa/",
+      "verified": true,
+      "logo": "/logos/lean-health.svg",
+      "checkedAt": "2026-11-20",
+      "note": "NOT Lean Technologies (lean-tech). Name from its footer «حقوق الطبع والنشر لشركة لين لخدمات الأعمال». Bare «لين» deliberately not used as an alias (taken by lean-tech / everyday word)."
+    },
+    {
+      "id": "mouwasat",
+      "name": "شركة المواساة الطبية",
+      "short": "المواساة",
+      "en": "Mouwasat Medical Services",
+      "aliases": [
+        "مستشفى المواساة",
+        "المواساة الطبية",
+        "شركة المواساة الطبية",
+        "شركة المواساة للخدمات الطبية",
+        "مستشفيات المواساة",
+        "mouwasat",
+        "mouwasat hospital",
+        "mouwasat medical services"
+      ],
+      "aliasesAlone": [
+        "مواساة",
+        "المواساة"
+      ],
+      "sector": "health",
+      "fields": [
+        "health"
+      ],
+      "appFields": [],
+      "newFields": [
+        "health"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (hospitals and medical centres); no careers page found",
+      "careersUrl": null,
+      "careersStatus": "no careers link in mouwasat.com menus; /ar/careers and /en/careers = 404 (route exists in its scripts but page not found)",
+      "about": "تأسست شركة المواساة الطبية بالدمام في عام 1975، وتدير اليوم مستشفيات ومرافق طبية متعددة.",
+      "aboutSource": "https://www.mouwasat.com/ar",
+      "aboutTranslated": false,
+      "source": "https://www.mouwasat.com/",
+      "verified": true,
+      "logo": "/logos/mouwasat.png",
+      "checkedAt": "2026-11-20",
+      "note": "Do not confuse with New Mowasat Hospital (Kuwait). «مواساة» = everyday word (consolation), so only in aliasesAlone. Name as its own site writes it («تأسست شركة المواساة الطبية بالدمام»); the listed-company name «شركة المواساة للخدمات الطبية» (seen only in web search results) is kept as an alias."
+    },
+    {
+      "id": "nupco",
+      "name": "نوبكو",
+      "short": "نوبكو",
+      "en": "NUPCO",
+      "aliases": [
+        "نوبكو",
+        "الشركة الوطنية للشراء الموحد",
+        "نوبكو للإمداد الصحي",
+        "nupco",
+        "national unified procurement company"
+      ],
+      "aliasesAlone": [],
+      "sector": "health",
+      "fields": [
+        "health",
+        "sales-supply",
+        "business"
+      ],
+      "appFields": [
+        "sales-supply",
+        "business"
+      ],
+      "newFields": [
+        "health"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "business: inferred (national unified procurement and health supply chain); careers page lists no job families",
+      "careersUrl": "https://www.nupco.com/careers-and-training/careers/",
+      "careersStatus": "200; careers page «التوظيف» describing its hiring journey; no listings or ATS link on the page",
+      "about": "نوبكو تعيد تعريف مفهوم الإمداد الصحي في المملكة عبر منظومة رقمية متكاملة تجمع بين الابتكار والكفاءة.",
+      "aboutSource": "https://www.nupco.com/",
+      "aboutTranslated": false,
+      "source": "https://www.nupco.com/",
+      "verified": true,
+      "logo": "/logos/nupco.png",
+      "checkedAt": "2026-11-20",
+      "note": "Full Arabic name «الشركة الوطنية للشراء الموحد» is not written on the pages I opened (they use «نوبكو»); its LinkedIn slug says 'national unified procurement medical supplies company'. Verify before showing."
+    },
+    {
+      "id": "saudi-german-health",
+      "name": "السعودي الألماني الصحية",
+      "short": "السعودي الألماني",
+      "en": "Saudi German Health",
+      "aliases": [
+        "السعودي الألماني الصحية",
+        "المستشفى السعودي الألماني",
+        "مستشفى السعودي الألماني",
+        "مجموعة مستشفيات السعودي الألماني",
+        "السعودي الالماني",
+        "saudi german health",
+        "saudi german hospital",
+        "sgh"
+      ],
+      "aliasesAlone": [],
+      "sector": "health",
+      "fields": [
+        "health",
+        "business"
+      ],
+      "appFields": [
+        "business"
+      ],
+      "newFields": [
+        "health"
+      ],
+      "fieldsBasis": "careers-page",
+      "fieldsEvidence": "Opportunity categories on its careers site: Physicians, Nursing, Clinical Support Services, Business Services, Internship",
+      "careersUrl": "https://career.saudigermanhealth.com/",
+      "careersStatus": "200; careers site 'Join Our Family' with job categories; job search runs on its Taleo board (aa303.taleo.net/careersection/sgh_external), which timed out on check",
+      "about": "أنشأت عائلة بترجي «السعودي الألماني الصحية» ونمت لتصبح مزوّدًا خاصًا للرعاية الصحية في الشرق الأوسط وشمال إفريقيا، يضم أكثر من ثمانية آلاف وخمسمئة طبيب وممرض وأخصائي وموظف.",
+      "aboutSource": "https://saudigermanhealth.com/ar",
+      "aboutTranslated": false,
+      "source": "https://saudigermanhealth.com/",
+      "verified": true,
+      "logo": "/logos/saudi-german-health.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Group brand of Saudi German Hospitals. «sgh» alias: check it does not clash with another company in the app."
+    },
+    {
+      "id": "hrdf",
+      "name": "صندوق تنمية الموارد البشرية",
+      "short": "هدف",
+      "en": "Human Resources Development Fund (HRDF)",
+      "aliases": [
+        "صندوق تنمية الموارد البشرية",
+        "صندوق هدف",
+        "صندوق الموارد البشرية",
+        "hrdf",
+        "hadaf"
+      ],
+      "aliasesAlone": [
+        "هدف"
+      ],
+      "sector": "government",
+      "fields": [
+        "hr",
+        "business"
+      ],
+      "appFields": [
+        "hr",
+        "business"
+      ],
+      "newFields": [],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from its mandate (training and employment support for Saudi workforce); its own jobs page lists no openings",
+      "careersUrl": "https://www.hrdf.org.sa/about/joinus/jobs/",
+      "careersStatus": "200; «التوظيف الحالي» page: «نأسف لا يوجد وظائف متاحة في الوقت الحالي» (last updated 30 Oct 2025). Join-us page: https://www.hrdf.org.sa/about/joinus/",
+      "about": "أنشئ صندوق تنمية الموارد البشرية بهدف دعم جهود تأهيل القوى العاملة الوطنية وتوظيفها في القطاع الخاص.",
+      "aboutSource": "https://www.hrdf.org.sa/",
+      "aboutTranslated": false,
+      "source": "https://www.hrdf.org.sa/",
+      "verified": true,
+      "logo": "/logos/hrdf.svg",
+      "checkedAt": "2026-11-20",
+      "note": "About line trimmed from home meta description (decision number/date removed). «هدف» = 'goal' -> aliasesAlone."
+    },
+    {
+      "id": "monshaat",
+      "name": "الهيئة العامة للمنشآت الصغيرة والمتوسطة",
+      "short": "منشآت",
+      "en": "Monsha'at (Small and Medium Enterprises General Authority)",
+      "aliases": [
+        "الهيئة العامة للمنشآت الصغيرة والمتوسطة",
+        "هيئة منشآت",
+        "هيئة المنشآت الصغيرة والمتوسطة",
+        "monshaat",
+        "monsha'at"
+      ],
+      "aliasesAlone": [
+        "منشآت",
+        "منشات"
+      ],
+      "sector": "government",
+      "fields": [
+        "business",
+        "finance",
+        "marketing"
+      ],
+      "appFields": [
+        "business",
+        "marketing"
+      ],
+      "newFields": [
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from its mandate (SME support programmes, financing, entrepreneurship); jobs are posted on Jadarat (script-only), no own careers page",
+      "careersUrl": null,
+      "careersStatus": "No own careers page; site links to its Jadarat entity profile https://jadarat.sa/EntityProfile?EntityId=TDJueG9CYVVHbjg9&JobType=3&Param=3&RouterId=ekg2ekxTVE5NQ2s9 (not opened; Jadarat is script-only)",
+      "about": "تعمل «منشآت» على إعداد وتنفيذ ودعم البرامج والمشاريع لنشر ثقافة العمل الحر وريادة الأعمال والابتكار، وتنويع مصادر الدعم المالي للمنشآت.",
+      "aboutSource": "https://www.monshaat.gov.sa/ar",
+      "aboutTranslated": false,
+      "source": "https://www.monshaat.gov.sa/ar",
+      "verified": true,
+      "logo": "/logos/monshaat.png",
+      "checkedAt": "2026-11-20",
+      "note": "About line trimmed from the home meta description. «منشآت» = 'establishments' -> aliasesAlone."
+    },
+    {
+      "id": "nhc",
+      "name": "الشركة الوطنية للإسكان",
+      "short": "الوطنية للإسكان",
+      "en": "National Housing Company (NHC)",
+      "aliases": [
+        "الشركة الوطنية للإسكان",
+        "الوطنية للإسكان",
+        "national housing company",
+        "nhc"
+      ],
+      "aliasesAlone": [],
+      "sector": "government",
+      "fields": [
+        "engineering",
+        "business",
+        "sales-supply"
+      ],
+      "appFields": [
+        "business",
+        "sales-supply"
+      ],
+      "newFields": [
+        "engineering"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from business (state-owned real-estate developer for housing); own site not readable",
+      "careersUrl": null,
+      "careersStatus": "www.nhc.sa/ar -> 403 Cloudflare 'Just a moment...'; skipped. careers.nhc.sa does not resolve",
+      "about": null,
+      "aboutSource": null,
+      "aboutTranslated": false,
+      "source": null,
+      "verified": false,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "Own site behind Cloudflare: Arabic name is the public name, NOT verified on its own site. No bare «الإسكان» alias, per instructions."
+    },
+    {
+      "id": "efg",
+      "name": "مجموعة ESL FACEIT",
+      "short": "ESL FACEIT",
+      "en": "ESL FACEIT Group",
+      "aliases": [
+        "مجموعة إي إس إل فيس إت",
+        "إي إس إل",
+        "فيس إت",
+        "esl faceit group",
+        "esl",
+        "faceit",
+        "efg"
+      ],
+      "aliasesAlone": [],
+      "sector": "gaming-media",
+      "fields": [
+        "gaming",
+        "media",
+        "software",
+        "design",
+        "finance",
+        "sales-supply",
+        "business"
+      ],
+      "appFields": [
+        "software",
+        "design",
+        "sales-supply",
+        "business"
+      ],
+      "newFields": [
+        "gaming",
+        "media",
+        "finance"
+      ],
+      "fieldsBasis": "postings",
+      "fieldsEvidence": "Departments of its Greenhouse openings (22): Overall Esports, CS2/Dota 2 & KSA, Engineering, Design, Controlling and FP&A, Accounting Tax Treasury, Purchasing, Commercial Strategy & Operations.",
+      "careersUrl": "https://eslfaceitgroup.com/career/",
+      "careersStatus": "200; careers page embeds Greenhouse board eslfaceitgrouplimited; 22 openings, 1 in Riyadh (Procurement Manager)",
+      "about": "تساعد مجموعة ESL FACEIT مجتمعات الألعاب على الازدهار عبر بناء عوالم تتجاوز اللعب تجمع اللاعبين والجماهير وصنّاع المحتوى حول الرياضات الإلكترونية والألعاب التي يحبونها.",
+      "aboutSource": "https://eslfaceitgroup.com/",
+      "aboutTranslated": true,
+      "source": "https://eslfaceitgroup.com/",
+      "verified": true,
+      "logo": "/logos/efg.png",
+      "checkedAt": "2026-11-20",
+      "note": "No Arabic site (eslfaceitgroup.com/ar/ is 404); Arabic name «مجموعة ESL FACEIT» as written on Savvy's Arabic page (its parent). Arabic transliterations in aliases are my spelling. Mostly non-Saudi roles."
+    },
+    {
+      "id": "manga-productions",
+      "name": "مانجا للإنتاج",
+      "short": "مانجا للإنتاج",
+      "en": "Manga Productions",
+      "aliases": [
+        "مانجا للإنتاج",
+        "شركة مانجا للإنتاج",
+        "مانجا للانتاج",
+        "manga productions",
+        "manga.com.sa"
+      ],
+      "aliasesAlone": [
+        "مانجا"
+      ],
+      "sector": "gaming-media",
+      "fields": [
+        "gaming",
+        "media",
+        "design",
+        "marketing"
+      ],
+      "appFields": [
+        "design",
+        "marketing"
+      ],
+      "newFields": [
+        "gaming",
+        "media"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (animation, video games and comics; Misk subsidiary). Careers page lists no categories or roles.",
+      "careersUrl": "https://manga.com.sa/careers/",
+      "careersStatus": "200; 'Join Manga Team / Yes, we are hiring' page with recruitment process, no openings listed (apply by email)",
+      "about": "شركة مانجا للإنتاج هي أحد الشركات التابعة لمؤسسة محمد بن سلمان (مسك) وتختص في صناعة المحتوى الإبداعي من خلال إنتاج الرسوم المتحركة وألعاب الفيديو والقصص المصورة.",
+      "aboutSource": "https://manga.com.sa/ar/",
+      "aboutTranslated": false,
+      "source": "https://manga.com.sa/",
+      "verified": true,
+      "logo": "/logos/manga-productions.svg",
+      "checkedAt": "2026-11-20",
+      "note": "«مانجا» = mango / manga comics -> aliasesAlone."
+    },
+    {
+      "id": "mbc",
+      "name": "مجموعة MBC",
+      "short": "MBC",
+      "en": "MBC Group",
+      "aliases": [
+        "ام بي سي",
+        "إم بي سي",
+        "مجموعة ام بي سي",
+        "قنوات mbc",
+        "mbc",
+        "mbc group"
+      ],
+      "aliasesAlone": [],
+      "sector": "gaming-media",
+      "fields": [
+        "media",
+        "marketing",
+        "design",
+        "business",
+        "software",
+        "finance"
+      ],
+      "appFields": [
+        "marketing",
+        "design",
+        "business",
+        "software"
+      ],
+      "newFields": [
+        "media",
+        "finance"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (largest MENA media group). Careers page lists no job families; its Oracle board shows 5 openings (Production Supervisor in Riyadh, Salesforce Developer, Procurement buyer, Accountant, QA & Training Officer).",
+      "careersUrl": "https://www.mbc.net/careers",
+      "careersStatus": "200; careers page links to its Oracle Careers Portal (ehff.fa.em2.oraclecloud.com, site CX_2001); API shows 5 openings, 1 in Riyadh",
+      "about": "مرحبًا بكم في \"مجموعة MBC\" – أكبر مجموعة إعلامية رائدة في منطقة الشرق الأوسط وشمال إفريقيا.",
+      "aboutSource": "https://www.mbc.net/ar",
+      "aboutTranslated": false,
+      "source": "https://www.mbc.net/",
+      "verified": true,
+      "logo": "/logos/mbc.png",
+      "checkedAt": "2026-11-20",
+      "note": "Logo is the apple-touch-icon mark (black 'mbc' glyph); the header SVG is white-only."
+    },
+    {
+      "id": "savvy-games",
+      "name": "مجموعة سافي للألعاب الإلكترونية",
+      "short": "سافي",
+      "en": "Savvy Games Group",
+      "aliases": [
+        "مجموعة سافي",
+        "سافي للألعاب",
+        "مجموعة سافي للألعاب الإلكترونية",
+        "savvy games",
+        "savvy games group",
+        "savvy"
+      ],
+      "aliasesAlone": [],
+      "sector": "gaming-media",
+      "fields": [
+        "gaming",
+        "business",
+        "finance",
+        "legal",
+        "marketing"
+      ],
+      "appFields": [
+        "business",
+        "marketing"
+      ],
+      "newFields": [
+        "gaming",
+        "finance",
+        "legal"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (PIF-backed games and esports investor/operator). Oracle careers board currently lists 0 openings.",
+      "careersUrl": "https://evth.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/savvy-careers",
+      "careersStatus": "200; Oracle Recruiting board linked from savvygames.com; its public API (siteNumber CX_1009) returns 0 open jobs",
+      "about": "بدعم من صندوق الاستثمارات العامة، تلتزم سافي بتعزيز النمو المستدام ودعم الابتكار في قطاع الألعاب والرياضات الإلكترونية، من خلال الاستحواذات الاستراتيجية، وضخ الاستثمارات، وإطلاق مشاريع تجارية مبتكرة.",
+      "aboutSource": "https://www.savvygames.com/ar",
+      "aboutTranslated": false,
+      "source": "https://www.savvygames.com/",
+      "verified": true,
+      "logo": "/logos/savvy-games.svg",
+      "checkedAt": "2026-11-20",
+      "note": "Arabic name from its Arabic footer «© 2026 مجموعة سافي للألعاب الإلكترونية». savvygames.com/careers is 404; the Oracle link is in its menu. Parent of ESL FACEIT Group and Scopely."
+    },
+    {
+      "id": "srmg",
+      "name": "المجموعة السعودية للأبحاث والإعلام",
+      "short": "SRMG",
+      "en": "Saudi Research and Media Group (SRMG)",
+      "aliases": [
+        "المجموعة السعودية للأبحاث والإعلام",
+        "السعودية للأبحاث والإعلام",
+        "الأبحاث والإعلام",
+        "srmg",
+        "saudi research and media group"
+      ],
+      "aliasesAlone": [],
+      "sector": "gaming-media",
+      "fields": [
+        "media",
+        "marketing",
+        "design",
+        "data",
+        "business"
+      ],
+      "appFields": [
+        "marketing",
+        "design",
+        "data",
+        "business"
+      ],
+      "newFields": [
+        "media"
+      ],
+      "fieldsBasis": "business",
+      "fieldsEvidence": "Inferred from the business (media group: digital platforms, satellite channels, print and films in 7 languages). Career portal is a script-only app.",
+      "careersUrl": "https://career.srmg.com/",
+      "careersStatus": "200; 'SRMG Career JobPortal' (script-only app), linked from srmg.com; roles not read",
+      "about": "منذ انطلاقتنا عام 1972، ونحن المصدر الأول في المنطقة لمتابعة ومعرفة أخبار الشرق الأوسط والعالم، واليوم نحن مجموعة إعلامية متكاملة تتنوّع منصاتها بين الرقمية والقنوات الفضائية والمطبوعات والأفلام.",
+      "aboutSource": "https://www.srmg.com/ar/home",
+      "aboutTranslated": false,
+      "source": "https://www.srmg.com/en/home",
+      "verified": true,
+      "logo": null,
+      "checkedAt": "2026-11-20",
+      "note": "About line condensed from two sentences of its Arabic home page. No logo: header logo is white-only, favicon 32 px."
+    }
+  ],
+  "updatesToExisting": [
+    {
+      "id": "alrajhi",
+      "careersUrl": "https://careers.alrajhibank.com.sa/ar/",
+      "careersStatus": "200; «موقع Al Rajhi Bank Careers للتوظيف» (Talentera ATS, a Bayt product); linked from alrajhibank.com.sa home",
+      "about": "مصرف الراجحي يقدّم باقات وحسابات مصممة لتبسيط المعاملات المصرفية اليومية.",
+      "aboutSource": "https://www.alrajhibank.com.sa/",
+      "logo": "/logos/alrajhi.svg",
+      "note": "careers site is Talentera (Bayt product): roles not collected.",
+      "part": "finance"
+    },
+    {
+      "id": "snb",
+      "careersUrl": "https://www.alahli.com/en/pages/about-us/careers",
+      "careersStatus": "200; 'Careers - AlAhli Jobs' page with sub-pages: culture, our-teams, SNB Rowad program, cooperative training, SNB Academy",
+      "about": "البنك الأهلي السعودي يقدّم خدمات ومنتجات مصرفية للأفراد كالحسابات والتمويل والبطاقات، متوافقة مع أحكام الشريعة.",
+      "aboutSource": "https://www.alahli.com/ar/pages/personal-banking",
+      "logo": "/logos/snb.svg",
+      "note": "alahli.com redirects to /en/pages/personal-banking.",
+      "part": "finance"
+    },
+    {
+      "id": "riyad-bank",
+      "careersUrl": "https://careers.riyadbank.com/en/",
+      "careersStatus": "200; 'Careers at Riyad Bank' (Talentera ATS, a Bayt product); linked from riyadbank.com home",
+      "about": "بنك الرياض يقدم خدمات مصرفية للأفراد عبر الفروع والتطبيق، ويساعد عملاءه على التخطيط المالي.",
+      "aboutSource": "https://www.riyadbank.com/ar",
+      "logo": "/logos/riyad-bank.svg",
+      "note": "careers site is Talentera (Bayt product): roles not collected.",
+      "part": "finance"
+    },
+    {
+      "id": "sab",
+      "careersUrl": "https://www.sab.com/en/about-us/careers/",
+      "careersStatus": "200; SAB careers page with graduate opportunities, student opportunities, employee benefits sub-pages",
+      "about": null,
+      "aboutSource": null,
+      "logo": "/logos/sab.svg",
+      "note": "Arabic site brands it «الأول» (title «خدمات مصرفية | الأول»).",
+      "part": "finance"
+    },
+    {
+      "id": "elm",
+      "careersUrl": "https://elm.sa/en/recruitment/Pages/join-our-family.aspx",
+      "careersStatus": "200; 'Join Our Family' page (found via elm.sa sitemap > Recruitment) links to its SuccessFactors boards on career.elm.sa: Coop/Trainee programs, Fresh Graduates, Experienced Professionals (3 openings, Riyadh, all senior, 11-15 Nov 2026)",
+      "about": "شركة عِلم رائدة في ابتكار الحلول وتطوير الخدمات.",
+      "aboutSource": "https://elm.sa/ar/Pages/default.aspx",
+      "logo": "/logos/elm.svg",
+      "note": "www.elm.sa answers 302 to http://elm.sa/...; use https://elm.sa. Recruitment job families (sitemap): Business Development & Sales, Audit, Finance & Investments, Human Capital, Project Management, Marketing, Business Analyst & Product Management, Technology & Engineering. Fresh-graduates board https://career.elm.sa/elm/go/fresh-graduates/8483400/ (200) says there are currently no open positions; its menu also lists Coop, Part Time and Freelancer, and Tajseer Program. No roles recorded (the 3 open roles are senior).",
+      "part": "tech"
+    },
+    {
+      "id": "jahez",
+      "careersUrl": "https://career.jahez.net/",
+      "careersStatus": "200; script-only careers app (Angular, Cloudflare Turnstile) linked from jahezgroup.com; roles not read. jahez.net/career.html (also linked) is an empty 'Jahez Careers' page",
+      "about": "المنصة السعودية الرائدة في توصيل طلبات المطاعم عبر الإنترنت، ومتوفرة خارج المملكة في البحرين والكويت.",
+      "aboutSource": "https://jahezgroup.com/ar/",
+      "logo": "/logos/jahez.png",
+      "note": "jahez.net home serves a Cloudflare 'Just a moment' check (skipped). Group site jahezgroup.com is open. Logo = Jahez-Logo-Red webp from jahezgroup.com converted to PNG and scaled 2560->1024 px wide.",
+      "part": "tech"
+    },
+    {
+      "id": "sdaia",
+      "careersUrl": "https://careers.sdaia.gov.sa/",
+      "careersStatus": "200; script-only SDAIA 'Careers' app (Vue, SDAIA-branded, account login); roles not read",
+      "about": "الهيئة السعودية للبيانات والذكاء الاصطناعي (سدايا) هي الجهة المختصة في المملكة بالبيانات والذكاء الاصطناعي، وهي المرجع الوطني في كل ما يتعلق بهما من تنظيم وتطوير وتعامل.",
+      "aboutSource": "https://sdaia.gov.sa/ar/SDAIA/about/Pages/About.aspx",
+      "logo": "/logos/sdaia.png",
+      "note": "Not linked from the pages I could read (home is an 'AI year' splash; menus load by script) - found by opening careers.sdaia.gov.sa directly; its app bundle carries SDAIA classes and 'SDAIA Logo'. Logo is the 192 px android icon (the 68 px header icon is too small).",
+      "part": "tech"
+    },
+    {
+      "id": "maaden",
+      "careersUrl": "https://careers.maaden.com/gb/en",
+      "careersStatus": "200; Phenom career site 'Maaden: Exciting Career Opportunities in Mining Industry' (linked from maaden.com menu as careers.maaden.com)",
+      "about": "شركة التعدين الرائدة في المملكة العربية السعودية، ملتزمة بالاستفادة المسؤولة من موارد المملكة المعدنية لتحقيق قيمة للصناعة والمجتمع.",
+      "aboutSource": "https://www.maaden.com/ar",
+      "logo": null,
+      "note": "maaden.com.sa now redirects to www.maaden.com. Logo not saved: site logo is white-gold (white wordmark), apple-touch-icon is near-white (mean lum 243); careers-site logo (cdn.phenompeople.com) has a white wordmark too.",
+      "part": "travel"
+    },
+    {
+      "id": "red-sea-global",
+      "careersUrl": null,
+      "careersStatus": "403 Cloudflare 'Just a moment...' on www.redseaglobal.com/ar and /en/careers - skipped per rules",
+      "about": null,
+      "aboutSource": null,
+      "logo": null,
+      "note": "Still behind a Cloudflare bot check; nothing collected.",
+      "part": "travel"
+    }
+  ],
+  "skipped": [
+    {
+      "company": "Saudi Tadawul Group / Saudi Exchange (tadawul)",
+      "reason": "saudiexchange.sa and tadawulgroup.sa both return Akamai 'Access Denied' (403); no identity, careers or logo could be verified, so no company record",
+      "part": "finance"
+    },
+    {
+      "company": "Gulf International Bank Saudi (gib-sa)",
+      "reason": "extra not finished in the time box: gib.com (group site) and its careers page en/careers-home-page.html return 200, but the Saudi entity identity/Arabic name were not verified",
+      "part": "finance"
+    },
+    {
+      "company": "Tweeq (tweeq)",
+      "reason": "extra not finished in the time box: tweeq.sa home 200 («طويق»); no careers link checked; its icon SVG is orange+white (not checked further)",
+      "part": "finance"
+    },
+    {
+      "company": "Noon (noon)",
+      "reason": "www.noon.com/saudi-en/, /saudi-ar/, www.noon.com and careers.noon.com all gave no response within 25-30 s (connection dropped; likely bot protection). No page opened, so no record.",
+      "part": "tech"
+    },
+    {
+      "company": "Thmanyah (thmanyah)",
+      "reason": "thmanyah.com, /ar and /careers serve a Vercel Security Checkpoint (HTTP 429 bot check). Skipped per rules; no page opened, so no record.",
+      "part": "tech"
+    },
+    {
+      "company": "Al-Dawaa Medical Services (al-dawaa)",
+      "reason": "www.al-dawaa.com and /ar/ serve a Cloudflare 'Just a moment' bot check (403). Skipped per rules; no page opened, so no record.",
+      "part": "retail"
+    },
+    {
+      "company": "Panda Retail Company (panda)",
+      "reason": "www.panda.com.sa and panda.com.sa serve a Vercel Security Checkpoint (HTTP 429). Skipped per rules; no page opened, so no record.",
+      "part": "retail"
+    },
+    {
+      "company": "Cenomi / Arabian Centres (cenomi)",
+      "reason": "cenomi.com opens but is only a mall-picker page (no about text, no careers link); cenomi.com/ar/ and /careers/ answer 404. Not enough own-site facts for a record in the time box.",
+      "part": "retail"
+    },
+    {
+      "company": "Red Sea Global (update)",
+      "reason": "Cloudflare 'Just a moment...' on www.redseaglobal.com/ar and /en/careers",
+      "part": "travel"
+    },
+    {
+      "company": "Mawani (Saudi Ports Authority), Saudi Ground Services",
+      "reason": "Not reached within the time box (Tasnee and New Murabba were done in the gov part)",
+      "part": "travel"
+    },
+    {
+      "company": "National Housing Company (nhc)",
+      "reason": "Cloudflare 'Just a moment...' on www.nhc.sa; record kept with nulls",
+      "part": "gov"
+    }
+  ],
+  "review": {
+    "fixesApplied": [
+      "wafeq: removed alias «وافِق» (normalises to «وافق» = 'agreed'; already in aliasesAlone)",
+      "tasnee: removed alias «تصنيع» ('manufacturing', a generic word that would catch the field, not the company)",
+      "new-murabba: removed aliasesAlone «المكعب» (the Mukaab is a building, not the employer)",
+      "almosafer-marketing-communications-officer-riyadh: dropped a requirement whose evidence did not show the skill (degree line / AI content tools ≠ llm-apps)",
+      "almosafer-arabic-copywriting-specialist-riyadh: dropped a requirement whose evidence did not show the skill (degree line / AI content tools ≠ llm-apps)"
+    ],
+    "issues": [],
+    "singleWordArabicAliases": [
+      "alinma: «الإنماء»",
+      "alinma: «الانماء»",
+      "geidea: «جيديا»",
+      "geidea: «جيدية»",
+      "bupa-arabia: «بوبا»",
+      "nupco: «نوبكو»",
+      "nana: «نانا»",
+      "unifonic: «يونيفونك»",
+      "unifonic: «يونيفونيك»",
+      "jarir: «جرير»",
+      "nahdi: «النهدي»",
+      "bindawood: «الدانوب»",
+      "acwa-power: «أكوا»",
+      "acwa-power: «اكوا»",
+      "sipchem: «سبكيم»",
+      "sipchem: «سبكم»",
+      "savola: «صافولا»",
+      "savola: «صافوله»",
+      "americana: «أمريكانا»",
+      "americana: «امريكانا»"
+    ],
+    "info": [
+      "soudah: Arabic official name not seen on its site; name = short",
+      "«stc» (stc) is inside «بنك stc» (stc-bank)",
+      "«stc» (stc) is inside «stc bank» (stc-bank)",
+      "«اس تي سي» (stc) is inside «بنك اس تي سي» (stc-bank)",
+      "«اس تي سي» (stc) is inside «اس تي سي بنك» (stc-bank)",
+      "«الراجحي» (alrajhi) is inside «تكافل الراجحي» (alrajhi-takaful)",
+      "«الراجحي» (alrajhi) is inside «الراجحي تكافل» (alrajhi-takaful)",
+      "«الراجحي» (alrajhi) is inside «الراجحي للتامين التكافلي» (alrajhi-takaful)",
+      "«الراجحي» (alrajhi) is inside «شركه الراجحي للتامين التكافلي» (alrajhi-takaful)",
+      "«al rajhi» (alrajhi) is inside «al rajhi takaful» (alrajhi-takaful)",
+      "«alrajhi» (alrajhi) is inside «alrajhi takaful» (alrajhi-takaful)",
+      "«rajhi» (alrajhi) is inside «al rajhi takaful» (alrajhi-takaful)",
+      "«لين» (lean-tech) is inside «لين لخدمات الاعمال» (lean-health)",
+      "«لين» (lean-tech) is inside «شركه لين لخدمات الاعمال» (lean-health)",
+      "«لين» (lean-tech) is inside «لين الصحيه» (lean-health)",
+      "«lean» (lean-tech) is inside «lean business services» (lean-health)",
+      "«lean» (lean-tech) is inside «lean health» (lean-health)",
+      "«lean» (lean-tech) is inside «lean sa» (lean-health)"
+    ]
+  }
+}

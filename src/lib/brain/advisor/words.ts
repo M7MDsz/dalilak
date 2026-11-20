@@ -164,6 +164,16 @@ export const FIELD_WORDS: Readonly<Record<JobFieldId, readonly string[]>> = {
     "مبيعات", "نجاح العملاء", "سلاسل الإمداد", "سلسلة الإمداد", "مشتريات", "لوجستيات", "sales", "procurement", "supply chain",
     "logistics",
   ],
+  // wave 2 fields (src/lib/data/wave2)
+  engineering: ["الهندسة المدنية", "هندسة مدنية", "الإنشاءات", "إنشاءات", "المقاولات", "مقاولات", "construction", "civil engineering"],
+  "project-controls": ["ضبط المشاريع", "التخطيط والجدولة", "حصر الكميات", "ضبط التكاليف", "project controls", "quantity surveying"],
+  "tourism-hospitality": ["سياحة", "السياحة", "الضيافة", "ضيافة", "الفنادق", "الفعاليات", "tourism", "hospitality", "events"],
+  "health-admin": ["القطاع الصحي", "الترميز الطبي", "المطالبات الطبية", "المعلوماتية الصحية", "healthcare", "medical coding"],
+  education: ["تعليم", "التعليم", "تعليمي", "education", "e-learning", "elearning"],
+  "banking-risk": ["بنوك", "البنوك", "مصرفي", "مصرفية", "الائتمان", "المراجعة الداخلية", "غسل الأموال", "banking", "audit", "compliance"],
+  legal: ["قانون", "القانون", "قانوني", "قانونية", "محاماة", "legal", "law"],
+  media: ["إعلام", "الإعلام", "المونتاج", "مونتاج", "موشن جرافيك", "الترجمة", "media", "video editing", "translation"],
+  gaming: ["ألعاب", "الألعاب", "قيمنق", "الرياضات الإلكترونية", "gaming", "games", "esports"],
 };
 
 export const CITY_WORDS: Readonly<Record<JobCityId, readonly string[]>> = {

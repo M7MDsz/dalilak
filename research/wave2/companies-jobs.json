@@ -1,0 +1,818 @@
+{
+  "checkedAt": "2026-11-20",
+  "label": "جُمعت في 20 نوفمبر 2026",
+  "note": "Wave 2 roles, in the shape of research/jobs/jobs-snapshot.json `jobs` (plus companyId). Up to 3 current roles per company, taken only from the company's own careers page or its own public ATS board, opened on 2026-11-20. Evidence lines are copied verbatim from each posting. A posting may have closed since. field may be a new area (e.g. legal, finance) that the app does not have yet.",
+  "jobs": [
+    {
+      "id": "moyasar-accounts-receivable-specialist-riyadh",
+      "companyId": "moyasar",
+      "title": "Accounts Receivable Specialist",
+      "titleAr": "أخصائي حسابات مدينة",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Moyasar",
+        "ar": "ميسر"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-09-11",
+      "postedAtSource": "published: 2026-09-11T00:00:00.000Z",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Moyasar careers (Workable)",
+      "url": "https://apply.workable.com/moyasar-financial-company-1/j/172E988986/",
+      "field": "finance",
+      "band": "junior",
+      "bandEvidence": "Experience in Accounts Receivable or general accounting.",
+      "requirements": [
+        {
+          "skill": "accounting",
+          "stars": 2,
+          "evidence": "Experience in Accounts Receivable or general accounting."
+        },
+        {
+          "skill": "excel",
+          "stars": 2,
+          "evidence": "Good Excel and accounting system skills."
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Good communication and follow-up skills."
+        },
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Arabic and English communication skills."
+        }
+      ],
+      "summary": "وظيفة في فريق المالية بميسر لإدارة الذمم المدينة والفواتير والتحصيل والتسويات وإبقاء السجلات المالية دقيقة.",
+      "tasks": [
+        "إعداد فواتير العملاء وإصدارها",
+        "متابعة الأرصدة المستحقة والتحصيل",
+        "إجراء تسويات العملاء والبنوك"
+      ]
+    },
+    {
+      "id": "moyasar-fraud-specialist-riyadh",
+      "companyId": "moyasar",
+      "title": "Fraud Specialist",
+      "titleAr": "أخصائي مكافحة الاحتيال",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Moyasar",
+        "ar": "ميسر"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-09-27",
+      "postedAtSource": "published: 2026-09-27T00:00:00.000Z",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Moyasar careers (Workable)",
+      "url": "https://apply.workable.com/moyasar-financial-company-1/j/1093FD8B27/",
+      "field": "finance",
+      "band": "junior",
+      "bandEvidence": "1–3 years of experience in fraud, fraud operations, fraud analysis, financial crime, or a related field.",
+      "requirements": [
+        {
+          "skill": "problem-solving",
+          "stars": 2,
+          "evidence": "Strong attention to detail and ability to make well-supported decisions based on available data."
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Good communication and documentation skills."
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "Collaborate with Risk, Operations, AML, Compliance, and other relevant teams when required."
+        }
+      ],
+      "summary": "وظيفة لمراقبة العمليات والتحقيق في الحالات المشبوهة ودعم اكتشاف الاحتيال ومنعه في بيئة المدفوعات والمحافظ.",
+      "tasks": [
+        "مراقبة العمليات والحسابات لاكتشاف السلوك الاحتيالي",
+        "مراجعة تنبيهات الاحتيال والتحقيق في العمليات المشبوهة",
+        "رفع مطالبات استرداد المبالغ ومتابعتها حتى الحل"
+      ]
+    },
+    {
+      "id": "moyasar-legal-specialist-riyadh",
+      "companyId": "moyasar",
+      "title": "Legal Specialist",
+      "titleAr": "أخصائي قانوني",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Moyasar",
+        "ar": "ميسر"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-09-11",
+      "postedAtSource": "published: 2026-09-11T00:00:00.000Z",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Moyasar careers (Workable)",
+      "url": "https://apply.workable.com/moyasar-financial-company-1/j/962BF8A06A/",
+      "field": "legal",
+      "band": "junior",
+      "bandEvidence": "Experience in a Legal Specialist or similar role.",
+      "requirements": [
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Arabic and English communication skills."
+        }
+      ],
+      "summary": "وظيفة لدعم الاحتياجات القانونية لشركة مدفوعات: العقود والمستندات القانونية والمسائل التنظيمية.",
+      "tasks": [
+        "مراجعة العقود والاتفاقيات واتفاقيات السرية وصياغتها",
+        "متابعة الأنظمة والتطورات التنظيمية ذات العلاقة",
+        "دعم المسائل المتعلقة بالبنك المركزي السعودي والجهات التنظيمية"
+      ]
+    },
+    {
+      "id": "d360-app-ops-engineer-payments-riyadh",
+      "companyId": "d360",
+      "title": "App Ops Engineer (Payments)",
+      "titleAr": "مهندس عمليات تطبيقات (المدفوعات)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "D360 Bank",
+        "ar": "بنك D360"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-11-12",
+      "postedAtSource": "ExternalPostedStartDate: 2026-11-12T09:52:40+00:00",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "D360 Bank careers (Oracle Recruiting Cloud)",
+      "url": "https://fa-erqw-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/D360BankCareerPage/job/90493",
+      "field": "cyber-cloud",
+      "band": "mid",
+      "bandEvidence": "Recommended 3 to 5 years of equivalent experience where required competencies and experience has been demonstrated preferably in banking or fintech industry.",
+      "requirements": [
+        {
+          "skill": "sql",
+          "stars": 2,
+          "evidence": "Good knowledge of Databases and basic queries and data extraction for reporting."
+        },
+        {
+          "skill": "devops",
+          "stars": 2,
+          "evidence": "Proficiency with common automation tools for Applications."
+        },
+        {
+          "skill": "problem-solving",
+          "stars": 2,
+          "evidence": "Proficiency with common tasks in troubleshooting, workload, scheduling, and basic issues related to support."
+        },
+        {
+          "skill": "security-fundamentals",
+          "stars": 1,
+          "evidence": "Security & Compliance"
+        },
+        {
+          "skill": "communication",
+          "stars": 1,
+          "evidence": "Communication"
+        }
+      ],
+      "summary": "وظيفة لإدارة تشغيل تطبيقات المدفوعات يومياً وضمان توفر الأنظمة وأدائها وأمانها.",
+      "tasks": [
+        "التحقيق في مشكلات التطبيقات والخدمات وحلّها",
+        "مراقبة أداء التطبيقات وتحليل السجلات وتقارير الأخطاء",
+        "أتمتة المهام التشغيلية وعمليات النشر"
+      ]
+    },
+    {
+      "id": "d360-cloud-engineer-riyadh",
+      "companyId": "d360",
+      "title": "Cloud Engineer",
+      "titleAr": "مهندس سحابة",
+      "titleArTranslated": true,
+      "company": {
+        "en": "D360 Bank",
+        "ar": "بنك D360"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-11-01",
+      "postedAtSource": "ExternalPostedStartDate: 2026-11-01T11:16:03+00:00",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "D360 Bank careers (Oracle Recruiting Cloud)",
+      "url": "https://fa-erqw-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/D360BankCareerPage/job/90556",
+      "field": "cyber-cloud",
+      "band": "mid",
+      "bandEvidence": "3+ years of equivalent experience in DevOps",
+      "requirements": [
+        {
+          "skill": "devops",
+          "stars": 2,
+          "evidence": "3+ years of equivalent experience in DevOps"
+        },
+        {
+          "skill": "programming",
+          "stars": 2,
+          "evidence": "Programming & Coding"
+        },
+        {
+          "skill": "agile",
+          "stars": 1,
+          "evidence": "is a team member for the agile development process"
+        },
+        {
+          "skill": "problem-solving",
+          "stars": 1,
+          "evidence": "Problem-solving"
+        },
+        {
+          "skill": "security-fundamentals",
+          "stars": 1,
+          "evidence": "He is also knowledgeable of crypto primitives, authentication protocols, and authorization standards."
+        }
+      ],
+      "summary": "وظيفة لبناء خطوط التكامل والنشر المستمر وإدارة إصدارات التطبيقات ضمن فريق تطوير رشيق.",
+      "tasks": [
+        "بناء خطوط التكامل والنشر المستمر (CI/CD)",
+        "نشر الوحدات والتحديثات والإصلاحات إلى بيئة الإنتاج",
+        "إجراء اختبارات الثغرات الأمنية والاختبارات الآلية"
+      ]
+    },
+    {
+      "id": "mrsool-customer-care-representative-riyadh",
+      "companyId": "mrsool",
+      "title": "Representative, Customer Care",
+      "titleAr": "ممثل خدمة عملاء",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Mrsool",
+        "ar": "مرسول"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-10-04",
+      "postedAtSource": "published: 2026-10-04T00:00:00.000Z",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Mrsool careers (Workable)",
+      "url": "https://apply.workable.com/mrsool-3/j/29356C93C5/",
+      "field": "business",
+      "band": "junior",
+      "bandEvidence": "Experience: At least one year of experience in customer service, preferably in delivery apps or the tech industry.",
+      "requirements": [
+        {
+          "skill": "customer-success",
+          "stars": 2,
+          "evidence": "Customer Service Representative with expertise in customer support and problem-solving to join our team."
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Strong communication skills, both verbal and written."
+        },
+        {
+          "skill": "problem-solving",
+          "stars": 2,
+          "evidence": "Ability to work under pressure and resolve issues quickly and efficiently."
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "Coordinate with the technical, shipping, and marketing teams to resolve any app or delivery-related issues."
+        }
+      ],
+      "summary": "ممثل خدمة عملاء في الرياض يجيب عن استفسارات مستخدمي تطبيق مرسول ويحل مشكلاتهم عبر الهاتف والبريد والمحادثة المباشرة.",
+      "tasks": [
+        "الرد على استفسارات العملاء عبر الهاتف والبريد والمحادثة المباشرة",
+        "متابعة حالة الطلبات ومعالجة التأخير أثناء التوصيل",
+        "إعداد تقارير دورية عن المشكلات المتكررة واقتراحات التحسين"
+      ]
+    },
+    {
+      "id": "mrsool-creative-copywriter-riyadh",
+      "companyId": "mrsool",
+      "title": "Creative Copywriter",
+      "titleAr": "كاتب محتوى إبداعي",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Mrsool",
+        "ar": "مرسول"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-09-09",
+      "postedAtSource": "published: 2026-09-09T00:00:00.000Z",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Mrsool careers (Workable)",
+      "url": "https://apply.workable.com/mrsool-3/j/13BC24D7C9/",
+      "field": "marketing",
+      "band": "junior",
+      "bandEvidence": "1–3+ years of experience in copywriting, content creation, or related fields (agency or in-house).",
+      "requirements": [
+        {
+          "skill": "content",
+          "stars": 3,
+          "evidence": "Exceptional writing, editing, and storytelling skills."
+        },
+        {
+          "skill": "seo",
+          "stars": 2,
+          "evidence": "Understanding of digital marketing, social trends, and basic SEO principles."
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Creative thinker with strong collaboration and communication skills."
+        },
+        {
+          "skill": "project-management",
+          "stars": 1,
+          "evidence": "Ability to manage multiple projects and meet deadlines in a fast-paced environment."
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "Collaborate with marketing, design, and product teams to develop content that aligns with brand strategy."
+        }
+      ],
+      "summary": "كاتب محتوى إبداعي في الرياض يكتب نصوصاً تسويقية جذابة بصوت علامة مرسول للموقع والبريد ووسائل التواصل والإعلانات.",
+      "tasks": [
+        "كتابة وتحرير النصوص التسويقية للموقع والبريد ووسائل التواصل والإعلانات ونصوص الفيديو",
+        "تحسين النصوص لمحركات البحث وللتحويل",
+        "تدقيق المحتوى والمساعدة في بناء تقويم المحتوى وإرشاداته"
+      ]
+    },
+    {
+      "id": "mozn-revenue-operations-analyst-riyadh",
+      "companyId": "mozn",
+      "title": "Revenue Operations Analyst",
+      "titleAr": "محلل عمليات الإيرادات",
+      "titleArTranslated": true,
+      "company": {
+        "en": "MOZN",
+        "ar": "مُزن"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-11-09",
+      "postedAtSource": "published: 2026-11-09T00:00:00.000Z",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "MOZN careers (Workable)",
+      "url": "https://apply.workable.com/mozn-ai/j/22EDF94D03/",
+      "field": "business",
+      "band": "junior",
+      "bandEvidence": "2+ years of experience in sales operations, revenue operations, sales support, or a similar role.",
+      "requirements": [
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Excellent analytical and communication skills, with the ability to balance strategic thinking and attention to detail."
+        },
+        {
+          "skill": "sales",
+          "stars": 2,
+          "evidence": "Strong understanding of sales processes and metrics, with the ability to optimize and improve processes."
+        },
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Must be fluent in both written and spoken English and Arabic."
+        },
+        {
+          "skill": "project-management",
+          "stars": 1,
+          "evidence": "Highly organized with great attention to detail and the ability to manage multiple projects and deadlines."
+        }
+      ],
+      "summary": "محلل عمليات إيرادات في الرياض يدعم الفريق التجاري في هيكلة الصفقات والتسعير والعقود حتى إغلاقها.",
+      "tasks": [
+        "دعم الفريق التجاري في هيكلة الصفقات واستراتيجية التسعير وشروط العقود",
+        "صياغة عقود العملاء وتحديثها وإدارتها",
+        "تحديث بيانات الصفقات في نظام إدارة علاقات العملاء واستخراج رؤى لتحسين التوقعات"
+      ]
+    },
+    {
+      "id": "mozn-legal-specialist-riyadh",
+      "companyId": "mozn",
+      "title": "Legal Specialist",
+      "titleAr": "أخصائي قانوني",
+      "titleArTranslated": true,
+      "company": {
+        "en": "MOZN",
+        "ar": "مُزن"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-11-10",
+      "postedAtSource": "published: 2026-11-10T00:00:00.000Z",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "MOZN careers (Workable)",
+      "url": "https://apply.workable.com/mozn-ai/j/BB6A394FBC/",
+      "field": "legal",
+      "band": "junior",
+      "bandEvidence": "Minimum 2 years of relevant legal experience, preferably within a corporate legal department, law firm, technology company, or similar environment.",
+      "requirements": [
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Good command of English, both written and spoken."
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Strong Arabic written and verbal communication skills."
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "Proactive, collaborative, and capable of working with different functions and levels of management."
+        }
+      ],
+      "summary": "أخصائي قانوني في الرياض يصيغ العقود التجارية ويراجعها ويقدّم المشورة القانونية اليومية لفرق الشركة.",
+      "tasks": [
+        "صياغة العقود التجارية ومراجعتها والتفاوض عليها مثل اتفاقيات SaaS واتفاقيات عدم الإفصاح",
+        "مراجعة طلبات العروض ووثائق المشتريات ذات الأثر القانوني",
+        "دعم شؤون الحوكمة مثل قرارات المساهمين ومجلس الإدارة والسجلات والتراخيص"
+      ]
+    },
+    {
+      "id": "mozn-cloud-platform-engineer-riyadh",
+      "companyId": "mozn",
+      "title": "Cloud Platform Engineer",
+      "titleAr": "مهندس منصات سحابية",
+      "titleArTranslated": true,
+      "company": {
+        "en": "MOZN",
+        "ar": "مُزن"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-10-27",
+      "postedAtSource": "published: 2026-10-27T00:00:00.000Z",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "MOZN careers (Workable)",
+      "url": "https://apply.workable.com/mozn-ai/j/05591481EB/",
+      "field": "cyber-cloud",
+      "band": "mid",
+      "bandEvidence": "4+ years of experience in cloud, platform, or infrastructure engineering.",
+      "requirements": [
+        {
+          "skill": "cloud",
+          "stars": 3,
+          "evidence": "Deep hands-on expertise in GCP and Kubernetes, including production experience with GKE."
+        },
+        {
+          "skill": "devops",
+          "stars": 2,
+          "evidence": "Experience with GitOps (Argo CD/Flux) and GitHub Actions/Workflows."
+        },
+        {
+          "skill": "programming",
+          "stars": 2,
+          "evidence": "Proficiency in Python, Bash, or Go for automation and tooling."
+        },
+        {
+          "skill": "linux",
+          "stars": 2,
+          "evidence": "Strong understanding of cloud networking, gateways, Linux, and distributed systems."
+        },
+        {
+          "skill": "networking",
+          "stars": 2,
+          "evidence": "Strong understanding of cloud networking, gateways, Linux, and distributed systems."
+        }
+      ],
+      "summary": "مهندس منصات سحابية في الرياض يصمّم ويشغّل منصات سحابية موثوقة على GCP وKubernetes ويؤتمت عمليات النشر.",
+      "tasks": [
+        "تصميم وتشغيل منصات سحابية أصلية على GCP مع GKE",
+        "بناء خطوط نشر GitOps وسير عمل GitHub Actions",
+        "تطوير أدوات أتمتة داخلية بلغة Python أو Bash أو Go"
+      ]
+    },
+    {
+      "id": "nahdi-pharmacist-riyadh",
+      "companyId": "nahdi",
+      "title": "Pharmacist (Riyadh)",
+      "titleAr": "صيدلي (الرياض)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Nahdi Medical Company",
+        "ar": "النهدي"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Riyadh Region, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-11-08",
+      "postedAtSource": "PostedDate: 2026-11-08 (Oracle job list API)",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Nahdi careers (Oracle Recruiting)",
+      "url": "https://efan.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/2639",
+      "field": "health",
+      "band": "junior",
+      "bandEvidence": "1 - 3 Years of Experience",
+      "requirements": [
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "English - Mandatory"
+        },
+        {
+          "skill": "sales",
+          "stars": 1,
+          "evidence": "Supervises the retail store team and operations in order to ensure key sales targets, customer satisfaction levels along with operational readiness levels are continously met."
+        },
+        {
+          "skill": "customer-success",
+          "stars": 1,
+          "evidence": "Educate customers on proper handling of medical equipment (e.g. glucose meters) designed for home use by providing information and additional sources of reference (e.g. user manual) to ensure safe and appropriate use of equipment"
+        }
+      ],
+      "summary": "صيدلي في فروع النهدي بالرياض يصرف الأدوية ويقدّم المشورة الصحية للعملاء ويشرف على فريق الصيدلية.",
+      "tasks": [
+        "صرف الوصفات الطبية ومراجعتها وتقديم الاستشارة حول الجرعات والآثار الجانبية والتداخلات الدوائية",
+        "توعية العملاء بطريقة استخدام الأجهزة الطبية المنزلية مثل أجهزة قياس السكر",
+        "الإشراف على فريق الصيدلية ومتابعة أهداف المبيعات ورضا العملاء"
+      ]
+    },
+    {
+      "id": "nahdi-regional-it-support-specialist-riyadh",
+      "companyId": "nahdi",
+      "title": "Regional IT Support Specialist RYD (2023826)",
+      "titleAr": "أخصائي دعم تقنية المعلومات (منطقة الرياض)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Nahdi Medical Company",
+        "ar": "النهدي"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh Region, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-11-09",
+      "postedAtSource": "PostedDate: 2026-11-09 (Oracle job list API)",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Nahdi careers (Oracle Recruiting)",
+      "url": "https://efan.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/2718",
+      "field": "cyber-cloud",
+      "band": "entry",
+      "bandEvidence": "Experience:0-3 Years of Experience",
+      "requirements": [
+        {
+          "skill": "networking",
+          "stars": 2,
+          "evidence": "Networking Basics"
+        },
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Languages: English - Arabic"
+        },
+        {
+          "skill": "customer-success",
+          "stars": 1,
+          "evidence": "Conducting regular site visits to all assigned regional stores, to ensure good relationship with end users and maintain their satisfaction and NPS."
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "Collaborate with the third parties during the project implementations for stores operations (new retail applications, pharmacies HW and technology refreshment"
+        }
+      ],
+      "summary": "أخصائي دعم تقني في منطقة الرياض يقدّم الدعم اليومي لموظفي المكاتب والصيدليات ويضمن جاهزية الأجهزة والشبكة.",
+      "tasks": [
+        "دعم التشغيل اليومي لمستخدمي المكاتب الإقليمية: الشبكة والهواتف وقاعات الاجتماعات والطابعات",
+        "تجهيز الأجهزة والتطبيقات للفروع الجديدة واختبار التحديثات قبل نشرها",
+        "زيارة الصيدليات دورياً لضمان رضا المستخدمين"
+      ]
+    },
+    {
+      "id": "nahdi-accounting-coop",
+      "companyId": "nahdi",
+      "title": "Accounting Co-op",
+      "titleAr": "تدريب تعاوني في المحاسبة",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Nahdi Medical Company",
+        "ar": "النهدي"
+      },
+      "city": "other",
+      "cityText": "Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-11-16",
+      "postedAtSource": "PostedDate: 2026-11-16 (Oracle job list API)",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Nahdi careers (Oracle Recruiting)",
+      "url": "https://efan.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/2730",
+      "field": "finance",
+      "band": "entry",
+      "bandEvidence": "We’re looking for students:",
+      "requirements": [
+        {
+          "skill": "accounting",
+          "stars": 2,
+          "evidence": "Currently studying towards Bachelor’s with the following major: Accounting"
+        },
+        {
+          "skill": "excel",
+          "stars": 2,
+          "evidence": "Proficient in Microsoft Office applications: Word, Excel, Power Point & Outlook."
+        },
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Proficient in English."
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Excellent written and verbal communication for coordinating across teams"
+        }
+      ],
+      "summary": "تدريب تعاوني لطلاب المحاسبة السعوديين في الإدارة المالية بالنهدي، من يناير حتى يوليو 2027.",
+      "tasks": [
+        "المشاركة في أعمال المحاسبة المالية للشركة",
+        "دعم إعداد التقارير المالية",
+        "المساهمة في أنشطة الرقابة المالية"
+      ]
+    },
+    {
+      "id": "almosafer-marketing-communications-officer-riyadh",
+      "companyId": "almosafer",
+      "title": "Officer - Marketing Communications",
+      "titleAr": "مسؤول اتصالات تسويقية",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Almosafer",
+        "ar": "المسافر"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-11-12",
+      "postedAtSource": "datePosted: Thu Nov 12 00:00:00 UTC 2026",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Almosafer careers (SuccessFactors)",
+      "url": "https://jobs.almosafer.com/job/Riyadh-Officer-Marketing-Communications/1456695733/",
+      "field": "marketing",
+      "band": "junior",
+      "bandEvidence": "Minimum of 2 years experience as a marketing specialist or similar.",
+      "requirements": [
+        {
+          "skill": "social-media",
+          "stars": 2,
+          "evidence": "Social media platform knowledge."
+        },
+        {
+          "skill": "content",
+          "stars": 2,
+          "evidence": "Produce valuable and engaging content for our website and social channels that attracts and converts our target groups"
+        },
+        {
+          "skill": "ads",
+          "stars": 1,
+          "evidence": "Experimenting with various organic and paid acquisition channels"
+        },
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Editorial skills in both Arabic & English."
+        }
+      ],
+      "summary": "تنفيذ حملات العلامة التجارية والتسويق لعلامتَي «اكتشف السعودية» و«مواسم» (الحج والعمرة) من الرياض.",
+      "tasks": [
+        "تنفيذ حملات تسويقية مع مدير التسويق لرفع الوعي وجذب العملاء",
+        "كتابة محتوى جذاب للموقع وقنوات التواصل الاجتماعي",
+        "إدارة تقويم التسويق وحملات إدارة علاقات العملاء (CRM)"
+      ]
+    },
+    {
+      "id": "almosafer-product-designer-riyadh",
+      "companyId": "almosafer",
+      "title": "Product Designer",
+      "titleAr": "مصمم منتجات",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Almosafer",
+        "ar": "المسافر"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-11-12",
+      "postedAtSource": "datePosted: Thu Nov 12 02:00:00 UTC 2026",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Almosafer careers (SuccessFactors)",
+      "url": "https://jobs.almosafer.com/job/Riyadh-Product-Designer/1254555701/",
+      "field": "design",
+      "band": "mid",
+      "bandEvidence": "You have 3-5 years of product design experience within a consumer focused organization",
+      "requirements": [
+        {
+          "skill": "figma",
+          "stars": 2,
+          "evidence": "proficient in design, prototyping, and whiteboarding tools (such as Figma, Framer, Miro)"
+        },
+        {
+          "skill": "ux-research",
+          "stars": 2,
+          "evidence": "You are comfortable planning and conducting research from interviews and usability tests to surveys"
+        },
+        {
+          "skill": "prototyping",
+          "stars": 2,
+          "evidence": "You will rapidly and pragmatically produce concepts and prototypes"
+        },
+        {
+          "skill": "ui-design",
+          "stars": 3,
+          "evidence": "You possess excellent visual design skills"
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "You have the necessary communication skills to tell a story about your work and communicate complex concepts to technical and non-technical stakeholders."
+        }
+      ],
+      "summary": "تصميم تجربة حجز وإدارة منتجات السفر (طيران، إقامة، أنشطة) للعملاء على الويب والجوال ضمن فريق متعدد التخصصات.",
+      "tasks": [
+        "فهم احتياجات العملاء ومشكلاتهم وتحويلها إلى فرص",
+        "إجراء مقابلات واستبيانات واختبارات قابلية الاستخدام",
+        "إنتاج نماذج أولية سريعة وتجارب للتحقق من الحلول"
+      ]
+    },
+    {
+      "id": "almosafer-arabic-copywriting-specialist-riyadh",
+      "companyId": "almosafer",
+      "title": "Specialist - Copywriting",
+      "titleAr": "أخصائي كتابة إعلانية (عربي)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Almosafer",
+        "ar": "المسافر"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-11-11",
+      "postedAtSource": "datePosted: Wed Nov 11 02:00:00 UTC 2026",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Almosafer careers (SuccessFactors)",
+      "url": "https://jobs.almosafer.com/job/Riyadh-Specialist-Copywriting/1446311433/",
+      "field": "marketing",
+      "band": "mid",
+      "bandEvidence": "At least 5 years of copywriting experience, ideally in a creative or digital agency or another fast-paced environment.",
+      "requirements": [
+        {
+          "skill": "content",
+          "stars": 3,
+          "evidence": "Excellent writing, editing and proofreading skills in Arabic, with strong attention to detail and cultural nuance."
+        },
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Fluent in spoken and written English, with the confidence to present ideas, take briefs and give feedback across departments and stakeholders."
+        },
+        {
+          "skill": "social-media",
+          "stars": 2,
+          "evidence": "Working knowledge of CMS, SEM, CRM and social media platforms."
+        },
+        {
+          "skill": "marketing-basics",
+          "stars": 2,
+          "evidence": "Proven experience writing for digital marketing: social media, CRM, paid and owned channels."
+        }
+      ],
+      "summary": "كتابة النصوص العربية لعلامتَي «اكتشف السعودية» و«مواسم» في كل نقاط التواصل، من منشورات التواصل إلى نصوص التطبيق والباقات السياحية.",
+      "tasks": [
+        "كتابة نصوص عربية للمواقع والتطبيقات والحملات المدفوعة",
+        "إعداد الباقات السياحية والبرامج والمواد الترويجية",
+        "اعتماد المحتوى العربي النهائي ومراجعة أعمال الكتّاب والوكالات"
+      ]
+    }
+  ]
+}
