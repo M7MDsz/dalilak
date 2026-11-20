@@ -197,12 +197,14 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
     if (ended !== "full") return;
     setFullEnded(true);
     clearHandover(handover);
-    if (user.cv !== null && user.seen.catchUpForCv !== user.cv.analysedAt) begin("catch-up");
   });
   const begin = useEffectEvent((next: OpenForm) => {
     const store = useAppStore.getState();
     if (next === "full") store.markSeen("mapOpenPlayed", true);
-    if (next === "catch-up" && user.cv !== null) store.markSeen("catchUpForCv", user.cv.analysedAt);
+    // The full form already draws every station the CV proved as done (the CV is read in the onboarding, before the
+    // map's first visit), so it stands for that CV's catch-up too. 21 Nov 2026: a catch-up chained after the full form
+    // wiped the finished map and redrew it («أنت هنا» back at «البداية»). The map opens once.
+    if ((next === "full" || next === "catch-up") && user.cv !== null) store.markSeen("catchUpForCv", user.cv.analysedAt);
     setCounted(true);
     setForm(next);
     if (instant) {

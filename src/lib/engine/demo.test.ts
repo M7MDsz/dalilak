@@ -109,7 +109,7 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4, CV in onboarding)",
   const s2 = finalize(onboarded(announce(s2a), t + MINUTE, CV_ANSWERS), clockAt(1));
   // Step 4: «ابدأ هذا المسار» → target_set (+30): the reveal's job, ranked with the CV's stars
   const s4 = finalize(targeted(s2, recommend(CV_ANSWERS, undefined, skillStars(s2)).recommended, t + 2 * MINUTE), clockAt(2));
-  // Step 6 (the old order's CV step): nothing left to do; the map opens on the CV's catch-up
+  // Step 6 (the old order's CV step): nothing left to do; the map's full opening already shows the CV's stages done (no catch-up after it)
   const s6 = announce(s4);
   // Step 8: course started (pays nothing)
   const s8 = started(announce(s6), "c-powerbi-1", t + 4 * MINUTE);

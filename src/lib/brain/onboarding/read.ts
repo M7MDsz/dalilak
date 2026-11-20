@@ -230,10 +230,27 @@ function readEducation(reading: Reading): Found | null {
   return found ? { question: "education", value: found.value } : null;
 }
 
+/** The generic major words: they decide only when no specific major is named (21 Nov 2026, tester: «بكالوريوس علوم
+ * الحاسب» read as science, «إدارة الموارد البشرية» as business). */
+const GENERIC_MAJOR_WORDS: ReadonlySet<string> = new Set(["إدارة", "علوم", "هندسة"]);
+const SPECIFIC_MAJORS = MAJOR_KEYWORDS.filter((k) => !GENERIC_MAJOR_WORDS.has(k.keyword));
+/** «الحاسب», «الموارد البشرية», «التسويق»…: the specific Arabic keywords with the article too. */
+const SPECIFIC_MAJORS_WITH_AL = [
+  ...SPECIFIC_MAJORS,
+  ...SPECIFIC_MAJORS.filter((k) => /^[؀-ۿ]/u.test(k.keyword) && !k.keyword.startsWith("ال")).map((k) => ({
+    keyword: k.keyword
+      .split(" ")
+      .map((w) => (w.startsWith("ال") ? w : `ال${w}`))
+      .join(" "),
+    value: k.value,
+  })),
+];
+
 function readMajor(reading: Reading): Found | null {
   // «هندسة» means engineering only when no `cs` keyword matched (4.3).
-  const csHit = reading.find(MAJOR_KEYWORDS.filter((k) => k.value === "cs").map((k) => k.keyword)).length > 0;
-  const found = earliestOf(reading, MAJOR_KEYWORDS, (v) => csHit && v === "engineering");
+  const csHit = reading.find(SPECIFIC_MAJORS_WITH_AL.filter((k) => k.value === "cs").map((k) => k.keyword)).length > 0;
+  const found =
+    earliestOf(reading, SPECIFIC_MAJORS_WITH_AL) ?? earliestOf(reading, MAJOR_KEYWORDS, (v) => csHit && v === "engineering");
   return found ? { question: "major", value: found.value } : null;
 }
 
@@ -276,6 +293,12 @@ function readExperience(reading: Reading): Found | null {
   if (none) {
     reading.use(none.start, none.end);
     return { question: "experience", value: "none" };
+  }
+  // 4b. The dual «سنتين» / «عامين» (two years, no digit: «خبرة سنتين», 21 Nov 2026 tester) → 1to3.
+  const dual = reading.find(["سنتين", "سنتان", "عامين", "عامان"])[0];
+  if (dual) {
+    reading.use(dual.start, dual.end);
+    return { question: "experience", value: "1to3" };
   }
   // 5. A number in digits or words: 0 → none; 1 to 3 → 1to3; above 3 → over3.
   for (let i = 0; i < reading.words.length; i++) {

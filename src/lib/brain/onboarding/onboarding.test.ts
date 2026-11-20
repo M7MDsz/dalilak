@@ -182,13 +182,22 @@ describe("free text (spec 4.3)", () => {
     );
   });
 
-  it("applies the tie rules: the earliest keyword wins («طالب ماجستير», «إدارة مالية»), «هندسة برمجيات» is cs", () => {
+  it("applies the tie rules: the earliest keyword wins («طالب ماجستير»), a specific major beats «إدارة»/«علوم», «هندسة برمجيات» is cs", () => {
     expect(onboardingTurn(ctx({ city: { value: "riyadh", label: "الرياض" } }), text("طالب ماجستير")).answers.education).toBe("student");
     const base: OnboardingAnswers = { city: { value: "riyadh", label: "الرياض" }, education: "bachelor" };
-    expect(onboardingTurn(ctx(base), text("إدارة مالية")).answers.major?.value).toBe("business");
+    // 21 Nov 2026 (tester): the specific word decides — «إدارة مالية» is the finance major, CV lines name the real major
+    expect(onboardingTurn(ctx(base), text("إدارة مالية")).answers.major?.value).toBe("finance");
+    expect(onboardingTurn(ctx(base), text("بكالوريوس علوم الحاسب، جامعة الملك عبدالعزيز")).answers.major?.value).toBe("cs");
+    expect(onboardingTurn(ctx(base), text("بكالوريوس إدارة الموارد البشرية، جامعة الملك سعود")).answers.major?.value).toBe("hr");
+    expect(onboardingTurn(ctx(base), text("إدارة أعمال")).answers.major?.value).toBe("business");
     expect(onboardingTurn(ctx(base), text("هندسة برمجيات")).answers.major?.value).toBe("cs");
     expect(onboardingTurn(ctx(base), text("هندسة")).answers.major?.value).toBe("engineering");
     expect(onboardingTurn(ctx(base), text("ذكاء اصطناعي")).answers.major?.value).toBe("cs");
+  });
+
+  it("reads the dual «سنتين» as one to three years (21 Nov 2026, tester)", () => {
+    const base: OnboardingAnswers = { city: { value: "riyadh", label: "الرياض" }, education: "bachelor", major: { value: "hr", label: "موارد بشرية" } };
+    expect(onboardingTurn(ctx(base), text("عندي خبرة سنتين")).answers.experience).toBe("1to3");
   });
 
   it("reads experience in the order of 4.3", () => {

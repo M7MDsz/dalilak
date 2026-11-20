@@ -735,7 +735,7 @@ arithmetic, so the line ends on the ring's number (P5).
 is right from the first frame:
 
 ```
-!seen.mapOpenPlayed                              → "full"   (then catch-up if a CV is waiting for it)
+!seen.mapOpenPlayed                              → "full"   (it stands for a waiting CV's catch-up: never both)
 cv && seen.catchUpForCv !== cv.analysedAt        → "catch-up"
 otherwise                                        → "short"
 ```
@@ -747,8 +747,9 @@ otherwise                                        → "short"
 - **Wait for the daily reward.** Start the opening only when `!dailyReward(facts, clock).due && blocking !== "daily"`.
   `due` is known before `touchDay` runs (not the creation day, no `daily_reward` event dated today), so the map waits
   even though the shell's effect that opens the daily overlay runs after the map's own effects.
-- When the full form starts: `markSeen("mapOpenPlayed", true)`. It holds until it ends. When catch-up starts:
-  `markSeen("catchUpForCv", cv.analysedAt)`. Catch-up is the opening after a CV analysis, `data-open="catch-up"`, at
+- When the full form starts: `markSeen("mapOpenPlayed", true)`, and with a CV also `markSeen("catchUpForCv",
+  cv.analysedAt)` (the full form already draws the stations the CV proved as done; a catch-up after it wiped the finished
+  map and redrew it, 21 Nov 2026). It holds until it ends. When catch-up starts: `markSeen("catchUpForCv", cv.analysedAt)`. Catch-up is the opening after a CV analysis, `data-open="catch-up"`, at
   most `MAP_OPEN.catchUpMs`; it may reuse the full form's beats but not its length (the design notes in
   `design/explore/darb/map/final-home.notes.txt` that play the full 3.5 s form after a CV are overruled by spec 3.4).
   The full form plays only while `!seen.mapOpenPlayed`.

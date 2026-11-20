@@ -328,7 +328,8 @@ export function parseUnderstandRequest(input: unknown): OnboardingUnderstandRequ
   if (r.v !== PROTOCOL_VERSION || typeof r.step !== "string" || r.step.length > 20) return null;
   if (typeof r.question !== "string" || r.question.length > 300 || typeof r.name !== "string" || r.name.length > 40) return null;
   if (typeof r.text !== "string" || r.text.trim() === "") return null;
-  if (!Array.isArray(r.options) || r.options.length > 120) return null;
+  // the company question sends every known company (about 150 since wave 3): allow up to 400 options
+  if (!Array.isArray(r.options) || r.options.length > 400) return null;
   const options = r.options.flatMap((o) =>
     typeof o === "object" && o !== null && typeof (o as UnderstandOption).id === "string" && typeof (o as UnderstandOption).label === "string"
       ? [{ id: (o as UnderstandOption).id.slice(0, 60), label: (o as UnderstandOption).label.slice(0, 80) }]
