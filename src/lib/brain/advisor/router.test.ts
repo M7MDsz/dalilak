@@ -257,9 +257,9 @@ describe("5.6 examples, no key (the local brain and the router)", () => {
     expect(r.actions).toEqual([]);
     expect(r.cards.map((c) => (c.kind === "job" ? c.jobId : c.kind))).toEqual([
       "data-analyst-riyadh",
-      // 21 Nov 2026: the jobs page ranks the target's field first, so the next two are data jobs
-      "master-works-data-senior-engineer-riyadh",
-      "jeeny-growth-insights-analytics-riyadh",
+      // 21 Nov 2026: the target's field first and jobs within reach of a new graduate before the senior ones
+      "ninja-real-estate-performance-analyst-riyadh",
+      "qiddiya-hr-analytics-analyst-riyadh",
     ]);
     for (const card of r.cards) {
       expect(card.kind === "job" && card.chip?.label).toBe("قدّم على ذي");
@@ -378,7 +378,7 @@ describe("5.8: every page chip answers, in code", () => {
     );
     const best = route("", { chip: { intent: "page", slug: "best-job" }, jobsDisclosed: true });
     expect(best.actions).toEqual([]);
-    expect(best.text).toBe("أنسب وظيفة لمهاراتك الحين «محلل بيانات» بمطابقة 70%، وبعدها «مهندس بيانات أول» و«مدير نمو - رؤى وتحليلات».");
+    expect(best.text).toBe("أنسب وظيفة لمهاراتك الحين «محلل بيانات» بمطابقة 70%، وبعدها «محلل أداء عقاري» و«محلل تحليلات وتقارير الموارد البشرية».");
     expect(best.cards).toHaveLength(3);
   });
 

@@ -322,3 +322,25 @@ export function userFactsGrounded(reply: string, facts: UserFacts): boolean {
   if (!degree && W.has(text, CLAIMS_DEGREE)) return false;
   return true;
 }
+
+// ── No Persian / Urdu or Fusha slips (21 Nov 2026, QA: «روز» in an answer about the trial period) ────────────────────
+
+/** Letters of Persian and Urdu that Arabic does not use (پ چ ژ گ ک ی ہ ے ۀ). */
+const NON_ARABIC_LETTERS = /[\u067E\u0686\u0698\u06AF\u06A9\u06CC\u06C1\u06D2\u06C0]/;
+/** Persian / Urdu words written in Arabic letters. */
+const NON_ARABIC_WORDS = ["روز", "است", "هست", "میں", "برای", "خیلی", "چطور", "ہے", "اینجا", "آنجا"];
+/** Fusha and other dialects' words the prompt bans (5.1 VOICE); allowed when the data quoted this turn has them. */
+const OFF_DIALECT_WORDS = ["سوف", "لا أستطيع", "لديك", "ماذا", "دحين", "عايز", "هلّق"];
+
+/**
+ * A model reply that slipped out of Najdi: a Persian / Urdu letter or word, or a Fusha / other dialect word the prompt
+ * bans (unless this turn's tool results, the data it may quote, have it too). True means the reply is replaced.
+ */
+export function dialectSlip(reply: string, sources: readonly unknown[] = []): boolean {
+  if (NON_ARABIC_LETTERS.test(reply)) return true;
+  const text = W.textOf(reply);
+  if (W.has(text, NON_ARABIC_WORDS)) return true;
+  if (!W.has(text, OFF_DIALECT_WORDS)) return false;
+  const quoted = W.textOf(allText(sources));
+  return W.norm(OFF_DIALECT_WORDS).some((w) => W.has(text, [w]) && !W.has(quoted, [w]));
+}

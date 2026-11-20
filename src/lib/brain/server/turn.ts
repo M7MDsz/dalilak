@@ -18,6 +18,7 @@ import type { AdvisorCard, NavTarget, ToolName } from "@/lib/types";
 
 import { CAREER_TOOL, CAREER_TOOL_STATUS, runCareerTool } from "../advisor/careers";
 import { AdvisorCtx } from "../advisor/context";
+import { labourFiguresGrounded } from "../advisor/labour";
 import { openChip, replyForTool, toEvents, type Reply } from "../advisor/replies";
 import { routeAdvisorMessage, type RouterDecision } from "../advisor/router";
 import {
@@ -25,6 +26,7 @@ import {
   asksToOpen,
   capReplyLength,
   claimsUndoneDeed,
+  dialectSlip,
   namesAreGrounded,
   numbersAreGrounded,
   scrubIds,
@@ -177,8 +179,14 @@ export function finishModelReply(
   const results = [snapshotDigest(ctx), ...calls.map((c) => c.result), ...careers];
   // Rule 8 (numbers), and since 21 Nov 2026: every Latin name (certificate, exam, company, tool) is in the app's data or
   // this turn's results, and nothing is said about the user (experience, a degree) that the snapshot does not hold.
+  // Saudization / labour law: each rate, day count and riyal figure is that topic's own (a 30% elsewhere in the data does
+  // not ground «التوطين في المحاسبة 30%»); and the reply stays in Najdi (no Persian / Fusha slip).
   const grounded =
-    numbersAreGrounded(text, results, ctx.facts) && namesAreGrounded(text, [...results, ctx.facts]) && userFactsGrounded(text, ctx.facts);
+    numbersAreGrounded(text, results, ctx.facts) &&
+    namesAreGrounded(text, [...results, ctx.facts]) &&
+    userFactsGrounded(text, ctx.facts) &&
+    labourFiguresGrounded(text, message) &&
+    !dialectSlip(text, results);
   if (text === "" || !grounded || claimsUndoneDeed(text, emitted)) {
     // Rules 8 and 9: not regenerated; the template for the tool that was called is sent at once.
     const last = [...calls].reverse().find((c) => c.name !== "navigate");

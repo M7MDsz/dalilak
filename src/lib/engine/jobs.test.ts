@@ -17,15 +17,16 @@ describe("rankJobs (spec 7.2)", () => {
     // (Tamara, 50%) follows them; wave 3's OutSystems developer (Master-Works, 50%) comes after the older 50% ones; the top
     // three (demo step 6) hold
     // 21 Nov 2026 (owner: the jobs shown must relate to the path): the target's field (data) first, by match
+    // 21 Nov 2026: the target's field first, jobs within reach of a new graduate before the senior ones, then by match
     expect(ranked.slice(0, 8).map((r) => [getJob(r.jobId).title, r.match])).toEqual([
       ["محلل بيانات", 70],
-      ["مهندس بيانات أول", 53],
-      ["مدير نمو - رؤى وتحليلات", 47],
       ["محلل أداء عقاري", 43],
-      ["مسؤول قواعد بيانات (PostgreSQL و MySQL)", 43],
-      ["عالم بيانات أول - مقاييس وتحليلات منصات سلة", 43],
       ["محلل تحليلات وتقارير الموارد البشرية", 40],
       ["برنامج تمارا للخريجين (Builders) - مسار البيانات", 40],
+      ["مهندس ذكاء اصطناعي مبتدئ (رؤية حاسوبية)", 20],
+      ["مهندس ذكاء اصطناعي", 20],
+      ["مهندس بيانات أول", 53],
+      ["مدير نمو - رؤى وتحليلات", 47],
     ]);
     expect(ranked[0]).toMatchObject({ jobId: "data-analyst-riyadh", isTarget: true, applied: false, missing: ["powerbi", "statistics"] });
     expect(ranked.find((r) => r.jobId === "syarah-financial-analyst-tamheer-riyadh")?.missing).toEqual(["accounting", "financial-analysis"]);
@@ -36,24 +37,14 @@ describe("rankJobs (spec 7.2)", () => {
     const f = cvAnalysedFacts();
     const at40 = (facts: typeof f) => rankJobs(facts).filter((r) => r.match === 40).map((r) => r.jobId);
     expect(at40(f)).toEqual([
-      // 21 Nov 2026: the jobs in the fields that suit the user (the target's data field) come first, then the rest
+      // 21 Nov 2026: the target's field first, then within reach of the user's band, then the rest
       "qiddiya-hr-analytics-analyst-riyadh",
       "tamara-builders-program-data-riyadh",
-      "almajed-mobile-developer-riyadh",
-      "hungerstation-senior-product-designer-riyadh",
-      "lucidya-social-media-analyst-riyadh",
-      "platinumlist-content-manager-riyadh",
-      "master-works-ai-business-analyst-riyadh",
       "maharah-qa-analyst-riyadh",
-      "lucidya-talent-acquisition-lead-riyadh",
-      "taj-hr-cybersecurity-engineer-riyadh",
-      "mullers-solutions-soc-l2-specialist-riyadh",
       "rentokil-customer-experience-specialist-riyadh",
-      "ninja-live-operations-supervisor-riyadh",
       "hanmiglobal-hse-engineer-riyadh",
       "gathern-guest-relations-associate-riyadh",
       "seven-guest-service-associate-riyadh",
-      "qiddiya-training-administration-senior-specialist-riyadh",
       "tamara-collections-advisor-riyadh",
       "pwc-assurance-coop-2027-riyadh",
       "webook-legal-analyst-riyadh",
@@ -61,70 +52,69 @@ describe("rankJobs (spec 7.2)", () => {
       "mozn-revenue-assurance-officer-riyadh",
       "segadty-hr-coop-trainee-riyadh",
       "lucid-payroll-analyst-riyadh",
-      "ey-resource-management-workforce-planning-specialist-riyadh",
       "ninja-it-governance-analyst-riyadh",
       "bosch-software-development-intern-riyadh",
       "hungerstation-3pl-management-specialist-riyadh",
       "syarah-fleet-purchasing-officer-riyadh",
-      "acwa-store-keeper-afif",
       "sgs-junior-civil-structural-design-review-engineer-riyadh",
       "teefnajd-junior-architect-engineer-riyadh",
-      "accor-health-safety-fire-protection-specialist-riyadh",
       "eram-community-startups-coordinator-riyadh",
-      "abbvie-national-field-trainer-riyadh",
       "bank-of-jordan-financial-credit-analyst-riyadh",
       "moyasar-aml-specialist-riyadh",
-      "ultimate-peaks-internal-auditor-operations-riyadh",
       "bayut-dubizzle-legal-coordinator-tamheer-riyadh",
       "khayira-legal-administrative-specialist-riyadh",
       "flow-leasing-coordinator-riyadh",
+      "lucidya-customer-product-marketing-intern-remote",
+      "accor-income-auditor-jeddah",
+      "hungerstation-account-manager-jeddah",
+      "marriott-sales-executive-jeddah",
+      "ninja-outbound-officer-jeddah",
+      "aanaab-early-years-arabic-teacher-jeddah",
+      "rawafid-governance-prequalification-officer-jeddah",
+      "almajed-mobile-developer-riyadh",
+      "hungerstation-senior-product-designer-riyadh",
+      "lucidya-social-media-analyst-riyadh",
+      "platinumlist-content-manager-riyadh",
+      "master-works-ai-business-analyst-riyadh",
+      "lucidya-talent-acquisition-lead-riyadh",
+      "taj-hr-cybersecurity-engineer-riyadh",
+      "mullers-solutions-soc-l2-specialist-riyadh",
+      "ninja-live-operations-supervisor-riyadh",
+      "qiddiya-training-administration-senior-specialist-riyadh",
+      "ey-resource-management-workforce-planning-specialist-riyadh",
+      "acwa-store-keeper-afif",
+      "accor-health-safety-fire-protection-specialist-riyadh",
+      "abbvie-national-field-trainer-riyadh",
+      "ultimate-peaks-internal-auditor-operations-riyadh",
       "riyadhair-flight-following-specialist-riyadh",
       "riyadhair-operations-controller-riyadh",
       "eram-media-content-creation-riyadh",
       "salla-mahally-seo-manager-jeddah",
       "fuku-hse-engineer-dammam",
       "matar-albaqmi-planning-engineer-dammam",
-      "lucidya-customer-product-marketing-intern-remote",
-      "accor-income-auditor-jeddah",
-      "hungerstation-account-manager-jeddah",
-      "marriott-sales-executive-jeddah",
-      "ninja-outbound-officer-jeddah",
-      "aanaab-early-years-arabic-teacher-jeddah",
       "eram-academic-program-administrator-jeddah",
-      "rawafid-governance-prequalification-officer-jeddah",
     ]);
     // living in Jeddah with an interest in marketing: Jeddah first; then the marketing jobs; then data order
     const jeddah = { ...f, answers: { ...f.answers, city: { value: "jeddah" as const, label: "جدة" }, interest: ["marketing"] as const } };
     expect(at40(jeddah)).toEqual([
-      // 21 Nov 2026: the suited fields (marketing, the interest; data, the target's) first, then Jeddah, then data order
-      "salla-mahally-seo-manager-jeddah",
-      "lucidya-social-media-analyst-riyadh",
-      "platinumlist-content-manager-riyadh",
+      // 21 Nov 2026: the suited fields first, then within reach, then Jeddah, then data order
       "lucidya-customer-product-marketing-intern-remote",
       "qiddiya-hr-analytics-analyst-riyadh",
       "tamara-builders-program-data-riyadh",
+      "salla-mahally-seo-manager-jeddah",
+      "lucidya-social-media-analyst-riyadh",
+      "platinumlist-content-manager-riyadh",
       "accor-income-auditor-jeddah",
       "hungerstation-account-manager-jeddah",
       "marriott-sales-executive-jeddah",
       "ninja-outbound-officer-jeddah",
       "aanaab-early-years-arabic-teacher-jeddah",
-      "eram-academic-program-administrator-jeddah",
       "rawafid-governance-prequalification-officer-jeddah",
-      "almajed-mobile-developer-riyadh",
-      "hungerstation-senior-product-designer-riyadh",
-      "master-works-ai-business-analyst-riyadh",
       "maharah-qa-analyst-riyadh",
-      "lucidya-talent-acquisition-lead-riyadh",
-      "taj-hr-cybersecurity-engineer-riyadh",
-      "mullers-solutions-soc-l2-specialist-riyadh",
       "rentokil-customer-experience-specialist-riyadh",
-      "ninja-live-operations-supervisor-riyadh",
       "hanmiglobal-hse-engineer-riyadh",
-      "fuku-hse-engineer-dammam",
-      "matar-albaqmi-planning-engineer-dammam",
       "gathern-guest-relations-associate-riyadh",
       "seven-guest-service-associate-riyadh",
-      "qiddiya-training-administration-senior-specialist-riyadh",
       "tamara-collections-advisor-riyadh",
       "pwc-assurance-coop-2027-riyadh",
       "webook-legal-analyst-riyadh",
@@ -132,23 +122,34 @@ describe("rankJobs (spec 7.2)", () => {
       "mozn-revenue-assurance-officer-riyadh",
       "segadty-hr-coop-trainee-riyadh",
       "lucid-payroll-analyst-riyadh",
-      "ey-resource-management-workforce-planning-specialist-riyadh",
       "ninja-it-governance-analyst-riyadh",
       "bosch-software-development-intern-riyadh",
       "hungerstation-3pl-management-specialist-riyadh",
       "syarah-fleet-purchasing-officer-riyadh",
-      "acwa-store-keeper-afif",
       "sgs-junior-civil-structural-design-review-engineer-riyadh",
       "teefnajd-junior-architect-engineer-riyadh",
-      "accor-health-safety-fire-protection-specialist-riyadh",
       "eram-community-startups-coordinator-riyadh",
-      "abbvie-national-field-trainer-riyadh",
       "bank-of-jordan-financial-credit-analyst-riyadh",
       "moyasar-aml-specialist-riyadh",
-      "ultimate-peaks-internal-auditor-operations-riyadh",
       "bayut-dubizzle-legal-coordinator-tamheer-riyadh",
       "khayira-legal-administrative-specialist-riyadh",
       "flow-leasing-coordinator-riyadh",
+      "eram-academic-program-administrator-jeddah",
+      "almajed-mobile-developer-riyadh",
+      "hungerstation-senior-product-designer-riyadh",
+      "master-works-ai-business-analyst-riyadh",
+      "lucidya-talent-acquisition-lead-riyadh",
+      "taj-hr-cybersecurity-engineer-riyadh",
+      "mullers-solutions-soc-l2-specialist-riyadh",
+      "ninja-live-operations-supervisor-riyadh",
+      "fuku-hse-engineer-dammam",
+      "matar-albaqmi-planning-engineer-dammam",
+      "qiddiya-training-administration-senior-specialist-riyadh",
+      "ey-resource-management-workforce-planning-specialist-riyadh",
+      "acwa-store-keeper-afif",
+      "accor-health-safety-fire-protection-specialist-riyadh",
+      "abbvie-national-field-trainer-riyadh",
+      "ultimate-peaks-internal-auditor-operations-riyadh",
       "riyadhair-flight-following-specialist-riyadh",
       "riyadhair-operations-controller-riyadh",
       "eram-media-content-creation-riyadh",
@@ -181,8 +182,13 @@ describe("rankJobs (spec 7.2)", () => {
     const split = ranked.findIndex((r) => !inField(r));
     expect(split).toBeGreaterThan(0);
     expect(ranked.slice(split).some(inField)).toBe(false);
+    // inside each field group: the jobs within reach of a new graduate (entry, junior) first, then the match decides
+    const reach = (r: (typeof ranked)[number]) => getJob(r.jobId).band !== "mid";
     for (const group of [ranked.slice(0, split), ranked.slice(split)]) {
-      expect(group.map((r) => r.match)).toEqual([...group.map((r) => r.match)].sort((a, b) => b - a));
+      const cut = group.findIndex((r) => !reach(r));
+      const parts = cut === -1 ? [group] : [group.slice(0, cut), group.slice(cut)];
+      if (cut !== -1) expect(group.slice(cut).some(reach)).toBe(false);
+      for (const part of parts) expect(part.map((r) => r.match)).toEqual([...part.map((r) => r.match)].sort((a, b) => b - a));
     }
   });
 
@@ -276,22 +282,23 @@ describe("searchJobs (spec 7.1)", () => {
         "lamdax-mobile-flutter-intern-remote", "lucidya-activations-campaigns-intern-remote", "lucidya-customer-product-marketing-intern-remote",
       ].sort(),
     );
+    // the Tamheer role (within reach of a new graduate) before the SEO manager (mid), 21 Nov 2026
     expect(searchJobs(f, { field: "marketing", city: "jeddah" }).map((r) => r.jobId)).toEqual([
-      "salla-mahally-seo-manager-jeddah",
       "salla-marketing-specialist-tamheer-jeddah",
+      "salla-mahally-seo-manager-jeddah",
     ]);
     expect(searchJobs(f, { skill: "powerbi" }).map((r) => r.jobId)).toEqual([
       "data-analyst-riyadh",
-      "master-works-data-senior-engineer-riyadh",
-      "jeeny-growth-insights-analytics-riyadh",
       "ninja-real-estate-performance-analyst-riyadh",
       "qiddiya-hr-analytics-analyst-riyadh",
+      "master-works-data-senior-engineer-riyadh",
+      "jeeny-growth-insights-analytics-riyadh",
       "arabicai-machine-learning-engineer-riyadh",
+      "qiddiya-hris-specialist-riyadh",
       "qiddiya-training-administration-senior-specialist-riyadh",
       "ultimate-peaks-internal-auditor-operations-riyadh",
       "eram-accounts-payable-analyst-riyadh",
       "eram-smp-associate-hr-analyst-dhahran",
-      "qiddiya-hris-specialist-riyadh",
     ]);
     expect(searchJobs(f, { skill: "seo", city: "jeddah" }).map((r) => r.jobId)).toEqual(["salla-mahally-seo-manager-jeddah"]);
   });

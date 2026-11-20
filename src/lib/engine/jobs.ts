@@ -1,5 +1,5 @@
 // Owner: engine. Job ranking (spec 7.2) and search (7.1).
-import { JOB_IDS } from "@/lib/ids";
+import { EXPERIENCE_BANDS, JOB_IDS } from "@/lib/ids";
 import { getField, getJob, getJobCity, getSkill } from "@/lib/data";
 import { normalizeText, tokenize, wordForms } from "@/lib/text/normalize";
 import type { FitBreakdown, Job, JobFieldId, JobId, JobQuery, RankedJob, SkillId, UserFacts } from "@/lib/types";
@@ -7,6 +7,9 @@ import type { FitBreakdown, Job, JobFieldId, JobId, JobQuery, RankedJob, SkillId
 import { matchPercent } from "./match";
 import { compareFit, fitBreakdown, wantedFields } from "./onboarding-fit";
 import { skillStars, totalStars } from "./stars";
+
+/** Spec 4.6: the experience answer as a job band (none and under a year are entry level). */
+const BAND_OF_EXPERIENCE = { none: "entry", under1: "entry", "1to3": "junior", over3: "mid" } as const;
 
 /**
  * All the jobs ranked (7.2): 21 Nov 2026 (owner: "the jobs shown to choose between should be related to the path or what
@@ -42,9 +45,15 @@ export function rankJobs(facts: UserFacts): readonly RankedJob[] {
     const suited = new Set<JobFieldId>(wantedFields(facts.answers) ?? []);
     if (facts.targetJobId !== null) suited.add(getJob(facts.targetJobId).field);
     const inSuited = (job: Job) => suited.size === 0 || suited.has(job.field);
+    // within reach of the user's experience (at most one band above): a senior «أول» role goes after the reachable ones
+    // for a new graduate (the user's own target is never pushed down), the same rule as the onboarding company tiles and the
+    // map's job column (tester, 21 Nov 2026)
+    const userBand = BAND_OF_EXPERIENCE[facts.answers.experience ?? "none"];
+    const reachable = (job: Job) => EXPERIENCE_BANDS.indexOf(job.band) - EXPERIENCE_BANDS.indexOf(userBand) <= 1;
     rows.sort(
       (a, b) =>
         Number(inSuited(b.job)) - Number(inSuited(a.job)) ||
+        Number(reachable(b.job) || b.ranked.isTarget) - Number(reachable(a.job) || a.ranked.isTarget) ||
         b.ranked.match - a.ranked.match ||
         Number(b.ranked.isTarget) - Number(a.ranked.isTarget) ||
         Number(inCity(b.job)) - Number(inCity(a.job)) ||

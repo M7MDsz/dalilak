@@ -214,6 +214,11 @@ const ROUTE_SAYINGS: readonly (readonly [EntryRouteId, readonly string[]])[] = [
   ["misk-career-essentials", ["مسك", "misk"]],
   // wave 3 (src/lib/data/wave3/knowledge.ts)
   ["sdaia-academy", ["أكاديمية سدايا", "sdaia academy"]],
+  ["hrdf-wage-support", ["دعم التوظيف", "دعم الأجور", "wage support"]],
+  ["hrdf-job-search-subsidy", ["إعانة البحث عن عمل", "اعانة البحث عن عمل", "إعانة الباحثين عن عمل", "حافز"]],
+  ["hrdf-maharat", ["برنامج مهارات"]],
+  ["hrdf-wusool", ["برنامج وصول", "دعم النقل"]],
+  ["hrdf-professional-certificates", ["دعم الشهادات", "دعم الشهادات المهنية"]],
 ];
 
 /** Messages another row answers better (the CV, the gap, the match, feelings, XP, badges, the leaderboard). */
@@ -236,7 +241,7 @@ function askOf(text: W.Text): CareerAsk {
   return "what";
 }
 
-function routeNamed(text: W.Text): EntryRoute | null {
+export function routeNamed(text: W.Text): EntryRoute | null {
   for (const [id, sayings] of ROUTE_SAYINGS) {
     if (W.has(text, sayings)) return ENTRY_ROUTES.find((r) => r.id === id) ?? null;
   }
@@ -458,7 +463,7 @@ function routeCheckLine(r: EntryRoute): string | null {
   return r.note && /close|no open cohort/i.test(r.note) ? "تأكد من صفحتهم إذا التسجيل مفتوح الحين." : null;
 }
 
-function routeReply(r: EntryRoute, f: CareerFamily | null): Reply {
+export function routeReply(r: EntryRoute, f: CareerFamily | null): Reply {
   const fits = f && (r.fits === "all" || r.fits.includes(f.id)) ? `ويناسب ${q(f.title)}.` : null;
   return withOffer([`${r.nameAr} من ${r.owner}: ${r.line}`, fits, routeCheckLine(r)], f ? jobsOffer(f) : null);
 }

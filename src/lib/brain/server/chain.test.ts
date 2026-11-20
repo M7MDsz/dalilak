@@ -191,7 +191,9 @@ describe("runChain", () => {
     calls.length = 0;
     const third = await run();
     expect(calls.map((c) => c.slot)).toEqual(["gemini-2"]);
-    expect(calls[0]?.share).toBe(400); // the first live slot, and the last: the whole budget
+    // the first live slot, and the last: the whole budget (real clock: a few ms less under load)
+    expect(calls[0]?.share).toBeGreaterThanOrEqual(390);
+    expect(calls[0]?.share).toBeLessThanOrEqual(400);
     expect(third.ok && third.slot.id).toBe("gemini-2");
     expect(records[2]?.misses).toEqual([{ slot: "gemini-1", why: "cooling_down", ms: 0 }]);
   });

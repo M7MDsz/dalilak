@@ -191,8 +191,8 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4, CV in onboarding)",
     expect(skillTreeSummary(s6)).toMatchObject({ skillsHeld: 8, starsHeld: 11 });
     expect(rankJobs(s6).slice(0, 3).map((r) => [getJob(r.jobId).title, r.match])).toEqual([
       ["محلل بيانات", 70],
-      ["مهندس بيانات أول", 53],
-      ["مدير نمو - رؤى وتحليلات", 47],
+      ["محلل أداء عقاري", 43],
+      ["محلل تحليلات وتقارير الموارد البشرية", 40],
     ]);
   });
 

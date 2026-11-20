@@ -82,6 +82,7 @@ import {
   type Reply,
 } from "./replies";
 import { careerAnswer, careerFirst, careerSalaryReply } from "./careers";
+import { labourReply, routeAnswer } from "./labour";
 import { guideByTopic, guideFor } from "./guide";
 import { T } from "./templates";
 import { applyOutcome, isToolError, runTool } from "./tools";
@@ -119,6 +120,7 @@ export type AdvisorIntent =
   | "feelings"
   | "interview"
   | "career"
+  | "labour"
   | "fallback";
 
 export type RouterDecision =
@@ -839,6 +841,10 @@ function decide(request: AdvisorRequest, ctx: AdvisorCtx): Decision {
   // before row 2's «no market numbers» (every mode: a number is never left to a model here).
   const pay = careerSalaryReply(text);
   if (pay) return router("career", pay);
+  // Saudization, Nitaqat, the labour law and SANED, from the data (21 Nov 2026, QA: asked directly, a model declined or
+  // invented a rate or a day count); before row 2's «no market numbers», in every mode.
+  const labour = labourReply(ctx, text);
+  if (labour) return router("labour", labour);
   if (W.has(text, W.REAL_NUMBER_WORDS)) return router("real-numbers", reply(T.realNumbers()));
 
   // Rows 4-6: the three state-changing requests (5.4), never from a question.
@@ -875,6 +881,9 @@ function decide(request: AdvisorRequest, ctx: AdvisorCtx): Decision {
   // 2026, QA: a model added certificates that are not in the data).
   const careerSure = careerFirst(ctx, text);
   if (careerSure) return router("career", careerSure);
+  // An entry route named on its own («وش هو تمهير؟», «معسكرات طويق»): its line from the data, before any model.
+  const route = routeAnswer(ctx, text);
+  if (route) return router("career", route);
 
   // Row 7: job search.
   const search = detectSearch(text);
