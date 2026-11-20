@@ -38,7 +38,7 @@ The CV now comes first, inside the conversation (owner, 20 Nov 2026; the flow is
 | 9 | 1:03 | Press «رجوع لمساري» | The map at 90%; on the job cards «باقي لك» counts down |
 | 10 | 1:07 | Open «اسأل دليلك» (or Ctrl+K), type «قدّم لي على وظيفة محلل بيانات», Enter | «دليلك» opens the job page beside the chat, fills the form himself and saves it in «طلباتي»: «تم حفظ طلبك», DL-2026-0001, +40 XP (XP 420) |
 | 11 | 1:27 | Press «المتصدرون» | The leaderboard: you climb from 18 to 10 |
-| 12 | 1:34 | If time allows: «المهارات», then «ملفي» | The skill tree (wait ~3 s for it to settle on 9 of 93); badges 6 of 12 |
+| 12 | 1:34 | If time allows: «المهارات», then «ملفي» | The skill tree (wait ~3 s for it to settle on 9 of 114); badges 6 of 12 |
 
 Without a CV: tap «ما عندي سيرة الحين» at step 2 and the seven questions follow as before (+50 XP, the reveal, the map);
 the map's first station «اكتشف مهاراتك» still opens /cv, which also re-analyses for anyone.
@@ -52,7 +52,7 @@ Real: the conversation and its scoring that picks the target job; reading the CV
 skills with the sentence that proves each; the match formula; the roadmap; XP, levels, streak, badges, the leaderboard
 ranking; «دليلك» opening pages and acting when asked, with the rules enforced in code.
 
-Real: the learning guides (for each of the 93 skills a real top pick course, alternatives and people to follow; for the
+Real: the learning guides (for each of the 114 skills a real top pick course, alternatives and people to follow; for the
 5 demo skills and the 16 skills added on 20 Nov (product management, cyber security and cloud, AI, sales, procurement and
 supply chain) also articles, a proof task and the recognised certificate; every link opened on 20 Nov 2026, kept in
 `src/lib/data/guides.ts` and `src/lib/data/expansion/guides.ts` with the page where it was found recommended, so they
@@ -60,7 +60,7 @@ work offline). The career knowledge base (16 career families: what the job is, i
 employers, Saudi entry routes such as Tamheer and Doroob, certificates, a Hays 2026 salary range with its page, interview
 questions) is in `src/lib/data/expansion/knowledge.ts`, reviewed in `research/expansion/review.html`.
 
-Real: the jobs (20 Nov 2026): 83 open postings in Saudi Arabia from public job pages (Workable, Greenhouse and
+Real: the jobs (20 Nov 2026): 169 open postings in Saudi Arabia from public job pages (Workable, Greenhouse and
 SmartRecruiters boards and the company career pages of Salla, Lucidya, Foodics, Ninja, Tamara, Delivery Hero, Maharah,
 PetroApp, Mozn, Qiddiya and others), each with its company, source site,
 posting date, link (opens in a new tab) and, for every requirement, the posting's own sentence

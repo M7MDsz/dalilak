@@ -130,7 +130,7 @@ export function receiptText(ref: ReceiptRef): string {
       // a real posting is prepared here and sent by the user from the posting (20 Nov 2026)
       return getJob(ref.j).real
         ? `تعبئة طلبك على ${quoted(getJob(ref.j).title)} وتجهيزه`
-        : `تعبئة طلبك على ${quoted(getJob(ref.j).title)} وإرساله`;
+        : `تعبئة طلبك على ${quoted(getJob(ref.j).title)} وحفظه`; // the practice job: saved in «طلباتي», never "sent"
   }
 }
 
