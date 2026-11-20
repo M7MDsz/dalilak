@@ -131,3 +131,17 @@ describe("quoted facts stay word for word", () => {
     expect(phraseProblem(request, ["زين، هدف واضح.", "عندي لك مسار حلو، لحظات وأرسمه."])).toBe("lost «محلل بيانات»");
   });
 });
+
+describe("a CV whose strongest field is not an interest tile (tester, 21 Nov 2026)", () => {
+  const civil = [
+    { skill: "planning-scheduling", stars: 2, evidence: "تخطيط وجدولة المشاريع باستخدام Primavera P6", line: 3 },
+    { skill: "quantity-surveying", stars: 2, evidence: "حساب الكميات والتسعير", line: 4 },
+  ] as const;
+
+  it("suggests the nearest tile, never a raw field id", () => {
+    expect(interestFromCv(civil as never)).toBe("business");
+    const question = cvInterestQuestion(civil as never, interestFromCv(civil as never)) ?? "";
+    expect(question).not.toMatch(/[a-z]+-[a-z]+/);
+    expect(question).toContain("تنظيم الأعمال والمشاريع");
+  });
+});

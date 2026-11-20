@@ -150,8 +150,37 @@ export function interestFromCv(skills: readonly CvSkill[]): InterestOption | nul
   let best: string | null = null;
   let most = 0;
   for (const [field, stars] of byField) if (stars > most) [best, most] = [field, stars];
-  return best !== null && most >= 3 && isJobFieldId(best) ? (best as InterestOption) : null;
+  if (best === null || most < 3 || !isJobFieldId(best)) return null;
+  // 21 Nov 2026 (tester): a field that is not one of the six interest tiles (a civil-engineering CV → project-controls)
+  // is suggested as the nearest tile, so «دليلك» names a real option (never a raw id) and a plain «إيه» records it
+  return NEAREST_INTEREST[best] ?? null;
 }
+
+/** The interest tile nearest to each job field (the six tiles are data, software, design, marketing, business, hr). */
+const NEAREST_INTEREST: Readonly<Record<string, InterestOption>> = {
+  data: "data",
+  software: "software",
+  design: "design",
+  marketing: "marketing",
+  business: "business",
+  hr: "hr",
+  product: "business",
+  "cyber-cloud": "software",
+  gaming: "software",
+  media: "design",
+  communications: "marketing",
+  education: "hr",
+  "sales-supply": "business",
+  engineering: "business",
+  "project-controls": "business",
+  "banking-risk": "business",
+  legal: "business",
+  "real-estate": "business",
+  aviation: "business",
+  "energy-sustainability": "business",
+  "tourism-hospitality": "business",
+  "health-admin": "business",
+};
 
 /** «Excel و SQL» (a space before a Latin name, so it reads apart) · «الإحصاء والبرمجة». */
 function andOf(a: string, b: string): string {
@@ -278,7 +307,11 @@ export function interestHint(interest: InterestOption): string {
  */
 export function cvInterestQuestion(skills: readonly CvSkill[], suggested: InterestOption | null): string | null {
   if (suggested === null) return null;
-  const inField = skills.filter((s) => SKILLS.find((k) => k.id === s.skill)?.field === suggested);
+  // the skills whose field leads to the suggested tile (a civil engineer's Primavera and quantity surveying → «تنظيم الأعمال والمشاريع»)
+  const inField = skills.filter((s) => {
+    const field = SKILLS.find((k) => k.id === s.skill)?.field;
+    return field !== undefined && NEAREST_INTEREST[field] === suggested;
+  });
   const [a, b] = strongestSkills(inField);
   const label = optionLabel("interest", suggested) ?? suggested;
   if (a === undefined) return `${interestHint(suggested)} تبي تكمل فيها ولا تفكر بمجال ثاني؟`;

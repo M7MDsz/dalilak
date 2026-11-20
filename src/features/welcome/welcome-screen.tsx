@@ -52,7 +52,9 @@ function WelcomeFlow({ user }: { user: UserState }) {
   const onNight = useCallback((value: boolean) => setNight(value), []);
   const onLeaving = useCallback(() => setLeaving(true), []);
 
-  const pending = pendingOf(user);
+  // before «دليلك» has greeted, nothing is pending yet (pendingStep is null on an empty thread): show step 1 with every
+  // stop still ahead, not «7 من 7» all ticked rolling down to 1 (tester, 21 Nov 2026)
+  const pending = user.onboarding.thread.length === 0 ? ONBOARDING_STEP_IDS[0] : pendingOf(user);
   const step = pending ? getQuestion(pending).n : ONBOARDING_STEP_IDS.length;
 
   return (

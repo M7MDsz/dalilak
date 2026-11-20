@@ -82,7 +82,7 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
   const height = useSyncExternalStore(subscribeResize, windowHeight, serverHeight);
   // with a CV read in onboarding, its skills weigh in the choice too (the same rule «دليلك» used for his path line)
   const cvStars = useMemo(() => (user.cv !== null && user.onboarding.cv === "analysed" ? skillStars(user) : undefined), [user]);
-  const data = useMemo(() => revealData(user.answers, cvStars), [user.answers, cvStars]);
+  const data = useMemo(() => revealData(user.answers, cvStars, cvStars ? user : undefined), [user, cvStars]);
   const firstName = firstNameOf(user.name);
   const lines = useMemo(() => revealLines(firstName), [firstName]);
 
@@ -240,6 +240,7 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
                 sheetRef={sheetRef}
                 stages={data.stages}
                 summary={RESULT_COPY.summary(data.recommended.stages, data.recommended.hours)}
+                note={data.cvCover ? RESULT_COPY.cvCovered(data.cvCover.done, data.cvCover.total, data.cvCover.match) : undefined}
                 title={data.recommended.title}
                 titleTravels={!startOnResult && !instant && !skipped && index >= 4}
               />

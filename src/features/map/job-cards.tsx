@@ -13,6 +13,7 @@ import { NavLink, NumberTicker } from "@/components/motion";
 import { cn } from "@/components/ui";
 import { CompanyLogo } from "@/features/shared";
 import { JOBS, getJob, getJobCity, getSkill } from "@/lib/data";
+import { EXPERIENCE_BANDS } from "@/lib/ids";
 import { dreamCompany, matchPercent, skillStars, wantedFields } from "@/lib/engine";
 import { formatNumber, formatPercent } from "@/lib/format";
 import { hrefFor } from "@/lib/routes";
@@ -50,6 +51,9 @@ function dreamJobIds(user: UserState): ReadonlySet<JobId> {
   }
 }
 
+/** Spec 4.6: the user's experience answer as a job band (none and under a year are entry level). */
+const BAND_OF = { none: "entry", under1: "entry", "1to3": "junior", over3: "mid" } as const;
+
 /**
  * The fields whose jobs suit this user (21 Nov 2026, tester: a data path listed a field-sales job): the target job's field,
  * then the fields they asked for (interests, else their major's fields). Empty when nothing is known yet.
@@ -77,9 +81,19 @@ export function jobAds(user: UserState): readonly JobAd[] {
     })
     .sort((a, b) => Number(b.ad.dream) - Number(a.ad.dream) || b.ad.match - a.ad.match || a.order - b.order)
     .map((row) => row.ad);
-  if (suited.size === 0) return ranked;
-  const inField = ranked.filter((ad) => ad.dream || suited.has(ad.job.field));
-  const others = ranked.filter((ad) => !ad.dream && !suited.has(ad.job.field));
+  // within reach first (21 Nov 2026, tester): a job more than one band above the user's experience (a senior «أول» role
+  // for a beginner) goes after the reachable ones, the same rule the onboarding company tiles use
+  const userBand = BAND_OF[user.answers.experience ?? "none"];
+  const reachable = (ad: JobAd) => EXPERIENCE_BANDS.indexOf(ad.job.band) - EXPERIENCE_BANDS.indexOf(userBand) <= 1;
+  // the dream company's jobs stay pinned first (owner, 20 Nov 2026), then the reachable ones, then the rest
+  const byReach = [
+    ...ranked.filter((ad) => ad.dream),
+    ...ranked.filter((ad) => !ad.dream && reachable(ad)),
+    ...ranked.filter((ad) => !ad.dream && !reachable(ad)),
+  ];
+  if (suited.size === 0) return byReach;
+  const inField = byReach.filter((ad) => ad.dream || suited.has(ad.job.field));
+  const others = byReach.filter((ad) => !ad.dream && !suited.has(ad.job.field));
   return inField.length >= 6 ? inField : [...inField, ...others.slice(0, 6 - inField.length)];
 }
 

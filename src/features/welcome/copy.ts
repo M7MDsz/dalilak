@@ -40,6 +40,8 @@ export const RESULT_COPY = {
   altChoose: "اختر هذا المسار",
   footer: "تستطيع تغيير هدفك في أي وقت من صفحة الوظائف.",
   cvLine: "بعد قراءة سيرتك قد تجد أنك قطعت جزءاً منها.",
+  /** With a CV read in onboarding (21 Nov 2026, tester): what it already covers, instead of the line above. */
+  cvCovered: (done: number, total: number, match: number) => `سيرتك تغطي ${done} من ${total} مراحل، ومطابقتك الحين ${match}%.`,
   /** Spec 3.4: a preparatory stage. */
   prep: "تمهيدية",
   /** 20 Nov 2026: under the recommended job, when the user named a company (onboarding step 7). */

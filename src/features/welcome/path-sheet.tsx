@@ -34,6 +34,8 @@ export interface PathSheetProps {
   readonly stages: readonly RevealStageInfo[];
   readonly title: string;
   readonly summary: string;
+  /** The footer's second line; default «بعد قراءة سيرتك…» (with a CV read in onboarding: what it covers). */
+  readonly note?: string;
   readonly mode: SheetMode;
   readonly landed: boolean;
   /** The footer (summary, CV line) shows with the result. */
@@ -49,7 +51,7 @@ export interface PathSheetProps {
 /** Titles longer than this (characters) take the smaller heading size at the trophy. */
 const LONG_TITLE = 26;
 
-export function PathSheet({ layout, stages, title, summary, mode, landed, footer, titleTravels = false, maxHeight, sheetRef, className }: PathSheetProps) {
+export function PathSheet({ layout, stages, title, summary, note, mode, landed, footer, titleTravels = false, maxHeight, sheetRef, className }: PathSheetProps) {
   const instant = useInstant();
   const box = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
@@ -148,7 +150,7 @@ export function PathSheet({ layout, stages, title, summary, mode, landed, footer
               transition={footer ? { ...tween.move, delay: 0.2 } : tween.exit}
             >
               <p className="text-small font-semibold text-fg">{summary}</p>
-              <p className="text-small text-fg-3">{RESULT_COPY.cvLine}</p>
+              <p className="text-small text-fg-3">{note ?? RESULT_COPY.cvLine}</p>
             </motion.div>
           </>
         ) : null}

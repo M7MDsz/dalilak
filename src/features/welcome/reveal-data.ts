@@ -4,9 +4,9 @@
 // "stay stronger" in the sweep and which fields stay lit.
 import { answerText, companyCityLine, revealReasonText } from "@/lib/copy";
 import { FIELDS, JOBS, SKILLS, getField, getJob, getQuestion, getSkill } from "@/lib/data";
-import { canonicalStages, dreamCompany, pathSummary, rankByFit, recommend } from "@/lib/engine";
+import { canonicalStages, dreamCompany, pathSummary, rankByFit, recommend, roadmapFor } from "@/lib/engine";
 import { QUESTION_IDS } from "@/lib/ids";
-import type { FieldId, JobId, OnboardingAnswers, QuestionId, SkillId, StarMap, StarSlot } from "@/lib/types";
+import type { FieldId, JobId, OnboardingAnswers, QuestionId, SkillId, StarMap, StarSlot, UserFacts } from "@/lib/types";
 
 export interface RevealStageInfo {
   /** 1-based, canonical order (`reveal-path-node-{n}`). Before a CV this is also the map's displayed order. */
@@ -39,6 +39,8 @@ export interface RevealData {
    */
   readonly company: { readonly name: string; readonly aimed: boolean } | null;
   readonly stages: readonly RevealStageInfo[];
+  /** With a CV read in onboarding: how much of the path it already covers (the footer says so). Null without a CV. */
+  readonly cvCover: { readonly done: number; readonly total: number; readonly match: number } | null;
   /** The twenty jobs in data order; `fits` = the answers point at it (the tile stays at full contrast). */
   readonly tiles: readonly { readonly id: JobId; readonly title: string; readonly fits: boolean }[];
   /** The seven fields with their skills; `lit` = a field the answers point at (it stays lit after the pass). */
@@ -59,8 +61,18 @@ function jobCard(id: JobId): RevealJobCard {
   };
 }
 
-/** `stars`: the CV's skills when the user read a CV in onboarding (21 Nov 2026, owner: the path is built on the CV too). */
-export function revealData(answers: OnboardingAnswers, stars?: StarMap): RevealData {
+/** What the CV already covers of a job's path (the map's own roadmap). */
+function coverOf(jobId: JobId, facts: UserFacts): { done: number; total: number; match: number } {
+  const map = roadmapFor(jobId, facts);
+  return { done: map.stages.filter((s) => s.state === "done").length, total: map.stages.length, match: map.match };
+}
+
+/**
+ * `stars`: the CV's skills when the user read a CV in onboarding (21 Nov 2026, owner: the path is built on the CV too).
+ * `facts`: the same user, so the path card shows the map's own order (the CV's done stages first, then what's left:
+ * Power BI at station 7 for the demo) and the footer what the CV covers (tester, 21 Nov 2026).
+ */
+export function revealData(answers: OnboardingAnswers, stars?: StarMap, facts?: UserFacts): RevealData {
   const rec = recommend(answers, undefined, stars);
   const ranked = rankByFit(answers, stars).filter((b) => !b.excluded);
   const top = ranked[0]?.score ?? 0;
@@ -83,13 +95,14 @@ export function revealData(answers: OnboardingAnswers, stars?: StarMap): RevealD
     alternatives: [jobCard(rec.alternatives[0]), jobCard(rec.alternatives[1])],
     reasons: rec.reasons.map(revealReasonText),
     company: dream ? { name: dream.company.short, aimed: dream.job !== null && dream.job === rec.recommended } : null,
-    stages: canonicalStages(rec.recommended).map((s, i) => ({
+    stages: (facts ? roadmapFor(rec.recommended, facts).stages : canonicalStages(rec.recommended)).map((s, i) => ({
       n: i + 1,
       skill: s.skill,
       name: getSkill(s.skill).name,
       star: s.star,
       prep: s.prep,
     })),
+    cvCover: facts ? coverOf(rec.recommended, facts) : null,
     tiles: JOBS.map((job) => ({ id: job.id, title: job.title, fits: fitting.has(job.id) })),
     fields: FIELDS.map((field) => ({
       id: field.id,
