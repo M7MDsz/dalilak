@@ -43,7 +43,7 @@ export const RESULT_COPY = {
   prep: "تمهيدية",
   /** 20 Nov 2026: under the recommended job, when the user named a company (onboarding step 7). */
   companyAimed: (company: string) => `في ${company}، الشركة التي اخترتها`,
-  companyNoJob: (company: string) => `لا توجد الآن وظيفة من ${company} في القائمة، فهذه الأقرب لك.`,
+  companyNoJob: (company: string) => `لا توجد الآن وظيفة من ${company} في المجال الذي تريده، فهذه الأقرب لك.`,
   /** «8 مراحل · 74 ساعة تعلّم». */
   summary: (stages: number, hours: number) => `${countNoun(stages, "stage")} · ${countNoun(hours, "hour")} تعلّم`,
 } as const;

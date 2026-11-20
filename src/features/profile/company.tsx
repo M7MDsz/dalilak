@@ -8,8 +8,8 @@ import { useState, type ReactNode } from "react";
 import { IconArrowForward } from "@/components/icons";
 import { Sheet } from "@/components/motion";
 import { Button, Chip, TextField, cn } from "@/components/ui";
-import { COMPANY_TILES, companyTiles, getCompany } from "@/lib/data";
-import { companyField, dreamCompany, matchCompany } from "@/lib/engine";
+import { getCompany } from "@/lib/data";
+import { companyChoices, companyField, dreamCompany, matchCompany } from "@/lib/engine";
 import { CompanyMark } from "@/features/shared/company-mark";
 import { useAppStore } from "@/lib/store";
 import { TID } from "@/lib/testids";
@@ -83,8 +83,9 @@ function CompanyPicker({
 function PickerBody({ current, field, onDone }: { readonly current: CompanyId | null; readonly field: JobFieldId | null; readonly onDone: () => void }): ReactNode {
   const [choice, setChoice] = useState<CompanyId | null>(current);
   const [typed, setTyped] = useState("");
-  const first = companyTiles(field);
-  const others = [...new Set(Object.values(COMPANY_TILES).flat())].filter((id) => !first.includes(id));
+  // only companies with real jobs in the app (20 Nov 2026): the user's field first, then the rest by how many jobs they have
+  const first = companyChoices(field);
+  const others = companyChoices(null, 40).filter((id) => !first.includes(id));
   const matched = typed.trim() === "" ? null : matchCompany(typed);
   // a typed company that is not among the tiles joins the first row, chosen
   const extra = choice !== null && !first.includes(choice) && !others.includes(choice) ? [choice] : [];

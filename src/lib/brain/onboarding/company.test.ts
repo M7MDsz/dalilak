@@ -9,7 +9,7 @@ import { companyJob, jobsAtCompany, makeClock } from "@/lib/engine";
 import { COMPANY_IDS } from "@/lib/ids";
 import { appendOnboardingMessages, applyOnboardingTurn, newUser } from "@/lib/store/transitions";
 import type { OnboardingContext, OnboardingInput } from "@/lib/brain/protocol";
-import type { OnboardingAnswers, UserState } from "@/lib/types";
+import type { CompanyId, OnboardingAnswers, UserState } from "@/lib/types";
 
 import { onboardingContext, onboardingTurn, openingMessages, pendingQuestion, questionChips } from "./index";
 
@@ -42,15 +42,33 @@ describe("the company step: where it sits and its tiles", () => {
     expect(turn.pending).toBe("company");
     expect(turn.replies[1]).toBe("وفيه شركة أو وظيفة معيّنة في بالك؟");
     expect(turn.chips?.question).toBe("company");
-    expect(turn.chips?.options.map((o) => o.id)).toEqual(["maharah", "aramco", "stc", "sabic", "qiddiya", "salla", "none"]);
-    expect(turn.chips?.options.map((o) => o.label)).toEqual(["مهارة", "أرامكو", "stc", "سابك", "القدية", "سلة", "لا، مو الحين"]);
+    const ids = turn.chips?.options.map((o) => o.id) ?? [];
+    expect(ids[0]).toBe("maharah");
+    expect(ids.at(-1)).toBe("none");
+    expect(turn.chips?.options.at(-1)?.label).toBe("لا، مو الحين");
+    // 20 Nov 2026 owner's rule: only companies that really have a data job in the app
+    for (const id of ids.slice(1, -1)) expect(jobsAtCompany(id as CompanyId).some((j) => getJob(j).field === "data"), id).toBe(true);
   });
 
   it("follows the field: «مهارة» first (the owner's request), then the field's employers, «لا، مو الحين» last", () => {
-    expect(questionChips("company", { interest: ["software"] }).options.map((o) => o.id)).toEqual(["maharah", "stc", "mobily", "zain", "foodics", "lucidya", "none"]);
-    expect(questionChips("company", { interest: ["design"] }).options.map((o) => o.id)).toEqual(["maharah", "neom", "roshn", "hungerstation", "tabby", "lucidya", "none"]);
-    expect(questionChips("company", { interest: ["hr", "data"] }).options[1]?.id).toBe("qiddiya");
-    expect(questionChips("company", { interest: ["unsure"] }).options.map((o) => o.id)).toEqual(["maharah", "aramco", "stc", "sabic", "neom", "pif", "none"]);
+    // only companies with real jobs in the field just picked (the first interest), most jobs first, at most five
+    for (const field of ["software", "design", "marketing", "business", "hr"] as const) {
+      const ids = questionChips("company", { interest: [field] }).options.map((o) => o.id);
+      expect(ids[0], field).toBe("maharah");
+      expect(ids.at(-1), field).toBe("none");
+      const middle = ids.slice(1, -1) as CompanyId[];
+      expect(middle.length, field).toBeGreaterThan(0);
+      expect(middle.length, field).toBeLessThanOrEqual(5);
+      const counts = middle.map((id) => jobsAtCompany(id).filter((j) => getJob(j).field === field).length);
+      for (const [i, n] of counts.entries()) {
+        expect(n, `${field} ${middle[i]}`).toBeGreaterThan(0);
+        if (i > 0) expect(n, `${field} order`).toBeLessThanOrEqual(counts[i - 1] ?? 0);
+      }
+    }
+    // the first interest decides: a websites user never sees a company with no websites job
+    expect(questionChips("company", { interest: ["software"] }).options.map((o) => o.id)).not.toContain("stc");
+    // «لم أحدّد بعد»: the companies with the most jobs overall, every one with at least one job
+    for (const o of questionChips("company", { interest: ["unsure"] }).options.slice(1, -1)) expect(jobsAtCompany(o.id as CompanyId).length, o.id).toBeGreaterThan(0);
   });
 });
 
@@ -112,12 +130,18 @@ describe("what «دليلك» says when a company is named", () => {
       const short = getCompany(id).short;
       const reply = tap(id).replies[0];
       const job = companyJob({ ...FIVE, company: id });
-      if (job === null) {
-        expect(jobsAtCompany(id), id).toEqual([]);
+      if (job === null && jobsAtCompany(id).length === 0) {
         expect(reply, id).toBe(
           `${short}، اختيار زين! بس ما عندي الحين وظيفة منهم في قائمتي، فبرسم مسارك لأقرب وظيفة تناسبك، وتقدر تغيّر الشركة من «ملفي» متى ما بغيت.`,
         );
+      } else if (job === null) {
+        // it has jobs, but none in the field the user asked for: never aimed at another field (20 Nov 2026)
+        expect(jobsAtCompany(id).every((j) => getJob(j).field !== "data"), id).toBe(true);
+        expect(reply, id).toBe(
+          `${short}، اختيار زين! بس ما عندي الحين وظيفة منهم في المجال اللي تبيه، فبرسم مسارك لأقرب وظيفة تناسبك، ووظايفهم الثانية تلقاها في «الوظائف».`,
+        );
       } else {
+        expect(getJob(job).field, id).toBe("data");
         const j = getJob(job);
         const where = j.city === "remote" ? "عن بُعد" : `في ${getJobCity(j.city).name}`;
         expect(reply, id).toBe(`${short}، اختيار زين! عندهم وظيفة «${j.title}» ${where}، وعليها برسم مسارك.`);

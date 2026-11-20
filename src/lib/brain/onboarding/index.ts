@@ -3,8 +3,8 @@
 // Internal files: tables.ts (keywords, acknowledgement bank, special replies), read.ts (the 4.3 order of reading).
 // `pendingQuestion` and `onboardingContext` are written in full by the architect (they ARE the "pending" contract).
 import { NEUTRAL_PRINT } from "@/lib/copy";
-import { JOB_CITIES, companyTiles, getCompany, getJob, getJobCity, getQuestion, optionLabel } from "@/lib/data";
-import { companyField, companyJob, jobsAtCompany } from "@/lib/engine";
+import { JOB_CITIES, getCompany, getJob, getJobCity, getQuestion, optionLabel } from "@/lib/data";
+import { companyChoices, companyField, companyJob, jobsAtCompany } from "@/lib/engine";
 import { ONBOARDING_STEP_IDS, isOptionOf } from "@/lib/ids";
 import type { CityValue, CompanyId, InterestOption, JobId, OnboardingAnswers, OnboardingStepId, UserState } from "@/lib/types";
 import type { OnboardingChipSet, OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
@@ -119,7 +119,7 @@ function ackCompany(value: CompanyId | "none", answers: OnboardingAnswers): stri
   if (jobsAtCompany(value).length === 0) return ACK.company.noJob(company);
   if (BEFORE_COMPANY.some((q) => answers[q] === undefined)) return ACK.company.early(company);
   const job = companyJob({ ...answers, company: value });
-  return job === null ? ACK.company.noJob(company) : ACK.company.job(company, getJob(job).title, whereOf(job));
+  return job === null ? ACK.company.noJobInField(company) : ACK.company.job(company, getJob(job).title, whereOf(job));
 }
 
 function recordFound(name: string, found: Found, typed: string | null = null, before: OnboardingAnswers = {}): Recorded {
@@ -404,7 +404,7 @@ export function resumeMessages(context: OnboardingContext): readonly string[] {
  */
 export function questionChips(question: OnboardingStepId, answers: OnboardingAnswers): OnboardingChipSet {
   if (question === "company") {
-    const tiles = companyTiles(companyField(answers)).map((id) => ({ id, label: getCompany(id).short }));
+    const tiles = companyChoices(companyField(answers)).map((id) => ({ id, label: getCompany(id).short }));
     return { question, options: [...tiles, { id: "none", label: chipLabel("company", "none") }] };
   }
   return { question, options: getQuestion(question).options };

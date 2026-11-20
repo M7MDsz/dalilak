@@ -1,5 +1,5 @@
 // Owner: engine. The onboarding fit score and recommendation (spec 4.6). Never shown as a number (P5).
-import { EXPERIENCE_BANDS, JOB_IDS, isCompanyId } from "@/lib/ids";
+import { EXPERIENCE_BANDS, JOB_IDS, isCompanyId, isJobFieldId } from "@/lib/ids";
 import { getCompany, getJob, getJobCity, type Company } from "@/lib/data";
 import type {
   CompanyId,
@@ -53,6 +53,15 @@ function userBand(answers: OnboardingAnswers): ExperienceBand {
 
 function majorFields(answers: OnboardingAnswers): readonly [JobFieldId, JobFieldId] | null {
   return answers.major === undefined ? null : MAJOR_FIELDS[answers.major.value];
+}
+
+/** The fields the user asked for: their interests, else their major's two fields; null when they named neither. */
+export function wantedFields(answers: OnboardingAnswers): ReadonlySet<JobFieldId> | null {
+  const interests = new Set<JobFieldId>();
+  for (const interest of answers.interest ?? []) if (isJobFieldId(interest)) interests.add(interest);
+  if (interests.size > 0) return interests;
+  const fields = majorFields(answers);
+  return fields === null ? null : new Set(fields);
 }
 
 /** Which interest the job's field is: 0 first, 1 second, or -1. */
@@ -142,7 +151,10 @@ export type CompanyJobs = (id: CompanyId) => readonly JobId[];
 export function companyJob(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobsAtCompany): JobId | null {
   const company = answers.company;
   if (company === undefined || company === "none" || !isCompanyId(company)) return null;
-  const ids = jobsAt(company);
+  // 20 Nov 2026: only the company's jobs in the fields the user asked for (a websites user who names Tamara is not sent
+  // to its collections job); none there → null, and the ranking decides as if no company was named.
+  const wanted = wantedFields(answers);
+  const ids = jobsAt(company).filter((id) => wanted === null || wanted.has(getJob(id).field));
   if (ids.length === 0) return null;
   const withoutPriority: OnboardingAnswers = { ...answers, priority: undefined };
   const fits = ids.map((id) => fitBreakdown(id, withoutPriority));

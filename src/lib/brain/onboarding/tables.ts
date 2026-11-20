@@ -202,6 +202,11 @@ export const INTEREST_KEYWORDS: readonly { readonly keyword: string; readonly va
   { keyword: "برمجة", value: "software" },
   { keyword: "تطبيقات", value: "software" },
   { keyword: "مواقع", value: "software" },
+  { keyword: "موقع إلكتروني", value: "software" },
+  { keyword: "ويب", value: "software" },
+  { keyword: "فرونت إند", value: "software" },
+  { keyword: "باك إند", value: "software" },
+  { keyword: "مطوّر", value: "software" },
   { keyword: "تطوير", value: "software" },
   { keyword: "تصميم", value: "design" },
   { keyword: "إبداع", value: "design" },
@@ -231,6 +236,13 @@ export const INTEREST_KEYWORDS: readonly { readonly keyword: string; readonly va
   { keyword: "apps", value: "software" },
   { keyword: "web", value: "software" },
   { keyword: "websites", value: "software" },
+  { keyword: "website", value: "software" },
+  { keyword: "frontend", value: "software" },
+  { keyword: "front end", value: "software" },
+  { keyword: "backend", value: "software" },
+  { keyword: "back end", value: "software" },
+  { keyword: "app", value: "software" },
+  { keyword: "developer", value: "software" },
   { keyword: "programming", value: "software" },
   { keyword: "coding", value: "software" },
   { keyword: "design", value: "design" },
@@ -411,6 +423,9 @@ export const ACK = {
       `${company}، اختيار زين! عندهم وظيفة «${title}» ${where}، وعليها برسم مسارك.`,
     noJob: (company: string): string =>
       `${company}، اختيار زين! بس ما عندي الحين وظيفة منهم في قائمتي، فبرسم مسارك لأقرب وظيفة تناسبك، وتقدر تغيّر الشركة من «ملفي» متى ما بغيت.`,
+    /** It has jobs in the data, but none in the field the user asked for (20 Nov 2026): never aimed at another field. */
+    noJobInField: (company: string): string =>
+      `${company}، اختيار زين! بس ما عندي الحين وظيفة منهم في المجال اللي تبيه، فبرسم مسارك لأقرب وظيفة تناسبك، ووظايفهم الثانية تلقاها في «الوظائف».`,
     early: (company: string): string => `${company}، سجّلتها! عندهم وظايف في قائمتي، وبعد ما أعرفك أكثر أختار لك أنسبها.`,
     none: "ولا يهمك، نخليها مفتوحة، وتقدر تضيفها بعدين من «ملفي».",
     /** The second miss: a name «دليلك» does not know is never guessed (4.5: it never loops). */

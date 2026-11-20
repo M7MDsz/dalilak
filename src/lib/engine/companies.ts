@@ -2,7 +2,7 @@
 // typed name means (Arabic and English, the common spellings of data `COMPANIES[].aliases`), and which jobs belong to a
 // company. Jobs are found by the company NAME they carry (`company`, `companyEn`), never by job id, so the job data can
 // change under it. Pure.
-import { COMPANIES, JOBS } from "@/lib/data";
+import { COMPANIES, JOBS, companyTiles, getJob } from "@/lib/data";
 import { isJobFieldId } from "@/lib/ids";
 import { findKeywords, normalizeText, tokenize } from "@/lib/text/normalize";
 import type { CompanyId, Job, JobFieldId, JobId, OnboardingAnswers } from "@/lib/types";
@@ -78,6 +78,25 @@ export function jobsAtCompany(id: CompanyId): readonly JobId[] {
     byCompany = { jobs: JOBS, map };
   }
   return byCompany.map.get(id) ?? [];
+}
+
+/**
+ * The companies the seventh step offers (and the profile picker shows first), 20 Nov 2026 owner's rule: only companies
+ * that really have a job in the app for that field ("applicable"), the ones with the most jobs first (the curated tiles
+ * break ties), at most `max` of them; «مهارة», the hackathon's organiser, always leads (owner's request). With no field
+ * («لم أحدّد بعد»), the companies with the most jobs overall.
+ */
+export function companyChoices(field: JobFieldId | null, max = 5): readonly CompanyId[] {
+  const curated = companyTiles(field);
+  const rank = (id: CompanyId): number => {
+    const at = curated.indexOf(id);
+    return at === -1 ? curated.length : at;
+  };
+  const counted = COMPANIES.filter((c) => c.id !== "maharah")
+    .map((c, order) => ({ id: c.id, order, n: jobsAtCompany(c.id).filter((j) => field === null || getJob(j).field === field).length }))
+    .filter((c) => c.n > 0)
+    .sort((a, b) => b.n - a.n || rank(a.id) - rank(b.id) || a.order - b.order);
+  return ["maharah", ...counted.slice(0, max).map((c) => c.id)];
 }
 
 /** The field whose companies the seventh step shows: the first interest that is a job field; null for «لم أحدّد بعد». */
