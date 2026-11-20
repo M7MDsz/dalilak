@@ -49,7 +49,7 @@ export function toReplyChips(chips: readonly Chip[], prefix: string, live?: Chip
 const NO_PARTS: readonly AdvisorPart[] = [];
 const LINE_BREAK = String.fromCharCode(10);
 
-/** One «دليل» row: pending (a turn in flight) or a saved reply. Memoised: a row re-renders only when its own props change. */
+/** One «دليلك» row: pending (a turn in flight) or a saved reply. Memoised: a row re-renders only when its own props change. */
 const DaleelRow = memo(function DaleelRow({
   message,
   pending,

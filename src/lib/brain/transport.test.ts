@@ -79,9 +79,9 @@ describe("schemas", () => {
     expect(long?.message.text).toHaveLength(500);
     const chip = parseAdvisorRequest({
       ...valid,
-      message: { text: "قدّم على أي حال", chip: { intent: "apply", jobId: "bi-analyst-riyadh", anyway: true } },
+      message: { text: "قدّم على أي حال", chip: { intent: "apply", jobId: "qiddiya-hr-analytics-analyst-riyadh", anyway: true } },
     });
-    expect(chip?.message.chip).toEqual({ intent: "apply", jobId: "bi-analyst-riyadh", anyway: true });
+    expect(chip?.message.chip).toEqual({ intent: "apply", jobId: "qiddiya-hr-analytics-analyst-riyadh", anyway: true });
   });
 
   it("rejects unknown ids and wrong shapes (rule 2)", () => {

@@ -39,8 +39,8 @@ const gapLands = {
 /** The button of the card, by rule of 2.8, in the words the roadmap's next-step card uses for the same action (3.4). */
 const STEP_BUTTON = {
   1: "ارفع سيرتك الذاتية",
-  2: "أكمل الدورة",
-  3: "ابدأ الدورة",
+  2: "عد إلى الدليل",
+  3: "افتح الدليل",
   4: "عرض الوظيفة",
   5: "استعرض الوظائف",
 } as const satisfies Record<NextStep["rule"], string>;

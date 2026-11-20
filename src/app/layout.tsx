@@ -19,10 +19,10 @@ import { THEME_BOOT_SCRIPT } from "@/lib/theme-boot";
 
 import "./globals.css";
 
-// Browser tab: «دليلك · {page}» (TEAM-BRIEF 0). A page sets `export const metadata = { title: "الوظائف" }`.
+// Browser tab: «دليل · {page}» (TEAM-BRIEF 0). A page sets `export const metadata = { title: "الوظائف" }`.
 export const metadata: Metadata = {
-  title: { default: "دليلك", template: "دليلك · %s" },
-  description: "دليلك من مهاراتك إلى وظيفتك",
+  title: { default: "دليل", template: "دليل · %s" },
+  description: "دليل: من مهاراتك إلى وظيفتك",
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, colorScheme: "light" };

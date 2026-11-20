@@ -30,7 +30,7 @@ import type { AnswerRects } from "./conversation";
 import { RESULT_COPY, firstNameOf, revealLines } from "./copy";
 import { PathSheet, type SheetMode } from "./path-sheet";
 import { AnswerCluster, FieldIcon, JobSweep, NarrowToThree, SkillLandscape } from "./reveal-scenes";
-import { revealData, type RevealJobCard } from "./reveal-data";
+import { revealData, type RevealData, type RevealJobCard } from "./reveal-data";
 
 type Phase = "show" | "result" | "leaving";
 
@@ -188,7 +188,7 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
               {RESULT_COPY.heading(firstName)}
             </motion.h1>
             <motion.div animate={state} custom={0.08} initial={startOnResult ? false : "hidden"} variants={block}>
-              <RecommendedCard job={data.recommended} />
+              <RecommendedCard company={data.company} job={data.recommended} />
             </motion.div>
           </div>
 
@@ -348,7 +348,7 @@ function Scene({ children, immediate = false }: { children: React.ReactNode; imm
   );
 }
 
-function RecommendedCard({ job }: { job: RevealJobCard }) {
+function RecommendedCard({ job, company }: { job: RevealJobCard; company: RevealData["company"] }) {
   return (
     <Card data-testid={TID.reveal.recommended} data-value={job.id} label={RESULT_COPY.recommendedLabel}>
       <div className="flex flex-col gap-2 pt-1">
@@ -356,12 +356,23 @@ function RecommendedCard({ job }: { job: RevealJobCard }) {
         <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-fg-2">
           <IconCompany className="shrink-0 text-fg-3" size={18} waypoint="muted" />
           <span>{job.companyCity}</span>
-          <SampleTag kind="company" />
+          {job.real ? null : <SampleTag kind="practice" />}
         </p>
         <p className="flex items-center gap-2 text-small text-fg-2">
           <FieldIcon className="shrink-0 text-fg-3" field={job.fieldId} size={18} />
           <span>{job.field}</span>
         </p>
+        {/* the company the user has in mind (onboarding step 7): this is its job, or the closest one and why */}
+        {company ? (
+          <p
+            className={cn("mt-1 flex items-start gap-2 border-t border-border pt-3 text-small", company.aimed ? "font-semibold text-fg" : "text-fg-2")}
+            data-testid={TID.reveal.company}
+            data-value={company.aimed ? "aimed" : "closest"}
+          >
+            {company.aimed ? <IconCheck className="mt-0.5 shrink-0 text-ok-fg" size={16} strokeWidth={2.5} waypoint="off" /> : null}
+            <span>{company.aimed ? RESULT_COPY.companyAimed(company.name) : RESULT_COPY.companyNoJob(company.name)}</span>
+          </p>
+        ) : null}
       </div>
     </Card>
   );
@@ -374,7 +385,7 @@ function AlternativeCard({ job, index, onChoose, disabled, visible }: { job: Rev
         <h3 className="text-title text-fg">{job.title}</h3>
         <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-fg-2">
           <span>{job.companyCity}</span>
-          <SampleTag kind="company" />
+          {job.real ? null : <SampleTag kind="practice" />}
         </p>
         <p className="flex items-center gap-2 text-small text-fg-2">
           <FieldIcon className="shrink-0 text-fg-3" field={job.fieldId} size={16} />

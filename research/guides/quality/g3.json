@@ -1,0 +1,895 @@
+{
+  "checkedAt": "2026-11-20",
+  "skills": {
+    "design-basics": {
+      "topPick": {
+        "title": "مقدمة في تصميم الجرافيك",
+        "provider": "صندوق تنمية الموارد البشرية (دروب Doroob)",
+        "url": "https://lms.doroob.sa/courses/Doroob/DRB-EL-027-IGD-1-AR/2019/about",
+        "lang": "ar",
+        "price": null,
+        "financialAid": null,
+        "hours": null,
+        "certificate": true,
+        "star": 1,
+        "why": "دورة عربية للمبتدئين من دروب: عناصر التصميم ومبادئه والألوان والخطوط، وتنتهي بشهادة إتمام بعد الاختبار.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Fundamentals of Graphic Design",
+          "provider": "California Institute of the Arts (Coursera)",
+          "url": "https://www.coursera.org/learn/fundamentals-of-graphic-design",
+          "lang": "en",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 8,
+          "certificate": true,
+          "star": 1,
+          "why": "أساسيات اللون والخط والصورة والتكوين من كالآرتس، بالإنجليزي، للمبتدئين بدون خبرة.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "مقدمة في التصميم الجرافيكي",
+          "provider": "إدراك (Edraak)",
+          "url": "https://www.edraak.org/programs/course/gd101-vt1_2108/",
+          "lang": "ar",
+          "price": null,
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "مقرر عربي من إدراك عن أساسيات التصميم الجرافيكي، بداية مناسبة لو تفضّل الشرح بالعربي.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Chris Do",
+          "platform": "The Futur (بودكاست)",
+          "url": "https://podcasts.apple.com/podcast/id1209219220",
+          "why": "مصمم ومؤسس The Futur، بودكاست منتظم عن التصميم والتسويق وشغل المصمم.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": null,
+      "certification": {
+        "kind": "official",
+        "name": "Adobe Certified Professional – Visual Design Using Adobe Photoshop",
+        "issuer": "Adobe (exam delivered by Certiport)",
+        "code": null,
+        "type": "exam",
+        "url": "https://certifiedprofessional.adobe.com/photoshop",
+        "fee": { "amount": 150, "currency": "USD", "note": "Adobe says exams typically cost US$150; check the Certiport store for the local price" },
+        "prepUrl": "https://certifiedprofessional.adobe.com/photoshop#ExamGuide",
+        "prepLabel": "دليل الاختبار الرسمي من Adobe (الأهداف ودروس مجانية)",
+        "level": "beginner",
+        "star": 1,
+        "why": "تثبت أنك تشتغل على Photoshop بمستوى عملي، وهي شهادة Adobe الرسمية اللي تعرفها جهات التصميم والإعلان.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://lms.doroob.sa/courses/Doroob/DRB-EL-027-IGD-1-AR/2019/about", "status": "added", "note": "Doroob/HRDF Arabic beginner course page opens (topics, level, completion certificate at 70% final exam). Price not stated, effort '5' with no unit -> hours null. Made top pick as the realistic Arabic choice." },
+        { "url": "https://www.coursera.org/learn/fundamentals-of-graphic-design", "status": "fixed", "note": "Moved to alternatives. Title/CalArts/en confirmed; header says 8 hours (FAQ says ~15). 'Enroll for free' is a trial with no explicit audit -> paid; financial aid available; shareable certificate." },
+        { "url": "https://www.edraak.org/programs/course/gd101-vt1_2108/", "status": "added", "note": "Edraak course page shows Arabic title; price, hours and certificate not shown -> null." },
+        { "url": "https://www.canva.com/design-school/", "status": "removed", "note": "403 Forbidden (also canva.com/learn/design-school/); could not verify, dropped." },
+        { "url": "https://podcasts.apple.com/podcast/id1209219220", "status": "added", "note": "Person added: The Futur with Chris Do podcast, host Chris Do (CEO of The Futur), episode 2 days ago." },
+        { "url": "https://thefutur.com/", "status": "removed", "note": "Page returned content from a staging host; not used as the person link." },
+        { "url": "https://certifiedprofessional.adobe.com/photoshop", "status": "added", "note": "Certification: official Adobe page for ACP Visual Design Using Adobe Photoshop (Certiport, 50 min, 30 questions, pass 700/1000, 2025 exam guide). Fee not on this page." },
+        { "url": "https://certifiedprofessional.adobe.com/en/how-it-works", "status": "added", "note": "Fee source: 'exams typically cost US$150', local price via Certiport store; ~150 hours experience recommended." }
+      ]
+    },
+    "figma": {
+      "topPick": {
+        "title": "Figma Design for beginners",
+        "provider": "Figma Learn (الدورة الرسمية)",
+        "url": "https://help.figma.com/hc/en-us/sections/30880632542743-Figma-Design-for-beginners",
+        "lang": "en",
+        "price": "free",
+        "financialAid": null,
+        "hours": null,
+        "certificate": null,
+        "star": 1,
+        "why": "دورة Figma الرسمية المجانية: تصمّم موقع portfolio من الصفر وتتعلّم الأداة أثناءها.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "إنشاء تصميمات ونماذج أوّلية عالية الدقة في Figma",
+          "provider": "Google (Coursera)",
+          "url": "https://www.coursera.org/learn/create-high-fidelity-designs-and-prototypes-in-figma-arabic",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 30,
+          "certificate": true,
+          "star": 2,
+          "why": "مقرر Google بالعربي: تحوّل تصميمك إلى نسخة عالية الدقة ونموذج تفاعلي في Figma، بعد ما تعرف الأساسيات.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "Introduction to design systems",
+          "provider": "Figma Learn",
+          "url": "https://help.figma.com/hc/en-us/articles/14552901442839-Overview-Introduction-to-design-systems",
+          "lang": "en",
+          "price": null,
+          "financialAid": null,
+          "hours": 2,
+          "certificate": null,
+          "star": 3,
+          "why": "دورة Figma الرسمية لبناء نظام تصميم بالأنماط والمكوّنات، لمن يعرف Figma ويبي المستوى المتقدم.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Christine Vallaure",
+          "platform": "moonlearning",
+          "url": "https://www.moonlearning.io/",
+          "why": "مصممة تعلّم Figma وتصميم الواجهات وأنظمة التصميم، ولها جلسات وموارد مجانية.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": null,
+      "certification": {
+        "kind": "none",
+        "proof": "ملف Figma منشور أو دراسة حالة لتصميم تطبيق كامل فيه مكوّنات وAuto Layout ونموذج تفاعلي تقدر تعرضه في المقابلة.",
+        "proofUrl": "https://www.coursera.org/learn/create-high-fidelity-designs-and-prototypes-in-figma-arabic",
+        "why": "Figma ما تقدّم شهادة رسمية، والشهادات اللي تحمل اسمها تصدرها جهات أخرى.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://help.figma.com/hc/en-us/sections/30880632542743-Figma-Design-for-beginners", "status": "ok", "note": "Section page shows the course title 'Figma Design for beginners'." },
+        { "url": "https://help.figma.com/hc/en-us/articles/30848209492887", "status": "ok", "note": "Course overview (2025) confirms: build a portfolio site from scratch, works on the free Starter plan; no duration or certificate stated." },
+        { "url": "https://www.coursera.org/learn/create-high-fidelity-designs-and-prototypes-in-figma-arabic", "status": "added", "note": "Google course taught in Arabic; 3 weeks at 10 h/week -> 30; no explicit audit -> paid; financial aid; shareable certificate." },
+        { "url": "https://help.figma.com/hc/en-us/articles/14552901442839-Overview-Introduction-to-design-systems", "status": "added", "note": "Official Figma course: 4 lessons, 7 videos, ~2 hours, for designers who already know styles/components. Price not stated -> null." },
+        { "url": "https://www.moonlearning.io/", "status": "added", "note": "Person added: Christine Vallaure, founder of moonlearning, 2x Figma Config speaker per page." },
+        { "url": "https://help.figma.com/hc/en-us/sections/23691657321239-Courses", "status": "ok", "note": "Figma's official courses section opened: courses only, no certification. Web search found no figma.com certification, only third-party ones -> kind none." }
+      ]
+    },
+    "ux-research": {
+      "topPick": {
+        "title": "Conduct UX Research and Test Early Concepts",
+        "provider": "Google (Coursera)",
+        "url": "https://www.coursera.org/learn/conduct-ux-research",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 20,
+        "certificate": true,
+        "star": 1,
+        "why": "من شهادة Google لتجربة المستخدم: تخطط بحث المستخدم وتختبر أفكارك مبكراً.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "إجراء بحث تجربة المستخدم واختبار المفاهيم المبكرة",
+          "provider": "Google (Coursera)",
+          "url": "https://www.coursera.org/learn/conduct-ux-research-and-test-early-concepts-arabic",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 20,
+          "certificate": true,
+          "star": 1,
+          "why": "نفس مقرر Google لبحث المستخدم لكن بالعربي، لو تفضّل الشرح بلغتك.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "أسس تصميم تجربة المستخدم (UX)",
+          "provider": "Google (Coursera)",
+          "url": "https://www.coursera.org/learn/foundations-of-user-experience-ux-design-arabic",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 20,
+          "certificate": true,
+          "star": 1,
+          "why": "أول مقرر في شهادة Google بالعربي، يعطيك الصورة الكاملة لتجربة المستخدم قبل البحث.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Jakob Nielsen",
+          "platform": "Substack",
+          "url": "https://jakobnielsenphd.substack.com/",
+          "why": "من مؤسسي Nielsen Norman Group، يكتب عن قابلية الاستخدام وتجربة المستخدم.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": null,
+      "certification": {
+        "kind": "official",
+        "name": "Google UX Design Professional Certificate",
+        "issuer": "Google (Coursera)",
+        "code": null,
+        "type": "program",
+        "url": "https://www.coursera.org/professional-certificates/google-ux-design",
+        "fee": { "amount": 49, "currency": "USD", "note": "Coursera subscription per month after a 7-day trial (US/Canada price); financial aid available" },
+        "prepUrl": "https://www.coursera.org/learn/foundations-of-user-experience-ux-design-arabic",
+        "prepLabel": "أول مقرر في الشهادة، بالعربي على Coursera",
+        "level": "beginner",
+        "star": 1,
+        "why": "شهادة مهنية من Google تثبت أساسيات بحث المستخدم والتصميم، وتنتهي بملف أعمال فيه ثلاثة مشاريع.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://www.coursera.org/learn/conduct-ux-research", "status": "ok", "note": "Title/Google/en confirmed; 2 weeks at 10 h/week -> 20; trial, no explicit audit -> paid; financial aid; certificate; course 4 of the Google UX certificate." },
+        { "url": "https://www.coursera.org/learn/conduct-ux-research-and-test-early-concepts-arabic", "status": "added", "note": "Same Google course taught in Arabic; 2 weeks at 10 h/week; paid; financial aid; certificate." },
+        { "url": "https://www.coursera.org/learn/foundations-user-experience-design", "status": "replaced", "note": "Page fine (en, 1 week at 10 h/week, paid, financial aid) but replaced by its Arabic version below." },
+        { "url": "https://www.coursera.org/learn/foundations-of-user-experience-ux-design-arabic", "status": "added", "note": "Arabic version of course 1 ('Taught in Arabic'); 2 weeks at 10 h/week -> 20; paid; financial aid; certificate." },
+        { "url": "https://jakobnielsenphd.substack.com/", "status": "ok", "note": "Substack 'Jakob Nielsen on UX' loads." },
+        { "url": "https://www.coursera.org/professional-certificates/google-ux-design", "status": "added", "note": "Certification: 6 months at 10 h/week, beginner, $49/month after 7-day trial (US/Canada), financial aid; taught in English." },
+        { "url": "https://grow.google/intl/mena/google-career-certificates/ux-design/", "status": "ok", "note": "Google MENA Arabic page for the same certificate opens; no price shown." }
+      ]
+    },
+    "ui-design": {
+      "topPick": {
+        "title": "Visual Elements of User Interface Design",
+        "provider": "California Institute of the Arts (Coursera)",
+        "url": "https://www.coursera.org/learn/visual-elements-user-interface-design",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 10,
+        "certificate": true,
+        "star": 1,
+        "why": "من تخصص UI/UX في كالآرتس، يركّز على الجانب البصري للواجهات.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "مبادىء تصميم تجربة وواجهة المستخدم UI/UX",
+          "provider": "إدراك (Edraak)",
+          "url": "https://www.edraak.org/programs/specialization/uiux-v1/",
+          "lang": "ar",
+          "price": null,
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "تخصص عربي من إدراك في مبادئ تصميم الواجهات وتجربة المستخدم.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "إنشاء تصميمات ونماذج أوّلية عالية الدقة في Figma",
+          "provider": "Google (Coursera)",
+          "url": "https://www.coursera.org/learn/create-high-fidelity-designs-and-prototypes-in-figma-arabic",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 30,
+          "certificate": true,
+          "star": 2,
+          "why": "مقرر Google بالعربي لتصميم واجهات عالية الدقة في Figma، يناسبك بعد الأساسيات.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Steve Schoger و Adam Wathan",
+          "platform": "Refactoring UI",
+          "url": "https://refactoringui.com/",
+          "why": "كتاب وفيديوهات مدفوعة فيها نصائح عملية تخلّي واجهتك أوضح وأجمل حتى لو ما أنت مصمم محترف.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": null,
+      "certification": {
+        "kind": "official",
+        "name": "Google UX Design Professional Certificate",
+        "issuer": "Google (Coursera)",
+        "code": null,
+        "type": "program",
+        "url": "https://www.coursera.org/professional-certificates/google-ux-design",
+        "fee": { "amount": 49, "currency": "USD", "note": "Coursera subscription per month after a 7-day trial (US/Canada price); financial aid available" },
+        "prepUrl": "https://www.coursera.org/learn/create-high-fidelity-designs-and-prototypes-in-figma-arabic",
+        "prepLabel": "مقرر الواجهات عالية الدقة في Figma، بالعربي على Coursera",
+        "level": "beginner",
+        "star": 1,
+        "why": "شهادة مهنية من Google فيها تصميم واجهات عالية الدقة ونماذج تفاعلية؛ مستواها مبتدئ، والمستوى الأعلى يثبته ملف أعمالك.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://www.coursera.org/learn/visual-elements-user-interface-design", "status": "ok", "note": "Title/CalArts/en confirmed; 1 week at 10 h/week -> 10; must purchase Certificate experience, no audit -> paid; financial aid; certificate." },
+        { "url": "https://www.edraak.org/programs/specialization/uiux-v1/", "status": "added", "note": "Edraak specialization page shows Arabic title; details (price, hours, certificate) not shown -> null." },
+        { "url": "https://www.coursera.org/learn/create-high-fidelity-designs-and-prototypes-in-figma-arabic", "status": "added", "note": "Google course taught in Arabic; 3 weeks at 10 h/week; paid; financial aid; certificate." },
+        { "url": "https://refactoringui.com/", "status": "ok", "note": "Live sales page; authors Adam Wathan and Steve Schoger; paid ($99/$149). 'why' now says it is paid." },
+        { "url": "https://www.coursera.org/professional-certificates/google-ux-design", "status": "added", "note": "Certification: Google UX Design Professional Certificate (beginner, $49/month US/Canada, financial aid)." }
+      ]
+    },
+    "prototyping": {
+      "topPick": {
+        "title": "Build Wireframes and Low-Fidelity Prototypes",
+        "provider": "Google (Coursera)",
+        "url": "https://www.coursera.org/learn/wireframes-low-fidelity-prototypes",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 10,
+        "certificate": true,
+        "star": 1,
+        "why": "تحوّل الفكرة إلى مخطط ثم نموذج أولي تقدر تجرّبه.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Guide to prototyping in Figma",
+          "provider": "Figma Learn",
+          "url": "https://help.figma.com/hc/en-us/articles/360040314193-Guide-to-prototyping-in-Figma",
+          "lang": "en",
+          "price": "free",
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "الدليل الرسمي لربط الشاشات وصنع نموذج تفاعلي داخل Figma.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "إنشاء إطارات شبكية ونماذج أوّلية منخفضة الدقة",
+          "provider": "Google (Coursera)",
+          "url": "https://www.coursera.org/learn/build-wireframes-and-low-fidelity-prototypes-arabic",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 20,
+          "certificate": true,
+          "star": 1,
+          "why": "نفس مقرر Google للمخططات والنماذج الأولية لكن بالعربي.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Jake Knapp",
+          "platform": "Character (صفحة كتاب Sprint)",
+          "url": "https://www.character.vc/sprint",
+          "why": "صاحب طريقة Design Sprint: تبني نموذجاً أولياً وتختبره مع عملاء حقيقيين في خمسة أيام.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": null,
+      "certification": {
+        "kind": "official",
+        "name": "Google UX Design Professional Certificate",
+        "issuer": "Google (Coursera)",
+        "code": null,
+        "type": "program",
+        "url": "https://www.coursera.org/professional-certificates/google-ux-design",
+        "fee": { "amount": 49, "currency": "USD", "note": "Coursera subscription per month after a 7-day trial (US/Canada price); financial aid available" },
+        "prepUrl": "https://www.coursera.org/learn/build-wireframes-and-low-fidelity-prototypes-arabic",
+        "prepLabel": "مقرر المخططات والنماذج الأولية، بالعربي على Coursera",
+        "level": "beginner",
+        "star": 1,
+        "why": "شهادة مهنية من Google تثبت أنك تبني مخططات ونماذج أولية وتختبرها، وتنتهي بملف أعمال.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://www.coursera.org/learn/wireframes-low-fidelity-prototypes", "status": "ok", "note": "Title/Google/en confirmed; 1 week at 10 h/week -> 10; purchase or free trial, no audit -> paid; financial aid; certificate." },
+        { "url": "https://help.figma.com/hc/en-us/articles/360040314193-Guide-to-prototyping-in-Figma", "status": "ok", "note": "Official Figma Learn guide loads, title matches." },
+        { "url": "https://www.coursera.org/learn/build-wireframes-and-low-fidelity-prototypes-arabic", "status": "added", "note": "Arabic version of the top pick ('Taught in Arabic'); 2 weeks at 10 h/week -> 20; paid; financial aid; certificate." },
+        { "url": "https://www.thesprintbook.com/", "status": "fixed", "note": "301 redirect to character.vc/sprint; used the target URL." },
+        { "url": "https://www.character.vc/sprint", "status": "added", "note": "Person added: Jake Knapp, co-author of Sprint; page describes building and testing a prototype in a five-day sprint." },
+        { "url": "https://www.coursera.org/professional-certificates/google-ux-design", "status": "added", "note": "Certification: Google UX Design Professional Certificate ($49/month US/Canada, financial aid)." }
+      ]
+    },
+    "marketing-basics": {
+      "topPick": {
+        "title": "أساسيات التسويق الرقمي",
+        "provider": "Google (Skillshop)",
+        "url": "https://skillshop.exceedlms.com/student/collection/1830717?locale=ar",
+        "lang": "ar",
+        "price": "free",
+        "financialAid": null,
+        "hours": 40,
+        "certificate": true,
+        "star": 1,
+        "why": "دورة Google بالعربي: 17 وحدة عن القنوات والجمهور وقياس النتائج، وتنتهي بشارة إنجاز تضيفها لملفك.",
+        "recommendedBy": [
+          { "label": "Google MENA: دورات مجانية عن بعد للتسويق", "url": "https://grow.google/intl/mena/courses-and-tools", "note": "الصفحة تذكر مجموعة Skillshop لأساسيات التسويق الرقمي" }
+        ],
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Digital Marketing Certification Course: Get Certified in Digital Marketing",
+          "provider": "HubSpot Academy",
+          "url": "https://academy.hubspot.com/courses/digital-marketing",
+          "lang": "en",
+          "price": "free",
+          "financialAid": null,
+          "hours": 3.4,
+          "certificate": true,
+          "star": 1,
+          "why": "مختصرة ومجانية بشهادة، تعطيك الصورة كاملة بسرعة، بالإنجليزي.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "مبادئ الإعلام والتسويق الرقمي",
+          "provider": "University of Illinois Urbana-Champaign (Coursera)",
+          "url": "https://www.coursera.org/learn/marketing-channels-ar",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 20,
+          "certificate": true,
+          "star": 1,
+          "why": "مقرر بالعربي من جامعة إلينوي عن مبادئ الإعلام والتسويق الرقمي.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Seth Godin",
+          "platform": "مدونته",
+          "url": "https://seths.blog/",
+          "why": "تدوينة قصيرة كل يوم عن التسويق، من أشهر كتّاب التسويق.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [
+        { "label": "Google MENA: دورات مجانية عن بعد للتسويق", "url": "https://grow.google/intl/mena/courses-and-tools", "note": null },
+        { "label": "Ahrefs Blog: 17 Free Online Marketing Courses (2021)", "url": "https://ahrefs.com/blog/online-marketing-courses/", "note": "يذكر النسخة الإنجليزية القديمة: Google Digital Garage - Fundamentals of Digital Marketing" }
+      ],
+      "certification": {
+        "kind": "official",
+        "name": "Google Digital Marketing & E-commerce Professional Certificate",
+        "issuer": "Google (Coursera)",
+        "code": null,
+        "type": "program",
+        "url": "https://www.coursera.org/professional-certificates/google-digital-marketing-ecommerce",
+        "fee": { "amount": 49, "currency": "USD", "note": "Coursera subscription per month after a 7-day trial (US/Canada price); financial aid available" },
+        "prepUrl": "https://grow.google/intl/mena/google-career-certificates/",
+        "prepLabel": "صفحة شهادات Google المهنية بالعربي",
+        "level": "beginner",
+        "star": 1,
+        "why": "شهادة مهنية من Google في أساسيات التسويق الرقمي والتجارة الإلكترونية، بالإنجليزي، ومعروفة عند جهات التوظيف.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://skillshop.exceedlms.com/student/collection/1830717?locale=ar", "status": "fixed", "note": "No redirect; Arabic title, 17 modules, 40 hours confirmed; completion award addable to Skillshop/LinkedIn. Price not on page; marked free per Google Ads Help page saying Skillshop is a library of free courses. Provider label normalised." },
+        { "url": "https://support.google.com/google-ads/answer/7539883", "status": "ok", "note": "Google help page: Skillshop gives 'the library of free online courses designed by Google product experts' (basis for price free on Skillshop items)." },
+        { "url": "https://academy.hubspot.com/courses/digital-marketing", "status": "fixed", "note": "Title corrected to the full page title; FREE certification course; 3 h 24 min, 10 lessons, 30 videos; English." },
+        { "url": "https://www.coursera.org/learn/marketing-channels-ar", "status": "added", "note": "Arabic course from UIUC ('Taught in Arabic'); 2 weeks at 10 h/week -> 20; financial aid; shareable certificate; no audit stated -> paid." },
+        { "url": "https://seths.blog/", "status": "ok", "note": "Blog live, latest post dated 2026-11-20." },
+        { "url": "https://grow.google/intl/mena/courses-and-tools", "status": "ok", "note": "Arabic Google MENA page lists the Skillshop digital marketing basics collection." },
+        { "url": "https://ahrefs.com/blog/online-marketing-courses/", "status": "ok", "note": "2021 list still live; includes Google Digital Garage Fundamentals (#17)." },
+        { "url": "https://www.coursera.org/professional-certificates/google-digital-marketing-ecommerce", "status": "added", "note": "Certification: 6 months at ~10 h/week, introductory, $49/month after 7-day trial (US/Canada), financial aid; English only for now (Arabic not confirmed)." },
+        { "url": "https://grow.google/intl/mena/google-career-certificates/", "status": "added", "note": "Google MENA Arabic page listing the career certificates incl. Digital Marketing & E-commerce; no Saudi price shown." }
+      ]
+    },
+    "content": {
+      "topPick": {
+        "title": "Content Marketing Certification Course",
+        "provider": "HubSpot Academy",
+        "url": "https://academy.hubspot.com/courses/content-marketing",
+        "lang": "en",
+        "price": "free",
+        "financialAid": null,
+        "hours": 8,
+        "certificate": true,
+        "star": 2,
+        "why": "شهادة HubSpot المجانية في تسويق المحتوى: تخطط المحتوى وتكتبه بهدف واضح.",
+        "recommendedBy": [
+          { "label": "Ahrefs Blog: 17 Free Online Marketing Courses (2021)", "url": "https://ahrefs.com/blog/online-marketing-courses/", "note": "رقم 7 في القائمة" }
+        ],
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "كتابة المحتوى الإبداعي",
+          "provider": "صندوق تنمية الموارد البشرية (دروب Doroob)",
+          "url": "https://lms.doroob.sa/courses/Doroob/C.S-CRSKL006/DEC2020/about?lang=ar",
+          "lang": "ar",
+          "price": null,
+          "financialAid": null,
+          "hours": null,
+          "certificate": true,
+          "star": 1,
+          "why": "دورة عربية من دروب في كتابة المحتوى للتواصل الاجتماعي والمدونات وأساسيات SEO، بشهادة إتمام.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Ann Handley",
+          "platform": "موقعها",
+          "url": "https://annhandley.com/",
+          "why": "كاتبة ومسوّقة معروفة، تعلّم العلامات تكتب بصوت واضح وتحكي قصتها.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [
+        { "label": "Ahrefs Blog: 17 Free Online Marketing Courses (2021)", "url": "https://ahrefs.com/blog/online-marketing-courses/", "note": null }
+      ],
+      "certification": {
+        "kind": "official",
+        "name": "HubSpot Content Marketing Certification",
+        "issuer": "HubSpot Academy",
+        "code": null,
+        "type": "program",
+        "url": "https://academy.hubspot.com/certification-overview",
+        "fee": { "amount": 0, "currency": "USD", "note": "Free; HubSpot lists its certifications as completely free and online" },
+        "prepUrl": "https://academy.hubspot.com/courses/content-marketing",
+        "prepLabel": "دورة HubSpot المجانية اللي تنتهي باختبار الشهادة",
+        "level": "intermediate",
+        "star": 2,
+        "why": "شهادة مجانية معروفة في تسويق المحتوى، يكتبها كثير من المسوّقين في سيرهم الذاتية.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://academy.hubspot.com/courses/content-marketing", "status": "fixed", "note": "Page opens with this title but details render by JavaScript. Hours (8) and free taken from HubSpot's own certification-overview page; old priceNote dropped." },
+        { "url": "https://academy.hubspot.com/certification-overview", "status": "added", "note": "Official HubSpot page: certifications 'Completely free & online'; Content Marketing 8 hours, Social Media Marketing 5 hours, Digital Advertising 4 hours." },
+        { "url": "https://lms.doroob.sa/courses/Doroob/C.S-CRSKL006/DEC2020/about?lang=ar", "status": "added", "note": "Doroob/HRDF Arabic beginner course; registration open; completion certificate at 70%; price not stated, effort '3' with no unit." },
+        { "url": "https://annhandley.com/", "status": "ok", "note": "Site live; 'Keynote Business Speaker. Writer. Marketer.'" },
+        { "url": "https://ahrefs.com/blog/online-marketing-courses/", "status": "ok", "note": "Lists HubSpot Content Marketing Certification Course (#7)." }
+      ]
+    },
+    "social-media": {
+      "topPick": {
+        "title": "مقدمة في التسويق عبر وسائل التواصل الاجتماعي",
+        "provider": "صندوق تنمية الموارد البشرية (دروب Doroob)",
+        "url": "https://lms.doroob.sa/courses/E-Learning/DRB-027-SM-01-AR/2018/about",
+        "lang": "ar",
+        "price": null,
+        "financialAid": null,
+        "hours": null,
+        "certificate": true,
+        "star": 1,
+        "why": "دورة عربية للمبتدئين من دروب: تختار القنوات وتدير الحسابات وتخطط المحتوى، بشهادة إتمام.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Social Media Marketing Certification",
+          "provider": "HubSpot Academy",
+          "url": "https://academy.hubspot.com/courses/social-media",
+          "lang": "en",
+          "price": "free",
+          "financialAid": null,
+          "hours": 5,
+          "certificate": true,
+          "star": 2,
+          "why": "شهادة HubSpot المجانية في استراتيجية التواصل الاجتماعي وقياس النتائج، بالإنجليزي.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "الترويج لنشاطك التجاري باستخدام المحتوى",
+          "provider": "Google (Skillshop)",
+          "url": "https://skillshop.exceedlms.com/student/collection/754850-promote-with-content?locale=ar",
+          "lang": "ar",
+          "price": "free",
+          "financialAid": null,
+          "hours": 3,
+          "certificate": null,
+          "star": 1,
+          "why": "بالعربي من Google: توصل لجمهورك عبر الفيديو وتسويق المحتوى.",
+          "recommendedBy": [
+            { "label": "Google MENA: دورات مجانية عن بعد للتسويق", "url": "https://grow.google/intl/mena/courses-and-tools", "note": "تذكر دورة الترويج لنشاطك التجاري باستخدام المحتوى" }
+          ],
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Matt Navarra",
+          "platform": "موقعه",
+          "url": "https://www.mattnavarra.com/",
+          "why": "مستشار تواصل اجتماعي يتابع تحديثات المنصات أولاً بأول في نشرته Geekout.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [
+        { "label": "Google MENA: دورات مجانية عن بعد للتسويق", "url": "https://grow.google/intl/mena/courses-and-tools", "note": null }
+      ],
+      "certification": {
+        "kind": "official",
+        "name": "HubSpot Social Media Marketing Certification",
+        "issuer": "HubSpot Academy",
+        "code": null,
+        "type": "program",
+        "url": "https://academy.hubspot.com/certification-overview",
+        "fee": { "amount": 0, "currency": "USD", "note": "Free; HubSpot lists its certifications as completely free and online" },
+        "prepUrl": "https://academy.hubspot.com/courses/social-media",
+        "prepLabel": "دورة HubSpot المجانية اللي تنتهي باختبار الشهادة",
+        "level": "intermediate",
+        "star": 2,
+        "why": "شهادة مجانية معروفة في إدارة حسابات التواصل وبناء الجمهور وقياس النتائج.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://lms.doroob.sa/courses/E-Learning/DRB-027-SM-01-AR/2018/about", "status": "added", "note": "Doroob/HRDF Arabic beginner course specifically on social media (channels, account management, content planning); completion certificate at 70%; price not stated. Made top pick." },
+        { "url": "https://skillshop.exceedlms.com/student/collection/754850-promote-with-content?locale=ar", "status": "fixed", "note": "Moved to alternatives (general content course, ~90 min of listed items). Arabic title confirmed, 'المدة 3س' -> hours 3; no award mentioned; free per Skillshop help page." },
+        { "url": "https://academy.hubspot.com/courses/social-media", "status": "fixed", "note": "Page opens with this title (details render by JavaScript); free and 5 hours from HubSpot certification-overview page." },
+        { "url": "https://www.mattnavarra.com/", "status": "added", "note": "Person added: social media consultant, Geekout newsletter (30,000+ subscribers per page)." },
+        { "url": "https://grow.google/intl/mena/courses-and-tools", "status": "ok", "note": "Lists the Skillshop 'promote with content' course." },
+        { "url": "https://en-gb.facebook.com/business/learn/certification/exams/100-101-exam", "status": "removed", "note": "Meta Certified Digital Marketing Associate (100-101): official facebook.com pages refused connection (ECONNRESET, 3 tries); fee could not be verified, so HubSpot certification used instead." }
+      ]
+    },
+    "seo": {
+      "topPick": {
+        "title": "SEO Course for Beginners",
+        "provider": "Ahrefs Academy (Sam Oh)",
+        "url": "https://ahrefs.com/academy/seo-training-course",
+        "lang": "en",
+        "price": "free",
+        "financialAid": null,
+        "hours": 2,
+        "certificate": null,
+        "star": 1,
+        "why": "مجانية وبدون تسجيل: 14 درساً في ساعتين تشرح كيف تجيب زيارات من البحث.",
+        "recommendedBy": [
+          { "label": "Ahrefs Blog: 17 Free Online Marketing Courses (2021)", "url": "https://ahrefs.com/blog/online-marketing-courses/", "note": "قائمة من Ahrefs نفسها، فهي توصية من صاحب الدورة" }
+        ],
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "SEO Starter Guide: The Basics",
+          "provider": "Google Search Central",
+          "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+          "lang": "en",
+          "price": "free",
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "الدليل الرسمي من Google لأساسيات الظهور في نتائج البحث، بالإنجليزي.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "التسويق الرقمي: الـ SEO، التحليل الرقمي، والتواجد الصحيح",
+          "provider": "إدراك (Edraak)",
+          "url": "https://www.edraak.org/programs/specialization/digmar-vv2/",
+          "lang": "ar",
+          "price": null,
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "تخصص عربي من إدراك عن SEO والتحليل الرقمي والتواجد على الإنترنت.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Lily Ray",
+          "platform": "موقعها",
+          "url": "https://lilyray.nyc/",
+          "why": "خبيرة SEO وبحث بالذكاء الاصطناعي، تشارك تحليلاتها وتجاربها علناً.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [
+        { "label": "Ahrefs Blog: 17 Free Online Marketing Courses (2021)", "url": "https://ahrefs.com/blog/online-marketing-courses/", "note": "قائمة من Ahrefs نفسها، فهي توصية من صاحب الدورة" }
+      ],
+      "certification": {
+        "kind": "none",
+        "proof": "موقع أو مدونة حسّنتها بنفسك مع لقطات من Google Search Console قبل وبعد (الظهور والنقرات).",
+        "proofUrl": "https://www.semrush.com/academy/exams/seo-fundamentals-exam",
+        "why": "ما فيه شهادة SEO معترف بها رسمياً، وGoogle نفسها ما تمنح شهادة SEO؛ الموجود شهادات إتمام من شركات أدوات مثل Semrush.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://ahrefs.com/academy/seo-training-course", "status": "ok", "note": "Title, Sam Oh, 14 lessons, 2h, free, no sign-up confirmed; no certificate for this course." },
+        { "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide", "status": "fixed", "note": "Title corrected to the page title 'SEO Starter Guide: The Basics'. ?hl=ar still serves English, so lang stays en." },
+        { "url": "https://www.edraak.org/programs/specialization/digmar-vv2/", "status": "added", "note": "Edraak specialization page shows Arabic title; details not shown -> null." },
+        { "url": "https://lilyray.nyc/", "status": "ok", "note": "Site live; 'Brooklyn, NYC-based SEO & AI Search professional'." },
+        { "url": "https://ahrefs.com/blog/online-marketing-courses/", "status": "ok", "note": "Lists 'SEO Training Course by Ahrefs' (#5)." },
+        { "url": "https://academy.hubspot.com/courses/seo-training", "status": "removed", "note": "Old HubSpot SEO certification URL now serves 'AEO Fundamentals' (2h20m, free); SEO cert not in HubSpot certification list, so not used." },
+        { "url": "https://www.semrush.com/academy/exams/seo-fundamentals-exam", "status": "added", "note": "proofUrl: page shows free 'SEO Essentials with Semrush' course with Semrush Academy certificate. Note: Academy moves platform on Dec 16 (download certificates by Dec 15), URL may change." }
+      ]
+    },
+    "ads": {
+      "topPick": {
+        "title": "الترويج لنشاط تجاري من خلال الإعلان على الإنترنت",
+        "provider": "Google (Skillshop)",
+        "url": "https://skillshop.exceedlms.com/student/collection/765272-promote-business-online?locale=ar",
+        "lang": "ar",
+        "price": "free",
+        "financialAid": null,
+        "hours": 3,
+        "certificate": null,
+        "star": 1,
+        "why": "بالعربي من Google: أدوات الإعلان واستهداف العملاء المناسبين في 3 ساعات.",
+        "recommendedBy": [
+          { "label": "Google MENA: دورات مجانية عن بعد للتسويق", "url": "https://grow.google/intl/mena/courses-and-tools", "note": "تذكر دورة الإعلان على الإنترنت (3 ساعات)" }
+        ],
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Digital Advertising Certification Course",
+          "provider": "HubSpot Academy",
+          "url": "https://academy.hubspot.com/courses/digital-advertising",
+          "lang": "en",
+          "price": "free",
+          "financialAid": null,
+          "hours": 4,
+          "certificate": true,
+          "star": 1,
+          "why": "شهادة HubSpot المجانية في الإعلانات الرقمية، بالإنجليزي، في حوالي 4 ساعات.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Frederick Vallaeys",
+          "platform": "Optmyzr (مقالاته)",
+          "url": "https://www.optmyzr.com/author/frederick-vallaeys",
+          "why": "من أوائل موظفي Google وعمل على AdWords، يكتب دراسات عملية عن إعلانات Google.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [
+        { "label": "Google MENA: دورات مجانية عن بعد للتسويق", "url": "https://grow.google/intl/mena/courses-and-tools", "note": null },
+        { "label": "Ahrefs Blog: 17 Free Online Marketing Courses (2021)", "url": "https://ahrefs.com/blog/online-marketing-courses/", "note": null }
+      ],
+      "certification": {
+        "kind": "official",
+        "name": "Google Ads Search Certification",
+        "issuer": "Google (Skillshop)",
+        "code": null,
+        "type": "exam",
+        "url": "https://support.google.com/google-ads/answer/9702955?hl=en-GB",
+        "fee": { "amount": 0, "currency": "USD", "note": "Foundational Google Ads certifications are free (Skillshop help); online assessment, 75 min, 80% to pass, valid 1 year" },
+        "prepUrl": "https://support.google.com/google-ads/answer/7539883",
+        "prepLabel": "تدريب Google Ads المجاني في Skillshop",
+        "level": "beginner",
+        "star": 1,
+        "why": "شهادة Google الرسمية في إعلانات البحث، مجانية، وتطلبها الوكالات وفرق التسويق.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://skillshop.exceedlms.com/student/collection/765272-promote-business-online?locale=ar", "status": "fixed", "note": "No redirect; Arabic title, 5 items, 'المدة 3س' confirmed; no award mentioned; free per Skillshop help page. Provider label normalised." },
+        { "url": "https://skillshop.withgoogle.com/intl/ar_ALL/", "status": "replaced", "note": "Live but a homepage, not a course, and does not state free; the Google Ads certification is now in the certification block. Replaced by HubSpot Digital Advertising course." },
+        { "url": "https://academy.hubspot.com/courses/digital-advertising", "status": "added", "note": "Page opens with title 'Digital Advertising Certification Course' (details by JavaScript); free and 4 hours from HubSpot certification-overview page." },
+        { "url": "https://www.optmyzr.com/author/frederick-vallaeys", "status": "added", "note": "Person added: co-founder/CEO of Optmyzr, ex-Google AdWords (Quality Score); latest article July 2026." },
+        { "url": "https://support.google.com/google-ads/answer/9702955?hl=en-GB", "status": "added", "note": "Certification: official Google Ads help page lists Google Ads Search; taken on skillshop.docebosaas.com; 75 min, 80% pass, valid one year." },
+        { "url": "https://support.google.com/skillshop/answer/14746215", "status": "added", "note": "Fee source: 'Foundational certifications continue to be available free of charge'; Professional (proctored) certs limited audience, future fee." },
+        { "url": "https://support.google.com/google-ads/answer/7539883", "status": "added", "note": "prepUrl: Google Ads training on Skillshop, free courses; certifications in Search, Display, Measurement, Video, Shopping." },
+        { "url": "https://skillshop.docebosaas.com/learn/courses/8692/google-ads-search-certification", "status": "removed", "note": "Skillshop course page only shows 'Loading' to the fetch tool; could not verify, so help-center pages used instead." }
+      ]
+    },
+    "english": {
+      "topPick": {
+        "title": "Business English | LearnEnglish",
+        "provider": "British Council",
+        "url": "https://learnenglish.britishcouncil.org/free-resources/business",
+        "lang": "en",
+        "price": "free",
+        "financialAid": null,
+        "hours": null,
+        "certificate": null,
+        "star": 2,
+        "why": "مجاني من المجلس الثقافي البريطاني: إيميلات العمل والمقابلات وبودكاست للمهنيين.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "IELTS الإعداد لاختبار اللغة الإنجليزية",
+          "provider": "صندوق تنمية الموارد البشرية (دروب Doroob)",
+          "url": "https://lms.doroob.sa/courses/Doroob/DRB-106Ax-2ed/2017/about",
+          "lang": "en",
+          "price": null,
+          "financialAid": null,
+          "hours": null,
+          "certificate": true,
+          "star": 1,
+          "why": "دورة من دروب تشرح أقسام IELTS الأربعة ومتطلبات كل قسم، بشهادة إتمام.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "English Conversational Skills for Beginners Series",
+          "provider": "إدراك (Edraak)",
+          "url": "https://www.edraak.org/en/series/eng101",
+          "lang": "ar",
+          "price": "free",
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "سلسلة من إدراك بمدرّبين من المجلس الثقافي البريطاني لمحادثة الإنجليزي للمبتدئين، بشرح عربي.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Lucy Bella Simkins",
+          "platform": "English with Lucy",
+          "url": "https://www.englishwithlucy.com/",
+          "why": "معلمة إنجليزي بريطاني بقناة يوتيوب كبيرة، عندها اختبار مستوى وموارد مجانية.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": null,
+      "certification": {
+        "kind": "official",
+        "name": "IELTS Academic",
+        "issuer": "IELTS (British Council, IDP IELTS, Cambridge University Press & Assessment)",
+        "code": null,
+        "type": "exam",
+        "url": "https://ielts.org/",
+        "fee": { "amount": 1636, "currency": "SAR", "note": "Computer-delivered IELTS Academic at British Council, KSU - Common First Year, Riyadh (ielts.org listing); other Saudi British Council centres show SAR 1,705; may change and be subject to tax" },
+        "prepUrl": "https://ielts.org/take-a-test/preparation-resources/sample-test-questions/academic-test",
+        "prepLabel": "أسئلة تجريبية رسمية لاختبار IELTS Academic",
+        "level": "intermediate",
+        "star": 2,
+        "why": "اختبار الإنجليزي اللي تطلبه أغلب الجامعات وبرامج الابتعاث وكثير من جهات العمل في السعودية.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://learnenglish.britishcouncil.org/free-resources/business", "status": "ok", "note": "Title 'Business English | LearnEnglish' confirmed; free resources (emails, podcasts, interview skills); no certificate." },
+        { "url": "https://lms.doroob.sa/courses/Doroob/DRB-106Ax-2ed/2017/about", "status": "added", "note": "Doroob/HRDF IELTS prep course (content in English, beginner); completion certificate at 70%; price not stated, effort '6' with no unit." },
+        { "url": "https://www.edraak.org/en/series/eng101", "status": "added", "note": "Edraak series page: 3 self-paced courses, language Arabic, British Council Amman instructors, 'Register for Free', courses 2-3 described as free; no certificate stated." },
+        { "url": "https://www.englishwithlucy.com/", "status": "added", "note": "Person added: site names Lucy Bella Simkins, British English teacher, ~13M YouTube subscribers; free level test and resources." },
+        { "url": "https://ielts.org/", "status": "added", "note": "Certification: official IELTS site; jointly owned by British Council, IDP IELTS and Cambridge University Press & Assessment." },
+        { "url": "https://ielts.org/test-centres/british-council-ksu-common-first-year", "status": "added", "note": "Fee source: Riyadh, IELTS Academic and General Training (computer) SAR 1,636." },
+        { "url": "https://ielts.org/test-centres/british-council-saudi-institute-for-training-females-only", "status": "ok", "note": "Buraydah centre: Academic/GT SAR 1,705, UKVI Academic SAR 1,815 (shows price varies by centre)." },
+        { "url": "https://ielts.org/take-a-test/preparation-resources/sample-test-questions/academic-test", "status": "added", "note": "prepUrl: official IELTS Academic sample questions for all four skills with answer keys." },
+        { "url": "https://www.britishcouncil.sa/en/exam/ielts/dates-fees-locations", "status": "removed", "note": "British Council Saudi Arabia site timed out (EN and AR pages, 3 tries); used ielts.org centre listings for the SAR fee." }
+      ]
+    }
+  }
+}

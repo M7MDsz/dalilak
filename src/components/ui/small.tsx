@@ -7,10 +7,11 @@ const SAMPLE_LABEL = {
   data: "بيانات تجريبية",
   company: "جهة تجريبية",
   cv: "سيرة تجريبية",
+  practice: "وظيفة تدريبية",
 } as const;
 
 export interface SampleTagProps extends ComponentProps<"span"> {
-  /** data «بيانات تجريبية» (jobs, courses, leaderboard users) · company «جهة تجريبية» · cv «سيرة تجريبية» */
+  /** data «بيانات تجريبية» (leaderboard users) · company «جهة تجريبية» · cv «سيرة تجريبية» · practice «وظيفة تدريبية» (the one practice job) */
   readonly kind?: keyof typeof SAMPLE_LABEL;
   /** Other wording, when the spec gives one. */
   readonly children?: ReactNode;
@@ -65,7 +66,7 @@ export interface KbdProps extends ComponentProps<"kbd"> {
   readonly keys?: readonly string[];
 }
 
-/** A keyboard key, for shortcuts shown in the interface (Ctrl K opens «دليل»). Latin, left to right. */
+/** A keyboard key, for shortcuts shown in the interface (Ctrl K opens «دليلك»). Latin, left to right. */
 export function Kbd({ keys, className, children, ...rest }: KbdProps) {
   if (keys) {
     return (

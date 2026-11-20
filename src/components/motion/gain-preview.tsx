@@ -1,5 +1,5 @@
 "use client";
-// GainPreview (spec `gain-preview`, playbook 3.7): the job's match ring shows what a course would add. Hover shows it with
+// GainPreview (spec `gain-preview`, playbook 3.7): the job's match ring shows what a learning step would add. Hover shows it with
 // a mouse; a tap (phone, pen) or the keyboard (Enter, Space) toggles it, since hover does not exist there. The preview: an
 // accent dotted next leg and an open tick at the projected value, and a caption that rolls to the projected number. The
 // ring's own number stays the real match.
@@ -18,7 +18,7 @@ export function GainPreview({
   on,
   onToggle,
   nowLabel = "تطابقك الآن",
-  afterLabel = "بعد الدورة",
+  afterLabel = "بعد خطوة التعلّم",
   testId = "gain-preview",
   className,
 }: {

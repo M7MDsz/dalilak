@@ -493,3 +493,14 @@ export function IconExperience(props: IconProps) {
     </IconBase>
   );
 }
+
+/** Opens outside Dalilak (a real job posting): an arrow leaving its box. */
+export function IconExternal(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M13.5 4H20v6.5M20 4l-8.5 8.5" />
+      <path d="M17 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9.5a2 2 0 0 1 2-2h4" />
+      <circle className="wp" cx="4.5" cy="3.75" r="1.75" />
+    </IconBase>
+  );
+}

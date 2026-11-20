@@ -2,7 +2,7 @@
 // at module level. It writes to the stores and keeps going whatever mounts or unmounts (React Strict Mode runs effect
 // cleanups on mount, so no cleanup may abort a turn); only «إيقاف» does.
 //
-// One turn: the user's bubble → «دليل يفكّر…» → the status lines roll as the server names its tools → an `action`, if
+// One turn: the user's bubble → «دليلك يفكّر…» → the status lines roll as the server names its tools → an `action`, if
 // any, goes to the dispatcher and EVERY later event waits until the site has responded (5.5 rule 12, page-handoff) →
 // the reply comes into focus: the receipt of what was done, the words, the cards, the chips.
 import {
@@ -19,6 +19,7 @@ import {
 } from "@/lib/brain/advisor";
 import { streamAdvisor } from "@/lib/brain/client";
 import { LIMITS, PROTOCOL_VERSION, type AdvisorAction, type AdvisorRequest, type ProtocolMessage } from "@/lib/brain/protocol";
+import { getJob } from "@/lib/data";
 import { applicationStatus, makeClock } from "@/lib/engine";
 import { sleep } from "@/lib/motion";
 import { factsOf, selectCurrentUser, useAppStore, useUi } from "@/lib/store";
@@ -53,7 +54,7 @@ const instantNow = () =>
 // ── ids ────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 let seq = 0;
-/** A thread message id (a handler, so the time is allowed): `u-…` for the user, `d-…` for «دليل». */
+/** A thread message id (a handler, so the time is allowed): `u-…` for the user, `d-…` for «دليلك». */
 export function messageId(prefix: "u" | "d"): string {
   seq += 1;
   return `${prefix}-${Date.now().toString(36)}-${seq.toString(36)}`;
@@ -70,7 +71,7 @@ export function greetIfEmpty(): void {
 
 // ── pacing: the glyph and the status line are seen, never longer than the work needs ───────────────────────────────
 
-/** «دليل يفكّر…» stays at least this long before the first tool line rolls in. */
+/** «دليلك يفكّر…» stays at least this long before the first tool line rolls in. */
 const FIRST_LINE_MS = 420;
 /** Each tool line stays at least this long (the roll itself is 420 ms). */
 const TOOL_LINE_MS = 560;
@@ -99,7 +100,7 @@ function pacer(instant: boolean) {
       thinking = false;
       min = instant ? 0 : TOOL_LINE_MS;
     },
-    /** Before the action: «دليل يفكّر…» has been seen; a tool line (the action's own) only has to be rolling in. */
+    /** Before the action: «دليلك يفكّر…» has been seen; a tool line (the action's own) only has to be rolling in. */
     async act() {
       await until(thinking ? min : Math.min(min, instant ? 0 : ACTION_LINE_MS));
       min = 0;
@@ -149,7 +150,7 @@ function refusedReply(outcome: Extract<DispatchOutcome, { ok: false }>, action: 
     case "already_applied": {
       const jobId = action.type === "apply" ? action.jobId : null;
       const app = jobId ? facts.applications.find((a) => a.jobId === jobId) : undefined;
-      return { text: applyAlreadyReply(app ? applicationStatus(app, clock.now) : "sent"), chips: [OPEN_APPLICATIONS] };
+      return { text: applyAlreadyReply(app ? applicationStatus(app, clock.now) : "sent", jobId !== null && getJob(jobId).real), chips: [OPEN_APPLICATIONS] };
     }
     case "locked":
     case "credited":
@@ -166,7 +167,7 @@ function refusedReply(outcome: Extract<DispatchOutcome, { ok: false }>, action: 
 
 let controller: AbortController | null = null;
 
-/** Sends a message (typed, a chip or a page button) as the user. Ignored while «دليل» is busy (5.5 rule 13). */
+/** Sends a message (typed, a chip or a page button) as the user. Ignored while «دليلك» is busy (5.5 rule 13). */
 export function sendMessage(outgoing: AdvisorOutgoing): void {
   void runTurn(outgoing, { bubble: true, claimed: false });
 }
@@ -199,7 +200,7 @@ export function sendRequest(outgoing: AdvisorOutgoing, settleMs: number): void {
   })();
 }
 
-/** «إيقاف». During «دليل»'s application it is the sheet's «إيقاف» (7.4); a page already changing cannot be stopped. */
+/** «إيقاف». During «دليلك»'s application it is the sheet's «إيقاف» (7.4); a page already changing cannot be stopped. */
 export function stopTurn(): void {
   const ui = useUi.getState();
   const run = ui.applyRun;
@@ -251,7 +252,7 @@ async function runTurn(outgoing: AdvisorOutgoing, opts: { bubble: boolean; claim
 
   let userKey = lastUser >= 0 ? baseId(messages[lastUser]?.id ?? "") : "";
   if (opts.bubble) {
-    greetIfEmpty(); // a page button opened an empty thread: «دليل» greets before the request
+    greetIfEmpty(); // a page button opened an empty thread: «دليلك» greets before the request
     userKey = messageId("u");
     useAppStore.getState().appendAdvisorMessages([{ id: userKey, from: "user", at: clock.now, blocks: [text], cards: [], chips: [] }]);
   }
@@ -291,7 +292,8 @@ async function runTurn(outgoing: AdvisorOutgoing, opts: { bubble: boolean; claim
           go,
           isPhone,
           onApplyStep: (step) => {
-            const line = applyStatusLine(step);
+            // a real posting is prepared, never sent by «دليلك» (20 Nov 2026): step 5 says «أجهّز الطلب…»
+            const line = applyStatusLine(step, event.action.type === "apply" && getJob(event.action.jobId).real);
             if (line) useLive.getState().setStatus(line, "working");
             // steps 2-4 share one line, step 6 has none: each still moves the work on (the elapsed seconds stay away)
             useLive.getState().progress();
@@ -358,7 +360,7 @@ async function runTurn(outgoing: AdvisorOutgoing, opts: { bubble: boolean; claim
     }
     await pace.settle();
     if (ctl.signal.aborted && !acted) {
-      // «إيقاف» while «دليل» was still thinking: what arrived stays (nothing, with the local brain's held reply)
+      // «إيقاف» while «دليلك» was still thinking: what arrived stays (nothing, with the local brain's held reply)
       useLive.getState().addNote({ id: `${id}-stopped`, kind: "stopped", afterId: userKey });
       useLive.getState().end();
       return;

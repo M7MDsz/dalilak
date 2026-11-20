@@ -281,7 +281,7 @@ function TileStates() {
           <span className="text-small text-fg-2">لا عمق لما لا يُضغط</span>
         </Tile>
       </Cell>
-      <Cell cap="pressed (the press frame, «دليل» pressing)">
+      <Cell cap="pressed (the press frame, «دليلك» pressing)">
         <Tile faceClassName="gap-1 p-4" pressed>
           <span className="text-title">مضغوطة الآن</span>
           <span className="text-small text-fg-2">الوجه نزل على قاعدته</span>
@@ -841,7 +841,7 @@ function MockCv() {
                 <div className="flex flex-wrap items-center gap-3 ps-1">
                   <span className={buttonStyles({ variant: "secondary", size: "sm" })}>
                     <IconAdvisor size={18} />
-                    دع دليل يقدّم عنك
+                    دع دليلك يقدّم عنك
                   </span>
                   <span className={buttonStyles({ variant: "ghost", size: "sm" })}>اجعلها هدفي</span>
                 </div>

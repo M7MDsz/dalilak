@@ -1,13 +1,23 @@
-// Owner: brain-advisor. SERVER-ONLY. The Gemini tool loop (STACK-NOTES 5.3-5.6), behind the provider switch.
-// UNTESTED against the live API: there is no key on this machine (spec v3 item 6). Built from the installed SDK's types
-// and the stack notes: everything goes in `config`; roles are user / model; function results go back as ONE user turn
-// per round; the model's content is appended exactly as received (its parts may carry thoughtSignature).
-import { FunctionCallingConfigMode, ThinkingLevel, type Content, type GoogleGenAI, type Part } from "@google/genai";
+// Owner: brain-advisor. SERVER-ONLY. The Gemini tool loop (STACK-NOTES 5.3-5.6), one runner per chain slot (gemini-1,
+// gemini-2). Tested live 18 and 20 Nov 2026. Built from the installed SDK's types and the stack notes: everything goes
+// in `config`; roles are user / model; function results go back as ONE user turn per round; the model's content is
+// appended exactly as received (its parts may carry thoughtSignature).
+import { FunctionCallingConfigMode, ThinkingLevel, type Content, type GoogleGenAI, type Part, type ThinkingConfig } from "@google/genai";
 
 import type { ProtocolMessage } from "@/lib/brain/protocol";
 
+import { ProviderFailure } from "./chain";
 import type { ModelRunner, ModelTurnInput } from "./model-common";
-import { ProviderFailure, geminiDeadlineMs } from "./provider";
+import { geminiDeadlineMs } from "./provider";
+
+/**
+ * The least thinking a model allows. Gemini 3 models take a level (minimal: measured live 18 Nov 2026 on
+ * gemini-3.5-flash-lite, 0.8-1.4 s per call instead of 1.0-3.0 s, replies as good); Gemini 2.x models (a GEMINI_MODEL_2
+ * the owner may pick) know only a token budget, where 0 turns thinking off.
+ */
+export function geminiThinking(model: string): ThinkingConfig {
+  return /^gemini-2\./.test(model) ? { thinkingBudget: 0 } : { thinkingLevel: ThinkingLevel.MINIMAL };
+}
 
 /** The neutral history as Gemini contents: roles user / model, consecutive turns merged, starting with a user turn. */
 function toContents(history: readonly ProtocolMessage[], message: string): Content[] {
@@ -45,9 +55,8 @@ export function geminiRunner(client: GoogleGenAI, model: string): ModelRunner {
         contents,
         config: {
           systemInstruction: input.system,
-          // minimal thinking: measured live 18 Nov 2026 on gemini-3.5-flash-lite, 0.8-1.4 s per call instead of 1.0-3.0 s
-          // with replies as good; the default crossed the 6 s first-event limit late in a conversation
-          thinkingConfig: { thinkingLevel: ThinkingLevel.MINIMAL },
+          // the least thinking: the default crossed the 6 s first-event limit late in a conversation
+          thinkingConfig: geminiThinking(model),
           tools,
           toolConfig: {
             functionCallingConfig: { mode: round < input.maxRounds ? FunctionCallingConfigMode.AUTO : FunctionCallingConfigMode.NONE },

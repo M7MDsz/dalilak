@@ -1,5 +1,5 @@
 "use client";
-// "Blurs into focus" (playbook blocks 4 and 5). Focus belongs to «دليل»: answers, analysis results, the path reveal.
+// "Blurs into focus" (playbook blocks 4 and 5). Focus belongs to «دليلك»: answers, analysis results, the path reveal.
 import { motion } from "motion/react";
 import { Fragment, useMemo, type ReactNode } from "react";
 
@@ -8,7 +8,7 @@ import { focusIn, group, staggerStep } from "@/lib/motion";
 import { headlineChunks } from "./segment";
 
 /**
- * «دليل»'s reply, an analysis result or a reveal arriving block by block: each block rises 8 px and blurs into focus
+ * «دليلك»'s reply, an analysis result or a reveal arriving block by block: each block rises 8 px and blurs into focus
  * (560 ms), 80 ms apart (the whole group stays under 480 ms). Blocks appended later come into focus as they mount.
  * `restored`: a saved thread or result renders at rest, without replaying.
  */

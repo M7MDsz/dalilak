@@ -233,7 +233,7 @@ function DaleelSays({ children }: { children: ReactNode }) {
         <IconAdvisor size={20} />
       </span>
       <div className="min-w-0 flex-1">
-        <p className="text-[15px] font-bold text-ink">دليل</p>
+        <p className="text-[15px] font-bold text-ink">دليلك</p>
         {children}
       </div>
     </div>
@@ -243,7 +243,7 @@ function DaleelSays({ children }: { children: ReactNode }) {
 function FocusCell() {
   const [run, replay] = useRun();
   return (
-    <Cell block="focus" title="FocusInGroup" note="ردّ «دليل» يتضح كتلةً كتلة: يرتفع 8 بكسل ويزول الضباب، بفاصل 80 جزءاً من الثانية." onReplay={replay}>
+    <Cell block="focus" title="FocusInGroup" note="ردّ «دليلك» يتضح كتلةً كتلة: يرتفع 8 بكسل ويزول الضباب، بفاصل 80 جزءاً من الثانية." onReplay={replay}>
       <DaleelSays>
         <FocusInGroup
           key={run}
@@ -790,7 +790,7 @@ function TypeOnDemo() {
       </label>
       <p className="flex items-center gap-2 text-sm text-ink-2">
         <IconAdvisor size={18} />
-        {filling ? "دليل يملأ الطلب…" : "اكتمل الطلب، راجعيه قبل الإرسال"}
+        {filling ? "دليلك يملأ الطلب…" : "اكتمل الطلب، راجعيه قبل الإرسال"}
       </p>
     </form>
   );
@@ -799,7 +799,7 @@ function TypeOnDemo() {
 function TypeOnCell() {
   const [run, replay] = useRun();
   return (
-    <Cell block="typeon" title="useTypeOn" note="«دليل» يملأ حقلاً حقيقياً: الاسم حرفاً حرفاً في 400 جزء من الثانية، والرسالة كلمةً كلمة في ثانيتين." onReplay={replay}>
+    <Cell block="typeon" title="useTypeOn" note="«دليلك» يملأ حقلاً حقيقياً: الاسم حرفاً حرفاً في 400 جزء من الثانية، والرسالة كلمةً كلمة في ثانيتين." onReplay={replay}>
       <TypeOnDemo key={run} />
     </Cell>
   );
@@ -1183,7 +1183,7 @@ function BurstCell() {
 
 // ------------------------------------------------------------------------------------------------ showcase, sweep
 
-const SHOWCASE_CAPTIONS = ["نريكِ أين تقفين من وظيفتكِ", "دليل يجيبكِ فوراً", "كل دورة تُحسب لكِ", "وتتقدّمين بين المتصدرين"];
+const SHOWCASE_CAPTIONS = ["نريكِ أين تقفين من وظيفتكِ", "دليلك يجيبكِ فوراً", "كل دورة تُحسب لكِ", "وتتقدّمين بين المتصدرين"];
 
 const showcasePieces: ((active: boolean, played: boolean) => ReactNode)[] = [
   (active, played) => (
@@ -1201,7 +1201,7 @@ const showcasePieces: ((active: boolean, played: boolean) => ReactNode)[] = [
         <IconAdvisor size={18} />
       </span>
       <div className="min-w-0">
-        <p className="text-sm font-bold text-fg">دليل</p>
+        <p className="text-sm font-bold text-fg">دليلك</p>
         <p className="text-[15px] text-fg-2">
           <Roll id={played ? "b" : "a"}>{played ? "محطتكِ التالية: SQL للمبتدئين" : "أراجع مساركِ…"}</Roll>
         </p>
@@ -1645,7 +1645,7 @@ export default function MotionGalleryPage() {
     <main className={cn("mx-auto px-4 py-8 lg:px-8 lg:py-12", only === null ? "max-w-[1280px]" : "max-w-3xl")}>
       {only === null && (
         <header className="mb-8 flex flex-col gap-2">
-          <p className="text-sm font-semibold text-ink-2">دليلك · معرض المطوّرين</p>
+          <p className="text-sm font-semibold text-ink-2">دليل · معرض المطوّرين</p>
           <h1 className="text-3xl font-bold text-ink">كتل الحركة</h1>
           <p className="max-w-3xl text-base leading-relaxed text-ink-2">
             كل كتلة حركة مشتركة في خلية واحدة مع زر «أعد». ست أفعال فقط: يرتفع، يتضح، يقفز، يتدحرج، يُرسم، ينتقل. الألوان كلها من رموز التصميم، والأشخاص والجهات

@@ -17,7 +17,7 @@ export function MatchCard({ state, delay, compact = false }: PieceProps) {
           <p className="mt-0.5 truncate text-small text-fg-2">
             {DEMO.job.company} · {DEMO.job.city}
           </p>
-          <SampleTag kind="company" className="mt-2" />
+          <SampleTag kind="practice" className="mt-2" />
         </div>
         <Ring value={played ? DEMO.match.after : DEMO.match.before} delay={played ? delay : 0} size={compact ? 76 : 84} />
       </div>

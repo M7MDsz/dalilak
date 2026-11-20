@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // Index of the design-foundation galleries (development only).
-const pages = ["kit", "motion", "icons", "icons-utility", "avatars", "brand", "chat", "game"];
+const pages = ["kit", "motion", "icons", "icons-utility", "avatars", "brand", "chat", "game", "brain"];
 
 export default function DevIndex() {
   return (

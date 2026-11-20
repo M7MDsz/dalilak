@@ -1,6 +1,6 @@
-# «دليلك» architecture contract
+# «دليل» architecture contract
 
-Written 18 Nov 2026 by the architect, against `docs/PRODUCT-SPEC.md` **version 3** (the «دليلك» rename, `map-open`, the
+Written 18 Nov 2026 by the architect, against `docs/PRODUCT-SPEC.md` **version 3** (the «دليل» rename, `map-open`, the
 home leaderboard preview, DL numbers), `docs/COMPONENT-PLAYBOOK.md`, `docs/STACK-NOTES.md` and `docs/DESIGN-BRIEF.md`.
 About twenty agents build in parallel from this file. Read it before writing a line; it tells you **which files are yours,
 what you may import, the exact names you code against, and what you must test**.
@@ -237,7 +237,7 @@ ids ─► types ─► data ─► engine ─► copy
 - **The one two-way edge between owners is cut on purpose.** brain-advisor imports `store/{transitions,seeds,snapshot}`;
   therefore `transitions.ts` and `snapshot.ts` import nothing from `src/lib/brain` except types from the pure
   `protocol.ts` (which imports nothing back), and `brain/advisor/{templates,chips}`,
-  `brain/client.ts` and `brain/onboarding/**` import nothing from `src/lib/store`. Text the transitions need from «دليل»
+  `brain/client.ts` and `brain/onboarding/**` import nothing from `src/lib/store`. Text the transitions need from «دليلك»
   is passed in (`resolveInterruptedApply(user, clock, line)`; the zustand wrapper passes `applyInterruptedLine()`).
   `seeds.ts` imports the pure `@/lib/brain/cv` (which imports no store module).
 
@@ -343,7 +343,7 @@ Cross-screen UI state several owners must agree on (exact names in `UiState` / `
 |---|---|---|---|
 | `advisorOpen` + `openAdvisor/closeAdvisor/toggleAdvisor` | advisor (Ctrl+K, close), shell (phone centre tab) | advisor, shell (docking padding) | 3.14 |
 | `advisorBusy` + `setAdvisorBusy` | advisor (each turn, each apply run) | every page button that calls `askAdvisor` (`disabled={advisorBusy}`) | 5.5 rule 13 |
-| `advisorRequest` (`{id, outgoing}`) + `askAdvisor(outgoing)` | map (form 4), cv (result cards), jobs («دع دليل يقدّم عنك») | advisor: a `useUi.subscribe` listener sends the request whose id is newer than the last handled id (a ref); never cleared, never taken | a page button asks «دليل» (text + chip payload); ignored while `advisorBusy` |
+| `advisorRequest` (`{id, outgoing}`) + `askAdvisor(outgoing)` | map (form 4), cv (result cards), jobs («دع دليلك يقدّم عنك») | advisor: a `useUi.subscribe` listener sends the request whose id is newer than the last handled id (a ref); never cleared, never taken | a page button asks «دليلك» (text + chip payload); ignored while `advisorBusy` |
 | `holds` + `hold/release` (hook `useOverlayHold(key, active)`, layout effect) | welcome `reveal`, cv `cv-show`, learn `celebration`, advisor `advisor-apply`, map `map-open-full` | shell overlay host, advisor (nudge, rule 7) | 3.15 hold rule |
 | `blocking` + `setBlocking` | shell overlay host (`daily` blocks input; `levelup` never does, it is listed for the nudge) | map (opening waits for daily), advisor (nudge) | 2.6, 3.4 |
 | `applySheetOpen` + `setApplySheetOpen` | jobs (either mode) | advisor (rule 7), `startApplyRun` | 5.5 rule 7 |
@@ -393,7 +393,7 @@ one screen stays in that screen, copied verbatim from the spec.
 | `SAMPLE_COPY`, `XP_REASON`, `XP_REASON_ONBOARDING_AND_TARGET`, `STAGE_STATE_LABEL`, `COURSE_STATE_LABEL`, `APPLICATION_STATUS_COPY`, `BAND_LABEL`, `NAV_LABEL`, `NEUTRAL_PRINT`, `SOURCE_LABEL`, `TOAST_COPY`, `ASK_ADVISOR_APPLY_TEXT` | 7.6, 3.15, 3.4, 3.10, 3.9, 9.3, 2.5, 4.3 |
 | `starsOf`, `starsOfRequired`, `courseStateLabel`, `lockReasonText`, `nextStepLabel`, `revealReasonText`, `answerText`, `educationAndMajorText`, `applicationNote` (7.4 template), `cvAttachmentLine`, `xpHistoryText`, `xpNewsReason`, `hoursText`, `targetChangedToast`, `appliedChip` | 3.5, 3.8, 3.10, 2.8, 4.6, 4.3, 7.4, 3.13, 3.15 |
 
-The onboarding acknowledgements and replies (4.4, 4.5) and «دليل»'s reply templates (5.9) are NOT copy: they belong
+The onboarding acknowledgements and replies (4.4, 4.5) and «دليلك»'s reply templates (5.9) are NOT copy: they belong
 to brain-advisor (`src/lib/brain/onboarding`, `src/lib/brain/advisor/templates.ts`).
 
 ---
@@ -454,7 +454,7 @@ down, else "local". Fetched once per page load by `useBrainStatus()`. The adviso
 lastCourseIds } }`. `PageContext = { route, jobId?, courseId?, skillId?, applySheetOpen, showRunning }` — built by the
 advisor from `parsePathname(usePathname())` (ids validated with `asJobId` / `asCourseId`), `?skill=`, and the UI store.
 
-**What «دليل» may know** = `UserFacts` + the last 12 messages + the page. Not the CV text, not the other thread, not the
+**What «دليلك» may know** = `UserFacts` + the last 12 messages + the page. Not the CV text, not the other thread, not the
 markers. The server derives every number (match, rank, next step) from the facts with the same engine as the browser.
 
 **Response**: NDJSON, `AdvisorEvent` per line, in this order within a turn: `status*` → `action?` → `text+` → `card*` →
@@ -467,7 +467,7 @@ failure.
 | `action {action}` | hand to the dispatcher; **hold every later event of this turn** until it reports (rule 12, `page-handoff`) |
 | `text {text}` | one complete paragraph; reveal block by block (`answer-focus`, 80 ms apart) |
 | `card {card}` | draw from data by id (titles, company + «جهة تجريبية», live match / status); the `next-step` card carries nothing and is drawn and performed with the live `nextStep(facts)` (`useNextStepAction`) |
-| `chips {chips}` | the reply's chips (role yes/no/chip → test ids); they replace the page chips while shown; only the newest «دليل» message shows chips |
+| `chips {chips}` | the reply's chips (role yes/no/chip → test ids); they replace the page chips while shown; only the newest «دليلك» message shows chips |
 | `done {mode, source}` | end; update the mode line |
 | `error {code}` | «تعذّر الرد الآن. جرّب مرة أخرى.» + «أعد المحاولة» (`advisor-retry`) |
 
@@ -496,8 +496,8 @@ happen; the router turns that into an `action`, a model turn turns it into an of
 
 **Chips and buttons** carry a `ChipPayload` (types.ts) — never parsed as text: `page {slug}` · `start_course {courseId}` ·
 `apply {jobId, anyway?}` · `set_target {jobId}` · `open {to}` · `not_now`. Page chips come from `pageChips(page, facts,
-clock)` (pure, client-side). Every «دع دليل يقدّم عنك» button calls `askAdvisor({ text: ASK_ADVISOR_APPLY_TEXT, chip: {
-intent: "apply", jobId } })` and renders `disabled={useUi((s) => s.advisorBusy)}`; «اسأل دليل عن هذه الوظيفة» calls
+clock)` (pure, client-side). Every «دع دليلك يقدّم عنك» button calls `askAdvisor({ text: ASK_ADVISOR_APPLY_TEXT, chip: {
+intent: "apply", jobId } })` and renders `disabled={useUi((s) => s.advisorBusy)}`; «اسأل دليلك عن هذه الوظيفة» calls
 `openAdvisor()` only (the page chips do the rest).
 
 **Chip roles and test ids.** A reply that offers one action with two chips (the action, then «ليس الآن» or «شاهد
@@ -521,9 +521,9 @@ A chip on a card renders as `advisor-card-action-{id}`.
 | 8 numbers from data | `advisor/rules.ts numbersAreGrounded` | a failing model reply is replaced by the tool's 5.9 template |
 | 9 no done-claim | `rules.ts claimsUndoneDeed` | replaced by the offer template |
 | 10 cards from data | events carry ids only | the panel draws from data |
-| 11 always an answer, soon | `run-advisor.ts`, `server/provider.ts` | 2.5 s to the first provider event, else the local events; 60 s cooldown (`markProviderFailure`); after a sent `action` / `text` / `card` / `chips` event, finish with the called tool's template (a `status` line does not count: «دليل يفكّر…» may be sent before the provider answers) |
+| 11 always an answer, soon | `run-advisor.ts`, `server/provider.ts` | 2.5 s to the first provider event, else the local events; 60 s cooldown (`markProviderFailure`); after a sent `action` / `text` / `card` / `chips` event, finish with the called tool's template (a `status` line does not count: «دليلك يفكّر…» may be sent before the provider answers) |
 | 12 reply waits for the deed | advisor panel | events after `action` are held until the dispatcher resolves; not ok → the template for the reason (§9.1) |
-| 13 one thing at a time | advisor panel (`advisorBusy`), `askAdvisor` (ignored while busy), `startApplyRun` (null while a run is unfinished or a sheet is open) | send, chips and every «دع دليل يقدّم عنك» button disabled while in flight |
+| 13 one thing at a time | advisor panel (`advisorBusy`), `askAdvisor` (ignored while busy), `startApplyRun` (null while a run is unfinished or a sheet is open) | send, chips and every «دع دليلك يقدّم عنك» button disabled while in flight |
 | 14 bounded | `run-advisor.ts` | ≤ 4 tool rounds, ≤ 1 navigation |
 | 15 scope | router fallback, prompt | no web/file tools |
 | 16 honesty on applying | apply template | the trial sentence is always in the template |
@@ -569,7 +569,7 @@ for `request_failed` and also for the server's `too_short` / `bad_request` (unre
 
 ---
 
-## 9. The dispatcher and «دليل» applying (owner `advisor`, with `jobs`)
+## 9. The dispatcher and «دليلك» applying (owner `advisor`, with `jobs`)
 
 ### 9.1 Turn handling in the panel
 
@@ -592,7 +592,7 @@ for `request_failed` and also for the server's `too_short` / `bad_request` (unre
    | `locked` / `credited` / `completed` | `startCourseRefusedLine(reason, courseId, facts)` |
    | `no_user` | `replyFailedLine()` |
 
-4. On `done`, append «دليل»'s message (blocks, cards, chips) to the thread; `setAdvisorBusy(false)`; on phones
+4. On `done`, append «دليلك»'s message (blocks, cards, chips) to the thread; `setAdvisorBusy(false)`; on phones
    `openAdvisor()` if an action had closed the panel.
 5. «إيقاف» aborts the fetch (what arrived stays) — or, during an apply run, calls `requestApplyStop()`.
 
@@ -695,7 +695,7 @@ repeats news: the queue is rebuilt from the `announced` flags.
   heading «الوظائف» / «الدورات», because the detail page has its own title header). Each list page renders its own
   `<h1>` with `lg:sr-only` (visible on phones, where the top bar has no heading). The top-bar copy is `aria-hidden`.
 - **Titles**: every `page.tsx` exports `metadata = { title: { absolute: pageTitle(PAGE_HEADINGS.x) } }`; `[id]` pages use
-  `generateMetadata` with the job title / short course title; `/` and `/welcome` use `pageTitle()` («دليلك»).
+  `generateMetadata` with the job title / short course title; `/` and `/welcome` use `pageTitle()` («دليل»).
 - Only one of the desktop nav / phone tab bar is **rendered** (`useViewport()`, right on the first render), so test ids
   stay unique; the same holds for the desktop launcher (AdvisorRoot renders it only when `useViewport().desktop`, never
   hidden with CSS).
@@ -753,12 +753,12 @@ otherwise                                        → "short"
   `design/explore/darb/map/final-home.notes.txt` that play the full 3.5 s form after a CV are overruled by spec 3.4).
   The full form plays only while `!seen.mapOpenPlayed`.
 - `mapOpenRequest`: remember its value at mount; a CHANGE after mount replays the short form (the dispatcher bumps it
-  before navigating, so arriving from «دليل» plays the opening once, not twice).
+  before navigating, so arriving from «دليلك» plays the opening once, not twice).
 - Ring baseline: `seen.pathMatch` (write after showing). The map reads data only through the engine (`buildRoadmap`, `nextStep`, `leaderboard`, `jobMatch`) and labels
 through data and copy (`getSkill(stage.skill).name`, `STAGE_STATE_LABEL`, `SOURCE_LABEL`, `lockReasonText`,
 `hoursText`, `countNoun`); stage-sheet strings are copied from spec 3.4. The preview's user row is `leaderboard().me` with
 the user's first name and «أنت»; sample rows use `TID.path.leaderboardRow(row.id)` for `row.id !== "me"`.
-Never blocks input; reduced motion shows the end state. Next-step card: `useNextStepAction()`; form 4's «دع دليل يقدّم
+Never blocks input; reduced motion shows the end state. Next-step card: `useNextStepAction()`; form 4's «دع دليلك يقدّم
 عنك» → `askAdvisor(...)` (disabled while `advisorBusy`), «قدّم بنفسك» → `/jobs/{id}?apply=1`; form 1's «ابدأ بدون
 سيرة» → `skipCv()`. Branch cards at 100% → `ConfirmTargetDialog`.
 
@@ -770,7 +770,7 @@ that come back, so nothing re-flows) → `analyseCvText` → empty skills: the e
 `recordCvAnalysis({analysis, fileName})` **before** `extract` begins, then the show plays the real evidence
 (`analysis.skills[i].line` indexes `analysis.lines`). Errors: the 3.6 lines for the extract codes; `request_failed`,
 `too_short` and `bad_request` all show «تعذّر التحليل الآن. جرّب مرة أخرى.» with «أعد المحاولة». Result cards:
-`rankJobs` top three, «دع دليل يقدّم عنك» → `askAdvisor` (disabled while `advisorBusy`), «اجعلها هدفي» →
+`rankJobs` top three, «دع دليلك يقدّم عنك» → `askAdvisor` (disabled while `advisorBusy`), «اجعلها هدفي» →
 `ConfirmTargetDialog`. Privacy line extension when `useBrainStatus()?.configured`.
 
 ### 11.5 Learn (owner `learn`)
@@ -851,7 +851,7 @@ Then quiet: every XP event and badge `announced: true`; advisor thread empty; `s
   frame; `data-state` = the spec's state words. Ids marked "architect" in testids.ts are additions QA may rely on.
 - **Numbers** via `formatNumber` / `formatPercent` / `formatGain`; never `toLocaleString`. Latin digits everywhere.
 - **No `Date.now()` / `Math.random()` in render**; time comes from `useClock()` or `makeClock()` in handlers.
-- **Applying from a page button while «دليل» is busy**: every button that calls `askAdvisor` renders
+- **Applying from a page button while «دليلك» is busy**: every button that calls `askAdvisor` renders
   `disabled={useUi((s) => s.advisorBusy)}` (rule 13; `askAdvisor` ignores it anyway).
 - **Arabic** stays in source files (never in shell arguments). RTL logical classes only (STACK 2.4).
 - **Colours** from design tokens only (DESIGN-BRIEF §4).

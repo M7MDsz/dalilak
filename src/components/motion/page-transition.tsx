@@ -46,7 +46,7 @@ export function useShownPathname(): string {
 }
 
 /**
- * `go(href)`: every in-app navigation that should transition (navigation items, cards, buttons, «دليل»'s navigate event).
+ * `go(href)`: every in-app navigation that should transition (navigation items, cards, buttons, «دليلك»'s navigate event).
  * Same pathname (only the query changes), reduced motion and still frames navigate at once without the leave.
  * Filters, tabs and search must NOT use it: they call `router.replace(url, { scroll: false })` and do not transition.
  */

@@ -3,7 +3,7 @@
 // real data: their six answers, the real twenty jobs (the ones the answers point at stay stronger), the real 38 skills in
 // 7 fields, and the three jobs that were really chosen. Layers live across steps where the story continues (the answers
 // stay while the jobs pass; the twenty tiles become three); only the status line rolls.
-//   answers-gather   the six answers travel from where they sat in «ملفك يتكوّن» and gather round «دليل»'s compass
+//   answers-gather   the six answers travel from where they sat in «ملفك يتكوّن» and gather round «دليلك»'s compass
 //   jobs-sweep       twenty job tiles pass in rows under the answers; mid-pass the ones that do not fit drop back
 //   skills-map       the skill landscape: seven fields, one dot per skill; the fields light in turn and the ones the
 //                    answers point at stay lit
@@ -13,7 +13,18 @@ import { AnimatePresence, animate, motion } from "motion/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { DaleelGlyph } from "@/components/chat";
-import { IconFieldBusiness, IconFieldData, IconFieldDesign, IconFieldHr, IconFieldMarketing, IconFieldProfessional, IconFieldSoftware } from "@/components/icons";
+import {
+  IconFieldBusiness,
+  IconFieldCyberCloud,
+  IconFieldData,
+  IconFieldDesign,
+  IconFieldHr,
+  IconFieldMarketing,
+  IconFieldProduct,
+  IconFieldProfessional,
+  IconFieldSalesSupply,
+  IconFieldSoftware,
+} from "@/components/icons";
 import type { IconProps } from "@/components/icons/icon-base";
 import { SweepRows, useInstant } from "@/components/motion";
 import { cn } from "@/components/ui";
@@ -114,6 +125,9 @@ const FIELD_ICON: Record<FieldId, (props: IconProps) => React.ReactNode> = {
   marketing: IconFieldMarketing,
   business: IconFieldBusiness,
   hr: IconFieldHr,
+  product: IconFieldProduct,
+  "cyber-cloud": IconFieldCyberCloud,
+  "sales-supply": IconFieldSalesSupply,
   professional: IconFieldProfessional,
 };
 

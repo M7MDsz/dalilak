@@ -1,13 +1,13 @@
 "use client";
-// Owner: advisor. Everything «دليل» shows OUTSIDE the panel:
-// - Launcher: the desktop floating button «اسأل دليل» at the bottom inline-end corner (spec 2.6). On phones the shell's
+// Owner: advisor. Everything «دليلك» shows OUTSIDE the panel:
+// - Launcher: the desktop floating button «اسأل دليلك» at the bottom inline-end corner (spec 2.6). On phones the shell's
 //   centre tab is the launcher; this one is rendered only on desktop (never hidden with CSS: one test id on screen).
-// - GlyphFlight: the signature of the opening. «دليل»'s glyph leaves the launcher and lands in the panel's header (and
+// - GlyphFlight: the signature of the opening. «دليلك»'s glyph leaves the launcher and lands in the panel's header (and
 //   goes home again on close). Measured at the moment of the change and flown as one fixed element, so a scrolled page,
 //   the panel's own 16 px slide or a portal can never put its start or end point in the wrong place.
 // - Nudge: the one line by the launcher (beside it on desktop), once per account, on the first arrival at /path (2.6).
 // - WorkingPill: phones only. While an action runs the sheet steps aside so the page is seen (3.14); this pill keeps
-//   «دليل»'s glyph and the rolling status line on screen until the sheet comes back with the reply.
+//   «دليلك»'s glyph and the rolling status line on screen until the sheet comes back with the reply.
 import { AnimatePresence, motion } from "motion/react";
 import { useLayoutEffect, useRef, useState, type ReactNode, type Ref } from "react";
 
@@ -134,7 +134,7 @@ function Flyer({ flight, onLand }: { flight: Flight; onLand: (id: number) => voi
  * bottom of the page's inline-end column, where /path keeps the leaderboard preview, and hid the user's own row
  * («أنت») for its whole 8 s; beside it, it stays in the launcher's own band at the bottom of the window, which on /path
  * is the free strip under that column and the map sheet's empty bottom corner (the sheet's only bottom furniture, the
- * trailhead sign, lives in the other corner). Phone: above the centre tab «دليل», and above the map's pinned next-step
+ * trailhead sign, lives in the other corner). Phone: above the centre tab «دليلك», and above the map's pinned next-step
  * card when that card sits at the bottom, so it never covers the user's next action.
  */
 export function Nudge({ shown, phone, onOpen }: { shown: boolean; phone: boolean; onOpen: () => void }) {

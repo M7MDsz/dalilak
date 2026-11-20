@@ -46,6 +46,9 @@ export interface PathSheetProps {
   readonly className?: string;
 }
 
+/** Titles longer than this (characters) take the smaller heading size at the trophy. */
+const LONG_TITLE = 26;
+
 export function PathSheet({ layout, stages, title, summary, mode, landed, footer, titleTravels = false, maxHeight, sheetRef, className }: PathSheetProps) {
   const instant = useInstant();
   const box = useRef<HTMLDivElement>(null);
@@ -246,12 +249,15 @@ function Station({
             ref={titleRef}
             transition={tween.fast}
           >
+            {/* a real posting's title can be long («عالم بيانات أول - مقاييس وتحليلات منصات سلة»): a smaller size and at most two
+                lines, so it never runs into the last station's label (the card beside the sheet shows it in full) */}
             <span
               className={cn(
-                "block rounded-control border-[1.5px] px-2.5 py-1 font-bold text-fg transition-[border-color,background-color] duration-300 ease-out",
-                rows ? "text-[16px] leading-6" : "text-h3",
+                "line-clamp-2 rounded-control border-[1.5px] px-2.5 py-1 font-bold text-fg transition-[border-color,background-color] duration-300 ease-out",
+                rows ? "text-[16px] leading-6" : title.length > LONG_TITLE ? "text-title" : "text-h3",
                 landed || rest ? "border-transparent bg-transparent" : "border-border-strong bg-surface",
               )}
+              title={title}
             >
               {title}
             </span>

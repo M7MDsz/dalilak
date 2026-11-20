@@ -1,5 +1,5 @@
 // Owner: architect (written in full as part of the contract); maintained afterwards by `shell`.
-// Every URL of the product (spec 2.1, 2.2) and the browser-tab titles (2.2, v3: «دليلك · {page heading}»).
+// Every URL of the product (spec 2.1, 2.2) and the browser-tab titles (2.2, v3: «دليل · {page heading}»).
 // Pure: safe on client and server. The only way to build an in-app URL is hrefFor(): nobody concatenates paths.
 
 import { isCourseId, isFieldId, isJobCityId, isJobFieldId, isJobId, isLearnTab, isSkillId } from "@/lib/ids";
@@ -44,17 +44,17 @@ export const PAGE_HEADINGS = {
   cv: "سيرتي الذاتية",
   jobs: "الوظائف",
   applications: "طلباتي",
-  learn: "الدورات",
+  learn: "دليل التعلّم",
   leaderboard: "المتصدرون",
   profile: "ملفي",
 } as const satisfies Record<Exclude<ShellRouteKey, "job" | "course">, string>;
 
 /** The product name, for titles. */
-export const PRODUCT_NAME = "دليلك";
+export const PRODUCT_NAME = "دليل";
 
 /**
- * Browser-tab title (spec 2.2 as updated in v3): «دليلك · {page heading}»; `/` and `/welcome` are «دليلك» alone;
- * `/jobs/[id]` uses the job title and `/learn/[id]` the SHORT course title (pass it as `heading`).
+ * Browser-tab title (spec 2.2 as updated in v3): «دليل · {page heading}»; `/` and `/welcome` are «دليل» alone;
+ * `/jobs/[id]` uses the job title and `/learn/[id]` the guide title «دليل Power BI» (pass it as `heading`).
  * Pages export `metadata = { title: { absolute: pageTitle(...) } }` (absolute, so the root layout needs no template).
  */
 export function pageTitle(heading?: string): string {

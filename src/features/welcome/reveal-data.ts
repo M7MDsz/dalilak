@@ -4,7 +4,7 @@
 // "stay stronger" in the sweep and which fields stay lit.
 import { answerText, companyCityLine, revealReasonText } from "@/lib/copy";
 import { FIELDS, JOBS, SKILLS, getField, getJob, getQuestion, getSkill } from "@/lib/data";
-import { canonicalStages, pathSummary, rankByFit, recommend } from "@/lib/engine";
+import { canonicalStages, dreamCompany, pathSummary, rankByFit, recommend } from "@/lib/engine";
 import { QUESTION_IDS } from "@/lib/ids";
 import type { FieldId, JobId, OnboardingAnswers, QuestionId, SkillId, StarSlot } from "@/lib/types";
 
@@ -22,6 +22,8 @@ export interface RevealJobCard {
   readonly title: string;
   /** «وادي الغيم للبيانات · الرياض» (the «جهة تجريبية» tag is drawn beside it). */
   readonly companyCity: string;
+  /** A real posting (no sample tag); false for the one practice job («وظيفة تدريبية»). */
+  readonly real: boolean;
   readonly field: string;
   readonly fieldId: FieldId;
   readonly stages: number;
@@ -33,6 +35,11 @@ export interface RevealData {
   readonly recommended: RevealJobCard;
   readonly alternatives: readonly [RevealJobCard, RevealJobCard];
   readonly reasons: readonly string[];
+  /**
+   * 20 Nov 2026 (owner's part 2): the company the user has in mind. `aimed`: the recommended job is that company's (the
+   * path ends on it); otherwise the data has none of its jobs and the recommended one is the closest (and says so).
+   */
+  readonly company: { readonly name: string; readonly aimed: boolean } | null;
   readonly stages: readonly RevealStageInfo[];
   /** The twenty jobs in data order; `fits` = the answers point at it (the tile stays at full contrast). */
   readonly tiles: readonly { readonly id: JobId; readonly title: string; readonly fits: boolean }[];
@@ -47,6 +54,7 @@ function jobCard(id: JobId): RevealJobCard {
     id,
     title: job.title,
     companyCity: companyCityLine(id),
+    real: job.real,
     field: getField(job.field).name,
     fieldId: job.field,
     stages: summary.stages,
@@ -65,6 +73,7 @@ export function revealData(answers: OnboardingAnswers): RevealData {
 
   const interests = new Set<string>(answers.interest ?? []);
   const recommendedField = getJob(rec.recommended).field;
+  const dream = dreamCompany({ answers });
 
   return {
     answers: QUESTION_IDS.map((question) => ({
@@ -75,6 +84,7 @@ export function revealData(answers: OnboardingAnswers): RevealData {
     recommended: jobCard(rec.recommended),
     alternatives: [jobCard(rec.alternatives[0]), jobCard(rec.alternatives[1])],
     reasons: rec.reasons.map(revealReasonText),
+    company: dream ? { name: dream.company.short, aimed: dream.job !== null && dream.job === rec.recommended } : null,
     stages: canonicalStages(rec.recommended).map((s, i) => ({
       n: i + 1,
       skill: s.skill,

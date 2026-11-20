@@ -1,4 +1,4 @@
-// Owner: advisor. Display-only typography for «دليل»'s words in the panel (the saved text is never changed):
+// Owner: advisor. Display-only typography for «دليلك»'s words in the panel (the saved text is never changed):
 // - tidyReply: a number stays on the same line as the word after it («12 ساعة», «40 XP», «DL-2026-0001 وأنت»). The
 //   no-break space is invisible. (A Latin run itself, such as DL-2026-0001, is kept whole by the thread's CSS: the chat
 //   kit isolates each run in a <bdi>, and the panel gives those `white-space: nowrap`.)

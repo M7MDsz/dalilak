@@ -61,7 +61,7 @@ function JobsList({ user }: { user: UserState }): ReactNode {
   const params = useSearchParams();
   const url = useMemo(() => parseJobsQuery(new URLSearchParams(params.toString())), [params]);
 
-  // The search box answers at once from local state; the URL follows (and an outside change, «دليل» opening
+  // The search box answers at once from local state; the URL follows (and an outside change, «دليلك» opening
   // /jobs?q=…, flows back into the box).
   const [text, setText] = useState(url.q ?? "");
   const written = useRef(url.q ?? "");

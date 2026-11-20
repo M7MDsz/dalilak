@@ -1,6 +1,6 @@
-# Dalilak «دليلك» design brief (the lead's decisions for the design foundation)
+# Dalilak «دليل» design brief (the lead's decisions for the design foundation)
 
-The product is called «دليلك» (Dalilak); «مساري» is only the name of the roadmap page. See docs/TEAM-BRIEF.md section 0.
+The product is called «دليل» (Dalilak); «مساري» is only the name of the roadmap page. See docs/TEAM-BRIEF.md section 0.
 
 Read after `BRIEF.md`, `HANDOFF-1-IDEA.md`, `docs/TEAM-BRIEF.md`. For product facts use `docs/PRODUCT-SPEC.md`; for motion use
 `docs/COMPONENT-PLAYBOOK.md`; for library facts use `docs/STACK-NOTES.md`. Where this file disagrees with the playbook's
@@ -69,8 +69,8 @@ placeholder names or with the Darb exploration page, this file wins.
    trophy handles as horns) and give the stock-looking ones (briefcase, lock, search, trophy, upload) Dalilak's own character.
    Stroke 2 px at 24 px. The navigation item «مساري» (the roadmap page, "my path") uses a cut of the logo mark.
 9. **Logo:** keep the arch-and-waypoint mark. Add a 16 px favicon cut, centre it optically in the app tile, and set the
-   wordmark «دليلك» in IBM Plex Sans Arabic with one custom detail (for example one dot of the ي as the accent waypoint).
-   The mark was drawn when the product was called «مساري»; the brand designer checks that it still suits «دليلك» ("your guide":
+   wordmark «دليل» in IBM Plex Sans Arabic with one custom detail (for example one dot of the ي as the accent waypoint).
+   The mark was drawn when the product was called «مساري»; the brand designer checks that it still suits «دليل» ("guide":
    a trail and a waypoint fit a guide well) and keeps it unless something is clearly better.
 10. **Home leaderboard preview** shows who is first (top three), not only the user's row. (Screen builders will do this.)
 11. **Phone:** CV and leaderboard must not be buried. The spec's phone shell (2.4) is the rule.
@@ -121,7 +121,7 @@ those four.
 
 - `signature.tsx` (31, including `IconGate` and `IconHereMarker`): navigation `IconPath` (the roadmap page «مساري»: a cut of the logo mark), `IconSkills` (المهارات), `IconCourses`
   (الدورات), `IconCv` (سيرتي), `IconJobs` (الوظائف), `IconApplications` (طلباتي), `IconLeaderboard` (المتصدرون),
-  `IconProfile` (ملفي), `IconAdvisor` (دليل: the compass), `IconMore` (المزيد); game `IconXp` (spot height), `IconLevel`,
+  `IconProfile` (ملفي), `IconAdvisor` (دليلك: the compass), `IconMore` (المزيد); game `IconXp` (spot height), `IconLevel`,
   `IconStreak` (campfire), `IconBadge`, `IconTrophy`, `IconFlag` (the goal), `IconStar`, `IconStarFilled`, `IconGift`
   (daily reward), `IconTarget` (target job), `IconRankUp`, `IconRankDown`; fields `IconFieldData`, `IconFieldSoftware`,
   `IconFieldDesign`, `IconFieldMarketing`, `IconFieldBusiness`, `IconFieldHr`, `IconFieldProfessional`.

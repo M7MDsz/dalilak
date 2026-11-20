@@ -3,17 +3,21 @@
 //
 // Order (first match wins): a chip or button (row 3, never parsed as text) · a message made only of acknowledgement
 // words («تمام», «طيب», «اوكي», «لا»: the answer to the last offer, else a warm line; QA fix, before row 21 so it can
-// never reach the fallback) · 1 refuse «أكمل الدورة عني» and «أعطني XP» · refuse to invent an employer · 2 real /
-// real-world numbers · 4 apply · 5 start a course · 6 set the target (4-6 only when the message is a request in the
-// sense of 5.4: it does not open with a question word) · 7 job search · 8 open a page · the typed fixed answers of 5.8
-// · 9 explain · 10 gap · 11 next step · 12 a course · 13 leaderboard · 14 XP/level/streak · 15 badges/stars ·
-// 16 applications · 17 the CV · 18 greeting · 19 thanks · 20 who · 21 the fallback.
+// never reach the fallback) · 1 refuse «أكمل الدورة عني» / «خلّصها عني» and «أعطني XP» · refuse to invent an employer ·
+// 2 real / real-world numbers · 4 apply · 5 start a course (a learning step) · 6 set the target (4-6 only when the
+// message is a request in the sense of 5.4: it does not open with a question word) · the learning guides («وين أتعلم
+// SQL؟», «مين أتابع في البيانات؟», «وش أقرأ عن Power BI؟», «وش أبدأ فيه؟»: the guide's answer, and its page opens; 20 Nov
+// 2026) · 7 job search · 8 open a page · the typed fixed answers of 5.8 · 9 explain · 10 gap · 11 next step · 12 a
+// course · 13 leaderboard · 14 XP/level/streak · 15 badges/stars · 16 applications · 17 the CV · 18 greeting ·
+// 19 thanks · 20 who · 21 the fallback.
+// Careers (20 Nov 2026, careers.ts): the pay of a named career family goes right before row 2 (the published figure with
+// its source); every other career question (a family named, or a first-month / certificates / route question about the
+// target's family) goes after the how-to answers and before row 9.
 // One deliberate refinement: a «لماذا … مطابقتي» or «ينقصني» message that names exactly one job title is answered by
 // rows 9/10 for THAT job before row 7 would read the title as a job search (see the brain report).
-import { COURSES, JOBS, MATCH_LINE, getJob, getSkill } from "@/lib/data";
-import { shortTitle } from "@/lib/engine";
+import { JOBS, MATCH_LINE, SKILLS, getCourse, getJob, getSkill } from "@/lib/data";
 import { courseIdFor } from "@/lib/ids";
-import type { Chip, ChipPayload, CourseId, JobCityId, JobFieldId, JobId, NavTarget, PageChipSlug, SkillId, ToolName } from "@/lib/types";
+import type { Chip, ChipPayload, CourseId, FieldId, JobCityId, JobFieldId, JobId, NavTarget, PageChipSlug, SkillId, ToolName } from "@/lib/types";
 import type { AdvisorEvent, AdvisorRequest, ToolParams, ToolResults } from "@/lib/brain/protocol";
 
 import { AdvisorCtx } from "./context";
@@ -40,6 +44,7 @@ import {
   gapReply,
   greetingReply,
   guardBlocked,
+  guideReply,
   levelHowReply,
   nextStepReply,
   openPageReply,
@@ -56,8 +61,11 @@ import {
   toEvents,
   whyPathReply,
   xpLevelReply,
+  type GuideAsk,
+  type GuidePick,
   type Reply,
 } from "./replies";
+import { careerReply, careerSalaryReply } from "./careers";
 import { guideByTopic, guideFor } from "./guide";
 import { T } from "./templates";
 import { applyOutcome, isToolError, runTool } from "./tools";
@@ -75,6 +83,7 @@ export type AdvisorIntent =
   | "apply"
   | "start-course"
   | "set-target"
+  | "guide"
   | "job-search"
   | "open-page"
   | "explain-match"
@@ -93,6 +102,7 @@ export type AdvisorIntent =
   | "how-to"
   | "feelings"
   | "interview"
+  | "career"
   | "fallback";
 
 export type RouterDecision =
@@ -321,7 +331,8 @@ function detectApply(
   if (!(W.has(text, W.APPLY_VERBS) || wishToApply(text))) return null;
   if (W.has(text, W.COURSE_WORDS)) return null;
   const named = W.jobsNamed(text);
-  const thisJob = ctx.pageJob !== null && W.has(text, W.THIS_WORDS);
+  // on a job page «قدّم عني» / «قدّم لي» with nothing else means this job (20 Nov 2026: kept on the router, never a model)
+  const thisJob = ctx.pageJob !== null && (W.has(text, W.THIS_WORDS) || W.has(text, ["عني", "عنّي", "لي"]));
   if (!(named.length > 0 || W.has(text, W.JOB_REFERENCES) || thisJob)) return null;
   if (named.length === 1) return { jobId: named[0]! };
   if (named.length > 1) return { jobId: null };
@@ -410,6 +421,9 @@ function detectSearch(text: W.Text): SearchDetection | null {
 
 const PAGE_KEYS = Object.keys(W.PAGE_WORDS) as (keyof typeof W.PAGE_WORDS)[];
 
+/** «الدليل» written as such (not the vocative «يا دليل»): «افتح الدليل», «افتح دليله». */
+const GUIDE_EXACT: ReadonlySet<string> = new Set(["الدليل", "والدليل", "دليله", "دليلها", "guide"]);
+
 function detectOpen(ctx: AdvisorCtx, text: W.Text): NavTarget | null {
   if (W.has(text, W.UPLOAD_WORDS) && W.has(text, W.CV_WORDS)) return { screen: "cv" };
   if (!W.has(text, W.OPEN_WORDS)) return null;
@@ -417,14 +431,79 @@ function detectOpen(ctx: AdvisorCtx, text: W.Text): NavTarget | null {
   if (jobs[0]) return { screen: "job", jobId: jobs[0] };
   const courses = W.coursesNamed(text);
   if (courses[0]) return { screen: "course", courseId: courses[0] };
-  const skills = W.skillsNamed(text);
-  if (skills[0] && W.has(text, W.COURSE_WORDS)) {
-    const courseId = nextCourseFor(ctx, skills[0]);
-    if (courseId) return { screen: "course", courseId };
+  // «افتح دليل Power BI» / «افتح دورة الإحصاء»: the guide page of that skill's next step (a skill word: the tree)
+  const courseWord = W.has(text, W.COURSE_WORDS);
+  const guideWord = W.has(text, W.GUIDE_WORDS);
+  const skill = W.skillsNamed(text)[0] ?? (courseWord || guideWord ? W.skillsAsked(text)[0] : undefined);
+  if (skill) {
+    const courseId = nextCourseFor(ctx, skill);
+    if (courseId && courseWord) return { screen: "course", courseId };
+    if (W.has(text, W.SKILL_WORDS)) return { screen: "skills", skill };
+    if (courseId && guideWord) return { screen: "course", courseId };
   }
-  if (skills[0] && W.has(text, W.SKILL_WORDS)) return { screen: "skills", skill: skills[0] };
   const page = earliest(text, W.PAGE_WORDS, PAGE_KEYS);
-  return page ? { screen: page } : null;
+  if (page) return { screen: page };
+  // «افتح الدليل» with no skill: the guide of the next step, else the guides list
+  if (text.words.some((w) => GUIDE_EXACT.has(w))) {
+    const step = ctx.nextStep;
+    return step.rule === 2 || step.rule === 3 ? { screen: "course", courseId: step.courseId } : { screen: "learn" };
+  }
+  return null;
+}
+
+// ── The learning guides (20 Nov 2026: «دليلك» knows the guides) ───────────────────────────────────────────────────
+
+/** What a guide question asks for, or null: who to follow, what to read, where to learn (the top pick). */
+function guideAsk(text: W.Text): GuideAsk | null {
+  if (W.has(text, W.FOLLOW_WORDS) && !W.has(text, W.FOLLOW_UP_WORDS)) return "follow";
+  if (W.has(text, W.READ_WORDS) && !W.has(text, W.CV_WORDS)) return "read";
+  if (W.has(text, W.LEARN_WHERE_WORDS)) return "where";
+  // «أفضل كورس SQL», «ترشح لي دورة إكسل؟»
+  if (W.has(text, W.COURSE_WORDS) && (W.has(text, W.BEST_WORDS) || W.has(text, W.RECOMMEND_WORDS))) return "where";
+  return null;
+}
+
+const GUIDE_FIELD_KEYS: readonly FieldId[] = [...(Object.keys(W.FIELD_WORDS) as JobFieldId[]), "professional"];
+const GUIDE_FIELD_WORDS: Readonly<Record<FieldId, readonly string[]>> = { ...W.FIELD_WORDS, ...W.GUIDE_FIELD_EXTRA };
+
+/** A field's skill for this user: the next step's when it is in that field, else the first on their path, else the first. */
+function fieldSkill(ctx: AdvisorCtx, field: FieldId): SkillId {
+  const step = ctx.nextStep;
+  if (step.rule === 2 || step.rule === 3) {
+    const skill = getCourse(step.courseId).skill;
+    if (getSkill(skill).field === field) return skill;
+  }
+  const stages = (ctx.roadmap?.stages ?? []).filter((s) => getSkill(s.skill).field === field);
+  const onPath = stages.find((s) => s.state !== "done") ?? stages[0];
+  if (onPath) return onPath.skill;
+  return SKILLS.find((s) => s.field === field)?.id ?? SKILLS[0]!.id;
+}
+
+/**
+ * The guide a question is about: a skill named (however it is said: «باوربي», «اكسل»), else a field named (its skill for
+ * this user), else the next step. Null: «where» with no learning step to point at (before the CV, ready to apply, done),
+ * answered by the next step itself.
+ */
+function guidePick(ctx: AdvisorCtx, text: W.Text, ask: GuideAsk): GuidePick | null {
+  const skill = W.skillsAsked(text)[0];
+  if (skill) {
+    const courseId = nextCourseFor(ctx, skill);
+    return courseId ? { by: "skill", courseId } : null;
+  }
+  const field = earliest(text, GUIDE_FIELD_WORDS, GUIDE_FIELD_KEYS);
+  if (field) {
+    const courseId = nextCourseFor(ctx, fieldSkill(ctx, field));
+    return courseId ? { by: "field", field, courseId } : null;
+  }
+  const step = ctx.nextStep;
+  if (step.rule === 2 || step.rule === 3) return { by: "next", courseId: step.courseId };
+  // who to follow / what to read before the CV or after the path: the target's field still has a guide
+  if (ask !== "where" && ctx.target) {
+    const targetField = getJob(ctx.target).field;
+    const courseId = nextCourseFor(ctx, fieldSkill(ctx, targetField));
+    return courseId ? { by: "field", field: targetField, courseId } : null;
+  }
+  return null;
 }
 
 // ── 5.8 fixed answers, typed (matched before the general intents) ─────────────────────────────────────────────────
@@ -459,7 +538,9 @@ function detectCourseQuestion(ctx: AdvisorCtx, text: W.Text): Reply | null {
   if (W.has(text, W.PATH_COURSES_WORDS)) return pathCoursesRoute(ctx);
   if (W.has(text, W.SHORT_COURSES_WORDS)) return shortCoursesRoute(ctx);
   if (W.has(text, W.COURSE_WORDS) && named.length === 1) return courseWhatRoute(ctx, named[0]!);
-  if (ctx.pageCourse && (W.has(text, W.COURSE_WORDS) || W.has(text, W.THIS_WORDS))) return courseWhatRoute(ctx, ctx.pageCourse);
+  // on a guide's page: «وش ذي الدورة؟», «وش في ذا الدليل؟» («الدليل» as written, not the vocative «يا دليل»)
+  const guideWord = text.words.some((w) => GUIDE_EXACT.has(w));
+  if (ctx.pageCourse && (W.has(text, W.COURSE_WORDS) || W.has(text, W.THIS_WORDS) || guideWord)) return courseWhatRoute(ctx, ctx.pageCourse);
   if (W.has(text, W.COURSE_WORDS) && namedCourse) return courseWhatRoute(ctx, namedCourse);
   return null;
 }
@@ -537,7 +618,7 @@ interface Offer {
   readonly no: Chip | null;
 }
 
-/** The yes / no chips of a reply whose words are exactly `said` (the newest «دليل» message), or null. */
+/** The yes / no chips of a reply whose words are exactly `said` (the newest «دليلك» message), or null. */
 function offerIn(r: Reply, said: string): Offer | null {
   if (r.text.join("\n\n").trim() !== said) return null;
   const yes = r.chips.find((c) => c.role === "yes");
@@ -554,7 +635,7 @@ function quietly(build: () => Reply): Reply | null {
 }
 
 /**
- * The offer the newest «دليل» message made, if it was one with yes / no chips. History carries text only, so the offer
+ * The offer the newest «دليلك» message made, if it was one with yes / no chips. History carries text only, so the offer
  * is rebuilt: every offer is a pure function of (facts, page, the user's message), and the facts do not change between
  * an offer and its answer (an offer runs no action). Tried in order: the reply to the previous user message read again ·
  * the next step and the two refusals that offer it (the chips' labels read as text may route elsewhere) · a model
@@ -585,17 +666,18 @@ function previousOffer(request: AdvisorRequest, ctx: AdvisorCtx): Offer | null {
     if (offer) return offer;
   }
 
-  // A model turn turned a state-changing call into an offer (5.4): «أقدّم لك على «…»؟», «أبدأ لك دورة «…»؟», «أجعل «…» هدفك؟».
+  // A model turn turned a state-changing call into an offer (5.4): «أقدّم لك على «…»؟», «أبدأ لك خطوة …؟», «أخلّي «…» هدفك؟».
   for (const job of JOBS) {
     if (said === T.applyOffer(job.title)) return offerIn(applyOfferReply(job.id, call(ctx, "apply_to_job", { job_id: job.id }), ctx), said);
     if (said === T.targetOffer(job.title)) {
       return offerIn(targetOfferReply(ctx, job.id, call(ctx, "set_target_job", { job_id: job.id })), said);
     }
   }
-  for (const course of COURSES) {
-    if (said === T.startOffer(shortTitle(course))) {
-      return offerIn(startOfferReply(ctx, course.id, call(ctx, "start_course", { course_id: course.id })), said);
-    }
+  // a step offer names the skill: it is that skill's next step
+  for (const skill of SKILLS) {
+    if (said !== T.startOffer(skill.name)) continue;
+    const courseId = nextCourseFor(ctx, skill.id);
+    if (courseId) return offerIn(startOfferReply(ctx, courseId, call(ctx, "start_course", { course_id: courseId })), said);
   }
 
   // «مطابقتك مع هذه الوظيفة 53% فقط…» names no job: it is the one unapplied job with that match, if only one has it.
@@ -653,8 +735,10 @@ function decide(request: AdvisorRequest, ctx: AdvisorCtx): Decision {
   const ack = detectAck(text);
   if (ack) return router("acknowledge", ackRoute(request, ctx, ack));
 
-  // Row 1: refuse to complete for the user (5.5 rule 6: no such tool exists), and to grant XP, badges or stars.
-  if (W.has(text, W.COMPLETE_VERBS) && W.has(text, W.LESSON_WORDS) && W.has(text, W.FOR_ME)) {
+  // Row 1: refuse to complete for the user (5.5 rule 6: no such tool exists; «خلّصها عني» and «اضغط خلّصتها عني» too),
+  // and to grant XP, badges or stars.
+  const completeAsk = (W.has(text, W.COMPLETE_VERBS) && W.has(text, W.LESSON_WORDS)) || W.has(text, W.COMPLETE_IT);
+  if (completeAsk && W.has(text, W.FOR_ME)) {
     return router("refuse-complete", completeForMeReply(ctx));
   }
   if (W.has(text, W.GIVE_ME) && W.has(text, W.GRANT_WORDS)) {
@@ -665,6 +749,10 @@ function decide(request: AdvisorRequest, ctx: AdvisorCtx): Decision {
   if (W.has(text, W.INVENT_VERBS) && W.has(text, W.INVENT_OBJECTS)) return router("refuse-invent", inventReply(ctx));
   // Row 2: is it real; real-world numbers (answered before any model, 5.1).
   if (W.has(text, W.REAL_WORDS)) return router("is-real", reply(T.isReal()));
+  // The pay of a named career family (careers.ts): its published figure with the source, or "no published figure",
+  // before row 2's «no market numbers» (every mode: a number is never left to a model here).
+  const pay = careerSalaryReply(text);
+  if (pay) return router("career", pay);
   if (W.has(text, W.REAL_NUMBER_WORDS)) return router("real-numbers", reply(T.realNumbers()));
 
   // Rows 4-6: the three state-changing requests (5.4), never from a question.
@@ -685,6 +773,13 @@ function decide(request: AdvisorRequest, ctx: AdvisorCtx): Decision {
   if (named.length === 1) {
     if (W.has(text, W.WHY_WORDS) && asksAboutMatch(text)) return open("explain-match", explainRoute(ctx, named[0]!));
     if (W.has(text, W.GAP_WORDS)) return open("gap", gapRoute(ctx, named[0]!));
+  }
+
+  // The learning guides: the top pick, the people or the articles, and the guide page opens (every mode: real data only).
+  const ask = guideAsk(text);
+  if (ask) {
+    const pick = guidePick(ctx, text, ask);
+    return pick ? router("guide", guideReply(ctx, ask, pick)) : router("next-step", nextStepRoute(ctx));
   }
 
   // Row 7: job search.
@@ -711,6 +806,13 @@ function decide(request: AdvisorRequest, ctx: AdvisorCtx): Decision {
     return router("how-to", how);
   }
 
+  // A career family named («وش يسوي مدير المنتج؟», «كيف أصير مهندس سحابة؟», «وش الشهادات اللي تفيدني في الأمن
+  // السيبراني؟»), or a first-month / certificates / entry-route question about the target's family (careers.ts). After
+  // every more specific row above, before the general rows (so «وش أسوي أول شهر؟» is not row 11's next step). Online the
+  // model answers first, with get_career.
+  const career = careerReply(ctx, text);
+  if (career) return open("career", career);
+
   const row = openRow(ctx, text);
   // the generic «ذي برّا اللي أقدر عليه» for a message that names a platform feature («وين شاراتي؟»): the guide's
   // answer, with its page, is the local answer instead (the model still answers first when online)
@@ -732,7 +834,8 @@ function decide(request: AdvisorRequest, ctx: AdvisorCtx): Decision {
  * (5.8 slugs for page intents, "open-{screen}" for «افتح…» chips, e.g. "open-applications", "open-path", "open-jobs").
  * Rule 7 in router turns: while `request.page.applySheetOpen || request.page.showRunning` it emits NO action event at all
  * (navigate, apply, start_course or set_target) and answers templates `blockedActionReply(the action it would have
- * emitted, facts)` instead. Rule 2: start_course refused by the tool → `startCourseRefusedLine`.
+ * emitted, facts)` instead. Rule 2: start_course refused by the tool → `startCourseRefusedLine`. A guide question
+ * («وين أتعلم SQL؟») answers from the guide data and opens that skill's guide page (navigate).
  */
 export function routeAdvisorMessage(request: AdvisorRequest): RouterDecision {
   const ctx = AdvisorCtx.of(request);

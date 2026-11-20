@@ -1,7 +1,8 @@
 // Owner: engine. The onboarding fit score and recommendation (spec 4.6). Never shown as a number (P5).
-import { EXPERIENCE_BANDS, JOB_IDS } from "@/lib/ids";
-import { getJob } from "@/lib/data";
+import { EXPERIENCE_BANDS, JOB_IDS, isCompanyId } from "@/lib/ids";
+import { getCompany, getJob, getJobCity, type Company } from "@/lib/data";
 import type {
+  CompanyId,
   ExperienceBand,
   ExperienceOption,
   FitBreakdown,
@@ -12,7 +13,10 @@ import type {
   OnboardingAnswers,
   Recommendation,
   RevealReason,
+  UserFacts,
 } from "@/lib/types";
+
+import { jobsAtCompany } from "./companies";
 
 /** Spec 4.6 "Major → fields": primary, then secondary; `other` has none. */
 const MAJOR_FIELDS: Readonly<Record<MajorOption, readonly [JobFieldId, JobFieldId] | null>> = {
@@ -114,16 +118,54 @@ export function fitReasons(jobId: JobId, answers: OnboardingAnswers): readonly R
     reasons.push({ kind: "major", tier: terms.major === 25 ? "primary" : "secondary", majorLabel: answers.major.label });
   }
   if (terms.experience === 15) reasons.push({ kind: "experience", band: job.band });
-  if (terms.city === 10) reasons.push({ kind: "city", cityLabel: answers.city?.label ?? "" });
+  if (terms.city === 10) {
+    // a place recorded as its nearest job market («شقراء» → riyadh, 20 Nov 2026) is near the job's city, not in it
+    const cityName = getJobCity(job.city).name;
+    const typed = answers.city?.label ?? "";
+    reasons.push(typed === "" || typed === cityName ? { kind: "city", cityLabel: cityName } : { kind: "city", cityLabel: cityName, near: true });
+  }
   else if (terms.city === 6) reasons.push({ kind: "remote" });
   const priority = answers.priority;
   if (terms.priority > 0 && priority !== undefined && priority !== "explore") reasons.push({ kind: "priority", priority });
   return reasons.length === 0 ? [{ kind: "none" }] : reasons.slice(0, 3);
 }
 
-/** Recommended (rank 1), alternative 1 (rank 2), alternative 2 (best remaining job of another field) and fitReasons(recommended). */
-export function recommend(answers: OnboardingAnswers): Recommendation {
+/** The jobs of a company in the job data (a seam: tests pass their own). */
+export type CompanyJobs = (id: CompanyId) => readonly JobId[];
+
+/**
+ * 20 Nov 2026 (owner's part 2): the job at the company the user has in mind (`answers.company`), or null when they named
+ * none or the job data has no job of that company. Of several, the best fit by the 4.6 score WITHOUT the priority term
+ * (the company is asked before «الأولوية», and «دليلك» names this job in his reply right then, so the reveal must land on
+ * the same one); a job the education gate would leave out comes only after the others (the user chose the company).
+ */
+export function companyJob(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobsAtCompany): JobId | null {
+  const company = answers.company;
+  if (company === undefined || company === "none" || !isCompanyId(company)) return null;
+  const ids = jobsAt(company);
+  if (ids.length === 0) return null;
+  const withoutPriority: OnboardingAnswers = { ...answers, priority: undefined };
+  const fits = ids.map((id) => fitBreakdown(id, withoutPriority));
+  fits.sort((a, b) => Number(a.excluded) - Number(b.excluded) || compareFit(a, b));
+  return fits[0]?.jobId ?? null;
+}
+
+/**
+ * Recommended (rank 1), alternative 1 (rank 2), alternative 2 (best remaining job of another field) and fitReasons(recommended).
+ * When the user named a company that has a job in the data, that job is the recommended one (the path reveal ends on it)
+ * and the ranking's best two others are the alternatives; otherwise the ranking decides, as before.
+ */
+export function recommend(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobsAtCompany): Recommendation {
   const ranked = rankByFit(answers);
+  const aimed = companyJob(answers, jobsAt);
+  if (aimed !== null) {
+    const rest = ranked.filter((f) => f.jobId !== aimed);
+    const field = getJob(aimed).field;
+    const second = rest[0];
+    const third = rest.slice(1).find((f) => getJob(f.jobId).field !== field) ?? rest[1];
+    if (second === undefined || third === undefined) throw new Error("engine: no alternatives");
+    return { recommended: aimed, alternatives: [second.jobId, third.jobId], reasons: fitReasons(aimed, answers) };
+  }
   const first = ranked[0];
   const second = ranked[1];
   if (first === undefined || second === undefined) throw new Error("engine: fewer than two jobs to recommend");
@@ -131,4 +173,24 @@ export function recommend(answers: OnboardingAnswers): Recommendation {
   const third = ranked.slice(2).find((f) => getJob(f.jobId).field !== field) ?? ranked[2];
   if (third === undefined) throw new Error("engine: no second alternative");
   return { recommended: first.jobId, alternatives: [second.jobId, third.jobId], reasons: fitReasons(first.jobId, answers) };
+}
+
+/** The company the user has in mind, with its jobs in the data and the one the path aims at. */
+export interface DreamCompany {
+  readonly id: CompanyId;
+  readonly company: Company;
+  /** Its jobs in the job data, in data order: the map's job ads pin these first. Empty when it has none there. */
+  readonly jobs: readonly JobId[];
+  /** companyJob: the one the onboarding path aimed at; null when the data has none of its jobs. */
+  readonly job: JobId | null;
+}
+
+/**
+ * The selector of «الشركة اللي في بالك» (onboarding step 7, «ملفي»): null for «لا، مو الحين», for an account saved before
+ * the question existed, and for anything that is not a known company.
+ */
+export function dreamCompany(facts: Pick<UserFacts, "answers">, jobsAt: CompanyJobs = jobsAtCompany): DreamCompany | null {
+  const id = facts.answers.company;
+  if (id === undefined || id === "none" || !isCompanyId(id)) return null;
+  return { id, company: getCompany(id), jobs: jobsAt(id), job: companyJob(facts.answers, jobsAt) };
 }

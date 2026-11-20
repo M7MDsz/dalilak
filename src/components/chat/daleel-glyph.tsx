@@ -1,6 +1,6 @@
 "use client";
-// DaleelGlyph: «دليل»'s living mark (playbook block 9). The same idea as IconAdvisor: an open compass ring with the
-// waypoint in its opening, and a needle that points at the waypoint ("«دليل» points you to your next step").
+// DaleelGlyph: «دليلك»'s living mark (playbook block 9). The same idea as IconAdvisor: an open compass ring with the
+// waypoint in its opening, and a needle that points at the waypoint ("«دليلك» points you to your next step").
 // Only the needle moves (one moving part). Its behaviour is the state:
 //   idle       still, pointing at the waypoint
 //   listening  a small attentive turn (the user is typing), held
@@ -39,7 +39,7 @@ const NEEDLE_TIP = "M12 7.75 13.6 12h-3.2z";
 const NEEDLE_TAIL = "M13.6 12 12 16.25 10.4 12";
 
 export interface DaleelGlyphProps {
-  /** What «دليل» is doing. Default `idle`. */
+  /** What «دليلك» is doing. Default `idle`. */
   readonly state?: DaleelState;
   /** Outer size in px, 16 to 48. Default 24. With `framed` this is the disc's size. */
   readonly size?: number;
@@ -54,7 +54,7 @@ export interface DaleelGlyphProps {
   readonly onSettled?: () => void;
 }
 
-/** «دليل»'s living compass. Reads at 20 px beside a line of text; 16 to 48 px. */
+/** «دليلك»'s living compass. Reads at 20 px beside a line of text; 16 to 48 px. */
 export function DaleelGlyph({ state = "idle", size = 24, framed = false, layoutId, className, title, onSettled }: DaleelGlyphProps) {
   const instant = useInstant();
   const rotate = useMotionValue(REST);

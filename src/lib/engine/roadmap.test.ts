@@ -45,32 +45,59 @@ describe("canonical stages (spec 3.4, 9.3)", () => {
 
   it("9.8 check 9: the three reveal jobs", () => {
     expect(pathSummary("data-analyst-riyadh")).toEqual({ stages: 8, prep: 0, hours: 74 });
-    expect(pathSummary("reporting-specialist-jeddah")).toEqual({ stages: 7, prep: 0, hours: 60 });
-    expect(pathSummary("business-analyst-riyadh")).toEqual({ stages: 7, prep: 0, hours: 64 });
+    expect(pathSummary("qiddiya-hr-analytics-analyst-riyadh")).toEqual({ stages: 8, prep: 2, hours: 64 });
+    expect(pathSummary("syarah-financial-analyst-tamheer-riyadh")).toEqual({ stages: 5, prep: 0, hours: 38 });
   });
 
-  it("every job's stage and preparatory counts equal the 9.3 column (6 to 11)", () => {
+  it("every job's stage and preparatory counts are as listed (5 to 13)", () => {
     const expected: Record<JobId, [number, number]> = {
       "data-analyst-riyadh": [8, 0],
-      "bi-analyst-riyadh": [11, 0],
-      "reporting-specialist-jeddah": [7, 0],
-      "junior-data-scientist-remote": [8, 1],
-      "frontend-developer-riyadh": [7, 1],
-      "backend-developer-riyadh": [8, 1],
-      "web-app-developer-remote": [10, 3],
-      "qa-tester-dammam": [7, 1],
-      "ui-ux-designer-riyadh": [7, 1],
-      "product-designer-jeddah": [10, 1],
-      "ux-researcher-remote": [7, 2],
-      "digital-marketing-specialist-riyadh": [6, 0],
-      "content-writer-jeddah": [7, 0],
-      "digital-ads-specialist-dammam": [8, 1],
-      "business-analyst-riyadh": [7, 0],
-      "project-coordinator-jeddah": [7, 0],
-      "financial-analyst-riyadh": [10, 1],
-      "hr-specialist-riyadh": [7, 0],
-      "recruiter-jeddah": [8, 0],
-      "training-coordinator-dammam": [6, 0],
+      "jeeny-growth-insights-analytics-riyadh": [11, 0],
+      "qiddiya-hr-analytics-analyst-riyadh": [8, 2],
+      "ninja-real-estate-performance-analyst-riyadh": [8, 0],
+      "master-works-data-senior-engineer-riyadh": [8, 1],
+      "salla-senior-data-scientist-remote": [10, 2],
+      "lucidya-frontend-engineer-dammam": [7, 1],
+      "salla-senior-backend-checkout-remote": [11, 3],
+      "salla-senior-qa-engineer-remote": [8, 2],
+      "almajed-mobile-developer-riyadh": [9, 4],
+      "horizontal-graduate-designer-riyadh": [6, 1],
+      "flyakeed-product-designer-riyadh": [9, 2],
+      "lucidya-product-designer-riyadh": [9, 2],
+      "hungerstation-senior-product-designer-riyadh": [10, 2],
+      "salla-marketing-specialist-tamheer-jeddah": [6, 0],
+      "salla-mahally-seo-manager-jeddah": [9, 2],
+      "lucidya-social-media-analyst-riyadh": [7, 1],
+      "platinumlist-content-manager-riyadh": [8, 1],
+      "syarah-financial-analyst-tamheer-riyadh": [5, 0],
+      "foodics-accountant-erp-riyadh": [8, 0],
+      "master-works-ai-business-analyst-riyadh": [10, 4],
+      "maharah-business-development-specialist-riyadh": [6, 0],
+      "maharah-qa-analyst-riyadh": [7, 2],
+      "atheer-hr-specialist-riyadh": [8, 0],
+      "qiddiya-hris-specialist-riyadh": [6, 1],
+      "lucidya-people-operations-riyadh": [7, 1],
+      "tamara-people-business-partner-riyadh": [7, 0],
+      "lucidya-talent-acquisition-lead-riyadh": [6, 0],
+      // the expansion's 18
+      "petroapp-product-manager-riyadh": [6, 1],
+      "salla-product-manager-storefront-jeddah": [10, 4],
+      "master-works-ai-product-manager-riyadh": [9, 3],
+      "taj-hr-cybersecurity-engineer-riyadh": [6, 1],
+      "mullers-solutions-soc-l2-specialist-riyadh": [9, 2],
+      "qiddiya-it-security-design-riyadh": [7, 2],
+      "lucidya-devops-engineer-riyadh": [5, 0],
+      "lucidya-site-reliability-engineer-riyadh": [5, 0],
+      "mozn-cloud-platform-engineer-riyadh": [6, 0],
+      "lamdax-ai-engineer-remote": [9, 4],
+      "foodics-ai-engineer-riyadh": [6, 0],
+      "mozn-ai-engineer-riyadh": [13, 8],
+      "foodics-field-sales-representative-riyadh": [6, 0],
+      "shipa-junior-business-development-executive-riyadh": [6, 0],
+      "petroapp-customer-success-specialist-riyadh": [6, 0],
+      "qiddiya-procurement-specialist-riyadh": [7, 1],
+      "ninja-procurement-cost-control-specialist-riyadh": [7, 0],
+      "hungerstation-junior-3pl-account-manager-riyadh": [8, 2],
     };
     for (const id of JOB_IDS) {
       const { stages, prep } = pathSummary(id);
@@ -79,20 +106,20 @@ describe("canonical stages (spec 3.4, 9.3)", () => {
   });
 
   it("places an unlisted prerequisite right before the skill it prepares, transitively, as a ★ «تمهيدية»", () => {
-    const web = canonicalStages("web-app-developer-remote");
-    expect(web.map((s) => `${s.skill}${"*".repeat(s.star)}${s.prep ? "(prep→" + s.prepares + ")" : ""}`)).toEqual([
-      "html-css*(prep→javascript)",
-      "programming*(prep→javascript)",
-      "javascript*",
-      "react*",
-      "git*",
+    // the mobile developer: UI design needs Figma, which needs design basics: both come before it
+    const mobile = canonicalStages("almajed-mobile-developer-riyadh");
+    expect(mobile.map((s) => `${s.skill}${"*".repeat(s.star)}${s.prep ? "(prep→" + s.prepares + ")" : ""}`)).toEqual([
+      "programming*",
+      "git*(prep→apis)",
       "apis*",
+      "design-basics*(prep→figma)",
+      "figma*(prep→ui-design)",
+      "ui-design*",
       "communication*(prep→teamwork)",
       "teamwork*",
-      "javascript**",
-      "javascript***",
+      "business-analysis*",
     ]);
-    const ds = canonicalStages("junior-data-scientist-remote");
+    const ds = canonicalStages("salla-senior-data-scientist-remote");
     expect(ds[0]).toMatchObject({ skill: "excel", star: 1, prep: true, prepares: "sql" });
   });
 });
@@ -143,8 +170,8 @@ describe("roadmap (spec 3.4)", () => {
     expect(r.stages[6]).toMatchObject({ n: 7, courseId: "c-powerbi-1", hours: 10, xp: 200, gain: 20, matchAfter: 90 });
     expect(r.stages[7]).toMatchObject({ n: 8, courseId: "c-statistics-2", gain: 10, matchAfter: 80 });
     expect(r.branches).toEqual([
-      { jobId: "reporting-specialist-jeddah", now: 50, after: 80 },
-      { jobId: "bi-analyst-riyadh", now: 43, after: 60 },
+      { jobId: "jeeny-growth-insights-analytics-riyadh", now: 47, after: 77 },
+      { jobId: "master-works-data-senior-engineer-riyadh", now: 53, after: 73 },
     ]);
   });
 
@@ -179,63 +206,46 @@ describe("roadmap (spec 3.4)", () => {
     expect(r?.stages[6]?.state).toBe("current");
   });
 
-  it("bi-analyst-riyadh holds 11 stages; every job has 6 to 11, ends at 100, and its last done stage is at the match", () => {
-    expect(roadmapFor("bi-analyst-riyadh", cvAnalysedFacts()).stages).toHaveLength(11);
+  it("jeeny-growth-insights-analytics-riyadh holds 11 stages; every job has 5 to 13, ends at 100, and its last done stage is at the match", () => {
+    expect(roadmapFor("jeeny-growth-insights-analytics-riyadh", cvAnalysedFacts()).stages).toHaveLength(11);
     for (const id of JOB_IDS) {
       const r = roadmapFor(id, cvAnalysedFacts());
       expect(r.stages[r.stages.length - 1]?.matchAt, id).toBe(100);
-      expect(r.stages.length, id).toBeGreaterThanOrEqual(6);
-      expect(r.stages.length, id).toBeLessThanOrEqual(11);
+      expect(r.stages.length, id).toBeGreaterThanOrEqual(5);
+      expect(r.stages.length, id).toBeLessThanOrEqual(13);
       const lastDone = r.stages.filter((s) => s.state === "done").pop();
       if (lastDone) expect(lastDone.matchAt, id).toBe(r.match);
     }
   });
 
   it("a preparatory stage done by implication joins the group of the star that implied it", () => {
-    // frontend with a CV proving JavaScript only: programming (prep → javascript) is done by implication
-    const f = withCv(onboardedTarget("frontend-developer-riyadh"), t + 3 * MINUTE, [
-      { skill: "javascript", stars: 1, evidence: "JavaScript", line: 0 },
+    // the data scientist with a CV proving SQL only: Excel (prep → SQL) is done by implication
+    const f = withCv(onboardedTarget("salla-senior-data-scientist-remote"), t + 3 * MINUTE, [{ skill: "sql", stars: 1, evidence: "SQL", line: 0 }]);
+    const r = roadmapFor("salla-senior-data-scientist-remote", f);
+    expect(label(r)).toEqual([
+      "excel*",
+      "sql*",
+      "statistics*",
+      "python-data*",
+      "powerbi*",
+      "dataviz*",
+      "communication*",
+      "sql**",
+      "communication**",
+      "sql***",
     ]);
-    const r = roadmapFor("frontend-developer-riyadh", f);
-    expect(label(r)).toEqual(["programming*", "javascript*", "html-css*", "react*", "git*", "english*", "javascript**"]);
     expect(r.stages[0]).toMatchObject({ state: "done", doneBy: { kind: "implied" }, prep: true, gain: 0 });
-    expect(r.stages[2]?.state).toBe("current");
-    // git needs programming, which has no star: locked, never contradicting the catalogue
-    expect(r.stages[4]).toMatchObject({ skill: "git", state: "locked", lock: { kind: "prereq", skill: "programming" } });
+    expect(r.stages[1]).toMatchObject({ state: "done", doneBy: { kind: "cv" } });
+    // statistics needs Excel, which has no star: locked, never contradicting the catalogue
+    expect(r.stages[2]).toMatchObject({ skill: "statistics", state: "locked", lock: { kind: "prereq", skill: "excel" } });
   });
 
   it("the current stage can always be started (an implied prep that another skill still needs)", () => {
-    const f = withCv(onboardedTarget("web-app-developer-remote"), t + 3 * MINUTE, [
-      { skill: "html-css", stars: 1, evidence: "HTML", line: 0 },
-      { skill: "javascript", stars: 1, evidence: "JavaScript", line: 1 },
-      { skill: "react", stars: 1, evidence: "React", line: 2 },
-    ]);
-    const r = roadmapFor("web-app-developer-remote", f);
-    expect(label(r)).toEqual([
-      "html-css*",
-      "programming*",
-      "javascript*",
-      "react*",
-      "git*",
-      "apis*",
-      "communication*",
-      "teamwork*",
-      "javascript**",
-      "javascript***",
-    ]);
-    expect(r.stages.map((s) => s.state)).toEqual([
-      "done",
-      "done",
-      "done",
-      "done",
-      "locked",
-      "locked",
-      "current",
-      "locked",
-      "upcoming",
-      "locked",
-    ]);
+    const f = withCv(onboardedTarget("salla-senior-data-scientist-remote"), t + 3 * MINUTE, [{ skill: "sql", stars: 1, evidence: "SQL", line: 0 }]);
+    const r = roadmapFor("salla-senior-data-scientist-remote", f);
+    expect(r.stages.map((s) => s.state)).toEqual(["done", "done", "locked", "locked", "locked", "locked", "current", "upcoming", "locked", "locked"]);
     expect(r.currentN).toBe(7);
+    expect(r.stages[6]).toMatchObject({ skill: "communication", star: 1 });
   });
 
   it("without a target there is no roadmap", () => {
@@ -244,11 +254,10 @@ describe("roadmap (spec 3.4)", () => {
 });
 
 describe("branches (spec 3.4)", () => {
-  it("ties on the projected match go to the target's field, then data order", () => {
-    // bi-analyst and business-analyst both project to 60: bi-analyst (data) wins
+  it("offers the two highest projected matches (the growth analyst 77, the data engineer 73)", () => {
     expect(branchJobs("data-analyst-riyadh", cvAnalysedFacts()).map((b) => [b.jobId, b.now, b.after])).toEqual([
-      ["reporting-specialist-jeddah", 50, 80],
-      ["bi-analyst-riyadh", 43, 60],
+      ["jeeny-growth-insights-analytics-riyadh", 47, 77],
+      ["master-works-data-senior-engineer-riyadh", 53, 73],
     ]);
   });
 

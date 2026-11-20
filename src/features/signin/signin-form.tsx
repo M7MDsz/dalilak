@@ -74,8 +74,8 @@ export function SigninForm({ className }: { className?: string }) {
 
   return (
     <section className={cn("relative isolate flex flex-col", className)}>
-      {/* quiet terrain at the foot of the paper: the trail on the right starts somewhere down here */}
-      <ContourBackdrop intensity="faint" summit={{ x: 0.02, y: 1.02 }} rings={14} seed={7} />
+      {/* quiet terrain at the foot of the paper, in its outer corner (the form is the right half on a desktop) */}
+      <ContourBackdrop intensity="faint" summit={{ x: 0.98, y: 1.02 }} rings={14} seed={7} />
 
       <header className="flex items-center">
         <Logo size={36} />

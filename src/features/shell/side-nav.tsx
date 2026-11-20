@@ -1,6 +1,6 @@
 "use client";
 // Owner: shell. The desktop side navigation of spec 2.3 / 2.5 (1024 px and wider), on the inline-start side (the right in
-// RTL): the logo and wordmark «دليلك» (links to /path), the eight items in three groups separated by space, and at the
+// RTL): the logo and wordmark «دليل» (links to /path), the eight items in three groups separated by space, and at the
 // bottom one quiet line «عرض تجريبي · بيانات تجريبية». The active item is a white sheet that slides between items
 // (a shared layoutId; the shell does not move on a page change, only this marker does) and its icon keeps the coral
 // waypoint; every other icon's waypoint is muted. No item carries a dot or a counter.

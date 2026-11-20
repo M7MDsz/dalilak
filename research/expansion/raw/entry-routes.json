@@ -1,0 +1,208 @@
+{
+ "checkedAt": "2026-11-20",
+ "routes": [
+  {
+   "id": "tamheer",
+   "nameAr": "تطوير الخريجين (تمهير)",
+   "nameEn": "Tamheer (graduate on-the-job training)",
+   "owner": "صندوق تنمية الموارد البشرية (هدف)",
+   "url": "https://www.hrdf.org.sa/media/beyozfrm/programs-guide-for-individuals-2026-ar.pdf",
+   "whatItIs": "تدريب على رأس العمل لخريجي الدبلوم والبكالوريوس، تكسب فيه خبرة ميدانية بمكافأة شهرية من هدف.",
+   "eligibility": [
+    "أن يكون المستفيد سعودي الجنسية.",
+    "أن يكون مسجل في موقع صندوق تنمية الموارد البشرية.",
+    "أن يكون حاصلاً على درجة الدبلوم من المعاهد والكليات التقنية والصحية والإدارية بمدته لا تقل عن سنة دراسية واحدة من جهة معتمدة (فصلين دراسيين).",
+    "أن يكون المتقدم حاصلاً على درجة البكالوريوس أو أعلى من إحدى الجامعات السعودية أو الخارجية المعتمدة من وزارة التعليم (يجب إرفاق قرار معادلة الشهادة الصادرة من وزارة التعليم في حال كان مصدر الشهادة جامعة خارجية).",
+    "ألا يكون لديه خبرة عملية سابقة في القطاع العام أو الخاص تتجاوز سنة ميلادية.",
+    "لا يتجاوز العمر 30 سنة ميلادي.",
+    "ألا يكون المستفيد ملتحقاً بأي عمل حالياً في القطاع العام أو الخاص.",
+    "ألا يكون الفرد ضمن قائمة \"المحظورين\" لدى الصندوق.",
+    "ألا يكون المستفيد استفاد من (رصيد التدريب) في منتج تطوير الخريجين (تمهير) الاستفادة الكاملة بما لا يزيد عن فرصتين بما مجموعه 6 أشهر للفرصتين.",
+    "ألا يكون المستفيد مستبعد من منتج تطوير الخريجين (تمهير)."
+   ],
+   "durationBenefit": "يساهم صندوق تنمية الموارد البشرية بدعم خريجي المعاهد والكليات حملة الدبلومات الفنية والصحية والإدارية وحملة البكالوريوس فأعلى بمكافأة تبلغ (3000) ريال شهرياً، ولمدة تتراوح من 3 أشهر الى 6 أشهر.",
+   "fitsFamilies": "all",
+   "checkedAt": "2026-11-20",
+   "note": "Read from the rendered page of HRDF's official PDF «دليل البرامج للأفراد 2026» (programs-guide-for-individuals-2026-ar.pdf, hrdf.org.sa, 63 pages), downloaded directly on 2026-11-20; the PDF's text layer garbles Arabic, so every quote was taken from a page image. Pages 17-18."
+  },
+  {
+   "id": "doroob",
+   "nameAr": "التدريب الإلكتروني (دروب)",
+   "nameEn": "Doroob (HRDF e-learning)",
+   "owner": "صندوق تنمية الموارد البشرية (هدف)",
+   "url": "https://www.hrdf.org.sa/media/beyozfrm/programs-guide-for-individuals-2026-ar.pdf",
+   "officialSite": "https://doroob.sa/",
+   "whatItIs": "منصة دورات أونلاين من هدف في المهارات الوظيفية، تسجّل فيها وتتعلم عن بعد والتكاليف على الصندوق.",
+   "eligibility": "يمكن لأي مواطن ومواطنة التسجيل في برنامج التدريب الإلكتروني (دروب) والالتحاق بالبرامج التدريبية. (الفئة المستهدفة: الباحثون والباحثات عن عمل، موظفو القطاع الخاص، الطلاب والطالبات.)",
+   "durationBenefit": "التسجيل في التدريب الإلكتروني (دروب) متاح لجميع المواطنين ومدفوع التكاليف من قبل الصندوق.",
+   "fitsFamilies": "all",
+   "checkedAt": "2026-11-20",
+   "note": "Read from the rendered page of HRDF's official PDF «دليل البرامج للأفراد 2026» (programs-guide-for-individuals-2026-ar.pdf, hrdf.org.sa, 63 pages), downloaded directly on 2026-11-20; the PDF's text layer garbles Arabic, so every quote was taken from a page image. Page 31. doroob.sa itself opened but is script-only (no readable text), so nothing was taken from it."
+  },
+  {
+   "id": "hrdf-coop",
+   "nameAr": "التدريب التعاوني",
+   "nameEn": "HRDF co-op training (for students)",
+   "owner": "صندوق تنمية الموارد البشرية (هدف)",
+   "url": "https://www.hrdf.org.sa/media/beyozfrm/programs-guide-for-individuals-2026-ar.pdf",
+   "whatItIs": "لطلاب الدبلوم والبكالوريوس اللي عندهم تدريب تعاوني شرط للتخرج: هدف يسهّله عبر منصته.",
+   "eligibility": [
+    "أن يكون المستفيد سعودي الجنسية.",
+    "أن يكون مسجل في موقع صندوق تنمية الموارد البشرية.",
+    "أن يكون ضمن الدارسين في مراحل الدبلوم أو البكالوريوس.",
+    "ألا يكون مستفيد حالياً من منتجات التدريب على رأس العمل لدى صندوق تنمية الموارد البشرية.",
+    "ألا يكون ضمن قائمة \"المحظورين\" لدى الصندوق.",
+    "ألا يكون مستبعد من منتج التدريب التعاوني."
+   ],
+   "durationBenefit": "تكون مساهمة الصندوق في منتج التدريب التعاوني بالتمكين رقمياً بالاستفادة من المنصة المقدمة من الصندوق.",
+   "fitsFamilies": "all",
+   "checkedAt": "2026-11-20",
+   "note": "Read from the rendered page of HRDF's official PDF «دليل البرامج للأفراد 2026» (programs-guide-for-individuals-2026-ar.pdf, hrdf.org.sa, 63 pages), downloaded directly on 2026-11-20; the PDF's text layer garbles Arabic, so every quote was taken from a page image. Pages 20-21. No stipend is stated for co-op."
+  },
+  {
+   "id": "hrdf-professional-certificates",
+   "nameAr": "دعم الشهادات المهنية الاحترافية",
+   "nameEn": "HRDF professional certificates support",
+   "owner": "صندوق تنمية الموارد البشرية (هدف)",
+   "url": "https://www.hrdf.org.sa/media/beyozfrm/programs-guide-for-individuals-2026-ar.pdf",
+   "whatItIs": "تاخذ شهادة مهنية معتمدة (مثل شهادات التقنية والمالية)، وهدف يرجّع لك تكاليف التدريب ورسوم الاختبار.",
+   "eligibility": [
+    "أن يكون المستفيد سعودي الجنسية، سواءً كان عاملاً في القطاع العام أو الخاص، أو باحثاً عن عمل.",
+    "أن تكون الشهادة ضمن الشهادات المعتمدة من قبل صندوق تنمية الموارد البشرية.",
+    "أن يكون تاريخ الحصول على الشهادة بعد تاريخ اعتماد الشهادة في برنامج \"دعم الشهادات المهنية الاحترافية\".",
+    "أن يقر المتقدم بعدم قيام جهة العمل التابع لها بدفع تكاليف الشهادة الحاصل عليها.",
+    "أن لا يتجاوز طلب تعويض تكاليف أكثر من شهادتين فقط للفرد الواحد.",
+    "أن تكون الشهادة المهنية صالحة وغير منتهية، بحيث لا يتجاوز تاريخ اعتماد الشهادة عن ستة أشهر.",
+    "لا يتحمل الصندوق تكاليف رسوم العضوية سواءً كانت إلزامية للشهادة أو غير إلزامية."
+   ],
+   "durationBenefit": "يقوم الصندوق بتعويض المستفيدين مادياً عن تكاليف التدريب ورسوم الاختبارات، وذلك بعد الحصول على الشهادة المهنية الاحترافية. الوقت المستغرق لدراسة الأهلية 40 يوم من تاريخ التقديم على البرنامج؛ تاريخ الصرف 40 يوم عمل من تاريخ التقديم في حال اكتمال كافة المتطلبات.",
+   "fitsFamilies": "all",
+   "checkedAt": "2026-11-20",
+   "note": "Read from the rendered page of HRDF's official PDF «دليل البرامج للأفراد 2026» (programs-guide-for-individuals-2026-ar.pdf, hrdf.org.sa, 63 pages), downloaded directly on 2026-11-20; the PDF's text layer garbles Arabic, so every quote was taken from a page image. Pages 28-29. The list of approved certificates is not in the guide; it is not claimed here which certificates qualify."
+  },
+  {
+   "id": "hrdf-strategic-partnership-institutes",
+   "nameAr": "معاهد الشراكات الاستراتيجية",
+   "nameEn": "HRDF strategic partnership institutes (train-to-hire)",
+   "owner": "صندوق تنمية الموارد البشرية (هدف)",
+   "url": "https://www.hrdf.org.sa/media/beyozfrm/programs-guide-for-individuals-2026-ar.pdf",
+   "whatItIs": "تدريب ينتهي بتوظيف في تخصصات نوعية لدى شركات القطاع الخاص، عبر معاهد غير ربحية مرخّصة.",
+   "eligibility": [
+    "أن يكون سعودي الجنسية.",
+    "أن يكون المستفيد من الباحثين عن عمل، ولا يعمل لدى أي جهة، وألا يكون طالباً منتظماً في إحدى المؤسسات التعليمية.",
+    "أن يتم توظيف المستفيد في أي من الوظائف المدعومة.",
+    "أن يكون الموظف مستجداً في المنشأة."
+   ],
+   "durationBenefit": "يساهم الصندوق خلال مدة التدريب بنسبة (75%) من تكاليف التدريب ولمدة لا تزيد عن (24) شهراً بما لا يتجاوز مبلغ (3000) ريال شهرياً للموظف الواحد؛ ويقدم إعانة خلال مدة التدريب بنسبة (75%) من راتب الموظف بما لا يتجاوز (1000) ريال شهرياً؛ ويساهم ولمدة سنة بنسبة (50%) من راتب الموظف وبما لا يتجاوز مبلغ (2000) ريال شهرياً للموظف الواحد.",
+   "fitsFamilies": "all",
+   "checkedAt": "2026-11-20",
+   "note": "Read from the rendered page of HRDF's official PDF «دليل البرامج للأفراد 2026» (programs-guide-for-individuals-2026-ar.pdf, hrdf.org.sa, 63 pages), downloaded directly on 2026-11-20; the PDF's text layer garbles Arabic, so every quote was taken from a page image. Pages 26-27. The support is paid through the hiring company and training body, not to the trainee directly; the guide does not list which specialisms are covered."
+  },
+  {
+   "id": "tuwaiq-bootcamps",
+   "nameAr": "معسكرات أكاديمية طويق",
+   "nameEn": "Tuwaiq Academy bootcamps",
+   "owner": "أكاديمية طويق",
+   "url": "https://tuwaiq.edu.sa/",
+   "whatItIs": "معسكرات تقنية مكثفة من شهر إلى 9 أشهر بشهادات احترافية، وتنتهي بالتوظيف للمتميزين.",
+   "eligibility": null,
+   "durationBenefit": "معسكرات منتهية بالتوظيف للمتميزين، مبنيّة على احتياجات سوق العمل، تقام لمدة 1-9 أشهر بشهادات احترافية في العديد من المجالات التقنية.",
+   "stats": {
+    "نسبة توظيف خريجي المعسكرات": "82%",
+    "متخرجـ/ـة": "55,000+",
+    "as": "shown on the home page counters"
+   },
+   "fitsFamilies": [
+    "frontend-web",
+    "backend",
+    "qa",
+    "data-analyst-bi",
+    "data-science",
+    "ai-ml",
+    "cyber",
+    "cloud-devops",
+    "ui-ux-product-design"
+   ],
+   "checkedAt": "2026-11-20",
+   "note": "Home page tuwaiq.edu.sa opened with curl (WebFetch got 403). Eligibility and cost are not on the home page; the FAQ page (tuwaiq.edu.sa/Faqs) loads its content by script and showed no readable answers, so eligibility is null and cost is not claimed. Satr (satr.tuwaiq.edu.sa) is Tuwaiq's learning platform; its page is script-only."
+  },
+  {
+   "id": "misk-career-essentials",
+   "nameAr": "برنامج مسك للجاهزية المهنية",
+   "nameEn": "Misk Career Essentials Program",
+   "owner": "مؤسسة محمد بن سلمان «مسك»",
+   "url": "https://hub.misk.org.sa/programs/skills/misk-career-essentials-program/",
+   "whatItIs": "دورات رقمية قصيرة بالعربي عن مهارات سوق العمل للطلاب والخريجين الجدد، مع شهادة لكل دورة.",
+   "eligibility": "Young professionals, fresh graduates, university students, and hearing-impaired (no prerequisites; open to non-Saudi nationals, per the FAQ).",
+   "durationBenefit": "1-2 hours per course; self-paced digital courses and interactive sessions; certificates for every course.",
+   "fitsFamilies": "all",
+   "checkedAt": "2026-11-20",
+   "note": "The page shows «Application Close»: applications ran 01 Jan 2026 to 06 Oct 2026. Cost is not stated on the page."
+  },
+  {
+   "id": "misk-traineeship-mirai",
+   "nameAr": "برنامج مسك للتدريب بالتعاون مع ميراي",
+   "nameEn": "Misk Traineeship Program x Mirai",
+   "owner": "مؤسسة محمد بن سلمان «مسك»",
+   "url": "https://hub.misk.org.sa/programs/skills/misk-traineeship-program-x-mirai/",
+   "whatItIs": "تدريب 6 أشهر دوام كامل بالرياض لحديثي التخرج في التقنية والتصميم، براتب شهري وتأمين طبي.",
+   "eligibility": "Saudi National; bachelor's degree in AI, computer engineering, IT, graphic design, software engineering or UI/UX; «The cumulative GPA should not be less than (3.75 out of 5) or (3 out of 4) or its equivalent»; advanced English.",
+   "durationBenefit": "6 months, full-time, in person in Riyadh; «Competitive monthly salary», training courses, medical insurance (spouse, children, parents).",
+   "fitsFamilies": [
+    "frontend-web",
+    "backend",
+    "qa",
+    "ai-ml",
+    "data-science",
+    "ui-ux-product-design",
+    "cloud-devops",
+    "cyber"
+   ],
+   "checkedAt": "2026-11-20",
+   "note": "The page lists the last cohort as 15 Apr to 15 Oct 2025 (applications 12 Dec 2024 to 30 Mar 2025): no open cohort shown. Kept as a recurring route; check the page before quoting it to a user."
+  }
+ ],
+ "notOpened": [
+  {
+   "name": "SDAIA Academy «أكاديمية سدايا»",
+   "tried": [
+    "https://academy.sdaia.gov.sa/ (DNS: not found)",
+    "https://athkax.sdaia.gov.sa/ (opened, script-only page titled «AthkaX», no readable text; the address came from a news aggregator)"
+   ],
+   "result": "dropped"
+  },
+  {
+   "name": "Saudi Digital Academy «الأكاديمية الرقمية السعودية»",
+   "tried": [
+    "https://sda.edu.sa/ (DNS: not found)"
+   ],
+   "result": "dropped: no official URL could be confirmed; only aggregator posts about its «همة» camps were found"
+  },
+  {
+   "name": "doroob.sa",
+   "tried": [
+    "https://doroob.sa/ (script-only)"
+   ],
+   "result": "facts taken from the HRDF 2026 guide instead"
+  },
+  {
+   "name": "HRDF «دعم التوظيف» as a route for individuals",
+   "tried": [
+    "https://www.hrdf.org.sa/media/beyozfrm/programs-guide-for-individuals-2026-ar.pdf"
+   ],
+   "result": "the 2026 individuals guide has no product by that name; the closest are «معاهد الشراكات الاستراتيجية» (included) and the freelance/delivery support products (not included: not a graduate entry route)"
+  },
+  {
+   "name": "Saudization / Nitaqat facts for graduates (hrsd.gov.sa)",
+   "tried": [],
+   "result": "not attempted within the time budget; no fact included"
+  },
+  {
+   "name": "Tamheer on hrdf.org.sa as an HTML page",
+   "tried": [
+    "search returned no official HTML page"
+   ],
+   "result": "used the official HRDF 2026 guide PDF instead"
+  }
+ ]
+}

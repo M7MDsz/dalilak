@@ -1,7 +1,8 @@
 "use client";
 // Owner: signin. The moving half of the sign-in page (spec 3.1 "Showcase"). Desktop: the trail composition, scaled to
 // the stage (or the one-piece band when the stage is too small to keep its text at 14 px or more). Phone: the band
-// above the form. Only one of them is rendered, so `signin-showcase` and `signin-showcase-piece` stay unique.
+// under the form (the name box comes first). Only one of them is rendered, so `signin-showcase` and
+// `signin-showcase-piece` stay unique.
 import { useViewport } from "@/features/shared";
 import { Stage } from "@/components/ui";
 

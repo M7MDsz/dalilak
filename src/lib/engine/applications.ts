@@ -1,6 +1,8 @@
 // Owner: engine. Application status as a function of time, the match when sent and the simulation control (spec 7.5),
-// and the application number (7.4).
-import { APPLICATION_PREFIX, APPLICATION_TIMING, MATCH_LINE } from "@/lib/data";
+// and the application number (7.4). 20 Nov 2026: an application to a REAL posting was prepared in Dalilak and is sent by
+// the user from the original posting, so no company is pretended to review it: it stays «sent» (shown as prepared) and
+// the simulation control never moves it. Only the practice job's application follows the simulated track.
+import { APPLICATION_PREFIX, APPLICATION_TIMING, MATCH_LINE, getJob } from "@/lib/data";
 import type { Application, ApplicationStatus, Clock, UserFacts } from "@/lib/types";
 
 const STEP: Readonly<Record<ApplicationStatus, number>> = { sent: 0, review: 1, shortlisted: 2, closed: 2 };
@@ -20,6 +22,7 @@ function timeStatus(application: Application, now: number): ApplicationStatus {
 
 /** The time-based status (7.5) unless `pinned` (then `manualStatus`); otherwise the later of the time-based and the manual status. */
 export function applicationStatus(application: Application, now: number): ApplicationStatus {
+  if (isPreparedOnly(application)) return "sent";
   const manual = application.manualStatus;
   if (application.pinned) return manual ?? "sent";
   const byTime = timeStatus(application, now);
@@ -29,10 +32,16 @@ export function applicationStatus(application: Application, now: number): Applic
 
 /** The status «محاكاة: انقل للحالة التالية» moves to (sent → review → shortlisted|closed by the 60% line), or null at the end. */
 export function nextApplicationStatus(application: Application, now: number): ApplicationStatus | null {
+  if (isPreparedOnly(application)) return null;
   const current = applicationStatus(application, now);
   if (current === "sent") return "review";
   if (current === "review") return resultOf(application);
   return null;
+}
+
+/** A real posting's application: prepared here, sent by the user from the posting; no simulated status. */
+export function isPreparedOnly(application: Application): boolean {
+  return getJob(application.jobId).real;
 }
 
 /** «DL-2026-0001»: prefix, year, sequence as four digits (spec 7.4, v3). */

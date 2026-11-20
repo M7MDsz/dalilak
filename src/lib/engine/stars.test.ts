@@ -101,13 +101,13 @@ describe("skill tree nodes (spec 3.5)", () => {
   });
 
   it("marks the target's path skills, preparatory ones included", () => {
-    const nodes = skillNodes(targeted(newFacts(), "frontend-developer-riyadh", t));
-    expect(SKILL_IDS.filter((s) => nodes[s].inPath)).toEqual(["programming", "html-css", "git", "javascript", "react", "english"]);
+    const nodes = skillNodes(targeted(newFacts(), "lucidya-frontend-engineer-dammam", t));
+    expect(SKILL_IDS.filter((s) => nodes[s].inPath)).toEqual(["programming", "html-css", "git", "javascript", "react", "apis"]);
     expect(SKILL_IDS.filter((s) => skillNodes(newFacts())[s].inPath)).toEqual([]);
   });
 
-  it("summarises: 8 of 38 skills · 11 of 59 stars, then 9 · 12", () => {
-    expect(skillTreeSummary(cvAnalysedFacts())).toEqual({ skillsHeld: 8, skillsTotal: 38, starsHeld: 11, starsTotal: 59 });
-    expect(skillTreeSummary(courseDoneFacts())).toEqual({ skillsHeld: 9, skillsTotal: 38, starsHeld: 12, starsTotal: 59 });
+  it("summarises: 8 of 54 skills · 11 of 80 stars, then 9 · 12", () => {
+    expect(skillTreeSummary(cvAnalysedFacts())).toEqual({ skillsHeld: 8, skillsTotal: 54, starsHeld: 11, starsTotal: 80 });
+    expect(skillTreeSummary(courseDoneFacts())).toEqual({ skillsHeld: 9, skillsTotal: 54, starsHeld: 12, starsTotal: 80 });
   });
 });

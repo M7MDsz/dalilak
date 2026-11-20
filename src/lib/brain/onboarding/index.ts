@@ -3,9 +3,10 @@
 // Internal files: tables.ts (keywords, acknowledgement bank, special replies), read.ts (the 4.3 order of reading).
 // `pendingQuestion` and `onboardingContext` are written in full by the architect (they ARE the "pending" contract).
 import { NEUTRAL_PRINT } from "@/lib/copy";
-import { JOB_CITIES, getQuestion, optionLabel } from "@/lib/data";
-import { QUESTION_IDS, isOptionOf } from "@/lib/ids";
-import type { CityValue, InterestOption, OnboardingAnswers, QuestionId, UserState } from "@/lib/types";
+import { JOB_CITIES, companyTiles, getCompany, getJob, getJobCity, getQuestion, optionLabel } from "@/lib/data";
+import { companyField, companyJob, jobsAtCompany } from "@/lib/engine";
+import { ONBOARDING_STEP_IDS, isOptionOf } from "@/lib/ids";
+import type { CityValue, CompanyId, InterestOption, JobId, OnboardingAnswers, OnboardingStepId, UserState } from "@/lib/types";
 import type { OnboardingChipSet, OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
 import { LIMITS } from "@/lib/brain/protocol";
 import { normalizeText } from "@/lib/text/normalize";
@@ -15,20 +16,20 @@ import { ACK, FILLER_WORDS, LEAD_OTHER, LEAD_SALAM, QUESTION_NUMBER, REPLY } fro
 
 // ── Small helpers ──────────────────────────────────────────────────────────────────────────────────────────────────
 
-/** «خالد» from «خالد العتيبي»: how «دليل» addresses the user. */
+/** «خالد» from «خالد العتيبي»: how «دليلك» addresses the user. */
 function firstName(name: string): string {
   const first = name.trim().split(/\s+/)[0];
   return first && first.length > 0 ? first : name.trim();
 }
 
-/** The question as «دليل» asks it (q3 after `secondary` has its own wording, 4.2). */
-function questionText(question: QuestionId, answers: OnboardingAnswers): string {
+/** The question as «دليلك» asks it (q3 after `secondary` has its own wording, 4.2). */
+function questionText(question: OnboardingStepId, answers: OnboardingAnswers): string {
   const q = getQuestion(question);
   if (question === "major" && answers.education === "secondary" && q.textAfterSecondary) return q.textAfterSecondary;
   return q.text;
 }
 
-function chipLabel(question: QuestionId, option: string): string {
+function chipLabel(question: OnboardingStepId, option: string): string {
   return optionLabel(question, option) ?? option;
 }
 
@@ -36,7 +37,7 @@ function chipLabel(question: QuestionId, option: string): string {
  * The acknowledgement variant (4.4): (characters in the name, spaces not counted + question number) mod 3 → variant
  * 1, 2, 3. «خالد» gets city variant 3, education variant 1, major variant 2.
  */
-function variant(name: string, question: QuestionId): 0 | 1 | 2 {
+function variant(name: string, question: OnboardingStepId): 0 | 1 | 2 {
   const letters = [...name.replace(/\s+/g, "")].length;
   return ((letters + QUESTION_NUMBER[question]) % 3) as 0 | 1 | 2;
 }
@@ -47,7 +48,7 @@ function cityHasJobs(value: CityValue): boolean {
 }
 
 /** The neutral value of each question (4.3) and how it prints in «تمام، سأعتبرها «…» ونكمل.». */
-function neutralAnswer(question: QuestionId): { readonly answers: OnboardingAnswers; readonly label: string } {
+function neutralAnswer(question: OnboardingStepId): { readonly answers: OnboardingAnswers; readonly label: string } {
   switch (question) {
     case "city":
       return { answers: { city: { value: "none", label: "" } }, label: NEUTRAL_PRINT.city };
@@ -63,6 +64,8 @@ function neutralAnswer(question: QuestionId): { readonly answers: OnboardingAnsw
       return { answers: { interest: ["unsure"] }, label: chipLabel("interest", "unsure") };
     case "priority":
       return { answers: { priority: "explore" }, label: chipLabel("priority", "explore") };
+    case "company":
+      return { answers: { company: "none" }, label: chipLabel("company", "none") };
   }
 }
 
@@ -83,7 +86,7 @@ function typedLabel(text: string): string | null {
 
 /** One answer as recorded this turn, and the words that acknowledge it. */
 interface Recorded {
-  readonly question: QuestionId;
+  readonly question: OnboardingStepId;
   readonly answers: OnboardingAnswers;
   /** The acknowledgement of 4.4 (or the neutral line of 4.5). */
   readonly ack: string;
@@ -96,15 +99,39 @@ function ackCity(name: string, value: CityValue, label: string): string {
   return ACK.city[variant(name, "city")](label);
 }
 
-function recordFound(name: string, found: Found, typed: string | null = null): Recorded {
+/** The five steps before the company: once they are answered, «دليلك» can name the company's job the path will aim at. */
+const BEFORE_COMPANY = ["city", "education", "major", "experience", "interest"] as const;
+
+/** «في الرياض» / «عن بُعد». */
+function whereOf(jobId: JobId): string {
+  const job = getJob(jobId);
+  return job.city === "remote" ? getJobCity("remote").name : `في ${getJobCity(job.city).name}`;
+}
+
+/**
+ * Step 7's acknowledgement (20 Nov 2026): «لا، مو الحين»; a company with a job in the data (named, with its city, once the
+ * five answers before it are in; before that, only that it has jobs); a company the data has no job of (the path goes to
+ * the closest job, and the reveal says so too).
+ */
+function ackCompany(value: CompanyId | "none", answers: OnboardingAnswers): string {
+  if (value === "none") return ACK.company.none;
+  const company = getCompany(value).short;
+  if (jobsAtCompany(value).length === 0) return ACK.company.noJob(company);
+  if (BEFORE_COMPANY.some((q) => answers[q] === undefined)) return ACK.company.early(company);
+  const job = companyJob({ ...answers, company: value });
+  return job === null ? ACK.company.noJob(company) : ACK.company.job(company, getJob(job).title, whereOf(job));
+}
+
+function recordFound(name: string, found: Found, typed: string | null = null, before: OnboardingAnswers = {}): Recorded {
   switch (found.question) {
     case "city": {
       const label = found.label ?? (found.value === "other" && typed ? typed : chipLabel("city", found.value));
       return {
         question: "city",
         answers: { city: { value: found.value, label } },
-        ack: ackCity(name, found.value, label),
-        extra: `مدينتك ${label}`,
+        // a Saudi place outside the chips: where it is, its nearest big job market and how far (20 Nov 2026)
+        ack: found.place ? ACK.cityPlace(found.place) : ackCity(name, found.value, label),
+        extra: found.place?.kind === "region" ? `منطقتك ${label}` : `مدينتك ${label}`,
       };
     }
     case "education": {
@@ -148,16 +175,21 @@ function recordFound(name: string, found: Found, typed: string | null = null): R
       const label = chipLabel("priority", found.value);
       return { question: "priority", answers: { priority: found.value }, ack: ACK.priority[found.value], extra: `أولويتك ${label}` };
     }
+    case "company": {
+      const label = found.value === "none" ? chipLabel("company", "none") : `الشركة اللي في بالك ${getCompany(found.value).short}`;
+      return { question: "company", answers: { company: found.value }, ack: ackCompany(found.value, before), extra: label };
+    }
   }
 }
 
-function recordNeutral(question: QuestionId): Recorded {
+function recordNeutral(question: OnboardingStepId): Recorded {
   const neutral = neutralAnswer(question);
-  return { question, answers: neutral.answers, ack: ACK.neutral(neutral.label), extra: neutral.label };
+  const ack = question === "company" ? ACK.company.none : ACK.neutral(neutral.label);
+  return { question, answers: neutral.answers, ack, extra: neutral.label };
 }
 
 /** A chip's option id as an answer (4.2: recorded directly, never parsed). Null for an id that is not an option. */
-function chipFound(question: QuestionId, option: string): Found | null {
+function chipFound(question: OnboardingStepId, option: string): Found | null {
   switch (question) {
     case "city":
       return isOptionOf("city", option) ? { question, value: option, label: null } : null;
@@ -171,11 +203,13 @@ function chipFound(question: QuestionId, option: string): Found | null {
       return isOptionOf("interest", option) ? { question, values: [option] } : null;
     case "priority":
       return isOptionOf("priority", option) ? { question, value: option } : null;
+    case "company":
+      return isOptionOf("company", option) ? { question, value: option } : null;
   }
 }
 
 /** Model-classified option ids as an answer (interest: up to two; others: the first valid id). */
-function classifiedFound(question: QuestionId, options: readonly string[]): Found | null {
+function classifiedFound(question: OnboardingStepId, options: readonly string[]): Found | null {
   if (question === "interest") {
     const valid = options.filter((o): o is InterestOption => isOptionOf("interest", o));
     const [a, b] = [...new Set(valid)];
@@ -197,8 +231,8 @@ function merge(answers: OnboardingAnswers, recorded: readonly Recorded[]): Onboa
   return out;
 }
 
-function unansweredIn(answers: OnboardingAnswers): QuestionId[] {
-  return QUESTION_IDS.filter((q) => answers[q] === undefined);
+function unansweredIn(answers: OnboardingAnswers): OnboardingStepId[] {
+  return ONBOARDING_STEP_IDS.filter((q) => answers[q] === undefined);
 }
 
 /** The turn after answers were recorded: acknowledgement (+ extras), then the next question or the closing line. */
@@ -237,7 +271,7 @@ function answeredTurn(
 /** A turn that answers something else and asks the pending question again (4.5: it never loops, never stalls). */
 function sideTurn(
   context: OnboardingContext,
-  pending: QuestionId,
+  pending: OnboardingStepId,
   userText: string,
   reply: string,
   misses: OnboardingContext["misses"] = context.misses,
@@ -293,7 +327,7 @@ function withLead(turn: OnboardingTurn, lead: string | null): OnboardingTurn {
   return { ...turn, replies: [`${lead} ${first}`, ...rest] };
 }
 
-function textTurn(context: OnboardingContext, pending: QuestionId, raw: string): OnboardingTurn {
+function textTurn(context: OnboardingContext, pending: OnboardingStepId, raw: string): OnboardingTurn {
   const text = raw.slice(0, LIMITS.onboardingMessageChars);
   const userText = text.trim();
   if (userText === "") return sideTurn(context, pending, userText, REPLY.unmapped);
@@ -315,31 +349,35 @@ function textTurn(context: OnboardingContext, pending: QuestionId, raw: string):
 }
 
 /** Steps 3-5 of 4.3 on what steps 1-2 left. */
-function readAnswers(context: OnboardingContext, pending: QuestionId, userText: string, reading: Reading): OnboardingTurn {
+function readAnswers(context: OnboardingContext, pending: OnboardingStepId, userText: string, reading: Reading): OnboardingTurn {
 
   // Step 3: the pending question; for it, «لا أعرف» is itself an answer (its neutral value).
   const recorded: Recorded[] = [];
   const pendingFound = readPending(reading, pending);
-  if (pendingFound) recorded.push(recordFound(context.name, pendingFound));
+  if (pendingFound) recorded.push(recordFound(context.name, pendingFound, null, context.answers));
   else if (readNeutral(reading)) recorded.push(recordNeutral(pending));
 
   // Step 4: the other unanswered questions.
   const others = unansweredIn(context.answers).filter((q) => q !== pending);
-  for (const found of readOthers(reading, others)) recorded.push(recordFound(context.name, found));
+  for (const found of readOthers(reading, others)) recorded.push(recordFound(context.name, found, null, context.answers));
 
   if (recorded.length > 0) return answeredTurn(context, userText, recorded, context.misses);
 
   // Step 5: could not be mapped. First time: ask again. Second time: city and major are accepted as typed (2-30
-  // letters), the other four take their neutral value; either way the conversation moves on.
+  // letters), the other four take their neutral value; either way the conversation moves on. A company «دليلك» does not
+  // know is never stored as typed: it stays «لا، مو الحين», and he says he did not know it.
   const missed = (context.misses[pending] ?? 0) + 1;
   const misses = { ...context.misses, [pending]: missed };
   const unmapped = { question: pending, text: userText };
-  if (missed < 2) return sideTurn(context, pending, userText, REPLY.unmapped, misses, unmapped);
+  if (missed < 2) return sideTurn(context, pending, userText, pending === "company" ? REPLY.unmappedCompany : REPLY.unmapped, misses, unmapped);
+  if (pending === "company") {
+    return answeredTurn(context, userText, [{ ...recordNeutral("company"), ack: ACK.company.unknown }], misses, unmapped);
+  }
   if (pending === "city" || pending === "major") {
     const typed = typedLabel(userText);
     if (typed) {
       const found: Found = pending === "city" ? { question: "city", value: "other", label: typed } : { question: "major", value: "other" };
-      return answeredTurn(context, userText, [recordFound(context.name, found, typed)], misses, unmapped);
+      return answeredTurn(context, userText, [recordFound(context.name, found, typed, context.answers)], misses, unmapped);
     }
   }
   return answeredTurn(context, userText, [recordNeutral(pending)], misses, unmapped);
@@ -347,7 +385,7 @@ function readAnswers(context: OnboardingContext, pending: QuestionId, userText: 
 
 // ── Contract exports ───────────────────────────────────────────────────────────────────────────────────────────────
 
-/** «دليل»'s opening (4.1): the greeting, the six-questions line, then question 1 in its own message (it stood at the end
+/** «دليلك»'s opening (4.1): the greeting, the seven-questions line, then question 1 in its own message (it stood at the end
  *  of a long second message and wrapped there; on its own it reads as the question it is). */
 export function openingMessages(name: string): readonly string[] {
   return [REPLY.opening(firstName(name)), REPLY.openingLead, `${REPLY.openingAsk} ${questionText("city", {})}`];
@@ -359,9 +397,16 @@ export function resumeMessages(context: OnboardingContext): readonly string[] {
   return pending === null ? [] : [questionText(pending, context.answers)];
 }
 
-/** The chips of a question for the current answers (question 3 after `secondary` keeps the same chips). */
-export function questionChips(question: QuestionId, answers: OnboardingAnswers): OnboardingChipSet {
-  void answers;
+/**
+ * The chips of a question for the current answers (question 3 after `secondary` keeps the same chips). Step 7, the
+ * company: the big employers of the field the user just picked (its first interest; «لم أحدّد بعد» gets the big names of
+ * several fields), then «لا، مو الحين».
+ */
+export function questionChips(question: OnboardingStepId, answers: OnboardingAnswers): OnboardingChipSet {
+  if (question === "company") {
+    const tiles = companyTiles(companyField(answers)).map((id) => ({ id, label: getCompany(id).short }));
+    return { question, options: [...tiles, { id: "none", label: chipLabel("company", "none") }] };
+  }
   return { question, options: getQuestion(question).options };
 }
 
@@ -382,28 +427,36 @@ export function onboardingTurn(context: OnboardingContext, input: OnboardingInpu
     }
     const found = chipFound(input.question, input.option);
     if (!found) return textTurn(context, pending, userText);
-    return answeredTurn(context, userText, [recordFound(context.name, found)], context.misses);
+    return answeredTurn(context, userText, [recordFound(context.name, found, null, context.answers)], context.misses);
   }
 
   if (input.kind === "classified") {
     const found = classifiedFound(input.question, input.options);
     const typed = typedLabel(input.text);
     if (!found) return textTurn(context, pending, input.text);
-    return withLead(answeredTurn(context, input.text.trim(), [recordFound(context.name, found, typed)], context.misses), greetingLead(input.text));
+    return withLead(answeredTurn(context, input.text.trim(), [recordFound(context.name, found, typed, context.answers)], context.misses), greetingLead(input.text));
   }
 
   return textTurn(context, pending, input.text);
 }
 
 /**
- * The question «دليل» is waiting on: the first of the six, in their fixed order (4.1), that has no answer yet (a
- * question already answered in an earlier free-text message is skipped, 4.3). Null when all six are answered.
+ * The question «دليلك» is waiting on: the first of the seven steps, in their fixed order (4.1), that has no answer yet (a
+ * question already answered in an earlier free-text message is skipped, 4.3). Null when all seven are answered.
+ * `completedBefore`: the account finished onboarding before step 7 existed (saved before 20 Nov 2026: completed, no
+ * company): it stays complete, its company counts as «لا، مو الحين».
  */
-export function pendingQuestion(answers: OnboardingAnswers): QuestionId | null {
-  for (const question of QUESTION_IDS) {
+export function pendingQuestion(answers: OnboardingAnswers, completedBefore = false): OnboardingStepId | null {
+  for (const question of ONBOARDING_STEP_IDS) {
+    if (question === "company" && completedBefore) continue;
     if (answers[question] === undefined) return question;
   }
   return null;
+}
+
+/** The step a saved user is on: null before the greeting (empty thread) and once onboarding is complete. */
+export function pendingStep(user: Pick<UserState, "answers" | "onboarding" | "onboardingCompletedAt">): OnboardingStepId | null {
+  return user.onboarding.thread.length === 0 ? null : pendingQuestion(user.answers, user.onboardingCompletedAt !== null);
 }
 
 /**
@@ -416,6 +469,6 @@ export function onboardingContext(user: UserState): OnboardingContext {
     name: user.name,
     answers: user.answers,
     misses: user.onboarding.misses,
-    pending: user.onboarding.thread.length === 0 ? null : pendingQuestion(user.answers),
+    pending: pendingStep(user),
   };
 }

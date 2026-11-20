@@ -3,7 +3,10 @@
 // pending question. Then the whole flow end to end with the store's pure transitions (the local brain, no network).
 import { describe, expect, it } from "vitest";
 
-import { makeClock, recommend } from "@/lib/engine";
+import { SA_PLACES, SA_REGIONS, SA_REGION_IDS, distanceKm, findSaPlace, getJob, nearestJobMarket } from "@/lib/data";
+import { revealReasonText } from "@/lib/copy";
+import { fitReasons, makeClock, rankByFit, recommend } from "@/lib/engine";
+import { normalizeText } from "@/lib/text/normalize";
 import { appendOnboardingMessages, applyOnboardingTurn, newUser, setTarget } from "@/lib/store/transitions";
 import type { OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
 import type { OnboardingAnswers, UserState } from "@/lib/types";
@@ -38,14 +41,15 @@ const DEMO_CHIPS: readonly OnboardingInput[] = [
   { kind: "chip", question: "major", option: "mis" },
   { kind: "chip", question: "experience", option: "none" },
   { kind: "chip", question: "interest", option: "data" },
+  { kind: "chip", question: "company", option: "none" },
   { kind: "chip", question: "priority", option: "first-job" },
 ];
 
 describe("the opening and the six demo chips (spec 4.1, 10.2 steps 1-2)", () => {
   it("greets, says what comes, then asks question 1 in its own message", () => {
     expect(openingMessages("خالد")).toEqual([
-      "هلا والله يا خالد، أنا دليل، دليلك إلى وظيفتك. بكون معك من أول خطوة لآخرها.",
-      "بسألك ست أسئلة قصيرة، وعلى ضوئها أرسم لك مسار يناسبك أنت.",
+      "هلا والله يا خالد، أنا دليلك إلى وظيفتك. بكون معك من أول خطوة لآخرها.",
+      "بسألك سبع أسئلة قصيرة، وعلى ضوئها أرسم لك مسار يناسبك أنت.",
       "نبدأ بالسهل: في أي مدينة أنت الحين؟",
     ]);
   });
@@ -58,6 +62,7 @@ describe("the opening and the six demo chips (spec 4.1, 10.2 steps 1-2)", () => 
       "زين، نظم معلومات إدارية. فيه مهارات كثيرة تنحسب لك من الحين.",
       "ولا يهمك، كلنا بدينا من هنا. بختار لك وظائف تناسب البدايات.",
       "الأرقام والبيانات، اختيار حلو. اللي يقرا الأرقام ينسمع رأيه.",
+      "ولا يهمك، نخليها مفتوحة، وتقدر تضيفها بعدين من «ملفي».",
       "أول وظيفة، هدف واضح. بختار لك أقصر طريق لها.",
     ]);
     expect(turns.map((t) => t.userText)).toEqual([
@@ -66,12 +71,13 @@ describe("the opening and the six demo chips (spec 4.1, 10.2 steps 1-2)", () => 
       "نظم معلومات إدارية",
       "بدون خبرة بعد",
       "الأرقام والبيانات",
+      "لا، مو الحين",
       "أول وظيفة بأسرع وقت",
     ]);
     // Each turn asks the next question with its chips; the last one closes.
     expect(turns[0]?.replies[1]).toBe("وش آخر شهادة دراسية أخذتها؟");
     expect(turns[0]?.chips?.question).toBe("education");
-    const last = turns[5];
+    const last = turns[6];
     expect(last?.replies).toEqual([
       "أول وظيفة، هدف واضح. بختار لك أقصر طريق لها.",
       "يعطيك العافية يا خالد، اكتملت الصورة. لحظات وأرسم لك مسارك.",
@@ -85,6 +91,7 @@ describe("the opening and the six demo chips (spec 4.1, 10.2 steps 1-2)", () => 
       major: { value: "mis", label: "نظم معلومات إدارية" },
       experience: "none",
       interest: ["data"],
+      company: "none",
       priority: "first-job",
     });
   });
@@ -146,11 +153,11 @@ describe("free text (spec 4.3)", () => {
     expect(turn.answers.city).toEqual({ value: "riyadh", label: "الرياض" });
     expect(turn.replies[0]).toBe("وعليكم السلام. تمام، الرياض. وفيه بعد فرص عن بُعد لو تبي.");
     const taif = onboardingTurn(ctx({}, "Sam"), text("السلام عليكم، أنا من الطائف"));
-    expect(taif.answers.city).toEqual({ value: "other", label: "الطائف" });
-    expect(taif.replies[0]?.startsWith("وعليكم السلام. الطائف، يا حيّ أهلها!")).toBe(true);
+    expect(taif.answers.city).toEqual({ value: "jeddah", label: "الطائف" });
+    expect(taif.replies[0]?.startsWith("وعليكم السلام. الطائف، حيّاك الله!")).toBe(true);
     expect(onboardingTurn(ctx(), text("هلا، أنا من جدة")).replies[0]?.startsWith("هلا والله. ")).toBe(true);
     expect(onboardingTurn(ctx(), text("أنا من الرياض")).replies[0]).toBe("تمام، الرياض. وفيه بعد فرص عن بُعد لو تبي.");
-    expect(onboardingTurn(ctx(), text("مرحبا، كم باقي؟")).replies[0]).toBe("هلا والله. باقي 6 أسئلة بس.");
+    expect(onboardingTurn(ctx(), text("مرحبا، كم باقي؟")).replies[0]).toBe("هلا والله. باقي 7 أسئلة بس.");
   });
 
   it("understands simple English for the interest question", () => {
@@ -166,11 +173,13 @@ describe("free text (spec 4.3)", () => {
     expect(onboardingTurn(at, text("not sure")).answers.interest).toEqual(["unsure"]);
   });
 
-  it("keeps the typed word for «الخبر» and a known city outside the three", () => {
+  it("keeps the typed word for «الخبر», and records a city outside the three as its nearest job market", () => {
     expect(onboardingTurn(ctx(), text("أنا في الخبر")).answers.city).toEqual({ value: "dammam", label: "الخبر" });
     const abha = onboardingTurn(ctx(), text("أبها"));
-    expect(abha.answers.city).toEqual({ value: "other", label: "أبها" });
-    expect(abha.replies[0]).toBe("أبها، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في البيانات التجريبية، فبضيف لك وظائف عن بُعد تناسبك.");
+    expect(abha.answers.city).toEqual({ value: "jeddah", label: "أبها" });
+    expect(abha.replies[0]).toBe(
+      "أبها، حيّاك الله! مقر إمارة منطقة عسير، وأقرب سوق وظائف كبير لك جدة (حوالي 500 كم بخط مستقيم). وفيه بعد وظائف عن بُعد تقدر تشتغلها من مكانك.",
+    );
   });
 
   it("applies the tie rules: the earliest keyword wins («طالب ماجستير», «إدارة مالية»), «هندسة برمجيات» is cs", () => {
@@ -234,10 +243,10 @@ describe("every other message (spec 4.5)", () => {
     expect(onboardingTurn(ctx(), text("شكراً")).replies).toEqual(["العفو.", q1]);
     expect(onboardingTurn(ctx(), text("يعطيك العافية")).replies).toEqual(["العفو.", q1]);
     expect(onboardingTurn(ctx(), text("من أنت؟")).replies[0]).toBe(
-      "أنا دليل، دليلك إلى وظيفتك. أسألك الحين عشان أرسم مسارك، وبعدها أكون معك في كل خطوة.",
+      "أنا دليلك إلى وظيفتك. أسألك الحين عشان أرسم مسارك، وبعدها أكون معك في كل خطوة.",
     );
     expect(onboardingTurn(ctx(), text("هل أنت ذكاء اصطناعي")).replies[0]).toBe(
-      "أنا دليل، دليلك إلى وظيفتك. أسألك الحين عشان أرسم مسارك، وبعدها أكون معك في كل خطوة.",
+      "أنا دليلك إلى وظيفتك. أسألك الحين عشان أرسم مسارك، وبعدها أكون معك في كل خطوة.",
     );
     expect(onboardingTurn(ctx(), text("لماذا تسأل؟")).replies[0]).toBe(
       "أسأل عشان أختار لك من 20 وظيفة اللي يناسب مدينتك وتخصصك وخبرتك واللي تحبه. وترى إجاباتك تنحفظ في متصفحك.",
@@ -245,28 +254,29 @@ describe("every other message (spec 4.5)", () => {
     expect(onboardingTurn(ctx(), text("ماذا ستفعل بإجاباتي")).replies[0]).toBe(
       "أسأل عشان أختار لك من 20 وظيفة اللي يناسب مدينتك وتخصصك وخبرتك واللي تحبه. وترى إجاباتك تنحفظ في متصفحك.",
     );
-    expect(onboardingTurn(ctx({ city: { value: "riyadh", label: "الرياض" } }), text("كم سؤالاً بقي؟")).replies[0]).toBe("باقي 5 أسئلة بس.");
+    expect(onboardingTurn(ctx({ city: { value: "riyadh", label: "الرياض" } }), text("كم سؤالاً بقي؟")).replies[0]).toBe("باقي 6 أسئلة بس.");
     const four: OnboardingAnswers = {
       city: { value: "riyadh", label: "الرياض" },
       education: "bachelor",
       major: { value: "mis", label: "نظم معلومات إدارية" },
       experience: "none",
     };
-    expect(onboardingTurn(ctx(four), text("كم باقي؟")).replies[0]).toBe("باقي سؤالين بس.");
-    expect(onboardingTurn(ctx({ ...four, interest: ["data"] }), text("كم باقي")).replies[0]).toBe("باقي سؤال واحد بس.");
+    expect(onboardingTurn(ctx(four), text("كم باقي؟")).replies[0]).toBe("باقي 3 أسئلة بس.");
+    expect(onboardingTurn(ctx({ ...four, interest: ["data"] }), text("كم باقي")).replies[0]).toBe("باقي سؤالين بس.");
     expect(onboardingTurn(ctx(), text("كم الراتب في جدة؟")).replies).toEqual(["سؤال في محله، ونرجع له بعد ما نرسم مسارك.", q1]);
   });
 
   it("asks again on the first miss, and on the second accepts city and major as typed", () => {
-    const first = onboardingTurn(ctx(), text("العلا"));
+    // a place outside the kingdom (every Saudi one is known: see "every Saudi city and governorate" below)
+    const first = onboardingTurn(ctx(), text("دبي"));
     expect(first.replies).toEqual(["سامحني، ما لقطتها زين. تقدر تختار من الخيارات تحت، أو تكتبها بطريقة ثانية.", "في أي مدينة أنت الحين؟"]);
-    expect(first.unmapped).toEqual({ question: "city", text: "العلا" });
+    expect(first.unmapped).toEqual({ question: "city", text: "دبي" });
     expect(first.misses).toEqual({ city: 1 });
     expect(first.answers).toEqual({});
 
-    const second = onboardingTurn(ctx({}, "خالد", first.misses), text("العلا"));
-    expect(second.answers.city).toEqual({ value: "other", label: "العلا" });
-    expect(second.replies[0]).toBe("العلا، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في البيانات التجريبية، فبضيف لك وظائف عن بُعد تناسبك.");
+    const second = onboardingTurn(ctx({}, "خالد", first.misses), text("دبي"));
+    expect(second.answers.city).toEqual({ value: "other", label: "دبي" });
+    expect(second.replies[0]).toBe("دبي، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في البيانات التجريبية، فبضيف لك وظائف عن بُعد تناسبك.");
     expect(second.pending).toBe("education");
 
     const majorBase: OnboardingAnswers = { city: { value: "riyadh", label: "الرياض" }, education: "bachelor" };
@@ -293,6 +303,171 @@ describe("every other message (spec 4.5)", () => {
   });
 });
 
+describe("every Saudi city and governorate (20 Nov 2026: «شقراء» gets a real answer)", () => {
+  const cityOf = (t: string) => onboardingTurn(ctx(), text(t));
+  const tail = "وفيه بعد وظائف عن بُعد تقدر تشتغلها من مكانك.";
+
+  it("knows the 13 regions, each with its seat and its governorates, all inside the kingdom", () => {
+    expect(SA_REGIONS.map((r) => r.id)).toEqual([...SA_REGION_IDS]);
+    expect(SA_REGION_IDS).toHaveLength(13);
+    for (const region of SA_REGIONS) {
+      expect(findSaPlace(region.seat)?.kind, region.seat).toBe("seat");
+      expect(findSaPlace(region.seat)?.region, region.seat).toBe(region.id);
+      expect(SA_PLACES.filter((p) => p.region === region.id && p.kind === "governorate").length, region.name).toBeGreaterThanOrEqual(3);
+    }
+    expect(SA_PLACES.filter((p) => p.kind === "seat")).toHaveLength(13);
+    expect(SA_PLACES.filter((p) => p.kind === "governorate")).toHaveLength(141);
+    expect(new Set(SA_PLACES.map((p) => p.name)).size).toBe(SA_PLACES.length);
+    for (const place of SA_PLACES) {
+      if (place.at === null) {
+        expect(place.metroOf, place.name).toBeDefined();
+        continue;
+      }
+      const [lat, lon] = place.at;
+      expect(lat > 16 && lat < 32.2 && lon > 34.4 && lon < 55.7, place.name).toBe(true);
+    }
+    for (const name of ["شقراء", "الدوادمي", "المجمعة", "الزلفي", "عفيف", "وادي الدواسر", "بيشة"]) {
+      expect(findSaPlace(name)?.kind, name).toBe("governorate");
+    }
+  });
+
+  it("no two places share a spelling", () => {
+    const seen = new Map<string, string>();
+    for (const place of SA_PLACES) {
+      for (const name of [place.name, ...(place.aliases ?? [])]) {
+        const key = normalizeText(name).replace(/^ال/, "");
+        expect(seen.get(key) ?? place.name, name).toBe(place.name);
+        seen.set(key, place.name);
+      }
+    }
+  });
+
+  it("works the distance out from the coordinates (haversine, straight line)", () => {
+    const at = (name: string) => findSaPlace(name)?.at ?? [0, 0];
+    expect(Math.round(distanceKm(at("الرياض"), at("جدة")))).toBeGreaterThan(840);
+    expect(Math.round(distanceKm(at("الرياض"), at("جدة")))).toBeLessThan(860);
+    expect(distanceKm(at("شقراء"), at("شقراء"))).toBe(0);
+    const shaqra = findSaPlace("شقراء");
+    expect(shaqra && nearestJobMarket(shaqra)).toEqual({ market: "riyadh", km: 160 });
+    const bisha = findSaPlace("بيشة");
+    expect(bisha && nearestJobMarket(bisha).market).toBe("jeddah");
+    const hofuf = findSaPlace("الهفوف");
+    expect(hofuf && nearestJobMarket(hofuf).market).toBe("dammam");
+  });
+
+  it("says where the place is, its nearest big job market and how far, in Najdi", () => {
+    expect(cityOf("شقراء").replies[0]).toBe(
+      `شقراء، حيّاك الله! محافظة في منطقة الرياض، وأقرب سوق وظائف كبير لك الرياض (حوالي 160 كم بخط مستقيم). ${tail}`,
+    );
+    expect(cityOf("الدوادمي").replies[0]).toBe(
+      `الدوادمي، حيّاك الله! محافظة في منطقة الرياض، وأقرب سوق وظائف كبير لك الرياض (حوالي 240 كم بخط مستقيم). ${tail}`,
+    );
+    expect(cityOf("بيشة").replies[0]).toBe(
+      `بيشة، حيّاك الله! محافظة في منطقة عسير، وأقرب سوق وظائف كبير لك جدة (حوالي 390 كم بخط مستقيم). ${tail}`,
+    );
+    expect(cityOf("عفيف").replies[0]).toBe(
+      `عفيف، حيّاك الله! محافظة في منطقة الرياض، وأقرب سوق وظائف كبير لك الرياض (حوالي 400 كم بخط مستقيم). ${tail}`,
+    );
+    expect(cityOf("الهفوف").replies[0]).toBe(
+      `الهفوف، حيّاك الله! مدينة في المنطقة الشرقية، وأقرب سوق وظائف كبير لك الدمام (حوالي 130 كم بخط مستقيم). ${tail}`,
+    );
+    expect(cityOf("القصيم").replies[0]).toBe(
+      `القصيم، حيّاك الله! مقر إمارتها بريدة، وأقرب سوق وظائف كبير لك الرياض (حوالي 330 كم من بريدة بخط مستقيم). ${tail}`,
+    );
+    expect(cityOf("البيضاء").replies[0]).toBe(
+      `البيضاء، حيّاك الله! محافظة في المنطقة الشرقية، وهي ضمن حاضرة الدمام، يعني سوق الدمام عندك. ${tail}`,
+    );
+    // and the next question follows, as after any answer
+    expect(cityOf("شقراء").replies[1]).toBe("وش آخر شهادة دراسية أخذتها؟");
+    expect(cityOf("شقراء").pending).toBe("education");
+  });
+
+  it("accepts the common spellings: ة/ه, ء, ال, ى/ي, أ/إ/ا, ئ/ي and the other names", () => {
+    const cases: readonly [string, string, string][] = [
+      ["شقرا", "riyadh", "شقراء"],
+      ["الشقراء", "riyadh", "شقراء"],
+      ["أنا من شقراء", "riyadh", "شقراء"],
+      ["ساكن في مدينة شقراء", "riyadh", "شقراء"],
+      ["دوادمي", "riyadh", "الدوادمي"],
+      ["الدوادمى", "riyadh", "الدوادمي"],
+      ["المجمعه", "riyadh", "المجمعة"],
+      ["مجمعة", "riyadh", "المجمعة"],
+      ["زلفي", "riyadh", "الزلفي"],
+      ["وادى الدواسر", "riyadh", "وادي الدواسر"],
+      ["بيشه", "jeddah", "بيشة"],
+      ["ابها", "jeddah", "أبها"],
+      ["إبها", "jeddah", "أبها"],
+      ["الاحساء", "dammam", "الأحساء"],
+      ["الإحساء", "dammam", "الأحساء"],
+      ["الداير", "jeddah", "الدائر"],
+      ["صبياء", "jeddah", "صبيا"],
+      ["جيزان", "jeddah", "جيزان"],
+      ["محايل", "jeddah", "محايل"],
+      ["بالمذنب", "riyadh", "المذنب"],
+      ["حفر الباطن", "riyadh", "حفر الباطن"],
+      ["الشرقية", "dammam", "الشرقية"],
+    ];
+    for (const [typed, value, label] of cases) {
+      const turn = cityOf(typed);
+      expect(turn.answers.city, typed).toEqual({ value, label });
+      expect(turn.unmapped, typed).toBeNull();
+      expect(turn.replies[0]?.includes("حيّاك الله!"), typed).toBe(true);
+    }
+  });
+
+  it("never treats a real Saudi place as not understood", () => {
+    for (const place of SA_PLACES) {
+      for (const name of [place.name, ...(place.aliases ?? [])]) {
+        const turn = cityOf(name);
+        expect(turn.unmapped, name).toBeNull();
+        expect(turn.answers.city?.value, name).not.toBe("other");
+        expect(turn.answers.city?.value, name).not.toBe("none");
+      }
+    }
+  });
+
+  it("keeps the chip cities and their replies exactly as before", () => {
+    expect(cityOf("الرياض").replies[0]).toBe("تمام، الرياض. وفيه بعد فرص عن بُعد لو تبي.");
+    expect(cityOf("جدة").answers.city).toEqual({ value: "jeddah", label: "جدة" });
+    expect(cityOf("الدمام").answers.city).toEqual({ value: "dammam", label: "الدمام" });
+    expect(cityOf("مكة").answers.city).toEqual({ value: "makkah", label: "مكة المكرمة" });
+    expect(cityOf("المدينة المنورة").answers.city).toEqual({ value: "madinah", label: "المدينة المنورة" });
+    expect(cityOf("الظهران").answers.city).toEqual({ value: "dammam", label: "الظهران" });
+    expect(cityOf("رياض الخبراء").answers.city).toEqual({ value: "riyadh", label: "رياض الخبراء" });
+  });
+
+  it("reads an everyday word that is also a place only as the place", () => {
+    expect(cityOf("أبي دوام كامل في الرياض").answers.city).toEqual({ value: "riyadh", label: "الرياض" });
+    expect(cityOf("الكامل").answers.city).toEqual({ value: "jeddah", label: "الكامل" });
+    expect(cityOf("الجهة الشرقية من جدة").answers.city).toEqual({ value: "jeddah", label: "جدة" });
+  });
+
+  it("ranks the nearest market's jobs first and the remote ones right after (the 4.6 city term)", () => {
+    const ranked = rankByFit(cityOf("شقراء").answers);
+    expect(ranked.length).toBeGreaterThan(0);
+    for (const fit of ranked) {
+      const city = getJob(fit.jobId).city;
+      expect(fit.terms.city, fit.jobId).toBe(city === "riyadh" ? 10 : city === "remote" ? 6 : 0);
+    }
+    const bisha = rankByFit(cityOf("بيشة").answers);
+    for (const fit of bisha) {
+      const city = getJob(fit.jobId).city;
+      expect(fit.terms.city, fit.jobId).toBe(city === "jeddah" ? 10 : city === "remote" ? 6 : 0);
+    }
+  });
+
+  it("says a job in the nearest market is near the place, not in it («قريبة منك: الرياض»; the city itself stays «في مدينتك»)", () => {
+    // major and experience score nothing here, so the city is one of the (at most three) reasons
+    const base: OnboardingAnswers = { education: "bachelor", major: { value: "other", label: "تخصص آخر" }, experience: "over3", interest: ["data"] };
+    const shaqra = fitReasons("data-analyst-riyadh", { ...base, city: cityOf("شقراء").answers.city }).map(revealReasonText);
+    expect(shaqra).toContain("قريبة منك: الرياض");
+    expect(shaqra.join(" ")).not.toContain("شقراء");
+    const riyadh = fitReasons("data-analyst-riyadh", { ...base, city: cityOf("الرياض").answers.city }).map(revealReasonText);
+    expect(riyadh).toContain("في مدينتك: الرياض");
+    expect(revealReasonText({ kind: "city", cityLabel: "الرياض", near: true })).toBe("قريبة منك: الرياض");
+  });
+});
+
 describe("the pending question is derived (ARCHITECTURE 8.5)", () => {
   function user(answers: OnboardingAnswers, greeted: boolean): UserState {
     const fresh = newUser("خالد", clock);
@@ -303,7 +478,7 @@ describe("the pending question is derived (ARCHITECTURE 8.5)", () => {
   it("pendingQuestion: {} → city; city + major → education; all six → null", () => {
     expect(pendingQuestion({})).toBe("city");
     expect(pendingQuestion({ city: { value: "jeddah", label: "جدة" }, major: { value: "marketing", label: "تسويق" } })).toBe("education");
-    expect(play(DEMO_CHIPS)[5]?.pending).toBeNull();
+    expect(play(DEMO_CHIPS)[6]?.pending).toBeNull();
   });
 
   it("onboardingContext: empty thread → null; after the greeting → city", () => {
@@ -355,6 +530,7 @@ describe("the onboarding flow end to end through the local brain and the store's
     say("بكالوريوس");
     say("سنتين");
     say("التسويق والمحتوى");
+    say("لا، مو الحين");
     const last = say("أغيّر مجالي");
     expect(last.done).toBe(true);
     expect(state.answers).toMatchObject({ education: "bachelor", experience: "1to3", interest: ["marketing"], priority: "switch" });

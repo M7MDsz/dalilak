@@ -31,7 +31,7 @@ export interface AnswerTilesProps {
   /** False once answered: the picked tile travels into the thread, the rest fade out. */
   readonly open: boolean;
   readonly onPick: (option: AnswerOption) => void;
-  /** «دليل» is answering: the pieces wait. */
+  /** «دليلك» is answering: the pieces wait. */
   readonly disabled?: boolean;
   readonly size?: "sm" | "md";
   /** Classes of every tile's face (a phone tightens the ten majors). */

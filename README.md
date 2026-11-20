@@ -1,22 +1,22 @@
-# دليلك · Dalilak
+# دليل · Dalilak
 
 **دليلك إلى وظيفتك: from your skills to your job.**
 
-Dalilak is an Arabic, game-like career guide. You talk to «دليل» (Daleel), upload your CV, and in seconds you know where
+Dalilak is an Arabic, game-like career guide. You talk to «دليلك» ("your guide"), upload your CV, and in seconds you know where
 you stand, which job fits you, what you are missing, and the next step. Every course you finish is measured progress toward
 the job you chose: XP, levels, stars, badges and a weekly leaderboard.
 
 Built for the Maharah hackathon («مهاراثون»), November 2026.
 
-| Onboarding with «دليل» | Your roadmap (calm design) |
+| Onboarding with «دليلك» | Your roadmap (calm design) |
 | --- | --- |
 | ![Onboarding](docs/screenshots/onboarding.png) | ![Map, calm design](docs/screenshots/map-calm.png) |
-| **Your roadmap (game design)** | **«دليل» applies for you** |
+| **Your roadmap (game design)** | **«دليلك» applies for you** |
 | ![Map, game design](docs/screenshots/map-game.png) | ![The advisor applies on several sites](docs/screenshots/advisor-applies.png) |
 
 ## What it does
 
-- **A conversation, not a form.** «دليل» asks six short questions in Saudi Najdi Arabic (city, education, major,
+- **A conversation, not a form.** «دليلك» asks six short questions in Saudi Najdi Arabic (city, education, major,
   experience, interests, priority), understands typed answers in dialect, and answers every message at once.
 - **CV analysis you can see.** Upload a PDF or Word file, or paste the text. Dalilak finds 38 skills, gives each one 1 to 3
   stars, and shows the sentence in your CV that proves it.
@@ -24,17 +24,17 @@ Built for the Maharah hackathon («مهاراثون»), November 2026.
   that close the gap.
 - **A roadmap you can play.** Your path is a map from «البداية» to the job, with a 3D flight to each station, a skill tree,
   XP, levels, a daily streak, 12 badges and a leaderboard.
-- **An advisor that acts.** «دليل» answers questions about your path, jobs, courses and the platform itself, opens the
+- **An advisor that acts.** «دليلك» answers questions about your path, jobs, courses and the platform itself, opens the
   page you need, and can fill and send an application for you (simulated: Dalilak, LinkedIn, بيت.كوم, Indeed and the
   company site, one after another).
 - **Two designs.** A calm design and a game-board design; the user switches between them in the side menu or on «ملفي».
-- **Works offline.** With no internet or no AI key, «دليل» runs on a built-in local brain. With a Gemini key, free
+- **Works offline.** With no internet or no AI key, «دليلك» runs on a built-in local brain. With a Gemini key, free
   questions are answered by Gemini, inside rules enforced in code (every number must come from the user's own data).
 
 ## Real and simulated
 
 - **Real:** the conversation and its scoring, reading the CV and the evidence for each skill, the match formula, the
-  roadmap, XP, levels, streak, badges, the ranking, and «دليل» opening pages and acting when asked.
+  roadmap, XP, levels, streak, badges, the ranking, and «دليلك» opening pages and acting when asked.
 - **Sample data, labelled as such on screen:** the 20 jobs, the companies («جهة تجريبية»), the 59 courses and the other
   leaderboard players. Applying sends nothing to anyone, and the app says so. Sign-in is by name only, and everything is
   stored in the browser.

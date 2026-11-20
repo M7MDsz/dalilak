@@ -1,4 +1,4 @@
-# How Dalilak «دليلك» is drawn (DESIGN.md)
+# How Dalilak «دليل» is drawn (DESIGN.md)
 
 For every screen builder. Read it before you build any screen, then keep `/dev/kit` open beside you: it shows every piece
 below in every state, on paper and on the stage. The decisions behind this file are in `docs/DESIGN-BRIEF.md`; motion is in
@@ -148,7 +148,7 @@ station** on the map, **the one primary action of a screen**, and **«أنت»**
   icon's own colour. The kit does this for you: secondary and ghost buttons, plain and outline icon buttons, field and
   select adornments and chips carry the class `wp-quiet`, which mutes the dot of every icon inside them; disabled controls
   mute it too. The coral dot stays on the primary button's icon, a solid icon button (send), the active navigation item,
-  position markers («أنت هنا», the current station, the trailhead) and «دليل»'s glyph.
+  position markers («أنت هنا», the current station, the trailhead) and «دليلك»'s glyph.
   - Your own control outside the kit: add `wp-quiet` to it, or pass `waypoint="muted"` to the icon.
   - A quiet control that IS the user's next action or position (the active nav item, the advisor launcher): add
     `data-wp-live` to it and the coral comes back.
@@ -360,7 +360,7 @@ border only.
 ### Button
 `variant` `"primary" | "secondary" | "ghost"` (default primary) · `size` `"sm" | "md" | "lg"` (40 / 48 / 56 px; sm only
 inside cards and rows) · `icon` (20 px md/lg, 18 px sm) · `iconPosition` `"start" | "end"` (default end, the inline-end) ·
-`pressed` (shows the press frame: «دليل» pressing it) · `loading` (keeps label and width, the icon becomes the running arc,
+`pressed` (shows the press frame: «دليلك» pressing it) · `loading` (keeps label and width, the icon becomes the running arc,
 presses stop) · `render` (another element: `render={<a href="/samples/cv.pdf" />}`) · every `<button>` prop.
 ```tsx
 <Button icon={<IconArrowForward size={20} />} data-testid="path-next-start">ابدأ الدورة</Button>
@@ -582,7 +582,7 @@ A list page has no stage and no show. It still reads as Dalilak because of five 
   last.
 - **Server and client.** Kit components with state or motion are client components; they render fine inside server
   pages. Do not pass functions as props from a server component (`BadgeMedal`'s function `emblem`): pass nodes.
-- **Programmatic press.** When «دليل» acts on a control, set `pressed` for about 160 ms, then call the action. The press is
+- **Programmatic press.** When «دليلك» acts on a control, set `pressed` for about 160 ms, then call the action. The press is
   seen; the action follows it.
 - **Test ids** come from the spec: pass `data-testid` to any kit component (it reaches the element), or `testId` where the
   component renders several elements (XpBar, SkillStars, Stamp, BadgeMedal, StreakFlame, EmptyState, SelectField). Numbers
@@ -606,8 +606,8 @@ A list page has no stage and no show. It still reads as Dalilak because of five 
 
 **Never** (Mohammed's rejected list and what leads to it)
 - Gradient or glow washes on cards, headers or backgrounds · coloured or glowing shadows · glass or `backdrop-blur` ·
-  sparkle / ✦ icons · emoji as icons · a purple-gradient "AI" look · an orb or blob for «دليل».
-- Bouncing or pulsing dots next to a spinner (waiting is «دليل»'s glyph and a rolling status line) · a spinner for a page.
+  sparkle / ✦ icons · emoji as icons · a purple-gradient "AI" look · an orb or blob for «دليلك».
+- Bouncing or pulsing dots next to a spinner (waiting is «دليلك»'s glyph and a rolling status line) · a spinner for a page.
 - Hover lift, scale or shadow growth · a loop at rest outside the five allowed (playbook 1.7).
 - Heavy spring page pushes, dimming, two pages visible at once.
 - A coral dot on a quiet control (close, search, filters, secondary actions): see the waypoint rule, 3.1.

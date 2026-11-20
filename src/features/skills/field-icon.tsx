@@ -3,11 +3,14 @@ import type { ReactNode } from "react";
 
 import {
   IconFieldBusiness,
+  IconFieldCyberCloud,
   IconFieldData,
   IconFieldDesign,
   IconFieldHr,
   IconFieldMarketing,
+  IconFieldProduct,
   IconFieldProfessional,
+  IconFieldSalesSupply,
   IconFieldSoftware,
   type IconProps,
 } from "@/components/icons";
@@ -20,6 +23,9 @@ const ICONS = {
   marketing: IconFieldMarketing,
   business: IconFieldBusiness,
   hr: IconFieldHr,
+  product: IconFieldProduct,
+  "cyber-cloud": IconFieldCyberCloud,
+  "sales-supply": IconFieldSalesSupply,
   professional: IconFieldProfessional,
 } as const satisfies Record<FieldId, (props: IconProps) => ReactNode>;
 

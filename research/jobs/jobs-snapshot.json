@@ -1,0 +1,1676 @@
+{
+  "checkedAt": "2026-11-20",
+  "label": "جُمعت في 20 نوفمبر 2026",
+  "note": "Snapshot of public postings opened on 2026-11-20. A posting may have closed since. Evidence lines are copied verbatim from each posting.",
+  "sources": [
+    {
+      "name": "Workable public job board",
+      "url": "https://jobs.workable.com/",
+      "how": "public job-search JSON used by the site itself; postings opened one by one"
+    },
+    {
+      "name": "Workable company boards (Salla, Foodics, Lucidya, Ninja)",
+      "url": "https://apply.workable.com/salla/",
+      "how": "public company career pages and their public posting JSON"
+    },
+    {
+      "name": "Greenhouse job board (Tamara)",
+      "url": "https://job-boards.eu.greenhouse.io/tamara",
+      "how": "public Greenhouse Job Board API"
+    },
+    {
+      "name": "Delivery Hero careers / SmartRecruiters (HungerStation)",
+      "url": "https://careers.deliveryhero.com/",
+      "how": "public SmartRecruiters Posting API"
+    }
+  ],
+  "demoCandidates": [
+    {
+      "jobId": "jeeny-growth-insights-analytics-riyadh",
+      "asks": [
+        "excel",
+        "sql",
+        "powerbi",
+        "statistics",
+        "communication"
+      ],
+      "missing": [],
+      "note": "All 5 skills in its own text, Riyadh, open. But it is a manager role: 'At least 5 years experience', so not entry level."
+    },
+    {
+      "jobId": "qiddiya-hr-analytics-analyst-riyadh",
+      "asks": [
+        "powerbi",
+        "statistics"
+      ],
+      "missing": [
+        "excel",
+        "sql",
+        "communication"
+      ],
+      "note": "Entry level (0-1 years), Riyadh, posted 4 Nov 2026. Asks Power BI and statistical analysis (plus dashboards and presentations), not Excel, SQL or communication by name. An HR-analytics analyst."
+    },
+    {
+      "jobId": "ninja-real-estate-performance-analyst-riyadh",
+      "asks": [
+        "excel",
+        "powerbi",
+        "communication"
+      ],
+      "missing": [
+        "sql",
+        "statistics"
+      ],
+      "note": "Junior (min. 2 years), Riyadh. Statistics appears only as an accepted degree, so it is not counted."
+    }
+  ],
+  "jobs": [
+    {
+      "id": "jeeny-growth-insights-analytics-riyadh",
+      "title": "Growth Manager - Insights & Analytics",
+      "titleAr": "مدير نمو - رؤى وتحليلات",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Jeeny",
+        "ar": "جيني"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-09-29",
+      "postedAtSource": "2026-09-29",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Workable public job board (jobs.workable.com)",
+      "url": "https://jobs.workable.com/view/9VFZMw6SXRJ5tMB5HZGEGF/growth-manager---insights-%26-analytics-in-riyadh-at-jeeny",
+      "field": "data",
+      "band": "mid",
+      "bandEvidence": "At least 5 years experience in an analytical role",
+      "requirements": [
+        {
+          "skill": "excel",
+          "stars": 3,
+          "evidence": "Amazing SQL and Excel skills. Experience with Python or R is a plus"
+        },
+        {
+          "skill": "sql",
+          "stars": 3,
+          "evidence": "Amazing SQL and Excel skills. Experience with Python or R is a plus"
+        },
+        {
+          "skill": "powerbi",
+          "stars": 1,
+          "evidence": "Experience with some BI tools and data visualization like Tableau, Power BI or Looker"
+        },
+        {
+          "skill": "statistics",
+          "stars": 2,
+          "evidence": "Solid grasp of statistics and demonstrated experience with A/B testing"
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Excellent communication skills; able to present insights to technical and non-technical stakeholders"
+        }
+      ],
+      "summary": "تحوّل بيانات منصة التنقل إلى رؤى تقود حملات النمو والاحتفاظ بالعملاء وتوزيع ميزانيات التسويق.",
+      "tasks": [
+        "تحليل مؤشرات السوق وتجارب A/B",
+        "بناء نماذج توقّع للطلب والاحتفاظ",
+        "إدارة ميزانية النمو ومتابعة العائد"
+      ]
+    },
+    {
+      "id": "qiddiya-hr-analytics-analyst-riyadh",
+      "title": "Analyst - HR Analytics and Reporting",
+      "titleAr": "محلل تحليلات وتقارير الموارد البشرية",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Qiddiya Investment Company",
+        "ar": "شركة القدية للاستثمار"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-04",
+      "postedAtSource": "2026-11-04",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Workable public job board (jobs.workable.com)",
+      "url": "https://jobs.workable.com/view/vQUmwMzM5YQRVSBRCsLjpN/analyst---hr-analytics-and-reporting-in-riyadh-at-qiddiya-investment-company",
+      "field": "data",
+      "band": "entry",
+      "bandEvidence": "0-1 years of experience",
+      "requirements": [
+        {
+          "skill": "powerbi",
+          "stars": 2,
+          "evidence": "Develop and maintain HR dashboards and scorecards using Power BI and other reporting tools."
+        },
+        {
+          "skill": "statistics",
+          "stars": 1,
+          "evidence": "Conduct statistical and trend analysis to support Human Capital strategies and initiatives."
+        },
+        {
+          "skill": "dataviz",
+          "stars": 1,
+          "evidence": "Experience developing dashboards and executive reporting."
+        },
+        {
+          "skill": "presentation",
+          "stars": 1,
+          "evidence": "Translate complex data into clear insights and executive-ready presentations."
+        },
+        {
+          "skill": "hr-basics",
+          "stars": 1,
+          "evidence": "Experience working with HR systems such as SAP SuccessFactors, Oracle HCM, Workday, or similar platforms."
+        }
+      ],
+      "summary": "تحلّل بيانات الموظفين وتبني لوحات Power BI وتقارير دورية تدعم قرارات القوى العاملة في القدية.",
+      "tasks": [
+        "تحليل اتجاهات التوظيف والدوران الوظيفي إحصائياً",
+        "بناء لوحات وبطاقات أداء بـ Power BI",
+        "إعداد تقارير وعروض للقيادة العليا"
+      ]
+    },
+    {
+      "id": "ninja-real-estate-performance-analyst-riyadh",
+      "title": "Real Estate Performance Analyst",
+      "titleAr": "محلل أداء عقاري",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Ninja",
+        "ar": "نينجا"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-02",
+      "postedAtSource": "2026-11-02",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Ninja careers (apply.workable.com/ananinja)",
+      "url": "https://apply.workable.com/ananinja/j/210045281C/",
+      "field": "data",
+      "band": "junior",
+      "bandEvidence": "Minimum of 2 years of experience",
+      "requirements": [
+        {
+          "skill": "excel",
+          "stars": 3,
+          "evidence": "Advanced Microsoft Excel skills."
+        },
+        {
+          "skill": "powerbi",
+          "stars": 1,
+          "evidence": "Experience in developing KPI dashboards; Power BI or similar tools is an advantage."
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Strong written and verbal communication skills in both Arabic and English."
+        },
+        {
+          "skill": "problem-solving",
+          "stars": 1,
+          "evidence": "Strong analytical and problem-solving skills."
+        },
+        {
+          "skill": "presentation",
+          "stars": 1,
+          "evidence": "Support management in preparing reports and presentations."
+        }
+      ],
+      "summary": "تتابع أداء الوحدات العقارية مقابل المستهدفات وتعدّ التقارير ولوحات المؤشرات لدعم قرارات الإدارة.",
+      "tasks": [
+        "إعداد تقارير الأداء الدورية وتوحيدها",
+        "بناء لوحات مؤشرات الأداء ومتابعتها",
+        "رصد فجوات الأداء واقتراح التحسينات"
+      ]
+    },
+    {
+      "id": "master-works-data-senior-engineer-riyadh",
+      "title": "Data, Senior Engineer",
+      "titleAr": "مهندس بيانات أول",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Master-Works",
+        "ar": "ماستر ووركس"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-10-28",
+      "postedAtSource": "2026-10-28",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Workable public job board (jobs.workable.com)",
+      "url": "https://jobs.workable.com/view/3REMXu4uNPDavL1uZrTsaa/data%2C-senior-engineer-in-riyadh-at-master-works",
+      "field": "data",
+      "band": "mid",
+      "bandEvidence": "Minimum 3 years of experience",
+      "requirements": [
+        {
+          "skill": "sql",
+          "stars": 3,
+          "evidence": "Strong ability to write, analyze, debug, and optimize SQL queries."
+        },
+        {
+          "skill": "powerbi",
+          "stars": 1,
+          "evidence": "Experience with data visualization tools such as Power BI, Tableau, AWS QuickSight, or similar platforms."
+        },
+        {
+          "skill": "dataviz",
+          "stars": 1,
+          "evidence": "Develop data visualization solutions to present complex data effectively."
+        },
+        {
+          "skill": "communication",
+          "stars": 1,
+          "evidence": "Strong analytical thinking, problem-solving, attention to detail, communication, and collaboration skills."
+        },
+        {
+          "skill": "english",
+          "stars": 1,
+          "evidence": "Good command of English and the ability to communicate technical information effectively."
+        }
+      ],
+      "summary": "تصمّم حلول تكامل البيانات ومستودعاتها وتبني التقارير ولوحات المعلومات لدعم قرارات العملاء.",
+      "tasks": [
+        "كتابة استعلامات SQL وتحسين أدائها",
+        "بناء تقارير ولوحات معلومات تفاعلية",
+        "تحويل متطلبات العمل إلى مواصفات تقنية"
+      ]
+    },
+    {
+      "id": "salla-senior-data-scientist-remote",
+      "title": "Senior Data Scientist - Salla Platforms Metrics & Analytics",
+      "titleAr": "عالم بيانات أول - مقاييس وتحليلات منصات سلة",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Salla",
+        "ar": "سلة"
+      },
+      "city": "remote",
+      "cityText": "Madinah (remote)",
+      "remote": true,
+      "postedAt": "2026-07-23",
+      "postedAtSource": "2026-07-23",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Salla careers (apply.workable.com/salla)",
+      "url": "https://apply.workable.com/salla/j/AB2A46514F/",
+      "field": "data",
+      "band": "mid",
+      "bandEvidence": "5+ years of experience",
+      "requirements": [
+        {
+          "skill": "sql",
+          "stars": 3,
+          "evidence": "Strong SQL and Python; deep comfort working directly with warehouse-level data (BigQuery, Clickhouse, Redshift, or similar)."
+        },
+        {
+          "skill": "python-data",
+          "stars": 1,
+          "evidence": "Strong SQL and Python; deep comfort working directly with warehouse-level data (BigQuery, Clickhouse, Redshift, or similar)."
+        },
+        {
+          "skill": "dataviz",
+          "stars": 1,
+          "evidence": "Experience designing customer- or merchant-facing analytics products — dashboards, embedded reports, or analytics APIs."
+        },
+        {
+          "skill": "statistics",
+          "stars": 1,
+          "evidence": "Statistical modeling or forecasting experience applied to growth analytics."
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Excellent communication skills; able to align multiple teams around a single source of truth."
+        }
+      ],
+      "summary": "تقود طبقة المقاييس والتحليلات في منصة سلة ليحصل كل تاجر على تقارير دقيقة وموحّدة عن نموه.",
+      "tasks": [
+        "توحيد تعريفات المقاييس عبر المنتجات",
+        "تصميم تقارير وتحليلات التجار وتحسينها",
+        "وضع قواعد جودة البيانات ومطابقتها"
+      ]
+    },
+    {
+      "id": "lucidya-frontend-engineer-dammam",
+      "title": "Frontend Software Engineer - Saudi Only",
+      "titleAr": "مهندس برمجيات واجهات أمامية (للسعوديين فقط)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Lucidya",
+        "ar": "لوسيديا"
+      },
+      "city": "dammam",
+      "cityText": "Riyadh / Jeddah / Al Khobar",
+      "remote": false,
+      "postedAt": "2026-09-13",
+      "postedAtSource": "2026-09-13",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Lucidya careers (apply.workable.com/lucidya)",
+      "url": "https://apply.workable.com/lucidya/j/8120FF802B/",
+      "field": "software",
+      "band": "entry",
+      "bandEvidence": "0–2 years of professional frontend development experience",
+      "requirements": [
+        {
+          "skill": "javascript",
+          "stars": 2,
+          "evidence": "Strong understanding of JavaScript fundamentals."
+        },
+        {
+          "skill": "react",
+          "stars": 1,
+          "evidence": "Hands-on experience building applications with React."
+        },
+        {
+          "skill": "html-css",
+          "stars": 1,
+          "evidence": "Solid understanding of HTML, CSS, responsive design, and browser fundamentals."
+        },
+        {
+          "skill": "git",
+          "stars": 1,
+          "evidence": "Familiarity with Git and collaborative development workflows."
+        },
+        {
+          "skill": "apis",
+          "stars": 1,
+          "evidence": "Experience integrating frontend applications with APIs and handling asynchronous data."
+        }
+      ],
+      "summary": "تبني تطبيقات ويب إنتاجية بـ React وTypeScript لمنصة لوسيديا لتجربة العملاء المدعومة بالذكاء الاصطناعي.",
+      "tasks": [
+        "بناء واجهات ويب بـ React وTypeScript",
+        "ربط الواجهات بخدمات REST والتحديث اللحظي",
+        "كتابة اختبارات وتتبع الأخطاء من جذورها"
+      ]
+    },
+    {
+      "id": "salla-senior-backend-checkout-remote",
+      "title": "Senior Backend Engineer - Checkout",
+      "titleAr": "مهندس برمجيات خلفية أول - الدفع",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Salla",
+        "ar": "سلة"
+      },
+      "city": "remote",
+      "cityText": "Jeddah (remote)",
+      "remote": true,
+      "postedAt": "2026-08-18",
+      "postedAtSource": "2026-08-18",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Salla careers (apply.workable.com/salla)",
+      "url": "https://apply.workable.com/salla/j/891691547B/",
+      "field": "software",
+      "band": "mid",
+      "bandEvidence": "6+ years of professional software engineering experience",
+      "requirements": [
+        {
+          "skill": "programming",
+          "stars": 2,
+          "evidence": "Strong experience building scalable backend services in at least one modern language such as PHP, Go, Java, or C#."
+        },
+        {
+          "skill": "apis",
+          "stars": 1,
+          "evidence": "Experience designing RESTful APIs and integrating with third-party platforms and payment providers."
+        },
+        {
+          "skill": "sql",
+          "stars": 3,
+          "evidence": "Strong SQL knowledge with experience designing and optimizing MySQL or PostgreSQL databases."
+        },
+        {
+          "skill": "problem-solving",
+          "stars": 1,
+          "evidence": "This role is ideal for engineers who enjoy solving complex distributed systems problems, building high-performance services, and designing software that operates reliably at scale. You'll work closely with Product, Design, Data, and Engineering teams to deliver resilient, observable, and maintainable systems that directly impact millions of transactions."
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "This role is ideal for engineers who enjoy solving complex distributed systems problems, building high-performance services, and designing software that operates reliably at scale. You'll work closely with Product, Design, Data, and Engineering teams to deliver resilient, observable, and maintainable systems that directly impact millions of transactions."
+        }
+      ],
+      "summary": "تصمّم وتطوّر أنظمة خلفية عالية التوفر تشغّل الدفع والعروض في منصة سلة للتجارة الإلكترونية.",
+      "tasks": [
+        "تصميم واجهات REST وتكاملات بوابات الدفع",
+        "تحسين قواعد بيانات MySQL وPostgreSQL",
+        "كتابة اختبارات ومراجعة الشيفرة"
+      ]
+    },
+    {
+      "id": "salla-senior-qa-engineer-remote",
+      "title": "Senior QA Engineer (Manual & Automation)",
+      "titleAr": "مهندس ضمان جودة أول (يدوي وآلي)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Salla",
+        "ar": "سلة"
+      },
+      "city": "remote",
+      "cityText": "Makkah (remote)",
+      "remote": true,
+      "postedAt": "2026-10-08",
+      "postedAtSource": "2026-10-08",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Salla careers (apply.workable.com/salla)",
+      "url": "https://apply.workable.com/salla/j/B431E1A886/",
+      "field": "software",
+      "band": "mid",
+      "bandEvidence": "5+ years of QA experience",
+      "requirements": [
+        {
+          "skill": "javascript",
+          "stars": 2,
+          "evidence": "Solid JavaScript and TypeScript skills, enough to write clean, maintainable Playwright automation and read application code with confidence"
+        },
+        {
+          "skill": "git",
+          "stars": 1,
+          "evidence": "Strong command of Git and GitHub: branching, pull requests, code reviews, and working within CI pipelines"
+        },
+        {
+          "skill": "apis",
+          "stars": 1,
+          "evidence": "Experience testing web, mobile, and APIs"
+        },
+        {
+          "skill": "problem-solving",
+          "stars": 1,
+          "evidence": "Triage defects and investigate them in depth using browser DevTools (network, console, performance, storage) to find root causes, not just symptoms, and help the team prioritize what matters most"
+        },
+        {
+          "skill": "communication",
+          "stars": 1,
+          "evidence": "Communicate risks clearly to developers, product managers, and leadership, with a recommendation rather than just a report"
+        }
+      ],
+      "summary": "تملك جودة منتجات سلة من مراجعة المتطلبات حتى قرار الإطلاق، باختبارات يدوية وآلية.",
+      "tasks": [
+        "اختبار الميزات الجديدة يدوياً واستكشافياً",
+        "بناء اختبارات Playwright آلية في CI",
+        "تحليل الأخطاء وإيصال المخاطر للفريق"
+      ]
+    },
+    {
+      "id": "almajed-mobile-developer-riyadh",
+      "title": "Mobile Applications Developer",
+      "titleAr": "مطوّر تطبيقات جوال",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Almajed 4 Oud",
+        "ar": "الماجد للعود"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-04",
+      "postedAtSource": "2026-11-04",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Workable public job board (jobs.workable.com)",
+      "url": "https://jobs.workable.com/view/pebWNwCJYUpmnZrwF9SAvB/mobile-applications-developer-in-riyadh-at-almajed-4-oud",
+      "field": "software",
+      "band": "mid",
+      "bandEvidence": "3–5 years of practical experience",
+      "requirements": [
+        {
+          "skill": "programming",
+          "stars": 1,
+          "evidence": "Proven experience developing applications for Android and iOS."
+        },
+        {
+          "skill": "apis",
+          "stars": 1,
+          "evidence": "Develop and consume APIs (Application Programming Interfaces)."
+        },
+        {
+          "skill": "ui-design",
+          "stars": 1,
+          "evidence": "Build user-friendly interfaces and enhance user experience (UI/UX)."
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "Collaborate with UI/UX designers, business analysts, and IT teams."
+        },
+        {
+          "skill": "business-analysis",
+          "stars": 1,
+          "evidence": "Participate in gathering and analyzing business requirements."
+        }
+      ],
+      "summary": "تصمّم وتطوّر تطبيقات الجوال لأنظمة iOS وAndroid وتربطها بأنظمة الشركة الداخلية.",
+      "tasks": [
+        "تطوير تطبيقات iOS وAndroid وصيانتها",
+        "بناء واجهات سهلة الاستخدام",
+        "ربط التطبيقات بالأنظمة عبر واجهات API"
+      ]
+    },
+    {
+      "id": "horizontal-graduate-designer-riyadh",
+      "title": "KSA National Graduate Designer (UX/UI)",
+      "titleAr": "مصمم تجربة وواجهات مستخدم حديث التخرج (للسعوديين)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Horizontal Digital",
+        "ar": "هورايزنتال ديجيتال"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh (hybrid)",
+      "remote": false,
+      "postedAt": "2026-11-18",
+      "postedAtSource": "2026-11-18",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Workable public job board (jobs.workable.com)",
+      "url": "https://jobs.workable.com/view/vFjJC6Cu8uwTzGrbkgqt7E/hybrid-ksa-national-graduate-designer-(ux%2Fui)-in-riyadh-at-horizontal-digital",
+      "field": "design",
+      "band": "entry",
+      "bandEvidence": "recent grad or early-career designer",
+      "requirements": [
+        {
+          "skill": "figma",
+          "stars": 1,
+          "evidence": "Comfortable using design tools like Figma or Adobe XD—or excited to learn."
+        },
+        {
+          "skill": "prototyping",
+          "stars": 1,
+          "evidence": "Create visual assets, mockups, and prototypes using tools like Figma and Adobe Creative Cloud."
+        },
+        {
+          "skill": "ui-design",
+          "stars": 1,
+          "evidence": "A portfolio (student work, passion projects, or freelance welcome!) that shows visual design skills and an understanding of UI fundamentals."
+        },
+        {
+          "skill": "design-basics",
+          "stars": 1,
+          "evidence": "A recent grad or early-career designer with a portfolio that shows creativity, attention to detail, and a strong sense of visual design."
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "Collaborate with designers, developers, writers, and strategists to bring websites and apps to life."
+        }
+      ],
+      "summary": "فرصة لحديثي التخرج لتصميم تجارب مواقع وتطبيقات رقمية مع فريق تصميم وتطوير متكامل.",
+      "tasks": [
+        "تصميم نماذج ومخططات أولية بـ Figma",
+        "إنشاء عناصر بصرية للمواقع والتطبيقات",
+        "التعاون مع المطورين والكتّاب والاستراتيجيين"
+      ]
+    },
+    {
+      "id": "flyakeed-product-designer-riyadh",
+      "title": "Product Designer Specialist",
+      "titleAr": "أخصائي تصميم منتجات",
+      "titleArTranslated": true,
+      "company": {
+        "en": "FlyAkeed",
+        "ar": "فلاي أكيد"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-16",
+      "postedAtSource": "2026-11-16",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Workable public job board (jobs.workable.com)",
+      "url": "https://jobs.workable.com/view/fJSwLU6uoyho2g6Xx5JNJL/product-designer-specialist-in-riyadh-at-flyakeed",
+      "field": "design",
+      "band": "mid",
+      "bandEvidence": "3+ years of experience",
+      "requirements": [
+        {
+          "skill": "figma",
+          "stars": 2,
+          "evidence": "Proficiency in Figma (Required), Adobe Creative Suite, Print and AI design tools and image generation."
+        },
+        {
+          "skill": "ux-research",
+          "stars": 1,
+          "evidence": "Conduct user research and usability testing."
+        },
+        {
+          "skill": "prototyping",
+          "stars": 1,
+          "evidence": "Create wireframes, user flows, and high-fidelity mockups."
+        },
+        {
+          "skill": "ui-design",
+          "stars": 2,
+          "evidence": "A strong portfolio demonstrating your design process, including user research, wireframing, and high-fidelity UI."
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "Ability to communicate design concepts clearly and collaborate effectively with diverse teams."
+        }
+      ],
+      "summary": "تصمّم تجربة المستخدم لمنصات فلاي أكيد على الجوال والويب بالتعاون مع المنتج والهندسة.",
+      "tasks": [
+        "تصميم واجهات تتمحور حول المستخدم ونماذجها",
+        "إجراء بحث المستخدم واختبارات قابلية الاستخدام",
+        "إعداد مخططات ورحلات وتصاميم عالية الدقة"
+      ]
+    },
+    {
+      "id": "lucidya-product-designer-riyadh",
+      "title": "Product Designer (Saudi Nationals Only)",
+      "titleAr": "مصمم منتجات (للسعوديين فقط)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Lucidya",
+        "ar": "لوسيديا"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-08-12",
+      "postedAtSource": "2026-08-12",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Lucidya careers (apply.workable.com/lucidya)",
+      "url": "https://apply.workable.com/lucidya/j/87CCA82651/",
+      "field": "design",
+      "band": "mid",
+      "bandEvidence": "3–5 years of product design or UX/UI experience",
+      "requirements": [
+        {
+          "skill": "figma",
+          "stars": 2,
+          "evidence": "You're proficient in Figma and comfortable with prototyping, design systems, and modern product design practices."
+        },
+        {
+          "skill": "prototyping",
+          "stars": 1,
+          "evidence": "Own design problems end-to-end. You'll take ownership from understanding the problem and defining the user experience through wireframes, prototypes, high-fidelity UI, handoff, implementation, and post-launch iteration."
+        },
+        {
+          "skill": "ux-research",
+          "stars": 1,
+          "evidence": "Bring customer evidence into design decisions. You'll conduct or support usability testing and lightweight research, using what you learn to validate assumptions rather than relying solely on personal opinion."
+        },
+        {
+          "skill": "ui-design",
+          "stars": 2,
+          "evidence": "You have 3–5 years of product design or UX/UI experience, ideally in B2B or SaaS environments, with a portfolio demonstrating genuine end-to-end product thinking."
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "You're highly collaborative. You don't throw designs over the wall to Engineering or wait for Product to tell you what to do. You work with people throughout the process."
+        }
+      ],
+      "summary": "تتولى مشكلات التصميم من فهم المشكلة حتى الإطلاق في منصة لوسيديا، مع مراعاة العربية والإنجليزية.",
+      "tasks": [
+        "تحويل المتطلبات الغامضة إلى تجربة واضحة",
+        "تصميم مخططات ونماذج وواجهات عالية الدقة",
+        "اختبار قابلية الاستخدام والتحقق من الافتراضات"
+      ]
+    },
+    {
+      "id": "hungerstation-senior-product-designer-riyadh",
+      "title": "Senior Product Designer (Saudi Nationals)",
+      "titleAr": "مصمم منتجات أول (للسعوديين)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "HungerStation (Delivery Hero)",
+        "ar": "هنقرستيشن"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-10",
+      "postedAtSource": "2026-11-10",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Delivery Hero careers (SmartRecruiters)",
+      "url": "https://jobs.smartrecruiters.com/DeliveryHero/744000160830109-senior-product-designer-saudi-nationals-",
+      "field": "design",
+      "band": "mid",
+      "bandEvidence": "6 years of designing digital products",
+      "requirements": [
+        {
+          "skill": "figma",
+          "stars": 3,
+          "evidence": "Deep knowledge of design and prototyping tools such as Figma, Figjam, Miro, Maze, Sketch, UXCam, and Zeplin)"
+        },
+        {
+          "skill": "ux-research",
+          "stars": 1,
+          "evidence": "Minimum 3 years of experience in user research for conducting the qualitative and quantitative methods"
+        },
+        {
+          "skill": "ui-design",
+          "stars": 2,
+          "evidence": "6 years of designing digital products, with a strong portfolio that showcases a deep knowledge of product design knowledge & skills"
+        },
+        {
+          "skill": "presentation",
+          "stars": 1,
+          "evidence": "Present presentations and facilitates workshops in the scope of the product/project to facilitate discussions"
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "Highly collaborative between the cross-functional teams"
+        }
+      ],
+      "summary": "تقود تصميم منتجات هنقرستيشن الرقمية من البحث حتى التنفيذ مع فرق المنتج والتطوير.",
+      "tasks": [
+        "تحويل نتائج بحث المستخدم إلى ميزات",
+        "قيادة مراحل التصميم مع فرق متعددة",
+        "تقديم العروض وإدارة ورش العمل"
+      ]
+    },
+    {
+      "id": "salla-marketing-specialist-tamheer-jeddah",
+      "title": "Marketing Specialist ( Tamheer ) x 3",
+      "titleAr": "أخصائي تسويق (برنامج تمهير)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Salla",
+        "ar": "سلة"
+      },
+      "city": "jeddah",
+      "cityText": "Jeddah",
+      "remote": false,
+      "postedAt": "2025-09-29",
+      "postedAtSource": "2025-09-29",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Salla careers (apply.workable.com/salla)",
+      "url": "https://apply.workable.com/salla/j/9B7214D1B5/",
+      "field": "marketing",
+      "band": "entry",
+      "bandEvidence": "Tamheer on-the-job training; some experience or internships preferred",
+      "requirements": [
+        {
+          "skill": "marketing-basics",
+          "stars": 1,
+          "evidence": "Support the marketing team in developing and implementing marketing plans and campaigns."
+        },
+        {
+          "skill": "social-media",
+          "stars": 1,
+          "evidence": "Help manage social media accounts, including posting, scheduling, and responding to inquiries."
+        },
+        {
+          "skill": "content",
+          "stars": 1,
+          "evidence": "Assist in creating engaging content for digital platforms, including social media, blogs, and newsletters."
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Excellent written and verbal communication skills."
+        },
+        {
+          "skill": "problem-solving",
+          "stars": 1,
+          "evidence": "Analytical skills to interpret data and make recommendations."
+        }
+      ],
+      "summary": "تدريب على رأس العمل عبر تمهير في فريق تسويق سلة، بتخصص تواصل اجتماعي أو تصميم أو كتابة.",
+      "tasks": [
+        "دعم تنفيذ الخطط والحملات التسويقية",
+        "إنشاء محتوى للمنصات الرقمية والنشرات",
+        "إدارة حسابات التواصل والرد على الاستفسارات"
+      ]
+    },
+    {
+      "id": "salla-mahally-seo-manager-jeddah",
+      "title": "SEO Manager",
+      "titleAr": "مدير تحسين محركات البحث",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Salla (Mahally)",
+        "ar": "سلة (محلي)"
+      },
+      "city": "jeddah",
+      "cityText": "Jeddah",
+      "remote": false,
+      "postedAt": "2026-10-06",
+      "postedAtSource": "2026-10-06",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Salla (Mahally) careers (apply.workable.com/salla)",
+      "url": "https://apply.workable.com/salla/j/028A1DF2A6/",
+      "field": "marketing",
+      "band": "mid",
+      "bandEvidence": "4+ years of hands-on SEO experience",
+      "requirements": [
+        {
+          "skill": "seo",
+          "stars": 1,
+          "evidence": "Strong technical SEO expertise, with hands-on experience diagnosing and resolving complex issues related to crawlability, indexation, rendering, canonicalisation, and site architecture."
+        },
+        {
+          "skill": "content",
+          "stars": 2,
+          "evidence": "Own the content roadmap for organic: Arabic-first keyword and intent research, briefs, publishing cadence, and refresh cycles."
+        },
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Professional proficiency in both Arabic and English, with the ability to conduct Arabic keyword and search-intent research and assess the quality and relevance of Arabic SEO content."
+        },
+        {
+          "skill": "sql",
+          "stars": 1,
+          "evidence": "SQL, Python, or scripting experience for log analysis, bulk SEO audits, or automated monitoring."
+        },
+        {
+          "skill": "business-analysis",
+          "stars": 1,
+          "evidence": "Proven experience partnering directly with Engineering and Product teams to translate SEO findings into clear technical requirements and successfully deliver SEO improvements at scale."
+        }
+      ],
+      "summary": "تقود استراتيجية البحث العضوي لسوق محلي التابع لسلة: السيو التقني والمحتوى والظهور في محركات الإجابة.",
+      "tasks": [
+        "معالجة الزحف والفهرسة لملايين الصفحات",
+        "إدارة خطة المحتوى والكلمات المفتاحية العربية",
+        "تحويل فرص السيو إلى متطلبات للهندسة"
+      ]
+    },
+    {
+      "id": "lucidya-social-media-analyst-riyadh",
+      "title": "Senior Social Media Analyst",
+      "titleAr": "محلل أول لوسائل التواصل الاجتماعي",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Lucidya",
+        "ar": "لوسيديا"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-09-28",
+      "postedAtSource": "2026-09-28",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Lucidya careers (apply.workable.com/lucidya)",
+      "url": "https://apply.workable.com/lucidya/j/6FAFB24C93/",
+      "field": "marketing",
+      "band": "junior",
+      "bandEvidence": "years not stated (asks for experience in any social media role); band is our reading",
+      "requirements": [
+        {
+          "skill": "social-media",
+          "stars": 2,
+          "evidence": "Excellent knowledge of any social media tools and trends."
+        },
+        {
+          "skill": "content",
+          "stars": 1,
+          "evidence": "Providing constructive criticism to content creators to help them make improvements."
+        },
+        {
+          "skill": "marketing-basics",
+          "stars": 1,
+          "evidence": "Creating reports with analytical findings and recommendations for Internal (sales, marketing, etc.) or external (customers, prospects) requests."
+        },
+        {
+          "skill": "english",
+          "stars": 1,
+          "evidence": "Proficiency in English"
+        },
+        {
+          "skill": "presentation",
+          "stars": 1,
+          "evidence": "Therefore the social media analysts create professional reports that summarize their findings or present them in a more easily understandable format. These reports can be requested internally or externally to inform clients about how well their social media efforts are performing."
+        }
+      ],
+      "summary": "تقيس نجاح حضور العلامات على وسائل التواصل من مؤشرات المنشورات وتقدّم توصيات للعملاء.",
+      "tasks": [
+        "تحليل مؤشرات المنشورات والحسابات",
+        "رصد الإشارات للعلامة والاتجاهات الجديدة",
+        "إعداد تقارير بالنتائج والتوصيات"
+      ]
+    },
+    {
+      "id": "platinumlist-content-manager-riyadh",
+      "title": "English & Arabic Content Manager",
+      "titleAr": "مدير محتوى عربي وإنجليزي",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Platinumlist",
+        "ar": "بلاتينوم ليست"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-10-08",
+      "postedAtSource": "2026-10-08",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Workable public job board (jobs.workable.com)",
+      "url": "https://jobs.workable.com/view/erWWZEHR2drXcnYLnEXEus/english-%26-arabic-content-manager-in-riyadh-at-platinumlist",
+      "field": "marketing",
+      "band": "mid",
+      "bandEvidence": "3+ years of experience writing and editing",
+      "requirements": [
+        {
+          "skill": "content",
+          "stars": 2,
+          "evidence": "Strong editing, proofreading, and copywriting skills in both languages with the ability to adapt content to different audiences while maintaining the brand's tone of voice."
+        },
+        {
+          "skill": "seo",
+          "stars": 1,
+          "evidence": "Optimize content following SEO best practices to improve discoverability and search performance"
+        },
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Translate and adapt content from English to Arabic, including events, attractions, venues, FAQs, artist names, and UX texts"
+        },
+        {
+          "skill": "communication",
+          "stars": 1,
+          "evidence": "Strong communication and interpersonal skills, with the ability to collaborate effectively with cross-functional teams"
+        },
+        {
+          "skill": "problem-solving",
+          "stars": 1,
+          "evidence": "Strong problem-solving and critical thinking abilities."
+        }
+      ],
+      "summary": "تكتب وتحرر وتترجم محتوى الفعاليات والتذاكر بالعربية والإنجليزية وتحسّنه لمحركات البحث.",
+      "tasks": [
+        "كتابة وتحرير المحتوى بالعربية والإنجليزية",
+        "ترجمة محتوى الفعاليات والأماكن إلى العربية",
+        "تحسين المحتوى وفق ممارسات السيو"
+      ]
+    },
+    {
+      "id": "syarah-financial-analyst-tamheer-riyadh",
+      "title": "Financial Analyst -Tamheer Program",
+      "titleAr": "محلل مالي (برنامج تمهير)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Syarah",
+        "ar": "سيارة"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-03",
+      "postedAtSource": "2026-11-03",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Workable public job board (jobs.workable.com)",
+      "url": "https://jobs.workable.com/view/hK9DrzL5rr5AZKBE1ije8J/financial-analyst--tamheer-program-in-riyadh-at-syarah",
+      "field": "business",
+      "band": "entry",
+      "bandEvidence": "students or recent graduates (COOP / Tamheer)",
+      "requirements": [
+        {
+          "skill": "excel",
+          "stars": 1,
+          "evidence": "Familiarity with Microsoft Excel and Google Sheets (knowledge of Pivot Tables and Charts is a plus)"
+        },
+        {
+          "skill": "financial-analysis",
+          "stars": 1,
+          "evidence": "Analyze financial data and identify trends or variances"
+        },
+        {
+          "skill": "accounting",
+          "stars": 1,
+          "evidence": "Basic understanding of financial statements and accounting principles"
+        },
+        {
+          "skill": "communication",
+          "stars": 1,
+          "evidence": "Good communication skills in Arabic and English"
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "Collaborate with team members to gather and interpret business data"
+        }
+      ],
+      "summary": "تدريب لحديثي التخرج في فريق المالية بسيارة: تقارير وموازنات وتحليل بيانات مالية.",
+      "tasks": [
+        "إعداد التقارير ولوحات المعلومات المالية",
+        "دعم إعداد الموازنة والتوقعات",
+        "تنظيم البيانات المالية في Excel"
+      ]
+    },
+    {
+      "id": "foodics-accountant-erp-riyadh",
+      "title": "Accountant-ERP",
+      "titleAr": "محاسب - أنظمة ERP",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Foodics",
+        "ar": "فودكس"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-09",
+      "postedAtSource": "2026-11-09",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Foodics careers (apply.workable.com/foodics)",
+      "url": "https://apply.workable.com/foodics/j/FB74E1BE9C/",
+      "field": "business",
+      "band": "mid",
+      "bandEvidence": "4+ years of accounting experience",
+      "requirements": [
+        {
+          "skill": "accounting",
+          "stars": 1,
+          "evidence": "Strong understanding of IFRS/GAAP accounting principles and financial reporting standards."
+        },
+        {
+          "skill": "excel",
+          "stars": 3,
+          "evidence": "Advanced Excel skills and experience with financial analysis and modeling."
+        },
+        {
+          "skill": "financial-analysis",
+          "stars": 2,
+          "evidence": "Support budgeting, forecasting, and financial planning across revenue streams."
+        },
+        {
+          "skill": "communication",
+          "stars": 1,
+          "evidence": "Excellent analytical, problem-solving, and communication skills."
+        },
+        {
+          "skill": "english",
+          "stars": 1,
+          "evidence": "Proficiency in written and spoken English."
+        }
+      ],
+      "summary": "تدير العمليات المحاسبية اليومية وإيرادات الاشتراكات في فودكس وتدعم التدقيق والموازنات.",
+      "tasks": [
+        "إدارة الذمم والتسويات البنكية والأستاذ العام",
+        "إعداد القوائم المالية وفق IFRS",
+        "دعم الموازنة والتوقعات المالية"
+      ]
+    },
+    {
+      "id": "master-works-ai-business-analyst-riyadh",
+      "title": "AI Business, Analyst",
+      "titleAr": "محلل أعمال للذكاء الاصطناعي",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Master-Works (Nabeh)",
+        "ar": "ماستر ووركس (نابه)"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-10-18",
+      "postedAtSource": "2026-10-18",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Workable public job board (jobs.workable.com)",
+      "url": "https://jobs.workable.com/view/n8h3Ki1iy63QuBH9fdye2c/ai-business%2C-analyst-in-riyadh-at-master-works",
+      "field": "business",
+      "band": "mid",
+      "bandEvidence": "3–5 years of business analysis experience",
+      "requirements": [
+        {
+          "skill": "business-analysis",
+          "stars": 1,
+          "evidence": "Translate business goals into epics, use cases, user stories, workflows, process diagrams, and acceptance criteria."
+        },
+        {
+          "skill": "agile",
+          "stars": 1,
+          "evidence": "Proficiency in Agile methodologies (Scrum/Kanban), Waterfall, and hybrid project delivery frameworks."
+        },
+        {
+          "skill": "apis",
+          "stars": 1,
+          "evidence": "Working knowledge of software architecture, REST APIs, enterprise system integrations, data flow modeling, and database concepts."
+        },
+        {
+          "skill": "presentation",
+          "stars": 1,
+          "evidence": "Excellent written and verbal communication, stakeholder management, and presentation skills."
+        },
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Professional fluency in English is required; professional proficiency in Arabic is strongly preferred."
+        }
+      ],
+      "summary": "تربط احتياجات الأعمال بحلول الذكاء الاصطناعي: جمع المتطلبات وتوثيقها ومتابعتها حتى قبول العميل.",
+      "tasks": [
+        "إدارة ورش جمع المتطلبات مع العملاء",
+        "كتابة وثائق المتطلبات وقصص المستخدم",
+        "تخطيط اختبارات القبول وإغلاق الفجوات"
+      ]
+    },
+    {
+      "id": "atheer-hr-specialist-riyadh",
+      "title": "HR Specialist - HR Operations & Talent Acquisition (Saudi Nationals Only)",
+      "titleAr": "أخصائي موارد بشرية - العمليات والاستقطاب (للسعوديين)",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Atheer ACT",
+        "ar": "أثير"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-19",
+      "postedAtSource": "2026-11-19",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Workable public job board (jobs.workable.com)",
+      "url": "https://jobs.workable.com/view/72vqnnjUdvdMSTTVtnkg6w/hr-specialist---hr-operations-%26-talent-acquisition-(saudi-nationals-only)-in-riyadh-at-atheer-act",
+      "field": "hr",
+      "band": "junior",
+      "bandEvidence": "1-3 years of HR experience in Saudi Arabia",
+      "requirements": [
+        {
+          "skill": "hr-basics",
+          "stars": 2,
+          "evidence": "1-3 years of HR experience in Saudi Arabia covering both HR Operations and Recruitment."
+        },
+        {
+          "skill": "recruitment",
+          "stars": 2,
+          "evidence": "Proven success recruiting senior-level, senior leadership, and technical talent."
+        },
+        {
+          "skill": "labor-law",
+          "stars": 1,
+          "evidence": "Practical experience with Qiwa, GOSI, Muqeem, and Mudad."
+        },
+        {
+          "skill": "payroll",
+          "stars": 1,
+          "evidence": "Strong understanding of Saudi labor regulations, payroll processes, and Wage Protection System requirements."
+        },
+        {
+          "skill": "english",
+          "stars": 2,
+          "evidence": "Professional proficiency in both Arabic and English."
+        }
+      ],
+      "summary": "تبني وظيفة الموارد البشرية الداخلية في أثير: العمليات اليومية والرواتب والمنصات الحكومية والاستقطاب.",
+      "tasks": [
+        "إدارة التعيين وإنهاء الخدمة وخدمات الموظفين",
+        "تجهيز الرواتب ومتابعة التوطين",
+        "استقطاب الكفاءات وإدارة المقابلات"
+      ]
+    },
+    {
+      "id": "qiddiya-hris-specialist-riyadh",
+      "title": "Specialist - HRIS",
+      "titleAr": "أخصائي أنظمة معلومات الموارد البشرية",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Qiddiya Investment Company",
+        "ar": "شركة القدية للاستثمار"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-19",
+      "postedAtSource": "2026-11-19",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Workable public job board (jobs.workable.com)",
+      "url": "https://jobs.workable.com/view/hdwW7r7pmEQgejb1zPFW1n/specialist---hris-in-riyadh-at-qiddiya-investment-company",
+      "field": "hr",
+      "band": "junior",
+      "bandEvidence": "2+ years of experience in HRIS",
+      "requirements": [
+        {
+          "skill": "hr-basics",
+          "stars": 1,
+          "evidence": "Maintain and support HR systems, including employee data, organizational structures, workflows, and security roles."
+        },
+        {
+          "skill": "powerbi",
+          "stars": 1,
+          "evidence": "Support leadership reporting requirements using tools such as Power BI and HR reporting platforms."
+        },
+        {
+          "skill": "dataviz",
+          "stars": 1,
+          "evidence": "Develop KPI dashboards related to recruitment, turnover, diversity, performance, and workforce planning."
+        },
+        {
+          "skill": "business-analysis",
+          "stars": 1,
+          "evidence": "Gather business requirements and support system enhancement initiatives."
+        },
+        {
+          "skill": "training-dev",
+          "stars": 1,
+          "evidence": "Deliver user training and develop system guides and process documentation."
+        }
+      ],
+      "summary": "تدعم أنظمة الموارد البشرية في القدية وتضمن دقة البيانات وتبني تقارير ولوحات مؤشرات للقيادة.",
+      "tasks": [
+        "صيانة أنظمة الموارد البشرية ودعم مستخدميها",
+        "بناء لوحات مؤشرات التوظيف والأداء",
+        "تدريب المستخدمين وإعداد أدلة الأنظمة"
+      ]
+    },
+    {
+      "id": "lucidya-people-operations-riyadh",
+      "title": "People Operations Specialist",
+      "titleAr": "أخصائي عمليات الموارد البشرية",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Lucidya",
+        "ar": "لوسيديا"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-11",
+      "postedAtSource": "2026-11-11",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Lucidya careers (apply.workable.com/lucidya)",
+      "url": "https://apply.workable.com/lucidya/j/43C9E0B639/",
+      "field": "hr",
+      "band": "mid",
+      "bandEvidence": "At least 5 years of relevant experience in HR Operations",
+      "requirements": [
+        {
+          "skill": "hr-basics",
+          "stars": 2,
+          "evidence": "Experience: At least 5 years of relevant experience in HR Operations."
+        },
+        {
+          "skill": "labor-law",
+          "stars": 1,
+          "evidence": "Saudi Labour Law Expertise: Has in-depth knowledge of Saudi Labour Law, stays up to date with regulatory changes, and can confidently apply it in day-to-day operations."
+        },
+        {
+          "skill": "payroll",
+          "stars": 1,
+          "evidence": "Work closely with Finance to ensure payroll is always correct and on time"
+        },
+        {
+          "skill": "recruitment",
+          "stars": 1,
+          "evidence": "Help manage increasing hiring volume without compromising quality"
+        },
+        {
+          "skill": "teamwork",
+          "stars": 1,
+          "evidence": "Team Spirit: A strong team player who is collaborative, supportive, and willing to step in wherever needed."
+        }
+      ],
+      "summary": "تملك العمليات الأساسية لانضمام الموظفين في لوسيديا: العقود والرواتب والتهيئة والأنظمة الحكومية.",
+      "tasks": [
+        "تنفيذ تهيئة الموظفين الجدد كاملة",
+        "ضمان دقة الرواتب وانتظامها",
+        "تنظيم أنظمة وسجلات الموارد البشرية"
+      ]
+    },
+    {
+      "id": "tamara-people-business-partner-riyadh",
+      "title": "People Business Partner",
+      "titleAr": "شريك أعمال الموارد البشرية",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Tamara",
+        "ar": "تمارا"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh, Saudi Arabia",
+      "remote": false,
+      "postedAt": "2026-09-01",
+      "postedAtSource": "2026-09-01",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Tamara careers (Greenhouse job board)",
+      "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/4805287101",
+      "field": "hr",
+      "band": "mid",
+      "bandEvidence": "3+ years of HRBP experience",
+      "requirements": [
+        {
+          "skill": "hr-basics",
+          "stars": 2,
+          "evidence": "Proven strong foundation and knowledge of principles & practice of HR including employment law & compliance requirements."
+        },
+        {
+          "skill": "labor-law",
+          "stars": 1,
+          "evidence": "Maintain an in-depth knowledge of compliance requirements related to day-to-day employee management, ensuring regulatory compliance, and collaborating with legal/compliance departments as needed."
+        },
+        {
+          "skill": "training-dev",
+          "stars": 1,
+          "evidence": "Identify training, coaching, and mentoring needs for departments, managers, and employees."
+        },
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Strong communication and negotiation skills."
+        },
+        {
+          "skill": "project-management",
+          "stars": 1,
+          "evidence": "Ability to make recommendations to effectively resolve problems or issues demonstrated project management skills."
+        }
+      ],
+      "summary": "تقدّم الاستشارة في الموارد البشرية لقادة تمارا: علاقات الموظفين والأداء والتعويضات وتطوير المواهب.",
+      "tasks": [
+        "دعم القادة في قضايا الموارد البشرية",
+        "إدارة علاقات الموظفين وتخطيط التعاقب",
+        "تحديد احتياجات التدريب والتوجيه"
+      ]
+    },
+    {
+      "id": "lucidya-talent-acquisition-lead-riyadh",
+      "title": "Talent Acquisition Lead",
+      "titleAr": "قائد استقطاب المواهب",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Lucidya",
+        "ar": "لوسيديا"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-06-04",
+      "postedAtSource": "2026-06-04",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Lucidya careers (apply.workable.com/lucidya)",
+      "url": "https://apply.workable.com/lucidya/j/840F54D259/",
+      "field": "hr",
+      "band": "mid",
+      "bandEvidence": "4-5 years of experience in talent acquisition",
+      "requirements": [
+        {
+          "skill": "recruitment",
+          "stars": 2,
+          "evidence": "4-5 years of experience in talent acquisition or recruitment"
+        },
+        {
+          "skill": "hr-basics",
+          "stars": 1,
+          "evidence": "Bachelor's degree in Human Resources, Business Administration, or a related field"
+        },
+        {
+          "skill": "project-management",
+          "stars": 1,
+          "evidence": "You're highly organized and capable of managing multiple hiring initiatives, stakeholders, and timelines without losing attention to detail."
+        },
+        {
+          "skill": "communication",
+          "stars": 1,
+          "evidence": "You're a strong storyteller and communicator. You can explain what makes Lucidya unique in a way that excites candidates and creates genuine interest in our mission."
+        },
+        {
+          "skill": "presentation",
+          "stars": 1,
+          "evidence": "Whether you're presenting at a career fair, leading a campus event, or hosting students at Lucidya, you'll tell the story of who we are, what we believe in, and why ambitious graduates should build their careers with us."
+        }
+      ],
+      "summary": "تقود استقطاب حديثي التخرج في لوسيديا عبر شراكات الجامعات ومراكز التقييم وتجربة مرشحين مميزة.",
+      "tasks": [
+        "بناء شراكات مع الجامعات والمجتمعات الطلابية",
+        "إدارة توظيف برامج الخريجين ومراكز التقييم",
+        "متابعة مؤشرات التوظيف وتحسين العملية"
+      ]
+    }
+  ],
+  "companiesByField": {
+    "data": [
+      {
+        "en": "Saudi Aramco",
+        "ar": "أرامكو السعودية",
+        "careersUrl": "https://www.aramco.jobs/",
+        "note": "aramco.com/careers timed out; aramco.jobs opened"
+      },
+      {
+        "en": "stc",
+        "ar": "stc",
+        "careersUrl": "https://careers.stc.com.sa/",
+        "note": "5 openings listed on 20 Nov, all senior"
+      },
+      {
+        "en": "SABIC",
+        "ar": "سابك",
+        "careersUrl": "https://jobs.sabic.com/"
+      },
+      {
+        "en": "Zakat, Tax and Customs Authority (ZATCA)",
+        "ar": "هيئة الزكاة والضريبة والجمارك",
+        "careersUrl": "https://careers.zatca.gov.sa/"
+      },
+      {
+        "en": "Qiddiya Investment Company",
+        "ar": "شركة القدية للاستثمار",
+        "careersUrl": "https://jobs.workable.com/search?query=qiddiya",
+        "note": "qiddiya.com/careers returned 403; its postings open on Workable"
+      },
+      {
+        "en": "Salla",
+        "ar": "سلة",
+        "careersUrl": "https://apply.workable.com/salla/"
+      }
+    ],
+    "software": [
+      {
+        "en": "stc",
+        "ar": "stc",
+        "careersUrl": "https://careers.stc.com.sa/"
+      },
+      {
+        "en": "Mobily",
+        "ar": "موبايلي",
+        "careersUrl": "https://careers.mobily.com.sa/en/sites/opportunities"
+      },
+      {
+        "en": "Zain KSA",
+        "ar": "زين السعودية",
+        "careersUrl": "https://sa.zain.com/en/careers"
+      },
+      {
+        "en": "Ejada Systems",
+        "ar": "إجادة للأنظمة",
+        "careersUrl": "https://Careers.ejada.com/"
+      },
+      {
+        "en": "Foodics",
+        "ar": "فودكس",
+        "careersUrl": "https://apply.workable.com/foodics/"
+      },
+      {
+        "en": "Lucidya",
+        "ar": "لوسيديا",
+        "careersUrl": "https://apply.workable.com/lucidya/"
+      }
+    ],
+    "design": [
+      {
+        "en": "NEOM",
+        "ar": "نيوم",
+        "careersUrl": "https://www.neom.com/en-us/be-part-of-neom/work-at-neom"
+      },
+      {
+        "en": "ROSHN",
+        "ar": "روشن",
+        "careersUrl": "https://www.roshn.sa/careers"
+      },
+      {
+        "en": "HungerStation (Delivery Hero)",
+        "ar": "هنقرستيشن",
+        "careersUrl": "https://careers.deliveryhero.com/"
+      },
+      {
+        "en": "Tabby",
+        "ar": "تابي",
+        "careersUrl": "https://tabby.ai/en-SA/careers",
+        "note": "redirects to the en-AE careers page"
+      },
+      {
+        "en": "Lucidya",
+        "ar": "لوسيديا",
+        "careersUrl": "https://apply.workable.com/lucidya/"
+      }
+    ],
+    "marketing": [
+      {
+        "en": "Almarai",
+        "ar": "المراعي",
+        "careersUrl": "https://www.almarai.com/en/careers"
+      },
+      {
+        "en": "Salla",
+        "ar": "سلة",
+        "careersUrl": "https://apply.workable.com/salla/"
+      },
+      {
+        "en": "HungerStation (Delivery Hero)",
+        "ar": "هنقرستيشن",
+        "careersUrl": "https://careers.deliveryhero.com/"
+      },
+      {
+        "en": "Zain KSA",
+        "ar": "زين السعودية",
+        "careersUrl": "https://sa.zain.com/en/careers"
+      },
+      {
+        "en": "Tamara",
+        "ar": "تمارا",
+        "careersUrl": "https://tamara.co/en-SA/careers"
+      }
+    ],
+    "business": [
+      {
+        "en": "Public Investment Fund (PIF)",
+        "ar": "صندوق الاستثمارات العامة",
+        "careersUrl": "https://www.pif.gov.sa/en/careers/"
+      },
+      {
+        "en": "Saudi Aramco",
+        "ar": "أرامكو السعودية",
+        "careersUrl": "https://www.aramco.jobs/"
+      },
+      {
+        "en": "Qiddiya Investment Company",
+        "ar": "شركة القدية للاستثمار",
+        "careersUrl": "https://jobs.workable.com/search?query=qiddiya",
+        "note": "postings open on Workable"
+      },
+      {
+        "en": "ROSHN",
+        "ar": "روشن",
+        "careersUrl": "https://www.roshn.sa/careers"
+      },
+      {
+        "en": "Foodics",
+        "ar": "فودكس",
+        "careersUrl": "https://apply.workable.com/foodics/"
+      },
+      {
+        "en": "Tamara",
+        "ar": "تمارا",
+        "careersUrl": "https://job-boards.eu.greenhouse.io/tamara"
+      }
+    ],
+    "hr": [
+      {
+        "en": "Qiddiya Investment Company",
+        "ar": "شركة القدية للاستثمار",
+        "careersUrl": "https://jobs.workable.com/search?query=qiddiya",
+        "note": "several HR openings on 20 Nov"
+      },
+      {
+        "en": "Misk Foundation",
+        "ar": "مؤسسة مسك",
+        "careersUrl": "https://misk.org.sa/careers/"
+      },
+      {
+        "en": "stc",
+        "ar": "stc",
+        "careersUrl": "https://careers.stc.com.sa/"
+      },
+      {
+        "en": "Almarai",
+        "ar": "المراعي",
+        "careersUrl": "https://www.almarai.com/en/careers"
+      },
+      {
+        "en": "Tamara",
+        "ar": "تمارا",
+        "careersUrl": "https://job-boards.eu.greenhouse.io/tamara"
+      },
+      {
+        "en": "Lucidya",
+        "ar": "لوسيديا",
+        "careersUrl": "https://apply.workable.com/lucidya/"
+      }
+    ]
+  },
+  "companiesNotOpened": "Did not open on 20 Nov 2026 (left out): SDAIA careers (404), Al Rajhi Bank (redirect to not-found), SNB/alahli.com (404), Riyad Bank (404), SAB (404), Elm (redirects to its home page), Red Sea Global (403), Ma'aden (404), Jahez (404), aramco.com/careers (timeout). Jadarat (jadarat.sa) opens but is a script-only app with no readable postings without a browser.",
+  "apis": [
+    {
+      "name": "Jooble REST API",
+      "saudi": "Likely: Jooble runs sa.jooble.org (its pages appeared in search results), and the docs say each country domain has its own key. Not tested without a key.",
+      "freeLimit": "Free plan: 100 requests per day per key (one country), resets at midnight UTC; more on request through support.",
+      "key": "Fill in the form on jooble.org/api/about (name, position, email, website, phone). One key per country: request it for sa.jooble.org.",
+      "displayTerms": "API page: you may post the results on your website in your own design. Terms of Service not read in full. Each result has link, source, company, location, snippet, updated.",
+      "request": "POST https://jooble.org/api/{key}  body {\"keywords\":\"Data Analyst\",\"location\":\"Riyadh\",\"page\":1}",
+      "docs": [
+        "https://jooble.org/api/about",
+        "https://help.jooble.org/en/support/solutions/articles/60001448238-rest-api-documentation"
+      ]
+    },
+    {
+      "name": "Careerjet API",
+      "saudi": "Unconfirmed: locale_code takes the form language_COUNTRY, but the docs page does not list the supported codes, so en_SA is not confirmed (an unsupported code returns HTTP 400).",
+      "freeLimit": "Not stated on the docs page.",
+      "key": "API key from a Careerjet Publisher account (publisher registration); sent as basic-auth user name with an empty password.",
+      "displayTerms": "Not stated on the docs page. Every call must include the end user's IP and user agent (403 without them), so calls go through our server on the user's behalf.",
+      "request": "GET https://search.api.careerjet.net/v4/query?locale_code=en_SA&keywords=...&user_ip=...&user_agent=...",
+      "docs": [
+        "https://www.careerjet.com/partners/api"
+      ]
+    },
+    {
+      "name": "JSearch (OpenWeb Ninja / RapidAPI)",
+      "saudi": "Unconfirmed: the OpenWeb Ninja page does not list countries. The RapidAPI pages load only with JavaScript, so their parameters and plans could not be read.",
+      "freeLimit": "Not confirmed. The figure of about 200 free requests a month could not be checked on any page that opens without sign-up.",
+      "key": "Sign up on the OpenWeb Ninja developer portal (app.openwebninja.com) or subscribe on RapidAPI.",
+      "displayTerms": "Not stated on the page opened. Its page says it returns postings 'from LinkedIn, Indeed, Glassdoor, ZipRecruiter, and all public job sites via Google for Jobs'.",
+      "request": "Not confirmed from public docs.",
+      "docs": [
+        "https://www.openwebninja.com/api/jsearch",
+        "https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch"
+      ]
+    }
+  ],
+  "apiRecommendation": {
+    "name": "Jooble REST API",
+    "why": "It is the only one of the three whose public docs state a free limit (100 requests a day per key, reset at midnight UTC) and a simple request (POST JSON with keywords and location). It has a Saudi site (sa.jooble.org) and each country gets its own key, so ask for the Saudi key. Each result carries the original link, source, company and update date, which fits our cards. Its API page says results may be shown on your site in your own design. Careerjet's docs do not confirm en_SA and need the user's IP and browser on every call. JSearch's free quota and Saudi coverage could not be confirmed from pages that open without sign-up, and it resurfaces LinkedIn, Indeed and Glassdoor postings, the sites we chose not to scrape."
+  }
+}

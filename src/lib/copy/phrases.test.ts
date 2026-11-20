@@ -167,7 +167,7 @@ describe("stars (3.5, 3.8)", () => {
 describe("course states and locks (3.10)", () => {
   it("labels each state, with the counts while started", () => {
     expect(courseStateLabel({ state: "available" })).toBe("متاحة");
-    expect(courseStateLabel({ state: "started", ticked: [1, 2], total: 5 })).toBe("بدأتها · 2 من 5");
+    expect(courseStateLabel({ state: "started", ticked: [1, 2], total: 5 })).toBe("بدأتها");
     expect(courseStateLabel({ state: "completed", at: T })).toBe("مكتملة");
     expect(courseStateLabel({ state: "credited", by: { kind: "cv", evidence: "…" } })).toBe("مثبتة");
     expect(courseStateLabel({ state: "locked", lock: { kind: "prereq", skill: "excel" } })).toBe("مقفلة");
@@ -301,7 +301,7 @@ describe("other phrases", () => {
   it("gives the XP toast reason, merging onboarding and target (3.15)", () => {
     expect(xpNewsReason(news(["onboarding_completed", "target_set"]))).toBe("التعارف واختيار الهدف");
     expect(xpNewsReason(news(["cv_analysed"]))).toBe("حلّلت سيرتك");
-    expect(xpNewsReason(news(["course_completed"]))).toBe("أكملت دورة");
+    expect(xpNewsReason(news(["course_completed"]))).toBe("أتممت خطوة تعلّم");
     expect(xpNewsReason(news(["job_applied"]))).toBe("تقديم مدروس");
     expect(xpNewsReason(news(["daily_reward"]))).toBe("مكافأة يومية");
     expect(xpNewsReason(news(["course_completed", "job_applied"]))).toBe("تقديم مدروس");
@@ -319,11 +319,11 @@ describe("other phrases", () => {
     expect(hoursText(10)).toBe("10 ساعات");
     expect(hoursText(12)).toBe("12 ساعة");
     expect(hoursText(2)).toBe("ساعتان");
-    expect(targetChangedToast("bi-analyst-riyadh")).toBe("هدفك الآن: محلل ذكاء الأعمال");
+    expect(targetChangedToast("ninja-real-estate-performance-analyst-riyadh")).toBe("هدفك الآن: محلل أداء عقاري");
     expect(appliedChip("review")).toBe("قدّمت · قيد المراجعة · محاكاة");
     expect(appliedChip("shortlisted")).toBe("قدّمت · مرشّح للمقابلة · محاكاة");
     expect(companyCityLine("data-analyst-riyadh")).toBe("وادي الغيم للبيانات · الرياض");
-    expect(companyCityLine("junior-data-scientist-remote")).toBe("مختبر النجم الثامن · عن بُعد");
+    expect(companyCityLine("salla-senior-data-scientist-remote")).toBe("سلة · عن بُعد");
   });
 });
 
@@ -342,14 +342,14 @@ describe.skipIf(!engineBuilt())("phrases with the engine (run once the engine is
         matchNow: 70,
         matchAfter: 90,
       }),
-    ).toBe("ابدأ دورة «أساسيات Power BI»");
+    ).toBe("تعلّم Power BI");
     expect(nextStepLabel({ rule: 2, courseId: "c-statistics-2", ticked: 2, total: 5 })).toBe(
-      "أكمل دورة «الإحصاء التطبيقي للمحللين»",
+      "أكمل تعلّم الإحصاء",
     );
   });
 
   it("writes the XP history row of a course (3.13)", () => {
-    expect(xpHistoryText(xpEvent({ type: "course_completed", ref: "c-powerbi-1" }))).toBe("أكملت دورة أساسيات Power BI");
+    expect(xpHistoryText(xpEvent({ type: "course_completed", ref: "c-powerbi-1" }))).toBe("أتممت خطوة Power BI");
   });
 
   it("builds the 7.4 demo note from the facts after the Power BI course", () => {

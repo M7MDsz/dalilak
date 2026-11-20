@@ -8,7 +8,7 @@
 //     its five requirement segments, the locked gems), the one primary «اذهب إلى مساري» with the match and the next
 //     step under it. «أفضل الوظائف لمهاراتك»: the other best jobs as destinations, each with its buttons UNDER the card
 //     (a button never sits inside a pressable card).
-// After a show the blocks come into focus (`results-rise`: «دليل» worked them out), the counts climb, the XP coin lands
+// After a show the blocks come into focus (`results-rise`: «دليلك» worked them out), the counts climb, the XP coin lands
 // and the collection meter fills tick by tick; a saved result renders at rest. Wide content: the haul on the right with
 // the other jobs under it, the side column (340 px, sticky) on the left. Narrow: one column, the target and its action
 // right after the results tile, then the loot, then the other jobs.
@@ -20,11 +20,14 @@ import {
   IconAdvisor,
   IconArrowForward,
   IconFieldBusiness,
+  IconFieldCyberCloud,
   IconFieldData,
   IconFieldDesign,
   IconFieldHr,
   IconFieldMarketing,
+  IconFieldProduct,
   IconFieldProfessional,
+  IconFieldSalesSupply,
   IconFieldSoftware,
   IconRetry,
   IconStarFilled,
@@ -61,6 +64,9 @@ const FIELD_ICON = {
   marketing: IconFieldMarketing,
   business: IconFieldBusiness,
   hr: IconFieldHr,
+  product: IconFieldProduct,
+  "cyber-cloud": IconFieldCyberCloud,
+  "sales-supply": IconFieldSalesSupply,
   professional: IconFieldProfessional,
 } as const satisfies Record<FieldId, ComponentType<IconProps>>;
 
@@ -396,7 +402,7 @@ function CardLink({ href, children, ...rest }: Omit<ComponentProps<"a">, "href">
   );
 }
 
-/** The card's own buttons, under it: «دع دليل يقدّم عنك» on every card, «اجعلها هدفي» on the others (spec 3.6). */
+/** The card's own buttons, under it: «دع دليلك يقدّم عنك» on every card, «اجعلها هدفي» on the others (spec 3.6). */
 function JobActions({ jobId, advisorBusy, onApply, onSetTarget }: { readonly jobId: JobId; readonly advisorBusy: boolean; readonly onApply: () => void; readonly onSetTarget?: () => void }) {
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-2 ps-1">

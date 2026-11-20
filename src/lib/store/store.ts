@@ -20,6 +20,7 @@ import type {
   AvatarId,
   BadgeId,
   Clock,
+  CompanyId,
   CompleteCourseResult,
   Consequence,
   CourseId,
@@ -75,10 +76,12 @@ export interface AppActions {
   /** «إعادة ضبط العرض»: deletes the current account and signs out (3.13). The profile then calls go("/"). */
   resetCurrentAccount(): void;
   setAvatar(avatar: AvatarId): void;
+  /** «الشركة اللي في بالك» on «ملفي» (20 Nov 2026): change it, or "none" to clear it. Pays nothing; the target stays. */
+  setDreamCompany(company: CompanyId | "none"): void;
 
   // ── Onboarding (spec 3.2, 3.3, 4) ──────────────────────────────────────────────────────────────────────────────
   /**
-   * Appends «دليل»'s lines to the onboarding thread (greeting when empty; the re-ask on resume). The pending question is
+   * Appends «دليلك»'s lines to the onboarding thread (greeting when empty; the re-ask on resume). The pending question is
    * derived (brain/onboarding `pendingQuestion`), so nothing else is written.
    */
   appendOnboardingMessages(texts: readonly string[]): void;
@@ -100,6 +103,8 @@ export interface AppActions {
   // ── Courses (spec 3.10, 3.11) ──────────────────────────────────────────────────────────────────────────────────
   startCourse(courseId: CourseId): StartCourseResult;
   tickLesson(courseId: CourseId, lesson: number, ticked: boolean): void;
+  /** The certificate link pasted on «خلّصتها» (optional; an empty string removes it). Pays nothing. */
+  setCertificate(courseId: CourseId, url: string): void;
   /**
    * One write before the celebration's first beat. Its XP event and badges are written announced: false like every other
    * gain; the learn page holds `celebration` (useUi.getState().hold, synchronously, BEFORE calling this) and calls
@@ -113,7 +118,7 @@ export interface AppActions {
   submitApplication(input: { readonly jobId: JobId; readonly note: string; readonly by: "user" | "advisor" }): SubmitApplicationResult;
   /** «محاكاة: انقل للحالة التالية». */
   advanceApplication(jobId: JobId): void;
-  /** The persisted in-flight marker of «دليل» applying (set by the dispatcher at start, cleared at sent / stopped). */
+  /** The persisted in-flight marker of «دليلك» applying (set by the dispatcher at start, cleared at sent / stopped). */
   setApplyInFlight(jobId: JobId | null): void;
   /**
    * Called once after hydration by the advisor root: turns a leftover marker into «لم يكتمل التقديم…» in the thread. This
@@ -213,6 +218,8 @@ export const useAppStore = create<AppStore>()(
         signOut: () => replace(signOutIn(get())),
         resetCurrentAccount: () => replace(resetCurrentAccountIn(get())),
         setAvatar: (avatar) => write((user) => T.setAvatar(user, avatar)),
+        setDreamCompany: (company) =>
+          write((user) => (user.answers.company === company ? user : { ...user, answers: { ...user.answers, company } })),
 
         // ── Onboarding ────────────────────────────────────────────────────────────────────────────────────────────
         appendOnboardingMessages: (texts) => write((user, clock) => T.appendOnboardingMessages(user, texts, clock)),
@@ -249,6 +256,7 @@ export const useAppStore = create<AppStore>()(
           return out === null ? { ok: false, reason: "no_user" } : out.result;
         },
         tickLesson: (courseId, lesson, ticked) => write((user) => T.tickLesson(user, courseId, lesson, ticked)),
+        setCertificate: (courseId, url) => write((user) => T.setCertificate(user, courseId, url)),
         completeCourse: (courseId) => {
           const out = onUser((user, clock): UserStep<CompleteCourseResult> => {
             const done = T.completeCourse(user, courseId, clock);
@@ -349,4 +357,14 @@ export function selectCurrentUser(state: PersistedState): UserState | null {
   const id = state.currentUserId;
   if (id === null) return null;
   return state.users[id] ?? null;
+}
+
+/**
+ * The company the signed-in user has in mind (onboarding step 7, «ملفي»), as its id: a stable primitive, so it is safe in
+ * `useAppStore(selectDreamCompanyId)`. Null for «لا، مو الحين», an account saved before the question, or nobody signed in.
+ * For the company itself, its jobs (pin them first) and the one the path aimed at: engine `dreamCompany(user)`.
+ */
+export function selectDreamCompanyId(state: PersistedState): CompanyId | null {
+  const company = selectCurrentUser(state)?.answers.company;
+  return company === undefined || company === "none" ? null : company;
 }

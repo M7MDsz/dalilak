@@ -1,6 +1,6 @@
 // Owner: skills. The skill tree's own copy, verbatim from spec 3.5 (strings used by one screen stay in that screen,
-// ARCHITECTURE 6). Shared helpers (countNoun, starsOf, hoursText, joinWithAnd) come from @/lib/copy.
-import { countNoun, hoursText } from "@/lib/copy";
+// ARCHITECTURE 6). Shared helpers (countNoun, starsOf, guideTitle, joinWithAnd) come from @/lib/copy.
+import { countNoun } from "@/lib/copy";
 import { formatNumber } from "@/lib/format";
 import type { SkillNodeState } from "@/lib/types";
 
@@ -19,8 +19,8 @@ export const COPY = {
   sources: "مصدر النجوم",
   fromCv: "من سيرتك:",
   maxed: "أتممت كل نجوم هذه المهارة.",
-  start: "ابدأ الدورة",
-  resume: "أكمل الدورة",
+  start: "افتح الدليل",
+  resume: "عد إلى الدليل",
   showJobs: "عرضها",
   close: "إغلاق",
   bannerTitle: "شجرتك لم تُضئ بعد. ارفع سيرتك لتُظهر ما تملكه.",
@@ -32,9 +32,9 @@ export function subline(skills: number, fields: number): string {
   return `${countNoun(skills, "skill")} في ${formatNumber(fields)} مجالات. كل نجمة تقرّبك من وظيفة.`;
 }
 
-/** «من دورة: {course}» (the course's short title). */
-export function fromCourse(course: string): string {
-  return `من دورة: ${course}`;
+/** «من دليل Power BI» (the guide's title, guideTitle: the course itself is internal). */
+export function fromCourse(guide: string): string {
+  return `من ${guide}`;
 }
 
 /** «تتطلب: Excel» (several: «تتطلب: SQL والإحصاء»). */
@@ -53,11 +53,12 @@ export function openPrereq(name: string): string {
 }
 
 /**
- * «النجمة التالية: دورة «{course}» · {hours} ساعات · +{xp} XP», in its parts: the lead, then «· 10 ساعات», then «· »
- * before the «+{xp} XP» that XpValue draws (so the line may break only between the parts, never inside one).
+ * «النجمة التالية: دليل Power BI · +{xp} XP», in its parts: the lead, the guide's title (guideTitle), then «· » before
+ * the «+{xp} XP» that XpValue draws (so the line may break only between the parts, never inside one). No hours: the
+ * course behind the guide is internal, its hours are not a real course's duration.
  */
-export function nextStarParts(course: string, hours: number): { lead: string; course: string; hours: string; dot: string } {
-  return { lead: "النجمة التالية: ", course: `دورة «${course}»`, hours: ` · ${hoursText(hours)}`, dot: " · " };
+export function nextStarParts(guide: string): { lead: string; guide: string; dot: string } {
+  return { lead: "النجمة التالية: ", guide, dot: " · " };
 }
 
 /** «تطلبها 3 وظائف» · «تطلبها وظيفة واحدة» · «تطلبها وظيفتان». */

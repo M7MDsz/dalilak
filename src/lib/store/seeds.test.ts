@@ -182,7 +182,7 @@ describe("seed details", () => {
     expect(nextStep(seeded("course-done"))).toMatchObject({ rule: 3, courseId: "c-statistics-2" });
   });
 
-  it("mid-path: DL-2026-0001, sent by «دليل» at 90%, pinned at review; statistics started with lessons 1-2", () => {
+  it("mid-path: DL-2026-0001, sent by «دليلك» at 90%, pinned at review; statistics started with lessons 1-2", () => {
     const user = seeded("mid-path");
     const app = user.applications[0];
     expect(app).toMatchObject({

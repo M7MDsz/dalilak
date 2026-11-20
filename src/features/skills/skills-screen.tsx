@@ -39,7 +39,7 @@ type FieldChoice = FieldId | "all";
 
 /** The landscape's placement (three columns, ≥ 1060 px of content): rows read in display order, heights balanced. */
 const LANDSCAPE =
-  "@min-[1060px]/content:grid-cols-3 @min-[1060px]/content:[grid-template-areas:'data_software_design'_'data_software_design'_'data_software_design'_'data_business_design'_'marketing_business_hr'_'marketing_professional_hr'_'marketing_professional_hr']";
+  "@min-[1060px]/content:grid-cols-3 @min-[1060px]/content:[grid-template-areas:'data_software_design'_'data_software_design'_'data_software_design'_'data_business_design'_'marketing_business_hr'_'marketing_professional_hr'_'marketing_professional_hr'_'product_cyber-cloud_sales-supply'_'product_cyber-cloud_sales-supply']";
 const AREA: Readonly<Record<FieldId, string>> = {
   data: "@min-[1060px]/content:[grid-area:data]",
   software: "@min-[1060px]/content:[grid-area:software]",
@@ -47,6 +47,9 @@ const AREA: Readonly<Record<FieldId, string>> = {
   marketing: "@min-[1060px]/content:[grid-area:marketing]",
   business: "@min-[1060px]/content:[grid-area:business]",
   hr: "@min-[1060px]/content:[grid-area:hr]",
+  product: "@min-[1060px]/content:[grid-area:product]",
+  "cyber-cloud": "@min-[1060px]/content:[grid-area:cyber-cloud]",
+  "sales-supply": "@min-[1060px]/content:[grid-area:sales-supply]",
   professional: "@min-[1060px]/content:[grid-area:professional]",
 };
 
@@ -88,7 +91,7 @@ function SkillsTree({ user }: { readonly user: UserState }): ReactNode {
     setField(choice);
   }, []);
 
-  // The URL changed (a node, a prerequisite, «دليل», Back): follow it. Render-time adjustment, no effect.
+  // The URL changed (a node, a prerequisite, «دليلك», Back): follow it. Render-time adjustment, no effect.
   if (panel.url !== fromUrl) {
     setPanel({ skill: fromUrl ?? panel.skill, open: fromUrl !== null, url: fromUrl });
     if (fromUrl && field !== "all" && getSkill(fromUrl).field !== field) setField(getSkill(fromUrl).field);

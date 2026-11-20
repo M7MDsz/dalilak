@@ -37,15 +37,19 @@ export function QuestNumber({ n, state, size = "md", className }: { readonly n: 
   );
 }
 
-export interface QuestCardProps extends Omit<TileProps, "children" | "state" | "ribbon"> {
-  /** The course's full title («أساسيات Power BI: من البيانات إلى لوحة المعلومات»). */
-  readonly title: string;
+export interface QuestCardProps extends Omit<TileProps, "children" | "state" | "ribbon" | "title"> {
+  /** The step's title (on «دليل التعلّم»: the guide's pick, the real course to learn it from). */
+  readonly title: ReactNode;
   /** The skill it raises («Power BI»). */
   readonly skill: string;
   /** The star it grants (1..3). */
   readonly star: number;
-  readonly hours: number;
-  readonly lessons: number;
+  /**
+   * What it costs, drawn only when given. Leave both out for a learning step whose course is internal (the guide's
+   * course hours and lessons are not a real course's duration).
+   */
+  readonly hours?: number;
+  readonly lessons?: number;
   /** Its XP (spec 8.2: 20 × hours). */
   readonly xp: number;
   /** Match points it adds to the target («+20% مطابقة»), only for a course on the path. */
@@ -68,7 +72,7 @@ export interface QuestCardProps extends Omit<TileProps, "children" | "state" | "
   /** The ribbon's label, when the state's own is not enough. */
   readonly ribbonLabel?: ReactNode;
   /**
-   * A button of its own («ابدأ الدورة»). With an action the card itself is flat (the button is the pressable piece:
+   * A button of its own («افتح الدليل»). With an action the card itself is flat (the button is the pressable piece:
    * a button never sits inside another button); without one, the whole card is the pressable piece (pass `render` for a link).
    */
   readonly action?: ReactNode;
@@ -111,7 +115,15 @@ export function QuestCard({
   const started = progress !== undefined && progress > 0 && state !== "done";
   const ribbonText =
     ribbonLabel ??
-    (credited ? "مثبتة" : started ? `${state === "next" ? "أكمل" : "جارية"} · ${formatNumber(progress)} من ${formatNumber(lessons)}` : undefined);
+    (credited
+      ? "مثبتة"
+      : started
+        ? lessons !== undefined
+          ? `${state === "next" ? "أكمل" : "جارية"} · ${formatNumber(progress)} من ${formatNumber(lessons)}`
+          : state === "next"
+            ? "أكمل"
+            : "جارية"
+        : undefined);
   const rewardStatus = state === "done" && !credited ? "earned" : state === "locked" ? "locked" : "offer";
   const latin = /^[\x20-\x7e]+$/.test(skill);
   const flat = action !== undefined || interactive === false;
@@ -162,16 +174,22 @@ export function QuestCard({
         ) : null}
       </div>
 
-      <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-small text-fg-2">
-        <span className="inline-flex items-center gap-1.5">
-          <IconClock className="text-fg-3" size={18} waypoint="off" />
-          {hoursLabel(hours)}
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <IconLessons className="text-fg-3" size={18} waypoint="off" />
-          {lessonsLabel(lessons)}
-        </span>
-      </p>
+      {hours !== undefined || lessons !== undefined ? (
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-small text-fg-2">
+          {hours !== undefined ? (
+            <span className="inline-flex items-center gap-1.5">
+              <IconClock className="text-fg-3" size={18} waypoint="off" />
+              {hoursLabel(hours)}
+            </span>
+          ) : null}
+          {lessons !== undefined ? (
+            <span className="inline-flex items-center gap-1.5">
+              <IconLessons className="text-fg-3" size={18} waypoint="off" />
+              {lessonsLabel(lessons)}
+            </span>
+          ) : null}
+        </p>
+      ) : null}
 
       {note ? <p className="text-small text-fg-2">{note}</p> : null}
 
@@ -192,7 +210,7 @@ export function QuestCard({
         </RewardRow>
       ) : null}
 
-      {started ? <LessonMeter done={progress} total={lessons} /> : null}
+      {started && lessons !== undefined ? <LessonMeter done={progress} total={lessons} /> : null}
 
       {state === "locked" && lockedReason ? (
         <p className="flex items-start gap-1.5 text-small font-medium text-fg-2">

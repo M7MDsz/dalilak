@@ -31,7 +31,7 @@ export interface QuickRepliesProps {
   /** False once answered: the picked chip travels into the thread, the rest fade out. */
   readonly open: boolean;
   readonly onPick: (option: QuickReplyOption) => void;
-  /** «دليل» is answering: the chips wait (spec 5.5 rule 13). */
+  /** «دليلك» is answering: the chips wait (spec 5.5 rule 13). */
   readonly disabled?: boolean;
   /** The chip a script is pressing (the press frame shows before the pick). */
   readonly pressedId?: string | null;

@@ -9,10 +9,10 @@ Read `BRIEF.md`, `docs/TEAM-BRIEF.md` and `docs/PRODUCT-SPEC.md` first. This fil
 ## 0. Ten decisions, and what was checked
 
 1. **One vocabulary of six verbs** (section 1.1): rise, focus, pop, roll, draw, travel. Every motion in the product is one of them, with fixed numbers. If a motion is none of the six, it is cut.
-2. **Blur belongs to «دليل».** Only things «دليل» produced (answers, analysis results, the path reveal) come "into focus". Nothing else blurs, except the 2 px inside a roll.
-3. **Typing belongs to «دليل»'s hands.** Text types itself only inside a real field that «دليل» is filling, or the sample CV. Answers never typewrite.
+2. **Blur belongs to «دليلك».** Only things «دليلك» produced (answers, analysis results, the path reveal) come "into focus". Nothing else blurs, except the 2 px inside a roll.
+3. **Typing belongs to «دليلك»'s hands.** Text types itself only inside a real field that «دليلك» is filling, or the sample CV. Answers never typewrite.
 4. **Route change: old page out in 120 ms, then the new page rises 6 px in 260 ms.** Done with one CSS class and one navigation helper. React `<ViewTransition>` is not used (section 4).
-5. **Shows are state-driven.** The path reveal, the CV analysis, the celebration and «دليل» filling the apply form all run on one small step runner (`useShow`): a step index in React state, real work awaited, a minimum dwell per step. No giant imperative timeline.
+5. **Shows are state-driven.** The path reveal, the CV analysis, the celebration and «دليلك» filling the apply form all run on one small step runner (`useShow`): a step index in React state, real work awaited, a minimum dwell per step. No giant imperative timeline.
 6. **Numbers never swap.** Big numbers count (XP, match), small ones roll (level, streak, rank, step). The match ring and its number are driven by the same value.
 7. **Two ways for one thing to travel, and no third:** a shared `layoutId` when the element itself moves and stays (inside one page), `FlyToken` when a token is consumed by its target (XP into the user chip). Never across a route change.
 8. **Two dialog routes:** every sheet and dialog is Base UI `Dialog` with CSS transitions; the advisor panel alone is Base UI `Dialog` with a Motion popup, because it carries a travelling glyph.
@@ -29,11 +29,11 @@ Read `BRIEF.md`, `docs/TEAM-BRIEF.md` and `docs/PRODUCT-SPEC.md` first. This fil
 
 | | |
 |---|---|
-| **Six verbs** | **rise** (it arrived) · **focus** («دليل» worked it out) · **pop** (you did it, or earned it) · **roll** (the value changed) · **draw** (progress, proof) · **travel** (this caused that). Plus **press** on every control and **type** when «دليل» fills a field |
+| **Six verbs** | **rise** (it arrived) · **focus** («دليلك» worked it out) · **pop** (you did it, or earned it) · **roll** (the value changed) · **draw** (progress, proof) · **travel** (this caused that). Plus **press** on every control and **type** when «دليلك» fills a field |
 | **Easings** | `ease.out` `(0.22, 1, 0.36, 1)` enters · `ease.in` `(0.4, 0, 1, 1)` exits · `ease.inOut` `(0.65, 0, 0.35, 1)` drawing · `ease.pop` `(0.34, 1.32, 0.64, 1)` the sent bubble only |
 | **Durations (ms)** | `exit` 150 · `fast` 200 · `page` 260 · `move` 420 · `pop` 440 · `focus` 560 · `draw` 900 · shimmer 2400 |
 | **Springs** (visual duration / bounce) | `snappy` 0.2 / 0 selected and toggled states · `smooth` 0.3 / 0 the app default · `gentle` 0.35 / 0.15 anything that travels, resizes or reorders · `pop` 0.4 / 0.3 an earned thing landing · `cheer` 0.45 / 0.4 the one centrepiece of a big moment |
-| **Enters** | a page rises 6 px · a block rises 8 px · «دليل»'s output comes into focus (8 px, blur 4 px) · the user's message pops from the send button · earned things pop · sheets and the advisor panel come 16 px from their edge · values roll · lines draw |
+| **Enters** | a page rises 6 px · a block rises 8 px · «دليلك»'s output comes into focus (8 px, blur 4 px) · the user's message pops from the send button · earned things pop · sheets and the advisor panel come 16 px from their edge · values roll · lines draw |
 | **Exits** | 150 ms, ease-in, opacity (at most 4-8 px back the way it came), all at once, never a spring. Lines never un-draw |
 | **Stagger** | 80 ms between blocks · 60 ms chips and star pips · 50 ms words · never more than 480 ms in total · never on exit · one group at a time |
 | **Route** | the old page fades out in 120 ms, then the new page rises 6 px in 260 ms. The shell does not move. Filters, tabs and search do not transition |
@@ -47,13 +47,13 @@ The rest of this section is the same thing with reasons and code.
 | Verb | It says | What moves | Numbers |
 |---|---|---|---|
 | **Rise** | "this arrived" | opacity 0 to 1 with a short upward travel: 6 px for a page, 8 px for a block, 12 px for a result card, 16 px for a sheet or panel (from its edge) | page 260 ms; blocks 420 ms; sheets 200 ms in, 150 ms out; ease-out |
-| **Focus** | "«دليل» worked this out" | rise 8 px plus blur 4 px to 0, block by block | 560 ms each, 80 ms apart |
+| **Focus** | "«دليلك» worked this out" | rise 8 px plus blur 4 px to 0, block by block | 560 ms each, 80 ms apart |
 | **Pop** | "you did this" / "you earned this" | scale up with a small overshoot. Sent bubble: from `y 22px, scale 0.92` at the send-button corner. Earned things (tag, star, badge, chip): from `scale 0.8` | bubble 440 ms on `ease.pop`; earned things on `spring.pop` |
 | **Roll** | "this value changed" | in a clipped line the old value leaves upward and the new one arrives from below, each with 2 px blur. Big numbers count instead | roll 420 ms; count 800 ms |
 | **Draw** | "this is progress" / "this is the proof" | a stroke grows: path edges, rings, check marks (`pathLength`), the evidence marker (`background-size`) | edges and rings 900 ms ease-in-out; marker 600 ms; checks 240-300 ms |
 | **Travel** | "this caused that" | exactly one object moves from the cause to the effect: the tag to the tray, XP to the chip, the glyph into the panel, the marker along the path | `spring.gentle`; a `FlyToken` flight is 600 ms |
 
-Two touches complete it. **Press:** every control goes down at once and comes back eased (`active:scale-[0.97] active:transition-none`, release 200 ms). **Type:** «دليل» writing into a field, at the speed the spec gives that step.
+Two touches complete it. **Press:** every control goes down at once and comes back eased (`active:scale-[0.97] active:transition-none`, release 200 ms). **Type:** «دليلك» writing into a field, at the speed the spec gives that step.
 
 Rules that make the six read as one language:
 
@@ -161,7 +161,7 @@ A variant's own `transition` wins over the component's `transition` prop. To del
 | Page | rise 6 px, 260 ms (`.page`, CSS) | fades and lifts 4 px in 120 ms, before the navigation starts |
 | Sections and cards on a page | with the page. At most **one** staggered group per page (its main trio or hero), `rise` | with the page |
 | A phase inside one route (`/welcome` phases, show scenes, tab panels) | `rise`, after the old one has left (`AnimatePresence mode="wait"`) | `rise.exit`, 150 ms |
-| «دليل»'s reply blocks, analysis results, the reveal | `focusIn`, 80 ms apart | fade 150 ms |
+| «دليلك»'s reply blocks, analysis results, the reveal | `focusIn`, 80 ms apart | fade 150 ms |
 | The user's sent message | pop from the send-button corner, 440 ms | stays |
 | Chip, tag, star, badge, nudge | `popIn` | fade and `scale 0.9`, 150 ms |
 | Sheet or dialog | rises 16 px and fades in 200 ms; the scrim (flat `black/30`) fades in 200 ms | the same path back, 150 ms, ease-in |
@@ -274,7 +274,7 @@ What that gives, and what builders must add by hand:
 
 - No tinted gradient or glow washes on cards, headers or backgrounds. No coloured or glowing shadows. No `backdrop-blur`, no glass.
 - No sparkle icons, no orb or blob as the "AI" mark, no purple-gradient AI look, no emoji as icons, no stock icon pack.
-- No bouncing or pulsing dots, anywhere. Waiting is «دليل»'s glyph plus a rolling status line.
+- No bouncing or pulsing dots, anywhere. Waiting is «دليلك»'s glyph plus a rolling status line.
 - No gradient text, border beams, shimmer on buttons, spotlight or cursor-follow effects, tilt, magnetic buttons.
 - No animated backgrounds (aurora, beams, particles, flickering grids, moving paths).
 
@@ -282,9 +282,9 @@ What that gives, and what builders must add by hand:
 
 - No heavy spring page pushes, no dimming of the old page, no cross-fade with two pages half visible.
 - No per-character animation of Arabic text, ever (letters disconnect). Words, lines or whole blocks only.
-- No typewriter for «دليل»'s answers. No animation per streamed token.
+- No typewriter for «دليلك»'s answers. No animation per streamed token.
 - No number that swaps without rolling or counting. No Arabic-Indic digits: one `formatNumber` helper with `"en-US"`, never a bare `toLocaleString()`.
-- No loop outside these five: the showcase's turn-taking, the current-stage pulse ring, «دليل»'s glyph with its status shimmer, the running arc of a `StatusMark`, the caret while «دليل» types.
+- No loop outside these five: the showcase's turn-taking, the current-stage pulse ring, «دليلك»'s glyph with its status shimmer, the running arc of a `StatusMark`, the caret while «دليلك» types.
 - No confetti except the one `Burst` on the match beat of the course celebration. No second celebration overlay on top of a first.
 - No motion that blocks input longer than the duration the spec states for it. Buttons under a show are live from its first beat.
 - No hover-only affordance (hover does not exist on a phone).
@@ -316,7 +316,7 @@ Suggested homes: tokens in `src/lib/motion.ts`; blocks in `src/components/motion
 | 6 | `Roll` | Any value replacing another in place: status line, step counter, level, streak, rank, state label | keyed child in `AnimatePresence mode="popLayout"`, `y ±100%` and 2 px blur, clipped line | the reference assistant rolling status, Motion Primitives text-loop | yes |
 | 7 | `RollingStatus` | The one "working" line | `Roll` + `.shimmer-text` + elapsed seconds after 4 s | the reference assistant status line, the reference demo shimmer, React Bits ThoughtLine | yes |
 | 8 | `.shimmer-text` (CSS) | Light passing over a label | two backgrounds clipped to text, one hue two lightness steps, travelling right to left | Motion Primitives text-shimmer | css |
-| 9 | `DaleelGlyph` | «دليل»'s living mark | one small SVG with per-part variants; states `idle`, `listening`, `thinking`, `working`, `done`; a 2.4 s loop in step with the shimmer; settles into the still brand glyph when the first words arrive | the reference demo living glyph (own shape), Animate UI per-part icon pattern | no |
+| 9 | `DaleelGlyph` | «دليلك»'s living mark | one small SVG with per-part variants; states `idle`, `listening`, `thinking`, `working`, `done`; a 2.4 s loop in step with the shimmer; settles into the still brand glyph when the first words arrive | the reference demo living glyph (own shape), Animate UI per-part icon pattern | no |
 | 10 | `StatusMark` | pending / running / done / failed, one mark | 24 px SVG: dashed ring, a spinning arc, a check drawn with `pathLength` in 240 ms after a 120 ms delay | React Bits Micro StatusMark, Kokonut drawn check | no |
 | 11 | `SentBubble` | The sent message pops from the composer | `y 22, scale 0.92`, 440 ms `ease.pop`, origin at the send-button corner | the reference assistant send transition | yes |
 | 12 | `NumberTicker` | Big numbers count (XP, gaps, totals) | a motion value animated with `animate()`, rendered as a motion child (no re-render), `dir="ltr"`, `tabular-nums`, final value in the DOM and in `data-value` | Magic UI number-ticker | yes |
@@ -326,7 +326,7 @@ Suggested homes: tokens in `src/lib/motion.ts`; blocks in `src/components/motion
 | 16 | `useShow` | The director of every show | step index in state; `Promise.all([dwell, realWork])`; cancellable | Aceternity multi-step loader (its timing idea only) | yes |
 | 17 | `Highlight` (`.evidence`) | The evidence marker in the CV | `background-size 0 to 100%` on an inline span, from the right, `box-decoration-break: clone` | the reference demo reading show | css |
 | 18 | `SkillTag` + `LayoutGroup` | A tag pops out of its sentence and flies to the tray | `popIn`, then the same `layoutId` rendered in the tray | Aceternity upload morph idea | yes |
-| 19 | `useTypeOn` | «دليل» fills a field; the sample CV writes itself | reveal graphemes, words or lines of a string inside a controlled field on a timer | "fields type themselves" (TEAM-BRIEF 5) | yes |
+| 19 | `useTypeOn` | «دليلك» fills a field; the sample CV writes itself | reveal graphemes, words or lines of a string inside a controlled field on a timer | "fields type themselves" (TEAM-BRIEF 5) | yes |
 | 20 | `Composer` | Pill that opens into a card; Send and Stop on one button | `layout` on the form with `borderRadius` in `style`; `field-sizing: content`; IME guard; two stacked faces that cross with blur | the reference demo composer, cult/ui morph-surface, Kokonut ai-prompt | yes |
 | 21 | `ChatThread` | Transcript that follows the newest message only while pinned | `role="log"`, `content-visibility: auto` per message, pinned flag and `ResizeObserver` | shadcn message-scroller, prompt-kit | no |
 | 22 | `AdvisorPanel`, `AdvisorLauncher` | The side-panel opening | Base UI `Dialog` (non-modal on desktop), popup composed with `motion.div`, glyph shared by `layoutId` | the reference demo panel | yes |
@@ -340,7 +340,7 @@ Suggested homes: tokens in `src/lib/motion.ts`; blocks in `src/components/motion
 | 30 | `ShowcaseStage` | Sign-in showcase director | six real components in a fixed composition; one has the turn; caption rolls | Magic UI bento "live cell" idea | yes |
 | 31 | `SweepRows` | `jobs-sweep` in the reveal | three rows of tiles on a one-shot linear translate | replaces Marquee | yes |
 | 32 | `Collapse` (CSS) | Height that follows content, without measuring | `grid-template-rows: 0fr` to `1fr` transition, inner `min-h-0 overflow-clip` | React Bits ThoughtLine | css |
-| 33 | `PressButton` | Tactile press, and a press «دليل» can perform | `active:scale-[0.97] active:transition-none`; the same style on `data-pressed` for a programmatic press | cult/ui pressed recipe (shadow kept neutral) | no |
+| 33 | `PressButton` | Tactile press, and a press «دليلك» can perform | `active:scale-[0.97] active:transition-none`; the same style on `data-pressed` for a programmatic press | cult/ui pressed recipe (shadow kept neutral) | no |
 | 34 | Toasts | XP and badge toasts | Base UI `Toast` (installed) with its CSS variables; one position | Sonner stack maths | no |
 
 The lead's brief also named a MultiStepLoader, a Marquee and a card-to-page shared element. They are answered, not forgotten: the loader is `useShow` + `RollingStatus` (the spec gives each show one status line, not a step list); the Marquee is replaced by `ShowcaseStage` and `SweepRows`; card-to-page is a matched cut, not a morph (section 4 gives the reasons).
@@ -488,7 +488,7 @@ export function ShowcaseStage({ pieces, captions }: { pieces: ((active: boolean)
 - When the loop wraps, the whole stage dips to opacity 0 and back once (150 ms out, 260 ms in) while every piece resets to its start state. Pieces do not rewind one by one.
 - The grid spans and sizes are the designers' composition; the sketch shows the mechanism only.
 - **Layout.** The form must be physically on the left. Keep the form first in the DOM and use `flex flex-col-reverse lg:flex-row-reverse` on the wrapper: in an RTL row, `row-reverse` lays out left to right, so the form lands on the left on desktop; on a phone `col-reverse` puts the showcase band on top while the form stays first for the keyboard and screen readers.
-- **`signin-handoff`** is a matched cut, not a shared element (the two screens are two routes): on submit the page leaves with the normal 120 ms leave; on `/welcome` «دليل»'s first line arrives with `WordsIn` and the user's name is its first emphasised word. Same surface, same rhythm, so it reads as one gesture.
+- **`signin-handoff`** is a matched cut, not a shared element (the two screens are two routes): on submit the page leaves with the normal 120 ms leave; on `/welcome` «دليلك»'s first line arrives with `WordsIn` and the user's name is its first emphasised word. Same surface, same rhythm, so it reads as one gesture.
 
 **Pitfalls.**
 
@@ -499,7 +499,7 @@ export function ShowcaseStage({ pieces, captions }: { pieces: ((active: boolean)
 
 ### 3.2 Onboarding conversation [spec 3.2, 4]
 
-**Pattern.** A full-page chat built from the **same chat kit as the advisor panel** (`ChatThread`, `SentBubble`, `FocusInGroup`, `Composer`, `DaleelGlyph`), plus the chip row and the «ملفك يتكوّن» card. One question per turn; «دليل» thinks 350-600 ms (glyph only, no status line: the wait is too short to read one), then its acknowledgement and next question come into focus as two blocks.
+**Pattern.** A full-page chat built from the **same chat kit as the advisor panel** (`ChatThread`, `SentBubble`, `FocusInGroup`, `Composer`, `DaleelGlyph`), plus the chip row and the «ملفك يتكوّن» card. One question per turn; «دليلك» thinks 350-600 ms (glyph only, no status line: the wait is too short to read one), then its acknowledgement and next question come into focus as two blocks.
 
 **Why.** His words: the chatbot must answer at once and be good to you, and a sent bubble that pops and an answer that blurs into focus are the two things he has already approved. Using one kit for onboarding and advisor makes "the same character stays" visible.
 
@@ -823,11 +823,11 @@ export function ReorderList({ rows }: { rows: { id: string; me?: boolean; node: 
 - Hydration: any component that calls `useSearchParams()` sits under `<Suspense>` or `next build` stops. `params` is a Promise (`use(params)`). Matches are computed after the store hydrates.
 - Filters call `router.replace`, so typing in the search box never triggers the page transition.
 
-### 3.8 «دليل» applies for you [spec 3.8, 7.4]
+### 3.8 «دليلك» applies for you [spec 3.8, 7.4]
 
-**Pattern.** «دليل» operates the **real apply sheet** in front of the user. The advisor's `apply` event starts a `useShow` script with the spec's six steps; the sheet opens empty, each field types itself with a small «دليل» mark that moves from field to field, the matching skills pop in, the note types by words, the send button is visibly pressed, the confirmation lands. The status line in the chat rolls in step.
+**Pattern.** «دليلك» operates the **real apply sheet** in front of the user. The advisor's `apply` event starts a `useShow` script with the spec's six steps; the sheet opens empty, each field types itself with a small «دليلك» mark that moves from field to field, the matching skills pop in, the note types by words, the send button is visibly pressed, the confirmation lands. The status line in the chat rolls in step.
 
-**Why.** This is "he opens it for you, like in our demos" at its strongest, and the one place where typing is the right verb: it is «دليل»'s hands on the page. Running it as steps makes «أوقف» trivial and exact.
+**Why.** This is "he opens it for you, like in our demos" at its strongest, and the one place where typing is the right verb: it is «دليلك»'s hands on the page. Running it as steps makes «أوقف» trivial and exact.
 
 | Step (spec 7.4) | Technique |
 |---|---|
@@ -850,7 +850,7 @@ const name = useTypeOn(nameUnits, 400, step === "fields");      // nameUnits = u
 ```
 
 - «أوقف» during steps 1-4 flips `play` to false: the effect cleanup stops the script, the fields keep what was written and become editable. After the press it cannot be stopped (spec).
-- Phone (`sheet-to-pill`): the advisor sheet collapses to a pill «دليل يعمل…» and reopens with the reply. Pill and sheet share one empty background layer by `layoutId`; their contents fade separately so no text stretches.
+- Phone (`sheet-to-pill`): the advisor sheet collapses to a pill «دليلك يعمل…» and reopens with the reply. Pill and sheet share one empty background layer by `layoutId`; their contents fade separately so no text stretches.
 - The reply comes into focus only after the confirmation has shown (`page-handoff` order: the site responds first, the words follow).
 
 **Pitfalls.**
@@ -986,11 +986,11 @@ While it climbs, the user's row sits above its neighbours (`zIndex: 1`), scales 
 
 ### 3.12 Advisor panel and its opening [spec 3.14, 5]
 
-**Pattern.** The panel is Dalilak's own form of the the reference demo opening, in the same register he approved (opacity plus a 16 px slide from the edge, 200 ms in, 150 ms out) with one signature of its own: **«دليل»'s glyph travels from the launcher into the panel header**. Three beats inside about 400 ms: the launcher fades while its glyph leaves; the panel arrives from the inline-end edge; header, thread and composer rise 60 ms apart. The thread is restored without replaying old messages.
+**Pattern.** The panel is Dalilak's own form of the the reference demo opening, in the same register he approved (opacity plus a 16 px slide from the edge, 200 ms in, 150 ms out) with one signature of its own: **«دليلك»'s glyph travels from the launcher into the panel header**. Three beats inside about 400 ms: the launcher fades while its glyph leaves; the panel arrives from the inline-end edge; header, thread and composer rise 60 ms apart. The thread is restored without replaying old messages.
 
-Inside, everything is the approved chat grammar: the composer is a pill that springs open into a card; the sent bubble pops from it; while «دليل» works its glyph is alive beside a rolling, shimmering status line that names the real step; the reply comes into focus block by block; cards rise after the text; one round button is Send or Stop.
+Inside, everything is the approved chat grammar: the composer is a pill that springs open into a card; the sent bubble pops from it; while «دليلك» works its glyph is alive beside a rolling, shimmering status line that names the real step; the reply comes into focus block by block; cards rise after the text; one round button is Send or Stop.
 
-**Why.** He named this transition. The lead could not tell whether he meant the opening or the reading motion, so both are built: the opening here, the reading show as the CV analysis (3.6). The panel lives in the shell, outside `.page`, so when «دليل» opens a page the page changes beside a panel that does not move: the user watches the site respond to the chat.
+**Why.** He named this transition. The lead could not tell whether he meant the opening or the reading motion, so both are built: the opening here, the reading show as the CV analysis (3.6). The panel lives in the shell, outside `.page`, so when «دليلك» opens a page the page changes beside a panel that does not move: the user watches the site respond to the chat.
 
 | Spec moment | Block and verb |
 |---|---|
@@ -1023,7 +1023,7 @@ export function AdvisorPanel({ open, onOpenChange, phone, children }:
                   animate={{ opacity: 1, x: 0, y: 0, transition: tween.fast }}
                   exit={{ ...from, transition: tween.exit }} />   /* the exit must animate opacity, or Base UI will not wait */
               }>
-              <Dialog.Title className="sr-only">دليل</Dialog.Title>
+              <Dialog.Title className="sr-only">دليلك</Dialog.Title>
               <motion.span layoutId="daleel-glyph" transition={{ layout: spring.gentle }} className="size-8" />
               {children}
             </Dialog.Popup>
@@ -1093,7 +1093,7 @@ const face = "absolute inset-0 grid place-items-center transition-[opacity,filte
 **Pitfalls.**
 
 - RTL: the panel is on the inline-end side, which is the physical left; it enters from further left: `x: 16 * INLINE_END`. The send arrow is mirrored, check marks are not.
-- Desktop: `modal={false}` **and** `disablePointerDismissal`, or the panel closes the moment «دليل» "opens a page for you" or the user clicks the page. The spec's line that the page "stays visible and usable beside it" is why focus is not trapped on desktop.
+- Desktop: `modal={false}` **and** `disablePointerDismissal`, or the panel closes the moment «دليلك» "opens a page for you" or the user clicks the page. The spec's line that the page "stays visible and usable beside it" is why focus is not trapped on desktop.
 - Phone: a modal full-screen sheet that rises 24 px; the composer stays above the keyboard (flex column, `h-dvh`, no fixed positioning inside).
 - Performance: no `layout` on bubbles. The fixed popup has `layoutRoot`; the thread's scroller needs `layoutScroll` if anything inside it uses `layout`. The shimmer is CSS; the glyph is the only loop.
 - Hydration: the panel is closed on the first render. `phone` comes from `matchMedia` in an effect, never during render. The saved thread is restored after hydration with `initial={false}`.
@@ -1170,7 +1170,7 @@ export function FlyToken({ flight, onArrive }: { flight: Flight; onArrive: () =>
 
 | Not used | Why |
 |---|---|
-| React `<ViewTransition>` and Motion `AnimateView` for route changes | Nobody has run them in this app. The snapshots are painted above the whole document, so every fixed or sticky piece of the shell (top bar, tab bar, launcher, toasts, and above all the open advisor panel) would need its own pinned transition name or be covered for 380 ms, exactly while «دليل» is opening a page. They cannot be interrupted. The CSS route in 1.5 gives the same "old out first" read with none of that, and degrades to the transition he already approved. |
+| React `<ViewTransition>` and Motion `AnimateView` for route changes | Nobody has run them in this app. The snapshots are painted above the whole document, so every fixed or sticky piece of the shell (top bar, tab bar, launcher, toasts, and above all the open advisor panel) would need its own pinned transition name or be covered for 380 ms, exactly while «دليلك» is opening a page. They cannot be interrupted. The CSS route in 1.5 gives the same "old out first" read with none of that, and degrades to the transition he already approved. |
 | A cross-route shared element (job card grows into the job page) | It needs the mechanism above. `layoutId` does not survive a route change in the App Router. Replaced by the matched cut of 3.7. **If the whole flow is green and time is left, this is the single stretch item**: `<ViewTransition name={"job-" + id} share="morph" default="none">` on both ends, with the root's default cross-fade switched off in CSS. Do not start it before QA has passed. |
 | `AnimatePresence` around a layout's `children` | The layout receives the new page at once, so the "exiting" page re-renders with the new route's content. The known workaround imports a Next internal. |
 | `LazyMotion` | The saving is invisible on localhost, and with the smaller feature set `layout` and `layoutId` silently do nothing. |
@@ -1179,13 +1179,13 @@ export function FlyToken({ flight, onArrive }: { flight: Flight; onArrive: () =>
 | Marquee, 3D marquee, hero parallax | The spec stages six real pieces in turn; an endless drift has no cause (P8). A horizontal marquee also breaks in RTL without a `dir="ltr"` island. `SweepRows` covers the one place tiles pass by. |
 | The scrolling multi-step list and its full-screen blurred overlay | The spec gives each show one status line and a stage. A step list would compete with the stage, and `backdrop-blur` is on the rejected list. Its good idea (real stages with a minimum dwell) lives in `useShow`. |
 | One long `useAnimate` timeline for a show | Untested in a browser, awkward under Strict Mode, opaque to QA. Steps in state give `data-value` hooks and a trivial reduced-motion form. `useAnimate` is fine inside one small scene. |
-| Hold-to-confirm buttons | The spec's consent is a chip or a clear request. A hold gesture cannot be performed by «دليل» in front of the user, and it is unfamiliar on a stage. |
+| Hold-to-confirm buttons | The spec's consent is a chip or a clear request. A hold gesture cannot be performed by «دليلك» in front of the user, and it is unfamiliar on a stage. |
 | Typing dots, typewriter answers, per-token fades | Rejected look (dots), and per-token animation is unbounded work on long answers. Blocks come into focus instead. |
 | Per-character text effects, scramble, split-flap, text morph | Arabic letters join; isolated spans render as disconnected forms. |
 | Dock magnification, tilt, magnetic buttons, spotlight and cursor effects | Pointer-only tricks with no phone equivalent, and no meaning in this product. |
 | Animated or patterned backgrounds as motion (aurora, beams, particles, flickering grid, background paths) | Rejected look, and most run a frame loop forever. Any static pattern is the design system's call and must be one paint. |
 | Glass (`backdrop-filter`), gradient text, border beams, shimmer on buttons, glow shadows | Rejected look. The shimmer exists once, on the status label, in one neutral hue. |
-| Orb, blob or aurora as the "AI" mark | Rejected look. «دليل» has its own glyph with states. |
+| Orb, blob or aurora as the "AI" mark | Rejected look. «دليلك» has its own glyph with states. |
 | Direction-aware tab pushes (300 px, both panels visible), 3D tab stacks | The cross-fade and the push he rejected. Tab panels use `mode="wait"` with `rise`; lists reorder in place. |
 | Base UI `Drawer` (swipe to dismiss) | One dialog primitive (`Dialog`) for everything keeps behaviour identical on both widths. Swipe-to-dismiss is not needed for the walkthrough and was not tested. |
 | Scroll-driven animation (`useScroll`, tracing beams, scroll-filled rails) | Progress in Dalilak comes from state (a course completed), not from scrolling. |

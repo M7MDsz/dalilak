@@ -2,6 +2,9 @@
 // their field, the sample CV text, the onboarding questions, levels and badges. Check 4 (the sample CV read by the
 // analyser) belongs to brain-cv and check 5 / 6 (matches, fit) to the engine; here the aliases are only sanity-checked
 // against the sample CV so brain-cv's acceptance test cannot fail because of the data.
+import { readFileSync } from "node:fs";
+import path from "node:path";
+
 import { describe, expect, it } from "vitest";
 
 import {
@@ -102,13 +105,23 @@ function allStrings(value: unknown): string[] {
   return [];
 }
 
-/** Spec 3.4 / 9.3: one stage per required star, plus a prep stage (first star) for each unlisted prerequisite. */
+/** Every prerequisite of a skill, transitively (ui-design → figma → design-basics). */
+function prereqsOf(skill: SkillId, seen: Set<SkillId> = new Set()): Set<SkillId> {
+  for (const p of getSkill(skill).prereqs) {
+    if (seen.has(p)) continue;
+    seen.add(p);
+    prereqsOf(p, seen);
+  }
+  return seen;
+}
+
+/** Spec 3.4 / 9.3: one stage per required star, plus a prep stage (first star) for each unlisted prerequisite, transitively. */
 function stagesOf(job: Job): { courses: CourseId[]; preps: number } {
   const listed = new Set<SkillId>(job.requirements.map((r) => r.skill));
   const courses: CourseId[] = [];
   const preps = new Set<SkillId>();
   for (const r of job.requirements) {
-    for (const p of getSkill(r.skill).prereqs) if (!listed.has(p)) preps.add(p);
+    for (const p of prereqsOf(r.skill)) if (!listed.has(p)) preps.add(p);
     for (let star = 1; star <= r.stars; star++) {
       const id = courseIdFor(r.skill, star);
       if (id) courses.push(id);
@@ -131,14 +144,15 @@ describe("fields and skills (9.1, 9.2, 9.8 check 1)", () => {
     expect(getField("professional").name).toBe("المهارات المهنية");
   });
 
-  it("has 38 skills in table order, split 7/6/5/5/5/5/5, with 59 star slots (14/9/8/7/7/7/7)", () => {
+  it("has 54 skills in table order (spec 9.2's 38 and the expansion's 16), with 80 star slots", () => {
     expect(SKILLS.map((s) => s.id)).toEqual([...SKILL_IDS]);
     const perField = (field: FieldId) => SKILLS.filter((s) => s.field === field);
-    expect(FIELD_IDS.map((f) => perField(f).length)).toEqual([7, 6, 5, 5, 5, 5, 5]);
-    expect(FIELD_IDS.map((f) => perField(f).reduce((sum, s) => sum + s.maxStars, 0))).toEqual([14, 9, 8, 7, 7, 7, 7]);
-    expect(SKILLS.reduce((sum, s) => sum + s.maxStars, 0)).toBe(59);
+    // data, software, design, marketing, business, hr, product, cyber-cloud, sales-supply, professional
+    expect(FIELD_IDS.map((f) => perField(f).length)).toEqual([8, 7, 5, 5, 5, 5, 4, 6, 4, 5]);
+    expect(FIELD_IDS.map((f) => perField(f).reduce((sum, s) => sum + s.maxStars, 0))).toEqual([15, 10, 8, 7, 7, 7, 5, 8, 6, 7]);
+    expect(SKILLS.reduce((sum, s) => sum + s.maxStars, 0)).toBe(80);
     expect(CATALOGUE_COUNTS.skills).toBe(SKILLS.length);
-    expect(CATALOGUE_COUNTS.starSlots).toBe(59);
+    expect(CATALOGUE_COUNTS.starSlots).toBe(80);
   });
 
   it("gives three slots to five skills and two to eleven (9.2)", () => {
@@ -157,9 +171,15 @@ describe("fields and skills (9.1, 9.2, 9.8 check 1)", () => {
         "recruitment",
         "communication",
         "english",
+        // the expansion's
+        "product-roadmap",
+        "security-fundamentals",
+        "cloud",
+        "sales",
+        "supply-chain",
       ].sort(),
     );
-    expect(withSlots(1)).toHaveLength(22);
+    expect(withSlots(1)).toHaveLength(33);
   });
 
   it("keeps every prerequisite inside its skill's field, listed earlier, never itself", () => {
@@ -325,11 +345,33 @@ const COURSE_HOURS: Readonly<Record<CourseId, number>> = {
   "c-presentation-1": 6,
   "c-teamwork-1": 6,
   "c-problem-solving-1": 6,
+  // the expansion's 21 (src/lib/data/expansion/courses.ts, 218 hours)
+  "c-deep-learning-1": 14,
+  "c-llm-apps-1": 12,
+  "c-product-discovery-1": 8,
+  "c-product-roadmap-1": 8,
+  "c-product-roadmap-2": 12,
+  "c-product-specs-1": 8,
+  "c-product-analytics-1": 10,
+  "c-linux-1": 8,
+  "c-networking-1": 10,
+  "c-security-fundamentals-1": 12,
+  "c-security-fundamentals-2": 10,
+  "c-soc-analysis-1": 12,
+  "c-cloud-1": 10,
+  "c-cloud-2": 14,
+  "c-devops-1": 14,
+  "c-sales-1": 8,
+  "c-sales-2": 10,
+  "c-customer-success-1": 8,
+  "c-procurement-1": 8,
+  "c-supply-chain-1": 10,
+  "c-supply-chain-2": 12,
 };
 
 describe("courses (9.4, 8.2, 9.8 check 2)", () => {
-  it("has 59 courses in table order, one per star slot, ids c-{skill}-{star}", () => {
-    expect(COURSES).toHaveLength(59);
+  it("has 80 courses in table order (59 + the expansion's 21), one per star slot, ids c-{skill}-{star}", () => {
+    expect(COURSES).toHaveLength(80);
     expect(COURSES.map((c) => c.id)).toEqual([...COURSE_IDS]);
     for (const course of COURSES) expect(course.id).toBe(`c-${course.skill}-${course.star}`);
     for (const skill of SKILLS) {
@@ -339,12 +381,12 @@ describe("courses (9.4, 8.2, 9.8 check 2)", () => {
     expect(CATALOGUE_COUNTS.courses).toBe(COURSES.length);
   });
 
-  it("has the hours as listed: 566 hours and 11,320 XP in total", () => {
+  it("has the hours as listed: 784 hours (566 + 218) and 15,680 XP in total", () => {
     for (const course of COURSES) expect(course.hours, course.id).toBe(COURSE_HOURS[course.id]);
     const hours = COURSES.reduce((sum, c) => sum + c.hours, 0);
-    expect(hours).toBe(566);
+    expect(hours).toBe(784);
     expect(hours).toBe(CATALOGUE_COUNTS.courseHours);
-    expect(hours * 20).toBe(11_320);
+    expect(hours * 20).toBe(15_680);
   });
 
   it("has as many lessons as 8.2 gives for the hours, each a short title, none repeated in a course", () => {
@@ -399,38 +441,133 @@ describe("courses (9.4, 8.2, 9.8 check 2)", () => {
 
 // ─── 9.8 checks 3 and 9: jobs ─────────────────────────────────────────────────────────────────────────────────────
 
-/** Spec 9.3: requirements in roadmap order, and the stage count before any CV (prep stages). */
+/**
+ * Requirements in roadmap order, and the stage count before any CV (prep stages). 20 Nov 2026: the practice job (spec
+ * 9.3's «محلل بيانات») and the 27 real postings of research/jobs/jobs-snapshot.json and research/jobs/maharah.json.
+ */
 const JOB_TABLE: Readonly<Record<JobId, { reqs: string; stages: number; preps: number }>> = {
   "data-analyst-riyadh": { reqs: "excel:2 sql:2 powerbi:1 statistics:2 communication:1", stages: 8, preps: 0 },
-  "bi-analyst-riyadh": { reqs: "excel:2 sql:3 powerbi:3 dataviz:1 statistics:2", stages: 11, preps: 0 },
-  "reporting-specialist-jeddah": { reqs: "excel:2 powerbi:1 statistics:2 dataviz:1 communication:1", stages: 7, preps: 0 },
-  "junior-data-scientist-remote": { reqs: "sql:2 statistics:2 python-data:1 ml:1 problem-solving:1", stages: 8, preps: 1 },
-  "frontend-developer-riyadh": { reqs: "html-css:1 javascript:2 react:1 git:1 english:1", stages: 7, preps: 1 },
-  "backend-developer-riyadh": { reqs: "programming:2 git:1 apis:1 sql:2 problem-solving:1", stages: 8, preps: 1 },
-  "web-app-developer-remote": { reqs: "javascript:3 react:1 git:1 apis:1 teamwork:1", stages: 10, preps: 3 },
-  "qa-tester-dammam": { reqs: "programming:2 git:1 problem-solving:1 english:1 teamwork:1", stages: 7, preps: 1 },
-  "ui-ux-designer-riyadh": { reqs: "design-basics:1 figma:2 ui-design:1 ux-research:1 presentation:1", stages: 7, preps: 1 },
-  "product-designer-jeddah": { reqs: "figma:3 ui-design:2 prototyping:1 ux-research:1 communication:2", stages: 10, preps: 1 },
-  "ux-researcher-remote": { reqs: "design-basics:1 ux-research:1 figma:1 statistics:1 presentation:1", stages: 7, preps: 2 },
-  "digital-marketing-specialist-riyadh": { reqs: "marketing-basics:1 social-media:2 content:1 ads:1 excel:1", stages: 6, preps: 0 },
-  "content-writer-jeddah": { reqs: "marketing-basics:1 content:2 seo:1 english:2 communication:1", stages: 7, preps: 0 },
-  "digital-ads-specialist-dammam": { reqs: "marketing-basics:1 social-media:2 ads:1 seo:1 excel:2", stages: 8, preps: 1 },
-  "business-analyst-riyadh": { reqs: "project-management:1 business-analysis:1 excel:2 sql:1 english:2", stages: 7, preps: 0 },
-  "project-coordinator-jeddah": { reqs: "project-management:2 agile:1 communication:2 teamwork:1 excel:1", stages: 7, preps: 0 },
-  "financial-analyst-riyadh": { reqs: "accounting:1 financial-analysis:2 excel:3 presentation:1 english:2", stages: 10, preps: 1 },
-  "hr-specialist-riyadh": { reqs: "hr-basics:2 labor-law:1 payroll:1 communication:2 excel:1", stages: 7, preps: 0 },
-  "recruiter-jeddah": { reqs: "hr-basics:1 recruitment:2 communication:2 english:2 teamwork:1", stages: 8, preps: 0 },
-  "training-coordinator-dammam": { reqs: "hr-basics:1 training-dev:1 recruitment:1 communication:2 presentation:1", stages: 6, preps: 0 },
+  "jeeny-growth-insights-analytics-riyadh": { reqs: "excel:3 sql:3 statistics:2 powerbi:1 communication:2", stages: 11, preps: 0 },
+  "qiddiya-hr-analytics-analyst-riyadh": { reqs: "statistics:1 powerbi:2 dataviz:1 presentation:1 hr-basics:1", stages: 8, preps: 2 },
+  "ninja-real-estate-performance-analyst-riyadh": { reqs: "excel:3 powerbi:1 communication:2 problem-solving:1 presentation:1", stages: 8, preps: 0 },
+  "master-works-data-senior-engineer-riyadh": { reqs: "sql:3 powerbi:1 dataviz:1 communication:1 english:1", stages: 8, preps: 1 },
+  "salla-senior-data-scientist-remote": { reqs: "sql:3 statistics:1 python-data:1 dataviz:1 communication:2", stages: 10, preps: 2 },
+  "lucidya-frontend-engineer-dammam": { reqs: "html-css:1 javascript:2 git:1 react:1 apis:1", stages: 7, preps: 1 },
+  "salla-senior-backend-checkout-remote": { reqs: "programming:2 sql:3 apis:1 problem-solving:1 teamwork:1", stages: 11, preps: 3 },
+  "salla-senior-qa-engineer-remote": { reqs: "javascript:2 git:1 apis:1 problem-solving:1 communication:1", stages: 8, preps: 2 },
+  "almajed-mobile-developer-riyadh": { reqs: "programming:1 apis:1 ui-design:1 teamwork:1 business-analysis:1", stages: 9, preps: 4 },
+  "horizontal-graduate-designer-riyadh": { reqs: "design-basics:1 figma:1 prototyping:1 ui-design:1 teamwork:1", stages: 6, preps: 1 },
+  "flyakeed-product-designer-riyadh": { reqs: "ux-research:1 figma:2 prototyping:1 ui-design:2 teamwork:1", stages: 9, preps: 2 },
+  "lucidya-product-designer-riyadh": { reqs: "ux-research:1 figma:2 prototyping:1 ui-design:2 teamwork:1", stages: 9, preps: 2 },
+  "hungerstation-senior-product-designer-riyadh": { reqs: "ux-research:1 figma:3 ui-design:2 presentation:1 teamwork:1", stages: 10, preps: 2 },
+  "salla-marketing-specialist-tamheer-jeddah": { reqs: "marketing-basics:1 social-media:1 content:1 communication:2 problem-solving:1", stages: 6, preps: 0 },
+  "salla-mahally-seo-manager-jeddah": { reqs: "content:2 seo:1 english:2 sql:1 business-analysis:1", stages: 9, preps: 2 },
+  "lucidya-social-media-analyst-riyadh": { reqs: "marketing-basics:1 social-media:2 content:1 english:1 presentation:1", stages: 7, preps: 1 },
+  "platinumlist-content-manager-riyadh": { reqs: "content:2 seo:1 english:2 communication:1 problem-solving:1", stages: 8, preps: 1 },
+  "syarah-financial-analyst-tamheer-riyadh": { reqs: "excel:1 accounting:1 financial-analysis:1 communication:1 teamwork:1", stages: 5, preps: 0 },
+  "foodics-accountant-erp-riyadh": { reqs: "accounting:1 excel:3 financial-analysis:2 communication:1 english:1", stages: 8, preps: 0 },
+  "master-works-ai-business-analyst-riyadh": { reqs: "business-analysis:1 agile:1 apis:1 presentation:1 english:2", stages: 10, preps: 4 },
+  "maharah-business-development-specialist-riyadh": { reqs: "communication:2 presentation:1 marketing-basics:1 business-analysis:1 sales:1", stages: 6, preps: 0 },
+  "maharah-qa-analyst-riyadh": { reqs: "business-analysis:1 statistics:1 dataviz:1 problem-solving:1 communication:1", stages: 7, preps: 2 },
+  "atheer-hr-specialist-riyadh": { reqs: "hr-basics:2 labor-law:1 recruitment:2 payroll:1 english:2", stages: 8, preps: 0 },
+  "qiddiya-hris-specialist-riyadh": { reqs: "hr-basics:1 powerbi:1 dataviz:1 business-analysis:1 training-dev:1", stages: 6, preps: 1 },
+  "lucidya-people-operations-riyadh": { reqs: "hr-basics:2 labor-law:1 payroll:1 recruitment:1 teamwork:1", stages: 7, preps: 1 },
+  "tamara-people-business-partner-riyadh": { reqs: "hr-basics:2 labor-law:1 training-dev:1 communication:2 project-management:1", stages: 7, preps: 0 },
+  "lucidya-talent-acquisition-lead-riyadh": { reqs: "hr-basics:1 recruitment:2 project-management:1 communication:1 presentation:1", stages: 6, preps: 0 },
+  // the expansion's 18 (research/expansion/raw/jobs.json)
+  "petroapp-product-manager-riyadh": { reqs: "product-discovery:1 product-specs:1 product-roadmap:1 product-analytics:1 agile:1", stages: 6, preps: 1 },
+  "salla-product-manager-storefront-jeddah": { reqs: "product-discovery:1 product-analytics:1 ml:1 ux-research:1 english:2", stages: 10, preps: 4 },
+  "master-works-ai-product-manager-riyadh": { reqs: "product-discovery:1 product-roadmap:2 product-specs:1 product-analytics:1 llm-apps:1", stages: 9, preps: 3 },
+  "taj-hr-cybersecurity-engineer-riyadh": { reqs: "communication:1 networking:1 security-fundamentals:1 soc-analysis:1 english:1", stages: 6, preps: 1 },
+  "mullers-solutions-soc-l2-specialist-riyadh": { reqs: "presentation:1 networking:1 security-fundamentals:2 soc-analysis:1 english:2", stages: 9, preps: 2 },
+  "qiddiya-it-security-design-riyadh": { reqs: "teamwork:1 networking:1 security-fundamentals:1 soc-analysis:1 procurement:1", stages: 7, preps: 2 },
+  "lucidya-devops-engineer-riyadh": { reqs: "linux:1 networking:1 cloud:1 devops:1 git:1", stages: 5, preps: 0 },
+  "lucidya-site-reliability-engineer-riyadh": { reqs: "problem-solving:1 linux:1 networking:1 cloud:1 devops:1", stages: 5, preps: 0 },
+  "mozn-cloud-platform-engineer-riyadh": { reqs: "networking:1 cloud:2 programming:1 linux:1 devops:1", stages: 6, preps: 0 },
+  "lamdax-ai-engineer-remote": { reqs: "programming:1 python-data:1 ml:1 deep-learning:1 apis:1", stages: 9, preps: 4 },
+  "foodics-ai-engineer-riyadh": { reqs: "programming:2 git:1 apis:1 llm-apps:1 problem-solving:1", stages: 6, preps: 0 },
+  "mozn-ai-engineer-riyadh": { reqs: "ml:1 deep-learning:1 cloud:1 devops:1 apis:1", stages: 13, preps: 8 },
+  "foodics-field-sales-representative-riyadh": { reqs: "sales:1 communication:2 presentation:1 marketing-basics:1 english:1", stages: 6, preps: 0 },
+  "shipa-junior-business-development-executive-riyadh": { reqs: "sales:1 customer-success:1 communication:2 presentation:1 excel:1", stages: 6, preps: 0 },
+  "petroapp-customer-success-specialist-riyadh": { reqs: "sales:1 customer-success:1 communication:2 teamwork:1 problem-solving:1", stages: 6, preps: 0 },
+  "qiddiya-procurement-specialist-riyadh": { reqs: "procurement:1 financial-analysis:1 communication:1 problem-solving:1 supply-chain:2", stages: 7, preps: 1 },
+  "ninja-procurement-cost-control-specialist-riyadh": { reqs: "accounting:1 financial-analysis:1 procurement:1 excel:3 problem-solving:1", stages: 7, preps: 0 },
+  "hungerstation-junior-3pl-account-manager-riyadh": { reqs: "procurement:1 dataviz:1 supply-chain:1 problem-solving:1 communication:2", stages: 8, preps: 2 },
 };
 
-describe("jobs (9.3, 9.8 checks 3 and 9)", () => {
-  it("has 20 jobs in data order with five requirements each, as listed", () => {
+/** The snapshots the real jobs were written from (20 Nov 2026): the job boards, and Maharah's own careers board. */
+const readSnapshot = (file: string) => JSON.parse(readFileSync(path.join(import.meta.dirname, "../../../research/jobs", file), "utf8")) as {
+  readonly checkedAt: string;
+  readonly jobs: readonly {
+    readonly id: string;
+    readonly title: string;
+    readonly titleAr: string;
+    readonly url: string;
+    readonly postedAt: string;
+    readonly company: { readonly en: string; readonly ar: string };
+    readonly requirements: readonly { readonly skill: string; readonly stars: number; readonly evidence: string }[];
+  }[];
+};
+const SNAPSHOT = {
+  checkedAt: readSnapshot("jobs-snapshot.json").checkedAt,
+  jobs: [...readSnapshot("jobs-snapshot.json").jobs, ...readSnapshot("maharah.json").jobs, ...readSnapshot("../expansion/raw/jobs.json").jobs],
+};
+
+describe("jobs (9.3, 9.8 checks 3 and 9; real postings of 20 Nov 2026)", () => {
+  it("has 46 jobs in data order (28 + the expansion's 18) with five requirements each, as listed", () => {
     expect(JOBS.map((j) => j.id)).toEqual([...JOB_IDS]);
     expect(CATALOGUE_COUNTS.jobs).toBe(JOBS.length);
+    expect(JOBS).toHaveLength(46);
     for (const job of JOBS) {
       expect(job.requirements, job.id).toHaveLength(5);
       expect(job.requirements.map((r) => `${r.skill}:${r.stars}`).join(" "), job.id).toBe(JOB_TABLE[job.id].reqs);
       expect(new Set(job.requirements.map((r) => r.skill)).size, job.id).toBe(5);
+    }
+  });
+
+  it("keeps ONE practice job (the demo's «محلل بيانات») and 45 real postings", () => {
+    expect(JOBS.filter((j) => !j.real).map((j) => j.id)).toEqual(["data-analyst-riyadh"]);
+    const practice = getJob("data-analyst-riyadh");
+    expect(practice.source).toBeUndefined();
+    expect(practice.requirements.every((r) => r.evidence === undefined)).toBe(true);
+    expect(JOBS.filter((j) => j.real)).toHaveLength(45);
+  });
+
+  it("gives every real job its source, link, dates, both names and the posting's own sentence per requirement, as in the snapshot", () => {
+    for (const job of JOBS.filter((j) => j.real)) {
+      const snap = SNAPSHOT.jobs.find((s) => s.id === job.id);
+      expect(snap, job.id).toBeDefined();
+      if (!snap || !job.source) throw new Error(`no source for ${job.id}`);
+      expect(job.source.url).toBe(snap.url);
+      expect(job.source.url.startsWith("https://"), job.id).toBe(true);
+      expect(job.source.checkedAt).toBe(SNAPSHOT.checkedAt);
+      expect(job.source.postedAt).toBe(snap.postedAt);
+      expect((job.source.postedAt ?? "") <= job.source.checkedAt, job.id).toBe(true);
+      expect(job.source.site.length, job.id).toBeGreaterThan(0);
+      expect(job.title).toBe(snap.titleAr);
+      expect(job.titleEn).toBe(snap.title);
+      expect(job.company).toBe(snap.company.ar);
+      expect(job.companyEn).toBe(snap.company.en);
+      for (const r of job.requirements) {
+        const from = snap.requirements.find((s) => s.skill === r.skill);
+        expect(from, `${job.id} ${r.skill}`).toBeDefined();
+        // the posting's level, capped at the stars the skill has in Dalilak (the cap is written in the source note)
+        expect(r.stars, `${job.id} ${r.skill}`).toBe(Math.min(from?.stars ?? 0, getSkill(r.skill).maxStars));
+        if (r.stars !== from?.stars) expect(job.source.note ?? "", job.id).toContain("capped");
+        expect(r.evidence, `${job.id} ${r.skill}`).toBe(from?.evidence);
+      }
+    }
+  });
+
+  it("lists a real job's requirements in roadmap order: a listed prerequisite comes before the skill that needs it", () => {
+    for (const job of JOBS) {
+      const order = job.requirements.map((r) => r.skill);
+      order.forEach((skill, i) => {
+        for (const p of prereqsOf(skill)) {
+          const at = order.indexOf(p);
+          if (at >= 0) expect(at, `${job.id}: ${p} before ${skill}`).toBeLessThan(i);
+        }
+      });
     }
   });
 
@@ -440,21 +577,23 @@ describe("jobs (9.3, 9.8 checks 3 and 9)", () => {
     }
   });
 
-  it("requires every one of the 38 skills in at least one job", () => {
+  it("requires 53 of the 54 skills in at least one job (no posting asks for paid ads)", () => {
     const required = new Set(JOBS.flatMap((j) => j.requirements.map((r) => r.skill)));
-    expect(SKILL_IDS.filter((s) => !required.has(s))).toEqual([]);
+    expect(SKILL_IDS.filter((s) => !required.has(s))).toEqual(["ads"]);
   });
 
-  it("splits the jobs by field 4/4/3/3/3/3, by city 9/5/3/3 and by band 12/6/2", () => {
+  it("splits the jobs by field 8/5/4/4/5/5/3/6/6, by city 38/3/1/4 and by band 8/15/23", () => {
     const count = <K extends string>(key: (j: Job) => K, value: K) => JOBS.filter((j) => key(j) === value).length;
-    expect(["data", "software", "design", "marketing", "business", "hr"].map((f) => count((j) => j.field, f))).toEqual([
-      4, 4, 3, 3, 3, 3,
-    ]);
-    expect(JOB_CITY_IDS.map((c) => count((j) => j.city, c))).toEqual([9, 5, 3, 3]);
-    expect(["entry", "junior", "mid"].map((b) => count((j) => j.band, b))).toEqual([12, 6, 2]);
+    expect(
+      ["data", "software", "design", "marketing", "business", "hr", "product", "cyber-cloud", "sales-supply"].map((f) =>
+        count((j) => j.field, f),
+      ),
+    ).toEqual([8, 5, 4, 4, 5, 5, 3, 6, 6]);
+    expect(JOB_CITY_IDS.map((c) => count((j) => j.city, c))).toEqual([38, 3, 1, 4]);
+    expect(["entry", "junior", "mid"].map((b) => count((j) => j.band, b))).toEqual([8, 15, 23]);
   });
 
-  it("gives every job's stage count and prep count of 9.3 (the reveal's three: 8/74, 7/60, 7/64)", () => {
+  it("gives every job's stage count and prep count (the reveal's three: 8/74, 8/64, 5/38)", () => {
     for (const job of JOBS) {
       const { courses, preps } = stagesOf(job);
       expect(courses.length, job.id).toBe(JOB_TABLE[job.id].stages);
@@ -462,10 +601,10 @@ describe("jobs (9.3, 9.8 checks 3 and 9)", () => {
     }
     const hours = (id: JobId) => stagesOf(getJob(id)).courses.reduce((sum, c) => sum + getCourse(c).hours, 0);
     expect(hours("data-analyst-riyadh")).toBe(74);
-    expect(hours("reporting-specialist-jeddah")).toBe(60);
-    expect(hours("business-analyst-riyadh")).toBe(64);
-    expect(Math.min(...JOBS.map((j) => stagesOf(j).courses.length))).toBe(6);
-    expect(Math.max(...JOBS.map((j) => stagesOf(j).courses.length))).toBe(11);
+    expect(hours("qiddiya-hr-analytics-analyst-riyadh")).toBe(64);
+    expect(hours("syarah-financial-analyst-tamheer-riyadh")).toBe(38);
+    expect(Math.min(...JOBS.map((j) => stagesOf(j).courses.length))).toBe(5);
+    expect(Math.max(...JOBS.map((j) => stagesOf(j).courses.length))).toBe(13);
   });
 
   it("keeps the demo job's text exactly as 9.3 writes it", () => {
@@ -540,15 +679,15 @@ const FORBIDDEN_COMPANY_WORDS = [
 describe("honest sample data (9.7, 9.8 check 8)", () => {
   const catalogue = { FIELDS, SKILLS, JOBS, COURSES, LEADERBOARD_USERS, LEVELS, BADGES, ONBOARDING_QUESTIONS, JOB_CITIES, SAMPLE_CV_BODY };
 
-  it("uses no forbidden word in a company name, and every company once", () => {
+  it("uses no forbidden word in the practice job's fictional company, and no real job uses it", () => {
     const withoutAl = (w: string) => (w.startsWith("ال") && w.length > 3 ? w.slice(2) : w);
     const forbidden = new Set(FORBIDDEN_COMPANY_WORDS.flatMap((w) => [norm(w), withoutAl(norm(w))]));
-    for (const job of JOBS) {
+    for (const job of JOBS.filter((j) => !j.real)) {
       for (const word of words(job.company)) {
         for (const reading of readings(word)) expect(forbidden.has(reading), `${job.company}: ${word}`).toBe(false);
       }
     }
-    expect(new Set(JOBS.map((j) => j.company)).size).toBe(20);
+    expect(JOBS.filter((j) => j.company === "وادي الغيم للبيانات").map((j) => j.id)).toEqual(["data-analyst-riyadh"]);
   });
 
   it("mentions no money, salary or currency anywhere in the jobs", () => {
@@ -639,8 +778,8 @@ describe("levels and badges (8.3, 8.6)", () => {
     expect(getBadge("first-steps")).toEqual({
       id: "first-steps",
       name: "الخطوة الأولى",
-      description: "أكملت التعارف مع دليل.",
-      hint: "أكمل التعارف مع دليل.",
+      description: "أكملت التعارف مع دليلك.",
+      hint: "أكمل التعارف مع دليلك.",
     });
     expect(getBadge("top-ten").name).toBe("ضمن العشرة الأوائل");
   });
@@ -649,7 +788,7 @@ describe("levels and badges (8.3, 8.6)", () => {
 describe("onboarding questions (4.2, 3.2)", () => {
   it("asks the six questions in order, with the 3.2 slot labels", () => {
     expect(ONBOARDING_QUESTIONS.map((q) => q.id)).toEqual([...QUESTION_IDS]);
-    expect(ONBOARDING_QUESTIONS.map((q) => q.n)).toEqual([1, 2, 3, 4, 5, 6]);
+    expect(ONBOARDING_QUESTIONS.map((q) => q.n)).toEqual([1, 2, 3, 4, 5, 7]);
     expect(ONBOARDING_QUESTIONS.map((q) => q.slot)).toEqual(["المدينة", "المؤهل", "التخصص", "الخبرة", "الاهتمام", "الأولوية"]);
     expect(getQuestion("city").text).toBe("في أي مدينة أنت الحين؟");
     expect(getQuestion("priority").text).toBe("وآخر سؤال، وش أولويتك الحين؟");
@@ -692,7 +831,7 @@ describe("sample CV (6.2)", () => {
 describe("lookups", () => {
   it("find by id and throw on an unknown id (ids are typed, so that is a bug)", () => {
     expect(getSkill("powerbi").name).toBe("Power BI");
-    expect(getJob("bi-analyst-riyadh").title).toBe("محلل ذكاء الأعمال");
+    expect(getJob("syarah-financial-analyst-tamheer-riyadh").title).toBe("محلل مالي (برنامج تمهير)");
     expect(getCourse("c-git-1").hours).toBe(6);
     expect(() => getSkill("nope" as string as SkillId)).toThrow();
     expect(() => getJob("nope" as string as JobId)).toThrow();

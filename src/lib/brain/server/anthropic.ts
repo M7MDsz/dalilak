@@ -7,8 +7,8 @@ import type Anthropic from "@anthropic-ai/sdk";
 
 import type { ProtocolMessage } from "@/lib/brain/protocol";
 
+import { ProviderFailure } from "./chain";
 import type { ModelRunner, ModelTurnInput } from "./model-common";
-import { ProviderFailure } from "./provider";
 
 /** The neutral history as Claude messages: user / assistant, consecutive turns merged, starting with a user turn. */
 function toMessages(history: readonly ProtocolMessage[], message: string): Anthropic.MessageParam[] {

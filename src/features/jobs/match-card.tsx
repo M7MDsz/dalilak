@@ -1,20 +1,21 @@
 "use client";
 // Owner: jobs. The job page's action card (spec 3.8 "Match" and "Actions"; DESIGN 4.0: the 340 px column, sticky):
 // the ring with the caption «مطابقتك» (the card's label, cut into its border line) · «كل مهارة من الخمس تساوي 20% من
-// المطابقة.» · «كيف تُحسب؟» (an explainer that draws each skill's share) · «دع دليل يقدّم عنك» (primary) · «قدّم بنفسك»
-// (text button) · «اجعلها هدفي» or «هدفك الحالي» · «اسأل دليل عن هذه الوظيفة». Applied: the chip «قدّمت · {status} ·
-// محاكاة» and «تابع الطلب» replace the two apply buttons.
+// المطابقة.» · «كيف تُحسب؟» (an explainer that draws each skill's share) · «دع دليلك يقدّم عنك» (primary) · «قدّم بنفسك»
+// (text button) · «اجعلها هدفي» or «هدفك الحالي» · «اسأل دليلك عن هذه الوظيفة». Applied: the chip «قدّمت · {status} ·
+// محاكاة» and «تابع الطلب» replace the two apply buttons. A REAL job (20 Nov 2026) is prepared, not sent: «دع دليلك يجهّز
+// طلبك» / «جهّز طلبك بنفسك», and once prepared «جاهز للإرسال من الإعلان الأصلي» with «افتح الإعلان الأصلي» (no simulated status).
 // The ring takes a `preview` from the course rows (gain-preview): an accent dotted leg to the match those courses reach.
 // The reward for applying is shown where it is earned (docs/GAME-LAYER.md 4): «تكسب +40 XP عند التقديم» from 60%, the
 // locked chip with its real condition under it, and «كسبت +40 XP تقديم مدروس» once the application paid it (spec 8.1).
 import { motion } from "motion/react";
 import { useId, useState, type ReactNode } from "react";
 
-import { IconAdvisor, IconArrowForward, IconCheck, IconChevronDown, IconFlag, IconSend } from "@/components/icons";
+import { IconAdvisor, IconArrowForward, IconCheck, IconChevronDown, IconExternal, IconFlag, IconSend } from "@/components/icons";
 import { RewardChip, RewardRow } from "@/components/game";
 import { Collapse, NavLink, Ring } from "@/components/motion";
 import { Button, Card, buttonStyles, cn } from "@/components/ui";
-import { ASK_ADVISOR_APPLY_TEXT, appliedChip } from "@/lib/copy";
+import { ASK_ADVISOR_APPLY_TEXT, JOB_SOURCE_COPY, appliedChip } from "@/lib/copy";
 import { MATCH_LINE, XP, getJob, getSkill } from "@/lib/data";
 import { matchBreakdown, skillStars } from "@/lib/engine";
 import { tween } from "@/lib/motion";
@@ -50,13 +51,15 @@ export function MatchCard({
   isTarget: boolean;
   /** This job is the user's next step (rule 4): the card carries the accent dot. */
   nextHere: boolean;
-  /** False on phones, where «دع دليل يقدّم عنك» is pinned to the bottom instead (spec 3.8 "Phone"). */
+  /** False on phones, where «دع دليلك يقدّم عنك» is pinned to the bottom instead (spec 3.8 "Phone"). */
   showPrimary: boolean;
   onApplySelf: () => void;
   onSetTarget: () => void;
 }): ReactNode {
   const [explain, setExplain] = useState(false);
   const panelId = useId();
+  const job = getJob(jobId);
+  const source = job.real ? job.source : undefined;
   const advisorBusy = useUi((s) => s.advisorBusy);
 
   return (
@@ -116,8 +119,20 @@ export function MatchCard({
                     data-testid={TID.job.appliedStatus}
                   >
                     <IconCheck className="shrink-0 text-ok-fg" size={18} strokeWidth={2.5} waypoint="off" />
-                    {appliedChip(status)}
+                    {source ? JOB_SOURCE_COPY.preparedShort : appliedChip(status)}
                   </p>
+                  {source ? (
+                    <a
+                      className={buttonStyles({ className: "w-full" })}
+                      data-testid="job-applied-open-posting"
+                      href={source.url}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <IconExternal size={20} />
+                      {JOB_SOURCE_COPY.openPosting}
+                    </a>
+                  ) : null}
                   <NavLink
                     className={buttonStyles({
                       variant: "secondary",
@@ -150,7 +165,7 @@ export function MatchCard({
                         })
                       }
                     >
-                      {JOB_COPY.applyAdvisor}
+                      {source ? JOB_COPY.applyAdvisorReal : JOB_COPY.applyAdvisor}
                     </Button>
                   ) : null}
                   <Button
@@ -161,7 +176,7 @@ export function MatchCard({
                     size="sm"
                     variant="ghost"
                   >
-                    {JOB_COPY.applySelf}
+                    {source ? JOB_COPY.applySelfReal : JOB_COPY.applySelf}
                   </Button>
                   <ApplyReward match={match} />
                 </>

@@ -1,5 +1,5 @@
 "use client";
-// useTypeOn (playbook block 19): «دليل» fills a field, the sample CV writes itself. Typing belongs to «دليل»'s hands only:
+// useTypeOn (playbook block 19): «دليلك» fills a field, the sample CV writes itself. Typing belongs to «دليلك»'s hands only:
 // never for answers. The value goes into a real, controlled, read-only field (one text node, so Arabic joins as it grows).
 import { useEffect, useState } from "react";
 

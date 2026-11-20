@@ -59,12 +59,15 @@ export const JOB_COPY = {
   courseGain: (gain: number) => `+${formatPercent(gain)}`,
   courseGainWord: "مطابقة",
   prep: "تمهيدية",
-  openCourse: "افتح الدورة",
-  applyAdvisor: "دع دليل يقدّم عنك",
+  openCourse: "افتح الدليل",
+  applyAdvisor: "دع دليلك يقدّم عنك",
   applySelf: "قدّم بنفسك",
+  /** A real job: «دليلك» prepares it, the user sends it from the original posting. */
+  applyAdvisorReal: "دع دليلك يجهّز طلبك",
+  applySelfReal: "جهّز طلبك بنفسك",
   setTarget: "اجعلها هدفي",
   isTarget: "هدفك الحالي",
-  askAdvisor: "اسأل دليل عن هذه الوظيفة",
+  askAdvisor: "اسأل دليلك عن هذه الوظيفة",
   follow: "تابع الطلب",
   /** The apply reward chip (docs/GAME-LAYER.md 4, spec 8.1): «تكسب +40 XP عند التقديم» / «+40 XP من 60% مطابقة». */
   rewardOffer: "تكسب",
@@ -75,7 +78,7 @@ export const JOB_COPY = {
   rewardReason: "تقديم مدروس",
 } as const;
 
-/** Spec 3.8 the apply sheet, and 7.4 «دليل» applying. */
+/** Spec 3.8 the apply sheet, and 7.4 «دليلك» applying. */
 export const SHEET_COPY = {
   title: (title: string) => `التقديم على ${title}`,
   warning: (match: number) => `مطابقتك ${formatPercent(match)}، أقل من 60%. الأفضل أن تسدّ الفجوة أولاً.`,
@@ -89,17 +92,20 @@ export const SHEET_COPY = {
   submit: "أرسل الطلب",
   submitAnyway: "قدّم على أي حال",
   cancel: "إلغاء",
-  filling: "دليل يعبّي طلبك…",
-  // the other sites «دليل» applies on after the in-app send (APPLY_SITES; a simulation, and it says so)
-  sitesLine: "أقدّم عنك في المواقع الثانية…",
-  sitesDone: "أرسلت طلبك في دليلك",
-  sitesTitle: "وأقدّم عنك الحين في المواقع الثانية",
-  siteDalilak: "دليلك",
-  siteWaiting: "بالدور",
-  siteFilling: "يعبّي الطلب…",
-  siteSent: "أُرسل",
-  sitesNote: "محاكاة للعرض: ما ينرسل شي لأي موقع حقيقي.",
-  sitesLabel: "أُرسل عبر:",
+  filling: "دليلك يعبّي طلبك…",
+  // a real posting (20 Nov 2026): prepared here, sent by the user from the original posting
+  prepare: "جهّز الطلب",
+  prepareAnyway: "جهّزه على أي حال",
+  preparing: "جارٍ التجهيز…",
+  /** Step 5's status line for a real job. */
+  preparingLine: "أجهّز الطلب…",
+  prepared: "طلبك جاهز",
+  /** «دليلك»'s line on a real job's confirmation (Najdi). */
+  preparedLead: "جهّزت طلبك وحفظته في منصة دليل. باقي خطوة وحدة منك: افتح الإعلان الأصلي وقدّم من هناك، وبنسخ لك رسالة التقديم.",
+  postedOn: "الإعلان منشور على:",
+  copyFailed: "ما قدرت أنسخ الرسالة. تلقاها في «طلباتي».",
+  /** «دليلك»'s honest end of the practice job's moment (Najdi). */
+  practiceLine: "وظيفة تدريبية: في الوظائف الحقيقية أفتح لك الإعلان الأصلي عشان ترسله",
   /** 7.4 step 5's status line, shown in the sheet while the pressed send goes out. */
   sendingLine: "أرسل الطلب…",
   stop: "إيقاف",

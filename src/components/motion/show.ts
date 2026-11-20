@@ -1,5 +1,5 @@
 "use client";
-// useShow (playbook block 16): the director of every show (path reveal, CV analysis, celebration, «دليل» applying).
+// useShow (playbook block 16): the director of every show (path reveal, CV analysis, celebration, «دليلك» applying).
 // The step index lives in React state; each step lasts at least its `ms` AND until its real work (`until`) is done,
 // capped at 12 s. Cancellable, Strict-Mode safe, and it reports `playing` (the overlay queue holds while a show plays).
 import { useCallback, useEffect, useEffectEvent, useRef, useState } from "react";

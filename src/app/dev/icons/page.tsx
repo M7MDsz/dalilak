@@ -61,7 +61,7 @@ const ICONS: readonly Entry[] = [
   { name: "IconApplications", meaning: "طلباتي", group: "nav", Icon: IconApplications },
   { name: "IconLeaderboard", meaning: "المتصدرون", group: "nav", Icon: IconLeaderboard },
   { name: "IconProfile", meaning: "ملفي", group: "nav", Icon: IconProfile },
-  { name: "IconAdvisor", meaning: "دليل، المستشار", group: "nav", Icon: IconAdvisor },
+  { name: "IconAdvisor", meaning: "دليلك، المستشار", group: "nav", Icon: IconAdvisor },
   { name: "IconMore", meaning: "المزيد", group: "nav", Icon: IconMore },
   { name: "IconXp", meaning: "نقاط الخبرة XP", group: "game", Icon: IconXp },
   { name: "IconLevel", meaning: "المستوى", group: "game", Icon: IconLevel },
@@ -404,7 +404,7 @@ const LAB: readonly Entry[] = [
   },
   {
     name: "Adv",
-    meaning: "دليل",
+    meaning: "دليلك",
     group: "nav",
     Icon: labIcon(
       <>
@@ -672,7 +672,7 @@ function Overview() {
     <main className="mx-auto max-w-[1360px] px-5 py-8 lg:px-10 lg:py-12">
       <header className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3 border-b border-line pb-6">
         <div>
-          <h1 className="text-[24px] font-bold leading-tight text-ink lg:text-[28px]">أيقونات دليلك: التوقيع</h1>
+          <h1 className="text-[24px] font-bold leading-tight text-ink lg:text-[28px]">أيقونات دليل: التوقيع</h1>
           <p className="mt-2 text-[15px] text-ink-2">
             31 أيقونة مرسومة باليد على شبكة 24. خط واحد بسماكة 2، زوايا مستديرة، وكل خط يبقى مفتوحاً وتجلس في فتحته نقطة طريق واحدة.
           </p>

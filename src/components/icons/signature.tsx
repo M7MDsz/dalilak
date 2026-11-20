@@ -87,7 +87,7 @@ export function IconProfile(props: IconProps) {
   );
 }
 
-// دليل: an open compass ring; the needle points through the gap at the waypoint (always with its name).
+// دليلك: an open compass ring; the needle points through the gap at the waypoint (always with its name).
 export function IconAdvisor(props: IconProps) {
   return (
     <IconBase {...props}>
@@ -326,6 +326,39 @@ export function IconFieldProfessional(props: IconProps) {
       <rect height="11" rx="2" width="18" x="3" y="3" />
       <path d="M8.5 14 6 21M15.5 14l2.5 7M7 8.5h4.5" />
       <circle className="wp" cx="16" cy="8.5" r="1.75" />
+    </IconBase>
+  );
+}
+
+/* The three fields of the 20 Nov 2026 expansion */
+
+// A target: two rings around the waypoint, the one thing the product is built to hit.
+export function IconFieldProduct(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="4.75" />
+      <circle className="wp" cx="12" cy="12" r="1.75" />
+    </IconBase>
+  );
+}
+
+// A shield; the waypoint is its keyhole.
+export function IconFieldCyberCloud(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M12 3.5 19.5 6.5v5c0 4.5-3.25 7.75-7.5 9-4.25-1.25-7.5-4.5-7.5-9v-5z" />
+      <circle className="wp" cx="12" cy="11.5" r="1.75" />
+    </IconBase>
+  );
+}
+
+// A parcel seen from its corner; the waypoint is the label on its way to the customer.
+export function IconFieldSalesSupply(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M12 3.5 19.5 7.5v9L12 20.5l-7.5-4v-9zM4.5 7.5 12 11.5l7.5-4M12 11.5v9" />
+      <circle className="wp" cx="16" cy="14" r="1.5" />
     </IconBase>
   );
 }

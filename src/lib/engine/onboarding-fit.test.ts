@@ -1,39 +1,43 @@
 import { describe, expect, it } from "vitest";
 
+import { getJob } from "@/lib/data";
+import { JOB_IDS } from "@/lib/ids";
 import type { OnboardingAnswers } from "@/lib/types";
 
 import { fitBreakdown, fitReasons, rankByFit, recommend } from "./onboarding-fit";
 import { DEMO_ANSWERS } from "./test-fixtures";
 
 describe("fit score (spec 4.6)", () => {
-  it("9.8 check 6: the worked example scores 100 / 90 / 82 / 78 / 47 with these terms", () => {
-    const rows = (["data-analyst-riyadh", "reporting-specialist-jeddah", "bi-analyst-riyadh", "junior-data-scientist-remote", "business-analyst-riyadh"] as const).map(
+  it("9.8 check 6: the worked example scores 100 / 100 / 82 / 71 / 47 with these terms", () => {
+    const rows = (["data-analyst-riyadh", "qiddiya-hr-analytics-analyst-riyadh", "ninja-real-estate-performance-analyst-riyadh", "salla-senior-data-scientist-remote", "syarah-financial-analyst-tamheer-riyadh"] as const).map(
       (id) => fitBreakdown(id, DEMO_ANSWERS),
     );
     expect(rows.map((r) => [r.terms.interest, r.terms.major, r.terms.experience, r.terms.city, r.terms.priority, r.score])).toEqual([
       [40, 25, 15, 10, 10, 100],
-      [40, 25, 15, 0, 10, 90],
+      [40, 25, 15, 10, 10, 100],
       [40, 25, 7, 10, 0, 82],
-      [40, 25, 7, 6, 0, 78],
+      [40, 25, 0, 6, 0, 71],
       [0, 12, 15, 10, 10, 47],
     ]);
     expect(rows.every((r) => !r.excluded)).toBe(true);
   });
 
-  it("ranks: the four data jobs, then the business analyst", () => {
+  it("ranks: the practice data analyst first (data order breaks the tie at 100), then the real data jobs", () => {
+    // 20 Nov 2026 expansion: the remote entry AI engineer (Lamdax, data field) scores 96, under the two at 100, so the
+    // reveal still recommends the practice job with the HR-analytics analyst
     expect(rankByFit(DEMO_ANSWERS).slice(0, 5).map((f) => [f.jobId, f.score])).toEqual([
       ["data-analyst-riyadh", 100],
-      ["reporting-specialist-jeddah", 90],
-      ["bi-analyst-riyadh", 82],
-      ["junior-data-scientist-remote", 78],
-      ["business-analyst-riyadh", 47],
+      ["qiddiya-hr-analytics-analyst-riyadh", 100],
+      ["lamdax-ai-engineer-remote", 96],
+      ["ninja-real-estate-performance-analyst-riyadh", 82],
+      ["jeeny-growth-insights-analytics-riyadh", 75],
     ]);
   });
 
-  it("recommends the data analyst, the reporting specialist, and the business analyst from another field, with three reasons", () => {
+  it("recommends the data analyst, the HR-analytics analyst, and the financial analyst from another field, with three reasons", () => {
     expect(recommend(DEMO_ANSWERS)).toEqual({
       recommended: "data-analyst-riyadh",
-      alternatives: ["reporting-specialist-jeddah", "business-analyst-riyadh"],
+      alternatives: ["qiddiya-hr-analytics-analyst-riyadh", "syarah-financial-analyst-tamheer-riyadh"],
       reasons: [
         { kind: "interest", interest: "data" },
         { kind: "major", tier: "primary", majorLabel: "نظم معلومات إدارية" },
@@ -44,21 +48,21 @@ describe("fit score (spec 4.6)", () => {
   });
 
   it("gives any job its own reasons, in 4.6 order, up to three", () => {
-    // business analyst: major secondary · entry band · Riyadh · first job → the first three
-    expect(fitReasons("business-analyst-riyadh", DEMO_ANSWERS)).toEqual([
+    // financial analyst (business): major secondary · entry band · Riyadh · first job → the first three
+    expect(fitReasons("syarah-financial-analyst-tamheer-riyadh", DEMO_ANSWERS)).toEqual([
       { kind: "major", tier: "secondary", majorLabel: "نظم معلومات إدارية" },
       { kind: "experience", band: "entry" },
       { kind: "city", cityLabel: "الرياض" },
     ]);
-    // BI analyst (junior: 7 experience points are not a reason): interest, major, city
-    expect(fitReasons("bi-analyst-riyadh", DEMO_ANSWERS)).toEqual([
+    // real-estate performance analyst (junior: 7 experience points are not a reason): interest, major, city
+    expect(fitReasons("ninja-real-estate-performance-analyst-riyadh", DEMO_ANSWERS)).toEqual([
       { kind: "interest", interest: "data" },
       { kind: "major", tier: "primary", majorLabel: "نظم معلومات إدارية" },
       { kind: "city", cityLabel: "الرياض" },
     ]);
-    // remote
+    // remote (every remote posting is mid-level, so over three years is a reason too)
     const noCity: OnboardingAnswers = { ...DEMO_ANSWERS, city: { value: "none", label: "" }, interest: ["unsure"], major: { value: "other", label: "تخصص آخر" }, experience: "over3" };
-    expect(fitReasons("junior-data-scientist-remote", noCity)).toEqual([{ kind: "remote" }]);
+    expect(fitReasons("salla-senior-data-scientist-remote", noCity)).toEqual([{ kind: "experience", band: "mid" }, { kind: "remote" }]);
   });
 
   it("gives the single «none» reason when nothing scored", () => {
@@ -70,9 +74,9 @@ describe("fit score (spec 4.6)", () => {
       interest: ["unsure"],
       priority: "explore",
     };
-    // frontend: entry band (two bands from mid), Riyadh, software
-    expect(fitBreakdown("frontend-developer-riyadh", nothing).score).toBe(0);
-    expect(fitReasons("frontend-developer-riyadh", nothing)).toEqual([{ kind: "none" }]);
+    // frontend: entry band (two bands from mid), Dammam, software
+    expect(fitBreakdown("lucidya-frontend-engineer-dammam", nothing).score).toBe(0);
+    expect(fitReasons("lucidya-frontend-engineer-dammam", nothing)).toEqual([{ kind: "none" }]);
   });
 
   it("second interest scores 30; priorities switch and grow", () => {
@@ -81,25 +85,25 @@ describe("fit score (spec 4.6)", () => {
     expect(da.terms.interest).toBe(30);
     // switch: the field is an interest but it IS the major's primary field (data for mis) → 0
     expect(da.terms.priority).toBe(0);
-    expect(fitBreakdown("digital-marketing-specialist-riyadh", two).terms).toMatchObject({ interest: 40, priority: 10 });
+    expect(fitBreakdown("salla-marketing-specialist-tamheer-jeddah", two).terms).toMatchObject({ interest: 40, priority: 10 });
     const grow: OnboardingAnswers = { ...DEMO_ANSWERS, priority: "grow" };
     expect(fitBreakdown("data-analyst-riyadh", grow).terms.priority).toBe(10);
-    expect(fitBreakdown("business-analyst-riyadh", grow).terms.priority).toBe(0);
+    expect(fitBreakdown("syarah-financial-analyst-tamheer-riyadh", grow).terms.priority).toBe(0);
   });
 
   it("the education gate leaves mid-level jobs out for secondary, diploma and student", () => {
     for (const education of ["secondary", "diploma", "student"] as const) {
       const a: OnboardingAnswers = { ...DEMO_ANSWERS, education };
-      expect(fitBreakdown("web-app-developer-remote", a).excluded).toBe(true);
-      expect(rankByFit(a).map((f) => f.jobId)).not.toContain("web-app-developer-remote");
-      expect(rankByFit(a).map((f) => f.jobId)).not.toContain("product-designer-jeddah");
-      expect(rankByFit(a)).toHaveLength(18);
+      expect(fitBreakdown("salla-senior-backend-checkout-remote", a).excluded).toBe(true);
+      expect(rankByFit(a).map((f) => f.jobId)).not.toContain("salla-senior-backend-checkout-remote");
+      expect(rankByFit(a).map((f) => f.jobId)).not.toContain("lucidya-product-designer-riyadh");
+      expect(rankByFit(a)).toHaveLength(JOB_IDS.filter((id) => getJob(id).band !== "mid").length);
     }
-    expect(rankByFit({ ...DEMO_ANSWERS, education: "unknown" })).toHaveLength(20);
+    expect(rankByFit({ ...DEMO_ANSWERS, education: "unknown" })).toHaveLength(JOB_IDS.length);
   });
 
   it("breaks ties by the interest term, then the lower band, then data order", () => {
-    // software interest, cs major (software primary), no city, under a year (entry): frontend and qa tie at 80
+    // software interest, cs major (software primary), no city, under a year (entry): the two remote Salla jobs tie at 71
     const a: OnboardingAnswers = {
       city: { value: "none", label: "" },
       education: "bachelor",
@@ -111,10 +115,13 @@ describe("fit score (spec 4.6)", () => {
     const ranked = rankByFit(a);
     const scores = ranked.map((f) => f.score);
     expect(scores).toEqual([...scores].sort((x, y) => y - x));
-    // frontend 40+25+15+0 = 80; qa 80 too (entry, dammam): data order puts frontend first
-    expect(ranked.slice(0, 2).map((f) => [f.jobId, f.score])).toEqual([
-      ["frontend-developer-riyadh", 80],
-      ["qa-tester-dammam", 80],
+    // frontend 40+25+15+0 = 80; the expansion's junior AI engineer 40+25+7+0 = 72; backend and QA 40+25+0+6 = 71 each
+    // (both mid, remote): data order puts backend first
+    expect(ranked.slice(0, 4).map((f) => [f.jobId, f.score])).toEqual([
+      ["lucidya-frontend-engineer-dammam", 80],
+      ["foodics-ai-engineer-riyadh", 72],
+      ["salla-senior-backend-checkout-remote", 71],
+      ["salla-senior-qa-engineer-remote", 71],
     ]);
   });
 });

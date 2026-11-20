@@ -1,7 +1,7 @@
 "use client";
 // RollingStatus (playbook block 7): the one "working" line. Each new step rolls in (old up and out, new up and in, 2 px
 // blur), the current text carries the passing light (.shimmer-text, 2.4 s, right to left), and after 4 s the elapsed
-// seconds fade in beside it. No dots, ever: waiting is «دليل»'s glyph plus this line.
+// seconds fade in beside it. No dots, ever: waiting is «دليلك»'s glyph plus this line.
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
@@ -27,9 +27,9 @@ export function useElapsed(startedAt?: number, running = true): number {
 }
 
 export interface RollingStatusProps {
-  /** The current step, in «دليل»'s voice: «دليل يفكّر…», «أبحث في الوظائف…». A new label rolls in. */
+  /** The current step, in «دليلك»'s voice: «دليلك يفكّر…», «أبحث في الوظائف…». A new label rolls in. */
   readonly label: string;
-  /** Also draw «دليل»'s glyph before the line (20 px), in this state. Leave it out where the glyph already sits beside it. */
+  /** Also draw «دليلك»'s glyph before the line (20 px), in this state. Leave it out where the glyph already sits beside it. */
   readonly glyph?: DaleelState;
   /** When the work started (ms since epoch). Default: when the line appeared. */
   readonly startedAt?: number;
@@ -40,7 +40,7 @@ export interface RollingStatusProps {
   readonly testId?: string;
 }
 
-/** «دليل» is working: the step label rolls, a light passes over it, and after 4 s the seconds appear («6 ث»). */
+/** «دليلك» is working: the step label rolls, a light passes over it, and after 4 s the seconds appear («6 ث»). */
 export function RollingStatus({ label, glyph, startedAt, elapsedAfter = 4, className, testId }: RollingStatusProps) {
   const seconds = useElapsed(startedAt);
   const showSeconds = seconds >= elapsedAfter;

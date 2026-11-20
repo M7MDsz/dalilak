@@ -66,7 +66,7 @@ export function riseBy(px: number): Variants {
   };
 }
 
-/** "«دليل» worked this out": rise 8 px and blur 4 px to 0. Only for things «دليل» produced. */
+/** "«دليلك» worked this out": rise 8 px and blur 4 px to 0. Only for things «دليلك» produced. */
 export const focusIn: Variants = {
   hidden: { opacity: 0, y: 8, filter: "blur(4px)" },
   show: { opacity: 1, y: 0, filter: "blur(0px)", transition: tween.focus },

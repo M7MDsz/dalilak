@@ -1,4 +1,4 @@
-# The game layer of Dalilak «دليلك» (GAME-LAYER.md)
+# The game layer of Dalilak «دليل» (GAME-LAYER.md)
 
 For every screen builder. Written 18 Nov 2026 by the game-layer design lead, after Mohammed looked at the running app and
 wrote: "And for دليلك I want to keep the gaming UI so if you wanted to change to it so you have the choice". His first brief
@@ -106,7 +106,7 @@ Rules that make it one language:
 - **At most one `next` per screen.** It is the one accent piece. The target job on `/jobs` uses it because it is your destination.
 - `selected` (a chosen answer, a set filter) is pressed home and filled with ink, with the waypoint dot at its start.
 - Hover changes the face colour only (`bg-hover`) or the border of a flat piece; never a lift, never a shadow.
-- Press: the face goes down onto its plinth at once and comes back in 200 ms. `pressed` shows the same frame when «دليل»
+- Press: the face goes down onto its plinth at once and comes back in 200 ms. `pressed` shows the same frame when «دليلك»
   presses a piece for the user.
 
 ## 4. The reward language
@@ -183,7 +183,7 @@ counts (spec `xp-chip-fill`); the FlyToken target stays the chip.
 3. Side column: «هدفك بعد التحليل» = `DestinationCard target` with `matchFrom={0}` (the ring counts 0 → 70%, `ring-count`), then
    the one primary «اذهب إلى مساري» and the line «التالي: دورة «أساسيات Power BI» ترفعك إلى 90%». Then «أفضل الوظائف
    لمهاراتك»: the next two as `DestinationCard`, each with its two buttons UNDER the card (a button never sits inside a
-   pressable card): «دع دليل يقدّم عنك» (secondary sm) and «اجعلها هدفي» (ghost sm).
+   pressable card): «دع دليلك يقدّم عنك» (secondary sm) and «اجعلها هدفي» (ghost sm).
 
 ### 5.5 Courses `/learn` (`src/features/learn/learn-screen.tsx`, `course-card.tsx`, `state-tag.tsx`)
 **Before:** two cards with a small state pill, title, hours, XP, match; a collapsed «أنجزتها (6)».

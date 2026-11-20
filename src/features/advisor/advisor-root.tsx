@@ -2,7 +2,7 @@
 // Owner: advisor. <AdvisorRoot /> is rendered ONCE by the app shell, as a sibling of #app-content (outside the page and
 // outside the content's stacking context), so it survives page changes and stays above the apply sheet. It renders the
 // panel, the desktop launcher (only when useViewport().desktop), the travelling glyph, the nudge and the phone working
-// pill; it owns Ctrl+K / Esc, hands its navigation to the dispatcher, listens for page buttons that ask «دليل»
+// pill; it owns Ctrl+K / Esc, hands its navigation to the dispatcher, listens for page buttons that ask «دليلك»
 // (useUi.advisorRequest), and resolves an application a reload interrupted, once per account and page load.
 //
 // Contract points (ARCHITECTURE 9, 10, 13):
@@ -62,7 +62,7 @@ export function AdvisorRoot(): ReactNode {
   const userId = user?.id ?? null;
   const turn = useLive((s) => s.turn);
   const pillElapsedFrom = useElapsedStart(turn);
-  // while «دليل» fills the apply sheet, the sheet narrates and carries its own «إيقاف»: the phone pill steps aside
+  // while «دليلك» fills the apply sheet, the sheet narrates and carries its own «إيقاف»: the phone pill steps aside
   const applying = useUi((s) => s.applyRun !== null && s.applyRun.result === null);
   const pathname = usePathname();
   const go = useGo();
@@ -98,7 +98,7 @@ export function AdvisorRoot(): ReactNode {
   // the dispatcher moves the page through the route transition
   useEffect(() => registerNavigator(go), [go]);
 
-  // page buttons that ask «دليل» («دع دليل يقدّم عنك» …): askAdvisor opened the panel; the bubble pops once it is in
+  // page buttons that ask «دليلك» («دع دليلك يقدّم عنك» …): askAdvisor opened the panel; the bubble pops once it is in
   useEffect(() => {
     const handle = (state: UiStore, prev?: UiStore) => {
       const request = state.advisorRequest;
@@ -111,7 +111,7 @@ export function AdvisorRoot(): ReactNode {
     return useUi.subscribe(handle);
   }, []);
 
-  // an application «دليل» was filling when the page was reloaded: «لم يكتمل التقديم…» (7.4), once per account and load
+  // an application «دليلك» was filling when the page was reloaded: «لم يكتمل التقديم…» (7.4), once per account and load
   useEffect(() => {
     if (userId === null || resolvedFor.has(userId)) return;
     resolvedFor.add(userId);

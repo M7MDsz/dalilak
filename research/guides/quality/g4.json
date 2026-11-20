@@ -1,0 +1,1045 @@
+{
+  "checkedAt": "2026-11-20",
+  "skills": {
+    "project-management": {
+      "topPick": {
+        "title": "Foundations of Project Management",
+        "provider": "Google (Coursera)",
+        "url": "https://www.coursera.org/learn/project-management-foundations",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 10,
+        "certificate": true,
+        "star": 1,
+        "why": "أول دورة في شهادة Google لإدارة المشاريع، للمبتدئ بدون أي خبرة سابقة.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "أسس إدارة المشاريع",
+          "provider": "Google (Coursera)",
+          "url": "https://www.coursera.org/learn/foundations-of-project-management-arabic",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 20,
+          "certificate": true,
+          "star": 1,
+          "why": "نفس أول دورة في شهادة Google لكن بالعربي، تناسب اللي يفضّل يتعلّم بلغته.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "إدارة المشاريع",
+          "provider": "إدراك (Edraak)",
+          "url": "https://www.edraak.org/programs/specialization/pm-v1/",
+          "lang": "ar",
+          "price": null,
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "تخصص عربي في إدارة المشاريع على منصة إدراك؛ الصفحة ما تعرض السعر والمدة، فشيّك عليها قبل التسجيل.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Antonio Nieto-Rodriguez",
+          "platform": "موقعه",
+          "url": "https://antonionietorodriguez.com/",
+          "why": "يكتب عن إدارة المشاريع في Harvard Business Review، وينشر قالب Project Canvas مجاناً.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "Google Project Management Professional Certificate",
+        "issuer": "Google",
+        "code": null,
+        "type": "program",
+        "url": "https://www.coursera.org/professional-certificates/google-project-management",
+        "fee": {
+          "amount": 49,
+          "currency": "USD",
+          "note": "Per month on Coursera (US/Canada) after a 7-day free trial; page estimates most learners finish for under USD 300; financial aid available"
+        },
+        "prepUrl": "https://www.coursera.org/learn/project-management-foundations",
+        "prepLabel": "أول دورة في البرنامج: Foundations of Project Management",
+        "level": "beginner",
+        "star": 2,
+        "why": "برنامج Google كامل (7 دورات، أكثر من 140 ساعة) يثبت إنك تقدر تدير مشروع من بدايته لنهايته، ويحسب لك ساعات تعليم تؤهلك لاختبار CAPM من PMI.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.coursera.org/learn/project-management-foundations",
+          "status": "fixed",
+          "note": "Page OK (Google Career Certificates, English, beginner, 1 week x 10 h, shareable certificate, financial aid). No audit option shown: price paid, financialAid set true. Program is now 7 courses."
+        },
+        {
+          "url": "https://www.coursera.org/learn/foundations-of-project-management-arabic",
+          "status": "added",
+          "note": "Arabic version of the Google course; taught in Arabic, beginner, 2 weeks x 10 h, certificate, financial aid."
+        },
+        {
+          "url": "https://www.edraak.org/programs/specialization/pm-v1/",
+          "status": "added",
+          "note": "Edraak specialization page shows title «إدارة المشاريع | إدراك»; details load by JavaScript so price/hours/certificate unknown (null)."
+        },
+        {
+          "url": "https://antonionietorodriguez.com/",
+          "status": "added",
+          "note": "Person added (list was empty): his own site, HBR author, free Project Canvas."
+        },
+        {
+          "url": "https://www.coursera.org/professional-certificates/google-project-management",
+          "status": "added",
+          "note": "Certification: Google PM Professional Certificate, 7 courses, beginner, USD 49/month after 7-day trial, prepares for PMI CAPM. Chosen because every pmi.org page (CAPM page, home, handbook) returned 403/404 to the fetch tool, so CAPM could not be verified."
+        }
+      ]
+    },
+    "accounting": {
+      "topPick": {
+        "title": "مبادئ وأساسيات المحاسبة | What Accounting is all about",
+        "provider": "جامعة الفيصل (Coursera)",
+        "url": "https://www.coursera.org/learn/what-accounting-is-all-about",
+        "lang": "ar",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 2,
+        "certificate": true,
+        "star": 1,
+        "why": "بالعربي من جامعة سعودية: ساعتين تفهم فيها القيود والقوائم المالية الأساسية.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "AccountingCoach",
+          "provider": "AccountingCoach",
+          "url": "https://www.accountingcoach.com/",
+          "lang": "en",
+          "price": "free_to_audit",
+          "financialAid": null,
+          "hours": null,
+          "certificate": true,
+          "star": 1,
+          "why": "شروحات واختبارات قصيرة مجانية للمفاهيم المحاسبية، والشهادات والفيديوهات ضمن اشتراك PRO المدفوع.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "فني المحاسبة (Accounting Technician)",
+        "issuer": "الهيئة السعودية للمراجعين والمحاسبين (SOCPA)",
+        "code": null,
+        "type": "exam",
+        "url": "https://www.socpa.org.sa/Socpa/Technical-Resources/Professional-Tests/Professional-Examinations/933.aspx",
+        "fee": {
+          "amount": 1200,
+          "currency": "SAR",
+          "note": "Exam entry fee, excluding VAT"
+        },
+        "prepUrl": "https://www.socpa.org.sa/getattachment/Socpa/Technical-Resources/Professional-Tests/933/Tabs/347/fny2024-11-24.pdf.aspx?lang=ar-SA",
+        "prepLabel": "موضوعات اختبار فني المحاسبة من الهيئة",
+        "level": "beginner",
+        "star": 1,
+        "why": "شهادة سعودية من الهيئة تثبت أساسيات المحاسبة؛ الاختبار بالعربي (60 سؤال)، ويشترط دبلوم محاسبة أو ساعات محاسبة في شهادتك.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.coursera.org/learn/what-accounting-is-all-about",
+          "status": "fixed",
+          "note": "Page OK (Alfaisal University | KLD, taught in Arabic, beginner, 2 h, shareable certificate). No audit shown: price paid; financialAid set true (page says Financial aid available)."
+        },
+        {
+          "url": "https://www.accountingcoach.com/",
+          "status": "fixed",
+          "note": "Explanations, quizzes, Q&A and dictionary are free; certificates and videos are PRO (paid one-time). Price changed free -> free_to_audit, certificate true."
+        },
+        {
+          "url": "https://www.socpa.org.sa/Socpa/Technical-Resources/Professional-Tests/Professional-Examinations/933.aspx",
+          "status": "added",
+          "note": "Certification: SOCPA Accounting Technician exam (60 MCQ, 150 min, pass 60%, Arabic only, 1,200 SAR). SOCPA's entry-level credential; the Fellowship is the advanced one. Eligibility needs an accounting diploma or accounting credit hours."
+        },
+        {
+          "url": "https://www.socpa.org.sa/getattachment/Socpa/Technical-Resources/Professional-Tests/933/Tabs/347/fny2024-11-24.pdf.aspx?lang=ar-SA",
+          "status": "added",
+          "note": "Official exam subjects PDF linked from the SOCPA page; opens, titled «موضوعات اختبار فني المحاسبة»."
+        },
+        {
+          "url": "https://www.accountingcoach.com/about-us",
+          "status": "removed",
+          "note": "Checked, not used: Tried to add AccountingCoach's author as a person; about page 404, so no person added. People list stays empty."
+        }
+      ]
+    },
+    "agile": {
+      "topPick": {
+        "title": "Agile Project Management",
+        "provider": "Google (Coursera)",
+        "url": "https://www.coursera.org/learn/agile-project-management",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 20,
+        "certificate": true,
+        "star": 1,
+        "why": "من شهادة Google لإدارة المشاريع: مبادئ Agile وطريقة Scrum والعمل بدورات قصيرة.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "دليل Scrum",
+          "provider": "Ken Schwaber و Jeff Sutherland (scrumguides.org)",
+          "url": "https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-Arabic.pdf",
+          "lang": "ar",
+          "price": "free",
+          "financialAid": null,
+          "hours": null,
+          "certificate": false,
+          "star": 1,
+          "why": "الدليل الرسمي لـ Scrum (نسخة نوفمبر 2020) مترجم للعربي من مؤلفَيه، وهو أساس اختبار PSM I.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Jeff Sutherland",
+          "platform": "Scrum Inc.",
+          "url": "https://www.scruminc.com/",
+          "why": "شريك في ابتكار Scrum، وشركته تنشر مواد عملية عنه.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "Professional Scrum Master I (PSM I)",
+        "issuer": "Scrum.org",
+        "code": "PSM I",
+        "type": "exam",
+        "url": "https://www.scrum.org/assessments/professional-scrum-master-i-certification",
+        "fee": {
+          "amount": 200,
+          "currency": "USD",
+          "note": "Per attempt; taxes may apply"
+        },
+        "prepUrl": "https://www.scrum.org/resources/suggested-reading-professional-scrum-master",
+        "prepLabel": "قائمة القراءة الرسمية للاختبار من Scrum.org",
+        "level": "beginner",
+        "star": 1,
+        "why": "تثبت إنك فاهم إطار Scrum وأدواره وأحداثه؛ 80 سؤال في 60 دقيقة، والاختبار بالإنجليزي.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.coursera.org/learn/agile-project-management",
+          "status": "fixed",
+          "note": "Page OK (Google, English, beginner, 2 weeks x 10 h, certificate). No audit shown: price paid, financialAid true."
+        },
+        {
+          "url": "https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-Arabic.pdf",
+          "status": "fixed",
+          "note": "PDF opens: Arabic 2020 Scrum Guide by Ken Schwaber and Jeff Sutherland. Title set to the cover title «دليل Scrum» (old title was invented)."
+        },
+        {
+          "url": "https://www.scruminc.com/",
+          "status": "ok",
+          "note": "Scrum Inc. site, founded by Dr. Jeff Sutherland; articles, training, podcast."
+        },
+        {
+          "url": "https://www.scrum.org/assessments/professional-scrum-master-i-certification",
+          "status": "added",
+          "note": "Certification: PSM I, USD 200 per attempt, 80 questions, 60 min, 85% pass, fundamental level; English and Japanese."
+        },
+        {
+          "url": "https://www.scrum.org/resources/suggested-reading-professional-scrum-master",
+          "status": "added",
+          "note": "Official PSM I suggested-reading page; opens."
+        }
+      ]
+    },
+    "business-analysis": {
+      "topPick": {
+        "title": "Free Business Analyst Course with Certificate",
+        "provider": "Simplilearn (SkillUp)",
+        "url": "https://www.simplilearn.com/introduction-to-business-analysis-free-course-skillup",
+        "lang": "en",
+        "price": "free",
+        "financialAid": null,
+        "hours": 2,
+        "certificate": true,
+        "star": 1,
+        "why": "مدخل مجاني قصير (ساعتين) لدور محلل الأعمال وأساسياته، مع شهادة إتمام.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Introduction to Business Analysis",
+          "provider": "Angie Eissa (almentor)",
+          "url": "https://www.almentor.net/en/courses/Introduction-to-Business-Analysis",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": null,
+          "hours": 0.8,
+          "certificate": true,
+          "star": 1,
+          "why": "مدخل قصير بالعربي (48 دقيقة، 8 دروس) لدور محلل الأعمال؛ أول درس معاينة مجانية والباقي باشتراك almentor.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Laura Brandenburg",
+          "platform": "Bridging the Gap",
+          "url": "https://www.bridging-the-gap.com/",
+          "why": "تنشر مقالات عملية لمحللي الأعمال، مثل جمع المتطلبات ودخول المهنة في منتصف المسار.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "Entry Certificate in Business Analysis (ECBA)",
+        "issuer": "IIBA",
+        "code": "ECBA",
+        "type": "exam",
+        "url": "https://www.iiba.org/business-analysis-certifications/ecba/",
+        "fee": {
+          "amount": 316,
+          "currency": "USD",
+          "note": "Non-member promotional price through 31 Dec 2026 (regular USD 395), includes exam, learning journey and one-year IIBA membership; member price USD 196"
+        },
+        "prepUrl": "https://www.iiba.org/knowledgehub/certification/ecba-certification/about-ecba-certification/roadmap-to-ecba-certification/",
+        "prepLabel": "خارطة الاستعداد الرسمية لاختبار ECBA من IIBA",
+        "level": "beginner",
+        "star": 1,
+        "why": "شهادة الدخول لمجال تحليل الأعمال من IIBA، ما تحتاج خبرة سابقة ولا ساعات تدريب.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.simplilearn.com/introduction-to-business-analysis-free-course-skillup",
+          "status": "fixed",
+          "note": "Page OK: free, 2 h, SkillUp certificate, beginner, English. Provider label normalised to 'Simplilearn (SkillUp)'."
+        },
+        {
+          "url": "https://www.almentor.net/en/courses/Introduction-to-Business-Analysis",
+          "status": "added",
+          "note": "Arabic course on almentor: Angie Eissa, 48 min / 8 lessons, completion certificate; lesson 1 free preview, rest by subscription (price not shown) -> paid."
+        },
+        {
+          "url": "https://www.bridging-the-gap.com/",
+          "status": "added",
+          "note": "Person added (list was empty): Laura Brandenburg's Bridging the Gap; photo captioned with her name; BA articles and blog."
+        },
+        {
+          "url": "https://www.iiba.org/business-analysis-certifications/ecba/",
+          "status": "added",
+          "note": "Certification: ECBA, foundational, no experience needed; USD 316 non-member / 196 member (20% promo to 31 Dec 2026)."
+        },
+        {
+          "url": "https://www.iiba.org/knowledgehub/certification/ecba-certification/about-ecba-certification/roadmap-to-ecba-certification/",
+          "status": "added",
+          "note": "Official ECBA roadmap page; opens."
+        }
+      ]
+    },
+    "financial-analysis": {
+      "topPick": {
+        "title": "Reading Financial Statements",
+        "provider": "Corporate Finance Institute (CFI)",
+        "url": "https://corporatefinanceinstitute.com/course/learn-to-read-financial-statements-free-course/",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": null,
+        "hours": 2,
+        "certificate": true,
+        "star": 1,
+        "why": "تقرأ القوائم المالية وتفهم أرقامها في ساعتين؛ بعض الدروس معاينة مجانية والباقي باشتراك CFI.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Introduction to Financial Accounting",
+          "provider": "University of Pennsylvania (Coursera)",
+          "url": "https://www.coursera.org/learn/wharton-accounting",
+          "lang": "en",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 20,
+          "certificate": true,
+          "star": 2,
+          "why": "من وارتون: تقرأ القوائم المالية وتفهم القيود خلفها بعمق أكبر من الدورات القصيرة.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Aswath Damodaran",
+          "platform": "موقعه في جامعة نيويورك",
+          "url": "https://pages.stern.nyu.edu/~adamodar/",
+          "why": "أستاذ التقييم المالي في NYU Stern، ينشر محاضراته وجداوله للجميع.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "CFA Program Level I",
+        "issuer": "CFA Institute",
+        "code": "Level I",
+        "type": "exam",
+        "url": "https://www.cfainstitute.org/programs/cfa-program",
+        "fee": {
+          "amount": 1140,
+          "currency": "USD",
+          "note": "Lowest per-exam price shown on the official page ('From USD 1,140/exam', early registration); standard registration costs more"
+        },
+        "prepUrl": "https://www.cfainstitute.org/programs/cfa-program/curriculum",
+        "prepLabel": "منهج برنامج CFA الرسمي ومواضيع المستوى الأول",
+        "level": "intermediate",
+        "star": 2,
+        "why": "أشهر شهادة في التحليل المالي، والمستوى الأول يغطي تحليل القوائم المالية ويحتاج نحو 300 ساعة مذاكرة؛ أما CME-1 من الأكاديمية المالية فهو عن أنظمة السوق المالية لا التحليل.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://corporatefinanceinstitute.com/course/learn-to-read-financial-statements-free-course/",
+          "status": "ok",
+          "note": "Page OK: Reading Financial Statements, 2 h, certificate (80% on final), free preview lessons, full access by CFI subscription."
+        },
+        {
+          "url": "https://www.coursera.org/learn/wharton-accounting",
+          "status": "fixed",
+          "note": "Title on page is now 'Introduction to Financial Accounting' (was 'Financial Accounting: Read and Interpret Financial Statements'); 2 weeks x 10 h -> hours 20; certificate true; financial aid true."
+        },
+        {
+          "url": "https://pages.stern.nyu.edu/~adamodar/",
+          "status": "ok",
+          "note": "Damodaran Online home page on NYU Stern domain loads."
+        },
+        {
+          "url": "https://www.cfainstitute.org/programs/cfa-program",
+          "status": "added",
+          "note": "Certification: CFA Program Level I chosen for star 2. Page shows 'From USD 1,140/exam' (not level-specific; early price), all three levels USD 3,520-4,570. The dates-fees page shows only placeholders to the fetch tool."
+        },
+        {
+          "url": "https://www.cfainstitute.org/programs/cfa-program/curriculum",
+          "status": "added",
+          "note": "Official curriculum page; Level I has 10 topics incl. Financial Statement Analysis 11-14%."
+        },
+        {
+          "url": "https://fa.gov.sa/en/Services/ExamDetails/71f97df5-7f7b-4a04-80f8-ab4000ab736b",
+          "status": "removed",
+          "note": "Checked, not used: Checked CME-1 (Financial Academy): Part I is securities legislation (Capital Market Law, market conduct, licensed persons), fee 1,250 SAR, required for CMA-registered roles. It tests market rules, not financial analysis, so not used as the certificate; mentioned in 'why'."
+        }
+      ]
+    },
+    "hr-basics": {
+      "topPick": {
+        "title": "Preparing to Manage Human Resources",
+        "provider": "University of Minnesota (Coursera)",
+        "url": "https://www.coursera.org/learn/managing-human-resources",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 20,
+        "certificate": true,
+        "star": 1,
+        "why": "مدخل واضح لوظائف الموارد البشرية وإدارة الموظفين.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "التحضير لإدارة الموارد البشرية",
+          "provider": "University of Minnesota (Coursera)",
+          "url": "https://www.coursera.org/learn/managing-human-resources-ar",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 20,
+          "certificate": true,
+          "star": 1,
+          "why": "نفس الدورة بالعربي: مدخل لوظائف الموارد البشرية للي يفضّل يتعلّم بلغته.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Josh Bersin",
+          "platform": "موقعه",
+          "url": "https://joshbersin.com/",
+          "why": "من أشهر المحللين في الموارد البشرية والتعلّم وتقنيات HR.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "Associate Professional in Human Resources - International (aPHRi)",
+        "issuer": "HRCI",
+        "code": "aPHRi",
+        "type": "exam",
+        "url": "https://www.hrci.org/certifications/aphri",
+        "fee": {
+          "amount": 2200,
+          "currency": "SAR",
+          "note": "Lowest package (application, practice exam, exam voucher) on HRCI's authorized Saudi partner store hrcisa.org, linked from hrci.org; HRCI's own page shows no price"
+        },
+        "prepUrl": "https://www.hrci.org/docs/default-source/2024-document-control/hrci_aphri-exam-content-outline-2024.pdf",
+        "prepLabel": "المخطط الرسمي لمحتوى اختبار aPHRi من HRCI",
+        "level": "beginner",
+        "star": 2,
+        "why": "شهادة HRCI لبداية مسارك في الموارد البشرية، ما تحتاج خبرة، والاختبار متاح بالعربي والإنجليزي في السعودية.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.coursera.org/learn/managing-human-resources",
+          "status": "fixed",
+          "note": "Page OK (University of Minnesota, English, 2 weeks x 10 h, certificate). No audit shown: price paid, financialAid true."
+        },
+        {
+          "url": "https://www.coursera.org/learn/managing-human-resources-ar",
+          "status": "added",
+          "note": "Arabic version of the same course («التحضير لإدارة الموارد البشرية»), taught in Arabic, 2 weeks x 10 h, certificate, financial aid."
+        },
+        {
+          "url": "https://joshbersin.com/",
+          "status": "ok",
+          "note": "Josh Bersin's site: articles, podcast, Josh Bersin Institute."
+        },
+        {
+          "url": "https://www.hrci.org/certifications/aphri",
+          "status": "added",
+          "note": "Certification: aPHRi (foundational, for those starting in HR). HRCI page shows no fee and links to its Saudi partner hrcisa.org."
+        },
+        {
+          "url": "https://hrcisa.org/products/associate-professional-in-human-resources-international-aphri%E2%84%A2",
+          "status": "added",
+          "note": "Used for the fee only: HRCI's authorized Saudi partner; packages 2,200 SR (application, practice exam, voucher) and 5,500 SR (adds self-paced learning); exam in English and Arabic; no HR experience required."
+        },
+        {
+          "url": "https://www.hrci.org/docs/default-source/2024-document-control/hrci_aphri-exam-content-outline-2024.pdf",
+          "status": "added",
+          "note": "Official aPHRi exam content outline PDF; opens (HR Operations 33%, Recruitment 22%, C&B 15%, HRD 10%, ER/H&S 20%)."
+        },
+        {
+          "url": "https://www.shrm.org/credentials/certification/shrm-cp",
+          "status": "removed",
+          "note": "Checked, not used: Considered SHRM-CP (operational level; USD 350-499 per exam-options page). Not chosen: aPHRi fits a 'basics' skill, needs no experience and is offered in Arabic in Saudi."
+        }
+      ]
+    },
+    "recruitment": {
+      "topPick": {
+        "title": "Recruiting, Hiring, and Onboarding Employees",
+        "provider": "University of Minnesota (Coursera)",
+        "url": "https://www.coursera.org/learn/recruiting-hiring-onboarding-employees",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 20,
+        "certificate": true,
+        "star": 1,
+        "why": "من جذب المرشحين إلى المقابلة واستقبال الموظف الجديد.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [],
+      "people": [
+        {
+          "name": "Lou Adler",
+          "platform": "The Adler Group",
+          "url": "https://louadlergroup.com/",
+          "why": "صاحب منهج Performance-based Hiring وكتاب Hire with Your Head، وينشر مقالات وقوالب للتوظيف.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "SHRM Talent Acquisition Specialty Credential",
+        "issuer": "SHRM",
+        "code": null,
+        "type": "program",
+        "url": "https://www.shrm.org/mena/credentials/specialty-credentials/talent-acquisition",
+        "fee": null,
+        "prepUrl": "https://www.shrm.org/mena/credentials/specialty-credentials/talent-acquisition",
+        "prepLabel": "مكوّنات البرنامج الرسمية في صفحة SHRM",
+        "level": "intermediate",
+        "star": 2,
+        "why": "شهادة من SHRM في استقطاب المواهب، تحصل عليها بعد برنامج مع مدرّب و3 دورات إلكترونية واختبار معرفة.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.coursera.org/learn/recruiting-hiring-onboarding-employees",
+          "status": "fixed",
+          "note": "Page OK (University of Minnesota, English, 2 weeks x 10 h, certificate). No audit shown: price paid, financialAid true."
+        },
+        {
+          "url": "https://www.coursera.org/learn/recruiting-hiring-onboarding-employees-ar",
+          "status": "removed",
+          "note": "Checked, not used: Tried an Arabic version of the course: 404. No Arabic alternative found."
+        },
+        {
+          "url": "https://louadlergroup.com/",
+          "status": "added",
+          "note": "Person added (list was empty): Lou Adler's company site (Performance-based Hiring, articles, templates)."
+        },
+        {
+          "url": "https://www.shrm.org/mena/credentials/specialty-credentials/talent-acquisition",
+          "status": "added",
+          "note": "Certification: SHRM Talent Acquisition Specialty Credential (instructor-led program + 3 eLearning courses + knowledge assessment; 22 PDCs). Page shows no price -> fee null. LinkedIn Certified Professional-Recruiter not used: linkedin.com may not be opened under the brief."
+        }
+      ]
+    },
+    "labor-law": {
+      "topPick": {
+        "title": "نظام العمل",
+        "provider": "وزارة الموارد البشرية والتنمية الاجتماعية",
+        "url": "https://www.hrsd.gov.sa/knowledge-centre/%D9%86%D8%B8%D8%A7%D9%85-%D8%A7%D9%84%D8%B9%D9%85%D9%84",
+        "lang": "ar",
+        "price": "free",
+        "financialAid": null,
+        "hours": null,
+        "certificate": false,
+        "star": 1,
+        "why": "النص الرسمي لنظام العمل السعودي من الوزارة، مقسّم على 16 باباً.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "الثقافة العمالية",
+          "provider": "وزارة الموارد البشرية والتنمية الاجتماعية",
+          "url": "https://www.hrsd.gov.sa/labor-culture",
+          "lang": "ar",
+          "price": "free",
+          "financialAid": null,
+          "hours": null,
+          "certificate": false,
+          "star": 1,
+          "why": "مقالات وإنفوجرافيك رسمية مبسطة عن الإجازات والعمل الإضافي ونهاية الخدمة.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "none",
+        "proof": "لخّص أحكام الإجازات وساعات العمل ونهاية الخدمة من نظام العمل مع أرقام المواد، واحسب مكافأة نهاية الخدمة لحالة واقعية.",
+        "proofUrl": null,
+        "why": "ما فيه شهادة معترف فيها للمبتدئ في نظام العمل السعودي؛ رخصة الاستشارات العمالية في منصة قوى للممارسين المحترفين، مو شهادة مبتدئ.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.hrsd.gov.sa/knowledge-centre/%D9%86%D8%B8%D8%A7%D9%85-%D8%A7%D9%84%D8%B9%D9%85%D9%84",
+          "status": "ok",
+          "note": "Opens: HRSD «نظام العمل» index with 16 chapters, each linking to its articles."
+        },
+        {
+          "url": "https://www.hrsd.gov.sa/labor-culture",
+          "status": "ok",
+          "note": "Opens: HRSD Labor Culture portal with articles and infographics on leave, overtime, end of service."
+        },
+        {
+          "url": "https://www.hrsd.gov.sa/labour-education",
+          "status": "removed",
+          "note": "Checked, not used: Checked for an official labor-law course or certificate: none offered; only the Qiwa labor consultancy license (a practitioner license, not an entry credential). Certification set to kind none."
+        },
+        {
+          "url": "https://doroob.sa/ar/",
+          "status": "removed",
+          "note": "Checked, not used: Doroob «الثقافة العمالية» course is reported by news sites, but doroob.sa renders by JavaScript (empty to fetch) and the HRDF courses page lists no course names; 3 attempts, could not verify, so not added."
+        }
+      ]
+    },
+    "training-dev": {
+      "topPick": {
+        "title": "Learning and Development",
+        "provider": "HRCI (Coursera)",
+        "url": "https://www.coursera.org/learn/learning-and-development",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 20,
+        "certificate": true,
+        "star": 1,
+        "why": "تحدّد احتياج التدريب وتصمّم برنامجاً له وتقيس أثره، للمبتدئ في الموارد البشرية.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [],
+      "people": [
+        {
+          "name": "Cathy Moore",
+          "platform": "مدونتها",
+          "url": "https://blog.cathy-moore.com/",
+          "why": "صاحبة طريقة Action Mapping لتصميم التدريب حول ما يسويه الموظف فعلاً، ومدونتها فيها أدوات مجانية.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "none",
+        "proof": "صمّم ورشة تدريبية قصيرة (تحليل احتياج، أهداف، نشاط، تقييم أثر) وقدّمها لزملائك، واحفظ خطتها ونتائج تقييمهم.",
+        "proofUrl": "https://www.coursera.org/learn/learning-and-development",
+        "why": "ما فيه شهادة معترف فيها للمبتدئ في التدريب والتطوير؛ شهادة APTD من ATD تشترط 3 سنوات خبرة في المجال، فهي خطوتك بعدين.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.coursera.org/learn/learning-and-development",
+          "status": "fixed",
+          "note": "Page OK (HRCI, English, beginner, 2 weeks x 10 h, certificate). No audit shown: price paid, financialAid true."
+        },
+        {
+          "url": "https://www.coursera.org/learn/learning-and-development-ar",
+          "status": "removed",
+          "note": "Checked, not used: Tried an Arabic version: 404. No Arabic alternative found."
+        },
+        {
+          "url": "https://blog.cathy-moore.com/",
+          "status": "added",
+          "note": "Person added (list was empty): Cathy Moore's training-design blog (cathy-moore.com redirects here)."
+        },
+        {
+          "url": "https://assets.td.org/m/1db17e40338e8d55/original/APTD-Certification-Handbook-January-2026.pdf",
+          "status": "removed",
+          "note": "Checked, not used: Official APTD handbook (Jan 2026) opened: exam USD 525 member / 800 non-member, 115 questions, 2 h, BUT eligibility requires 3 years paid TD experience + 28 PD hours. Not a star-1 credential, so certification set to kind none (APTD named in 'why'). td.org web pages return 403 to the fetch tool."
+        }
+      ]
+    },
+    "payroll": {
+      "topPick": {
+        "title": "Compensation and Benefits",
+        "provider": "HRCI (Coursera)",
+        "url": "https://www.coursera.org/learn/compensation-and-benefits",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 20,
+        "certificate": true,
+        "star": 1,
+        "why": "أساسيات الرواتب والبدلات والمزايا، وفيها وحدة عن الرواتب وجداول صرفها؛ الدورة غير خاصة بالسعودية، فارجع لنظام العمل في التفاصيل المحلية.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [],
+      "people": [],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "none",
+        "proof": "ابنِ مسير رواتب في Excel لعشرة موظفين فيه الراتب الأساسي والبدلات واستقطاع التأمينات الاجتماعية والغياب، حسب نظام العمل.",
+        "proofUrl": "https://www.coursera.org/learn/compensation-and-benefits",
+        "why": "ما فيه شهادة رواتب معترف فيها خاصة بالسعودية؛ شهادة FPC من PayrollOrg أمريكية وأسئلتها مبنية على الأنظمة الفدرالية الأمريكية.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.coursera.org/learn/compensation-and-benefits",
+          "status": "fixed",
+          "note": "Page OK (HRCI, English, beginner, 2 weeks x 10 h, certificate); module 4 covers payroll and payroll schedules. No audit shown: price paid, financialAid true."
+        },
+        {
+          "url": "https://www.coursera.org/learn/compensation-and-benefits-ar",
+          "status": "removed",
+          "note": "Checked, not used: Tried an Arabic version: 404."
+        },
+        {
+          "url": "https://payroll.org/certification/certification-faq",
+          "status": "removed",
+          "note": "Checked, not used: Checked PayrollOrg FPC: FAQ says exams test US federal laws and regulations (not state-specific); the FPC page itself returned 403. US-focused, so certification set to kind none."
+        }
+      ]
+    },
+    "problem-solving": {
+      "topPick": {
+        "title": "التفكير الناقد | Critical Thinking",
+        "provider": "جامعة الفيصل (Coursera)",
+        "url": "https://www.coursera.org/learn/critical-thinking-1",
+        "lang": "ar",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 5,
+        "certificate": true,
+        "star": 1,
+        "why": "بالعربي من جامعة سعودية: 5 ساعات تتعلّم فيها تحلّل المشكلة قبل ما تحكم؛ Coursera تصنّفها مستوى متوسط.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Creative Problem Solving",
+          "provider": "University of Minnesota (Coursera)",
+          "url": "https://www.coursera.org/learn/creative-problem-solving",
+          "lang": "en",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 10,
+          "certificate": true,
+          "star": 1,
+          "why": "أدوات عملية لتوليد حلول جديدة واختيار الأنسب.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "none",
+        "proof": "اكتب دراسة حالة في صفحة لمشكلة حقيقية واجهتها: تعريفها، أسبابها، البدائل، قرارك ونتيجته.",
+        "proofUrl": "https://www.coursera.org/learn/critical-thinking-1",
+        "why": "ما فيه شهادة معترف فيها لمهارة حل المشكلات؛ اللي يثبتها أمثلة حقيقية تشرحها في المقابلة.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.coursera.org/learn/critical-thinking-1",
+          "status": "fixed",
+          "note": "Page OK (Alfaisal University | KLD, Arabic, intermediate level, 5 h, certificate). No audit or free enroll shown: price paid, financialAid true."
+        },
+        {
+          "url": "https://www.coursera.org/learn/creative-problem-solving",
+          "status": "fixed",
+          "note": "Page OK (University of Minnesota, English, 1 week x 10 h, certificate). Price paid, financialAid true."
+        }
+      ]
+    },
+    "presentation": {
+      "topPick": {
+        "title": "مهارة مخاطبة الجمهور | Public Speaking Skills",
+        "provider": "جامعة الفيصل (Coursera)",
+        "url": "https://www.coursera.org/learn/public-speaking-skills",
+        "lang": "ar",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 2,
+        "certificate": true,
+        "star": 1,
+        "why": "بالعربي وللمبتدئين: ساعتين تبني فيها ثقتك قدّام الجمهور.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Introduction to Public Speaking",
+          "provider": "University of Washington (Coursera)",
+          "url": "https://www.coursera.org/learn/public-speaking",
+          "lang": "en",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 10,
+          "certificate": true,
+          "star": 1,
+          "why": "دورة أطول للمبتدئين عن إعداد الخطاب وإلقائه.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "فن العرض والتأثير",
+          "provider": "إدراك (Edraak)",
+          "url": "https://www.edraak.org/programs/specialization/the-art-of-presentation-and-influence-v1/",
+          "lang": "ar",
+          "price": null,
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "تخصص عربي في العرض والتأثير على منصة إدراك؛ الصفحة ما تعرض المدة والسعر.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Garr Reynolds",
+          "platform": "Presentation Zen",
+          "url": "https://presentationzen.com/",
+          "why": "صاحب Presentation Zen: شرائح بسيطة وقصة واضحة.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "Nancy Duarte",
+          "platform": "Duarte",
+          "url": "https://www.duarte.com/",
+          "why": "شركتها من أشهر جهات تدريب العرض والتقديم ورواية القصة في العروض.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "none",
+        "proof": "سجّل عرضاً مدته 5 دقائق عن موضوع من شغلك بشرائح بسيطة، وشاركه مع شخص يقيّمك.",
+        "proofUrl": "https://www.coursera.org/learn/public-speaking-skills",
+        "why": "ما فيه شهادة معترف فيها لمهارة العرض والتقديم؛ العرض المسجّل دليل مباشر عليها.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.coursera.org/learn/public-speaking-skills",
+          "status": "fixed",
+          "note": "Page OK (Alfaisal University | KLD, Arabic, beginner, 2 h, certificate). Price paid, financialAid true."
+        },
+        {
+          "url": "https://www.coursera.org/learn/public-speaking",
+          "status": "fixed",
+          "note": "Page OK (University of Washington, English, beginner, 1 week x 10 h, certificate). Price paid, financialAid true."
+        },
+        {
+          "url": "https://www.edraak.org/programs/specialization/the-art-of-presentation-and-influence-v1/",
+          "status": "added",
+          "note": "Edraak specialization page shows title «فن العرض والتأثير | إدراك»; details load by JavaScript, so price/hours/certificate null."
+        },
+        {
+          "url": "https://presentationzen.com/",
+          "status": "ok",
+          "note": "Garr Reynolds' Presentation Zen site (copyright Garr Reynolds)."
+        },
+        {
+          "url": "https://www.duarte.com/",
+          "status": "ok",
+          "note": "Duarte presentation training firm; refers to 'Duarte and her team'."
+        }
+      ]
+    },
+    "teamwork": {
+      "topPick": {
+        "title": "Teamwork Skills: Communicating Effectively in Groups",
+        "provider": "University of Colorado Boulder (Coursera)",
+        "url": "https://www.coursera.org/learn/teamwork-skills-effective-communication",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 10,
+        "certificate": true,
+        "star": 1,
+        "why": "كيف تتواصل وتتعاون بفعالية داخل فريق العمل.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "مهارات العمل الجماعي: التواصل الفعّال في مجموعات",
+          "provider": "University of Colorado Boulder (Coursera)",
+          "url": "https://www.coursera.org/learn/teamwork-skills-effective-communication-ar",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 10,
+          "certificate": true,
+          "star": 1,
+          "why": "نفس الدورة بالعربي: التواصل والتعاون داخل الفريق للمبتدئين.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "مهارات القيادة والعمل الجماعي",
+          "provider": "إدراك (Edraak)",
+          "url": "https://www.edraak.org/programs/specialization/leadershipsp-vv2/",
+          "lang": "ar",
+          "price": null,
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "تخصص عربي في القيادة والعمل الجماعي على منصة إدراك؛ الصفحة ما تعرض المدة والسعر.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Amy C. Edmondson",
+          "platform": "موقعها",
+          "url": "https://amycedmondson.com/",
+          "why": "تكتب عن الأمان النفسي والعمل الجماعي، وكتابها The Fearless Organization مرجع في الموضوع.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "none",
+        "proof": "وثّق مشروعاً جماعياً شاركت فيه: دورك، كيف تعاملتم مع خلاف، والنتيجة، مع تزكية من زميل أو مشرف.",
+        "proofUrl": "https://www.coursera.org/learn/teamwork-skills-effective-communication",
+        "why": "ما فيه شهادة معترف فيها لمهارة العمل الجماعي؛ اللي يثبتها مشاريع حقيقية وتزكية ممن اشتغل معك.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        {
+          "url": "https://www.coursera.org/learn/teamwork-skills-effective-communication",
+          "status": "fixed",
+          "note": "Page OK (CU Boulder, English, beginner, 1 week x 10 h, certificate). Price paid, financialAid true."
+        },
+        {
+          "url": "https://www.coursera.org/learn/teamwork-skills-effective-communication-ar",
+          "status": "added",
+          "note": "Arabic version of the same course, taught in Arabic, beginner, 1 week x 10 h, certificate, financial aid."
+        },
+        {
+          "url": "https://www.edraak.org/programs/specialization/leadershipsp-vv2/",
+          "status": "added",
+          "note": "Edraak specialization page shows title «مهارات القيادة والعمل الجماعي | إدراك»; details load by JavaScript, so price/hours/certificate null."
+        },
+        {
+          "url": "https://amycedmondson.com/",
+          "status": "added",
+          "note": "Person added (list was empty): Amy C. Edmondson's own site (psychological safety, teamwork, The Fearless Organization)."
+        }
+      ]
+    }
+  }
+}

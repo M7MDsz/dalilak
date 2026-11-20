@@ -1,5 +1,5 @@
 // Owner: signin. The sign-in page `/` (spec 3.1). A thin Server Component: the Guard waits for the saved state, applies
-// ?seed=, sends a signed-in user on (spec 2.2), and only then renders the screen. Tab title: «دليلك» alone (2.2).
+// ?seed=, sends a signed-in user on (spec 2.2), and only then renders the screen. Tab title: «دليل» alone (2.2).
 import type { Metadata } from "next";
 
 import { SigninScreen } from "@/features/signin";

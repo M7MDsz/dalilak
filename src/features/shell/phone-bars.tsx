@@ -2,7 +2,7 @@
 // Owner: shell. The phone shell of spec 2.4 (anything narrower than 1024 px).
 // Top bar: the logo at the inline-start, the compact user chip at the inline-end; no page heading (the page's own <h1>
 // is its first line) and no next-step pill (the next step is the card at the top of /path).
-// Bottom tab bar: «مساري» · «الدورات» · «دليل» (centre, larger: opens the advisor, `shell-advisor-launcher`) ·
+// Bottom tab bar: «مساري» · «دليل التعلّم» · «دليلك» (centre, larger: opens the advisor, `shell-advisor-launcher`) ·
 // «الوظائف» · «المزيد» (`shell-more`, opens a bottom sheet with «المهارات» · «سيرتي» · «طلباتي» · «المتصدرون» · «ملفي»).
 // Same test ids as the desktop navigation; only one of the two is rendered.
 import { useState, type ReactNode } from "react";

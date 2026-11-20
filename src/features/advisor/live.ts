@@ -7,15 +7,15 @@ import { create } from "zustand";
 
 import type { AdvisorOutgoing } from "@/lib/types";
 
-/** «دليل» working on a reply: the row shows his living glyph and the rolling status line. */
+/** «دليلك» working on a reply: the row shows his living glyph and the rolling status line. */
 export interface LiveTurn {
-  /** The key of the «دليل» message this turn becomes (the saved message's id starts with it). */
+  /** The key of the «دليلك» message this turn becomes (the saved message's id starts with it). */
   readonly id: string;
   /** For the elapsed seconds after 4 s (spec 3.14). */
   readonly startedAt: number;
   /** When the work last visibly moved on (a new status line, or a new step of the apply run under the same line). */
   readonly statusAt: number;
-  /** «دليل يفكّر…», then the tool's line (5.3), then during an application the step's line (7.4). */
+  /** «دليلك يفكّر…», then the tool's line (5.3), then during an application the step's line (7.4). */
   readonly status: string;
   /** `thinking` before any tool, `working` while a tool or an action runs (the glyph's state). */
   readonly activity: "thinking" | "working";

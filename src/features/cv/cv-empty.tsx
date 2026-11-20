@@ -1,5 +1,5 @@
 "use client";
-// Owner: cv. The empty result (spec 3.6), in «دليل»'s voice: nothing was saved and no XP was paid. «دليل»'s still glyph
+// Owner: cv. The empty result (spec 3.6), in «دليلك»'s voice: nothing was saved and no XP was paid. «دليلك»'s still glyph
 // stands where the empty state's drawing would be, because he is the one speaking.
 import type { ReactNode } from "react";
 

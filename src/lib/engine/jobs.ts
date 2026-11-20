@@ -9,9 +9,9 @@ import { compareFit, fitBreakdown } from "./onboarding-fit";
 import { skillStars, totalStars } from "./stars";
 
 /**
- * All 20 jobs ranked (7.2): higher match first; ties: the target · a job in the user's city · a job whose field is one of
+ * All the jobs ranked (7.2): higher match first; ties: the target · a job in the user's city · a job whose field is one of
  * the interests · data order. While the user holds no star: by the onboarding fit score (4.6) instead (its own ties; the
- * jobs the education gate leaves out of the recommendation come last, in fit order, so the list still holds all 20).
+ * jobs the education gate leaves out of the recommendation come last, in fit order, so the list still holds them all).
  */
 export function rankJobs(facts: UserFacts): readonly RankedJob[] {
   const stars = skillStars(facts);
@@ -49,11 +49,16 @@ export function rankJobs(facts: UserFacts): readonly RankedJob[] {
   return rows.map((r) => r.ranked);
 }
 
-/** The searchable words of a job (7.1): title, company, city name, field name, the names of its five skills. */
+/**
+ * The searchable words of a job (7.1): title, company, city name, field name, the names of its five skills; for a real
+ * posting also its own title and the company's own name («Salla», «Lucidya»).
+ */
 function jobWords(job: Job): readonly string[] {
   const text = [
     job.title,
+    job.titleEn ?? "",
     job.company,
+    job.companyEn ?? "",
     getJobCity(job.city).name,
     getField(job.field).name,
     ...job.requirements.map((r) => getSkill(r.skill).name),

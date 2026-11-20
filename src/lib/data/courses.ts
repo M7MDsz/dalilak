@@ -4,9 +4,13 @@
 // a small result the learner produces, as many as spec 8.2 gives for the hours (6 → 3, 8 → 4, 10 → 5, 12 → 5, 14 → 6,
 // 16 → 6). The two demo courses (c-powerbi-1, c-statistics-2) are the spec's text word for word. No provider,
 // instructor, rating, price or enrolment count exists. Pure module.
+import { COURSE_IDS } from "@/lib/ids";
 import type { Course, CourseId } from "@/lib/types";
 
-export const COURSES: readonly Course[] = [
+import { EXPANSION_COURSES } from "./expansion/courses";
+
+/** The 59 courses of spec 9.4. */
+const SPEC_COURSES: readonly Course[] = [
   // ── data ──────────────────────────────────────────────────────────────────────────────────────────────────────────
   {
     id: "c-excel-1",
@@ -871,6 +875,11 @@ export const COURSES: readonly Course[] = [
     lessons: ["تعريف المشكلة وأسبابها الجذرية", "توليد الحلول والمفاضلة بينها", "قرار موثّق لمشكلة من عملك"],
   },
 ];
+
+/** Every course (the 59 of spec 9.4 and the expansion's 21 in ./expansion/courses.ts), in COURSE_IDS order. */
+export const COURSES: readonly Course[] = [...SPEC_COURSES, ...EXPANSION_COURSES].sort(
+  (a, b) => COURSE_IDS.indexOf(a.id) - COURSE_IDS.indexOf(b.id),
+);
 
 export function getCourse(id: CourseId): Course {
   const course = COURSES.find((c) => c.id === id);

@@ -1,6 +1,6 @@
-// Owner: brain-advisor. «دليل»'s guide to the platform itself (Mohammed, 18 Nov 2026, on «طيب كيف اغير صورتي؟» answered
+// Owner: brain-advisor. «دليلك»'s guide to the platform itself (Mohammed, 18 Nov 2026, on «طيب كيف اغير صورتي؟» answered
 // with «ما أدري»: "he should be able to advise and help to everything in the platform and actually open that page for
-// you"). One entry per thing a user can do: the words that name it, the page where it is done, and «دليل»'s answer in
+// you"). One entry per thing a user can do: the words that name it, the page where it is done, and «دليلك»'s answer in
 // Najdi naming the buttons exactly as they are written on screen.
 // - The router answers a how-to question from here and opens the page at once (every mode, also offline): see
 //   detectHowTo in router.ts. Topics that already have their own personal answer (badges, XP and level, rank, streak,
@@ -18,11 +18,12 @@ export interface GuideEntry {
   /** The message must ALSO contain one of these (a how / where word or a doing verb), so a passing mention is not a
    *  how-to question: «كيف أوصل لهدفي» is about the path, «كيف أغيّر هدفي» is this entry. */
   readonly ask: readonly string[];
-  /** When set, the message must contain one of these TOO: «كيف أبدأ دورة؟» is a how-to, «أي دورة أبدأ بها؟» asks which. */
+  /** When set, the message must contain one of these TOO: «كيف أبدأ دورة؟» is a how-to, «أي دورة أبدأ بها؟» asks which.
+   *  («وين أتعلم SQL؟» never reaches here: the router answers it from that skill's guide first.) */
   readonly also?: readonly string[];
   /** Where it is done; null when there is nothing to open (a button of the panel itself). */
   readonly to: NavTarget | null;
-  /** «دليل»'s answer, Najdi, the buttons in «…» as on screen. */
+  /** «دليلك»'s answer, Najdi, the buttons in «…» as on screen. */
   readonly how: string;
   /** False: only the model's guide (the router has a personal answer for it). */
   readonly routed: boolean;
@@ -65,23 +66,24 @@ export const GUIDE: readonly GuideEntry[] = [
     hint: "Upload / analyse a CV: CV page (سيرتي) → upload a PDF or Word file or paste the text → «حلّل سيرتي»; «جرّب بسيرة ذاتية تجريبية» for the sample; «حلّل سيرة أخرى» to redo. navigate screen=cv.",
   },
   {
+    // 20 Nov 2026: Dalilak guides, it does not host courses. A step of the path opens the guide of its skill.
     id: "course",
-    topic: ["دورة", "الدورة", "دورات", "الدورات", "كورس", "الكورس", "course"],
+    topic: ["دورة", "الدورة", "دورات", "الدورات", "كورس", "الكورس", "كورسات", "الخطوة", "خطوة", "دليل التعلم", "دليل التعلّم", "course"],
     ask: ["كيف", "شلون", "طريقة", "how"],
-    also: ["أبدأ", "ابدأ", "أكمل", "اكمل", "أخلص", "اخلص", "أخلّص", "أنهي", "start", "finish", "complete"],
+    also: ["أبدأ", "ابدأ", "أكمل", "اكمل", "أخلص", "اخلص", "أخلّص", "أنهي", "أستخدم", "استخدم", "start", "finish", "complete"],
     to: { screen: "learn" },
-    how: "تفضّل، فتحت لك الدورات. افتح أي دورة واضغط «ابدأ الدورة»، وإذا خلّصتها اضغط «أكمل الدورة» وتاخذ نقاطها ونجمتها، وترتفع مطابقتك.",
+    how: "تفضّل، فتحت لك «دليل التعلّم». اختر الخطوة اللي تبيها، وفي دليلها اضغط «ابدأ بهذا» ويفتح لك أحسن كورس لها في صفحة جديدة. تعلّم هناك، وإذا خلّصت ارجع واضغط «خلّصتها»، وتاخذ نقاطها ونجمتها وترتفع مطابقتك.",
     routed: true,
-    hint: "Start / complete a course: courses page (الدورات, tabs «في مساري» «وسّع آفاقك» «مكتملة») → a course → «ابدأ الدورة», later «أكمل الدورة» (XP, a star, the match rises). The user completes courses, never you. navigate screen=learn.",
+    hint: "Learn a skill: the page «دليل التعلّم» lists the learning steps of the user's path; each step opens the guide of its skill (titled «دليل Power BI»): one real top-pick course «ابدأ بهذا» (opens the real course in a new tab and starts the step), up to 2 quieter alternatives, people to follow, articles to read, a small proof task. When the user has finished the course they press «خلّصتها» (self-reported, optional certificate link): it pays the step's XP and star and the match rises. Dalilak does not host courses or lessons; the user learns and completes, never you. navigate screen=learn.",
   },
   {
     id: "apply",
     topic: ["أقدّم", "اقدم", "أقدم", "التقديم", "تقديم", "apply"],
     ask: HOW,
     to: { screen: "jobs" },
-    how: "تفضّل، فتحت لك الوظائف. افتح الوظيفة واضغط «قدّم بنفسك»، أو اضغط «دع دليل يقدّم عنك» وأنا أقدّم عنك في دليلك وLinkedIn وبيت.كوم وIndeed وموقع الجهة (تقديم تجريبي).",
+    how: "تفضّل، فتحت لك الوظائف. افتح الوظيفة واضغط «قدّم بنفسك»، أو اضغط «دع دليلك يقدّم عنك» وأنا أقدّم عنك في منصة دليل وLinkedIn وبيت.كوم وIndeed وموقع الجهة (تقديم تجريبي).",
     routed: true,
-    hint: "Apply to a job: job page → «قدّم بنفسك» (the user fills it), or «دع دليل يقدّم عنك» / the user asks you and you call apply_to_job: you fill it and also apply on LinkedIn, بيت.كوم, Indeed and the company site (all simulated). navigate screen=jobs.",
+    hint: "Apply to a job: job page → «قدّم بنفسك» (the user fills it), or «دع دليلك يقدّم عنك» / the user asks you and you call apply_to_job: you fill it and also apply on LinkedIn, بيت.كوم, Indeed and the company site (all simulated). navigate screen=jobs.",
   },
   {
     id: "history",
@@ -144,9 +146,9 @@ export const GUIDE: readonly GuideEntry[] = [
     topic: ["الخريطة", "خريطة", "المحطة", "المحطات", "map"],
     ask: [...HOW, "أستخدم", "استخدم"],
     to: { screen: "path" },
-    how: "تفضّل، هذا مسارك. اضغط على أي محطة وتطير لها الكاميرا وتشوف وش فيها، و«أنت هنا» يوريك وين وصلت.",
+    how: "تفضّل، هذا مسارك. اضغط على أي محطة وتطير لها الكاميرا وتشوف وش فيها، و«افتح الدليل» يوديك لدليل تعلّمها، و«أنت هنا» يوريك وين وصلت.",
     routed: true,
-    hint: "The roadmap map (مساري): press a station to fly to it and see its course and progress; «أنت هنا» marks the user. navigate screen=path.",
+    hint: "The roadmap map (مساري): press a station to fly to it and see its learning step; its button «افتح الدليل» starts the step and opens the skill's guide; «أنت هنا» marks the user. navigate screen=path.",
   },
   {
     id: "skills",
@@ -154,9 +156,9 @@ export const GUIDE: readonly GuideEntry[] = [
     // not «كيف»: «كيف أطوّر مهاراتي» wants advice, not the page
     ask: ["وين", "فين", "أشوف", "اشوف", "where"],
     to: { screen: "skills" },
-    how: "تفضّل، فتحت لك «المهارات». الشجرة فيها 38 مهارة في 7 مجالات، واضغط أي مهارة تشوف نجومها ووش الدورة اللي تزيدها.",
+    how: "تفضّل، فتحت لك «المهارات». الشجرة فيها 38 مهارة في 7 مجالات، واضغط أي مهارة تشوف نجومها ودليل تعلّمها.",
     routed: true,
-    hint: "Skill tree: skills page (المهارات): 38 skills in 7 fields, stars per skill; press one for its stars and course. navigate screen=skills.",
+    hint: "Skill tree: skills page (المهارات): 38 skills in 7 fields, stars per skill; press one for its stars and its learning guide. navigate screen=skills.",
   },
   // ── for the model only (the router has a personal answer with the user's numbers) ──
   {
@@ -164,9 +166,9 @@ export const GUIDE: readonly GuideEntry[] = [
     topic: ["شارة", "شارات", "الشارات", "شاراتي"],
     ask: HOW,
     to: { screen: "profile" },
-    how: "تفضّل، فتحت لك «ملفي». شاراتك تحت «الشارات»، فيها 12 شارة وكل وحدة تنفتح بخطوة: أول دورة، أول تقديم، سلسلة أيام وغيرها.",
+    how: "تفضّل، فتحت لك «ملفي». شاراتك تحت «الشارات»، فيها 12 شارة وكل وحدة تنفتح بخطوة: أول خطوة تعلّم تخلّصها، أول تقديم، سلسلة أيام وغيرها.",
     routed: false,
-    hint: "Badges: profile page «الشارات» (12 badges, each unlocked by a step: first course, first application, a streak…); list_badges gives the nearest one. navigate screen=profile.",
+    hint: "Badges: profile page «الشارات» (12 badges, each unlocked by a step: the first finished learning step, the first application, a streak…); list_badges gives the nearest one. navigate screen=profile.",
   },
   {
     id: "streak",
@@ -182,9 +184,9 @@ export const GUIDE: readonly GuideEntry[] = [
     topic: ["الترتيب", "المتصدرين", "المتصدرون"],
     ask: HOW,
     to: { screen: "leaderboard" },
-    how: "تفضّل، فتحت لك «المتصدرون». ترتيبك يُحسب من نقاط ذا الأسبوع، وتطلع فيه بالدورات والتقديم.",
+    how: "تفضّل، فتحت لك «المتصدرون». ترتيبك ينحسب من نقاط ذا الأسبوع، وتطلع فيه بخطوات التعلّم والتقديم.",
     routed: false,
-    hint: "Leaderboard (المتصدرون): weekly XP rank among 25 (24 are sample users); climb by courses and applications; get_leaderboard has the numbers. navigate screen=leaderboard.",
+    hint: "Leaderboard (المتصدرون): weekly XP rank among 25 (24 are sample users); climb by finishing learning steps and applying; get_leaderboard has the numbers. navigate screen=leaderboard.",
   },
   {
     id: "applications",

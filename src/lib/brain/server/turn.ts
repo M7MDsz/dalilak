@@ -1,36 +1,39 @@
-// Owner: brain-advisor. SERVER-ONLY by placement, but with no SDK import: the provider runner is injected, so tests can
-// drive a failing or slow "provider" and prove the silent fallback (spec 5.5 rule 11).
+// Owner: brain-advisor. SERVER-ONLY by placement, but with no SDK import: the provider runners are injected, so tests can
+// drive failing or slow "providers" and prove the backup chain and the silent fallback (spec 5.5 rule 11, part 7).
 // One advisor turn (spec 5.5, 5.7, A3, A4):
 // 1. routeAdvisorMessage(request). A "router" decision is emitted as is, in every mode (rule 1).
-// 2. An "open" decision goes to the provider when the brain is online: the tool loop (≤ 4 rounds, rule 14), tools run by
-//    runTool, state-changing calls turned into offers (5.4), navigation only on an open word (rule 7), the reply checked
+// 2. An "open" decision goes to the provider chain (./chain.ts) when some slot is online: gemini-1 → gemini-2 →
+//    anthropic, each with its own cooldown. One slot's tool loop (≤ 4 rounds, rule 14), tools run by runTool,
+//    state-changing calls turned into offers (5.4), navigation only on an open word (rule 7), the reply checked
 //    (rules 8, 9, 17), cards from tool results (rule 10).
-// 3. The provider must produce its first event within 2.5 s; on a timeout, an error, a refusal or an empty reply the
-//    decision's `local` events are emitted and the cooldown starts (rule 11). Nothing but status lines is sent before
-//    the model's reply has passed the checks, so the fallback never repeats or contradicts a sent answer.
+// 3. Some slot must produce its first event within 6 s: a fast failure moves to the next slot at once, a slow one gets
+//    only its share of that budget. When every slot failed or rested, the decision's `local` events are emitted (rule
+//    11). Nothing but status lines is sent before the model's reply has passed the checks, so the fallback never
+//    repeats or contradicts a sent answer.
 // The generator never throws: its last event is `done` or `error` (or nothing, after a user abort).
 import { STATE_CHANGING_TOOLS, isToolName } from "@/lib/ids";
 import { TIMEOUTS_MS, LIMITS } from "@/lib/brain/protocol";
-import type { AdvisorEvent, AdvisorRequest, BrainMode, BrainStatus, ProviderName, ReplySource, ToolParams, ToolResults } from "@/lib/brain/protocol";
+import type { AdvisorEvent, AdvisorRequest, BrainMode, ReplySource, ToolParams, ToolResults } from "@/lib/brain/protocol";
 import type { AdvisorCard, NavTarget, ToolName } from "@/lib/types";
 
+import { CAREER_TOOL, CAREER_TOOL_STATUS, runCareerTool } from "../advisor/careers";
 import { AdvisorCtx } from "../advisor/context";
 import { openChip, replyForTool, toEvents, type Reply } from "../advisor/replies";
 import { routeAdvisorMessage, type RouterDecision } from "../advisor/router";
 import { asksHowTo, asksToOpen, capReplyLength, claimsUndoneDeed, numbersAreGrounded } from "../advisor/rules";
 import { DISCLOSE_JOBS, THINKING_LINE, TOOL_STATUS } from "../advisor/templates";
 import { isToolError, navTargetFromParams, parseToolParams, runTool } from "../advisor/tools";
+import { ProviderFailure, liveSlots, recordLocalOnly, runChain, type ChainHooks, type ChainResult, type ChainSlot } from "./chain";
 import { TOOL_DECLARATIONS, buildSystemPrompt, snapshotDigest, type ModelRunner, type ModelToolCall } from "./model-common";
-import type { BrainFailure } from "./provider";
 
 export interface TurnDeps {
-  /** The brain status now (configured, provider, mode with the cooldown). */
-  readonly status: () => BrainStatus;
-  /** The provider runner, built only when a model turn is about to run (never in local mode: no client is made). */
-  readonly runner: () => { readonly provider: ProviderName; readonly run: ModelRunner } | null;
-  readonly markFailure: (failure: BrainFailure) => void;
-  readonly classify: (error: unknown, signal: AbortSignal) => BrainFailure;
-  /** Rule 11: the provider's first event (default TIMEOUTS_MS.advisorFirstEvent = 2.5 s). */
+  /** The configured slots of the chain, in order (product: chainSlots()). The chain skips the resting ones. */
+  readonly slots: () => readonly ChainSlot[];
+  /** The model runner of one slot, built only when that slot is about to be tried (no client is made otherwise). */
+  readonly runner: (slot: ChainSlot) => ModelRunner | null;
+  /** Cooldowns, error classes and the reply log (product: CHAIN_HOOKS). */
+  readonly hooks: ChainHooks;
+  /** Rule 11: some slot's first event (default TIMEOUTS_MS.advisorFirstEvent = 6 s), shared out along the chain. */
   readonly firstEventMs?: number;
   /** The whole model turn (default 12 s); then the local brain answers. */
   readonly turnMs?: number;
@@ -138,6 +141,8 @@ export function finishModelReply(
   rawText: string,
   calls: readonly CallRecord[],
   local: readonly AdvisorEvent[],
+  /** get_career results of this turn (run outside runTool): their pay figures are grounded for rule 8. */
+  careers: readonly unknown[] = [],
 ): AdvisorEvent[] {
   // Rule 7: a page opens only when the message asks to open something, and never while a sheet is open or a show runs.
   const nav = navigationsOf(calls)[0] ?? null;
@@ -154,7 +159,7 @@ export function finishModelReply(
 
   const text = capReplyLength(rawText.trim());
   const emitted = action ? ["navigate"] : [];
-  const grounded = numbersAreGrounded(text, [snapshotDigest(ctx), ...calls.map((c) => c.result)], ctx.facts);
+  const grounded = numbersAreGrounded(text, [snapshotDigest(ctx), ...calls.map((c) => c.result), ...careers], ctx.facts);
   if (text === "" || !grounded || claimsUndoneDeed(text, emitted)) {
     // Rules 8 and 9: not regenerated; the template for the tool that was called is sent at once.
     const last = [...calls].reverse().find((c) => c.name !== "navigate");
@@ -176,8 +181,6 @@ export function finishModelReply(
   });
 }
 
-type Outcome = { readonly ok: true; readonly text: string } | { readonly ok: false; readonly error: unknown };
-
 export async function* runTurn(request: AdvisorRequest, signal: AbortSignal, deps: TurnDeps): AsyncGenerator<AdvisorEvent> {
   let decision: RouterDecision;
   try {
@@ -188,89 +191,101 @@ export async function* runTurn(request: AdvisorRequest, signal: AbortSignal, dep
     return;
   }
 
-  const status = deps.status();
+  const slots = deps.slots();
+  const online = liveSlots(slots, deps.hooks.coolingDown).live.length > 0;
+  const mode: BrainMode = online ? "online" : "local";
   if (decision.kind === "router") {
     yield* decision.events;
-    yield done(status.mode, "router");
+    yield done(mode, "router");
     return;
   }
 
-  const runner = status.mode === "online" ? deps.runner() : null;
-  if (!runner) {
+  if (!online) {
+    recordLocalOnly("advisor", slots, deps.hooks);
     yield* decision.local;
-    yield done(status.mode, "local");
+    yield done("local", "local");
     return;
   }
 
-  // ── A model turn ────────────────────────────────────────────────────────────────────────────────────────────────
+  // ── A model turn, along the chain ───────────────────────────────────────────────────────────────────────────────
   yield { type: "status", tool: null, text: THINKING_LINE };
 
   const ctx = AdvisorCtx.of(request);
   const queue: AdvisorEvent[] = [];
+  // The tool calls of the slot being tried; a slot that takes over starts from an empty list (its cards, its numbers).
   const calls: CallRecord[] = [];
-  const state: { outcome: Outcome | null; wake: (() => void) | null; first: boolean; deadline: "first" | "turn" | null } = {
-    outcome: null,
-    wake: null,
-    first: false,
-    deadline: null,
-  };
+  // get_career results (read-only knowledge, no card, no action): only their numbers count for rule 8.
+  const careers: unknown[] = [];
+  let current = -1;
+  const state: { outcome: ChainResult<string> | null; wake: (() => void) | null } = { outcome: null, wake: null };
   const push = (event: AdvisorEvent): void => {
     queue.push(event);
     state.wake?.();
   };
 
-  const controller = new AbortController();
-  const onUserAbort = (): void => controller.abort();
+  // Aborted by «إيقاف», or when the browser goes away mid-turn (the finally below): releases the provider call.
+  const chain = new AbortController();
+  const onUserAbort = (): void => chain.abort();
   signal.addEventListener("abort", onUserAbort, { once: true });
-  const firstTimer = setTimeout(() => {
-    if (!state.first) {
-      state.deadline = "first";
-      controller.abort();
-    }
-  }, deps.firstEventMs ?? TIMEOUTS_MS.advisorFirstEvent);
-  const turnTimer = setTimeout(() => {
-    state.deadline ??= "turn";
-    controller.abort();
-  }, deps.turnMs ?? DEFAULT_TURN_MS);
 
-  const onToolCall = (call: ModelToolCall): unknown => {
-    if (calls.length >= MAX_TOOL_CALLS) return { error: "not_allowed", detail: "too many tool calls" };
-    if (!isToolName(call.name)) return { error: "not_allowed", detail: `unknown tool ${call.name}` };
-    const name = call.name;
-    const params = parseToolParams(name, call.args);
-    if (isToolError(params)) return params;
-    push({ type: "status", tool: name, text: TOOL_STATUS[name] });
-    const result = runTool(name, params, { facts: ctx.facts, clock: ctx.clock, page: ctx.page });
-    if (!isToolError(result)) calls.push({ name, params, result });
-    return result;
-  };
+  const toolCallFor =
+    (index: number, attemptSignal: AbortSignal) =>
+    (call: ModelToolCall): unknown => {
+      // A slot that was cut off (its share ran out, or the next slot took over) adds nothing: no status line, no card.
+      if (index !== current || attemptSignal.aborted) return { error: "not_allowed", detail: "this attempt has ended" };
+      if (calls.length + careers.length >= MAX_TOOL_CALLS) return { error: "not_allowed", detail: "too many tool calls" };
+      if (call.name === CAREER_TOOL) {
+        const career = runCareerTool(call.args);
+        if (isToolError(career)) return career;
+        push({ type: "status", tool: null, text: CAREER_TOOL_STATUS });
+        careers.push(career);
+        return career;
+      }
+      if (!isToolName(call.name)) return { error: "not_allowed", detail: `unknown tool ${call.name}` };
+      const name = call.name;
+      const params = parseToolParams(name, call.args);
+      if (isToolError(params)) return params;
+      push({ type: "status", tool: name, text: TOOL_STATUS[name] });
+      const result = runTool(name, params, { facts: ctx.facts, clock: ctx.clock, page: ctx.page });
+      if (!isToolError(result)) calls.push({ name, params, result });
+      return result;
+    };
 
-  let run: Promise<string>;
-  try {
-    run = runner.run({
-      system: buildSystemPrompt(ctx),
-      history: request.history,
-      message: request.message.text,
-      tools: TOOL_DECLARATIONS,
-      signal: controller.signal,
-      perCallTimeoutMs: deps.perCallMs ?? DEFAULT_PER_CALL_MS,
-      maxRounds: LIMITS.toolRounds,
-      onFirstEvent: () => {
-        state.first = true;
-        clearTimeout(firstTimer);
-      },
-      onToolCall,
-    });
-  } catch (error) {
-    run = Promise.reject(error);
-  }
-  run.then(
-    (text) => {
-      state.outcome = { ok: true, text };
+  const system = buildSystemPrompt(ctx);
+  runChain<string>({
+    task: "advisor",
+    slots,
+    signal: chain.signal,
+    firstEventMs: deps.firstEventMs ?? TIMEOUTS_MS.advisorFirstEvent,
+    totalMs: deps.turnMs ?? DEFAULT_TURN_MS,
+    hooks: deps.hooks,
+    attempt: (slot, attempt) => {
+      const run = deps.runner(slot);
+      if (!run) return Promise.reject(new ProviderFailure("auth", `${slot.id}: no client`));
+      current = attempt.index;
+      calls.length = 0;
+      careers.length = 0;
+      return run({
+        system,
+        history: request.history,
+        message: request.message.text,
+        tools: TOOL_DECLARATIONS,
+        signal: attempt.signal,
+        perCallTimeoutMs: deps.perCallMs ?? DEFAULT_PER_CALL_MS,
+        maxRounds: LIMITS.toolRounds,
+        onFirstEvent: attempt.firstEvent,
+        onToolCall: toolCallFor(attempt.index, attempt.signal),
+      });
+    },
+  }).then(
+    (result) => {
+      state.outcome = result;
       state.wake?.();
     },
     (error: unknown) => {
-      state.outcome = { ok: false, error };
+      // runChain does not throw; this keeps the turn alive if it ever did.
+      console.error("[brain] provider chain failed", error);
+      state.outcome = { ok: false, aborted: false, ms: 0, misses: [] };
       state.wake?.();
     },
   );
@@ -288,18 +303,15 @@ export async function* runTurn(request: AdvisorRequest, signal: AbortSignal, dep
       state.wake = null;
     }
   } finally {
-    clearTimeout(firstTimer);
-    clearTimeout(turnTimer);
     signal.removeEventListener("abort", onUserAbort);
-    if (!state.outcome) controller.abort(); // the browser went away mid-turn: release the provider call
+    if (!state.outcome) chain.abort(); // the browser went away mid-turn: release the provider call
   }
 
   const outcome = state.outcome;
   if (!outcome) return;
+  current = -1; // a slot still running after the chain moved on can add nothing now
   if (!outcome.ok) {
-    if (signal.aborted) return; // «إيقاف»: what arrived stays; nothing more is sent
-    const failure: BrainFailure = state.deadline ? "timeout" : deps.classify(outcome.error, signal);
-    deps.markFailure(failure === "aborted" ? "timeout" : failure);
+    if (outcome.aborted || signal.aborted) return; // «إيقاف»: what arrived stays; nothing more is sent
     yield* decision.local;
     yield done("local", "local");
     return;
@@ -307,11 +319,11 @@ export async function* runTurn(request: AdvisorRequest, signal: AbortSignal, dep
 
   let events: AdvisorEvent[];
   try {
-    events = finishModelReply(ctx, request.message.text, outcome.text, calls, decision.local);
+    events = finishModelReply(ctx, request.message.text, outcome.value, calls, decision.local, careers);
   } catch (error) {
     console.error("[brain] model reply could not be checked", error);
     events = [...decision.local];
   }
   yield* events;
-  yield done("online", runner.provider);
+  yield done("online", outcome.slot.provider);
 }

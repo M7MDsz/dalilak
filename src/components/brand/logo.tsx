@@ -96,7 +96,7 @@ export interface LogoProps {
   readonly size?: number;
   readonly className?: string;
   readonly tone?: LogoTone;
-  /** Accessible name. Default «دليلك». Pass "" to make it decorative. */
+  /** Accessible name. Default «دليل». Pass "" to make it decorative. */
   readonly title?: string;
   /** Gallery only: try other proportions. */
   readonly params?: LockupParams;
@@ -105,10 +105,10 @@ export interface LogoProps {
 const PAD = 0.75;
 
 /**
- * The logo: mark and wordmark «دليلك» in one drawing, horizontal (mark on the right) or stacked. One waypoint only: the
+ * The logo: mark and wordmark «دليل» in one drawing, horizontal (mark on the right) or stacked. One waypoint only: the
  * mark's (accent, or ink with tone="mono"); the word is all ink.
  */
-export function Logo({ layout = "horizontal", size = 32, className, tone = "accent", title = "دليلك", params = {} }: LogoProps) {
+export function Logo({ layout = "horizontal", size = 32, className, tone = "accent", title = "دليل", params = {} }: LogoProps) {
   const cut = pickCut(markBoxPx(layout, size, params));
   const g = lockupGeometry(layout, cut, params);
   const vb = { x: g.viewBox.x - PAD, y: g.viewBox.y - PAD, w: g.viewBox.w + PAD * 2, h: g.viewBox.h + PAD * 2 };

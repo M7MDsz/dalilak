@@ -30,7 +30,7 @@ export interface TileProps extends Omit<useRender.ComponentProps<"button">, "cla
   readonly interactive?: boolean;
   /** A toggle that is on (an answer chosen, a filter set): pressed home and filled with ink. */
   readonly selected?: boolean;
-  /** Shows the press frame without a pointer: «دليل» pressing the tile in front of the user. */
+  /** Shows the press frame without a pointer: «دليلك» pressing the tile in front of the user. */
   readonly pressed?: boolean;
   /** A StateRibbon (or any tag) hung on the top edge at the inline-start. It moves with the face. */
   readonly ribbon?: ReactNode;

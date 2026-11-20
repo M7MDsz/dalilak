@@ -71,3 +71,11 @@ export function historyStamp(at: number, now: number): string {
   if (days === 1) return `أمس ${clockTime(at)}`;
   return dayMonth(at);
 }
+
+/** A calendar day "YYYY-MM-DD" (a job posting's dates) as «20 نوفمبر 2026», or «20 نوفمبر» without the year. */
+export function dayKeyText(day: string, withYear = true): string {
+  const [y, m, d] = day.split("-").map(Number);
+  if (!y || !m || !d) return day;
+  const text = `${d} ${MONTHS[m - 1] ?? ""}`;
+  return withYear ? `${text} ${y}` : text;
+}

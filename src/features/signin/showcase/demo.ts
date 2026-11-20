@@ -4,7 +4,8 @@
 // demo persona: the «محلل بيانات» path after the sample CV, then the course «أساسيات Power BI» (spec 10.2 steps 7-10).
 import type { AvatarId } from "@/components/avatars";
 import { getCourse, getJob, getJobCity, getLeaderboardUser, getSkill, LEADERBOARD_USERS } from "@/lib/data";
-import { defaultAvatar, levelFor, shortTitle, weeklyRankFor } from "@/lib/engine";
+import { guideTitle } from "@/lib/copy";
+import { defaultAvatar, levelFor, weeklyRankFor } from "@/lib/engine";
 import type { LeaderboardUserId, SkillId } from "@/lib/types";
 
 const JOB = getJob("data-analyst-riyadh");
@@ -44,7 +45,7 @@ export const DEMO = {
     excel: { name: getSkill("excel").name, stars: 2, slots: getSkill("excel").maxStars },
     powerbi: { name: getSkill("powerbi").name, before: 0, after: 1, slots: getSkill("powerbi").maxStars },
   },
-  course: shortTitle(COURSE),
+  course: guideTitle(COURSE.id),
   /** Piece 5: the course pays +200 XP (8.2). */
   xp: { gain: XP_AFTER - XP_BEFORE, before: levelView(XP_BEFORE), after: levelView(XP_AFTER) },
   /** Piece 6: the board around the user, before (180 XP, rank 18) and after the course (380 XP, rank 10). */

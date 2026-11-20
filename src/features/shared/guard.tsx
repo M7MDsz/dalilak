@@ -80,7 +80,7 @@ function GuardLogo(): ReactNode {
   return (
     <div aria-busy="true" className="grid min-h-dvh place-items-center bg-bg text-fg">
       <span className="animate-rise [animation-delay:160ms]">
-        <LogoMark size={56} title="دليلك" />
+        <LogoMark size={56} title="دليل" />
       </span>
     </div>
   );

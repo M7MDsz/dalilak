@@ -28,15 +28,16 @@ describe("layout", () => {
     }
   });
 
-  it("draws the data field in four tiers, Excel at the root", () => {
+  it("draws the data field in five tiers (deep learning under ML since the 20 Nov expansion), Excel at the root", () => {
     const data = FIELD_LAYOUTS.data;
     expect(data.tiers.map((row) => row.map((p) => p.skill))).toEqual([
       ["excel"],
       ["sql", "statistics", "powerbi"],
       ["python-data", "dataviz"],
       ["ml"],
+      ["deep-learning"],
     ]);
-    expect(data.lines).toHaveLength(7);
+    expect(data.lines).toHaveLength(8);
   });
 
   it("logs the layout for review", () => {

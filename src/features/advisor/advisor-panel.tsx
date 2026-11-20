@@ -1,12 +1,12 @@
 "use client";
-// Owner: advisor. The panel «دليل» (spec 3.14; playbook 3.12): one conversation that follows the user across the app.
+// Owner: advisor. The panel «دليلك» (spec 3.14; playbook 3.12): one conversation that follows the user across the app.
 //
 // Desktop (≥ 1024 px): a floating sheet on the inline-end side (the left), 420 px wide, inset 8 px, that docks at
 // ≥ 1280 px (the shell gives the content `padding-inline-end: 436px`) and overlays without a scrim below that. It never
-// traps focus: the page beside it stays usable, and «دليل» changes that page while the panel stays put.
+// traps focus: the page beside it stays usable, and «دليلك» changes that page while the panel stays put.
 // Phone: a full-screen sheet that traps focus. Both arrive the same way, Dalilak's form of the side-panel chat opening: 16 px
 // from their edge plus a fade, 200 ms in, 150 ms out (the phone sheet rises 24 px); inside, the header, the thread and
-// the composer rise 60 ms apart, and on desktop «دليل»'s glyph travels from the launcher into the header (AdvisorRoot).
+// the composer rise 60 ms apart, and on desktop «دليلك»'s glyph travels from the launcher into the header (AdvisorRoot).
 //
 // The panel stays mounted when closed (hidden and inert), so the thread keeps its scroll and a reply that lands while
 // it is closed is simply there when it opens again: the thread is restored, never replayed.
@@ -29,7 +29,7 @@ import { routeContext } from "./page-context";
 import { greetIfEmpty, sendMessage, stopTurn } from "./runner";
 import { toReplyChips, useThreadRows } from "./thread-view";
 
-/** The press frame a chip shows before its message goes (DESIGN 7: «دليل» pressing is seen, then the action follows). */
+/** The press frame a chip shows before its message goes (DESIGN 7: «دليلك» pressing is seen, then the action follows). */
 const PRESS_MS = 160;
 
 // The arrival is a CSS transition of opacity and translate, which the browser runs on the compositor: a busy main
@@ -78,7 +78,7 @@ export function AdvisorPanel({ phone, entered, glyphSlotRef, panelRef, glyphHidd
   const [typing, setTyping] = useState(false);
   const [pressedKey, setPressedKey] = useState<string | null>(null);
 
-  // the first open after onboarding (an empty thread): once the panel is in, «دليل» greets (he does not introduce himself
+  // the first open after onboarding (an empty thread): once the panel is in, «دليلك» greets (he does not introduce himself
   // again: the same character ran the onboarding)
   useEffect(() => {
     if (!entered) return;
@@ -153,7 +153,7 @@ export function AdvisorPanel({ phone, entered, glyphSlotRef, panelRef, glyphHidd
     greetIfEmpty();
   };
 
-  // from step 5 of «دليل»'s application a pressed send cannot be stopped: the control is gone (7.4)
+  // from step 5 of «دليلك»'s application a pressed send cannot be stopped: the control is gone (7.4)
   const stopGone = applyRun !== null && applyRun.result === null && applyRun.step >= 5;
   const mode = brain?.mode === "online" ? "online" : "local";
 

@@ -1,4 +1,4 @@
-// Owner: advisor. THE dispatcher (ARCHITECTURE 8.2, 9; spec 5.3 contract): the one place in the browser where «دليل»'s
+// Owner: advisor. THE dispatcher (ARCHITECTURE 8.2, 9; spec 5.3 contract): the one place in the browser where «دليلك»'s
 // actions change the site. The server never changes state; it sends an `action` event and the panel hands it here.
 //
 // For every action, first (5.5 rule 7, re-checked on the client for the race): an apply sheet open or any show running
@@ -22,7 +22,7 @@ export interface DispatchContext {
   readonly go: (href: string) => void;
   /** Below 1024 px: the advisor is a full-screen sheet that steps aside while the action runs. */
   readonly isPhone: boolean;
-  /** Each step of «دليل» filling the apply sheet, for the status line (7.4). */
+  /** Each step of «دليلك» filling the apply sheet, for the status line (7.4). */
   readonly onApplyStep?: (step: ApplyStep) => void;
 }
 
@@ -40,7 +40,7 @@ const RISE_CAP_MS = 900;
 /** Phones: the page that opened stays in view on its own this long before the sheet comes back with the reply
  *  (3.14 "the page is visible": the user sees the site respond to the chat). */
 const PHONE_VIEW_MS = 900;
-/** Phones, after «دليل»'s application: the apply sheet closes by itself (its exit) before the advisor sheet returns. */
+/** Phones, after «دليلك»'s application: the apply sheet closes by itself (its exit) before the advisor sheet returns. */
 const APPLY_SHEET_GONE_CAP_MS = 700;
 /** The apply watchdog (ARCHITECTURE 9.2). */
 const WATCH_AFTER_ARRIVAL_MS = 3_000;
@@ -131,7 +131,7 @@ export async function dispatchAction(action: AdvisorAction, ctx: DispatchContext
 
 async function navigate(to: Extract<AdvisorAction, { type: "navigate" }>["to"], ctx: DispatchContext): Promise<DispatchOutcome> {
   const closedPanel = await stepAside(ctx);
-  // the map plays its short opening on «دليل»'s request, also when /path is already on screen (v3 3.4 situation 3)
+  // the map plays its short opening on «دليلك»'s request, also when /path is already on screen (v3 3.4 situation 3)
   if (to.screen === "path") useUi.getState().requestMapOpen();
   await goAndArrive(hrefFor(to), ctx);
   await inView(closedPanel);
@@ -158,7 +158,7 @@ async function setTarget(action: Extract<AdvisorAction, { type: "set_target" }>,
   return { ok: true, closedPanel };
 }
 
-/** «دليل» fills the real apply sheet in front of the user (7.4, ARCHITECTURE 9.2). The jobs page runs the steps. */
+/** «دليلك» fills the real apply sheet in front of the user (7.4, ARCHITECTURE 9.2). The jobs page runs the steps. */
 async function apply(action: Extract<AdvisorAction, { type: "apply" }>, ctx: DispatchContext): Promise<DispatchOutcome> {
   const ui = useUi.getState();
   const runId = ui.startApplyRun(action.jobId);

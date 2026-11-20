@@ -83,7 +83,14 @@
   fill: none;
   stroke: var(--color-contour);
   stroke-width: 1;
-  opacity: 0.75;
+  opacity: 0.6;
+}
+/* the paper under the hill: a soft dotted survey grid (flat dots, never a wash), quieter still on the terraces */
+.dm-terrain .dm-grid {
+  opacity: 0.55;
+}
+.dm-terrain .dm-grid-dot {
+  fill: var(--color-contour-2);
 }
 .dm-terrain .dm-svy {
   fill: none;
@@ -509,6 +516,15 @@ a.dm-peak:hover .dm-lb > b {
 .dm-you[data-summit] .dm-pill {
   left: calc(var(--sr) + 14px);
 }
+/* on the winding road the leg into the lit station climbs up and to the left through «أنت هنا»: the tag stands above
+   the waypoint's level (its foot just under it), on the side the road has already left, so the road never runs under it */
+.dm-you:not([data-summit]) .dm-pill {
+  top: -44px;
+}
+.dm-you:not([data-summit]) .dm-pill::before {
+  top: calc(50% + 20px);
+  width: 22px;
+}
 .dm-pill .dm-tx b {
   display: block;
   font: 700 15px/1.3 var(--font-sans);
@@ -720,6 +736,13 @@ a.dm-peak:hover .dm-lb > b {
   left: -7px;
   width: 8px;
 }
+.dm[data-small] .dm-you:not([data-summit]) .dm-pill {
+  top: -34px;
+}
+.dm[data-small] .dm-you:not([data-summit]) .dm-pill::before {
+  top: calc(50% + 15px);
+  width: 18px;
+}
 .dm[data-small] .dm-pill .dm-tx b {
   font-size: 13px;
   line-height: 1.25;
@@ -764,7 +787,9 @@ a.dm-peak:hover .dm-lb > b {
 .dm[data-dense] .dm-lb em.dm-inline {
   display: inline-flex;
 }
-.dm[data-dense][data-small] .dm-lb em.dm-src > span {
+/* the phone sheet: a done station keeps its check, and its source («من سيرتك») is left to the station card, so a label on
+   a left bend of the winding road never runs off the narrow sheet (also in the game theme's wider type) */
+.dm[data-small] .dm-lb em.dm-src > span {
   display: none;
 }
 

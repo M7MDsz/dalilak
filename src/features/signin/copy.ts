@@ -7,13 +7,13 @@ export const SIGNIN_COPY = {
   /** The headline split where the drawn first step sits under its last word. */
   headlineLead: "مسارك المهني يبدأ",
   headlineStep: "بخطوة.",
-  support: "اكتب اسمك وابدأ. دليل يتعرّف عليك، يقرأ سيرتك، ويرسم لك الطريق إلى وظيفتك.",
+  support: "اكتب اسمك وابدأ. دليلك يتعرّف عليك، يقرأ سيرتك، ويرسم لك الطريق إلى وظيفتك.",
   accountsHeading: "أكمل بحساب محفوظ",
   fieldLabel: "اسمك",
   fieldPlaceholder: "مثال: خالد",
   submit: "ابدأ رحلتك",
   helper: "بدون بريد ولا كلمة مرور. تقدّمك يُحفظ في هذا المتصفح.",
-  footer: "عرض تجريبي: الوظائف والدورات والمتسابقون بيانات تجريبية.",
+  footer: "الوظائف إعلانات حقيقية جُمعت في 20 نوفمبر، وأدلة التعلّم حقيقية. المتسابقون ووظيفة «محلل بيانات» تجريبية.",
   matchNotice: "يوجد تقدّم محفوظ بهذا الاسم في هذا المتصفح.",
   resume: "أكمل من حيث توقفت",
   restart: "ابدأ من جديد",
@@ -34,9 +34,9 @@ export const NAME_ERROR_COPY = {
 /** The six showcase captions, in the spec's order (3.1 table): piece 1 to 6. */
 export const SHOWCASE_CAPTIONS = [
   "مسار واضح: الخطوة التالية أمامك",
-  "مطابقتك ترتفع مع كل دورة",
+  "مطابقتك ترتفع مع كل خطوة تعلّم",
   "كل مهارة ومعها الجملة التي تثبتها",
-  "دليل يجيبك ويفتح لك الصفحات",
+  "دليلك يجيبك ويفتح لك الصفحات",
   "نقاط ومستويات وسلسلة أيام",
   "ترتيبك بين المتسابقين",
 ] as const;
@@ -47,12 +47,12 @@ export const PIECE_COPY = {
   goal: "جاهز للوظيفة",
   fromCv: "من سيرتك:",
   excelEvidence: "تنظيف بيانات المبيعات الأسبوعية وتلخيصها في Excel…",
-  /** «من دورة: {course}» (3.5), with the course's short title. */
-  fromCourse: (course: string) => `من دورة: ${course}`,
-  daleel: "دليل",
+  /** «من دليل Power BI» (3.5), with the guide's title. */
+  fromCourse: (guide: string) => `من ${guide}`,
+  daleel: "دليلك",
   /** The advisor panel's header line (3.14). */
-  daleelLine: "دليلك إلى وظيفتك",
+  daleelLine: "مرشدك إلى وظيفتك",
   question: "وش أسوي الحين؟",
-  answer: "خطوتك الجاية: دورة أساسيات Power BI",
+  answer: "خطوتك الجاية: تعلّم Power BI",
   you: "أنت",
 } as const;

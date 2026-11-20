@@ -1,11 +1,12 @@
 // Owner: data. Copy that combines spec strings with values; every function returns final copy. Pure module.
 // May import data and engine (never the reverse).
 import { getCourse, getJob, getJobCity, getSkill, optionLabel } from "@/lib/data";
-import { jobGap, shortTitle } from "@/lib/engine";
+import { jobGap } from "@/lib/engine";
 import { formatNumber, formatPercent } from "@/lib/format";
 import { isCourseId, isJobId } from "@/lib/ids";
 import type {
   ApplicationStatus,
+  CourseId,
   CourseStateInfo,
   CvRecord,
   ExperienceBand,
@@ -63,11 +64,10 @@ export function starsOfRequired(skillName: string, held: number, need: number): 
   return `${skillName}: لا نجوم بعد، والمطلوب ${countNounBare(need, "star")}`;
 }
 
-/** Spec 3.10 labels, including «بدأتها · 2 من 5». A locked course's reason is `lockReasonText`. */
+/** Spec 3.10 labels («بدأتها»: a guide has no lessons to count). A locked step's reason is `lockReasonText`. */
 export function courseStateLabel(info: CourseStateInfo): string {
   switch (info.state) {
     case "started":
-      return `${COURSE_STATE_LABEL.started} · ${formatNumber(info.ticked.length)} من ${formatNumber(info.total)}`;
     case "available":
     case "completed":
     case "credited":
@@ -87,15 +87,28 @@ export function lockReasonText(reason: LockReason): string {
   }
 }
 
-/** Spec 2.8 labels: «ارفع سيرتك الذاتية» · «أكمل دورة «{course}»» · «ابدأ دورة «{course}»» · «قدّم على «{target}»» · «اختر هدفك التالي». */
+/**
+ * A learning step's name as the user sees it: the skill it teaches («Power BI», «الإحصاء»). Courses are internal (the game
+ * runs on them); the user meets a guide per skill, so the old course titles never show.
+ */
+export function stepName(courseId: CourseId): string {
+  return getSkill(getCourse(courseId).skill).name;
+}
+
+/** «دليل Power BI» (the guide page's title and tab title). */
+export function guideTitle(courseId: CourseId): string {
+  return `دليل ${stepName(courseId)}`;
+}
+
+/** Spec 2.8 labels: «ارفع سيرتك الذاتية» · «أكمل تعلّم {skill}» · «تعلّم {skill}» · «قدّم على «{target}»» · «اختر هدفك التالي». */
 export function nextStepLabel(step: NextStep): string {
   switch (step.rule) {
     case 1:
       return "ارفع سيرتك الذاتية";
     case 2:
-      return `أكمل دورة «${shortTitle(getCourse(step.courseId))}»`;
+      return `أكمل تعلّم ${stepName(step.courseId)}`;
     case 3:
-      return `ابدأ دورة «${shortTitle(getCourse(step.courseId))}»`;
+      return `تعلّم ${stepName(step.courseId)}`;
     case 4:
       return `قدّم على «${getJob(step.jobId).title}»`;
     case 5:
@@ -129,7 +142,7 @@ export function revealReasonText(reason: RevealReason): string {
     case "experience":
       return EXPERIENCE_REASON[reason.band];
     case "city":
-      return `في مدينتك: ${reason.cityLabel}`;
+      return reason.near ? `قريبة منك: ${reason.cityLabel}` : `في مدينتك: ${reason.cityLabel}`;
     case "remote":
       return "عن بُعد: يناسب أي مدينة";
     case "priority":
@@ -235,13 +248,13 @@ export function cvAttachmentLine(cv: CvRecord | null): string {
 }
 
 /**
- * Spec 3.13 XP history row text, without the amount and the time: «أكملت دورة أساسيات Power BI». Other events:
+ * Spec 3.13 XP history row text, without the amount and the time: «أتممت خطوة Power BI». Other events:
  * «أكملت التعارف» · «اخترت هدفك» · «حلّلت سيرتك» · «قدّمت على وظيفة محلل بيانات» · «مكافأة يومية».
  */
 export function xpHistoryText(event: XpEvent): string {
   switch (event.type) {
     case "course_completed":
-      return isCourseId(event.ref) ? `أكملت دورة ${shortTitle(getCourse(event.ref))}` : XP_REASON.course_completed;
+      return isCourseId(event.ref) ? `أتممت خطوة ${stepName(event.ref)}` : XP_REASON.course_completed;
     case "job_applied":
       return isJobId(event.ref) ? `قدّمت على وظيفة ${getJob(event.ref).title}` : XP_REASON.job_applied;
     case "onboarding_completed":

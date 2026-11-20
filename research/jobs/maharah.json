@@ -1,0 +1,126 @@
+{
+  "checkedAt": "2026-11-20",
+  "company": {
+    "name": "Maharah Human Resources Company",
+    "nameAr": "شركة مهارة للموارد البشرية",
+    "field": "hr",
+    "about": "تقدّم مهارة خدمات استقدام العمالة وتوظيفها لقطاع الأفراد وقطاع الأعمال.",
+    "url": "https://maharah.com/",
+    "careersUrl": "https://apply.workable.com/maharahjobs/"
+  },
+  "careersNote": "maharah.com links two careers pages: http://careers.maharah.com/ (did not connect on 20 Nov 2026) and https://apply.workable.com/maharahjobs/ (opened; 9 open roles, all in Riyadh). Recorded the 2 that fit the app's fields. Left out (engineering, outside the app's fields): Architect, Civil Engineer, Electrical Engineer, Mechanical Engineer (22 Oct, Esnad Maharah -Outsource) and their Arabic postings مهندس مدني، مهندس معماري، مهندس ميكانيكي (28 Oct). No data or HR role was open. Evidence lines are copied verbatim from each posting.",
+  "jobs": [
+    {
+      "id": "maharah-business-development-specialist-riyadh",
+      "title": "Business Development Specialist",
+      "titleAr": "أخصائي تطوير أعمال",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Maharah Human Resources Company",
+        "ar": "شركة مهارة للموارد البشرية"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-19",
+      "postedAtSource": "2026-11-19",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Maharah careers (apply.workable.com/maharahjobs, the careers link on maharah.com)",
+      "url": "https://apply.workable.com/maharahjobs/j/AFE5A11056/",
+      "field": "business",
+      "band": "junior",
+      "bandEvidence": "1–3 years of experience in Business Development or B2B Sales.",
+      "requirements": [
+        {
+          "skill": "communication",
+          "stars": 2,
+          "evidence": "Strong communication, negotiation, and presentation skills."
+        },
+        {
+          "skill": "presentation",
+          "stars": 2,
+          "evidence": "Conduct client visits and meetings to present company services."
+        },
+        {
+          "skill": "marketing-basics",
+          "stars": 1,
+          "evidence": "Generate leads and build a strong sales pipeline."
+        },
+        {
+          "skill": "business-analysis",
+          "stars": 1,
+          "evidence": "Monitor market trends and competitor activities."
+        },
+        {
+          "skill": "sales",
+          "stars": 1,
+          "evidence": "Negotiate and close deals to achieve sales targets."
+        }
+      ],
+      "summary": "تبحث عن عملاء جدد لخدمات مهارة من قطاع الأعمال، تزورهم وتعرض الخدمات وتفاوض حتى تُغلق الصفقة.",
+      "tasks": [
+        "زيارة العملاء وعرض خدمات الشركة",
+        "توليد فرص بيع وبناء قائمة عملاء محتملين",
+        "التفاوض وإغلاق الصفقات لتحقيق المستهدف"
+      ],
+      "note": "The app has no sales or negotiation skill: marketing-basics (leads) and problem-solving (negotiating and closing) are our reading of the nearest skills. The posting also prefers a valid driving licence."
+    },
+    {
+      "id": "maharah-qa-analyst-riyadh",
+      "title": "QA Analyst",
+      "titleAr": "محلل ضمان جودة",
+      "titleArTranslated": true,
+      "company": {
+        "en": "Maharah Human Resources Company",
+        "ar": "شركة مهارة للموارد البشرية"
+      },
+      "city": "riyadh",
+      "cityText": "Riyadh",
+      "remote": false,
+      "postedAt": "2026-11-08",
+      "postedAtSource": "2026-11-08",
+      "checkedAt": "2026-11-20",
+      "urlStatusOnCheck": 200,
+      "source": "Maharah careers (apply.workable.com/maharahjobs, the careers link on maharah.com)",
+      "url": "https://apply.workable.com/maharahjobs/j/12DFFDDAB0/",
+      "field": "business",
+      "band": "junior",
+      "bandEvidence": "Around 1–3 years of relevant experience",
+      "requirements": [
+        {
+          "skill": "business-analysis",
+          "stars": 2,
+          "evidence": "Conduct sample testing and validate transactions/processes against approved SOPs, policies and controls."
+        },
+        {
+          "skill": "statistics",
+          "stars": 1,
+          "evidence": "Provides operational QA execution support through sampling, testing, evidence gathering, documentation and data preparation under the supervision of a QA Specialist, QA Assistant Manager/Officer or QA Manager."
+        },
+        {
+          "skill": "dataviz",
+          "stars": 1,
+          "evidence": "Support data collection and preparation of QA dashboards and reports."
+        },
+        {
+          "skill": "problem-solving",
+          "stars": 1,
+          "evidence": "Assist in Root Cause Analysis activities as directed."
+        },
+        {
+          "skill": "communication",
+          "stars": 1,
+          "evidence": "Identify and accurately document QA findings and exceptions."
+        }
+      ],
+      "summary": "تراجع عيّنات من المعاملات والإجراءات وتتحقق من مطابقتها للسياسات المعتمدة، وتوثّق الملاحظات وتساعد في تقارير الجودة.",
+      "tasks": [
+        "اختبار عيّنات من المعاملات مقابل الإجراءات المعتمدة",
+        "توثيق الملاحظات والأدلة في أنظمة الجودة",
+        "تجهيز بيانات لوحات وتقارير الجودة"
+      ],
+      "note": "Process and operations quality assurance (audit-style), not software testing. Listed under the department «Esnad Maharah -Outsource» (Maharah's outsourcing arm). Bachelor's in Business Administration, Quality Management, Industrial Engineering, Finance or related."
+    }
+  ]
+}

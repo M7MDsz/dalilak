@@ -1,0 +1,835 @@
+{
+ "checkedAt": "2026-11-20",
+ "note": "Guides for 8 new Dalil skills (batch B), shaped like research/guides/guides-demo.json but with «proof» {task, dataset, checkedAt} as briefed. Every url was opened on 2026-11-20 (WebFetch, or curl/pdftotext for PDFs); hours, price, certificate and language come from the page, else null. Coursera courses that show «Enroll for free» but put the certificate (and, per their FAQ, the materials) behind the paid Certificate experience are marked «paid» with a priceNote, as in guides-demo.json. recommendedBy is null throughout: no opened third-party page recommended these items by name. Dropped (could not be opened or confirmed): Pendo x Mind the Product discovery/analytics certifications (old pages now redirect to the Pendo Learning Lab, which lists only 3 AI courses); Product School micro-certifications (404 / school offline); Amplitude Academy (403); MITx SC1x Supply Chain Fundamentals (edX says «no longer available»); Edraak/Doroob sales and supply-chain courses (seen only on the for9a aggregator, no official page opened); Etimad portal (login wall); MOF procurement-law pages (404); Atlassian PRD page (body did not render); ASCM, SAP and Oracle S&OP explainers (empty / 403).",
+ "skills": {
+  "product-discovery": {
+   "topPick": {
+    "title": "Digital Product Management: Modern Fundamentals",
+    "provider": "University of Virginia, Darden School of Business (Coursera)",
+    "url": "https://www.coursera.org/learn/uva-darden-digital-product-management",
+    "lang": "en",
+    "price": "paid",
+    "priceNote": "The page shows «Enroll for free»; per its FAQ, materials, assignments and the certificate need the paid Certificate experience (a free trial or a «Full Course, No Certificate» option may exist; the page does not confirm it for this course). Included with Coursera Plus.",
+    "hours": 10,
+    "hoursNote": "Header: «1 week at 10 hours a week»; modules 3+3+2+2 hours.",
+    "certificate": true,
+    "star": 1,
+    "why": "اكتشاف العملاء وصياغة الفرضيات واختبارها والـMVP بشكل عملي، وتقييمها 4.7 من 5,451 مراجعة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "How to Build a Startup",
+     "provider": "Udacity (Steve Blank, Kathleen Mullaney)",
+     "url": "https://www.udacity.com/course/how-to-build-a-startup--ep245",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "The page says «Free Course».",
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "مجانية من ستيف بلانك: منهج Customer Development، تخرج من المكتب وتختبر فكرتك مع العملاء.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Teresa Torres",
+     "platform": "Product Talk (blog)",
+     "url": "https://www.producttalk.org/",
+     "profileChecked": "https://www.producttalk.org/opportunity-solution-tree/",
+     "why": "صاحبة شجرة الفرص والحلول، تكتب عن مقابلات العملاء المستمرة واختبار الافتراضات قبل البناء.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.producttalk.org/"
+     },
+     "linkedinSource": null,
+     "linksNote": "producttalk.org/about redirected to the home page, which showed no social links in its HTML."
+    },
+    {
+     "name": "Marty Cagan",
+     "platform": "SVPG (blog)",
+     "url": "https://www.svpg.com/",
+     "profileChecked": "https://www.svpg.com/product-discovery/",
+     "why": "يكتب في مدونة SVPG منذ 2007 عن اكتشاف المنتج: تحقّق من الطلب والحل قبل أن تبرمج.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.svpg.com/team/marty-cagan/",
+      "linkedin": "http://www.linkedin.com/in/cagan"
+     },
+     "linkedinSource": "https://www.svpg.com/team/marty-cagan/",
+     "linksNote": "The X link on that page (twitter.com/officialsvpg) is SVPG's company account, so it is left out."
+    },
+    {
+     "name": "Rob Fitzpatrick",
+     "platform": "Book site (The Mom Test)",
+     "url": "https://www.momtestbook.com/",
+     "why": "مؤلف The Mom Test: كيف تسأل العملاء أسئلة تكشف الحقيقة حتى لو جاملوك.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.momtestbook.com/",
+      "x": "https://twitter.com/robfitz"
+     },
+     "linkedinSource": null,
+     "linksNote": "X link is in the author metadata (schema.org sameAs) of momtestbook.com, with his own site robfitz.com; no LinkedIn link on the page."
+    }
+   ],
+   "articles": [
+    {
+     "title": "Opportunity Solution Trees: Visualize Your Discovery to Stay Aligned and Drive Outcomes",
+     "author": "Teresa Torres",
+     "site": "producttalk.org",
+     "url": "https://www.producttalk.org/opportunity-solution-tree/",
+     "lang": "en",
+     "date": "2023-12-06",
+     "why": "ترسم الطريق من الهدف إلى فرص العملاء ثم الحلول ثم اختبارات الافتراضات، بعد 3-4 مقابلات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Product Discovery",
+     "author": "Marty Cagan",
+     "site": "svpg.com",
+     "url": "https://www.svpg.com/product-discovery/",
+     "lang": "en",
+     "date": "2007-09-24",
+     "why": "مقال قصير: تحقّق من طلب السوق ومن الحل بنماذج أولية بدل إضاعة دورات البرمجة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "أجرِ 5 مقابلات قصصية مع مستخدمين لتطبيق توصيل تستخدمه، ثم ارسم شجرة فرص وحلول من صفحة واحدة: هدف واحد، 3 فرص بكلامهم، حلّان لكل فرصة، واختبار افتراض واحد لأقوى حل.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "product-roadmap": {
+   "topPick": {
+    "title": "Product Strategy and Roadmapping",
+    "provider": "Microsoft (Coursera), Microsoft AI Product Manager Professional Certificate",
+    "url": "https://www.coursera.org/learn/microsoft-product-strategy-and-roadmapping",
+    "lang": "en",
+    "price": "paid",
+    "priceNote": "The page shows «Enroll for free»; per its FAQ, materials, assignments and the certificate need the paid Certificate experience (a free trial or a «Full Course, No Certificate» option may exist; the page does not confirm it for this course). Included with Coursera Plus.",
+    "hours": 20,
+    "hoursNote": "Header: «2 weeks at 10 hours a week»; the six module estimates add up to 21 hours.",
+    "certificate": true,
+    "star": 2,
+    "why": "من Microsoft: رؤية المنتج والأهداف الذكية وبناء خارطة الطريق والأولويات وأصحاب المصلحة، تقييم 4.8.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Prioritization & Roadmapping",
+     "provider": "Uxcel",
+     "url": "https://uxcel.com/courses/prioritization-roadmapping",
+     "lang": "en",
+     "price": "paid",
+     "priceNote": "«All Level 1 lessons are free, no credit card required»; Levels 2-3 and the certificate need a Pro (or Teams) plan.",
+     "hours": 3,
+     "hoursNote": "Page: «3 hours to complete», 10 lessons and 3 level tests.",
+     "certificate": true,
+     "star": 1,
+     "why": "متى تستخدم RICE وMoSCoW وKano ولماذا، بدروس قصيرة؛ المستوى الأول مجاني بلا بطاقة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Roman Pichler",
+     "platform": "Blog, free video tutorials and podcast",
+     "url": "https://www.romanpichler.com/",
+     "why": "خبير استراتيجية المنتج، صاحب Product Vision Board وGO Product Roadmap، وعنده فيديوهات ومقالات مجانية.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.romanpichler.com/",
+      "linkedin": "https://www.linkedin.com/in/romanpichler/",
+      "youtube": "https://www.youtube.com/romanpichler"
+     },
+     "linkedinSource": "https://www.romanpichler.com/about-roman/"
+    },
+    {
+     "name": "Marty Cagan",
+     "platform": "SVPG (blog)",
+     "url": "https://www.svpg.com/",
+     "profileChecked": "https://www.svpg.com/the-alternative-to-roadmaps/",
+     "why": "يدعو لاستبدال قائمة الميزات برؤية منتج وأهداف قابلة للقياس لكل فريق.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.svpg.com/team/marty-cagan/",
+      "linkedin": "http://www.linkedin.com/in/cagan"
+     },
+     "linkedinSource": "https://www.svpg.com/team/marty-cagan/",
+     "linksNote": "The X link on that page (twitter.com/officialsvpg) is SVPG's company account, so it is left out."
+    }
+   ],
+   "articles": [
+    {
+     "title": "RICE: Simple prioritization for product managers",
+     "author": "Sean McBride",
+     "site": "intercom.com",
+     "url": "https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/",
+     "lang": "en",
+     "date": "2018-01-05",
+     "why": "يشرح معادلة RICE: الوصول والأثر والثقة مقسومة على الجهد، لترتيب المشاريع بطريقة ثابتة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "The Alternative to Roadmaps",
+     "author": "Marty Cagan",
+     "site": "svpg.com",
+     "url": "https://www.svpg.com/the-alternative-to-roadmaps/",
+     "lang": "en",
+     "date": "2015-09-07",
+     "why": "للنجمة الثانية: رؤية منتج، وأهداف عمل قابلة للقياس لكل فريق، والتزامات محددة بدل خارطة ميزات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اختر تطبيقاً سعودياً تستخدمه: اكتب رؤيته في سطر، رتّب 8 ميزات مقترحة بجدول RICE، ثم حوّلها إلى خارطة طريق Now/Next/Later من صفحة واحدة مع هدف قابل للقياس (OKR) لكل ربع.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "product-specs": {
+   "topPick": {
+    "title": "إدارة المشروعات في أجايل",
+    "provider": "Google Career Certificates (Coursera), «إدارة المشروعات من Google»",
+    "url": "https://www.coursera.org/learn/agile-project-management-arabic",
+    "lang": "ar",
+    "price": "paid",
+    "priceNote": "The page shows «Enroll for free»; per its FAQ, materials, assignments and the certificate need the paid Certificate experience (a free trial or a «Full Course, No Certificate» option may exist; the page does not confirm it for this course). Included with Coursera Plus.",
+    "hours": 20,
+    "hoursNote": "Header: «2 weeks at 10 hours a week»; the 4 module estimates add up to about 23 hours.",
+    "certificate": true,
+    "star": 1,
+    "why": "بالعربي من Google: كتابة قصص المستخدم ومعايير القبول وبناء الـBacklog وتنقيحه، تقييم 4.9.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Client Needs and Software Requirements",
+     "provider": "University of Alberta (Coursera), Software Product Management Specialization",
+     "url": "https://www.coursera.org/learn/client-needs-and-software-requirements",
+     "lang": "en",
+     "price": "paid",
+     "priceNote": "The page shows «Enroll for free»; per its FAQ, materials, assignments and the certificate need the paid Certificate experience (a free trial or a «Full Course, No Certificate» option may exist; the page does not confirm it for this course). Included with Coursera Plus.",
+     "hours": 10,
+     "hoursNote": "Header: «1 week at 10 hours a week»; each of the 4 modules lists 3 hours.",
+     "certificate": true,
+     "star": 1,
+     "why": "أنواع المتطلبات وقصص المستخدم واختبارات القبول وخرائط القصص، تقييم 4.8 من 3,161 مراجعة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Mike Cohn",
+     "platform": "Mountain Goat Software (blog)",
+     "url": "https://www.mountaingoatsoftware.com/",
+     "why": "مؤلف User Stories Applied وشريك في تأسيس Scrum Alliance، مرجع في كتابة قصص المستخدم.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.mountaingoatsoftware.com/",
+      "youtube": "https://www.youtube.com/@MountainGoatSoftware"
+     },
+     "linkedinSource": null,
+     "linksNote": "His About page (mountaingoatsoftware.com/about/mike-cohn) links only the company LinkedIn page, so no personal LinkedIn; the YouTube channel is Mountain Goat Software's."
+    },
+    {
+     "name": "Lenny Rachitsky",
+     "platform": "Lenny's Newsletter (Substack)",
+     "url": "https://www.lennysnewsletter.com/",
+     "profileChecked": "https://www.lennysnewsletter.com/p/what-is-good-retention-issue-29",
+     "why": "نشرة يتابعها أكثر من 1.2 مليون عن المنتج والنمو والمسار المهني لمديري المنتجات.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.lennysnewsletter.com/",
+      "youtube": "https://www.youtube.com/c/LennysPodcast"
+     },
+     "linkedinSource": null,
+     "linksNote": "Taken from lennysnewsletter.com/about; no LinkedIn or personal X link on that page."
+    }
+   ],
+   "articles": [
+    {
+     "title": "User Stories: What They Are, How to Write Them, and Examples",
+     "author": "Mountain Goat Software (no byline)",
+     "site": "mountaingoatsoftware.com",
+     "url": "https://www.mountaingoatsoftware.com/agile/user-stories",
+     "lang": "en",
+     "why": "كيف تكتب قصة مستخدم وتنقّحها، ومعايير القبول التي تخبر الفريق متى اكتملت القصة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "How To Write a Good PRD",
+     "author": "Martin Cagan",
+     "site": "Silicon Valley Product Group (PDF)",
+     "url": "https://www.svpg.com/assets/Files/goodprd.pdf",
+     "lang": "en",
+     "why": "يوضح الفرق بين PRD ومتطلبات السوق وخارطة الطريق، وكيف تكتب مستنداً يبني عليه الفريق ويختبر.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اكتب PRD من صفحتين لميزة «حجز موعد» في تطبيق عيادة: المشكلة والهدف ومقياس النجاح، 5 قصص مستخدم بصيغة «بصفتي… أريد… لكي…» لكل منها 3 معايير قبول Given/When/Then، وما هو خارج النطاق.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "product-analytics": {
+   "topPick": {
+    "title": "Mixpanel Fundamentals",
+    "provider": "Mixpanel University",
+    "url": "https://university.mixpanel.com/student/path/3411736-mixpanel-fundamentals",
+    "lang": "en",
+    "price": "free",
+    "priceNote": "The Mixpanel University home page offers «free modules, guided paths, and certifications»; the path page itself shows no price. A log-in appears to be needed.",
+    "hours": 5,
+    "hoursNote": "Path page: «Duration: 5h», Beginner.",
+    "certificate": true,
+    "star": 1,
+    "why": "من Mixpanel نفسها: القمع والاحتفاظ والمسارات والشرائح (Cohorts) خطوة بخطوة، مع شهادة اختيارية.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "A/B Testing (Introduction to A/B Testing)",
+     "provider": "Udacity (instructors from Google)",
+     "url": "https://www.udacity.com/course/ab-testing--ud257",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "The page says «Free Course».",
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "مجانية يدرّسها مختصون من Google: اختيار المقاييس وتصميم التجربة وتحليل نتائجها وأخلاقياتها.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Lenny Rachitsky",
+     "platform": "Lenny's Newsletter (Substack)",
+     "url": "https://www.lennysnewsletter.com/",
+     "profileChecked": "https://www.lennysnewsletter.com/p/what-is-good-retention-issue-29",
+     "why": "نشرة يتابعها أكثر من 1.2 مليون، ومنها معايير مرجعية للاحتفاظ لكل نوع منتج.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.lennysnewsletter.com/",
+      "youtube": "https://www.youtube.com/c/LennysPodcast"
+     },
+     "linkedinSource": null,
+     "linksNote": "Taken from lennysnewsletter.com/about; no LinkedIn or personal X link on that page."
+    },
+    {
+     "name": "John Cutler",
+     "platform": "The Beautiful Mess (Substack)",
+     "url": "https://cutlefish.substack.com/",
+     "profileChecked": "https://amplitude.com/books/north-star",
+     "why": "شارك في تأليف North Star Playbook من Amplitude، ويكتب عن ربط عمل الفرق بمقاييس المنتج.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://cutlefish.substack.com/",
+      "x": "https://twitter.com/johncutlefish"
+     },
+     "linkedinSource": null,
+     "linksNote": "Taken from cutlefish.substack.com/about; no LinkedIn link on that page (it links only a GitHub repository, not a profile, so no github link)."
+    }
+   ],
+   "articles": [
+    {
+     "title": "What is good retention?",
+     "author": "Lenny Rachitsky",
+     "site": "lennysnewsletter.com",
+     "url": "https://www.lennysnewsletter.com/p/what-is-good-retention-issue-29",
+     "lang": "en",
+     "date": "2020-06-09",
+     "why": "أرقام مرجعية للاحتفاظ حسب نوع المنتج من 20 خبير نمو، فتعرف هل رقمك جيد.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "North Star Playbook",
+     "author": "Amplitude (co-author John Cutler)",
+     "site": "amplitude.com",
+     "url": "https://amplitude.com/books/north-star",
+     "lang": "en",
+     "why": "كيف تختار مقياس North Star وتربطه باحتياج العميل وعمل الفريق وأهداف الشركة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "افتح بيانات متجر Google التجريبية في BigQuery (مجاناً بوضع Sandbox)، وابنِ قمع شراء من 4 خطوات من مشاهدة المنتج إلى الشراء، واحسب التحويل بين كل خطوتين، ثم اقترح تجربة A/B لأضعف خطوة مع مقياسها.",
+    "dataset": {
+     "name": "GA4 sample ecommerce dataset, Google Merchandise Store (bigquery-public-data.ga4_obfuscated_sample_ecommerce, 2020-11-01 to 2021-01-31)",
+     "provider": "Google Analytics / BigQuery public datasets",
+     "url": "https://developers.google.com/analytics/bigquery/web-ecommerce-demo-dataset"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "sales": {
+   "topPick": {
+    "title": "المبيعات الواردة",
+    "provider": "HubSpot Academy (Coursera), «مندوب مبيعات HubSpot Professional Certificate»",
+    "url": "https://www.coursera.org/learn/inbound-sales-ar",
+    "lang": "ar",
+    "price": "paid",
+    "priceNote": "The page shows «Enroll for free»; per its FAQ, materials, assignments and the certificate need the paid Certificate experience (a free trial or a «Full Course, No Certificate» option may exist; the page does not confirm it for this course). Included with Coursera Plus.",
+    "hours": 20,
+    "hoursNote": "Header: «2 weeks at 10 hours a week»; modules 3+3+4+5+5 hours.",
+    "certificate": true,
+    "star": 1,
+    "why": "بالعربي من HubSpot: إيجاد المشترين وتأهيلهم والتواصل معهم وأطر التأهيل وعرض بيعي مخصص.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Inbound Sales Certification Course",
+     "provider": "HubSpot Academy",
+     "url": "https://academy.hubspot.com/courses/inbound-sales",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "The page says «FREE Certification Course»; a HubSpot Academy account is «100% free».",
+     "hours": 3.1,
+     "hoursNote": "Page: 7 lessons, 22 videos, 5 quizzes, «3 hr 6 min» total.",
+     "certificate": true,
+     "star": 1,
+     "why": "نفس منهج HubSpot مجاناً بالكامل مع شهادة: 7 دروس في نحو 3 ساعات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Successful Negotiation: Essential Strategies and Skills",
+     "provider": "University of Michigan (Coursera)",
+     "url": "https://www.coursera.org/learn/negotiation-skills",
+     "lang": "en",
+     "price": "paid",
+     "priceNote": "The page shows «Join for Free» / «Enroll now» but does not state a free audit option; the certificate is paid.",
+     "hours": 20,
+     "hoursNote": "Header: «2 weeks at 10 hours a week».",
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: التحضير للتفاوض وتكتيكاته وإغلاق الصفقة بعقد، تقييم 4.8 من 20,159 مراجعة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Anthony Iannarino",
+     "platform": "The Sales Blog, weekly newsletter and podcast",
+     "url": "https://www.thesalesblog.com/",
+     "why": "استراتيجي مبيعات B2B: مدونة ونشرة أسبوعية (أكثر من 100 ألف مشترك) وبودكاست عن صناعة الفرص.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.thesalesblog.com/",
+      "linkedin": "https://www.linkedin.com/in/iannarino/",
+      "x": "https://twitter.com/iannarino",
+      "youtube": "https://www.youtube.com/@iannarino"
+     },
+     "linkedinSource": "https://www.thesalesblog.com/"
+    },
+    {
+     "name": "Jeb Blount",
+     "platform": "Sales Gravy (podcast, articles, weekly newsletter)",
+     "url": "https://salesgravy.com/",
+     "why": "مدرّب Sales Gravy ونظامها Fanatical Prospecting للتنقيب عن العملاء، ونشرة أسبوعية لـ470 ألف مندوب.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://salesgravy.com/",
+      "youtube": "https://www.youtube.com/@salesgravy",
+      "x": "https://x.com/SalesGravy"
+     },
+     "linkedinSource": null,
+     "linksNote": "The YouTube and X links on salesgravy.com are Sales Gravy company accounts; the page links only a company LinkedIn page, so no personal LinkedIn."
+    }
+   ],
+   "articles": [
+    {
+     "title": "B2B Sales Strategy Roadmap: The Ultimate Guide",
+     "author": "S. Anthony Iannarino (site owner; no byline)",
+     "site": "thesalesblog.com",
+     "url": "https://www.thesalesblog.com/b2b-sales-strategy-roadmap",
+     "lang": "en",
+     "why": "مراحل الشراء الخمس في B2B ومهارات المندوب، ويبدأ من سؤال: لماذا يتغيّر العميل؟",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اختر منتجاً وجهّز قائمة 20 شركة سعودية محتملة في HubSpot CRM أو Excel، أهّلها بمعايير BANT، واكتب تسلسل تواصل من 3 رسائل، ثم سجّل مكالمة اكتشاف تجريبية 10 دقائق مع زميل يلعب دور العميل.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "customer-success": {
+   "topPick": {
+    "title": "Customer Success: Reducing Churn & Growing Revenue",
+    "provider": "Wiley Skills Network, John Wiley & Sons (Coursera)",
+    "url": "https://www.coursera.org/learn/wiley-customer-success-reducing-churn-growing-revenue",
+    "lang": "en",
+    "price": "paid",
+    "priceNote": "The page shows «Join for Free» / «Enroll now» and «Included with Coursera Plus»; per its FAQ the materials and certificate need the paid Certificate experience. No audit option stated.",
+    "hours": 10,
+    "hoursNote": "Header: «1 week to complete» at «10 hours a week»; 17 modules.",
+    "certificate": true,
+    "star": 1,
+    "why": "مبنية على القوانين العشرة لنجاح العملاء: صحة العميل، سرعة الوصول للقيمة، ومقاييس الاحتفاظ والـChurn.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Service Hub Software Certification Course",
+     "provider": "HubSpot Academy",
+     "url": "https://academy.hubspot.com/courses/hubspot-service-software",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "The page says «FREE Certification Course»; the practical exercises need a Pro or Enterprise HubSpot subscription.",
+     "hours": 2.4,
+     "hoursNote": "Page: 9 lessons, 28 videos, 7 quizzes, «2 hours 24 minutes» total; 60-question exam.",
+     "certificate": true,
+     "star": 1,
+     "why": "مجانية مع شهادة: مساحة نجاح العملاء ومؤشرات صحة العميل ومكتب الدعم (Help Desk).",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Customer Success and Account Health Checks (lesson)",
+     "provider": "HubSpot Academy",
+     "url": "https://academy.hubspot.com/lessons/customer-success-and-account-health-checks",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "The page says «FREE Lesson».",
+     "hours": 0.47,
+     "hoursNote": "Page: «28 min», 3 videos and 1 quiz.",
+     "certificate": null,
+     "star": 1,
+     "why": "درس مجاني في نصف ساعة عن فحص صحة الحساب وتقليل الـChurn وكسب ولاء العميل.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Lincoln Murphy",
+     "platform": "Sixteen Ventures (blog)",
+     "url": "https://sixteenventures.com/",
+     "profileChecked": "https://sixteenventures.com/customer-success-definition",
+     "why": "يكتب عن نجاح العملاء ورفع قيمة العميل مدى الحياة، وعنده قاموس كامل لمصطلحات المجال.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://sixteenventures.com/",
+      "linkedin": "https://www.linkedin.com/in/lincolnmurphy/",
+      "x": "https://x.com/lincolnmurphy"
+     },
+     "linkedinSource": "https://sixteenventures.com/",
+     "linksNote": "LinkedIn and X are in the author metadata (schema.org sameAs) of sixteenventures.com, next to his site lincolnmurphy.com."
+    },
+    {
+     "name": "Donna Weber",
+     "platform": "Website, blog and newsletter",
+     "url": "https://donnaweber.com/",
+     "why": "مؤلفة كتاب Onboarding Matters، متخصصة في إيصال القيمة للعميل مبكراً أثناء الـonboarding.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://donnaweber.com/",
+      "linkedin": "https://www.linkedin.com/in/donnaweb/",
+      "youtube": "https://www.youtube.com/@valueexpert"
+     },
+     "linkedinSource": "https://donnaweber.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Customer Success: Defined (2024)",
+     "author": "Lincoln Murphy",
+     "site": "sixteenventures.com",
+     "url": "https://sixteenventures.com/customer-success-definition",
+     "lang": "en",
+     "date": "2023-01-04",
+     "why": "قاموس مصطلحات نجاح العملاء من المفاهيم العامة إلى الممارسات اليومية، مرجع سريع للمبتدئ.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Why Your Customers Are Already Shopping Around (And How to Catch It Early)",
+     "author": "Gainsight (no byline)",
+     "site": "gainsight.com",
+     "url": "https://www.gainsight.com/blog/why-your-customers-are-already-shopping-around-and-how-to-catch-it-early/",
+     "lang": "en",
+     "date": "2026-04-08",
+     "why": "إشارات الـChurn المبكرة قبل أن يقرر العميل المغادرة، وكيف تلتقطها في وقتها.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "حمّل بيانات Telco Customer Churn، واحسب نسبة الـChurn حسب 3 خصائص من اختيارك، ثم صمّم مؤشر صحة عميل من 4 عناصر وخطة onboarding لأول 30 يوماً للفئة الأعلى خطراً.",
+    "dataset": {
+     "name": "Telco Customer Churn",
+     "provider": "Kaggle (dataset by blastchar)",
+     "url": "https://www.kaggle.com/datasets/blastchar/telco-customer-churn"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "supply-chain": {
+   "topPick": {
+    "title": "إدارة سلاسل الإمداد | Supply Chain Management",
+    "provider": "Alfaisal University | KLD (Coursera)",
+    "url": "https://www.coursera.org/learn/supply-chain-management-",
+    "lang": "ar",
+    "price": "paid",
+    "priceNote": "The page shows «Enroll now» and «Included with Coursera Plus»; per its FAQ the certificate needs the paid Certificate experience. No free or audit option stated.",
+    "hours": 2,
+    "hoursNote": "Page: «2 hours to complete» (one module: 46 min video, 10 min reading, 42 min assignments).",
+    "certificate": true,
+    "star": 1,
+    "why": "بالعربي من جامعة الفيصل: مراحل سلسلة الإمداد ومحرّكاتها وإدارة المخزون، تقييم 4.8 من 121.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Supply Chain Planning",
+     "provider": "University of California, Irvine (Coursera)",
+     "url": "https://www.coursera.org/learn/supply-chain-planning",
+     "lang": "en",
+     "price": "paid",
+     "priceNote": "The page shows «Enroll for free»; per its FAQ, materials, assignments and the certificate need the paid Certificate experience (a free trial or a «Full Course, No Certificate» option may exist; the page does not confirm it for this course). Included with Coursera Plus.",
+     "hours": 6,
+     "hoursNote": "Page: «6 hours to complete»; module times add up to about 5 hours.",
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: التنبؤ بالطلب وتخطيط العرض والتنبؤ المقيّد واجتماعات الإجماع، أساس الـS&OP، بـExcel.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Exploring Planning Processes in SAP IBP",
+     "provider": "SAP Learning",
+     "url": "https://learning.sap.com/courses/exploring-planning-processes-in-sap-ibp",
+     "lang": "en",
+     "price": null,
+     "priceNote": "The page does not state a price; it says «Leads to Achievement» and lists no prerequisites.",
+     "hours": 1.78,
+     "hoursNote": "Page: «1hr 47min» (2 units).",
+     "certificate": null,
+     "star": 2,
+     "why": "مقدمة من SAP لعمليات التخطيط في سلسلة الإمداد ونظام SAP IBP، للمبتدئ وبلا متطلبات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Lora Cecere",
+     "platform": "Supply Chain Shaman (blog)",
+     "url": "https://www.supplychainshaman.com/",
+     "why": "مؤسسة Supply Chain Insights، تكتب عن تخطيط سلسلة الإمداد والمخزون واستشعار الطلب.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.supplychainshaman.com/",
+      "linkedin": "https://www.linkedin.com/in/loracecere/",
+      "youtube": "https://www.youtube.com/channel/UCeFBs3tx8IQNYZ0p_FE4b1A/videos"
+     },
+     "linkedinSource": "https://www.supplychainshaman.com/",
+     "linksNote": " x link dropped: twitter.com/lcecere returned 404 on 20 Nov 2026."
+    }
+   ],
+   "articles": [
+    {
+     "title": "Defining the Role of the Budget in Supply Chain Planning",
+     "author": "Lora Cecere",
+     "site": "supplychainshaman.com",
+     "url": "https://www.supplychainshaman.com/defining-the-role-of-the-budget-in-supply-chain-planning/",
+     "lang": "en",
+     "date": "2026-11-19",
+     "why": "للنجمة الثانية: الميزانية خطة مالية لا تشغيلية، وكيف تربطها بخطة الإمداد دون أن تقيّدها.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "You Didn't Ask, But Here Is My Response to Your Question on Inventory Management",
+     "author": "Lora Cecere",
+     "site": "supplychainshaman.com",
+     "url": "https://www.supplychainshaman.com/you-didnt-ask-but-here-is-my-response-to-your-question-on-inventory-management/",
+     "lang": "en",
+     "date": "2026-11-16",
+     "why": "لماذا لا يكفي حساب مخزون الأمان وحده: قابلية التنبؤ وشكل المخزون ووظيفته وتحليل صحته.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "خذ مبيعات شهرية لمنتج واحد (24 شهراً)، وتنبأ بطلب 3 أشهر بالمتوسط المتحرك في Excel واحسب خطأ التنبؤ (MAPE)، ثم احسب مخزون الأمان ونقطة إعادة الطلب واكتب توصية من نصف صفحة.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "procurement": {
+   "topPick": {
+    "title": "Supplier Sourcing and RFI/RFQ/RFP Execution",
+    "provider": "Coursera (Procurement Essentials: Streamline and Boost Success Professional Certificate)",
+    "url": "https://www.coursera.org/learn/supplier-sourcing-and-rfi-rfq-rfp-execution",
+    "lang": "en",
+    "price": "paid",
+    "priceNote": "The page shows «Enroll for free»; per its FAQ, materials, assignments and the certificate need the paid Certificate experience (a free trial or a «Full Course, No Certificate» option may exist; the page does not confirm it for this course). Included with Coursera Plus.",
+    "hours": 6,
+    "hoursNote": "Page: «6 hours to complete» (modules 2+2+1+1).",
+    "certificate": true,
+    "star": 1,
+    "why": "عملية ومباشرة: اكتشاف الموردين والفرق بين RFI وRFQ وRFP، مع قوالب لطلب الأسعار وتتبّعها.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Procurement Techniques",
+     "provider": "Almentor (instructor: Ahmed Rasekh)",
+     "url": "https://www.almentor.net/en/courses/Procurement-Techniques",
+     "lang": "ar",
+     "price": "paid",
+     "priceNote": "Subscription site: the page shows «Subscribe Now»; only lesson 1 is marked as a free preview.",
+     "hours": 0.72,
+     "hoursNote": "Page: «0h 43min / 8 lessons».",
+     "certificate": true,
+     "star": 1,
+     "why": "بالعربي في 43 دقيقة: دورة حياة الشراء واستراتيجية التوريد ومتابعة أداء الموردين وأمر الشراء.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Philip Ideson",
+     "platform": "Art of Procurement (podcast and media platform)",
+     "url": "https://artofprocurement.com/",
+     "profileChecked": "https://artofprocurement.com/about",
+     "why": "شريك مؤسس ومدير Art of Procurement منذ 2015: بودكاست ومحتوى عن التوريد والعقود وإدارة الموردين.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://artofprocurement.com/",
+      "linkedin": "https://www.linkedin.com/in/philipideson/"
+     },
+     "linkedinSource": "https://artofprocurement.com/about",
+     "linksNote": "Art of Procurement's own X (x.com/aopshow) and YouTube (youtube.com/c/ArtofProcurement) are company accounts, not his."
+    },
+    {
+     "name": "Kelly Barner",
+     "platform": "Art of Procurement (podcast and media platform)",
+     "url": "https://artofprocurement.com/",
+     "profileChecked": "https://artofprocurement.com/about",
+     "why": "شريكة مؤسسة في Art of Procurement، منصة للمشتريات فيها بودكاست وأدلة ومقالات تعليمية.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://artofprocurement.com/",
+      "linkedin": "https://www.linkedin.com/in/kelly-barner-6884443/"
+     },
+     "linkedinSource": "https://artofprocurement.com/about"
+    }
+   ],
+   "articles": [
+    {
+     "title": "How to Use Saudi Arabia's Etimad to Bid on Governmental Contracts",
+     "author": "Dunya Hassanein",
+     "site": "setupinsaudi.com",
+     "url": "https://www.setupinsaudi.com/en/news/announcements/how-to-use-saudi-arabia-s-etimad-to-bid-on-governmental-contracts",
+     "lang": "en",
+     "date": "2026-02-04",
+     "why": "خطوات منصة اعتماد عملياً: التسجيل عبر نفاذ، شراء الكراسة، تقديم العرض، ومتابعة العقد بعد الترسية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اكتب طلب عروض أسعار (RFQ) لتوريد 50 جهاز لابتوب لجهة حكومية: المواصفات والكميات ومدة التوريد ومعايير التقييم الفني والمالي، ثم قارن 3 عروض افتراضية في جدول وأوصِ بمورد مع التبرير.",
+    "dataset": null,
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  }
+ },
+ "noteLinks": "people[].links were read from pages the person or their company controls (fetched 2026-11-20); linkedin.com itself was never opened. linkedinSource is the page that links to the LinkedIn profile, or null when no personal LinkedIn link was found."
+}

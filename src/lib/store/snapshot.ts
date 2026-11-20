@@ -1,5 +1,5 @@
 // Owner: store (written in full by the architect: it IS the snapshot contract of spec 5.2). Pure.
-// The facts of a user (UserFacts = UserSnapshot): what the engine needs and what «دليل» may know. The CV document,
+// The facts of a user (UserFacts = UserSnapshot): what the engine needs and what «دليلك» may know. The CV document,
 // both threads and the "seen" markers stay in the browser.
 import type { SeenMarkers, UserFacts, UserState } from "@/lib/types";
 

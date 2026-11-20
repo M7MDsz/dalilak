@@ -203,7 +203,7 @@ const TYPE = [
   { cls: "text-h2", spec: "h2 24 / 1.5 / 700", sample: "الخطوة التالية: SQL للمبتدئين" },
   { cls: "text-h3", spec: "h3 20 / 1.55 / 700", sample: "أساسيات Power BI" },
   { cls: "text-title", spec: "title 17 / 1.6 / 600", sample: "تحليل البيانات بـ Python · تُفتح بعد SQL" },
-  { cls: "text-body", spec: "body 16 / 1.85 / 400", sample: "ارفع سيرتك الذاتية، وسيقرأ دليل مهاراتك ويرسم لك الطريق من حيث تقف اليوم إلى وظيفة محلل بيانات. كل دورة تكملها ترفع مستوى مهارة، وتزيد تطابقك مع الوظيفة." },
+  { cls: "text-body", spec: "body 16 / 1.85 / 400", sample: "ارفع سيرتك الذاتية، وسيقرأ دليلك مهاراتك ويرسم لك الطريق من حيث تقف اليوم إلى وظيفة محلل بيانات. كل دورة تكملها ترفع مستوى مهارة، وتزيد تطابقك مع الوظيفة." },
   { cls: "text-small", spec: "small 14 / 1.7 / 400", sample: "شركة نخلة الرقمية · الرياض · دوام كامل" },
   { cls: "text-caption", spec: "caption 13 / 1.6 / 500", sample: "بيانات تجريبية · ح ن ث ر خ ج س · 1,000 1,100" },
 ] as const;
@@ -316,7 +316,7 @@ function ButtonsCell() {
           ابدأ الدورة
         </Button>
         <Button icon={<IconSend size={18} />} size="sm" variant="secondary">
-          قدّم عبر دليل
+          قدّم عبر دليلك
         </Button>
         <Button size="sm" variant="ghost">
           اعرض المهارات
@@ -327,7 +327,7 @@ function ButtonsCell() {
           أضف هدفاً
         </Button>
         <Button onClick={pressForMe} size="sm" variant="ghost">
-          دع دليل يضغط الزر المجاور
+          دع دليلك يضغط الزر المجاور
         </Button>
         <Tag>sizes: lg 56 · md 48 · sm 40</Tag>
       </div>
@@ -677,7 +677,7 @@ function RewardsCell() {
         <div className="flex flex-col items-center gap-3">
           {/* the real emblems, passed with no size: BadgeMedal sizes whatever it is given to its emblem box */}
           <div className="flex flex-wrap items-start justify-center gap-5">
-            <BadgeMedal description="أكملت التعارف مع دليل." emblem={<BadgeEmblem id="first-steps" />} name="الخطوة الأولى" />
+            <BadgeMedal description="أكملت التعارف مع دليلك." emblem={<BadgeEmblem id="first-steps" />} name="الخطوة الأولى" />
             <BadgeMedal description="عدت ثلاثة أيام متتالية." emblem={<BadgeEmblem id="streak-3" />} name="ثلاثة أيام" />
             <BadgeMedal
               emblem={<BadgeEmblem id="job-ready" />}
@@ -733,7 +733,7 @@ function QuietCell() {
                 تصفّح الوظائف
               </Button>
             }
-            body="لم تقدّم على أي وظيفة بعد. اختر وظيفة وسيقدّم عنك دليل إن طلبت."
+            body="لم تقدّم على أي وظيفة بعد. اختر وظيفة وسيقدّم عنك دليلك إن طلبت."
             title="لا طلبات بعد"
           />
         </Card>
@@ -753,7 +753,7 @@ function QuietCell() {
           <Divider label="المراتب 4 و5" variant="trail" />
           <div className="flex flex-wrap items-center gap-4 text-small text-fg-2">
             <span className="inline-flex items-center gap-1.5">
-              اسأل دليل <Kbd keys={["Ctrl", "K"]} />
+              اسأل دليلك <Kbd keys={["Ctrl", "K"]} />
             </span>
             <span className="inline-flex items-center gap-1.5">
               أغلق <Kbd>Esc</Kbd>
@@ -826,7 +826,7 @@ export default function KitPage() {
         <p className="text-caption text-fg-3" dir="ltr">
           /dev/kit · design system · Dalilak
         </p>
-        <h1 className="text-h1">عُدّة دليلك</h1>
+        <h1 className="text-h1">عُدّة دليل</h1>
         <p className="max-w-2xl text-body text-fg-2">
           الألوان والخطوط وكل قطعة تُبنى منها الشاشات، على الورق أولاً ثم على المسرح الداكن. كل لون من رمز، وكل نص يجتاز حدّ التباين.
         </p>
@@ -877,9 +877,9 @@ export default function KitPage() {
           <bdi dir="ltr">{'<Stage contour="present">'}</bdi> بارتفاع 720، كما يقف خلف عرض صفحة الدخول.
         </p>
         <Stage className="flex h-[45rem] flex-col justify-end gap-3 rounded-sheet px-gutter py-12 lg:px-14" contour="present" contourSummit={{ x: 0.62, y: 0.38 }}>
-          <p className="text-small font-semibold text-accent-fg">دليلك</p>
+          <p className="text-small font-semibold text-accent-fg">دليل</p>
           <p className="max-w-2xl text-h1 lg:text-display">كل خطوة تقرّبك من وظيفتك</p>
-          <p className="max-w-xl text-body text-fg-2">ارفع سيرتك، وسيرسم لك دليل الطريق من حيث تقف اليوم إلى وظيفتك.</p>
+          <p className="max-w-xl text-body text-fg-2">ارفع سيرتك، وسيرسم لك دليلك الطريق من حيث تقف اليوم إلى وظيفتك.</p>
         </Stage>
       </section>
     </main>

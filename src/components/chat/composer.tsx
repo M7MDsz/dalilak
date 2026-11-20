@@ -2,7 +2,7 @@
 // Composer (playbook block 20): a pill that springs open into a card when focused and grows with the text.
 // - Enter sends, Shift+Enter adds a line, Enter during IME composition does nothing, Escape closes the empty card.
 // - ONE round button at the inline-end (the left): Send (an up arrow) or Stop. On send the arrow leaves upward with the
-//   message and a new one re-enters from below (16 px, 520 ms); while «دليل» answers the Stop face turns in, and the face
+//   message and a new one re-enters from below (16 px, 520 ms); while «دليلك» answers the Stop face turns in, and the face
 //   not in use turns away small and blurred.
 // - A disabled state with its hint; an optional slot for the attach-CV chip in the open card's footer.
 // The card's height is animated on this one element (a spring to open and close, a quick tween per new line), as the
@@ -31,15 +31,15 @@ export interface ComposerProps {
   readonly onValueChange?: (value: string) => void;
   /** Called with the trimmed text (at most `maxLength` characters). */
   readonly onSend: (text: string) => void;
-  /** «دليل» is answering or acting: the round button is Stop, and Enter does not send. */
+  /** «دليلك» is answering or acting: the round button is Stop, and Enter does not send. */
   readonly responding?: boolean;
   readonly onStop?: () => void;
   /** Nothing can be typed or sent; the hint says why (it replaces the placeholder). */
   readonly disabled?: boolean;
   readonly disabledHint?: string;
-  /** Default «اسأل دليل أو اطلب منه أن يفتح لك صفحة…» (spec 3.14). Onboarding: «اكتب إجابتك أو اختر من الخيارات…». */
+  /** Default «اسأل دليلك أو اطلب منه أن يفتح لك صفحة…» (spec 3.14). Onboarding: «اكتب إجابتك أو اختر من الخيارات…». */
   readonly placeholder?: string;
-  /** The field's accessible name. Default «رسالتك إلى دليل». */
+  /** The field's accessible name. Default «رسالتك إلى دليلك». */
   readonly label?: string;
   /** Characters sent (spec 3.14: the first 500). Default 500. */
   readonly maxLength?: number;
@@ -47,7 +47,7 @@ export interface ComposerProps {
   readonly attachment?: ReactNode;
   /** The key hint in the open card's footer when there is no attachment. Set to null to hide it. */
   readonly keyHint?: string | null;
-  /** True while the user is typing (focused, with text): drives «دليل»'s `listening` glyph. */
+  /** True while the user is typing (focused, with text): drives «دليلك»'s `listening` glyph. */
   readonly onTypingChange?: (typing: boolean) => void;
   readonly autoFocus?: boolean;
   readonly ref?: Ref<ComposerHandle>;
@@ -73,8 +73,8 @@ export function Composer({
   onStop,
   disabled = false,
   disabledHint,
-  placeholder = "اسأل دليل أو اطلب منه أن يفتح لك صفحة…",
-  label = "رسالتك إلى دليل",
+  placeholder = "اسأل دليلك أو اطلب منه أن يفتح لك صفحة…",
+  label = "رسالتك إلى دليلك",
   maxLength = 500,
   attachment,
   keyHint = "Enter للإرسال · Shift + Enter لسطر جديد",
@@ -123,7 +123,7 @@ export function Composer({
   }, []);
   // (after a reply ends the arrow is mounted again, so it re-enters from below by itself)
 
-  // typing -> «دليل» listens
+  // typing -> «دليلك» listens
   const typing = focused && value.trim() !== "";
   const lastTyping = useRef(false);
   useEffect(() => {
@@ -284,7 +284,7 @@ export function Composer({
               </motion.span>
             ) : null}
           </AnimatePresence>
-          {/* Stop: turns in while «دليل» answers; turns away small and blurred when not in use */}
+          {/* Stop: turns in while «دليلك» answers; turns away small and blurred when not in use */}
           <span aria-hidden className={cn(face, responding ? "" : "scale-50 rotate-90 opacity-0 blur-[2px]")}>
             <IconStop size={18} />
           </span>

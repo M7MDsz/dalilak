@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { applicationNumber, applicationStatus, nextApplicationNumber, nextApplicationStatus } from "./applications";
+import { applicationNumber, applicationStatus, isPreparedOnly, nextApplicationNumber, nextApplicationStatus } from "./applications";
 import { makeClock } from "./clock";
 import { CLOCK, T0, application, applied, newFacts } from "./test-fixtures";
 
@@ -15,10 +15,10 @@ describe("application status (spec 7.5)", () => {
     expect(applicationStatus(high, t + 30 * s)).toBe("review");
     expect(applicationStatus(high, t + 119 * s)).toBe("review");
     expect(applicationStatus(high, t + 120 * s)).toBe("shortlisted");
-    const low = application("bi-analyst-riyadh", t, 43);
+    const low = application("data-analyst-riyadh", t, 43);
     expect(applicationStatus(low, t + 120 * s)).toBe("closed");
     // the 60% line itself is enough
-    expect(applicationStatus(application("business-analyst-riyadh", t, 60), t + 200 * s)).toBe("shortlisted");
+    expect(applicationStatus(application("data-analyst-riyadh", t, 60), t + 200 * s)).toBe("shortlisted");
   });
 
   it("a manual advance moves ahead of time, never back", () => {
@@ -38,9 +38,22 @@ describe("application status (spec 7.5)", () => {
     const high = application("data-analyst-riyadh", t, 90);
     expect(nextApplicationStatus(high, t)).toBe("review");
     expect(nextApplicationStatus(high, t + 40 * s)).toBe("shortlisted");
-    expect(nextApplicationStatus(application("bi-analyst-riyadh", t, 43), t + 40 * s)).toBe("closed");
+    expect(nextApplicationStatus(application("data-analyst-riyadh", t, 43), t + 40 * s)).toBe("closed");
     expect(nextApplicationStatus(high, t + 200 * s)).toBeNull();
-    expect(nextApplicationStatus(application("bi-analyst-riyadh", t, 43, { manualStatus: "closed" }), t)).toBeNull();
+    expect(nextApplicationStatus(application("data-analyst-riyadh", t, 43, { manualStatus: "closed" }), t)).toBeNull();
+  });
+});
+
+describe("a real posting's application (20 Nov 2026)", () => {
+  it("was prepared here and is sent by the user from the posting: no simulated status, no control", () => {
+    const real = application("master-works-data-senior-engineer-riyadh", t, 73);
+    expect(isPreparedOnly(real)).toBe(true);
+    expect(isPreparedOnly(application("data-analyst-riyadh", t, 90))).toBe(false);
+    expect(applicationStatus(real, t)).toBe("sent");
+    expect(applicationStatus(real, t + 10_000 * s)).toBe("sent");
+    expect(applicationStatus({ ...real, manualStatus: "shortlisted" }, t + 10_000 * s)).toBe("sent");
+    expect(nextApplicationStatus(real, t)).toBeNull();
+    expect(nextApplicationStatus(real, t + 200 * s)).toBeNull();
   });
 });
 

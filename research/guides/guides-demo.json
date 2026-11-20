@@ -1,0 +1,648 @@
+{
+  "checkedAt": "2026-11-20",
+  "notes": {
+    "fields": "price: free | paid | free_to_audit. hours: a number only when the page states it (hoursNote says how); else null. certificate: true/false only when the page says it; else null. star: the Dalilak star level (1-3) the item fits. recommendedBy: where it was found recommended, or null when no recommendation source could be opened.",
+    "reddit": "Reddit could not be opened by any tool on 20 Nov 2026 (reddit.com, old.reddit.com and mirrors refused or blocked; the search tool refuses reddit.com). No Reddit page was opened, so no recommendedBy points straight at Reddit. One Reddit thread appears only as cited inside an article that was opened (CareerFoundry).",
+    "saudiPlatforms": "Satr (satr.codes now redirects to satr.tuwaiq.edu.sa), Doroob (doroob.sa), Edraak and SDAIA Academy were checked. Their catalog pages load through JavaScript and showed no course details to the fetch tool, and searches surfaced only third-party listings (some closed). So none of their courses are included: nothing could be confirmed from their own pages."
+  },
+  "skills": {
+    "excel": {
+      "nextStarForDemoUser": 3,
+      "topPick": {
+        "title": "Excel Power Tools for Data Analysis",
+        "provider": "Macquarie University (Coursera)",
+        "url": "https://www.coursera.org/learn/excel-power-tools",
+        "lang": "en",
+        "price": "paid",
+        "priceNote": "The page shows «Enroll for free» (trial); the certificate is paid. The page does not confirm a free audit.",
+        "hours": 15,
+        "hoursNote": "Sum of the 4 module times on the page (4+3+4+4). The header says «2 weeks at 10 hours a week».",
+        "certificate": true,
+        "star": 3,
+        "why": "تغطي بالضبط النجمة الثالثة: Power Query وPower Pivot ونموذج البيانات وDAX، وتقييمها 4.9 من 1,351 مراجعة.",
+        "recommendedBy": [
+          {
+            "label": "DataCamp: Best platforms to learn Excel (Matt Crabtree, 16 Nov 2026)",
+            "url": "https://www.datacamp.com/blog/best-platforms-to-learn-excel",
+            "note": "Recommends Macquarie's Excel courses on Coursera (the Excel Skills for Business series), not this course by name."
+          }
+        ],
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "مهارات Excel للأعمال: المستوى المتوسط I",
+          "provider": "Macquarie University (Coursera)",
+          "url": "https://www.coursera.org/learn/excel-intermediate-1-ar",
+          "lang": "ar",
+          "price": "paid",
+          "priceNote": "The page shows «Join for Free» / free trial; materials and certificate need the paid certificate option.",
+          "hours": 30,
+          "hoursNote": "Sum of the 7 module times on the page. The header says «3 weeks at 10 hours a week».",
+          "certificate": true,
+          "star": 2,
+          "why": "بالعربي: الدوال والجداول والجداول المحورية وأدوات التقسيم، لمن يريد تثبيت النجمة الثانية قبل الثالثة.",
+          "recommendedBy": [
+            {
+              "label": "DataCamp: Best platforms to learn Excel (16 Nov 2026)",
+              "url": "https://www.datacamp.com/blog/best-platforms-to-learn-excel",
+              "note": "Recommends Macquarie's Excel Skills for Business series on Coursera; this is the Arabic edition of one of its courses."
+            }
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "مهارات برنامج Excel للعمل: المبادئ الأساسية",
+          "provider": "Macquarie University (Coursera)",
+          "url": "https://www.coursera.org/learn/excel-essentials-ar",
+          "lang": "ar",
+          "price": "paid",
+          "priceNote": "The page shows «Join for Free»; the certificate needs the paid option. The page does not confirm a free audit.",
+          "hours": 26,
+          "hoursNote": "Sum of the 7 module times on the page; the header and the Arabic description disagree (3 vs 6 weeks).",
+          "certificate": true,
+          "star": 1,
+          "why": "بالعربي ومن الصفر: المعادلات والتنسيق والرسوم، وتقييمها 4.7 من 273 مراجعة.",
+          "recommendedBy": [
+            {
+              "label": "DataCamp: Best platforms to learn Excel (16 Nov 2026)",
+              "url": "https://www.datacamp.com/blog/best-platforms-to-learn-excel",
+              "note": "Recommends Macquarie's Excel Skills for Business series on Coursera; this is the Arabic edition of its first course."
+            }
+          ],
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Leila Gharani",
+          "platform": "YouTube / XelPlus",
+          "url": "https://www.youtube.com/@LeilaGharani",
+          "profileChecked": "https://www.xelplus.com/about/",
+          "arab": false,
+          "why": "حاصلة على Microsoft MVP عشر مرات، وشروحها في Excel وPower Query واضحة وعملية، ولها أكثر من 3 ملايين مشترك.",
+          "recommendedBy": [
+            {
+              "label": "Analytics Vidhya: Top 10 YouTube Channels to Learn Excel (updated 1 May 2025)",
+              "url": "https://www.analyticsvidhya.com/blog/2024/09/youtube-channels-to-learn-excel/"
+            },
+            {
+              "label": "DataCamp: Best platforms to learn Excel (16 Nov 2026)",
+              "url": "https://www.datacamp.com/blog/best-platforms-to-learn-excel"
+            }
+          ]
+        },
+        {
+          "name": "Dave Bruns (Exceljet)",
+          "platform": "Blog / reference site",
+          "url": "https://exceljet.net/",
+          "profileChecked": "https://exceljet.net/about",
+          "arab": false,
+          "why": "مرجع مجاني فيه أكثر من 1,000 معادلة و400 دالة بأمثلة قصيرة، وصاحبه Excel MVP.",
+          "recommendedBy": [
+            {
+              "label": "Analytics Vidhya: Top 10 YouTube Channels to Learn Excel",
+              "url": "https://www.analyticsvidhya.com/blog/2024/09/youtube-channels-to-learn-excel/"
+            }
+          ]
+        },
+        {
+          "name": "Mike Girvin (excelisfun)",
+          "platform": "YouTube",
+          "url": "https://www.youtube.com/@excelisfun",
+          "profileChecked": "https://www.youtube.com/@excelisfun/about",
+          "arab": false,
+          "why": "قناة عميقة ومفصّلة لمن يريد التعمّق في Excel وPower Query.",
+          "whyNote": "The channel page showed only its name; the description of Mike Girvin comes from the Analytics Vidhya list.",
+          "recommendedBy": [
+            {
+              "label": "Analytics Vidhya: Top 10 YouTube Channels to Learn Excel",
+              "url": "https://www.analyticsvidhya.com/blog/2024/09/youtube-channels-to-learn-excel/"
+            }
+          ]
+        },
+        {
+          "name": "Faraz Shaikh",
+          "platform": "Meetup (Saudi Arabia Microsoft Excel & Power Platform Meetup, الخبر)",
+          "url": "https://www.meetup.com/saudi-arabia-microsoft-excel-power-platform-meetup/",
+          "profileChecked": "https://www.meetup.com/saudi-arabia-microsoft-excel-power-platform-meetup/",
+          "arab": false,
+          "saudiBased": true,
+          "why": "Microsoft MVP يدير مجتمع Excel وPower Platform في السعودية (أكثر من 3,000 عضو)، فيه لقاءات مجانية أونلاين وحضورية.",
+          "recommendedBy": null
+        }
+      ],
+      "articles": [
+        {
+          "title": "About Power Query in Excel",
+          "author": "Microsoft Support",
+          "site": "support.microsoft.com",
+          "url": "https://support.microsoft.com/en-us/office/about-power-query-in-excel-7104fbee-9e62-4cb9-a02e-5bfb1a6c536a",
+          "lang": "en",
+          "why": "شرح رسمي لمراحل Power Query الأربع: الاتصال بالبيانات وتحويلها ودمجها وتحميلها.",
+          "recommendedBy": null
+        },
+        {
+          "title": "Dynamic array formulas in Excel",
+          "author": "Dave Bruns (Exceljet)",
+          "site": "exceljet.net",
+          "url": "https://exceljet.net/articles/dynamic-array-formulas-in-excel",
+          "lang": "en",
+          "why": "تفهم كيف تُرجع معادلة واحدة نتائج كثيرة (FILTER وSORT وUNIQUE) وتختصر عليك شغلاً كثيراً.",
+          "recommendedBy": null
+        }
+      ],
+      "proofTask": {
+        "task": "حمّل بيانات Coffee Shop Sales، نظّفها في Power Query، ابنِ نموذج بيانات وجدولاً محورياً يبيّن المبيعات حسب الشهر والفرع، وأضف مقياس DAX واحداً للنمو الشهري.",
+        "star": 3,
+        "dataset": {
+          "name": "Coffee Shop Sales",
+          "provider": "Maven Analytics Data Playground (free download)",
+          "url": "https://mavenanalytics.io/data-playground/coffee-shop-sales"
+        }
+      }
+    },
+    "sql": {
+      "nextStarForDemoUser": 3,
+      "topPick": {
+        "title": "SQL Tutorial: Window Functions (Advanced SQL), formerly the Mode SQL Tutorial",
+        "provider": "ThoughtSpot (mode.com/sql-tutorial now redirects here)",
+        "url": "https://www.thoughtspot.com/sql-tutorial/sql-window-functions",
+        "lang": "en",
+        "price": "free",
+        "priceNote": "Open web tutorial, no sign-in needed to read; listed among free SQL resources by DataCamp.",
+        "hours": null,
+        "certificate": null,
+        "star": 3,
+        "why": "يشرح دوال النوافذ خطوة بخطوة: ROW_NUMBER وRANK وLAG وLEAD وPARTITION BY، وهي قلب النجمة الثالثة.",
+        "recommendedBy": [
+          {
+            "label": "DataCamp: Top resources to learn SQL for free (Matt Crabtree, 15 Jul 2026)",
+            "url": "https://www.datacamp.com/blog/top-resources-to-learn-sql-for-free",
+            "note": "Lists the Mode SQL Tutorial; mode.com/sql-tutorial/sql-window-functions returns a 301 to this page."
+          }
+        ],
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "تحليل البيانات للإجابة عن الأسئلة",
+          "provider": "Google (Coursera), Google Data Analytics Professional Certificate",
+          "url": "https://www.coursera.org/learn/analyze-data-to-answer-questions-arabic",
+          "lang": "ar",
+          "price": "paid",
+          "priceNote": "The page shows «Enroll for free»; the certificate needs the paid option.",
+          "hours": 26,
+          "hoursNote": "Sum of the 4 module times on the page (5+5+5+11). The header says «3 weeks at 10 hours a week».",
+          "certificate": true,
+          "star": 2,
+          "why": "بالعربي من Google: الربط JOIN والاستعلامات الفرعية والتجميع في SQL والجداول المؤقتة، تثبّت النجمة الثانية.",
+          "recommendedBy": [
+            {
+              "label": "CareerFoundry: The best Reddit data advice for beginners (updated 25 Oct 2023)",
+              "url": "https://careerfoundry.com/en/blog/data-analytics/reddit-data-advice/",
+              "note": "Quotes an r/dataanalysis thread calling the Google Data Analytics Certificate «excellent and inexpensive» (thread cited: https://www.reddit.com/r/dataanalysis/comments/urubk3/; Reddit itself could not be opened)."
+            }
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "SQLBolt: Learn SQL with simple, interactive exercises",
+          "provider": "SQLBolt",
+          "url": "https://sqlbolt.com/",
+          "lang": "en",
+          "price": "free",
+          "priceNote": "The page states no price and asks for no account; DataCamp lists it among free SQL resources.",
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "دروس قصيرة تفاعلية تتمرّن فيها داخل المتصفح بلا تثبيت، ممتازة لمراجعة الأساسيات بسرعة.",
+          "recommendedBy": [
+            {
+              "label": "DataCamp: Top resources to learn SQL for free (15 Jul 2026)",
+              "url": "https://www.datacamp.com/blog/top-resources-to-learn-sql-for-free"
+            }
+          ],
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Baraa Khatib Salkini (Data with Baraa)",
+          "platform": "YouTube",
+          "url": "https://www.youtube.com/@DataWithBaraa",
+          "profileChecked": "https://www.datawithbaraa.com/",
+          "arab": null,
+          "why": "مهندس بيانات سابق في IBM وBosch وMercedes-Benz، وعنده دورة SQL مجانية كاملة على يوتيوب (حوالي 30 ساعة) بشرح مرسوم باليد.",
+          "recommendedBy": null
+        },
+        {
+          "name": "Markus Winand",
+          "platform": "Blog / free web book",
+          "url": "https://use-the-index-luke.com/",
+          "profileChecked": "https://use-the-index-luke.com/",
+          "arab": false,
+          "why": "كتابه المجاني على الويب يعلّمك لماذا يكون الاستعلام بطيئاً وكيف تسرّعه بالفهارس، وهذا جزء «تحسين الاستعلامات» في النجمة الثالثة.",
+          "recommendedBy": null
+        },
+        {
+          "name": "Julia Evans",
+          "platform": "Blog",
+          "url": "https://jvns.ca/",
+          "profileChecked": "https://jvns.ca/blog/2019/10/03/sql-queries-don-t-start-with-select/",
+          "arab": false,
+          "why": "تشرح الأفكار التقنية الصعبة بكلام بسيط ورسوم، ولها مجلة مصوّرة عن SQL اسمها «Become a SELECT Star!».",
+          "recommendedBy": null
+        }
+      ],
+      "articles": [
+        {
+          "title": "SQL queries don't start with SELECT",
+          "author": "Julia Evans",
+          "site": "jvns.ca",
+          "url": "https://jvns.ca/blog/2019/10/03/sql-queries-don-t-start-with-select/",
+          "lang": "en",
+          "why": "تفهم ترتيب تنفيذ الاستعلام (FROM ثم WHERE ثم GROUP BY ثم SELECT) فتعرف لماذا تنجح بعض الشروط وتفشل غيرها.",
+          "recommendedBy": null
+        },
+        {
+          "title": "Use The Index, Luke: SQL indexing and tuning (free web edition of SQL Performance Explained)",
+          "author": "Markus Winand",
+          "site": "use-the-index-luke.com",
+          "url": "https://use-the-index-luke.com/",
+          "lang": "en",
+          "why": "تتعلّم كيف تعمل الفهارس في WHERE والربط والترتيب، فتكتب استعلامات أسرع.",
+          "recommendedBy": null
+        }
+      ],
+      "proofTask": {
+        "task": "حمّل بيانات Pizza Place Sales إلى SQLite أو PostgreSQL، واكتب استعلاماً يرتّب أكثر 3 أصناف مبيعاً في كل شهر بـ RANK() OVER (PARTITION BY ...)، واستعلاماً ثانياً يحسب فرق المبيعات عن الشهر السابق بـ LAG.",
+        "star": 3,
+        "dataset": {
+          "name": "Pizza Place Sales",
+          "provider": "Maven Analytics Data Playground (free download)",
+          "url": "https://mavenanalytics.io/data-playground/pizza-place-sales"
+        }
+      }
+    },
+    "powerbi": {
+      "nextStarForDemoUser": 1,
+      "topPick": {
+        "title": "بدء استخدام تحليلات بيانات Microsoft (Get started with Microsoft data analytics)",
+        "provider": "Microsoft Learn (PL-300 learning path)",
+        "url": "https://learn.microsoft.com/ar-sa/training/paths/data-analytics-microsoft/",
+        "lang": "ar",
+        "langNote": "Arabic page is a machine translation of the English path (English: https://learn.microsoft.com/en-us/training/paths/data-analytics-microsoft/).",
+        "price": "free",
+        "priceNote": "Microsoft Learn training is free to read; DataCamp lists it as a free, self-paced option. The PL-300 exam itself is paid (price by country).",
+        "hours": null,
+        "certificate": null,
+        "certificateNote": "The path gives a Microsoft Learn achievement, not a certificate; it prepares for the Microsoft Certified: Power BI Data Analyst Associate (exam PL-300).",
+        "star": 1,
+        "why": "المسار الرسمي من Microsoft نفسها وبالعربي: 4 وحدات تبدأ من دور محلل البيانات حتى أول تقرير تفاعلي، ولا يحتاج خبرة سابقة.",
+        "recommendedBy": [
+          {
+            "label": "DataCamp: Best Power BI courses (Josef Waples, updated 23 Sep 2026)",
+            "url": "https://www.datacamp.com/blog/best-power-bi-courses",
+            "note": "Lists the Microsoft Learn Power BI path as a free, self-paced option."
+          },
+          {
+            "label": "Dataquest: What's the best way to learn Power BI? (Charlie Custer, 5 Aug 2025)",
+            "url": "https://www.dataquest.io/blog/whats-the-best-way-to-learn-microsoft-power-bi",
+            "note": "Calls the Microsoft PL-300 certification «the only one that really carries any weight»."
+          }
+        ],
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Microsoft Power BI Data Analyst Professional Certificate",
+          "provider": "Microsoft (Coursera)",
+          "url": "https://www.coursera.org/professional-certificates/microsoft-power-bi-data-analyst",
+          "lang": "en",
+          "price": "paid",
+          "priceNote": "The page shows «Enroll for free» and «Included with Coursera Plus»; no price stated. Completers get a 50% voucher for the PL-300 exam.",
+          "hours": 188,
+          "hoursNote": "Sum of the 8 course hours on the page; the page also says «5 months at 10 hours a week».",
+          "certificate": true,
+          "star": 1,
+          "why": "برنامج كامل من 8 دورات يبدأ من الصفر ويوصلك لاختبار PL-300، وتقييمه 4.6 من 9,687 مراجعة.",
+          "recommendedBy": [
+            {
+              "label": "Dataquest: What's the best way to learn Power BI? (5 Aug 2025)",
+              "url": "https://www.dataquest.io/blog/whats-the-best-way-to-learn-microsoft-power-bi",
+              "note": "Recommends the PL-300 certification this program prepares for; it does not name this Coursera program."
+            }
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "Prepare data for analysis with Power BI",
+          "provider": "Microsoft Learn (PL-300 learning path)",
+          "url": "https://learn.microsoft.com/en-us/training/paths/prepare-data-power-bi/",
+          "lang": "en",
+          "price": "free",
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "المسار الرسمي التالي: تجلب البيانات وتنظفها في Power Query قبل بناء النموذج، 3 وحدات بلا متطلبات سابقة.",
+          "recommendedBy": [
+            {
+              "label": "DataCamp: Best Power BI courses (updated 23 Sep 2026)",
+              "url": "https://www.datacamp.com/blog/best-power-bi-courses",
+              "note": "Lists the free Microsoft Learn Power BI path."
+            }
+          ],
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Marco Russo & Alberto Ferrari (SQLBI)",
+          "platform": "Blog / books",
+          "url": "https://www.sqlbi.com/",
+          "profileChecked": "https://www.sqlbi.com/about/",
+          "arab": false,
+          "why": "أشهر مرجع في DAX: مقالات مجانية كل أسبوعين، وموقع DAX Guide، وكتاب The Definitive Guide to DAX.",
+          "recommendedBy": null
+        },
+        {
+          "name": "Ruth Pozuelo Martinez (Curbal)",
+          "platform": "YouTube / site",
+          "url": "https://curbal.com/",
+          "profileChecked": "https://curbal.com/",
+          "arab": false,
+          "why": "Microsoft Data Platform MVP، لها أكثر من 800 فيديو في Power BI ودورة مقدمة مجانية.",
+          "recommendedBy": null
+        },
+        {
+          "name": "Leila Gharani",
+          "platform": "YouTube / XelPlus",
+          "url": "https://www.youtube.com/@LeilaGharani",
+          "profileChecked": "https://www.xelplus.com/about/",
+          "arab": false,
+          "why": "تشرح Power BI وPower Query وDAX للموظفين بلغة سهلة، وهي Microsoft MVP.",
+          "recommendedBy": null
+        },
+        {
+          "name": "منذر أسامة الشيخ ورّاق (Monzer Osama Alchikh)",
+          "platform": "مدونة عربية / X / LinkedIn",
+          "url": "https://www.monzerosama.com/",
+          "profileChecked": "https://sessionize.com/MonzerOsama",
+          "arab": true,
+          "saudiBased": true,
+          "why": "Microsoft MVP منذ 2008 ويعمل في الرياض، يكتب بالعربي عن Power BI وقدّم جلسة عربية «أول لوحة في 30 دقيقة».",
+          "whyNote": "His blog's dated posts look like 2019-2020; X: https://x.com/Monzer_Osama",
+          "recommendedBy": null
+        }
+      ],
+      "articles": [
+        {
+          "title": "Understand star schema and the importance for Power BI",
+          "author": "Microsoft Learn",
+          "site": "learn.microsoft.com",
+          "url": "https://learn.microsoft.com/en-us/power-bi/guidance/star-schema",
+          "lang": "en",
+          "why": "تفهم جداول الحقائق والأبعاد، وهي الفكرة التي يقوم عليها كل تقرير Power BI سليم.",
+          "recommendedBy": null
+        },
+        {
+          "title": "Introducing CALCULATE in DAX",
+          "author": "Marco Russo & Alberto Ferrari (SQLBI)",
+          "site": "sqlbi.com",
+          "url": "https://www.sqlbi.com/articles/introducing-calculate-in-dax/",
+          "lang": "en",
+          "why": "دليل للمبتدئ لأهم دالة في DAX وكيف تغيّر الفلاتر، لتستعد للنجمة الثانية.",
+          "recommendedBy": null
+        }
+      ],
+      "proofTask": {
+        "task": "حمّل ملف Financial Sample من Microsoft، وابنِ في Power BI لوحة فيها 3 رسوم (المبيعات حسب الشهر، والربح حسب الشريحة، والمبيعات حسب البلد) مع فلتر للبلد، ثم اكتب تحتها سطرين بأهم ملاحظة.",
+        "star": 1,
+        "dataset": {
+          "name": "Financial Sample Excel workbook",
+          "provider": "Microsoft Learn (free)",
+          "url": "https://learn.microsoft.com/en-us/power-bi/create-reports/sample-financial-download"
+        }
+      }
+    },
+    "statistics": {
+      "nextStarForDemoUser": 2,
+      "topPick": {
+        "title": "Introduction to Statistics",
+        "provider": "Stanford University (Coursera), Guenther Walther",
+        "url": "https://www.coursera.org/learn/stanford-statistics",
+        "lang": "en",
+        "price": "free_to_audit",
+        "priceNote": "Skillscouter calls it the «best free university intro»; the Coursera page itself shows «Join for Free», says the certificate is paid, and does not confirm audit.",
+        "hours": 10,
+        "hoursNote": "The page says «1 week at 10 hours a week».",
+        "certificate": true,
+        "star": 2,
+        "why": "من ستانفورد: من وصف البيانات إلى فترات الثقة واختبارات الدلالة، وهذا بالضبط الانتقال للنجمة الثانية. تقييمها 4.6 من 4,307 مراجعة.",
+        "recommendedBy": [
+          {
+            "label": "Skillscouter: Best statistics courses online in 2026 (Lewis Keegan, updated 23 Aug 2026)",
+            "url": "https://skillscouter.com/best-statistics-courses/",
+            "note": "«Best free university intro for beginners»."
+          },
+          {
+            "label": "Liora: Best statistics courses (9 Aug 2026)",
+            "url": "https://liora.io/en/best-statistics-courses",
+            "note": "«the most rigorous beginner statistics course on Coursera»."
+          }
+        ],
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "OpenIntro Statistics (free textbook, with videos and slides)",
+          "provider": "OpenIntro",
+          "url": "https://www.openintro.org/book/os/",
+          "lang": "en",
+          "price": "free",
+          "priceNote": "Free PDF (optional contribution can be set to $0); printed copies are paid.",
+          "hours": null,
+          "certificate": null,
+          "star": 2,
+          "why": "كتاب مجاني مع فيديو لكل درس تقريباً؛ الفصول 5 إلى 7 تشرح الاستدلال واختبار الفرضيات خطوة بخطوة.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Josh Starmer (StatQuest)",
+          "platform": "YouTube",
+          "url": "https://www.youtube.com/@statquest",
+          "profileChecked": "https://statquest.org/",
+          "arab": false,
+          "why": "فيديوهات مجانية تشرح الإحصاء وتعلّم الآلة ببساطة شديدة وخطوة خطوة.",
+          "recommendedBy": null
+        },
+        {
+          "name": "Allen B. Downey",
+          "platform": "Blog / free book (Think Stats)",
+          "url": "https://allendowney.github.io/ThinkStats/",
+          "profileChecked": "https://greenteapress.com/wp/think-stats-3e/",
+          "arab": false,
+          "why": "كتابه Think Stats مجاني على الويب ويعلّم الإحصاء على بيانات حقيقية؛ الفصلان 8 و9 عن التقدير واختبار الفرضيات.",
+          "recommendedBy": null
+        },
+        {
+          "name": "Andy Field",
+          "platform": "Site / books",
+          "url": "https://www.discoveringstatistics.com/",
+          "profileChecked": "https://www.discoveringstatistics.com/",
+          "arab": false,
+          "why": "مؤلف سلسلة Discovering Statistics، وموقعه يجمع دروساً وفيديوهات مجانية تبدأ من الأساسيات حتى مقارنة المتوسطات.",
+          "recommendedBy": null
+        }
+      ],
+      "articles": [
+        {
+          "title": "There is only one test!",
+          "author": "Allen Downey",
+          "site": "allendowney.blogspot.com",
+          "url": "http://allendowney.blogspot.com/2011/05/there-is-only-one-test.html",
+          "lang": "en",
+          "why": "تفهم أن كل اختبارات الفرضيات تجيب سؤالاً واحداً: هل الفرق حقيقي أم صدفة؟ فلا تحتاج تحفظها.",
+          "recommendedBy": null
+        },
+        {
+          "title": "Seeing Theory: a visual introduction to probability and statistics",
+          "author": "Daniel Kunin and team (Brown University)",
+          "site": "seeing-theory.brown.edu",
+          "url": "https://seeing-theory.brown.edu/",
+          "lang": "en",
+          "why": "رسوم تفاعلية تشرح الاحتمالات والاستدلال وفترات الثقة بالنظر بدل المعادلات (الموقع مؤرشف لكنه يعمل).",
+          "recommendedBy": null
+        }
+      ],
+      "proofTask": {
+        "task": "من ملف Financial Sample قارن متوسط الربح بين شريحتين (مثلاً Government وEnterprise): احسب فترة ثقة 95% واختبار t في Excel (T.TEST)، ثم اشرح النتيجة في 3 أسطر لشخص غير متخصص.",
+        "star": 2,
+        "dataset": {
+          "name": "Financial Sample Excel workbook",
+          "provider": "Microsoft Learn (free)",
+          "url": "https://learn.microsoft.com/en-us/power-bi/create-reports/sample-financial-download"
+        }
+      }
+    },
+    "communication": {
+      "nextStarForDemoUser": 2,
+      "topPick": {
+        "title": "Improving Communication Skills",
+        "provider": "University of Pennsylvania, Wharton (Coursera), Maurice Schweitzer",
+        "url": "https://www.coursera.org/learn/wharton-communication-skills",
+        "lang": "en",
+        "price": "paid",
+        "priceNote": "The page shows «Enroll for free»; the certificate needs the paid option. The page does not confirm a free audit.",
+        "hours": 12,
+        "hoursNote": "The page lists each of the 4 modules as «3 hours to complete».",
+        "certificate": true,
+        "star": 2,
+        "why": "تتعلّم صياغة رسالة مقنعة والثقة والإصغاء وطرح الأسئلة، وهذا هو «الإقناع وإدارة الحوار» في النجمة الثانية. تقييمها 4.7 من 2,143 مراجعة.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "مهارات العمل الجماعي: التواصل الفعّال في مجموعات",
+          "provider": "University of Colorado Boulder (Coursera), Matthew Koschmann",
+          "url": "https://www.coursera.org/learn/teamwork-skills-effective-communication-ar",
+          "lang": "ar",
+          "price": "paid",
+          "priceNote": "The page shows «Join for Free» / free trial; materials and certificate need the paid option.",
+          "hours": 11,
+          "hoursNote": "Sum of the 4 module times on the page (2+3+2+4).",
+          "certificate": true,
+          "star": 1,
+          "why": "بالعربي: التواصل داخل الفريق واتخاذ القرار والتعامل مع الخلاف والتفاوض، وتقييمها 4.8 من 489 مراجعة.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "Share Data Through the Art of Visualization",
+          "provider": "Google (Coursera), Google Data Analytics Professional Certificate",
+          "url": "https://www.coursera.org/learn/visualize-data",
+          "lang": "en",
+          "price": "paid",
+          "priceNote": "The page shows «Enroll for free»; the certificate needs the paid option.",
+          "hours": 19,
+          "hoursNote": "Sum of the 4 module times on the page (5+5+5+4).",
+          "certificate": true,
+          "star": 2,
+          "why": "تواصل المحلل تحديداً: كيف تحكي قصة بالأرقام وتبني عرضاً يقنع من يسمعك.",
+          "recommendedBy": [
+            {
+              "label": "CareerFoundry: The best Reddit data advice for beginners (updated 25 Oct 2023)",
+              "url": "https://careerfoundry.com/en/blog/data-analytics/reddit-data-advice/",
+              "note": "Quotes an r/dataanalysis thread recommending the Google Data Analytics Certificate, which this course is part of."
+            }
+          ],
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Cole Nussbaumer Knaflic (storytelling with data)",
+          "platform": "Blog / books / podcast",
+          "url": "https://www.storytellingwithdata.com/",
+          "profileChecked": "https://www.storytellingwithdata.com/meet-the-team",
+          "arab": false,
+          "why": "بنت دورة عرض البيانات في Google، وتعلّمك كيف تعرض نتيجتك بوضوح ومن غير رسوم مزدحمة.",
+          "recommendedBy": null
+        },
+        {
+          "name": "Brent Dykes",
+          "platform": "Blog / LinkedIn / book",
+          "url": "https://www.effectivedatastorytelling.com/",
+          "profileChecked": "https://www.effectivedatastorytelling.com/",
+          "arab": false,
+          "why": "مؤلف Effective Data Storytelling وكاتب في Forbes، يشرح كيف تحوّل الأرقام إلى قصة تغيّر القرار.",
+          "recommendedBy": null
+        },
+        {
+          "name": "Nancy Duarte",
+          "platform": "Blog / books",
+          "url": "https://www.duarte.com/resources/blog/",
+          "profileChecked": "https://www.duarte.com/about/",
+          "arab": false,
+          "why": "مؤلفة Resonate وDataStory ودليل HBR للعروض المقنعة، ومدونتها مليئة بنصائح العرض والإقناع.",
+          "recommendedBy": null
+        }
+      ],
+      "articles": [
+        {
+          "title": "Why The Pyramid Principle Is Not A Data Storytelling Framework",
+          "author": "Brent Dykes",
+          "site": "effectivedatastorytelling.com",
+          "url": "https://www.effectivedatastorytelling.com/post/why-the-pyramid-principle-is-not-a-data-storytelling-framework",
+          "lang": "en",
+          "why": "تعرف متى تبدأ بالتوصية مباشرة (مع المدير المستعجل) ومتى تبني القصة حتى يصل السامع للنتيجة بنفسه.",
+          "recommendedBy": null
+        },
+        {
+          "title": "How to Tell a Story with Data",
+          "author": "Jim Stikeleather (Harvard Business Review, 2013)",
+          "site": "hbr.org",
+          "url": "https://hbr.org/2013/04/how-to-tell-a-story-with-data",
+          "lang": "en",
+          "why": "لماذا يقنع العرض الذي يحكي قصة أكثر من العرض الذي يسرد الأرقام فقط.",
+          "whyNote": "Only the opening paragraphs were visible; HBR may ask for sign-in to read the rest.",
+          "recommendedBy": null
+        }
+      ],
+      "proofTask": {
+        "task": "خذ نتيجة مهمة Power BI أو الإحصاء، واكتب مذكرة من صفحة واحدة (المشكلة، النتيجة، التوصية)، ثم اعرضها في 3 دقائق على شخص وردّ على اعتراض واحد منه.",
+        "star": 2,
+        "dataset": {
+          "name": "Financial Sample Excel workbook",
+          "provider": "Microsoft Learn (free)",
+          "url": "https://learn.microsoft.com/en-us/power-bi/create-reports/sample-financial-download"
+        }
+      }
+    }
+  }
+}

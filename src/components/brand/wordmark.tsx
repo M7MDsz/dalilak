@@ -38,21 +38,21 @@ export function WordShape({ tone = "accent" }: { readonly tone?: LogoTone }) {
 }
 
 export interface WordmarkProps {
-  /** Rendered height in px: from the top of ل/ك to the bottom of the ي's dots. Default 32. */
+  /** Rendered height in px: from the top of the ل to the bottom of the final ل's tail. Default 32. */
   readonly height?: number;
   readonly className?: string;
   /** Default "auto": the accent waypoint on the ي from 48 px tall, all ink below. */
   readonly tone?: WordmarkTone;
-  /** Accessible name. Default «دليلك». Pass "" to make it decorative. */
+  /** Accessible name. Default «دليل». Pass "" to make it decorative. */
   readonly title?: string;
 }
 
 /**
- * «دليلك» set in IBM Plex Sans Arabic Bold, as outlines, so it renders the same everywhere (no font load, no shaping
+ * «دليل» set in IBM Plex Sans Arabic Bold, as outlines, so it renders the same everywhere (no font load, no shaping
  * differences). One custom detail: the ي's dots are two equal circles, and from 48 px the leading one is the waypoint,
  * in the accent. Ink from currentColor.
  */
-export function Wordmark({ height = 32, className, tone = "auto", title = "دليلك" }: WordmarkProps) {
+export function Wordmark({ height = 32, className, tone = "auto", title = "دليل" }: WordmarkProps) {
   const decorative = title === "";
   const resolved: LogoTone = tone === "auto" ? (height >= WORDMARK_ACCENT_FROM ? "accent" : "mono") : tone;
   return (

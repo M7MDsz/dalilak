@@ -1,14 +1,14 @@
-// Owner: brain-advisor. «دليل»'s replies as data: the 5.9 template filled from a tool result, with its cards and chips,
+// Owner: brain-advisor. «دليلك»'s replies as data: the 5.9 template filled from a tool result, with its cards and chips,
 // and the event order of protocol.ts (status* → action? → text+ → card* → chips?). Used by the router (every mode) and
 // by the model turn when a model's reply must be replaced by "the template for that tool" (5.5 rules 8, 9, 11). Pure.
-import { APPLICATION_STATUS_COPY, countNoun, hoursText, nextStepLabel } from "@/lib/copy";
-import { XP, getBadge, getCourse, getJob, getSkill } from "@/lib/data";
+import { APPLICATION_STATUS_COPY, guideTitle, nextStepLabel } from "@/lib/copy";
+import { XP, getBadge, getCourse, getField, getGuide, getJob, getSkill } from "@/lib/data";
 import { courseOnPath, courseState, fitReasons } from "@/lib/engine";
-import type { AdvisorCard, Chip, ChipPayload, CourseId, JobId, NavTarget, ToolName } from "@/lib/types";
+import type { AdvisorCard, Chip, ChipPayload, CourseId, FieldId, JobId, NavTarget, ToolName } from "@/lib/types";
 import type { AdvisorAction, AdvisorEvent, ToolParams, ToolResults } from "@/lib/brain/protocol";
 
 import type { AdvisorCtx } from "./context";
-import { courseShort, joinAnd, openChipLabel, pageName } from "./phrasing";
+import { guideCourseFacts, joinAnd, openChipLabel, pageName } from "./phrasing";
 import {
   DISCLOSE_JOBS,
   T,
@@ -16,6 +16,7 @@ import {
   applyAlreadyReply,
   blockedActionReply,
   heldStarsWord,
+  lockReasonInSentence,
   needStarsWord,
   startCourseRefusedLine,
 } from "./templates";
@@ -78,15 +79,15 @@ export function openChip(to: NavTarget, label?: string, role: Chip["role"] = "ch
   return chip(`open-${to.screen}`, label ?? openChipLabel(to), { intent: "open", to }, role);
 }
 
-const OPEN_COURSE = (courseId: CourseId): Chip => openChip({ screen: "course", courseId }, "افتح الدورة", "yes");
+const OPEN_COURSE = (courseId: CourseId): Chip => openChip({ screen: "course", courseId }, "افتح الدليل", "yes");
 const OPEN_CV_YES: Chip = openChip({ screen: "cv" }, "افتح صفحة السيرة", "yes");
 const OPEN_APPLICATIONS: Chip = openChip({ screen: "applications" }, "افتح طلباتي");
 const OPEN_PATH: Chip = openChip({ screen: "path" }, "افتح مساري");
 const OPEN_JOBS: Chip = openChip({ screen: "jobs" }, "افتح الوظائف");
 const APPLY_YES = (jobId: JobId): Chip => chip("apply", "قدّم على ذي", { intent: "apply", jobId }, "yes");
 const APPLY_CARD = (jobId: JobId): Chip => chip("apply", "قدّم على ذي", { intent: "apply", jobId });
-const START_CARD = (courseId: CourseId): Chip => chip("start-course", "ابدأ الدورة", { intent: "start_course", courseId });
-const START_YES = (courseId: CourseId): Chip => chip("start-course", "ابدأ الدورة", { intent: "start_course", courseId }, "yes");
+const START_CARD = (courseId: CourseId): Chip => chip("start-course", "ابدأ الخطوة", { intent: "start_course", courseId });
+const START_YES = (courseId: CourseId): Chip => chip("start-course", "ابدأ الخطوة", { intent: "start_course", courseId }, "yes");
 const TARGET_CARD = (jobId: JobId): Chip => chip("set-target", "خلّها هدفي", { intent: "set_target", jobId });
 const TARGET_YES = (jobId: JobId): Chip => chip("set-target", "خلّها هدفي", { intent: "set_target", jobId }, "yes");
 
@@ -106,24 +107,20 @@ export function nextStepReply(ctx: AdvisorCtx, result: ToolResults["recommend_ne
     case 1:
       return reply(T.nextStepCv(), { tools, chips: [OPEN_CV_YES, NOT_NOW] });
     case 2:
-      // 5.2: the course is already on screen, so no offer to open it.
-      if (ctx.pageCourse === step.courseId) return reply(T.nextStepHereContinue(step.ticked, step.total), { tools });
-      return reply(T.nextStepContinue(courseShort(step.courseId), step.ticked, step.total), {
-        tools,
-        chips: [OPEN_COURSE(step.courseId), NOT_NOW],
-      });
+      // 5.2: the guide is already on screen, so no offer to open it.
+      if (ctx.pageCourse === step.courseId) return reply(T.nextStepHereContinue(), { tools });
+      return reply(T.nextStepContinue(skillName(step.courseId)), { tools, chips: [OPEN_COURSE(step.courseId), NOT_NOW] });
     case 3: {
-      const course = getCourse(step.courseId);
+      const prepares = step.prepares ? getSkill(step.prepares).name : skillName(step.courseId);
       if (ctx.pageCourse === step.courseId) {
-        const lessons = countNoun(course.lessons.length, "lesson");
         const text = step.prep
-          ? T.nextStepHerePrep(lessons, step.xp, step.prepares ? getSkill(step.prepares).name : skillName(step.courseId))
-          : T.nextStepHereCourse(lessons, step.xp, target, step.matchNow, step.matchAfter);
+          ? T.nextStepHerePrep(step.xp, prepares)
+          : T.nextStepHereCourse(step.xp, target, step.matchNow, step.matchAfter);
         return reply(text, { tools, chips: [START_YES(step.courseId), NOT_NOW] });
       }
       const text = step.prep
-        ? T.nextStepPrep(courseShort(step.courseId), hoursText(course.hours), step.xp, step.prepares ? getSkill(step.prepares).name : skillName(step.courseId))
-        : T.nextStepCourse(courseShort(step.courseId), hoursText(course.hours), step.xp, target, step.matchNow, step.matchAfter);
+        ? T.nextStepPrep(skillName(step.courseId), step.xp, prepares)
+        : T.nextStepCourse(skillName(step.courseId), step.xp, target, step.matchNow, step.matchAfter);
       return reply(text, { tools, chips: [OPEN_COURSE(step.courseId), NOT_NOW] });
     }
     case 4:
@@ -205,7 +202,7 @@ export function explainReply(result: ToolResults["explain_match"], tools: readon
   }
   if (none.length > 0) parts.push(T.explainNone(joinAnd(none.map((r) => getSkill(r.skill).name))));
   if (result.total >= 100) parts.push(T.explainTotalFull());
-  else if (result.next_course) parts.push(T.explainTotal(result.total, courseShort(result.next_course.id), result.next_course.match_after));
+  else if (result.next_course) parts.push(T.explainTotal(result.total, skillName(result.next_course.id), result.next_course.match_after));
   else parts.push(`المجموع ${result.total}%.`);
   return reply(parts.join(" "), { tools });
 }
@@ -217,7 +214,7 @@ export function gapReply(result: ToolResults["get_job_gap"], tools: readonly Too
   const row = result.rows.find((r) => !r.prep) ?? result.rows[0];
   const missing = joinAnd(result.missing.map((m) => getSkill(m.skill).name));
   if (!row) return reply(T.gapNone(jobTitle), { tools, cards: [card] });
-  return reply(T.gap(jobTitle, missing, courseShort(row.courseId), hoursText(row.hours), result.match, row.matchAfter), {
+  return reply(T.gap(jobTitle, missing, skillName(row.courseId), result.match, row.matchAfter), {
     tools,
     cards: [card],
   });
@@ -231,7 +228,7 @@ export function applyReply(ctx: AdvisorCtx, jobId: JobId, result: ToolResults["a
     const action: AdvisorAction = { type: "apply", jobId, expect: { number: result.number, match: result.match, xp: result.xp } };
     return guardBlocked(
       ctx,
-      reply(T.applySent(title(jobId), result.number, result.match, result.xp), {
+      reply(applyDoneText(jobId, result.number, result.match, result.xp), {
         tools,
         action,
         cards: [{ kind: "application", jobId }],
@@ -240,7 +237,7 @@ export function applyReply(ctx: AdvisorCtx, jobId: JobId, result: ToolResults["a
     );
   }
   if (result.reason === "already_applied") {
-    return reply(applyAlreadyReply(result.status), { tools, chips: [OPEN_APPLICATIONS] });
+    return reply(applyAlreadyReply(result.status, getJob(jobId).real), { tools, chips: [OPEN_APPLICATIONS] });
   }
   return reply(T.applyLowMatch(result.match), {
     tools,
@@ -249,6 +246,12 @@ export function applyReply(ctx: AdvisorCtx, jobId: JobId, result: ToolResults["a
       openChip({ screen: "job", jobId, focus: "missing" }, "وريني الفجوة", "no"),
     ],
   });
+}
+
+/** The line after «دليلك» applied, by job kind (20 Nov 2026): the practice job's honest send, a real job's preparation. */
+function applyDoneText(jobId: JobId, number: string, match: number, xp: number): string {
+  const job = getJob(jobId);
+  return job.real ? T.applyPrepared(job.title, job.company, number, match, xp) : T.applySent(job.title, number, match, xp);
 }
 
 export function applyWhichReply(ctx: AdvisorCtx): Reply {
@@ -276,7 +279,7 @@ export function applySearchReply(ctx: AdvisorCtx, result: ToolResults["search_jo
  */
 export function withJobsDisclosure(ctx: AdvisorCtx, r: Reply): Reply {
   if (ctx.jobsDisclosed || !r.cards.some((c) => c.kind === "job")) return r;
-  if (r.text.some((t) => t.includes("تجريبي"))) return r;
+  if (r.text.some((t) => t.includes(DISCLOSE_JOBS) || t.includes("تجريبي"))) return r;
   const last = r.text.length - 1;
   if (last < 0) return { ...r, text: [DISCLOSE_JOBS] };
   return { ...r, text: r.text.map((t, i) => (i === last ? `${t} ${DISCLOSE_JOBS}` : t)) };
@@ -288,7 +291,10 @@ export function applyOfferReply(jobId: JobId, result: ToolResults["apply_to_job"
   return reply(T.applyOffer(title(jobId)), { tools: ["apply_to_job"], chips: [APPLY_YES(jobId), NOT_NOW] });
 }
 
-// ── Courses ────────────────────────────────────────────────────────────────────────────────────────────────────────
+// ── Learning steps (a course is a step the user meets as the guide of its skill, 20 Nov 2026) ───────────────────────
+
+/** The guide of the skill a course teaches. */
+const guideOf = (courseId: CourseId) => getGuide(getCourse(courseId).skill);
 
 export function startReply(ctx: AdvisorCtx, courseId: CourseId, result: ToolResults["start_course"]): Reply {
   const tools: readonly ToolName[] = ["start_course"];
@@ -296,7 +302,7 @@ export function startReply(ctx: AdvisorCtx, courseId: CourseId, result: ToolResu
   if (result.already) {
     return guardBlocked(
       ctx,
-      reply(T.courseAlreadyStarted(result.ticked, result.total), {
+      reply(T.courseAlreadyStarted(skillName(courseId)), {
         tools,
         action: { type: "navigate", to: { screen: "course", courseId } },
       }),
@@ -304,16 +310,17 @@ export function startReply(ctx: AdvisorCtx, courseId: CourseId, result: ToolResu
   }
   const onPath = courseOnPath(courseId, ctx.facts);
   const after = onPath && !onPath.prep && result.match_after !== null && result.match_after > onPath.matchNow ? result.match_after : null;
+  const top = guideOf(courseId).topPick;
   return guardBlocked(
     ctx,
-    reply(T.courseStarted(courseShort(courseId), countNoun(result.lessons, "lesson"), after), {
+    reply(T.courseStarted(skillName(courseId), top.title, top.provider, after), {
       tools,
       action: { type: "start_course", courseId },
     }),
   );
 }
 
-/** «أبشر. أي دورة؟ هذه دورات مسارك.» with the path's remaining courses (up to three), each with «ابدأ الدورة». */
+/** «أبشر. وش تبي تتعلّم؟ هذي خطوات مسارك.» with the path's remaining steps (up to three), each with «ابدأ الخطوة». */
 export function courseWhichReply(ctx: AdvisorCtx): Reply {
   const roadmap = ctx.roadmap;
   const ids = roadmap ? roadmap.stages.filter((s) => s.state !== "done").map((s) => s.courseId).slice(0, 3) : [];
@@ -322,7 +329,7 @@ export function courseWhichReply(ctx: AdvisorCtx): Reply {
 
 export function startOfferReply(ctx: AdvisorCtx, courseId: CourseId, result: ToolResults["start_course"]): Reply {
   if (!result.ok) return reply(startCourseRefusedLine(result.reason, courseId, ctx.facts), { tools: ["start_course"] });
-  return reply(T.startOffer(courseShort(courseId)), { tools: ["start_course"], chips: [START_YES(courseId), NOT_NOW] });
+  return reply(T.startOffer(skillName(courseId)), { tools: ["start_course"], chips: [START_YES(courseId), NOT_NOW] });
 }
 
 /** True when completing the course raises the match with the target (on the path, not preparatory, not done). */
@@ -333,21 +340,21 @@ function raisesMatch(ctx: AdvisorCtx, courseId: CourseId): number | null {
   return info && !info.prep && info.matchAfter > info.matchNow ? info.matchAfter : null;
 }
 
+/** «وش في ذا الدليل؟»: the guide's top pick (what the data says about it), and what finishing the step gives. */
 export function courseWhatReply(ctx: AdvisorCtx, result: ToolResults["get_course"], tools: readonly ToolName[] = ["get_course"]): Reply {
-  const first = result.lessons[0] ?? "";
-  const last = result.lessons[result.lessons.length - 1] ?? "";
-  const text = T.courseWhat(
-    courseShort(result.id),
-    hoursText(result.hours),
-    countNoun(result.lessons.length, "lesson"),
-    first,
-    last,
-    result.star,
+  const guide = getGuide(result.skill);
+  const top = guide.topPick;
+  const head = T.courseWhat(
     getSkill(result.skill).name,
+    top.title,
+    top.provider,
+    guideCourseFacts(top),
+    result.star,
     result.xp,
     raisesMatch(ctx, result.id),
   );
-  return reply(text, { tools });
+  const more = T.courseWhatMore(guide.people.length > 0, guide.articles.length > 0);
+  return reply(more ? `${head} ${more}` : head, { tools });
 }
 
 export function courseGainReply(ctx: AdvisorCtx, courseId: CourseId): Reply {
@@ -358,14 +365,14 @@ export function courseGainReply(ctx: AdvisorCtx, courseId: CourseId): Reply {
   const info = courseOnPath(courseId, ctx.facts);
   if (!info) return reply(T.courseGainOffPath(target), { tools });
   if (info.prep) return reply(T.courseGainPrep(info.prepares ? getSkill(info.prepares).name : skillName(courseId)), { tools });
-  return reply(T.courseGain(courseShort(courseId), target, info.matchNow, info.matchAfter), { tools });
+  return reply(T.courseGain(skillName(courseId), target, info.matchNow, info.matchAfter), { tools });
 }
 
 export function pathCoursesReply(result: ToolResults["list_courses"]): Reply {
   const tools: readonly ToolName[] = ["list_courses"];
   const [first] = result.courses;
   if (!first) return reply(T.pathCoursesNone(), { tools });
-  return reply(T.pathCourses(result.courses.length, courseShort(first.id), hoursText(first.hours)), {
+  return reply(T.pathCourses(result.courses.length, skillName(first.id)), {
     tools,
     cards: result.courses.slice(0, 5).map((c) => courseCard(c.id)),
   });
@@ -380,7 +387,7 @@ export function shortCoursesReply(result: ToolResults["list_courses"]): Reply {
 export function targetReply(ctx: AdvisorCtx, jobId: JobId, result: ToolResults["set_target_job"]): Reply {
   const tools: readonly ToolName[] = ["set_target_job"];
   if (!result.ok) return reply(T.targetAlready(), { tools });
-  const course = result.first_course ? courseShort(result.first_course) : null;
+  const course = result.first_course ? skillName(result.first_course) : null;
   return guardBlocked(
     ctx,
     reply(T.targetChanged(title(jobId), result.match, result.remaining, course), {
@@ -412,7 +419,7 @@ export function climbReply(next: ToolResults["recommend_next_step"], board: Tool
   const step = next.step;
   const tail =
     (step.rule === 2 || step.rule === 3) && next.course && board.rank_with_plus !== null
-      ? T.climbCourse(courseShort(step.courseId), next.course.xp, board.rank_with_plus)
+      ? T.climbCourse(skillName(step.courseId), next.course.xp, board.rank_with_plus)
       : T.climbLabel(nextStepLabel(step));
   return reply(`${head} ${tail}`, { tools });
 }
@@ -451,8 +458,12 @@ export function applicationsReply(result: ToolResults["list_applications"]): Rep
   const [newest] = newestFirst;
   if (!newest) return reply(T.applicationsNone(), { tools });
   const status = APPLICATION_STATUS_COPY[newest.status].label;
-  const text =
-    newestFirst.length === 1
+  const job = getJob(newest.job_id);
+  const text = job.real
+    ? newestFirst.length === 1
+      ? T.applicationsOneReal(job.title, job.company)
+      : T.applicationsMoreReal(newestFirst.length, job.title, job.company)
+    : newestFirst.length === 1
       ? T.applicationsOne(title(newest.job_id), status)
       : T.applicationsMore(newestFirst.length, title(newest.job_id), status);
   return reply(text, { tools, cards: newestFirst.slice(0, 5).map((a) => ({ kind: "application", jobId: a.job_id }) as const) });
@@ -472,7 +483,7 @@ export function greetingReply(ctx: AdvisorCtx, salam: boolean): Reply {
   return reply(parts.join(" "));
 }
 
-/** The course «أكمل الدورة عني» is about: the one on screen, else the started one, else the next step's. */
+/** The step «أكمل الدورة عني» / «خلّصها عني» is about: the guide on screen, else the started step, else the next one. */
 function courseInQuestion(ctx: AdvisorCtx): CourseId | null {
   if (ctx.pageCourse) return ctx.pageCourse;
   const step = ctx.nextStep;
@@ -498,7 +509,7 @@ export function grantReply(ctx: AdvisorCtx, next: ToolResults["recommend_next_st
     case 3: {
       const xp = next.course?.xp ?? getCourse(step.courseId).hours * XP.perCourseHour;
       if (ctx.pageCourse === step.courseId) return reply(`${head} ${T.grantTailHere(xp)}`, { tools });
-      return reply(`${head} ${T.grantTailCourse(courseShort(step.courseId), xp)}`, {
+      return reply(`${head} ${T.grantTailCourse(skillName(step.courseId), xp)}`, {
         tools,
         chips: [OPEN_COURSE(step.courseId), NOT_NOW],
       });
@@ -538,12 +549,96 @@ export function remainingReply(ctx: AdvisorCtx): Reply {
   const target = ctx.targetTitle;
   if (!roadmap || !target) return fallbackReply();
   if (roadmap.complete) return reply(T.remainingDone(target));
-  return reply(T.remaining(ctx.remainingStages, roadmap.hoursLeft, target));
+  return reply(T.remaining(ctx.remainingStages, target));
 }
 
 export function levelHowReply(ctx: AdvisorCtx): Reply {
   const level = ctx.level;
   return reply(T.levelHow(level.xpToNext, level.xpToNext === null ? null : level.level + 1));
+}
+
+// ── The learning guides («وين أتعلم SQL؟», «مين أتابع في البيانات؟», «وش أقرأ عن Power BI؟»; 20 Nov 2026) ─────────
+
+/** What a guide question asks for: where to learn (the top pick), who to follow (people), what to read (articles). */
+export type GuideAsk = "where" | "follow" | "read";
+
+/**
+ * Why «دليلك» picked the skill: the user named it, it is their next step, or it is their nearest skill in the field they
+ * named. `courseId` is the step whose guide opens (the course of the user's next star in that skill).
+ */
+export type GuidePick =
+  | { readonly by: "skill"; readonly courseId: CourseId }
+  | { readonly by: "next"; readonly courseId: CourseId }
+  | { readonly by: "field"; readonly field: FieldId; readonly courseId: CourseId };
+
+/** The lock or all-stars note for the step that opens (the guide page says it too; one short line). */
+function guideNote(ctx: AdvisorCtx, courseId: CourseId): string | null {
+  const info = courseState(courseId, ctx.facts);
+  if (info.state === "locked") return T.guideLocked(lockReasonInSentence(info.lock));
+  if (info.state === "completed" || info.state === "credited") {
+    const skill = getCourse(courseId).skill;
+    if (getCourse(courseId).star >= getSkill(skill).maxStars) return T.guideAllHeld(getSkill(skill).name);
+  }
+  return null;
+}
+
+/**
+ * A guide question answered from the guide data (real courses, people, articles; nothing invented: hours, price and a
+ * certificate only when the data has them), and the guide page opens beside the chat (navigate, 5.5 rule 7 applies).
+ */
+export function guideReply(ctx: AdvisorCtx, ask: GuideAsk, pick: GuidePick): Reply {
+  const courseId = pick.courseId;
+  const course = getCourse(courseId);
+  const skill = getSkill(course.skill).name;
+  const guide = getGuide(course.skill);
+  const top = guide.topPick;
+  // 5.2: on that guide's own page already, nothing opens and the tails say it is in front of the user
+  const here = ctx.pageCourse === courseId;
+  const title = here ? null : guideTitle(courseId);
+  const text: string[] = [];
+  let lead = false;
+  if (pick.by === "next") {
+    const info = courseOnPath(courseId, ctx.facts);
+    const raises = info && !info.prep ? info : null;
+    const started = courseState(courseId, ctx.facts).state === "started";
+    text.push(T.guideLeadNext(skill, started, ctx.targetTitle, raises ? raises.matchNow : null, raises ? raises.matchAfter : null));
+    lead = true;
+  } else if (pick.by === "field") {
+    text.push(T.guideLeadField(getField(pick.field).name, skill));
+    lead = true;
+  }
+  switch (ask) {
+    case "where":
+      text.push(`${T.guideTop(skill, top.title, top.provider, guideCourseFacts(top), lead)} ${T.guideWhy(top.why)}`);
+      text.push(T.guideTopTail(title));
+      break;
+    case "follow": {
+      const people = guide.people.slice(0, 3);
+      if (people.length === 0) {
+        text.push(T.guidePeopleNone(skill, title, top.title, top.provider));
+        break;
+      }
+      text.push(T.guidePeopleHead(skill, lead));
+      for (const person of people) text.push(T.guidePerson(person.name, person.platform, person.why));
+      text.push(T.guidePeopleTail(title));
+      break;
+    }
+    case "read": {
+      const articles = guide.articles.slice(0, 3);
+      if (articles.length === 0) {
+        text.push(T.guideReadNone(skill, title, top.title, top.provider));
+        break;
+      }
+      text.push(T.guideReadHead(skill, lead));
+      for (const article of articles) text.push(T.guideArticle(article.title, article.author, article.why));
+      text.push(T.guideReadTail(title));
+      break;
+    }
+  }
+  const note = guideNote(ctx, courseId);
+  if (note) text.push(note);
+  if (here) return reply(text, { tools: ["get_course"] });
+  return guardBlocked(ctx, reply(text, { tools: ["get_course", "navigate"], action: { type: "navigate", to: { screen: "course", courseId } } }));
 }
 
 // ── "The template for that tool" (model turns: 5.5 rules 8, 9, 11) ─────────────────────────────────────────────────

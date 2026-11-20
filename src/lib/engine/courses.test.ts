@@ -9,11 +9,11 @@ import { MINUTE, T0, completed, courseDoneFacts, cvAnalysedFacts, newFacts, onbo
 const t = T0.getTime();
 
 describe("course XP and titles (spec 8.2, «Course titles»)", () => {
-  it("pays 20 XP per hour; 59 courses are 566 hours and 11,320 XP", () => {
+  it("pays 20 XP per hour; 80 courses (59 + the expansion's 21) are 784 hours and 15,680 XP", () => {
     expect(courseXp(getCourse("c-powerbi-1"))).toBe(200);
     expect(courseXp(getCourse("c-statistics-2"))).toBe(240);
-    expect(COURSES.reduce((sum, c) => sum + c.hours, 0)).toBe(566);
-    expect(COURSES.reduce((sum, c) => sum + courseXp(c), 0)).toBe(11_320);
+    expect(COURSES.reduce((sum, c) => sum + c.hours, 0)).toBe(784);
+    expect(COURSES.reduce((sum, c) => sum + courseXp(c), 0)).toBe(15_680);
   });
 
   it("short title = the part before the colon, trimmed; the whole title without one", () => {
@@ -121,7 +121,7 @@ describe("learnList (spec 3.10)", () => {
     const ranks = items.map((id) => rank[courseState(id, f).state]);
     expect(ranks).toEqual([...ranks].sort((a, b) => a - b));
     expect(new Set(items.map((id) => courseState(id, f).state))).toEqual(new Set(["available", "started", "credited", "locked"]));
-    // the data field by hand: available sql-3, python-data-1 · started excel-3 · locked powerbi-2, powerbi-3, dataviz-1, ml-1
+    // the data field by hand: available sql-3, python-data-1 · started excel-3 · locked powerbi-2, powerbi-3, dataviz-1, ml-1, deep-learning-1
     expect(learnList(f, "explore", "data").items).toEqual([
       "c-sql-3",
       "c-python-data-1",
@@ -130,6 +130,7 @@ describe("learnList (spec 3.10)", () => {
       "c-powerbi-3",
       "c-dataviz-1",
       "c-ml-1",
+      "c-deep-learning-1",
     ]);
   });
 

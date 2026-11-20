@@ -1,4 +1,4 @@
-// Dalilak «دليلك» brand: the mark, its small cuts, the wordmark, the lockups, the favicon tiles and the app tile.
+// Dalilak «دليل» brand: the mark, its small cuts, the wordmark, the lockups, the favicon tiles and the app tile.
 // Every colour comes from a token: ink is currentColor, the waypoint is var(--color-accent).
 export { FAVICON_16, FAVICON_32, MARK_16, MARK_24, MARK_32, MARK_FULL, type MarkCut, type TileCut, WORDMARK } from "./geometry";
 export {

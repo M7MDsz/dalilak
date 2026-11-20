@@ -50,7 +50,7 @@ const CITY: readonly QuickReplyOption[] = [
 ];
 
 const GREETING =
-  "أهلاً خالد، أنا دليل، دليلك إلى وظيفتك. سأكون معك من أول خطوة إلى آخرها.\n\nأسألك ستة أسئلة قصيرة لأرسم لك مساراً يناسبك أنت. نبدأ: في أي مدينة أنت الآن؟";
+  "أهلاً خالد، أنا دليلك إلى وظيفتك. سأكون معك من أول خطوة إلى آخرها.\n\nأسألك ستة أسئلة قصيرة لأرسم لك مساراً يناسبك أنت. نبدأ: في أي مدينة أنت الآن؟";
 
 function JobCard({ title = "محلل بيانات", company = "وادي الغيم للبيانات", city = "الرياض", match = 70 }: { title?: string; company?: string; city?: string; match?: number }) {
   return (
@@ -132,10 +132,10 @@ type Canned = { status: string[]; parts: readonly AdvisorPart[]; chips?: readonl
 function cannedFor(intent: string): Canned {
   switch (intent) {
     case "next-step":
-      return { status: ["دليل يفكّر…", "أراجع مسارك…"], parts: ANSWER_NEXT, chips: CHIPS_NEXT };
+      return { status: ["دليلك يفكّر…", "أراجع مسارك…"], parts: ANSWER_NEXT, chips: CHIPS_NEXT };
     case "why-match":
       return {
-        status: ["دليل يفكّر…", "أحسب المطابقة…"],
+        status: ["دليلك يفكّر…", "أحسب المطابقة…"],
         parts: [
           {
             kind: "text",
@@ -146,7 +146,7 @@ function cannedFor(intent: string): Canned {
       };
     case "open-path":
       return {
-        status: ["دليل يفكّر…", "أفتح الصفحة…"],
+        status: ["دليلك يفكّر…", "أفتح الصفحة…"],
         parts: [
           { kind: "receipt", id: "rp", text: "فتحت لك مساري", icon: <IconPath size={18} />, onOpen: () => undefined },
           { kind: "text", text: "تفضّل، هذا مسارك. أنت عند المرحلة 7 من 8، والتالية Power BI." },
@@ -154,7 +154,7 @@ function cannedFor(intent: string): Canned {
       };
     case "open-course":
       return {
-        status: ["دليل يفكّر…", "أفتح الصفحة…"],
+        status: ["دليلك يفكّر…", "أفتح الصفحة…"],
         parts: [
           { kind: "receipt", id: "rcrs", text: "فتحت لك «أساسيات Power BI»", icon: <IconCourses size={18} />, onOpen: () => undefined },
           { kind: "text", text: "تفضّل، فتحت لك «أساسيات Power BI». خمسة دروس، وبعدها تصعد مطابقتك إلى 90%. بالتوفيق." },
@@ -164,7 +164,7 @@ function cannedFor(intent: string): Canned {
       return { status: [], parts: [{ kind: "text", text: "تمام، متى ما أحببت." }] };
     default:
       return {
-        status: ["دليل يفكّر…"],
+        status: ["دليلك يفكّر…"],
         parts: [{ kind: "text", text: "هذه خارج ما أستطيعه هنا. أنا دليلك إلى وظيفتك: أدلّك على خطوتك التالية، أو أفتح لك صفحة، أو أشرح مطابقتك." }],
         chips: FALLBACK_CHIPS,
       };
@@ -254,7 +254,7 @@ function ScriptedPanel({ children }: { children: ReactNode }) {
     setTurns((all) => all.map((t) => (t.id === id && t.who === "daleel" ? { ...t, ...change } : t)));
   }, []);
 
-  /** «دليل» answers: pending (glyph, then the status steps), then the answer. Returns when the answer is in. */
+  /** «دليلك» answers: pending (glyph, then the status steps), then the answer. Returns when the answer is in. */
   const answer = useCallback(
     async (wait: (ms: number) => Promise<void>, canned: Canned) => {
       const id = nextId();
@@ -281,7 +281,7 @@ function ScriptedPanel({ children }: { children: ReactNode }) {
         setQuestion(null);
         setDraft("");
         setResponding(false);
-        onStep("«دليل» يرحّب ويسأل");
+        onStep("«دليلك» يرحّب ويسأل");
         await wait(450);
         // 1. the greeting and the first onboarding question: the glyph alone thinks (350-600 ms), then it focuses in
         const g = nextId();
@@ -301,7 +301,7 @@ function ScriptedPanel({ children }: { children: ReactNode }) {
         await wait(700);
         // 3. the status line rolls through two steps while the glyph seeks, then sweeps
         onStep("الحالة تتدحرج والبوصلة تبحث");
-        await answer(wait, { status: ["دليل يفكّر…", "أبحث في الوظائف…"], parts: ANSWER_JOBS, chips: CHIPS_JOBS });
+        await answer(wait, { status: ["دليلك يفكّر…", "أبحث في الوظائف…"], parts: ANSWER_JOBS, chips: CHIPS_JOBS });
         onStep("الجواب يتّضح: إيصال وبطاقة ورقائق");
         await wait(2300);
         // 4. a typed question sent from the composer
@@ -317,7 +317,7 @@ function ScriptedPanel({ children }: { children: ReactNode }) {
         composer.current?.send();
         await wait(380);
         onStep("الجواب الثاني: فقرة وقائمة وبطاقة دورة");
-        await answer(wait, { status: ["دليل يفكّر…", "أراجع مسارك…"], parts: ANSWER_NEXT, chips: CHIPS_NEXT });
+        await answer(wait, { status: ["دليلك يفكّر…", "أراجع مسارك…"], parts: ANSWER_NEXT, chips: CHIPS_NEXT });
         await wait(1800);
         onStep("انتهى. اكتب أو اختر رقاقة لتجرّب بنفسك");
       } finally {
@@ -397,21 +397,21 @@ function ScriptedPanel({ children }: { children: ReactNode }) {
     <section aria-labelledby="script-h" className="flex flex-col-reverse items-center gap-8 lg:flex-row-reverse lg:items-start" data-testid="section-script">
       {/* the panel, as it will sit in the product: 420 px, the sheet radius, the one floating shadow */}
       <section
-        aria-label="دليل"
+        aria-label="دليلك"
         className="flex h-[680px] w-full max-w-[420px] shrink-0 flex-col overflow-hidden rounded-sheet border border-border bg-surface shadow-float lg:h-[680px]"
         data-testid="chat-panel"
       >
         <header className="flex items-center gap-3 border-b border-border py-3 ps-4 pe-2">
           <DaleelGlyph framed size={40} state={typing ? "listening" : "idle"} />
           <div className="min-w-0 flex-1">
-            <p className="text-title leading-6 text-fg">دليل</p>
-            <p className="text-small text-fg-3">دليلك إلى وظيفتك</p>
+            <p className="text-title leading-6 text-fg">دليلك</p>
+            <p className="text-small text-fg-3">مرشدك إلى وظيفتك</p>
           </div>
           <IconButton icon={<IconNewChat size={20} />} label="محادثة جديدة" onClick={reset} />
           <IconButton icon={<IconClose size={20} />} label="إغلاق" />
         </header>
         <p className="border-b border-border px-4 py-2 text-caption text-fg-3" data-state="local" data-testid="advisor-mode">
-          وضع محلي: دليل يعمل دون اتصال.
+          وضع محلي: دليلك يعمل دون اتصال.
         </p>
         <ChatThread busy={responding} testId="advisor-thread">
           {turns.map((t, i) => {
@@ -614,7 +614,7 @@ function GlyphLab() {
 
 // ------------------------------------------------------------------------------------------------ (a) the status line
 
-const APPLY_STEPS = ["دليل يفكّر…", "أفتح نموذج التقديم…", "أكتب بياناتك…", "أرسل الطلب…"];
+const APPLY_STEPS = ["دليلك يفكّر…", "أفتح نموذج التقديم…", "أكتب بياناتك…", "أرسل الطلب…"];
 
 function StatusDemo() {
   const [run, replay] = useReplay();
@@ -627,7 +627,7 @@ function StatusDemo() {
   const glyph: DaleelState = i === 0 ? "thinking" : "working";
   return (
     <div className="grid gap-4 md:grid-cols-2">
-      <Tile label="Live: the steps roll; the seconds fade in after 4 s («دليل يقدّم عنك»)" testId="status-live">
+      <Tile label="Live: the steps roll; the seconds fade in after 4 s («دليلك يقدّم عنك»)" testId="status-live">
         <div className="flex min-h-12 items-center">
           <RollingStatus glyph={glyph} key={run} label={APPLY_STEPS[i] ?? ""} testId="advisor-status" />
         </div>
@@ -635,7 +635,7 @@ function StatusDemo() {
           أعد التسلسل
         </ReplayButton>
       </Tile>
-      <Tile label="The same line inside «دليل»'s message (the glyph sits beside the message)">
+      <Tile label="The same line inside «دليلك»'s message (the glyph sits beside the message)">
         <AdvisorMessage activity="working" key={run} startedAt={undefined} state="pending" status="أبحث في الوظائف…" />
         <AdvisorMessage activity="thinking" state="pending" />
         <p className="text-caption text-fg-3">Without a status: the onboarding wait (350-600 ms), the glyph alone.</p>
@@ -722,7 +722,7 @@ function ComposerDemo() {
             testIds={{ input: "composer-live-input", send: "composer-live-send", stop: "composer-live-stop" }}
           />
         </div>
-        <p className="text-caption text-fg-3">After a send the round button is Stop for 1.8 s (as while «دليل» answers), then the arrow returns from below.</p>
+        <p className="text-caption text-fg-3">After a send the round button is Stop for 1.8 s (as while «دليلك» answers), then the arrow returns from below.</p>
       </Tile>
       <div className="flex flex-col gap-4">
         <Tile label="Closed (the pill) · onboarding placeholder">
@@ -735,7 +735,7 @@ function ComposerDemo() {
           <Composer onSend={() => undefined} responding />
         </Tile>
         <Tile label="Disabled, with its hint">
-          <Composer disabled disabledHint="دليل يملأ الطلب الآن. لحظات وينتهي." onSend={() => undefined} />
+          <Composer disabled disabledHint="دليلك يملأ الطلب الآن. لحظات وينتهي." onSend={() => undefined} />
         </Tile>
       </div>
     </div>
@@ -824,7 +824,7 @@ function ApplyDemo() {
   const busy = step !== "idle" && step !== "done" && step !== "stopped";
   return (
     <div className="grid gap-4 lg:grid-cols-[1.3fr_1fr]">
-      <Tile label="«دليل» fills the real form while the user watches: letters for fields, words for the note" testId="apply-demo">
+      <Tile label="«دليلك» fills the real form while the user watches: letters for fields, words for the note" testId="apply-demo">
         <div className="flex flex-col gap-4">
           <div className="flex min-h-8 items-center gap-3">
             {busy ? <RollingStatus glyph={step === "open" ? "thinking" : "working"} label={status} /> : null}
@@ -856,11 +856,11 @@ function ApplyDemo() {
       </Tile>
       <Tile label="Play it">
         <p className="text-body text-fg-2">
-          الحقول تكتب نفسها بالترتيب، وعلامة «دليل» الصغيرة تنتقل من حقل إلى حقل، ثم يُضغط زر الإرسال أمامك. «إيقاف» أثناء الكتابة يُبقي ما كُتب ويجعله قابلاً للتعديل.
+          الحقول تكتب نفسها بالترتيب، وعلامة «دليلك» الصغيرة تنتقل من حقل إلى حقل، ثم يُضغط زر الإرسال أمامك. «إيقاف» أثناء الكتابة يُبقي ما كُتب ويجعله قابلاً للتعديل.
         </p>
         <div className="flex flex-wrap gap-2">
           <Button data-testid="apply-play" icon={<IconPlay size={20} />} iconPosition="start" onClick={fill} variant="secondary">
-            دع دليل يقدّم عنك
+            دع دليلك يقدّم عنك
           </Button>
         </div>
         <p className="text-caption text-fg-3" data-testid="apply-step" data-value={step}>
@@ -881,7 +881,7 @@ function StageDemo() {
         <div className="flex items-center gap-4">
           <DaleelGlyph framed size={40} state="thinking" />
           <DaleelGlyph size={28} state="working" />
-          <RollingStatus glyph="thinking" label="دليل يرسم مسارك…" />
+          <RollingStatus glyph="thinking" label="دليلك يرسم مسارك…" />
         </div>
         <UserMessage avatar={ME.avatar} entrance="none" name={ME.name}>
           افتح مساري
@@ -890,7 +890,7 @@ function StageDemo() {
       </div>
       <div className="relative flex flex-col justify-end gap-4">
         <ReplyChips chips={CHIPS_NEXT} restored />
-        <Composer onSend={() => undefined} placeholder="اسأل دليل عن مسارك…" />
+        <Composer onSend={() => undefined} placeholder="اسأل دليلك عن مسارك…" />
         <Composer onSend={() => undefined} responding />
       </div>
     </Stage>
@@ -904,7 +904,7 @@ export default function ChatGallery() {
     () => (
       <ul className="flex flex-col gap-2 text-body text-fg-2">
         <li>
-          <b className="font-semibold text-fg">الجانبان:</b> «دليل» يتكلّم من بداية السطر (اليمين) ومعه بوصلته؛ رسائل المستخدم في نهايته (اليسار) ومعها صورته، في جهة زر الإرسال الذي تخرج منه.
+          <b className="font-semibold text-fg">الجانبان:</b> «دليلك» يتكلّم من بداية السطر (اليمين) ومعه بوصلته؛ رسائل المستخدم في نهايته (اليسار) ومعها صورته، في جهة زر الإرسال الذي تخرج منه.
         </li>
         <li>
           <b className="font-semibold text-fg">ما يتحرّك:</b> الفقاعة تقفز من زاوية الإرسال، الحالة تتدحرج والضوء يمرّ عليها، الإبرة تبحث ثم تستقر، والجواب يتّضح كتلةً كتلة.
@@ -923,7 +923,7 @@ export default function ChatGallery() {
           /dev/chat · chat kit · Dalilak
         </p>
         <h1 className="text-h1 text-fg">عُدّة المحادثة</h1>
-        <p className="max-w-3xl text-body text-fg-2">قطع المحادثة التي تبني محادثة التعارف ولوحة «دليل»: بوصلته الحيّة، سطر الحالة، الفقاعات، المحرّر، الرقائق، والحقل الذي يكتبه بنفسه.</p>
+        <p className="max-w-3xl text-body text-fg-2">قطع المحادثة التي تبني محادثة التعارف ولوحة «دليلك»: بوصلته الحيّة، سطر الحالة، الفقاعات، المحرّر، الرقائق، والحقل الذي يكتبه بنفسه.</p>
       </header>
 
       {/* (b) the scripted conversation */}
@@ -935,7 +935,7 @@ export default function ChatGallery() {
         {sides}
       </ScriptedPanel>
 
-      <Section id="glyph" note="بوصلة «دليل»: الإبرة تشير إلى العلامة في فتحة الحلقة. هي الجزء الوحيد الذي يتحرّك، وحلقتها الدائرة هي إحدى الحلقات الخمس المسموحة." title="DaleelGlyph">
+      <Section id="glyph" note="بوصلة «دليلك»: الإبرة تشير إلى العلامة في فتحة الحلقة. هي الجزء الوحيد الذي يتحرّك، وحلقتها الدائرة هي إحدى الحلقات الخمس المسموحة." title="DaleelGlyph">
         <GlyphLab />
       </Section>
 
@@ -955,7 +955,7 @@ export default function ChatGallery() {
         <QuickRepliesDemo />
       </Section>
 
-      <Section id="typed" note="TypedField: حقل حقيقي يملؤه «دليل» أمام المستخدم في التقديم، بمؤشّر يومض وعلامة صغيرة تنتقل بين الحقول." title="TypedField">
+      <Section id="typed" note="TypedField: حقل حقيقي يملؤه «دليلك» أمام المستخدم في التقديم، بمؤشّر يومض وعلامة صغيرة تنتقل بين الحقول." title="TypedField">
         <ApplyDemo />
       </Section>
 

@@ -326,7 +326,7 @@ Not every family has a variable package (one Arabic family checked had only the 
 import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
-  title: { default: "دليلك", template: "دليلك · %s" }, // tab title per PRODUCT-SPEC 2.2: «دليلك · {page heading}»
+  title: { default: "دليل", template: "دليل · %s" }, // tab title per PRODUCT-SPEC 2.2: «دليل · {page heading}»
   description: "...",
 };
 export const viewport: Viewport = { themeColor: "#0b0f14", width: "device-width", initialScale: 1 };

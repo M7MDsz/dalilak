@@ -59,7 +59,7 @@ describe("next step (spec 2.8)", () => {
   });
 
   it("rule 4 also when applied to another job only", () => {
-    const ready = applied(completed(courseDoneFacts(), "c-statistics-2", t + 20 * MINUTE, 240), "business-analyst-riyadh", t + 30 * MINUTE, 60);
+    const ready = applied(completed(courseDoneFacts(), "c-statistics-2", t + 20 * MINUTE, 240), "syarah-financial-analyst-tamheer-riyadh", t + 30 * MINUTE, 60);
     expect(nextStep(ready)).toEqual({ rule: 4, jobId: "data-analyst-riyadh" });
   });
 

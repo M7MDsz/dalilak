@@ -1,6 +1,6 @@
 // Owner: map. The whole drawing of the map sheet, computed from the roadmap and the sheet's size. Pure and deterministic:
-// no React, no DOM, no randomness, nothing hand-placed for one path. The trail is ONE curve (a straight climb with a gentle
-// sway); every coin, label anchor, ground shadow, terrace edge, altitude mark, branch and opening delay is derived from it,
+// no React, no DOM, no randomness, nothing hand-placed for one path. The trail is ONE curve (a serpentine that winds left
+// and right, one bend per station, 20 Nov); every coin, label anchor, ground shadow, terrace edge, altitude mark, branch and opening delay is derived from it,
 // for 6 to 11 stages plus the start gate, the start and the goal, on a 366 px phone sheet and on a wide desktop sheet.
 // Ported from design/explore/darb/map/final-home.build.mjs (the approved page) and generalised from its one demo path.
 import type { Roadmap, RoadmapStage } from "@/lib/types";
@@ -288,7 +288,7 @@ function legs(nodes: readonly Node[], small: boolean, size: { readonly unit: num
   return { unit, lengths: fixeds.map((f, i) => f + (weights[i] ?? 0) * unit) };
 }
 
-const padTop = (small: boolean) => (small ? 88 : 124);
+const padTop = (small: boolean) => (small ? 96 : 124);
 const padBottom = (small: boolean) => (small ? 20 : 26);
 
 /** The lowest sheet that still gives every station room to be pointed at (11 stages on a phone need more than one screen). */
@@ -306,15 +306,12 @@ export function buildGeometry(roadmap: Roadmap, size: SheetSize): MapGeometry {
   const W = size.width;
   const H = size.height;
   const small = W < 560;
-  const cx = W * (small ? 0.625 : 0.583);
+  // on the phone the centre line sits a little left of where the straight trail stood (0.625): the left bends are
+  // shallow (the labels' room), the right bends take the swing, and «أنت هنا», which hangs right, stays on the sheet
+  const cx = W * (small ? 0.58 : 0.583);
   const yT = padTop(small);
   const yS = H - padBottom(small);
   const span = yS - yT;
-  const amp = small ? 13 : clamp(W * 0.03, 16, 24);
-  const sway = (y: number) => {
-    const t = (yS - y) / span;
-    return cx + amp * (0.82 * Math.sin(2 * Math.PI * (t * 1.12 + 0.07)) + 0.3 * Math.sin(2 * Math.PI * (t * 2.5 + 0.33)));
-  };
 
   const nodes = nodesOf(roadmap);
   const { unit, lengths } = legs(nodes, small, { fit: span });
@@ -322,17 +319,87 @@ export function buildGeometry(roadmap: Roadmap, size: SheetSize): MapGeometry {
   const rDone = clamp(unit * 0.45, 13, 20);
   const rAhead = Math.min(rDone + 1, small ? 20 : 21);
   const rNow = small ? (dense ? 22 : 24) : dense ? 25 : 27;
-  // the lit station's card label is ~330 px wide with its second line: it must fit between the sheet's edge and the coin
-  const roomy = !small && cx - amp - rNow - 20 - 8 >= 340;
+  const radius = (node: Node) => r1(node.look === "now" ? rNow : node.look === "done" ? rDone : rAhead);
 
+  // ── the serpentine (owner, 20 Nov): the road winds left and right, one bend per station. Every station stands on the
+  // crest of a bend (the road runs straight up through its coin), the bends alternate, and the lit station is always a
+  // LEFT bend: its card label hangs left, on the outside of the bend, so no road ever runs under it. Labels stay on the
+  // left everywhere (one reading line); a right bend's label is on the inside, so its swing is held to what keeps the
+  // road clear of that label. The trailhead is a bend too (opposite the first station); the road reaches the goal on
+  // the centre line.
+  const ampMax = small ? clamp(W * 0.06, 14, 22) : clamp(W * 0.08, 36, 64);
+  // the lit station's card is ~330 px wide with its second line (~350 px in the game theme's type): it must fit between
+  // the sheet's edge and the coin. A left bend may swing only as far as still leaves the card that room; a sheet with no
+  // such room drops the extras.
+  let ampLeft = small ? Math.min(ampMax, 8) : ampMax;
+  let roomy = false;
+  if (!small) {
+    const fit = cx - rNow - 20 - 8 - 362;
+    if (fit >= 8) {
+      ampLeft = Math.min(ampMax, fit);
+      roomy = true;
+    }
+  }
   let y = yS;
-  const placed = nodes.map((node, i) => {
+  const ys = nodes.map((_, i) => {
     y -= lengths[i] ?? unit;
-    return { ...node, y: r1(y), x: r1(sway(y)), r: r1(node.look === "now" ? rNow : node.look === "done" ? rDone : rAhead) };
+    return r1(y);
+  });
+  const nowAt = nodes.findIndex((n) => n.look === "now");
+  const anchor = nowAt >= 0 ? nowAt : nodes.length - 1;
+  /** -1 = a left bend, 1 = a right bend; i = -1 is the trailhead. */
+  const sideOf = (i: number): -1 | 1 => ((anchor - i) % 2 === 0 ? -1 : 1);
+  /** Half the height of a station's label (its paper backing), by what the label shows. */
+  const halfLabel = (node: Node | null) => {
+    if (node === null) return small ? 10 : 12;
+    if (node.look === "ahead" && !dense) return small ? 21 : 25;
+    return small ? 11 : 13;
+  };
+  // the trailhead sign's corner (wide sheets): a right bend standing in it stays on the centre line, so the corner keeps
+  // its room (the sign is still drawn only if nothing reaches it, below)
+  const bandTop = H - SIGN.inset - SIGN.height;
+  const knots: { y: number; x: number; side: -1 | 1; r: number; node: Node | null }[] = [
+    { y: yS, x: 0, side: sideOf(-1), r: small ? 7 : 9, node: null },
+    ...nodes.map((node, i) => ({ y: ys[i] ?? yS, x: 0, side: sideOf(i), r: radius(node), node })),
+  ];
+  for (const k of knots) k.x = k.side < 0 ? cx - ampLeft : cx + ampMax;
+  // the goal stands on the centre line
+  const summitKnot = { y: yT, x: cx };
+  knots.forEach((k, i) => {
+    if (k.side < 0) return;
+    if (!small && k.y + k.r >= bandTop - 6) k.x = cx;
+    // the inside label: the road must not swing under it within its height, toward either neighbour
+    const hh = halfLabel(k.node) + 3;
+    for (const nb of [knots[i - 1], knots[i + 1] ?? summitKnot]) {
+      if (nb === undefined) continue;
+      const leg = Math.abs(k.y - nb.y);
+      const c = 1 - Math.cos(Math.PI * Math.min(1, hh / Math.max(1, leg)));
+      if (c > 0) k.x = Math.min(k.x, nb.x + (2 * (k.r + 7)) / c);
+    }
+    k.x = r1(Math.max(k.x, cx - ampLeft));
+  });
+  const path = [...knots.map((k) => ({ y: k.y, x: k.x })), summitKnot];
+  /** The road's x at height y: half a cosine from one bend's crest to the next (no corner anywhere). */
+  const sway = (yy: number) => {
+    for (let i = 1; i < path.length; i++) {
+      const a = path[i - 1];
+      const b = path[i];
+      if (a === undefined || b === undefined) continue;
+      if (yy >= b.y || i === path.length - 1) {
+        const t = a.y === b.y ? 1 : clamp((a.y - yy) / (a.y - b.y), 0, 1);
+        return a.x + ((b.x - a.x) * (1 - Math.cos(Math.PI * t))) / 2;
+      }
+    }
+    return cx;
+  };
+
+  const placed = nodes.map((node, i) => {
+    const k = knots[i + 1];
+    return { ...node, y: ys[i] ?? yS, x: r1(k !== undefined ? k.x : cx), r: radius(node) };
   });
 
-  const start = { x: r1(sway(yS)), y: yS, r: small ? 7 : 9 };
-  const summit = { x: r1(sway(yT)), y: yT, r: small ? 12 : 15 };
+  const start = { x: r1(knots[0]?.x ?? cx), y: yS, r: small ? 7 : 9 };
+  const summit = { x: r1(summitKnot.x), y: yT, r: small ? 12 : 15 };
   const nowIndex = placed.findIndex((p) => p.look === "now");
   const now = nowIndex >= 0 ? placed[nowIndex] : undefined;
   const prevOfNow = nowIndex > 0 ? placed[nowIndex - 1] : undefined;
@@ -343,7 +410,7 @@ export function buildGeometry(roadmap: Roadmap, size: SheetSize): MapGeometry {
   // the trail as a fine polyline, bottom to top
   const poly = (ya: number, yb: number): [number, number][] => {
     const out: [number, number][] = [];
-    const n = Math.max(2, Math.ceil((ya - yb) / 3));
+    const n = Math.max(2, Math.ceil((ya - yb) / 2));
     for (let i = 0; i <= n; i++) {
       const yy = ya - ((ya - yb) * i) / n;
       out.push([sway(yy), yy]);
@@ -502,7 +569,8 @@ export function buildGeometry(roadmap: Roadmap, size: SheetSize): MapGeometry {
   }
   const innermost = sorted[0];
   if (innermost !== undefined) rings.push({ d: innermost * 0.45, tint: -1, pct: null, y: 0 });
-  for (const extra of [70, 150, 250, 370, 520, 700, 920, 1200, 1550]) rings.push({ d: baseD + extra * (small ? 0.7 : 1), tint: -1, pct: null, y: 0 });
+  // a few faint contours beyond the trailhead, wider apart as the land falls away (calm: the dotted grid carries the rest)
+  for (const extra of [90, 260, 520, 880, 1350]) rings.push({ d: baseD + extra * (small ? 0.7 : 1), tint: -1, pct: null, y: 0 });
   rings.sort((a, b) => b.d - a.d);
   const cliff = small ? 3 : 4;
   const bands: Band[] = [];
@@ -515,7 +583,7 @@ export function buildGeometry(roadmap: Roadmap, size: SheetSize): MapGeometry {
   }
   const marks = rings
     .filter((r) => r.tint > 0 && r.pct !== null && r.pct !== roadmap.match && r.pct !== 100)
-    .map((r) => ({ x: r1(sway(r.y) + (small ? 13 : 17)), y: r1(r.y + cliff / 2), pct: r.pct ?? 0 }));
+    .map((r) => ({ x: r1(Math.max(...[-12, -6, 0, 6, 12].map((dy) => sway(r.y + dy))) + (small ? 13 : 17)), y: r1(r.y + cliff / 2), pct: r.pct ?? 0 }));
   const crosses = (
     [
       [0.09, 0.3],
@@ -555,7 +623,6 @@ export function buildGeometry(roadmap: Roadmap, size: SheetSize): MapGeometry {
   const youH = small ? 38 : 48;
   let sign: { maxWidth: number } | null = null;
   if (!small) {
-    const bandTop = H - SIGN.inset - SIGN.height;
     let reach = start.x + start.r;
     for (const [px, py] of poly(yS, Math.max(yT, bandTop - road))) if (py >= bandTop - road) reach = Math.max(reach, px + road / 2);
     for (const p of placed) if (p.y + p.r >= bandTop - 6) reach = Math.max(reach, p.x + p.r);

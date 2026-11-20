@@ -11,16 +11,14 @@ export const APPLICATIONS_COPY = {
   sentPrefix: "قدّمت",
   matchThen: "مطابقتك عند التقديم",
   matchNow: "مطابقتك الآن",
-  byAdvisor: "قدّم عنك دليل",
-  /** Where «دليل» sent it (APPLY_SITES, simulated). */
-  sentVia: "أُرسل عبر:",
-  dalilak: "دليلك",
-  sitesNote: "التقديم في المواقع محاكاة للعرض.",
+  byAdvisor: "قدّم عنك دليلك",
+  /** A real job's application (20 Nov 2026): prepared here, sent by the user from the posting. */
+  prepared: "جاهز للإرسال",
   openJob: "عرض الوظيفة",
   advance: "محاكاة: انقل للحالة التالية",
   seeGap: "شاهد الفجوة",
   emptyTitle: "لم تقدّم على أي وظيفة بعد.",
-  emptyBody: "ابدأ بالوظائف الأقرب لمهاراتك، أو اطلب من دليل أن يقدّم عنك.",
+  emptyBody: "ابدأ بالوظائف الأقرب لمهاراتك، أو اطلب من دليلك أن يقدّم عنك.",
   emptyAction: "استعرض الوظائف",
 } as const;
 

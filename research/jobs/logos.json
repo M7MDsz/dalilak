@@ -1,0 +1,211 @@
+{
+  "checkedAt": "2026-11-20",
+  "logos": {
+    "jeeny": {
+      "nameEn": "Jeeny",
+      "nameAr": "جيني",
+      "file": "/logos/jeeny.svg",
+      "source": "https://www.jeeny.me/static/images/v2/Layer%202.svg",
+      "page": "https://www.jeeny.me/en/"
+    },
+    "ninja": {
+      "nameEn": "Ninja",
+      "nameAr": "نينجا",
+      "file": "/logos/ninja.png",
+      "source": "https://web-assets.ananinja.com/_next/static/media/Logo-black.2dlyrn_dty-e_.png",
+      "page": "https://ananinja.com/sa/ar"
+    },
+    "salla": {
+      "nameEn": "Salla",
+      "nameAr": "سلة",
+      "file": "/logos/salla.svg",
+      "source": "https://salla.com/",
+      "page": "https://salla.com/",
+      "note": "Inline SVG of the page header logo (#svg-922467710_4836) saved as a file; only xmlns added and page CSS classes removed."
+    },
+    "lucidya": {
+      "nameEn": "Lucidya",
+      "nameAr": "لوسيديا",
+      "file": "/logos/lucidya.svg",
+      "source": "https://cdn.prod.website-files.com/6422dc643df0a7ee2f09cf09/688db6585e24d565f977f427_logo-container.svg",
+      "page": "https://www.lucidya.com/"
+    },
+    "almajed-oud": {
+      "nameEn": "Almajed 4 Oud",
+      "nameAr": "الماجد للعود",
+      "file": "/logos/almajed-oud.png",
+      "source": "https://cdn.salla.sa/OqeQlR/nXCR6C2cOFuSv1iTLqtEoGAdovWmzeLmjn14NvN5.png",
+      "page": "https://sa.almajed4oud.com/ar",
+      "note": "The logo (og:image) of the official online store; almajed4oud.com redirects there."
+    },
+    "horizontal-digital": {
+      "nameEn": "Horizontal Digital",
+      "nameAr": "هورايزنتال ديجيتال",
+      "file": "/logos/horizontal-digital.svg",
+      "source": "https://www.horizontaldigital.com/",
+      "page": "https://www.horizontaldigital.com/",
+      "note": "Inline SVG of the page header logo saved as a file; its colour comes from the site CSS (light theme: neutral black), so fill=\"white\" was set to #000000."
+    },
+    "flyakeed": {
+      "nameEn": "FlyAkeed",
+      "nameAr": "فلاي أكيد",
+      "file": "/logos/flyakeed.png",
+      "source": "https://www.flyakeed.com/view/assets/images/logo/new/FlyAkeed%20English%20Logo.png",
+      "page": "https://www.flyakeed.com/",
+      "note": "Logo file referenced by the site stylesheet https://www.flyakeed.com/view/assets/css/helper.css."
+    },
+    "hungerstation": {
+      "nameEn": "HungerStation (Delivery Hero)",
+      "nameAr": "هنقرستيشن",
+      "file": "/logos/hungerstation.svg",
+      "source": "https://hungerstation.com/_next/static/media/hungerstation-logo-shadow.1vx_waus0h43y.svg",
+      "page": "https://hungerstation.com/sa-ar"
+    },
+    "syarah": {
+      "nameEn": "Syarah",
+      "nameAr": "سيارة",
+      "file": "/logos/syarah.svg",
+      "source": "https://cdn-frontend-r2.syarah.com/prod/assets/images/logoN.svg",
+      "page": "https://syarah.com/"
+    },
+    "foodics": {
+      "nameEn": "Foodics",
+      "nameAr": "فودكس",
+      "file": "/logos/foodics.svg",
+      "source": "https://www.foodics.com/wp-content/uploads/2021/12/foodics-logo.svg",
+      "page": "https://www.foodics.com/"
+    },
+    "atheer": {
+      "nameEn": "Atheer ACT",
+      "nameAr": "أثير",
+      "file": "/logos/atheer.png",
+      "source": "https://cdn.prod.website-files.com/66f1448a5b1cb6e6c446f6fe/670f4b3238086c796dd43b8d_Atheer_Webclip.png",
+      "page": "https://atheer-ct.com/",
+      "note": "The site apple-touch-icon (white mark on blue); the header logo is white-only. Website taken from the Workable posting (www.atheer-ct.com)."
+    },
+    "tamara": {
+      "nameEn": "Tamara",
+      "nameAr": "تمارا",
+      "file": "/logos/tamara.svg",
+      "source": "https://cdn.prod.website-files.com/67c184892f7a84b971ff49d9/68931b49f2808979578bdc64_tamara-text-logo-black-en.svg",
+      "page": "https://tamara.co/en-sa"
+    },
+    "aramco": {
+      "nameEn": "Saudi Aramco",
+      "nameAr": "أرامكو السعودية",
+      "file": "/logos/aramco.png",
+      "source": "https://www.aramco.jobs/images/librariesprovider2/default-album/logo.png?sfvrsn=74934ab7_12",
+      "page": "https://www.aramco.jobs/",
+      "note": "Header logo of Aramco’s careers site; www.aramco.com timed out on 20 Nov."
+    },
+    "stc": {
+      "nameEn": "stc",
+      "nameAr": "stc",
+      "file": "/logos/stc.svg",
+      "source": "https://www.stc.com.sa/content/dam/stc/footer-icons/stc-badge-purple.svg",
+      "page": "https://www.stc.com.sa/en/personal/home.html",
+      "note": "The organization logo named in the page’s schema.org data."
+    },
+    "zatca": {
+      "nameEn": "Zakat, Tax and Customs Authority (ZATCA)",
+      "nameAr": "هيئة الزكاة والضريبة والجمارك",
+      "file": "/logos/zatca.svg",
+      "source": "https://zatca.gov.sa/_layouts/15/zatca/Design/images/ZATCA-logo.svg",
+      "page": "https://zatca.gov.sa/ar/Pages/default.aspx"
+    },
+    "mobily": {
+      "nameEn": "Mobily",
+      "nameAr": "موبايلي",
+      "file": "/logos/mobily.svg",
+      "source": "https://www.mobily.com.sa/web/ar/home/personal",
+      "page": "https://www.mobily.com.sa/web/ar/home/personal",
+      "note": "Inline SVG of the page header logo (the Mobily mark) saved as a file, unchanged."
+    },
+    "ejada": {
+      "nameEn": "Ejada Systems",
+      "nameAr": "إجادة للأنظمة",
+      "file": "/logos/ejada.png",
+      "source": "https://www.ejada.com/documents/44644/0/ejada_logo.png/d539aad0-f6c6-dc1d-4bb6-c433bcfbcc3b",
+      "page": "https://www.ejada.com/"
+    },
+    "neom": {
+      "nameEn": "NEOM",
+      "nameAr": "نيوم",
+      "file": "/logos/neom.png",
+      "source": "https://www.neom.com/content/dam/neom/archived/favicons/favicon-192x192.png",
+      "page": "https://www.neom.com/en-us",
+      "note": "The NEOM mark from the site icon set; the full logo in the page’s schema.org data has white lettering for dark backgrounds."
+    },
+    "roshn": {
+      "nameEn": "ROSHN",
+      "nameAr": "روشن",
+      "file": "/logos/roshn.svg",
+      "source": "https://www.roshn.sa/images/roshn-footer-rebrand-logo.svg",
+      "page": "https://www.roshn.sa/"
+    },
+    "tabby": {
+      "nameEn": "Tabby",
+      "nameAr": "تابي",
+      "file": "/logos/tabby.svg",
+      "source": "https://tabby.ai/en-AE",
+      "page": "https://tabby.ai/en-AE",
+      "note": "Inline SVG of the page header logo saved as a file; fill=\"currentColor\" set to #000000 (black, as on the page)."
+    },
+    "almarai": {
+      "nameEn": "Almarai",
+      "nameAr": "المراعي",
+      "file": "/logos/almarai.svg",
+      "source": "https://almmedia.almarai.com/assets/images/almarai.svg",
+      "page": "https://www.almarai.com/ar"
+    },
+    "pif": {
+      "nameEn": "Public Investment Fund (PIF)",
+      "nameAr": "صندوق الاستثمارات العامة",
+      "file": "/logos/pif.svg",
+      "source": "https://www.pif.gov.sa/-/media/project/pif-corporate/pif-corporate-site/global/logo.svg",
+      "page": "https://www.pif.gov.sa/en/"
+    },
+    "misk": {
+      "nameEn": "Misk Foundation",
+      "nameAr": "مؤسسة مسك",
+      "file": "/logos/misk.png",
+      "source": "https://misk.org.sa/wp-content/uploads/2021/11/misk-21-logo-light-ar-768x441.png",
+      "page": "https://misk.org.sa/"
+    },
+    "maharah": {
+      "nameEn": "Maharah Human Resources Company",
+      "nameAr": "شركة مهارة للموارد البشرية",
+      "file": "/logos/maharah.svg",
+      "source": "https://maharah.com/wp-content/uploads/2021/08/logo-icon.svg",
+      "page": "https://maharah.com/",
+      "note": "The Maharah mark (dark navy) shown on the home page. The full header logo (/wp-content/uploads/2021/08/logo.svg) has white lettering for a dark header, so it would vanish on a light card. maharah.com.sa is a different company (operations and maintenance contracting)."
+    }
+  },
+  "missing": [
+    {
+      "nameEn": "Qiddiya Investment Company",
+      "nameAr": "شركة القدية للاستثمار",
+      "reason": "qiddiya.com answers plain requests with a Cloudflare bot check (403 \"Just a moment...\"); no official logo file could be downloaded."
+    },
+    {
+      "nameEn": "Master-Works (also \"Master-Works (Nabeh)\")",
+      "nameAr": "ماستر ووركس",
+      "reason": "master-works.sa only has a white logo (/themes/custom/master_works/logo.png, made for its dark header), invisible on a light card; no dark version on the site."
+    },
+    {
+      "nameEn": "Platinumlist",
+      "nameAr": "بلاتينوم ليست",
+      "reason": "platinumlist.net sends plain requests to a Queue-it waiting room; the page with the logo did not load."
+    },
+    {
+      "nameEn": "SABIC",
+      "nameAr": "سابك",
+      "reason": "www.sabic.com did not serve its page to a plain request (307 redirect loop); the only logo reachable on its careers site jobs.sabic.com is a 75x40 PNG, below the 128 px minimum."
+    },
+    {
+      "nameEn": "Zain KSA",
+      "nameAr": "زين السعودية",
+      "reason": "sa.zain.com rejects direct downloads of its logo files (\"Request Rejected\" bot protection), although the home page opened."
+    }
+  ]
+}

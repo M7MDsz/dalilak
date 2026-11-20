@@ -3,7 +3,7 @@
        drawing when the browser rasters it above 24 px.
        A favicon cannot read CSS variables, so this file, and only this file in src, carries hex values: the CURRENT tokens
        color-stage #0b1b38, color-on-stage #f4f7fc and color-accent #f54d38.
-       Generated 2026-11-18; if the palette changes, regenerate it with: node artifacts/foundation/brand/tools/export.mjs -->
+       Generated 2026-11-20; if the palette changes, regenerate it with: node artifacts/foundation/brand/tools/export.mjs -->
   <style>
     .c32 { display: none; }
     @media (min-width: 25px) { .c16 { display: none; } .c32 { display: inline; } }

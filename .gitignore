@@ -30,3 +30,7 @@ design/explore/**/shots/
 /design/explore/**/_research/
 /design/explore/**/_scratch*/
 /tsconfig.tsbuildinfo
+
+# Python bytecode (research generators)
+__pycache__/
+*.pyc

@@ -1,5 +1,5 @@
 "use client";
-// The CV results as loot (docs/GAME-LAYER.md 4.7): every skill «دليل» found is a card you collected, with its stars and the
+// The CV results as loot (docs/GAME-LAYER.md 4.7): every skill «دليلك» found is a card you collected, with its stars and the
 // sentence that proves it (P4: evidence over assertion). Cards are read, not pressed, so they lie flat. LootReveal lands them
 // one after another (pop, under 480 ms in total) when the results arrive; nothing moves after that.
 import { motion } from "motion/react";

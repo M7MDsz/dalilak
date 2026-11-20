@@ -6,8 +6,8 @@ export const BADGES: readonly Badge[] = [
   {
     id: "first-steps",
     name: "الخطوة الأولى",
-    description: "أكملت التعارف مع دليل.",
-    hint: "أكمل التعارف مع دليل.",
+    description: "أكملت التعارف مع دليلك.",
+    hint: "أكمل التعارف مع دليلك.",
   },
   {
     id: "goal-set",
@@ -29,15 +29,15 @@ export const BADGES: readonly Badge[] = [
   },
   {
     id: "first-course",
-    name: "أول دورة",
-    description: "أكملت أول دورة.",
-    hint: "أكمل دورة واحدة.",
+    name: "أول خطوة تعلّم",
+    description: "أتممت أول خطوة تعلّم.",
+    hint: "أتمّ خطوة تعلّم واحدة.",
   },
   {
     id: "five-courses",
-    name: "خمس دورات",
-    description: "أكملت خمس دورات.",
-    hint: "أكمل خمس دورات.",
+    name: "خمس خطوات تعلّم",
+    description: "أتممت خمس خطوات تعلّم.",
+    hint: "أتمّ خمس خطوات تعلّم.",
   },
   {
     id: "streak-3",

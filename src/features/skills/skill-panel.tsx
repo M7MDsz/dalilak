@@ -1,7 +1,7 @@
 "use client";
 // Owner: skills. The skill panel (spec 3.5): what a skill is, where each of its stars came from, what it needs, the
-// next star's course, and the jobs that require it. A centred dialog from 1024 px, a bottom sheet on phones (spec 2.4),
-// opened by the URL (`/skills?skill=powerbi`, so «دليل» and QA can open it, and the advisor sees which skill is open).
+// next star's guide, and the jobs that require it. A centred dialog from 1024 px, a bottom sheet on phones (spec 2.4),
+// opened by the URL (`/skills?skill=powerbi`, so «دليلك» and QA can open it, and the advisor sees which skill is open).
 //
 // It is the design system's Sheet, rebuilt here (same Base UI Dialog, same classes and transitions) for one reason: the
 // spec names a test id for the close control (`skills-panel-close`) and Sheet's close button takes none. See the
@@ -12,9 +12,9 @@ import { useRef, type ReactNode } from "react";
 
 import { IconArrowForward, IconCheckCircle, IconClose, IconEvidence, IconJobs, IconLock, IconStarFilled, IconTarget } from "@/components/icons";
 import { Button, SkillStars, XpValue, buttonStyles, cn } from "@/components/ui";
-import { joinWithAnd, starsOf } from "@/lib/copy";
+import { guideTitle, joinWithAnd, starsOf } from "@/lib/copy";
 import { getCourse, getField, getSkill } from "@/lib/data";
-import { courseState, courseXp, jobsRequiringSkill, shortTitle, starSources } from "@/lib/engine";
+import { courseState, courseXp, jobsRequiringSkill, starSources } from "@/lib/engine";
 import { courseIdFor } from "@/lib/ids";
 import { tween } from "@/lib/motion";
 import { hrefFor } from "@/lib/routes";
@@ -25,7 +25,10 @@ import { COPY, fromCourse, jobsLine, lockedLine, nextStarParts, openPrereq, requ
 import { FieldIcon } from "./field-icon";
 import { missingPrereqs } from "./model";
 
-/** Consecutive stars with the same source are one row (the CV that proved Excel ★★ is one sentence, drawn once). */
+/**
+ * Consecutive stars with the same source are one row (the CV that proved Excel ★★ is one sentence, drawn once). Stars
+ * earned through the skill's guide are one row too: every learning step of a skill opens the same «دليل Power BI».
+ */
 function groupSources(sources: readonly StarSource[]): { stars: number; source: StarSource }[] {
   const out: { stars: number; source: StarSource }[] = [];
   for (const s of sources) {
@@ -33,7 +36,7 @@ function groupSources(sources: readonly StarSource[]): { stars: number; source: 
     const same =
       last !== undefined &&
       last.source.source === s.source &&
-      (s.source === "cv" ? last.source.source === "cv" && last.source.evidence === s.evidence : last.source.source === "course" && last.source.courseId === s.courseId);
+      (s.source === "cv" ? last.source.source === "cv" && last.source.evidence === s.evidence : last.source.source === "course" && guideTitle(last.source.courseId) === guideTitle(s.courseId));
     if (same) last.stars += 1;
     else out.push({ stars: 1, source: s });
   }
@@ -82,7 +85,7 @@ export function SkillPanel({
   readonly onStart: (courseId: CourseId) => void;
   readonly onJobs: (skill: SkillId) => void;
 }): ReactNode {
-  // Focus lands on the title (read first by a screen reader, no ring on the close button when «دليل» or a link opens it).
+  // Focus lands on the title (read first by a screen reader, no ring on the close button when «دليلك» or a link opens it).
   const titleRef = useRef<HTMLHeadingElement>(null);
   const def = skill ? getSkill(skill) : null;
 
@@ -126,7 +129,7 @@ export function SkillPanel({
                       <span className="box-decoration-clone rounded-[3px] bg-mark px-0.5">«{row.source.evidence}»</span>
                     </p>
                   ) : (
-                    <p className="min-w-0 flex-1 text-body text-fg">{fromCourse(shortTitle(getCourse(row.source.courseId)))}</p>
+                    <p className="min-w-0 flex-1 text-body text-fg">{fromCourse(guideTitle(row.source.courseId))}</p>
                   )}
                   {row.source.source === "cv" ? <IconEvidence className="mt-1 shrink-0 text-fg-3" size={20} waypoint="muted" /> : null}
                 </li>
@@ -199,13 +202,14 @@ export function SkillPanel({
     } else if (nextCourse) {
       const course = getCourse(nextCourse);
       const started = courseState(nextCourse, facts).state === "started";
-      const parts = nextStarParts(shortTitle(course), course.hours);
+      const parts = nextStarParts(guideTitle(nextCourse));
       footer = (
         <div className="flex flex-col gap-3">
           <p className="text-body text-fg">
             {parts.lead}
-            <span className="whitespace-nowrap">{parts.course}</span>
-            <span className="whitespace-nowrap">{parts.hours}</span>
+            <bdi className="whitespace-nowrap" dir="rtl">
+              {parts.guide}
+            </bdi>
             <span className="whitespace-nowrap">
               {parts.dot}
               <XpValue className="align-[-0.15em]" gain size="sm" value={courseXp(course)} />

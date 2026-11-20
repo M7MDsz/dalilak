@@ -1,5 +1,5 @@
 // Owner: architect. FROZEN CONTRACT (change only through the lead): every agent codes against these names.
-// The domain types of «دليلك»: the static catalogue (spec 9), the user's saved facts (A1), the values the engine derives
+// The domain types of «دليل»: the static catalogue (spec 9), the user's saved facts (A1), the values the engine derives
 // from them (spec 2.8, 3.4, 7, 8), the consequence every state-changing action returns (A2), and the persisted shape.
 // Types only (no runtime code). Ids, their runtime lists and guards live in ./ids.
 
@@ -8,6 +8,7 @@ import type {
   AvatarId,
   BadgeId,
   CityOption,
+  CompanyId,
   CourseId,
   EducationOption,
   ExperienceBand,
@@ -20,6 +21,7 @@ import type {
   LeaderboardUserId,
   LearnTab,
   MajorOption,
+  OnboardingStepId,
   OptionsByQuestion,
   PageChipSlug,
   PriorityOption,
@@ -33,6 +35,7 @@ export type {
   AvatarId,
   BadgeId,
   CityOption,
+  CompanyId,
   CourseId,
   EducationOption,
   ExperienceBand,
@@ -46,6 +49,7 @@ export type {
   LearnTab,
   MajorOption,
   NavScreen,
+  OnboardingStepId,
   OptionsByQuestion,
   PageChipSlug,
   PriorityOption,
@@ -129,18 +133,44 @@ export interface Skill {
 export interface Requirement {
   readonly skill: SkillId;
   readonly stars: StarSlot;
+  /** Real jobs: the posting's own sentence this requirement was read from, verbatim (shown so the user sees why). */
+  readonly evidence?: string;
 }
 
-/** Spec 9.3. Exactly five requirements, in roadmap order. No salary, date or applicant count exists. */
+/** Where a real job was posted (20 Nov 2026 snapshot). */
+export interface JobSource {
+  /** The site, as shown: «Workable», «صفحة وظائف سلة (Workable)» … */
+  readonly site: string;
+  /** The original posting (opened in a new tab). */
+  readonly url: string;
+  /** The posting date, when the posting gives one. */
+  readonly postedAt: DayKey | null;
+  /** The day the posting was opened and found open («جُمعت في 20 نوفمبر»). */
+  readonly checkedAt: DayKey;
+  /** How the posting's words were read as Dalilak's skills, where that needed a judgement (shown as a source note). */
+  readonly note?: string;
+}
+
+/** Spec 9.3. Exactly five requirements, in roadmap order. No salary or applicant count exists. */
 export interface Job {
   readonly id: JobId;
-  /** «محلل بيانات» (masculine generic, as advertised). */
+  /** «محلل بيانات» (masculine generic, as advertised; a real job's title is translated from the posting). */
   readonly title: string;
+  /** Real jobs: the posting's own title. */
+  readonly titleEn?: string;
   readonly field: JobFieldId;
   readonly city: JobCityId;
+  /** Real jobs: the posting's own place text («Riyadh / Jeddah / Al Khobar», «Madinah (remote)»). */
+  readonly place?: string;
   readonly band: ExperienceBand;
-  /** The fictional company (spec 9.7), e.g. «وادي الغيم للبيانات». Always shown with the tag «جهة تجريبية». */
+  /** The company in Arabic. The practice job's is fictional (spec 9.7, «وادي الغيم للبيانات»). */
   readonly company: string;
+  /** Real jobs: the company's own (English) name, shown in small type. */
+  readonly companyEn?: string;
+  /** True for a real posting (with `source`); false for the one practice job («وظيفة تدريبية»). */
+  readonly real: boolean;
+  /** Real jobs: where it was posted. */
+  readonly source?: JobSource;
   readonly requirements: readonly [Requirement, Requirement, Requirement, Requirement, Requirement];
   /** One sentence, at most 25 words. */
   readonly summary: string;
@@ -201,14 +231,14 @@ export interface OnboardingOption<V extends string = string> {
 }
 
 /** Spec 4.2 / 3.2. One per question; `options` is typed per question. */
-export type OnboardingQuestion<Q extends QuestionId = QuestionId> = {
+export type OnboardingQuestion<Q extends OnboardingStepId = OnboardingStepId> = {
   [K in Q]: {
     readonly id: K;
-    /** 1..6, the step indicator «السؤال 2 من 6». */
-    readonly n: 1 | 2 | 3 | 4 | 5 | 6;
+    /** 1..7, the step indicator «السؤال 2 من 7» (20 Nov 2026: the seventh step, `company`, is number 6). */
+    readonly n: 1 | 2 | 3 | 4 | 5 | 6 | 7;
     /** The slot label of «ملفك يتكوّن» and of the profile's «معلوماتي»: «المدينة» … «الأولوية». */
     readonly slot: string;
-    /** What «دليل» asks. */
+    /** What «دليلك» asks. */
     readonly text: string;
     /** Question 3 only: the wording after `secondary` («وما المجال الأقرب إليك دراسةً أو تدريباً؟»); null elsewhere. */
     readonly textAfterSecondary: string | null;
@@ -239,6 +269,12 @@ export interface OnboardingAnswers {
   /** One or two interests, in the order they appeared (spec 4.3). Neutral: ["unsure"]. */
   readonly interest?: readonly [InterestOption] | readonly [InterestOption, InterestOption];
   readonly priority?: PriorityOption;
+  /**
+   * 20 Nov 2026 (owner's part 2): the company the user has in mind (the optional seventh step), or "none" for «لا، مو
+   * الحين». Missing on accounts saved before it existed: their onboarding counts as complete (brain/onboarding
+   * `pendingQuestion`), and engine `dreamCompany` reads it as no company.
+   */
+  readonly company?: CompanyId | "none";
 }
 
 // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -286,6 +322,8 @@ export interface CourseProgress {
   /** 1-based lesson numbers ticked, ascending. */
   readonly ticked: readonly number[];
   readonly completedAt: number | null;
+  /** The certificate link the user pasted on «خلّصتها» (optional, self-reported; the guide page shows it back). */
+  readonly certificateUrl?: string;
 }
 
 /** One entry of the XP history (spec 8.1). Zero-XP happenings are not recorded. */
@@ -358,7 +396,7 @@ export interface UserFacts {
   readonly badges: readonly UnlockedBadge[];
 }
 
-/** What «دليل» is allowed to know (spec 5.2): exactly the facts. The CV text, the threads and the markers stay home. */
+/** What «دليلك» is allowed to know (spec 5.2): exactly the facts. The CV text, the threads and the markers stay home. */
 export type UserSnapshot = UserFacts;
 
 // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -408,7 +446,7 @@ export type ChipPayload =
   | { readonly intent: "page"; readonly slug: PageChipSlug }
   /** «ابدأ الدورة» (confirmation), page chip `start-course` «ابدأ هذه الدورة». */
   | { readonly intent: "start_course"; readonly courseId: CourseId }
-  /** «قدّم على هذه», page chip `apply`, the button «دع دليل يقدّم عنك»; `anyway` = «قدّم على أي حال» (5.5 rule 5). */
+  /** «قدّم على هذه», page chip `apply`, the button «دع دليلك يقدّم عنك»; `anyway` = «قدّم على أي حال» (5.5 rule 5). */
   | { readonly intent: "apply"; readonly jobId: JobId; readonly anyway?: boolean }
   /** «اجعلها هدفي» (confirmation and page chip `set-target`). */
   | { readonly intent: "set_target"; readonly jobId: JobId }
@@ -446,10 +484,10 @@ export interface AdvisorMessage {
   readonly id: string;
   readonly from: "user" | "daleel";
   readonly at: number;
-  /** User: one block, the text sent (or the chip label). «دليل»: its paragraphs, each revealed as one block. */
+  /** User: one block, the text sent (or the chip label). «دليلك»: its paragraphs, each revealed as one block. */
   readonly blocks: readonly string[];
   readonly cards: readonly AdvisorCard[];
-  /** Only the newest «دليل» message shows its chips; older chips are kept but not rendered. */
+  /** Only the newest «دليلك» message shows its chips; older chips are kept but not rendered. */
   readonly chips: readonly Chip[];
 }
 
@@ -465,7 +503,7 @@ export interface AdvisorMessage {
 export interface OnboardingProgress {
   readonly thread: readonly OnboardingMessage[];
   /** Unmapped answers per question: the second miss is accepted as typed or neutral (spec 4.5). */
-  readonly misses: Readonly<Partial<Record<QuestionId, number>>>;
+  readonly misses: Readonly<Partial<Record<OnboardingStepId, number>>>;
   /** Saved when step 6 of the path reveal starts (spec 3.3). */
   readonly revealPlayed: boolean;
 }
@@ -476,7 +514,7 @@ export interface AdvisorThread {
   readonly messages: readonly AdvisorMessage[];
   /** Jobs or companies already came up in this thread (5.9: «وللعلم: كل الوظائف هنا بيانات تجريبية.» only the first time). */
   readonly jobsDisclosed: boolean;
-  /** Set when «دليل» starts filling an application, cleared when it is sent or stopped. Found set on load → interrupted. */
+  /** Set when «دليلك» starts filling an application, cleared when it is sent or stopped. Found set on load → interrupted. */
   readonly applyInFlight: { readonly jobId: JobId; readonly startedAt: number } | null;
 }
 
@@ -757,7 +795,8 @@ export type RevealReason =
   | { readonly kind: "interest"; readonly interest: InterestOption }
   | { readonly kind: "major"; readonly tier: "primary" | "secondary"; readonly majorLabel: string }
   | { readonly kind: "experience"; readonly band: ExperienceBand }
-  | { readonly kind: "city"; readonly cityLabel: string }
+  /** `near`: the user typed a place near this job city («شقراء» → الرياض): `cityLabel` is the job city, printed «قريبة منك». */
+  | { readonly kind: "city"; readonly cityLabel: string; readonly near?: boolean }
   | { readonly kind: "remote" }
   | { readonly kind: "priority"; readonly priority: Exclude<PriorityOption, "explore"> }
   | { readonly kind: "none" };
@@ -943,17 +982,17 @@ export interface News {
 /** Running shows that hold the overlay queue and the nudge (spec 3.15 hold rule, 2.6) and block navigation (5.5 rule 7). */
 export type HoldKey = "reveal" | "cv-show" | "celebration" | "advisor-apply" | "map-open-full";
 
-/** What the advisor panel is asked to send for a page button (spec 3.4 form 4, 3.6, 3.8 «دع دليل يقدّم عنك», …). */
+/** What the advisor panel is asked to send for a page button (spec 3.4 form 4, 3.6, 3.8 «دع دليلك يقدّم عنك», …). */
 export interface AdvisorOutgoing {
   /** The user bubble, e.g. «قدّم لي على هذه الوظيفة». */
   readonly text: string;
   readonly chip?: ChipPayload;
 }
 
-/** The six visible steps of «دليل» filling the apply sheet (spec 7.4). 0 = waiting for the sheet to mount. */
+/** The six visible steps of «دليلك» filling the apply sheet (spec 7.4). 0 = waiting for the sheet to mount. */
 export type ApplyStep = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
-/** «دليل» applying for the user: the dispatcher starts it, the jobs page's apply sheet runs it and reports back. */
+/** «دليلك» applying for the user: the dispatcher starts it, the jobs page's apply sheet runs it and reports back. */
 export interface ApplyRun {
   /** Increments per run, so a stale sheet never answers a new run. */
   readonly id: number;

@@ -4,7 +4,7 @@
 // Ids marked "architect" are not in the spec; they are added so that QA can reach a part the spec leaves unnamed.
 // Pure module.
 
-import type { AvatarId, BadgeId, CourseId, FieldId, JobCityId, JobFieldId, JobId, LeaderboardUserId, QuestionId, SkillId } from "@/lib/types";
+import type { AvatarId, BadgeId, CourseId, FieldId, JobCityId, JobFieldId, JobId, LeaderboardUserId, OnboardingStepId, SkillId } from "@/lib/types";
 
 export const TID = {
   /** Spec 2.5-2.7, 2.2. One element per id is rendered (desktop nav OR phone tab bar). */
@@ -36,10 +36,10 @@ export const TID = {
   welcome: {
     thread: "welcome-thread",
     step: "welcome-step",
-    chip: (question: QuestionId, option: string) => `welcome-chip-${question}-${option}`,
+    chip: (question: OnboardingStepId, option: string) => `welcome-chip-${question}-${option}`,
     input: "welcome-input",
     send: "welcome-send",
-    slot: (question: QuestionId) => `welcome-slot-${question}`,
+    slot: (question: OnboardingStepId) => `welcome-slot-${question}`,
     messageLast: "welcome-message-last",
   },
   /** Spec 3.3. */
@@ -54,6 +54,8 @@ export const TID = {
     accept: "reveal-accept",
     alt: (index: 0 | 1) => `reveal-alt-${index}`,
     altChoose: (index: 0 | 1) => `reveal-alt-choose-${index}`,
+    /** architect (20 Nov 2026): the line under the recommended job about the company the user has in mind. */
+    company: "reveal-company",
   },
   /** Spec 3.4 (v3). */
   path: {
@@ -249,6 +251,14 @@ export const TID = {
     historyRow: (index: number) => `profile-history-row-${index}`,
     answers: "profile-answers",
     changeTarget: "profile-change-target",
+    /** architect (20 Nov 2026): «الشركة اللي في بالك» on «ملفي», its value, change and clear, and the picker. */
+    company: "profile-company",
+    companyChange: "profile-company-change",
+    companyClear: "profile-company-clear",
+    companyOption: (id: string) => `profile-company-option-${id}`,
+    companyInput: "profile-company-input",
+    companySave: "profile-company-save",
+    companyCancel: "profile-company-cancel",
     signout: "profile-signout",
     reset: "profile-reset",
     resetConfirm: "profile-reset-confirm",

@@ -1,6 +1,6 @@
 "use client";
-// Piece 4 (spec 3.1): the advisor exchange, built from the chat kit's own parts: «دليل»'s header (his glyph, his name and
-// the line «دليلك إلى وظيفتك», spec 3.14), the page chip «ماذا أفعل الآن؟», the user's bubble and his answer.
+// Piece 4 (spec 3.1): the advisor exchange, built from the chat kit's own parts: «دليلك»'s header (his glyph, his name and
+// the line «مرشدك إلى وظيفتك», spec 3.14), the page chip «ماذا أفعل الآن؟», the user's bubble and his answer.
 // Its moment: the chip is pressed, the user's bubble pops (the approved send pop, from its inline-end corner), the
 // glyph works for a beat (the needle seeks) and the answer comes into focus as the needle settles.
 import { AnimatePresence, motion } from "motion/react";
@@ -30,7 +30,7 @@ export function AdvisorCard({ state, delay, compact = false }: PieceProps) {
   const instant = useInstant();
   const played = usePlayed(state);
   const d = delay * 1000;
-  // 0: the chip is pressed · 1: the bubble pops · 2: «دليل» works · 3: the answer comes into focus
+  // 0: the chip is pressed · 1: the bubble pops · 2: «دليلك» works · 3: the answer comes into focus
   const step = useSteps(played, [d, d + 170, d + 650, d + 1450], instant);
   const restored = instant && state === "done";
   const glyph: DaleelState = step === 2 ? "thinking" : step >= 3 && !restored ? "done" : "idle";

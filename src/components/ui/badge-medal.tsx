@@ -28,7 +28,7 @@ export interface BadgeMedalProps {
   readonly name?: string;
   /** Shown when earned or new. */
   readonly description?: string;
-  /** Shown when locked («أكمل دورة واحدة.»). */
+  /** Shown when locked («أتمّ خطوة تعلّم واحدة.»). */
   readonly hint?: string;
   /** sm 56 (toasts, rows) · md 80 (profile grid) · lg 112 (the unlock moment) */
   readonly size?: keyof typeof SIZE;

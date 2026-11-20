@@ -1,9 +1,9 @@
 "use client";
-// AdvisorMessage: one turn of «دليل», from "working on it" to the answer, in one place.
+// AdvisorMessage: one turn of «دليلك», from "working on it" to the answer, in one place.
 //   pending  the glyph beside the message is alive (thinking / working) and the status line rolls through the real steps
 //   answer   the glyph settles (done), the status leaves, and the answer comes into focus block by block (80 ms apart):
 //            paragraphs and short lists (light markdown), action receipts, then cards rise 12 px, then the reply chips land
-// One «دليل» turn = one row: his glyph at the inline-start (the right), the content beside it. The same row serves the
+// One «دليلك» turn = one row: his glyph at the inline-start (the right), the content beside it. The same row serves the
 // onboarding conversation (glyph only, no status: the wait is 350-600 ms) and the advisor panel.
 // Also here: ActionReceipt («فتحت لك صفحة الوظائف»), MessageCard (the frame for app-drawn cards), ChatError
 // («تعذّر الرد الآن» + «أعد المحاولة») and StoppedMark («توقّف الرد»).
@@ -23,7 +23,7 @@ import { RollingStatus } from "./rolling-status";
 
 // ------------------------------------------------------------------------------------------------ parts
 
-/** What «دليل» says, in order. Cards are drawn by the app from tool results, never from the model's text (spec 5.5 rule 10). */
+/** What «دليلك» says, in order. Cards are drawn by the app from tool results, never from the model's text (spec 5.5 rule 10). */
 export type AdvisorPart =
   | { readonly kind: "text"; readonly text: string; readonly id?: string }
   | { readonly kind: "receipt"; readonly text: string; readonly icon?: ReactNode; readonly state?: "running" | "done"; readonly onOpen?: () => void; readonly testId?: string; readonly id?: string }
@@ -56,11 +56,11 @@ const cardRise = riseBy(12);
 // ------------------------------------------------------------------------------------------------ AdvisorMessage
 
 export interface AdvisorMessageProps {
-  /** `pending`: «دليل» is working on it (glyph alive, status rolling). `answer` (default): the reply. */
+  /** `pending`: «دليلك» is working on it (glyph alive, status rolling). `answer` (default): the reply. */
   readonly state?: "pending" | "answer";
   /** While pending: `thinking` (before any tool) or `working` (a tool is running). Default thinking. */
   readonly activity?: "thinking" | "working";
-  /** The status line while pending («دليل يفكّر…», then the tool's line). Leave it out for the glyph alone (onboarding). */
+  /** The status line while pending («دليلك يفكّر…», then the tool's line). Leave it out for the glyph alone (onboarding). */
   readonly status?: string;
   /** When the work started (ms since epoch), for the elapsed seconds after 4 s. */
   readonly startedAt?: number;
@@ -78,7 +78,7 @@ export interface AdvisorMessageProps {
   readonly stopped?: boolean;
   /** A saved thread: render at rest, never replay. */
   readonly restored?: boolean;
-  /** «دليل» above the first line. Default true. */
+  /** «دليلك» above the first line. Default true. */
   readonly showName?: boolean;
   /** The glyph beside the message. Default true (turn it off for a second message in a row). */
   readonly showGlyph?: boolean;
@@ -89,7 +89,7 @@ export interface AdvisorMessageProps {
   readonly statusTestId?: string;
 }
 
-/** «دليل»'s message: pending with a living glyph and a rolling status, then the answer coming into focus. */
+/** «دليلك»'s message: pending with a living glyph and a rolling status, then the answer coming into focus. */
 export function AdvisorMessage({
   state = "answer",
   activity = "thinking",
@@ -136,11 +136,11 @@ export function AdvisorMessage({
     >
       {showGlyph ? <DaleelGlyph framed size={32} state={glyph} /> : <span aria-hidden className="w-8 shrink-0" />}
       <div className="relative flex min-w-0 flex-1 flex-col">
-        {showName ? <p className="text-small leading-8 font-semibold text-fg">دليل</p> : null}
+        {showName ? <p className="text-small leading-8 font-semibold text-fg">دليلك</p> : null}
         <AnimatePresence initial={!restored} mode="popLayout">
           {pending ? (
             <motion.div className="flex min-h-7 items-center" exit={{ opacity: 0, transition: tween.exit }} key="status">
-              {status ? <RollingStatus label={status} startedAt={startedAt} testId={statusTestId} /> : <span className="sr-only">دليل يفكّر…</span>}
+              {status ? <RollingStatus label={status} startedAt={startedAt} testId={statusTestId} /> : <span className="sr-only">دليلك يفكّر…</span>}
             </motion.div>
           ) : (
             <motion.div animate="show" className="flex flex-col gap-3" initial={restored ? false : "hidden"} key="answer" variants={group(step, startDelay) as Variants}>
@@ -171,7 +171,7 @@ export function AdvisorMessage({
 // ------------------------------------------------------------------------------------------------ ActionReceipt
 
 export interface ActionReceiptProps {
-  /** What «دليل» did, in his voice: «فتحت لك صفحة الوظائف». */
+  /** What «دليلك» did, in his voice: «فتحت لك صفحة الوظائف». */
   readonly children: ReactNode;
   /** The page's icon (18 px), for example <IconJobs size={18} />. */
   readonly icon?: ReactNode;
@@ -183,7 +183,7 @@ export interface ActionReceiptProps {
   readonly testId?: string;
 }
 
-/** A small record of an action «دليل» performed on the page (page-handoff): the page's icon, the line, a check. */
+/** A small record of an action «دليلك» performed on the page (page-handoff): the page's icon, the line, a check. */
 export function ActionReceipt({ children, icon, state = "done", onOpen, className, testId }: ActionReceiptProps) {
   const body = (
     <>
@@ -260,7 +260,7 @@ export interface ChatErrorProps {
   readonly className?: string;
 }
 
-/** The error row, on «دليل»'s side: warn colour with the warning icon and words (never the accent), and one retry. */
+/** The error row, on «دليلك»'s side: warn colour with the warning icon and words (never the accent), and one retry. */
 export function ChatError({ message = "تعذّر الرد الآن. جرّب مرة أخرى.", onRetry, retryLabel = "أعد المحاولة", retryTestId, testId, className }: ChatErrorProps) {
   return (
     <motion.div animate={{ opacity: 1, y: 0 }} className={cn("flex items-start gap-3", className)} data-role="error" data-testid={testId} initial={{ opacity: 0, y: 8 }} role="alert" transition={tween.move}>

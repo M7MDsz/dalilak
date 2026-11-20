@@ -1,0 +1,464 @@
+{
+ "checkedAt": "2026-11-20",
+ "note": "All six families come from one opened source: the Hays Saudi Arabia Salary Guide 2026 PDF, downloaded directly from hays.ae on 2026-11-20 (no form, no login). Figures are total fixed MONTHLY package in SAR as of Q4 2025, read from the rendered table pages (the PDF text layer misaligns rows, so every number was checked against a render of the page). Hays gives job titles only, no junior/senior bands, and its titles skew to manager level: treat these as mid-to-senior ranges, not entry salaries.",
+ "families": {
+  "product": {
+   "family": "product",
+   "role": "Product Manager",
+   "minSAR": 25000,
+   "maxSAR": 45000,
+   "avgSAR": 40000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 45, table «Product management» (Monthly salary ranges and average values (SAR))",
+   "quote": "Product Manager | 25,000 - 45,000 | 40,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Product Owner",
+     "minSAR": 25000,
+     "maxSAR": 40000,
+     "avgSAR": 35000
+    }
+   ]
+  },
+  "cyber": {
+   "family": "cyber",
+   "role": "Information Security Analyst",
+   "minSAR": 15000,
+   "maxSAR": 30000,
+   "avgSAR": 22500,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 42, table «Information/cyber security» (Monthly salary ranges and average values (SAR))",
+   "quote": "Information Security Analyst | 15,000 - 30,000 | 22,500  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Information Security Engineer",
+     "minSAR": 22500,
+     "maxSAR": 40000,
+     "avgSAR": 30000
+    },
+    {
+     "role": "Penetration Tester",
+     "minSAR": 15000,
+     "maxSAR": 35000,
+     "avgSAR": 27500
+    }
+   ]
+  },
+  "cloud-devops": {
+   "family": "cloud-devops",
+   "role": "DevOps Engineer",
+   "minSAR": 22500,
+   "maxSAR": 35000,
+   "avgSAR": 30000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 44, table «Software engineering» (Monthly salary ranges and average values (SAR))",
+   "quote": "DevOps Engineer | 22,500 - 35,000 | 30,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Cloud Engineer",
+     "minSAR": 20000,
+     "maxSAR": 35000,
+     "avgSAR": 30000,
+     "pageOrTable": "p. 46, table «Cloud, infrastructure & networking»"
+    },
+    {
+     "role": "Site Reliability Engineer",
+     "minSAR": 25000,
+     "maxSAR": 40000,
+     "avgSAR": 35000,
+     "pageOrTable": "p. 46, table «Cloud, infrastructure & networking»"
+    }
+   ]
+  },
+  "ai-ml": {
+   "family": "ai-ml",
+   "role": "Machine Learning Engineer",
+   "minSAR": 30000,
+   "maxSAR": 60000,
+   "avgSAR": 45000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 45, table «Data science & analytics» (Monthly salary ranges and average values (SAR))",
+   "quote": "Machine Learning Engineer | 30,000 - 60,000 | 45,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Data Scientist",
+     "minSAR": 35000,
+     "maxSAR": 75000,
+     "avgSAR": 55000
+    }
+   ]
+  },
+  "sales-cs": {
+   "family": "sales-cs",
+   "role": "Key Account Manager",
+   "minSAR": 20000,
+   "maxSAR": 30000,
+   "avgSAR": 25000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 41, table «Sales / Industrial» (Monthly salary ranges and average values (SAR))",
+   "quote": "Key Account Manager | 20,000 - 30,000 | 25,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Sales Manager",
+     "minSAR": 25000,
+     "maxSAR": 33000,
+     "avgSAR": 28000
+    },
+    {
+     "role": "Business Development Manager",
+     "minSAR": 25000,
+     "maxSAR": 35000,
+     "avgSAR": 30000
+    }
+   ],
+   "note": "Hays 2026 has no 'Sales Executive' or 'Customer Success' row; Key Account Manager is the most junior sales title in the table (Industrial sales). No customer-success salary was found in any opened source."
+  },
+  "supply-procurement": {
+   "family": "supply-procurement",
+   "role": "Procurement Manager",
+   "minSAR": 30000,
+   "maxSAR": 50000,
+   "avgSAR": 40000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 37, table «Procurement & supply chain» (Monthly salary ranges and average values (SAR))",
+   "quote": "Procurement Manager | 30,000 - 50,000 | 40,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Supply Chain Manager",
+     "minSAR": 30000,
+     "maxSAR": 45000,
+     "avgSAR": 37500
+    },
+    {
+     "role": "Category Manager",
+     "minSAR": 22000,
+     "maxSAR": 32000,
+     "avgSAR": 27000
+    },
+    {
+     "role": "Logistics Manager",
+     "minSAR": 25000,
+     "maxSAR": 35000,
+     "avgSAR": 30000
+    }
+   ],
+   "note": "Manager-level titles only; Hays has no buyer/officer/analyst row for procurement or supply chain."
+  }
+ },
+ "sourcesTried": [
+  {
+   "name": "Hays Saudi Arabia Salary Guide 2026",
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "result": "USED: direct PDF (62 MB), monthly SAR tables for all six families (pp. 37, 41, 42, 44, 45, 46)."
+  },
+  {
+   "name": "Hays Saudi Arabia Salary Guide 2025",
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2025",
+   "result": "Downloaded (direct PDF) but not used: the 2026 edition supersedes it."
+  }
+ ],
+ "familiesExisting": {
+  "data-analyst-bi": {
+   "family": "data-analyst-bi",
+   "role": "Data Analyst",
+   "minSAR": 18000,
+   "maxSAR": 30000,
+   "avgSAR": 25000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 45, table «Technology / Data science & analytics» (Monthly salary ranges and average values (SAR))",
+   "quote": "Data Analyst | 18,000 - 30,000 | 25,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Business Intelligence Manager",
+     "minSAR": 30000,
+     "maxSAR": 50000,
+     "avgSAR": 40000
+    }
+   ],
+   "note": "No BI Analyst or BI Developer row; the only BI title is Business Intelligence Manager."
+  },
+  "data-science": {
+   "family": "data-science",
+   "role": "Data Scientist",
+   "minSAR": 35000,
+   "maxSAR": 75000,
+   "avgSAR": 55000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 45, table «Technology / Data science & analytics» (Monthly salary ranges and average values (SAR))",
+   "quote": "Data Scientist | 35,000 - 75,000 | 55,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20"
+  },
+  "frontend-web": {
+   "family": "frontend-web",
+   "role": "Front End Developer/Engineer",
+   "minSAR": 20000,
+   "maxSAR": 35000,
+   "avgSAR": 25000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 44, table «Technology / Software engineering» (Monthly salary ranges and average values (SAR))",
+   "quote": "Front End Developer/Engineer | 20,000 - 35,000 | 25,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Full Stack Developer",
+     "minSAR": 20000,
+     "maxSAR": 35000,
+     "avgSAR": 27500
+    },
+    {
+     "role": "Mobile Application Developer",
+     "minSAR": 20000,
+     "maxSAR": 30000,
+     "avgSAR": 27500
+    }
+   ]
+  },
+  "backend": {
+   "family": "backend",
+   "role": "Back End Developer/Engineer",
+   "minSAR": 20000,
+   "maxSAR": 35000,
+   "avgSAR": 25000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 44, table «Technology / Software engineering» (Monthly salary ranges and average values (SAR))",
+   "quote": "Back End Developer/Engineer | 20,000 - 35,000 | 25,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Full Stack Developer",
+     "minSAR": 20000,
+     "maxSAR": 35000,
+     "avgSAR": 27500
+    }
+   ]
+  },
+  "qa": {
+   "family": "qa",
+   "role": "QA/Test Analyst",
+   "minSAR": 15000,
+   "maxSAR": 30000,
+   "avgSAR": 22500,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 44, table «Technology / Software engineering» (Monthly salary ranges and average values (SAR))",
+   "quote": "QA/Test Analyst | 15,000 - 30,000 | 22,500  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Lead QA/Test Analyst",
+     "minSAR": 25000,
+     "maxSAR": 40000,
+     "avgSAR": 32500
+    },
+    {
+     "role": "Head of QA/Testing",
+     "minSAR": 35000,
+     "maxSAR": 50000,
+     "avgSAR": 37500
+    }
+   ]
+  },
+  "ui-ux-product-design": {
+   "family": "ui-ux-product-design",
+   "role": "UX/UI Designer",
+   "minSAR": 15000,
+   "maxSAR": 35000,
+   "avgSAR": 25000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 45, table «Technology / Product management» (Monthly salary ranges and average values (SAR))",
+   "quote": "UX/UI Designer | 15,000 - 35,000 | 25,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Senior Product Designer",
+     "minSAR": 25000,
+     "maxSAR": 40000,
+     "avgSAR": 32500
+    },
+    {
+     "role": "UI/UX Developer",
+     "minSAR": 15000,
+     "maxSAR": 30000,
+     "avgSAR": 22500,
+     "pageOrTable": "p. 44, table «Software engineering»"
+    }
+   ]
+  },
+  "ux-research": null,
+  "digital-marketing": {
+   "family": "digital-marketing",
+   "role": "Social Media Manager",
+   "minSAR": 33000,
+   "maxSAR": 41000,
+   "avgSAR": 37000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 38, table «Marketing & digital marketing / Generalist Marketing» (Monthly salary ranges and average values (SAR))",
+   "quote": "Social Media Manager | 33,000 - 41,000 | 37,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Brand Manager",
+     "minSAR": 30000,
+     "maxSAR": 40000,
+     "avgSAR": 35000
+    },
+    {
+     "role": "Digital Marketing Director",
+     "minSAR": 70000,
+     "maxSAR": 90000,
+     "avgSAR": 80000
+    }
+   ],
+   "note": "Manager-level only: the marketing table has no Digital Marketing Specialist, SEO or Content row. Social Media Manager is the closest digital title."
+  },
+  "business-pm-finance": {
+   "family": "business-pm-finance",
+   "role": "Project Manager",
+   "minSAR": 20000,
+   "maxSAR": 45000,
+   "avgSAR": 30000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 43, table «Technology / Project delivery & business analysis» (Monthly salary ranges and average values (SAR))",
+   "quote": "Project Manager | 20,000 - 45,000 | 30,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Senior Business Analyst",
+     "minSAR": 10000,
+     "maxSAR": 40000,
+     "avgSAR": 27500
+    },
+    {
+     "role": "Financial Analyst",
+     "minSAR": 15000,
+     "maxSAR": 25000,
+     "avgSAR": 20000,
+     "pageOrTable": "p. 32, table «Accountancy & finance»"
+    },
+    {
+     "role": "Accountant",
+     "minSAR": 10000,
+     "maxSAR": 20000,
+     "avgSAR": 15000,
+     "pageOrTable": "p. 32, table «Accountancy & finance»"
+    },
+    {
+     "role": "Senior Accountant",
+     "minSAR": 20000,
+     "maxSAR": 28000,
+     "avgSAR": 25000,
+     "pageOrTable": "p. 32, table «Accountancy & finance»"
+    }
+   ],
+   "note": "Hays has only «Senior Business Analyst» (no plain Business Analyst row). A second Project Manager row (ERP & enterprise solutions, p. 43) reads 20,000 - 40,000 | 30,000."
+  },
+  "hr-recruitment": {
+   "family": "hr-recruitment",
+   "role": "HR Generalist",
+   "minSAR": 18000,
+   "maxSAR": 23000,
+   "avgSAR": 20000,
+   "period": "monthly",
+   "level": "not stated (Hays lists job titles only, no seniority band)",
+   "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+   "sourceYear": 2026,
+   "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+   "pageOrTable": "p. 35, table «Human resources» (Monthly salary ranges and average values (SAR))",
+   "quote": "HR Generalist | 18,000 - 23,000 | 20,000  (SAR range | SAR average). Footnote: Salaries shown here represent the total fixed monthly salary package for each position, in Saudi Arabia Riyal (SAR) as of Q4 2025. 'Range' represents the upper and lower salary rates from job listings, job offers, and candidate registrations with Hays Saudi Arabia.",
+   "checkedAt": "2026-11-20",
+   "relatedRowsSameTable": [
+    {
+     "role": "Recruitment Specialist",
+     "minSAR": 15000,
+     "maxSAR": 20000,
+     "avgSAR": 18000
+    },
+    {
+     "role": "HR Business Partner",
+     "minSAR": 30000,
+     "maxSAR": 45000,
+     "avgSAR": 38000
+    },
+    {
+     "role": "Talent Acquisition Manager",
+     "minSAR": 30000,
+     "maxSAR": 40000,
+     "avgSAR": 35000
+    },
+    {
+     "role": "HR Assistant",
+     "minSAR": 12000,
+     "maxSAR": 15000,
+     "avgSAR": 13000
+    }
+   ],
+   "note": "No HR Officer row; HR Assistant is the most junior HR title."
+  }
+ },
+ "familiesExistingNullReasons": {
+  "ux-research": "Hays Saudi Arabia Salary Guide 2026 has no UX Researcher row (checked the Technology product-management and software-engineering tables, pp. 44-45). No other source opened."
+ },
+ "noteExisting": "familiesExisting comes from the same Hays 2026 PDF; each number was read from a render of the page (pp. 32, 35, 38, 43, 44, 45), not the misaligned text layer. Source oddity kept as is: the marketing table prints Trade Marketing Manager as range 38,000 - 45,000 with average 83,000 (not used)."
+}

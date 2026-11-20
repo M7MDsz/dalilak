@@ -7,14 +7,14 @@ import { pendingQuestion } from "@/lib/brain/onboarding";
 import { BADGE_IDS, COURSE_IDS, FIELD_IDS, JOB_IDS, LEADERBOARD_USER_IDS, SKILL_IDS, courseIdFor } from "@/lib/ids";
 import { hrefFor, parsePathname } from "@/lib/routes";
 import { factsOf, INITIAL_SEEN, stateFromFacts } from "@/lib/store/snapshot";
-import type { UserFacts } from "@/lib/types";
+import type { OnboardingAnswers, UserFacts } from "@/lib/types";
 
 describe("contract", () => {
   it("has the spec's id counts", () => {
-    expect(FIELD_IDS).toHaveLength(7);
-    expect(SKILL_IDS).toHaveLength(38);
-    expect(COURSE_IDS).toHaveLength(59);
-    expect(JOB_IDS).toHaveLength(20);
+    expect(FIELD_IDS).toHaveLength(10);
+    expect(SKILL_IDS).toHaveLength(54);
+    expect(COURSE_IDS).toHaveLength(80);
+    expect(JOB_IDS).toHaveLength(46);
     expect(BADGE_IDS).toHaveLength(12);
     expect(LEADERBOARD_USER_IDS).toHaveLength(24);
   });
@@ -43,7 +43,18 @@ describe("contract", () => {
         interest: ["data"],
         priority: "first-job",
       }),
-    ).toBeNull();
+    ).toBe("company");
+    // 20 Nov 2026: the seventh step (the company, «لا، مو الحين» = "none") completes it
+    const seven: OnboardingAnswers = {
+      city: { value: "riyadh", label: "الرياض" },
+      education: "bachelor",
+      major: { value: "mis", label: "نظم معلومات إدارية" },
+      experience: "none",
+      interest: ["data"],
+      company: "none",
+      priority: "first-job",
+    };
+    expect(pendingQuestion(seven)).toBeNull();
   });
 
   it("wraps facts in a simulation state and gets them back (spec 5.2)", () => {

@@ -1,5 +1,5 @@
 "use client";
-// ReplyChips: the chips under «دليل»'s last answer (confirmation chips «افتح الدورة» · «ليس الآن») and the page's
+// ReplyChips: the chips under «دليلك»'s last answer (confirmation chips «افتح الدورة» · «ليس الآن») and the page's
 // suggestion chips above the composer (spec 5.8). They land with popIn, 60 ms apart (the whole group under 480 ms).
 // A chip carries an intent, not free text: the caller decides what it does (spec 5.5 rule 1).
 import { motion } from "motion/react";
@@ -27,7 +27,7 @@ export interface ReplyChipsProps {
   readonly delay?: number;
   /** Render at rest (a restored thread, or chips that were already there). */
   readonly restored?: boolean;
-  /** The chip «دليل» or the script is pressing: it shows the press frame. */
+  /** The chip «دليلك» or the script is pressing: it shows the press frame. */
   readonly pressedId?: string | null;
   readonly className?: string;
   readonly label?: string;

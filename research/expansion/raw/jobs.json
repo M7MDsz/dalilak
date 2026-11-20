@@ -1,0 +1,1808 @@
+{
+ "checkedAt": "2026-11-20",
+ "method": "1) Searched Workable's public job-search JSON (the one jobs.workable.com itself uses: GET /api/v1/jobs?query=<keyword>&location=Saudi Arabia) with about 45 keywords across the six families, kept Saudi locations, filtered by title and by the experience line. 2) Probed the listed Saudi employers' own ATS boards: Workable accounts API, Greenhouse boards API, Lever postings API, Ashby posting API, SmartRecruiters postings API, plus several careers pages. 3) Opened every chosen posting on 20 Nov 2026 from the company's own board (apply.workable.com/<company>, Greenhouse, SmartRecruiters) or Workable's own job page (jobs.workable.com/view/... and its .md twin), and re-requested each final URL (all HTTP 200). 4) Evidence and bandEvidence strings were matched by script against each posting's text (markdown bold, bullets and stray links stripped), so they are verbatim. No aggregators (LinkedIn, Indeed, Bayt, etc.), no logins, no forms. Preferred direct employers; three postings come from recruitment/staffing firms' own Workable boards and are flagged in their notes (two in cyber, where no direct-employer posting at entry-mid level was found besides Qiddiya).",
+ "jobs": [
+  {
+   "id": "petroapp-product-manager-riyadh",
+   "family": "product",
+   "title": "Product Manager",
+   "titleAr": "مدير منتج",
+   "titleArTranslated": true,
+   "company": {
+    "en": "PetroApp",
+    "ar": "بترو آب"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-11",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "PetroApp careers (apply.workable.com/petroapp)",
+   "url": "https://apply.workable.com/petroapp/j/7148A3C6B5/",
+   "band": "junior",
+   "bandEvidence": "1 to 3 years of product management experience, ideally in fintech, payments, mobility, logistics, or B2B SaaS",
+   "requirements": [
+    {
+     "skill": "product-discovery",
+     "stars": 1,
+     "evidence": "Talk to the people who use PetroApp every day: fleet managers, finance teams, drivers, station staff, and car owners. Go to stations and customer sites when that is where the answer is"
+    },
+    {
+     "skill": "product-specs",
+     "stars": 1,
+     "evidence": "Turn what you learn into clear PRDs, user stories, and acceptance criteria that engineers can build from without guessing"
+    },
+    {
+     "skill": "product-roadmap",
+     "stars": 1,
+     "evidence": "Prioritize your backlog by user and business impact, and be ready to explain every trade-off"
+    },
+    {
+     "skill": "product-analytics",
+     "stars": 1,
+     "evidence": "Comfortable with data: you can define a metric, read a dashboard, and question it. SQL is a plus"
+    },
+    {
+     "skill": "agile",
+     "stars": 1,
+     "evidence": "Experience working in agile teams (Scrum or Kanban)"
+    }
+   ],
+   "note": "Hybrid. product-roadmap capped at 1: the posting asks backlog prioritisation, not product vision or strategy.",
+   "summary": "تملك مشكلة في منتج مدفوعات الوقود وإدارة الأساطيل من اكتشافها مع المستخدمين إلى قياس أثر الحل بعد الإطلاق.",
+   "tasks": [
+    "مقابلة السائقين ومديري الأساطيل في المحطات",
+    "كتابة متطلبات المنتج وقصص المستخدم",
+    "ترتيب الأولويات ومتابعة مؤشرات النجاح بعد الإطلاق"
+   ]
+  },
+  {
+   "id": "salla-product-manager-storefront-jeddah",
+   "family": "product",
+   "title": "Product Manager - Storefront",
+   "titleAr": "مدير منتج - واجهة المتجر",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Salla",
+    "ar": "سلة"
+   },
+   "city": "jeddah",
+   "cityText": "Jeddah, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-08",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Salla careers (apply.workable.com/salla)",
+   "url": "https://apply.workable.com/salla/j/6FEBF88574/",
+   "band": "mid",
+   "bandEvidence": "4–6 years of experience in Product Management, preferably owning Search, Discovery, Product Pages, Conversion, or other customer-facing product experiences within a live consumer or e-commerce product.",
+   "requirements": [
+    {
+     "skill": "product-discovery",
+     "stars": 1,
+     "evidence": "Run continuous discovery: talk to buyers and merchants regularly, watch real sessions, and test ideas with prototypes before committing engineering time."
+    },
+    {
+     "skill": "product-analytics",
+     "stars": 1,
+     "evidence": "Make decisions with data: define the metrics that matter for each surface, read the funnel yourself, and let evidence, not opinion, settle debates."
+    },
+    {
+     "skill": "ml",
+     "stars": 1,
+     "evidence": "Experience working closely with Data Science and Machine Learning teams on Search, Ranking, or Recommendation with a clear understanding of product ownership and decision-making responsibilities."
+    },
+    {
+     "skill": "ux-research",
+     "stars": 1,
+     "evidence": "Hands-on experience conducting User Research and Product Experiments, using insights to influence product decisions."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Fluent in Arabic and English, both written and spoken."
+    }
+   ],
+   "note": "Hybrid; the same posting is also listed for Makkah. ml at 1 is a judgement call: the PM works with ML teams on search ranking, not building models.",
+   "summary": "تقود البحث وصفحة المنتج والتقييمات في متاجر سلة لتحويل المتسوقين إلى مشترين يثقون بالمتجر.",
+   "tasks": [
+    "إدارة البحث وصفحة المنتج والتقييمات",
+    "اكتشاف مستمر مع المشترين والتجار",
+    "تجارب A/B وقراءة مسار التحويل"
+   ]
+  },
+  {
+   "id": "master-works-ai-product-manager-riyadh",
+   "family": "product",
+   "title": "AI Product Manager",
+   "titleAr": "مدير منتجات الذكاء الاصطناعي",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Master-Works",
+    "ar": "ماستر ووركس"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-15",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Master-Works job page on Workable (jobs.workable.com)",
+   "url": "https://jobs.workable.com/view/4rtgM8rwhyE2zNhdTPBVNJ/ai-product-manager-in-riyadh-at-master-works",
+   "band": "mid",
+   "bandEvidence": "4+ years of product management experience, including AI-enabled or enterprise software products.",
+   "requirements": [
+    {
+     "skill": "product-discovery",
+     "stars": 1,
+     "evidence": "Own the product lifecycle from discovery and ideation through MVP, launch, adoption, and continuous improvement."
+    },
+    {
+     "skill": "product-roadmap",
+     "stars": 2,
+     "evidence": "Define product vision, roadmaps, positioning, and measurable business objectives."
+    },
+    {
+     "skill": "product-specs",
+     "stars": 1,
+     "evidence": "Prepare PRDs, user stories, wireframes, acceptance criteria, and release plans."
+    },
+    {
+     "skill": "product-analytics",
+     "stars": 1,
+     "evidence": "Define KPIs for adoption, retention, feature usage, model quality, and commercial performance."
+    },
+    {
+     "skill": "llm-apps",
+     "stars": 1,
+     "evidence": "Practical understanding of Generative AI, LLMs, RAG, AI agents, APIs, and AI integration patterns."
+    }
+   ],
+   "note": "Hiring for Nabeh, a Master-Works subsidiary. llm-apps at 1: the PM must understand LLM/RAG products, not build them.",
+   "summary": "تقود استراتيجية منتجات الذكاء الاصطناعي التوليدي ورؤية الحاسب في نابه وتحوّل احتياج العملاء إلى منتجات قابلة للتوسع.",
+   "tasks": [
+    "تحديد رؤية المنتج وخارطة الطريق",
+    "كتابة متطلبات المنتج ومعايير القبول",
+    "قياس التبنّي وجودة النماذج"
+   ]
+  },
+  {
+   "id": "taj-hr-cybersecurity-engineer-riyadh",
+   "family": "cyber",
+   "title": "Cybersecurity Engineer",
+   "titleAr": "مهندس أمن سيبراني",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Taj HR",
+    "ar": "تاج إتش آر"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-28",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Taj HR job page on Workable (jobs.workable.com)",
+   "url": "https://jobs.workable.com/view/635TpyhQz8gBwR2RTwV8qp/cybersecurity-engineer-in-riyadh-at-taj-hr",
+   "band": "mid",
+   "bandEvidence": "3–6 years of relevant professional experience in cybersecurity or network security.",
+   "requirements": [
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Maintain security documentation and incident reports"
+    },
+    {
+     "skill": "networking",
+     "stars": 1,
+     "evidence": "Practical experience in firewall configuration and management."
+    },
+    {
+     "skill": "security-fundamentals",
+     "stars": 1,
+     "evidence": "Strong understanding of network security principles."
+    },
+    {
+     "skill": "soc-analysis",
+     "stars": 1,
+     "evidence": "Knowledge of security monitoring and incident response."
+    },
+    {
+     "skill": "english",
+     "stars": 1,
+     "evidence": "Good English communication skills."
+    }
+   ],
+   "note": "Taj HR is a recruitment firm; the hiring employer is not named. networking evidence is firewall work; communication evidence is security documentation and incident reports.",
+   "summary": "تراقب أمن الشبكة وتدير قواعد الجدار الناري وتحقق في الحوادث الأمنية وتكشف الثغرات.",
+   "tasks": [
+    "مراقبة أمن الشبكة ورصد التهديدات",
+    "إعداد قواعد الجدار الناري وسياسات الأمن",
+    "التحقيق في الحوادث وكتابة تقاريرها"
+   ]
+  },
+  {
+   "id": "mullers-solutions-soc-l2-specialist-riyadh",
+   "family": "cyber",
+   "title": "SOC L2 Specialist - (Saudi National Only)",
+   "titleAr": "أخصائي مركز عمليات الأمن - المستوى الثاني",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Müller's Solutions",
+    "ar": "مولرز سوليوشنز"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-09",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Müller's Solutions job page on Workable (jobs.workable.com)",
+   "url": "https://jobs.workable.com/view/ezEsoSEw6GC7L4JnXN1FgZ/soc-l2-specialist---(saudi-national-only)-in-riyadh-at-m%C3%BCller%60s-solutions",
+   "band": "mid",
+   "bandEvidence": "4–6 years in a SOC, with at least 2 years at L2 level",
+   "requirements": [
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Write incident reports and present findings to technical and management stakeholders"
+    },
+    {
+     "skill": "networking",
+     "stars": 1,
+     "evidence": "Solid knowledge of MITRE ATT&CK, the cyber kill chain, malware analysis basics and network protocols"
+    },
+    {
+     "skill": "security-fundamentals",
+     "stars": 2,
+     "evidence": "Report incidents in line with NCA requirements and SMC's escalation matrix"
+    },
+    {
+     "skill": "soc-analysis",
+     "stars": 1,
+     "evidence": "Strong hands-on SIEM experience (Splunk, IBM QRadar, Microsoft Sentinel, or similar)"
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Saudi national, fluent in Arabic and English"
+    }
+   ],
+   "note": "Müller's Solutions is a staffing/outsourcing firm; the role delivers 'SMC's managed security operations service'. Saudi nationals only. security-fundamentals at 2 for NCA incident reporting (governance/compliance).",
+   "summary": "تتولى التنبيهات المصعّدة في مركز عمليات الأمن وتقود الاستجابة للحوادث وتشرف على محللي المستوى الأول.",
+   "tasks": [
+    "تحليل التنبيهات المصعّدة وإغلاقها بأسباب واضحة",
+    "ضبط قواعد SIEM وصيد التهديدات",
+    "كتابة تقارير الحوادث وفق متطلبات الهيئة الوطنية للأمن السيبراني"
+   ]
+  },
+  {
+   "id": "qiddiya-it-security-design-riyadh",
+   "family": "cyber",
+   "title": "Assistant Manager - IT Security Design",
+   "titleAr": "مساعد مدير - تصميم أمن تقنية المعلومات",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Qiddiya Investment Company",
+    "ar": "شركة القدية للاستثمار"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-01",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Qiddiya job page on Workable (jobs.workable.com)",
+   "url": "https://jobs.workable.com/view/8gRDcPuhdDP6bfbixT2nrQ/assistant-manager---it-security-design-in-riyadh-at-qiddiya-investment-company",
+   "band": "mid",
+   "bandEvidence": "Experience: 4 years and above.",
+   "requirements": [
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Coordinate security design activities with architecture, infrastructure, and application teams."
+    },
+    {
+     "skill": "networking",
+     "stars": 1,
+     "evidence": "Develop, review, and approve security requirements for LAN, WAN, VPN, firewall, router, and related network technologies."
+    },
+    {
+     "skill": "security-fundamentals",
+     "stars": 1,
+     "evidence": "Evaluate business requirements and determine appropriate security protocols and controls."
+    },
+    {
+     "skill": "soc-analysis",
+     "stars": 1,
+     "evidence": "Conduct security testing and monitoring and support validation through appropriate test scripts."
+    },
+    {
+     "skill": "procurement",
+     "stars": 1,
+     "evidence": "Support vendor and procurement activities associated with security solutions."
+    }
+   ],
+   "note": "Assistant-manager title, asks 4+ years. soc-analysis is a judgement call: the posting asks security testing and monitoring but names no SIEM or incident response.",
+   "summary": "تخطط وتصمم بنية أمنية لأنظمة تقنية المعلومات في القدية وتضمن دمج متطلبات الأمن في كل تصميم تقني.",
+   "tasks": [
+    "تصميم البنية الأمنية لأنظمة تقنية المعلومات",
+    "وضع متطلبات أمن الشبكات والجدران النارية",
+    "مراجعة التصاميم الأمنية واختبارها"
+   ]
+  },
+  {
+   "id": "lucidya-devops-engineer-riyadh",
+   "family": "cloud-devops",
+   "title": "DevOps Engineer (Saudi Only)",
+   "titleAr": "مهندس DevOps",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Lucidya",
+    "ar": "لوسيديا"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-19",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Lucidya careers (apply.workable.com/lucidya)",
+   "url": "https://apply.workable.com/lucidya/j/FAE968EB43/",
+   "band": "junior",
+   "bandEvidence": "Experienced: You have 1–3 years of hands-on experience in DevOps, Cloud Infrastructure, Platform Engineering, or a related role.",
+   "requirements": [
+    {
+     "skill": "linux",
+     "stars": 1,
+     "evidence": "Scripting & Automation: Ability to write basic automation scripts using Bash or Python."
+    },
+    {
+     "skill": "networking",
+     "stars": 1,
+     "evidence": "Linux & Networking: Working knowledge of Linux systems, networking fundamentals, DNS, HTTP/HTTPS, and troubleshooting connectivity issues."
+    },
+    {
+     "skill": "cloud",
+     "stars": 1,
+     "evidence": "Cloud Platforms: Hands-on experience with at least one major cloud provider, such as AWS or GCP."
+    },
+    {
+     "skill": "devops",
+     "stars": 1,
+     "evidence": "Hands-On: You have practical experience with CI/CD pipelines, Docker, Kubernetes, and cloud infrastructure."
+    },
+    {
+     "skill": "git",
+     "stars": 1,
+     "evidence": "Version Control: Experience using Git and working with collaborative software development workflows."
+    }
+   ],
+   "note": "Saudi nationals only.",
+   "summary": "تبني خطوط النشر المستمر وتشغّل التطبيقات في حاويات Kubernetes وتراقب صحة منصة لوسيديا للذكاء الاصطناعي.",
+   "tasks": [
+    "بناء وصيانة خطوط CI/CD",
+    "نشر التطبيقات على Kubernetes ومراقبتها",
+    "أتمتة المهام المتكررة بالسكربتات"
+   ]
+  },
+  {
+   "id": "lucidya-site-reliability-engineer-riyadh",
+   "family": "cloud-devops",
+   "title": "Site Reliability Engineer - Saudi Only",
+   "titleAr": "مهندس موثوقية المواقع (SRE)",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Lucidya",
+    "ar": "لوسيديا"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-09-03",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Lucidya careers (apply.workable.com/lucidya)",
+   "url": "https://apply.workable.com/lucidya/j/B519978733/",
+   "band": "junior",
+   "bandEvidence": "You’ve spent 1-3 years working in SRE, DevOps, or infrastructure engineering, and you’ve seen what breaks at scale",
+   "requirements": [
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "You don’t just fix issues - you ask why they happened and make sure they don’t happen again"
+    },
+    {
+     "skill": "linux",
+     "stars": 1,
+     "evidence": "Write scripts in Python, Bash, or similar to automate workflows"
+    },
+    {
+     "skill": "networking",
+     "stars": 1,
+     "evidence": "Have a solid grasp of networking, load balancing, and high-availability design"
+    },
+    {
+     "skill": "cloud",
+     "stars": 1,
+     "evidence": "You’re comfortable working in cloud environments like AWS, GCP, or Azure—and you understand how distributed systems behave"
+    },
+    {
+     "skill": "devops",
+     "stars": 1,
+     "evidence": "Use Terraform (or similar IaC tools) to manage infrastructure"
+    }
+   ],
+   "note": "Saudi nationals only. Posted 3 Sep 2026 and still listed on Lucidya's board on 20 Nov.",
+   "summary": "تحافظ على استقرار وتوسّع البنية السحابية لمنصة لوسيديا وتدير Kubernetes وتستجيب للحوادث وتحلل أسبابها.",
+   "tasks": [
+    "إدارة بيئات AWS أو GCP بـ Terraform",
+    "تشغيل عناقيد Kubernetes في الإنتاج",
+    "بناء المراقبة والاستجابة للحوادث"
+   ]
+  },
+  {
+   "id": "mozn-cloud-platform-engineer-riyadh",
+   "family": "cloud-devops",
+   "title": "Cloud Platform Engineer",
+   "titleAr": "مهندس منصات سحابية",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Mozn",
+    "ar": "مزن"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-27",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Mozn careers (apply.workable.com/mozn-ai)",
+   "url": "https://apply.workable.com/mozn-ai/j/05591481EB/",
+   "band": "mid",
+   "bandEvidence": "4+ years of experience in cloud, platform, or infrastructure engineering.",
+   "requirements": [
+    {
+     "skill": "networking",
+     "stars": 1,
+     "evidence": "Design and troubleshoot Kubernetes networking, ingress, service discovery, and traffic management."
+    },
+    {
+     "skill": "cloud",
+     "stars": 2,
+     "evidence": "Deep hands-on expertise in GCP and Kubernetes, including production experience with GKE."
+    },
+    {
+     "skill": "programming",
+     "stars": 1,
+     "evidence": "Proficiency in Python, Bash, or Go for automation and tooling."
+    },
+    {
+     "skill": "linux",
+     "stars": 1,
+     "evidence": "Strong understanding of cloud networking, gateways, Linux, and distributed systems."
+    },
+    {
+     "skill": "devops",
+     "stars": 1,
+     "evidence": "Strong experience with infrastructure as code (IaC), using tools such as Terraform, Pulumi, Crossplane, or equivalent."
+    }
+   ],
+   "note": "cloud at 2: the role designs GCP platforms (architect level).",
+   "summary": "تصمم وتشغّل منصات سحابية على GCP قلبها GKE وتبني قوالب بنية تحتية قابلة لإعادة الاستخدام لفرق مزن.",
+   "tasks": [
+    "تشغيل عناقيد GKE وترقيتها وتوسيعها",
+    "بناء خطوط GitOps بـ Argo CD",
+    "أتمتة البنية التحتية بـ Terraform"
+   ]
+  },
+  {
+   "id": "lamdax-ai-engineer-remote",
+   "family": "ai-ml",
+   "title": "AI Engineer",
+   "titleAr": "مهندس ذكاء اصطناعي",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Lamdax",
+    "ar": "لامداكس"
+   },
+   "city": "remote",
+   "cityText": "Remote",
+   "remote": true,
+   "postedAt": "2026-10-28",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Lamdax careers (apply.workable.com/lamdax)",
+   "url": "https://apply.workable.com/lamdax/j/E770665A8C/",
+   "band": "entry",
+   "bandEvidence": "Fresh graduate with a bachelor's degree in Computer Science, Artificial Intelligence, Data Science, Software Engineering, or a related field.",
+   "requirements": [
+    {
+     "skill": "programming",
+     "stars": 1,
+     "evidence": "Working knowledge of Python, SQL, and .NET."
+    },
+    {
+     "skill": "python-data",
+     "stars": 1,
+     "evidence": "Experience with data cleaning, preprocessing, feature engineering, exploratory analysis, or working with structured business datasets."
+    },
+    {
+     "skill": "ml",
+     "stars": 1,
+     "evidence": "Hands-on experience from internships, university projects, or personal projects developing and testing machine learning models."
+    },
+    {
+     "skill": "deep-learning",
+     "stars": 1,
+     "evidence": "Experience with at least one major AI or machine learning framework such as TensorFlow, PyTorch, scikit-learn, or Hugging Face."
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Exposure to model deployment or monitoring, APIs, Docker, or cloud services."
+    }
+   ],
+   "note": "Remote, listed under Riyadh; the posting accepts candidates based in Saudi Arabia or Egypt. deep-learning is a judgement call: TensorFlow, PyTorch or Hugging Face fit it, but scikit-learn alone would also satisfy the line.",
+   "summary": "وظيفة لحديثي التخرج تبني فيها نماذج تعلّم آلة وتختبرها وتدعم نشرها لحلول أعمال حقيقية.",
+   "tasks": [
+    "تجهيز البيانات وتنظيفها لتدريب النماذج",
+    "تطوير نماذج تعلّم الآلة واختبارها",
+    "توثيق التجارب وأداء النماذج"
+   ]
+  },
+  {
+   "id": "smart-technology-solutions-ai-data-trainee-jeddah",
+   "family": "ai-ml",
+   "title": "AI &Data Trainee",
+   "titleAr": "متدرب ذكاء اصطناعي وبيانات",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Smart Technology Solutions",
+    "ar": "سمارت تكنولوجي سوليوشنز"
+   },
+   "city": "jeddah",
+   "cityText": "Jeddah, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-18",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Smart Technology Solutions job page on Workable (jobs.workable.com)",
+   "url": "https://jobs.workable.com/view/esTsB8egTmXvZNcepyEsrz/ai-%26data-trainee-in-jeddah-at-smart-technology-solutions",
+   "band": "entry",
+   "bandEvidence": "Bachelor’s degree (or recent graduate) in Computer Science, Data Science, Artificial Intelligence, or a related field.",
+   "requirements": [
+    {
+     "skill": "programming",
+     "stars": 1,
+     "evidence": "Good programming skills in Python and familiarity with data processing libraries (such as Pandas and NumPy)."
+    },
+    {
+     "skill": "dataviz",
+     "stars": 1,
+     "evidence": "Basic understanding of working with data and data visualization tools."
+    },
+    {
+     "skill": "statistics",
+     "stars": 1,
+     "evidence": "Foundational knowledge of statistics, data mining, and predictive modeling concepts."
+    },
+    {
+     "skill": "ml",
+     "stars": 1,
+     "evidence": "Basic knowledge of machine learning frameworks such as TensorFlow, PyTorch, or scikit-learn (academic or personal projects are a plus)."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Good communication skills with the ability to simplify technical concepts."
+    }
+   ],
+   "note": "Trainee role for recent graduates. The requirement lines sit in one block in the posting.",
+   "summary": "برنامج تدريبي لحديثي التخرج لبناء حلول ذكاء اصطناعي وتحليل بيانات ونماذج تعلّم آلة لمشاريع الشركة.",
+   "tasks": [
+    "تحليل مجموعات بيانات كبيرة لاستخراج رؤى",
+    "بناء نماذج تعلّم آلة لمشاريع الشركة",
+    "دمج حلول الذكاء الاصطناعي مع الأنظمة"
+   ]
+  },
+  {
+   "id": "foodics-ai-engineer-riyadh",
+   "family": "ai-ml",
+   "title": "AI Engineer",
+   "titleAr": "مهندس ذكاء اصطناعي",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Foodics",
+    "ar": "فودكس"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-09-29",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Foodics careers (apply.workable.com/foodics)",
+   "url": "https://apply.workable.com/foodics/j/9BDF0B39E6/",
+   "band": "junior",
+   "bandEvidence": "Opportunities exist for early-career developers through veteran software architects.",
+   "requirements": [
+    {
+     "skill": "programming",
+     "stars": 2,
+     "evidence": "Deep software engineering expertise in a modern programming language, prioritizing algorithmic depth over superficial multi-language breadth."
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Practical experience with backend infrastructure: REST/gRPC APIs, relational/non-relational databases, caching tiers, message queues, and distributed systems resilience."
+    },
+    {
+     "skill": "git",
+     "stars": 1,
+     "evidence": "Proficiency with Git, automated testing frameworks, CI/CD pipelines, and writing clean, maintainable software."
+    },
+    {
+     "skill": "llm-apps",
+     "stars": 1,
+     "evidence": "Comprehensive mental model of LLM mechanics: context window constraints, tokenization, function calling protocols, non-deterministic behaviors, and hallucination management."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Methodical debugging skills with the ability to articulate systematic troubleshooting methodologies."
+    }
+   ],
+   "note": "Open to all seniority levels; the level is set by the candidate's ability. Band 'junior' reflects the early-career track it names; no years are stated.",
+   "summary": "تبني البنية الخلفية لوكلاء ذكاء اصطناعي يعتمدون على النماذج اللغوية الكبيرة داخل منصة فودكس للمطاعم.",
+   "tasks": [
+    "بناء بنية الوكلاء وإدارة الحالة والجلسات",
+    "تصميم تكاملات الأدوات وخوادم MCP",
+    "بناء اختبارات تقييم لمخرجات النماذج"
+   ]
+  },
+  {
+   "id": "mozn-ai-engineer-riyadh",
+   "family": "ai-ml",
+   "title": "AI Engineer",
+   "titleAr": "مهندس ذكاء اصطناعي",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Mozn",
+    "ar": "مزن"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-07-27",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Mozn careers (apply.workable.com/mozn-ai)",
+   "url": "https://apply.workable.com/mozn-ai/j/8C246156A4/",
+   "band": "mid",
+   "bandEvidence": "3-5 years of experience across software engineering, ML engineering, data science, data engineering and generative AI.",
+   "requirements": [
+    {
+     "skill": "ml",
+     "stars": 1,
+     "evidence": "Designing, building, and scaling machine learning models and infrastructure"
+    },
+    {
+     "skill": "deep-learning",
+     "stars": 1,
+     "evidence": "Expertise in Python, TensorFlow, PyTorch, ONNX, and ML deployment frameworks"
+    },
+    {
+     "skill": "cloud",
+     "stars": 1,
+     "evidence": "Experience with cloud ML environments (SageMaker, Vertex AI, OCI Data Science)"
+    },
+    {
+     "skill": "devops",
+     "stars": 1,
+     "evidence": "Expertise in containerization and orchestration technologies (Docker, Kubernetes), with hands-on experience in ML lifecycle management (MLflow) and local LLM deployment frameworks (Ollama)"
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Experience designing and consuming REST APIs, webhooks, and enterprise integration interfaces"
+    }
+   ],
+   "note": "Posted 27 Jul 2026 and still listed on Mozn's board on 20 Nov.",
+   "summary": "تصمم وتنشر حلول تعلّم آلة وذكاء اصطناعي توليدي لعملاء حكوميين وشركات في السعودية من النموذج حتى التشغيل.",
+   "tasks": [
+    "بناء نماذج تعلّم الآلة وتوسيعها",
+    "نشر نماذج التعلّم العميق في الإنتاج",
+    "تطوير واجهات API تعرض قدرات الذكاء الاصطناعي"
+   ]
+  },
+  {
+   "id": "foodics-field-sales-representative-riyadh",
+   "family": "sales-cs",
+   "title": "Field Sales Representative",
+   "titleAr": "مندوب مبيعات ميداني",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Foodics",
+    "ar": "فودكس"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-11",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Foodics careers (apply.workable.com/foodics)",
+   "url": "https://apply.workable.com/foodics/j/D84B028E41/",
+   "band": "entry",
+   "bandEvidence": "Fresh graduate with up to 2 years of experience (sales or customer-facing experience is a plus).",
+   "requirements": [
+    {
+     "skill": "sales",
+     "stars": 1,
+     "evidence": "Prospect and visit restaurants, cafes and food businesses in your assigned area to generate new business."
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Run on-site product demos and explain how Foodics POS, modules and integrations solve the owner's daily problems."
+    },
+    {
+     "skill": "marketing-basics",
+     "stars": 1,
+     "evidence": "Build local relationships and track competitor activity in your area."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Excellent communication and interpersonal skills; confident, presentable and persuasive."
+    },
+    {
+     "skill": "english",
+     "stars": 1,
+     "evidence": "Fluent Arabic; good English is a plus."
+    }
+   ],
+   "note": "Saudi nationals preferred; own car and driving licence required. marketing-basics is a judgement call (tracking local competitor activity).",
+   "summary": "تزور المطاعم والمقاهي في مدينتك وتعرض نظام فودكس لنقاط البيع وتغلق صفقات عملاء جدد.",
+   "tasks": [
+    "زيارة المطاعم والمقاهي لجلب عملاء جدد",
+    "تقديم عروض حيّة لنظام نقاط البيع",
+    "تسجيل الزيارات والعملاء المحتملين في Salesforce"
+   ]
+  },
+  {
+   "id": "shipa-junior-business-development-executive-riyadh",
+   "family": "sales-cs",
+   "title": "Junior Business Development Executive (Saudi National)",
+   "titleAr": "تنفيذي تطوير أعمال مبتدئ",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Shipa",
+    "ar": "شيبا"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-26",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Shipa job page on Workable (jobs.workable.com)",
+   "url": "https://jobs.workable.com/view/d5xAQsGgdPL28cjkE774g1/junior-business-development-executive-(saudi-national)-in-riyadh-at-shipa",
+   "band": "junior",
+   "bandEvidence": "This is a junior-level role suitable for candidates with 0–2 years of experience who are eager to learn and build a career in business development.",
+   "requirements": [
+    {
+     "skill": "sales",
+     "stars": 1,
+     "evidence": "Assist in identifying potential customers and generating new business leads."
+    },
+    {
+     "skill": "customer-success",
+     "stars": 1,
+     "evidence": "Support new customer onboarding and coordinate with internal teams."
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Assist in preparing sales proposals, quotations, and presentations."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Strong communication and interpersonal skills."
+    },
+    {
+     "skill": "excel",
+     "stars": 1,
+     "evidence": "Basic proficiency in MS Excel and other MS Office tools."
+    }
+   ],
+   "note": "Saudi nationals only. 0-2 years, so fresh graduates qualify; labelled 'junior' as the posting does.",
+   "summary": "تدعم فريق تطوير الأعمال في شيبا للتوصيل بجلب عملاء جدد ومتابعة العملاء الحاليين.",
+   "tasks": [
+    "البحث عن عملاء محتملين وتوليد فرص",
+    "تجهيز عروض الأسعار والعروض التقديمية",
+    "تحديث بيانات العملاء والمتابعات في CRM"
+   ]
+  },
+  {
+   "id": "petroapp-customer-success-specialist-riyadh",
+   "family": "sales-cs",
+   "title": "Customer Success Specialist",
+   "titleAr": "أخصائي نجاح العملاء",
+   "titleArTranslated": true,
+   "company": {
+    "en": "PetroApp",
+    "ar": "بترو آب"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-07-06",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "PetroApp careers (apply.workable.com/petroapp)",
+   "url": "https://apply.workable.com/petroapp/j/140FDB57A0/",
+   "band": "junior",
+   "bandEvidence": "1–2 years of experience in Customer Success, Account Management, or a similar customer-facing role.",
+   "requirements": [
+    {
+     "skill": "customer-success",
+     "stars": 1,
+     "evidence": "Manage subscription renewals and support retention efforts to minimize churn."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Collaborate with Sales, Product, Marketing, and Support teams to ensure a seamless customer experience."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Strong communication and relationship management skills."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Excellent problem-solving and customer service abilities."
+    },
+    {
+     "skill": "sales",
+     "stars": 1,
+     "evidence": "Familiarity with CRM and customer success tools."
+    }
+   ],
+   "note": "Posted 6 Jul 2026 and still listed on PetroApp's board on 20 Nov. Previous SaaS experience is required. sales at 1 only for the CRM line (a preferred qualification).",
+   "summary": "تدير علاقة عملاء منصة بترو آب وتتابع استخدامهم وتجديد اشتراكاتهم لتقليل خسارة العملاء.",
+   "tasks": [
+    "متابعة استخدام العملاء للمنصة وتشجيع التبنّي",
+    "إدارة تجديد الاشتراكات وتقليل الخسارة",
+    "إعداد تقارير أداء العملاء"
+   ]
+  },
+  {
+   "id": "tamara-business-development-specialist-riyadh",
+   "family": "sales-cs",
+   "title": "Business Development Specialist",
+   "titleAr": "أخصائي تطوير أعمال",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Tamara",
+    "ar": "تمارا"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-15",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Tamara careers (job-boards.eu.greenhouse.io/tamara)",
+   "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/5034365101",
+   "band": "junior",
+   "bandEvidence": "Experience in business development or sales or lead generation, ideally 2+ years of experience.",
+   "requirements": [
+    {
+     "skill": "sales",
+     "stars": 2,
+     "evidence": "Drive new business by identifying, qualifying, and developing new partnership opportunities for Tamara."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Collaborate closely with Partnerships Managers, Partner Success and Marketing teams to strategize creative outreach campaigns and determine priority of outreach based on potential impact."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Engage potential partners about their goals and challenges, and educate them on the value of Tamara."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Written and verbal fluency in English; excellent communication skills."
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Ability to work on data, create insights and PowerPoint presentations for sales pitches."
+    }
+   ],
+   "note": "sales at 2: B2B merchant-partner acquisition against a quota.",
+   "summary": "تجلب تجاراً شركاء جدداً لتمارا وتدير المراحل الأولى من مسار المبيعات لتحقيق الحصة المستهدفة.",
+   "tasks": [
+    "تحديد فرص الشراكة مع التجار وتأهيلها",
+    "التواصل مع العملاء المحتملين ورعايتهم",
+    "إعداد عروض تقديمية للبيع"
+   ]
+  },
+  {
+   "id": "qiddiya-procurement-specialist-riyadh",
+   "family": "supply-procurement",
+   "title": "Specialist - Procurement",
+   "titleAr": "أخصائي مشتريات",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Qiddiya Investment Company",
+    "ar": "شركة القدية للاستثمار"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-19",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Qiddiya job page on Workable (jobs.workable.com)",
+   "url": "https://jobs.workable.com/view/cSXrjno345fb9kAGDyroR9/specialist---procurement-in-riyadh-at-qiddiya-investment-company",
+   "band": "junior",
+   "bandEvidence": "Typically 2+ years of relevant procurement or supply chain experience.",
+   "requirements": [
+    {
+     "skill": "procurement",
+     "stars": 1,
+     "evidence": "Conduct RFQs, RFPs, and competitive tendering in accordance with procurement policies and approved authority levels."
+    },
+    {
+     "skill": "financial-analysis",
+     "stars": 1,
+     "evidence": "Perform commercial evaluations of supplier proposals, including pricing, payment terms, lead times, and contractual requirements."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Coordinate with internal stakeholders to clarify requirements, specifications, scope of work, budgets, and delivery timelines."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Monitor purchase orders and supplier commitments to ensure timely delivery and resolve procurement-related issues."
+    },
+    {
+     "skill": "supply-chain",
+     "stars": 2,
+     "evidence": "Experience with ERP/procurement platforms such as SAP, SAP Ariba is preferred."
+    }
+   ],
+   "note": "supply-chain at 2 for SAP / SAP Ariba ERP, which the posting lists as preferred. financial-analysis is a judgement call (commercial evaluation of supplier offers). Qiddiya posted a second 'Specialist - Procurement' on 16 Nov.",
+   "summary": "تدير عمليات الشراء في القدية من طلب الشراء إلى الترسية وأمر الشراء مع توفير التكاليف والالتزام بالسياسات.",
+   "tasks": [
+    "طرح طلبات عروض الأسعار والمناقصات",
+    "تقييم عروض الموردين تجارياً والتفاوض معهم",
+    "متابعة أوامر الشراء وأداء الموردين"
+   ]
+  },
+  {
+   "id": "ninja-procurement-cost-control-specialist-riyadh",
+   "family": "supply-procurement",
+   "title": "Procurement & Cost Control Specialist",
+   "titleAr": "أخصائي مشتريات ومراقبة تكاليف",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Ninja",
+    "ar": "نينجا"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-28",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Ninja careers (apply.workable.com/ananinja)",
+   "url": "https://apply.workable.com/ananinja/j/2484DA5885/",
+   "band": "junior",
+   "bandEvidence": "Minimum 2–4 years of experience in procurement cost control, accounts payable, procurement finance, or a related field.",
+   "requirements": [
+    {
+     "skill": "financial-analysis",
+     "stars": 1,
+     "evidence": "The role monitors procurement spend against approved budgets, validates supplier invoices, and ensures supplier payments are processed accurately and on time in line with contractual terms, the delegation of authority, and company policies"
+    },
+    {
+     "skill": "procurement",
+     "stars": 1,
+     "evidence": "Good understanding of the procure-to-pay (P2P) cycle, budget monitoring, cost analysis, and supplier account reconciliation."
+    },
+    {
+     "skill": "accounting",
+     "stars": 1,
+     "evidence": "Working knowledge of basic accounting principles, KSA VAT regulations, and ZATCA e-invoicing requirements."
+    },
+    {
+     "skill": "excel",
+     "stars": 3,
+     "evidence": "Hands-on experience with ERP systems (such as SAP, Oracle, or Microsoft Dynamics) and advanced Microsoft Excel skills."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong analytical and problem-solving skills with high attention to detail and the ability to meet payment deadlines."
+    }
+   ],
+   "note": "excel at 3 for 'advanced Microsoft Excel skills'. financial-analysis evidence is the start of a longer sentence in the role description (budget monitoring).",
+   "summary": "تراقب إنفاق المشتريات مقابل الميزانية وتتحقق من فواتير الموردين وتضمن صرف مستحقاتهم بدقة في نينجا.",
+   "tasks": [
+    "التحقق من فواتير الموردين ومعالجة الدفعات",
+    "مراقبة الإنفاق مقابل الميزانية المعتمدة",
+    "مطابقة حسابات الموردين وخفض التكاليف"
+   ]
+  },
+  {
+   "id": "hungerstation-junior-3pl-account-manager-riyadh",
+   "family": "supply-procurement",
+   "title": "Junior 3PL Account Manager",
+   "titleAr": "مدير حسابات شركات الخدمات اللوجستية (مبتدئ)",
+   "titleArTranslated": true,
+   "company": {
+    "en": "HungerStation (Delivery Hero)",
+    "ar": "هنقرستيشن"
+   },
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-09",
+   "checkedAt": "2026-11-20",
+   "urlStatusOnCheck": 200,
+   "source": "Delivery Hero careers (SmartRecruiters, HungerStation)",
+   "url": "https://jobs.smartrecruiters.com/DeliveryHero/744000160579649-junior-3pl-account-manager",
+   "band": "junior",
+   "bandEvidence": "0 – 3 years of relevant experience.",
+   "requirements": [
+    {
+     "skill": "procurement",
+     "stars": 1,
+     "evidence": "Ensure sufficient availability of supply in cities and proactively acquire new 3PLs."
+    },
+    {
+     "skill": "dataviz",
+     "stars": 1,
+     "evidence": "Track and analyze the performance of active riders through detailed reporting dashboards."
+    },
+    {
+     "skill": "supply-chain",
+     "stars": 1,
+     "evidence": "Basic knowledge of logistics."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Problem-solving skills."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Excellent communication skills."
+    }
+   ],
+   "note": "Manages third-party logistics (3PL) partner companies, so it is placed under supply-procurement as logistics-supplier management rather than sales. procurement evidence is acquiring and managing 3PL suppliers. Diploma accepted; bachelor's preferred.",
+   "summary": "تدير علاقة هنقرستيشن مع شركات التوصيل الخارجية وتتابع التزامها وأداء مناديبها وتضمن توفر الأسطول في المدن.",
+   "tasks": [
+    "متابعة التزام شركات التوصيل بالمعايير",
+    "تحليل أداء المناديب عبر لوحات التقارير",
+    "استقطاب شركات توصيل جديدة عند الحاجة"
+   ]
+  }
+ ],
+ "demandEvidence": {
+  "product": [
+   "Salla: 4 matching openings (distinct titles) seen on apply.workable.com/salla (Senior Product Manager - Catalog and Store; Product Manager - Storefront; Senior Product Manager - GCC Expansion; Staff Product Manager - Enterprise)",
+   "Squadio [recruitment/staffing firm]: 3 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Senior Product Manager- Saudi National; Senior Product Manager; Senior Product Manager (ARAB))",
+   "Lucidya: 2 matching openings (distinct titles) seen on apply.workable.com/lucidya (Principal Product Manager - Customer Service Suite; Senior Product Manager - Monitoring & Research)",
+   "Müller`s Solutions [recruitment/staffing firm]: 2 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (GIS Product Manager; SAP Product Manager)",
+   "PetroApp: 2 matching openings (distinct titles) seen on apply.workable.com/petroapp (Product Manager; Senior Product Manager)",
+   "webook.com: 2 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Product Manager; Tribe Lead Product Manager)",
+   "Master-Works: 1 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (AI Product Manager)"
+  ],
+  "cyber": [
+   "Müller`s Solutions [recruitment/staffing firm]: 9 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Senior Email Security Engineer - 3 Month; Google Cloud Security Engineer.; Cybersecurity Architect; Cybersecurity Specialist - (Saudi National); ...)",
+   "Qiddiya Investment Company: 9 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Associate Director - Cybersecurity Risk and Compliance; Analyst - Cybersecurity Business Partner; Manager - Cybersecurity Governance; Senior Specialist - IT Security Delivery; ...)",
+   "TAWANTECH: 7 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Senior Specialist - Cybersecurity Production Support - Saudi Arabia 🇸🇦; Senior Specialist - Cybersecurity Production Support; Business Analyst / Developer - GRC SecOps; Business Analyst Developers \\GRC IRM; ...)",
+   "Eram Talent [recruitment/staffing firm]: 5 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Cybersecurity Architect (Saudi Arabia); Cybersecurity Governance, Risk & Compliance (GRC) Specialist (Saudi Arabia); Cybersecurity Governance & Compliance Specialist (Saudi Arabia); Associate Cybersecurity Analyst; ...)",
+   "DeepSource Technologies: 4 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Senior Security Engineer - (Saudi National)- Riyadh, KSA; Senior Network Security Engineer -(Saudi National)- Riyadh, KSA; Senior IT Security Operation- Saudi National- Riyadh, KSA; Senior IT Security Operation Architect - Saudi National- Riyadh, KSA)",
+   "Master-Works: 2 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Penetration Tester, Senior Engineer; Network Security, Senior Engineer)",
+   "AIS: 1 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (OT Cybersecurity Sales Representative)",
+   "HungerStation (Delivery Hero): 1 matching openings in Saudi Arabia seen on api.smartrecruiters.com/v1/companies/DeliveryHero/postings (Senior Security Engineer I)",
+   "Level note: no entry or junior cybersecurity posting was found on 20 Nov 2026; every open cyber posting seen asks 3+ years. Arabic.AI 'Operations and Security Engineer' (Riyadh, posted 9 Nov) states no years and was left out. Qiddiya 'Analyst - Cybersecurity Business Partner' (posted 9 Nov) was left out because its text describes a Senior Manager - Cybersecurity Strategy role."
+  ],
+  "cloud-devops": [
+   "Müller`s Solutions [recruitment/staffing firm]: 6 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Google Cloud Engineer; Azure Cloud Engineer; Google Cloud Architect; GCP DevOps Specialist; ...)",
+   "Eram Talent [recruitment/staffing firm]: 4 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Cloud Engineer (Saudi Arabia); Cloud Engineer / Architect (Saudi Arabia); Computing & Cloud Architect (Saudi Arabia); Enterprise Computing & Cloud Architect (Saudi Arabia))",
+   "DeepSource Technologies: 3 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Senior Cloud Engineer - (Saudi National)- Riyadh, KSA; Cloud Administrator (Azure)- Saudi National- Riyadh, KSA; Senior Infrastructure Engineer (Saudi National)- Riyadh, KSA)",
+   "Lucidya: 3 matching openings (distinct titles) seen on apply.workable.com/lucidya (Site Reliability Engineer - Saudi Only; Senior DevOps Engineer; DevOps Engineer (Saudi Only))",
+   "Advansys: 2 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (DevSecOps Engineer; Platform Engineer - SailPoint IdentityIQ)",
+   "JASARA PMC: 2 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Infrastructure Engineer (EOI); Infrastructure Engineer)",
+   "Mozn: 2 matching openings (distinct titles) seen on apply.workable.com/mozn-ai (Senior Site Reliability Engineer; Cloud Platform Engineer)"
+  ],
+  "ai-ml": [
+   "InnovationTeam: 4 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Senior Generative AI (Gen AI) Engineer; Junior AI Engineer; AI Engineer - Computer Vision; AI Engineer)",
+   "Müller`s Solutions [recruitment/staffing firm]: 4 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (AI / Computer Vision Engineer; Data Scientist - 6 months contract; Data Scientist; AI / Computer Vision ENGINEER)",
+   "Master-Works: 3 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (AI Engineer, Specialist; AI Product, Senior Engineer (VLM & Computer Vision); AI Product, Senior Engineer (LLM & Agentic AI))",
+   "Devsinc: 2 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (NLP Engineer - Arabic Language Focus; Senior Data Scientist)",
+   "Envision Employment Solutions [recruitment/staffing firm]: 2 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (AI/ML Engineer; Oracle AI Agent Studio Engineer)",
+   "Eram Talent [recruitment/staffing firm]: 2 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Associate Data Scientist (Saudi Arabia); AI/LLM Engineer (Saudi Arabia))",
+   "Mozn: 2 matching openings (distinct titles) seen on apply.workable.com/mozn-ai (Data Scientist III; AI Engineer)",
+   "Lean Technologies: 1 matching openings in Saudi Arabia seen on jobs.ashbyhq.com/LeanTech (Senior Data Scientist)"
+  ],
+  "sales-cs": [
+   "Lucidya: 7 matching openings (distinct titles) seen on apply.workable.com/lucidya (Sr. Customer Success Manager; Sr Account Executive - Agentic AI; Account Executive - Enterprise; Account Executive - Government; ...)",
+   "Müller`s Solutions [recruitment/staffing firm]: 6 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (AI Business Development Specialist; Infrastructure Software Sales Specialist (RedHat/Rancher); Account Manager \"Saudi National Only\"; Senior Account Manager \"Saudi National only\"; ...)",
+   "Eram Talent [recruitment/staffing firm]: 5 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Sales Executive - Calibration Equipment & Services; Sales Executive - Calibration Services | Riyadh; Sales Executive; Business Development Executives/Marketing Specialist (Saudi Arabia); ...)",
+   "Foodics: 3 matching openings (distinct titles) seen on apply.workable.com/foodics (Key Account Manager; Sales Executive - Expansion Team; Field Sales Representative)",
+   "InnovationTeam: 3 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Cloud Sales Associate (Saudi National); Customer Success Manager (Key Accounts); Junior Sales Executive)",
+   "Master-Works: 3 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Sales Account, Manager; Account Manager; Account Manager, Senior)",
+   "Taj HR [recruitment/staffing firm]: 3 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Enterprise Sales Account Manager; Sales Account Manager; Bakery Products Sales Specialist)",
+   "HungerStation (Delivery Hero): 5 matching openings in Saudi Arabia seen on api.smartrecruiters.com/v1/companies/DeliveryHero/postings (Sales Executive (Jeddah); Account Manager (Jeddah); Sales Executive; Sales Executive ( Jazan); Senior Key Account Manager - Groceries)",
+   "Tamara: 1 matching openings in Saudi Arabia seen on job-boards.eu.greenhouse.io/tamara (Business Development Specialist)",
+   "Also open (left out to keep 4): HungerStation 'Sales Executive' (Dhahran) and 'Sales Executive (Jeddah)' ask '1- 2 Years of relevant experience'; Lucidya 'Sales Development Representative - Fresh Graduates' (Riyadh, posted 16 Apr 2026, still on its board)."
+  ],
+  "supply-procurement": [
+   "Qiddiya Investment Company: 16 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Senior Specialist - Technology procurement; Assistant Manager - Technology Procurement; Manager - Procurement - City292- DA3; Assistant Manager - Supply Chain Risks; ...)",
+   "JASARA PMC: 11 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Procurement Manager (SBU); Senior Procurement Manager (SBU); QMM Procurement Lead; Senior Procurement Manager - MEP; ...)",
+   "Müller`s Solutions [recruitment/staffing firm]: 7 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (SAP Supply Chain Management (SCM) Project Manager; SAP-Supply Chain Lead; Senior Oracle Cloud Fusion Finance & Procurement Consultant; SAP Supply Chain & Procurement Consultant; ...)",
+   "Eram Talent [recruitment/staffing firm]: 6 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Project Manager - Logistics & Supplychain; SAP Procurement Solutions Analyst - S/4HANA & Ariba (Saudi Arabia); Procurement Engineer (Saudi Arabia); Procurement Expeditor; ...)",
+   "ABIS: 3 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Procurement Officer; Procurement Engineer - Mechanical ( Shutdown & Turnaround) - Saudi experience; Logistic Incharge (Technical & Planning ))",
+   "Hire Fellows [recruitment/staffing firm]: 2 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (Procurement & Inventory Officer; Procurement Officer - Saudi National)",
+   "Segadty: 2 matching openings (distinct titles) seen on jobs.workable.com (Workable job search, location Saudi Arabia) (E-commerce Operations & Logistics Supervisor; Purchasing & Logistics Officer)",
+   "HungerStation (Delivery Hero): 4 matching openings in Saudi Arabia seen on api.smartrecruiters.com/v1/companies/DeliveryHero/postings (Logistics Optimization Manager; 3PL Management Specialist; Junior 3PL Account Manager; 3PL Territory Lead - West)",
+   "Level note: no open supply-chain planner / demand planner posting at entry-mid level was found; Ninja 'Fulfillment Planning Specialist' (Riyadh) plans manpower, not supply, and was left out. Bayut | dubizzle 'Procurement Officer (Saudi Only)' (Riyadh, posted 8 Nov) states no years and was left out."
+  ]
+ },
+ "familiesWithNoOpenPosting": [],
+ "boardsTried": [
+  {
+   "company": "Workable job search",
+   "url": "https://jobs.workable.com/api/v1/jobs?query=...&location=Saudi%20Arabia",
+   "result": "Public JSON used by jobs.workable.com; ~45 family keywords; 1078 unique Saudi postings collected, then filtered by title"
+  },
+  {
+   "company": "Salla",
+   "url": "https://apply.workable.com/salla/",
+   "result": "opened; 23 postings listed (all countries)"
+  },
+  {
+   "company": "Foodics",
+   "url": "https://apply.workable.com/foodics/",
+   "result": "opened; 30 postings listed (all countries)"
+  },
+  {
+   "company": "Lucidya",
+   "url": "https://apply.workable.com/lucidya/",
+   "result": "opened; 36 postings listed (all countries)"
+  },
+  {
+   "company": "Ninja",
+   "url": "https://apply.workable.com/ananinja/",
+   "result": "opened; 36 postings listed (all countries)"
+  },
+  {
+   "company": "PetroApp",
+   "url": "https://apply.workable.com/petroapp/",
+   "result": "opened; 33 postings listed (all countries)"
+  },
+  {
+   "company": "Mozn",
+   "url": "https://apply.workable.com/mozn-ai/",
+   "result": "opened; 18 postings listed (all countries)"
+  },
+  {
+   "company": "Lamdax",
+   "url": "https://apply.workable.com/lamdax/",
+   "result": "opened; 9 postings listed (all countries)"
+  },
+  {
+   "company": "Mozn",
+   "url": "https://mozn.sa/careers",
+   "result": "redirects to mozn.ai/careers, which links apply.workable.com/mozn-ai"
+  },
+  {
+   "company": "qiddiya",
+   "url": "https://apply.workable.com/qiddiya/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "qiddiya-investment-company",
+   "url": "https://apply.workable.com/qiddiya-investment-company/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "zid",
+   "url": "https://apply.workable.com/zid/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "lendo",
+   "url": "https://apply.workable.com/lendo/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "barq",
+   "url": "https://apply.workable.com/barq/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "hala",
+   "url": "https://apply.workable.com/hala/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "master-works",
+   "url": "https://apply.workable.com/master-works/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "masterworks",
+   "url": "https://apply.workable.com/masterworks/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "sary",
+   "url": "https://apply.workable.com/sary/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "nana",
+   "url": "https://apply.workable.com/nana/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "unifonic",
+   "url": "https://apply.workable.com/unifonic/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "mozn",
+   "url": "https://apply.workable.com/mozn/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "calo",
+   "url": "https://apply.workable.com/calo/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "tabby",
+   "url": "https://apply.workable.com/tabby/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "lean",
+   "url": "https://apply.workable.com/lean/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "leantech",
+   "url": "https://apply.workable.com/leantech/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "geidea",
+   "url": "https://apply.workable.com/geidea/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "jahez",
+   "url": "https://apply.workable.com/jahez/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "ninja",
+   "url": "https://apply.workable.com/ninja/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "elm",
+   "url": "https://apply.workable.com/elm/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "site",
+   "url": "https://apply.workable.com/site/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "tamara",
+   "url": "https://apply.workable.com/tamara/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "careem",
+   "url": "https://apply.workable.com/careem/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "noon",
+   "url": "https://apply.workable.com/noon/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "redseaglobal",
+   "url": "https://apply.workable.com/redseaglobal/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "hungerstation",
+   "url": "https://apply.workable.com/hungerstation/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "neom",
+   "url": "https://apply.workable.com/neom/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "smart-technology-solutions",
+   "url": "https://apply.workable.com/smart-technology-solutions/",
+   "result": "Workable API answered but listed 0 postings (slug not used by the company or no openings); Qiddiya, Master-Works and Smart Technology Solutions postings were opened on jobs.workable.com instead"
+  },
+  {
+   "company": "moyasar",
+   "url": "https://apply.workable.com/moyasar/",
+   "result": "404"
+  },
+  {
+   "company": "rewaa",
+   "url": "https://apply.workable.com/rewaa/",
+   "result": "404"
+  },
+  {
+   "company": "tweeq",
+   "url": "https://apply.workable.com/tweeq/",
+   "result": "404"
+  },
+  {
+   "company": "ejar",
+   "url": "https://apply.workable.com/ejar/",
+   "result": "404"
+  },
+  {
+   "company": "cipher",
+   "url": "https://apply.workable.com/cipher/",
+   "result": "404"
+  },
+  {
+   "company": "roshn",
+   "url": "https://apply.workable.com/roshn/",
+   "result": "404"
+  },
+  {
+   "company": "sitecareers",
+   "url": "https://apply.workable.com/sitecareers/",
+   "result": "404"
+  },
+  {
+   "company": "redsea",
+   "url": "https://apply.workable.com/redsea/",
+   "result": "404"
+  },
+  {
+   "company": "zatca",
+   "url": "https://apply.workable.com/zatca/",
+   "result": "404"
+  },
+  {
+   "company": "arabic-ai",
+   "url": "https://apply.workable.com/arabic-ai/",
+   "result": "404"
+  },
+  {
+   "company": "master-works-1",
+   "url": "https://apply.workable.com/master-works-1/",
+   "result": "404"
+  },
+  {
+   "company": "Tamara",
+   "url": "https://boards-api.greenhouse.io/v1/boards/tamara/jobs?content=true",
+   "result": "opened; 35 postings (the EU API host boards-api.eu.greenhouse.io did not resolve from this machine; posting page job-boards.eu.greenhouse.io opened with 200)"
+  },
+  {
+   "company": "Careem",
+   "url": "https://boards-api.greenhouse.io/v1/boards/careem/jobs?content=true",
+   "result": "opened; 11 postings, none in Saudi Arabia"
+  },
+  {
+   "company": "tabby",
+   "url": "https://boards-api.greenhouse.io/v1/boards/tabby/jobs",
+   "result": "404"
+  },
+  {
+   "company": "leantech",
+   "url": "https://boards-api.greenhouse.io/v1/boards/leantech/jobs",
+   "result": "404"
+  },
+  {
+   "company": "leantechnologies",
+   "url": "https://boards-api.greenhouse.io/v1/boards/leantechnologies/jobs",
+   "result": "404"
+  },
+  {
+   "company": "noon",
+   "url": "https://boards-api.greenhouse.io/v1/boards/noon/jobs",
+   "result": "404"
+  },
+  {
+   "company": "geidea",
+   "url": "https://boards-api.greenhouse.io/v1/boards/geidea/jobs",
+   "result": "404"
+  },
+  {
+   "company": "unifonic",
+   "url": "https://boards-api.greenhouse.io/v1/boards/unifonic/jobs",
+   "result": "404"
+  },
+  {
+   "company": "mozn",
+   "url": "https://boards-api.greenhouse.io/v1/boards/mozn/jobs",
+   "result": "404"
+  },
+  {
+   "company": "sary",
+   "url": "https://boards-api.greenhouse.io/v1/boards/sary/jobs",
+   "result": "404"
+  },
+  {
+   "company": "nana",
+   "url": "https://boards-api.greenhouse.io/v1/boards/nana/jobs",
+   "result": "404"
+  },
+  {
+   "company": "calo",
+   "url": "https://boards-api.greenhouse.io/v1/boards/calo/jobs",
+   "result": "404"
+  },
+  {
+   "company": "hala",
+   "url": "https://boards-api.greenhouse.io/v1/boards/hala/jobs",
+   "result": "404"
+  },
+  {
+   "company": "jahez",
+   "url": "https://boards-api.greenhouse.io/v1/boards/jahez/jobs",
+   "result": "404"
+  },
+  {
+   "company": "lendo",
+   "url": "https://boards-api.greenhouse.io/v1/boards/lendo/jobs",
+   "result": "404"
+  },
+  {
+   "company": "tweeq",
+   "url": "https://boards-api.greenhouse.io/v1/boards/tweeq/jobs",
+   "result": "404"
+  },
+  {
+   "company": "zid",
+   "url": "https://boards-api.greenhouse.io/v1/boards/zid/jobs",
+   "result": "404"
+  },
+  {
+   "company": "barq",
+   "url": "https://boards-api.greenhouse.io/v1/boards/barq/jobs",
+   "result": "404"
+  },
+  {
+   "company": "rewaa",
+   "url": "https://boards-api.greenhouse.io/v1/boards/rewaa/jobs",
+   "result": "404"
+  },
+  {
+   "company": "moyasar",
+   "url": "https://boards-api.greenhouse.io/v1/boards/moyasar/jobs",
+   "result": "404"
+  },
+  {
+   "company": "cipher",
+   "url": "https://boards-api.greenhouse.io/v1/boards/cipher/jobs",
+   "result": "404"
+  },
+  {
+   "company": "tabby",
+   "url": "https://api.lever.co/v0/postings/tabby?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "lean",
+   "url": "https://api.lever.co/v0/postings/lean?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "leantech",
+   "url": "https://api.lever.co/v0/postings/leantech?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "careem",
+   "url": "https://api.lever.co/v0/postings/careem?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "noon",
+   "url": "https://api.lever.co/v0/postings/noon?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "unifonic",
+   "url": "https://api.lever.co/v0/postings/unifonic?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "mozn",
+   "url": "https://api.lever.co/v0/postings/mozn?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "geidea",
+   "url": "https://api.lever.co/v0/postings/geidea?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "calo",
+   "url": "https://api.lever.co/v0/postings/calo?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "sary",
+   "url": "https://api.lever.co/v0/postings/sary?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "nana",
+   "url": "https://api.lever.co/v0/postings/nana?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "jahez",
+   "url": "https://api.lever.co/v0/postings/jahez?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "lendo",
+   "url": "https://api.lever.co/v0/postings/lendo?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "hala",
+   "url": "https://api.lever.co/v0/postings/hala?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "tweeq",
+   "url": "https://api.lever.co/v0/postings/tweeq?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "moyasar",
+   "url": "https://api.lever.co/v0/postings/moyasar?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "zid",
+   "url": "https://api.lever.co/v0/postings/zid?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "rewaa",
+   "url": "https://api.lever.co/v0/postings/rewaa?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "barq",
+   "url": "https://api.lever.co/v0/postings/barq?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "foodics",
+   "url": "https://api.lever.co/v0/postings/foodics?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "salla",
+   "url": "https://api.lever.co/v0/postings/salla?mode=json",
+   "result": "404"
+  },
+  {
+   "company": "Rewaa",
+   "url": "https://api.lever.co/v0/postings/rewaatech?mode=json",
+   "result": "board exists (linked from rewaa.com/careers) but 0 postings"
+  },
+  {
+   "company": "Lean Technologies",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/leantech",
+   "result": "opened; 8 postings; only Saudi match for the 6 families is 'Senior Data Scientist' (senior)"
+  },
+  {
+   "company": "tabby",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/tabby",
+   "result": "404"
+  },
+  {
+   "company": "lean",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/lean",
+   "result": "404"
+  },
+  {
+   "company": "careem",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/careem",
+   "result": "404"
+  },
+  {
+   "company": "noon",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/noon",
+   "result": "404"
+  },
+  {
+   "company": "unifonic",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/unifonic",
+   "result": "404"
+  },
+  {
+   "company": "mozn",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/mozn",
+   "result": "404"
+  },
+  {
+   "company": "geidea",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/geidea",
+   "result": "404"
+  },
+  {
+   "company": "calo",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/calo",
+   "result": "404"
+  },
+  {
+   "company": "sary",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/sary",
+   "result": "404"
+  },
+  {
+   "company": "nana",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/nana",
+   "result": "404"
+  },
+  {
+   "company": "jahez",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/jahez",
+   "result": "404"
+  },
+  {
+   "company": "lendo",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/lendo",
+   "result": "404"
+  },
+  {
+   "company": "hala",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/hala",
+   "result": "404"
+  },
+  {
+   "company": "tweeq",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/tweeq",
+   "result": "404"
+  },
+  {
+   "company": "moyasar",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/moyasar",
+   "result": "404"
+  },
+  {
+   "company": "zid",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/zid",
+   "result": "404"
+  },
+  {
+   "company": "rewaa",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/rewaa",
+   "result": "404"
+  },
+  {
+   "company": "barq",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/barq",
+   "result": "404"
+  },
+  {
+   "company": "tamara",
+   "url": "https://api.ashbyhq.com/posting-api/job-board/tamara",
+   "result": "404"
+  },
+  {
+   "company": "Delivery Hero / HungerStation",
+   "url": "https://api.smartrecruiters.com/v1/companies/DeliveryHero/postings",
+   "result": "opened; 789 postings worldwide, 26 in Saudi Arabia"
+  },
+  {
+   "company": "Careem",
+   "url": "https://api.smartrecruiters.com/v1/companies/Careem/postings",
+   "result": "API answered with 0 postings (not their SmartRecruiters id)"
+  },
+  {
+   "company": "Noon",
+   "url": "https://api.smartrecruiters.com/v1/companies/Noon/postings",
+   "result": "API answered with 0 postings (not their SmartRecruiters id)"
+  },
+  {
+   "company": "NEOM",
+   "url": "https://api.smartrecruiters.com/v1/companies/NEOM/postings",
+   "result": "API answered with 0 postings (not their SmartRecruiters id)"
+  },
+  {
+   "company": "Geidea",
+   "url": "https://api.smartrecruiters.com/v1/companies/Geidea/postings",
+   "result": "API answered with 0 postings (not their SmartRecruiters id)"
+  },
+  {
+   "company": "stc",
+   "url": "https://api.smartrecruiters.com/v1/companies/stc/postings",
+   "result": "API answered with 0 postings (not their SmartRecruiters id)"
+  },
+  {
+   "company": "Elm",
+   "url": "https://api.smartrecruiters.com/v1/companies/Elm/postings",
+   "result": "API answered with 0 postings (not their SmartRecruiters id)"
+  },
+  {
+   "company": "RedSeaGlobal",
+   "url": "https://api.smartrecruiters.com/v1/companies/RedSeaGlobal/postings",
+   "result": "API answered with 0 postings (not their SmartRecruiters id)"
+  },
+  {
+   "company": "Tabby",
+   "url": "https://tabby.ai/en-SA/careers",
+   "result": "200, redirects to the en-AE careers page; tabby.sa/en-SA/careers also 200; no ATS link in the static HTML, not pursued"
+  },
+  {
+   "company": "stc",
+   "url": "https://careers.stc.com.sa/",
+   "result": "200 (SuccessFactors career site); not searched further in this pass (prior pass saw only senior openings)"
+  },
+  {
+   "company": "SITE",
+   "url": "https://www.site.sa/en/careers",
+   "result": "200; no ATS link in the static HTML"
+  },
+  {
+   "company": "Cipher",
+   "url": "https://cipher.com.sa/careers",
+   "result": "504"
+  },
+  {
+   "company": "Elm",
+   "url": "https://www.elm.sa/en/careers",
+   "result": "redirects to the Elm home page"
+  },
+  {
+   "company": "Jahez",
+   "url": "https://jahez.net/careers",
+   "result": "404"
+  },
+  {
+   "company": "Unifonic",
+   "url": "https://unifonic.com/careers",
+   "result": "404"
+  },
+  {
+   "company": "Tweeq",
+   "url": "https://tweeq.sa/careers",
+   "result": "404"
+  }
+ ]
+}

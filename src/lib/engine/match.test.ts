@@ -77,33 +77,60 @@ describe("match with the catalogue", () => {
     ]);
     expect(b.total).toBe(70);
     expect(b.metPoints).toBe(60);
-    const thirds = matchBreakdown(getJob("bi-analyst-riyadh"), stars({ excel: 2, sql: 2, statistics: 1 }));
+    const thirds = matchBreakdown(getJob("jeeny-growth-insights-analytics-riyadh"), stars({ excel: 2, sql: 2, statistics: 1 }));
     expect(thirds.rows[1]?.points).toBeCloseTo(13.333, 2);
-    expect(thirds.total).toBe(43);
+    expect(thirds.total).toBe(37);
   });
 
-  it("9.8 check 5: with the sample CV every job's match equals the 9.3 column; only data analyst is ≥ 70", () => {
+  it("9.8 check 5: with the sample CV every job's match is as listed; only the practice data analyst is ≥ 70", () => {
     const expected: Record<(typeof JOB_IDS)[number], number> = {
       "data-analyst-riyadh": 70,
-      "bi-analyst-riyadh": 43,
-      "reporting-specialist-jeddah": 50,
-      "junior-data-scientist-remote": 30,
-      "frontend-developer-riyadh": 20,
-      "backend-developer-riyadh": 30,
-      "web-app-developer-remote": 20,
-      "qa-tester-dammam": 50,
-      "ui-ux-designer-riyadh": 20,
-      "product-designer-jeddah": 10,
-      "ux-researcher-remote": 40,
-      "digital-marketing-specialist-riyadh": 20,
-      "content-writer-jeddah": 40,
-      "digital-ads-specialist-dammam": 20,
-      "business-analyst-riyadh": 60,
-      "project-coordinator-jeddah": 50,
-      "financial-analyst-riyadh": 53,
-      "hr-specialist-riyadh": 30,
-      "recruiter-jeddah": 50,
-      "training-coordinator-dammam": 30,
+      "jeeny-growth-insights-analytics-riyadh": 47,
+      "qiddiya-hr-analytics-analyst-riyadh": 40,
+      "ninja-real-estate-performance-analyst-riyadh": 43,
+      "master-works-data-senior-engineer-riyadh": 53,
+      "salla-senior-data-scientist-remote": 43,
+      "lucidya-frontend-engineer-dammam": 0,
+      "salla-senior-backend-checkout-remote": 43,
+      "salla-senior-qa-engineer-remote": 20,
+      "almajed-mobile-developer-riyadh": 40,
+      "horizontal-graduate-designer-riyadh": 20,
+      "flyakeed-product-designer-riyadh": 20,
+      "lucidya-product-designer-riyadh": 20,
+      "hungerstation-senior-product-designer-riyadh": 40,
+      "salla-marketing-specialist-tamheer-jeddah": 10,
+      "salla-mahally-seo-manager-jeddah": 40,
+      "lucidya-social-media-analyst-riyadh": 40,
+      "platinumlist-content-manager-riyadh": 40,
+      "syarah-financial-analyst-tamheer-riyadh": 60,
+      "foodics-accountant-erp-riyadh": 53,
+      "master-works-ai-business-analyst-riyadh": 40,
+      "maharah-business-development-specialist-riyadh": 30,
+      "maharah-qa-analyst-riyadh": 40,
+      "atheer-hr-specialist-riyadh": 20,
+      "qiddiya-hris-specialist-riyadh": 0,
+      "lucidya-people-operations-riyadh": 20,
+      "tamara-people-business-partner-riyadh": 10,
+      "lucidya-talent-acquisition-lead-riyadh": 40,
+      // the expansion's 18
+      "petroapp-product-manager-riyadh": 0,
+      "salla-product-manager-storefront-jeddah": 20,
+      "master-works-ai-product-manager-riyadh": 0,
+      "taj-hr-cybersecurity-engineer-riyadh": 40,
+      "mullers-solutions-soc-l2-specialist-riyadh": 40,
+      "qiddiya-it-security-design-riyadh": 20,
+      "lucidya-devops-engineer-riyadh": 0,
+      "lucidya-site-reliability-engineer-riyadh": 0,
+      "mozn-cloud-platform-engineer-riyadh": 20,
+      "lamdax-ai-engineer-remote": 20,
+      "foodics-ai-engineer-riyadh": 10,
+      "mozn-ai-engineer-riyadh": 0,
+      "foodics-field-sales-representative-riyadh": 50,
+      "shipa-junior-business-development-executive-riyadh": 50,
+      "petroapp-customer-success-specialist-riyadh": 30,
+      "qiddiya-procurement-specialist-riyadh": 20,
+      "ninja-procurement-cost-control-specialist-riyadh": 13,
+      "hungerstation-junior-3pl-account-manager-riyadh": 10,
     };
     const facts = cvAnalysedFacts();
     for (const id of JOB_IDS) expect(jobMatch(id, facts), id).toBe(expected[id]);
@@ -158,13 +185,13 @@ describe("jobGap (spec 3.8 / 7.3)", () => {
   });
 
   it("marks a missing prerequisite the job does not list as a preparatory row at +0%", () => {
-    // frontend: html-css · javascript (needs programming, unlisted) · react · git · english
-    const gap = jobGap("frontend-developer-riyadh", newFacts());
+    // frontend: html-css · javascript (needs programming, unlisted) · react · git · apis
+    const gap = jobGap("lucidya-frontend-engineer-dammam", newFacts());
     const prep = gap.rows.filter((r) => r.prep);
     expect(prep).toHaveLength(1);
     expect(prep[0]).toMatchObject({ skill: "programming", star: 1, gain: 0, matchAfter: 0 });
     // the sample CV proves programming: no preparatory row then
-    expect(jobGap("frontend-developer-riyadh", cvAnalysedFacts()).rows.some((r) => r.prep)).toBe(false);
+    expect(jobGap("lucidya-frontend-engineer-dammam", cvAnalysedFacts()).rows.some((r) => r.prep)).toBe(false);
   });
 
   it("is empty when ready", () => {
@@ -180,8 +207,8 @@ describe("projectedMatch (spec 3.4 branches)", () => {
   it("raises the stars to the target's requirements", () => {
     const facts = cvAnalysedFacts();
     const target = getJob("data-analyst-riyadh").requirements;
-    expect(projectedMatch("reporting-specialist-jeddah", target, facts)).toBe(80);
-    expect(projectedMatch("bi-analyst-riyadh", target, facts)).toBe(60);
+    expect(projectedMatch("jeeny-growth-insights-analytics-riyadh", target, facts)).toBe(77);
+    expect(projectedMatch("master-works-data-senior-engineer-riyadh", target, facts)).toBe(73);
     expect(projectedMatch("data-analyst-riyadh", target, facts)).toBe(100);
   });
 });

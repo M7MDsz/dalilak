@@ -105,7 +105,7 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
   const s8 = started(announce(s6), "c-powerbi-1", t + 4 * MINUTE);
   // Step 9: course completed → course_completed (+200)
   const s9 = finalize(completed(s8, "c-powerbi-1", t + 5 * MINUTE, 200), clockAt(5));
-  // Step 11: «دليل» applies at 90% → job_applied (+40)
+  // Step 11: «دليلك» applies at 90% → job_applied (+40)
   const s11 = finalize(applied(announce(s9), "data-analyst-riyadh", t + 6 * MINUTE, targetMatch(s9) ?? 0), clockAt(6));
   // One course further (8.8 last row): statistics ★★ → +240
   const s14 = finalize(completed(announce(s11), "c-statistics-2", t + 7 * MINUTE, 240), clockAt(7));
@@ -127,8 +127,8 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
     expect(getJob(rec.recommended).company).toBe("وادي الغيم للبيانات");
     expect(pathSummary(rec.recommended)).toMatchObject({ stages: 8, hours: 74 });
     expect(rec.alternatives.map((id) => [getJob(id).title, pathSummary(id).stages, pathSummary(id).hours])).toEqual([
-      ["أخصائي تقارير وبيانات", 7, 60],
-      ["محلل أعمال", 7, 64],
+      ["محلل تحليلات وتقارير الموارد البشرية", 8, 64],
+      ["محلل مالي (برنامج تمهير)", 5, 38],
     ]);
   });
 
@@ -168,8 +168,8 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
     expect(skillTreeSummary(s6)).toMatchObject({ skillsHeld: 8, starsHeld: 11 });
     expect(rankJobs(s6).slice(0, 3).map((r) => [getJob(r.jobId).title, r.match])).toEqual([
       ["محلل بيانات", 70],
-      ["محلل أعمال", 60],
-      ["محلل مالي", 53],
+      ["محلل مالي (برنامج تمهير)", 60],
+      ["مهندس بيانات أول", 53],
     ]);
   });
 
@@ -213,7 +213,7 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
     expect(leaderboard(s9, clockAt(5)).me).toMatchObject({ rank: 10, weeklyXp: 380 });
   });
 
-  it("step 11: «دليل» applies at 90%: DL-2026-0001, +40 → 420, rank stays 10 (no rank line), «أول تقديم»", () => {
+  it("step 11: «دليلك» applies at 90%: DL-2026-0001, +40 → 420, rank stays 10 (no rank line), «أول تقديم»", () => {
     expect(nextApplicationNumber(s9, clockAt(6))).toBe("DL-2026-0001");
     expect(applicationNumber(1, 2026)).toBe(s11.applications[0]?.number);
     expect(s11.applications[0]).toMatchObject({ jobId: "data-analyst-riyadh", matchAtSend: 90, xpPaid: 40 });
@@ -250,8 +250,8 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
     ]);
   });
 
-  it("step 13: skill tree 9 of 38 · 12 of 59, Power BI fills and «تصوير البيانات» opens; profile 6 of 12 badges, history +40 +200 +100 +30 +50", () => {
-    expect(skillTreeSummary(s11)).toEqual({ skillsHeld: 9, skillsTotal: 38, starsHeld: 12, starsTotal: 59 });
+  it("step 13: skill tree 9 of 54 · 12 of 80 (38 · 59 before the 20 Nov expansion), Power BI fills and «تصوير البيانات» opens; profile 6 of 12 badges, history +40 +200 +100 +30 +50", () => {
+    expect(skillTreeSummary(s11)).toEqual({ skillsHeld: 9, skillsTotal: 54, starsHeld: 12, starsTotal: 80 });
     const baseline = starsBeforeLatestStar(s11);
     expect([baseline.powerbi, totalStars(baseline)]).toEqual([0, 11]);
     expect(skillNode("dataviz", s11).state).toBe("available");

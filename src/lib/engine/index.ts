@@ -4,6 +4,7 @@ export * from "./applications";
 export * from "./avatar";
 export * from "./badges";
 export * from "./clock";
+export * from "./companies";
 export * from "./courses";
 export * from "./jobs";
 export * from "./leaderboard";

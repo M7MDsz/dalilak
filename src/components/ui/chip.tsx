@@ -14,7 +14,7 @@ export interface ChipProps extends ComponentProps<"button"> {
   readonly size?: "sm" | "md";
   /** Optional icon after the dot, before the label (18 px md, 16 px sm). */
   readonly icon?: ReactNode;
-  /** The press frame without a pointer («دليل» picking a chip for the user). */
+  /** The press frame without a pointer («دليلك» picking a chip for the user). */
   readonly pressed?: boolean;
 }
 

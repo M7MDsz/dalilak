@@ -6,20 +6,24 @@
 // content area between the top bar and the tab bar. Advisor mode: modal={false} (the composer's «إيقاف» stays reachable);
 // user mode: modal="trap-focus". Both: disablePointerDismissal (a click on the panel never closes it or loses a note).
 //
-// What the user sees while «دليل» fills it: the fields write themselves one after another with «دليل»'s small mark moving
+// What the user sees while «دليلك» fills it: the fields write themselves one after another with «دليلك»'s small mark moving
 // from field to field (TypedField from the chat kit), the matching skills pop in, the note types by words, the CV line
 // appears, the send button lights up and is pressed in front of the user, then the confirmation lands as a stamped receipt.
+// 20 Nov 2026: a REAL posting is prepared, never sent: its buttons say «جهّز الطلب», and the confirmation shows where the
+// job is posted and ONE big action, «افتح الإعلان الأصلي وقدّم» (the posting in a new tab, the note on the clipboard,
+// then «نسخت لك رسالة التقديم»). The PRACTICE job keeps its moment and ends with «دليلك»'s honest line instead of the old
+// simulated multi-site step.
 import { Dialog } from "@base-ui/react/dialog";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { DaleelGlyph, RollingStatus, TypedField } from "@/components/chat";
-import { IconArrowForward, IconCheck, IconClose, IconCompany, IconFile, IconInfo, IconSend, IconStop, IconWarning } from "@/components/icons";
-import { useGo, useInstant } from "@/components/motion";
+import { IconArrowForward, IconCheck, IconClose, IconExternal, IconFile, IconInfo, IconSend, IconStop, IconWarning } from "@/components/icons";
+import { useGo } from "@/components/motion";
 import { SkillGem } from "@/components/game";
-import { Button, RunningArc, SampleTag, Stamp, XpValue, cn } from "@/components/ui";
-import { SAMPLE_COPY, cvAttachmentLine } from "@/lib/copy";
-import { APPLY_SITE_MS, APPLY_SITES, MATCH_LINE, getJob, getSkill } from "@/lib/data";
+import { Button, Stamp, XpValue, buttonStyles, cn } from "@/components/ui";
+import { JOB_SOURCE_COPY, SAMPLE_COPY, cvAttachmentLine } from "@/lib/copy";
+import { MATCH_LINE, getJob, getSkill } from "@/lib/data";
 import { formatPercent } from "@/lib/format";
 import { rise, spring, tween } from "@/lib/motion";
 import { hrefFor } from "@/lib/routes";
@@ -27,7 +31,7 @@ import { useUi } from "@/lib/store";
 import { TID } from "@/lib/testids";
 import type { Gap, JobId, UserState } from "@/lib/types";
 
-import { useViewport } from "@/features/shared";
+import { JobTag, useViewport } from "@/features/shared";
 
 import { SHEET_COPY } from "./copy";
 import { ApplyReward } from "./match-card";
@@ -36,7 +40,7 @@ import { STEP_ORDER, type ApplyFlow, type FormKey } from "./use-apply-flow";
 
 const MARK_ID = "daleel-apply-mark";
 
-/** The field to keep in view at each of «دليل»'s steps. */
+/** The field to keep in view at each of «دليلك»'s steps. */
 const FOLLOW: Partial<Record<(typeof STEP_ORDER)[number], string>> = {
   name: TID.apply.name,
   city: TID.apply.city,
@@ -79,7 +83,8 @@ export function ApplySheet({
 
   const advisor = flow.session?.mode === "advisor";
   const running = advisor && !flow.stopped && flow.stepId !== null;
-  const closable = !running && flow.phase !== "sending";
+  // a real job's run ends on the hand-off with the sheet still open: from then on it can be closed
+  const closable = (!running || flow.ended) && flow.phase !== "sending";
   // the panel overlays the page between 1024 and 1279 px: keep the sheet clear of it, on the inline-start side
   const besidePanel = desktop && !wide && advisorOpen;
 
@@ -129,7 +134,7 @@ export function ApplySheet({
                 <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-fg-2">
                   <span>{job.company}</span>
                   <span aria-hidden>·</span>
-                  <SampleTag kind="company" />
+                  <JobTag jobId={jobId} />
                 </p>
               </div>
               {closable ? (
@@ -152,18 +157,7 @@ export function ApplySheet({
                   key="confirmed"
                   variants={rise}
                 >
-                  <Confirmation application={flow.application} onClose={flow.close} title={job.title} />
-                </motion.div>
-              ) : flow.stepId === "sites" ? (
-                <motion.div
-                  animate="show"
-                  className="min-h-0 flex-1 overflow-y-auto"
-                  exit="exit"
-                  initial="hidden"
-                  key="sites"
-                  variants={rise}
-                >
-                  <SitesRun />
+                  <Confirmation application={flow.application} jobId={jobId} onClose={flow.close} title={job.title} />
                 </motion.div>
               ) : (
                 <motion.div
@@ -206,13 +200,13 @@ function FormBody({
   const low = match < MATCH_LINE;
   const sending = flow.phase === "sending";
   const statusLine = advisor && !flow.stopped && flow.stepId !== null;
-  // while «دليل» fills, the flow owns the values (each passed field gets its whole value); a typed fragment is handed back
+  // while «دليلك» fills, the flow owns the values (each passed field gets its whole value); a typed fragment is handed back
   // only when he was stopped, and the user's own edits always count
   const accept = !advisor || flow.stopped;
   const [noteDone, setNoteDone] = useState(false);
   const bodyRef = useRef<HTMLDivElement>(null);
 
-  // while «دليل» writes, keep the field he is on in view (the note and the CV line sit low on a 900 px screen)
+  // while «دليلك» writes, keep the field he is on in view (the note and the CV line sit low on a 900 px screen)
   useEffect(() => {
     const body = bodyRef.current;
     const anchor = flow.stepId === null ? null : FOLLOW[flow.stepId];
@@ -254,7 +248,9 @@ function FormBody({
             <RollingStatus
               className="text-body"
               elapsedAfter={Number.POSITIVE_INFINITY}
-              label={sending || flow.stepId === "done" ? SHEET_COPY.sendingLine : SHEET_COPY.filling}
+              label={
+                sending || flow.stepId === "done" ? (flow.real ? SHEET_COPY.preparingLine : SHEET_COPY.sendingLine) : SHEET_COPY.filling
+              }
             />
           </div>
         ) : null}
@@ -318,7 +314,7 @@ function FormBody({
       <footer className="flex flex-col gap-3 border-t border-border px-5 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] lg:px-6">
         <p className="flex items-center gap-2 text-small text-fg-3">
           <IconInfo className="shrink-0" size={18} waypoint="muted" />
-          {SAMPLE_COPY.applySheet}
+          {flow.real ? SAMPLE_COPY.applySheetReal : SAMPLE_COPY.applySheet}
         </p>
         <div className="flex flex-wrap items-center gap-3">
           <Button
@@ -334,7 +330,17 @@ function FormBody({
             onClick={flow.submit}
             pressed={flow.pressed}
           >
-            {sending ? SHEET_COPY.sending : low ? SHEET_COPY.submitAnyway : SHEET_COPY.submit}
+            {flow.real
+              ? sending
+                ? SHEET_COPY.preparing
+                : low
+                  ? SHEET_COPY.prepareAnyway
+                  : SHEET_COPY.prepare
+              : sending
+                ? SHEET_COPY.sending
+                : low
+                  ? SHEET_COPY.submitAnyway
+                  : SHEET_COPY.submit}
           </Button>
           {flow.filling ? (
             <Button
@@ -359,7 +365,7 @@ function FormBody({
   );
 }
 
-/** Field 4 «مهاراتك المطابقة»: the «ما لديك» skills as chips with their stars; they pop in one by one when «دليل» fills. */
+/** Field 4 «مهاراتك المطابقة»: the «ما لديك» skills as chips with their stars; they pop in one by one when «دليلك» fills. */
 function SkillsField({ have, shown, active }: { have: Gap["have"]; shown: boolean; active: boolean }): ReactNode {
   return (
     <div className="flex min-w-0 flex-col gap-2">
@@ -397,7 +403,7 @@ function SkillsField({ have, shown, active }: { have: Gap["have"]; shown: boolea
             : null}
           {shown && have.length === 0 ? <span className="text-body text-fg-3">—</span> : null}
         </div>
-        {active ? <DaleelGlyph framed layoutId={MARK_ID} size={26} state="working" title="دليل يكتب" /> : null}
+        {active ? <DaleelGlyph framed layoutId={MARK_ID} size={26} state="working" title="دليلك يكتب" /> : null}
       </div>
     </div>
   );
@@ -434,99 +440,52 @@ function CvField({ line, shown }: { line: string; shown: boolean }): ReactNode {
 // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 /**
- * The confirmation (spec 3.8): «تم إرسال طلبك» · «رقم الطلب: DL-2026-0001» · «مطابقتك عند التقديم: 90%» · «+40 XP ·
- * تقديم مدروس» (or «بدون نقاط: المطابقة أقل من 60%») · «تابع طلباتي» and «إغلاق». Drawn as a receipt: the stamp lands
- * (`sent-mark`), the number rolls in, the rows are separated by the dotted trail.
+ * The confirmation (spec 3.8), drawn as a receipt: the stamp lands (`sent-mark`), the number rolls in, the rows are
+ * separated by the dotted trail: «رقم الطلب: DL-2026-0001» · «مطابقتك عند التقديم: 90%» · «+40 XP · تقديم مدروس» (or
+ * «بدون نقاط: المطابقة أقل من 60%»).
+ * - The practice job: «تم إرسال طلبك», then «دليلك»'s honest line «وظيفة تدريبية: في الوظائف الحقيقية أفتح لك الإعلان
+ *   الأصلي عشان ترسله» · «تابع طلباتي» and «إغلاق».
+ * - A real job: «طلبك جاهز» and «دليلك»'s line (prepared, saved, one step left), the receipt, where the job is posted, and
+ *   the one big action «افتح الإعلان الأصلي وقدّم»: a link (so the new tab opens on the press itself) that also copies
+ *   the note; then «نسخت لك رسالة التقديم». «تابع طلباتي» and «إغلاق» stay quieter.
  */
-/**
- * After the in-app send, «دليل» applies on the other sites one after another (APPLY_SITES; Mohammed, 18 Nov 2026: "show
- * that he will apply for in multiple sites"). A simulation that says so: names only, nothing leaves the laptop. Each row
- * waits its turn, fills (the running arc) and is sent; the whole step is APPLY_SITES.length × APPLY_SITE_MS long, and the
- * last row turns green just before the confirmation arrives. Reduced motion: every row is already sent.
- */
-function SitesRun(): ReactNode {
-  const instant = useInstant();
-  const [at, setAt] = useState(instant ? APPLY_SITES.length : 0);
-  useEffect(() => {
-    if (at >= APPLY_SITES.length) return;
-    const timer = window.setTimeout(() => setAt((n) => n + 1), APPLY_SITE_MS - 40);
-    return () => window.clearTimeout(timer);
-  }, [at]);
-  return (
-    <div className="flex flex-col gap-4 px-5 pt-5 pb-6 lg:px-6" data-testid="apply-sites">
-      <p className="inline-flex items-center gap-2 text-body font-semibold text-ok-fg">
-        <IconCheck size={20} strokeWidth={2.5} waypoint="off" />
-        {SHEET_COPY.sitesDone}
-      </p>
-      <p className="text-title font-bold text-fg">{SHEET_COPY.sitesTitle}</p>
-      <ul className="flex flex-col gap-2">
-        {APPLY_SITES.map((site, index) => {
-          const state = index < at ? "sent" : index === at ? "filling" : "waiting";
-          return (
-            <motion.li
-              animate={{ opacity: 1, y: 0 }}
-              className={cn(
-                "flex h-14 items-center gap-3 rounded-control border px-4 transition-[background-color,border-color] duration-200 ease-out",
-                state === "sent" ? "border-transparent bg-ok-soft" : state === "filling" ? "border-fg bg-surface" : "border-border bg-bg",
-              )}
-              data-state={state}
-              data-testid={`apply-site-${site.id}`}
-              initial={instant ? false : { opacity: 0, y: 6 }}
-              key={site.id}
-              transition={{ ...tween.move, delay: instant ? 0 : 0.05 * index }}
-            >
-              <span aria-hidden className="grid size-9 shrink-0 place-items-center rounded-full border border-border bg-surface text-fg-2">
-                <IconCompany size={18} waypoint="muted" />
-              </span>
-              <bdi className="min-w-0 flex-1 truncate text-body font-semibold text-fg">{site.name}</bdi>
-              {state === "sent" ? (
-                <span className="inline-flex items-center gap-1.5 text-small font-semibold text-ok-fg">
-                  <IconCheck size={18} strokeWidth={2.5} waypoint="off" />
-                  {SHEET_COPY.siteSent}
-                </span>
-              ) : state === "filling" ? (
-                <span className="inline-flex items-center gap-2 text-small text-fg-2">
-                  <RunningArc size={16} />
-                  {SHEET_COPY.siteFilling}
-                </span>
-              ) : (
-                <span className="text-small text-fg-3">{SHEET_COPY.siteWaiting}</span>
-              )}
-            </motion.li>
-          );
-        })}
-      </ul>
-      <p className="flex items-start gap-2 text-small text-fg-3">
-        <IconInfo className="mt-0.5 shrink-0" size={18} waypoint="off" />
-        <span>{SHEET_COPY.sitesNote}</span>
-      </p>
-    </div>
-  );
-}
-
 function Confirmation({
   application,
+  jobId,
   title,
   onClose,
 }: {
   application: NonNullable<ApplyFlow["application"]>;
+  jobId: JobId;
   title: string;
   onClose: () => void;
 }): ReactNode {
   const go = useGo();
+  const job = getJob(jobId);
+  const source = job.real ? job.source : undefined;
+  const [copied, setCopied] = useState<boolean | null>(null);
   const openApplications = () => {
     onClose();
     go(hrefFor({ screen: "applications" }));
   };
+  const openPosting = () => {
+    void copyNote(application.note).then(setCopied);
+  };
   return (
-    <div className="flex flex-col items-center gap-6 px-5 pt-8 pb-7 lg:px-6" data-testid={TID.apply.confirmation}>
+    <div
+      className="flex flex-col items-center gap-6 px-5 pt-8 pb-7 lg:px-6"
+      data-kind={source ? "real" : "practice"}
+      data-testid={TID.apply.confirmation}
+    >
       <div className="flex flex-col items-center gap-3 text-center">
         <Stamp play size="md" tone="ok" />
-        <h2 className="text-h2 text-fg">{SHEET_COPY.sent}</h2>
+        <h2 className="text-h2 text-fg">{source ? SHEET_COPY.prepared : SHEET_COPY.sent}</h2>
         <p className="text-small text-fg-2">
           <bdi>{title}</bdi>
         </p>
       </div>
+
+      {source ? <DaleelLine testId="apply-prepared-line" text={SHEET_COPY.preparedLead} /> : null}
 
       <dl className="w-full max-w-md rounded-card border border-border bg-bg px-5">
         <ReceiptRow delay={0.25} label={SHEET_COPY.numberLabel} testId={TID.apply.number} value={application.number}>
@@ -547,23 +506,6 @@ function Confirmation({
             {formatPercent(application.matchAtSend)}
           </bdi>
         </ReceiptRow>
-        {application.by === "advisor" ? (
-          <motion.div
-            className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b-2 border-dotted border-border-strong py-3"
-            data-testid="apply-sites-sent"
-            {...riseAt(0.37)}
-          >
-            <span className="text-body text-fg-2">{SHEET_COPY.sitesLabel}</span>
-            <span className="flex flex-wrap justify-end gap-1.5">
-              {[SHEET_COPY.siteDalilak, ...APPLY_SITES.map((s) => s.name)].map((name) => (
-                <span className="inline-flex h-7 items-center gap-1 rounded-full bg-ok-soft px-2.5 text-caption font-semibold text-ok-fg" key={name}>
-                  <IconCheck size={14} strokeWidth={2.5} waypoint="off" />
-                  <bdi>{name}</bdi>
-                </span>
-              ))}
-            </span>
-          </motion.div>
-        ) : null}
         <motion.div className="flex min-h-14 items-center justify-center gap-2 py-3 text-body" {...riseAt(0.41)}>
           {application.xpPaid > 0 ? (
             <>
@@ -581,8 +523,67 @@ function Confirmation({
         </motion.div>
       </dl>
 
+      {source ? (
+        <motion.div className="flex w-full max-w-md flex-col gap-3" data-testid="apply-handoff" {...riseAt(0.5)}>
+          <p className="text-small text-fg-2">
+            {SHEET_COPY.postedOn} <bdi className="font-medium text-fg">{source.site}</bdi>
+            <span aria-hidden className="mx-1.5 text-fg-4">
+              ·
+            </span>
+            <span>{job.company}</span>
+          </p>
+          <a
+            className={buttonStyles({ size: "lg", className: "w-full" })}
+            data-testid="apply-open-posting"
+            href={source.url}
+            onClick={openPosting}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <IconExternal size={22} />
+            {JOB_SOURCE_COPY.openAndApply}
+          </a>
+          <AnimatePresence initial={false}>
+            {copied === true ? (
+              <motion.p
+                animate={{ opacity: 1, y: 0 }}
+                className="inline-flex items-center gap-2 text-body font-semibold text-ok-fg"
+                data-testid="apply-note-copied"
+                initial={{ opacity: 0, y: 6 }}
+                key="copied"
+                transition={tween.move}
+              >
+                <IconCheck size={20} strokeWidth={2.5} waypoint="off" />
+                {JOB_SOURCE_COPY.noteCopied}
+              </motion.p>
+            ) : copied === false ? (
+              <motion.p
+                animate={{ opacity: 1 }}
+                className="text-small text-fg-2"
+                initial={{ opacity: 0 }}
+                key="not-copied"
+                transition={tween.move}
+              >
+                {SHEET_COPY.copyFailed}
+              </motion.p>
+            ) : null}
+          </AnimatePresence>
+          <p className="flex items-start gap-2 text-small text-fg-3">
+            <IconInfo className="mt-0.5 shrink-0" size={18} waypoint="off" />
+            <span>{JOB_SOURCE_COPY.mayHaveClosed}</span>
+          </p>
+        </motion.div>
+      ) : (
+        <DaleelLine testId="apply-practice-note" text={SHEET_COPY.practiceLine} />
+      )}
+
       <div className="flex w-full max-w-md flex-col-reverse gap-3 sm:flex-row sm:justify-center">
-        <Button data-testid={TID.apply.goApplications} icon={<IconArrowForward size={20} />} onClick={openApplications}>
+        <Button
+          data-testid={TID.apply.goApplications}
+          icon={<IconArrowForward size={20} />}
+          onClick={openApplications}
+          variant={source ? "secondary" : "primary"}
+        >
           {SHEET_COPY.goApplications}
         </Button>
         <Button data-testid={TID.apply.close} onClick={onClose} variant="secondary">
@@ -591,6 +592,45 @@ function Confirmation({
       </div>
     </div>
   );
+}
+
+/** One line in «دليلك»'s own voice (Najdi), with his mark: the confirmation's hand-off and the practice job's honest end. */
+function DaleelLine({ text, testId }: { text: string; testId: string }): ReactNode {
+  return (
+    <motion.p
+      className="flex w-full max-w-md items-start gap-3 rounded-card border border-border bg-surface px-4 py-3.5 text-body text-fg"
+      data-testid={testId}
+      {...riseAt(0.45)}
+    >
+      <span className="mt-0.5 inline-flex shrink-0">
+        <DaleelGlyph size={24} />
+      </span>
+      <span>{text}</span>
+    </motion.p>
+  );
+}
+
+/** The cover note onto the clipboard (the async API, else the old copy command). True when it worked. */
+async function copyNote(note: string): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(note);
+    return true;
+  } catch {
+    try {
+      const area = document.createElement("textarea");
+      area.value = note;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      const ok = document.execCommand("copy");
+      area.remove();
+      return ok;
+    } catch {
+      return false;
+    }
+  }
 }
 
 function ReceiptRow({

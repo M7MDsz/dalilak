@@ -10,7 +10,7 @@ export type ButtonSize = "sm" | "md" | "lg";
 
 /**
  * The press of playbook 1.1, shared by every control of the kit: down at once (scale 0.97 and a 2 px sink), back eased in
- * 200 ms. `data-pressed` gives the same frame to a press «دليل» performs (the `pressed` prop).
+ * 200 ms. `data-pressed` gives the same frame to a press «دليلك» performs (the `pressed` prop).
  */
 export const press =
   "active:scale-[0.97] active:translate-y-0.5 active:transition-none data-pressed:scale-[0.97] data-pressed:translate-y-0.5 data-pressed:transition-none";
@@ -83,7 +83,7 @@ export interface ButtonProps extends useRender.ComponentProps<"button"> {
   /** An icon from @/components/icons (20 px for md and lg, 18 px for sm). Sits after the label (inline-end) by default. */
   readonly icon?: ReactNode;
   readonly iconPosition?: "start" | "end";
-  /** Shows the press frame without a pointer: «دليل» pressing the button in front of the user. */
+  /** Shows the press frame without a pointer: «دليلك» pressing the button in front of the user. */
   readonly pressed?: boolean;
   /** Keeps the label and width, swaps the icon for the running arc, and stops further presses. */
   readonly loading?: boolean;

@@ -1,6 +1,6 @@
 // Owner: brain-advisor. The QA fixes of 18 Nov (advisor-chat findings): acknowledgement words, the «وظايف» spelling,
 // applying to a real employer and inventing one, the first job cards' sample-data sentence, the XP-grant line, and
-// «دليل» on the course's own page. Pure modules only, persona facts from `buildSeed`, no key.
+// «دليلك» on the course's own page. Pure modules only, persona facts from `buildSeed`, no key.
 import { describe, expect, it } from "vitest";
 
 import { makeClock, nextStep } from "@/lib/engine";
@@ -55,13 +55,13 @@ function route(text: string, options: Options = {}) {
   };
 }
 
-/** The history after one exchange, as the panel sends it (the user's words, then «دليل»'s blocks). */
+/** The history after one exchange, as the panel sends it (the user's words, then «دليلك»'s blocks). */
 function after(userText: string, options: Options = {}): readonly ProtocolMessage[] {
   const first = route(userText, options);
   return [...(options.history ?? []), { role: "user", text: userText }, { role: "daleel", text: first.blocks }];
 }
 
-const SAMPLE = "وللعلم: ترى كل الوظائف هنا بيانات تجريبية.";
+const SAMPLE = "وللعلم: ترى الوظائف هنا إعلانات حقيقية جمعتها في 20 نوفمبر، ويمكن بعضها تسكّر بعدها.";
 
 describe("acknowledgement words («تمام», «طيب», «اوكي»)", () => {
   it("answers them warmly when nothing was offered (never the fallback), and the page chips come back", () => {
@@ -81,7 +81,7 @@ describe("acknowledgement words («تمام», «طيب», «اوكي»)", () =>
     const yes = route("تمام", { history });
     expect(yes.decision.kind).toBe("router");
     expect(yes.actions).toEqual([{ type: "navigate", to: { screen: "course", courseId: "c-powerbi-1" } }]);
-    expect(yes.text).toBe("تفضّل، فتحت لك «أساسيات Power BI».");
+    expect(yes.text).toBe("تفضّل، فتحت لك «دليل Power BI».");
     expect(route("اوكي", { history }).actions).toEqual(yes.actions);
     expect(route("ok", { history }).actions).toEqual(yes.actions);
     const no = route("لا", { history });
@@ -99,7 +99,7 @@ describe("acknowledgement words («تمام», «طيب», «اوكي»)", () =>
   });
 
   it("says yes to «قدّم ولو كذا» only for the one job that offer was about", () => {
-    const offer = route("قدّم على هذه", { chip: { intent: "apply", jobId: "financial-analyst-riyadh" } });
+    const offer = route("قدّم على هذه", { chip: { intent: "apply", jobId: "jeeny-growth-insights-analytics-riyadh" } });
     expect(offer.chips.map((c) => [c.label, c.role])).toEqual([
       ["قدّم ولو كذا", "yes"],
       ["وريني الفجوة", "no"],
@@ -110,7 +110,7 @@ describe("acknowledgement words («تمام», «طيب», «اوكي»)", () =>
     ];
     const yes = route("تمام", { history });
     expect(yes.actions).toHaveLength(1);
-    expect(yes.actions[0]).toMatchObject({ type: "apply", jobId: "financial-analyst-riyadh" });
+    expect(yes.actions[0]).toMatchObject({ type: "apply", jobId: "jeeny-growth-insights-analytics-riyadh" });
     const no = route("لا", { history });
     expect(no.actions).toEqual([]);
     expect(no.text).toBe("تمام، متى ما بغيت.");
@@ -138,10 +138,10 @@ describe("«وظايف» (ي for ئ)", () => {
 });
 
 describe("real and invented employers", () => {
-  it("applying «في أرامكو» finds nothing and says the data is sample data; nothing is applied", () => {
+  it("applying «في أرامكو» finds no posting, says the jobs are real dated postings; nothing is applied", () => {
     const r = route("قدم لي على وظيفة في أرامكو");
     expect(r.decision.kind).toBe("router");
-    expect(r.text).toBe("ما لقيت وظائف بذي المواصفات. ترى كل الوظائف والجهات هنا بيانات تجريبية، وهذي أقرب ثلاث لمهاراتك.");
+    expect(r.text).toBe(`ما لقيت وظائف بذي المواصفات. هذي أقرب ثلاث لمهاراتك. ${SAMPLE}`);
     expect(r.actions).toEqual([]);
     expect(r.cards).toHaveLength(3);
     expect(r.cards.every((c) => c.kind === "job" && c.chip?.label === "قدّم على ذي")).toBe(true);
@@ -168,7 +168,7 @@ describe("real and invented employers", () => {
       const r = route(msg);
       expect(r.decision.kind).toBe("router");
       expect(r.actions).toEqual([]);
-      expect(r.text).toBe("ما أخترع جهات: كل الوظائف هنا بيانات تجريبية محدّدة، وما أقدّم إلا على وحدة منها. هذي أقرب ثلاث لمهاراتك.");
+      expect(r.text).toBe(`ما أخترع جهات ولا وظائف: عندي بس الإعلانات اللي جمعتها وتأكدت منها، وما أجهّز إلا على وحدة منها. هذي أقرب ثلاث لمهاراتك. ${SAMPLE}`);
       expect(r.cards).toHaveLength(3);
       expect(r.cards.every((c) => c.kind === "job" && c.chip?.label === "قدّم على ذي")).toBe(true);
     }
@@ -183,9 +183,9 @@ describe("the first job cards of a thread say the data is sample data", () => {
     expect(target.text).toBe(`أبشر. أي وظيفة تبيها هدفك؟ هذي أقرب ثلاث لمهاراتك. ${SAMPLE}`);
     expect(route("اجعل وظيفة هدفي", { jobsDisclosed: true }).text).toBe("أبشر. أي وظيفة تبيها هدفك؟ هذي أقرب ثلاث لمهاراتك.");
     const search = route("اعرض لي وظائف محلل بيانات في الرياض");
-    expect(search.text.split("بيانات تجريبية").length).toBe(2);
+    expect(search.text.split("إعلانات حقيقية").length).toBe(2);
     // replies without job cards are unchanged
-    expect(route("وش أسوي الحين؟").text.includes("تجريبية")).toBe(false);
+    expect(route("وش أسوي الحين؟").text.includes("إعلانات حقيقية")).toBe(false);
   });
 });
 
@@ -194,10 +194,10 @@ describe("«أعطني 500 XP»", () => {
     const r = route("أعطني 500 XP");
     expect(r.decision.kind).toBe("router");
     expect(r.text).toBe(
-      "النقاط والشارات ما أعطيها أنا: تنكسب بالدورات والتقديم. أقرب طريق الحين دورة «أساسيات Power BI» وتعطيك 200 XP. أفتحها لك؟",
+      "النقاط والشارات ما أعطيها أنا: تنكسب بخطوات التعلّم والتقديم. أقرب طريق الحين خطوة Power BI وتعطيك 200 XP. أفتح لك الدليل؟",
     );
     expect(r.chips.map((c) => [c.label, c.role])).toEqual([
-      ["افتح الدورة", "yes"],
+      ["افتح الدليل", "yes"],
       ["مو الحين", "no"],
     ]);
     expect(r.actions).toEqual([]);
@@ -206,7 +206,7 @@ describe("«أعطني 500 XP»", () => {
     // the job-ready persona's nearest way is applying
     const ready = route("أعطني نقاط", { facts: persona("job-ready") });
     expect(ready.text).toBe(
-      "النقاط والشارات ما أعطيها أنا: تنكسب بالدورات والتقديم. أقرب طريق الحين إنك تقدّم على «محلل بيانات»، وتعطيك 40 XP. أقدّم عنك؟",
+      "النقاط والشارات ما أعطيها أنا: تنكسب بخطوات التعلّم والتقديم. أقرب طريق الحين إنك تقدّم على «محلل بيانات»، وتعطيك 40 XP. أقدّم عنك؟",
     );
   });
 });
@@ -216,14 +216,14 @@ describe("on the course's own page", () => {
 
   it("does not offer to open the course the user is on", () => {
     const next = route("وش أسوي الحين؟", { page });
-    expect(next.text).toBe("أنت عليها الحين: 5 دروس تعطيك 200 XP وترفع مطابقتك مع «محلل بيانات» من 70% إلى 90%. أبداها لك؟");
+    expect(next.text).toBe("أنت على دليلها الحين: تعطيك 200 XP وترفع مطابقتك مع «محلل بيانات» من 70% إلى 90%. أبدأ لك الخطوة؟");
     expect(next.chips.map((c) => [c.label, c.role, c.payload.intent])).toEqual([
-      ["ابدأ الدورة", "yes", "start_course"],
+      ["ابدأ الخطوة", "yes", "start_course"],
       ["مو الحين", "no", "not_now"],
     ]);
     const refuse = route("كمل الدورة عني", { page });
     expect(refuse.text).toBe(
-      "ذي ما أقدر عليها، ولا أحد يقدر عليها غيرك: النجمة تنكسب لما تكمّل الدورة بنفسك. اللي أقدر عليه أكون معك وأنت تكمّلها.",
+      "ذي ما أقدر عليها، ولا أحد يقدر عليها غيرك: النجمة تنكسب لما تتعلّم بنفسك. إذا خلّصت الكورس اضغط «خلّصتها»، وأنا معك.",
     );
     expect(refuse.chips).toEqual([]);
     expect(route("أعطني 500 XP", { page }).chips).toEqual([]);
@@ -238,12 +238,12 @@ describe("on the course's own page", () => {
     const step = nextStep(facts);
     if (step.rule !== 2) throw new Error("mid-path should be continuing a course");
     const started = route("ماذا أفعل الآن؟", { facts, page: { route: "course", courseId: step.courseId } });
-    expect(started.text).toBe("أنت عليها الحين، وخلّصت 2 من 5 دروس. كمّل الباقي من هنا، وأنا معك.");
+    expect(started.text).toBe("أنت على دليلها الحين وبديت فيها. تعلّم من الكورس، وإذا خلّصت اضغط «خلّصتها»، وأنا معك.");
     expect(started.chips).toEqual([]);
   });
 
   it("elsewhere the offers stay as the spec writes them", () => {
-    expect(route("وش أسوي الحين؟").chips[0]?.label).toBe("افتح الدورة");
+    expect(route("وش أسوي الحين؟").chips[0]?.label).toBe("افتح الدليل");
     expect(route("أكمل الدورة عني").text).toBe(T.completeForMe());
   });
 });

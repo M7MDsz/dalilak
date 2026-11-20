@@ -3,7 +3,7 @@
 // pinned to the bottom (within 48 px), never yanks the scroll while they read back, and keeps the last answer in view
 // when the composer grows (the scroller shrinks: if pinned, it stays at the end). When the reader has scrolled up and
 // something new arrives, a small round button offers the way back down.
-// New content from «دليل»: the thread glides to the end (480 ms, eased in and out) while the answer comes into focus.
+// New content from «دليلك»: the thread glides to the end (480 ms, eased in and out) while the answer comes into focus.
 // The user's own message, a first paint and a scroller squeezed by the composer snap instead. Only the reader's own gesture (wheel, touch, keys,
 // the scrollbar) unpins it; reaching the end again pins it. The scroller has `layoutScroll`, so a chip that travels in
 // from outside (QuickReplies) measures correctly.
@@ -23,7 +23,7 @@ const GLIDE_MS = 480;
 export interface ChatThreadProps {
   /** The messages, oldest first (AdvisorMessage, UserMessage, ChatError …), each with a stable key. */
   readonly children: ReactNode;
-  /** The thread's accessible name. Default «المحادثة مع دليل». */
+  /** The thread's accessible name. Default «المحادثة مع دليلك». */
   readonly label?: string;
   /** A reply is on its way (aria-busy). */
   readonly busy?: boolean;
@@ -36,8 +36,8 @@ export interface ChatThreadProps {
   readonly header?: ReactNode;
 }
 
-/** The scrolling transcript of «دليل» and the user. Give it `min-h-0 flex-1` room inside a flex column. */
-export function ChatThread({ children, label = "المحادثة مع دليل", busy = false, className, contentClassName, testId, header }: ChatThreadProps) {
+/** The scrolling transcript of «دليلك» and the user. Give it `min-h-0 flex-1` room inside a flex column. */
+export function ChatThread({ children, label = "المحادثة مع دليلك", busy = false, className, contentClassName, testId, header }: ChatThreadProps) {
   const scroller = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
   const pinned = useRef(true);
@@ -64,7 +64,7 @@ export function ChatThread({ children, label = "المحادثة مع دليل",
     el.scrollTop = el.scrollHeight;
   }, []);
 
-  /** Glide to the end when «دليل»'s content arrives: 480 ms, eased in and out, toward the live end (it may still grow). */
+  /** Glide to the end when «دليلك»'s content arrives: 480 ms, eased in and out, toward the live end (it may still grow). */
   const glide = useCallback(() => {
     const el = scroller.current;
     if (!el || raf.current) return;
@@ -100,7 +100,7 @@ export function ChatThread({ children, label = "المحادثة مع دليل",
     }
     if (el.scrollHeight - el.clientHeight - el.scrollTop <= 1) return;
     // the user's own message snaps (it pops out of the composer right under it; a travelling chip lands where it will
-    // stay); «دليل»'s content glides
+    // stay); «دليلك»'s content glides
     if (lastIsUser) snap();
     else glide();
   });

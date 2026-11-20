@@ -1,7 +1,7 @@
 "use client";
 // Owner: jobs. One job on the board of `/jobs` (spec 3.7 "Job card"; docs/GAME-LAYER.md 5.3): a destination you unlock.
-// The game layer's DestinationCard carries every part of the spec's card: the title, «{company} · {city}» with «جهة
-// تجريبية», the experience label, the match ring (the one number, P5), and the gap («ينقصك») as up to three locked gems
+// The game layer's DestinationCard carries every part of the spec's card: the title, «{company} · {city}» with the job's
+// own mark (the practice job «وظيفة تدريبية»; a real posting its English name, site and «جُمعت في 20 نوفمبر»), the experience label, the match ring (the one number, P5), and the gap («ينقصك») as up to three locked gems
 // under a five-segment unlock meter (each segment = one requirement's 20 points, spec 7.2). The reward for applying is
 // on the card: +40 XP, open from 60%, locked under it (spec 8.1). Flags: the target is the board's one accent piece
 // («هدفك», the coral key, featured at the top); an application lies flat with «قدّمت» and its status.
@@ -12,7 +12,8 @@
 import { useLayoutEffect, useMemo, useState, type ReactNode } from "react";
 
 import { DestinationCard } from "@/components/game";
-import { APPLICATION_STATUS_COPY } from "@/lib/copy";
+import { CompanyLogo, JobTag } from "@/features/shared";
+import { APPLICATION_STATUS_COPY, JOB_SOURCE_COPY } from "@/lib/copy";
 import { getJob, getJobCity } from "@/lib/data";
 import { hrefFor } from "@/lib/routes";
 import { TID } from "@/lib/testids";
@@ -43,7 +44,8 @@ export function JobCard({
   featured?: boolean;
 }): ReactNode {
   const job = getJob(row.jobId);
-  const status = applied ? `${APPLICATION_STATUS_COPY[applied.status].label} · محاكاة` : null;
+  // a real job's application was prepared here and is sent by the user from the posting: no simulated status
+  const status = applied ? (job.real ? JOB_SOURCE_COPY.preparedShort : `${APPLICATION_STATUS_COPY[applied.status].label} · محاكاة`) : null;
   const requirements = useMemo(() => jobRequirements(row.jobId, stars), [row.jobId, stars]);
   // committed empty once, then (before the first paint) the real stars: the meter's segments grow, so they fill in steps
   const [fromEmpty, setFromEmpty] = useState(() => from === 0 && row.match > 0);
@@ -78,6 +80,7 @@ export function JobCard({
       className="h-full"
       company={job.company}
       experience={experienceText(job.band)}
+      emblem={<CompanyLogo jobId={row.jobId} size={featured ? 56 : 44} />}
       featured={featured}
       icon={<FieldIcon field={job.field} size={featured ? 26 : 22} />}
       match={row.match}
@@ -85,6 +88,7 @@ export function JobCard({
       matchTestId={TID.jobs.match(row.jobId)}
       render={<RouteLink href={hrefFor({ screen: "job", jobId: row.jobId })} />}
       skills={skills}
+      tag={<JobTag jobId={row.jobId} />}
       target={row.isTarget}
       testId={TID.jobs.card(row.jobId)}
       title={job.title}

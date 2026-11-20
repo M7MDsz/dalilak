@@ -1,19 +1,25 @@
 // Owner: brain-advisor. Reading one typed onboarding message, in the order of spec 4.3 (each step has one test, so no
 // two rules compete): 1 question · 2 greeting / thanks set aside · 3 the pending question · 4 the other unanswered
 // questions · 5 could not be mapped. Words that matched are used up. Pure.
+import { getJobCity, getSaRegion, nearestJobMarket } from "@/lib/data";
+import { COMPANY_KEYWORDS, matchCompanyAlone } from "@/lib/engine";
 import { findKeywords, normalizeText, tokenize } from "@/lib/text/normalize";
 import type {
   CityOption,
+  CompanyId,
   EducationOption,
   ExperienceOption,
   InterestOption,
   MajorOption,
+  OnboardingStepId,
   PriorityOption,
-  QuestionId,
 } from "@/lib/types";
 
 import {
+  AMBIGUOUS_PLACE_WORDS,
   CITY_ENTRIES,
+  COMPANY_GATE_WORDS,
+  COMPANY_NONE_PHRASES,
   COUNT_PHRASES,
   EDUCATION_KEYWORDS,
   EXPERIENCE_GATE_WORDS,
@@ -21,12 +27,16 @@ import {
   EXPERIENCE_MORE_WORDS,
   EXPERIENCE_NONE_WORDS,
   EXPERIENCE_UNDER1_PHRASES,
+  FILLER_WORDS,
   GREETING_OTHER,
   GREETING_SALAM,
   INTEREST_KEYWORDS,
   MAJOR_KEYWORDS,
   NEUTRAL_PHRASES,
   NUMBER_WORDS,
+  PLACE_CONTEXT_WORDS,
+  PLACE_ENTRIES,
+  placeSpellings,
   PRIORITY_KEYWORDS,
   QUESTION_WORDS,
   THANKS_WORDS,
@@ -34,6 +44,7 @@ import {
   WHO_PHRASES,
   WHY_ASK_PHRASES,
   WISH_WORDS,
+  type PlaceAck,
 } from "./tables";
 
 // ── Words with a "used" mark ───────────────────────────────────────────────────────────────────────────────────────
@@ -103,6 +114,11 @@ export class Reading {
   rest(): string[] {
     return this.words.filter((_, i) => !this.used[i]);
   }
+
+  /** Words not used yet outside [start, end). */
+  restOutside(start: number, end: number): string[] {
+    return this.words.filter((_, i) => !this.used[i] && (i < start || i >= end));
+  }
 }
 
 // ── Step 1 and 2 ───────────────────────────────────────────────────────────────────────────────────────────────────
@@ -136,12 +152,13 @@ export function readGreeting(reading: Reading): Special | null {
 // ── Steps 3-4: one reader per question ─────────────────────────────────────────────────────────────────────────────
 
 export type Found =
-  | { readonly question: "city"; readonly value: CityOption; readonly label: string | null }
+  | { readonly question: "city"; readonly value: CityOption; readonly label: string | null; readonly place?: PlaceAck }
   | { readonly question: "education"; readonly value: EducationOption }
   | { readonly question: "major"; readonly value: MajorOption }
   | { readonly question: "experience"; readonly value: ExperienceOption }
   | { readonly question: "interest"; readonly values: readonly [InterestOption] | readonly [InterestOption, InterestOption] }
-  | { readonly question: "priority"; readonly value: PriorityOption };
+  | { readonly question: "priority"; readonly value: PriorityOption }
+  | { readonly question: "company"; readonly value: CompanyId | "none" };
 
 /** The earliest hit (longer first at the same start) of a keyword table, used up. */
 function earliestOf<V>(reading: Reading, table: readonly { readonly keyword: string; readonly value: V }[], skip?: (v: V) => boolean): { value: V; keyword: string } | null {
@@ -155,13 +172,57 @@ function earliestOf<V>(reading: Reading, table: readonly { readonly keyword: str
   return { value, keyword: hit.keyword };
 }
 
+const CITY_KEYWORDS = [...CITY_ENTRIES.map((e) => e.keyword), ...PLACE_ENTRIES.map((e) => e.keyword)];
+const AMBIGUOUS_PLACES = new Set(AMBIGUOUS_PLACE_WORDS.flatMap(placeSpellings).flatMap((w) => [nk(w), nk(w).replace(/^ال/, "")]));
+const PLACE_CONTEXT = new Set(PLACE_CONTEXT_WORDS.map(nk));
+const PLACE_FILLERS = new Set([...FILLER_WORDS.map(nk), ...PLACE_CONTEXT]);
+const MADINAH_WORD = nk("مدينة");
+
+/** An ambiguous place name counts after a place word, with «ب» on its front («بالمذنب»), or when nothing else was said. */
+function placeInContext(reading: Reading, hit: { keyword: string; start: number; end: number }): boolean {
+  const before = reading.words[hit.start - 1];
+  if (before !== undefined && PLACE_CONTEXT.has(before)) return true;
+  const word = reading.words[hit.start] ?? "";
+  if (word.startsWith("ب") && !hit.keyword.startsWith("ب")) return true;
+  return reading.restOutside(hit.start, hit.end).every((w) => PLACE_FILLERS.has(w));
+}
+
+/** The place as recorded: its nearest big job market is the value; the label is the name as the table spells it. */
+function placeFound(entry: (typeof PLACE_ENTRIES)[number]): Found {
+  const { market, km } = nearestJobMarket(entry.place);
+  const region = entry.region ?? getSaRegion(entry.place.region);
+  const ack: PlaceAck = {
+    label: entry.label,
+    kind: entry.region ? "region" : entry.place.kind,
+    regionName: region.name,
+    seat: region.seat,
+    market: getJobCity(market).name,
+    km,
+  };
+  return { question: "city", value: market, label: entry.label, place: ack };
+}
+
+/**
+ * The earliest city or place named (longer first at the same start): the five chip cities and «الخبر» as before, then
+ * every other Saudi city, governorate and region (tables PLACE_ENTRIES). «مدينة» before a place is the word "city", not
+ * «المدينة»; an everyday word that is also a place counts only as a place (see placeInContext).
+ */
 function readCity(reading: Reading): Found | null {
-  const hit = reading.find(CITY_ENTRIES.map((e) => e.keyword))[0];
-  if (!hit) return null;
-  const entry = CITY_ENTRIES.find((e) => nk(e.keyword) === hit.keyword);
-  if (!entry) return null;
-  reading.use(hit.start, hit.end);
-  return { question: "city", value: entry.value, label: entry.label };
+  const hits = reading.find(CITY_KEYWORDS);
+  for (const hit of hits) {
+    const core = CITY_ENTRIES.find((e) => nk(e.keyword) === hit.keyword);
+    if (core) {
+      if (core.value === "madinah" && reading.words[hit.start] === MADINAH_WORD && hits.some((h) => h.start === hit.end)) continue;
+      reading.use(hit.start, hit.end);
+      return { question: "city", value: core.value, label: core.label };
+    }
+    const entry = PLACE_ENTRIES.find((e) => nk(e.keyword) === hit.keyword);
+    if (!entry) continue;
+    if (AMBIGUOUS_PLACES.has(hit.keyword) && !placeInContext(reading, hit)) continue;
+    reading.use(hit.start, hit.end);
+    return placeFound(entry);
+  }
+  return null;
 }
 
 function readEducation(reading: Reading): Found | null {
@@ -248,17 +309,46 @@ function readPriority(reading: Reading): Found | null {
   return found ? { question: "priority", value: found.value } : null;
 }
 
-const READERS: Readonly<Record<QuestionId, (reading: Reading) => Found | null>> = {
+/** Words around a company typed alone that are not part of its name: «أبي أشتغل في مهارة». */
+const COMPANY_FILLERS = new Set([...PLACE_FILLERS, ...COMPANY_GATE_WORDS.map(nk), ...["أشتغل", "اشتغل", "شركة", "عند", "مع", "يمكن"].map(nk)]);
+
+/** A company named (engine COMPANY_KEYWORDS: «أرامكو», «ارامكو», «Aramco», «اس تي سي», «stc» …): the earliest, longer first. */
+function readCompanyName(reading: Reading): Found | null {
+  const found = earliestOf(reading, COMPANY_KEYWORDS.map((k) => ({ keyword: k.keyword, value: k.id })));
+  return found ? { question: "company", value: found.value } : null;
+}
+
+/**
+ * Step 7 (20 Nov 2026): a company named; a whole answer that is an everyday-word name («مهارة», filler words aside); else
+ * «لا، مو الحين» in its many forms («لا», «مافي», «بعدين», «not now»).
+ */
+function readCompany(reading: Reading): Found | null {
+  const named = readCompanyName(reading);
+  if (named) return named;
+  const rest = reading.rest().filter((w) => !COMPANY_FILLERS.has(w));
+  const alone = matchCompanyAlone(rest);
+  if (alone) {
+    reading.use(0, reading.words.length);
+    return { question: "company", value: alone };
+  }
+  const none = reading.find(COMPANY_NONE_PHRASES)[0];
+  if (!none) return null;
+  reading.use(none.start, none.end);
+  return { question: "company", value: "none" };
+}
+
+const READERS: Readonly<Record<OnboardingStepId, (reading: Reading) => Found | null>> = {
   city: readCity,
   education: readEducation,
   major: readMajor,
   experience: readExperience,
   interest: readInterest,
+  company: readCompany,
   priority: readPriority,
 };
 
 /** Step 3: the pending question. */
-export function readPending(reading: Reading, question: QuestionId): Found | null {
+export function readPending(reading: Reading, question: OnboardingStepId): Found | null {
   return READERS[question](reading);
 }
 
@@ -272,15 +362,22 @@ export function readNeutral(reading: Reading): boolean {
 
 /**
  * Step 4: the other unanswered questions, in order. `interest` and `priority` only with a wish word; `experience`
- * only when the message contains «خبرة» or a year word.
+ * only when the message contains «خبرة» or a year word; `company` only a company NAME, with a wish word («أبي أشتغل
+ * في أرامكو»; never «لا», and never «أشتغل في stc», which is where one works now).
  */
-export function readOthers(reading: Reading, unanswered: readonly QuestionId[]): Found[] {
+export function readOthers(reading: Reading, unanswered: readonly OnboardingStepId[]): Found[] {
   const wish = reading.mentions(WISH_WORDS);
   const yearOrExperience = reading.mentions(EXPERIENCE_GATE_WORDS);
+  const companyWish = reading.mentions(COMPANY_GATE_WORDS);
   const found: Found[] = [];
   for (const question of unanswered) {
     if ((question === "interest" || question === "priority") && !wish) continue;
     if (question === "experience" && !yearOrExperience) continue;
+    if (question === "company") {
+      const named = companyWish ? readCompanyName(reading) : null;
+      if (named) found.push(named);
+      continue;
+    }
     const f = READERS[question](reading);
     if (f) found.push(f);
   }

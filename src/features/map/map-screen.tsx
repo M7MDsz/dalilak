@@ -1,8 +1,9 @@
 "use client";
 // Owner: map. The roadmap page /path («مساري»), the home of the product (spec 3.4, ARCHITECTURE 11.3). It ports the
 // approved page design/explore/darb/map/final-home.html: a hill you can fly over. The sheet is drawn from the engine's
-// roadmap by geometry.ts; this file owns the state: which opening this visit plays (decided once, on the first render),
-// the hold, the wait for the daily reward, the replay when «دليل» opens the map, the hand-over from the reveal, and which
+// roadmap by geometry.ts. Beside it (owner, 20 Nov): the real jobs and what is left to reach each one (job-cards.tsx), in
+// the place of the next-step card, the target card and the leaderboard preview. This file owns the state: which opening this visit plays (decided once, on the first render),
+// the hold, the wait for the daily reward, the replay when «دليلك» opens the map, the hand-over from the reveal, and which
 // station the camera is at.
 import { useCallback, useEffect, useEffectEvent, useId, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import { createPortal } from "react-dom";
@@ -10,10 +11,10 @@ import { createPortal } from "react-dom";
 import { IconArrowBack, IconStarFilled, IconTrophy } from "@/components/icons";
 import { PageTransition, useGo, useInstant } from "@/components/motion";
 import { Button, EmptyState, cn, toast } from "@/components/ui";
-import { ConfirmTargetDialog, useNextStepAction, useViewport } from "@/features/shared";
-import { ASK_ADVISOR_APPLY_TEXT, TOAST_COPY, countNoun } from "@/lib/copy";
+import { ConfirmTargetDialog, useViewport } from "@/features/shared";
+import { TOAST_COPY, countNoun } from "@/lib/copy";
 import { BADGES, getJob, getSkill } from "@/lib/data";
-import { buildRoadmap, canonicalStages, courseState, dailyReward, leaderboard, levelFor, nextStep, skillStars, streakInfo, totalXp } from "@/lib/engine";
+import { buildRoadmap, canonicalStages, courseState, dailyReward, levelFor, skillStars, streakInfo, totalXp } from "@/lib/engine";
 import { formatNumber } from "@/lib/format";
 import { hrefFor } from "@/lib/routes";
 import { useAppStore, useClock, useCurrentUser, useOverlayHold, useUi } from "@/lib/store";
@@ -24,7 +25,8 @@ import { Camera, type FlightTarget } from "./camera";
 import { playOpening, type Opening } from "./choreography";
 import { buildGeometry, minSheetHeight, type MapGeometry, type OpenForm, type SheetSize } from "./geometry";
 import { MapSheet, type BranchLabel } from "./map-sheet";
-import { BranchCards, LeaderboardPreview, NextStepCard, NextStepDock, PlayerPanel, TargetCard, type PlayerFacts } from "./side-cards";
+import { BasedOnLine, JobCards } from "./job-cards";
+import { BranchCards, PlayerPanel, type PlayerFacts } from "./side-cards";
 import { StationCard, type CardSubject } from "./station-card";
 
 import "./map.css";
@@ -90,9 +92,7 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
   const clock = useClock();
   const go = useGo();
   const viewport = useViewport();
-  const performNext = useNextStepAction();
   const titleId = useId();
-  const advisorBusy = useUi((state) => state.advisorBusy);
   const blocking = useUi((state) => state.blocking);
   const mapOpenRequest = useUi((state) => state.mapOpenRequest);
 
@@ -117,8 +117,6 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
   const mapRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const [wide, setWide] = useState<boolean | null>(null);
-  // one column with room for two cards side by side (680 to 900 px of content: beside the docked advisor panel, a tablet)
-  const [pair, setPair] = useState(false);
   const [size, setSize] = useState<SheetSize | null>(null);
   useLayoutEffect(() => {
     const main = mainRef.current;
@@ -126,7 +124,6 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
     if (main === null || map === null) return;
     const read = () => {
       setWide(main.offsetWidth >= 900);
-      setPair(main.offsetWidth >= 680);
       const width = Math.round(map.clientWidth);
       const height = Math.round(map.clientHeight);
       if (width > 0 && height > 0) setSize((prev) => (prev !== null && prev.width === width && prev.height === height ? prev : { width, height }));
@@ -140,8 +137,8 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
   const geometry = useMemo<MapGeometry | null>(() => (size === null ? null : buildGeometry(roadmap, size)), [roadmap, size]);
   const small = geometry !== null ? geometry.small : !viewport.desktop;
   const minHeight = minSheetHeight(roadmap, small);
-  // One column (under 900 px of content: a phone, or beside the docked advisor panel): the target header and the next
-  // step come first (spec 3.4 phone order, DESIGN 4.0), then the map. On a wide sheet the map takes the rest of the first
+  // One column (under 900 px of content: a phone, or beside the docked advisor panel): the real jobs come first, a row
+  // that scrolls sideways (owner, 20 Nov: in the place of the target header and the next step), then the map. On a wide sheet the map takes the rest of the first
   // screen under them, so the whole page reads at once; on the phone sheet it is one screen tall (its stations keep room
   // to be pointed at) and starts right under the next step.
   const leadRef = useRef<HTMLDivElement>(null);
@@ -158,18 +155,12 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
   const lead = wide === false && !small ? leadHeight + 8 : 0;
 
   // ── derived content ──
-  const step = useMemo(() => nextStep(user), [user]);
-  const board = useMemo(() => leaderboard(user, clock), [user, clock]);
   const level = useMemo(() => levelFor(totalXp(user)).level, [user]);
   // the stars the user holds in every skill: a star is drawn solid only when it is earned (DESIGN-BRIEF 3.5)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const stars = useMemo(() => skillStars(user), [user.cv, user.courses]);
   const job = getJob(roadmap.jobId);
   const firstName = user.name.trim().split(/\s+/)[0] ?? user.name;
-  const stepStage = useMemo(() => {
-    if (step.rule !== 2 && step.rule !== 3) return null;
-    return roadmap.stages.find((s) => s.courseId === step.courseId) ?? null;
-  }, [roadmap, step]);
   const branches = useMemo<readonly BranchLabel[]>(() => roadmap.branches.map((b) => ({ jobId: b.jobId, title: getJob(b.jobId).title, now: b.now, after: b.after })), [roadmap]);
 
   // ── the opening ──
@@ -187,7 +178,6 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
     }),
     [user, clock, daily, firstName],
   );
-  const cvRewardOpen = !user.xpEvents.some((e) => e.type === "cv_analysed");
   const ready = !daily.due && blocking !== "daily";
   const started = useRef(false);
   const openingRef = useRef<Opening | null>(null);
@@ -250,7 +240,7 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
     endForm(form);
   });
 
-  // «دليل» opens the map (also when /path is already on screen): the short form plays again
+  // «دليلك» opens the map (also when /path is already on screen): the short form plays again
   const handledRequest = useRef(mapOpenRequest);
   useEffect(() => {
     if (mapOpenRequest === handledRequest.current) return;
@@ -273,15 +263,8 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
     };
   }, [handover]);
 
-  // ring-count baseline: remember the match only after it has been shown
+  // the match count in «أنت هنا»: remember the match only after it has been shown
   const resting = phase === "rest";
-  // Once the count has played on this visit, a ring that mounts again (the target card moves between the wide column and
-  // the one-column lead when the advisor panel docks) starts on the number already shown: ring-count plays when the
-  // match changes, never again for a layout switch (spec 3.4).
-  const [ringBase, setRingBase] = useState(ringFrom);
-  useEffect(() => {
-    if (resting && counted) setRingBase(roadmap.match);
-  }, [resting, counted, roadmap.match]);
   const seenMatch = user.seen.pathMatch;
   useEffect(() => {
     if (!resting || seenMatch === roadmap.match) return;
@@ -413,20 +396,10 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
     }
     go(hrefFor({ screen: "course", courseId: stage.courseId }));
   };
-  const onNext = () => {
-    if (step.rule === 4) useUi.getState().askAdvisor({ text: ASK_ADVISOR_APPLY_TEXT, chip: { intent: "apply", jobId: step.jobId } });
-    else performNext(step);
-  };
-  const onNextSecondary = () => {
-    if (step.rule === 1) useAppStore.getState().skipCv();
-    else if (step.rule === 4) go(hrefFor({ screen: "job", jobId: step.jobId, apply: true }));
-  };
 
   // ── what the card shows ──
   const focusedStage = focusKey !== null && focusKey !== "summit" ? (roadmap.stages.find((s) => `s${s.n}` === focusKey) ?? null) : null;
   const subject: CardSubject | null = focusKey === "summit" ? { kind: "summit" } : focusedStage !== null ? { kind: "stage", stage: focusedStage, course: courseState(focusedStage.courseId, user) } : null;
-  // one primary action on screen: while the open card carries it, the side card's button steps back
-  const stepBack = focusedStage !== null && focusedStage.state === "current";
   const card =
     subject !== null ? (
       <StationCard animate={!instant} hop={hop} onClose={closeCard} onCourse={onCourse} onJob={() => go(hrefFor({ screen: "job", jobId: roadmap.jobId }))} ref={cardRef} roadmap={roadmap} stars={stars} subject={subject} titleId={titleId} />
@@ -437,21 +410,16 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
   const T = geometry !== null ? geometry.timeline[form] : null;
   const shownMatch = counted || instant ? roadmap.match : ringFrom;
   const matchCount = useMemo(() => ({ value: shownMatch, from: ringFrom, delay: T !== null ? T.count : 0, duration: T !== null && T.countD > 0 ? T.countD : 0.6 }), [shownMatch, ringFrom, T]);
-  const ring = { value: shownMatch, from: ringBase, delay: T !== null ? T.count : 0 };
   const sign = geometry?.sign ?? null;
 
   return (
     <PageTransition className={handover !== null ? "[animation:none]" : undefined}>
-      {/* one column: the target card's label is cut into its top border, so the page keeps it clear of the sticky top bar */}
       <main className="px-3 pt-4 pb-4 @min-[900px]/content:px-7 @min-[900px]/content:pt-2 @min-[900px]/content:pb-6" ref={mainRef}>
         <h1 className="sr-only">مسارك</h1>
         <div className="grid items-start gap-x-5 gap-y-2 @min-[900px]/content:grid-cols-[minmax(0,1fr)_21.25rem]" style={{ ["--lead" as string]: `${lead}px` } as CSSProperties}>
           {wide === false ? (
-            // spec 3.4 phone order: the target header, then the next step; side by side when the content has the room,
-            // and then the two cards share one height (the next step fills it: body, rewards, the button at its foot)
-            <div className={cn("grid gap-2", pair ? "grid-cols-2" : null)} ref={leadRef}>
-              <TargetCard explain held={stars} ring={ring} roadmap={roadmap} />
-              <NextStepDock advisorBusy={advisorBusy} cvRewardOpen={cvRewardOpen} held={stars} onAction={onNext} onSecondary={onNextSecondary} pair={pair} roadmap={roadmap} stage={stepStage} step={step} />
+            <div className="min-w-0" ref={leadRef}>
+              <JobCards layout="row" user={user} />
             </div>
           ) : null}
           <section
@@ -515,19 +483,17 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
           </section>
 
           {wide === null ? null : wide ? (
-            <aside className="flex min-w-0 flex-col gap-2.5">
-              <NextStepCard advisorBusy={advisorBusy} cvRewardOpen={cvRewardOpen} held={stars} onAction={onNext} onSecondary={onNextSecondary} roadmap={roadmap} stage={stepStage} step={step} stepBack={stepBack} />
-              <TargetCard held={stars} ring={ring} roadmap={roadmap} />
-              {/* the player plate only where the column has the height for it: at 1440 x 900 the column is full and the
-                  top-bar chip carries the player (the launcher «اسأل دليل» needs the corner under the column) */}
-              <PlayerPanel className="hidden [@media(min-height:76rem)]:flex" player={player} track={false} />
-              <LeaderboardPreview board={board} firstName={firstName} />
+            // the real jobs, as tall as the map less the corner under the column (the launcher «اسأل دليلك» stands there);
+            // the list scrolls past the first four
+            <aside className="flex min-w-0 flex-col @min-[900px]/content:sticky @min-[900px]/content:top-[calc(var(--shell-top)+0.5rem)] @min-[900px]/content:max-h-[calc(100dvh-var(--shell-top)-6.75rem)]">
+              <JobCards className="min-h-0 flex-1" layout="column" user={user} />
+              <BasedOnLine className="mt-2 px-1" jobId={roadmap.jobId} />
             </aside>
           ) : (
             <div className="mt-2 flex min-w-0 flex-col gap-4">
               <BranchCards branches={roadmap.branches} complete={complete} onBranch={onBranch} />
               <PlayerPanel player={player} />
-              <LeaderboardPreview board={board} firstName={firstName} />
+              <BasedOnLine className="px-1" jobId={roadmap.jobId} />
             </div>
           )}
         </div>

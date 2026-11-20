@@ -1,6 +1,6 @@
 "use client";
 // SentBubble and UserMessage: the user's side of the conversation.
-// SIDES (Arabic, right to left): «دليل» speaks from the inline-start (the right), with his glyph; the user's messages sit
+// SIDES (Arabic, right to left): «دليلك» speaks from the inline-start (the right), with his glyph; the user's messages sit
 // at the inline-end (the left), with the user's avatar at the far inline-end. The composer's round send button is at
 // its inline-end too, so a sent message pops out of that corner: transform-origin is the bubble's bottom inline-end
 // corner (physical bottom-left), `y 22px, scale 0.92` to rest in 440 ms on the approved ease.pop (playbook 3.2).

@@ -1,17 +1,16 @@
 "use client";
 // Owner: learn. The next-step card under a completed course (spec 3.11 → the five forms of 3.4, by rule of 2.8). It is
 // the user's next action, so its label carries the accent waypoint and its button is the page's one primary. Performing
-// goes through the shared useNextStepAction (rule 3 starts the course, shows «بدأت الدورة. بالتوفيق.» and opens it).
+// goes through the shared useNextStepAction (rule 3 starts the step, shows «بدأت هذه الخطوة. بالتوفيق.» and opens its guide).
 // The map builds its own card from the same table; screens do not import each other.
 import type { ReactNode } from "react";
 
-import { IconArrowForward, IconClock, IconTarget } from "@/components/icons";
+import { IconArrowForward, IconTarget } from "@/components/icons";
 import { useGo } from "@/components/motion";
 import { Button, Card, XpValue } from "@/components/ui";
 import { useNextStepAction } from "@/features/shared";
-import { ASK_ADVISOR_APPLY_TEXT, hoursText } from "@/lib/copy";
-import { getCourse, getJob } from "@/lib/data";
-import { shortTitle } from "@/lib/engine";
+import { ASK_ADVISOR_APPLY_TEXT, guideTitle, stepName } from "@/lib/copy";
+import { getJob } from "@/lib/data";
 import { hrefFor } from "@/lib/routes";
 import { useAppStore, useUi } from "@/lib/store";
 import { TID } from "@/lib/testids";
@@ -47,25 +46,19 @@ export function NextStepCard({ step, className }: { readonly step: NextStep; rea
       );
       break;
     case 2: {
-      const course = getCourse(step.courseId);
       title = NEXT_CARD_COPY.rule2.title;
-      body = rule2Body(shortTitle(course), step.ticked, step.total);
+      body = rule2Body(stepName(step.courseId));
       actions = primary(NEXT_CARD_COPY.rule2.button);
       break;
     }
     case 3: {
-      const course = getCourse(step.courseId);
       title = NEXT_CARD_COPY.rule3.title;
-      // «دورة «أساسيات Power BI» · 10 ساعات · +200 XP · ترفع مطابقتك إلى 90%»: the course on its line, then its facts,
+      // «دليل Power BI» · +200 XP · ترفع مطابقتك إلى 90%»: the guide on its line, then its facts,
       // each with its mark (so no line of a wrapped row starts or ends with a lone «·»)
       body = (
         <span className="flex flex-col gap-1.5">
-          <span className="text-body font-medium text-fg">{rule3Course(shortTitle(course))}</span>
+          <span className="text-body font-medium text-fg">{rule3Course(guideTitle(step.courseId))}</span>
           <span className="flex flex-wrap items-center gap-x-4 gap-y-1">
-            <span className="inline-flex items-center gap-1.5">
-              <IconClock className="text-fg-3" size={18} waypoint="off" />
-              {hoursText(step.hours)}
-            </span>
             <XpValue gain size="sm" value={step.xp} />
             {step.prep ? null : (
               <span className="inline-flex items-center gap-1.5">

@@ -14,7 +14,7 @@ export const NAV_GROUPS: readonly (readonly NavItemId[])[] = [
 
 export const NAV_ITEMS: readonly NavItemId[] = NAV_GROUPS.flat();
 
-/** Spec 2.4: the phone tab bar is «مساري» · «الدورات» · «دليل» (centre) · «الوظائف» · «المزيد». */
+/** Spec 2.4: the phone tab bar is «مساري» · «دليل التعلّم» · «دليلك» (centre) · «الوظائف» · «المزيد». */
 export const PHONE_TABS_BEFORE_CENTRE: readonly NavItemId[] = ["path", "learn"];
 export const PHONE_TABS_AFTER_CENTRE: readonly NavItemId[] = ["jobs"];
 
@@ -33,7 +33,7 @@ export const NAV_HREF = {
   profile: hrefFor({ screen: "profile" }),
 } as const satisfies Record<NavItemId, string>;
 
-/** The item a pathname belongs to: `/jobs/[id]` marks «الوظائف», `/learn/[id]` marks «الدورات». */
+/** The item a pathname belongs to: `/jobs/[id]` marks «الوظائف», `/learn/[id]` marks «دليل التعلّم». */
 export function activeNavItem(pathname: string): NavItemId | null {
   const parsed = parsePathname(pathname);
   if (parsed === null) return null;

@@ -1,9 +1,10 @@
 "use client";
-// Owner: learn. The courses catalogue `/learn` (spec 3.10; playbook 3.9). All 59 courses, the ones on the user's path
-// first, and every card says what star it grants. Tabs «في مساري» · «وسّع آفاقك» · «مكتملة» and the field filter live in
-// the URL (router.replace, no page transition: the list reorders in place, `list-reorder`). Under the path tab the done
-// stages sit in the collapsed group «أنجزتها (6)», whose toggle shows the stations already passed.
-// Every course is a quest (docs/GAME-LAYER.md 5.5): the next step's course is the one `next` piece of the page.
+// Owner: learn. «دليل التعلّم» `/learn` (spec 3.10): the learning steps of the user's path in order, each with where to
+// learn it (the guide's real top pick), the next one highlighted with why («تقفل أكبر جزء من فجوتك مع «محلل بيانات»»),
+// the done ones in the collapsed group «أنجزتها (6)» with their stamps. Tabs «خطوات مساري» · «كل المهارات» · «مكتملة»
+// live in the URL (router.replace: the list reorders in place); the field chips show on «كل المهارات» only. Two quiet
+// filters (language عربي / English, and مجاني) pick, per step, the first option of its guide that fits; a step with no
+// fitting option is left out. Every step is a quest (docs/GAME-LAYER.md 5.5): the next step is the one `next` piece.
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState, type ReactNode } from "react";
 
@@ -12,7 +13,7 @@ import { IconChevronDown, IconInfo } from "@/components/icons";
 import { Collapse, PageTransition, PillTabs, ReorderList } from "@/components/motion";
 import { Button, Card, Chip, EmptyState, cn } from "@/components/ui";
 import { SAMPLE_COPY } from "@/lib/copy";
-import { FIELDS, getCourse } from "@/lib/data";
+import { FIELDS, getCourse, getGuide, getJob, getSkill, isFreeCourse, type GuideCourse } from "@/lib/data";
 import { courseOnPath, courseState, courseXp, learnList, nextStep } from "@/lib/engine";
 import { hrefFor, parseLearnQuery } from "@/lib/routes";
 import { useCurrentUser } from "@/lib/store";
@@ -24,6 +25,19 @@ import { CourseCard, type CourseCardModel } from "./course-card";
 import { nextCourseOf } from "./quest";
 
 const TAB_ORDER: readonly LearnTab[] = ["path", "explore", "done"];
+
+type LangFilter = "ar" | "en" | null;
+interface SourceFilter {
+  readonly lang: LangFilter;
+  readonly free: boolean;
+}
+
+/** The guide's option that fits the filters: the top pick first, then the alternatives; null when none fits. */
+function pickFor(id: CourseId, filter: SourceFilter): GuideCourse | null {
+  const guide = getGuide(getCourse(id).skill);
+  const options = [guide.topPick, ...guide.alternatives];
+  return options.find((o) => (filter.lang === null || o.lang === filter.lang) && (!filter.free || isFreeCourse(o))) ?? null;
+}
 
 export function LearnScreen(): ReactNode {
   return (
@@ -41,16 +55,17 @@ function Catalogue(): ReactNode {
   return <CatalogueFor user={user} />;
 }
 
-function cardModel(user: UserState, id: CourseId, nextCourse: CourseId | null, ahead: boolean): CourseCardModel {
+function cardModel(user: UserState, id: CourseId, nextCourse: CourseId | null, ahead: boolean, pick: GuideCourse): CourseCardModel {
   const course = getCourse(id);
-  return {
-    course,
-    info: courseState(id, user),
-    xp: courseXp(course),
-    path: courseOnPath(id, user),
-    next: id === nextCourse,
-    ahead,
-  };
+  const path = courseOnPath(id, user);
+  const next = id === nextCourse;
+  const why =
+    next && path !== null
+      ? path.prep
+        ? LEARN_COPY.prepWhy(getSkill(path.prepares ?? course.skill).name)
+        : LEARN_COPY.nextWhy(getJob(path.jobId).title)
+      : null;
+  return { course, info: courseState(id, user), xp: courseXp(course), path, next, ahead, pick, why };
 }
 
 function CatalogueFor({ user }: { readonly user: UserState }): ReactNode {
@@ -67,6 +82,7 @@ function CatalogueFor({ user }: { readonly user: UserState }): ReactNode {
   }
   const { tab, field } = view;
   const [doneOpen, setDoneOpen] = useState(false);
+  const [filter, setFilter] = useState<SourceFilter>({ lang: null, free: false });
 
   const show = (next: { tab?: LearnTab; field?: FieldId | null }) => {
     const nextTab = next.tab ?? tab;
@@ -77,16 +93,19 @@ function CatalogueFor({ user }: { readonly user: UserState }): ReactNode {
   };
 
   const { items, doneGroup } = useMemo(() => {
-    const listing = learnList(user, tab, field);
+    const listing = learnList(user, tab, tab === "explore" ? field : null);
     const next = nextCourseOf(nextStep(user));
-    return {
-      items: listing.items.map((id) => cardModel(user, id, next, tab === "path")),
-      doneGroup: listing.doneGroup.map((id) => cardModel(user, id, null, false)),
-    };
-  }, [user, tab, field]);
+    const models = (ids: readonly CourseId[], nextId: CourseId | null, ahead: boolean) =>
+      ids.flatMap((id) => {
+        const pick = pickFor(id, filter);
+        return pick === null ? [] : [cardModel(user, id, nextId, ahead, pick)];
+      });
+    return { items: models(listing.items, next, tab === "path"), doneGroup: models(listing.doneGroup, null, false) };
+  }, [user, tab, field, filter]);
+  const filtered = filter.lang !== null || filter.free;
 
   const labelBy = tab === "path" ? "stage" : "field";
-  const empty = items.length === 0 ? emptyFor(tab, field, doneGroup.length > 0) : null;
+  const empty = items.length === 0 ? (filtered ? { title: LEARN_COPY.emptyField, action: LEARN_COPY.emptyFieldAction, go: {} } : emptyFor(tab, field, doneGroup.length > 0)) : null;
 
   return (
     <main className="mx-auto flex w-full max-w-[72rem] flex-col gap-8 px-gutter pt-6 pb-12 @min-[900px]/content:pt-8">
@@ -107,6 +126,24 @@ function CatalogueFor({ user }: { readonly user: UserState }): ReactNode {
           onPick={(id) => show({ tab: id })}
           tabs={TAB_ORDER.map((id) => ({ id, label: LEARN_COPY.tabs[id], testId: TID.learn.tab(id) }))}
         />
+        <div aria-label={LEARN_COPY.filtersLabel} className="flex flex-wrap items-center gap-2" role="group">
+          {(["ar", "en"] as const).map((lang) => (
+            <Chip
+              data-testid={`learn-lang-${lang}`}
+              key={lang}
+              onClick={() => setFilter((f) => ({ ...f, lang: f.lang === lang ? null : lang }))}
+              selected={filter.lang === lang}
+              size="sm"
+            >
+              {lang === "ar" ? LEARN_COPY.filterAr : LEARN_COPY.filterEn}
+            </Chip>
+          ))}
+          <span aria-hidden className="mx-1 h-5 border-s border-border-strong" />
+          <Chip data-testid="learn-free" onClick={() => setFilter((f) => ({ ...f, free: !f.free }))} selected={filter.free} size="sm">
+            {LEARN_COPY.filterFree}
+          </Chip>
+        </div>
+        {tab !== "explore" ? null : (
         <div
           aria-label={LEARN_COPY.fieldsLabel}
           className="-mx-gutter flex gap-2 overflow-x-auto px-gutter pb-1 [scrollbar-width:none] @min-[900px]/content:mx-0 @min-[900px]/content:flex-wrap @min-[900px]/content:overflow-visible @min-[900px]/content:px-0 [&::-webkit-scrollbar]:hidden"
@@ -121,6 +158,7 @@ function CatalogueFor({ user }: { readonly user: UserState }): ReactNode {
             </Chip>
           ))}
         </div>
+        )}
       </div>
 
       <section aria-label={LEARN_COPY.tabs[tab]} className="flex flex-col gap-6">
@@ -128,7 +166,14 @@ function CatalogueFor({ user }: { readonly user: UserState }): ReactNode {
           <Card padding="none">
             <EmptyState
               action={
-                <Button data-testid={TID.learn.emptyAction} onClick={() => show(empty.go)} variant="secondary">
+                <Button
+                  data-testid={TID.learn.emptyAction}
+                  onClick={() => {
+                    if (filtered) setFilter({ lang: null, free: false });
+                    else show(empty.go);
+                  }}
+                  variant="secondary"
+                >
                   {empty.action}
                 </Button>
               }

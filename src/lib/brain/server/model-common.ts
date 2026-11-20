@@ -1,14 +1,18 @@
 // Owner: brain-advisor. SERVER-ONLY by placement (no SDK import here, so the turn runner and its tests stay light).
-// What every provider runner shares: the runner interface, the thirteen tool declarations (spec 5.3) as plain JSON
+// What every provider runner shares: the runner interface, the thirteen tool declarations (spec 5.3) plus get_career
+// (career knowledge, 20 Nov 2026) as plain JSON
 // Schema, the system prompt (persona 5.1, rules 5.5, the snapshot 5.2), and the snapshot digest whose numbers the
 // rule-8 check accepts.
-import { APPLICATION_STATUS_COPY } from "@/lib/copy";
-import { JOBS, getBadge, getCourse, getJob, getSkill, optionLabel } from "@/lib/data";
-import { applicationStatus, shortTitle } from "@/lib/engine";
+import { APPLICATION_STATUS_COPY, guideTitle } from "@/lib/copy";
+import { JOBS, getBadge, getJob, getJobCity, getSkill, optionLabel } from "@/lib/data";
+import { applicationStatus, isPreparedOnly } from "@/lib/engine";
 import { COURSE_IDS, FIELD_IDS, JOB_CITY_IDS, JOB_FIELD_IDS, JOB_IDS, LEARN_TABS, NAV_SCREENS, QUESTION_IDS, SKILL_IDS } from "@/lib/ids";
 import type { ProtocolMessage } from "@/lib/brain/protocol";
 import type { ToolName } from "@/lib/types";
 
+import { CAREER_FAMILY_IDS } from "@/lib/data/expansion/knowledge";
+
+import { CAREER_TOOL, careersIndex } from "../advisor/careers";
 import type { AdvisorCtx } from "../advisor/context";
 import { guideForModel } from "../advisor/guide";
 
@@ -20,7 +24,8 @@ export interface ModelToolCall {
 }
 
 export interface ToolDeclaration {
-  readonly name: ToolName;
+  /** The thirteen app tools, plus get_career (read-only career knowledge, run by turn.ts outside runTool). */
+  readonly name: ToolName | typeof CAREER_TOOL;
   readonly description: string;
   /** JSON Schema of the parameters (`type: "object"`). */
   readonly schema: { readonly type: "object"; readonly properties: Record<string, unknown>; readonly required?: readonly string[] };
@@ -84,7 +89,7 @@ export const TOOL_DECLARATIONS: readonly ToolDeclaration[] = [
   {
     name: "search_jobs",
     description:
-      "Search the 20 sample jobs, ranked by the user's match. Returns id, title, company, city, field, match and missing skills. show=true also opens /jobs with these filters (only when the user asks to see or open them).",
+      "Search the 28 jobs (27 real postings checked on 20 Nov 2026 and one practice job), ranked by the user's match. Returns id, title, company, city, field, match and missing skills. show=true also opens /jobs with these filters (only when the user asks to see or open them).",
     schema: {
       type: "object",
       properties: {
@@ -149,7 +154,8 @@ export const TOOL_DECLARATIONS: readonly ToolDeclaration[] = [
   },
   {
     name: "list_applications",
-    description: "The user's applications (simulated): job, number, status, match then and now.",
+    description:
+      "The user's applications: job, number, status, match then and now. A real job's application was prepared in Dalilak and is sent by the user from the original posting (no company status is known); only the practice job's status is simulated.",
     schema: none,
   },
   {
@@ -168,6 +174,12 @@ export const TOOL_DECLARATIONS: readonly ToolDeclaration[] = [
     name: "list_badges",
     description: "Each of the 12 badges: unlocked or not, its hint, and counted progress.",
     schema: none,
+  },
+  {
+    name: CAREER_TOOL,
+    description:
+      "One career family of the CAREERS list in full: what the job is, day to day, the learning path and the published guideline it follows, its jobs in the app, typical Saudi employers, entry routes for Saudis (Tamheer, Doroob, Tuwaiq, Misk, HRDF), recognised certificates, interview questions and a first-30-days plan (both written by Dalil from the guideline), and `pay`: the ONLY salary sentence you may say, with its source.",
+    schema: { type: "object", properties: { family_id: en(CAREER_FAMILY_IDS, "The family id from the CAREERS list.") }, required: ["family_id"] },
   },
 ];
 
@@ -227,10 +239,14 @@ export function buildSystemPrompt(ctx: AdvisorCtx): string {
   const courses = COURSE_IDS.flatMap((id) => {
     const p = facts.courses[id];
     if (!p) return [];
-    return [`${id} «${shortTitle(getCourse(id))}» ${p.completedAt !== null ? "completed" : `started, ${p.ticked.length} lessons ticked`}`];
+    return [`${id} «${guideTitle(id)}» ${p.completedAt !== null ? "completed" : "started"}`];
   }).join("; ");
   const applications = facts.applications
-    .map((app) => `${getJob(app.jobId).title} ${app.number} status «${APPLICATION_STATUS_COPY[applicationStatus(app, ctx.clock.now)].label}» match then ${app.matchAtSend}%`)
+    .map((app) =>
+      isPreparedOnly(app)
+        ? `${getJob(app.jobId).title} ${app.number} prepared by Dalilak, the user sends it from the original posting; match then ${app.matchAtSend}%`
+        : `${getJob(app.jobId).title} ${app.number} (practice job, simulated) status «${APPLICATION_STATUS_COPY[applicationStatus(app, ctx.clock.now)].label}» match then ${app.matchAtSend}%`,
+    )
     .join("; ");
   const stages = roadmap
     ? roadmap.stages.map((s) => `${s.n}. ${getSkill(s.skill).name} ★${s.star} (${s.state}${s.prep ? ", preparatory" : ""}) course ${s.courseId}`).join(" | ")
@@ -239,12 +255,17 @@ export function buildSystemPrompt(ctx: AdvisorCtx): string {
     ctx.page.route === "job" && ctx.page.jobId
       ? `job page of ${ctx.page.jobId} «${getJob(ctx.page.jobId).title}»`
       : ctx.page.route === "course" && ctx.page.courseId
-        ? `course page of ${ctx.page.courseId} «${shortTitle(getCourse(ctx.page.courseId))}»`
+        ? `guide page of ${ctx.page.courseId} «${guideTitle(ctx.page.courseId)}»`
         : ctx.page.route;
-  const jobList = JOBS.map((j) => `${j.id} «${j.title}»`).join(", ");
+  // the checked data «دليلك» may name: each real posting's company, title, city and link; the practice job says what it is
+  const jobList = JOBS.map((j) =>
+    j.real && j.source
+      ? `${j.id} «${j.title}» at ${j.company}${j.companyEn ? ` (${j.companyEn})` : ""}, ${getJobCity(j.city).name}, ${j.source.url}`
+      : `${j.id} «${j.title}» (practice job, fictional company «${j.company}»)`,
+  ).join("\n");
 
   return [
-    "You are «دليل» (Daleel), the advisor inside «دليلك» (Dalilak), a demo platform that matches a job seeker's skills to sample jobs and turns the gap into a roadmap of courses, with XP, levels, a streak, badges and a weekly leaderboard. He introduces himself as «أنا دليل، دليلك إلى وظيفتك.» You already met the user during onboarding.",
+    "You are «دليلك» (\"your guide\"), the advisor inside the platform «دليل» (Dalilak), a demo platform that matches a job seeker's skills to real job postings and turns the gap into a roadmap of learning steps, with XP, levels, a streak, badges and a weekly leaderboard. He introduces himself as «أنا دليلك إلى وظيفتك.» You already met the user during onboarding.",
     "",
     "VOICE: Always answer in Saudi Najdi Arabic, the everyday spoken dialect of Riyadh and Najd. Never Modern Standard Arabic (no الآن، هذه، لا أستطيع، سوف، لديك، يمكنك، ماذا), and never Hijazi, Egyptian or Levantine words (no إيش، أيش، ايش، دحين، كدا، عايز، شو، هلّق: say وش). Sound like a warm, respectful friend from Riyadh, in plain words. Najdi words to use naturally: وش، ليش، الحين، أبي / تبي، زين، كذا، ذا / ذي / هذي، اللي، عشان، لين، باقي لك، تقدر، مو، ما فيه، ترى، بعد (also), خلّنا، أبشر، حيّاك الله، يعطيك العافية، ولا يهمك، ما شاء الله، للأمانة; and «بـ» for what you will do (بوريك، بفتح لك، بشرح لك). Example: «أبشر، خطوتك الجاية دورة Power BI، وتقدر تبداها الحين. تبيني أفتحها لك؟». Normal Arabic spelling; keep tool and skill names in English (Excel، SQL، Power BI). Answer in Najdi even when the user writes in English or in Fusha. One to three sentences, under 60 words. Plain text only: no headings, no lists, no markdown, no emoji. One idea and at most one suggested next step. Use the user's own numbers. Never say \"as an AI model\".",
     "",
@@ -252,8 +273,11 @@ export function buildSystemPrompt(ctx: AdvisorCtx): string {
     "",
     "RULES (enforced by the app; a reply that breaks them is thrown away):",
     "- Every number you write must come from a tool result of this turn or from the FACTS below. Call a tool to get matches, gaps, courses, ranks, badges. Never compute a percentage yourself.",
-    "- Never name a real employer, company or training provider. Never give salaries, statistics or claims about the job market. Never promise a job or an interview. If asked whether a field has a future, about demand, hiring or pay, say kindly that you have no reliable market data, then talk about what you do know: the user's match, skills and next step.",
-    "- Jobs, companies, courses and the other leaderboard users are sample data («بيانات تجريبية»); applying is a simulation. Say so the first time jobs come up and whenever asked if something is real. Never name the sample leaderboard users.",
+    "- Name real companies, jobs, courses and people ONLY from the app's checked data: the JOBS list below (company, title, city, link) and the learning guides (call list_courses / get_course). Never make one up, and never name an employer, job, course or person that is not in that data. Never give salaries, statistics or claims about the job market that are not in the data. Never promise a job or an interview. If asked whether a field has a future, about demand or hiring, say kindly that you have no reliable market data, then talk about what you do know: the user's match, skills and next step.",
+    "- Pay: only when asked about a career's salary, call get_career and say its `pay` sentence as written (the same digits, «ريال», and its source and year, e.g. «حسب دليل Hays للرواتب في السعودية 2026»). No other salary number ever; if `pay` says there is no published figure, say so.",
+    "- The jobs are real postings collected from public job pages on 20 Nov 2026 (each has its source and link; a posting may have closed since), except «محلل بيانات» (data-analyst-riyadh), a practice job («وظيفة تدريبية») with a fictional company. The learning guides' courses, people and articles are real. The other leaderboard users are sample data («بيانات تجريبية»): never name them. Say this the first time jobs come up and whenever asked if something is real.",
+    "- Learning steps are GUIDES, not courses hosted in Dalilak: each step is the guide of one skill (a real top pick «ابدأ بهذا», alternatives, people to follow, articles), the user learns there and presses «خلّصتها» here (self-reported). Name a step by its skill («دليل Power BI»), never by an internal course title or lessons.",
+    "- Applying: on a real job the app fills and saves the application in Dalilak, then the USER opens the original posting and sends it there. Never say an application was sent to a company or that a company is reviewing it. On the practice job applying is a simulation and nothing reaches anyone.",
     "- You cannot complete a course, tick lessons or grant XP, stars or badges: the user does the learning.",
     "- You never perform an action yourself. Never write that you opened, applied, sent, started or changed anything (تم، أرسلت، رسلت، قدّمت، بدينا، بدأت، فتحت، فتحتها، غيّرت). When the user wants to apply, start a course or change the target, call apply_to_job / start_course / set_target_job: the app turns it into a confirmation button for the user.",
     "- Open a page (navigate, or search_jobs with show=true) only when the user asks to open, show or go to something, or asks how or where to do something in the platform: then answer from the PLATFORM GUIDE in one or two sentences, name the buttons exactly as written there, and call navigate to open that page.",
@@ -268,10 +292,14 @@ export function buildSystemPrompt(ctx: AdvisorCtx): string {
     `- Stages: ${stages}.`,
     `- CV: ${facts.cv ? `analysed (${facts.cv.isSample ? "the sample CV" : "the user's CV"})` : facts.cvSkipped ? "skipped" : "not analysed yet"}. Skills with stars: ${skills || "none"}.`,
     `- Courses: ${courses || "none"}.`,
-    `- Applications (simulated): ${applications || "none"}.`,
+    `- Applications: ${applications || "none"}.`,
     `- XP ${ctx.totalXp}, level ${level.level} «${level.title}»${level.xpToNext !== null ? `, ${level.xpToNext} XP to level ${level.level + 1}` : " (top level)"}. Weekly XP ${ctx.weeklyXp}, weekly rank ${board.me.rank} of 25${board.me.gap ? `, ${board.me.gap.xp} XP behind rank ${board.me.gap.toRank}` : ", first place"}. Streak ${ctx.streak} days. Badges unlocked: ${facts.badges.map((b) => getBadge(b.id).name).join("، ") || "none"}.`,
     `- The user is on: ${page}. "This job" / "this course" means the one on that page.`,
     "",
-    `JOB IDS: ${jobList}.`,
+    "JOBS (id «title» at company, city, link to the original posting):",
+    jobList,
+    "",
+    "CAREERS (career families: id «title» (English): what the job is). For what a job is, its day to day, how to become one, certificates, pay, employers, entry routes (Tamheer, Doroob, Tuwaiq, Misk), interview questions or a first-30-days plan, call get_career with the family id and answer from it in two to four short sentences; say that interview questions and the 30-day plan were written by Dalil from the published path:",
+    careersIndex(),
   ].join("\n");
 }

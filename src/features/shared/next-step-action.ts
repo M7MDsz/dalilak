@@ -1,8 +1,8 @@
 "use client";
 // Owner: shell. The ONE way to perform the next step (spec 2.8), used by the pill, the map card, the course page, the
 // celebration («الخطوة التالية»), the leaderboard card and the advisor's next-step card:
-// rule 1 → go(/cv) · rule 2 → go(/learn/{id}) · rule 3 → store.startCourse(id), the toast «بدأت الدورة. بالتوفيق.»
-// (spec 3.11), then go(/learn/{id}) («ابدأ الدورة» opens it already started) · rule 4 → go(/jobs/{id}) · rule 5 →
+// rule 1 → go(/cv) · rule 2 → go(/learn/{id}) · rule 3 → store.startCourse(id), the toast «بدأت هذه الخطوة. بالتوفيق.»
+// (spec 3.11), then go(/learn/{id}) (the step's guide opens already started) · rule 4 → go(/jobs/{id}) · rule 5 →
 // go(/jobs). Where each step goes is the engine's `nextStepTarget`; navigation goes through useGo() (playbook 1.5).
 import { useCallback } from "react";
 

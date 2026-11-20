@@ -5,17 +5,21 @@ import type { ComponentProps, ReactNode } from "react";
 
 import {
   IconCheck,
+  IconInfo,
   IconFieldBusiness,
+  IconFieldCyberCloud,
   IconFieldData,
   IconFieldDesign,
   IconFieldHr,
   IconFieldMarketing,
+  IconFieldProduct,
   IconFieldProfessional,
+  IconFieldSalesSupply,
   IconFieldSoftware,
 } from "@/components/icons";
 import type { Requirement as GameRequirement } from "@/components/game";
 import { NavLink } from "@/components/motion";
-import { SampleTag, cn } from "@/components/ui";
+import { cn } from "@/components/ui";
 import { BAND_LABEL, SAMPLE_COPY } from "@/lib/copy";
 import { getJob, getSkill } from "@/lib/data";
 import type { ExperienceBand, FieldId, JobId, SkillId, StarMap } from "@/lib/types";
@@ -29,6 +33,9 @@ const FIELD_ICON = {
   marketing: IconFieldMarketing,
   business: IconFieldBusiness,
   hr: IconFieldHr,
+  product: IconFieldProduct,
+  "cyber-cloud": IconFieldCyberCloud,
+  "sales-supply": IconFieldSalesSupply,
   professional: IconFieldProfessional,
 } as const satisfies Record<FieldId, unknown>;
 
@@ -85,16 +92,15 @@ export function AppliedFlag({ className }: { className?: string }): ReactNode {
   );
 }
 
-/** Spec 7.6 `/jobs` banner «بيانات تجريبية: الوظائف والجهات هنا للعرض فقط.», drawn as the kit draws honesty (DESIGN 6). */
+/**
+ * The `/jobs` honesty line (20 Nov 2026): «إعلانات حقيقية جُمعت في 20 نوفمبر 2026، وقد يُغلق بعضها بعد ذلك. «محلل بيانات»
+ * وظيفة تدريبية.», quiet, with the info mark.
+ */
 export function SampleLine(): ReactNode {
-  const text = SAMPLE_COPY.jobsBanner;
-  const cut = text.indexOf(":");
-  const tag = cut > 0 ? text.slice(0, cut) : SAMPLE_COPY.data;
-  const rest = cut > 0 ? text.slice(cut + 1).trim() : text;
   return (
-    <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-fg-3">
-      <SampleTag>{tag}</SampleTag>
-      <span>{rest}</span>
+    <p className="flex items-start gap-2 text-small text-fg-3" data-testid="jobs-honesty">
+      <IconInfo className="mt-0.5 shrink-0" size={18} waypoint="muted" />
+      <LtrNumbers text={SAMPLE_COPY.jobsBanner} />
     </p>
   );
 }

@@ -1,0 +1,61 @@
+/* Owner: welcome. The scroll bar of the onboarding chat (20 Nov 2026: Chrome on Windows drew the default thin bar, with
+   arrow buttons and a square thumb, pressed against the chat column).
+   .wl-thread is ChatThread's outer box; its scroller is the [role="log"] child.
+   - A slim pill (4 px drawn inside an 8 px gutter), rounded, in the surface's own scrollbar tone at 55 % until the
+     reader points at the chat, then full; a little darker while it is held. No arrow buttons, no track.
+   - It lives in the 8 px the thread borrows past the column (`-mx-2`), so it can never reach the answer tiles below
+     or beside it, and it stops 8 px short of the thread's top and bottom edges.
+   - `scrollbar-gutter: stable both-edges` keeps the column centred and still: nothing shifts when the bar appears.
+   - Nothing to scroll, nothing drawn (overflow-y: auto).
+   Mouse and trackpad screens only: a touch screen keeps its own overlay bar. Chromium draws the ::-webkit-scrollbar
+   parts only while `scrollbar-width` and `scrollbar-color` are left at auto, so they are reset here (the base layer sets
+   them on every element); Firefox, which has no such parts, keeps the base thin bar in the same tone. */
+
+@media (hover: hover) and (pointer: fine) {
+  .wl-thread > [role="log"] {
+    scrollbar-gutter: stable both-edges;
+  }
+
+  @supports selector(::-webkit-scrollbar) {
+    .wl-thread > [role="log"] {
+      scrollbar-width: auto;
+      scrollbar-color: auto;
+    }
+
+    .wl-thread > [role="log"]::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+      background: transparent;
+    }
+
+    .wl-thread > [role="log"]::-webkit-scrollbar-track {
+      margin-block: 8px;
+      background: transparent;
+    }
+
+    .wl-thread > [role="log"]::-webkit-scrollbar-button,
+    .wl-thread > [role="log"]::-webkit-scrollbar-corner {
+      display: none;
+      width: 0;
+      height: 0;
+      background: transparent;
+    }
+
+    .wl-thread > [role="log"]::-webkit-scrollbar-thumb {
+      min-height: 40px;
+      border: 2px solid transparent;
+      border-radius: 999px;
+      background-clip: padding-box;
+      background-color: color-mix(in oklab, var(--scrollbar) 55%, transparent);
+    }
+
+    .wl-thread > [role="log"]:hover::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar);
+    }
+
+    .wl-thread > [role="log"]::-webkit-scrollbar-thumb:hover,
+    .wl-thread > [role="log"]::-webkit-scrollbar-thumb:active {
+      background-color: var(--fg-3);
+    }
+  }
+}

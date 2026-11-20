@@ -1,12 +1,13 @@
-// Owner: advisor. The action receipt: a one-line record, in the thread, of what «دليل» did on the site (opened a page,
-// started a course, changed the target, filled and sent an application). It sits above the reply's words, so the order
-// on screen is the order of events: the page changed (the receipt), then «دليل» speaks (the text).
+// Owner: advisor. The action receipt: a one-line record, in the thread, of what «دليلك» did on the site (opened a page,
+// started a learning step, changed the target, filled and sent an application). It sits above the reply's words, so the order
+// on screen is the order of events: the page changed (the receipt), then «دليلك» speaks (the text).
 //
 // The persisted AdvisorMessage has no field for it (src/lib/types.ts is frozen), so the receipt rides in the message id,
 // which the panel owns (ARCHITECTURE 5.1: "advisor messages get their id from the panel"): `d-<time>-<n>~<encoded ref>`.
 // The part before "~" is the message's stable key (the pending row and the answer share it, so React keeps one row).
-// Records are written in the verbal-noun form of a task log («فتح طلباتك», «بدء دورة …»), so they never repeat the
-// reply's own sentence («تفضّل، فتحت لك طلباتك.»).
+// Records are written in the verbal-noun form of a task log («فتح طلباتك», «بدء خطوة Power BI»), so they never repeat
+// the reply's own sentence («تفضّل، فتحت لك طلباتك.»). Since 20 Nov 2026 a course is a learning step shown as its
+// skill's guide: a record names the skill («فتح «دليل Power BI»»), never the internal course title.
 import type { ReactNode } from "react";
 import { createElement } from "react";
 
@@ -22,8 +23,8 @@ import {
   IconSkills,
   IconTarget,
 } from "@/components/icons";
-import { getCourse, getJob } from "@/lib/data";
-import { shortTitle } from "@/lib/engine";
+import { guideTitle, stepName } from "@/lib/copy";
+import { getJob } from "@/lib/data";
 import { isCourseId, isJobId } from "@/lib/ids";
 import { hrefFor } from "@/lib/routes";
 import type { AdvisorAction } from "@/lib/brain/protocol";
@@ -90,7 +91,6 @@ export function receiptOf(id: string): ReceiptRef | null {
 }
 
 const quoted = (text: string) => `«${text}»`;
-const courseShort = (id: CourseId) => shortTitle(getCourse(id));
 
 function openedText(to: NavTarget): string {
   switch (to.screen) {
@@ -107,9 +107,9 @@ function openedText(to: NavTarget): string {
     case "applications":
       return "فتح طلباتك";
     case "learn":
-      return "فتح الدورات";
+      return "فتح دليل التعلّم";
     case "course":
-      return `فتح دورة ${quoted(courseShort(to.courseId))}`;
+      return `فتح ${quoted(guideTitle(to.courseId))}`;
     case "leaderboard":
       return "فتح صفحة المتصدرين";
     case "profile":
@@ -123,11 +123,14 @@ export function receiptText(ref: ReceiptRef): string {
     case "go":
       return openedText(ref.to);
     case "start":
-      return `بدء دورة ${quoted(courseShort(ref.c))}`;
+      return `بدء خطوة ${stepName(ref.c)}`;
     case "target":
       return `تغيير هدفك إلى ${quoted(getJob(ref.j).title)}`;
     case "apply":
-      return `تعبئة طلبك على ${quoted(getJob(ref.j).title)} وإرساله`;
+      // a real posting is prepared here and sent by the user from the posting (20 Nov 2026)
+      return getJob(ref.j).real
+        ? `تعبئة طلبك على ${quoted(getJob(ref.j).title)} وتجهيزه`
+        : `تعبئة طلبك على ${quoted(getJob(ref.j).title)} وإرساله`;
   }
 }
 

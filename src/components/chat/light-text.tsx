@@ -1,4 +1,4 @@
-// Light markdown for «دليل»'s replies: paragraphs, line breaks, short lists (`- ` or `1. `) and **bold**. Nothing else is
+// Light markdown for «دليلك»'s replies: paragraphs, line breaks, short lists (`- ` or `1. `) and **bold**. Nothing else is
 // interpreted: no links, no images, no HTML. The text is never injected as HTML; it becomes React text nodes, so a reply
 // can never add markup or fetch anything. Latin runs (SQL, Power BI, 70%, +200 XP, DL-2026-0001) are isolated left to
 // right, so a sign or a percent never jumps to the wrong side inside Arabic (DESIGN.md 2.3).

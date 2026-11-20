@@ -1,0 +1,910 @@
+{
+  "checkedAt": "2026-11-20",
+  "note": "Every link was opened on 2026-11-20 (WebFetch or a direct page load). price, hours and certificate are null when the page did not state them. The 5 demo skills (excel, sql, powerbi, statistics, communication) are in guides-demo.json.",
+  "skills": {
+    "dataviz": {
+      "topPick": {
+        "title": "Share Data Through the Art of Visualization",
+        "provider": "Google (Coursera)",
+        "url": "https://www.coursera.org/learn/visualize-data",
+        "language": "en",
+        "price": "paid",
+        "hours": 20,
+        "certificate": "yes",
+        "why": "من شهادة Google لتحليل البيانات: تختار الرسم المناسب وتعرض النتيجة كقصة يفهمها الكل.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [],
+      "people": [
+        {
+          "name": "Cole Nussbaumer Knaflic",
+          "platform": "storytelling with data (موقع ومدونة)",
+          "url": "https://www.storytellingwithdata.com/",
+          "why": "أمثلة عملية تعلّمك كيف يفهم الناس الرسم من أول نظرة."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "python-data": {
+      "topPick": {
+        "title": "Data Analysis with Python - Full Course for Beginners (Numpy, Pandas, Matplotlib, Seaborn)",
+        "provider": "freeCodeCamp.org (YouTube)",
+        "url": "https://www.youtube.com/watch?v=r-uOLxNrNk8",
+        "language": "en",
+        "price": "free",
+        "hours": 4.4,
+        "certificate": null,
+        "why": "دورة كاملة مجانية للمبتدئين مع تمارين: pandas والرسم في مكان واحد."
+      },
+      "alternatives": [
+        {
+          "title": "Data Analysis with Python: From Raw Data to Insights",
+          "provider": "IBM (Coursera)",
+          "url": "https://www.coursera.org/learn/data-analysis-with-python",
+          "language": "en",
+          "price": "paid",
+          "hours": 20,
+          "certificate": "yes",
+          "why": "مستوى متوسط وبشهادة من IBM، لما تبي تتعمق بعد الأساسيات.",
+          "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+        }
+      ],
+      "people": [
+        {
+          "name": "Wes McKinney",
+          "platform": "موقعه وكتابه",
+          "url": "https://wesmckinney.com/book/",
+          "why": "صانع مكتبة pandas، وكتابه Python for Data Analysis متاح مجاناً على موقعه."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "ml": {
+      "topPick": {
+        "title": "Machine Learning Specialization",
+        "provider": "DeepLearning.AI و Stanford Online (Coursera)",
+        "url": "https://www.coursera.org/specializations/machine-learning-introduction",
+        "language": "en",
+        "price": "free to audit",
+        "hours": 95,
+        "certificate": "yes",
+        "why": "أشهر بداية لتعلّم الآلة، يشرحها Andrew Ng خطوة خطوة للمبتدئين.",
+        "priceNote": "تقدر تحضر مجاناً بدون شهادة، والشهادة باشتراك"
+      },
+      "alternatives": [
+        {
+          "title": "Machine Learning Crash Course",
+          "provider": "Google",
+          "url": "https://developers.google.com/machine-learning/crash-course",
+          "language": "en",
+          "price": "free",
+          "hours": null,
+          "certificate": null,
+          "why": "مقدمة عملية سريعة من Google، محتواها مفتوح للجميع."
+        }
+      ],
+      "people": [
+        {
+          "name": "Andrew Ng",
+          "platform": "موقعه الرسمي",
+          "url": "https://www.andrewng.org/",
+          "why": "مؤسس DeepLearning.AI وشريك مؤسس في Coursera، يشرح الذكاء الاصطناعي ببساطة."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "programming": {
+      "topPick": {
+        "title": "CS50's Introduction to Computer Science (CS50x)",
+        "provider": "Harvard University",
+        "url": "https://cs50.harvard.edu/x/",
+        "language": "en",
+        "price": "free",
+        "hours": null,
+        "certificate": "yes",
+        "why": "أشهر مقدمة للبرمجة في العالم: تبني التفكير البرمجي من الصفر في 11 أسبوع.",
+        "priceNote": "الدورة مجانية، والشهادة الموثّقة عبر edX"
+      },
+      "alternatives": [
+        {
+          "title": "Python for Everybody",
+          "provider": "Dr. Charles Severance (py4e.com)",
+          "url": "https://www.py4e.com/",
+          "language": "en",
+          "price": "free",
+          "hours": null,
+          "certificate": null,
+          "why": "أسهل بداية بلغة Python: محاضرات وكتاب وتمارين مجاناً."
+        }
+      ],
+      "people": [
+        {
+          "name": "David J. Malan",
+          "platform": "صفحته في هارفارد",
+          "url": "https://cs.harvard.edu/malan/",
+          "why": "أستاذ CS50 في هارفارد، شرحه حيّ ويخلّي البرمجة ممتعة."
+        },
+        {
+          "name": "Elzero Web School (أكاديمية الزيرو)",
+          "platform": "YouTube",
+          "url": "https://www.youtube.com/@ElzeroWebSchool",
+          "why": "قناة عربية مشهورة تشرح البرمجة وتطوير الويب بالعربي من الصفر."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "html-css": {
+      "topPick": {
+        "title": "Learn web development",
+        "provider": "MDN Web Docs (Mozilla)",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+        "language": "en",
+        "price": "free",
+        "hours": null,
+        "certificate": null,
+        "why": "المرجع الأول للويب: يعلّمك HTML و CSS خطوة خطوة مع تمارين."
+      },
+      "alternatives": [
+        {
+          "title": "Foundations Course",
+          "provider": "The Odin Project",
+          "url": "https://www.theodinproject.com/paths/foundations/courses/foundations",
+          "language": "en",
+          "price": "free",
+          "hours": null,
+          "certificate": null,
+          "why": "منهج مجاني بمشاريع حقيقية: صفحة وصفات وصفحة هبوط."
+        }
+      ],
+      "people": [
+        {
+          "name": "Kevin Powell",
+          "platform": "YouTube",
+          "url": "https://www.youtube.com/@KevinPowell",
+          "why": "من أوضح من يشرح CSS، فيديوهات أسبوعية قصيرة."
+        },
+        {
+          "name": "Elzero Web School (أكاديمية الزيرو)",
+          "platform": "YouTube",
+          "url": "https://www.youtube.com/@ElzeroWebSchool",
+          "why": "قناة عربية مشهورة تشرح البرمجة وتطوير الويب بالعربي من الصفر."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "git": {
+      "topPick": {
+        "title": "Introduction to Git",
+        "provider": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-git/",
+        "language": "en",
+        "price": "free",
+        "hours": null,
+        "certificate": null,
+        "why": "وحدة قصيرة للمبتدئين: تحفظ نسخ الكود وتتبّع التغييرات وتجرّب الفروع."
+      },
+      "alternatives": [
+        {
+          "title": "Introduction to GitHub",
+          "provider": "GitHub Skills",
+          "url": "https://github.com/skills/introduction-to-github",
+          "language": "en",
+          "price": "free",
+          "hours": 1,
+          "certificate": null,
+          "why": "تمرين عملي على GitHub نفسه، تخلّصه في أقل من ساعة."
+        }
+      ],
+      "people": [],
+      "recommendedBy": []
+    },
+    "javascript": {
+      "topPick": {
+        "title": "الدورة التعليمية الحديثة لـ جافاسكريبت (The Modern JavaScript Tutorial)",
+        "provider": "javascript.info",
+        "url": "https://ar.javascript.info/",
+        "language": "ar",
+        "price": "free",
+        "hours": null,
+        "certificate": null,
+        "why": "شرح مفصّل بالعربي مع أمثلة ومهام، من الأساسيات إلى المتقدم."
+      },
+      "alternatives": [
+        {
+          "title": "JavaScript",
+          "provider": "The Odin Project",
+          "url": "https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript",
+          "language": "en",
+          "price": "free",
+          "hours": null,
+          "certificate": null,
+          "why": "مشاريع عملية مجانية تثبّت اللي تتعلمه."
+        }
+      ],
+      "people": [
+        {
+          "name": "Elzero Web School (أكاديمية الزيرو)",
+          "platform": "YouTube",
+          "url": "https://www.youtube.com/@ElzeroWebSchool",
+          "why": "قناة عربية مشهورة تشرح البرمجة وتطوير الويب بالعربي من الصفر."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "react": {
+      "topPick": {
+        "title": "Learn React (Quick Start)",
+        "provider": "react.dev (التوثيق الرسمي)",
+        "url": "https://react.dev/learn",
+        "language": "en",
+        "price": "free",
+        "hours": null,
+        "certificate": null,
+        "why": "التوثيق الرسمي: يغطي 80% من مفاهيم React اللي تحتاجها يومياً."
+      },
+      "alternatives": [
+        {
+          "title": "Learn React",
+          "provider": "Scrimba (Bob Ziroll)",
+          "url": "https://scrimba.com/learn-react-c0e",
+          "language": "en",
+          "price": "free",
+          "hours": null,
+          "certificate": null,
+          "why": "دورة تفاعلية مجانية تكتب فيها الكود داخل الدرس."
+        }
+      ],
+      "people": [
+        {
+          "name": "Dan Abramov",
+          "platform": "مدونة overreacted",
+          "url": "https://overreacted.io/",
+          "why": "من فريق React سابقاً، مدونته تشرح طريقة تفكير React بعمق."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "apis": {
+      "topPick": {
+        "title": "Postman API Fundamentals Student Expert",
+        "provider": "Postman Academy",
+        "url": "https://academy.postman.com/path/postman-api-fundamentals-student-expert",
+        "language": "en",
+        "price": null,
+        "hours": null,
+        "certificate": "yes",
+        "why": "تتعلّم كيف تطلب البيانات من API وتختبرها بأداة Postman، وتنتهي بشهادة."
+      },
+      "alternatives": [],
+      "people": [],
+      "recommendedBy": []
+    },
+    "design-basics": {
+      "topPick": {
+        "title": "Fundamentals of Graphic Design",
+        "provider": "California Institute of the Arts (Coursera)",
+        "url": "https://www.coursera.org/learn/fundamentals-of-graphic-design",
+        "language": "en",
+        "price": "paid",
+        "hours": 8,
+        "certificate": "yes",
+        "why": "أساسيات اللون والخط والصورة والتكوين، للمبتدئين بدون خبرة.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [
+        {
+          "title": "Canva Design School",
+          "provider": "Canva",
+          "url": "https://www.canva.com/design-school/",
+          "language": "en",
+          "price": "free",
+          "hours": null,
+          "certificate": null,
+          "why": "دروس ونصائح مجانية قصيرة تطبّقها على Canva مباشرة."
+        }
+      ],
+      "people": [],
+      "recommendedBy": []
+    },
+    "figma": {
+      "topPick": {
+        "title": "Figma Design for beginners",
+        "provider": "Figma Learn (الدورة الرسمية)",
+        "url": "https://help.figma.com/hc/en-us/sections/30880632542743-Figma-Design-for-beginners",
+        "language": "en",
+        "price": "free",
+        "hours": null,
+        "certificate": null,
+        "why": "دورة Figma الرسمية: تصمّم موقع portfolio من الصفر وتتعلّم الأداة أثناءها."
+      },
+      "alternatives": [],
+      "people": [],
+      "recommendedBy": []
+    },
+    "ux-research": {
+      "topPick": {
+        "title": "Conduct UX Research and Test Early Concepts",
+        "provider": "Google (Coursera)",
+        "url": "https://www.coursera.org/learn/conduct-ux-research",
+        "language": "en",
+        "price": "paid",
+        "hours": 20,
+        "certificate": "yes",
+        "why": "من شهادة Google لتجربة المستخدم: تخطط بحث المستخدم وتختبر أفكارك مبكراً.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [
+        {
+          "title": "Foundations of User Experience (UX) Design",
+          "provider": "Google (Coursera)",
+          "url": "https://www.coursera.org/learn/foundations-user-experience-design",
+          "language": "en",
+          "price": "paid",
+          "hours": 10,
+          "certificate": "yes",
+          "why": "لو تبي الصورة الكاملة لتجربة المستخدم قبل البحث.",
+          "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+        }
+      ],
+      "people": [
+        {
+          "name": "Jakob Nielsen",
+          "platform": "Substack",
+          "url": "https://jakobnielsenphd.substack.com/",
+          "why": "من مؤسسي Nielsen Norman Group، يكتب عن قابلية الاستخدام وتجربة المستخدم."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "ui-design": {
+      "topPick": {
+        "title": "Visual Elements of User Interface Design",
+        "provider": "California Institute of the Arts (Coursera)",
+        "url": "https://www.coursera.org/learn/visual-elements-user-interface-design",
+        "language": "en",
+        "price": "paid",
+        "hours": 10,
+        "certificate": "yes",
+        "why": "من تخصص UI/UX في كالآرتس، يركّز على الجانب البصري للواجهات.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [],
+      "people": [
+        {
+          "name": "Steve Schoger و Adam Wathan",
+          "platform": "Refactoring UI",
+          "url": "https://refactoringui.com/",
+          "why": "نصائح عملية تخلّي واجهتك أوضح وأجمل حتى لو ما أنت مصمم محترف."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "prototyping": {
+      "topPick": {
+        "title": "Build Wireframes and Low-Fidelity Prototypes",
+        "provider": "Google (Coursera)",
+        "url": "https://www.coursera.org/learn/wireframes-low-fidelity-prototypes",
+        "language": "en",
+        "price": "paid",
+        "hours": 10,
+        "certificate": "yes",
+        "why": "تحوّل الفكرة إلى مخطط ثم نموذج أولي تقدر تجرّبه.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [
+        {
+          "title": "Guide to prototyping in Figma",
+          "provider": "Figma Learn",
+          "url": "https://help.figma.com/hc/en-us/articles/360040314193-Guide-to-prototyping-in-Figma",
+          "language": "en",
+          "price": "free",
+          "hours": null,
+          "certificate": null,
+          "why": "الدليل الرسمي لربط الشاشات وصنع نموذج تفاعلي داخل Figma."
+        }
+      ],
+      "people": [],
+      "recommendedBy": []
+    },
+    "marketing-basics": {
+      "topPick": {
+        "title": "أساسيات التسويق الرقمي",
+        "provider": "Google Skillshop (مهارات من Google)",
+        "url": "https://skillshop.exceedlms.com/student/collection/1830717?locale=ar",
+        "language": "ar",
+        "price": "free",
+        "hours": 40,
+        "certificate": "yes",
+        "why": "دورة Google بالعربي: 17 وحدة عن القنوات والجمهور وقياس النتائج، وتنتهي بشهادة."
+      },
+      "alternatives": [
+        {
+          "title": "Digital Marketing Certification Course",
+          "provider": "HubSpot Academy",
+          "url": "https://academy.hubspot.com/courses/digital-marketing",
+          "language": "en",
+          "price": "free",
+          "hours": 3.4,
+          "certificate": "yes",
+          "why": "مختصرة ومجانية بشهادة، تعطيك الصورة كاملة بسرعة."
+        }
+      ],
+      "people": [
+        {
+          "name": "Seth Godin",
+          "platform": "مدونته",
+          "url": "https://seths.blog/",
+          "why": "تدوينة قصيرة كل يوم عن التسويق، من أشهر كتّاب التسويق."
+        }
+      ],
+      "recommendedBy": [
+        {
+          "source": "Google MENA: دورات مجانية عن بعد للتسويق",
+          "url": "https://grow.google/intl/mena/courses-and-tools"
+        },
+        {
+          "source": "Ahrefs Blog: 17 Free Online Marketing Courses (2021)",
+          "url": "https://ahrefs.com/blog/online-marketing-courses/",
+          "note": "يذكر النسخة الإنجليزية القديمة: Google Digital Garage - Fundamentals of Digital Marketing"
+        }
+      ]
+    },
+    "content": {
+      "topPick": {
+        "title": "Content Marketing Certification Course",
+        "provider": "HubSpot Academy",
+        "url": "https://academy.hubspot.com/courses/content-marketing",
+        "language": "en",
+        "price": "free",
+        "hours": null,
+        "certificate": "yes",
+        "why": "شهادة HubSpot في تسويق المحتوى: تخطط المحتوى وتكتبه بهدف واضح.",
+        "priceNote": "مجانيتها من قائمة Ahrefs للدورات المجانية؛ صفحة الدورة نفسها لا تذكر السعر"
+      },
+      "alternatives": [],
+      "people": [
+        {
+          "name": "Ann Handley",
+          "platform": "موقعها",
+          "url": "https://annhandley.com/",
+          "why": "كاتبة ومسوّقة معروفة، تعلّم العلامات تكتب بصوت واضح وتحكي قصتها."
+        }
+      ],
+      "recommendedBy": [
+        {
+          "source": "Ahrefs Blog: 17 Free Online Marketing Courses (2021)",
+          "url": "https://ahrefs.com/blog/online-marketing-courses/"
+        }
+      ]
+    },
+    "social-media": {
+      "topPick": {
+        "title": "الترويج لنشاطك التجاري باستخدام المحتوى",
+        "provider": "Google Skillshop (مهارات من Google)",
+        "url": "https://skillshop.exceedlms.com/student/collection/754850-promote-with-content?locale=ar",
+        "language": "ar",
+        "price": "free",
+        "hours": null,
+        "certificate": null,
+        "why": "بالعربي من Google: توصل لجمهورك عبر وسائل التواصل والفيديو والمحتوى."
+      },
+      "alternatives": [
+        {
+          "title": "Social Media Marketing Certification",
+          "provider": "HubSpot Academy",
+          "url": "https://academy.hubspot.com/courses/social-media",
+          "language": "en",
+          "price": null,
+          "hours": null,
+          "certificate": "yes",
+          "why": "شهادة HubSpot في إدارة حسابات التواصل وبناء الجمهور."
+        }
+      ],
+      "people": [],
+      "recommendedBy": [
+        {
+          "source": "Google MENA: دورات مجانية عن بعد للتسويق",
+          "url": "https://grow.google/intl/mena/courses-and-tools"
+        }
+      ]
+    },
+    "seo": {
+      "topPick": {
+        "title": "SEO Course for Beginners",
+        "provider": "Ahrefs Academy (Sam Oh)",
+        "url": "https://ahrefs.com/academy/seo-training-course",
+        "language": "en",
+        "price": "free",
+        "hours": 2,
+        "certificate": null,
+        "why": "مجانية وبدون تسجيل: 14 درساً في ساعتين تشرح كيف تجيب زيارات من البحث."
+      },
+      "alternatives": [
+        {
+          "title": "SEO Starter Guide",
+          "provider": "Google Search Central",
+          "url": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+          "language": "en",
+          "price": "free",
+          "hours": null,
+          "certificate": null,
+          "why": "الدليل الرسمي من Google لأساسيات الظهور في نتائج البحث."
+        }
+      ],
+      "people": [
+        {
+          "name": "Lily Ray",
+          "platform": "موقعها",
+          "url": "https://lilyray.nyc/",
+          "why": "خبيرة SEO معروفة تشارك تحليلاتها وتجاربها علناً."
+        }
+      ],
+      "recommendedBy": [
+        {
+          "source": "Ahrefs Blog: 17 Free Online Marketing Courses (2021)",
+          "url": "https://ahrefs.com/blog/online-marketing-courses/",
+          "note": "قائمة من Ahrefs نفسها، فهي توصية من صاحب الدورة"
+        }
+      ]
+    },
+    "ads": {
+      "topPick": {
+        "title": "الترويج لنشاط تجاري من خلال الإعلان على الإنترنت",
+        "provider": "Google Skillshop (مهارات من Google)",
+        "url": "https://skillshop.exceedlms.com/student/collection/765272-promote-business-online?locale=ar",
+        "language": "ar",
+        "price": "free",
+        "hours": 3,
+        "certificate": null,
+        "why": "بالعربي من Google: أدوات الإعلان واستهداف العملاء المناسبين في 3 ساعات."
+      },
+      "alternatives": [
+        {
+          "title": "Google Skillshop: شهادات إعلانات Google",
+          "provider": "Google Skillshop",
+          "url": "https://skillshop.withgoogle.com/intl/ar_ALL/",
+          "language": "ar",
+          "price": "free",
+          "hours": null,
+          "certificate": "yes",
+          "why": "بعدها خذ شهادات إعلانات Google الرسمية مجاناً."
+        }
+      ],
+      "people": [],
+      "recommendedBy": [
+        {
+          "source": "Google MENA: دورات مجانية عن بعد للتسويق",
+          "url": "https://grow.google/intl/mena/courses-and-tools"
+        },
+        {
+          "source": "Ahrefs Blog: 17 Free Online Marketing Courses (2021)",
+          "url": "https://ahrefs.com/blog/online-marketing-courses/"
+        }
+      ]
+    },
+    "project-management": {
+      "topPick": {
+        "title": "Foundations of Project Management",
+        "provider": "Google (Coursera)",
+        "url": "https://www.coursera.org/learn/project-management-foundations",
+        "language": "en",
+        "price": "paid",
+        "hours": 10,
+        "certificate": "yes",
+        "why": "أول دورة في شهادة Google لإدارة المشاريع، ما تحتاج أي خبرة سابقة.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [],
+      "people": [],
+      "recommendedBy": []
+    },
+    "accounting": {
+      "topPick": {
+        "title": "مبادئ وأساسيات المحاسبة | What Accounting is all about",
+        "provider": "جامعة الفيصل (Coursera)",
+        "url": "https://www.coursera.org/learn/what-accounting-is-all-about",
+        "language": "ar",
+        "price": "paid",
+        "hours": 2,
+        "certificate": "yes",
+        "why": "بالعربي من جامعة سعودية: ساعتين تفهم فيها القيود والقوائم المالية الأساسية.",
+        "priceNote": "مشمولة في Coursera Plus، والشهادة مدفوعة"
+      },
+      "alternatives": [
+        {
+          "title": "AccountingCoach",
+          "provider": "AccountingCoach",
+          "url": "https://www.accountingcoach.com/",
+          "language": "en",
+          "price": "free",
+          "hours": null,
+          "certificate": null,
+          "why": "شروحات مجانية مبسطة للمفاهيم المحاسبية."
+        }
+      ],
+      "people": [],
+      "recommendedBy": []
+    },
+    "agile": {
+      "topPick": {
+        "title": "Agile Project Management",
+        "provider": "Google (Coursera)",
+        "url": "https://www.coursera.org/learn/agile-project-management",
+        "language": "en",
+        "price": "paid",
+        "hours": 20,
+        "certificate": "yes",
+        "why": "من شهادة Google لإدارة المشاريع: مبادئ Agile والعمل بدورات قصيرة.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [
+        {
+          "title": "دليل سكرم 2020 (The Scrum Guide بالعربي)",
+          "provider": "Ken Schwaber و Jeff Sutherland (scrumguides.org)",
+          "url": "https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-Arabic.pdf",
+          "language": "ar",
+          "price": "free",
+          "hours": null,
+          "certificate": "no",
+          "why": "الدليل الرسمي لـ Scrum مترجماً للعربي، من مؤلفَيه."
+        }
+      ],
+      "people": [
+        {
+          "name": "Jeff Sutherland",
+          "platform": "Scrum Inc.",
+          "url": "https://www.scruminc.com/",
+          "why": "شريك في ابتكار Scrum، وشركته تنشر مواد عملية عنه."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "business-analysis": {
+      "topPick": {
+        "title": "Free Business Analyst Course with Certificate",
+        "provider": "Simplilearn SkillUP",
+        "url": "https://www.simplilearn.com/introduction-to-business-analysis-free-course-skillup",
+        "language": "en",
+        "price": "free",
+        "hours": 2,
+        "certificate": "yes",
+        "why": "مدخل مجاني قصير بشهادة لدور محلل الأعمال وأساسياته."
+      },
+      "alternatives": [],
+      "people": [],
+      "recommendedBy": []
+    },
+    "financial-analysis": {
+      "topPick": {
+        "title": "Reading Financial Statements",
+        "provider": "Corporate Finance Institute (CFI)",
+        "url": "https://corporatefinanceinstitute.com/course/learn-to-read-financial-statements-free-course/",
+        "language": "en",
+        "price": "paid",
+        "hours": 2,
+        "certificate": "yes",
+        "why": "تقرأ القوائم المالية وتفهم أرقامها، من معهد متخصص في التدريب المالي.",
+        "priceNote": "بعض الدروس معاينة مجانية، والباقي باشتراك"
+      },
+      "alternatives": [
+        {
+          "title": "Financial Accounting: Read and Interpret Financial Statements",
+          "provider": "University of Pennsylvania (Coursera)",
+          "url": "https://www.coursera.org/learn/wharton-accounting",
+          "language": "en",
+          "price": "paid",
+          "hours": null,
+          "certificate": null,
+          "why": "من وارتون: تحليل القوائم المالية والإفصاحات بعمق أكبر.",
+          "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+        }
+      ],
+      "people": [
+        {
+          "name": "Aswath Damodaran",
+          "platform": "موقعه في جامعة نيويورك",
+          "url": "https://pages.stern.nyu.edu/~adamodar/",
+          "why": "أستاذ التقييم المالي في NYU Stern، ينشر محاضراته وجداوله للجميع."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "hr-basics": {
+      "topPick": {
+        "title": "Preparing to Manage Human Resources",
+        "provider": "University of Minnesota (Coursera)",
+        "url": "https://www.coursera.org/learn/managing-human-resources",
+        "language": "en",
+        "price": "paid",
+        "hours": 20,
+        "certificate": "yes",
+        "why": "مدخل واضح لوظائف الموارد البشرية وإدارة الموظفين.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [],
+      "people": [
+        {
+          "name": "Josh Bersin",
+          "platform": "موقعه",
+          "url": "https://joshbersin.com/",
+          "why": "من أشهر المحللين في الموارد البشرية والتعلّم وتقنيات HR."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "recruitment": {
+      "topPick": {
+        "title": "Recruiting, Hiring, and Onboarding Employees",
+        "provider": "University of Minnesota (Coursera)",
+        "url": "https://www.coursera.org/learn/recruiting-hiring-onboarding-employees",
+        "language": "en",
+        "price": "paid",
+        "hours": 20,
+        "certificate": "yes",
+        "why": "من جذب المرشحين إلى المقابلة واستقبال الموظف الجديد.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [],
+      "people": [],
+      "recommendedBy": []
+    },
+    "labor-law": {
+      "topPick": {
+        "title": "نظام العمل",
+        "provider": "وزارة الموارد البشرية والتنمية الاجتماعية",
+        "url": "https://www.hrsd.gov.sa/knowledge-centre/%D9%86%D8%B8%D8%A7%D9%85-%D8%A7%D9%84%D8%B9%D9%85%D9%84",
+        "language": "ar",
+        "price": "free",
+        "hours": null,
+        "certificate": "no",
+        "why": "النص الرسمي لنظام العمل السعودي من الوزارة، مقسّم على 16 باباً."
+      },
+      "alternatives": [
+        {
+          "title": "الثقافة العمالية",
+          "provider": "وزارة الموارد البشرية والتنمية الاجتماعية",
+          "url": "https://www.hrsd.gov.sa/labor-culture",
+          "language": "ar",
+          "price": "free",
+          "hours": null,
+          "certificate": "no",
+          "why": "مقالات وإنفوجرافيك رسمية مبسطة عن الإجازات والعمل الإضافي ونهاية الخدمة."
+        }
+      ],
+      "people": [],
+      "recommendedBy": []
+    },
+    "training-dev": {
+      "topPick": {
+        "title": "Learning and Development",
+        "provider": "HRCI (Coursera)",
+        "url": "https://www.coursera.org/learn/learning-and-development",
+        "language": "en",
+        "price": "paid",
+        "hours": 20,
+        "certificate": "yes",
+        "why": "تحدّد احتياج التدريب وتصمّم برنامجاً له وتقيس أثره.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [],
+      "people": [],
+      "recommendedBy": []
+    },
+    "payroll": {
+      "topPick": {
+        "title": "Compensation and Benefits",
+        "provider": "HRCI (Coursera)",
+        "url": "https://www.coursera.org/learn/compensation-and-benefits",
+        "language": "en",
+        "price": "paid",
+        "hours": 20,
+        "certificate": "yes",
+        "why": "أساسيات الرواتب والبدلات والمزايا للمبتدئين في الموارد البشرية.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك؛ الدورة غير خاصة بالسعودية، فارجع لنظام العمل في التفاصيل المحلية"
+      },
+      "alternatives": [],
+      "people": [],
+      "recommendedBy": []
+    },
+    "english": {
+      "topPick": {
+        "title": "Business English | LearnEnglish",
+        "provider": "British Council",
+        "url": "https://learnenglish.britishcouncil.org/free-resources/business",
+        "language": "en",
+        "price": "free",
+        "hours": null,
+        "certificate": null,
+        "why": "مجاني من المجلس الثقافي البريطاني: إيميلات العمل والمقابلات وبودكاست للمهنيين."
+      },
+      "alternatives": [],
+      "people": [],
+      "recommendedBy": []
+    },
+    "problem-solving": {
+      "topPick": {
+        "title": "التفكير الناقد | Critical Thinking",
+        "provider": "جامعة الفيصل (Coursera)",
+        "url": "https://www.coursera.org/learn/critical-thinking-1",
+        "language": "ar",
+        "price": "paid",
+        "hours": 5,
+        "certificate": "yes",
+        "why": "بالعربي من جامعة سعودية: 5 ساعات تتعلّم فيها تحلّل المشكلة قبل ما تحكم.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك (مستوى متوسط)"
+      },
+      "alternatives": [
+        {
+          "title": "Creative Problem Solving",
+          "provider": "University of Minnesota (Coursera)",
+          "url": "https://www.coursera.org/learn/creative-problem-solving",
+          "language": "en",
+          "price": "paid",
+          "hours": 10,
+          "certificate": "yes",
+          "why": "أدوات عملية لتوليد حلول جديدة واختيار الأنسب.",
+          "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+        }
+      ],
+      "people": [],
+      "recommendedBy": []
+    },
+    "presentation": {
+      "topPick": {
+        "title": "مهارة مخاطبة الجمهور | Public Speaking Skills",
+        "provider": "جامعة الفيصل (Coursera)",
+        "url": "https://www.coursera.org/learn/public-speaking-skills",
+        "language": "ar",
+        "price": "paid",
+        "hours": 2,
+        "certificate": "yes",
+        "why": "بالعربي وللمبتدئين: ساعتين تبني فيها ثقتك قدّام الجمهور.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [
+        {
+          "title": "Introduction to Public Speaking",
+          "provider": "University of Washington (Coursera)",
+          "url": "https://www.coursera.org/learn/public-speaking",
+          "language": "en",
+          "price": "paid",
+          "hours": 10,
+          "certificate": "yes",
+          "why": "دورة أطول للمبتدئين عن إعداد الخطاب وإلقائه.",
+          "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+        }
+      ],
+      "people": [
+        {
+          "name": "Garr Reynolds",
+          "platform": "Presentation Zen",
+          "url": "https://presentationzen.com/",
+          "why": "صاحب Presentation Zen: شرائح بسيطة وقصة واضحة."
+        },
+        {
+          "name": "Nancy Duarte",
+          "platform": "Duarte",
+          "url": "https://www.duarte.com/",
+          "why": "شركتها من أشهر جهات تدريب العرض والتقديم ورواية القصة في العروض."
+        }
+      ],
+      "recommendedBy": []
+    },
+    "teamwork": {
+      "topPick": {
+        "title": "Teamwork Skills: Communicating Effectively in Groups",
+        "provider": "University of Colorado Boulder (Coursera)",
+        "url": "https://www.coursera.org/learn/teamwork-skills-effective-communication",
+        "language": "en",
+        "price": "paid",
+        "hours": 10,
+        "certificate": "yes",
+        "why": "كيف تتواصل وتتعاون بفعالية داخل فريق العمل.",
+        "priceNote": "التسجيل يبدأ مجاناً، والمحتوى الكامل والشهادة باشتراك"
+      },
+      "alternatives": [],
+      "people": [],
+      "recommendedBy": []
+    }
+  }
+}

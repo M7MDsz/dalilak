@@ -296,7 +296,7 @@ export function CvShow({ run, outcome, onFinished }: { readonly run: ShowRun; re
             "@min-[900px]/content:[grid-template-areas:'doc_status'_'doc_tray'_'doc_rings']",
           )}
         >
-          {/* the voice: «دليل»'s glyph and the rolling status line, the trail of the six stages under it */}
+          {/* the voice: «دليلك»'s glyph and the rolling status line, the trail of the six stages under it */}
           <div className="flex flex-col gap-3 [grid-area:status]" data-testid={TID.cv.showStage} data-value={stepId}>
             <div className="flex min-h-11 items-center gap-3">
               <DaleelGlyph framed size={40} state={glyph} />

@@ -1,0 +1,758 @@
+{
+  "checkedAt": "2026-11-20",
+  "people": {
+    "Leila Gharani": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/leilagharani/",
+        "sourceUrl": "https://www.xelplus.com/about/"
+      },
+      "x": null,
+      "youtube": {
+        "url": "https://www.youtube.com/@LeilaGharani"
+      },
+      "website": {
+        "url": "https://www.xelplus.com/"
+      },
+      "github": null,
+      "note": "LinkedIn linked from xelplus.com About ('Connect with me' + footer) and her YouTube About links. No X/Twitter link on her site or YouTube About, so x left null."
+    },
+    "Dave Bruns (Exceljet)": {
+      "linkedin": null,
+      "x": {
+        "url": "https://x.com/exceljet"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@ExceljetNet"
+      },
+      "website": {
+        "url": "https://exceljet.net/"
+      },
+      "github": null,
+      "note": "X is the Exceljet brand account linked from exceljet.net footer. YouTube @ExceljetNet links back to exceljet.net (note: @exceljet is an unrelated aviation channel). No personal LinkedIn linked from exceljet.net pages, so linkedin null."
+    },
+    "Mike Girvin (excelisfun)": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/michaelgelgirvin/",
+        "sourceUrl": "https://www.youtube.com/@excelisfun/about"
+      },
+      "x": {
+        "url": "https://x.com/excelisfun"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@excelisfun"
+      },
+      "website": {
+        "url": "https://excelisfun.net/"
+      },
+      "github": null,
+      "note": "LinkedIn is in his YouTube channel About links and also on excelisfun.net. X linked from excelisfun.net (his workbook download site)."
+    },
+    "Faraz Shaikh": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/company/ExcelExciting/",
+        "sourceUrl": "https://excelexciting.com/"
+      },
+      "x": {
+        "url": "https://x.com/ExcelExciting"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@ExcelExciting"
+      },
+      "website": {
+        "url": "https://excelexciting.com/"
+      },
+      "github": null,
+      "note": "Confirmed same person: the Khobar meetup is 'Hosted by Faraz Shaikh, Microsoft MVP' and its group socials point to ExcelExciting (site, X, LinkedIn); excelexciting.com (title 'Excel Exciting - Faraz Shaikh', MVP) features the Saudi Arabia Excel & Power Platform Meetup. LinkedIn is a COMPANY page (ExcelExciting), the only one his site/YouTube/meetup link; no personal /in/ link found."
+    },
+    "Baraa Khatib Salkini (Data with Baraa)": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/baraa-khatib-salkini/",
+        "sourceUrl": "https://www.datawithbaraa.com/"
+      },
+      "x": null,
+      "youtube": {
+        "url": "https://www.youtube.com/@DataWithBaraa"
+      },
+      "website": {
+        "url": "https://www.datawithbaraa.com/"
+      },
+      "github": {
+        "url": "https://github.com/DataWithBaraa"
+      },
+      "note": "LinkedIn linked from datawithbaraa.com and his GitHub social accounts (YouTube About links an older id form /in/baraa-khatib-salkini-845b1b55). No X linked anywhere (Instagram/TikTok only)."
+    },
+    "Markus Winand": {
+      "linkedin": {
+        "url": "https://at.linkedin.com/in/markuswinand/",
+        "sourceUrl": "https://winand.at/"
+      },
+      "x": {
+        "url": "https://x.com/MarkusWinand"
+      },
+      "youtube": null,
+      "website": {
+        "url": "https://winand.at/"
+      },
+      "github": {
+        "url": "https://github.com/fatalmind"
+      },
+      "note": "LinkedIn linked in the footer of winand.at, use-the-index-luke.com and modern-sql.com. X handle declared as twitter:site @MarkusWinand on winand.at (his sites now link Mastodon/Bluesky, not X). GitHub fatalmind = 'Markus Winand', blog winand.at. Other sites: https://use-the-index-luke.com/ , https://modern-sql.com/"
+    },
+    "Julia Evans": {
+      "linkedin": null,
+      "x": null,
+      "youtube": null,
+      "website": {
+        "url": "https://jvns.ca/"
+      },
+      "github": {
+        "url": "https://github.com/jvns"
+      },
+      "note": "jvns.ca About and her GitHub link only Mastodon (social.jvns.ca/@b0rk), Bluesky (b0rk.jvns.ca) and GitHub; no X or LinkedIn linked, so both null."
+    },
+    "Marco Russo & Alberto Ferrari (SQLBI)": {
+      "linkedin": null,
+      "x": null,
+      "youtube": {
+        "url": "https://www.youtube.com/@SQLBI"
+      },
+      "website": {
+        "url": "https://www.sqlbi.com/"
+      },
+      "github": {
+        "url": "https://github.com/sql-bi"
+      },
+      "note": "Brand: sqlbi.com and SQLBI YouTube About link github.com/sql-bi and a company LinkedIn (linkedin.com/company/sqlbi/, kept out of top-level per brief); no SQLBI brand X account linked (only the founders' personal X). Member LinkedIns come from their sqlbi.com author pages.",
+      "members": {
+        "Marco Russo": {
+          "linkedin": {
+            "url": "https://it.linkedin.com/in/sqlbi",
+            "sourceUrl": "https://www.sqlbi.com/author/marco-russo/"
+          },
+          "x": {
+            "url": "https://x.com/marcorus"
+          },
+          "youtube": null,
+          "website": {
+            "url": "https://www.sqlbi.com/author/marco-russo/"
+          },
+          "github": {
+            "url": "https://github.com/marcosqlbi"
+          }
+        },
+        "Alberto Ferrari": {
+          "linkedin": {
+            "url": "https://www.linkedin.com/in/albertoferrarisqlbi",
+            "sourceUrl": "https://www.sqlbi.com/author/alberto-ferrari/"
+          },
+          "x": {
+            "url": "https://x.com/FerrariAlberto"
+          },
+          "youtube": null,
+          "website": {
+            "url": "https://www.sqlbi.com/author/alberto-ferrari/"
+          },
+          "github": null
+        }
+      }
+    },
+    "Ruth Pozuelo Martinez (Curbal)": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/ruthpozuelo",
+        "sourceUrl": "https://curbal.com/"
+      },
+      "x": null,
+      "youtube": {
+        "url": "https://www.youtube.com/@CurbalEN"
+      },
+      "website": {
+        "url": "https://curbal.com/"
+      },
+      "github": null,
+      "note": "LinkedIn linked on curbal.com homepage and in the Curbal YouTube About links. YouTube = channel UCJ7UhloHSA4wAqPzyi6TOkw (@CurbalEN; @curbal is someone else). No X linked on curbal.com or the channel About."
+    },
+    "منذر أسامة الشيخ ورّاق (Monzer Osama Alchikh)": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/monzerosama/",
+        "sourceUrl": "https://www.monzerosama.com/"
+      },
+      "x": {
+        "url": "https://x.com/Monzer_Osama"
+      },
+      "youtube": null,
+      "website": {
+        "url": "https://www.monzerosama.com/"
+      },
+      "github": null,
+      "note": "X Monzer_Osama confirmed: linked from monzerosama.com and his Sessionize page (https://sessionize.com/MonzerOsama), which also links the same LinkedIn. No YouTube channel or GitHub linked from his pages."
+    },
+    "Josh Starmer (StatQuest)": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/joshua-starmer-phd/",
+        "sourceUrl": "https://statquest.org/"
+      },
+      "x": {
+        "url": "https://x.com/joshuastarmer"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@statquest"
+      },
+      "website": {
+        "url": "https://statquest.org/"
+      },
+      "github": {
+        "url": "https://github.com/StatQuest"
+      },
+      "note": "LinkedIn, X and GitHub all linked from statquest.org; GitHub StatQuest ('StatQuest with Josh Starmer') lists the same LinkedIn/X in its social accounts."
+    },
+    "Allen B. Downey": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/allendowney/",
+        "sourceUrl": "https://www.allendowney.com/"
+      },
+      "x": {
+        "url": "https://x.com/allendowney"
+      },
+      "youtube": null,
+      "website": {
+        "url": "https://www.allendowney.com/"
+      },
+      "github": {
+        "url": "https://github.com/AllenDowney"
+      },
+      "note": "LinkedIn, X and GitHub linked from allendowney.com (home and blog About page); GitHub profile lists blog allendowney.com and X @allendowney. No personal YouTube channel found."
+    },
+    "Andy Field": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/profandyfield/",
+        "sourceUrl": "https://www.discoveringstatistics.com/"
+      },
+      "x": {
+        "url": "https://x.com/profandyfield"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@ProfAndyField"
+      },
+      "website": {
+        "url": "https://www.discoveringstatistics.com/"
+      },
+      "github": {
+        "url": "https://github.com/profandyfield"
+      },
+      "note": "LinkedIn, X and GitHub linked from discoveringstatistics.com. YouTube channel 'Discover Statistics' (@ProfAndyField) confirmed directly: description 'Videos to accompany my various textbooks about statistics, R and IBM SPSS Statistics'."
+    },
+    "Cole Nussbaumer Knaflic (storytelling with data)": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/colenussbaumer/",
+        "sourceUrl": "https://www.storytellingwithdata.com/meet-the-team-cole"
+      },
+      "x": {
+        "url": "https://x.com/storywithdata"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/c/storytellingwithdata"
+      },
+      "website": {
+        "url": "https://www.storytellingwithdata.com/"
+      },
+      "github": null,
+      "note": "Personal LinkedIn linked under 'Social media' on her own SWD bio page (meet-the-team-cole). X @storywithdata and the YouTube channel are the storytelling with data brand accounts, linked from that bio page and the SWD site footer."
+    },
+    "Brent Dykes": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/brentdykes/",
+        "sourceUrl": "https://www.effectivedatastorytelling.com/about"
+      },
+      "x": {
+        "url": "https://x.com/analyticshero"
+      },
+      "youtube": null,
+      "website": {
+        "url": "https://www.effectivedatastorytelling.com/"
+      },
+      "github": null,
+      "note": "LinkedIn and X (@analyticshero) linked from effectivedatastorytelling.com (home and About). No YouTube or GitHub found."
+    },
+    "Nancy Duarte": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/nancyduarte/",
+        "sourceUrl": "https://www.duarte.com/nancy-duarte/"
+      },
+      "x": {
+        "url": "https://x.com/nancyduarte"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/user/duartedesign"
+      },
+      "website": {
+        "url": "https://www.duarte.com/nancy-duarte/"
+      },
+      "github": null,
+      "note": "LinkedIn and X linked from her bio page on duarte.com. YouTube is the Duarte company channel (her firm), not a personal channel. nancyduarte.com did not respond, so website is her duarte.com page."
+    },
+    "Cole Nussbaumer Knaflic": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/colenussbaumer/",
+        "sourceUrl": "https://www.storytellingwithdata.com/meet-the-team-cole"
+      },
+      "x": {
+        "url": "https://x.com/storywithdata"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/c/storytellingwithdata"
+      },
+      "website": {
+        "url": "https://www.storytellingwithdata.com/"
+      },
+      "github": null,
+      "note": "Personal LinkedIn linked under 'Social media' on her own SWD bio page (meet-the-team-cole). X @storywithdata and the YouTube channel are the storytelling with data brand accounts, linked from that bio page and the SWD site footer."
+    },
+    "Wes McKinney": {
+      "linkedin": {
+        "url": "https://linkedin.com/in/wesmckinn",
+        "sourceUrl": "https://wesmckinney.com/"
+      },
+      "x": {
+        "url": "https://x.com/wesmckinn"
+      },
+      "youtube": null,
+      "website": {
+        "url": "https://wesmckinney.com/"
+      },
+      "github": {
+        "url": "https://github.com/wesm"
+      },
+      "note": "LinkedIn, X and GitHub linked from wesmckinney.com; GitHub profile lists wesmckinney.com and X @wesmckinn. The YouTube handle @WesMcKinney belongs to someone else (Arabic videos), so youtube is null."
+    },
+    "Andrew Ng": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/andrewyng/",
+        "sourceUrl": "https://www.andrewng.org/"
+      },
+      "x": {
+        "url": "https://x.com/AndrewYNg"
+      },
+      "youtube": null,
+      "website": {
+        "url": "https://www.andrewng.org/"
+      },
+      "github": {
+        "url": "https://github.com/andrewyng"
+      },
+      "note": "LinkedIn and X linked from andrewng.org. GitHub andrewyng confirmed via its profile (name Andrew Ng, blog andrewng.org). No personal YouTube channel (DeepLearning.AI is his company's)."
+    },
+    "David J. Malan": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/malan/",
+        "sourceUrl": "https://cs.harvard.edu/malan/"
+      },
+      "x": {
+        "url": "https://x.com/davidjmalan"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@davidjmalan"
+      },
+      "website": {
+        "url": "https://cs.harvard.edu/malan/"
+      },
+      "github": {
+        "url": "https://github.com/dmalan"
+      },
+      "note": "LinkedIn, X and GitHub linked from his Harvard page. YouTube @davidjmalan confirmed directly (name David J. Malan, description 'I teach youtube.com/cs50'); course channel is youtube.com/cs50."
+    },
+    "Elzero Web School (أكاديمية الزيرو)": {
+      "linkedin": null,
+      "x": {
+        "url": "https://x.com/Osama_Elzero"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@ElzeroWebSchool"
+      },
+      "website": {
+        "url": "https://elzero.org/"
+      },
+      "github": {
+        "url": "https://github.com/ElzeroWebSchool"
+      },
+      "note": "No LinkedIn (founder's or academy's) is linked from elzero.org (home, contact) or the channel's About links, so linkedin is null. X is founder Osama Elzero's account, the one the channel About links. GitHub ElzeroWebSchool has the course repos and points to the channel; founder's personal GitHub is github.com/OsamaElzero (no repos)."
+    },
+    "Kevin Powell": {
+      "linkedin": null,
+      "x": {
+        "url": "https://x.com/KevinJPowell"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@KevinPowell"
+      },
+      "website": {
+        "url": "https://www.kevinpowell.co/"
+      },
+      "github": {
+        "url": "https://github.com/kevin-powell"
+      },
+      "note": "X and GitHub linked from his YouTube channel About page (GitHub also on his ZurichJS speaker page); no LinkedIn linked from his site, YouTube About, GitHub, or SmashingConf/ZurichJS speaker pages."
+    },
+    "Dan Abramov": {
+      "linkedin": null,
+      "x": null,
+      "youtube": null,
+      "website": {
+        "url": "https://overreacted.io/"
+      },
+      "github": {
+        "url": "https://github.com/gaearon"
+      },
+      "note": "GitHub gaearon lists his personal site danabra.mov and Bluesky (bsky.app/profile/danabra.mov); no X, YouTube channel or LinkedIn linked from overreacted.io, danabra.mov or GitHub."
+    },
+    "Jakob Nielsen": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=jakobnielsenphd",
+        "sourceUrl": "https://jakobnielsenphd.substack.com/about"
+      },
+      "x": {
+        "url": "https://x.com/uxtigersdotcom"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@UXtigers"
+      },
+      "website": {
+        "url": "https://jakobnielsenphd.substack.com/"
+      },
+      "github": null,
+      "note": "LinkedIn is the 'Follow Jakob on LinkedIn' link (member jakobnielsenphd) on his Substack About page and posts, copied as linked, not an /in/ URL. X (@uxtigersdotcom, his UX Tigers brand account) and the site link are from the 'UX Tigers (by Jakob Nielsen)' YouTube About page; uxtigers.com/about links the same channel. nngroup.com people page links only NN/g company accounts."
+    },
+    "Steve Schoger و Adam Wathan": {
+      "linkedin": null,
+      "x": null,
+      "youtube": null,
+      "website": {
+        "url": "https://refactoringui.com/"
+      },
+      "github": null,
+      "note": "Refactoring UI has no brand X/YouTube/LinkedIn of its own; refactoringui.com links the two authors' personal X accounts and Steve's YouTube.",
+      "members": {
+        "Steve Schoger": {
+          "linkedin": null,
+          "x": {
+            "url": "https://x.com/steveschoger"
+          },
+          "youtube": {
+            "url": "https://www.youtube.com/@SteveSchoger"
+          },
+          "website": {
+            "url": "https://steveschoger.com/"
+          },
+          "github": null,
+          "note": "X linked from refactoringui.com, steveschoger.com and his YouTube About; YouTube channel UCxqiDtkXtOCNJdckODHk9YA linked from steveschoger.com. github.com/steveschoger exists but is empty with no name, so not confirmed. No LinkedIn linked."
+        },
+        "Adam Wathan": {
+          "linkedin": null,
+          "x": {
+            "url": "https://x.com/adamwathan"
+          },
+          "youtube": {
+            "url": "https://www.youtube.com/@adamwathan"
+          },
+          "website": {
+            "url": "https://adamwathan.me/"
+          },
+          "github": {
+            "url": "https://github.com/adamwathan"
+          },
+          "note": "X linked from adamwathan.me and refactoringui.com; YouTube @adamwathan opened directly (channel 'Adam Wathan', Tailwind content). No LinkedIn linked from his site, GitHub or refactoringui.com."
+        }
+      }
+    },
+    "Seth Godin": {
+      "linkedin": null,
+      "x": {
+        "url": "https://x.com/ThisIsSethsBlog"
+      },
+      "youtube": null,
+      "website": {
+        "url": "https://seths.blog/"
+      },
+      "github": null,
+      "note": "X @ThisIsSethsBlog is the blog's account, declared in the twitter:site meta tag of seths.blog. sethgodin.com is his other hub. No personal LinkedIn or YouTube channel linked from seths.blog or sethgodin.com."
+    },
+    "Ann Handley": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/annhandley/",
+        "sourceUrl": "https://annhandley.com/about/"
+      },
+      "x": {
+        "url": "https://x.com/annhandley"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@AnnHandley"
+      },
+      "website": {
+        "url": "https://annhandley.com/"
+      },
+      "github": null,
+      "note": "LinkedIn and YouTube (linked as youtube.com/c/AnnHandley) appear on annhandley.com home/about/contact. X handle comes only from the twitter:site meta tag (@annhandley) of annhandley.com; the site has no visible X link (it links Bluesky and Instagram)."
+    },
+    "Lily Ray": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/lily-ray-44755615/",
+        "sourceUrl": "https://lilyray.nyc/"
+      },
+      "x": {
+        "url": "https://x.com/lilyraynyc"
+      },
+      "youtube": null,
+      "website": {
+        "url": "https://lilyray.nyc/"
+      },
+      "github": null,
+      "note": "LinkedIn and X linked from lilyray.nyc homepage and its About page (lilyray.nyc/about-lily-ray/)."
+    },
+    "Jeff Sutherland": {
+      "linkedin": null,
+      "x": null,
+      "youtube": null,
+      "website": {
+        "url": "https://jvsmanagement.com/"
+      },
+      "github": null,
+      "note": "jeffsutherland.com and scrumai.org both redirect to jvsmanagement.com ('ScrumAI.org with Dr. Jeff Sutherland'). X left null: the handle @jeffsutherland appears in search results but is not linked from any of his own pages and x.com could not be opened to confirm it. Scrum Inc pages link only the company LinkedIn (/company/scrum-inc) and @scruminc."
+    },
+    "Aswath Damodaran": {
+      "linkedin": null,
+      "x": {
+        "url": "https://x.com/AswathDamodaran"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/channel/UCLvnJL8htRR1T9cbSccaoVw"
+      },
+      "website": {
+        "url": "https://pages.stern.nyu.edu/~adamodar/"
+      },
+      "github": null,
+      "note": "X and YouTube (@AswathDamodaranonValuation) linked from his NYU home page (New_Home_Page/home.htm, also reached via damodaran.com); X also on his NYU Stern faculty bio. No LinkedIn linked from home page, blog, YouTube About or faculty page."
+    },
+    "Josh Bersin": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/bersin",
+        "sourceUrl": "https://joshbersin.com/"
+      },
+      "x": {
+        "url": "https://x.com/Josh_Bersin"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@JoshBersinCompany"
+      },
+      "website": {
+        "url": "https://joshbersin.com/"
+      },
+      "github": null,
+      "note": "LinkedIn, X and YouTube linked from joshbersin.com footer; LinkedIn and X also on the YouTube About page (youtube.com/@JoshBersinCompany/about)."
+    },
+    "Garr Reynolds": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/garr-reynolds-898b31133/",
+        "sourceUrl": "https://www.garrreynolds.com/contact"
+      },
+      "x": {
+        "url": "https://x.com/presentationzen"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@Presentation-Zen"
+      },
+      "website": {
+        "url": "https://www.garrreynolds.com/"
+      },
+      "github": null,
+      "note": "LinkedIn, X (@presentationzen) and YouTube linked from garrreynolds.com and presentationzen.com (his blog); the YouTube channel's About links back to both sites."
+    },
+    "Scott Chacon": {
+      "linkedin": {
+        "url": "https://linkedin.com/in/schacon",
+        "sourceUrl": "https://scottchacon.com/"
+      },
+      "x": {
+        "url": "https://x.com/chacon"
+      },
+      "youtube": null,
+      "website": {
+        "url": "https://scottchacon.com/"
+      },
+      "github": {
+        "url": "https://github.com/schacon"
+      },
+      "note": "LinkedIn, X (twitter.com/chacon) and GitHub linked from scottchacon.com; GitHub also on scottchacon.com/about. LinkedIn copied as linked."
+    },
+    "Kin Lane": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/kinlane/",
+        "sourceUrl": "https://kinlane.com/"
+      },
+      "x": null,
+      "youtube": null,
+      "website": {
+        "url": "https://apievangelist.com/"
+      },
+      "github": {
+        "url": "https://github.com/kinlane"
+      },
+      "note": "Personal LinkedIn and GitHub linked from his personal site kinlane.com. apievangelist.com links only a company LinkedIn (/company/api-evangelist/), GitHub api-evangelist and Bluesky (apievangelist.com). No X linked."
+    },
+    "Chris Do": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/thechrisdo",
+        "sourceUrl": "https://thefutur.com/"
+      },
+      "x": {
+        "url": "https://x.com/thechrisdo"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/@thefutur"
+      },
+      "website": {
+        "url": "https://thefutur.com/"
+      },
+      "github": null,
+      "note": "LinkedIn and X linked from thefutur.com, the site of his company The Futur. YouTube @thefutur is The Futur's channel (his company), linked from the same site."
+    },
+    "Christine Vallaure": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/christinevallaure",
+        "sourceUrl": "https://www.moonlearning.io/about"
+      },
+      "x": null,
+      "youtube": {
+        "url": "https://www.youtube.com/@moonlearning"
+      },
+      "website": {
+        "url": "https://www.moonlearning.io/"
+      },
+      "github": null,
+      "note": "LinkedIn linked from moonlearning.io/about. YouTube @moonlearning is her moonlearning channel; its About links her Medium (christinevallaure.medium.com) and moonlearning's Instagram. No X linked."
+    },
+    "Jake Knapp": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/jake-knapp/",
+        "sourceUrl": "https://www.character.vc/sprint"
+      },
+      "x": null,
+      "youtube": null,
+      "website": {
+        "url": "https://jakeknapp.com/"
+      },
+      "github": null,
+      "note": "LinkedIn linked from the Sprint page of Character (character.vc), his venture firm. jakeknapp.com links only Medium (medium.com/@jakek); no X linked from his pages."
+    },
+    "Matt Navarra": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/mattnavarra/",
+        "sourceUrl": "https://www.mattnavarra.com/"
+      },
+      "x": {
+        "url": "https://x.com/mattnavarra"
+      },
+      "youtube": null,
+      "website": {
+        "url": "https://www.mattnavarra.com/"
+      },
+      "github": null,
+      "note": "LinkedIn and X linked from mattnavarra.com. The site links only a YouTube playlist, not a channel, so youtube is null."
+    },
+    "Frederick Vallaeys": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/frederickvallaeys/",
+        "sourceUrl": "https://www.optmyzr.com/author/frederick-vallaeys/"
+      },
+      "x": null,
+      "youtube": null,
+      "website": {
+        "url": "https://www.optmyzr.com/author/frederick-vallaeys/"
+      },
+      "github": null,
+      "note": "LinkedIn linked from his author page on optmyzr.com (his company). The X and YouTube links on that page are Optmyzr company accounts (twitter.com/optmyzr, youtube.com/user/Optmyzr, @PPCTownHall), so x and youtube are null. frederickvallaeys.com has no content."
+    },
+    "Antonio Nieto-Rodriguez": {
+      "linkedin": {
+        "url": "https://be.linkedin.com/in/antonionietorodriguez",
+        "sourceUrl": "https://antonionietorodriguez.com/"
+      },
+      "x": {
+        "url": "https://x.com/ANietoRodriguez"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/channel/UCp6jQanzTMJm-tLiIqObDlg"
+      },
+      "website": {
+        "url": "https://antonionietorodriguez.com/"
+      },
+      "github": null,
+      "note": "LinkedIn, X and YouTube linked in the header and footer of antonionietorodriguez.com (read via the fetch tool; direct curl got a 502). LinkedIn copied as linked."
+    },
+    "Laura Brandenburg": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/laurabrandenburg/",
+        "sourceUrl": "https://www.bridging-the-gap.com/about-laura-brandenburg/"
+      },
+      "x": null,
+      "youtube": null,
+      "website": {
+        "url": "https://www.bridging-the-gap.com/"
+      },
+      "github": null,
+      "note": "LinkedIn linked from her About page and the homepage of bridging-the-gap.com. No X or YouTube channel linked (only embedded videos)."
+    },
+    "Lou Adler": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/company/the-adler-group/",
+        "sourceUrl": "https://louadlergroup.com/"
+      },
+      "x": {
+        "url": "https://x.com/loua"
+      },
+      "youtube": {
+        "url": "https://www.youtube.com/user/louadler"
+      },
+      "website": {
+        "url": "https://louadlergroup.com/"
+      },
+      "github": null,
+      "note": "LinkedIn is a COMPANY page (The Adler Group), the only LinkedIn his company site links ('Follow on LinkedIn'); his bio page (louadlergroup.com/about-us/team-bios/lou-adler/) links no personal /in/ profile. X @loua and YouTube user/louadler are the 'Follow on X / Youtube' links on the same site."
+    },
+    "Cathy Moore": {
+      "linkedin": null,
+      "x": null,
+      "youtube": null,
+      "website": {
+        "url": "https://blog.cathy-moore.com/"
+      },
+      "github": null,
+      "note": "Her blog's home, About and Contact pages link no LinkedIn, X, YouTube or GitHub (only a Facebook group), so only website is given."
+    },
+    "Lucy Bella Simkins": {
+      "linkedin": null,
+      "x": null,
+      "youtube": {
+        "url": "https://www.youtube.com/@EnglishwithLucy"
+      },
+      "website": {
+        "url": "https://www.englishwithlucy.com/"
+      },
+      "github": null,
+      "note": "englishwithlucy.com links the YouTube channel, Instagram and TikTok; the channel About links her course sites and TikTok. No LinkedIn or X linked."
+    },
+    "Amy C. Edmondson": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/amycedmondson/",
+        "sourceUrl": "https://amycedmondson.com/about/"
+      },
+      "x": {
+        "url": "https://x.com/AmyCEdmondson"
+      },
+      "youtube": null,
+      "website": {
+        "url": "https://amycedmondson.com/"
+      },
+      "github": null,
+      "note": "LinkedIn and X linked from amycedmondson.com (home and About). No personal YouTube channel linked (only embedded talks)."
+    }
+  }
+}

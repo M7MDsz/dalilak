@@ -72,8 +72,8 @@ export const APPLY_WISH_TARGETS = ["أقدّم", "تقدّم", "تقديم", "ا
 /** Apply: a job reference (plus a job title, plus «هذه»/«هذي» on a job page). */
 export const JOB_REFERENCES = ["وظيفة", "الوظيفة", "عليها", "الوظيفه"];
 export const THIS_WORDS = ["هذه", "هذي", "هاذي", "هذا"];
-/** Apply: a course word excludes the apply reading («ابدأ دورة العرض والتقديم»). */
-export const COURSE_WORDS = ["دورة", "الدورة", "دورات"];
+/** Apply: a course word excludes the apply reading («ابدأ دورة العرض والتقديم»). «كورس» is how most Saudis say it. */
+export const COURSE_WORDS = ["دورة", "الدورة", "دورات", "كورس", "الكورس", "كورسات"];
 
 /** Start a course. */
 export const START_VERBS = ["ابدأ", "ابدئي", "سجّلني في الدورة", "start"];
@@ -84,7 +84,14 @@ export const MY_TARGET = ["هدفي"];
 // ── 5.7 row 1: refuse to complete; row 2: real, real-world numbers ────────────────────────────────────────────────
 
 export const COMPLETE_VERBS = ["أكمل", "كمّل", "خلّص", "أنهِ", "انهي"];
-export const LESSON_WORDS = ["الدورة", "دورة", "الدرس", "درس", "الدروس"];
+/** What «أكمل … عني» is about: a course (the old word, still said), a lesson, the learning step. Not «الدليل»: it also
+ *  matches «يا دليل» («كمّل لي يا دليل» is not a request to finish a course). */
+export const LESSON_WORDS = ["الدورة", "دورة", "الدرس", "درس", "الدروس", "الخطوة", "خطوة", "الكورس", "كورس"];
+/** The same verbs with «it» attached («خلّصها عني», «كمّلها لي»), and «اضغط خلّصتها عني» (the guide's button). */
+export const COMPLETE_IT = [
+  "خلّصها", "خلصها", "خلّصه", "خلصه", "كمّلها", "كملها", "كمّله", "كمله", "أكملها", "اكملها", "أكمله", "اكمله", "أنهها",
+  "انهيها", "خلّصتها", "خلصتها",
+];
 export const FOR_ME = ["عني", "لي", "بدالي", "عنّي"];
 export const GIVE_ME = ["أعطني", "عطني", "اعطني", "أعطيني", "اعطيني", "زودني", "زوّدني", "ضيف لي", "أضف لي", "give me"];
 export const GRANT_WORDS = ["XP", "نقاط", "النقاط", "شارة", "شارات", "نجمة", "نجوم"];
@@ -107,7 +114,7 @@ export const ACK_WORDS = [
 ];
 export const NO_WORDS = ["لا", "لأ", "no", "nope", "مو الحين", "مو الآن", "ليس الآن", "بعدين", "لاحقاً", "لاحقا", "not now", "later"];
 /** Words allowed around an acknowledgement or a no without changing it: «تمام يا دليل», «لا والله». */
-export const ACK_FILLERS = ["يا", "دليل", "والله", "جداً", "جدا"];
+export const ACK_FILLERS = ["يا", "دليلك", "دليل", "والله", "جداً", "جدا"];
 /** Allowed around a no only: «لا شكراً» is a polite no, while «تمام شكراً» stays a thanks (row 19). */
 export const NO_FILLERS = ["شكراً", "شكرا", "مشكور", "thanks"];
 
@@ -117,7 +124,7 @@ export const REAL_NUMBER_WORDS = [
   // the future / demand of a field: no market claims either (18 Nov 2026: the model said «الطلب عليه عالٍ جداً»)
   "له مستقبل", "مستقبل المجال", "مستقبله", "الطلب على", "الطلب عليه", "مطلوب في السوق", "مطلوبة في السوق", "يتوظفون بسرعة",
 ];
-/** Worry, fear, frustration: «دليل» comforts first, then the next step (T.feelingsLead). */
+/** Worry, fear, frustration: «دليلك» comforts first, then the next step (T.feelingsLead). */
 export const FEELING_WORDS = [
   "خايف", "خايفة", "خوف", "قلقان", "قلقانة", "قلق", "تعبت", "تعبان", "تعبانة", "محبط", "محبطة", "إحباط", "زهقت", "طفشت",
   "يأست", "يئست", "متضايق", "متضايقة", "ضايقة", "انرفضت", "رفضوني", "ما أحد رد", "ما احد رد", "محد رد", "فاشل", "فاشلة",
@@ -147,6 +154,16 @@ export const FIELD_WORDS: Readonly<Record<JobFieldId, readonly string[]>> = {
   marketing: ["marketing", "تسويق", "التسويق"],
   business: ["business", "أعمال", "الأعمال", "المشاريع"],
   hr: ["hr", "موارد بشرية", "الموارد البشرية"],
+  // 20 Nov 2026 expansion fields
+  product: ["product", "إدارة المنتجات", "إدارة المنتج", "مدير منتج", "منتجات"],
+  "cyber-cloud": [
+    "أمن سيبراني", "سيبراني", "سايبر", "أمن المعلومات", "سحابة", "سحابي", "الحوسبة السحابية", "كلاود", "ديف أوبس",
+    "cyber", "cybersecurity", "cloud", "devops",
+  ],
+  "sales-supply": [
+    "مبيعات", "نجاح العملاء", "سلاسل الإمداد", "سلسلة الإمداد", "مشتريات", "لوجستيات", "sales", "procurement", "supply chain",
+    "logistics",
+  ],
 };
 
 export const CITY_WORDS: Readonly<Record<JobCityId, readonly string[]>> = {
@@ -160,7 +177,7 @@ export const CITY_WORDS: Readonly<Record<JobCityId, readonly string[]>> = {
 
 export const OPEN_WORDS = [
   "افتح", "افتحلي", "ورّني", "وريني", "أرني", "اعرض", "روح", "خذني", "ودّني", "ودني", "وديني",
-  // with an object pronoun («طيب افتحها لي» after «دليل» named a course): whole-word matching misses these otherwise
+  // with an object pronoun («طيب افتحها لي» after «دليلك» named a course): whole-word matching misses these otherwise
   "افتحها", "افتحه", "افتحهم", "افتحهن", "اعرضها", "اعرضه", "اعرضلي",
   "أبغى أشوف", "أبي أشوف", "خلني أشوف", "وين", "open", "show", "go to",
 ];
@@ -171,11 +188,14 @@ export const PAGE_WORDS: Readonly<Record<Exclude<NavScreen, "job" | "course">, r
   cv: ["سيرتي", "السيرة", "السيرة الذاتية", "cv", "resume"],
   jobs: ["الوظائف", "الوظايف", "jobs"],
   applications: ["طلباتي", "الطلبات", "applications"],
-  learn: ["الدورات", "دوراتي", "courses"],
+  learn: ["دليل التعلّم", "دليل التعلم", "أدلة التعلم", "الأدلة", "الدورات", "دوراتي", "الكورسات", "courses"],
   leaderboard: ["المتصدرون", "المتصدرين", "الترتيب", "leaderboard", "rank"],
   profile: ["ملفي", "الشارات", "profile", "badges"],
 };
 export const UPLOAD_WORDS = ["أرفع", "ارفع"];
+/** «افتح دليل Power BI»: with a skill named, the guide page of that skill's next step. Note: the keyword «الدليل» also
+ *  matches a bare «دليلك» (the vocative «يا دليل»), so a guide word only counts next to a skill, or with no page named. */
+export const GUIDE_WORDS = ["الدليل", "دليله", "دليلها", "guide"];
 export const CV_WORDS = ["سيرتي", "السيرة", "سيرة", "السيرة الذاتية", "cv", "resume"];
 export const SKILL_WORDS = ["مهارة", "المهارة"];
 
@@ -204,6 +224,53 @@ export const GREETING_WORDS = ["السلام", "مرحبا", "هلا", "أهلا
 export const THANKS_WORDS = ["شكراً", "مشكور", "يعطيك العافية", "تسلم", "thanks", "thank you"];
 export const WHO_WORDS = ["من أنت", "مين أنت", "ما اسمك", "هل أنت"];
 
+// ── The learning guides (20 Nov 2026: «دليلك» knows the guides) ─────────────────────────────────────────────────────
+
+/**
+ * Where to learn: the guide's top pick. A first-person «learn» verb («وين أتعلم SQL؟», «أبي أتعلم باوربي», «وش أتعلم
+ * أول؟»), or «وش أبدأ فيه؟». «أي دورة أبدأ بها؟» and «من وين أبدأ؟» stay the next step (row 11; 5.4 opens nothing for
+ * them).
+ */
+export const LEARN_WHERE_WORDS = [
+  "أتعلم", "أتعلمه", "أتعلمها", "نتعلم", "أدرسه", "أدرسها", "وش أبدأ فيه", "وش أبدأ به", "وش أبدأ فيها", "إيش أبدأ فيه",
+  "ايش أبدأ فيه", "شنو أبدأ فيه", "where to learn", "where can i learn", "where do i learn", "what should i learn", "learn",
+];
+/** A best or recommend word: with a course word it asks for the top pick («أفضل كورس SQL», «ترشح لي دورة إكسل؟»). */
+export const RECOMMEND_WORDS = ["تنصحني", "ترشح لي", "ترشحلي", "رشح لي", "رشّح لي", "اقترح لي", "recommend", "best"];
+/** Who to follow: the guide's people («مين أتابع في البيانات؟»). */
+export const FOLLOW_WORDS = [
+  "مين أتابع", "من أتابع", "وش أتابع", "إيش أتابع", "ايش أتابع", "أتابعهم", "أتابعها", "حسابات", "يوتيوبر", "يوتيوبرز",
+  "المؤثرين", "مين أفضل الناس", "who to follow", "who should i follow", "who do i follow",
+];
+/** What to read: the guide's articles («وش أقرأ عن Power BI؟»). Never the imperative «اقرأ سيرتي». */
+export const READ_WORDS = [
+  "وش أقرأ", "إيش أقرأ", "ايش أقرأ", "شنو أقرأ", "أقرأ عن", "أقرأ فيه", "مقالات", "مقال", "مقالة", "what to read",
+  "what should i read", "articles",
+];
+/** Words that make «أتابع» mean following up an application, not following people. */
+export const FOLLOW_UP_WORDS = ["طلبي", "طلباتي", "الطلب", "الطلبات"];
+/** The fields as a guide question names them (job fields, plus the professional skills). */
+export const GUIDE_FIELD_EXTRA: Readonly<Record<"professional", readonly string[]>> = {
+  professional: ["المهارات المهنية", "المهارات الشخصية", "soft skills"],
+};
+/**
+ * How people say a skill in a guide question, on top of its name and the CV analyser's aliases (spec 9.2): «باوربي»,
+ * «اكسل», «سيكوال». Only for the guide questions and «افتح دليل …»; the other rows read the skill names only.
+ */
+export const SKILL_SAYINGS: Readonly<Partial<Record<SkillId, readonly string[]>>> = {
+  excel: ["اكسل", "إكسل", "الاكسل"],
+  sql: ["سيكوال", "سيكول", "اس كيو ال", "إس كيو إل"],
+  statistics: ["احصاء", "الاحصاء", "stats"],
+  powerbi: ["باوربي", "باور بي", "باور بي اي", "باور بي آي", "power bi", "powerbi"],
+  communication: ["التواصل", "مهارات التواصل"],
+  "python-data": ["تحليل البيانات ببايثون", "pandas"],
+  ml: ["الذكاء الاصطناعي", "machine learning"],
+  figma: ["فيقما"],
+  javascript: ["جافا سكربت"],
+  react: ["رياكت"],
+  english: ["الانقليزي", "الإنجليزي", "الانجليزي", "انجليزي"],
+};
+
 // ── 5.8 fixed answers, typed (matched before the general intents) ─────────────────────────────────────────────────
 
 export const REMAINING_ASK = ["كم"];
@@ -228,6 +295,7 @@ interface Entity<Id> {
 let jobTitles: readonly Entity<JobId>[] | null = null;
 let courseTitles: readonly Entity<CourseId>[] | null = null;
 let skillNames: readonly Entity<SkillId>[] | null = null;
+let skillSayings: readonly Entity<SkillId>[] | null = null;
 
 function jobEntities(): readonly Entity<JobId>[] {
   jobTitles ??= JOBS.map((job) => ({ id: job.id, key: normalizeText(job.title) }));
@@ -277,6 +345,24 @@ export function coursesNamed(text: Text): readonly CourseId[] {
 
 export function skillsNamed(text: Text): readonly SkillId[] {
   return namedIn(text, skillEntities());
+}
+
+/** Every way to say a skill (name, CV aliases, SKILL_SAYINGS), minus the bare field words («التسويق», «HR»). */
+function sayingEntities(): readonly Entity<SkillId>[] {
+  if (skillSayings) return skillSayings;
+  const fieldWords = new Set([...Object.values(FIELD_WORDS).flat(), ...GUIDE_FIELD_EXTRA.professional].map((w) => normalizeText(w)));
+  const out: Entity<SkillId>[] = [];
+  for (const skill of SKILLS) {
+    const keys = new Set([skill.name, ...skill.aliases, ...(SKILL_SAYINGS[skill.id] ?? [])].map((k) => normalizeText(k)));
+    for (const key of keys) if (key && !fieldWords.has(key)) out.push({ id: skill.id, key });
+  }
+  skillSayings = out;
+  return out;
+}
+
+/** The skills a guide question is about, however they are said («وين أتعلم باوربي؟» → powerbi). */
+export function skillsAsked(text: Text): readonly SkillId[] {
+  return namedIn(text, sayingEntities());
 }
 
 /** The span of the job title found in the text (used to keep its words out of the field and city readings). */

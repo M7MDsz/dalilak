@@ -1,0 +1,617 @@
+{
+ "checkedAt": "2026-11-20",
+ "note": "Guidelines for 3 new career families (cyber, cloud-devops, ai-ml), shaped like research/paths/paths-guidelines.json, and recognised certificates for 8 tech families from official issuer pages (Coursera listings for Google, IBM and Meta). Every page was opened on 2026-11-20; priceText and examLanguages are as stated on the page, else null. roadmap.sh orders were read from node positions in the page data.",
+ "guidelines": {
+  "cyber": {
+   "label": "الأمن السيبراني",
+   "guidelines": [
+    {
+     "name": "Cyber Security Roadmap",
+     "provider": "roadmap.sh",
+     "url": "https://roadmap.sh/cyber-security",
+     "orderedTopics": [
+      "Fundamental IT Skills",
+      "Operating Systems",
+      "Networking Knowledge",
+      "Security Skills and Knowledge",
+      "Cloud Skills and Knowledge",
+      "Programming Skills"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "Order read from the roadmap's own node positions (top to bottom) in the page data; these are the 6 top-level topics (295 subtopics hang under them)."
+    },
+    {
+     "name": "CompTIA Security+ V8 (exam SY0-801) exam domains",
+     "provider": "CompTIA",
+     "url": "https://www.comptia.org/en-us/certifications/security/v8/",
+     "orderedTopics": [
+      "1 General Security Concepts (16%)",
+      "2 Threats, Vulnerabilities, and Attacks (24%)",
+      "3 Security Architecture (19%)",
+      "4 Security Operations (27%)",
+      "5 Security Program Management and Oversight (14%)"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "V8 launched 17 Nov 2026 and is «the recommended version»; the main Security+ page says V7 (SY0-701) retires with the English exam on 11 Jun 2027 and translated V7 exams on 13 Aug 2027. The SY0-701 objectives themselves were not opened; V8 is what a new learner will sit."
+    },
+    {
+     "name": "ISC2 Certified in Cybersecurity (CC) exam outline",
+     "provider": "ISC2",
+     "url": "https://www.isc2.org/certifications/cc/cc-certification-exam-outline",
+     "orderedTopics": [
+      "1 Security Principles (24%)",
+      "2 Security Governance (17.3%)",
+      "3 Identity and Access Management (IAM) Concepts (20%)",
+      "4 Networking and Cloud Security Concepts (21.3%)",
+      "5 Security Operations and Incident Response (17.3%)"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "Outline effective 1 Sep 2026; 100–125 items; exam languages English, Chinese, Japanese, German, Spanish."
+    },
+    {
+     "name": "The Saudi Cybersecurity Workforce Framework (SCyWF 1.5:2026)",
+     "provider": "الهيئة الوطنية للأمن السيبراني (NCA)",
+     "url": "https://nca.gov.sa/en/regulatory-documents/frameworks-and-standard-list/scywf/",
+     "orderedTopics": [
+      "Cybersecurity Architecture, Research and Development (CARD)",
+      "Leadership and Workforce Development (LWD)",
+      "Governance, Risk, Compliance and Laws (GRCL)",
+      "Protection and Defense (PD)",
+      "Industrial Control Systems and Operational Technologies (ICS/OT)"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "A workforce taxonomy (5 categories, their specialty areas and job roles with tasks/knowledge/skills), not a learning order. Categories listed in the order of the PDF's tables 3–7 (https://cdn.nca.gov.sa/api/public/cms/files/7d581106-8bab-4531-a019-4ce46071a3a6_SCyWF_EN-.pdf). The category, specialty-area and job-role tables are images, so role names could not be read as text."
+    }
+   ],
+   "basedOnLine": "المسار مبني على: خارطة roadmap.sh للأمن السيبراني، ومجالات اختبار CompTIA Security+، ومخطط اختبار ISC2 للأمن السيبراني (CC)، والإطار السعودي لكوادر الأمن السيبراني (سيوف) من الهيئة الوطنية للأمن السيبراني",
+   "basedOnLinks": [
+    "https://roadmap.sh/cyber-security",
+    "https://www.comptia.org/en-us/certifications/security/v8/",
+    "https://www.isc2.org/certifications/cc/cc-certification-exam-outline",
+    "https://nca.gov.sa/en/regulatory-documents/frameworks-and-standard-list/scywf/"
+   ],
+   "orderNote": {
+    "proposedOrder": [
+     "linux",
+     "networking",
+     "security-fundamentals",
+     "soc-analysis",
+     "cloud"
+    ],
+    "why": "roadmap.sh يضع نظام التشغيل قبل الشبكات، والشبكات قبل مهارات الأمن، والأمن قبل السحابة؛ وCompTIA وISC2 يضعان المفاهيم العامة قبل عمليات الأمن والاستجابة للحوادث، فتأتي مراقبة الأمن (SOC) بعد أساسيات الأمن.",
+    "quotes": [
+     {
+      "source": "roadmap.sh Cyber Security",
+      "line": "Fundamental IT Skills → Operating Systems → Networking Knowledge → Security Skills and Knowledge → Cloud Skills and Knowledge → Programming Skills"
+     },
+     {
+      "source": "CompTIA Security+ V8",
+      "line": "1 General Security Concepts (16%) … 4 Security Operations (27%)"
+     },
+     {
+      "source": "ISC2 CC exam outline",
+      "line": "1 Security Principles (24%) … 5 Security Operations and Incident Response (17.3%)"
+     }
+    ],
+    "caveat": "linux وnetworking كلاهما ★1 تأسيسي؛ roadmap.sh يقدّم نظام التشغيل، أما ISC2 فيجمع الشبكات مع أمن السحابة في المجال 4، فأي ترتيب بينهما مقبول. وCloud في هذه العائلة تأتي بعد الأمن (roadmap.sh: Cloud Skills بعد Security Skills)."
+   }
+  },
+  "cloud-devops": {
+   "label": "السحابة وDevOps",
+   "guidelines": [
+    {
+     "name": "AWS Certified Cloud Practitioner (CLF-C02) exam guide: content domains",
+     "provider": "Amazon Web Services",
+     "url": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html",
+     "orderedTopics": [
+      "1 Cloud Concepts (24%)",
+      "2 Security and Compliance (30%)",
+      "3 Cloud Technology and Services (34%)",
+      "4 Billing, Pricing, and Support (12%)"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "Target candidate: «up to 6 months of exposure to AWS Cloud»; out of scope for the exam: «Coding», «Designing cloud architecture», «Troubleshooting», «Implementation»."
+    },
+    {
+     "name": "Study guide for Exam AZ-900: Microsoft Azure Fundamentals (skills measured as of July 20, 2026)",
+     "provider": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-900",
+     "orderedTopics": [
+      "Describe cloud concepts (25–30%): cloud computing, shared responsibility, cloud models, consumption-based model, serverless · benefits of cloud · IaaS, PaaS, SaaS",
+      "Describe Azure architecture and services (35–40%): regions, availability zones, resource groups, subscriptions · compute and networking (VMs, containers, functions, virtual networks, DNS, VPN Gateway) · storage · identity, access and security (Entra ID, MFA, RBAC, Zero Trust, defense in depth)",
+      "Describe Azure management and governance (30–35%): cost management · governance and compliance (Purview, Azure Policy, resource locks) · portal, Cloud Shell, CLI, PowerShell, Azure Arc, infrastructure as code, ARM templates · monitoring (Advisor, Service Health, Azure Monitor)"
+     ],
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "name": "DevOps Roadmap",
+     "provider": "roadmap.sh",
+     "url": "https://roadmap.sh/devops",
+     "orderedTopics": [
+      "Learn a Programming Language",
+      "Operating System",
+      "Terminal Knowledge",
+      "Version Control Systems",
+      "VCS Hosting",
+      "Containers",
+      "What is and how to setup X ?",
+      "Networking & Protocols",
+      "Cloud Providers",
+      "Serverless",
+      "Configuration Management",
+      "Provisioning",
+      "CI / CD Tools",
+      "Logs Management",
+      "Infrastructure Monitoring",
+      "Secret Management",
+      "Container Orchestration",
+      "Observability",
+      "Artifact Management",
+      "GitOps",
+      "Service Mesh",
+      "Cloud Design Patterns"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "Order read from the roadmap's own node positions (top to bottom) in the page data (22 topics)."
+    }
+   ],
+   "basedOnLine": "المسار مبني على: دليل اختبار AWS Certified Cloud Practitioner (CLF-C02)، ودليل دراسة اختبار Microsoft AZ-900، وخارطة roadmap.sh لـ DevOps",
+   "basedOnLinks": [
+    "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html",
+    "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-900",
+    "https://roadmap.sh/devops"
+   ],
+   "orderNote": {
+    "proposedOrder": [
+     "linux",
+     "networking",
+     "cloud",
+     "devops"
+    ],
+    "why": "roadmap.sh يبدأ بنظام التشغيل وسطر الأوامر، ثم الشبكات ثم مزودي السحابة، ويأتي بعدها التهيئة والبنية كرمز وCI/CD وتنسيق الحاويات؛ واختبارا CLF-C02 وAZ-900 لا يتطلبان برمجة، فالسحابة ★1 تأتي قبل DevOps.",
+    "quotes": [
+     {
+      "source": "roadmap.sh DevOps",
+      "line": "Operating System → Terminal Knowledge → … → Networking & Protocols → Cloud Providers → … → Provisioning → CI / CD Tools → … → Container Orchestration"
+     },
+     {
+      "source": "AWS CLF-C02 exam guide",
+      "line": "Job tasks that are out of scope for the target candidate: Coding; Designing cloud architecture; Troubleshooting; Implementation"
+     }
+    ],
+    "caveat": "roadmap.sh يضع Containers (Docker) مبكراً قبل Networking وCloud Providers، أما CI/CD والبنية كرمز (Provisioning) وKubernetes فبعد السحابة؛ ولأن مهارة devops عندنا تجمع Docker وCI/CD وKubernetes وTerraform معاً، فمكانها بعد cloud. السحابة ★2 (التصميم المعماري) خارج نطاق CLF-C02 صراحةً، فتأتي بعد ★1."
+   }
+  },
+  "ai-ml": {
+   "label": "الذكاء الاصطناعي وتعلّم الآلة",
+   "guidelines": [
+    {
+     "name": "AI Engineer Roadmap",
+     "provider": "roadmap.sh",
+     "url": "https://roadmap.sh/ai-engineer",
+     "orderedTopics": [
+      "Introduction",
+      "How LLMs Work",
+      "Prompt Engineering",
+      "Context Engineering",
+      "Type of Models",
+      "Hugging Face",
+      "Choosing the Right Model",
+      "Ollama",
+      "LM Studio",
+      "OpenRouter",
+      "What are Embeddings",
+      "Embedding Models",
+      "Vector Databases",
+      "What are RAGs?",
+      "AI Agents",
+      "Model Context Protocol (MCP)",
+      "AI Safety and Ethics",
+      "LLM Observability",
+      "LLM Evaluations",
+      "Regression Testing",
+      "Multimodal AI",
+      "Development Tools"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "Order read from the roadmap's own node positions (top to bottom) in the page data (22 topics)."
+    },
+    {
+     "name": "الإطار الوطني للمعايير المهنية للبيانات والذكاء الاصطناعي: بطاقة مهنة «مهندس ذكاء اصطناعي» (AI-En)",
+     "provider": "الهيئة السعودية للبيانات والذكاء الاصطناعي (سدايا)",
+     "url": "https://iu.edu.sa/media/%D9%85%D8%B1%D9%83%D8%B2%20%D8%AF%D8%B9%D9%85%20%D8%A7%D8%AA%D8%AE%D8%A7%D8%B0%20%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%B1%20%D9%88%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA/%D9%86%D8%B4%D8%B1%D8%A7%D8%AA%20%D8%AA%D9%88%D8%B9%D9%8A%D8%A9_PDF/%D8%A7%D9%84%D8%A5%D8%B7%D8%A7%D8%B1%20%D8%A7%D9%84%D9%88%D8%B7%D9%86%D9%8A%20%D9%84%D9%84%D9%85%D8%B9%D8%A7%D9%8A%D9%8A%D8%B1%20%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9%20%D9%84%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A5%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A.pdf",
+     "orderedTopics": [
+      "Classification «الهندسة والهندسة المعمارية», specialty area «هندسة الذكاء الاصطناعي»",
+      "Description: «مهندس الذكاء الاصطناعي مسؤول عن تصميم وتطوير وتنفيذ حلول الذكاء الاصطناعي وتعلم وتدريب الآله»",
+      "Skills: computer vision, natural language processing and deep learning (AI-En-S05); choosing the most suitable ML model for the available data (AI-En-S08); deploying, managing and monitoring ML models in real production, e.g. MLOps tools (AI-En-S11)",
+      "Knowledge: computer vision, NLP and deep learning (AI-En-K03); ML architecture (AI-En-K06)"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "A competency card (what to know), not a learning order; PDF pages 37–38. Opened as the copy hosted by the Islamic University of Madinah (the same file used in paths-guidelines.json); sdaia.gov.sa was not retried."
+    },
+    {
+     "name": "Machine Learning Crash Course",
+     "provider": "Google for Developers",
+     "url": "https://developers.google.com/machine-learning/crash-course",
+     "orderedTopics": [
+      "1 Linear Regression",
+      "2 Logistic Regression",
+      "3 Classification",
+      "4 Working with Numerical Data",
+      "5 Working with Categorical Data",
+      "6 Datasets, Generalization, and Overfitting",
+      "7 Neural Networks",
+      "8 Embeddings",
+      "9 Intro to Large Language Models",
+      "10 Production ML Systems",
+      "11 AutoML (Automated Machine Learning)",
+      "12 ML Fairness"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "Module order as listed on the page; the sidebar also has «Introduction to ML» first."
+    }
+   ],
+   "basedOnLine": "المسار مبني على: خارطة roadmap.sh لمهندس الذكاء الاصطناعي، وبطاقة مهنة «مهندس ذكاء اصطناعي» في الإطار الوطني للمعايير المهنية للبيانات والذكاء الاصطناعي (سدايا)، ودورة Google المكثفة لتعلّم الآلة",
+   "basedOnLinks": [
+    "https://roadmap.sh/ai-engineer",
+    "https://iu.edu.sa/media/%D9%85%D8%B1%D9%83%D8%B2%20%D8%AF%D8%B9%D9%85%20%D8%A7%D8%AA%D8%AE%D8%A7%D8%B0%20%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%B1%20%D9%88%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA/%D9%86%D8%B4%D8%B1%D8%A7%D8%AA%20%D8%AA%D9%88%D8%B9%D9%8A%D8%A9_PDF/%D8%A7%D9%84%D8%A5%D8%B7%D8%A7%D8%B1%20%D8%A7%D9%84%D9%88%D8%B7%D9%86%D9%8A%20%D9%84%D9%84%D9%85%D8%B9%D8%A7%D9%8A%D9%8A%D8%B1%20%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9%20%D9%84%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A5%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A.pdf",
+    "https://developers.google.com/machine-learning/crash-course"
+   ],
+   "orderNote": {
+    "proposedOrder": [
+     "ml",
+     "deep-learning",
+     "llm-apps"
+    ],
+    "why": "دورة Google تبدأ بالانحدار والتصنيف ثم الشبكات العصبية ثم التضمينات ثم النماذج اللغوية الكبيرة؛ وبطاقة سدايا لمهندس الذكاء الاصطناعي تطلب التعلم العميق ثم نشر النماذج ومراقبتها في الإنتاج.",
+    "quotes": [
+     {
+      "source": "Google Machine Learning Crash Course",
+      "line": "1 Linear Regression … 7 Neural Networks → 8 Embeddings → 9 Intro to Large Language Models → 10 Production ML Systems"
+     },
+     {
+      "source": "سدايا، بطاقة AI-En",
+      "line": "AI-En-S05: «الرؤية الحاسوبية ومعالجة اللغات الطبيعية والتعلم العميق»؛ AI-En-S11: نشر نماذج تعلم الآلة وإدارتها ومراقبتها «في الإنتاج الواقعي (على سبيل المثال: أدوات عمليات تعلم الآلة)»"
+     }
+    ],
+    "caveat": "خارطة roadmap.sh لمهندس الذكاء الاصطناعي تبدأ مباشرة بـ «How LLMs Work» و«Prompt Engineering» ثم التضمينات وقواعد المتجهات وRAG والوكلاء والتقييم، ولا تشترط التعلم العميق قبلها؛ فوظيفة «مطوّر تطبيقات ذكاء اصطناعي» يمكن أن تطلب llm-apps بعد البرمجة وواجهات API دون ml وdeep-learning. ترتيب ml ثم deep-learning ثم llm-apps يناسب وظائف مهندس تعلّم الآلة."
+   }
+  }
+ },
+ "certificates": [
+  {
+   "family": "data-analyst-bi",
+   "name": "Microsoft Certified: Power BI Data Analyst Associate (Exam PL-300)",
+   "issuer": "Microsoft",
+   "url": "https://learn.microsoft.com/en-us/credentials/certifications/data-analyst-associate/",
+   "level": "associate",
+   "priceText": "Price based on the country or region in which the exam is proctored.",
+   "examLanguages": [
+    "English",
+    "Japanese",
+    "Chinese (Simplified)",
+    "Korean",
+    "German",
+    "French",
+    "Spanish",
+    "Portuguese (Brazil)",
+    "Chinese (Traditional)",
+    "Italian"
+   ],
+   "arabicAvailable": false,
+   "why": "الشهادة الأشهر لمحلل Power BI: تجهيز البيانات ونمذجتها بـ DAX والتقارير والأمان.",
+   "checkedAt": "2026-11-20",
+   "note": "Level «Intermediate»; renewal every 12 months (free online assessment)."
+  },
+  {
+   "family": "data-analyst-bi",
+   "name": "Google Data Analytics Professional Certificate",
+   "issuer": "Google (Coursera)",
+   "url": "https://www.coursera.org/professional-certificates/google-data-analytics",
+   "level": "entry",
+   "priceText": "«Enroll for free»; in the U.S. and Canada «$49 per month after the initial 7-day free trial»; most learners finish for «less than $300 USD»",
+   "examLanguages": [
+    "English"
+   ],
+   "arabicAvailable": null,
+   "why": "من Google للمبتدئ بلا خبرة سابقة، في نحو 6 أشهر بعشر ساعات أسبوعياً.",
+   "checkedAt": "2026-11-20",
+   "note": "«Taught in English», «5 languages available» (not named); the FAQ lists Arabic among Google Career Certificate languages in general but says this one is «currently available globally in English»."
+  },
+  {
+   "family": "data-science",
+   "name": "IBM Data Science Professional Certificate",
+   "issuer": "IBM (Coursera)",
+   "url": "https://www.coursera.org/professional-certificates/ibm-data-science",
+   "level": "entry",
+   "priceText": "«Enroll for free»; «Included with Coursera Plus»; financial aid mentioned",
+   "examLanguages": [
+    "English"
+   ],
+   "arabicAvailable": null,
+   "why": "مسار IBM للمبتدئ بلا خبرة في علم البيانات، نحو 4 أشهر بعشر ساعات أسبوعياً.",
+   "checkedAt": "2026-11-20",
+   "note": "«Taught in English», «27 languages available» (Arabic not named)."
+  },
+  {
+   "family": "data-science",
+   "name": "Google Advanced Data Analytics Professional Certificate",
+   "issuer": "Google (Coursera)",
+   "url": "https://www.coursera.org/professional-certificates/google-advanced-data-analytics",
+   "level": "associate",
+   "priceText": "«Enroll for free»; in the U.S. and Canada «$49 per month after the initial 7-day free trial»; most learners finish for «less than $300 USD»",
+   "examLanguages": [
+    "English"
+   ],
+   "arabicAvailable": null,
+   "why": "الخطوة التالية بعد تحليل البيانات: مستوى متقدم من Google في نحو 6 أشهر.",
+   "checkedAt": "2026-11-20",
+   "note": "Level «Advanced» with recommended prior experience; «7 languages available» (not named). Replaces Microsoft DP-100, which Microsoft marks as retired."
+  },
+  {
+   "family": "frontend-web",
+   "name": "Meta Front-End Developer Professional Certificate",
+   "issuer": "Meta (Coursera)",
+   "url": "https://www.coursera.org/professional-certificates/meta-front-end-developer",
+   "level": "entry",
+   "priceText": "«Enroll for free» and a 7-day trial that «transitions into a subscription to Coursera Plus»; courses can be audited free without the certificate",
+   "examLanguages": [
+    "English"
+   ],
+   "arabicAvailable": null,
+   "why": "من Meta للمبتدئ بلا خبرة: 9 دورات في تطوير الواجهات الأمامية، نحو 227 ساعة.",
+   "checkedAt": "2026-11-20",
+   "note": "«Taught in English», «22 languages available» (Arabic not named); duration stated inconsistently (7 months at 6 h/week vs about 4 months at 10 h/week)."
+  },
+  {
+   "family": "backend",
+   "name": "Meta Back-End Developer Professional Certificate",
+   "issuer": "Meta (Coursera)",
+   "url": "https://www.coursera.org/professional-certificates/meta-back-end-developer",
+   "level": "entry",
+   "priceText": "«Enroll for free»; «Included with Coursera Plus»",
+   "examLanguages": [
+    "English"
+   ],
+   "arabicAvailable": null,
+   "why": "من Meta للمبتدئ بلا خبرة: 9 دورات في تطوير الواجهات الخلفية، نحو 225 ساعة.",
+   "checkedAt": "2026-11-20",
+   "note": "«Taught in English», «22 languages available» (Arabic not named)."
+  },
+  {
+   "family": "backend",
+   "name": "AWS Certified Developer - Associate (DVA-C03)",
+   "issuer": "Amazon Web Services",
+   "url": "https://aws.amazon.com/certification/certified-developer-associate/",
+   "level": "associate",
+   "priceText": "150 USD (additional costs such as foreign exchange rates may apply)",
+   "examLanguages": [
+    "English",
+    "Japanese",
+    "Korean",
+    "Portuguese (Brazil)",
+    "Simplified Chinese",
+    "Spanish (Latin America)"
+   ],
+   "arabicAvailable": false,
+   "why": "شهادة Associate من AWS تثبت قدرتك على تطوير التطبيقات السحابية.",
+   "checkedAt": "2026-11-20",
+   "note": "130 minutes, 65 questions; exam code taken from the linked exam-guide URL."
+  },
+  {
+   "family": "qa",
+   "name": "ISTQB Certified Tester Foundation Level (CTFL) v4.0",
+   "issuer": "ISTQB",
+   "url": "https://istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/",
+   "level": "entry",
+   "priceText": null,
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "الشهادة الأساسية لمختبر البرمجيات عالمياً، وهي شرط لبقية شهادات ISTQB.",
+   "checkedAt": "2026-11-20",
+   "note": "Fees are set locally by Exam Providers and Member Boards (no global price); exam languages not listed on the page; 60-minute exam (+25% for non-native candidates); no prerequisites."
+  },
+  {
+   "family": "cyber",
+   "name": "CompTIA Security+ (V8, exam SY0-801)",
+   "issuer": "CompTIA",
+   "url": "https://www.comptia.org/en-us/certifications/security/v8/",
+   "level": "associate",
+   "priceText": null,
+   "examLanguages": [
+    "English"
+   ],
+   "arabicAvailable": null,
+   "why": "أشهر شهادة أمن للمبتدئ المحترف: التهديدات والمعمارية وعمليات الأمن والحوكمة.",
+   "checkedAt": "2026-11-20",
+   "note": "V8 launched 17 Nov 2026; recommended experience «Security administrator with two years of hands-on experience»; price not shown (only «Buy now»). V7 (SY0-701) translated exams remain until 13 Aug 2027 per the main Security+ page; Arabic is not named."
+  },
+  {
+   "family": "cyber",
+   "name": "ISC2 Certified in Cybersecurity (CC)",
+   "issuer": "ISC2",
+   "url": "https://www.isc2.org/certifications/cc",
+   "level": "entry",
+   "priceText": null,
+   "examLanguages": [
+    "English",
+    "Chinese",
+    "Japanese",
+    "German",
+    "Spanish"
+   ],
+   "arabicAvailable": false,
+   "why": "مدخل ISC2 لمن لا خبرة له: مبادئ الأمن والحوكمة والهوية والشبكات والاستجابة للحوادث.",
+   "checkedAt": "2026-11-20",
+   "note": "«No Work Experience Required»; exam price not stated on the page; languages from the exam outline page (https://www.isc2.org/certifications/cc/cc-certification-exam-outline)."
+  },
+  {
+   "family": "cyber",
+   "name": "Google Cybersecurity Professional Certificate",
+   "issuer": "Google (Coursera)",
+   "url": "https://www.coursera.org/professional-certificates/google-cybersecurity",
+   "level": "entry",
+   "priceText": "«Enroll for free»; in the U.S. and Canada «$49 per month after the initial 7-day free trial»; most learners finish for «less than $300 USD»",
+   "examLanguages": [
+    "English"
+   ],
+   "arabicAvailable": null,
+   "why": "للمبتدئ بلا خبرة: نحو 170 ساعة، وتجهّزك لاختبار Security+ مع سعر مخفّض له.",
+   "checkedAt": "2026-11-20",
+   "note": "«Taught in English», «6 languages available» (not named); about 170 hours; graduates get discounted access to the CompTIA Security+ exam."
+  },
+  {
+   "family": "cloud-devops",
+   "name": "AWS Certified Cloud Practitioner (CLF-C02)",
+   "issuer": "Amazon Web Services",
+   "url": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+   "level": "entry",
+   "priceText": "100 USD (additional costs such as foreign exchange rates may apply)",
+   "examLanguages": [
+    "Arabic",
+    "English",
+    "French (France)",
+    "German",
+    "Italian",
+    "Japanese",
+    "Korean",
+    "Portuguese (Brazil)",
+    "Spanish (Latin America)",
+    "Spanish (Spain)",
+    "Simplified Chinese",
+    "Traditional Chinese"
+   ],
+   "arabicAvailable": true,
+   "why": "أول شهادة سحابية من AWS ومتاحة بالعربي: المفاهيم والأمان والخدمات والفوترة.",
+   "checkedAt": "2026-11-20",
+   "note": "Foundational; 90 minutes, 65 questions; German and Italian versions retire after 31 Dec 2026."
+  },
+  {
+   "family": "cloud-devops",
+   "name": "Microsoft Certified: Azure Fundamentals (Exam AZ-900)",
+   "issuer": "Microsoft",
+   "url": "https://learn.microsoft.com/ar-sa/credentials/certifications/azure-fundamentals/",
+   "level": "entry",
+   "priceText": "يتم تحديد السعر حسب البلد أو المنطقة التي تتم فيها مراقبة الاختبار (price set by the country or region where the exam is proctored)",
+   "examLanguages": [
+    "English",
+    "Japanese",
+    "Chinese (Simplified)",
+    "Korean",
+    "Spanish",
+    "German",
+    "French",
+    "Indonesian (Indonesia)",
+    "Arabic (Saudi Arabia)",
+    "Chinese (Traditional)",
+    "Italian",
+    "Portuguese (Brazil)",
+    "Russian"
+   ],
+   "arabicAvailable": true,
+   "why": "أساسيات Azure باختبار متاح بالعربية (السعودية) ومسار تعلّم مجاني على Microsoft Learn.",
+   "checkedAt": "2026-11-20",
+   "note": "45-minute assessment; free practice assessment linked."
+  },
+  {
+   "family": "cloud-devops",
+   "name": "AWS Certified Solutions Architect - Associate (SAA-C03)",
+   "issuer": "Amazon Web Services",
+   "url": "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+   "level": "associate",
+   "priceText": "150 USD (additional costs such as foreign exchange rates may apply)",
+   "examLanguages": [
+    "English",
+    "French (France)",
+    "Italian",
+    "Japanese",
+    "Korean",
+    "Portuguese (Brazil)",
+    "Spanish (Latin America)",
+    "Spanish (Spain)",
+    "Simplified Chinese",
+    "Traditional Chinese"
+   ],
+   "arabicAvailable": false,
+   "why": "شهادة Associate من AWS في تصميم الحلول، وهي مستوى النجمة الثانية في السحابة.",
+   "checkedAt": "2026-11-20",
+   "note": "130 minutes, 65 questions; exam code taken from the linked exam-guide URL."
+  },
+  {
+   "family": "cloud-devops",
+   "name": "Certified Kubernetes Administrator (CKA)",
+   "issuer": "The Linux Foundation / CNCF",
+   "url": "https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/",
+   "level": "associate",
+   "priceText": "Exam only: $445; exam + THRIVE-ONE annual subscription: $625; exam + Kubernetes Fundamentals (LFS258): $645",
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "اختبار عملي من سطر الأوامر لإدارة عناقيد Kubernetes، مطلوب كثيراً في وظائف DevOps.",
+   "checkedAt": "2026-11-20",
+   "note": "Experience level «Intermediate»; performance-based, online proctored, 2 hours; no prerequisites; exam languages not stated."
+  },
+  {
+   "family": "ai-ml",
+   "name": "AWS Certified AI Practitioner (AIF-C01)",
+   "issuer": "Amazon Web Services",
+   "url": "https://aws.amazon.com/certification/certified-ai-practitioner/",
+   "level": "entry",
+   "priceText": "100 USD (additional costs such as foreign exchange rates may apply)",
+   "examLanguages": [
+    "Arabic",
+    "English",
+    "French (France)",
+    "German",
+    "Italian",
+    "Japanese",
+    "Korean",
+    "Portuguese (Brazil)",
+    "Spanish (Latin America)",
+    "Spanish (Spain)",
+    "Simplified Chinese",
+    "Traditional Chinese"
+   ],
+   "arabicAvailable": true,
+   "why": "شهادة تأسيسية من AWS في الذكاء الاصطناعي، واختبارها متاح بالعربية.",
+   "checkedAt": "2026-11-20",
+   "note": "Foundational; 90 minutes, 65 questions; German and Italian versions were to retire after 15 Oct 2026."
+  },
+  {
+   "family": "ai-ml",
+   "name": "Microsoft Certified: Azure AI Fundamentals (Exam AI-901)",
+   "issuer": "Microsoft",
+   "url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals/",
+   "level": "entry",
+   "priceText": "Price based on the country or region in which the exam is proctored.",
+   "examLanguages": [
+    "en",
+    "ar-sa",
+    "zh-cn",
+    "zh-tw",
+    "fr",
+    "de",
+    "id-id",
+    "it",
+    "ja",
+    "ko",
+    "pt-br",
+    "ru",
+    "es"
+   ],
+   "arabicAvailable": true,
+   "why": "أساسيات الذكاء الاصطناعي على Azure باختبار متاح بالعربية، ويتطلب معرفة بسيطة بـ Python.",
+   "checkedAt": "2026-11-20",
+   "note": "The required exam is now AI-901 (English version updated 15 Apr 2026); it replaces the old AI-900 code."
+  }
+ ],
+ "notOpened": [
+  "SY0-701 exam objectives (not opened; CompTIA now recommends V8 / SY0-801, whose domains were opened)",
+  "SCyWF category, specialty-area and job-role tables (images inside the NCA PDF; only the 5 category names were readable)",
+  "sdaia.gov.sa NOSF page (not retried; the framework PDF was opened from iu.edu.sa, as in paths-guidelines.json)",
+  "grow.google certificate pages (geo-redirected to an Arabic overview with no certificate details; Coursera listings used instead)",
+  "ISC2 CC exam price and CompTIA Security+ price (not stated on the opened pages)",
+  "Microsoft DP-100 (Azure Data Scientist Associate) and AI-102 (Azure AI Engineer Associate): the pages say «This certification and the renewal assessment are retired»; left out",
+  "TensorFlow Developer Certificate: the page says «we have closed the TensorFlow Certificate exam»; left out",
+  "Only one recognised QA certificate (ISTQB CTFL v4.0) was opened; a second was not researched in time"
+ ]
+}

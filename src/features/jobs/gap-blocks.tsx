@@ -9,7 +9,7 @@
 //   and its state from the catalogue (the next step is the one accent piece). The quests sit on the trail they are (DESIGN
 //   1: solid line, waypoint, dotted line): it starts at the user's match today (the waypoint), every quest is a leg, and
 //   the node after each leg carries the match reached there, ending on the goal flag. Hovering or focusing a quest
-//   previews that node on the page's ring (`gain-preview`). Each quest is one link to its course («افتح الدورة»).
+//   previews that node on the page's ring (`gain-preview`). Each quest is one link to its guide («افتح الدليل»).
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
@@ -18,7 +18,7 @@ import { IconCheckCircle, IconCourses, IconEvidence, IconFlag } from "@/componen
 import { NavLink } from "@/components/motion";
 import { buttonStyles, cn } from "@/components/ui";
 import { SOURCE_LABEL, lockReasonText, starsOfRequired } from "@/lib/copy";
-import { getCourse, getSkill } from "@/lib/data";
+import { getGuide, getSkill } from "@/lib/data";
 import { courseOnPath, courseState, nextStep } from "@/lib/engine";
 import { formatPercent } from "@/lib/format";
 import { group, rise } from "@/lib/motion";
@@ -311,8 +311,8 @@ function questState(info: ReturnType<typeof courseState>, next: boolean): GameSt
 }
 
 /**
- * One row of «كيف تسدّ الفجوة» as a quest: the course's full title · its hours and lessons · «+200 XP» · the star it grants
- * · «+20% مطابقة», raised and pressable (it opens the course), with «افتح الدورة» at its foot. On the target's own page
+ * One row of «كيف تسدّ الفجوة» as a quest: the skill's guide (its real top pick's title) · «+200 XP» · the star it grants
+ * · «+20% مطابقة», raised and pressable (it opens the guide), with «افتح الدليل» at its foot. On the target's own page
  * the quest carries its stage number from the map; elsewhere the skill's field emblem.
  */
 function Quest({
@@ -330,8 +330,9 @@ function Quest({
   previewValue: number;
   onPreview: (value: number | null) => void;
 }): ReactNode {
-  const course = getCourse(row.courseId);
+  // a learning step is the guide of one skill (20 Nov 2026): the quest names the guide's real top pick
   const skill = getSkill(row.skill);
+  const pick = getGuide(row.skill).topPick;
   const info = courseState(row.courseId, user);
   const state = questState(info, next);
   const onPath = courseOnPath(row.courseId, user);
@@ -341,9 +342,7 @@ function Quest({
       <QuestCard
         data-course={row.courseId}
         faceClassName="pb-16 @min-[34rem]/quest:pb-card"
-        hours={row.hours}
         icon={stage === undefined ? <FieldIcon field={skill.field} size={20} /> : undefined}
-        lessons={course.lessons.length}
         lockedReason={info.state === "locked" ? lockReasonText(info.lock) : undefined}
         matchGain={row.gain}
         onBlur={() => onPreview(null)}
@@ -362,7 +361,11 @@ function Quest({
         star={row.star}
         state={state}
         testId={TID.job.course(row.courseId)}
-        title={course.title}
+        title={
+          <span className="line-clamp-2">
+            <bdi>{pick.title}</bdi>
+          </span>
+        }
         xp={row.xp}
       />
       {/* the quest's own cue: part of the face to the eye, sinking with it when pressed; the face is the link */}

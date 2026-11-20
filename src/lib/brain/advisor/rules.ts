@@ -122,7 +122,7 @@ export function numbersAreGrounded(reply: string, toolResults: readonly unknown[
 /** Each claim word and the action types that would make it true. «تم» is true after any action. */
 const CLAIMS: readonly { readonly words: readonly string[]; readonly actions: readonly string[] }[] = [
   { words: ["تم"], actions: ["navigate", "apply", "start_course", "set_target"] },
-  // Najdi forms too («دليل» speaks Najdi since 18 Nov 2026; matching is by whole word). Only forms that can only mean
+  // Najdi forms too («دليلك» speaks Najdi since 18 Nov 2026; matching is by whole word). Only forms that can only mean
   // "I did it for you": «فتحتها» / «قدّمته» / «بدأتها» also mean "you unlocked / sent / started it" («الشارات اللي
   // فتحتها» is the user's badges), and rejected good replies when they were listed here.
   { words: ["أرسلت", "قدّمت", "قدّمتلك", "أرسلتلك", "رسلتلك"], actions: ["apply"] },

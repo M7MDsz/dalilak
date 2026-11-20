@@ -1,0 +1,2517 @@
+{
+  "checkedAt": "2026-11-20",
+  "method": "Each guideline was opened on 20 Nov 2026. roadmap.sh orders were read from the roadmap's own node positions in the page data (the article text has no order). App paths were recomputed from src/lib/data/skills.ts and jobs.ts with the same rule as src/lib/engine/path.ts (requirement order, prerequisites depth-first before the skill, every ★ then ★★ then ★★★). No app source was edited.",
+  "demoGuard": {
+    "job": "data-analyst-riyadh",
+    "canonicalNow": [
+      "excel*",
+      "sql*",
+      "powerbi*",
+      "statistics*",
+      "communication*",
+      "excel**",
+      "sql**",
+      "statistics**"
+    ],
+    "demoUserStages7and8": "7 = powerbi ★ (c-powerbi-1), 8 = statistics ★★ (c-statistics-2) — unchanged by every proposal here; two proposals (powerbi + statistics prerequisite; sql without Excel) change the canonical order or the pre-CV lock states and are flagged affectsDemo, not applied.",
+    "revealAlternativesNow": "recommend(DEMO_ANSWERS) on 20 Nov returns qiddiya-hr-analytics-analyst-riyadh (8 stages · 64 h) and syarah-financial-analyst-tamheer-riyadh (5 stages · 38 h); no demo-safe proposal changes those counts. Side note: demo.test step 3 still expects «أخصائي تقارير وبيانات» 7·60 and «محلل أعمال» 7·64 (old jobs), and syarah has 5 stages, below the 6–11 range in spec 9.3.",
+    "canonicalAfterAllProposed": [
+      "excel*",
+      "sql*",
+      "statistics*",
+      "powerbi*",
+      "communication*",
+      "excel**",
+      "sql**",
+      "statistics**"
+    ]
+  },
+  "summaryOfChanges": {
+    "demoSafePrerequisites": {
+      "javascript": [
+        "html-css"
+      ],
+      "git": [],
+      "dataviz": [],
+      "business-analysis": [],
+      "ux-research": [],
+      "prototyping": [
+        "figma"
+      ],
+      "ads": [
+        "marketing-basics"
+      ]
+    },
+    "demoSafeRequirementReorders": {
+      "jeeny-growth-insights-analytics-riyadh": [
+        "excel",
+        "sql",
+        "statistics",
+        "powerbi",
+        "communication"
+      ],
+      "qiddiya-hr-analytics-analyst-riyadh": [
+        "statistics",
+        "powerbi",
+        "dataviz",
+        "presentation",
+        "hr-basics"
+      ],
+      "salla-senior-data-scientist-remote": [
+        "sql",
+        "statistics",
+        "python-data",
+        "dataviz",
+        "communication"
+      ],
+      "lucidya-frontend-engineer-dammam": [
+        "html-css",
+        "javascript",
+        "git",
+        "react",
+        "apis"
+      ],
+      "salla-senior-backend-checkout-remote": [
+        "programming",
+        "sql",
+        "apis",
+        "problem-solving",
+        "teamwork"
+      ],
+      "horizontal-graduate-designer-riyadh": [
+        "design-basics",
+        "figma",
+        "prototyping",
+        "ui-design",
+        "teamwork"
+      ],
+      "flyakeed-product-designer-riyadh": [
+        "ux-research",
+        "figma",
+        "prototyping",
+        "ui-design",
+        "teamwork"
+      ],
+      "lucidya-product-designer-riyadh": [
+        "ux-research",
+        "figma",
+        "prototyping",
+        "ui-design",
+        "teamwork"
+      ],
+      "hungerstation-senior-product-designer-riyadh": [
+        "ux-research",
+        "figma",
+        "ui-design",
+        "presentation",
+        "teamwork"
+      ],
+      "atheer-hr-specialist-riyadh": [
+        "hr-basics",
+        "labor-law",
+        "recruitment",
+        "payroll",
+        "english"
+      ]
+    },
+    "flaggedNotApplied": {
+      "sql": [],
+      "powerbi": [
+        "excel",
+        "statistics"
+      ]
+    },
+    "largerChangesOptional": [
+      "New skill software-testing «اختبار البرمجيات» for the QA path (ISTQB CTFL); changes the 38-skill / 59-course counts.",
+      "ux-research ★★ «البحث الكمي» only if a UX researcher job is added.",
+      "Engine: a prerequisite that names a star (react needs javascript ★★; ml needs statistics ★★)."
+    ]
+  },
+  "notOpened": [
+    "pmi.org (403) — CAPM domains read from open-exam-prep.com, which cites the PMI ECO",
+    "IIBA ECBA blueprint PDF — domain names/weights read from open-exam-prep.com; IIBA pages confirm 9 domains",
+    "CIPD Level 3 people practice (403)",
+    "HubSpot Academy content-marketing curriculum (not in the served page)",
+    "SHRM BASK page (lists only the behavioural competencies; no functional-area structure)",
+    "sdaia.gov.sa NOSF page (request rejected) — the framework PDF was opened from iu.edu.sa",
+    "HRSD occupation profiles (search app; only the overview and the major groups opened)"
+  ],
+  "families": {
+    "data-analyst-bi": {
+      "label": "محلل بيانات / ذكاء الأعمال",
+      "guidelines": [
+        {
+          "name": "Exam PL-300 study guide: Microsoft Power BI Data Analyst (skills measured as of April 20, 2026)",
+          "provider": "Microsoft Learn",
+          "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-300",
+          "orderedTopics": [
+            "Prepare the data (25–30%): get or connect to data · profile and clean the data («Evaluate data, including data statistics and column properties») · transform and load",
+            "Model the data (25–30%): design a data model · DAX calculations («Use basic statistical functions», time intelligence) · optimise performance",
+            "Visualize and analyze the data (25–30%): create reports («Select an appropriate visual») · usability and storytelling · identify patterns and trends (outliers, forecasting)",
+            "Manage and secure Power BI (15–20%): workspaces and apps · scheduled refresh · row-level security"
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "Google Data Analytics Professional Certificate",
+          "provider": "Google (Coursera)",
+          "url": "https://www.coursera.org/professional-certificates/google-data-analytics",
+          "orderedTopics": [
+            "1 Foundations: Data, Data, Everywhere (spreadsheets, SQL, Tableau introduced)",
+            "2 Ask Questions to Make Data-Driven Decisions",
+            "3 Prepare Data for Exploration",
+            "4 Process Data from Dirty to Clean",
+            "5 Analyze Data to Answer Questions",
+            "6 Share Data Through the Art of Visualization (Tableau, presentations)",
+            "7 Introduction to Data Analysis Using Python",
+            "8 Google Data Analytics Capstone: Complete a Case Study",
+            "9 Accelerate Your Job Search with AI"
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "IBM Data Analyst Professional Certificate",
+          "provider": "IBM (Coursera)",
+          "url": "https://www.coursera.org/professional-certificates/ibm-data-analyst",
+          "orderedTopics": [
+            "1 Data Analytics Foundations",
+            "2 Excel for Data Analysis (incl. cleaning data in Excel)",
+            "3 Data Visualization and Dashboards with Excel and Cognos",
+            "4 Python for Data Science & AI",
+            "5 Python Project for Data Science",
+            "6 Databases and SQL for Data Science with Python",
+            "7 Data Analysis with Python (descriptive statistics, correlation, regression)",
+            "8 Data Visualization with Python",
+            "9 IBM Data Analyst Capstone Project",
+            "10 Generative AI",
+            "11 Career Guide and Interview Preparation"
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "Data Analyst Roadmap",
+          "provider": "roadmap.sh",
+          "url": "https://roadmap.sh/data-analyst",
+          "orderedTopics": [
+            "Introduction (types of data analytics)",
+            "Excel (IF, VLOOKUP/HLOOKUP, AVERAGE/COUNT/SUM, Pivot Tables, Charting)",
+            "Learn a Language (data manipulation and visualisation libraries)",
+            "Data Collection (databases, APIs, CSV, web scraping)",
+            "Data Cleanup (missing data, duplicates, outliers, transformation)",
+            "Descriptive Analysis (central tendency, dispersion, distribution shape)",
+            "Data Visualisation (Tableau, Matplotlib/ggplot2; bar, line, histogram, scatter…)",
+            "Statistical Analysis (hypothesis testing, correlation analysis, regression)",
+            "Machine Learning",
+            "Big Data Technologies",
+            "Deep Learning (Optional)"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "Order read from the roadmap's own node positions (top to bottom) in the page data; the article text alone has no order."
+        },
+        {
+          "name": "BI Analyst Roadmap",
+          "provider": "roadmap.sh",
+          "url": "https://roadmap.sh/bi-analyst",
+          "orderedTopics": [
+            "Introduction · Metrics and KPIs · Stakeholder Identification",
+            "Statistics: Descriptive, Inferential, Correlation, Regression, Hypothesis Testing",
+            "Data Sources · SQL Fundamentals · Popular Databases",
+            "Data Cleaning · Exploratory Data Analysis · Data Transformation",
+            "Visualisation Fundamentals · Chart Categories · Visualisation Best Practices",
+            "Excel · BI Platforms · Programming Languages",
+            "Time Series · A/B Testing · Cohort Analysis · Basic ML",
+            "Communication & Storytelling · Soft Skills",
+            "Data Quality, Ethics, Privacy",
+            "Data Modeling for BI · ETL basics",
+            "Portfolio · Certifications · Job Preparation"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "Order read from node positions (top to bottom)."
+        },
+        {
+          "name": "الإطار الوطني للمعايير المهنية للبيانات والذكاء الاصطناعي: بطاقة مهنة «محلل البيانات» (D-An)",
+          "provider": "الهيئة السعودية للبيانات والذكاء الاصطناعي (سدايا)",
+          "url": "https://iu.edu.sa/media/%D9%85%D8%B1%D9%83%D8%B2%20%D8%AF%D8%B9%D9%85%20%D8%A7%D8%AA%D8%AE%D8%A7%D8%B0%20%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%B1%20%D9%88%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA/%D9%86%D8%B4%D8%B1%D8%A7%D8%AA%20%D8%AA%D9%88%D8%B9%D9%8A%D8%A9_PDF/%D8%A7%D9%84%D8%A5%D8%B7%D8%A7%D8%B1%20%D8%A7%D9%84%D9%88%D8%B7%D9%86%D9%8A%20%D9%84%D9%84%D9%85%D8%B9%D8%A7%D9%8A%D9%8A%D8%B1%20%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9%20%D9%84%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A5%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A.pdf",
+          "orderedTopics": [
+            "Classification «علم البيانات وتحليلاته», domain «تحليل البيانات وذكاء الأعمال»",
+            "Skills: exploratory data analysis, statistical tests, outlier detection (D-An-S06); regression: OLS, GLM, tree methods, logistic (D-An-S08)",
+            "Knowledge: tables and the relationships between them (D-An-K05)",
+            "Abilities: clear data visualisations (D-An-A02); high-level programming languages (D-An-A03)"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "A competency card (what to know), not a learning order. Opened as the copy hosted by the Islamic University of Madinah; the sdaia.gov.sa page rejected automated access."
+        }
+      ],
+      "appSkills": [
+        {
+          "id": "excel",
+          "name": "Excel",
+          "maxStars": 3,
+          "prereqs": []
+        },
+        {
+          "id": "sql",
+          "name": "SQL",
+          "maxStars": 3,
+          "prereqs": [
+            "excel"
+          ]
+        },
+        {
+          "id": "statistics",
+          "name": "الإحصاء",
+          "maxStars": 2,
+          "prereqs": [
+            "excel"
+          ]
+        },
+        {
+          "id": "powerbi",
+          "name": "Power BI",
+          "maxStars": 3,
+          "prereqs": [
+            "excel"
+          ]
+        },
+        {
+          "id": "dataviz",
+          "name": "تصوير البيانات",
+          "maxStars": 1,
+          "prereqs": [
+            "powerbi"
+          ]
+        },
+        {
+          "id": "communication",
+          "name": "التواصل الفعّال",
+          "maxStars": 2,
+          "prereqs": []
+        },
+        {
+          "id": "presentation",
+          "name": "العرض والتقديم",
+          "maxStars": 1,
+          "prereqs": [
+            "communication"
+          ]
+        }
+      ],
+      "jobs": [
+        {
+          "jobId": "data-analyst-riyadh",
+          "title": "محلل بيانات",
+          "requirements": [
+            "excel ★★",
+            "sql ★★",
+            "powerbi ★",
+            "statistics ★★",
+            "communication ★"
+          ],
+          "pathNow": [
+            "excel*",
+            "sql*",
+            "powerbi*",
+            "statistics*",
+            "communication*",
+            "excel**",
+            "sql**",
+            "statistics**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "excel*",
+            "sql*",
+            "powerbi*",
+            "statistics*",
+            "communication*",
+            "excel**",
+            "sql**",
+            "statistics**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "excel*",
+            "sql*",
+            "statistics*",
+            "powerbi*",
+            "communication*",
+            "excel**",
+            "sql**",
+            "statistics**"
+          ]
+        },
+        {
+          "jobId": "jeeny-growth-insights-analytics-riyadh",
+          "title": "مدير نمو - رؤى وتحليلات",
+          "requirements": [
+            "excel ★★★",
+            "sql ★★★",
+            "powerbi ★",
+            "statistics ★★",
+            "communication ★★"
+          ],
+          "pathNow": [
+            "excel*",
+            "sql*",
+            "powerbi*",
+            "statistics*",
+            "communication*",
+            "excel**",
+            "sql**",
+            "statistics**",
+            "communication**",
+            "excel***",
+            "sql***"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "excel*",
+            "sql*",
+            "statistics*",
+            "powerbi*",
+            "communication*",
+            "excel**",
+            "sql**",
+            "statistics**",
+            "communication**",
+            "excel***",
+            "sql***"
+          ],
+          "pathAfterAllProposedChanges": [
+            "excel*",
+            "sql*",
+            "statistics*",
+            "powerbi*",
+            "communication*",
+            "excel**",
+            "sql**",
+            "statistics**",
+            "communication**",
+            "excel***",
+            "sql***"
+          ]
+        },
+        {
+          "jobId": "qiddiya-hr-analytics-analyst-riyadh",
+          "title": "محلل تحليلات وتقارير الموارد البشرية",
+          "requirements": [
+            "powerbi ★★",
+            "statistics ★",
+            "dataviz ★",
+            "presentation ★",
+            "hr-basics ★"
+          ],
+          "pathNow": [
+            "excel*(prep>powerbi)",
+            "powerbi*",
+            "statistics*",
+            "dataviz*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "hr-basics*",
+            "powerbi**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "excel*(prep>statistics)",
+            "statistics*",
+            "powerbi*",
+            "dataviz*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "hr-basics*",
+            "powerbi**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "excel*(prep>statistics)",
+            "statistics*",
+            "powerbi*",
+            "dataviz*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "hr-basics*",
+            "powerbi**"
+          ]
+        },
+        {
+          "jobId": "ninja-real-estate-performance-analyst-riyadh",
+          "title": "محلل أداء عقاري",
+          "requirements": [
+            "excel ★★★",
+            "powerbi ★",
+            "communication ★★",
+            "problem-solving ★",
+            "presentation ★"
+          ],
+          "pathNow": [
+            "excel*",
+            "powerbi*",
+            "communication*",
+            "problem-solving*",
+            "presentation*",
+            "excel**",
+            "communication**",
+            "excel***"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "excel*",
+            "powerbi*",
+            "communication*",
+            "problem-solving*",
+            "presentation*",
+            "excel**",
+            "communication**",
+            "excel***"
+          ],
+          "pathAfterAllProposedChanges": [
+            "excel*",
+            "statistics*(prep>powerbi)",
+            "powerbi*",
+            "communication*",
+            "problem-solving*",
+            "presentation*",
+            "excel**",
+            "communication**",
+            "excel***"
+          ]
+        },
+        {
+          "jobId": "master-works-data-senior-engineer-riyadh",
+          "title": "مهندس بيانات أول",
+          "requirements": [
+            "sql ★★★",
+            "powerbi ★",
+            "dataviz ★",
+            "communication ★",
+            "english ★"
+          ],
+          "pathNow": [
+            "excel*(prep>sql)",
+            "sql*",
+            "powerbi*",
+            "dataviz*",
+            "communication*",
+            "english*",
+            "sql**",
+            "sql***"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "excel*(prep>sql)",
+            "sql*",
+            "powerbi*",
+            "dataviz*",
+            "communication*",
+            "english*",
+            "sql**",
+            "sql***"
+          ],
+          "pathAfterAllProposedChanges": [
+            "sql*",
+            "excel*(prep>powerbi)",
+            "statistics*(prep>powerbi)",
+            "powerbi*",
+            "dataviz*",
+            "communication*",
+            "english*",
+            "sql**",
+            "sql***"
+          ]
+        }
+      ],
+      "consistent": [
+        "طلب الوظيفة التدريبية «محلل بيانات» (Excel ★★، SQL ★★، Power BI ★، الإحصاء ★★، التواصل ★) يوافق الأدلة: الجداول المحورية والبحث في Excel (roadmap.sh: Excel → Pivot Tables؛ IBM الدورة 2)، والربط والتجميع في SQL (Google الدورة 5)، وPower BI ★ = الربط والتنظيف والتقرير والنشر (PL-300: Prepare + Create reports) ونمذجة DAX في ★★ (PL-300: Model the data)، والإحصاء ★★ = اختبار الفرضيات والانحدار (roadmap.sh: Statistical Analysis؛ سدايا D-An-S08). لا تغيير.",
+        "ترتيب ما يراه مستخدم العرض بعد سيرته (المرحلة 7 = Power BI ★ ثم المرحلة 8 = الإحصاء ★★) يوافق roadmap.sh: «Data Visualisation» قبل «Statistical Analysis» (الإحصاء الاستدلالي)، والإحصاء الوصفي ★ مثبت مسبقاً من سيرته.",
+        "Excel قبل SQL للمحللين يوافق Google (جداول ثم SQL) وIBM (Excel الدورة 2، SQL الدورة 6).",
+        "التواصل والعرض في آخر المسار يوافق Google (الدورة 6: العروض) وroadmap.sh BI (Communication & Storytelling بعد الأدوات)."
+      ],
+      "mismatches": [
+        {
+          "issue": "في الترتيب القياسي يأتي Power BI ★ قبل الإحصاء الوصفي ★، لأن `powerbi` لا يتطلب إلا `excel`؛ فالمستخدم الجديد يبني لوحات قبل أن يتعلم وصف البيانات. الأدلة تضع الوصف والتنظيف قبل التصوير.",
+          "evidence": "Google DA: «5 Analyze Data to Answer Questions» قبل «6 Share Data Through the Art of Visualization»؛ roadmap.sh Data Analyst: «Descriptive Analysis» (central tendency, dispersion) قبل «Data Visualisation»؛ roadmap.sh BI Analyst: كتلة Statistics قبل «BI Platforms»؛ PL-300 يبدأ بـ «Profile and clean the data: Evaluate data, including data statistics and column properties».",
+          "proposedChange": "المُوصى به (ب) بديل آمن للعرض: إعادة ترتيب متطلبات الوظائف الحقيقية فقط: jeeny → `excel, sql, statistics, powerbi, communication`؛ qiddiya-hr-analytics → `statistics, powerbi, dataviz, presentation, hr-basics`. الوظيفة التدريبية تبقى كما هي. (أ) التغيير العام: `powerbi.prereqs: [\"excel\"] → [\"excel\", \"statistics\"]` — لم يُطبَّق، يحتاج موافقة، وكلفته أنه يضيف الإحصاء تمهيدية لكل وظيفة Power BI لا تطلب الإحصاء: ninja 8 → 9، master-works 8 → 9، qiddiya-hris +1.",
+          "affectsDemo": true,
+          "priority": "high",
+          "demoNote": "(أ) يغيّر الترتيب القياسي لـ data-analyst-riyadh إلى Excel ★ · SQL ★ · الإحصاء ★ · Power BI ★ · التواصل ★ · Excel ★★ · SQL ★★ · الإحصاء ★★: يتغير شريط المسار في الكشف (3.3) وحالات القفل قبل السيرة واختبار roadmap.test. العدد يبقى 8 مراحل · 74 ساعة، ومستخدم العرض يرى المرحلة 7 = Power BI ★ والمرحلة 8 = الإحصاء ★★ كما هي (الإحصاء ★ من سيرته). (ب) لا يمس العرض: qiddiya بديل في الكشف لكن عدده يبقى 8 مراحل · 64 ساعة."
+        },
+        {
+          "issue": "«تصوير البيانات» (اختيار الرسم المناسب) يتطلب Power BI، فكل من يحتاج التصوير بلا Power BI (عالم بيانات Python مثلاً) يُضاف له Power BI تمهيدية.",
+          "evidence": "roadmap.sh BI Analyst: «Viz. Fundamentals · Chart Categories · Viz. Best Practices» قبل «Excel · BI Platforms»؛ Google DA يعلّم التصوير بـ Tableau؛ IBM DS: «Data Visualization with Python»؛ PL-300 يضع «Select an appropriate visual» داخل إنشاء التقارير لا بعدها.",
+          "proposedChange": "`dataviz.prereqs: [\"powerbi\"] → []`. الوظائف التي تطلب dataviz وتطلب powerbi قبله لا يتغير مسارها؛ salla-senior-data-scientist يفقد مرحلة Power BI التمهيدية.",
+          "affectsDemo": false,
+          "priority": "medium"
+        },
+        {
+          "issue": "SQL يتطلب Excel؛ صحيح لمحللي البيانات لكنه يضيف Excel تمهيدية لمسارات البرمجة والتسويق (انظر عائلة الأنظمة الخلفية).",
+          "evidence": "Meta Back-End: «4 Introduction to Databases for Back-End Development» بلا أي دورة جداول؛ roadmap.sh Backend: «Relational Databases» بعد «Version Control» بلا Excel.",
+          "proposedChange": "`sql.prereqs: [\"excel\"] → []` — لم يُطبَّق، يحتاج موافقة (التفاصيل في عائلة backend).",
+          "affectsDemo": true,
+          "priority": "medium",
+          "demoNote": "الترتيب القياسي للوظيفة التدريبية لا يتغير (Excel أول متطلباتها) ولا أرقام العرض، لكن خريطة ما قبل السيرة تعرض SQL ★ «متاحة» بدل «مقفلة» (اختبار roadmap.test «before a CV»)."
+        }
+      ],
+      "basedOnLine": "المسار مبني على: دليل اختبار Microsoft PL-300 لمحلل بيانات Power BI، وشهادة Google لتحليل البيانات، وبطاقة مهنة «محلل البيانات» في الإطار الوطني للمعايير المهنية للبيانات والذكاء الاصطناعي (سدايا)",
+      "basedOnLinks": [
+        "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-300",
+        "https://www.coursera.org/professional-certificates/google-data-analytics",
+        "https://iu.edu.sa/media/%D9%85%D8%B1%D9%83%D8%B2%20%D8%AF%D8%B9%D9%85%20%D8%A7%D8%AA%D8%AE%D8%A7%D8%B0%20%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%B1%20%D9%88%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA/%D9%86%D8%B4%D8%B1%D8%A7%D8%AA%20%D8%AA%D9%88%D8%B9%D9%8A%D8%A9_PDF/%D8%A7%D9%84%D8%A5%D8%B7%D8%A7%D8%B1%20%D8%A7%D9%84%D9%88%D8%B7%D9%86%D9%8A%20%D9%84%D9%84%D9%85%D8%B9%D8%A7%D9%8A%D9%8A%D8%B1%20%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9%20%D9%84%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A5%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A.pdf"
+      ]
+    },
+    "data-science": {
+      "label": "علم البيانات",
+      "guidelines": [
+        {
+          "name": "IBM Data Science Professional Certificate",
+          "provider": "IBM (Coursera)",
+          "url": "https://www.coursera.org/professional-certificates/ibm-data-science",
+          "orderedTopics": [
+            "1 Data Science Foundations",
+            "2 Essential Tools for Data Scientists: Git, Jupyter & More",
+            "3 Data Science Methodology",
+            "4 Python for Data Science & AI",
+            "5 Python Project for Data Science",
+            "6 Databases and SQL for Data Science with Python",
+            "7 Data Analysis with Python (cleaning, EDA, statistical methods)",
+            "8 Data Visualization with Python",
+            "9 Machine Learning with Python",
+            "10 Applied Data Science Capstone",
+            "11 Generative AI",
+            "12 Career Guide and Interview Preparation"
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "Google Advanced Data Analytics Professional Certificate",
+          "provider": "Google (Coursera)",
+          "url": "https://www.coursera.org/professional-certificates/google-advanced-data-analytics",
+          "orderedTopics": [
+            "(assumes the Google Data Analytics certificate: spreadsheets, SQL, visualisation)",
+            "1 Foundations of Data Science",
+            "2 Go Beyond the Numbers: Translate Data into Insights (Python, Tableau)",
+            "3 The Power of Statistics (probability, sampling, hypothesis testing)",
+            "4 Regression Analysis: Simplify Complex Data Relationships",
+            "5 The Nuts and Bolts of Machine Learning",
+            "6 Capstone",
+            "7 Accelerate Your Job Search with AI"
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "AI and Data Scientist Roadmap",
+          "provider": "roadmap.sh",
+          "url": "https://roadmap.sh/ai-data-scientist",
+          "orderedTopics": [
+            "Mathematics · Statistics",
+            "Econometrics",
+            "Coding (Python, SQL)",
+            "Exploratory Data Analysis",
+            "Machine Learning",
+            "Deep Learning",
+            "MLOps",
+            "AI Engineering"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "Order read from node positions (top to bottom)."
+        },
+        {
+          "name": "الإطار الوطني للمعايير المهنية للبيانات والذكاء الاصطناعي: بطاقة مهنة «عالم بيانات» (D-S)",
+          "provider": "الهيئة السعودية للبيانات والذكاء الاصطناعي (سدايا)",
+          "url": "https://iu.edu.sa/media/%D9%85%D8%B1%D9%83%D8%B2%20%D8%AF%D8%B9%D9%85%20%D8%A7%D8%AA%D8%AE%D8%A7%D8%B0%20%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%B1%20%D9%88%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA/%D9%86%D8%B4%D8%B1%D8%A7%D8%AA%20%D8%AA%D9%88%D8%B9%D9%8A%D8%A9_PDF/%D8%A7%D9%84%D8%A5%D8%B7%D8%A7%D8%B1%20%D8%A7%D9%84%D9%88%D8%B7%D9%86%D9%8A%20%D9%84%D9%84%D9%85%D8%B9%D8%A7%D9%8A%D9%8A%D8%B1%20%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9%20%D9%84%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A5%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A.pdf",
+          "orderedTopics": [
+            "Tasks: probability in random situations, measuring relationships between variables (D-S-T01); business models such as recommendation, fraud detection, demand forecasting (D-S-T08)",
+            "Skills: statistical analysis, model validation and hypothesis testing (D-S-S02); exploratory data analysis and statistical tests (D-S-S03); clear, actionable communication to different audiences (D-S-S04)"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "A competency card (what to know), not a learning order. Opened as the copy hosted by the Islamic University of Madinah; the sdaia.gov.sa page rejected automated access."
+        }
+      ],
+      "appSkills": [
+        {
+          "id": "sql",
+          "name": "SQL",
+          "maxStars": 3,
+          "prereqs": [
+            "excel"
+          ]
+        },
+        {
+          "id": "statistics",
+          "name": "الإحصاء",
+          "maxStars": 2,
+          "prereqs": [
+            "excel"
+          ]
+        },
+        {
+          "id": "python-data",
+          "name": "تحليل البيانات بـ Python",
+          "maxStars": 1,
+          "prereqs": [
+            "sql",
+            "statistics"
+          ]
+        },
+        {
+          "id": "ml",
+          "name": "تعلّم الآلة",
+          "maxStars": 1,
+          "prereqs": [
+            "python-data"
+          ]
+        },
+        {
+          "id": "dataviz",
+          "name": "تصوير البيانات",
+          "maxStars": 1,
+          "prereqs": [
+            "powerbi"
+          ]
+        },
+        {
+          "id": "communication",
+          "name": "التواصل الفعّال",
+          "maxStars": 2,
+          "prereqs": []
+        }
+      ],
+      "jobs": [
+        {
+          "jobId": "salla-senior-data-scientist-remote",
+          "title": "عالم بيانات أول - مقاييس وتحليلات منصات سلة",
+          "requirements": [
+            "sql ★★★",
+            "dataviz ★",
+            "statistics ★",
+            "python-data ★",
+            "communication ★★"
+          ],
+          "pathNow": [
+            "excel*(prep>sql)",
+            "sql*",
+            "powerbi*(prep>dataviz)",
+            "dataviz*",
+            "statistics*",
+            "python-data*",
+            "communication*",
+            "sql**",
+            "communication**",
+            "sql***"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "excel*(prep>sql)",
+            "sql*",
+            "statistics*",
+            "python-data*",
+            "dataviz*",
+            "communication*",
+            "sql**",
+            "communication**",
+            "sql***"
+          ],
+          "pathAfterAllProposedChanges": [
+            "sql*",
+            "excel*(prep>statistics)",
+            "statistics*",
+            "python-data*",
+            "dataviz*",
+            "communication*",
+            "sql**",
+            "communication**",
+            "sql***"
+          ]
+        }
+      ],
+      "consistent": [
+        "`python-data` يتطلب `statistics` يوافق roadmap.sh (Mathematics · Statistics أولاً) وسدايا (D-S-S02/S03 الإحصاء واختبار الفرضيات).",
+        "`python-data` يتطلب `sql` يوافق مسار Google (شهادة تحليل البيانات بـ SQL قبل الشهادة المتقدمة)، وإن كانت IBM تبدأ بـ Python قبل SQL. لا تغيير.",
+        "`ml` بعد `python-data` يوافق IBM (الدورة 9 بعد 7) وGoogle المتقدمة (الدورة 5 بعد الإحصاء والانحدار)."
+      ],
+      "mismatches": [
+        {
+          "issue": "مسار عالم البيانات (سلة) يبدأ بـ Excel تمهيدية لـ SQL ثم Power BI تمهيدية لتصوير البيانات؛ لا شهادة علم بيانات تتضمن أياً منهما.",
+          "evidence": "IBM DS: الأدوات Git/Jupyter ثم Python ثم «Databases and SQL» ثم «Data Visualization with Python» — لا Excel ولا Power BI؛ Google Advanced: Python وTableau ثم الإحصاء.",
+          "proposedChange": "`dataviz.prereqs → []` (آمن: 10 → 9، تزول Power BI) و`sql.prereqs → []` (مُعلَّم، انظر backend). تبقى Excel تمهيدية لأن `statistics` يتطلب `excel`؛ إزالتها تحتاج `statistics.prereqs → []` (roadmap.sh يضع Statistics أولاً بلا جداول)، لكنه مثل sql يقلب قفل الإحصاء ★ قبل السيرة في العرض، فأولويته منخفضة ولم يُحسب هنا.",
+          "affectsDemo": true,
+          "priority": "high",
+          "demoNote": "جزء `sql` فقط يمس خريطة ما قبل السيرة في العرض (انظر backend)؛ جزء `dataviz` لا يمس العرض."
+        },
+        {
+          "issue": "التصوير يأتي قبل الإحصاء وتحليل Python في مسار سلة، والأدلة تضعه بعدهما.",
+          "evidence": "IBM DS: «7 Data Analysis with Python» ثم «8 Data Visualization with Python» ثم «9 Machine Learning»؛ Google Advanced: Python → «The Power of Statistics» → Regression → ML.",
+          "proposedChange": "إعادة ترتيب متطلبات salla-senior-data-scientist: `sql, statistics, python-data, dataviz, communication`.",
+          "affectsDemo": false,
+          "priority": "medium"
+        },
+        {
+          "issue": "`ml` يكتفي بنجمة واحدة من تحليل Python، والانحدار في الإحصاء ★★؛ Google تضع الإحصاء ثم الانحدار قبل تعلم الآلة.",
+          "evidence": "Google Advanced: «3 The Power of Statistics» → «4 Regression Analysis» → «5 The Nuts and Bolts of Machine Learning».",
+          "proposedChange": "لا تغيير الآن (لا وظيفة تطلب ml). لاحقاً: متطلب بنجمة محددة يحتاج تغييراً في المحرك.",
+          "affectsDemo": false,
+          "priority": "low"
+        }
+      ],
+      "basedOnLine": "المسار مبني على: شهادة IBM لعلم البيانات، وشهادة Google المتقدمة لتحليل البيانات، وبطاقة مهنة «عالم بيانات» في الإطار الوطني للمعايير المهنية للبيانات والذكاء الاصطناعي (سدايا)",
+      "basedOnLinks": [
+        "https://www.coursera.org/professional-certificates/ibm-data-science",
+        "https://www.coursera.org/professional-certificates/google-advanced-data-analytics",
+        "https://iu.edu.sa/media/%D9%85%D8%B1%D9%83%D8%B2%20%D8%AF%D8%B9%D9%85%20%D8%A7%D8%AA%D8%AE%D8%A7%D8%B0%20%D8%A7%D9%84%D9%82%D8%B1%D8%A7%D8%B1%20%D9%88%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA/%D9%86%D8%B4%D8%B1%D8%A7%D8%AA%20%D8%AA%D9%88%D8%B9%D9%8A%D8%A9_PDF/%D8%A7%D9%84%D8%A5%D8%B7%D8%A7%D8%B1%20%D8%A7%D9%84%D9%88%D8%B7%D9%86%D9%8A%20%D9%84%D9%84%D9%85%D8%B9%D8%A7%D9%8A%D9%8A%D8%B1%20%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9%20%D9%84%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A5%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A.pdf"
+      ]
+    },
+    "frontend-web": {
+      "label": "تطوير الواجهات الأمامية والويب",
+      "guidelines": [
+        {
+          "name": "Meta Front-End Developer Professional Certificate",
+          "provider": "Meta (Coursera)",
+          "url": "https://www.coursera.org/professional-certificates/meta-front-end-developer",
+          "orderedTopics": [
+            "1 Introduction to Front-End Development (HTML, CSS)",
+            "2 Programming with JavaScript",
+            "3 Version Control (Git, GitHub)",
+            "4 HTML and CSS in depth",
+            "5 React Basics",
+            "6 Advanced React (fetching and posting data via an API)",
+            "7 Principles of UX/UI Design",
+            "8 Front-End Developer Capstone",
+            "9 Coding Interview Preparation"
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "Frontend Developer Roadmap",
+          "provider": "roadmap.sh",
+          "url": "https://roadmap.sh/frontend",
+          "orderedTopics": [
+            "Internet",
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Version Control",
+            "VCS Hosting",
+            "Package Managers",
+            "CSS Frameworks",
+            "Learn a Framework (React, Vue…)",
+            "AI Assisted Coding",
+            "Auth Strategies · Module Bundlers · Linters & Formatters",
+            "Testing",
+            "Web APIs · Web Security",
+            "SSR / SSG · Type Checkers · Deployment",
+            "Design Systems",
+            "Performance",
+            "Accessibility · Web Components · GraphQL",
+            "PWAs · Mobile Apps · Desktop Apps"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "Order read from node positions (top to bottom)."
+        },
+        {
+          "name": "The Odin Project: Foundations",
+          "provider": "The Odin Project",
+          "url": "https://www.theodinproject.com/paths/foundations/courses/foundations",
+          "orderedTopics": [
+            "Introduction",
+            "Prerequisites (incl. Setting up Git)",
+            "Git Basics",
+            "HTML Foundations",
+            "CSS Foundations",
+            "Flexbox",
+            "JavaScript Basics",
+            "Conclusion"
+          ],
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "appSkills": [
+        {
+          "id": "html-css",
+          "name": "HTML و CSS",
+          "maxStars": 1,
+          "prereqs": []
+        },
+        {
+          "id": "programming",
+          "name": "أساسيات البرمجة",
+          "maxStars": 2,
+          "prereqs": []
+        },
+        {
+          "id": "javascript",
+          "name": "JavaScript",
+          "maxStars": 3,
+          "prereqs": [
+            "html-css",
+            "programming"
+          ]
+        },
+        {
+          "id": "react",
+          "name": "React",
+          "maxStars": 1,
+          "prereqs": [
+            "javascript"
+          ]
+        },
+        {
+          "id": "git",
+          "name": "Git",
+          "maxStars": 1,
+          "prereqs": [
+            "programming"
+          ]
+        },
+        {
+          "id": "apis",
+          "name": "واجهات API",
+          "maxStars": 1,
+          "prereqs": [
+            "programming",
+            "git"
+          ]
+        }
+      ],
+      "jobs": [
+        {
+          "jobId": "lucidya-frontend-engineer-dammam",
+          "title": "مهندس برمجيات واجهات أمامية (للسعوديين فقط)",
+          "requirements": [
+            "html-css ★",
+            "javascript ★★",
+            "react ★",
+            "git ★",
+            "apis ★"
+          ],
+          "pathNow": [
+            "html-css*",
+            "programming*(prep>javascript)",
+            "javascript*",
+            "react*",
+            "git*",
+            "apis*",
+            "javascript**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "html-css*",
+            "javascript*",
+            "git*",
+            "react*",
+            "programming*(prep>apis)",
+            "apis*",
+            "javascript**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "html-css*",
+            "javascript*",
+            "git*",
+            "react*",
+            "programming*(prep>apis)",
+            "apis*",
+            "javascript**"
+          ]
+        },
+        {
+          "jobId": "almajed-mobile-developer-riyadh",
+          "title": "مطوّر تطبيقات جوال",
+          "requirements": [
+            "programming ★",
+            "apis ★",
+            "ui-design ★",
+            "teamwork ★",
+            "business-analysis ★"
+          ],
+          "pathNow": [
+            "programming*",
+            "git*(prep>apis)",
+            "apis*",
+            "design-basics*(prep>figma)",
+            "figma*(prep>ui-design)",
+            "ui-design*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "project-management*(prep>business-analysis)",
+            "business-analysis*"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "programming*",
+            "git*(prep>apis)",
+            "apis*",
+            "design-basics*(prep>figma)",
+            "figma*(prep>ui-design)",
+            "ui-design*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "business-analysis*"
+          ],
+          "pathAfterAllProposedChanges": [
+            "programming*",
+            "git*(prep>apis)",
+            "apis*",
+            "design-basics*(prep>figma)",
+            "figma*(prep>ui-design)",
+            "ui-design*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "business-analysis*"
+          ]
+        }
+      ],
+      "consistent": [
+        "HTML و CSS أولاً ثم JavaScript ثم React يوافق الأدلة الثلاثة.",
+        "`react` يتطلب `javascript` يوافق Meta (React Basics بعد Programming with JavaScript) وroadmap.sh (Learn a Framework بعد JavaScript)."
+      ],
+      "mismatches": [
+        {
+          "issue": "JavaScript يتطلب «أساسيات البرمجة بـ Python»، فمطوّر الواجهات يأخذ دورة Python تمهيدية قبل JavaScript.",
+          "evidence": "Meta FE: «1 Introduction to Front-End Development» ثم مباشرة «2 Programming with JavaScript»؛ roadmap.sh: HTML → CSS → JavaScript بلا لغة قبلها؛ Odin: «JavaScript Basics» بعد HTML/CSS.",
+          "proposedChange": "`javascript.prereqs: [\"html-css\", \"programming\"] → [\"html-css\"]`.",
+          "affectsDemo": false,
+          "priority": "high"
+        },
+        {
+          "issue": "Git يتطلب البرمجة (Python)، فيبقى Python داخل مسارات JavaScript حتى بعد التغيير السابق.",
+          "evidence": "Odin: «Git Basics» قبل «HTML Foundations» و«JavaScript Basics»؛ roadmap.sh: «Version Control» مباشرة بعد JavaScript؛ Meta FE: «3 Version Control» بعد JavaScript وMeta BE بعد Python — أي لغة تكفي.",
+          "proposedChange": "`git.prereqs: [\"programming\"] → []`.",
+          "affectsDemo": false,
+          "priority": "high"
+        },
+        {
+          "issue": "Git يأتي بعد React في وظيفة لوسيديا، والأدلة تضع إدارة النسخ قبل إطار العمل.",
+          "evidence": "roadmap.sh: «Version Control» (y=384) قبل «Learn a Framework» (y=739)؛ Meta FE: الدورة 3 Version Control قبل الدورة 5 React Basics.",
+          "proposedChange": "إعادة ترتيب متطلبات lucidya-frontend-engineer: `html-css, javascript, git, react, apis`.",
+          "affectsDemo": false,
+          "priority": "medium"
+        },
+        {
+          "issue": "جملة الإعلان عن الواجهات («integrating frontend applications with APIs and handling asynchronous data») مربوطة بـ `apis`، ودورة `apis` تصميم خدمات خلفية مع قاعدة بيانات وتتطلب Python؛ أما جلب البيانات غير المتزامن فهو في JavaScript ★★ («الوعود والانتظار غير المتزامن / جلب البيانات من واجهات API»).",
+          "evidence": "Meta FE يعلّم استهلاك الواجهات في «6 Advanced React (fetching and posting data via an API)» بلا دورة خلفية؛ Meta BE يعلّم تصميم الواجهات في «6 APIs» بعد Python وقواعد البيانات.",
+          "proposedChange": "لوكيل الوظائف: إن كان في إعلان لوسيديا مهارة خامسة أخرى (الإنجليزية، العمل الجماعي…) فلتحل محل `apis`؛ فقرة الواجهات يغطيها `javascript ★★` الموجود. وإلا يبقى `apis` وتبقى Python تمهيدية واحدة.",
+          "affectsDemo": false,
+          "priority": "low"
+        },
+        {
+          "issue": "JavaScript ★★ (الجلب غير المتزامن) يأتي بعد React لأن كل ★ يسبق كل ★★؛ الأدلة تكمل JavaScript قبل إطار العمل.",
+          "evidence": "Meta FE: «Programming with JavaScript» (48 ساعة) كاملة قبل React؛ roadmap.sh: JavaScript قبل «Learn a Framework».",
+          "proposedChange": "لا حل بالبيانات وحدها. اختياري: متطلب بنجمة محددة (react يتطلب javascript ★★) — تغيير في المحرك.",
+          "affectsDemo": false,
+          "priority": "low"
+        }
+      ],
+      "basedOnLine": "المسار مبني على: شهادة Meta لتطوير الواجهات الأمامية، ومسار مطوّر الواجهات الأمامية في roadmap.sh",
+      "basedOnLinks": [
+        "https://www.coursera.org/professional-certificates/meta-front-end-developer",
+        "https://roadmap.sh/frontend"
+      ]
+    },
+    "backend": {
+      "label": "تطوير الأنظمة الخلفية",
+      "guidelines": [
+        {
+          "name": "Meta Back-End Developer Professional Certificate",
+          "provider": "Meta (Coursera)",
+          "url": "https://www.coursera.org/professional-certificates/meta-back-end-developer",
+          "orderedTopics": [
+            "1 Introduction to Back-End Development (HTML, CSS)",
+            "2 Programming in Python",
+            "3 Version Control",
+            "4 Introduction to Databases for Back-End Development (SQL, MySQL)",
+            "5 Django Web Framework",
+            "6 APIs (REST, JSON)",
+            "7 The Full Stack",
+            "8 Back-End Developer Capstone",
+            "9 Coding Interview Preparation"
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "Backend Developer Roadmap",
+          "provider": "roadmap.sh",
+          "url": "https://roadmap.sh/backend",
+          "orderedTopics": [
+            "Introduction",
+            "Frontend Basics",
+            "Pick a Backend Language",
+            "Version Control Systems",
+            "Repo Hosting Services",
+            "Relational Databases",
+            "Learn about APIs",
+            "Caching",
+            "Web Servers",
+            "AI Assisted Coding",
+            "Integration Patterns",
+            "CI / CD",
+            "More about Databases · Testing",
+            "Message Brokers",
+            "Architectural Patterns · Search Engines",
+            "Real-Time Data",
+            "Scaling Databases · NoSQL",
+            "Building For Scale"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "Order read from node positions (top to bottom)."
+        }
+      ],
+      "appSkills": [
+        {
+          "id": "programming",
+          "name": "أساسيات البرمجة",
+          "maxStars": 2,
+          "prereqs": []
+        },
+        {
+          "id": "git",
+          "name": "Git",
+          "maxStars": 1,
+          "prereqs": [
+            "programming"
+          ]
+        },
+        {
+          "id": "sql",
+          "name": "SQL",
+          "maxStars": 3,
+          "prereqs": [
+            "excel"
+          ]
+        },
+        {
+          "id": "apis",
+          "name": "واجهات API",
+          "maxStars": 1,
+          "prereqs": [
+            "programming",
+            "git"
+          ]
+        }
+      ],
+      "jobs": [
+        {
+          "jobId": "salla-senior-backend-checkout-remote",
+          "title": "مهندس برمجيات خلفية أول - الدفع",
+          "requirements": [
+            "programming ★★",
+            "apis ★",
+            "sql ★★★",
+            "problem-solving ★",
+            "teamwork ★"
+          ],
+          "pathNow": [
+            "programming*",
+            "git*(prep>apis)",
+            "apis*",
+            "excel*(prep>sql)",
+            "sql*",
+            "problem-solving*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "programming**",
+            "sql**",
+            "sql***"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "programming*",
+            "excel*(prep>sql)",
+            "sql*",
+            "git*(prep>apis)",
+            "apis*",
+            "problem-solving*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "programming**",
+            "sql**",
+            "sql***"
+          ],
+          "pathAfterAllProposedChanges": [
+            "programming*",
+            "sql*",
+            "git*(prep>apis)",
+            "apis*",
+            "problem-solving*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "programming**",
+            "sql**",
+            "sql***"
+          ]
+        }
+      ],
+      "consistent": [
+        "لغة برمجة أولاً ثم Git ثم واجهات API يوافق Meta BE وroadmap.sh.",
+        "`apis` يتطلب `programming` و`git` يوافق Meta BE (Python ثم Version Control قبل APIs)."
+      ],
+      "mismatches": [
+        {
+          "issue": "Excel مرحلة تمهيدية قبل SQL في مسار مطوّر الأنظمة الخلفية.",
+          "evidence": "Meta BE: «3 Version Control» ثم «4 Introduction to Databases for Back-End Development» — لا دورة جداول في الشهادة كلها؛ roadmap.sh: «Relational Databases» بعد «Repo Hosting Services» بلا Excel.",
+          "proposedChange": "`sql.prereqs: [\"excel\"] → []` — لم يُطبَّق، يحتاج موافقة. يزيل Excel التمهيدية من backend (11 → 10) ومدير SEO (−1)؛ في master-works وعلم البيانات تبقى Excel تمهيدية لـ Power BI أو الإحصاء.",
+          "affectsDemo": true,
+          "priority": "high",
+          "demoNote": "ترتيب الوظيفة التدريبية وأرقامها لا تتغير (Excel أول متطلباتها، ومستخدم العرض يملك Excel ★★)، لكن خريطة ما قبل السيرة (خطوة 4 في العرض) تعرض SQL ★ «متاحة» بدل «مقفلة»، ويتغير توقع roadmap.test «before a CV»."
+        },
+        {
+          "issue": "SQL يأتي بعد واجهات API، والأدلة تضع قواعد البيانات قبلها، ودورة `apis` نفسها فيها درس «الربط بقاعدة البيانات».",
+          "evidence": "Meta BE: «4 Introduction to Databases» قبل «6 APIs»؛ roadmap.sh: «Relational Databases» (y=577) قبل «Learn about APIs» (y=730).",
+          "proposedChange": "إعادة ترتيب متطلبات salla-senior-backend-checkout: `programming, sql, apis, problem-solving, teamwork`. (لا نضيف sql إلى متطلبات apis لأن ذلك يضيف SQL إلى مسارات الواجهات ومحلل الأعمال والجوال.)",
+          "affectsDemo": false,
+          "priority": "medium"
+        },
+        {
+          "issue": "البرمجة ★★ (الكائنية وهياكل البيانات) تأتي في المرحلة التاسعة، وMeta تعلّمها ضمن دورة Python الأولى.",
+          "evidence": "Meta BE: «2 Programming in Python» تشمل البرمجة الكائنية قبل Version Control.",
+          "proposedChange": "لا تغيير بالبيانات (قاعدة «كل ★ قبل ★★» في المحرك).",
+          "affectsDemo": false,
+          "priority": "low"
+        }
+      ],
+      "basedOnLine": "المسار مبني على: شهادة Meta لتطوير الأنظمة الخلفية، ومسار مطوّر الأنظمة الخلفية في roadmap.sh",
+      "basedOnLinks": [
+        "https://www.coursera.org/professional-certificates/meta-back-end-developer",
+        "https://roadmap.sh/backend"
+      ]
+    },
+    "qa": {
+      "label": "ضمان الجودة واختبار البرمجيات",
+      "guidelines": [
+        {
+          "name": "ISTQB Certified Tester Foundation Level (CTFL) v4.0 syllabus",
+          "provider": "ISTQB",
+          "url": "https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/",
+          "orderedTopics": [
+            "1 Fundamentals of Testing",
+            "2 Testing Throughout the Software Development Lifecycle",
+            "3 Static Testing",
+            "4 Test Analysis & Design",
+            "5 Managing The Test Activities",
+            "6 Test Tools"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "No programming or automation prerequisite is stated."
+        },
+        {
+          "name": "QA Engineer Roadmap",
+          "provider": "roadmap.sh",
+          "url": "https://roadmap.sh/qa",
+          "orderedTopics": [
+            "Learn the Fundamentals (QA mindset, testing approaches, white/gray/black box)",
+            "SDLC Delivery Model (Agile, Waterfall, V-Model)",
+            "Testing Methodologies (TDD, BDD, ATDD)",
+            "Manual Testing (test cases and scenarios, test planning, functional, regression, smoke, integration)",
+            "Frontend Automation (HTML, CSS, JavaScript, Playwright, Cypress, Selenium) · Backend Automation (Postman/Newman, REST Assured)",
+            "Accessibility · Load & Performance · Security Testing",
+            "Reporting · Monitoring & Logs",
+            "Version Control System (Git) · Repo Hosting",
+            "CI / CD",
+            "Headless Testing"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "Order read from node positions (top to bottom)."
+        }
+      ],
+      "appSkills": [
+        {
+          "id": "html-css",
+          "name": "HTML و CSS",
+          "maxStars": 1,
+          "prereqs": []
+        },
+        {
+          "id": "programming",
+          "name": "أساسيات البرمجة",
+          "maxStars": 2,
+          "prereqs": []
+        },
+        {
+          "id": "javascript",
+          "name": "JavaScript",
+          "maxStars": 3,
+          "prereqs": [
+            "html-css",
+            "programming"
+          ]
+        },
+        {
+          "id": "git",
+          "name": "Git",
+          "maxStars": 1,
+          "prereqs": [
+            "programming"
+          ]
+        },
+        {
+          "id": "apis",
+          "name": "واجهات API",
+          "maxStars": 1,
+          "prereqs": [
+            "programming",
+            "git"
+          ]
+        },
+        {
+          "id": "problem-solving",
+          "name": "حل المشكلات",
+          "maxStars": 1,
+          "prereqs": []
+        },
+        {
+          "id": "communication",
+          "name": "التواصل الفعّال",
+          "maxStars": 2,
+          "prereqs": []
+        }
+      ],
+      "jobs": [
+        {
+          "jobId": "salla-senior-qa-engineer-remote",
+          "title": "مهندس ضمان جودة أول (يدوي وآلي)",
+          "requirements": [
+            "javascript ★★",
+            "git ★",
+            "apis ★",
+            "problem-solving ★",
+            "communication ★"
+          ],
+          "pathNow": [
+            "html-css*(prep>javascript)",
+            "programming*(prep>javascript)",
+            "javascript*",
+            "git*",
+            "apis*",
+            "problem-solving*",
+            "communication*",
+            "javascript**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "html-css*(prep>javascript)",
+            "javascript*",
+            "git*",
+            "programming*(prep>apis)",
+            "apis*",
+            "problem-solving*",
+            "communication*",
+            "javascript**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "html-css*(prep>javascript)",
+            "javascript*",
+            "git*",
+            "programming*(prep>apis)",
+            "apis*",
+            "problem-solving*",
+            "communication*",
+            "javascript**"
+          ]
+        }
+      ],
+      "consistent": [
+        "JavaScript للأتمتة (Playwright) يوافق roadmap.sh: «Frontend Automation: HTML, CSS, JavaScript, Playwright».",
+        "Git في الوظيفة يوافق roadmap.sh (Version Control قبل CI/CD)."
+      ],
+      "mismatches": [
+        {
+          "issue": "لا توجد في التطبيق مهارة «اختبار البرمجيات»: مسار مهندس الجودة لا يعلّم أساسيات الاختبار ولا تصميم حالات الاختبار ولا الاختبار اليدوي، بل JavaScript وGit وAPI فقط.",
+          "evidence": "ISTQB CTFL: الفصول 1–5 كلها معرفة اختبار («Fundamentals of Testing» … «Test Analysis & Design» … «Managing The Test Activities») قبل «6 Test Tools»؛ roadmap.sh QA: «Learn the Fundamentals» و«Manual Testing» قبل أي أتمتة وقبل HTML/CSS/JavaScript.",
+          "proposedChange": "تغيير أكبر (ليس صغيراً): مهارة جديدة `software-testing` «اختبار البرمجيات» (حقل software، نجمتان، بلا متطلب؛ ★ = فصول ISTQB 1–4، ★★ = الأتمتة واختبار API)، تكون أول متطلبات وظيفة سلة بدل `apis` (جملة الإعلان «Experience testing web, mobile, and APIs» اختبار لا تصميم). يغيّر عدّ 38 مهارة و59 دورة (المواصفة 9.2/9.4 وdata.test).",
+          "affectsDemo": false,
+          "priority": "high",
+          "demoNote": "لا يمس أرقام العرض، لكنه يغيّر عدد المهارات والدورات المذكور في المواصفة."
+        },
+        {
+          "issue": "Python تمهيدية قبل JavaScript في مسار الجودة.",
+          "evidence": "roadmap.sh QA يضع «HTML, CSS, JavaScript» تحت Frontend Automation بلا لغة قبلها.",
+          "proposedChange": "يُحل بتغييري `javascript.prereqs → [\"html-css\"]` و`git.prereqs → []` (عائلة الواجهات). يبقى Python تمهيدية لـ `apis` ما لم يُستبدل `apis` كما في البند السابق.",
+          "affectsDemo": false,
+          "priority": "medium"
+        }
+      ],
+      "basedOnLine": "المسار مبني على: منهج شهادة ISTQB للمستوى التأسيسي في اختبار البرمجيات (CTFL)، ومسار مهندس ضمان الجودة في roadmap.sh",
+      "basedOnLinks": [
+        "https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/",
+        "https://roadmap.sh/qa"
+      ]
+    },
+    "ui-ux-product-design": {
+      "label": "تصميم الواجهات وتجربة المستخدم والمنتجات",
+      "guidelines": [
+        {
+          "name": "Google UX Design Professional Certificate",
+          "provider": "Google (Coursera)",
+          "url": "https://www.coursera.org/professional-certificates/google-ux-design",
+          "orderedTopics": [
+            "1 Foundations of User Experience (UX) Design",
+            "2 Start the UX Design Process: Empathize, Define, and Ideate (personas, user stories)",
+            "3 Build Wireframes and Low-Fidelity Prototypes (paper and Figma)",
+            "4 Conduct UX Research and Test Early Concepts (usability studies)",
+            "5 Create High-Fidelity Designs and Prototypes in Figma (visual design, typography, design systems)",
+            "6 Build Dynamic User Interfaces (UI) for Websites (IA, responsive)",
+            "7 Design a User Experience for Social Good & Prepare for Jobs",
+            "8 Accelerate Your Job Search with AI"
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "UX Design Roadmap",
+          "provider": "roadmap.sh",
+          "url": "https://roadmap.sh/ux-design",
+          "orderedTopics": [
+            "Human Decision Making",
+            "Behavior Change Strategies",
+            "Understanding the Product (user personas)",
+            "Conceptual Design (user stories, competitor analysis, Figma/Sketch/Balsamiq)",
+            "Prototyping",
+            "UX Best Practices (incl. «Make UI Professional and Beautiful»)",
+            "Measuring the Impact (A/B and multivariate testing)"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "Order read from node positions (top to bottom)."
+        }
+      ],
+      "appSkills": [
+        {
+          "id": "design-basics",
+          "name": "أساسيات التصميم",
+          "maxStars": 1,
+          "prereqs": []
+        },
+        {
+          "id": "figma",
+          "name": "Figma",
+          "maxStars": 3,
+          "prereqs": [
+            "design-basics"
+          ]
+        },
+        {
+          "id": "ux-research",
+          "name": "بحث المستخدم",
+          "maxStars": 1,
+          "prereqs": [
+            "design-basics"
+          ]
+        },
+        {
+          "id": "ui-design",
+          "name": "تصميم الواجهات",
+          "maxStars": 2,
+          "prereqs": [
+            "figma"
+          ]
+        },
+        {
+          "id": "prototyping",
+          "name": "النماذج التفاعلية",
+          "maxStars": 1,
+          "prereqs": [
+            "ui-design"
+          ]
+        },
+        {
+          "id": "teamwork",
+          "name": "العمل الجماعي",
+          "maxStars": 1,
+          "prereqs": [
+            "communication"
+          ]
+        },
+        {
+          "id": "presentation",
+          "name": "العرض والتقديم",
+          "maxStars": 1,
+          "prereqs": [
+            "communication"
+          ]
+        }
+      ],
+      "jobs": [
+        {
+          "jobId": "horizontal-graduate-designer-riyadh",
+          "title": "مصمم تجربة وواجهات مستخدم حديث التخرج (للسعوديين)",
+          "requirements": [
+            "design-basics ★",
+            "figma ★",
+            "ui-design ★",
+            "prototyping ★",
+            "teamwork ★"
+          ],
+          "pathNow": [
+            "design-basics*",
+            "figma*",
+            "ui-design*",
+            "prototyping*",
+            "communication*(prep>teamwork)",
+            "teamwork*"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "design-basics*",
+            "figma*",
+            "prototyping*",
+            "ui-design*",
+            "communication*(prep>teamwork)",
+            "teamwork*"
+          ],
+          "pathAfterAllProposedChanges": [
+            "design-basics*",
+            "figma*",
+            "prototyping*",
+            "ui-design*",
+            "communication*(prep>teamwork)",
+            "teamwork*"
+          ]
+        },
+        {
+          "jobId": "flyakeed-product-designer-riyadh",
+          "title": "أخصائي تصميم منتجات",
+          "requirements": [
+            "figma ★★",
+            "ux-research ★",
+            "ui-design ★★",
+            "prototyping ★",
+            "teamwork ★"
+          ],
+          "pathNow": [
+            "design-basics*(prep>figma)",
+            "figma*",
+            "ux-research*",
+            "ui-design*",
+            "prototyping*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "figma**",
+            "ui-design**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "ux-research*",
+            "design-basics*(prep>figma)",
+            "figma*",
+            "prototyping*",
+            "ui-design*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "figma**",
+            "ui-design**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "ux-research*",
+            "design-basics*(prep>figma)",
+            "figma*",
+            "prototyping*",
+            "ui-design*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "figma**",
+            "ui-design**"
+          ]
+        },
+        {
+          "jobId": "lucidya-product-designer-riyadh",
+          "title": "مصمم منتجات (للسعوديين فقط)",
+          "requirements": [
+            "figma ★★",
+            "ux-research ★",
+            "ui-design ★★",
+            "prototyping ★",
+            "teamwork ★"
+          ],
+          "pathNow": [
+            "design-basics*(prep>figma)",
+            "figma*",
+            "ux-research*",
+            "ui-design*",
+            "prototyping*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "figma**",
+            "ui-design**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "ux-research*",
+            "design-basics*(prep>figma)",
+            "figma*",
+            "prototyping*",
+            "ui-design*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "figma**",
+            "ui-design**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "ux-research*",
+            "design-basics*(prep>figma)",
+            "figma*",
+            "prototyping*",
+            "ui-design*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "figma**",
+            "ui-design**"
+          ]
+        },
+        {
+          "jobId": "hungerstation-senior-product-designer-riyadh",
+          "title": "مصمم منتجات أول (للسعوديين)",
+          "requirements": [
+            "figma ★★★",
+            "ux-research ★",
+            "ui-design ★★",
+            "presentation ★",
+            "teamwork ★"
+          ],
+          "pathNow": [
+            "design-basics*(prep>figma)",
+            "figma*",
+            "ux-research*",
+            "ui-design*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "teamwork*",
+            "figma**",
+            "ui-design**",
+            "figma***"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "ux-research*",
+            "design-basics*(prep>figma)",
+            "figma*",
+            "ui-design*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "teamwork*",
+            "figma**",
+            "ui-design**",
+            "figma***"
+          ],
+          "pathAfterAllProposedChanges": [
+            "ux-research*",
+            "design-basics*(prep>figma)",
+            "figma*",
+            "ui-design*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "teamwork*",
+            "figma**",
+            "ui-design**",
+            "figma***"
+          ]
+        }
+      ],
+      "consistent": [
+        "Figma قبل تصميم الواجهات، وFigma ★★/★★★ للمكوّنات وأنظمة التصميم، يوافق Google (الدورة 5: design systems).",
+        "أساسيات التصميم (اللون والخط) أولاً لمصممي الواجهات مقبول: إعلانات الوظائف تطلب «strong sense of visual design»، وإن كانت Google تعلّمها في الدورة 5."
+      ],
+      "mismatches": [
+        {
+          "issue": "النماذج التفاعلية لا تُفتح إلا بعد تصميم الواجهات، والأدلة تبدأ بالإطارات الشبكية والنماذج منخفضة الدقة قبل التصميم المرئي عالي الدقة؛ ودورة التطبيق نفسها تبدأ بـ «من الإطار الشبكي إلى النموذج».",
+          "evidence": "Google UX: «3 Build Wireframes and Low-Fidelity Prototypes» قبل «5 Create High-Fidelity Designs and Prototypes in Figma»؛ roadmap.sh UX: «Prototyping» بعد «Conceptual Design» و«Make UI Professional and Beautiful» لاحقاً ضمن Best Practices.",
+          "proposedChange": "`prototyping.prereqs: [\"ui-design\"] → [\"figma\"]`، وإعادة الترتيب: horizontal → `design-basics, figma, prototyping, ui-design, teamwork`؛ flyakeed ولوسيديا → `ux-research, figma, prototyping, ui-design, teamwork`. الأعداد لا تتغير.",
+          "affectsDemo": false,
+          "priority": "medium"
+        },
+        {
+          "issue": "بحث المستخدم يأتي بعد Figma ويتطلب أساسيات التصميم (اللون والخط)، والأدلة تبدأ بفهم المستخدم قبل الإطارات والتصميم المرئي.",
+          "evidence": "Google UX: «2 Start the UX Design Process: Empathize, Define, and Ideate» قبل «3 Build Wireframes» و«5 … visual design»؛ Michigan: «2 Understanding User Needs» بلا متطلب تصميم مرئي.",
+          "proposedChange": "`ux-research.prereqs: [\"design-basics\"] → []`، ووضع `ux-research` أول متطلبات flyakeed ولوسيديا وهنقرستيشن (هنقرستيشن → `ux-research, figma, ui-design, presentation, teamwork`). الأعداد لا تتغير.",
+          "affectsDemo": false,
+          "priority": "medium"
+        },
+        {
+          "issue": "اختبار الاستخدام في Google يأتي بعد النماذج منخفضة الدقة، بينما نجمة «بحث المستخدم» الوحيدة تجمع المقابلات واختبار الاستخدام في مرحلة واحدة.",
+          "evidence": "Google UX: المقابلات/التعاطف في الدورة 2، و«4 Conduct UX Research and Test Early Concepts» بعد النماذج.",
+          "proposedChange": "لا تغيير الآن (انظر عائلة بحث المستخدم: نجمة ثانية اختيارية).",
+          "affectsDemo": false,
+          "priority": "low"
+        }
+      ],
+      "basedOnLine": "المسار مبني على: شهادة Google لتصميم تجربة المستخدم، ومسار تصميم تجربة المستخدم في roadmap.sh",
+      "basedOnLinks": [
+        "https://www.coursera.org/professional-certificates/google-ux-design",
+        "https://roadmap.sh/ux-design"
+      ]
+    },
+    "ux-research": {
+      "label": "بحث تجربة المستخدم",
+      "guidelines": [
+        {
+          "name": "User Experience Research and Design Specialization",
+          "provider": "University of Michigan (Coursera)",
+          "url": "https://www.coursera.org/specializations/michiganux",
+          "orderedTopics": [
+            "1 Introduction to User Experience Principles and Processes",
+            "2 Understanding User Needs (interviews, in-situ observation, affinity walls)",
+            "3 Evaluating Designs with Users (user tests)",
+            "4 UX Design: From Concept to Prototype",
+            "5 UX Research at Scale: Surveys, Analytics, Online Testing",
+            "6 UX Capstone"
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "NN/g UX Certification (Research specialty)",
+          "provider": "Nielsen Norman Group",
+          "url": "https://www.nngroup.com/ux-certification/",
+          "orderedTopics": [
+            "UX Certification = 5 courses + 5 exams; a specialty = 5 courses on one topic",
+            "Specialties: Artificial Intelligence, Interaction Design, Research, Management",
+            "Courses under the Research heading include: Discovery: Building the Right Thing · Usability Testing · Measuring UX and ROI"
+          ],
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "appSkills": [
+        {
+          "id": "ux-research",
+          "name": "بحث المستخدم",
+          "maxStars": 1,
+          "prereqs": [
+            "design-basics"
+          ]
+        },
+        {
+          "id": "design-basics",
+          "name": "أساسيات التصميم",
+          "maxStars": 1,
+          "prereqs": []
+        },
+        {
+          "id": "statistics",
+          "name": "الإحصاء",
+          "maxStars": 2,
+          "prereqs": [
+            "excel"
+          ]
+        },
+        {
+          "id": "presentation",
+          "name": "العرض والتقديم",
+          "maxStars": 1,
+          "prereqs": [
+            "communication"
+          ]
+        }
+      ],
+      "jobs": [],
+      "jobsNote": "لا توجد اليوم وظيفة «باحث تجربة مستخدم» في jobs.ts؛ المهارة تظهر في ثلاث وظائف مصمم منتجات (انظر عائلة التصميم).",
+      "consistent": [
+        "دورة «بحث المستخدم» (أسئلة البحث، المقابلة، اختبار الاستخدام، تقرير توصيات) توافق Michigan الدورتين 2 و3 وNN/g «Usability Testing»."
+      ],
+      "mismatches": [
+        {
+          "issue": "بحث المستخدم يتطلب أساسيات التصميم (اللون والخط)، ولا دليل بحثي يشترط ذلك.",
+          "evidence": "Michigan: «2 Understanding User Needs» و«3 Evaluating Designs with Users» قبل «4 UX Design: From Concept to Prototype»؛ مقررات NN/g البحثية (Discovery، Usability Testing، Measuring UX and ROI) بلا تصميم مرئي.",
+          "proposedChange": "`ux-research.prereqs: [\"design-basics\"] → []` (نفس بند التصميم).",
+          "affectsDemo": false,
+          "priority": "medium"
+        },
+        {
+          "issue": "نجمة واحدة فقط، والأدلة تفرّق بين البحث النوعي والتقييمي والبحث الكمي على نطاق واسع (استبيانات، تحليلات، A/B).",
+          "evidence": "Michigan: «5 UX Research at Scale: Surveys, Analytics, Online Testing»؛ NN/g: «Measuring UX and ROI».",
+          "proposedChange": "اختياري وأكبر: نجمة ثانية «البحث الكمي: الاستبيانات والتحليلات واختبارات A/B» (دورة جديدة `c-ux-research-2`) — فقط إذا أُضيفت وظيفة باحث.",
+          "affectsDemo": false,
+          "priority": "low"
+        }
+      ],
+      "basedOnLine": "المسار مبني على: تخصص جامعة ميشيغان في بحث وتصميم تجربة المستخدم، وشهادة Nielsen Norman Group في تجربة المستخدم (تخصص البحث)",
+      "basedOnLinks": [
+        "https://www.coursera.org/specializations/michiganux",
+        "https://www.nngroup.com/ux-certification/"
+      ]
+    },
+    "digital-marketing": {
+      "label": "التسويق الرقمي والمحتوى والإعلانات",
+      "guidelines": [
+        {
+          "name": "Google Digital Marketing & E-commerce Professional Certificate",
+          "provider": "Google (Coursera)",
+          "url": "https://www.coursera.org/professional-certificates/google-digital-marketing-ecommerce",
+          "orderedTopics": [
+            "1 Foundations of Digital Marketing and E-commerce (funnel, customer journey)",
+            "2 Attract and Engage Customers with Digital Marketing (SEO, keyword research, content optimisation, SEM / Google Ads)",
+            "3 From Likes to Leads: Interact with Customers Online (social media marketing, social content)",
+            "4 Think Outside the Inbox: Email Marketing",
+            "5 Assess for Success: Marketing Analytics and Measurement",
+            "6 Make the Sale: Build, Launch, and Manage E-commerce Stores",
+            "7 Satisfaction Guaranteed: Develop Customer Loyalty Online",
+            "8 Accelerate Your Job Search with AI"
+          ],
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "Meta Social Media Marketing Professional Certificate",
+          "provider": "Meta (Coursera)",
+          "url": "https://www.coursera.org/professional-certificates/facebook-social-media-marketing",
+          "orderedTopics": [
+            "1 Introduction to Social Media Marketing (goals, KPIs, audiences)",
+            "2 Social Media Management (presence, tone of voice, content calendar)",
+            "3 Fundamentals of Social Media Advertising",
+            "4 Advertising with Meta (Ads Manager, budgets, placements)",
+            "5 Measure and Optimize Social Media Marketing Campaigns",
+            "6 Capstone"
+          ],
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "appSkills": [
+        {
+          "id": "marketing-basics",
+          "name": "أساسيات التسويق",
+          "maxStars": 1,
+          "prereqs": []
+        },
+        {
+          "id": "content",
+          "name": "كتابة المحتوى",
+          "maxStars": 2,
+          "prereqs": [
+            "marketing-basics"
+          ]
+        },
+        {
+          "id": "social-media",
+          "name": "إدارة وسائل التواصل",
+          "maxStars": 2,
+          "prereqs": [
+            "marketing-basics"
+          ]
+        },
+        {
+          "id": "seo",
+          "name": "تحسين محركات البحث (SEO)",
+          "maxStars": 1,
+          "prereqs": [
+            "content"
+          ]
+        },
+        {
+          "id": "ads",
+          "name": "الإعلانات المدفوعة",
+          "maxStars": 1,
+          "prereqs": [
+            "social-media"
+          ]
+        },
+        {
+          "id": "english",
+          "name": "الإنجليزية المهنية",
+          "maxStars": 2,
+          "prereqs": []
+        },
+        {
+          "id": "communication",
+          "name": "التواصل الفعّال",
+          "maxStars": 2,
+          "prereqs": []
+        }
+      ],
+      "jobs": [
+        {
+          "jobId": "salla-marketing-specialist-tamheer-jeddah",
+          "title": "أخصائي تسويق (برنامج تمهير)",
+          "requirements": [
+            "marketing-basics ★",
+            "social-media ★",
+            "content ★",
+            "communication ★★",
+            "problem-solving ★"
+          ],
+          "pathNow": [
+            "marketing-basics*",
+            "social-media*",
+            "content*",
+            "communication*",
+            "problem-solving*",
+            "communication**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "marketing-basics*",
+            "social-media*",
+            "content*",
+            "communication*",
+            "problem-solving*",
+            "communication**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "marketing-basics*",
+            "social-media*",
+            "content*",
+            "communication*",
+            "problem-solving*",
+            "communication**"
+          ]
+        },
+        {
+          "jobId": "salla-mahally-seo-manager-jeddah",
+          "title": "مدير تحسين محركات البحث",
+          "requirements": [
+            "content ★★",
+            "seo ★",
+            "english ★★",
+            "sql ★",
+            "business-analysis ★"
+          ],
+          "pathNow": [
+            "marketing-basics*(prep>content)",
+            "content*",
+            "seo*",
+            "english*",
+            "excel*(prep>sql)",
+            "sql*",
+            "project-management*(prep>business-analysis)",
+            "business-analysis*",
+            "content**",
+            "english**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "marketing-basics*(prep>content)",
+            "content*",
+            "seo*",
+            "english*",
+            "excel*(prep>sql)",
+            "sql*",
+            "business-analysis*",
+            "content**",
+            "english**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "marketing-basics*(prep>content)",
+            "content*",
+            "seo*",
+            "english*",
+            "sql*",
+            "business-analysis*",
+            "content**",
+            "english**"
+          ]
+        },
+        {
+          "jobId": "lucidya-social-media-analyst-riyadh",
+          "title": "محلل أول لوسائل التواصل الاجتماعي",
+          "requirements": [
+            "marketing-basics ★",
+            "social-media ★★",
+            "content ★",
+            "english ★",
+            "presentation ★"
+          ],
+          "pathNow": [
+            "marketing-basics*",
+            "social-media*",
+            "content*",
+            "english*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "social-media**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "marketing-basics*",
+            "social-media*",
+            "content*",
+            "english*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "social-media**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "marketing-basics*",
+            "social-media*",
+            "content*",
+            "english*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "social-media**"
+          ]
+        },
+        {
+          "jobId": "platinumlist-content-manager-riyadh",
+          "title": "مدير محتوى عربي وإنجليزي",
+          "requirements": [
+            "content ★★",
+            "seo ★",
+            "english ★★",
+            "communication ★",
+            "problem-solving ★"
+          ],
+          "pathNow": [
+            "marketing-basics*(prep>content)",
+            "content*",
+            "seo*",
+            "english*",
+            "communication*",
+            "problem-solving*",
+            "content**",
+            "english**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "marketing-basics*(prep>content)",
+            "content*",
+            "seo*",
+            "english*",
+            "communication*",
+            "problem-solving*",
+            "content**",
+            "english**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "marketing-basics*(prep>content)",
+            "content*",
+            "seo*",
+            "english*",
+            "communication*",
+            "problem-solving*",
+            "content**",
+            "english**"
+          ]
+        }
+      ],
+      "consistent": [
+        "أساسيات التسويق جذر كل المسارات يوافق الشهادتين (Foundations / Introduction أولاً).",
+        "SEO بعد كتابة المحتوى يوافق Google الدورة 2 (SEO مع تحسين المحتوى والبحث عن الكلمات المفتاحية).",
+        "الإعلانات بعد إدارة التواصل يوافق Meta (Social Media Management ثم Advertising)."
+      ],
+      "mismatches": [
+        {
+          "issue": "الإعلانات المدفوعة تتطلب إدارة وسائل التواصل، لكن المهارة تشمل Google Ads (البحث المدفوع)، وGoogle تعلّمه قبل التواصل الاجتماعي.",
+          "evidence": "Google DM&E: «2 Attract and Engage Customers… (SEO, SEM / Google Ads)» قبل «3 From Likes to Leads: … social media»؛ Meta: الإعلانات بعد الإدارة (لإعلانات Meta).",
+          "proposedChange": "`ads.prereqs: [\"social-media\"] → [\"marketing-basics\"]`. لا وظيفة اليوم تطلب ads، فلا مسار يتغير.",
+          "affectsDemo": false,
+          "priority": "low"
+        },
+        {
+          "issue": "لا مرحلة لقياس الأداء والتحليلات، والشهادتان تختمان بها؛ جمل الإعلانات عن تحليل البيانات مربوطة بـ «حل المشكلات».",
+          "evidence": "Google DM&E: «5 Assess for Success: Marketing Analytics and Measurement»؛ Meta: «5 Measure and Optimize Social Media Marketing Campaigns».",
+          "proposedChange": "لا تغيير بالبيانات الآن؛ القياس موجود داخل التواصل ★★ («قراءة أرقام المنصات وتحسين الأداء») والإعلانات. يمكن لوكيل الوظائف ربط جملة التحليل في إعلان سلة (تمهير) بـ `social-media ★★` إن كانت عن أرقام الحملات.",
+          "affectsDemo": false,
+          "priority": "low"
+        },
+        {
+          "issue": "مسار مدير SEO (سلة محلي) فيه Excel تمهيدية لـ SQL وإدارة المشاريع تمهيدية لتحليل الأعمال، ولا شهادة تسويق تطلبهما.",
+          "evidence": "Google DM&E وMeta SMM: لا جداول ولا إدارة مشاريع قبل القياس.",
+          "proposedChange": "يُحل بـ `sql.prereqs → []` (مُعلَّم) و`business-analysis.prereqs → []` (آمن): 10 → 8 مراحل.",
+          "affectsDemo": true,
+          "priority": "medium",
+          "demoNote": "جزء `sql` فقط يمس خريطة ما قبل السيرة في العرض (انظر backend)."
+        }
+      ],
+      "basedOnLine": "المسار مبني على: شهادة Google للتسويق الرقمي والتجارة الإلكترونية، وشهادة Meta لتسويق وسائل التواصل الاجتماعي",
+      "basedOnLinks": [
+        "https://www.coursera.org/professional-certificates/google-digital-marketing-ecommerce",
+        "https://www.coursera.org/professional-certificates/facebook-social-media-marketing"
+      ]
+    },
+    "business-pm-finance": {
+      "label": "تحليل الأعمال وإدارة المشاريع والمالية",
+      "guidelines": [
+        {
+          "name": "ECBA: Entry Certificate in Business Analysis (exam blueprint V1.1)",
+          "provider": "IIBA",
+          "url": "https://www.iiba.org/business-analysis-certifications/ecba/",
+          "orderedTopics": [
+            "(for people with no prior business analysis experience; «No prior experience required»)",
+            "1 Understanding Business Analysis (20%)",
+            "2 Mindset for Effective Business Analysis (14%)",
+            "3 Implementing Business Analysis (6%)",
+            "4–9 BABOK Guide domains (BACCM): Change · Need · Solution · Stakeholder · Value · Context (10% each)"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "IIBA's pages confirm nine domains (1–3 foundational, 4–9 from the BABOK Guide); names and weights read from open-exam-prep.com/study-guides/ecba/introduction/how-ecba-built, which quotes the blueprint."
+        },
+        {
+          "name": "CAPM Exam Content Outline (2023)",
+          "provider": "PMI",
+          "url": "https://www.pmi.org/certifications/certified-associate-capm",
+          "orderedTopics": [
+            "1 Project Management Fundamentals & Core Concepts (36%)",
+            "2 Predictive, Plan-Based Methodologies (17%)",
+            "3 Agile Frameworks/Methodologies (20%)",
+            "4 Business Analysis Frameworks (27%): BA roles, stakeholder communication, gathering requirements, product roadmaps, validating requirements"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "pmi.org refused automated access (403); domains and weights read from open-exam-prep.com/study-guides/capm/introduction-and-exam-overview/exam-content-outline-eco, which cites the PMI ECO."
+        },
+        {
+          "name": "FMVA: Financial Modeling & Valuation Analyst program",
+          "provider": "Corporate Finance Institute (CFI)",
+          "url": "https://corporatefinanceinstitute.com/certifications/financial-modeling-valuation-analyst-fmva-program/",
+          "orderedTopics": [
+            "Step 1 prep: Excel Fundamentals (Quick Start; Formulas for Finance) → Accounting Fundamentals → Reading Financial Statements → Corporate Finance Fundamentals → Math for Finance",
+            "Step 2 core: Financial Analysis Fundamentals → Financial Modeling Guidelines → 3-Statement Modeling → Business Valuation / DCF / Comparables → Forecasting → Scenario & Sensitivity Analysis in Excel → Excel Data Visualization and Dashboards → PowerPoint & Pitchbooks → Professional Ethics"
+          ],
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "appSkills": [
+        {
+          "id": "project-management",
+          "name": "إدارة المشاريع",
+          "maxStars": 2,
+          "prereqs": []
+        },
+        {
+          "id": "agile",
+          "name": "Agile",
+          "maxStars": 1,
+          "prereqs": [
+            "project-management"
+          ]
+        },
+        {
+          "id": "business-analysis",
+          "name": "تحليل الأعمال",
+          "maxStars": 1,
+          "prereqs": [
+            "project-management"
+          ]
+        },
+        {
+          "id": "accounting",
+          "name": "المحاسبة",
+          "maxStars": 1,
+          "prereqs": []
+        },
+        {
+          "id": "financial-analysis",
+          "name": "التحليل المالي",
+          "maxStars": 2,
+          "prereqs": [
+            "accounting"
+          ]
+        },
+        {
+          "id": "excel",
+          "name": "Excel",
+          "maxStars": 3,
+          "prereqs": []
+        }
+      ],
+      "jobs": [
+        {
+          "jobId": "master-works-ai-business-analyst-riyadh",
+          "title": "محلل أعمال للذكاء الاصطناعي",
+          "requirements": [
+            "business-analysis ★",
+            "agile ★",
+            "apis ★",
+            "presentation ★",
+            "english ★★"
+          ],
+          "pathNow": [
+            "project-management*(prep>business-analysis)",
+            "business-analysis*",
+            "agile*",
+            "programming*(prep>apis)",
+            "git*(prep>apis)",
+            "apis*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "english*",
+            "english**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "business-analysis*",
+            "project-management*(prep>agile)",
+            "agile*",
+            "programming*(prep>apis)",
+            "git*(prep>apis)",
+            "apis*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "english*",
+            "english**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "business-analysis*",
+            "project-management*(prep>agile)",
+            "agile*",
+            "programming*(prep>apis)",
+            "git*(prep>apis)",
+            "apis*",
+            "communication*(prep>presentation)",
+            "presentation*",
+            "english*",
+            "english**"
+          ]
+        },
+        {
+          "jobId": "syarah-financial-analyst-tamheer-riyadh",
+          "title": "محلل مالي (برنامج تمهير)",
+          "requirements": [
+            "excel ★",
+            "accounting ★",
+            "financial-analysis ★",
+            "communication ★",
+            "teamwork ★"
+          ],
+          "pathNow": [
+            "excel*",
+            "accounting*",
+            "financial-analysis*",
+            "communication*",
+            "teamwork*"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "excel*",
+            "accounting*",
+            "financial-analysis*",
+            "communication*",
+            "teamwork*"
+          ],
+          "pathAfterAllProposedChanges": [
+            "excel*",
+            "accounting*",
+            "financial-analysis*",
+            "communication*",
+            "teamwork*"
+          ]
+        },
+        {
+          "jobId": "foodics-accountant-erp-riyadh",
+          "title": "محاسب - أنظمة ERP",
+          "requirements": [
+            "accounting ★",
+            "excel ★★★",
+            "financial-analysis ★★",
+            "communication ★",
+            "english ★"
+          ],
+          "pathNow": [
+            "accounting*",
+            "excel*",
+            "financial-analysis*",
+            "communication*",
+            "english*",
+            "excel**",
+            "financial-analysis**",
+            "excel***"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "accounting*",
+            "excel*",
+            "financial-analysis*",
+            "communication*",
+            "english*",
+            "excel**",
+            "financial-analysis**",
+            "excel***"
+          ],
+          "pathAfterAllProposedChanges": [
+            "accounting*",
+            "excel*",
+            "financial-analysis*",
+            "communication*",
+            "english*",
+            "excel**",
+            "financial-analysis**",
+            "excel***"
+          ]
+        }
+      ],
+      "consistent": [
+        "Agile بعد أساسيات إدارة المشاريع يوافق CAPM (Fundamentals ثم Predictive وAgile).",
+        "التحليل المالي بعد المحاسبة يوافق CFI (Accounting Fundamentals وReading Financial Statements قبل Financial Analysis Fundamentals)، وترتيب سيارة (Excel ثم المحاسبة ثم التحليل المالي) يطابق خطوة CFI الأولى."
+      ],
+      "mismatches": [
+        {
+          "issue": "تحليل الأعمال يتطلب إدارة المشاريع، فكل مسار فيه تحليل أعمال يضيف إدارة المشاريع تمهيدية.",
+          "evidence": "IIBA ECBA: «built for people with no prior business analysis experience» و«No prior experience required»، ومخططه يبدأ بـ Understanding BA / Mindset / Implementing BA بلا مجال لإدارة المشاريع؛ PMI CAPM يضع «Business Analysis Frameworks (27%)» مجالاً مستقلاً بجانب أساسيات إدارة المشاريع لا بعدها.",
+          "proposedChange": "`business-analysis.prereqs: [\"project-management\"] → []`. almajed 10 → 9، مدير SEO −1، qiddiya HRIS 7 → 6؛ في master-works يبقى العدد 10 لأن إدارة المشاريع تنتقل تمهيدية لـ Agile (وهذا يوافق CAPM).",
+          "affectsDemo": false,
+          "priority": "high"
+        },
+        {
+          "issue": "مسار محلل الأعمال (master-works) يضيف Python وGit تمهيديتين لأجل `apis`، وECBA لا يتضمن برمجة.",
+          "evidence": "ECBA blueprint: لا مجال تقني/برمجي؛ جملة الإعلان «Working knowledge of software architecture, REST APIs…» معرفة لا تطوير.",
+          "proposedChange": "بعد `git.prereqs → []` تبقى Python تمهيدية واحدة. لوكيل الوظائف: إن ذكر الإعلان مهارة أنسب (العمل الجماعي، حل المشكلات…) فلتحل محل `apis`.",
+          "affectsDemo": false,
+          "priority": "low"
+        }
+      ],
+      "basedOnLine": "المسار مبني على: شهادة IIBA التأسيسية في تحليل الأعمال (ECBA)، ومخطط اختبار PMI CAPM لإدارة المشاريع، وبرنامج CFI للتحليل والنمذجة المالية (FMVA)",
+      "basedOnLinks": [
+        "https://www.iiba.org/business-analysis-certifications/ecba/",
+        "https://www.pmi.org/certifications/certified-associate-capm",
+        "https://corporatefinanceinstitute.com/certifications/financial-modeling-valuation-analyst-fmva-program/"
+      ]
+    },
+    "hr-recruitment": {
+      "label": "الموارد البشرية والاستقطاب",
+      "guidelines": [
+        {
+          "name": "aPHRi Exam Content Outline",
+          "provider": "HRCI",
+          "url": "https://www.hrci.org/docs/default-source/2024-document-control/hrci_aphri-exam-content-outline-2024.pdf",
+          "orderedTopics": [
+            "FA01 HR Operations (33%): legal and regulatory environment, HR administration and policies, HR metrics, HRIS, job descriptions, communication techniques",
+            "FA02 Recruitment and Selection (22%): «Applicable laws and regulations related to recruitment and selection», sources, methods, interviewing techniques, onboarding",
+            "FA03 Compensation and Benefits (15%): «Applicable laws and regulations related to compensation and benefits», pay structures, total rewards, payroll terminology",
+            "FA04 Human Resource Development and Retention (10%): training delivery formats, evaluating training programmes",
+            "FA05 Employee Relations, Health, and Safety (20%)"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "The PDF (2024 document-control copy) says the outline took effect in 2018."
+        },
+        {
+          "name": "دليل تصنيف المهارات السعودي (المهارات والمهن)",
+          "provider": "وزارة الموارد البشرية والتنمية الاجتماعية",
+          "url": "https://www.hrsd.gov.sa/skills-occupations",
+          "orderedTopics": [
+            "13,939 skills, each with tasks and proficiency levels («مستويات الكفاءة»)",
+            "2,047 occupations, each with essential and optional skills, qualifications and employment statistics"
+          ],
+          "checkedAt": "2026-11-20",
+          "note": "Saudi reference only: the overview page opened, but the occupation profiles load in a search app that could not be read, so no profile was compared. Not used in any «مبني على» line."
+        }
+      ],
+      "appSkills": [
+        {
+          "id": "hr-basics",
+          "name": "أساسيات الموارد البشرية",
+          "maxStars": 2,
+          "prereqs": []
+        },
+        {
+          "id": "recruitment",
+          "name": "الاستقطاب والتوظيف",
+          "maxStars": 2,
+          "prereqs": [
+            "hr-basics"
+          ]
+        },
+        {
+          "id": "labor-law",
+          "name": "أنظمة العمل",
+          "maxStars": 1,
+          "prereqs": [
+            "hr-basics"
+          ]
+        },
+        {
+          "id": "payroll",
+          "name": "الرواتب والمزايا",
+          "maxStars": 1,
+          "prereqs": [
+            "labor-law"
+          ]
+        },
+        {
+          "id": "training-dev",
+          "name": "التدريب والتطوير",
+          "maxStars": 1,
+          "prereqs": [
+            "hr-basics"
+          ]
+        },
+        {
+          "id": "communication",
+          "name": "التواصل الفعّال",
+          "maxStars": 2,
+          "prereqs": []
+        }
+      ],
+      "jobs": [
+        {
+          "jobId": "atheer-hr-specialist-riyadh",
+          "title": "أخصائي موارد بشرية - العمليات والاستقطاب (للسعوديين)",
+          "requirements": [
+            "hr-basics ★★",
+            "recruitment ★★",
+            "labor-law ★",
+            "payroll ★",
+            "english ★★"
+          ],
+          "pathNow": [
+            "hr-basics*",
+            "recruitment*",
+            "labor-law*",
+            "payroll*",
+            "english*",
+            "hr-basics**",
+            "recruitment**",
+            "english**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "hr-basics*",
+            "labor-law*",
+            "recruitment*",
+            "payroll*",
+            "english*",
+            "hr-basics**",
+            "recruitment**",
+            "english**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "hr-basics*",
+            "labor-law*",
+            "recruitment*",
+            "payroll*",
+            "english*",
+            "hr-basics**",
+            "recruitment**",
+            "english**"
+          ]
+        },
+        {
+          "jobId": "qiddiya-hris-specialist-riyadh",
+          "title": "أخصائي أنظمة معلومات الموارد البشرية",
+          "requirements": [
+            "hr-basics ★",
+            "powerbi ★",
+            "dataviz ★",
+            "business-analysis ★",
+            "training-dev ★"
+          ],
+          "pathNow": [
+            "hr-basics*",
+            "excel*(prep>powerbi)",
+            "powerbi*",
+            "dataviz*",
+            "project-management*(prep>business-analysis)",
+            "business-analysis*",
+            "training-dev*"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "hr-basics*",
+            "excel*(prep>powerbi)",
+            "powerbi*",
+            "dataviz*",
+            "business-analysis*",
+            "training-dev*"
+          ],
+          "pathAfterAllProposedChanges": [
+            "hr-basics*",
+            "excel*(prep>powerbi)",
+            "statistics*(prep>powerbi)",
+            "powerbi*",
+            "dataviz*",
+            "business-analysis*",
+            "training-dev*"
+          ]
+        },
+        {
+          "jobId": "lucidya-people-operations-riyadh",
+          "title": "أخصائي عمليات الموارد البشرية",
+          "requirements": [
+            "hr-basics ★★",
+            "labor-law ★",
+            "payroll ★",
+            "recruitment ★",
+            "teamwork ★"
+          ],
+          "pathNow": [
+            "hr-basics*",
+            "labor-law*",
+            "payroll*",
+            "recruitment*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "hr-basics**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "hr-basics*",
+            "labor-law*",
+            "payroll*",
+            "recruitment*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "hr-basics**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "hr-basics*",
+            "labor-law*",
+            "payroll*",
+            "recruitment*",
+            "communication*(prep>teamwork)",
+            "teamwork*",
+            "hr-basics**"
+          ]
+        },
+        {
+          "jobId": "tamara-people-business-partner-riyadh",
+          "title": "شريك أعمال الموارد البشرية",
+          "requirements": [
+            "hr-basics ★★",
+            "labor-law ★",
+            "training-dev ★",
+            "communication ★★",
+            "project-management ★"
+          ],
+          "pathNow": [
+            "hr-basics*",
+            "labor-law*",
+            "training-dev*",
+            "communication*",
+            "project-management*",
+            "hr-basics**",
+            "communication**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "hr-basics*",
+            "labor-law*",
+            "training-dev*",
+            "communication*",
+            "project-management*",
+            "hr-basics**",
+            "communication**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "hr-basics*",
+            "labor-law*",
+            "training-dev*",
+            "communication*",
+            "project-management*",
+            "hr-basics**",
+            "communication**"
+          ]
+        },
+        {
+          "jobId": "lucidya-talent-acquisition-lead-riyadh",
+          "title": "قائد استقطاب المواهب",
+          "requirements": [
+            "hr-basics ★",
+            "recruitment ★★",
+            "project-management ★",
+            "communication ★",
+            "presentation ★"
+          ],
+          "pathNow": [
+            "hr-basics*",
+            "recruitment*",
+            "project-management*",
+            "communication*",
+            "presentation*",
+            "recruitment**"
+          ],
+          "pathAfterDemoSafeChanges": [
+            "hr-basics*",
+            "recruitment*",
+            "project-management*",
+            "communication*",
+            "presentation*",
+            "recruitment**"
+          ],
+          "pathAfterAllProposedChanges": [
+            "hr-basics*",
+            "recruitment*",
+            "project-management*",
+            "communication*",
+            "presentation*",
+            "recruitment**"
+          ]
+        }
+      ],
+      "consistent": [
+        "الرواتب بعد أنظمة العمل يوافق aPHRi (FA03 يبدأ بـ «Applicable laws and regulations related to compensation and benefits»).",
+        "التدريب والتطوير بعد الأساسيات يوافق aPHRi (FA04 بعد FA01)، وأساسيات الموارد البشرية ★★ = العمليات (الملفات، الإجازات، الأداء، الأنظمة الإلكترونية) يطابق FA01 HR Operations."
+      ],
+      "mismatches": [
+        {
+          "issue": "الاستقطاب لا يتطلب أنظمة العمل، ووظيفة أثير ترتّب الاستقطاب قبل أنظمة العمل؛ aPHRi يضع البيئة النظامية في العمليات أولاً ويفتتح الاستقطاب بأنظمته (تصاريح العمل…).",
+          "evidence": "aPHRi FA01 HR Operations: «Legal and regulatory environment»؛ FA02: «Applicable laws and regulations related to recruitment and selection (for example: work authorization, job requisition, job postings)».",
+          "proposedChange": "آمن: إعادة ترتيب atheer-hr-specialist → `hr-basics, labor-law, recruitment, payroll, english` (العدد لا يتغير). اختياري عام: `recruitment.prereqs: [\"hr-basics\"] → [\"hr-basics\", \"labor-law\"]` (يضيف مرحلة لقائد استقطاب لوسيديا: 6 → 7).",
+          "affectsDemo": false,
+          "priority": "low"
+        },
+        {
+          "issue": "علاقات الموظفين والصحة والسلامة (20% من aPHRi) بلا مهارة.",
+          "evidence": "aPHRi: «FA05 Employee Relations, Health, and Safety (20%)».",
+          "proposedChange": "لا تغيير الآن (أنظمة العمل تغطي جزءاً)؛ يُذكر فقط.",
+          "affectsDemo": false,
+          "priority": "low"
+        }
+      ],
+      "basedOnLine": "المسار مبني على: مخطط محتوى اختبار aPHRi من معهد اعتماد الموارد البشرية (HRCI)",
+      "basedOnLinks": [
+        "https://www.hrci.org/docs/default-source/2024-document-control/hrci_aphri-exam-content-outline-2024.pdf"
+      ]
+    }
+  }
+}

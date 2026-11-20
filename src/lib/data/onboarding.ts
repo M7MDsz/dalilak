@@ -2,7 +2,11 @@
 // variant after `secondary`, and the chips with their option ids and labels. Pure module.
 // The acknowledgements, special replies and keyword tables of 4.3-4.5 are the onboarding interpreter's
 // (src/lib/brain/onboarding, owner brain-advisor), not data.
-import type { OnboardingQuestion, QuestionId } from "@/lib/types";
+// 20 Nov 2026 (owner's part 2): the optional seventh step, COMPANY_QUESTION, asked right after «الاهتمام» (step 6; the
+// priority question is now step 7). It stays out of ONBOARDING_QUESTIONS (the six of spec 4.2); getQuestion knows both.
+import type { OnboardingQuestion, OnboardingStepId } from "@/lib/types";
+
+import { COMPANIES, COMPANY_NONE_LABEL } from "./companies";
 
 export const ONBOARDING_QUESTIONS: readonly OnboardingQuestion[] = [
   {
@@ -84,7 +88,7 @@ export const ONBOARDING_QUESTIONS: readonly OnboardingQuestion[] = [
   },
   {
     id: "priority",
-    n: 6,
+    n: 7,
     slot: "الأولوية",
     text: "وآخر سؤال، وش أولويتك الحين؟",
     textAfterSecondary: null,
@@ -97,16 +101,31 @@ export const ONBOARDING_QUESTIONS: readonly OnboardingQuestion[] = [
   },
 ];
 
-/** The question with this id (narrow its options by checking `question.id`). */
-export function getQuestion(id: QuestionId): OnboardingQuestion {
+/**
+ * Step 6 of 7: «وفيه شركة أو وظيفة معيّنة في بالك؟». Its options are every company «دليلك» knows (the model's classification
+ * of a typed name reads them) and «لا، مو الحين»; the tiles show only the companies of the user's field
+ * (brain/onboarding `questionChips`, data `companyTiles`).
+ */
+export const COMPANY_QUESTION: OnboardingQuestion<"company"> = {
+  id: "company",
+  n: 6,
+  slot: "الشركة",
+  text: "وفيه شركة أو وظيفة معيّنة في بالك؟",
+  textAfterSecondary: null,
+  options: [...COMPANIES.map((c) => ({ id: c.id, label: c.short })), { id: "none", label: COMPANY_NONE_LABEL }],
+};
+
+/** The question with this id, the seventh step included (narrow its options by checking `question.id`). */
+export function getQuestion(id: OnboardingStepId): OnboardingQuestion {
+  if (id === "company") return COMPANY_QUESTION;
   const question = ONBOARDING_QUESTIONS.find((q) => q.id === id);
   if (!question) throw new Error(`data: unknown question ${id}`);
   return question;
 }
 
 /** The label of an option id of a question («riyadh» → «الرياض»), or null when the id is not an option. */
-export function optionLabel(question: QuestionId, option: string): string | null {
-  const found = ONBOARDING_QUESTIONS.find((q) => q.id === question);
+export function optionLabel(question: OnboardingStepId, option: string): string | null {
+  const found = question === "company" ? COMPANY_QUESTION : ONBOARDING_QUESTIONS.find((q) => q.id === question);
   const opt = found?.options.find((o) => o.id === option);
   return opt ? opt.label : null;
 }

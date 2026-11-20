@@ -20,7 +20,7 @@ import { IconArrowForward, IconRankUp, IconStarFilled } from "@/components/icons
 import { Burst, NumberTicker, Ring, resultOnly, useFlights, useGo, useInstant, useShow } from "@/components/motion";
 import { BadgeMedal, Button, ContourBackdrop, SkillStars, Stamp, XpBar, XpValue, cn, toast } from "@/components/ui";
 import { useNextStepAction, useViewport } from "@/features/shared";
-import { nextStepLabel } from "@/lib/copy";
+import { guideTitle, nextStepLabel } from "@/lib/copy";
 import { CELEBRATION_BEATS, getBadge, getCourse, getJob, getSkill, type CelebrationBeatId } from "@/lib/data";
 import { formatNumber } from "@/lib/format";
 import { levelFor, nextStep } from "@/lib/engine";
@@ -116,7 +116,7 @@ export function Celebration({ result }: { readonly result: CompletedCourse }): R
   useOverlayHold("celebration", open);
 
   // Beat 1: the celebration absorbs its own news (XP, level, badges and rank are on this board, not in toasts).
-  // Nothing else shows over it: the course page already closed every toast at the press of «أكمل الدورة» (during the
+  // Nothing else shows over it: the guide page already closed every toast at the press of «خلّصتها» (during the
   // lessons' cascade); this closes anything raised since, as the board arrives.
   useEffect(() => {
     useAppStore.getState().markAnnounced({ xp: c.xp.events.map((e) => e.id), badges: c.badges });
@@ -360,7 +360,7 @@ export function Celebration({ result }: { readonly result: CompletedCourse }): R
                   </span>
                   <div className="flex min-w-0 flex-col gap-1">
                     <p className="text-small font-semibold text-ok-fg lg:text-title">{CELEBRATION_COPY.course}</p>
-                    <h2 className="text-title font-bold text-balance text-fg lg:text-h2">{keepLatin(course.title)}</h2>
+                    <h2 className="text-title font-bold text-balance text-fg lg:text-h2">{keepLatin(guideTitle(course.id))}</h2>
                   </div>
                 </motion.header>
 

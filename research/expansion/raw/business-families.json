@@ -1,0 +1,420 @@
+{
+ "checkedAt": "2026-11-20",
+ "guidelines": {
+  "product": {
+   "guidelines": [
+    {
+     "name": "Product Manager Roadmap",
+     "provider": "roadmap.sh",
+     "url": "https://roadmap.sh/product-manager",
+     "orderedTopics": [
+      "Introduction (what product management is, product vs project management, roles, key skills; product development lifecycle)",
+      "Product Identification (brainstorming techniques; discovery, selection, validation, execution; problem framing)",
+      "Market Analysis (identifying market needs, competitive analysis, emerging market trends)",
+      "User Research (user personas, user interviews, surveys and questionnaires, ethnographic research)",
+      "Positioning (USP, market segmentation, case studies)",
+      "Vision & Mission",
+      "Value vs Features (feature creep, finding balance)",
+      "Strategic Thinking (competitive strategy, five forces, competitive advantage, strategic partners)",
+      "Value Proposition (defining it, value proposition canvas)",
+      "Defining Goals (target, baseline, trend, timeframe)",
+      "Product Requirements (writing PRDs, user stories, job stories, prioritization techniques, grooming sessions, user story mapping) | Product Roadmap (creating a roadmap, prioritising features, continuous and outcome-based roadmaps, communicating the roadmap)",
+      "Backlog Management · Release Strategies (feature toggles, phased rollouts, dark launches)",
+      "UX / UI Design · Service Design · Interaction Design · User Testing (A/B testing, usability testing)",
+      "Go-to-Market Strategy (launch planning, marketing strategies, growth hacking)",
+      "Agile Methodology (Scrum, Kanban) · Working with Engineering Teams (sprint planning, standups, retrospectives, MVP)",
+      "Key Product Metrics (DAU, MAU, conversion, retention, churn, LTV, CAC, North Star Metric)",
+      "Data-Driven Decision Making (A/B testing, cohort analysis, predictive analytics) · Feedback Loops",
+      "Communication Skills · Managing Stakeholders",
+      "Tools: roadmapping (Product Board, Aha, Notion), project management (Jira, Linear, Trello), analytics (Amplitude, Heap, Looker), communication",
+      "Risk: identifying risks, risk assessment, mitigation, monitoring and controlling",
+      "Scaling Products · Advanced Analysis (ML/AI in product management) · Portfolio Management",
+      "Leadership and Influence"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "Order read from the node positions (top to bottom) in roadmap.sh's own page data (roadmap.sh/product-manager.json). Product Requirements and Product Roadmap sit side by side in the same band."
+    },
+    {
+     "name": "The Pragmatic Framework (2027 edition: 37 focus areas in 7 categories)",
+     "provider": "Pragmatic Institute",
+     "url": "https://www.pragmaticinstitute.com/product/framework/",
+     "orderedTopics": [
+      "Market: Market Problems · Product Strategy · Distinctive Competencies · Win/Loss Analysis · Competitive Landscape",
+      "Focus: Market Definition · Distribution Strategy · Product Portfolio · Product Roadmap",
+      "Business: Business Plan · Pricing · Buy, Build or Partner · Business Outcomes · Measurement",
+      "Planning: Positioning · Buyer Journey · Buyer Personas · User Personas · Requirements · Ideation · Stakeholder Management",
+      "Go-to-Market: Marketing Plan · Growth · Retention · Launch · Organizational Alignment · Awareness · Engagement · Customer Satisfaction",
+      "Enablement: Adoption · Content · Assets · Channel Support",
+      "Operations: Scaling · Exceptions · Escalations · Customer Value Realization"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "Categories as laid out left to right on the page. «Market problems ... Finding them is the foundation for everything else in the Framework.» Its certification course order is Foundations → Focus: Strategic Product Planning → Build: Product Building Course."
+    },
+    {
+     "name": "The Scrum Guide (November 2020): Product Owner accountabilities",
+     "provider": "Ken Schwaber & Jeff Sutherland (scrumguides.org)",
+     "url": "https://scrumguides.org/scrum-guide.html",
+     "orderedTopics": [
+      "The Product Owner is accountable for maximizing the value of the product resulting from the work of the Scrum Team.",
+      "Developing and explicitly communicating the Product Goal;",
+      "Creating and clearly communicating Product Backlog items;",
+      "Ordering Product Backlog items; and,",
+      "Ensuring that the Product Backlog is transparent, visible and understood."
+     ],
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "name": "Professional Scrum Product Owner I (PSPO I): focus areas",
+     "provider": "Scrum.org",
+     "url": "https://www.scrum.org/assessments/professional-scrum-product-owner-i-certification",
+     "orderedTopics": [
+      "Understanding and Applying the Scrum Framework: Empiricism, Scrum Team, Events, Artifacts, Done",
+      "Developing People and Teams: Self-Managing Teams",
+      "Managing Products with Agility: Forecasting & Release Planning, Product Vision, Product Value, Product Backlog Management, Business Strategy, Stakeholders & Customers"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "«Many questions focus on the Product Owner accountabilities based on the Scrum Guide»."
+    }
+   ],
+   "basedOnLine": "المسار مبني على: خارطة roadmap.sh لمدير المنتج، وإطار Pragmatic Institute، ومسؤوليات مالك المنتج في دليل سكرم 2020، ومجالات اختبار PSPO I من Scrum.org",
+   "basedOnLinks": [
+    "https://roadmap.sh/product-manager",
+    "https://www.pragmaticinstitute.com/product/framework/",
+    "https://scrumguides.org/scrum-guide.html",
+    "https://www.scrum.org/assessments/professional-scrum-product-owner-i-certification"
+   ],
+   "orderNote": "Order product-discovery → product-roadmap → product-specs → product-analytics is supported, with one caveat. Discovery first: Pragmatic says of Market Problems «Finding them is the foundation for everything else in the Framework.», and on roadmap.sh User Research comes before everything about strategy and requirements. Roadmap before specs: roadmap.sh puts Vision & Mission, Strategic Thinking and Defining Goals above Product Requirements; the Scrum Guide lists «Developing and explicitly communicating the Product Goal;» before «Creating and clearly communicating Product Backlog items;»; Pragmatic's course order is «Focus: Strategic Product Planning» before «Build: Product Building Course» («hand off market information ... so development can build the right products»). Analytics last: roadmap.sh puts Key Product Metrics and Data-Driven Decision Making after requirements, roadmap, release and go-to-market. Caveat: in the Pragmatic Framework the Business category (with Measurement) sits before Planning (with Requirements), and on roadmap.sh Product Requirements and Product Roadmap are side by side, so specs and roadmap are close to parallel."
+  },
+  "sales-cs": {
+   "guidelines": [
+    {
+     "name": "Inbound Sales Certification Course: Get Certified in Inbound Sales",
+     "provider": "HubSpot Academy",
+     "url": "https://academy.hubspot.com/courses/inbound-sales",
+     "orderedTopics": [
+      "1 Welcome to the Inbound Sales Certification (6 min)",
+      "2 Inbound Sales Fundamentals (26 min)",
+      "3 Prioritizing Active Buyers Over Passive Buyers (37 min)",
+      "4 Earning the Attention of Today’s Empowered Buyer (40 min)",
+      "5 Understanding the Buyer’s Context (38 min)",
+      "6 Delivering Personalized Sales Presentations (31 min)",
+      "7 Inbound Sales Certification Next Steps (10 min)"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "The page is script-rendered; the lesson list was read with a fetch tool that renders the page. «FREE Certification Course», «3 hr 6 min»."
+    }
+   ],
+   "basedOnLine": "المسار مبني على: دورة HubSpot Academy المجانية للبيع الداخلي (Inbound Sales)",
+   "basedOnLinks": [
+    "https://academy.hubspot.com/courses/inbound-sales"
+   ],
+   "orderNote": "Order sales → customer-success is only weakly supported. No official customer-success curriculum opened (see notOpened), and Salesforce Trailhead's sales credential pages did not open. HubSpot's sales course covers the path up to the presentation and the close, with nothing after the sale. The only line found that puts the two in sequence is from a customer-success training company, not an official body: SuccessCOACHING (successcoaching.co) «connect what Marketing positions, Sales commits, and Customer Success delivers.» Keep the order, but treat it as a judgement call."
+  },
+  "supply-procurement": {
+   "guidelines": [
+    {
+     "name": "CIPS Level 2 Certificate in Procurement and Supply Operations (18 credits)",
+     "provider": "CIPS (Chartered Institute of Procurement & Supply)",
+     "url": "https://www.cips.org/qualifications/procurement-certificate",
+     "orderedTopics": [
+      "L2M1 Introducing Procurement and Supply",
+      "L2M2 Procurement and Supply Operations",
+      "L2M3 Stakeholder Relationships",
+      "L2M4 Systems Technology",
+      "L2M5 Inventory, Logistics and Expediting"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "«Five core modules make up the required 18 credits.» «Total exam time is 6 hours». The page says the syllabus changes from November 2027."
+    },
+    {
+     "name": "CIPS Level 3 Advanced Certificate in Procurement and Supply Operations (30 credits)",
+     "provider": "CIPS (Chartered Institute of Procurement & Supply)",
+     "url": "https://www.cips.org/qualifications/procurement-certificate-advanced",
+     "orderedTopics": [
+      "Core L3M1 Procurement and Supply Environments",
+      "Core L3M2 Ethical Procurement and Supply",
+      "Core L3M3 Contract Administration",
+      "Core L3M4 Team Dynamics and Change",
+      "Elective (one of): L3M5 Socially Responsible Procurement · L3M6 Socially Responsible Warehousing and Distribution"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "«Four core modules make up the 24 required credits.» «One elective module makes up the six remaining credits.»"
+    },
+    {
+     "name": "نظام المنافسات والمشتريات الحكومية الجديد",
+     "provider": "وزارة المالية",
+     "url": "https://www.mof.gov.sa/ar/new-tenders-procurement-low",
+     "orderedTopics": [
+      "الأنظمة واللوائح",
+      "النماذج",
+      "الأدلة الإرشادية",
+      "أحكام المحتوى المحلي",
+      "الأوامر والقرارات والتعاميم المرتبطة بنظام المنافسات",
+      "الأسئلة الشائعة",
+      "المدونات العامة",
+      "أبرز التعديلات على نظام المنافسات والمشتريات الحكومية 1448هـ",
+      "بوابة الموردين"
+     ],
+     "checkedAt": "2026-11-20",
+     "note": "A reference hub (sections in page order), not a learning order. The ministry's page https://www.mof.gov.sa/ar/tenders-and-procurement describes Etimad: «منصة إلكترونية شاملة لخدمات وزارة المالية ... و تتضمن العديد من الخدمات الأساسية مثل إدارة العقود والميزانية والمدفوعات بالإضافة الى إدارة المنافسات والمشتريات والحقوق المالية.» etimad.sa itself only redirects to its login page."
+    }
+   ],
+   "basedOnLine": "المسار مبني على: مؤهلات CIPS في المشتريات والتوريد (المستويان الثاني والثالث)، وصفحة نظام المنافسات والمشتريات الحكومية في وزارة المالية (منصة اعتماد)",
+   "basedOnLinks": [
+    "https://www.cips.org/qualifications/procurement-certificate",
+    "https://www.cips.org/qualifications/procurement-certificate-advanced",
+    "https://www.mof.gov.sa/ar/new-tenders-procurement-low"
+   ],
+   "orderNote": "Order supply-chain → procurement is NOT supported by the guidelines that opened. CIPS teaches both together from the start («L2M1 Introducing Procurement and Supply»), puts procurement operations second («L2M2 Procurement and Supply Operations») and puts the supply-chain-operations module last («L2M5 Inventory, Logistics and Expediting»). ASCM's CPIM/CSCP outlines, which would describe the supply-chain side, did not open. For procurement jobs (most of the openings found), procurement could come first, or the two can be treated as parallel; Saudi government procurement (Etimad, the procurement law) belongs inside procurement."
+  }
+ },
+ "certificates": [
+  {
+   "family": "product",
+   "name": "Product Management Certification (3-course series: Foundations, Focus, Build)",
+   "issuer": "Pragmatic Institute",
+   "url": "https://www.pragmaticinstitute.com/product/product-management-certification/",
+   "level": "entry",
+   "priceText": null,
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "شهادة من ثلاث دورات قصيرة مبنية على إطار Pragmatic، لا تتطلب خبرة سابقة.",
+   "checkedAt": "2026-11-20",
+   "note": "Page: «Recommended Experience None Required», «Complete in 1 Week»; no price shown, only «Enroll in all 3 courses for our Product Management Certification and save $200». The page calls it «Product Management Certification», not PMC."
+  },
+  {
+   "family": "product",
+   "name": "Professional Scrum Product Owner I (PSPO I)",
+   "issuer": "Scrum.org",
+   "url": "https://www.scrum.org/assessments/professional-scrum-product-owner-i-certification",
+   "level": "entry",
+   "priceText": "$200 USD per attempt",
+   "examLanguages": [
+    "English",
+    "Japanese (at Scrum.org)",
+    "Simplified Chinese (through scrum.org.cn)"
+   ],
+   "arabicAvailable": false,
+   "why": "اختبار عالمي لمسؤوليات مالك المنتج وإدارة قائمة مهام المنتج وفق دليل سكرم.",
+   "checkedAt": "2026-11-20",
+   "note": "«Language: English». Arabic is not offered; the page allows the Google Translate plugin («We cannot guarantee the quality of the translation»). 80 questions, 60 minutes, pass 85%."
+  },
+  {
+   "family": "product",
+   "name": "Certified Product Manager® (CPM)",
+   "issuer": "AIPMM",
+   "url": "https://aipmm.com/cpm",
+   "level": "associate",
+   "priceText": "Certification Exam Only: Price: $500",
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "شهادة عالمية تغطي عمل مدير المنتج من الفكرة حتى الإطلاق، دون شروط مسبقة.",
+   "checkedAt": "2026-11-20",
+   "note": "«There are no formal prerequisites for the course.» Training partners include one in the MENA region (Milestones Training & Consulting); a self-paced course with the voucher is listed at «Price: $1,500»."
+  },
+  {
+   "family": "sales-cs",
+   "name": "Inbound Sales Certification",
+   "issuer": "HubSpot Academy",
+   "url": "https://academy.hubspot.com/courses/inbound-sales",
+   "level": "entry",
+   "priceText": "FREE Certification Course",
+   "examLanguages": [
+    "English",
+    "Deutsch",
+    "Español",
+    "Français",
+    "日本語"
+   ],
+   "arabicAvailable": false,
+   "why": "دورة وشهادة مجانية من HubSpot في أساسيات البيع للمشتري الحديث، مدتها نحو 3 ساعات.",
+   "checkedAt": "2026-11-20",
+   "note": "Script-rendered page read with a rendering fetch tool. Arabic is not among the listed languages."
+  },
+  {
+   "family": "supply-procurement",
+   "name": "CIPS Level 2 Certificate in Procurement and Supply Operations",
+   "issuer": "CIPS",
+   "url": "https://www.cips.org/qualifications/procurement-certificate",
+   "level": "entry",
+   "priceText": "If you’re choosing to self-study you should budget around £1500 to £2000 depending on your study resources and exam choices at the diploma levels. This will be slightly less for the certificate levels.",
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "أول مستوى في مؤهلات CIPS: خمس وحدات من مدخل المشتريات إلى المخزون واللوجستيات.",
+   "checkedAt": "2026-11-20",
+   "note": "priceText is from CIPS's cost page https://www.cips.org/students/cost-of-studying. Exam languages are not stated on the qualification page."
+  },
+  {
+   "family": "supply-procurement",
+   "name": "CIPS Level 3 Advanced Certificate in Procurement and Supply Operations",
+   "issuer": "CIPS",
+   "url": "https://www.cips.org/qualifications/procurement-certificate-advanced",
+   "level": "associate",
+   "priceText": "If you’re choosing to self-study you should budget around £1500 to £2000 depending on your study resources and exam choices at the diploma levels. This will be slightly less for the certificate levels.",
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "المستوى الثالث من CIPS: إدارة العقود وأخلاقيات الشراء وبيئات التوريد.",
+   "checkedAt": "2026-11-20",
+   "note": "priceText is from https://www.cips.org/students/cost-of-studying. «Total exam time is 10 hours»."
+  },
+  {
+   "family": "ui-ux-product-design",
+   "name": "Google UX Design Professional Certificate",
+   "issuer": "Google (on Coursera)",
+   "url": "https://www.coursera.org/professional-certificates/google-ux-design",
+   "level": "entry",
+   "priceText": "In the U.S. and Canada, Coursera charges $49 per month after the initial 7-day free trial period.",
+   "examLanguages": [
+    "Taught in English",
+    "6 languages available"
+   ],
+   "arabicAvailable": null,
+   "why": "شهادة Google للمبتدئين في تصميم تجربة المستخدم، 6 أشهر بمعدل 10 ساعات أسبوعياً.",
+   "checkedAt": "2026-11-20",
+   "note": "«no experience or degree required». The FAQ says Google Career Certificates are available in «Turkish, German, Spanish, Arabic, Russian, and Indonesian Bahasa», but it is not clear that this certificate is one of them, so arabicAvailable is left null. grow.google's own page redirected to its MENA home page."
+  },
+  {
+   "family": "ux-research",
+   "name": "NN/g UX Certification",
+   "issuer": "Nielsen Norman Group",
+   "url": "https://www.nngroup.com/ux-certification/",
+   "level": "associate",
+   "priceText": "Approx. USD$ 6,600 * (*Pricing changes periodically. Totals reflect approximate learner investment.)",
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "شهادة من مجموعة نيلسن نورمان تتطلب اجتياز 5 دورات واختباراتها في تجربة المستخدم.",
+   "checkedAt": "2026-11-20",
+   "note": "«Pass 5 courses and their exams», «30+ hours of training»; «The foundational step.» Exams must be done within 35 days of the course."
+  },
+  {
+   "family": "digital-marketing",
+   "name": "Google Digital Marketing & E-commerce Professional Certificate",
+   "issuer": "Google (on Coursera)",
+   "url": "https://www.coursera.org/professional-certificates/google-digital-marketing-ecommerce",
+   "level": "entry",
+   "priceText": "In the U.S. and Canada, Coursera charges $49 per month after the initial 7-day free trial period.",
+   "examLanguages": [
+    "Taught in English",
+    "6 languages available"
+   ],
+   "arabicAvailable": null,
+   "why": "شهادة Google للمبتدئين في التسويق الرقمي والتجارة الإلكترونية دون خبرة سابقة.",
+   "checkedAt": "2026-11-20",
+   "note": "«no experience or degree required», «6 months at 10 hours a week»."
+  },
+  {
+   "family": "digital-marketing",
+   "name": "Meta Social Media Marketing Professional Certificate",
+   "issuer": "Meta (on Coursera)",
+   "url": "https://www.coursera.org/professional-certificates/facebook-social-media-marketing",
+   "level": "entry",
+   "priceText": null,
+   "examLanguages": [
+    "Taught in English",
+    "22 languages available"
+   ],
+   "arabicAvailable": null,
+   "why": "شهادة Meta للمبتدئين في تسويق وسائل التواصل الاجتماعي، نحو 5 أشهر.",
+   "checkedAt": "2026-11-20",
+   "note": "«Beginner level», «5 months at 10 hours a week». No price line was found in the served page."
+  },
+  {
+   "family": "business-pm-finance",
+   "name": "Entry Certificate in Business Analysis (ECBA)",
+   "issuer": "IIBA",
+   "url": "https://www.iiba.org/business-analysis-certifications/ecba/",
+   "level": "entry",
+   "priceText": "ECBA Complete: Sale price $356, was $445; $236 for IIBA members (Limited time offer · Save 20%)",
+   "examLanguages": [
+    "English",
+    "Chinese",
+    "Standard French",
+    "Canadian French",
+    "Japanese",
+    "Brazilian Portuguese"
+   ],
+   "arabicAvailable": false,
+   "why": "أول شهادة في تحليل الأعمال، بلا خبرة سابقة واختبار عن بُعد.",
+   "checkedAt": "2026-11-20",
+   "note": "«No prior experience needed · Online proctored exam». «Offer ends Dec. 31.»"
+  },
+  {
+   "family": "business-pm-finance",
+   "name": "Financial Modeling & Valuation Analyst (FMVA®)",
+   "issuer": "Corporate Finance Institute (CFI)",
+   "url": "https://corporatefinanceinstitute.com/certifications/financial-modeling-valuation-analyst-fmva-program/",
+   "level": "associate",
+   "priceText": "Starting from $298.20 / year",
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "برنامج عملي في النمذجة المالية والتقييم بـ Excel، 100 إلى 120 ساعة ذاتية.",
+   "checkedAt": "2026-11-20",
+   "note": "«100–120 hours, self-paced»; final exam «with a minimum passing grade of 70%»."
+  },
+  {
+   "family": "business-pm-finance",
+   "name": "زمالة الهيئة السعودية للمراجعين والمحاسبين (SOCPA)",
+   "issuer": "الهيئة السعودية للمراجعين والمحاسبين",
+   "url": "https://socpa.org.sa/Socpa/Technical-Resources/Professional-Tests.aspx",
+   "level": "professional",
+   "priceText": null,
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "الزمالة المهنية السعودية للمحاسبين والمراجعين، واختباراتها تُعقد في عدة مدن بالمملكة.",
+   "checkedAt": "2026-11-20",
+   "note": "The tests page lists «اختبار زمالة الهيئة» and an entry option «اختبار فني محاسبة». No fee for the fellowship is shown (the page shows only «تبلغ رسوم إعادة الاختبار (1,200) ريال لكل مادة.» for the zakat and income-tax certificate). The exam language is not stated, so arabicAvailable is null."
+  },
+  {
+   "family": "hr-recruitment",
+   "name": "Associate Professional in Human Resources – International (aPHRi)",
+   "issuer": "HRCI",
+   "url": "https://www.hrci.org/partner-with-hrci/saudi-partner-hub",
+   "level": "entry",
+   "priceText": null,
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "شهادة مبتدئة من HRCI لمن يبدأ في الموارد البشرية، ولها شريك تدريب سعودي.",
+   "checkedAt": "2026-11-20",
+   "note": "hrci.org's aPHRi page redirected (from Saudi Arabia) to the HRCI Saudi partner hub, which says aPHRi «is for those starting their HR journey» and that partner programmes «are aligned with Saudi Vision 2030 and eligible for HRDF subsidies»."
+  },
+  {
+   "family": "hr-recruitment",
+   "name": "SHRM Certified Professional (SHRM-CP)",
+   "issuer": "SHRM",
+   "url": "https://www.shrm.org/credentials/certification/shrm-cp",
+   "level": "associate",
+   "priceText": null,
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "شهادة SHRM العالمية لمختصي الموارد البشرية في المستوى التشغيلي.",
+   "checkedAt": "2026-11-20",
+   "note": "«for HR professionals functioning at the operational level»; four-hour exam at Prometric test centres. Price and languages are not on the served page."
+  },
+  {
+   "family": "hr-recruitment",
+   "name": "CIPD Foundation qualifications",
+   "issuer": "CIPD",
+   "url": "https://www.cipd.org/en/learning/qualifications/",
+   "level": "entry",
+   "priceText": null,
+   "examLanguages": null,
+   "arabicAvailable": null,
+   "why": "مؤهلات CIPD التأسيسية للموارد البشرية والتطوير، تمنح عضوية Foundation.",
+   "checkedAt": "2026-11-20",
+   "note": "«Once you have completed your qualification, you will be rewarded with either Foundation or Associate Membership of the CIPD». The Level 3 detail page returned 403 in the earlier pass."
+  }
+ ],
+ "notOpened": [
+  "ASCM CPIM and CSCP pages (ascm.org): bot protection (Incapsula) blocked curl, and the rendering fetch returned an empty page; the CPIM exam content manual PDF URL returned 500. No ASCM certificate or outline recorded.",
+  "Salesforce Trailhead: credentials/salesprofessional returned 503; credentials/salesrepresentative redirects to «Salesforce Certified Agentforce Sales Foundations», but exam details, price and languages are script-only and could not be read. No Salesforce sales certificate recorded.",
+  "Customer-success curriculum from an official body: none found. successcoaching.co/ccsm-level-1 and /ccsm returned 404 (SuccessCOACHING is a training company anyway); customersuccesscollective.com/certification returned 404.",
+  "etimad.sa and portal.etimad.sa redirect to login.etimad.sa (a sign-in page): not used. Etimad is described from the Ministry of Finance page.",
+  "laws.boe.gov.sa (Bureau of Experts) law page returned an error page (code 500).",
+  "pmi.org CAPM and PMP pages: 403 (both curl and the rendering fetch). No PMI certificate recorded.",
+  "Meta Certification page (facebook.com/business/learn/certification): connection reset.",
+  "Google Ads certifications: skillshop.withgoogle.com lists Google Ads course areas (Search, Display, Measurement, Video, Shopping, Apps, Discovery) but no certificate names, price or languages; support.google.com answer 9702452 is the Google Partners requirements page. Not recorded.",
+  "pragmaticinstitute.com/product/certifications/ returned 404; used /product/product-management-certification/.",
+  "cips.org level-2/level-3 guessed URLs returned 404; used /qualifications/procurement-certificate and /procurement-certificate-advanced.",
+  "grow.google/certificates/ux-design redirects to the Google MENA home page; used the Coursera listing."
+ ]
+}

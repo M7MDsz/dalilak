@@ -1,4 +1,4 @@
-/* Dalilak «دليلك» design tokens and base CSS. Owned by the design-system agent; how to use them: docs/DESIGN.md.
+/* Dalilak «دليل» design tokens and base CSS. Owned by the design-system agent; how to use them: docs/DESIGN.md.
    The token NAMES are a contract (docs/DESIGN-BRIEF.md section 4). Values may change: a palette swap is a change of the values
    below and nothing else. Contrast of every text token on every surface it may sit on is checked by
    artifacts/foundation/ds/contrast.mjs (run it after any change of value). */

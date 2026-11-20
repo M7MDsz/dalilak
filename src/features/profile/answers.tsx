@@ -14,6 +14,7 @@ import { useBrainStatus } from "@/lib/store";
 import { TID } from "@/lib/testids";
 import type { QuestionId, UserState } from "@/lib/types";
 
+import { CompanyRow } from "./company";
 import { PROFILE_COPY } from "./copy";
 import { Section } from "./section";
 
@@ -48,6 +49,8 @@ export function AnswersSection({ user, className }: { readonly user: UserState; 
             <dd className="min-w-0 text-end text-body font-medium text-fg">{answerText(user.answers, question) ?? neutralPrint(question)}</dd>
           </div>
         ))}
+        {/* «الشركة اللي في بالك» (onboarding step 7, 20 Nov 2026): across both columns, with change and clear */}
+        <CompanyRow user={user} />
         {/* the target job, across both columns, with the way to change it */}
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-3 @min-[640px]/content:col-span-2">
           <div className="flex min-w-0 flex-1 items-baseline justify-between gap-4 @min-[640px]/content:justify-start">

@@ -8,18 +8,19 @@ import type { ComponentProps, ComponentType, ReactNode } from "react";
 import type { GameState } from "@/components/game";
 import {
   IconFieldBusiness,
+  IconFieldCyberCloud,
   IconFieldData,
   IconFieldDesign,
   IconFieldHr,
   IconFieldMarketing,
+  IconFieldProduct,
   IconFieldProfessional,
+  IconFieldSalesSupply,
   IconFieldSoftware,
 } from "@/components/icons";
 import type { IconProps } from "@/components/icons/icon-base";
 import { NavLink } from "@/components/motion";
-import { courseStateLabel, dayMonth } from "@/lib/copy";
-import { getCourse } from "@/lib/data";
-import { shortTitle } from "@/lib/engine";
+import { COURSE_STATE_LABEL, dayMonth, guideTitle } from "@/lib/copy";
 import type { CourseId, CourseStateInfo, FieldId, NextStep } from "@/lib/types";
 
 import { completedOnLine, COURSE_COPY, fromCourseLine } from "./copy";
@@ -31,6 +32,9 @@ export const FIELD_ICON = {
   marketing: IconFieldMarketing,
   business: IconFieldBusiness,
   hr: IconFieldHr,
+  product: IconFieldProduct,
+  "cyber-cloud": IconFieldCyberCloud,
+  "sales-supply": IconFieldSalesSupply,
   professional: IconFieldProfessional,
 } as const satisfies Record<FieldId, ComponentType<IconProps>>;
 
@@ -67,18 +71,18 @@ export function questStateOf(info: CourseStateInfo, isNext: boolean): GameState 
 }
 
 /**
- * The ribbon's words where the spec names them (3.10): «بدأتها · 2 من 5» for a started course (instead of the layer's
+ * The ribbon's words where the spec names them (3.10): «بدأتها» for a started step (instead of the layer's
  * «جارية»). Undefined leaves the quest's own («التالية», «متاحة», «مكتملة», «مثبتة», «مقفلة»).
  */
 export function ribbonLabelOf(info: CourseStateInfo): string | undefined {
-  return info.state === "started" ? courseStateLabel(info) : undefined;
+  return info.state === "started" ? COURSE_STATE_LABEL.started : undefined;
 }
 
 /** Done or credited: the line under the title («أكملتها 18 نوفمبر» · «من سيرتك: «…»» · «من دورة: …»). */
 export function questNoteOf(info: CourseStateInfo, clamp = false): ReactNode {
   if (info.state === "completed") return completedOnLine(dayMonth(info.at));
   if (info.state !== "credited") return undefined;
-  if (info.by.kind === "course") return fromCourseLine(shortTitle(getCourse(info.by.courseId)));
+  if (info.by.kind === "course") return fromCourseLine(guideTitle(info.by.courseId));
   return (
     <span className={clamp ? "line-clamp-2" : undefined}>
       <span className="font-medium text-fg-3">{COURSE_COPY.fromCv} </span>

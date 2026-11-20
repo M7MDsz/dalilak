@@ -1,13 +1,14 @@
 // Owner: brain-advisor. The fixed script of spec 4.3-4.5: keyword tables, the acknowledgement bank, the special replies.
 // Every Arabic string is final copy from the spec. Pure; client-safe (no @/lib/store import).
+import { SA_PLACES, SA_REGIONS, findSaPlace, type SaPlace, type SaPlaceKind, type SaRegion } from "@/lib/data";
 import type {
   CityOption,
   EducationOption,
   ExperienceOption,
   InterestOption,
   MajorOption,
+  OnboardingStepId,
   PriorityOption,
-  QuestionId,
 } from "@/lib/types";
 
 // ── 4.3: keyword tables ────────────────────────────────────────────────────────────────────────────────────────────
@@ -19,11 +20,7 @@ export interface CityEntry {
   readonly label: string | null;
 }
 
-const OTHER_CITIES = [
-  "الطائف", "أبها", "خميس مشيط", "تبوك", "بريدة", "عنيزة", "حائل", "جازان", "نجران", "الباحة", "سكاكا", "عرعر",
-  "ينبع", "الجبيل", "الأحساء", "الهفوف", "القطيف", "الخرج", "حفر الباطن",
-];
-
+/** The three job cities and the two holy cities as the chips name them (4.3), and «الخبر» / «الظهران» kept as typed. */
 export const CITY_ENTRIES: readonly CityEntry[] = [
   { keyword: "الرياض", value: "riyadh", label: null },
   { keyword: "رياض", value: "riyadh", label: null },
@@ -41,8 +38,107 @@ export const CITY_ENTRIES: readonly CityEntry[] = [
   { keyword: "مكة المكرمة", value: "makkah", label: null },
   { keyword: "المدينة المنورة", value: "madinah", label: null },
   { keyword: "المدينه", value: "madinah", label: null },
-  ...OTHER_CITIES.map((city): CityEntry => ({ keyword: city, value: "other", label: city })),
 ];
+
+/**
+ * Every other city and governorate of the kingdom (src/lib/data/sa-places.ts, 20 Nov 2026), and the regions people name
+ * on their own («القصيم», «الشرقية»: read as the region's seat). Each is recorded as its nearest big job market (as
+ * «الخبر» is recorded as dammam), so its jobs come first and remote ones right after.
+ */
+export interface PlaceEntry {
+  readonly keyword: string;
+  readonly place: SaPlace;
+  /** The name kept as the label: the place's own name, or the alias or region name that was typed («جيزان», «القصيم»). */
+  readonly label: string;
+  /** Set when the keyword names a whole region: the reply speaks of the region and its seat. */
+  readonly region: SaRegion | null;
+}
+
+/**
+ * The spellings people type besides the name itself: a final «ء» left out or added («شقرا», «صبياء»), «ئ» / «ؤ» written
+ * «ي» / «و» («الداير»). ة/ه, ى/ي, أ/إ/ا and «ال» are already the normaliser's (src/lib/text).
+ */
+export function placeSpellings(name: string): string[] {
+  const out = new Set([name]);
+  if (name.endsWith("اء")) out.add(name.slice(0, -1));
+  else if (name.endsWith("ا")) out.add(`${name}ء`);
+  for (const form of [...out]) out.add(form.replace(/ئ/g, "ي").replace(/ؤ/g, "و"));
+  return [...out];
+}
+
+function placeEntries(): PlaceEntry[] {
+  const core = new Set(CITY_ENTRIES.map((e) => e.keyword));
+  const out: PlaceEntry[] = [];
+  const add = (label: string, place: SaPlace, region: SaRegion | null) => {
+    for (const keyword of placeSpellings(label)) if (!core.has(keyword)) out.push({ keyword, place, label, region });
+  };
+  for (const place of SA_PLACES) for (const name of [place.name, ...(place.aliases ?? [])]) add(name, place, null);
+  for (const region of SA_REGIONS) {
+    const seat = findSaPlace(region.seat);
+    if (seat) for (const alias of region.aliases) add(alias, seat, region);
+  }
+  return out;
+}
+
+export const PLACE_ENTRIES: readonly PlaceEntry[] = placeEntries();
+
+/**
+ * Place names that are also everyday words or first names («الكامل», «مرات», «الوجه», «شقراء», «بدر»): they count as
+ * the place only next to a place word («من», «في», «ساكن» …), with «ب» on the front («بالمذنب»), or when nothing else was
+ * said. So «أبي دوام كامل في الرياض» stays الرياض.
+ */
+export const AMBIGUOUS_PLACE_WORDS = [
+  "بدر", "الكامل", "مرات", "الوجه", "حقل", "القرى", "الحجرة", "البرك", "الحريق", "هروب", "تربة", "الدرب", "البيضاء",
+  "بحرة", "المهد", "البدع", "رماح", "ضمد", "الليث", "ثار", "العقيق", "الغزالة", "الطوال", "العارضة", "الدائر", "صوير",
+  "الأمواه", "الفرشة", "البدائع", "المذنب", "السليل", "الريث", "العديد", "طريف", "عفيف", "شقراء", "ميسان", "تيماء",
+  "سميراء", "الحائط", "السليمي", "المويه", "الحرث", "ليلى", "السيح", "الشرقية",
+];
+
+/** Words that say "this is where I am": the one before an ambiguous place name makes it the place. */
+export const PLACE_CONTEXT_WORDS = [
+  "من", "في", "ساكن", "ساكنة", "أسكن", "اسكن", "عايش", "عايشة", "أعيش", "مدينة", "مدينتي", "محافظة", "محافظتي",
+  "منطقة", "منطقتي", "ديرتي", "بلدي", "أنا", "انا",
+];
+
+/** What «دليلك» needs to say a place back: where it is, its nearest big job market, how far (straight line, whole km). */
+export interface PlaceAck {
+  /** As kept in the answer: «شقراء», «القصيم». */
+  readonly label: string;
+  readonly kind: SaPlaceKind | "region";
+  /** «منطقة الرياض», «المنطقة الشرقية». */
+  readonly regionName: string;
+  /** The region's emirate seat («بريدة»): said for a region. */
+  readonly seat: string;
+  /** «الرياض», «جدة», «الدمام». */
+  readonly market: string;
+  /** null: inside the market's own urban area (البيضاء). */
+  readonly km: number | null;
+}
+
+/** «حوالي 160 كم»: tens from 100 km up, fives below (never under 5). */
+export function roundKm(km: number): number {
+  return km >= 100 ? Math.round(km / 10) * 10 : Math.max(5, Math.round(km / 5) * 5);
+}
+
+function placeWhere(a: PlaceAck): string {
+  switch (a.kind) {
+    case "region":
+      return `مقر إمارتها ${a.seat}`;
+    case "seat":
+      return `مقر إمارة ${a.regionName}`;
+    case "city":
+      return `مدينة في ${a.regionName}`;
+    case "governorate":
+      return `محافظة في ${a.regionName}`;
+  }
+}
+
+function placeNear(a: PlaceAck): string {
+  if (a.km === null) return `، وهي ضمن حاضرة ${a.market}، يعني سوق ${a.market} عندك`;
+  if (a.kind === "region" && a.market === a.seat) return `، و${a.market} من أكبر أسواق الوظائف عندنا`;
+  const from = a.kind === "region" ? ` من ${a.seat}` : "";
+  return `، وأقرب سوق وظائف كبير لك ${a.market} (حوالي ${roundKm(a.km)} كم${from} بخط مستقيم)`;
+}
 
 export const EDUCATION_KEYWORDS: readonly { readonly keyword: string; readonly value: EducationOption }[] = [
   { keyword: "ثانوي", value: "secondary" },
@@ -202,6 +298,21 @@ export const EXPERIENCE_GATE_WORDS = ["خبرة", "خبرتي", "سنة", "سن�
 /** `interest` and `priority` are read ahead of their turn only with a wish word (4.3 step 4). */
 export const WISH_WORDS = ["أحب", "أهوى", "أميل", "أهتم", "يشدّني", "أريد", "أبغى", "أبي", "هدفي", "طموحي"];
 
+/**
+ * 20 Nov 2026, step 7 (the company): these say "no company in mind" («لا، مو الحين»). Read only while the company is the
+ * pending question, and only when no company is named («لا، أبي أرامكو» is أرامكو). Company names themselves are the
+ * engine's COMPANY_KEYWORDS (data `COMPANIES[].aliases`).
+ */
+export const COMPANY_NONE_PHRASES = [
+  "لا", "لأ", "لاء", "لا شكرا", "مو الحين", "مب الحين", "مو الآن", "ليس الآن", "ما فيه", "مافيه", "ما في", "مافي",
+  "ولا شي", "ولا شيء", "ولا وحدة", "ما عندي", "ماعندي", "بعدين", "لسا", "لسه", "أي شركة", "أي شي", "أي شيء", "أي وحدة",
+  "ما يفرق", "مايفرق", "عادي", "no", "nope", "not now", "not yet", "none", "any",
+];
+/** A company is read ahead of its turn (4.3 step 4) only with a wish word: «أبي أشتغل في أرامكو», never «أشتغل في stc». */
+export const COMPANY_GATE_WORDS = [
+  "أحب", "أهوى", "أميل", "أهتم", "يشدّني", "أريد", "أبغى", "أبي", "هدفي", "طموحي", "حلمي", "أحلم", "نفسي", "ودي", "ودّي",
+];
+
 /** For the pending question, these are themselves an answer: its neutral value (4.3 "Neutral values"). */
 export const NEUTRAL_PHRASES = ["لا أعرف", "ما أدري", "مدري", "لا أدري", "ما أعرف", "تخطَّ", "تخطى", "تخطي", "مو متأكد", "skip"];
 
@@ -219,7 +330,7 @@ export const GREETING_SALAM = ["السلام عليكم", "السلام", "سل�
 export const GREETING_OTHER = ["هلا", "هلا والله", "مرحبا", "مرحبتين", "أهلاً", "أهلين", "أهلا وسهلا", "صباح الخير", "مساء الخير", "صباح", "مساء", "الخير", "hi", "hello", "hey"];
 export const THANKS_WORDS = ["شكراً", "شكرا جزيلا", "مشكور", "يعطيك العافية", "الله يعطيك العافية", "تسلم", "جزاك الله خير", "thanks", "thank you"];
 /** Set aside with the greetings (a vocative): «هلا يا دليل». */
-export const VOCATIVE_WORDS = ["يا", "دليل"];
+export const VOCATIVE_WORDS = ["يا", "دليلك", "دليل"];
 
 /**
  * A greeting that came WITH an answer or a question is returned before the reply (QA: «السلام عليكم، أنا من الطائف»
@@ -231,18 +342,19 @@ export const LEAD_OTHER = ["هلا", "هلا والله", "مرحبا", "مرح�
 /** Filler words left out of an answer accepted as typed (4.5 second miss): «تخصصي فلسفة» keeps «فلسفة». */
 export const FILLER_WORDS = [
   "أنا", "انا", "تخصصي", "تخصص", "درست", "أدرس", "من", "في", "مدينتي", "ساكن", "أسكن", "عايش", "مدينة",
-  "السلام", "عليكم", "هلا", "مرحبا", "يا", "دليل",
+  "السلام", "عليكم", "هلا", "مرحبا", "يا", "دليلك", "دليل",
 ];
 
 // ── 4.4: acknowledgements; 4.5: special replies ────────────────────────────────────────────────────────────────────
 
-export const QUESTION_NUMBER: Readonly<Record<QuestionId, 1 | 2 | 3 | 4 | 5 | 6>> = {
+export const QUESTION_NUMBER: Readonly<Record<OnboardingStepId, 1 | 2 | 3 | 4 | 5 | 6 | 7>> = {
   city: 1,
   education: 2,
   major: 3,
   experience: 4,
   interest: 5,
-  priority: 6,
+  company: 6,
+  priority: 7,
 };
 
 export const ACK = {
@@ -253,6 +365,9 @@ export const ACK = {
   ],
   cityNoJobs: (city: string): string =>
     `${city}، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في البيانات التجريبية، فبضيف لك وظائف عن بُعد تناسبك.`,
+  /** Any other Saudi city, governorate or region (20 Nov 2026): «شقراء، حيّاك الله! محافظة في منطقة الرياض، …». */
+  cityPlace: (a: PlaceAck): string =>
+    `${a.label}، حيّاك الله! ${placeWhere(a)}${placeNear(a)}. وفيه بعد وظائف عن بُعد تقدر تشتغلها من مكانك.`,
   education: [
     (education: string): string => `${education}، ممتاز. أساس زين نبني عليه.`,
     (education: string): string => `${education}، ما شاء الله. وعليه نبني المهارات اللي تفرق معك.`,
@@ -286,20 +401,35 @@ export const ACK = {
     grow: "قرار موفق، تتطوّر في مجالك وتبني على اللي عندك.",
     explore: "الاستكشاف بداية ذكية. بوريك ثلاث اتجاهات والاختيار لك.",
   } satisfies Record<PriorityOption, string>,
+  /**
+   * 20 Nov 2026, step 7: the company the user has in mind. `job`: the job of that company the path will aim at (engine
+   * `companyJob`), «في الرياض» or «عن بُعد»; `noJob`: the job data has none of its jobs, so the path goes to the closest
+   * job and the reveal says so; `early`: named ahead of its turn, before «دليلك» knows enough to pick one of its jobs.
+   */
+  company: {
+    job: (company: string, title: string, where: string): string =>
+      `${company}، اختيار زين! عندهم وظيفة «${title}» ${where}، وعليها برسم مسارك.`,
+    noJob: (company: string): string =>
+      `${company}، اختيار زين! بس ما عندي الحين وظيفة منهم في قائمتي، فبرسم مسارك لأقرب وظيفة تناسبك، وتقدر تغيّر الشركة من «ملفي» متى ما بغيت.`,
+    early: (company: string): string => `${company}، سجّلتها! عندهم وظايف في قائمتي، وبعد ما أعرفك أكثر أختار لك أنسبها.`,
+    none: "ولا يهمك، نخليها مفتوحة، وتقدر تضيفها بعدين من «ملفي».",
+    /** The second miss: a name «دليلك» does not know is never guessed (4.5: it never loops). */
+    unknown: "ما عرفتها، فنخليها مفتوحة الحين، وتقدر تضيفها بعدين من «ملفي».",
+  },
   /** The neutral value taken (a «لا أعرف» answer, or the second miss of the four other questions: 4.5). */
   neutral: (label: string): string => `ولا يهمك، نخليها «${label}» ونكمل.`,
 } as const;
 
 export const REPLY = {
-  opening: (name: string): string => `هلا والله يا ${name}، أنا دليل، دليلك إلى وظيفتك. بكون معك من أول خطوة لآخرها.`,
-  openingLead: "بسألك ست أسئلة قصيرة، وعلى ضوئها أرسم لك مسار يناسبك أنت.",
+  opening: (name: string): string => `هلا والله يا ${name}، أنا دليلك إلى وظيفتك. بكون معك من أول خطوة لآخرها.`,
+  openingLead: "بسألك سبع أسئلة قصيرة، وعلى ضوئها أرسم لك مسار يناسبك أنت.",
   /** Before question 1, in its own message so the first question stands out (19 Nov 2026). */
   openingAsk: "نبدأ بالسهل:",
   closing: (name: string): string => `يعطيك العافية يا ${name}، اكتملت الصورة. لحظات وأرسم لك مسارك.`,
   greetingSalam: "وعليكم السلام، حيّاك الله.",
   greetingOther: "هلا والله.",
   thanks: "العفو.",
-  who: "أنا دليل، دليلك إلى وظيفتك. أسألك الحين عشان أرسم مسارك، وبعدها أكون معك في كل خطوة.",
+  who: "أنا دليلك إلى وظيفتك. أسألك الحين عشان أرسم مسارك، وبعدها أكون معك في كل خطوة.",
   whyAsk: "أسأل عشان أختار لك من 20 وظيفة اللي يناسب مدينتك وتخصصك وخبرتك واللي تحبه. وترى إجاباتك تنحفظ في متصفحك.",
   /** 4.5 «بقي {n} فقط.» with its counted noun (spec "Counted nouns"): 1 singular, 2 dual, 3-10 plural, 11+ singular. */
   count: (n: number): string =>
@@ -309,6 +439,8 @@ export const REPLY = {
   leadOther: "هلا والله.",
   otherQuestion: "سؤال في محله، ونرجع له بعد ما نرسم مسارك.",
   unmapped: "سامحني، ما لقطتها زين. تقدر تختار من الخيارات تحت، أو تكتبها بطريقة ثانية.",
+  /** The first miss of step 7 (a company name «دليلك» does not know). */
+  unmappedCompany: "ما عرفت ذي الشركة. تقدر تختار من الخيارات تحت أو تكتب اسمها بطريقة ثانية، وإذا ما في بالك شي، اختر «لا، مو الحين».",
   /** «وسجّلت أيضاً: تخصصك تسويق، وبدون خبرة بعد.» (4.3: the extra answers confirmed in the acknowledgement). */
   alsoRecorded: (items: string): string => `وسجّلت بعد: ${items}.`,
 } as const;

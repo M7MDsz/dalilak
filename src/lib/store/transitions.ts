@@ -7,7 +7,7 @@
 // course states, application numbers and statuses) or from data (XP amounts, the 60% line).
 // Imports: types, ids, data, engine, text, copy, and TYPES from @/lib/brain/protocol (a pure type module that imports
 // nothing back). Nothing else from src/lib/brain/** (brain-advisor imports this file; a two-way
-// edge would be an import cycle): text that comes from «دليل»'s templates is passed in as a parameter.
+// edge would be an import cycle): text that comes from «دليلك»'s templates is passed in as a parameter.
 import type {
   AdvisorMessage,
   Application,
@@ -16,6 +16,7 @@ import type {
   Clock,
   Consequence,
   CourseId,
+  CourseProgress,
   CoursePathInfo,
   CvAnalysis,
   CvRecord,
@@ -197,7 +198,7 @@ function onboardingMessage(index: number, from: OnboardingMessage["from"], text:
   return { id: `o-${index}`, from, text, at: clock.now };
 }
 
-/** Appends «دليل»'s lines to the onboarding thread (the greeting on first visit; the re-ask on resume: 3.2). */
+/** Appends «دليلك»'s lines to the onboarding thread (the greeting on first visit; the re-ask on resume: 3.2). */
 export function appendOnboardingMessages(user: UserState, texts: readonly string[], clock: Clock): UserState {
   if (texts.length === 0) return user;
   const thread = user.onboarding.thread;
@@ -343,6 +344,19 @@ export function tickLesson(user: UserState, courseId: CourseId, lesson: number, 
   return { ...user, courses: { ...user.courses, [courseId]: { ...progress, ticked: next } } };
 }
 
+/**
+ * Keeps the certificate link the user pasted for a started or completed course (self-reported, pays nothing). An empty
+ * link removes it; a course without progress leaves the user unchanged (same reference).
+ */
+export function setCertificate(user: UserState, courseId: CourseId, url: string): UserState {
+  const progress = user.courses[courseId];
+  if (!progress) return user;
+  const link = url.trim().slice(0, 500);
+  if ((progress.certificateUrl ?? "") === link) return user;
+  const next: CourseProgress = { startedAt: progress.startedAt, ticked: progress.ticked, completedAt: progress.completedAt, ...(link === "" ? {} : { certificateUrl: link }) };
+  return { ...user, courses: { ...user.courses, [courseId]: next } };
+}
+
 export type CompleteCourseOutcome =
   | { readonly ok: true; readonly transition: Transition; readonly onPath: CoursePathInfo | null }
   | { readonly ok: false; readonly reason: "not_started" | "completed" | "credited" | "locked" };
@@ -375,7 +389,7 @@ export function completeCourse(user: UserState, courseId: CourseId, clock: Clock
         ...user,
         courses: {
           ...user.courses,
-          [courseId]: { startedAt, ticked: course.lessons.map((_, i) => i + 1), completedAt: clock.now },
+          [courseId]: { ...user.courses[courseId], startedAt, ticked: course.lessons.map((_, i) => i + 1), completedAt: clock.now },
         },
         xpEvents: [...user.xpEvents, ...written],
       };
@@ -394,7 +408,7 @@ export type SubmitApplicationOutcome =
  * Writes an application (7.4): number = engine `nextApplicationNumber(user, clock)` (the SAME function the apply_to_job
  * tool uses for `expect.number`), match when sent, the note as given, cvLine, `job_applied` +40 only when the match is
  * ≥ 60 (once per job), badge first-application. A second application to the same job creates nothing.
- * The record IS "sent" (7.4: written at the start of step 5), so «دليل»'s in-flight marker for this job is cleared here.
+ * The record IS "sent" (7.4: written at the start of step 5), so «دليلك»'s in-flight marker for this job is cleared here.
  */
 export function submitApplication(
   user: UserState,
@@ -501,7 +515,7 @@ export function markSeen<K extends keyof SeenMarkers>(user: UserState, key: K, v
 // ── Advisor thread ───────────────────────────────────────────────────────────────────────────────────────────────
 
 /**
- * Appends to the advisor thread, keeps the last 40; sets jobsDisclosed when a «دليل» message carries at least one job card.
+ * Appends to the advisor thread, keeps the last 40; sets jobsDisclosed when a «دليلك» message carries at least one job card.
  * A message whose id is already in the thread is skipped (a repeated append, e.g. from a re-mounted component, adds nothing).
  */
 export function appendAdvisorMessages(user: UserState, messages: readonly AdvisorMessage[]): UserState {
@@ -532,7 +546,7 @@ export function clearAdvisorThread(user: UserState): UserState {
   return { ...user, advisor: { ...user.advisor, messages: [], jobsDisclosed: false } };
 }
 
-/** The in-flight marker of «دليل» applying (7.4). */
+/** The in-flight marker of «دليلك» applying (7.4). */
 export function setApplyInFlight(user: UserState, jobId: JobId | null, clock: Clock): UserState {
   if (jobId === null) {
     return user.advisor.applyInFlight === null ? user : { ...user, advisor: { ...user.advisor, applyInFlight: null } };
@@ -541,7 +555,7 @@ export function setApplyInFlight(user: UserState, jobId: JobId | null, clock: Cl
 }
 
 /**
- * On load (7.4): if applyInFlight is set and no application for that job exists, appends «دليل»'s message `line` (the
+ * On load (7.4): if applyInFlight is set and no application for that job exists, appends «دليلك»'s message `line` (the
  * caller passes brain/advisor/templates `applyInterruptedLine()`: «لم يكتمل التقديم. اطلبه مرة أخرى إن أحببت.») to the
  * advisor thread, with the id `interrupted-{startedAt}`; clears the marker either way.
  */

@@ -1,5 +1,5 @@
 "use client";
-// Owner: profile. «سجل النقاط» (spec 3.13, 8.1): every XP event, newest first, each row «+200 XP · أكملت دورة أساسيات
+// Owner: profile. «سجل النقاط» (spec 3.13, 8.1): every XP event, newest first, each row «+200 XP · أتممت خطوة
 // Power BI · اليوم 21:14». The gain is the game layer's earned reward chip (GAME-LAYER 4: brass outline, a check, XP
 // numerals: XP already yours), the reason in ink, the stamp quiet at the end.
 // history-roll (playbook 3.11): a row earned while the page is open (the daily reward) joins at the top while the others

@@ -7,7 +7,7 @@ import { IconAdvisor, IconXp } from "@/components/icons";
 
 // Gallery of Dalilak's avatars (development only). Everything is shown twice: on paper, and inside a stage block.
 
-export const metadata: Metadata = { title: "دليلك · الصور الرمزية" };
+export const metadata: Metadata = { title: "دليل · الصور الرمزية" };
 
 const SIZES = [96, 48, 32, 24] as const;
 const RING_LEVELS = [1, 3, 5, 7] as const;
@@ -219,7 +219,7 @@ function ChatSample() {
             <IconAdvisor size={22} />
           </span>
           <span className="grid flex-1 leading-6">
-            <span className="text-base font-bold text-fg">دليل</span>
+            <span className="text-base font-bold text-fg">دليلك</span>
             <span className="text-[13px] text-fg-2">مستشارك المهني</span>
           </span>
           <Avatar id="av-01" level={3} size={36} title="صورتك" />

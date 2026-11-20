@@ -1,6 +1,6 @@
 "use client";
 
-// /dev/brand: the Dalilak «دليلك» logo system (development gallery; Latin labels are for the team, not the product).
+// /dev/brand: the Dalilak «دليل» logo system (development gallery; Latin labels are for the team, not the product).
 import { type ReactNode, useEffect, useRef, useState } from "react";
 
 import {
@@ -119,11 +119,13 @@ function FileZoom({ px, zoom, bgVar }: { readonly px: number; readonly zoom: num
 
 /** The ي's dots, enlarged: the two drawn circles, with the font's own dot shapes as dashed outlines (same width and spacing). */
 const FONT_DOT = "M153 21.5Q150.4 21.5 148.75 19.9Q147.1 18.3 147.1 14.8Q147.1 11.3 148.75 9.7Q150.4 8.1 153 8.1L155 8.1Q157.6 8.1 159.25 9.7Q160.9 11.3 160.9 14.8Q160.9 18.3 159.25 19.9Q157.6 21.5 155 21.5L153 21.5Z";
+/** FONT_DOT was taken where the ink dot sat in the first wordmark (cx 154); this follows the dot wherever the word puts it. */
+const FONT_DOT_DX = WORDMARK.inkDot.cx - 154;
 function DotsProof() {
   return (
-    <svg className="h-auto w-full" viewBox="112 -48 72 74">
+    <svg className="h-auto w-full" viewBox={`${112 + FONT_DOT_DX} -48 72 74`}>
       <WordShape tone="accent" />
-      <g fill="none" strokeDasharray="0.8 0.6" strokeWidth={0.35} style={{ stroke: "var(--color-ok)" }}>
+      <g fill="none" strokeDasharray="0.8 0.6" strokeWidth={0.35} style={{ stroke: "var(--color-ok)" }} transform={`translate(${FONT_DOT_DX} 0)`}>
         <path d={FONT_DOT} />
         <path d={FONT_DOT} transform={`translate(${WORDMARK.dot.cx - WORDMARK.inkDot.cx} 0)`} />
       </g>
@@ -230,7 +232,7 @@ function WordProof() {
   return (
     <svg className="h-auto w-full" viewBox={vb}>
       <text fontSize={100} fontWeight={700} style={{ fill: "var(--color-accent)", fontFamily: "var(--font-sans)" }} textAnchor="middle" x={WORDMARK.advance / 2} y={0}>
-        دليلك
+        دليل
       </text>
       <g style={{ fill: "var(--color-ink)" }}>
         <path d={WORDMARK.body} />
@@ -246,23 +248,23 @@ const SIZES = [64, 32, 28, 24, 20, 16];
 
 /** The static files in public/brand, rendered from the components (the export script reads them from this page). */
 const EXPORTS: { name: string; surface: Surface; node: ReactNode }[] = [
-  { name: "mark", surface: "paper", node: <LogoMark size={128} title="دليلك" /> },
-  { name: "mark-on-stage", surface: "stage", node: <LogoMark size={128} title="دليلك" /> },
-  { name: "mark-mono", surface: "paper", node: <LogoMark size={128} title="دليلك" tone="mono" /> },
-  { name: "mark-32", surface: "paper", node: <LogoFavicon cut={32} size={64} title="دليلك" /> },
-  { name: "mark-24", surface: "paper", node: <LogoMark cut="24" size={48} title="دليلك" /> },
-  { name: "mark-16", surface: "paper", node: <LogoFavicon cut={16} size={64} title="دليلك" /> },
+  { name: "mark", surface: "paper", node: <LogoMark size={128} title="دليل" /> },
+  { name: "mark-on-stage", surface: "stage", node: <LogoMark size={128} title="دليل" /> },
+  { name: "mark-mono", surface: "paper", node: <LogoMark size={128} title="دليل" tone="mono" /> },
+  { name: "mark-32", surface: "paper", node: <LogoFavicon cut={32} size={64} title="دليل" /> },
+  { name: "mark-24", surface: "paper", node: <LogoMark cut="24" size={48} title="دليل" /> },
+  { name: "mark-16", surface: "paper", node: <LogoFavicon cut={16} size={64} title="دليل" /> },
   { name: "wordmark", surface: "paper", node: <Wordmark height={72} /> },
   { name: "wordmark-on-stage", surface: "stage", node: <Wordmark height={72} /> },
   { name: "logo-horizontal", surface: "paper", node: <Logo size={64} /> },
   { name: "logo-horizontal-on-stage", surface: "stage", node: <Logo size={64} /> },
   { name: "logo-stacked", surface: "paper", node: <Logo layout="stacked" size={128} /> },
   { name: "logo-stacked-on-stage", surface: "stage", node: <Logo layout="stacked" size={128} /> },
-  { name: "app-icon", surface: "paper", node: <AppIcon size={128} title="دليلك" /> },
-  { name: "app-icon-48", surface: "paper", node: <AppIcon size={48} title="دليلك" /> },
-  { name: "app-icon-32", surface: "paper", node: <AppIcon size={32} title="دليلك" /> },
-  { name: "favicon-16", surface: "paper", node: <LogoFavicon cut={16} size={16} tile title="دليلك" /> },
-  { name: "favicon-32", surface: "paper", node: <LogoFavicon cut={32} size={32} tile title="دليلك" /> },
+  { name: "app-icon", surface: "paper", node: <AppIcon size={128} title="دليل" /> },
+  { name: "app-icon-48", surface: "paper", node: <AppIcon size={48} title="دليل" /> },
+  { name: "app-icon-32", surface: "paper", node: <AppIcon size={32} title="دليل" /> },
+  { name: "favicon-16", surface: "paper", node: <LogoFavicon cut={16} size={16} tile title="دليل" /> },
+  { name: "favicon-32", surface: "paper", node: <LogoFavicon cut={32} size={32} tile title="دليل" /> },
 ];
 
 export default function BrandGallery() {
@@ -271,7 +273,7 @@ export default function BrandGallery() {
       <header className="mb-12 flex flex-wrap items-end justify-between gap-8">
         <div>
           <p className="text-[13px] font-semibold text-ink-3">Dalilak · brand system · /dev/brand</p>
-          <h1 className="mt-1 text-3xl font-bold">The mark, the wordmark «دليلك», lockups, small cuts, app tile</h1>
+          <h1 className="mt-1 text-3xl font-bold">The mark, the wordmark «دليل», lockups, small cuts, app tile</h1>
           <p className="mt-2 max-w-3xl text-[15px] text-ink-2">
             One trail folded into two contour arches, the waypoint between its feet. A guide walks the trail ahead of you and
             marks where you stand: the mark is that sentence. Every lockup carries exactly one waypoint, the mark&apos;s; the
@@ -371,7 +373,7 @@ export default function BrandGallery() {
         </div>
       </Section>
 
-      <Section n="04" note="IBM Plex Sans Arabic Bold as outlines; one detail: the ي's two dots are equal circles, the leading one the waypoint (from 48 px)" title="The wordmark «دليلك»">
+      <Section n="04" note="IBM Plex Sans Arabic Bold as outlines; one detail: the ي's two dots are equal circles, the leading one the waypoint (from 48 px)" title="The wordmark «دليل»">
         <div className="grid gap-4 md:grid-cols-2">
           <Board className="grid h-[300px] place-items-center" label="paper" surface="paper">
             <Wordmark height={150} />
@@ -527,7 +529,7 @@ export default function BrandGallery() {
                 <div className={`flex w-60 items-center gap-2.5 rounded-t-lg px-4 py-2.5 ${cls}`} dir="rtl">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img alt="" height={16} src="/icon.svg" width={16} />
-                  <span className="text-[14px]">دليلك · مساري</span>
+                  <span className="text-[14px]">دليل · مساري</span>
                 </div>
                 <Caption>{name}</Caption>
               </div>

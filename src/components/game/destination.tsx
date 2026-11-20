@@ -48,10 +48,14 @@ export interface DestinationCardProps extends Omit<TileProps, "children" | "stat
   readonly featured?: boolean;
   /** At most this many missing skills as gems (spec 3.7: three). */
   readonly maxGems?: number;
-  /** Buttons of its own («دع دليل يقدّم عنك»). With an action the card is flat; the buttons are the pressable pieces. */
+  /** Buttons of its own («دع دليلك يقدّم عنك»). With an action the card is flat; the buttons are the pressable pieces. */
   readonly action?: ReactNode;
   readonly testId?: string;
   readonly matchTestId?: string;
+  /** The mark beside the company (default «جهة تجريبية»; the jobs board passes the job's own: practice tag or source). */
+  readonly tag?: ReactNode;
+  /** Drawn as-is in place of the bordered `icon` token (the jobs board: the employer's logo or monogram). */
+  readonly emblem?: ReactNode;
 }
 
 /**
@@ -78,6 +82,8 @@ export function DestinationCard({
   action,
   testId,
   matchTestId,
+  tag,
+  emblem,
   faceClassName,
   interactive,
   ...rest
@@ -116,7 +122,9 @@ export function DestinationCard({
       state={state}
     >
       <div className="flex items-start gap-3">
-        {icon ? (
+        {emblem ? (
+          emblem
+        ) : icon ? (
           <span
             className={cn(
               "inline-grid shrink-0 place-items-center rounded-control border-2 border-fg text-fg wp-quiet stage:border-on-stage-3",
@@ -133,7 +141,7 @@ export function DestinationCard({
             <span>
               {company} · {city}
             </span>
-            <SampleTag kind="company" />
+            {tag === undefined ? <SampleTag kind="company" /> : tag}
           </p>
           {applied ? <p className="mt-1 text-small font-medium text-ok-fg">{applied.status}</p> : null}
         </div>

@@ -7,6 +7,7 @@ import {
   AVATAR_IDS,
   BADGE_IDS,
   CITY_OPTIONS,
+  COMPANY_OPTIONS,
   COURSE_IDS,
   EDUCATION_OPTIONS,
   EXPERIENCE_OPTIONS,
@@ -19,8 +20,8 @@ import {
   MAJOR_OPTIONS,
   NAV_SCREENS,
   PAGE_CHIP_SLUGS,
+  ONBOARDING_STEP_IDS,
   PRIORITY_OPTIONS,
-  QUESTION_IDS,
   SKILL_IDS,
   XP_EVENT_TYPES,
 } from "@/lib/ids";
@@ -76,6 +77,8 @@ const answers = z.object({
     .union([z.tuple([z.enum(INTEREST_OPTIONS)]), z.tuple([z.enum(INTEREST_OPTIONS), z.enum(INTEREST_OPTIONS)])])
     .optional(),
   priority: z.enum(PRIORITY_OPTIONS).optional(),
+  /** 20 Nov 2026: the company the user has in mind (onboarding step 7), or "none". */
+  company: z.enum(COMPANY_OPTIONS).optional(),
 });
 
 const cvRecord = z.object({
@@ -99,6 +102,7 @@ const courseProgress = z.object({
   startedAt: finite,
   ticked: z.array(z.number().int().min(1).max(10)).max(10),
   completedAt: finite.nullable(),
+  certificateUrl: z.string().max(500).optional(),
 });
 
 const xpEvent = z.object({
@@ -188,7 +192,7 @@ export function parseAdvisorRequest(input: unknown): AdvisorRequest | null {
 
 const onboardingClassify = z.object({
   v: z.literal(PROTOCOL_VERSION),
-  question: z.enum(QUESTION_IDS),
+  question: z.enum(ONBOARDING_STEP_IDS),
   text: z.string().max(10_000),
 });
 

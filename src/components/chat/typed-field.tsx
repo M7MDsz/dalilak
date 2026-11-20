@@ -1,8 +1,8 @@
 "use client";
-// TypedField: a real form field that «دليل» fills while the user watches (the apply flow, spec 7.4; playbook 3.8).
+// TypedField: a real form field that «دليلك» fills while the user watches (the apply flow, spec 7.4; playbook 3.8).
 // The text is the `value` of a controlled, read-only field (one text node, so Arabic letters join as it grows), revealed
 // by useTypeOn in graphemes (names, cities) or words (the note) over the step's duration. While it fills, the field looks
-// focused, an accent caret blinks at the end of the text (one of the five allowed loops), and «دليل»'s small mark sits at
+// focused, an accent caret blinks at the end of the text (one of the five allowed loops), and «دليلك»'s small mark sits at
 // its inline-end. Fields filled one after another hand the mark on: it travels by a shared layout id.
 // Stopping (`filling` false before the end) keeps what was written, and the field becomes editable.
 import { motion } from "motion/react";
@@ -16,16 +16,16 @@ import { DaleelGlyph } from "./daleel-glyph";
 
 export interface TypedFieldProps {
   readonly label: string;
-  /** What «دليل» writes. */
+  /** What «دليلك» writes. */
   readonly value: string;
-  /** «دليل» is writing it now. Turning it on starts from empty; turning it off keeps what was written. */
+  /** «دليلك» is writing it now. Turning it on starts from empty; turning it off keeps what was written. */
   readonly filling: boolean;
   /** The step's length in ms (spec 7.4: fields 400 ms each, the note 2000 ms). The value is fully written a little
    *  before it ends (at 85%), so the last letter is seen. Default 400. */
   readonly ms?: number;
   /** Reveal by letters (default) or by words (a long note). */
   readonly by?: "graphemes" | "words";
-  /** The field's value when «دليل» is not writing (it is editable then). Default: `value`. */
+  /** The field's value when «دليلك» is not writing (it is editable then). Default: `value`. */
   readonly formValue?: string;
   /** The user edits the field; also called with what was written when filling stops. */
   readonly onValueChange?: (value: string) => void;
@@ -34,7 +34,7 @@ export interface TypedFieldProps {
   /** A long text (the application note): a growing text area. */
   readonly multiline?: boolean;
   readonly hint?: string;
-  /** The shared id of «دليل»'s mark (one per form). Default "daleel-mark". */
+  /** The shared id of «دليلك»'s mark (one per form). Default "daleel-mark". */
   readonly markId?: string;
   readonly className?: string;
   readonly testId?: string;
@@ -115,7 +115,7 @@ export function TypedField({
             </div>
           ) : null}
         </div>
-        {filling ? <DaleelGlyph className={multiline ? "mt-0.5" : undefined} framed layoutId={markId} size={26} state="working" title="دليل يكتب" /> : null}
+        {filling ? <DaleelGlyph className={multiline ? "mt-0.5" : undefined} framed layoutId={markId} size={26} state="working" title="دليلك يكتب" /> : null}
       </div>
     </FieldShell>
   );

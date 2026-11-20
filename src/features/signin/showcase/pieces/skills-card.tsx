@@ -1,6 +1,6 @@
 "use client";
 // Piece 3 (spec 3.1): two skill cards. Excel with the CV sentence that proves it (the evidence marker, as the CV
-// analysis draws it), and Power BI. Its moment: Power BI receives its first star, and its source line («من دورة: …»,
+// analysis draws it), and Power BI. Its moment: Power BI receives its first star, and its source line («من دليل Power BI»,
 // spec 3.5) comes in under it.
 import { motion } from "motion/react";
 import type { ReactNode } from "react";

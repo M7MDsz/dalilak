@@ -1,5 +1,5 @@
 // Owner: jobs. DEVELOPMENT ONLY: a stand-in for the advisor dispatcher's `apply` action (ARCHITECTURE 9.2), so the jobs
-// screen's half of «دليل» applying can be recorded and checked on its own. It is never called by the product: only a
+// screen's half of «دليلك» applying can be recorded and checked on its own. It is never called by the product: only a
 // QA script calls `window.__dalilakJobs.advisorApply(jobId)` (or `.stop()`), and it is not installed in a production
 // build. It does what the dispatcher does around the run: startApplyRun, hold("advisor-apply"), the busy flag and the
 // in-flight marker, and on the result it releases and clears everything.

@@ -1,11 +1,11 @@
 "use client";
-// Owner: jobs. `/jobs/[id]` (spec 3.8): the gap for one job in three plain parts, and «دليل» applying for the user (7.4).
+// Owner: jobs. `/jobs/[id]` (spec 3.8): the gap for one job in three plain parts, and «دليلك» applying for the user (7.4).
 // Drawn as a destination you unlock (docs/GAME-LAYER.md 5.3.6): under the title, the job's five requirements as the five
 // segments of its unlock meter, each skill written under its segment with its stars (the ring's number, explained to the
 // point); the gap as skill gems (met, partial, locked) and the courses that close it as quests on a trail.
 // Order: on a wide content area (900 px and up) the content column (back link, header, the gap, «عن الوظيفة») and the
 // 340 px action card beside it, sticky (DESIGN 4.0); narrower, one column in the spec's phone order: header and ring
-// first, then the actions, then the three gap blocks, then «عن الوظيفة». On a phone «دع دليل يقدّم عنك» is pinned to the
+// first, then the actions, then the three gap blocks, then «عن الوظيفة». On a phone «دع دليلك يقدّم عنك» is pinned to the
 // bottom, directly above the tab bar, while scrolling (only one copy of the button is ever rendered).
 // `?apply=1` opens the apply sheet already filled; `#missing` scrolls to «ما ينقصك» («شاهد الفجوة»). An unknown id renders
 // the shell's not-found block.
@@ -13,12 +13,12 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 import { Tile, UnlockMeter, type Requirement as GameRequirement } from "@/components/game";
-import { IconAdvisor, IconArrowBack, IconCompany, IconExperience } from "@/components/icons";
+import { IconAdvisor, IconArrowBack, IconCompany, IconExperience, IconExternal, IconInfo } from "@/components/icons";
 import { NavLink, PageTransition } from "@/components/motion";
 import { Button, SampleTag, buttonStyles } from "@/components/ui";
-import { ConfirmTargetDialog, NotFoundBlock, useViewport } from "@/features/shared";
-import { ASK_ADVISOR_APPLY_TEXT, BAND_LABEL, companyCityLine } from "@/lib/copy";
-import { getField, getJob } from "@/lib/data";
+import { CompanyLogo, ConfirmTargetDialog, NotFoundBlock, useViewport } from "@/features/shared";
+import { ASK_ADVISOR_APPLY_TEXT, BAND_LABEL, JOB_SOURCE_COPY, companyCityLine, countNounBare, dayKeyText } from "@/lib/copy";
+import { getField, getJob, getSkill } from "@/lib/data";
 import { applicationStatus, jobGap, nextStep, projectedMatch, skillStars, totalStars } from "@/lib/engine";
 import { asJobId, hrefFor } from "@/lib/routes";
 import { useClock, useCurrentUser, useUi } from "@/lib/store";
@@ -96,7 +96,7 @@ function JobDetail({ jobId, user }: { jobId: JobId; user: UserState }): ReactNod
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wantsApply]);
 
-  // `#missing` («شاهد الفجوة» from «دليل»): scroll to the block once the page has risen
+  // `#missing` («شاهد الفجوة» from «دليلك»): scroll to the block once the page has risen
   useEffect(() => {
     if (window.location.hash !== "#missing") return;
     const timer = window.setTimeout(
@@ -177,7 +177,7 @@ function JobDetail({ jobId, user }: { jobId: JobId; user: UserState }): ReactNod
                 })
               }
             >
-              {JOB_COPY.applyAdvisor}
+              {job.real ? JOB_COPY.applyAdvisorReal : JOB_COPY.applyAdvisor}
             </Button>
           </div>
         ) : null}
@@ -190,7 +190,9 @@ function JobDetail({ jobId, user }: { jobId: JobId; user: UserState }): ReactNod
 }
 
 /**
- * Header (spec 3.8): job title · «{company} · {city}» · tags: the field, the experience label, «جهة تجريبية». Under it the
+ * Header (spec 3.8): job title · «{company} · {city}» (a real job: the company's own name in small type) · tags: the field,
+ * the experience label, and for the practice job «وظيفة تدريبية». A real job then shows where it was posted: the site, the
+ * posting date, «جُمعت في 20 نوفمبر 2026», «افتح الإعلان الأصلي» (a new tab) and the quiet note that it may have closed. Under it the
  * destination's lock: the unlock meter, one segment per requirement filled by the stars held ÷ the stars required (spec
  * 7.2), the skills written under their segments (from 640 px; on a phone the gems below name them), «تستوفي 3 من 5
  * متطلبات», and the lock that opens at 100%.
@@ -207,12 +209,20 @@ function JobHeader({
   const job = getJob(jobId);
   return (
     <header className="flex min-w-0 flex-col gap-3 @min-[900px]/content:col-start-1 @min-[900px]/content:row-start-1">
-      <h1 className="text-h2 text-fg @min-[600px]/content:text-h1" data-testid={TID.job.title}>
-        {job.title}
-      </h1>
-      <p className="flex items-center gap-2 text-body text-fg-2">
+      <div className="flex items-center gap-4">
+        <CompanyLogo jobId={jobId} size={56} />
+        <h1 className="min-w-0 text-h2 text-fg @min-[600px]/content:text-h1" data-testid={TID.job.title}>
+          {job.title}
+        </h1>
+      </div>
+      <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-body text-fg-2">
         <IconCompany className="shrink-0 text-fg-3" size={20} waypoint="muted" />
-        {companyCityLine(jobId)}
+        <span>{companyCityLine(jobId)}</span>
+        {job.companyEn ? (
+          <bdi className="text-small text-fg-3" data-testid="job-company-en" dir="ltr">
+            {job.companyEn}
+          </bdi>
+        ) : null}
       </p>
       <div className="flex flex-wrap items-center gap-2">
         <span className="inline-flex h-8 items-center gap-1.5 rounded-full border border-border-strong ps-2.5 pe-3 text-small font-medium text-fg-2">
@@ -223,12 +233,114 @@ function JobHeader({
           <IconExperience className="text-fg-2" size={17} waypoint="muted" />
           <LtrNumbers text={BAND_LABEL[job.band]} />
         </span>
-        <SampleTag className="h-8 px-2.5 text-small" kind="company" />
+        {job.real ? null : <SampleTag className="h-8 px-2.5 text-small" kind="practice" />}
       </div>
+      {job.real ? <PostingSource jobId={jobId} /> : <p className="text-small text-fg-3">{JOB_SOURCE_COPY.practiceNote}</p>}
       <Tile className="mt-3" faceClassName="px-card pt-4 pb-3.5" interactive={false}>
         <UnlockMeter labels size="md" skills={requirements} testId="job-unlock" value={match} />
       </Tile>
     </header>
+  );
+}
+
+/** A real job's source: the site, the dates, the link to the original posting (a new tab), the quiet note. */
+function PostingSource({ jobId }: { jobId: JobId }): ReactNode {
+  const job = getJob(jobId);
+  const source = job.source;
+  if (!source) return null;
+  return (
+    <div className="flex flex-col gap-2" data-testid="job-source">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-small text-fg-2">
+        <span>
+          {JOB_SOURCE_COPY.sourceLabel}: <bdi className="font-medium text-fg">{source.site}</bdi>
+        </span>
+        {source.postedAt ? (
+          <>
+            <span aria-hidden className="text-fg-4">
+              ·
+            </span>
+            <span>{JOB_SOURCE_COPY.posted(dayKeyText(source.postedAt))}</span>
+          </>
+        ) : null}
+        <span aria-hidden className="text-fg-4">
+          ·
+        </span>
+        <span data-testid="job-collected">{JOB_SOURCE_COPY.collected(dayKeyText(source.checkedAt))}</span>
+      </div>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <a
+          className={buttonStyles({ variant: "secondary", size: "sm" })}
+          data-testid="job-posting-link"
+          href={source.url}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {JOB_SOURCE_COPY.openPosting}
+          <IconExternal size={18} waypoint="off" />
+        </a>
+        <span className="inline-flex items-center gap-1.5 text-small text-fg-3">
+          <IconInfo className="shrink-0" size={16} waypoint="off" />
+          {JOB_SOURCE_COPY.mayHaveClosed}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/** A real job: each requirement with the posting's own sentence it was read from (so the user sees why). */
+function PostingEvidence({ jobId }: { jobId: JobId }): ReactNode {
+  const job = getJob(jobId);
+  if (!job.real) return null;
+  return (
+    <div className="mt-4 flex max-w-2xl flex-col gap-3" data-testid="job-evidence">
+      <h3 className="text-title text-fg">{JOB_SOURCE_COPY.evidenceTitle}</h3>
+      <p className="text-small text-fg-3">{JOB_SOURCE_COPY.evidenceLine}</p>
+      {job.titleEn || job.place ? (
+        <dl className="flex flex-col gap-1 text-small text-fg-2">
+          {job.titleEn ? (
+            <div className="flex flex-wrap gap-x-2">
+              <dt>{JOB_SOURCE_COPY.titleLabel}:</dt>
+              <dd className="m-0">
+                <bdi dir="ltr">{job.titleEn}</bdi>
+              </dd>
+            </div>
+          ) : null}
+          {job.place ? (
+            <div className="flex flex-wrap gap-x-2">
+              <dt>{JOB_SOURCE_COPY.placeLabel}:</dt>
+              <dd className="m-0">
+                <bdi dir="ltr">{job.place}</bdi>
+              </dd>
+            </div>
+          ) : null}
+        </dl>
+      ) : null}
+      <ul className="flex flex-col gap-3">
+        {job.requirements.map((r) => (
+          <li className="flex flex-col gap-1.5 rounded-card border border-border bg-surface px-4 py-3" data-skill={r.skill} key={r.skill}>
+            <span className="flex flex-wrap items-baseline gap-x-2 text-body font-semibold text-fg">
+              <bdi>{getSkill(r.skill).name}</bdi>
+              <span className="text-small font-normal text-fg-3">
+                <LtrNumbers text={`المطلوب: ${countNounBare(r.stars, "star")}`} />
+              </span>
+            </span>
+            {r.evidence ? (
+              <blockquote className="border-s-2 border-border-strong ps-3 text-small text-fg-2" dir="ltr" lang="en">
+                “{r.evidence}”
+              </blockquote>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+      {job.source?.note ? (
+        <p className="flex flex-col gap-1 text-small text-fg-3" data-testid="job-source-note">
+          <span>{JOB_SOURCE_COPY.sourceNote}</span>
+          <bdi className="block" dir="ltr" lang="en">
+            {job.source.note}
+          </bdi>
+        </p>
+      ) : null}
+    </div>
   );
 }
 
@@ -253,6 +365,7 @@ function About({ jobId }: { jobId: JobId }): ReactNode {
           </li>
         ))}
       </ul>
+      <PostingEvidence jobId={jobId} />
     </section>
   );
 }

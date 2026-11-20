@@ -1,16 +1,17 @@
 "use client";
-// Owner: advisor. The cards in «دليل»'s replies (spec 3.14, 5.5 rule 10): drawn by the app from data by id, never from a
+// Owner: advisor. The cards in «دليلك»'s replies (spec 3.14, 5.5 rule 10): drawn by the app from data by id, never from a
 // model's words. Titles, companies, matches and statuses are read LIVE from data and the engine, so an old card is never
-// stale. Every card opens its page; a card may carry one action chip («قدّم على هذه», «ابدأ الدورة», «اجعلها هدفي»),
-// which sends a new message with its payload (the router answers).
+// stale. Every card opens its page; a card may carry one action chip («قدّم على ذي», «ابدأ الخطوة», «خلّها هدفي»),
+// which sends a new message with its payload (the router answers). A course card is a learning step shown as its
+// skill's guide («دليل Power BI» and its real top pick; 20 Nov 2026): never the internal course title or its hours.
 import type { ReactNode } from "react";
 
 import { Chip as ChipButton, Button, Card, SampleTag, SkillStars, XpValue } from "@/components/ui";
 import { IconArrowForward, IconCheckCircle, IconClock } from "@/components/icons";
 import { Ring } from "@/components/motion";
-import { useNextStepAction } from "@/features/shared";
-import { APPLICATION_STATUS_COPY, companyCityLine, courseStateLabel, hoursText, nextStepLabel, starsOfRequired } from "@/lib/copy";
-import { getCourse, getJob, getSkill } from "@/lib/data";
+import { JobTag, useNextStepAction } from "@/features/shared";
+import { APPLICATION_STATUS_COPY, JOB_SOURCE_COPY, companyCityLine, courseStateLabel, guideTitle, nextStepLabel, starsOfRequired } from "@/lib/copy";
+import { getCourse, getGuide, getJob, getSkill } from "@/lib/data";
 import { applicationStatus, courseOnPath, courseState, courseXp, jobGap, jobMatch, nextStep, skillStars } from "@/lib/engine";
 import { formatNumber } from "@/lib/format";
 import { hrefFor } from "@/lib/routes";
@@ -23,7 +24,7 @@ export interface CardActions {
   readonly onOpen: (href: string) => void;
   /** A card's action chip: sends it as the user's message. */
   readonly onChip: (chip: Chip, key: string) => void;
-  /** «دليل» is busy: chips and the next-step button wait (5.5 rule 13). */
+  /** «دليلك» is busy: chips and the next-step button wait (5.5 rule 13). */
   readonly busy: boolean;
   /** The chip being pressed (the press frame shows before the message goes). */
   readonly pressedKey: string | null;
@@ -82,7 +83,7 @@ function JobCard({ jobId, chip, actions }: { jobId: JobId; chip?: Chip; actions:
         <span className="flex min-w-0 flex-1 flex-col items-start gap-1">
           <span className="text-title text-fg">{job.title}</span>
           <span className="text-small text-fg-2">{companyCityLine(jobId)}</span>
-          <SampleTag className="mt-1" kind="company" />
+          <JobTag className="mt-1" jobId={jobId} />
         </span>
         <Ring delay={0.35} from={actions.fresh ? 0 : undefined} size={56} value={match} />
       </span>
@@ -94,6 +95,8 @@ function CourseCard({ courseId, chip, actions }: { courseId: CourseId; chip?: Ch
   const user = useCurrentUser();
   const course = getCourse(courseId);
   const skill = getSkill(course.skill);
+  const top = getGuide(course.skill).topPick;
+  const title = guideTitle(courseId);
   const info = user ? courseState(courseId, user) : null;
   const path = user ? courseOnPath(courseId, user) : null;
   const held = user ? skillStars(user)[course.skill] : 0;
@@ -101,7 +104,7 @@ function CourseCard({ courseId, chip, actions }: { courseId: CourseId; chip?: Ch
   return (
     <CardFrame
       action={chip ? <CardChip actions={actions} chip={chip} id={courseId} /> : undefined}
-      label={course.title}
+      label={title}
       onOpen={() => actions.onOpen(hrefFor({ screen: "course", courseId }))}
       testId={TID.advisor.cardCourse(courseId)}
     >
@@ -115,12 +118,13 @@ function CourseCard({ courseId, chip, actions }: { courseId: CourseId; chip?: Ch
           </span>
           {info && info.state !== "available" ? <span className="shrink-0 text-small font-medium text-fg-3">{courseStateLabel(info)}</span> : null}
         </span>
-        <span className="text-title text-fg">{course.title}</span>
+        <span className="text-title text-fg">
+          <bdi>{title}</bdi>
+        </span>
+        <span className="line-clamp-2 text-small text-fg-2">
+          ابدأ بـ «<bdi>{top.title}</bdi>» · <bdi>{top.provider}</bdi>
+        </span>
         <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-small text-fg-2">
-          <span className="inline-flex items-center gap-1.5">
-            <IconClock className="text-fg-3" size={18} waypoint="off" />
-            {hoursText(course.hours)}
-          </span>
           {info?.state === "credited" ? null : <XpValue gain size="sm" value={courseXp(course)} />}
           {path && ahead ? (
             path.prep ? (
@@ -205,16 +209,26 @@ function ApplicationCard({ jobId, actions }: { jobId: JobId; actions: CardAction
           {app.xpPaid > 0 ? <XpValue className="mt-1 shrink-0" gain size="sm" value={app.xpPaid} /> : null}
         </span>
         <span className="mt-1 flex w-full flex-wrap items-center gap-x-3 gap-y-1.5 border-t border-border pt-3">
-          <span className="inline-flex items-center gap-1.5 text-small font-semibold text-fg" data-state={status}>
-            {status === "shortlisted" ? (
+          {job.real ? (
+            // a real posting: prepared here, sent by the user from the posting (20 Nov 2026), no simulated status
+            <span className="inline-flex items-center gap-1.5 text-small font-semibold text-fg" data-state="prepared">
               <IconCheckCircle className="text-ok-fg" size={18} waypoint="off" />
-            ) : (
-              <IconClock className="text-fg-3" size={18} waypoint="off" />
-            )}
-            {APPLICATION_STATUS_COPY[status].label}
-          </span>
-          {app.by === "advisor" ? <span className="text-small text-fg-2">قدّم عنك دليل</span> : null}
-          <SampleTag className="ms-auto">محاكاة</SampleTag>
+              {app.by === "advisor" ? JOB_SOURCE_COPY.preparedByAdvisor : JOB_SOURCE_COPY.preparedByUser}
+            </span>
+          ) : (
+            <>
+              <span className="inline-flex items-center gap-1.5 text-small font-semibold text-fg" data-state={status}>
+                {status === "shortlisted" ? (
+                  <IconCheckCircle className="text-ok-fg" size={18} waypoint="off" />
+                ) : (
+                  <IconClock className="text-fg-3" size={18} waypoint="off" />
+                )}
+                {APPLICATION_STATUS_COPY[status].label}
+              </span>
+              {app.by === "advisor" ? <span className="text-small text-fg-2">قدّم عنك دليلك</span> : null}
+              <SampleTag className="ms-auto">محاكاة</SampleTag>
+            </>
+          )}
         </span>
       </span>
     </CardFrame>

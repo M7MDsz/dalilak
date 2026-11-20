@@ -32,6 +32,9 @@ const TERRAIN: Readonly<Record<FieldId, { seed: number; x: number; y: number }>>
   business: { seed: 53, x: 0.7, y: 0.75 },
   hr: { seed: 67, x: 0.4, y: 0.2 },
   professional: { seed: 79, x: 0.62, y: 0.6 },
+  product: { seed: 83, x: 0.35, y: 0.55 },
+  "cyber-cloud": { seed: 97, x: 0.68, y: 0.4 },
+  "sales-supply": { seed: 101, x: 0.45, y: 0.78 },
 };
 
 const f = (n: number) => n.toFixed(1);

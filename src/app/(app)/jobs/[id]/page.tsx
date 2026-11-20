@@ -1,5 +1,5 @@
 // Owner: jobs. `/jobs/[id]`, the job page with the gap and the apply sheet (spec 3.8). A thin Server Component: the tab
-// title is the job title (spec 2.2: «دليلك · {job title}»); an unknown id renders the shell's not-found block (in the
+// title is the job title (spec 2.2: «دليل · {job title}»); an unknown id renders the shell's not-found block (in the
 // screen). The screen reads `?apply=1` with useSearchParams(), so it sits under <Suspense> (STACK 1.3).
 import type { Metadata } from "next";
 import { Suspense } from "react";

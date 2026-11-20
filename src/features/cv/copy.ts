@@ -2,15 +2,13 @@
 // screen stay in that screen (ARCHITECTURE 6). Counted nouns go through countNoun (spec "How to read").
 import type { CvErrorCode } from "@/lib/brain/protocol";
 import { countNoun, nextStepLabel } from "@/lib/copy";
-import { getCourse } from "@/lib/data";
-import { shortTitle } from "@/lib/engine";
 import { formatPercent } from "@/lib/format";
 import type { NextStep } from "@/lib/types";
 
 import type { CvStepId } from "@/components/motion";
 
 export const CV_COPY = {
-  intro: "ارفع سيرتك، ودليل يستخرج مهاراتك ويريك الجملة التي تثبت كل واحدة.",
+  intro: "ارفع سيرتك، ودليلك يستخرج مهاراتك ويريك الجملة التي تثبت كل واحدة.",
   /** Wide screens only: the drop zone's label, on the same line as pasteLabel so both boxes start and end level. */
   dropLabel: "ارفع ملف سيرتك",
   dropTitle: "اسحب ملف سيرتك هنا أو اختره من جهازك",
@@ -31,12 +29,12 @@ export const CV_COPY = {
   engineModel: "القراءة: نموذج ذكاء اصطناعي",
   jobsHeading: "أفضل الوظائف لمهاراتك",
   targetTag: "هدفك",
-  applyAdvisor: "دع دليل يقدّم عنك",
+  applyAdvisor: "دع دليلك يقدّم عنك",
   setTarget: "اجعلها هدفي",
   goPath: "اذهب إلى مساري",
   goJobs: "كل الوظائف",
   reanalyse: "حلّل سيرة أخرى",
-  // empty result, in «دليل»'s voice
+  // empty result, in «دليلك»'s voice
   emptyTitle: "لم ألتقط مهارات واضحة في هذا النص.",
   emptyBody: "أضف خبراتك ودوراتك ومهاراتك بأسمائها، أو جرّب السيرة التجريبية لترى كيف يعمل التحليل.",
   emptyEdit: "عدّل النص",
@@ -52,7 +50,7 @@ export const CV_ERROR_COPY = {
   request_failed: "تعذّر التحليل الآن. جرّب مرة أخرى.",
 } as const satisfies Record<CvErrorCode, string>;
 
-/** The status line of each show stage (spec 6.3), in «دليل»'s voice. */
+/** The status line of each show stage (spec 6.3), in «دليلك»'s voice. */
 export function stageLine(step: CvStepId, skills: number, jobs: number): string {
   switch (step) {
     case "read":
@@ -114,14 +112,14 @@ export function fieldCount(n: number): string {
 }
 
 /**
- * The line under «اذهب إلى مساري», from the next step (spec 2.8): «التالي: دورة «أساسيات Power BI» ترفعك إلى 90%.»
- * Null where there is no course or job to name (rule 1 or 5).
+ * The line under «اذهب إلى مساري», from the next step (spec 2.8): «التالي: تعلّم Power BI يرفعك إلى 90%.»
+ * Null where there is no learning step or job to name (rule 1 or 5).
  */
 export function nextLine(step: NextStep): string | null {
   switch (step.rule) {
     case 3: {
-      const course = `التالي: دورة «${shortTitle(getCourse(step.courseId))}»`;
-      return step.prep ? `${course}.` : `${course} ترفعك إلى ${formatPercent(step.matchAfter)}.`;
+      const learn = `التالي: ${nextStepLabel(step)}`;
+      return step.prep ? `${learn}.` : `${learn} يرفعك إلى ${formatPercent(step.matchAfter)}.`;
     }
     case 2:
     case 4:

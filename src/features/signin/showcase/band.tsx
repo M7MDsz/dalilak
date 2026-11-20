@@ -1,5 +1,5 @@
 "use client";
-// Owner: signin. The showcase reduced to one piece at a time (spec 3.1 "Phone": a band about 240 px high at the top,
+// Owner: signin. The showcase reduced to one piece at a time (spec 3.1 "Phone": a band about 240 px high under the form,
 // one piece with its caption). The same six pieces, in their compact cut, take turns: the old one leaves first (150 ms),
 // the next rises in (420 ms) and plays its moment, then rests. Under the caption a small trail shows where the story
 // is: covered solid, the current piece as the waypoint, the rest dotted (Darb's progress sentence).

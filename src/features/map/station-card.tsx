@@ -1,16 +1,17 @@
 "use client";
 // Owner: map. The station card: the stage sheet of spec 3.4 (`path-stage-sheet`), drawn as the approved page draws it. On
 // a wide sheet it is a card on the map beside the station the camera flew to; on a phone it is a bottom sheet above the
-// tab bar. It shows the real stage: its course, the skill and the star it raises, hours, lessons, XP, the match before
-// and after, and the user's progress there, with the one action the spec gives that state («ابدأ الدورة» starts the
-// course and opens it; «أكمل الدورة» and «افتح الدورة» only open it). Its arrival and departure are choreography.ts's.
+// tab bar. It shows the real stage: its learning guide («دليل Power BI», 20 Nov: the courses became «أدلة التعلّم») and
+// the guide's top pick, the skill and the star it raises, the hours when the pick states them, XP, the match before and
+// after, and the user's progress there, with one action «افتح الدليل» (on the lit stage it also starts the step). Its
+// arrival and departure are choreography.ts's.
 import type { ReactNode, Ref } from "react";
 
-import { IconArrowForward, IconClock, IconClose, IconLessons, IconLock } from "@/components/icons";
-import { Button, IconButton, SampleTag, SkillStars, Stamp, XpValue } from "@/components/ui";
-import { COURSE_STATE_LABEL, STAGE_STATE_LABEL, companyCityLine, countNoun, hoursText, lockReasonText } from "@/lib/copy";
-import { getCourse, getJob, getSkill } from "@/lib/data";
-import { shortTitle } from "@/lib/engine";
+import { IconArrowForward, IconClock, IconClose, IconLock } from "@/components/icons";
+import { Button, IconButton, SkillStars, Stamp, XpValue } from "@/components/ui";
+import { JobTag } from "@/features/shared";
+import { COURSE_STATE_LABEL, STAGE_STATE_LABEL, companyCityLine, countNoun, guideTitle, hoursText, lockReasonText } from "@/lib/copy";
+import { getGuide, getJob, getSkill } from "@/lib/data";
 import { formatNumber, formatPercent } from "@/lib/format";
 import { TID } from "@/lib/testids";
 import type { CourseStateInfo, Roadmap, RoadmapStage, StarMap } from "@/lib/types";
@@ -32,7 +33,7 @@ export interface StationCardProps {
   readonly titleId: string;
   readonly ref?: Ref<HTMLDivElement>;
   readonly onClose: () => void;
-  /** The stage's button, whatever its label. `start` is true only for «ابدأ الدورة». */
+  /** The stage's button «افتح الدليل». `start` is true on the lit stage before its step was started. */
   readonly onCourse: (stage: RoadmapStage, start: boolean) => void;
   readonly onJob: () => void;
 }
@@ -56,50 +57,54 @@ function Pips({ total, on }: { readonly total: number; readonly on: number }) {
   );
 }
 
+/** A pick's name without its trailing «(…)» (the English original or the learning path), so the line stays short. */
+function bare(text: string): string {
+  return text.replace(/\s*\([^()]*\)\s*$/, "") || text;
+}
+
 function CloseButton({ onClose }: { readonly onClose: () => void }) {
   return <IconButton className="dm-x" data-testid={TID.path.stageSheetClose} icon={<IconClose size={20} waypoint="off" />} label="إغلاق" onClick={onClose} size="sm" />;
 }
 
 function StageCard({ stage, course, roadmap, stars, animate, hop, titleId, onClose, onCourse }: Omit<StationCardProps, "subject" | "ref" | "onJob"> & { readonly stage: RoadmapStage; readonly course: CourseStateInfo }) {
   const skill = getSkill(stage.skill);
-  const courseData = getCourse(stage.courseId);
-  // rows and sentences use the short title; the full title is the course page's heading (spec «How to read»)
-  const short = shortTitle(courseData);
-  const lessons = courseData.lessons.length;
+  // the step is a learning guide now: «دليل Power BI», and the guide's top pick (where to start, on which platform)
+  const guide = guideTitle(stage.courseId);
+  const pick = getGuide(stage.skill).topPick;
   const done = stage.state === "done";
   const before = done ? stage.matchAt - stage.gain : roadmap.match;
   const after = done ? stage.matchAt : stage.matchAfter;
-  const ticked = course.state === "started" ? course.ticked.length : course.state === "completed" ? lessons : 0;
   const stampDelay = animate ? (hop ? 0.5 : (FLIGHT.barAt + 60) / 1000) : 0;
 
   const courseBlock = (
     <div className="dm-blk dm-fi">
-      {/* spec 3.4 rows: «الدورة: أساسيات Power BI» · «المدة: 10 ساعات» · «النقاط: +200 XP» */}
+      {/* «الدليل: دليل Power BI» · «ابدأ بـ: {the top pick} · {its platform}» · the hours (only when the pick states them) · XP */}
       {done && stage.doneBy?.kind !== "course" ? (
         <>
-          <span className="dm-k">الدورة المقابلة · {COURSE_STATE_LABEL.credited}</span>
+          <span className="dm-k">الدليل المقابل · {COURSE_STATE_LABEL.credited}</span>
           <b>
-            <bdi>{short}</bdi>
+            <bdi>{guide}</bdi>
           </b>
         </>
       ) : (
         <p className="dm-crs">
-          <span className="dm-k">الدورة:</span>
+          <span className="dm-k">الدليل:</span>
           <b>
-            <bdi>{short}</bdi>
+            <bdi>{guide}</bdi>
           </b>
         </p>
       )}
+      <span className="dm-sub">
+        ابدأ بـ: <bdi className="font-semibold text-ink">{bare(pick.title)}</bdi> · <bdi>{bare(pick.provider)}</bdi>
+      </span>
       <div className="dm-stats">
-        <span>
-          <IconClock size={18} waypoint="off" />
-          <span className="dm-k">المدة:</span>
-          {hoursText(stage.hours)}
-        </span>
-        <span>
-          <IconLessons size={18} waypoint="off" />
-          {countNoun(lessons, "lesson")}
-        </span>
+        {pick.hours !== null ? (
+          <span>
+            <IconClock size={18} waypoint="off" />
+            <span className="dm-k">المدة:</span>
+            {hoursText(pick.hours)}
+          </span>
+        ) : null}
         {done && stage.doneBy?.kind !== "course" ? null : (
           <span>
             <span className="dm-k">النقاط:</span>
@@ -153,7 +158,7 @@ function StageCard({ stage, course, roadmap, stars, animate, hop, titleId, onClo
           <>
             <span className="dm-k">تقدّمك</span>
             <q>
-              أكملتها بدورة «<bdi>{shortTitle(getCourse(stage.doneBy.courseId))}</bdi>».
+              خلّصت «<bdi>{guideTitle(stage.doneBy.courseId)}</bdi>».
             </q>
           </>
         ) : (
@@ -168,7 +173,7 @@ function StageCard({ stage, course, roadmap, stars, animate, hop, titleId, onClo
     if (stage.doneBy?.kind === "course") {
       action = (
         <Button className="dm-go dm-fi" data-testid={TID.path.stageStart} icon={<IconArrowForward size={20} />} onClick={() => onCourse(stage, false)} variant="secondary">
-          افتح الدورة
+          افتح الدليل
         </Button>
       );
     }
@@ -188,25 +193,18 @@ function StageCard({ stage, course, roadmap, stars, animate, hop, titleId, onClo
       <div className="dm-blk dm-fi">
         <div className="dm-row">
           <span className="dm-k">تقدّمك</span>
-          <b>
-            {started ? COURSE_STATE_LABEL.started : "لم تبدأ بعد"}
-            <i className="dm-sep" />
-            <span>
-              {formatNumber(ticked)} من {countNoun(lessons, "lesson")}
-            </span>
-          </b>
+          <b>{started ? COURSE_STATE_LABEL.started : "لم تبدأ بعد"}</b>
         </div>
-        <Pips on={ticked} total={lessons} />
       </div>
     );
     const current = stage.state === "current";
     action = current ? (
       <Button className="dm-go dm-fi" data-testid={TID.path.stageStart} icon={<IconArrowForward size={20} />} onClick={() => onCourse(stage, !started)}>
-        {started ? "أكمل الدورة" : "ابدأ الدورة"}
+        افتح الدليل
       </Button>
     ) : (
       <Button className="dm-go dm-fi" data-testid={TID.path.stageStart} icon={<IconArrowForward size={20} />} onClick={() => onCourse(stage, false)} variant="secondary">
-        افتح الدورة
+        افتح الدليل
       </Button>
     );
   }
@@ -278,7 +276,7 @@ function SummitCard({ roadmap, titleId, onClose, onJob }: Pick<StationCardProps,
         <b>{job.title}</b>
         <span className="dm-sub flex flex-wrap items-center gap-2">
           {companyCityLine(roadmap.jobId)}
-          <SampleTag kind="company" />
+          <JobTag jobId={roadmap.jobId} />
         </span>
       </div>
       <div className="dm-blk dm-fi">

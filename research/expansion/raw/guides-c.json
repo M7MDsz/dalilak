@@ -1,0 +1,1018 @@
+{
+ "checkedAt": "2026-11-20",
+ "note": "Guides for 8 new skills (cyber-cloud field plus deep-learning and llm-apps). Every url was opened on 2026-11-20 with WebFetch or curl; hours, price, certificate and language come from the opened page, else null. Coursera Arabic editions show «Enroll for free» but the certificate and graded work need the paid option, so they are marked paid with a priceNote. hoursNote says when hours are a sum of module times on the page. recommendedBy is null unless an opened page recommends the item. Field names follow the brief: proof (task, dataset, checkedAt) and people with arab/saudiBased. Dropped (could not be opened or confirmed): TryHackMe SOC Level 1 (429 / Vercel checkpoint), Cloudflare Learning articles (403), Splunk and Cisco NetAcad course detail pages (JavaScript only), DevOps with Docker on mooc.fi (JavaScript only), Arabic translations of Jay Alammar posts (mundhor.site 522, ai-ds.thakaa.sa DNS failure), Hugging Face course in Arabic (not translated), Eric Capuano SOC lab series (retired), Forrest Brazeal as Cloud Resume Challenge creator (not stated on the pages), Arab/Saudi creators (none could be confirmed from an opened page). No Arabic edition of AWS Cloud Practitioner Essentials or Google Cybersecurity was found; Satr, Doroob, Edraak, NCA CyberIC and SDAIA Academy were not re-checked.",
+ "skills": {
+  "networking": {
+   "topPick": {
+    "title": "أساسيات شبكات الكمبيوتر",
+    "provider": "Google (Coursera), Google IT Support Professional Certificate",
+    "url": "https://www.coursera.org/learn/computer-networking-ar",
+    "lang": "ar",
+    "price": "paid",
+    "priceNote": "The page shows «Enroll for free» and «Financial aid available»; graded work and the certificate need the paid Certificate experience (no audit option confirmed on the page).",
+    "hours": 34,
+    "hoursNote": "Sum of the 6 module times on the page (6+5+5+6+6+6). The header says «3 weeks at 10 hours a week».",
+    "certificate": true,
+    "star": 1,
+    "why": "بالعربي من Google: طبقات الشبكة وTCP/IP وعناوين IP وDNS وDHCP وحل مشكلات الاتصال.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Professor Messer's CompTIA N10-009 Network+ Training Course",
+     "provider": "Professor Messer",
+     "url": "https://www.professormesser.com/network-plus/n10-009/n10-009-video/n10-009-training-course/",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "The page states «All of my training videos are completely free»; the Course Notes PDF is an optional paid add-on.",
+     "hours": 12.9,
+     "hoursNote": "The page states a total run time of 12 hours 55 minutes (87 videos). certificate=false: no course certificate is mentioned; the Network+ exam is separate.",
+     "certificate": false,
+     "star": 1,
+     "why": "87 فيديو مجاني تغطي منهج Network+ كاملاً، وهو نفس مستوى النجمة: OSI والتوجيه والتقسيم الفرعي.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Networking Basics",
+     "provider": "Cisco Networking Academy",
+     "url": "https://www.netacad.com/courses/networking-basics",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "The page title and description say «Free online course … from Cisco Networking Academy». The rest of the page loads by JavaScript and showed no hours, badge or language list to the fetch tool.",
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "دورة سيسكو المجانية الرسمية لأساسيات الشبكات، مدخل طبيعي قبل مسار CCNA.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "NetworkChuck",
+     "platform": "YouTube / website",
+     "url": "https://networkchuck.com/",
+     "why": "فيديوهات حماسية وعملية عن الشبكات وشهادات CCNA وNetwork+ ومختبرات منزلية، مناسبة للمبتدئ.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://networkchuck.com/",
+      "youtube": "https://www.youtube.com/networkchuck",
+      "x": "https://twitter.com/networkchuck"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Jeremy (Jeremy's IT Lab)",
+     "platform": "Website / YouTube",
+     "url": "https://www.jeremysitlab.com/",
+     "profileChecked": "https://www.youtube.com/@JeremysITLab",
+     "why": "مدرّب CCNA وCCNP، قناته فيها دروس Cisco كاملة ومختبرات وأسئلة تدريب، ويستعد الآن لـ CCIE.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.jeremysitlab.com/",
+      "youtube": "https://www.youtube.com/@JeremysITLab"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Ed Harmoush (Practical Networking)",
+     "platform": "Website / YouTube",
+     "url": "https://www.practicalnetworking.net/",
+     "profileChecked": "https://www.practicalnetworking.net/series/subnetting/subnetting/",
+     "why": "صاحب سلسلة «Subnetting Mastery» التي تعلّمك التقسيم الفرعي من الصفر حتى تحله في أقل من دقيقة.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.practicalnetworking.net/",
+      "youtube": "https://www.youtube.com/channel/UCKmU-GKiukM8LYjkJFb8oBQ"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Subnetting Mastery",
+     "author": "Ed Harmoush",
+     "site": "practicalnetworking.net",
+     "url": "https://www.practicalnetworking.net/series/subnetting/subnetting/",
+     "lang": "en",
+     "why": "سلسلة من 7 أجزاء بورقة غش وتمارين تجعلك تحسب الشبكات الفرعية بسرعة وثقة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Networking! ACK!",
+     "author": "Julia Evans",
+     "site": "wizardzines.com",
+     "url": "https://wizardzines.com/zines/networking/",
+     "lang": "en",
+     "why": "مجلة مصوّرة مجانية تشرح ماذا يحدث في الشبكة حين تنزّل صورة من الإنترنت، بأسلوب بسيط.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "افتح ملفي dns.cap وhttp.cap من مكتبة Wireshark، واكتب صفحة تشرح فيها مسار الطلب: استعلام DNS وجوابه، ثم مصافحة TCP الثلاثية وطلب HTTP، مع رقم المنفذ وعنوان IP لكل طرف؛ وأضف جدول تقسيم للشبكة 192.168.10.0/24 إلى 4 شبكات فرعية (العنوان، القناع، أول وآخر عنوان، عنوان البث).",
+    "dataset": {
+     "name": "Wireshark Sample Captures (dns.cap, http.cap)",
+     "provider": "Wireshark wiki",
+     "url": "https://wiki.wireshark.org/SampleCaptures"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "linux": {
+   "topPick": {
+    "title": "أنت وأنظمة التشغيل: كيف تصبح مستخدمًا محترفًا",
+    "provider": "Google (Coursera), Google IT Support Professional Certificate",
+    "url": "https://www.coursera.org/learn/os-power-user-ar",
+    "lang": "ar",
+    "price": "paid",
+    "priceNote": "The page shows «Enroll for free» and «Financial aid available»; graded work and the certificate need the paid Certificate experience (no audit option confirmed on the page).",
+    "hours": 35,
+    "hoursNote": "Sum of the 6 module times on the page (7+4+7+5+6+6). The header says «4 weeks at 10 hours a week».",
+    "certificate": true,
+    "star": 1,
+    "why": "بالعربي من Google: سطر أوامر Linux والمستخدمون والأذونات والحزم وأنظمة الملفات والعمليات.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Introduction to Linux (LFS101)",
+     "provider": "The Linux Foundation",
+     "url": "https://training.linuxfoundation.org/training/introduction-to-linux/",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "The page lists the price as $0 («free training course»); enrolment needs a Linux Foundation portal login; access lasts 90 days.",
+     "hours": 60,
+     "hoursNote": "The page states «60 Hours of Course Material». It lists a «Digital Badge» but does not say whether a certificate is issued.",
+     "certificate": null,
+     "star": 1,
+     "why": "الدورة الرسمية المجانية من مؤسسة Linux: سطر الأوامر والملفات والعمليات وBash والسكربتات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "الفصل الدراسي المفقود من تعلمك لعلوم الكمبيوتر (The Missing Semester, ترجمة عربية)",
+     "provider": "MIT (community Arabic translation)",
+     "url": "https://missing-semester-ar.github.io/",
+     "lang": "ar",
+     "price": "free",
+     "priceNote": "Open course materials (CC BY-NC-SA) with lectures on YouTube; the Arabic site is a community translation of the 2020 edition, linked from missing.csail.mit.edu, which notes translations are not vetted by the maintainers.",
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "محاضرات MIT بالعربي عن الشِل والسكربتات ومعالجة البيانات بسطر الأوامر وVim وGit.",
+     "recommendedBy": [
+      {
+       "label": "The Missing Semester of Your CS Education (MIT, official site)",
+       "url": "https://missing.csail.mit.edu/",
+       "note": "Lists the Arabic translation at missing-semester-ar.github.io among community translations."
+      }
+     ],
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Julia Evans",
+     "platform": "Blog / zines",
+     "url": "https://jvns.ca/",
+     "profileChecked": "https://wizardzines.com/",
+     "why": "تشرح Linux وسطر الأوامر وBash برسوم بسيطة، ولها مجلات مصوّرة مثل «Bite Size Linux» و«Bite Size Bash».",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://jvns.ca/",
+      "github": "https://github.com/jvns"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Jay LaCroix (Learn Linux TV)",
+     "platform": "YouTube / website",
+     "url": "https://www.learnlinux.tv/",
+     "why": "خبرة أكثر من 20 سنة في Linux، وقناته فيها شروحات مجانية للخوادم والتوزيعات وAnsible.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.learnlinux.tv/",
+      "youtube": "https://www.youtube.com/@LearnLinuxTV",
+      "x": "https://x.com/JayTheLinuxGuy",
+      "github": "https://github.com/learnlinuxtv"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "William E. Shotts, Jr. (LinuxCommand.org)",
+     "platform": "Website / book",
+     "url": "https://linuxcommand.org/",
+     "why": "مؤلف كتاب «The Linux Command Line»، وموقعه يعلّم الشِل وكتابة السكربتات خطوة بخطوة.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://linuxcommand.org/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Bash scripting quirks & safety tips",
+     "author": "Julia Evans",
+     "site": "jvns.ca",
+     "url": "https://jvns.ca/blog/2017/03/26/bash-quirks/",
+     "lang": "en",
+     "why": "نصائح تحميك من أخطاء Bash الشائعة: الاقتباس وset -euo pipefail وshellcheck.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Writing Shell Scripts",
+     "author": "William E. Shotts, Jr.",
+     "site": "linuxcommand.org",
+     "url": "https://linuxcommand.org/lc3_writing_shell_scripts.php",
+     "lang": "en",
+     "why": "دروس متتابعة تكتب فيها أول سكربت ثم تضيف المتغيرات والشروط والحلقات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اجتز المستويات 0 إلى 15 في لعبة Bandit (اتصال SSH وfind وgrep وsort وuniq والأذونات)، ثم اكتب سكربت Bash ينسخ مجلداً احتياطياً بملف مضغوط باسم التاريخ ويحذف النسخ الأقدم من 7 أيام، وجدوِله بـ cron، وانشره على GitHub مع شرح قصير.",
+    "dataset": {
+     "name": "OverTheWire: Bandit",
+     "provider": "OverTheWire (free wargame for absolute beginners)",
+     "url": "https://overthewire.org/wargames/bandit/"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "security-fundamentals": {
+   "topPick": {
+    "title": "أمان تكنولوجيا المعلومات: الحماية من الهجمات الرقمية",
+    "provider": "Google (Coursera), Google IT Support Professional Certificate",
+    "url": "https://www.coursera.org/learn/it-security-ar",
+    "lang": "ar",
+    "price": "paid",
+    "priceNote": "The page shows «Enroll for free» and «Financial aid available»; graded work and the certificate need the paid Certificate experience (no audit option confirmed on the page).",
+    "hours": 29,
+    "hoursNote": "Sum of the 6 module times on the page (5+7+3+5+3+6). The header says «3 weeks at 10 hours a week».",
+    "certificate": true,
+    "star": 1,
+    "why": "بالعربي من Google: التهديدات والتشفير وAAA وإدارة الهوية وتأمين الشبكات والدفاع العميق.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Professor Messer's CompTIA SY0-701 Security+ Training Course",
+     "provider": "Professor Messer",
+     "url": "https://www.professormesser.com/security-plus/sy0-701/sy0-701-video/sy0-701-comptia-security-plus-course/",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "The page states «All of my training videos are completely free»; printed or downloadable Course Notes are paid extras.",
+     "hours": 15.2,
+     "hoursNote": "The page states a total run time of 15 hours 11 minutes (121 videos). certificate=false: no course certificate is mentioned; the Security+ exam is separate.",
+     "certificate": false,
+     "star": 1,
+     "why": "121 فيديو مجاني تغطي منهج Security+ كاملاً، وهو بالضبط مستوى النجمة الأولى.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "ISO 27001 Foundations Course",
+     "provider": "Advisera",
+     "url": "https://advisera.com/training/iso-27001-foundations-course/",
+     "lang": "en",
+     "price": "free_to_audit",
+     "priceNote": "The page says «Free unlimited access to the entire course»; the exam and certificate cost US $349 (two free retakes).",
+     "hours": 8,
+     "hoursNote": "The page states 8 hours, self-paced, 10 CPE credits.",
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: نظام إدارة أمن المعلومات وتقييم المخاطر ومعالجتها وبيان التطبيق وضوابط الملحق A.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Professor Messer",
+     "platform": "Website / YouTube",
+     "url": "https://www.professormesser.com/",
+     "why": "دورات فيديو مجانية لشهادات CompTIA (A+ وNetwork+ وSecurity+) مع جلسات مراجعة واختبارات قصيرة.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.professormesser.com/",
+      "youtube": "https://www.youtube.com/professormesser",
+      "x": "https://www.twitter.com/professormesser"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Brian Krebs (Krebs on Security)",
+     "platform": "Blog",
+     "url": "https://krebsonsecurity.com/",
+     "profileChecked": "https://krebsonsecurity.com/about/",
+     "why": "صحفي تحقيقات عمل في Washington Post، يشرح الاختراقات وبرامج الفدية والاحتيال كما حدثت فعلاً.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://krebsonsecurity.com/",
+      "x": "https://twitter.com/briankrebs",
+      "linkedin": "https://www.linkedin.com/in/bkrebs/"
+     },
+     "linkedinSource": "https://krebsonsecurity.com/about/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "الضوابط الأساسية للأمن السيبراني (ECC 2-2024)",
+     "author": "الهيئة الوطنية للأمن السيبراني",
+     "site": "nca.gov.sa",
+     "url": "https://nca.gov.sa/ar/regulatory-documents/controls-list/ecc/",
+     "lang": "ar",
+     "why": "للنجمة الثانية: الضوابط الوطنية التي تلتزم بها الجهات في المملكة، مع دليل التطبيق الإرشادي بالعربي.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "CSF 2.0 Quick-Start Guides",
+     "author": "NIST",
+     "site": "nist.gov",
+     "url": "https://www.nist.gov/cyberframework/quick-start-guides",
+     "lang": "en",
+     "why": "أدلة قصيرة لإطار NIST للأمن السيبراني، منها دليل للمنشآت الصغيرة ودليل لإدارة المخاطر.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "اختر منشأة صغيرة افتراضية (عيادة أو متجر إلكتروني)، واكتب سجل مخاطر من 10 مخاطر (الأصل، التهديد، الاحتمال، الأثر، المعالجة)، ثم اربط كل معالجة بضابط من «الضوابط الأساسية للأمن السيبراني» برقمه، وأضف سياسة كلمات مرور ومصادقة متعددة العوامل في صفحة واحدة.",
+    "dataset": {
+     "name": "الضوابط الأساسية للأمن السيبراني (ECC 2-2024) ودليل تطبيقها",
+     "provider": "الهيئة الوطنية للأمن السيبراني (NCA)",
+     "url": "https://nca.gov.sa/ar/regulatory-documents/controls-list/ecc/"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "soc-analysis": {
+   "topPick": {
+    "title": "إنشاء استعلامات لمايكروسوفت سينتينل باستخدام لغة استعلامات Kusto (KQL)",
+    "provider": "Microsoft Learn (SC-200 learning path)",
+    "url": "https://learn.microsoft.com/ar-sa/training/paths/sc-200-utilize-kql-for-azure-sentinel/",
+    "lang": "ar",
+    "price": "free",
+    "priceNote": "Free self-paced Microsoft Learn path (machine-translated Arabic, ms.translationtype MT); 4 modules, intermediate level; aligned to exam SC-200.",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "مجاني وبالعربي: تكتب استعلامات KQL للبحث في السجلات وبناء الكشف والتقارير داخل Microsoft Sentinel.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Splunk free eLearning: SOC Essentials: Investigating with Splunk (and other free security courses)",
+     "provider": "Splunk Education",
+     "url": "https://www.splunk.com/en_us/training/free-courses/overview.html",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "Listed on Splunk's «free courses» page with Intro to Splunk, The Art of Investigation and SOC Essentials: Introduction to Threat Hunting. The course pages themselves load by JavaScript and showed no details.",
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "دورات Splunk المجانية الرسمية: البحث في السجلات والتحقيق وصيد التهديدات، وهي أشهر أداة SIEM في الإعلانات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "SOC Analyst Learning Path",
+     "provider": "LetsDefend",
+     "url": "https://app.letsdefend.io/path/soc-analyst-learning-path",
+     "lang": "en",
+     "price": null,
+     "priceNote": "The page does not say whether the path is free; it links to subscription plans.",
+     "hours": null,
+     "hoursNote": "No hours stated; the FAQ says «a few weeks to a few months». Certificate and badge on completion per the page.",
+     "certificate": true,
+     "star": 1,
+     "why": "25 خطوة عملية: تنبيهات SIEM حقيقية والتصيّد وهجمات الويب وMITRE ATT&CK وSplunk والاستجابة للحوادث.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "John Hammond",
+     "platform": "YouTube",
+     "url": "https://www.youtube.com/@_JohnHammond",
+     "why": "قناة «Free Cybersecurity Education and Ethical Hacking»: تحليل برمجيات خبيثة وتحديات CTF وتحقيقات عملية.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "youtube": "https://www.youtube.com/@_JohnHammond"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Chris Sanders",
+     "platform": "Website / books",
+     "url": "https://chrissanders.org/",
+     "why": "مؤلف «Practical Packet Analysis» و«Applied Network Security Monitoring»، يعلّم المحللين كيف يحققون في الحوادث.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://chrissanders.org/",
+      "x": "https://twitter.com/chrissanders88",
+      "linkedin": "https://www.linkedin.com/in/chrissanders88/"
+     },
+     "linkedinSource": "https://chrissanders.org/about/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "NIST SP 800-61 Rev. 3: Incident Response Recommendations and Considerations for Cybersecurity Risk Management",
+     "author": "Alexander Nelson, Sanjay Rekhi, Murugiah Souppaya, Karen Scarfone (NIST)",
+     "site": "csrc.nist.gov",
+     "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+     "lang": "en",
+     "why": "المرجع الأمريكي الرسمي للاستجابة للحوادث (أبريل 2025): الاستعداد والكشف والاستجابة والتعافي.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Get Started with MITRE ATT&CK",
+     "author": "MITRE",
+     "site": "attack.mitre.org",
+     "url": "https://attack.mitre.org/resources/",
+     "lang": "en",
+     "why": "مدخل إلى إطار ATT&CK الذي يصنّف أساليب المهاجمين، وتستخدمه فرق SOC لبناء الكشف وتحليل التنبيهات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "حمّل بيانات Boss of the SOC v1 في Splunk، وحقق في سيناريو تشويه موقع الويب: من أي عنوان IP جاء الفحص، وما الأداة المستخدمة، ومتى نجح الاختراق؛ ثم اكتب تقرير حادثة من صفحة واحدة بالجدول الزمني والمؤشرات (IOCs) وأسلوب ATT&CK لكل خطوة، مع استعلامات SPL التي استخدمتها.",
+    "dataset": {
+     "name": "Boss of the SOC (BOTS) Dataset v1",
+     "provider": "Splunk (GitHub, CC0-1.0)",
+     "url": "https://github.com/splunk/botsv1"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "cloud": {
+   "topPick": {
+    "title": "مقدمة في البنية التحتية السحابية: وصف مفاهيم السحابة (مسار AZ-900، الجزء 1)",
+    "provider": "Microsoft Learn",
+    "url": "https://learn.microsoft.com/ar-sa/training/paths/microsoft-azure-fundamentals-describe-cloud-concepts/",
+    "lang": "ar",
+    "price": "free",
+    "priceNote": "Microsoft Learn path, self-paced, with no paid option on the page (only an optional Azure account for the hands-on parts); machine-translated Arabic (ms.translationtype MT). Part 1 of a four-part series for exam AZ-900; the AZ-900 exam is offered in «العربية (المملكة العربية السعودية)», its price set by country.",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "مجاني وبالعربي: مفاهيم السحابة ونماذج النشر والمسؤولية المشتركة، أول خطوة لاختبار AZ-900 المتاح بالعربي.",
+    "recommendedBy": [
+     {
+      "label": "Microsoft Certified: Azure Fundamentals (Microsoft Learn, Arabic page)",
+      "url": "https://learn.microsoft.com/ar-sa/credentials/certifications/azure-fundamentals/",
+      "note": "The certification page lists Arabic (Saudi Arabia) among the exam languages and points to the free practice assessment."
+     }
+    ],
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "AWS Cloud Practitioner Essentials",
+     "provider": "Amazon Web Services (AWS Skill Builder)",
+     "url": "https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/",
+     "lang": "en",
+     "price": null,
+     "priceNote": "The AWS page does not state a price or languages; the course itself opens on AWS Skill Builder after sign-in.",
+     "hours": 12.75,
+     "hoursNote": "The AWS page lists 12 hours 45 minutes.",
+     "certificate": null,
+     "star": 1,
+     "why": "الدورة الرسمية من AWS لشهادة Cloud Practitioner: الخدمات الأساسية والأمان والفوترة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "AWS Certified Solutions Architect - Associate (full course)",
+     "provider": "freeCodeCamp.org (taught by Andrew Brown, ExamPro)",
+     "url": "https://www.freecodecamp.org/news/pass-the-aws-certified-solutions-architect-associate-certification/",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "Released free on the freeCodeCamp.org YouTube channel (https://www.youtube.com/watch?v=c3Cn4xYfxJY).",
+     "hours": 50,
+     "hoursNote": "The article (23 May 2024) calls it a «50-hour watch». It does not name the exam code.",
+     "certificate": false,
+     "star": 2,
+     "why": "للنجمة الثانية: دورة مجانية كاملة لتصميم أنظمة عالية التوفر وقابلة للتوسع على AWS.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Werner Vogels (All Things Distributed)",
+     "platform": "Blog",
+     "url": "https://www.allthingsdistributed.com/",
+     "why": "يكتب عن بناء أنظمة موزّعة قابلة للتوسع، ومن داخل خدمات AWS مثل S3 وLambda.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.allthingsdistributed.com/",
+      "x": "https://twitter.com/werner"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Corey Quinn (Last Week in AWS)",
+     "platform": "Newsletter / podcast",
+     "url": "https://www.lastweekinaws.com/",
+     "why": "نشرة أسبوعية ساخرة تلخّص أخبار AWS وتشرح تكاليف السحابة وكيف تخفّضها.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.lastweekinaws.com/",
+      "x": "https://twitter.com/LastWeekinAWS"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Hosting a static website using Amazon S3",
+     "author": "Amazon Web Services",
+     "site": "docs.aws.amazon.com",
+     "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html",
+     "lang": "en",
+     "why": "الدليل الرسمي لاستضافة موقع ثابت على S3: التفعيل والأذونات وصفحة الخطأ وCloudFront للـ HTTPS.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "AWS Well-Architected Framework",
+     "author": "Amazon Web Services",
+     "site": "docs.aws.amazon.com",
+     "url": "https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html",
+     "lang": "en",
+     "why": "للنجمة الثانية: كيف تقيّم معمارية النظام على AWS من حيث الأمان والاعتمادية والأداء والتكلفة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "نفّذ «The Cloud Resume Challenge» على AWS: انشر سيرتك الذاتية موقعاً ثابتاً على S3 خلف CloudFront مع HTTPS ونطاق، وأضف عدّاد زوار عبر API Gateway وLambda وDynamoDB، واكتب البنية بـ AWS SAM أو Terraform، وانشر تلقائياً عبر GitHub Actions.",
+    "dataset": {
+     "name": "The Cloud Resume Challenge (AWS edition)",
+     "provider": "cloudresumechallenge.dev",
+     "url": "https://cloudresumechallenge.dev/docs/the-challenge/aws/"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "devops": {
+   "topPick": {
+    "title": "Introduction to DevOps and Site Reliability Engineering (LFS162)",
+    "provider": "The Linux Foundation",
+    "url": "https://training.linuxfoundation.org/training/introduction-to-devops-and-site-reliability-engineering-lfs162/",
+    "lang": "en",
+    "price": "free",
+    "priceNote": "The page lists the price as $0; enrolment needs a Linux Foundation portal login; 90 days of access.",
+    "hours": 12,
+    "hoursNote": "The page states «10-12 hours of course material»; 12 is the upper bound. It lists a digital badge, not a certificate. Prerequisites: intermediate Linux and basic scripting.",
+    "certificate": null,
+    "star": 1,
+    "why": "مجانية من مؤسسة Linux: الحاويات وKubernetes والبنية كرمز وCI/CD والمراقبة وSRE في دورة واحدة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Get started with Docker containers",
+     "provider": "Docker Docs",
+     "url": "https://docs.docker.com/get-started/workshop/",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "Open Docker documentation; the page shows no price and asks for no account.",
+     "hours": 1.3,
+     "hoursNote": "Sum of the 4 guide times on the page (12+20+20+25 = 77 minutes).",
+     "certificate": null,
+     "star": 1,
+     "why": "أربعة أدلة قصيرة: ما الحاوية، تشغيل أول حاوية، حفظ البيانات، وتطبيق متعدد الحاويات بـ Compose.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Learn Kubernetes Basics",
+     "provider": "Kubernetes Documentation (CNCF)",
+     "url": "https://kubernetes.io/docs/tutorials/kubernetes-basics/",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "Part of the open-source Kubernetes documentation (CC BY 4.0); no price or account.",
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "ست وحدات عملية: إنشاء عنقود بـ Minikube ثم النشر والكشف عبر Service والتوسيع والتحديث التدريجي.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Nana Janashia (TechWorld with Nana)",
+     "platform": "YouTube / website",
+     "url": "https://www.techworld-with-nana.com/",
+     "profileChecked": "https://www.youtube.com/@TechWorldwithNana",
+     "why": "تشرح Docker وKubernetes وCI/CD وTerraform بوضوح، وهي Docker Captain وAWS Container Hero.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://www.techworld-with-nana.com/",
+      "youtube": "https://www.youtube.com/@TechWorldwithNana",
+      "x": "https://twitter.com/Njuchi_",
+      "linkedin": "https://www.linkedin.com/in/nana-janashia/"
+     },
+     "linkedinSource": "https://www.techworld-with-nana.com/"
+    },
+    {
+     "name": "Martin Fowler",
+     "platform": "Website",
+     "url": "https://martinfowler.com/",
+     "profileChecked": "https://martinfowler.com/articles/continuousIntegration.html",
+     "why": "من أهم من كتب عن التكامل المستمر وتسليم البرمجيات، ومقالاته مرجع للفرق التقنية.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://martinfowler.com/"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Kelsey Hightower",
+     "platform": "GitHub",
+     "url": "https://github.com/kelseyhightower/kubernetes-the-hard-way",
+     "why": "صاحب دليل «Kubernetes The Hard Way» الذي يعلّمك مكونات Kubernetes ببنائها يدوياً.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "github": "https://github.com/kelseyhightower"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Continuous Integration",
+     "author": "Martin Fowler",
+     "site": "martinfowler.com",
+     "url": "https://martinfowler.com/articles/continuousIntegration.html",
+     "lang": "en",
+     "why": "الممارسات الأساسية للتكامل المستمر: بناء آلي يختبر نفسه، ودمج يومي، وإصلاح البناء المكسور فوراً.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "The Twelve-Factor App",
+     "author": "Adam Wiggins",
+     "site": "12factor.net",
+     "url": "https://12factor.net/",
+     "lang": "en",
+     "why": "اثنا عشر مبدأً لبناء تطبيقات جاهزة للسحابة والحاويات: الإعدادات في البيئة، والسجلات كتدفق، وغيرها.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "خذ تطبيق ويب صغيراً مع قاعدة بيانات، واكتب له Dockerfile وملف docker-compose، ثم أنشئ خط GitHub Actions يشغّل الاختبارات ويبني الصورة وينشرها على GitHub Container Registry عند كل دمج، وانشره على Minikube بملف Deployment وService، ووثّق الخطوات في README.",
+    "dataset": {
+     "name": "Publishing Docker images (GitHub Actions tutorial)",
+     "provider": "GitHub Docs",
+     "url": "https://docs.github.com/en/actions/tutorials/publish-packages/publish-docker-images"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "deep-learning": {
+   "topPick": {
+    "title": "Practical Deep Learning for Coders (Part 1)",
+    "provider": "fast.ai (Jeremy Howard)",
+    "url": "https://course.fast.ai/",
+    "lang": "en",
+    "price": "free",
+    "priceNote": "The page says the course is free.",
+    "hours": null,
+    "hoursNote": "The page lists 9 lessons of about 90 minutes each (no total stated). Prerequisites: about a year of coding, ideally Python. No certificate mentioned.",
+    "certificate": null,
+    "star": 1,
+    "why": "مجانية وعملية من أول درس: تدرّب نماذج رؤية ونصوص بـ PyTorch وfastai وتنشرها، بلا رياضيات جامعية.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "Neural Networks and Deep Learning",
+     "provider": "DeepLearning.AI (Coursera), Andrew Ng",
+     "url": "https://www.coursera.org/learn/neural-networks-deep-learning",
+     "lang": "en",
+     "price": "paid",
+     "priceNote": "The page shows «Enroll for free»; graded assignments and the certificate need the paid Certificate experience; financial aid available.",
+     "hours": 25,
+     "hoursNote": "Sum of the 4 module times on the page (2+8+6+9). The header says «3 weeks at 10 hours a week». Intermediate level.",
+     "certificate": true,
+     "star": 1,
+     "why": "أشهر مدخل نظري للشبكات العصبية (تقييم 4.9 من أكثر من 123 ألف مراجعة)، أول دورة في تخصص Deep Learning.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Neural Networks: Zero to Hero",
+     "provider": "Andrej Karpathy",
+     "url": "https://karpathy.ai/zero-to-hero.html",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "Lectures hosted on YouTube; the page states no price.",
+     "hours": 14.5,
+     "hoursNote": "Sum of the 8 lecture durations on the page (872 minutes). Prerequisites: solid Python and intro-level math.",
+     "certificate": null,
+     "star": 1,
+     "why": "تبني الشبكات العصبية بالكود من الصفر: الانتشار العكسي ثم نموذج لغوي ثم GPT خطوة بخطوة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Jeremy Howard",
+     "platform": "Website",
+     "url": "https://jeremy.fast.ai/",
+     "why": "مؤسس في fast.ai وشريك في تأسيس Answer.AI، وصاحب أطول دورة تعلّم عميق عملية مجانية.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://jeremy.fast.ai/"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Andrej Karpathy",
+     "platform": "Website / YouTube",
+     "url": "https://karpathy.ai/",
+     "why": "قاد الذكاء الاصطناعي في Tesla وكان من مؤسسي OpenAI، وصمّم مادة CS231n في Stanford ويشرح على يوتيوب.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://karpathy.ai/",
+      "x": "https://twitter.com/karpathy",
+      "youtube": "https://www.youtube.com/@AndrejKarpathy",
+      "github": "https://github.com/karpathy"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Jay Alammar",
+     "platform": "Blog",
+     "url": "https://jalammar.github.io/",
+     "why": "يشرح المحولات وBERT وGPT برسوم توضيحية مشهورة، ويعمل في Cohere.",
+     "arab": null,
+     "saudiBased": null,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://jalammar.github.io/",
+      "github": "https://github.com/jalammar",
+      "linkedin": "https://www.linkedin.com/in/jalammar/"
+     },
+     "linkedinSource": "https://jalammar.github.io/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "A Recipe for Training Neural Networks",
+     "author": "Andrej Karpathy",
+     "site": "karpathy.github.io",
+     "url": "https://karpathy.github.io/2019/04/25/recipe/",
+     "lang": "en",
+     "why": "خطوات عملية لتدريب الشبكات دون أخطاء صامتة: افهم البيانات، ابدأ بخط أساس، ثم الإفراط في التعلّم ثم التنظيم.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "A Visual and Interactive Guide to the Basics of Neural Networks",
+     "author": "Jay Alammar",
+     "site": "jalammar.github.io",
+     "url": "https://jalammar.github.io/visual-interactive-guide-basics-neural-networks/",
+     "lang": "en",
+     "why": "مدخل مرئي تفاعلي: الأوزان ودالة الخسارة والانحدار التدريجي وsoftmax بمثال أسعار المنازل.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "درّب مصنّف صور لسلالات القطط والكلاب (37 سلالة) على بيانات Oxford-IIIT Pet بـ fastai أو PyTorch مع نقل التعلّم، واعرض الدقة على بيانات الاختبار ومصفوفة الالتباس وأكثر الصور خطأً، ثم انشر نموذجك واجهة Gradio على Hugging Face Spaces.",
+    "dataset": {
+     "name": "The Oxford-IIIT Pet Dataset",
+     "provider": "Visual Geometry Group, University of Oxford (CC BY-SA 4.0)",
+     "url": "https://www.robots.ox.ac.uk/~vgg/data/pets/"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  },
+  "llm-apps": {
+   "topPick": {
+    "title": "Retrieval Augmented Generation (RAG)",
+    "provider": "DeepLearning.AI (also on Coursera), taught by Zain Hasan",
+    "url": "https://www.deeplearning.ai/courses/retrieval-augmented-generation-rag/",
+    "lang": "en",
+    "price": "free_to_audit",
+    "priceNote": "Free audit option (first module free to preview); full access, graded assignments and the certificate need PRO; Coursera offers financial aid.",
+    "hours": 26,
+    "hoursNote": "The page states 26 hours 3 minutes (about 5 hours a week for a month). Intermediate level.",
+    "certificate": true,
+    "star": 1,
+    "why": "تبني نظام RAG كاملاً: البحث الدلالي والهجين وقواعد المتجهات والتقطيع ثم تقييم النظام ومراقبته.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-20"
+   },
+   "alternatives": [
+    {
+     "title": "LangChain for LLM Application Development",
+     "provider": "DeepLearning.AI (Harrison Chase, Andrew Ng)",
+     "url": "https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "Enrolment is free («free for a limited time during the platform beta»); the graded assignment and the accomplishment need PRO.",
+     "hours": 1.9,
+     "hoursNote": "The page states 1 hour 53 minutes (8 video lessons, 6 code examples).",
+     "certificate": null,
+     "star": 1,
+     "why": "دورة قصيرة: النماذج والقوالب والذاكرة والسلاسل والأسئلة على المستندات والتقييم والوكلاء.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "ChatGPT Prompt Engineering for Developers",
+     "provider": "DeepLearning.AI (Isa Fulford, Andrew Ng)",
+     "url": "https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/",
+     "lang": "en",
+     "price": "free",
+     "priceNote": "«Learn for Free» (free for a limited time during the platform beta); the graded quiz and the accomplishment need PRO.",
+     "hours": 1.7,
+     "hoursNote": "The page states 1 hour 40 minutes (8 video lessons plus a quiz).",
+     "certificate": null,
+     "star": 1,
+     "why": "أساس كتابة الأوامر للمطوّر: التلخيص والاستخراج والتحويل وبناء روبوت محادثة، بكود Python.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "people": [
+    {
+     "name": "Chip Huyen",
+     "platform": "Blog / books",
+     "url": "https://huyenchip.com/",
+     "why": "مؤلفة كتاب «AI Engineering» وتكتب عن تصميم أنظمة الذكاء الاصطناعي ونقلها إلى الإنتاج.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://huyenchip.com/",
+      "x": "https://twitter.com/chipro",
+      "github": "https://github.com/chiphuyen",
+      "linkedin": "https://www.linkedin.com/in/chiphuyen"
+     },
+     "linkedinSource": "https://huyenchip.com/"
+    },
+    {
+     "name": "Simon Willison",
+     "platform": "Blog",
+     "url": "https://simonwillison.net/",
+     "profileChecked": "https://simonwillison.net/about/",
+     "why": "يكتب يومياً عن بناء التطبيقات بالنماذج اللغوية وأمانها، وهو من صاغ مصطلح «prompt injection».",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://simonwillison.net/",
+      "x": "https://twitter.com/simonw",
+      "github": "https://github.com/simonw"
+     },
+     "linkedinSource": null
+    },
+    {
+     "name": "Hamel Husain",
+     "platform": "Blog",
+     "url": "https://hamel.dev/",
+     "profileChecked": "https://hamel.dev/blog/posts/evals/",
+     "why": "متخصص في تقييم تطبيقات النماذج اللغوية، ويشرح كيف تبني اختبارات تكشف أخطاء منتجك قبل المستخدم.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20",
+     "links": {
+      "website": "https://hamel.dev/",
+      "x": "https://twitter.com/HamelHusain",
+      "github": "https://github.com/hamelsmu",
+      "linkedin": "https://www.linkedin.com/in/hamelhusain/"
+     },
+     "linkedinSource": "https://hamel.dev/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Patterns for Building LLM-based Systems & Products",
+     "author": "Eugene Yan",
+     "site": "eugeneyan.com",
+     "url": "https://eugeneyan.com/writing/llm-patterns/",
+     "lang": "en",
+     "why": "سبعة أنماط عملية: التقييم وRAG والضبط الدقيق والتخزين المؤقت والحواجز وتجربة المستخدم والتغذية الراجعة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    },
+    {
+     "title": "Your AI Product Needs Evals",
+     "author": "Hamel Husain",
+     "site": "hamel.dev",
+     "url": "https://hamel.dev/blog/posts/evals/",
+     "lang": "en",
+     "why": "يشرح لماذا يعتمد نجاح منتج الذكاء الاصطناعي على اختبارات تقييم خاصة بمجالك، وكيف تبنيها.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-20"
+    }
+   ],
+   "proof": {
+    "task": "ابنِ مساعداً يجيب عن أسئلة «الضوابط الأساسية للأمن السيبراني» من الهيئة الوطنية للأمن السيبراني: قطّع ملف PDF العربي، وخزّن المتجهات في قاعدة متجهات، واجعل كل إجابة تذكر رقم الضابط مصدراً لها، ثم اكتب 20 سؤالاً بإجاباتها الصحيحة وقِس نسبة الإجابات الصحيحة قبل وبعد تحسين التقطيع.",
+    "dataset": {
+     "name": "الضوابط الأساسية للأمن السيبراني (ECC 2-2024)، ملف PDF عربي",
+     "provider": "الهيئة الوطنية للأمن السيبراني (NCA)",
+     "url": "https://nca.gov.sa/ar/regulatory-documents/controls-list/ecc/"
+    },
+    "checkedAt": "2026-11-20"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-20"
+  }
+ }
+}

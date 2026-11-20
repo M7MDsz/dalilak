@@ -1,0 +1,723 @@
+{
+  "checkedAt": "2026-11-20",
+  "skills": {
+    "python-data": {
+      "topPick": {
+        "title": "Data Analysis with Python - Full Course for Beginners (Numpy, Pandas, Matplotlib, Seaborn)",
+        "provider": "freeCodeCamp.org (YouTube)",
+        "url": "https://www.youtube.com/watch?v=r-uOLxNrNk8",
+        "lang": "en",
+        "price": "free",
+        "financialAid": null,
+        "hours": 4,
+        "certificate": null,
+        "star": 1,
+        "why": "دورة فيديو مجانية للمبتدئين: تقرأ البيانات وتنظّفها بـ NumPy وpandas وترسمها بـ Matplotlib وSeaborn.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Data Analysis with Python: From Raw Data to Insights",
+          "provider": "IBM (Coursera)",
+          "url": "https://www.coursera.org/learn/data-analysis-with-python",
+          "lang": "en",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 16,
+          "certificate": true,
+          "star": 2,
+          "why": "مستوى متوسط بشهادة من IBM، تكمل فيها بعد الأساسيات: تجهيز البيانات واستكشافها وبناء نموذج بسيط وتقييمه.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Wes McKinney",
+          "platform": "موقعه وكتابه",
+          "url": "https://wesmckinney.com/book/",
+          "why": "صانع مكتبة pandas، وكتابه Python for Data Analysis (الطبعة الثالثة) مفتوح للقراءة مجاناً على موقعه.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "PCED – Certified Entry-Level Data Analyst with Python",
+        "issuer": "Python Institute (OpenEDG)",
+        "code": "PCED-30-02",
+        "type": "exam",
+        "url": "https://pythoninstitute.org/pced",
+        "fee": { "amount": 69, "currency": "USD", "note": "Official page says 'Exam – from $69'; per exam attempt" },
+        "prepUrl": "https://pythoninstitute.org/python-for-data-analytics-101",
+        "prepLabel": "دورة Python for Data Analytics 101 من Python Institute (النسخة الأساسية مجانية)",
+        "level": "beginner",
+        "star": 1,
+        "why": "اختبار مبتدئ من Python Institute يثبت إنك تقدر تجهّز البيانات وتحللها وتعرضها بـ Python، مدته 60 دقيقة.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://www.youtube.com/watch?v=r-uOLxNrNk8", "status": "fixed", "note": "Video title matches. Channel/duration not visible to fetch; freeCodeCamp's own article (freecodecamp.org/news/learn-data-analysis-with-python-course/) confirms this video ID as its free 4-hour course, so hours 4.4 -> 4." },
+        { "url": "https://www.coursera.org/learn/data-analysis-with-python", "status": "fixed", "note": "Title/provider OK. Intermediate level -> star 2. Hours 20 -> 16 (sum of 6 module times; page also says 2 weeks at 10 h/week). No audit offered on page -> price paid; 'Financial aid available' -> financialAid true; shareable certificate." },
+        { "url": "https://wesmckinney.com/book/", "status": "ok", "note": "Python for Data Analysis 3rd ed. Open Access HTML edition by Wes McKinney." },
+        { "url": "https://pythoninstitute.org/pced", "status": "added", "note": "Certification: PCED-30-02 active (released 15 Jul 2025), 40 questions, 60 min, pass 75%, 'from $69'." },
+        { "url": "https://pythoninstitute.org/python-for-data-analytics-101", "status": "added", "note": "Prep: PD101, Core free / Pro $49, page says it prepares for PCED." }
+      ]
+    },
+    "ml": {
+      "topPick": {
+        "title": "Machine Learning Specialization",
+        "provider": "DeepLearning.AI و Stanford Online (Coursera)",
+        "url": "https://www.coursera.org/specializations/machine-learning-introduction",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 95,
+        "certificate": true,
+        "star": 1,
+        "why": "أشهر بداية لتعلّم الآلة، يشرحها Andrew Ng خطوة خطوة للمبتدئين في 3 دورات.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Machine Learning Crash Course",
+          "provider": "Google",
+          "url": "https://developers.google.com/machine-learning/crash-course",
+          "lang": "en",
+          "price": "free",
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "مقدمة عملية من Google في 12 وحدة مستقلة، تقرأها كاملة بدون تسجيل.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Andrew Ng",
+          "platform": "موقعه الرسمي",
+          "url": "https://www.andrewng.org/",
+          "why": "مؤسس DeepLearning.AI وشريك مؤسس في Coursera، يشرح الذكاء الاصطناعي ببساطة.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "AWS Certified AI Practitioner",
+        "issuer": "Amazon Web Services (AWS)",
+        "code": "AIF-C01",
+        "type": "exam",
+        "url": "https://aws.amazon.com/certification/certified-ai-practitioner/",
+        "fee": { "amount": 100, "currency": "USD", "note": "Per exam attempt; page notes extra costs such as foreign exchange may apply" },
+        "prepUrl": "https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.html",
+        "prepLabel": "دليل الاختبار الرسمي من AWS",
+        "level": "beginner",
+        "star": 1,
+        "why": "شهادة أساسية من AWS تثبت فهمك لمفاهيم الذكاء الاصطناعي وتعلّم الآلة واستخدامها في العمل، ولا تطلب منك برمجة نماذج.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://www.coursera.org/specializations/machine-learning-introduction", "status": "fixed", "note": "Title/providers/Beginner OK. Price 'free to audit' -> paid: FAQ mentions auditing but the same page says 'No, you cannot take this course for free', so audit is not confirmed. Financial aid available; hours 95 = 33+34+28 course hours listed; shareable certificate." },
+        { "url": "https://developers.google.com/machine-learning/crash-course", "status": "ok", "note": "12 modules; no price stated but lesson pages are readable without sign-in (checked the Linear regression module), so kept free. No total hours, no certificate." },
+        { "url": "https://www.andrewng.org/", "status": "ok", "note": "Official site; lists Founder of DeepLearning.AI and Co-Founder of Coursera." },
+        { "url": "https://aws.amazon.com/certification/certified-ai-practitioner/", "status": "added", "note": "Certification: Foundational, 100 USD, 90 min, 65 questions. Chosen over Microsoft Azure AI Fundamentals because AI-900 retired 30 Jun 2026 and its AI-901 page shows no price (country-based)." },
+        { "url": "https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.html", "status": "added", "note": "Prep: official AIF-C01 exam guide (domains, target candidate). Skill Builder exam-prep link not opened, so not used." }
+      ]
+    },
+    "programming": {
+      "topPick": {
+        "title": "CS50’s Introduction to Computer Science",
+        "provider": "Harvard University (CS50 OpenCourseWare)",
+        "url": "https://cs50.harvard.edu/x/",
+        "lang": "en",
+        "price": "free",
+        "financialAid": null,
+        "hours": null,
+        "certificate": true,
+        "star": 1,
+        "why": "أشهر مقدمة للبرمجة: 11 أسبوع تبني فيها التفكير البرمجي من الصفر، الدورة مجانية والشهادة الموثّقة من edX مدفوعة.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Python for Everybody",
+          "provider": "Charles R. Severance (py4e.com)",
+          "url": "https://www.py4e.com/",
+          "lang": "en",
+          "price": "free",
+          "financialAid": null,
+          "hours": null,
+          "certificate": false,
+          "star": 1,
+          "why": "أسهل بداية بلغة Python: محاضرات وكتاب وتمارين مجاناً.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "البرمجة للجميع - بدء استخدام بايثون",
+          "provider": "University of Michigan (Coursera)",
+          "url": "https://www.coursera.org/learn/python-ar",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 19,
+          "certificate": true,
+          "star": 1,
+          "why": "نفس منهج Python for Everybody لكن بالعربي، بدون متطلبات سابقة، وبشهادة باشتراك أو بمساعدة مالية.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "David J. Malan",
+          "platform": "صفحته في هارفارد",
+          "url": "https://cs.harvard.edu/malan/",
+          "why": "أستاذ في هارفارد ومحاضر CS50، شرحه حيّ ويخلّي البرمجة ممتعة.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "Elzero Web School (أكاديمية الزيرو)",
+          "platform": "YouTube",
+          "url": "https://www.youtube.com/@ElzeroWebSchool",
+          "why": "قناة عربية مشهورة تشرح البرمجة وتطوير الويب بالعربي من الصفر.",
+          "arab": true,
+          "saudiBased": null,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "PCEP – Certified Entry-Level Python Programmer",
+        "issuer": "Python Institute (OpenEDG)",
+        "code": "PCEP-30-03",
+        "type": "exam",
+        "url": "https://pythoninstitute.org/pcep",
+        "fee": null,
+        "prepUrl": "https://edube.org/study/pe1",
+        "prepLabel": "دورة Python Essentials 1 المجانية من Python Institute",
+        "level": "beginner",
+        "star": 1,
+        "why": "اختبار مبتدئ يثبت إنك تفهم أساسيات البرمجة بـ Python: المتغيرات والشروط والحلقات والدوال، مدته 50 دقيقة.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://cs50.harvard.edu/x/", "status": "fixed", "note": "Title set exactly as page ('CS50’s Introduction to Computer Science'). Free via OpenCourseWare, eleven weeks, verified certificate via edX (and a CS50 Certificate page linked)." },
+        { "url": "https://www.py4e.com/", "status": "fixed", "note": "Free course by Charles R. Severance. certificate null -> false: page says free certificates only for University of Michigan students and staff." },
+        { "url": "https://www.coursera.org/learn/python-ar", "status": "added", "note": "Arabic Coursera version of Python for Everybody (University of Michigan, Charles Severance): taught in Arabic, 7 modules ~19 h, 4.8 (84 reviews), materials need the paid Certificate experience, financial aid available." },
+        { "url": "https://cs.harvard.edu/malan/", "status": "ok", "note": "David J. Malan's Harvard page (Gordon McKay Professor of the Practice of Computer Science), many CS50 items." },
+        { "url": "https://www.youtube.com/@ElzeroWebSchool", "status": "ok", "note": "Channel page opens as 'Elzero Web School - YouTube'; description/playlists are not visible to the fetch tool. elzero.org refused the fetch (403)." },
+        { "url": "https://pythoninstitute.org/pcep", "status": "added", "note": "Certification: PCEP-30-03, 35 questions, 50 min, pass 70%, entry level. Page gives no fixed price ('depend on the selected product and currency') -> fee null." },
+        { "url": "https://edube.org/study/pe1", "status": "added", "note": "Prep: Python Essentials 1, 'Cost: Free', 42 hours, prepares for PCEP." }
+      ]
+    },
+    "html-css": {
+      "topPick": {
+        "title": "Learn web development",
+        "provider": "MDN Web Docs (Mozilla)",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+        "lang": "en",
+        "price": "free",
+        "financialAid": null,
+        "hours": null,
+        "certificate": null,
+        "star": 1,
+        "why": "المرجع الأول للويب: دروس منظمة في HTML وCSS وتنسيق الصفحات، مع تمارين.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Foundations Course",
+          "provider": "The Odin Project",
+          "url": "https://www.theodinproject.com/paths/foundations/courses/foundations",
+          "lang": "en",
+          "price": "free",
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "منهج مجاني بمشاريع حقيقية: صفحة وصفات بـ HTML وصفحة هبوط بـ CSS.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "أساسيات مواقع الويب سريعة الاستجابة: البرمجة باستخدام HTML وCSS وJavaScript",
+          "provider": "University of London (Coursera)",
+          "url": "https://www.coursera.org/learn/website-coding-ar",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 25,
+          "certificate": true,
+          "star": 1,
+          "why": "بالعربي: أساسيات بناء صفحات ويب تتكيّف مع الجوال والشاشة الكبيرة، وبشهادة باشتراك أو بمساعدة مالية.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Kevin Powell",
+          "platform": "YouTube",
+          "url": "https://www.youtube.com/@KevinPowell",
+          "why": "من أوضح من يشرح CSS، فيديوهات أسبوعية قصيرة.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "Elzero Web School (أكاديمية الزيرو)",
+          "platform": "YouTube",
+          "url": "https://www.youtube.com/@ElzeroWebSchool",
+          "why": "قناة عربية مشهورة تشرح البرمجة وتطوير الويب بالعربي من الصفر.",
+          "arab": true,
+          "saudiBased": null,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "none",
+        "proof": "صفحة ويب متجاوبة تبنيها بنفسك (مثل صفحة هبوط) وتنشرها على GitHub Pages مع رابط الكود.",
+        "proofUrl": "https://www.coursera.org/learn/website-coding-ar",
+        "why": "ما فيه اختبار شهادة معترف به على نطاق واسع لـ HTML وCSS، وصاحب العمل يحكم على الصفحات اللي تبنيها وتنشرها.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development", "status": "ok", "note": "Page 'Learn web development | MDN'; core modules include Learn HTML, CSS styling basics, CSS layout. Open docs, no certificate mentioned." },
+        { "url": "https://www.theodinproject.com/paths/foundations/courses/foundations", "status": "ok", "note": "'Foundations Course' with Recipes (HTML) and Landing Page (CSS) projects. Home page says 'Our full stack curriculum is free'." },
+        { "url": "https://www.coursera.org/learn/website-coding-ar", "status": "added", "note": "Arabic course (University of London / Goldsmiths): taught in Arabic, 5 modules ~25 h (21 min + 6+6+7+6 h), 4.7 (57 reviews), Enroll now (no audit shown), financial aid available, shareable certificate." },
+        { "url": "https://www.youtube.com/@KevinPowell", "status": "ok", "note": "Channel page opens as 'Kevin Powell - YouTube'; details not visible to fetch." },
+        { "url": "https://www.youtube.com/@ElzeroWebSchool", "status": "ok", "note": "Channel page opens; details not visible to fetch." },
+        { "url": "https://www.freecodecamp.org/learn/2022/responsive-web-design/", "status": "removed", "note": "Considered freeCodeCamp Responsive Web Design certification as proofUrl, but the page renders empty to the fetch tool, so not used. Certification kind none; proofUrl is the Arabic Coursera course above (shareable certificate)." }
+      ]
+    },
+    "git": {
+      "topPick": {
+        "title": "Introduction to Git",
+        "provider": "Microsoft Learn",
+        "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-git/",
+        "lang": "en",
+        "price": "free",
+        "financialAid": null,
+        "hours": null,
+        "certificate": null,
+        "star": 1,
+        "why": "وحدة قصيرة للمبتدئين من 6 أجزاء: تحفظ نسخ الكود وتتبّع التغييرات وتجرّب الفروع.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Introduction to GitHub",
+          "provider": "GitHub Skills",
+          "url": "https://github.com/skills/introduction-to-github",
+          "lang": "en",
+          "price": "free",
+          "financialAid": null,
+          "hours": 1,
+          "certificate": null,
+          "star": 1,
+          "why": "تمرين عملي على GitHub نفسه: فرع وcommit وpull request، يخلص في أقل من ساعة.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Scott Chacon",
+          "platform": "موقعه وكتاب Pro Git",
+          "url": "https://scottchacon.com/about",
+          "why": "شريك مؤسس في GitHub ومؤلف كتاب Pro Git المتاح مجاناً على git-scm.com.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "GitHub Foundations",
+        "issuer": "GitHub (Microsoft Learn)",
+        "code": "GH-900",
+        "type": "exam",
+        "url": "https://learn.microsoft.com/en-us/credentials/certifications/github-foundations/",
+        "fee": null,
+        "prepUrl": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-900",
+        "prepLabel": "دليل الدراسة الرسمي لاختبار GH-900 من Microsoft",
+        "level": "beginner",
+        "star": 1,
+        "why": "اختبار مبتدئ يثبت إنك تفهم Git وGitHub والتعاون على المستودعات، ومصمم للمطورين وغير المطورين، وما يحتاج تجديد.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://learn.microsoft.com/en-us/training/modules/intro-to-git/", "status": "ok", "note": "Module 'Introduction to Git', Beginner, 6 units; no duration shown on page; gives a profile badge, not a certificate." },
+        { "url": "https://github.com/skills/introduction-to-github", "status": "ok", "note": "'This exercise takes less than one hour to complete'; public MIT template repo; no certificate." },
+        { "url": "https://scottchacon.com/about", "status": "added", "note": "people was empty. Page: cofounded GitHub, author of Pro Git (free at git-scm.com), cofounder of GitButler, based in Berlin. Pro Git page git-scm.com/book/en/v2 also checked." },
+        { "url": "https://learn.microsoft.com/en-us/credentials/certifications/github-foundations/", "status": "added", "note": "Certification: GH-900, Beginner, 100 min, proctored, no renewal needed. Page says 'Price based on the country or region' -> fee null (GitHub's registration page learn.github.com did not render)." },
+        { "url": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/gh-900", "status": "added", "note": "Prep: official GH-900 study guide (links GitHub Foundations Part 1 and 2 learning paths)." }
+      ]
+    },
+    "javascript": {
+      "topPick": {
+        "title": "الدورة التعليميه الحديثه لـ جافاسكريبت",
+        "provider": "javascript.info (النسخة العربية)",
+        "url": "https://ar.javascript.info/",
+        "lang": "ar",
+        "price": "free",
+        "financialAid": null,
+        "hours": null,
+        "certificate": null,
+        "star": 1,
+        "why": "شرح بالعربي مع أمثلة ومهام، يبدأ من الأساسيات ويوصل للبرمجة الكائنية والتعامل مع المتصفح.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "JavaScript Course",
+          "provider": "The Odin Project",
+          "url": "https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript",
+          "lang": "en",
+          "price": "free",
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 2,
+          "why": "12 مشروع عملي مجاني (مثل Todo List وWeather App) يثبّت اللي تعلمته.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Elzero Web School (أكاديمية الزيرو)",
+          "platform": "YouTube",
+          "url": "https://www.youtube.com/@ElzeroWebSchool",
+          "why": "قناة عربية مشهورة تشرح البرمجة وتطوير الويب بالعربي من الصفر.",
+          "arab": true,
+          "saudiBased": null,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "JSA – Certified Associate JavaScript Programmer",
+        "issuer": "JS Institute (OpenEDG)",
+        "code": null,
+        "type": "exam",
+        "url": "https://edube.org/certification/jsa",
+        "fee": { "amount": 295, "currency": "USD", "note": "Price shown on the official OpenEDG Edube page; per exam" },
+        "prepUrl": "https://edube.org/study/jse2",
+        "prepLabel": "دورة JavaScript Essentials 2 المجانية من JS Institute",
+        "level": "intermediate",
+        "star": 2,
+        "why": "اختبار بمستوى متوسط من JS Institute يثبت إنك تكتب JavaScript بعد مرحلة الأساسيات، والتحضير له مجاني على Edube.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://ar.javascript.info/", "status": "fixed", "note": "Title set exactly as page ('الدورة التعليميه الحديثه لـ جافاسكريبت'); Arabic content, 3 parts (language, browser, extra articles); no price, no certificate." },
+        { "url": "https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript", "status": "fixed", "note": "Title 'JavaScript' -> 'JavaScript Course' as on page; 12 projects; set star 2 (comes after Foundations)." },
+        { "url": "https://www.youtube.com/@ElzeroWebSchool", "status": "ok", "note": "Channel page opens; details not visible to fetch." },
+        { "url": "https://edube.org/certification/jsa", "status": "added", "note": "Certification: JSA, Associate level, 'Cost: USD 295'. Exam code not shown on this page -> null. Chosen over JSE (entry, USD 69 at edube.org/certification/jse) because the skill goes to star 3; JSA is the highest JS Institute level found." },
+        { "url": "https://edube.org/study/jse2", "status": "added", "note": "Prep: JavaScript Essentials 2, 'Cost: Free', 50 hours, prepares for JSA." }
+      ]
+    },
+    "react": {
+      "topPick": {
+        "title": "Quick Start",
+        "provider": "react.dev (التوثيق الرسمي)",
+        "url": "https://react.dev/learn",
+        "lang": "en",
+        "price": "free",
+        "financialAid": null,
+        "hours": null,
+        "certificate": null,
+        "star": 1,
+        "why": "التوثيق الرسمي: صفحة واحدة تعطيك 80% من مفاهيم React اللي تستخدمها يومياً.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "Free Interactive React Tutorial",
+          "provider": "Bob Ziroll (Scrimba)",
+          "url": "https://scrimba.com/learn-react-c0e",
+          "lang": "en",
+          "price": "free",
+          "financialAid": null,
+          "hours": null,
+          "certificate": null,
+          "star": 1,
+          "why": "دورة تفاعلية مجانية تكتب فيها الكود داخل الدرس.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "React Basics",
+          "provider": "Meta (Coursera)",
+          "url": "https://www.coursera.org/learn/react-basics",
+          "lang": "en",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 28,
+          "certificate": true,
+          "star": 1,
+          "why": "دورة من Meta للمبتدئين تبني فيها مكونات قابلة لإعادة الاستخدام، وهي جزء من شهادة Meta لتطوير الواجهات.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Dan Abramov",
+          "platform": "مدونة overreacted",
+          "url": "https://overreacted.io/",
+          "why": "من فريق React سابقاً، مدونته تشرح طريقة تفكير React بعمق.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "official",
+        "name": "Meta Front-End Developer Professional Certificate",
+        "issuer": "Meta (Coursera)",
+        "code": null,
+        "type": "program",
+        "url": "https://www.coursera.org/professional-certificates/meta-front-end-developer",
+        "fee": null,
+        "prepUrl": "https://www.coursera.org/learn/react-basics",
+        "prepLabel": "دورة React Basics من Meta، وهي ضمن البرنامج",
+        "level": "beginner",
+        "star": 1,
+        "why": "شهادة مهنية من Meta بعد 9 دورات منها React Basics وAdvanced React، تناسب من يبدأ في تطوير الواجهات.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://react.dev/learn", "status": "fixed", "note": "Title set to page title 'Quick Start'; page says it covers '80% of the React concepts that you will use on a daily basis'." },
+        { "url": "https://scrimba.com/learn-react-c0e", "status": "fixed", "note": "Title 'Learn React' -> 'Free Interactive React Tutorial' (page heading), teacher Bob Ziroll, free; no hours/certificate stated." },
+        { "url": "https://www.coursera.org/learn/react-basics", "status": "added", "note": "Meta course, Beginner, modules 11+7+7+3 = 28 h, 4.7 (2,617 reviews), Enroll for free but no audit confirmed -> paid, financial aid available, shareable certificate." },
+        { "url": "https://overreacted.io/", "status": "ok", "note": "Dan Abramov's blog; latest post 18 Sep 2026." },
+        { "url": "https://www.coursera.org/professional-certificates/meta-front-end-developer", "status": "added", "note": "Certification (program): 9 courses incl. React Basics and Advanced React, Beginner, 7 months at 6 h/week, 7-day trial then Coursera Plus, courses can be audited free without certificate, financial aid available. No program price on page -> fee null." }
+      ]
+    },
+    "apis": {
+      "topPick": {
+        "title": "APIs for Beginners - How to use an API (Full Course / Tutorial)",
+        "provider": "freeCodeCamp.org (YouTube), Craig Dennis",
+        "url": "https://www.youtube.com/watch?v=WXsD0ZgxjRw",
+        "lang": "en",
+        "price": "free",
+        "financialAid": null,
+        "hours": 3,
+        "certificate": null,
+        "star": 1,
+        "why": "دورة فيديو مجانية للمبتدئين: وش هو الـ API وليش موجود وكيف تستخدمه عملياً، يشرحها Craig Dennis في 3 ساعات.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "APIs",
+          "provider": "Meta (Coursera)",
+          "url": "https://www.coursera.org/learn/apis",
+          "lang": "en",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 21,
+          "certificate": true,
+          "star": 2,
+          "why": "خطوة بعد الأساسيات: تبني API بنفسك بمبادئ REST وDjango، تناسب من يعرف Python.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Kin Lane",
+          "platform": "مدونة API Evangelist",
+          "url": "https://apievangelist.com/",
+          "why": "يكتب من 2010 عن تصميم الـ APIs وحوكمتها وأمنها، ومدونته مرجع لمن يبي يفهم عالم الـ APIs.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "recommendedBy": [],
+      "certification": {
+        "kind": "none",
+        "proof": "مجموعة طلبات عامة في Postman على API مجاني حقيقي، مع أمثلة واختبارات وملف شرح منشور على GitHub.",
+        "proofUrl": null,
+        "why": "ما فيه شهادة معترف بها على نطاق واسع لمهارة APIs على مستوى المبتدئ، وصاحب العمل يحكم على مشروع عملي تقدر تشرحه.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://academy.postman.com/path/postman-api-fundamentals-student-expert", "status": "replaced", "note": "Old top pick: Postman Academy returns HTTP 403 to the fetch tool (also academy.postman.com root and the -certification-1 page), so it could not be verified. Replaced by the freeCodeCamp course." },
+        { "url": "https://www.youtube.com/watch?v=WXsD0ZgxjRw", "status": "added", "note": "Video title verified on YouTube; freeCodeCamp article (freecodecamp.org/news/apis-for-beginners/, 6 Feb 2023) confirms this link, 3-hour course by Craig Dennis (Twilio)." },
+        { "url": "https://www.coursera.org/learn/apis", "status": "added", "note": "Meta 'APIs', Intermediate, modules 7+6+6+2 = 21 h, 4.4 (399 reviews), no audit confirmed -> paid, financial aid available, shareable certificate; REST + Django." },
+        { "url": "https://apievangelist.com/", "status": "added", "note": "people was empty. API Evangelist, 'the working toolbox of Kin Lane', 5,000+ posts since 2010." },
+        { "url": "https://blog.postman.com/postman-student-programs-certification-update/", "status": "removed", "note": "Postman API Fundamentals Student Expert certification exists (official blog, 14 Oct 2022: free, anyone can take it, digital badge), but its current Academy page refuses fetches and postman.com/student-program pages no longer mention it, so certification set to kind none instead." }
+      ]
+    },
+    "communication": {
+      "topPick": {
+        "title": "Improving Communication Skills",
+        "provider": "University of Pennsylvania, Wharton (Coursera), Maurice Schweitzer",
+        "url": "https://www.coursera.org/learn/wharton-communication-skills",
+        "lang": "en",
+        "price": "paid",
+        "financialAid": true,
+        "hours": 12,
+        "certificate": true,
+        "star": 2,
+        "why": "تتعلّم صياغة رسالة مقنعة والثقة والإصغاء وطرح الأسئلة، وهذا هو «الإقناع وإدارة الحوار» في النجمة الثانية. تقييمها 4.7 من 2,143 مراجعة.",
+        "recommendedBy": null,
+        "checkedAt": "2026-11-20"
+      },
+      "alternatives": [
+        {
+          "title": "مهارات العمل الجماعي: التواصل الفعّال في مجموعات",
+          "provider": "University of Colorado Boulder (Coursera), Matthew Koschmann",
+          "url": "https://www.coursera.org/learn/teamwork-skills-effective-communication-ar",
+          "lang": "ar",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 11,
+          "certificate": true,
+          "star": 1,
+          "why": "بالعربي: التواصل داخل الفريق واتخاذ القرار والتعامل مع الخلاف والتفاوض، وتقييمها 4.8 من 489 مراجعة.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "Share Data Through the Art of Visualization",
+          "provider": "Google (Coursera), Google Data Analytics Professional Certificate",
+          "url": "https://www.coursera.org/learn/visualize-data",
+          "lang": "en",
+          "price": "paid",
+          "financialAid": true,
+          "hours": 19,
+          "certificate": true,
+          "star": 2,
+          "why": "تواصل المحلل تحديداً: كيف تحكي قصة بالأرقام وتبني عرضاً يقنع من يسمعك.",
+          "recommendedBy": [
+            {
+              "label": "CareerFoundry: The best Reddit data advice for beginners (updated 25 Oct 2023)",
+              "url": "https://careerfoundry.com/en/blog/data-analytics/reddit-data-advice/",
+              "note": "Quotes an r/dataanalysis thread recommending the Google Data Analytics Certificate, which this course is part of."
+            }
+          ],
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "people": [
+        {
+          "name": "Cole Nussbaumer Knaflic (storytelling with data)",
+          "platform": "Blog / books / podcast",
+          "url": "https://www.storytellingwithdata.com/",
+          "why": "بنت دورة عرض البيانات في Google، وتعلّمك كيف تعرض نتيجتك بوضوح ومن غير رسوم مزدحمة.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "Brent Dykes",
+          "platform": "Blog / LinkedIn / book",
+          "url": "https://www.effectivedatastorytelling.com/",
+          "why": "مؤلف Effective Data Storytelling وكاتب في Forbes، يشرح كيف تحوّل الأرقام إلى قصة تغيّر القرار.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "name": "Nancy Duarte",
+          "platform": "Blog / books",
+          "url": "https://www.duarte.com/resources/blog/",
+          "why": "مؤلفة دليل HBR للعروض المقنعة، ومدونة شركتها Duarte فيها نصائح عملية للعرض وشد انتباه الجمهور.",
+          "arab": false,
+          "saudiBased": false,
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "articles": [
+        {
+          "title": "Why The Pyramid Principle Is Not A Data Storytelling Framework",
+          "author": "Brent Dykes",
+          "site": "effectivedatastorytelling.com",
+          "url": "https://www.effectivedatastorytelling.com/post/why-the-pyramid-principle-is-not-a-data-storytelling-framework",
+          "lang": "en",
+          "why": "تعرف متى تبدأ بالتوصية مباشرة (مع المدير المستعجل) ومتى تبني القصة حتى يصل السامع للنتيجة بنفسه.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        },
+        {
+          "title": "How to Tell a Story with Data",
+          "author": "Jim Stikeleather (Harvard Business Review, 2013)",
+          "site": "hbr.org",
+          "url": "https://hbr.org/2013/04/how-to-tell-a-story-with-data",
+          "lang": "en",
+          "why": "لماذا يقنع العرض الذي يحكي قصة أكثر من العرض الذي يسرد الأرقام فقط.",
+          "recommendedBy": null,
+          "checkedAt": "2026-11-20"
+        }
+      ],
+      "proofTask": {
+        "task": "خذ نتيجة مهمة Power BI أو الإحصاء، واكتب مذكرة من صفحة واحدة (المشكلة، النتيجة، التوصية)، ثم اعرضها في 3 دقائق على شخص وردّ على اعتراض واحد منه.",
+        "dataset": {
+          "name": "Financial Sample Excel workbook",
+          "provider": "Microsoft Learn (free)",
+          "url": "https://learn.microsoft.com/en-us/power-bi/create-reports/sample-financial-download"
+        }
+      },
+      "certification": {
+        "kind": "none",
+        "proof": "عرض مسجّل مدته 3 دقائق لنتيجة تحليل حقيقية مع مذكرة من صفحة واحدة، ترسل رابطهما لمن يقيّمك.",
+        "proofUrl": "https://www.coursera.org/learn/wharton-communication-skills",
+        "why": "ما فيه شهادة معترف بها تثبت مهارة التواصل، والدليل الأقوى عرض مسجّل ومذكرة مكتوبة يشوفها صاحب العمل بنفسه.",
+        "checkedAt": "2026-11-20"
+      },
+      "log": [
+        { "url": "https://www.coursera.org/learn/wharton-communication-skills", "status": "fixed", "note": "Title, Wharton, Maurice Schweitzer, 4 modules x 3 h, 4.7 (2,143 reviews), shareable certificate all match. 'Enroll for free' but no audit confirmed -> kept paid. Page says 'Financial aid available' -> financialAid true (was missing)." },
+        { "url": "https://www.coursera.org/learn/teamwork-skills-effective-communication-ar", "status": "fixed", "note": "Arabic title, CU Boulder, Matthew Koschmann, 2+3+2+4 = 11 h, 4.8 (489 reviews) match. Button is 'Enroll now' -> paid. financialAid true added." },
+        { "url": "https://www.coursera.org/learn/visualize-data", "status": "fixed", "note": "Part of Google Data Analytics Professional Certificate, modules 5+5+5+4 = 19 h, shareable certificate match. financialAid true added." },
+        { "url": "https://careerfoundry.com/en/blog/data-analytics/reddit-data-advice/", "status": "ok", "note": "Updated 25 Oct 2023; quotes 'The Google Data Analytics Certification course through Coursera is excellent and inexpensive.'" },
+        { "url": "https://www.storytellingwithdata.com/", "status": "ok", "note": "Site opens (trainings, books, blog, podcast). meet-the-team page confirms Cole Nussbaumer Knaflic founder & CEO, and that she developed a data visualization course rolled out across Google." },
+        { "url": "https://www.effectivedatastorytelling.com/", "status": "ok", "note": "Brent Dykes' site: author of Effective Data Storytelling, 'regular Forbes contributor'." },
+        { "url": "https://www.duarte.com/resources/blog/", "status": "fixed", "note": "Blog opens with presenting/storytelling posts. duarte.com/about credits Nancy Duarte with The HBR Guide to Persuasive Presentations but does not say which other Duarte books she wrote, so 'why' trimmed to the verified book (name unchanged)." },
+        { "url": "https://www.effectivedatastorytelling.com/post/why-the-pyramid-principle-is-not-a-data-storytelling-framework", "status": "ok", "note": "Brent Dykes, 22 Jul 2026; lead with the recommendation when the audience is receptive, build the story when they must discover the insight or may resist." },
+        { "url": "https://hbr.org/2013/04/how-to-tell-a-story-with-data", "status": "ok", "note": "Jim Stikeleather, 24 Apr 2013; article body visible today with no paywall message." },
+        { "url": "https://learn.microsoft.com/en-us/power-bi/create-reports/sample-financial-download", "status": "ok", "note": "Dataset page offers direct download of the Financial Sample Excel workbook (go.microsoft.com/fwlink/?LinkID=521962)." }
+      ]
+    }
+  }
+}

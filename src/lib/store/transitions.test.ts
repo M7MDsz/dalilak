@@ -279,7 +279,7 @@ describe("the spec 8.8 / 10.4 walk", () => {
     const { applied } = journey();
     const user = applied.transition.user;
     const expected = nextApplicationNumber(factsOf(user), at(9));
-    const second = ok(submitApplication(user, { jobId: "business-analyst-riyadh", note: "x", by: "user" }, at(9)));
+    const second = ok(submitApplication(user, { jobId: "syarah-financial-analyst-tamheer-riyadh", note: "x", by: "user" }, at(9)));
     expect(second.application.number).toBe(expected);
     expect(expected).toBe("DL-2026-0002");
   });
@@ -385,11 +385,11 @@ describe("onboarding transitions (3.2, 4)", () => {
 
   it("pays target_set once: a later target change pays nothing and reports the new match", () => {
     const { cv } = journey();
-    const changed = setTarget(cv.user, "business-analyst-riyadh", at(4));
+    const changed = setTarget(cv.user, "syarah-financial-analyst-tamheer-riyadh", at(4));
     expect(changed.consequence.xp.gained).toBe(0);
     expect(changed.consequence.badges).toEqual([]);
     expect(changed.consequence.match.before).toEqual({ jobId: TARGET, value: 70 });
-    expect(changed.consequence.match.after).toEqual({ jobId: "business-analyst-riyadh", value: 60 });
+    expect(changed.consequence.match.after).toEqual({ jobId: "syarah-financial-analyst-tamheer-riyadh", value: 60 });
   });
 });
 
@@ -476,7 +476,7 @@ describe("applications (7.4, 7.5)", () => {
     const shortlisted = advanceApplication(moved, TARGET, at(6));
     expect(shortlisted.applications[0]?.manualStatus).toBe("shortlisted");
     expect(advanceApplication(shortlisted, TARGET, at(6))).toBe(shortlisted);
-    expect(advanceApplication(shortlisted, "qa-tester-dammam", at(6))).toBe(shortlisted);
+    expect(advanceApplication(shortlisted, "salla-senior-qa-engineer-remote", at(6))).toBe(shortlisted);
   });
 
   it("records the CV line of the sample CV", () => {
@@ -485,7 +485,7 @@ describe("applications (7.4, 7.5)", () => {
   });
 });
 
-describe("«دليل» applying: the in-flight marker (7.4)", () => {
+describe("«دليلك» applying: the in-flight marker (7.4)", () => {
   const LINE = "لم يكتمل التقديم. اطلبه مرة أخرى إن أحببت.";
 
   it("an interrupted run appends the line once and clears the marker", () => {
@@ -526,7 +526,7 @@ describe("advisor thread (3.14)", () => {
     return { id, from, at: 1, blocks: [id], cards: jobCard ? [{ kind: "job", jobId: TARGET }] : [], chips: [] };
   }
 
-  it("keeps the last 40, skips repeated ids, and marks jobs disclosed on a «دليل» job card", () => {
+  it("keeps the last 40, skips repeated ids, and marks jobs disclosed on a «دليلك» job card", () => {
     expect(ADVISOR_THREAD_LIMIT).toBe(LIMITS.threadMessages);
     let user = newUser("خالد", at(0));
     user = appendAdvisorMessages(user, [message("u1", "user", true)]);

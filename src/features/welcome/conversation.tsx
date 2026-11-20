@@ -1,5 +1,5 @@
 "use client";
-// Owner: welcome. Phase 1 of /welcome: the onboarding conversation with «دليل» (spec 3.2, 4; playbook 3.2).
+// Owner: welcome. Phase 1 of /welcome: the onboarding conversation with «دليلك» (spec 3.2, 4; playbook 3.2).
 // Built from the chat kit (ChatThread, AdvisorMessage, UserMessage (SentBubble), Composer, DaleelGlyph) and the game
 // layer: the quick replies are AnswerTiles (./answer-tiles, the kit's chip-to-bubble contract), the profile card is a
 // character sheet (./profile-trail). The interpreter is the pure brain script (instant, offline, identical every run); the
@@ -18,21 +18,23 @@ import { IconBranch } from "@/components/icons";
 import { WordsIn } from "@/components/motion";
 import { cn } from "@/components/ui";
 import { classifyOnboarding } from "@/lib/brain/client";
-import { onboardingContext, onboardingTurn, openingMessages, pendingQuestion, questionChips, resumeMessages } from "@/lib/brain/onboarding";
+import { onboardingContext, onboardingTurn, openingMessages, pendingStep, questionChips, resumeMessages } from "@/lib/brain/onboarding";
 import { PROTOCOL_VERSION, type OnboardingInput } from "@/lib/brain/protocol";
 import { answerText } from "@/lib/copy";
-import { ONBOARDING_TIMING } from "@/lib/data";
-import { QUESTION_IDS, isFieldId } from "@/lib/ids";
+import { ONBOARDING_TIMING, companyAnswerLabel, getCompany } from "@/lib/data";
+import { QUESTION_IDS, isCompanyId, isFieldId } from "@/lib/ids";
 import { focusIn, group, sleep, tween } from "@/lib/motion";
 import { selectCurrentUser, useAppStore, useBrainStatus } from "@/lib/store";
 import { TID } from "@/lib/testids";
-import type { OnboardingMessage, QuestionId, UserState } from "@/lib/types";
+import type { OnboardingAnswers, OnboardingMessage, OnboardingStepId, QuestionId, UserState } from "@/lib/types";
 import { useViewport } from "@/features/shared";
+import { CompanyMark } from "@/features/shared/company-mark";
 
 import { AnswerTiles, type AnswerOption } from "./answer-tiles";
 import { CHAT_COPY, firstNameOf } from "./copy";
 import { ProfileCard, ProfileRow } from "./profile-trail";
 import { FieldIcon } from "./reveal-scenes";
+import "./welcome.css";
 
 /** Where each answer sits on screen when the conversation ends: the reveal starts the answers from there. */
 export type AnswerRects = Partial<Record<QuestionId, DOMRect>>;
@@ -41,7 +43,7 @@ type Row =
   | { readonly kind: "user"; readonly id: string; readonly text: string }
   | { readonly kind: "daleel"; readonly id: string; readonly texts: readonly string[] };
 
-/** Consecutive lines of «دليل» are one turn (acknowledgement + next question = two blocks of one message). */
+/** Consecutive lines of «دليلك» are one turn (acknowledgement + next question = two blocks of one message). */
 function rowsOf(thread: readonly OnboardingMessage[]): Row[] {
   const rows: Row[] = [];
   for (const m of thread) {
@@ -52,7 +54,7 @@ function rowsOf(thread: readonly OnboardingMessage[]): Row[] {
   return rows;
 }
 
-/** «دليل» thinks 350-600 ms (spec 4.5), from a deterministic value: the same run looks the same every time. */
+/** «دليلك» thinks 350-600 ms (spec 4.5), from a deterministic value: the same run looks the same every time. */
 function thinkMs(index: number): number {
   const span = ONBOARDING_TIMING.thinkMaxMs - ONBOARDING_TIMING.thinkMinMs + 1;
   return ONBOARDING_TIMING.thinkMinMs + ((index * 131 + 89) % span);
@@ -62,9 +64,16 @@ function currentUser(): UserState | null {
   return selectCurrentUser(useAppStore.getState());
 }
 
-/** The question «دليل» is waiting on (null before the greeting and after the sixth answer). */
-export function pendingOf(user: UserState): QuestionId | null {
-  return user.onboarding.thread.length === 0 ? null : pendingQuestion(user.answers);
+/** The step «دليلك» is waiting on (null before the greeting and after the last answer; an account that finished before the
+ *  company step existed stays finished). */
+export function pendingOf(user: UserState): OnboardingStepId | null {
+  return pendingStep(user);
+}
+
+/** How each of the seven answers prints in «ملفك يتكوّن» (null while unanswered). */
+export function stepValues(answers: OnboardingAnswers): Record<OnboardingStepId, string | null> {
+  const values = Object.fromEntries(QUESTION_IDS.map((q) => [q, answerText(answers, q)])) as Record<QuestionId, string | null>;
+  return { ...values, company: companyAnswerLabel(answers.company) };
 }
 
 export function Conversation({ user, onDone }: { readonly user: UserState; readonly onDone: (rects: AnswerRects) => void }) {
@@ -87,8 +96,8 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
   const composer = useRef<ComposerHandle>(null);
   const finishing = useRef(false);
 
-  // First visit: «دليل» appears and thinks, then greets (checked inside the timer: Strict Mode's second run adds nothing).
-  // Resumed midway: the pending question is asked again, unless it is already the last thing «دليل» said.
+  // First visit: «دليلك» appears and thinks, then greets (checked inside the timer: Strict Mode's second run adds nothing).
+  // Resumed midway: the pending question is asked again, unless it is already the last thing «دليلك» said.
   const resumed = useRef(false);
   useEffect(() => {
     const now = currentUser();
@@ -99,7 +108,13 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
         if (!u || u.onboarding.thread.length > 0) return;
         useAppStore.getState().appendOnboardingMessages(openingMessages(u.name));
         setThinking(null);
-        window.setTimeout(() => setChipsReady(true), 900);
+        window.setTimeout(() => {
+          setChipsReady(true);
+          // an answer typed while «دليلك» was still greeting is played now, right after the greeting (never dropped)
+          const early = queued.current;
+          queued.current = null;
+          if (early) void runTurn({ kind: "text", text: early }, early);
+        }, 900);
       }, 620);
       return () => window.clearTimeout(timer);
     }
@@ -125,7 +140,7 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
     }, ONBOARDING_TIMING.closingHoldMs + 260);
   };
 
-  /** One turn: the bubble at once, «دليل» thinks, then the store applies the interpreted turn (thread, answers, slot). */
+  /** One turn: the bubble at once, «دليلك» thinks, then the store applies the interpreted turn (thread, answers, slot). */
   const runTurn = async (input: OnboardingInput, bubble: string, travelId?: string) => {
     const user0 = currentUser();
     if (!user0 || busy.current) return;
@@ -172,8 +187,14 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
 
   const send = (text: string) => {
     const now = currentUser();
-    // nothing is sent before «دليل» has greeted (the greeting comes first, spec 4.1) or after the sixth answer
-    if (!now || now.onboarding.thread.length === 0 || pendingQuestion(now.answers) === null) return;
+    if (!now) return;
+    // typed before «دليلك» has greeted (the greeting comes first, spec 4.1): kept and answered right after the greeting
+    if (now.onboarding.thread.length === 0) {
+      queued.current = text;
+      return;
+    }
+    // nothing is sent after the last answer
+    if (pendingStep(now) === null) return;
     if (busy.current) {
       queued.current = text;
       return;
@@ -191,8 +212,8 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
     return undefined;
   })();
   const chips = pending ? questionChips(pending, user.answers) : null;
-  const values = Object.fromEntries(QUESTION_IDS.map((q) => [q, answerText(user.answers, q)])) as Record<QuestionId, string | null>;
-  const done = pendingQuestion(user.answers) === null;
+  const values = stepValues(user.answers);
+  const done = user.onboarding.thread.length > 0 && pendingStep(user) === null;
 
   // one keyed array, so a message keeps its element from "thinking" to "answer" (the glyph settles in place)
   const items: ReactNode[] = rows.map((row) => {
@@ -231,11 +252,12 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
       <div className="mx-auto flex min-h-0 w-full max-w-[72rem] flex-1 gap-10 px-gutter">
         <section aria-labelledby="welcome-heading" className="flex min-h-0 min-w-0 flex-1 flex-col">
           <h1 className="sr-only" id="welcome-heading">
-            المحادثة مع دليل
+            المحادثة مع دليلك
           </h1>
+          {/* `wl-thread` (welcome.css): the slim scroll bar, in the 8 px the thread borrows past the column */}
           <ChatThread
             busy={thinking !== null}
-            className="-mx-2"
+            className="wl-thread -mx-2"
             contentClassName={cn("mx-auto min-h-full w-full max-w-[42rem] justify-end gap-6 px-2", desktop ? "pt-8 pb-6" : "pt-2 pb-4")}
             testId={TID.welcome.thread}
           >
@@ -252,7 +274,13 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
                   label: o.label,
                   testId: TID.welcome.chip(chips.question, o.id),
                   // the field emblems ride on the desktop pieces; on a phone they would cost the list a fourth line
-                  icon: desktop && chips.question === "interest" ? <InterestIcon option={o.id} size={20} /> : undefined,
+                  icon:
+                    desktop && chips.question === "interest" ? (
+                      <InterestIcon option={o.id} size={20} />
+                    ) : chips.question === "company" && isCompanyId(o.id) ? (
+                      // the companies carry their logo (a monogram when there is none), on a phone too: it is the name
+                      <CompanyMark company={getCompany(o.id)} size={desktop ? 20 : 18} />
+                    ) : undefined,
                 }))}
                 question={chips.question}
                 // a phone holds the ten majors in three lines (spec 3.2 Phone): the pieces are the small size there,
@@ -291,7 +319,7 @@ function InterestIcon({ option, size }: { readonly option: string; readonly size
 }
 
 /**
- * greeting-arrival: «دليل» appears and thinks (the glyph alone), then his first line arrives word by word with the
+ * greeting-arrival: «دليلك» appears and thinks (the glyph alone), then his first line arrives word by word with the
  * user's name emphasised, and the second comes into focus. Drawn exactly as an AdvisorMessage row.
  */
 function Greeting({ texts, firstName, pending = false, last }: { readonly texts: readonly string[]; readonly firstName: string; readonly pending?: boolean; readonly last: boolean }) {
@@ -308,9 +336,9 @@ function Greeting({ texts, firstName, pending = false, last }: { readonly texts:
     >
       <DaleelGlyph framed size={32} state={pending ? "thinking" : "done"} />
       <div className="flex min-w-0 flex-1 flex-col">
-        <p className="text-small leading-8 font-semibold text-fg">دليل</p>
+        <p className="text-small leading-8 font-semibold text-fg">دليلك</p>
         {pending ? (
-          <span className="sr-only">دليل يفكّر…</span>
+          <span className="sr-only">دليلك يفكّر…</span>
         ) : (
           <motion.div animate="show" className="flex flex-col gap-3" initial="hidden" variants={group(0.6, 0.05)}>
             {first ? (

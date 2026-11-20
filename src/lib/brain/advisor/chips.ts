@@ -54,19 +54,20 @@ export function pageChips(page: PageContext, facts: UserFacts, clock: Clock): re
     }
     case "applications":
       return [chip("applications-status", "وش صار على طلباتي؟"), chip("next-step", "وش أسوي لين يجي الرد؟")];
+    // «دليل التعلّم» and a step's guide (20 Nov 2026): the slugs and payloads stay, the words fit a guide.
     case "learn":
       return [
-        chip("course-start", "أي دورة أبدأ فيها؟"),
-        chip("courses-path", "دورات مساري"),
-        chip("courses-short", "دورات قصيرة"),
+        chip("course-start", "وش خطوتي الجاية؟"),
+        chip("courses-path", "خطوات مساري"),
+        chip("courses-short", "أقصر الخطوات"),
       ];
     case "course": {
       const courseId = page.courseId;
       if (!courseId) return [];
-      const chips: Chip[] = [chip("course-what", "وش ذي الدورة؟")];
-      // «ابدأ هذه الدورة» only where it would start something (not locked, credited, completed or already started).
+      const chips: Chip[] = [chip("course-what", "وش في ذا الدليل؟")];
+      // «ابدأ ذي الخطوة» only where it would start something (not locked, credited, completed or already started).
       if (courseState(courseId, facts).state === "available") {
-        chips.push(chip("start-course", "ابدأ ذي الدورة", { intent: "start_course", courseId }));
+        chips.push(chip("start-course", "ابدأ ذي الخطوة", { intent: "start_course", courseId }));
       }
       chips.push(chip("course-gain", "كم ترفع مطابقتي؟"));
       return chips;

@@ -1,5 +1,5 @@
 "use client";
-// Owner: welcome. /welcome: «دليل» gets to know the user (phase 1), then the path-reveal show (phase 2) ends on the named
+// Owner: welcome. /welcome: «دليلك» gets to know the user (phase 1), then the path-reveal show (phase 2) ends on the named
 // path and the result forms around it (phase 3), and a choice hands the path over to the map (spec 3.2, 3.3, 4).
 // The screen owns what lasts across the phases: the paper and its contours, the night stage that falls over it for the
 // show (the same hill, by night), and the top bar with the logo (it stays while the phases change under it).
@@ -11,6 +11,7 @@ import { StepTrail } from "@/components/game";
 import { PageTransition, Roll, useInstant } from "@/components/motion";
 import { ContourBackdrop, Stage } from "@/components/ui";
 import { getQuestion } from "@/lib/data";
+import { ONBOARDING_STEP_IDS } from "@/lib/ids";
 import { formatNumber } from "@/lib/format";
 import { tween } from "@/lib/motion";
 import { useCurrentUser } from "@/lib/store";
@@ -24,7 +25,7 @@ import { RevealFlow } from "./reveal";
 
 type Phase = { readonly kind: "chat" } | { readonly kind: "reveal"; readonly rects: AnswerRects | null; readonly startOnResult: boolean };
 
-/** Where a visit starts: the conversation, or (all six answered) the show, or (it reached step 6) the result. */
+/** Where a visit starts: the conversation, or (all seven answered) the show, or (it reached step 6) the result. */
 function initialPhase(user: UserState): Phase {
   const complete = user.onboardingCompletedAt !== null && pendingOf(user) === null && user.onboarding.thread.length > 0;
   if (!complete) return { kind: "chat" };
@@ -50,7 +51,7 @@ function WelcomeFlow({ user }: { user: UserState }) {
   const onLeaving = useCallback(() => setLeaving(true), []);
 
   const pending = pendingOf(user);
-  const step = pending ? getQuestion(pending).n : 6;
+  const step = pending ? getQuestion(pending).n : ONBOARDING_STEP_IDS.length;
 
   return (
     <PageTransition>
@@ -77,7 +78,7 @@ function WelcomeFlow({ user }: { user: UserState }) {
           initial={false}
           transition={tween.exit}
         >
-          <span className="text-fg transition-colors duration-500">{desktop ? <Logo size={30} /> : <LogoMark size={30} title="دليلك" />}</span>
+          <span className="text-fg transition-colors duration-500">{desktop ? <Logo size={30} /> : <LogoMark size={30} title="دليل" />}</span>
           <AnimatePresence initial={false}>
             {phase.kind === "chat" ? (
               <motion.div className="flex min-w-0 justify-end" exit={{ opacity: 0, transition: tween.exit }} key="step">
@@ -99,7 +100,7 @@ function WelcomeFlow({ user }: { user: UserState }) {
                     </span>
                   }
                   testId={TID.welcome.step}
-                  total={6}
+                  total={ONBOARDING_STEP_IDS.length}
                 />
               </motion.div>
             ) : null}

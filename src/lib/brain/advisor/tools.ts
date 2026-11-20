@@ -6,8 +6,8 @@
 // browser's submitApplication uses, so `expect.number` matches the real record.
 import { z } from "zod";
 
-import { nextStepLabel } from "@/lib/copy";
-import { COURSES, MATCH_LINE, XP, getBadge, getCourse, getJob, getSkill } from "@/lib/data";
+import { nextStepLabel, stepName } from "@/lib/copy";
+import { COURSES, MATCH_LINE, XP, getBadge, getCourse, getGuide, getJob, getSkill, type GuideCourse } from "@/lib/data";
 import {
   applicationStatus,
   badgeProgress,
@@ -46,7 +46,7 @@ import { hrefFor } from "@/lib/routes";
 import { completeCourse, startCourse, submitApplication } from "@/lib/store/transitions";
 import { stateFromFacts } from "@/lib/store/snapshot";
 import type { BadgeId, Clock, CourseId, JobId, JobQuery, NavTarget, NextStep, UserFacts } from "@/lib/types";
-import type { PageContext, ToolCourse, ToolError, ToolJob, ToolParams, ToolResults } from "@/lib/brain/protocol";
+import type { PageContext, ToolCourse, ToolError, ToolGuide, ToolGuideCourse, ToolJob, ToolParams, ToolResults } from "@/lib/brain/protocol";
 import type { ToolName } from "@/lib/ids";
 
 export interface ToolContext {
@@ -108,7 +108,11 @@ export function navTargetFromParams(params: ToolParams["navigate"]): NavTarget |
   }
 }
 
-/** A course as the tools describe it (5.3), with its place on the target's path. */
+/**
+ * A course as the tools describe it (5.3), with its place on the target's path. Since 20 Nov 2026 a course is a learning
+ * step the user meets as its skill's guide, so its `title` is the step's name (the skill: «Power BI»), never the internal
+ * course title the user no longer sees.
+ */
 export function toolCourse(courseId: CourseId, facts: UserFacts): ToolCourse {
   const course = getCourse(courseId);
   const state = courseState(courseId, facts).state;
@@ -116,7 +120,7 @@ export function toolCourse(courseId: CourseId, facts: UserFacts): ToolCourse {
   const done = state === "completed" || state === "credited";
   return {
     id: course.id,
-    title: course.title,
+    title: stepName(course.id),
     skill: course.skill,
     star: course.star,
     hours: course.hours,
@@ -126,6 +130,22 @@ export function toolCourse(courseId: CourseId, facts: UserFacts): ToolCourse {
     match_after: onPath ? onPath.matchAfter : null,
     prep: onPath ? onPath.prep : false,
     prepares: onPath ? onPath.prepares : null,
+  };
+}
+
+function guideCourse(c: GuideCourse): ToolGuideCourse {
+  return { title: c.title, provider: c.provider, lang: c.lang, price: c.price, hours: c.hours, certificate: c.certificate, why: c.why };
+}
+
+/** The guide of a course's skill, for get_course (the real items «دليلك» may name; 20 Nov 2026). */
+export function toolGuide(courseId: CourseId): ToolGuide {
+  const guide = getGuide(getCourse(courseId).skill);
+  return {
+    top_pick: guideCourse(guide.topPick),
+    alternatives: guide.alternatives.map(guideCourse),
+    people: guide.people.map((p) => ({ name: p.name, platform: p.platform, why: p.why })),
+    articles: guide.articles.map((a) => ({ title: a.title, author: a.author, why: a.why })),
+    proof: guide.proof ? guide.proof.task : null,
   };
 }
 
@@ -248,11 +268,13 @@ const HANDLERS: Handlers = {
     if (!isCourseId(params.course_id)) return unknownId(`course ${String(params.course_id)}`);
     const course = getCourse(params.course_id);
     const info = courseState(params.course_id, facts);
+    // a learning step: the skill's description and its real guide, no made-up lessons (20 Nov 2026)
     return {
       ...toolCourse(params.course_id, facts),
-      description: course.description,
-      lessons: course.lessons,
+      description: getSkill(course.skill).description,
+      lessons: [],
       lock: info.state === "locked" ? info.lock : null,
+      guide: toolGuide(params.course_id),
     };
   },
 

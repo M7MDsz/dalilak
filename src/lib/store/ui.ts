@@ -18,12 +18,12 @@ export interface UiState {
   /** The advisor panel is open (spec 3.14). Owner of the panel: `advisor`; the shell's phone tab and Ctrl+K toggle it too. */
   readonly advisorOpen: boolean;
   /**
-   * A reply or an action of «دليل» is in flight (5.5 rule 13). Set by the panel for each turn and each apply run. While
+   * A reply or an action of «دليلك» is in flight (5.5 rule 13). Set by the panel for each turn and each apply run. While
    * true, askAdvisor() ignores requests, and every page button that calls it renders disabled={advisorBusy}.
    */
   readonly advisorBusy: boolean;
   /**
-   * The newest request a page button queued for the panel to send («دع دليل يقدّم عنك», …). NOT cleared when handled:
+   * The newest request a page button queued for the panel to send («دع دليلك يقدّم عنك», …). NOT cleared when handled:
    * the panel keeps the last handled id in a ref and sends from a useUi.subscribe listener (and once on subscribe, if
    * the current id is newer than the ref), never from an effect whose cleanup aborts the turn.
    */
@@ -38,7 +38,7 @@ export interface UiState {
   readonly blocking: "daily" | "levelup" | null;
   /** The apply sheet is open, in either mode (5.5 rule 7: no navigation event is applied then). Set by the jobs page. */
   readonly applySheetOpen: boolean;
-  /** «دليل» applying for the user (7.4). Started by the dispatcher, run by the jobs page's apply sheet. */
+  /** «دليلك» applying for the user (7.4). Started by the dispatcher, run by the jobs page's apply sheet. */
   readonly applyRun: ApplyRun | null;
   /**
    * The reveal → map hand-over (v3 3.3, 3.4). Set by `welcome` just before navigating. The map and the shell read it in
@@ -46,7 +46,7 @@ export interface UiState {
    * it (`setMapHandover(null)`), when the full form ends or when the map unmounts.
    */
   readonly mapHandover: (MapHandover & { readonly id: number }) | null;
-  /** Incremented by the dispatcher when «دليل» opens the map, also when /path is already on screen (v3 3.4 situation 3). */
+  /** Incremented by the dispatcher when «دليلك» opens the map, also when /path is already on screen (v3 3.4 situation 3). */
   readonly mapOpenRequest: number;
   /** GET /api/brain, fetched once per page load (null until known). */
   readonly brain: BrainStatus | null;

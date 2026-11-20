@@ -1,7 +1,7 @@
 "use client";
 // Owner: applications. One application (spec 3.9 "Application card"), in the spec's reading order: job title · company
 // with «جهة تجريبية» · «رقم الطلب …» · «قدّمت …» · the three-step track · the status note · the match when sent and now
-// (and «ارتفعت من … إلى … منذ التقديم» when it rose) · «قدّم عنك دليل» · «عرض الوظيفة» · «محاكاة: انقل للحالة التالية»
+// (and «ارتفعت من … إلى … منذ التقديم» when it rose) · «قدّم عنك دليلك» · «عرض الوظيفة» · «محاكاة: انقل للحالة التالية»
 // (hidden once shortlisted or closed) · «شاهد الفجوة» when closed.
 //
 // `status-advance`: the status is derived (engine applicationStatus, clock refreshed every 5 s by the screen). The card
@@ -10,16 +10,21 @@
 // one after the page has risen; later changes (the 5 s tick, the simulation control) move it at once. First the track
 // draws and its marker rides to the new step (the cause), then the status label and the note roll (the meaning). The
 // marker is written back to seen.applicationStatus once the change has been shown. data-state is final from frame one.
+//
+// 20 Nov 2026 (real jobs): an application to a REAL posting was prepared here and is sent by the user from the original
+// posting. Its card says so («جهّزه دليلك، وأرسله أنت من الإعلان الأصلي») with the link, and shows no track, no status
+// note and no simulation control: nobody is pretended to review it. The practice job keeps the simulated track.
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { Avatar } from "@/components/avatars";
 import { DaleelGlyph } from "@/components/chat";
-import { IconArrowForward, IconArrowUp, IconCheck, IconCheckCircle, IconClock, IconFile, IconInfo, IconSend } from "@/components/icons";
+import { IconArrowForward, IconArrowUp, IconCheckCircle, IconClock, IconExternal, IconFile, IconInfo, IconSend } from "@/components/icons";
 import { NavLink, Roll, useInstant } from "@/components/motion";
-import { Button, SampleTag, buttonStyles, cn } from "@/components/ui";
-import { APPLICATION_STATUS_COPY, relativeTime } from "@/lib/copy";
-import { APPLY_SITES, getJob } from "@/lib/data";
+import { Button, buttonStyles, cn } from "@/components/ui";
+import { JobTag } from "@/features/shared";
+import { APPLICATION_STATUS_COPY, JOB_SOURCE_COPY, relativeTime } from "@/lib/copy";
+import { getJob } from "@/lib/data";
 import { applicationStatus, jobMatch, makeClock, nextApplicationStatus } from "@/lib/engine";
 import { bidiNumbers, formatPercent } from "@/lib/format";
 import { tween } from "@/lib/motion";
@@ -49,6 +54,7 @@ export function ApplicationCard({ application, user, clock }: { readonly applica
   const matchThen = application.matchAtSend;
   const matchNow = jobMatch(jobId, user);
   const cardRef = useRef<HTMLElement>(null);
+  const source = job.real ? job.source : undefined;
 
   const advance = () => {
     const after = nextApplicationStatus(application, makeClock().now);
@@ -76,10 +82,10 @@ export function ApplicationCard({ application, user, clock }: { readonly applica
               </h2>
               <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-fg-2">
                 <span>{job.company}</span>
-                <SampleTag kind="company" />
+                <JobTag jobId={jobId} />
               </p>
             </div>
-            <StatusLabel jobId={jobId} shown={meaning} status={status} />
+            {source ? <PreparedLabel jobId={jobId} /> : <StatusLabel jobId={jobId} shown={meaning} status={status} />}
           </div>
           <p className="text-small text-fg-3">
             {APPLICATIONS_COPY.numberLabel}{" "}
@@ -93,6 +99,9 @@ export function ApplicationCard({ application, user, clock }: { readonly applica
           </p>
         </header>
 
+        {source ? (
+          <Prepared by={application.by} url={source.url} user={user} />
+        ) : (
         <div className="flex flex-col gap-3">
           <StatusTrack className="max-w-[36rem]" status={shown} />
           <StatusNote status={meaning} />
@@ -107,6 +116,7 @@ export function ApplicationCard({ application, user, clock }: { readonly applica
             ) : null}
           </AnimatePresence>
         </div>
+        )}
       </div>
 
       {/* the match then and now, who sent it, and what to do with it */}
@@ -122,8 +132,7 @@ export function ApplicationCard({ application, user, clock }: { readonly applica
           </p>
         ) : null}
 
-        {application.by === "advisor" ? <ByAdvisor user={user} /> : null}
-        {application.by === "advisor" ? <SentVia /> : null}
+        {application.by === "advisor" && !source ? <ByAdvisor user={user} /> : null}
 
         <div className="flex flex-wrap gap-2.5 @min-[900px]/content:flex-col @min-[900px]/content:items-stretch">
           <NavLink className={buttonStyles({ variant: "secondary", size: "sm" })} data-testid={TID.applications.openJob(jobId)} href={hrefFor({ screen: "job", jobId })}>
@@ -226,7 +235,7 @@ function MatchFact({ label, value, testId }: { readonly label: string; readonly 
   );
 }
 
-/** «قدّم عنك دليل»: «دليل»'s glyph pinned to the user's avatar (he acted on the user's behalf, spec 9.6). */
+/** «قدّم عنك دليلك»: «دليلك»'s glyph pinned to the user's avatar (he acted on the user's behalf, spec 9.6). */
 function ByAdvisor({ user }: { readonly user: UserState }): ReactNode {
   return (
     <p className="flex items-center gap-3 text-small font-medium text-fg-2">
@@ -241,23 +250,52 @@ function ByAdvisor({ user }: { readonly user: UserState }): ReactNode {
   );
 }
 
-/**
- * Where «دليل» sent it: Dalilak and the other sites (APPLY_SITES, simulated). Every application he sends goes to all
- * of them, so nothing is stored per record; the «تجريبي» note says nothing left the laptop.
- */
-function SentVia(): ReactNode {
+/** A real job's status: prepared, to be sent from the posting (no simulated review). */
+function PreparedLabel({ jobId }: { readonly jobId: JobId }): ReactNode {
   return (
-    <div className="flex flex-col gap-2" data-testid="application-sites">
-      <p className="text-small text-fg-2">{APPLICATIONS_COPY.sentVia}</p>
-      <ul className="flex flex-wrap gap-1.5">
-        {[APPLICATIONS_COPY.dalilak, ...APPLY_SITES.map((s) => s.name)].map((name) => (
-          <li className="inline-flex h-7 items-center gap-1 rounded-full bg-ok-soft px-2.5 text-caption font-semibold text-ok-fg" key={name}>
-            <IconCheck size={14} strokeWidth={2.5} waypoint="off" />
-            <bdi>{name}</bdi>
-          </li>
-        ))}
-      </ul>
-      <p className="text-caption text-fg-3">{APPLICATIONS_COPY.sitesNote}</p>
+    <span
+      className="inline-flex h-9 shrink-0 items-center gap-2 rounded-full border border-border-strong ps-3 pe-3.5 text-small font-semibold text-fg"
+      data-state="prepared"
+      data-testid={TID.applications.status(jobId)}
+    >
+      <IconCheckCircle size={18} waypoint="muted" />
+      {APPLICATIONS_COPY.prepared}
+    </span>
+  );
+}
+
+/**
+ * A real job's application: «جهّزه دليلك، وأرسله أنت من الإعلان الأصلي» (or «جهّزته هنا…» when the user prepared it), with
+ * «دليلك»'s mark on the user's avatar when he did, and the link to the original posting (a new tab).
+ */
+function Prepared({ by, url, user }: { readonly by: Application["by"]; readonly url: string; readonly user: UserState }): ReactNode {
+  return (
+    <div className="flex flex-col items-start gap-3" data-testid="application-prepared">
+      <p className="flex items-center gap-3 text-body font-medium text-fg">
+        {by === "advisor" ? (
+          <span className="relative inline-flex shrink-0">
+            <Avatar id={user.avatar} size={32} />
+            <span className="absolute -bottom-1 -end-1.5 grid size-[1.375rem] place-items-center rounded-full border-2 border-surface bg-surface">
+              <DaleelGlyph size={18} />
+            </span>
+          </span>
+        ) : null}
+        <span>{by === "advisor" ? JOB_SOURCE_COPY.preparedByAdvisor : JOB_SOURCE_COPY.preparedByUser}</span>
+      </p>
+      <a
+        className={buttonStyles({ size: "sm" })}
+        data-testid="application-open-posting"
+        href={url}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <IconExternal size={18} />
+        {JOB_SOURCE_COPY.openPosting}
+      </a>
+      <p className="flex items-start gap-1.5 text-small text-fg-3">
+        <IconInfo className="mt-0.5 shrink-0" size={16} waypoint="off" />
+        <span>{JOB_SOURCE_COPY.mayHaveClosed}</span>
+      </p>
     </div>
   );
 }

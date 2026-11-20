@@ -1,4 +1,4 @@
-# «دليلك» (Dalilak) product spec
+# «دليل» (Dalilak) product spec
 
 Version 3 · 18 Nov 2026 · written by the product agent, revised against two critic reviews (coverage and reliability), then brought up to date with the owner's late choices (see "Changes on 18 Nov" below). Designers, builders and QA build from this file and test against it.
 Read `BRIEF.md`, `HANDOFF-1-IDEA.md` and `docs/TEAM-BRIEF.md` first (older documents call the product «مساري» / Masari: TEAM-BRIEF section 0). Where this file and Mohammed's words disagree, his words win.
@@ -7,23 +7,23 @@ Read `BRIEF.md`, `HANDOFF-1-IDEA.md` and `docs/TEAM-BRIEF.md` first (older docum
 
 If you read version 2, these are the only changes. Every number, the data of section 9, the arithmetic tables 8.8 and 10.4, and every test id not named below are unchanged.
 
-1. **Name.** The product is «دليلك» (Latin: Dalilak). The advisor keeps his name «دليل» and introduces himself as «أنا دليل، دليلك إلى وظيفتك.» «مساري» survives only as the name of the roadmap page (the navigation label, «افتح مساري», «رجوع لمساري», «اذهب إلى مساري», «في مساري», «دورات مساري»: all kept). Where «دليلك» alone could be read as the ordinary words "your guide", the copy says «منصة دليلك». Strings rewritten:
+1. **Name.** The product is «دليل» (Latin: Dalilak). The advisor is «دليلك» (Mohammed, 20 Nov 2026: the two names swapped) and introduces himself as «أنا دليلك إلى وظيفتك.» «مساري» survives only as the name of the roadmap page (the navigation label, «افتح مساري», «رجوع لمساري», «اذهب إلى مساري», «في مساري», «دورات مساري»: all kept). Where «دليل» alone could be read as the ordinary word "a guide", the copy says «منصة دليل». Strings rewritten:
 
    | Where | Was | Now |
    |---|---|---|
-   | Browser tab (2.2) | «مساري · {page heading}», «مساري» | «دليلك · {page heading}», «دليلك» |
-   | Wordmark: sign-in (3.1), side navigation (2.3), logo (9.9) | «مساري» | «دليلك» |
-   | Advisor panel header line (3.14) | «مستشارك في مساري» | «دليلك إلى وظيفتك» |
-   | Onboarding greeting (4.1, 10.2 step 1) | «أهلاً {name}، أنا دليل. سأكون معك من أول خطوة إلى الوظيفة.» | «أهلاً {name}، أنا دليل، دليلك إلى وظيفتك. سأكون معك من أول خطوة إلى آخرها.» |
-   | «من أنت؟» during onboarding (4.5) | «أنا دليل، مستشارك في مساري. أسألك الآن…» | «أنا دليل، دليلك إلى وظيفتك. أسألك الآن…» |
-   | «من أنت؟» after onboarding (5.6 example 19, 5.9) | «أنا دليل، مستشارك في مساري. أشرح لك…» | «أنا دليل، دليلك إلى وظيفتك. أشرح لك…» |
+   | Browser tab (2.2) | «مساري · {page heading}», «مساري» | «دليل · {page heading}», «دليل» |
+   | Wordmark: sign-in (3.1), side navigation (2.3), logo (9.9) | «مساري» | «دليل» |
+   | Advisor panel header line (3.14) | «مستشارك في مساري» | «مرشدك إلى وظيفتك» (20 Nov: under the name «دليلك») |
+   | Onboarding greeting (4.1, 10.2 step 1) | «أهلاً {name}، أنا دليل. سأكون معك من أول خطوة إلى الوظيفة.» | «أهلاً {name}، أنا دليلك إلى وظيفتك. سأكون معك من أول خطوة إلى آخرها.» |
+   | «من أنت؟» during onboarding (4.5) | «أنا دليل، مستشارك في مساري. أسألك الآن…» | «أنا دليلك إلى وظيفتك. أسألك الآن…» |
+   | «من أنت؟» after onboarding (5.6 example 19, 5.9) | «أنا دليل، مستشارك في مساري. أشرح لك…» | «أنا دليلك إلى وظيفتك. أشرح لك…» |
    | The fallback (5.6 example 10, 5.9) | «…أنا مستشارك في مساري: أدلّك على…» | «…أنا دليلك إلى وظيفتك: أدلّك على…» |
-   | Honesty sentence after applying (5.6 example 4, 5.9, 5.5 rule 16, 7.4) | «…هذا تقديم تجريبي داخل مساري ولم يصل…» | «…هذا تقديم تجريبي داخل منصة دليلك ولم يصل…» |
-   | Profile, «عن هذا العرض» (3.13) | «مساري عرض تجريبي. …» | «منصة دليلك عرض تجريبي. …» |
+   | Honesty sentence after applying (5.6 example 4, 5.9, 5.5 rule 16, 7.4) | «…هذا تقديم تجريبي داخل مساري ولم يصل…» | «…هذا تقديم تجريبي داخل منصة دليل ولم يصل…» |
+   | Profile, «عن هذا العرض» (3.13) | «مساري عرض تجريبي. …» | «منصة دليل عرض تجريبي. …» |
 
 2. **Application numbers** use the prefix DL: `DL-{year}-{sequence}`, in the demo «DL-2026-0001» (was MS-2026-0001) in 3.8, 3.9, 5.6, 7.4, 10.2 and 10.3.
 3. **Look.** Darb, IBM Plex Sans Arabic and the navy palette, as decided in `docs/DESIGN-BRIEF.md`. Skill levels stay stars («نجمة»), 1 to 3 slots per skill; avatars stay twelve, `av-01` to `av-12`. New bullet "Look" in "How to read".
-4. **The map is the centrepiece (3.4).** New tier-1 motion moment `map-open`, which replaces `path-draw-in`: in full the first time the map appears after the path reveal (the reveal hands over to it without a cut, 3.3 and 3.4), short (1.2 s or less) on every later visit to `/path` and when «دليل» opens the map, never blocking, reduced motion honoured. New "reading rules" that hold for any layout; the roadmap section now describes the path as data and behaviour only (the phone paragraph no longer fixes a top-to-bottom column), and states that a path holds up to 11 stages (9.3). The full form holds toasts and the nudge until it ends (3.15). New test id `path-map` (`data-open`). Seeds mark the full form as played (10.3).
+4. **The map is the centrepiece (3.4).** New tier-1 motion moment `map-open`, which replaces `path-draw-in`: in full the first time the map appears after the path reveal (the reveal hands over to it without a cut, 3.3 and 3.4), short (1.2 s or less) on every later visit to `/path` and when «دليلك» opens the map, never blocking, reduced motion honoured. New "reading rules" that hold for any layout; the roadmap section now describes the path as data and behaviour only (the phone paragraph no longer fixes a top-to-bottom column), and states that a path holds up to 11 stages (9.3). The full form holds toasts and the nudge until it ends (3.15). New test id `path-map` (`data-open`). Seeds mark the full form as played (10.3).
 5. **Home leaderboard preview (3.4).** `/path` shows the top three of the week and the user's own row, with the link «عرض الترتيب». It is not a visit to the leaderboard, so the `row-climb` baseline of 8.7 is unchanged and the demo's climb from 18 to 10 still plays on `/leaderboard`. New test ids `path-leaderboard`, `path-leaderboard-row-{userId}`, `path-leaderboard-me`, `path-leaderboard-open`; new sample-data label in 7.6.
 6. **No API key on this laptop yet.** Everything runs on the local brain. The Gemini and Anthropic paths are built behind the provider switch and cannot be tested until a key is pasted into `.env.local`; no AI client is ever constructed without an explicit non-empty key (5.5 rule 18). The keyed QA runs are owed, not passed (5.7, 10.1).
 7. The demo script (10.2) is updated for items 1, 2, 4 and 5 only; its clock and its numbers are unchanged.
@@ -33,12 +33,12 @@ If you read version 2, these are the only changes. Every number, the data of sec
 - **Order.** Sections 1-2 frame the product. Section 3 specifies every screen. Sections 4-8 hold the rules the screens refer to (onboarding, advisor, CV, jobs, game). Section 9 is the data and the artwork inventory. Section 10 is the demo script, the saved states and the arithmetic check. Section 11 is the honest list. Section 12 records how ambiguous requests were read.
 - **Copy.** Every Arabic string in «…» or in a table is final copy and appears exactly as written. `{name}`, `{match}` and similar are placeholders filled at run time. Digits are Latin (0-9). «XP» stays in Latin letters, after the number: «420 XP». Percentages are written «70%».
 - **Counted nouns.** Arabic changes the noun with the number: 1 → singular (مهارة واحدة), 2 → dual (مهارتان), 3-10 → plural (8 مهارات), 11 and above → singular (11 مهارة). Strings with counts are written here for the demo number; one shared helper applies the rule. The helper takes a **case**, because the dual changes with it: as a subject «بقيت لك مرحلتان»; as an object or after a preposition «صعدت مركزين», «وجدت وظيفتين», «عدت يومين»; one as an object is «مركزاً واحداً». Forms (singular / dual as subject / dual as object / plural): مهارة/مهارتان/مهارتين/مهارات · مرحلة/مرحلتان/مرحلتين/مراحل · دورة/دورتان/دورتين/دورات · ساعة/ساعتان/ساعتين/ساعات · درس/درسان/درسين/دروس · وظيفة/وظيفتان/وظيفتين/وظائف · نجمة/نجمتان/نجمتين/نجوم · مركز/مركزان/مركزين/مراكز · يوم/يومان/يومين/أيام · طلب/طلبان/طلبين/طلبات · شارة/شارتان/شارتين/شارات.
-- **Form of address.** The interface speaks in the masculine generic form, as Arabic interfaces do: buttons, labels, level titles, and «دليل»'s imperatives («اسألني»). One place is different: in onboarding the person has just given their name and is asked about themselves, so the questions (4.2) and their acknowledgements (4.4) are worded to carry no gender. Lines the user "says" (chips, the sample CV) are in first person, which is not gendered. Other people (the leaderboard) show a level number without a title, so nobody is given a title in the wrong gender.
-- **Voice.** Lines spoken by «دليل» (chat, status lines, the CV empty state) are first person singular («وجدت», «أقرأ»). Page text is impersonal («في سيرتك 8 مهارات», «المقبول: PDF و Word»). The product never speaks as a company "we" («وجدنا», «نقبل», «بياناتنا»); «دليل» says "we" only for something it does together with the user («نبدأ», «نكمل»).
-- **Three words with one meaning each.** «الهدف» and «هدفك» mean the target job only; the sixth onboarding answer is «الأولوية». The evidence for a skill is never called «الدليل» (that word is the advisor's name, and «دليلك» is the product's): it is «من سيرتك» or «مصدر النجوم». «نقاط» means XP only; a change in the match is written with its two percentages («من 70% إلى 90%»), never as "points".
+- **Form of address.** The interface speaks in the masculine generic form, as Arabic interfaces do: buttons, labels, level titles, and «دليلك»'s imperatives («اسألني»). One place is different: in onboarding the person has just given their name and is asked about themselves, so the questions (4.2) and their acknowledgements (4.4) are worded to carry no gender. Lines the user "says" (chips, the sample CV) are in first person, which is not gendered. Other people (the leaderboard) show a level number without a title, so nobody is given a title in the wrong gender.
+- **Voice.** Lines spoken by «دليلك» (chat, status lines, the CV empty state) are first person singular («وجدت», «أقرأ»). Page text is impersonal («في سيرتك 8 مهارات», «المقبول: PDF و Word»). The product never speaks as a company "we" («وجدنا», «نقبل», «بياناتنا»); «دليلك» says "we" only for something it does together with the user («نبدأ», «نكمل»).
+- **Three words with one meaning each.** «الهدف» and «هدفك» mean the target job only; the sixth onboarding answer is «الأولوية». The evidence for a skill is never called «الدليل» (that word is the product's name «دليل», and «دليلك» is the advisor's): it is «من سيرتك» or «مصدر النجوم». «نقاط» means XP only; a change in the match is written with its two percentages («من 70% إلى 90%»), never as "points".
 - **"From X to Y".** Sentences use words: «من 70% إلى 90%». Compact displays show the old value first in reading order (on the right), an arrow pointing left, then the new value.
 - **Time.** Relative: «الآن» (under a minute) · «قبل 5 دقائق» · «قبل ساعتين» · «أمس»; older than that, the date as «18 نوفمبر». Clock times as «21:14». A time today reads «اليوم 21:14».
-- **Course titles.** A course has a full title («أساسيات Power BI: من البيانات إلى لوحة المعلومات») and a short title, which is the part before the colon («أساسيات Power BI»; the whole title when there is no colon). Headings use the full title (course page, catalogue card, celebration, gap rows). Sentences, pills, the roadmap card and «دليل» use the short title.
+- **Course titles.** A course has a full title («أساسيات Power BI: من البيانات إلى لوحة المعلومات») and a short title, which is the part before the colon («أساسيات Power BI»; the whole title when there is no colon). Headings use the full title (course page, catalogue card, celebration, gap rows). Sentences, pills, the roadmap card and «دليلك» use the short title.
 - **Test ids.** Every element a QA script must click or read has `data-testid="area-thing"`. List items add the id: `jobs-card-data-analyst-riyadh`. Elements whose number animates carry the final value in `data-value` (so a script can assert during a count-up). Elements with states carry `data-state`. Job, course, skill, badge and sample-user ids are listed in section 9.
 - **Motion moments** are named in `code style`. Each names what moves and why; the design team decides how it looks. **None blocks input.** `data-state` and `data-value` hold the final state from the first frame, and a click during a moment acts on that final state. Lengths, where a moment is not part of a timed show: `map-open` 2.6 to 3.8 s in full and 1.2 s or less in its short form (3.4) · `catch-up` 2.4 s · `tree-grow` 1.0 s · `podium-rise` 0.8 s · `row-climb` 1.2 s. The three timed shows (the path reveal 7.8 s, the CV analysis 7.0 s, the celebration 5.0 s) have no skip button, but Space jumps each to its end state, for a presenter who needs the second.
 - **Motion tiers.** He asked for rich motion in four places: the sign-in showcase, the path reveal, the CV analysis and the chat. Those, the map's opening (he asked for the map to impress, 3.4), and the three moments that carry the demo's story (the roadmap catching up, the course celebration, the leaderboard climb), are **tier 1**: crafted one by one and reviewed frame by frame. Tier 1: `showcase-loop` · `answers-gather`, `jobs-sweep`, `skills-map`, `narrow-to-three`, `path-draw`, `reveal-landing`, `status-roll` · `scan-line`, `phrase-highlight`, `tag-pop`, `star-fill`, `results-rise` · `panel-open`, `composer-expand`, `bubble-pop`, `thinking-glyph`, `answer-focus`, `send-stop-morph`, `page-handoff`, `self-typing` · `map-open`, `catch-up`, `current-pulse` · `celebration-open`, `xp-count-up`, `star-award`, `match-rise` · `row-climb`. Every other named moment is **tier 2**: one shared enter (fade and an 8 px rise, 260 ms) or a plain state change, and it is upgraded only after tier 1 is signed off.
@@ -50,11 +50,11 @@ If you read version 2, these are the only changes. Every number, the data of sec
 
 ## 1. Product in five lines, and the principles
 
-1. «دليلك» tells a job seeker three things: where they stand, where they are going, and the next step.
-2. A short conversation with the advisor «دليل» picks a target job; a CV analysis finds the skills the user really has, each with the CV sentence that proves it.
+1. «دليل» tells a job seeker three things: where they stand, where they are going, and the next step.
+2. A short conversation with the advisor «دليلك» picks a target job; a CV analysis finds the skills the user really has, each with the CV sentence that proves it.
 3. The gap between those skills and the target job becomes a roadmap: one stage per missing star, one course per stage.
 4. Completing a course adds a star to a skill and visibly raises the match with the job; XP, levels, a daily streak, badges, a skill tree and a leaderboard make that progress feel like a game.
-5. «دليل» stays as an advisor who answers at once, opens any page on request, and applies to a job when asked.
+5. «دليلك» stays as an advisor who answers at once, opens any page on request, and applies to a job when asked.
 
 **Principles that settle arguments.** These decide what the product *does*. They do not rank against the team brief's first priority, look and feel, which decides how it is drawn. When two product ideas conflict, the lower number wins.
 
@@ -65,14 +65,14 @@ If you read version 2, these are the only changes. Every number, the data of sec
 | P3 | **Every screen answers "what do I do next".** One rule (section 2.8) computes one next step, and every screen shows that same step (on phones the top bar has no room for it: it is the card at the top of `/path`, one tap away on the «مساري» tab). | Dead ends; screens that only display. |
 | P4 | **Evidence over assertion.** A skill always shows where it came from (the CV sentence or the course). A match percentage can always be explained to the last point. | Unexplained scores; "AI says so". |
 | P5 | **One number tells the story: the match percentage.** It is the same number on the roadmap, the job page, the advisor's answers and the celebration. | A second competing score (the onboarding fit score is never shown as a number). |
-| P6 | **Honest sample data.** Jobs, companies, courses and other leaderboard users are labelled «بيانات تجريبية»; applying is labelled a simulation; «دليل» says so when it matters. | Real employer or provider names; real-world statistics; salaries. |
-| P7 | **«دليل» acts only when asked.** It suggests freely, but it changes the user's state (apply, start a course, change the target) only on the user's request, and it cannot do the learning for them. | An advisor that applies, enrols or "completes" on its own initiative. |
+| P6 | **Honest sample data.** Jobs, companies, courses and other leaderboard users are labelled «بيانات تجريبية»; applying is labelled a simulation; «دليلك» says so when it matters. | Real employer or provider names; real-world statistics; salaries. |
+| P7 | **«دليلك» acts only when asked.** It suggests freely, but it changes the user's state (apply, start a course, change the target) only on the user's request, and it cannot do the learning for them. | An advisor that applies, enrols or "completes" on its own initiative. |
 | P8 | **Motion shows cause and effect.** A course completes, so a star lands, so the ring rises. Motion without a cause is cut. | Decoration that moves for its own sake. |
 | P9 | **Arabic first, right to left, and whole at 390 px.** | Features that exist only on desktop. |
 
 **What P1 means in the build.**
 - At run time no request leaves this laptop except the call to the AI provider, and that call exists only when a key is configured. Fonts are files bundled at build time (no font CDN). The PDF and Word readers run inside the app's own server process: no worker, script, style or image is fetched from the network. Icons, avatars and the logo are local files.
-- Everything the demo script asks for is decided in code, never by a model: onboarding chips, the sample CV, and the one request to «دليل» (5.5 rule 1).
+- Everything the demo script asks for is decided in code, never by a model: onboarding chips, the sample CV, and the one request to «دليلك» (5.5 rule 1).
 - The stage run uses a production build with every route opened once (10.1), so the promise "no loading state" in section 3 holds.
 
 ---
@@ -96,7 +96,7 @@ If you read version 2, these are the only changes. Every number, the data of sec
 | `/leaderboard` | Leaderboard | app shell | 3.12 |
 | `/profile` | Profile | app shell | 3.13 |
 
-The advisor «دليل» is not a route. It is a panel that opens beside any app-shell page on a wide desktop, and over it on smaller screens (section 3.14).
+The advisor «دليلك» is not a route. It is a panel that opens beside any app-shell page on a wide desktop, and over it on smaller screens (section 3.14).
 
 ### 2.2 Guards and URL state
 
@@ -107,11 +107,11 @@ The advisor «دليل» is not a route. It is a panel that opens beside any app
 - Unknown `[id]` → a not-found block inside the shell: «هذه الصفحة غير موجودة.» with the button «رجوع لمساري» (`shell-notfound-home`).
 - Filters and tabs live in the URL so that the advisor and QA can open an exact view: `/jobs?q=&city=&field=&skill=`, `/learn?tab=path|explore|done&field=`, `/skills?skill={skillId}` (opens that skill's panel), `/jobs/[id]?apply=1` (opens the apply sheet).
 - `?seed={name}` on any URL loads a named saved state (section 10.3). It is applied before any guard or redirect, and is then removed from the URL.
-- Browser tab title: «دليلك · {page heading}» (for `/path`: «دليلك · مسارك»). Exceptions: `/` and `/welcome` are «دليلك» alone; `/jobs/[id]` is «دليلك · {job title}»; `/learn/[id]` is «دليلك · {short course title}».
+- Browser tab title: «دليل · {page heading}» (for `/path`: «دليل · مسارك»). Exceptions: `/` and `/welcome` are «دليل» alone; `/jobs/[id]` is «دليل · {job title}»; `/learn/[id]` is «دليل · {short course title}».
 
 ### 2.3 App shell on desktop (1024 px and wider)
 
-- **Side navigation** on the inline-start side (the right side in RTL): the logo and wordmark «دليلك» at the top (links to `/path`), then eight navigation items in three groups (2.5), then at the bottom one quiet line: «عرض تجريبي · بيانات تجريبية».
+- **Side navigation** on the inline-start side (the right side in RTL): the logo and wordmark «دليل» at the top (links to `/path`), then eight navigation items in three groups (2.5), then at the bottom one quiet line: «عرض تجريبي · بيانات تجريبية».
 - **Top bar** across the content area: the page heading at the inline-start; the **next-step pill** (2.8) in the middle; the **user chip** (2.7) at the inline-end.
 - **Content area**: the page. Page changes use one short transition, old page out first, never two pages visible at once. The one exception is the reveal handing over to the map (3.4), and even there no two pages are half-visible.
 - **Advisor launcher** (2.6) floats at the bottom inline-end corner (bottom left in RTL), above the content.
@@ -121,7 +121,7 @@ The advisor «دليل» is not a route. It is a panel that opens beside any app
 ### 2.4 App shell on a 390 px phone (anything narrower than 1024 px)
 
 - **Top bar**: the logo mark at the inline-start; the compact user chip at the inline-end. No page heading in the bar (the heading is the first line of the page). No next-step pill in the bar (the next step is the card at the top of `/path`).
-- **Bottom tab bar** with five slots: «مساري» · «الدورات» · «دليل» (centre, larger, opens the advisor) · «الوظائف» · «المزيد».
+- **Bottom tab bar** with five slots: «مساري» · «الدورات» · «دليلك» (centre, larger, opens the advisor) · «الوظائف» · «المزيد».
 - «المزيد» opens a bottom sheet listing: «المهارات» · «سيرتي» · «طلباتي» · «المتصدرون» · «ملفي».
 - The advisor opens as a full-screen sheet, and so does the apply sheet. The other dialogs (skill panel, stage sheet, avatar picker) are full-width bottom sheets.
 - The page never scrolls sideways. The only things that do are rows of field chips (skill tree, courses), which say so in their sections; the roadmap never does.
@@ -144,9 +144,9 @@ Group headings are not shown as text; the groups are separated by space. The act
 
 ### 2.6 Where the advisor launcher lives
 
-- Desktop: a floating button at the bottom inline-end corner of every app-shell page, with the «دليل» glyph and the label «اسأل دليل» (`shell-advisor-launcher`). Keyboard: `Ctrl+K` opens and closes the panel; `Esc` closes it.
-- Phone: the centre tab «دليل» (`shell-advisor-launcher`, same id).
-- It is absent on `/` and `/welcome` (there «دليل» is the page itself).
+- Desktop: a floating button at the bottom inline-end corner of every app-shell page, with the «دليلك» glyph and the label «اسأل دليلك» (`shell-advisor-launcher`). Keyboard: `Ctrl+K` opens and closes the panel; `Esc` closes it.
+- Phone: the centre tab «دليلك» (`shell-advisor-launcher`, same id).
+- It is absent on `/` and `/welcome` (there «دليلك» is the page itself).
 - **Nudge**: one line in a bubble beside the launcher, shown once per account, on the first arrival at `/path`: «مسارك جاهز. اسألني: ماذا أفعل الآن؟» (`shell-advisor-nudge`). It hides after 8 s or on any click; clicking it opens the panel. Toasts do not hold it back; the level-up, the daily reward, a running show (the list in 3.15, which includes the full `map-open`) or the open panel do. If `/path` is left before it could show, it shows on the next visit to `/path`. There is no other nudge.
 
 ### 2.7 The user chip
@@ -190,9 +190,9 @@ Screens whose data is local (everything except the CV analysis and the advisor's
 
 | Element | Copy |
 |---|---|
-| Logo and wordmark | «دليلك» |
+| Logo and wordmark | «دليل» |
 | Headline | «مسارك المهني يبدأ بخطوة.» |
-| Supporting line | «اكتب اسمك وابدأ. دليل يتعرّف عليك، يقرأ سيرتك، ويرسم لك الطريق إلى وظيفتك.» |
+| Supporting line | «اكتب اسمك وابدأ. دليلك يتعرّف عليك، يقرأ سيرتك، ويرسم لك الطريق إلى وظيفتك.» |
 | Saved accounts (only if this browser has any; under the supporting line, above the field label) | Heading «أكمل بحساب محفوظ», then one chip per saved account: avatar, name, «المستوى {n}» |
 | Field label | «اسمك» |
 | Field placeholder | «مثال: خالد» |
@@ -207,7 +207,7 @@ Screens whose data is local (everything except the CV analysis and the advisor's
 | 1 | Roadmap strip: stages 6, 7, 8 of the «محلل بيانات» path and the trophy | the «أنت هنا» marker travels from stage 6 to stage 7, which lights up | «مسار واضح: الخطوة التالية أمامك» |
 | 2 | Match ring for «محلل بيانات» | rises from 70% to 90% | «مطابقتك ترتفع مع كل دورة» |
 | 3 | Two skill cards: Excel with its evidence line «تنظيف بيانات المبيعات الأسبوعية وتلخيصها في Excel…», and Power BI | Power BI receives its first star | «كل مهارة ومعها الجملة التي تثبتها» |
-| 4 | Advisor exchange | the user bubble «ماذا أفعل الآن؟» pops, «دليل» answers «خطوتك التالية: دورة أساسيات Power BI» | «دليل يجيبك ويفتح لك الصفحات» |
+| 4 | Advisor exchange | the user bubble «ماذا أفعل الآن؟» pops, «دليلك» answers «خطوتك التالية: دورة أساسيات Power BI» | «دليلك يجيبك ويفتح لك الصفحات» |
 | 5 | XP and level | «+200 XP» lands, the level bar fills, the title becomes «المستوى 3 · مجتهد» | «نقاط ومستويات وسلسلة أيام» |
 | 6 | Leaderboard mini with three rows, one of them «أنت» | the «أنت» row climbs one place | «ترتيبك بين المتسابقين» |
 
@@ -230,30 +230,30 @@ Screens whose data is local (everything except the CV analysis and the advisor's
 
 ### 3.2 Onboarding conversation `/welcome` (phase 1)
 
-**Purpose.** «دليل» learns six things in six turns and makes the user feel heard. Full conversation design: section 4.
+**Purpose.** «دليلك» learns six things in six turns and makes the user feel heard. Full conversation design: section 4.
 
 **Layout.**
 - Top: logo; a step indicator «السؤال 2 من 6».
-- Centre: the conversation thread («دليل»'s messages with its glyph, the user's answers as bubbles).
+- Centre: the conversation thread («دليلك»'s messages with its glyph, the user's answers as bubbles).
 - Beside the thread on desktop: the card «ملفك يتكوّن» with six slots that fill as answers arrive: «المدينة» · «المؤهل» · «التخصص» · «الخبرة» · «الاهتمام» · «الأولوية».
 - Bottom: quick-reply chips for the pending question, and under them the composer with the placeholder «اكتب إجابتك أو اختر من الخيارات…».
 
 **States.**
-- First visit: «دليل»'s greeting, then question 1 with its chips.
-- Waiting for «دليل»: its glyph is "thinking" for 350-600 ms before each reply (never longer than 3 s; section 4.5).
+- First visit: «دليلك»'s greeting, then question 1 with its chips.
+- Waiting for «دليلك»: its glyph is "thinking" for 350-600 ms before each reply (never longer than 3 s; section 4.5).
 - Resumed (the page was left midway, or reloaded): the thread is restored and the pending question is asked again.
-- Done: after the sixth answer «دليل» says its closing line and the page moves to phase 2 by itself after 1.2 s.
+- Done: after the sixth answer «دليلك» says its closing line and the page moves to phase 2 by itself after 1.2 s.
 - Error: none is shown. The conversation is a local script; the one optional model call falls back to the local rule silently (section 4.5).
 
 **Interactions.** Tap a chip or type and send (`Enter`). Sending an empty or whitespace-only message is impossible (the send button, labelled «إرسال», is disabled). Answers are not edited in place: the reveal offers three jobs and the target can be changed at any time, so a wrong answer costs nothing.
 
 **XP events.** `onboarding_completed` +50 when the sixth answer is accepted. The toast is held until the user reaches `/path` (3.15).
 
-**Motion moments.** `greeting-arrival` («دليل» appears and its first lines come into focus) · `chip-to-bubble` (the tapped chip travels up and becomes the user's bubble; the other chips leave) · `bubble-pop` (a typed answer pops from the composer) · `answer-focus` («دليل»'s reply comes into focus) · `slot-fill` (the matching slot of «ملفك يتكوّن» fills when an answer is accepted) · `step-tick` (the step indicator advances).
+**Motion moments.** `greeting-arrival` («دليلك» appears and its first lines come into focus) · `chip-to-bubble` (the tapped chip travels up and becomes the user's bubble; the other chips leave) · `bubble-pop` (a typed answer pops from the composer) · `answer-focus` («دليلك»'s reply comes into focus) · `slot-fill` (the matching slot of «ملفك يتكوّن» fills when an answer is accepted) · `step-tick` (the step indicator advances).
 
 **Phone.** The card «ملفك يتكوّن» becomes a row of six small slots under the step indicator. Chips wrap onto at most three lines; the composer stays above the keyboard.
 
-**Test ids.** `welcome-thread` · `welcome-step` (`data-value` = 1-6) · `welcome-chip-{question}-{option}` (ids in section 4.2, for example `welcome-chip-city-riyadh`) · `welcome-input` · `welcome-send` · `welcome-slot-{question}` · `welcome-message-last` (the newest «دليل» message).
+**Test ids.** `welcome-thread` · `welcome-step` (`data-value` = 1-6) · `welcome-chip-{question}-{option}` (ids in section 4.2, for example `welcome-chip-city-riyadh`) · `welcome-input` · `welcome-send` · `welcome-slot-{question}` · `welcome-message-last` (the newest «دليلك» message).
 
 ### 3.3 Path-reveal sequence and reveal result `/welcome` (phases 2 and 3)
 
@@ -326,10 +326,10 @@ For the target «محلل بيانات» the stages are: Excel ★ · SQL ★ ·
 
 | Rule | Title | Body | Button |
 |---|---|---|---|
-| 1 | «اكتشف نقطة بدايتك» | «ارفع سيرتك الذاتية ليحدّد دليل المراحل التي أنجزتها فعلاً.» | «ارفع سيرتك الذاتية» and the text button «ابدأ بدون سيرة» |
+| 1 | «اكتشف نقطة بدايتك» | «ارفع سيرتك الذاتية ليحدّد دليلك المراحل التي أنجزتها فعلاً.» | «ارفع سيرتك الذاتية» and the text button «ابدأ بدون سيرة» |
 | 2 | «أكمل ما بدأته» | «دورة «{course}»: {x} من {y} دروس.» | «أكمل الدورة» |
 | 3 | «خطوتك التالية» | «دورة «أساسيات Power BI» · 10 ساعات · +200 XP · ترفع مطابقتك إلى 90%» | «ابدأ الدورة» |
-| 4 | «أنت جاهز لهذه الوظيفة» | «مطابقتك 100% مع «{target}».» | «دع دليل يقدّم عنك» (runs the advisor's application, 7.4) and the text button «قدّم بنفسك» (opens `/jobs/{id}?apply=1`) |
+| 4 | «أنت جاهز لهذه الوظيفة» | «مطابقتك 100% مع «{target}».» | «دع دليلك يقدّم عنك» (runs the advisor's application, 7.4) and the text button «قدّم بنفسك» (opens `/jobs/{id}?apply=1`) |
 | 5 | «اختر هدفك التالي» | «أنجزت هذا المسار. هذه وظائف صارت أقرب إليك.» | «استعرض الوظائف» |
 
 **Stage labels.** Each stage shows its number, the skill name and the star it stands for, a state label («مكتملة» · «الآن» · «لاحقاً» · «مقفلة»), and for done stages the source («من سيرتك» or «من دورة»).
@@ -358,7 +358,7 @@ For the target «محلل بيانات» the stages are: Excel ★ · SQL ★ ·
 **The opening transition `map-open`** (tier 1). It presents the path in the order it is read, so the transition itself teaches how to read the map: the start «البداية», the stages already done, the marker «أنت هنا» arriving on the current stage (or on the start gate), the next step answering, the stages ahead up to the goal, and the branch jobs last and quietly; the match reaches its value as the marker arrives. The rest of the page is in place from the first frame or within 300 ms, so the map is the only thing performing. How it looks and its exact beats are the chosen design's. Three situations:
 1. **In full** (2.6 to 3.8 s, the design's own timing) the first time the map appears after the path reveal. The reveal hands over to it without a cut: when a job is chosen on the reveal result (3.3), the rest of the result leaves first, the path strip stays, and the map opens out of it (the strip's start and named stages become the map's start and stages; the shell arrives around it). At no moment are two pages half-visible. If an alternative was chosen, the strip shows another job's stages, so it leaves with the rest of the result and the full form plays from its first beat. `mapOpenPlayed` is saved when the full form starts; a reload after that gets the short form.
 2. **Short** (1.2 s or less: the same story with fewer beats) on every later visit to `/path`. On the first visit after a CV analysis `catch-up` takes its place: it is that visit's opening (should the full form still be unplayed on that visit, the full form plays and `catch-up` follows it). If the daily reward opens on arrival, the opening waits until it is claimed.
-3. **When «دليل» opens the map** (`navigate` to `path`, example 2 of 5.6): the short form, also when `/path` was already on screen, so the request visibly lands (`page-handoff`: the map opens first, the reply follows).
+3. **When «دليلك» opens the map** (`navigate` to `path`, example 2 of 5.6): the short form, also when `/path` was already on screen, so the request visibly lands (`page-handoff`: the map opens first, the reply follows).
 
 It never blocks input: `data-state` and `data-value` hold the final state from the first frame, and a click on a stage or a button during it acts at once. With reduced motion the map shows its end state (the one global rule). For the hold rule of 3.15 the full form counts as a running show: toasts and the nudge (2.6) appear when it ends. The short form holds nothing.
 
@@ -418,7 +418,7 @@ It never blocks input: `data-state` and `data-value` hold the final state from t
 | Region | Copy |
 |---|---|
 | Heading | «سيرتي الذاتية» |
-| Intro | «ارفع سيرتك، ودليل يستخرج مهاراتك ويريك الجملة التي تثبت كل واحدة.» |
+| Intro | «ارفع سيرتك، ودليلك يستخرج مهاراتك ويريك الجملة التي تثبت كل واحدة.» |
 | Drop zone | «اسحب ملف سيرتك هنا أو اختره من جهازك» · «PDF أو Word (docx) · حتى 5 ميغابايت و15 صفحة» · button «اختر ملفاً» |
 | Paste area | label «أو الصق نص السيرة» · placeholder «الصق هنا نص سيرتك الذاتية…» · helper while the text has 1 to 79 characters: «النص قصير. أضف خبراتك ومهاراتك (80 حرفاً على الأقل).» |
 | Sample button | «جرّب بسيرة ذاتية تجريبية» |
@@ -437,7 +437,7 @@ A chosen file shows as a chip «{file name} · {size}» with «إزالة». The
 | Engine label | «القراءة: محلّل محلي بالكلمات المفتاحية» or «القراءة: نموذج ذكاء اصطناعي» |
 | Skills list, grouped by field | per skill: name · stars out of its maximum · «من سيرتك:» + the sentence in quotes |
 | Target line | «مطابقتك مع هدفك «محلل بيانات»: 70%» |
-| Matched jobs | heading «أفضل الوظائف لمهاراتك» · the top three as cards with match rings: «محلل بيانات» 70% (tag «هدفك») · «محلل أعمال» 60% · «محلل مالي» 53%. Every card opens its job when clicked and carries the button «دع دليل يقدّم عنك»; cards other than the target also carry «اجعلها هدفي» |
+| Matched jobs | heading «أفضل الوظائف لمهاراتك» · the top three as cards with match rings: «محلل بيانات» 70% (tag «هدفك») · «محلل أعمال» 60% · «محلل مالي» 53%. Every card opens its job when clicked and carries the button «دع دليلك يقدّم عنك»; cards other than the target also carry «اجعلها هدفي» |
 | Buttons | «اذهب إلى مساري» (primary) · «كل الوظائف» |
 | Footer | «آخر تحليل: {date}» · the button «حلّل سيرة أخرى» |
 
@@ -446,7 +446,7 @@ A chosen file shows as a chip «{file name} · {size}» with «إزالة». The
 - Loading: the analysis show (never a spinner).
 - Done: results. Returning to `/cv` later shows the saved results.
 - Reload: the result, the `cv_analysed` XP and the badge are saved when the analysis returns, before the show starts. A reload during the show opens the results, and the waiting news (XP toast, level-up, badge toast) shows there once (3.15).
-- Empty result (no skill found), in «دليل»'s voice: «لم ألتقط مهارات واضحة في هذا النص.» · «أضف خبراتك ودوراتك ومهاراتك بأسمائها، أو جرّب السيرة التجريبية لترى كيف يعمل التحليل.» · buttons «عدّل النص» and «جرّب بسيرة ذاتية تجريبية». No XP is paid.
+- Empty result (no skill found), in «دليلك»'s voice: «لم ألتقط مهارات واضحة في هذا النص.» · «أضف خبراتك ودوراتك ومهاراتك بأسمائها، أو جرّب السيرة التجريبية لترى كيف يعمل التحليل.» · buttons «عدّل النص» and «جرّب بسيرة ذاتية تجريبية». No XP is paid.
 - Errors (shown in the input state, under the drop zone; which one applies is defined in 6.1):
   - wrong type → «المقبول: PDF و Word (docx) فقط. أو الصق نص سيرتك.»
   - larger than 5 MB → «الملف أكبر من 5 ميغابايت. جرّب ملفاً أصغر أو الصق النص.»
@@ -455,7 +455,7 @@ A chosen file shows as a chip «{file name} · {size}» with «إزالة». The
   - no readable text (a scanned image) → «لا يوجد نص مقروء في الملف، وقد يكون صورة ممسوحة. الصق نص سيرتك هنا.»
   - the request itself failed → «تعذّر التحليل الآن. جرّب مرة أخرى.» with «أعد المحاولة».
 
-**Interactions.** Drag a file, pick a file, paste, or press the sample button; then «حلّل سيرتي». Clicking a matched-job card opens that job. «دع دليل يقدّم عنك» runs the advisor's application for that job (7.4); pressing it is the user asking (5.4). «اجعلها هدفي» asks for confirmation as in 3.8. A second analysis replaces the CV-proven stars but never removes a star earned by a course.
+**Interactions.** Drag a file, pick a file, paste, or press the sample button; then «حلّل سيرتي». Clicking a matched-job card opens that job. «دع دليلك يقدّم عنك» runs the advisor's application for that job (7.4); pressing it is the user asking (5.4). «اجعلها هدفي» asks for confirmation as in 3.8. A second analysis replaces the CV-proven stars but never removes a star earned by a course.
 
 **XP events.** `cv_analysed` +100, first successful analysis that finds at least one skill. For the demo this lifts 80 XP to 180 XP: the toast «+100 XP · حلّلت سيرتك · صعدت إلى المركز 18 هذا الأسبوع», the level-up «المستوى 2 · مستكشف» 0.6 s after it, and the badge toast «سيرة مقروءة». They are held until the results have settled and then appear together (3.15). None of them catches a click.
 
@@ -503,7 +503,7 @@ A chosen file shows as a chip «{file name} · {size}» with «إزالة». The
 
 ### 3.8 Job detail `/jobs/[id]` and the apply sheet
 
-**Purpose.** Show the gap for one job in three plain parts (what you have, what is missing, which courses close it), and let «دليل» apply for the user, which is what he asked for; applying by hand is the second way.
+**Purpose.** Show the gap for one job in three plain parts (what you have, what is missing, which courses close it), and let «دليلك» apply for the user, which is what he asked for; applying by hand is the second way.
 
 **Layout regions.**
 
@@ -516,7 +516,7 @@ A chosen file shows as a chip «{file name} · {size}» with «إزالة». The
 | The gap, block 1 | heading «ما لديك»: each fully met skill as «Excel · نجمتان من نجمتين» with its source («من سيرتك» or «من دورة») |
 | The gap, block 2 | heading «ما ينقصك»: each unmet skill as «الإحصاء: لديك نجمة من نجمتين» or, with no star yet, «Power BI: لا نجوم بعد، والمطلوب نجمة» («والمطلوب نجمتان», «والمطلوب 3 نجوم») |
 | The gap, block 3 | heading «كيف تسدّ الفجوة»: one row per missing star: course title · hours · «+200 XP» · «+20% مطابقة» · the button «افتح الدورة» |
-| Actions | «دع دليل يقدّم عنك» (primary) · «قدّم بنفسك» (text button) · «اجعلها هدفي» (or the label «هدفك الحالي») · «اسأل دليل عن هذه الوظيفة» |
+| Actions | «دع دليلك يقدّم عنك» (primary) · «قدّم بنفسك» (text button) · «اجعلها هدفي» (or the label «هدفك الحالي») · «اسأل دليلك عن هذه الوظيفة» |
 
 For «محلل بيانات» after the sample CV: ring 70%. **ما لديك**: Excel (2 of 2), SQL (2 of 2), التواصل الفعّال (1 of 1). **ما ينقصك**: Power BI (no star, 1 required), الإحصاء (1 of 2). **كيف تسدّ الفجوة**: «أساسيات Power BI: من البيانات إلى لوحة المعلومات» · 10 ساعات · +200 XP · +20% مطابقة; «الإحصاء التطبيقي للمحللين» · 12 ساعة · +240 XP · +10% مطابقة.
 After the Power BI course (the state the demo shows): ring 90%. **ما لديك**: Excel, SQL, Power BI (1 of 1), التواصل الفعّال. **ما ينقصك**: الإحصاء (1 of 2). **كيف تسدّ الفجوة**: «الإحصاء التطبيقي للمحللين» · 12 ساعة · +240 XP · +10% مطابقة.
@@ -531,10 +531,10 @@ After the Power BI course (the state the demo shows): ring 90%. **ما لديك*
 - Not found: the shell's not-found block (2.2).
 
 **Interactions.**
-- «دع دليل يقدّم عنك» opens the advisor panel, posts the user bubble «قدّم لي على هذه الوظيفة» and runs the advisor's application of 7.4. Pressing the button is the user asking (5.4).
+- «دع دليلك يقدّم عنك» opens the advisor panel, posts the user bubble «قدّم لي على هذه الوظيفة» and runs the advisor's application of 7.4. Pressing the button is the user asking (5.4).
 - «قدّم بنفسك» opens the apply sheet already filled.
 - «اجعلها هدفي» opens a confirmation: title «تغيير الهدف؟», body «سيُعاد رسم مسارك نحو «{title}». تقدّمك في المهارات محفوظ.», buttons «غيّر الهدف» and «إلغاء». After it: the toast «هدفك الآن: {title}». Changing the target pays no XP.
-- «اسأل دليل عن هذه الوظيفة» opens the advisor with the page chips of 5.8.
+- «اسأل دليلك عن هذه الوظيفة» opens the advisor with the page chips of 5.8.
 
 **The apply sheet.** A dialog centred in the content area. Its backdrop covers the content area only, so the advisor panel that is narrating it stays visible, undimmed and above it. On phones it is a full-screen sheet.
 
@@ -550,7 +550,7 @@ After the Power BI course (the state the demo shows): ring 90%. **ما لديك*
 | Field 6 | «السيرة الذاتية»: «مرفقة: {file name}» · «مرفقة: السيرة التجريبية» · «لا توجد سيرة مرفقة» |
 | Sample note | «تقديم تجريبي: لن يُرسل شيء إلى جهة حقيقية.» |
 | Buttons | «أرسل الطلب» (under 60% the same button reads «قدّم على أي حال») · «إلغاء» |
-| While «دليل» fills it | the line «دليل يملأ الطلب…» and the button «إيقاف» |
+| While «دليلك» fills it | the line «دليلك يملأ الطلب…» and the button «إيقاف» |
 | Sending | «جارٍ الإرسال…» (1.2 s) |
 | Confirmation | «تم إرسال طلبك» · «رقم الطلب: DL-2026-0001» · «مطابقتك عند التقديم: 90%» · «+40 XP · تقديم مدروس» (or «بدون نقاط: المطابقة أقل من 60%») · buttons «تابع طلباتي» and «إغلاق» |
 
@@ -558,9 +558,9 @@ The two ways to apply, and what the user sees in each, are specified in 7.4.
 
 **XP events.** `job_applied` +40 when the application is sent with a match of 60% or more (once per job). First application ever: the badge «أول تقديم».
 
-**Motion moments.** `gap-settle` (the three blocks arrive in order: have, missing, courses) · `sheet-open` · `self-typing` (tier 1; when «دليل» applies: each field writes itself, one after another, with a small «دليل» mark on the field being written) · `chips-pop` (the matching skills pop in) · `submit-press` (the button is visibly pressed) · `sent-mark` (the confirmation lands).
+**Motion moments.** `gap-settle` (the three blocks arrive in order: have, missing, courses) · `sheet-open` · `self-typing` (tier 1; when «دليلك» applies: each field writes itself, one after another, with a small «دليلك» mark on the field being written) · `chips-pop` (the matching skills pop in) · `submit-press` (the button is visibly pressed) · `sent-mark` (the confirmation lands).
 
-**Phone.** The header and ring first, then the actions, then the three gap blocks stacked, then «عن الوظيفة». «دع دليل يقدّم عنك» stays pinned to the bottom (above the tab bar) while scrolling. The apply sheet is full screen.
+**Phone.** The header and ring first, then the actions, then the three gap blocks stacked, then «عن الوظيفة». «دع دليلك يقدّم عنك» stays pinned to the bottom (above the tab bar) while scrolling. The apply sheet is full screen.
 
 **Test ids.** `job-back` · `job-title` · `job-match` (`data-value`) · `job-explain` · `job-explain-panel` · `job-have` · `job-missing` · `job-courses` · `job-course-{courseId}` · `job-apply-advisor` · `job-apply` («قدّم بنفسك») · `job-set-target` · `job-set-target-confirm` · `job-ask-advisor` · `job-applied-status` · `job-banner-cv` · `apply-sheet` · `apply-name` · `apply-city` · `apply-education` · `apply-skills` · `apply-note` · `apply-cv` · `apply-warning` · `apply-warning-gap` · `apply-submit` · `apply-cancel` · `apply-stop` · `apply-confirmation` · `apply-number` · `apply-go-applications` · `apply-close`.
 
@@ -576,7 +576,7 @@ The two ways to apply, and what the user sees in each, are specified in 7.4.
 | Simulation banner | «محاكاة: لا توجد جهة حقيقية تراجع طلبك. الحالات تتقدّم تلقائياً لتجربة المتابعة.» |
 | List | one card per application, newest first |
 
-**Application card.** Job title · «{company} · جهة تجريبية» · «رقم الطلب DL-2026-0001» · «قدّمت {relative time}» · a three-step track: «أُرسل» → «قيد المراجعة» → «النتيجة» · the status note · «مطابقتك عند التقديم 90%» · «مطابقتك الآن 90%» and, when it rose (here, after the statistics course), «ارتفعت من 90% إلى 100% منذ التقديم» · on an application the advisor sent, «قدّم عنك دليل» · the button «عرض الوظيفة» · the labelled control «محاكاة: انقل للحالة التالية» (hidden once the status is `shortlisted` or `closed`).
+**Application card.** Job title · «{company} · جهة تجريبية» · «رقم الطلب DL-2026-0001» · «قدّمت {relative time}» · a three-step track: «أُرسل» → «قيد المراجعة» → «النتيجة» · the status note · «مطابقتك عند التقديم 90%» · «مطابقتك الآن 90%» and, when it rose (here, after the statistics course), «ارتفعت من 90% إلى 100% منذ التقديم» · on an application the advisor sent, «قدّم عنك دليلك» · the button «عرض الوظيفة» · the labelled control «محاكاة: انقل للحالة التالية» (hidden once the status is `shortlisted` or `closed`).
 
 | Status id | Label | Note under the track |
 |---|---|---|
@@ -588,7 +588,7 @@ The two ways to apply, and what the user sees in each, are specified in 7.4.
 How statuses advance: section 7.5.
 
 **States.**
-- Empty: «لم تقدّم على أي وظيفة بعد.» · «ابدأ بالوظائف الأقرب لمهاراتك، أو اطلب من دليل أن يقدّم عنك.» · the button «استعرض الوظائف».
+- Empty: «لم تقدّم على أي وظيفة بعد.» · «ابدأ بالوظائف الأقرب لمهاراتك، أو اطلب من دليلك أن يقدّم عنك.» · the button «استعرض الوظائف».
 - Normal: the list.
 - No loading and no error state.
 
@@ -749,7 +749,7 @@ Rows show the level as a number only («المستوى 5»). Level titles appear
 | Streak | heading «سلسلة الأيام»: «يوم واحد» · «أطول سلسلة: 1» · a strip of the last 7 days · «مكافأة الغد: +40 XP» |
 | XP history | heading «سجل النقاط»: newest first, each row «+200 XP · أكملت دورة أساسيات Power BI · اليوم 21:14» |
 | My answers | heading «معلوماتي»: «المدينة» · «المؤهل» · «التخصص» · «الخبرة» · «الاهتمام» · «الأولوية» (neutral answers print as in 4.3) · «الوظيفة المستهدفة» with the link «غيّر الهدف» |
-| About | heading «عن هذا العرض»: «منصة دليلك عرض تجريبي. الوظائف والجهات والدورات والمتسابقون بيانات تجريبية، والتقديم على الوظائف محاكاة. تحليل السيرة وحساب المطابقة ورسم المسار حقيقي ويُحسب من بياناتك. بياناتك محفوظة في هذا المتصفح، لا في حساب على خادم.» When an AI key is configured one sentence is added: «عند تفعيل نموذج الذكاء الاصطناعي تُرسل رسائلك وملخص ملفك إلى مزوّد النموذج للرد فقط.» |
+| About | heading «عن هذا العرض»: «منصة دليل عرض تجريبي. الوظائف والجهات والدورات والمتسابقون بيانات تجريبية، والتقديم على الوظائف محاكاة. تحليل السيرة وحساب المطابقة ورسم المسار حقيقي ويُحسب من بياناتك. بياناتك محفوظة في هذا المتصفح، لا في حساب على خادم.» When an AI key is configured one sentence is added: «عند تفعيل نموذج الذكاء الاصطناعي تُرسل رسائلك وملخص ملفك إلى مزوّد النموذج للرد فقط.» |
 | Account | «تسجيل الخروج» · «إعادة ضبط العرض» |
 
 **Avatar picker** (dialog): title «اختر صورتك» · the twelve avatars · buttons «حفظ» and «إلغاء» · toast after saving: «تم تحديث صورتك.» The new avatar appears at once in the user chip, the leaderboard and the advisor thread.
@@ -764,7 +764,7 @@ Rows show the level as a number only («المستوى 5»). Level titles appear
 
 **Test ids.** `profile-avatar` (`data-value` = avatar id) · `profile-avatar-open` · `profile-avatar-option-{avatarId}` · `profile-avatar-save` · `profile-avatar-cancel` · `profile-level` (`data-value`) · `profile-xp` (`data-value`) · `profile-stat-{courses|stars|streak|rank}` (`data-value`) · `profile-badge-{badgeId}` (`data-state` = unlocked / locked) · `profile-badges-count` (`data-value`) · `profile-streak` · `profile-history` · `profile-history-row-{index}` · `profile-answers` · `profile-change-target` · `profile-signout` · `profile-reset` · `profile-reset-confirm`.
 
-### 3.14 Advisor panel «دليل»
+### 3.14 Advisor panel «دليلك»
 
 **Purpose.** One conversation that follows the user across the app: it answers, it opens pages, and on request it acts. Persona, tools, rules and examples: section 5.
 
@@ -773,21 +773,21 @@ Rows show the level as a number only («المستوى 5»). Level titles appear
 - **Desktop, 1024 to 1279 px:** the panel overlays the page, with no scrim.
 - On desktop the panel never traps focus: the page beside it stays usable.
 - **Phone:** a full-screen sheet, which traps focus.
-- Inside, top to bottom: header («دليل», the line «دليلك إلى وظيفتك», the buttons «محادثة جديدة» and «إغلاق») · the mode line · the thread · the tool status line (only while working) · the suggestion chips for the current page (5.8) · the composer with the placeholder «اسأل دليل أو اطلب منه أن يفتح لك صفحة…» and one round button that is «إرسال» or, while a reply or an action is on its way, «إيقاف».
+- Inside, top to bottom: header («دليلك», the line «مرشدك إلى وظيفتك», the buttons «محادثة جديدة» and «إغلاق») · the mode line · the thread · the tool status line (only while working) · the suggestion chips for the current page (5.8) · the composer with the placeholder «اسأل دليلك أو اطلب منه أن يفتح لك صفحة…» and one round button that is «إرسال» or, while a reply or an action is on its way, «إيقاف».
 
 **Mode line** (one quiet line under the header; exactly one of the two shows).
-- No key is configured, or the provider failed its last call within the past 60 s (5.5 rule 11): «وضع محلي: دليل يعمل دون اتصال.» Everything still works (5.7).
+- No key is configured, or the provider failed its last call within the past 60 s (5.5 rule 11): «وضع محلي: دليلك يعمل دون اتصال.» Everything still works (5.7).
 - A key is configured and answering: «متصل: رسائلك وملخص ملفك تُرسل إلى مزوّد نموذج الذكاء الاصطناعي للرد فقط.»
 
-**Thread content.** The user's bubbles; «دليل»'s text replies (plain text, no headings or lists); and **cards drawn by the app from tool results**, never from the model's text: job card (title, company with «جهة تجريبية», city, match), course card (title, star, hours, XP, match gain), gap card (have / missing), application card (job, number, status), next-step card (label and button). Cards are clickable and open their page. Replies that offer an action carry **confirmation chips** (for example «ابدأ الدورة» / «ليس الآن»).
+**Thread content.** The user's bubbles; «دليلك»'s text replies (plain text, no headings or lists); and **cards drawn by the app from tool results**, never from the model's text: job card (title, company with «جهة تجريبية», city, match), course card (title, star, hours, XP, match gain), gap card (have / missing), application card (job, number, status), next-step card (label and button). Cards are clickable and open their page. Replies that offer an action carry **confirmation chips** (for example «ابدأ الدورة» / «ليس الآن»).
 
 **States.**
-- First open after onboarding: one message from «دليل», who does not introduce itself again (the same character has just run the onboarding): «أهلاً من جديد يا {name}. مسارك نحو «{target}» جاهز، وأنا معك في كل خطوة. اسألني عن مسارك أو الدورات أو الوظائف، أو قل لي: ماذا أفعل الآن؟», and the page chips.
-- Thinking: «دليل»'s glyph is alive beside a status line. Before any tool runs it reads «دليل يفكّر…»; while a tool runs it shows that tool's line (5.3); after 4 s the elapsed seconds appear beside it.
+- First open after onboarding: one message from «دليلك», who does not introduce itself again (the same character has just run the onboarding): «أهلاً من جديد يا {name}. مسارك نحو «{target}» جاهز، وأنا معك في كل خطوة. اسألني عن مسارك أو الدورات أو الوظائف، أو قل لي: ماذا أفعل الآن؟», and the page chips.
+- Thinking: «دليلك»'s glyph is alive beside a status line. Before any tool runs it reads «دليلك يفكّر…»; while a tool runs it shows that tool's line (5.3); after 4 s the elapsed seconds appear beside it.
 - Answering: the reply comes into focus block by block; cards rise after the text.
 - Acting on the page: the page beside the panel changes while the status line says what is happening. On phones the sheet closes while the action runs, so the page is visible, and opens again with the reply when the action is finished.
 - One thing at a time: while a reply or an action is in flight, the send button and every chip are disabled (5.5 rule 13).
-- After a reload that interrupted an application «دليل» was filling: on the next open «دليل» adds «لم يكتمل التقديم. اطلبه مرة أخرى إن أحببت.» (7.4).
+- After a reload that interrupted an application «دليلك» was filling: on the next open «دليلك» adds «لم يكتمل التقديم. اطلبه مرة أخرى إن أحببت.» (7.4).
 - Error (both the provider and the local brain failed, which only a bug can cause): «تعذّر الرد الآن. جرّب مرة أخرى.» with «أعد المحاولة».
 - Empty thread after «محادثة جديدة»: the first-open message again, preceded by the toast «بدأنا محادثة جديدة.»
 
@@ -795,21 +795,21 @@ Rows show the level as a number only («المستوى 5»). Level titles appear
 - `Enter` sends, `Shift+Enter` makes a new line. Send is disabled for empty or whitespace-only text. Only the first 500 characters of a message are sent.
 - A chip does not send free text to a model. It carries its intent and its ids, and the router executes it in code (5.5 rule 1), the same way in every mode.
 - The thread is the same on every page and is saved per account (the last 40 messages).
-- «إيقاف» stops a reply and keeps what has arrived. While «دليل» is filling an application it is the same control as the sheet's «إيقاف»: it cancels the application during steps 1-4 (7.4).
+- «إيقاف» stops a reply and keeps what has arrived. While «دليلك» is filling an application it is the same control as the sheet's «إيقاف»: it cancels the application during steps 1-4 (7.4).
 - Closing the panel never cancels an action already under way.
 
-**XP events.** None. Talking to «دليل» pays nothing (P2). Actions it performs on request pay exactly what the same action pays by hand.
+**XP events.** None. Talking to «دليلك» pays nothing (P2). Actions it performs on request pay exactly what the same action pays by hand.
 
-**Motion moments.** Tier 1: `panel-open` (the panel arrives from its edge; this is "the chat-opening transition" in Dalilak's own form), `composer-expand` (the composer opens from a pill into a card when focused), `bubble-pop` (the sent message pops out of the composer), `thinking-glyph` («دليل»'s glyph is alive while it works and settles when the first words arrive), `status-roll` (tool lines roll one into the next), `answer-focus` (the reply comes into focus), `send-stop-morph` (the round button changes between send and stop), `page-handoff` (when a tool opens a page, the page changes first and the reply follows, so the user sees the site respond to the chat). Tier 2: `card-rise`.
+**Motion moments.** Tier 1: `panel-open` (the panel arrives from its edge; this is "the chat-opening transition" in Dalilak's own form), `composer-expand` (the composer opens from a pill into a card when focused), `bubble-pop` (the sent message pops out of the composer), `thinking-glyph` («دليلك»'s glyph is alive while it works and settles when the first words arrive), `status-roll` (tool lines roll one into the next), `answer-focus` (the reply comes into focus), `send-stop-morph` (the round button changes between send and stop), `page-handoff` (when a tool opens a page, the page changes first and the reply follows, so the user sees the site respond to the chat). Tier 2: `card-rise`.
 
-**Test ids.** `advisor-panel` (`data-state` = open / closed) · `advisor-close` · `advisor-clear` · `advisor-mode` (`data-state` = local / online) · `advisor-thread` · `advisor-message-last` (the newest reply from «دليل») · `advisor-status` · `advisor-input` · `advisor-send` · `advisor-stop` · `advisor-chip-{slug}` (page chips; the slugs are in 5.8, so an id means the same chip whichever chips are shown) · `advisor-confirm-yes` · `advisor-confirm-no` · `advisor-card-job-{jobId}` · `advisor-card-course-{courseId}` · `advisor-card-application-{jobId}` · `advisor-card-next-step` · `advisor-retry`.
+**Test ids.** `advisor-panel` (`data-state` = open / closed) · `advisor-close` · `advisor-clear` · `advisor-mode` (`data-state` = local / online) · `advisor-thread` · `advisor-message-last` (the newest reply from «دليلك») · `advisor-status` · `advisor-input` · `advisor-send` · `advisor-stop` · `advisor-chip-{slug}` (page chips; the slugs are in 5.8, so an id means the same chip whichever chips are shown) · `advisor-confirm-yes` · `advisor-confirm-no` · `advisor-card-job-{jobId}` · `advisor-card-course-{courseId}` · `advisor-card-application-{jobId}` · `advisor-card-next-step` · `advisor-retry`.
 
 ### 3.15 Global overlays
 
 One queue serves the whole app.
 
 - **What is in it.** Every XP event and every badge is saved with a flag `announced: false`. The queue is rebuilt from those entries on every load, and an entry is marked announced when its toast, its level-up or its celebration beat has shown. A reload therefore never loses news and never repeats it.
-- **Hold rule.** Nothing from the queue appears on `/` or `/welcome`, or while a show is running (the path reveal, the CV analysis show, the celebration, «دليل» filling the apply sheet, the full form of `map-open`). It is released on the next app-shell page or when the show ends. Several XP gains waiting together are merged into one toast with the sum. The celebration (3.11) absorbs the XP, level, badge and rank news of its own course.
+- **Hold rule.** Nothing from the queue appears on `/` or `/welcome`, or while a show is running (the path reveal, the CV analysis show, the celebration, «دليلك» filling the apply sheet, the full form of `map-open`). It is released on the next app-shell page or when the show ends. Several XP gains waiting together are merged into one toast with the sum. The celebration (3.11) absorbs the XP, level, badge and rank news of its own course.
 - **Nothing waits for anything else.** Toasts stack, newest on top, at most three visible, each on its own timer. The level-up opens 0.6 s after its XP toast (when `xp-fly` lands) and stays beside the toasts. Toasts and the level-up survive a page change.
 - **Nothing here swallows a click.** The level-up has no scrim: a click outside it closes it **and** is delivered to whatever was clicked. A presenter never has to dismiss anything to go on.
 - **The daily reward** is the one overlay that blocks. It shows alone, on a page load, before anything else in the queue.
@@ -835,16 +835,16 @@ One queue serves the whole app.
 
 ### 4.1 Shape of the conversation
 
-- «دليل» opens with two messages: «أهلاً {name}، أنا دليل، دليلك إلى وظيفتك. سأكون معك من أول خطوة إلى آخرها.» then «أسألك ستة أسئلة قصيرة لأرسم لك مساراً يناسبك أنت. نبدأ: في أي مدينة أنت الآن؟»
+- «دليلك» opens with two messages: «أهلاً {name}، أنا دليلك إلى وظيفتك. سأكون معك من أول خطوة إلى آخرها.» then «أسألك ستة أسئلة قصيرة لأرسم لك مساراً يناسبك أنت. نبدأ: في أي مدينة أنت الآن؟»
 - There are **six questions, always in this order**: city → education → major → experience → interest → priority. The name is already known from sign-in.
-- Every turn of «دليل» after an answer has two parts: an **acknowledgement** of what the user just said (one sentence that repeats the answer back, 4.4), then the **next question** with its chips.
+- Every turn of «دليلك» after an answer has two parts: an **acknowledgement** of what the user just said (one sentence that repeats the answer back, 4.4), then the **next question** with its chips.
 - A question whose answer the user already gave in an earlier free-text message is skipped (4.3).
-- After the sixth answer «دليل» closes: «شكراً يا {name}، اكتملت الصورة. لحظات وأرسم لك مسارك.» and the path reveal starts by itself.
+- After the sixth answer «دليلك» closes: «شكراً يا {name}، اكتملت الصورة. لحظات وأرسم لك مسارك.» and the path reveal starts by itself.
 - The questions, their order, the chips and the acknowledgement bank are a fixed script that runs in the browser. The AI model, when a key is present, helps in exactly one place and writes none of the words (4.5). This is what makes the conversation instant and identical on every run.
 
 ### 4.2 The six questions and their chips
 
-| # | Question id | «دليل» asks | Chips (`option id` label) |
+| # | Question id | «دليلك» asks | Chips (`option id` label) |
 |---|---|---|---|
 | 1 | `city` | «في أي مدينة أنت الآن؟» | `riyadh` «الرياض» · `jeddah` «جدة» · `dammam` «الدمام» · `makkah` «مكة المكرمة» · `madinah` «المدينة المنورة» · `other` «مدينة أخرى» |
 | 2 | `education` | «ما آخر مؤهل دراسي حصلت عليه؟» | `secondary` «ثانوي» · `diploma` «دبلوم» · `bachelor` «بكالوريوس» · `postgrad` «ماجستير أو أعلى» · `student` «ما زلت أدرس» |
@@ -860,13 +860,13 @@ Tapping a chip shows its label as the user's bubble and **records its option id 
 **Normalisation** (applied to a copy of the text before any matching, here and wherever this section is cited): Unicode NFKC; the direction marks U+200C-U+200F and U+202A-U+202E, diacritics and the stretching mark removed; ٠-٩ → 0-9; أ إ آ → ا; ى → ي; ة → ه; Latin lower-cased. Keywords match whole words, with or without «ال» and with or without a one-letter prefix (و، ف، ب، ل، ك): «بالرياض» matches «الرياض», «لطلباتي» matches «طلباتي».
 
 **Order of reading a typed message.** The steps run in this order and each has one test, so no two rules compete.
-1. **Question.** If it starts with a question word (لماذا، ليش، كيف، هل، كم، ماذا، وش) or ends with «؟» or «?», it is a question to «دليل» (4.5), not an answer. («من» and «ما» are not in this list: «من الرياض» and «ما عندي خبرة» are answers.)
+1. **Question.** If it starts with a question word (لماذا، ليش، كيف، هل، كم، ماذا، وش) or ends with «؟» or «?», it is a question to «دليلك» (4.5), not an answer. («من» and «ما» are not in this list: «من الرياض» and «ما عندي خبرة» are answers.)
 2. **Greeting and thanks.** Greeting and thanks words are set aside. If nothing else is left, the message is a greeting or thanks (4.5). «السلام عليكم، أنا من الرياض» carries on as «أنا من الرياض».
 3. **The pending question.** The rest is read against the pending question's keywords; the words that matched are used up.
 4. **The other unanswered questions.** What is left is read against them, so «أنا من جدة وتخصصي تسويق وما عندي خبرة» fills city, major and experience at once. Two limits. `interest` and `priority` are filled ahead of their turn only when the message carries a wish word (أحب، أهوى، أميل، أهتم، يشدّني، أريد، أبغى، أبي، هدفي، طموحي), because their keywords overlap with majors («تسويق» as a major is not yet an interest). `experience` is filled ahead of its turn only when the message contains «خبرة» or a year word (سنة، سنتين، سنوات، سنين), so «وما عندي خبرة» fills it, while «بكالوريوس 2024» and «ما عندي تخصص» do not.
 5. **Could not be mapped.** If nothing was filled, the message could not be mapped (4.5). There is no "off-topic" class and no "rude" class: a keyword table cannot tell them apart, so every unrecognised message that is not a question is treated the same way.
 
-When a message fills more than the pending question, «دليل» confirms the extra ones in its acknowledgement («وسجّلت أيضاً: تخصصك تسويق، وبدون خبرة بعد.») and skips those questions.
+When a message fills more than the pending question, «دليلك» confirms the extra ones in its acknowledgement («وسجّلت أيضاً: تخصصك تسويق، وبدون خبرة بعد.») and skips those questions.
 
 **When two values of one question match** («طالب ماجستير», «إدارة مالية»): the keyword that starts earliest in the message wins; at the same position the longer keyword wins. `interest` is the exception: it keeps up to two, in the order they appear.
 
@@ -933,15 +933,15 @@ Each acknowledgement names the answer. Where three general variants are listed, 
 - `grow`: «التطوّر في مجالك قرار ناضج. سنبني على ما عندك.»
 - `explore`: «الاستكشاف بداية ذكية. سأريك ثلاثة اتجاهات والاختيار لك.»
 
-### 4.5 Every other message, and how fast «دليل» answers
+### 4.5 Every other message, and how fast «دليلك» answers
 
-«دليل» answers **every** message, at once, and always ends by returning to the pending question with its chips.
+«دليلك» answers **every** message, at once, and always ends by returning to the pending question with its chips.
 
-| The user sends | «دليل» replies (then repeats the pending question) |
+| The user sends | «دليلك» replies (then repeats the pending question) |
 |---|---|
 | A greeting alone («السلام عليكم»، «هلا»، «مرحبا») | «وعليكم السلام، حيّاك الله.» / «هلا بك.» |
 | Thanks alone («شكراً»، «يعطيك العافية») | «العفو.» |
-| «من أنت؟» / «هل أنت ذكاء اصطناعي؟» | «أنا دليل، دليلك إلى وظيفتك. أسألك الآن لأرسم مسارك، ثم أبقى معك في كل خطوة.» |
+| «من أنت؟» / «هل أنت ذكاء اصطناعي؟» | «أنا دليلك إلى وظيفتك. أسألك الآن لأرسم مسارك، ثم أبقى معك في كل خطوة.» |
 | «لماذا تسأل؟» / «ماذا ستفعل بإجاباتي؟» | «أسأل لأختار لك من 20 وظيفة ما يناسب مدينتك وتخصصك وخبرتك وما تحب. وإجاباتك تُحفظ في متصفحك.» |
 | «كم سؤالاً بقي؟» | «بقي {n} فقط.» |
 | Any other question (step 1 of 4.3), a salary or a real-company question included | «سؤال لطيف، نعود إليه بعد أن نرسم مسارك.» |
@@ -952,9 +952,9 @@ Each acknowledgement names the answer. Where three general variants are listed, 
 
 The rows «من أنت», «لماذا تسأل» and «كم سؤالاً بقي» match by their keywords, with or without a question mark.
 
-**Speed.** Every reply comes from this section and the bank of 4.4: «دليل»'s glyph "thinks" for 350-600 ms, then the reply comes into focus. No network is involved.
+**Speed.** Every reply comes from this section and the bank of 4.4: «دليلك»'s glyph "thinks" for 350-600 ms, then the reply comes into focus. No network is involved.
 
-**Where the AI model helps, when a key is present: one place.** A typed answer that reached step 5 (the keywords could not map it) is given to the model to classify into that question's option ids, with a 2.5 s limit. On a timeout, an error, or an id outside the list, the behaviour above is used, silently. The model writes none of the conversation and answers no question during onboarding: a free answer there could name a salary or a company with nothing in code to check it, and a network wait would break the promise that «دليل» answers at once.
+**Where the AI model helps, when a key is present: one place.** A typed answer that reached step 5 (the keywords could not map it) is given to the model to classify into that question's option ids, with a 2.5 s limit. On a timeout, an error, or an id outside the list, the behaviour above is used, silently. The model writes none of the conversation and answers no question during onboarding: a free answer there could name a salary or a company with nothing in code to check it, and a network wait would break the promise that «دليلك» answers at once.
 
 ### 4.6 How the answers choose the target job and two alternatives
 
@@ -1022,7 +1022,7 @@ Six steps, **7.8 s** in total. The scoring itself takes no time; the sequence pr
 
 ### 5.1 Persona and voice
 
-«دليل» ("guide") is the same character that ran the onboarding. It is an advisor inside «دليلك» (the product is "your guide", and «دليل» is the guide's name: he introduces himself as «أنا دليل، دليلك إلى وظيفتك.»), not a general assistant.
+«دليلك» ("your guide") is the same character that ran the onboarding. It is the advisor inside «دليل» (he introduces himself as «أنا دليلك إلى وظيفتك.»), not a general assistant.
 
 - **Language.** Modern Standard Arabic that sounds Saudi and friendly. The Gulf touch is light and comes from a short list of expressions: «أبشر» · «حيّاك الله» · «يعطيك العافية» · «تمام» · «ولا يهمّك» · «خلّنا» · «ما شاء الله» · «للأمانة». It understands common Saudi dialect and simple English requests («وش أسوي الحين؟», «ودّني لطلباتي», "open my path") and always answers in Arabic. The word lists that make this true without a key are in 5.7; with a key the model covers the rest.
 - **Length.** One to three sentences, under 60 words. One idea and at most one suggested next step per reply. Plain text: no headings, no lists, no emoji.
@@ -1073,7 +1073,7 @@ Thirteen tools. Every tool that returns a match gain also returns `match_after`,
 
 Three tools change the user's state: **`start_course`**, **`apply_to_job`**, **`set_target_job`**. They run only when the current user message asks for that action. The server decides that in code, in the router (5.7); a model never decides it. A message asks when it is one of these two things.
 
-**1. A button or chip that carries the action and the id.** The confirmation chips («ابدأ الدورة», «قدّم على هذه», «قدّم على أي حال», «اجعلها هدفي»); the page chips «قدّم لي على هذه الوظيفة», «ابدأ هذه الدورة» and «اجعلها هدفي»; and the button «دع دليل يقدّم عنك» (3.4, 3.6, 3.8). Pressing one is the user asking.
+**1. A button or chip that carries the action and the id.** The confirmation chips («ابدأ الدورة», «قدّم على هذه», «قدّم على أي حال», «اجعلها هدفي»); the page chips «قدّم لي على هذه الوظيفة», «ابدأ هذه الدورة» and «اجعلها هدفي»; and the button «دع دليلك يقدّم عنك» (3.4, 3.6, 3.8). Pressing one is the user asking.
 
 **2. A typed request.** After the normalisation of 4.3, matching **whole words only**:
 
@@ -1093,10 +1093,10 @@ There is **no tool** that completes a course, ticks a lesson, grants XP, stars o
 
 ### 5.5 Rules enforced in server code
 
-1. **The router runs first, in every mode.** Every message goes through the router of 5.7 in server code before any provider is called. Rows 1-8 (both refusals, buttons and chips, apply, start, set target, job search, open a page) and every page chip of 5.8 are executed by the router and answered from the templates of 5.9, with or without a key. A provider is called only for a typed message that reaches rows 9-21. Everything the demo script asks of «دليل» is therefore decided in code, and costs no network wait.
-2. **Ids are real.** Every `job_id`, `course_id` and `skill_id` in a tool call must exist in the data; an unknown id fails the call and «دليل» says it could not find it. The model cannot invent a job, a company or a course.
+1. **The router runs first, in every mode.** Every message goes through the router of 5.7 in server code before any provider is called. Rows 1-8 (both refusals, buttons and chips, apply, start, set target, job search, open a page) and every page chip of 5.8 are executed by the router and answered from the templates of 5.9, with or without a key. A provider is called only for a typed message that reaches rows 9-21. Everything the demo script asks of «دليلك» is therefore decided in code, and costs no network wait.
+2. **Ids are real.** Every `job_id`, `course_id` and `skill_id` in a tool call must exist in the data; an unknown id fails the call and «دليلك» says it could not find it. The model cannot invent a job, a company or a course.
 3. **Consent for state changes** as in 5.4; at most one state-changing call per user message.
-4. **One job, one course.** A state-changing call needs exactly one id: the job or course on screen, or the only one whose full title (for a course, also its skill name) is in the message, or the one carried by a button or chip. Otherwise nothing runs and «دليل» asks which one, with up to three cards that each carry the chip («قدّم على هذه», «ابدأ الدورة», «اجعلها هدفي»). A second application to the same job creates nothing and returns `already_applied`.
+4. **One job, one course.** A state-changing call needs exactly one id: the job or course on screen, or the only one whose full title (for a course, also its skill name) is in the message, or the one carried by a button or chip. Otherwise nothing runs and «دليلك» asks which one, with up to three cards that each carry the chip («قدّم على هذه», «ابدأ الدورة», «اجعلها هدفي»). A second application to the same job creates nothing and returns `already_applied`.
 5. **A low match needs a second yes.** `apply_to_job` on a match under 60% returns `low_match` and emits no event, unless the message is the chip «قدّم على أي حال» carrying that job id.
 6. **No course completion.** The tool does not exist; a request for it gets the fixed refusal (router row 1).
 7. **Navigation is asked for.** In a model turn, `navigate` and `show: true` are honoured only when the user's message contains an open word (افتح، ورّني، أرني، اعرض، روح، خذني، ودّني، وين، open، show، go to); otherwise the event is dropped and the reply carries the chip «افتح {page}». No navigation event is applied while the apply sheet is open or a show is running (so typed text in the paste area or in an edited note is never pulled away). A state-changing event is its message's one navigation; any other navigation in that message is dropped.
@@ -1104,17 +1104,17 @@ There is **no tool** that completes a course, ticks a lesson, grants XP, stars o
 9. **No done-claim without the deed.** A model reply containing تم، أرسلت، قدّمت، بدأنا، بدأت، فتحت or غيّرت in a turn that produced no matching event is replaced by the offer template with its confirmation chips.
 10. **Cards come from data.** Job, course, gap and application cards are drawn by the browser from tool results, with their «جهة تجريبية» tags. The model's text never becomes a card.
 11. **Always an answer, and soon.** The provider has 2.5 s to send its first event. On a timeout, an error or an empty reply the local brain answers the same message, and the server does not call the provider again for 60 s (a timestamp in the server process; it is not user state), during which the panel shows the local mode line. Once any event of a turn has reached the browser, that turn is never re-run by the local brain: the template for the tool already called is sent. The user never sees a provider error.
-12. **The reply waits for the deed.** The reply text of a turn that emitted `apply`, `start_course` or `set_target` is held by the browser until the dispatcher reports the action finished. If the user stopped it, the held text is discarded and the fixed line of 7.4 is shown instead. «دليل» never says an application was sent that was cancelled.
+12. **The reply waits for the deed.** The reply text of a turn that emitted `apply`, `start_course` or `set_target` is held by the browser until the dispatcher reports the action finished. If the user stopped it, the held text is discarded and the fixed line of 7.4 is shown instead. «دليلك» never says an application was sent that was cancelled.
 13. **One thing at a time.** While a reply or an action is in flight, the send button and all chips are disabled, and the dispatcher ignores a second `apply`. During an application the composer's «إيقاف» is the sheet's «إيقاف».
 14. **Bounded work.** At most four tool rounds per message; at most one navigation per message.
-15. **Scope.** There is no tool for the web, for files, or for anything outside «دليلك»; out-of-scope requests get the fallback of 5.9 (example 10).
-16. **Honesty on applying.** The reply after `apply_to_job` always contains the sentence that it is a trial application inside the platform («وللأمانة: هذا تقديم تجريبي داخل منصة دليلك ولم يصل إلى جهة حقيقية.»); the server appends it if a model left it out.
+15. **Scope.** There is no tool for the web, for files, or for anything outside «دليل»; out-of-scope requests get the fallback of 5.9 (example 10).
+16. **Honesty on applying.** The reply after `apply_to_job` always contains the sentence that it is a trial application inside the platform («وللأمانة: هذا تقديم تجريبي داخل منصة دليل ولم يصل إلى جهة حقيقية.»); the server appends it if a model left it out.
 17. **Length.** A reply longer than 600 characters is cut at the last full sentence before that limit.
 18. **Keys and privacy.** The provider key stays on the server. **No AI client (Gemini or Anthropic) is ever constructed without an explicit, non-empty key**: with a missing or empty key the provider switch is in local mode, no client exists and no request is made. There is no key on this laptop yet (18 Nov): everything runs on the local brain, and both provider paths are built behind the switch and stay untested until a key is pasted into `.env.local`. The snapshot is sent to the provider only for the reply; nothing is stored on the server. The product tells the user so where it applies (3.6, 3.13, 3.14).
 
 ### 5.6 Example exchanges
 
-Context for all of them unless stated: the demo persona «خالد» after the sample CV (180 XP, level 2, match 70% with «محلل بيانات», weekly rank 18). U is the user, D is «دليل».
+Context for all of them unless stated: the demo persona «خالد» after the sample CV (180 XP, level 2, match 70% with «محلل بيانات», weekly rank 18). U is the user, D is «دليلك».
 
 **How to read the replies.** Each D line is the template of 5.9 filled with these numbers, so with no key the reply is exactly the text shown. With a key, rows 1-8 of the router and all chips still give exactly this text; for the other rows the model's wording is free and the test is: the same tool calls, the same numbers, the same cards and chips.
 
@@ -1138,9 +1138,9 @@ Cards: the two jobs («محلل بيانات» 70%, «محلل ذكاء الأع
 **4. Apply for me: the demo script's line** (context: after the Power BI course, 380 XP, match 90%; the user is on `/path`)
 U: «قدّم لي على وظيفة محلل بيانات»
 Tools: `apply_to_job(job_id: "data-analyst-riyadh")`. The job page opens, the apply sheet fills itself and is sent (7.4); the reply is shown when that has finished.
-D: «تم. أرسلت طلبك على «محلل بيانات» برقم DL-2026-0001 وأنت بمطابقة 90%، وأخذت 40 XP. وللأمانة: هذا تقديم تجريبي داخل منصة دليلك ولم يصل إلى جهة حقيقية. تابعه من «طلباتي».»
+D: «تم. أرسلت طلبك على «محلل بيانات» برقم DL-2026-0001 وأنت بمطابقة 90%، وأخذت 40 XP. وللأمانة: هذا تقديم تجريبي داخل منصة دليل ولم يصل إلى جهة حقيقية. تابعه من «طلباتي».»
 Card: the application. Chips: «افتح طلباتي» · «افتح مساري»
-The same happens with «قدّم لي على هذه الوظيفة» typed on the job page, with the page chip, and with the button «دع دليل يقدّم عنك».
+The same happens with «قدّم لي على هذه الوظيفة» typed on the job page, with the page chip, and with the button «دع دليلك يقدّم عنك».
 
 **5. Why is my match 70%**
 U: «لماذا مطابقتي 70%؟»
@@ -1221,7 +1221,7 @@ Cards: محلل بيانات 70% · محلل أعمال 60% · محلل مالي
 **19. Who are you**
 U: «من أنت؟»
 Tools: none
-D: «أنا دليل، دليلك إلى وظيفتك. أشرح لك مسارك، أفتح لك الصفحات، وأقدّم على الوظائف حين تطلب. أما الدورات فإكمالها لك أنت.»
+D: «أنا دليلك إلى وظيفتك. أشرح لك مسارك، أفتح لك الصفحات، وأقدّم على الوظائف حين تطلب. أما الدورات فإكمالها لك أنت.»
 
 **20. Badges**
 U: «كيف أحصل على شارة جديدة؟»
@@ -1270,7 +1270,7 @@ The fixed answers of 5.8 are matched before the general intents (so «كم بق�
 
 **Acceptance test.** With no key and no network: every user line of 5.6 gets exactly the reply, tool calls, cards and chips shown for it, and every chip of 5.8 gets its answer. The same test with a provider configured and the network adapter off must pass identically, with no reply slower than 2.5 s plus the local time. (That keyed half is owed until a key exists on this laptop: 10.1.)
 
-**Limits, to state honestly.** With no key «دليل» recognises wording close to these lists (Modern Standard Arabic, the Saudi dialect words above, and a few English words). It does not hold a free conversation: anything else gets the fallback, which offers three things it can do. It remembers nothing beyond "this job / this course" on screen and the last cards it showed.
+**Limits, to state honestly.** With no key «دليلك» recognises wording close to these lists (Modern Standard Arabic, the Saudi dialect words above, and a few English words). It does not hold a free conversation: anything else gets the fallback, which offers three things it can do. It remembers nothing beyond "this job / this course" on screen and the last cards it showed.
 
 ### 5.8 Suggestion chips per page
 
@@ -1301,7 +1301,7 @@ Fixed answers for the chips that need no tool:
 
 The other chips use the templates of 5.9: `next-step`, `skill-start` and `course-start` → next step · `gap` → gap · `jobs-data-riyadh` and `jobs-remote` → search (with `show`) · `best-job` → best job · `why-match` → explain · `apply`, `start-course`, `set-target` → the action · `applications-status` → applications · `courses-path`, `courses-short` → course lists · `course-what` → course · `course-gain` → gain · `rank-how`, `rank-gap` → rank · `badge-next` → badges.
 
-### 5.9 Reply templates (what «دليل» says without a model)
+### 5.9 Reply templates (what «دليلك» says without a model)
 
 These are the words of the router and the local brain. Slots are filled from tool results and the snapshot; counted nouns go through the shared helper with the right case. They are final copy, like every other Arabic string in this file. Without them a builder would have to invent the advisor's Arabic, and with no key on this laptop this is the advisor Mohammed will talk to.
 
@@ -1340,7 +1340,7 @@ These are the words of the router and the local brain. Slots are filled from too
 
 | Case | Reply |
 |---|---|
-| Sent | «تم. أرسلت طلبك على «{title}» برقم {number} وأنت بمطابقة {match}%، وأخذت {xp} XP. وللأمانة: هذا تقديم تجريبي داخل منصة دليلك ولم يصل إلى جهة حقيقية. تابعه من «طلباتي».» Chips: «افتح طلباتي» · «افتح مساري». Sent under 60%: «…وأنت بمطابقة {match}%، وبدون نقاط لأن المطابقة أقل من 60%. وللأمانة: …» |
+| Sent | «تم. أرسلت طلبك على «{title}» برقم {number} وأنت بمطابقة {match}%، وأخذت {xp} XP. وللأمانة: هذا تقديم تجريبي داخل منصة دليل ولم يصل إلى جهة حقيقية. تابعه من «طلباتي».» Chips: «افتح طلباتي» · «افتح مساري». Sent under 60%: «…وأنت بمطابقة {match}%، وبدون نقاط لأن المطابقة أقل من 60%. وللأمانة: …» |
 | Which job? | «أبشر. على أي وظيفة؟ هذه أقرب ثلاث لمهاراتك.» with three job cards, each with «قدّم على هذه» |
 | Under 60% | «مطابقتك مع هذه الوظيفة {match}% فقط، أقل من 60%. الأفضل أن نسدّ الفجوة أولاً. هل أقدّم على أي حال؟» Chips: «قدّم على أي حال» · «شاهد الفجوة» |
 | Already applied | «قدّمت على هذه الوظيفة من قبل، وحالة طلبك «{status}».» Chip: «افتح طلباتي» |
@@ -1386,7 +1386,7 @@ These are the words of the router and the local brain. Slots are filled from too
 |---|---|
 | Greeting | «وعليكم السلام ورحمة الله، حيّاك الله يا {name}. مطابقتك مع «{target}» {match}% وبقيت لك {n stages}. من أين نبدأ؟» For «هلا» or «مرحبا» the opening is «هلا بك يا {name}.» Before a CV the middle sentence is «مسارك نحو «{target}» ينتظر سيرتك الذاتية.» At 100% it is «مطابقتك مع «{target}» 100%.» |
 | Thanks | «العفو، يعطيك العافية. أنا هنا متى احتجتني.» |
-| Who are you | «أنا دليل، دليلك إلى وظيفتك. أشرح لك مسارك، أفتح لك الصفحات، وأقدّم على الوظائف حين تطلب. أما الدورات فإكمالها لك أنت.» |
+| Who are you | «أنا دليلك إلى وظيفتك. أشرح لك مسارك، أفتح لك الصفحات، وأقدّم على الوظائف حين تطلب. أما الدورات فإكمالها لك أنت.» |
 | «ليس الآن» | «تمام، متى ما أحببت.» |
 | Is it real | «للأمانة: الوظائف والجهات والدورات والمتسابقون بيانات تجريبية، والتقديم محاكاة. المحسوب فعلاً هو مهاراتك ومطابقتك ومسارك.» |
 | A real-world number | «لا أملك أرقاماً موثوقة عن الرواتب أو سوق العمل، ولا أحب أن أعطيك رقماً من عندي. الذي أعرفه بدقة هو مطابقتك ومهاراتك وخطوتك التالية.» |
@@ -1505,7 +1505,7 @@ The sample CV was read against these rules by hand: its six headings are found, 
 For an uploaded or pasted CV that is not the sample, the local analyser runs first. The model is then asked for one thing only: skills it can see that the alias lists missed, each as a skill id with a quoted evidence sentence. The server enforces, in code:
 - the skill id must be one of the 38; others are dropped;
 - the evidence must be a sentence that really occurs in the CV text; otherwise that skill is dropped;
-- **the model never sets stars.** A skill the local analyser found keeps its local stars and evidence. A skill only the model found gets its stars from the zone of its evidence line (step 4 of 6.5): 2 in an *applied* zone, otherwise 1, then lowered to the skill's maximum. So the star rules «دليل» explains (5.8) are true in every mode, and a match can always be explained to the last point (P4);
+- **the model never sets stars.** A skill the local analyser found keeps its local stars and evidence. A skill only the model found gets its stars from the zone of its evidence line (step 4 of 6.5): 2 in an *applied* zone, otherwise 1, then lowered to the skill's maximum. So the star rules «دليلك» explains (5.8) are true in every mode, and a match can always be explained to the last point (P4);
 - on a timeout (12 s), an error or an empty list, the local analyser's result stands alone.
 
 The results page says which engine read the CV (3.6): «نموذج ذكاء اصطناعي» when the model's call succeeded, otherwise the local label.
@@ -1559,34 +1559,34 @@ One star in a skill required at 1 star is worth 20 points; at 2 stars, 10 points
 
 ### 7.4 Applying
 
-**The application record.** Job id · number `DL-{year}-{sequence}` (four digits, counted per account from 0001) · time sent · match when sent · the note · the CV line · XP paid (40 or 0) · who sent it (`user` or `advisor`; an application sent by «دليل» shows «قدّم عنك دليل» on its card) · status.
+**The application record.** Job id · number `DL-{year}-{sequence}` (four digits, counted per account from 0001) · time sent · match when sent · the note · the CV line · XP paid (40 or 0) · who sent it (`user` or `advisor`; an application sent by «دليلك» shows «قدّم عنك دليلك» on its card) · status.
 
 **The note template.** «أتقدّم لوظيفة {title} لدى {company}. مطابقتي الحالية مع متطلبات الوظيفة {match}%، وأبرز ما لديّ: {held}. وأعمل الآن على استكمال: {missing}.» `{held}` = up to three fully met skills in the job's order; `{missing}` = up to two unmet skills. With nothing missing the last sentence is dropped; with nothing held the middle part becomes «وأبدأ الآن ببناء المهارات المطلوبة». The note is always built in the browser from this template; no model writes it (5.3).
 Demo text (the demo applies after the Power BI course, at 90%): «أتقدّم لوظيفة محلل بيانات لدى وادي الغيم للبيانات. مطابقتي الحالية مع متطلبات الوظيفة 90%، وأبرز ما لديّ: Excel و SQL و Power BI. وأعمل الآن على استكمال: الإحصاء.»
 
-**Two ways to apply.** The first one everywhere is «دع دليل يقدّم عنك» (the button, the chip, or a typed request): it is what he asked for. The second is «قدّم بنفسك».
+**Two ways to apply.** The first one everywhere is «دع دليلك يقدّم عنك» (the button, the chip, or a typed request): it is what he asked for. The second is «قدّم بنفسك».
 
 **When the user presses «قدّم بنفسك».** The apply sheet opens already filled. The user may edit the note. «أرسل الطلب» → «جارٍ الإرسال…» for 1.2 s → the confirmation. Under 60% the warning block sits above the form and the send button reads «قدّم على أي حال».
 
-**When «دليل» applies** (the user asked: 5.4). 7.2 s, and the user watches every step:
+**When «دليلك» applies** (the user asked: 5.4). 7.2 s, and the user watches every step:
 
 | Step | Status line in the chat | On the page | Time |
 |---|---|---|---|
-| 1 | «أفتح نموذج التقديم…» | if needed the job page opens; the apply sheet opens with empty fields and the line «دليل يملأ الطلب…» | 0.5 s |
+| 1 | «أفتح نموذج التقديم…» | if needed the job page opens; the apply sheet opens with empty fields and the line «دليلك يملأ الطلب…» | 0.5 s |
 | 2 | «أكتب بياناتك…» | the name writes itself, then the city, then the qualification and major | 1.2 s |
 | 3 | «أكتب بياناتك…» | the matching skills pop in one by one | 0.7 s |
 | 4 | «أكتب بياناتك…» | the note types itself; the CV line appears | 2.0 s |
 | 5 | «أرسل الطلب…» | the send button is visibly pressed; «جارٍ الإرسال…» | 1.6 s |
 | 6 | (the reply arrives) | the confirmation shows for 1.2 s, then the sheet closes by itself | 1.2 s |
 
-- **Stop.** The sheet's stop and the composer's stop are both labelled «إيقاف» and are the same control. During steps 1-4 it cancels: the sheet stays open with what was written, now editable, and «دليل» says «أوقفت التقديم. الطلب أمامك إن أحببت أن تكمله بنفسك.» From step 5 the control is gone: a pressed send cannot be stopped.
-- **When the record is written.** At the start of step 5. A reload before that leaves no application, and on the next load «دليل» adds «لم يكتمل التقديم. اطلبه مرة أخرى إن أحببت.» A reload after it finds the application sent; its XP and badge news shows once (3.15).
-- **The reply waits.** «دليل»'s «تم. أرسلت طلبك…» is shown only when step 6 ends (5.5 rule 12), so it can never describe an application that was stopped.
+- **Stop.** The sheet's stop and the composer's stop are both labelled «إيقاف» and are the same control. During steps 1-4 it cancels: the sheet stays open with what was written, now editable, and «دليلك» says «أوقفت التقديم. الطلب أمامك إن أحببت أن تكمله بنفسك.» From step 5 the control is gone: a pressed send cannot be stopped.
+- **When the record is written.** At the start of step 5. A reload before that leaves no application, and on the next load «دليلك» adds «لم يكتمل التقديم. اطلبه مرة أخرى إن أحببت.» A reload after it finds the application sent; its XP and badge news shows once (3.15).
+- **The reply waits.** «دليلك»'s «تم. أرسلت طلبك…» is shown only when step 6 ends (5.5 rule 12), so it can never describe an application that was stopped.
 - **A second request while one is running** is ignored (5.5 rule 13).
 - **Phones.** The advisor sheet closes for steps 1-6, so the page is visible, and opens again with the reply.
-- **Under 60%** «دليل» does not fill anything (5.5 rule 5). It answers: «مطابقتك مع هذه الوظيفة {match}% فقط، أقل من 60%. الأفضل أن نسدّ الفجوة أولاً. هل أقدّم على أي حال؟» with the chips «قدّم على أي حال» and «شاهد الفجوة» (which opens the job page at the block «ما ينقصك»).
+- **Under 60%** «دليلك» does not fill anything (5.5 rule 5). It answers: «مطابقتك مع هذه الوظيفة {match}% فقط، أقل من 60%. الأفضل أن نسدّ الفجوة أولاً. هل أقدّم على أي حال؟» with the chips «قدّم على أي حال» and «شاهد الفجوة» (which opens the job page at the block «ما ينقصك»).
 - **Already applied**: «قدّمت على هذه الوظيفة من قبل، وحالة طلبك «{status}».» with the chip «افتح طلباتي».
-- The reply always states that the application is a trial inside the platform: «…هذا تقديم تجريبي داخل منصة دليلك ولم يصل إلى جهة حقيقية.» (5.5 rule 16).
+- The reply always states that the application is a trial inside the platform: «…هذا تقديم تجريبي داخل منصة دليل ولم يصل إلى جهة حقيقية.» (5.5 rule 16).
 
 ### 7.5 Application statuses and how they advance in a demo
 
@@ -1619,9 +1619,9 @@ Stated honestly: **nobody reviews an application. The status is a function of ti
 | Leaderboard preview on `/path` | the tag «بيانات تجريبية» beside its heading (3.4) |
 | Sample CV | «(جهة تجريبية)» after the university and the employer inside the text; on the results, the tag «سيرة تجريبية» |
 | Profile | the section «عن هذا العرض» |
-| «دليل» | says it in words (5.1), and after every application (5.5 rule 16) |
+| «دليلك» | says it in words (5.1), and after every application (5.5 rule 16) |
 
-One label per place is enough. He asked that applying "look and feel real": so the word «تجريبي» is not repeated inside a confirmation, or under a button on a page that already carries the label. During the advisor's application it is read three times, each doing a different job: the tag on the company, the note on the sheet, and «دليل»'s sentence.
+One label per place is enough. He asked that applying "look and feel real": so the word «تجريبي» is not repeated inside a confirmation, or under a button on a page that already carries the label. During the advisor's application it is read three times, each doing a different job: the tag on the company, the note on the sheet, and «دليلك»'s sentence.
 
 ---
 
@@ -1638,7 +1638,7 @@ One label per place is enough. He asked that applying "look and feel real": so t
 | `job_applied` | an application is sent while the match is 60% or more | +40 | once per job; under 60% pays 0 |
 | `daily_reward` | the daily reward is claimed | 20 × streak day, at most 100 | once per calendar day |
 
-Nothing else pays XP: not starting a course, ticking a lesson, chatting with «دليل», opening a page, changing the avatar or unlocking a badge. Every XP event is written to the XP history with its reason and time.
+Nothing else pays XP: not starting a course, ticking a lesson, chatting with «دليلك», opening a page, changing the avatar or unlocking a badge. Every XP event is written to the XP history with its reason and time.
 
 ### 8.2 Course XP by hours
 
@@ -1686,7 +1686,7 @@ Twelve badges: the ten from the idea file and two that the leaderboard and the a
 
 | Badge id | Name | Description (when unlocked) | Hint (when locked) | Exact unlock rule |
 |---|---|---|---|---|
-| `first-steps` | «الخطوة الأولى» | «أكملت التعارف مع دليل.» | «أكمل التعارف مع دليل.» | `onboarding_completed` has fired |
+| `first-steps` | «الخطوة الأولى» | «أكملت التعارف مع دليلك.» | «أكمل التعارف مع دليلك.» | `onboarding_completed` has fired |
 | `goal-set` | «صاحب هدف» | «اخترت وظيفتك المستهدفة.» | «اختر وظيفتك المستهدفة.» | a target job is set for the first time |
 | `cv-scanned` | «سيرة مقروءة» | «حلّلت سيرتك واكتشفت مهاراتك.» | «حلّل سيرتك الذاتية.» | `cv_analysed` has fired |
 | `first-application` | «أول تقديم» | «قدّمت على أول وظيفة.» | «قدّم على وظيفة.» | applications sent ≥ 1 (any match) |
@@ -1987,8 +1987,8 @@ Lessons: 1 «التوزيعات ومقاييس التشتت» · 2 «العيّ�
 - The design team draws **12 avatars**, ids `av-01` to `av-12`, in one visual language with the logo and the icons. (The design exploration was briefed for 8; the product needs 12.)
 - **Which is which.** `av-01` to `av-04` are neutral figures with no gender cues; `av-05` to `av-08` are women; `av-09` to `av-12` are men. As a set they let any user find one that suits them.
 - **The default is always neutral.** For a new account: add the Unicode code points of the characters of the name, take the remainder of dividing by 4, add 1. «خالد»: 1582 + 1575 + 1604 + 1583 = 6344, remainder 0 → `av-01`. «محمد»: 1605 + 1581 + 1605 + 1583 = 6374, remainder 2 → `av-03`. So nobody is handed an avatar of the wrong gender on first sign-in; the user picks any of the twelve in the profile.
-- The avatar shows in: the user chip, the profile, the leaderboard (podium, rows, my card), the sign-in account chips, the user's side of the advisor thread, and the application sent by «دليل».
-- «دليل» has its own glyph, which is not one of the twelve.
+- The avatar shows in: the user chip, the profile, the leaderboard (podium, rows, my card), the sign-in account chips, the user's side of the advisor thread, and the application sent by «دليلك».
+- «دليلك» has its own glyph, which is not one of the twelve.
 
 ### 9.7 Fictional company naming rules
 
@@ -2017,8 +2017,8 @@ He asked for a logo, custom icons and designed avatars. This is everything the s
 
 | Group | Count | Items |
 |---|---|---|
-| Logo | 4 forms | the mark alone · the mark with the wordmark «دليلك» on one line · `icon.svg` for the browser tab · a one-colour form |
-| «دليل» glyph | 2 states, 2 sizes | still, and thinking (a loop: `thinking-glyph`, 3.14), each at 20 px and 40 px |
+| Logo | 4 forms | the mark alone · the mark with the wordmark «دليل» on one line · `icon.svg` for the browser tab · a one-colour form |
+| «دليلك» glyph | 2 states, 2 sizes | still, and thinking (a loop: `thinking-glyph`, 3.14), each at 20 px and 40 px |
 | Avatars | 12 | `av-01` to `av-12`: four neutral, four women, four men (9.6) |
 | Navigation icons | 9 | `path` · `skills` · `learn` · `cv` · `jobs` · `applications` · `leaderboard` · `profile` · `more` |
 | Field icons | 7 | one per field id (9.1). A skill node shows its field's icon: there are no per-skill icons |
@@ -2037,7 +2037,7 @@ In all: 51 icons, 19 emblems, 12 avatars, the glyph and the logo. The design exp
 ### 10.1 Before starting
 
 - **Build.** The stage run uses a production build (`npm run demo`: build, then start on port 3040), never the dev server. Each of the 12 routes is opened once beforehand, so nothing is compiled or fetched for the first time on stage.
-- **Mode.** The script makes no call to an AI provider in any mode: onboarding chips are local (4.5), the sample CV is always read locally (6.1), and the one request to «دليل» is executed by the router (5.5 rule 1). On stage, run with `AI_PROVIDER=local` unless the key was tested on the venue's network the same day; the panel then shows «وضع محلي: دليل يعمل دون اتصال.» With a key, free questions after the script go to the model, and if the network is down the local brain answers within 2.5 s.
+- **Mode.** The script makes no call to an AI provider in any mode: onboarding chips are local (4.5), the sample CV is always read locally (6.1), and the one request to «دليلك» is executed by the router (5.5 rule 1). On stage, run with `AI_PROVIDER=local` unless the key was tested on the venue's network the same day; the panel then shows «وضع محلي: دليلك يعمل دون اتصال.» With a key, free questions after the script go to the model, and if the network is down the local brain answers within 2.5 s.
 - **Browser.** Desktop window, 1440 px wide. Keyboard layout on Arabic before starting (steps 1 and 11 are typed; on a Latin layout the name comes out as Latin letters and is still accepted). The six recovery links of 10.2 are in the bookmarks bar.
 - **Start.** Open `http://localhost:3040/?seed=fresh`. It clears every earlier run in this browser.
 - **Acceptance for QA.** The whole script passes three times with the same screens and numbers: in local mode; with a key and the network on; with a key and the network adapter off. In the offline runs the console shows no failed request. Every number below is forced by sections 8 and 9, and checked in 10.4. **There is no key on this laptop yet (18 Nov):** until one is pasted into `.env.local`, only the local-mode run can be done; the two keyed runs are reported as "not run", never as passed.
@@ -2046,7 +2046,7 @@ In all: 51 icons, 19 emblems, 12 avatars, the glyph and the logo. The design exp
 
 | # | Clock | Do (test id) | What appears, with the numbers |
 |---|---|---|---|
-| 1 | 0:00 | Type «خالد» in `signin-name`, press `signin-submit` («ابدأ رحلتك») | The showcase was moving on the right. `/welcome` opens: «أهلاً خالد، أنا دليل، دليلك إلى وظيفتك. سأكون معك من أول خطوة إلى آخرها.» then «…نبدأ: في أي مدينة أنت الآن؟» |
+| 1 | 0:00 | Type «خالد» in `signin-name`, press `signin-submit` («ابدأ رحلتك») | The showcase was moving on the right. `/welcome` opens: «أهلاً خالد، أنا دليلك إلى وظيفتك. سأكون معك من أول خطوة إلى آخرها.» then «…نبدأ: في أي مدينة أنت الآن؟» |
 | 2 | 0:06 | Tap six chips: `welcome-chip-city-riyadh` · `welcome-chip-education-bachelor` · `welcome-chip-major-mis` · `welcome-chip-experience-none` · `welcome-chip-interest-data` · `welcome-chip-priority-first-job` | After each tap an acknowledgement and the next question. In order: «تمام، الرياض. وهناك أيضاً فرص عن بُعد إن أحببت.» · «بكالوريوس، ممتاز. أساس نبني عليه.» · «جميل، نظم معلومات إدارية. فيه مهارات كثيرة تُحسب لك من الآن.» · «ولا يهمّك، كلنا بدأنا من هنا. سأختار لك وظائف تناسب البدايات.» · «الأرقام والبيانات، اختيار جميل. من يقرأ الأرقام يُسمع رأيه.» · «أول وظيفة، أولوية واضحة. سأختار لك أقصر طريق إليها.» Then «شكراً يا خالد، اكتملت الصورة. لحظات وأرسم لك مسارك.» The slots of «ملفك يتكوّن» fill one by one |
 | 3 | 0:27 | Watch | The closing line holds 1.2 s, then the path-reveal sequence, 7.8 s, six lines ending «مسارك جاهز.» The drawn path stays on screen: Excel ★ · SQL ★ · Power BI ★ · الإحصاء ★ · التواصل الفعّال ★ · Excel ★★ · SQL ★★ · الإحصاء ★★ → the trophy «محلل بيانات» |
 | 4 | 0:37 | Press `reveal-accept` («ابدأ هذا المسار») | The result showed «محلل بيانات» · «وادي الغيم للبيانات · الرياض» · reasons «يوافق اهتمامك: الأرقام والبيانات», «قريب من تخصصك: نظم معلومات إدارية», «مناسب للبدايات» · «8 مراحل · 74 ساعة تعلّم» · alternatives «أخصائي تقارير وبيانات» (7 مراحل · 60 ساعة تعلّم) and «محلل أعمال» (7 مراحل · 64 ساعة تعلّم). Now `/path`: the rest of the result leaves, the path strip stays and the map opens out of it (`map-open` in full). When it ends: toast «+80 XP · التعارف واختيار الهدف» (no rank line: 8.7) with the badge toasts «الخطوة الأولى» and «صاحب هدف» stacked under it. User chip: «المستوى 1 · مبتدئ», 80 / 150 XP, streak 1. Match 0%. «0 من 8 مراحل · 74 ساعة تعلّم». The start gate «اكتشف مهاراتك» is lit. Leaderboard preview: فيصل ق. 980 · سلطان م. 910 · مشعل ر. 860, then «خالد · أنت» at rank 22 with 80 XP |
@@ -2056,7 +2056,7 @@ In all: 51 icons, 19 emblems, 12 avatars, the glyph and the logo. The design exp
 | 8 | 1:04 | Click `path-stage-7` (Power BI), press `path-stage-start` («ابدأ الدورة») | The stage sheet: «المرحلة 7: Power BI» · «أساسيات Power BI» · 10 ساعات · +200 XP · +20%. The course page opens already started |
 | 9 | 1:09 | Press `course-complete` («أكمل الدورة») | The five lessons tick in a run; then the **celebration** (5.0 s): «أكملت الدورة» · «+200 XP» (180 → **380**) · «Power BI: النجمة 1 من 3» · the ring rises **from 70% to 90%** · «مستوى جديد: 3 · مجتهد» · «شارات جديدة: أول دورة · ضمن العشرة الأوائل» · «صعدت 8 مراكز: المركز 10 هذا الأسبوع» |
 | 10 | 1:17 | Press `celebration-close` («رجوع لمساري») | `/path` with the short `map-open`: ring 90%, «7 من 8 مراحل · بقي 12 ساعة تعلّم», stage 7 done «من دورة», stage 8 «الإحصاء ★★» is now the lit one. User chip: «المستوى 3 · مجتهد», 380 / 600 XP. Leaderboard preview: the same top three, then «خالد · أنت» at rank 10 with 380 XP |
-| 11 | 1:21 | Press `shell-advisor-launcher`; type «قدّم لي على وظيفة محلل بيانات» in `advisor-input`, press Enter | The panel docks beside the page (`panel-open`) and the sent bubble pops out of the composer. «دليل» opens the job page (ring 90%; «ما ينقصك»: الإحصاء), the apply sheet opens and fills itself while the status lines roll («أفتح نموذج التقديم…» → «أكتب بياناتك…» → «أرسل الطلب…»): خالد · الرياض · بكالوريوس · نظم معلومات إدارية · Excel, SQL, Power BI, التواصل الفعّال · the note of 7.4. Confirmation: «رقم الطلب: DL-2026-0001» · «مطابقتك عند التقديم: 90%» · «+40 XP · تقديم مدروس». Then «دليل» replies as in example 4 of 5.6, with the application card. Toast «+40 XP · تقديم مدروس» (total **420 XP**; the rank stays 10, so no rank line), badge toast «أول تقديم» |
+| 11 | 1:21 | Press `shell-advisor-launcher`; type «قدّم لي على وظيفة محلل بيانات» in `advisor-input`, press Enter | The panel docks beside the page (`panel-open`) and the sent bubble pops out of the composer. «دليلك» opens the job page (ring 90%; «ما ينقصك»: الإحصاء), the apply sheet opens and fills itself while the status lines roll («أفتح نموذج التقديم…» → «أكتب بياناتك…» → «أرسل الطلب…»): خالد · الرياض · بكالوريوس · نظم معلومات إدارية · Excel, SQL, Power BI, التواصل الفعّال · the note of 7.4. Confirmation: «رقم الطلب: DL-2026-0001» · «مطابقتك عند التقديم: 90%» · «+40 XP · تقديم مدروس». Then «دليلك» replies as in example 4 of 5.6, with the application card. Toast «+40 XP · تقديم مدروس» (total **420 XP**; the rank stays 10, so no rank line), badge toast «أول تقديم» |
 | 12 | 1:41 | Press `shell-nav-leaderboard` | The row «خالد · أنت» climbs from 18 to 10 (`row-climb`, 1.2 s). «مركزك 10 من 25» · «420 XP» · «يفصلك 20 XP عن المركز 9» · «صعدت 8 مراكز». Podium: فيصل ق. 980 · سلطان م. 910 · مشعل ر. 860 |
 | 13 | 1:48 | If time allows: `shell-nav-skills`, then `shell-nav-profile` | Skill tree: «9 من 38 مهارة · 12 من 59 نجمة»; Power BI's first star fills and «تصوير البيانات» opens. Profile: «المستوى 3 · مجتهد» · «420 من 600 XP» · «الشارات 6 من 12»: الخطوة الأولى، صاحب هدف، سيرة مقروءة، أول دورة، ضمن العشرة الأوائل، أول تقديم · «سجل النقاط»: +40, +200, +100, +30, +50 |
 | | 1:56 | Say the closing line | *"Upload your CV, and in seconds you know where you stand, where you're going, and the next step. Every step you take is real progress toward a real job."* (His line from the idea file, kept as he wrote it. Because every job in the demo is sample data, an alternative ending is offered for him to choose: *"…every step is measured progress toward the job you chose."*) |
@@ -2065,7 +2065,7 @@ In all: 51 icons, 19 emblems, 12 avatars, the glyph and the logo. The design exp
 
 **The order protects what matters.** The headline (70% → 90%) lands at about 1:13, and the advisor's application is over by 1:41. A slip of fifteen seconds still leaves both inside two minutes. Step 13 is optional from the start. If the presenter falls behind the clock, cut in this order: step 13, then step 12, then the stage sheet in step 8 (press the card's «ابدأ الدورة», `path-next-step-action`, instead of opening the stage).
 
-**If typing is a problem in step 11** (the keyboard is on the wrong layout): click the job title in the target header (`path-target-title`), then press «دع دليل يقدّم عنك» (`job-apply-advisor`). The same application runs with no typing.
+**If typing is a problem in step 11** (the keyboard is on the wrong layout): click the job title in the target header (`path-target-title`), then press «دع دليلك يقدّم عنك» (`job-apply-advisor`). The same application runs with no typing.
 
 **If a step goes wrong on stage**, open the next state from the bookmarks bar:
 
@@ -2093,7 +2093,7 @@ Each link gives the numbers the presenter is about to say. One difference: in `m
 | `onboarded` | 80 · 1 مبتدئ | 0 · 0 | 0% | none | none | first-steps, goal-set (2) | 22 | rule 1: «ارفع سيرتك الذاتية» | nothing |
 | `cv-analysed` | 180 · 2 مستكشف | 11 · 8 (the sample CV, marked as the sample) | 70% | none | none | + cv-scanned (3) | 18 | rule 3: «ابدأ دورة «أساسيات Power BI»» | `catch-up` has not played yet: the first visit to `/path` plays it |
 | `course-done` | 380 · 3 مجتهد | 12 · 9 | 90% | `c-powerbi-1` completed | none | + first-course, top-ten (5) | 10 | rule 3: «ابدأ دورة «الإحصاء التطبيقي للمحللين»» | nothing |
-| `mid-path` | 420 · 3 مجتهد | 12 · 9 | 90% | `c-powerbi-1` completed; `c-statistics-2` started, lessons 1-2 ticked | `data-analyst-riyadh`: DL-2026-0001, sent by «دليل», match then 90%, status `review` (fixed) | + first-application (6) | 10 | rule 2: «أكمل دورة «الإحصاء التطبيقي للمحللين»» | nothing |
+| `mid-path` | 420 · 3 مجتهد | 12 · 9 | 90% | `c-powerbi-1` completed; `c-statistics-2` started, lessons 1-2 ticked | `data-analyst-riyadh`: DL-2026-0001, sent by «دليلك», match then 90%, status `review` (fixed) | + first-application (6) | 10 | rule 2: «أكمل دورة «الإحصاء التطبيقي للمحللين»» | nothing |
 | `job-ready` | 620 · 4 متمكّن | 13 · 9 | 100% | `c-powerbi-1` and `c-statistics-2` completed | none (so the 100% apply can be tested: it pays +40 → 660 XP) | first-steps, goal-set, cv-scanned, first-course, top-ten, job-ready (6) | 7 | rule 4: «قدّم على «محلل بيانات»» | nothing |
 | `returning` | 420 · 3 مجتهد | as `mid-path` | 90% | as `mid-path` | as `mid-path` | as `mid-path` (6) | 10 | rule 2 | account created two days ago, streak 2, last active yesterday: the first app-shell load offers the **daily reward**, day 3, «استلم +60 XP» → 480 XP, streak 3, badge «ثلاثة أيام» (7), weekly rank 8 |
 
@@ -2117,7 +2117,7 @@ One row per step of 10.2. Each number was recomputed from sections 8 and 9 for t
 | 8 | Course started (pays nothing) | 180 | 2 | 70 | 18 | 3 |
 | 9 | «أساسيات Power BI» completed: 10 h × 20 | +200 → 380 | **3 مجتهد** | **90** | **10** | 5 |
 | 10 | Back on `/path` | 380 | 3 | 90 | 10 | 5 |
-| 11 | «دليل» applies at 90%: `job_applied` | +40 → 420 | 3 | 90 | 10 | 6 |
+| 11 | «دليلك» applies at 90%: `job_applied` | +40 → 420 | 3 | 90 | 10 | 6 |
 | 12 | Leaderboard | 420 | 3 | 90 | 10 | 6 |
 | 13 | Skill tree, profile | 420 | 3 | 90 | 10 | 6 |
 
@@ -2140,7 +2140,7 @@ One row per step of 10.2. Each number was recomputed from sections 8 and 9 for t
 - The onboarding recommendation: computed from the six answers by the scoring rule of 4.6.
 - The roadmap: built from the target job, the user's stars and the skill prerequisites.
 - XP, levels, streak, daily reward, badges and the user's own leaderboard rank: computed by the rules of section 8 from what the user did.
-- «دليل»: a router in code that executes requests (open a page, search jobs, apply, start a course, change the target) the same way in every mode. Behind it, a tool loop on an AI model answers free questions when a key is present, and fixed templates answer the common ones when it is not. Its page-opening and form-filling really drive the app.
+- «دليلك»: a router in code that executes requests (open a page, search jobs, apply, start a course, change the target) the same way in every mode. Behind it, a tool loop on an AI model answers free questions when a key is present, and fixed templates answer the common ones when it is not. Its page-opening and form-filling really drive the app.
 - Everything the user does is saved in their browser and survives a reload, including a reload in the middle of a show.
 - Privacy as it really is: with no key, nothing leaves this laptop. With a key, chat messages, a summary of the profile and the CV text go to the model provider for the reply, and the product says so (3.6, 3.13, 3.14).
 
@@ -2178,8 +2178,8 @@ Cut in version 2 to protect the build time, none of them asked for: an all-time 
 | 5 | "a great looking loading to show you the best path" | A 7.8-second sequence of six steps that shows the real answers, jobs and skills being narrowed down. It ends on a path, not on a job card: the line it draws stays on screen with the recommended job's stages named from «البداية» to the trophy, and two alternatives beside it. |
 | 6 | The idea file picks the goal after the CV; the lead's journey picks it in onboarding | The lead's order is kept. The target comes from the conversation; the CV then shows how far along that path the user already is, and offers to change the target if another job fits better. The idea file's rewards are kept: +50 profile, +30 goal, +100 CV. |
 | 7 | "like a game like Laracast" | A learning-paths product where progress is the game: a path of stages, courses that grant stars, XP, levels, streak, badges. Nothing of that product's look, name or text is used. |
-| 8 | "he should help through the website like if you ask him anything in the website he open it to you" | «دليل» has a `navigate` tool for every page, and the page really opens while the chat stays. It also fills the application form in view of the user. |
-| 9 | "you can let him apply jobs for you" | Every job offers «دع دليل يقدّم عنك» as its first button (job page, CV results, the roadmap card at 100%), and the same can be typed or tapped in the chat. «دليل» applies only when the user asks for one specific job. It fills the form visibly and sends it; the record is a simulation and the reply says so every time. Applying by hand is the second way. |
+| 8 | "he should help through the website like if you ask him anything in the website he open it to you" | «دليلك» has a `navigate` tool for every page, and the page really opens while the chat stays. It also fills the application form in view of the user. |
+| 9 | "you can let him apply jobs for you" | Every job offers «دع دليلك يقدّم عنك» as its first button (job page, CV results, the roadmap card at 100%), and the same can be typed or tapped in the chat. «دليلك» applies only when the user asks for one specific job. It fills the form visibly and sends it; the record is a simulation and the reply says so every time. Applying by hand is the second way. |
 | 10 | "like a great ui like motions… when he analysis the cv" | The analysis is a 7-second show played over the real result: the real evidence sentences light up and become skill tags. |
 | 11 | "the transition when you click chat" | Both candidate moments are used: the panel that opens over any page (`panel-open`) for the chat, and the document-reading show for the CV analysis. |
 | 12 | "there should be a leadrboard show who is first… so everyone view it" | A page every signed-in user can open, with a podium and a full list. One board, this week's (no all-time tab: nobody new could climb it during a demo). Other people are sample users and are labelled so; only the signed-in user's rank is computed from what they did. "Everyone" cannot mean several real users, because accounts live in one browser. |
@@ -2193,10 +2193,10 @@ Cut in version 2 to protect the build time, none of them asked for: an all-time 
 | 20 | "Skills appear with a level-up celebration" (idea file, demo step 1) | The level thresholds are set so the CV analysis lifts the user to level 2 and the first course to level 3, with or without the application, in either order (8.8). |
 | 21 | XP, or an Arabic word for it | «XP» in Latin letters, as game players say it, explained once in the profile as «نقاط الخبرة». |
 | 22 | Address form | Masculine generic for buttons, labels and level titles, first person for the user's own lines and the sample CV. The onboarding questions and acknowledgements, which sit next to the person's name, are worded without gender. The demo persona is «خالد». Sample users on the leaderboard show a level number without a title, so no woman carries a masculine title. |
-| 23 | Voice of «دليل» | Modern Standard Arabic with a short list of Gulf expressions. Heavier dialect is understood on input and not used on output, so every judge reads it easily. |
+| 23 | Voice of «دليلك» | Modern Standard Arabic with a short list of Gulf expressions. Heavier dialect is understood on input and not used on output, so every judge reads it easily. |
 | 24 | Route name for the roadmap | `/path`, the lead's default. (The header of `tools/shot.mjs` uses `/roadmap` in an example; the spec does not.) |
-| 25 | The idea file's demo never applies; the journey in the brief applies before the course | The demo closes the gap first (70% → 90%) and then asks «دليل» to apply at 90%. That is the product's own story (gap, learn, apply); it puts the headline moment before 1:15; and one typed request shows both "he opens it for you" and "he applies for you". Applying first, at 70%, still works (8.8). |
+| 25 | The idea file's demo never applies; the journey in the brief applies before the course | The demo closes the gap first (70% → 90%) and then asks «دليلك» to apply at 90%. That is the product's own story (gap, learn, apply); it puts the headline moment before 1:15; and one typed request shows both "he opens it for you" and "he applies for you". Applying first, at 70%, still works (8.8). |
 | 26 | His closing line says "a real job", while every job in the demo is sample data | Kept exactly as he wrote it: it is his line. A wording that claims nothing untrue is offered beside it in 10.2, for him to choose. |
 | 27 | "he open it to you like what we do in our demos", with a key that may or may not be there | Requests that act (open, search, apply, start, change the target) are executed by a router in code in every mode; the model, when present, answers free questions. So the part he will show behaves the same with no key and no internet. |
-| 28 | "The name of the project actullay دليلك not masari" (18 Nov) | The product is «دليلك» (Dalilak). The advisor keeps the name «دليل» and introduces himself as «أنا دليل، دليلك إلى وظيفتك.» «مساري» stays only as the roadmap page's name. Where «دليلك» alone could be read as "your guide", the copy says «منصة دليلك». (TEAM-BRIEF section 0.) |
-| 29 | "For the map I want something impressive And easy to trace and have a good looking transition when you open it" (18 Nov) | A named opening, `map-open`: in full the first time the map appears after the reveal, which hands over to it without a cut; short (1.2 s or less) on every later visit and when «دليل» opens the map, so it never becomes a wait. "Easy to trace" became the five reading rules of 3.4, which hold whichever drawing he picks. |
+| 28 | "The name of the project actullay دليلك not masari" (18 Nov) | The product is «دليلك» (Dalilak). The advisor keeps the name «دليل» and introduces himself as «أنا دليل، دليلك إلى وظيفتك.» «مساري» stays only as the roadmap page's name. Where «دليلك» alone could be read as "your guide", the copy says «منصة دليلك». (TEAM-BRIEF section 0.) **20 Nov 2026, Mohammed: the names swapped: the product is «دليل», the advisor «دليلك» («أنا دليلك إلى وظيفتك.»); where «دليل» reads as the common noun, «منصة دليل».** |
+| 29 | "For the map I want something impressive And easy to trace and have a good looking transition when you open it" (18 Nov) | A named opening, `map-open`: in full the first time the map appears after the reveal, which hands over to it without a cut; short (1.2 s or less) on every later visit and when «دليلك» opens the map, so it never becomes a wait. "Easy to trace" became the five reading rules of 3.4, which hold whichever drawing he picks. |

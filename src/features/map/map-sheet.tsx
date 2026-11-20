@@ -41,6 +41,9 @@ export interface MapSheetProps {
   readonly onBranch: (jobId: JobId) => void;
 }
 
+/** The dotted survey grid's spacing in sheet pixels. */
+const GRID = 24;
+
 const at = (x: number, y: number, r: number): CSSProperties => ({ left: x, top: y, ["--r" as string]: `${r}px` });
 /** A station's box is its coin, centred on the trail. */
 const box = (x: number, y: number, r: number): CSSProperties => ({ left: x - r, top: y - r, ["--r" as string]: `${r}px` });
@@ -226,6 +229,11 @@ function MapSheetImpl({ g, roadmap, jobTitle, avatar, level, match, branches, st
   return (
     <div className="dm-plane" style={{ width: W, height: H }}>
       <svg aria-hidden className="dm-terrain" height={H + BT + BB} style={{ left: -BL, top: -BT }} viewBox={`${-BL} ${-BT} ${W + 2 * BL} ${H + BT + BB}`} width={W + 2 * BL}>
+        <defs>
+          <pattern height={GRID} id={`${uid}-grid`} patternUnits="userSpaceOnUse" width={GRID} x={0} y={0}>
+            <circle className="dm-grid-dot" cx={GRID / 2} cy={GRID / 2} r={1.1} />
+          </pattern>
+        </defs>
         {g.terrain.bands.map((band, i) => (
           <g key={i}>
             <path className="dm-fall" d={band.d} transform={`translate(0 ${g.terrain.cliff + 7})`} />
@@ -236,6 +244,8 @@ function MapSheetImpl({ g, roadmap, jobTitle, avatar, level, match, branches, st
         {g.terrain.hairs.map((d, i) => (
           <path className="dm-hair" d={d} key={i} />
         ))}
+        {/* the dotted survey grid lies over the whole sheet, under the trail and every label */}
+        <rect className="dm-grid" fill={`url(#${uid}-grid)`} height={H + BT + BB} width={W + 2 * BL} x={-BL} y={-BT} />
         <path className="dm-svy" d={g.terrain.crosses} />
         {g.terrain.marks.map((m) => (
           <g className="dm-alt" key={m.pct} transform={`translate(${m.x} ${m.y})`}>

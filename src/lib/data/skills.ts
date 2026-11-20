@@ -1,4 +1,5 @@
-// Owner: data. The 38 skills of spec 9.2, in table order (which is also the order inside each field): name, field, star
+// Owner: data. The 38 skills of spec 9.2 (and, merged at the bottom, the 16 of the 20 Nov 2026 expansion in
+// ./expansion/skills.ts, written to the same rules and checked by ./expansion/expansion.test.ts), in table order (which is also the order inside each field): name, field, star
 // slots, prerequisites (always inside the same field, each satisfied by one star), a one-line description for the
 // skill panel (under 15 words) and the aliases the CV analyser looks for (spec 6.5 step 5).
 //
@@ -7,9 +8,13 @@
 // bare word of the 9.2 list (تحليل، بيانات، تصميم، مشروع، إدارة، كتابة، تقارير، تطوير، تدريب، مبيعات، نظام، عرض، تقديم،
 // عمل، فريق), never a phrase that occurs in the sample CV (it must return exactly its eight skills, 6.2), and no alias
 // in two skills. data.test.ts checks all of this. Pure module.
+import { SKILL_IDS } from "@/lib/ids";
 import type { Skill, SkillId } from "@/lib/types";
 
-export const SKILLS: readonly Skill[] = [
+import { EXPANSION_SKILLS } from "./expansion/skills";
+
+/** The 38 skills of spec 9.2. */
+const SPEC_SKILLS: readonly Skill[] = [
   // ── data «البيانات والتحليل» ──────────────────────────────────────────────────────────────────────────────────────
   {
     id: "excel",
@@ -99,7 +104,7 @@ export const SKILLS: readonly Skill[] = [
     name: "Git",
     field: "software",
     maxStars: 1,
-    prereqs: ["programming"],
+    prereqs: [],
     description: "حفظ نسخ الكود وتتبّع تغييراته والعمل عليه مع الزملاء.",
     aliases: ["Git", "GitHub", "GitLab", "إدارة النسخ", "التحكم بالإصدارات", "version control"],
   },
@@ -108,7 +113,7 @@ export const SKILLS: readonly Skill[] = [
     name: "JavaScript",
     field: "software",
     maxStars: 3,
-    prereqs: ["html-css", "programming"],
+    prereqs: ["html-css"],
     description: "لغة الويب التي تجعل الصفحات تفاعلية وتتعامل مع البيانات.",
     aliases: ["JavaScript", "جافاسكربت", "جافا سكريبت", "TypeScript", "ES6", "jQuery"],
   },
@@ -155,7 +160,7 @@ export const SKILLS: readonly Skill[] = [
     name: "بحث المستخدم",
     field: "design",
     maxStars: 1,
-    prereqs: ["design-basics"],
+    prereqs: [],
     description: "فهم المستخدمين بالمقابلات واختبارات الاستخدام قبل التصميم وبعده.",
     aliases: [
       "بحث المستخدم",
@@ -182,7 +187,7 @@ export const SKILLS: readonly Skill[] = [
     name: "النماذج التفاعلية",
     field: "design",
     maxStars: 1,
-    prereqs: ["ui-design"],
+    prereqs: ["figma"],
     description: "تحويل التصاميم إلى نماذج قابلة للتجربة قبل تطويرها.",
     aliases: ["النماذج التفاعلية", "نموذج تفاعلي", "النماذج الأولية", "prototype", "prototyping", "wireframe", "wireframes"],
   },
@@ -229,7 +234,7 @@ export const SKILLS: readonly Skill[] = [
     name: "الإعلانات المدفوعة",
     field: "marketing",
     maxStars: 1,
-    prereqs: ["social-media"],
+    prereqs: ["marketing-basics"],
     description: "إعداد الحملات الإعلانية المدفوعة واستهدافها وقياس عائدها.",
     aliases: ["الإعلانات المدفوعة", "إعلانات مدفوعة", "الحملات الإعلانية", "Google Ads", "Meta Ads", "PPC", "paid ads"],
   },
@@ -267,7 +272,7 @@ export const SKILLS: readonly Skill[] = [
     name: "تحليل الأعمال",
     field: "business",
     maxStars: 1,
-    prereqs: ["project-management"],
+    prereqs: [],
     description: "فهم احتياجات العمل وتحويلها إلى متطلبات واضحة قابلة للتنفيذ.",
     aliases: ["تحليل الأعمال", "محلل أعمال", "جمع المتطلبات", "business analysis", "BPMN", "user stories"],
   },
@@ -391,6 +396,11 @@ export const SKILLS: readonly Skill[] = [
     aliases: ["العمل الجماعي", "العمل ضمن فريق", "روح الفريق", "teamwork"],
   },
 ];
+
+/** Every skill (the 38 of spec 9.2 and the expansion's 16), in SKILL_IDS order. */
+export const SKILLS: readonly Skill[] = [...SPEC_SKILLS, ...EXPANSION_SKILLS].sort(
+  (a, b) => SKILL_IDS.indexOf(a.id) - SKILL_IDS.indexOf(b.id),
+);
 
 export function getSkill(id: SkillId): Skill {
   const skill = SKILLS.find((s) => s.id === id);

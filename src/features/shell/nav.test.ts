@@ -65,7 +65,7 @@ describe("topBarHeading (ARCHITECTURE 11.1, 17.4)", () => {
     expect(topBarHeading("/path")).toBe("مسارك");
     expect(topBarHeading("/jobs")).toBe("الوظائف");
     expect(topBarHeading("/jobs/data-analyst-riyadh")).toBe("الوظائف");
-    expect(topBarHeading("/learn/c-powerbi-1")).toBe("الدورات");
+    expect(topBarHeading("/learn/c-powerbi-1")).toBe("دليل التعلّم");
     expect(topBarHeading("/skills")).toBe("شجرة المهارات");
     expect(topBarHeading("/welcome")).toBeNull();
   });

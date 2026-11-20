@@ -2,7 +2,7 @@
 // Owner: profile. The identity band of spec 3.13 as the player plate (docs/GAME-LAYER.md 5.8): the avatar (with its level
 // ring) and «غيّر الصورة», the name, the level token with «المستوى 3 · مجتهد», the XP line «420 من 600 XP» (level 7:
 // «بلغت أعلى مستوى») with «XP = نقاط الخبرة», and the brass XP track in segments with what is left to the next level.
-// Under the plate the stats row as five StatTiles: «XP» (brass) · «الدورات المكتملة» · «النجوم» · «سلسلة الأيام» ·
+// Under the plate the stats row as five StatTiles: «XP» (brass) · «خطوات التعلّم المنجزة» · «النجوم» · «سلسلة الأيام» ·
 // «ترتيب الأسبوع». Plate and tiles are flat ink pieces (`interactive={false}`): they are read, not pressed; the only
 // pressable thing here is the avatar button.
 // The plate sits on a faint contour map whose summit is the avatar: the user is the high point of their own page.
@@ -171,7 +171,7 @@ function NextLevelToken({ level }: { readonly level: number }): ReactNode {
   );
 }
 
-/** «XP» 420 · «الدورات المكتملة» 1 · «النجوم» 12 · «سلسلة الأيام» 1 · «ترتيب الأسبوع» 10: five flat StatTiles. */
+/** «XP» 420 · «خطوات التعلّم المنجزة» 1 · «النجوم» 12 · «سلسلة الأيام» 1 · «ترتيب الأسبوع» 10: five flat StatTiles. */
 function StatsRow({ stats }: { readonly stats: ProfileStats }): ReactNode {
   return (
     <div className="grid grid-cols-2 gap-3 @min-[820px]/content:grid-cols-5 @min-[820px]/content:gap-4">

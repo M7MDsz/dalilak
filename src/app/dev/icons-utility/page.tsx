@@ -159,7 +159,7 @@ function Overview() {
     <main className="mx-auto max-w-[1360px] px-4 py-8 md:px-10 md:py-12">
       <header className="flex flex-col gap-4 border-b border-line pb-6 md:flex-row md:items-end md:justify-between md:gap-8">
         <div>
-          <h1 className="text-[28px] font-bold leading-tight text-ink">أيقونات دليلك: الواجهة</h1>
+          <h1 className="text-[28px] font-bold leading-tight text-ink">أيقونات دليل: الواجهة</h1>
           <p className="mt-2 text-[15px] text-ink-2">
             42 أيقونة صغيرة للأسهم والأزرار والأشياء، من عائلة أيقونات التوقيع نفسها: شبكة 24، خط بسماكة 2، ونقطة طريق واحدة توضع بقاعدة واحدة من ثلاث.
           </p>

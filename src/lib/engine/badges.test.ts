@@ -34,7 +34,7 @@ describe("badge rules (spec 8.6)", () => {
   });
 
   it("first application counts at any match", () => {
-    const low = applied(cvAnalysedFacts(), "bi-analyst-riyadh", t + 10 * MINUTE, 43);
+    const low = applied(cvAnalysedFacts(), "jeeny-growth-insights-analytics-riyadh", t + 10 * MINUTE, 43);
     expect(badgesEarned(low, CLOCK)).toContain("first-application");
   });
 
@@ -73,7 +73,7 @@ describe("badge rules (spec 8.6)", () => {
   it("job-ready at 100% with the CURRENT target", () => {
     const ready = completed(courseDoneFacts(), "c-statistics-2", t + 20 * MINUTE, 240);
     expect(badgesEarned(ready, CLOCK)).toContain("job-ready");
-    expect(badgesEarned({ ...ready, targetJobId: "bi-analyst-riyadh" }, CLOCK)).not.toContain("job-ready");
+    expect(badgesEarned({ ...ready, targetJobId: "jeeny-growth-insights-analytics-riyadh" }, CLOCK)).not.toContain("job-ready");
   });
 
   it("top-ten = weekly rank ≤ 10, this week only", () => {

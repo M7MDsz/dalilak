@@ -31,7 +31,7 @@ import type {
   NextStep,
   OnboardingAnswers,
   OnboardingOption,
-  QuestionId,
+  OnboardingStepId,
   SkillId,
 
   StarSlot,
@@ -86,7 +86,7 @@ export interface AdvisorRequest {
   readonly message: { readonly text: string; readonly chip?: ChipPayload };
   /** The last 12 messages before this one, oldest first (spec 5.2). */
   readonly history: readonly ProtocolMessage[];
-  /** What «دليل» may know: the facts (UserSnapshot = UserFacts). The server derives every number from them. */
+  /** What «دليلك» may know: the facts (UserSnapshot = UserFacts). The server derives every number from them. */
   readonly facts: UserSnapshot;
   /** The device's clock (weekly XP, statuses and "today" come from it). */
   readonly clock: Clock;
@@ -94,7 +94,7 @@ export interface AdvisorRequest {
   readonly thread: {
     /** Jobs already came up in this thread (5.9: the sample-data sentence is added only the first time). */
     readonly jobsDisclosed: boolean;
-    /** Ids on the cards of the newest «دليل» message (context for a model; the router never resolves ids from it). */
+    /** Ids on the cards of the newest «دليلك» message (context for a model; the router never resolves ids from it). */
     readonly lastJobIds: readonly JobId[];
     readonly lastCourseIds: readonly CourseId[];
   };
@@ -127,7 +127,7 @@ export type AdvisorAction =
 export type ReplySource = "router" | "local" | ProviderName;
 
 export type AdvisorEvent =
-  /** The tool status line (5.3), or «دليل يفكّر…» before any tool (tool null). Rolls (`status-roll`). */
+  /** The tool status line (5.3), or «دليلك يفكّر…» before any tool (tool null). Rolls (`status-roll`). */
   | { readonly type: "status"; readonly tool: ToolName | null; readonly text: string }
   /**
    * A state change or a page change for the dispatcher. Everything after it in the same turn (text, cards, chips) is
@@ -253,6 +253,30 @@ export interface ToolCourse {
   readonly prepares: SkillId | null;
 }
 
+/** A real course of a learning guide, as get_course carries it (a null is unknown: never guessed, never said). */
+export interface ToolGuideCourse {
+  readonly title: string;
+  readonly provider: string;
+  readonly lang: "ar" | "en";
+  readonly price: "free" | "paid" | "free_to_audit" | null;
+  readonly hours: number | null;
+  readonly certificate: boolean | null;
+  /** One line, Arabic: why it is recommended. */
+  readonly why: string;
+}
+
+/**
+ * The learning guide of a step's skill (20 Nov 2026: Dalilak guides instead of hosting courses). Real items only, links
+ * opened on 20 Nov 2026: the top pick «ابدأ بهذا», up to two alternatives, people to follow, articles, a proof task.
+ */
+export interface ToolGuide {
+  readonly top_pick: ToolGuideCourse;
+  readonly alternatives: readonly ToolGuideCourse[];
+  readonly people: readonly { readonly name: string; readonly platform: string; readonly why: string }[];
+  readonly articles: readonly { readonly title: string; readonly author: string; readonly why: string }[];
+  readonly proof: string | null;
+}
+
 /**
  * Field spelling: the flat tool shapes use snake_case (`match_after`, `job_id`, as spec 5.3 names them). Where a result
  * embeds an engine type as is (`Gap`, `MatchBreakdown`, `NextStep`), that type keeps its camelCase names (`matchAfter`,
@@ -275,8 +299,11 @@ export interface ToolResults {
   list_courses: { readonly courses: readonly ToolCourse[] };
   get_course: ToolCourse & {
     readonly description: string;
+    /** Empty since the guides (20 Nov 2026): a learning step has no lessons in Dalilak. */
     readonly lessons: readonly string[];
     readonly lock: LockReason | null;
+    /** The guide of the step's skill (optional: added 20 Nov 2026, older readers ignore it). */
+    readonly guide?: ToolGuide;
   };
   start_course:
     | { readonly ok: true; readonly already: false; readonly hours: CourseHours; readonly lessons: number; readonly xp: number; readonly match_after: number | null }
@@ -333,22 +360,22 @@ export interface ToolError {
 export interface OnboardingContext {
   readonly name: string;
   readonly answers: OnboardingAnswers;
-  readonly misses: Readonly<Partial<Record<QuestionId, number>>>;
+  readonly misses: Readonly<Partial<Record<OnboardingStepId, number>>>;
   /** Derived, never stored: null while the thread is empty (before the greeting), else `pendingQuestion(answers)`. */
-  readonly pending: QuestionId | null;
+  readonly pending: OnboardingStepId | null;
 }
 
 export type OnboardingInput =
   /** A chip: its option id is recorded directly, never parsed (4.2). The `other` city chip is NOT sent (it only focuses the composer). */
-  | { readonly kind: "chip"; readonly question: QuestionId; readonly option: string }
+  | { readonly kind: "chip"; readonly question: OnboardingStepId; readonly option: string }
   /** A typed message (only the first 300 characters are read, 4.5). */
   | { readonly kind: "text"; readonly text: string }
   /** A typed message the model classified into option ids of `question` (interest: up to two). */
-  | { readonly kind: "classified"; readonly question: QuestionId; readonly options: readonly string[]; readonly text: string };
+  | { readonly kind: "classified"; readonly question: OnboardingStepId; readonly options: readonly string[]; readonly text: string };
 
 /** The quick replies under the pending question (test id `welcome-chip-{question}-{option}`). */
 export interface OnboardingChipSet {
-  readonly question: QuestionId;
+  readonly question: OnboardingStepId;
   readonly options: readonly OnboardingOption[];
 }
 
@@ -356,13 +383,13 @@ export interface OnboardingChipSet {
 export interface OnboardingTurn {
   /** The user's bubble (chip label or the typed text). */
   readonly userText: string;
-  /** «دليل»'s messages in order: the acknowledgement (4.4) or special reply (4.5), then the next question; or the closing line. */
+  /** «دليلك»'s messages in order: the acknowledgement (4.4) or special reply (4.5), then the next question; or the closing line. */
   readonly replies: readonly string[];
   /** All answers after this turn. */
   readonly answers: OnboardingAnswers;
-  readonly misses: Readonly<Partial<Record<QuestionId, number>>>;
+  readonly misses: Readonly<Partial<Record<OnboardingStepId, number>>>;
   /** The question now pending (its chips are `chips`); null when done. The store does not save it (it is derived). */
-  readonly pending: QuestionId | null;
+  readonly pending: OnboardingStepId | null;
   readonly chips: OnboardingChipSet | null;
   /** The sixth answer was accepted: the closing line is in `replies`; phase 2 starts 1.2 s later. */
   readonly done: boolean;
@@ -371,19 +398,19 @@ export interface OnboardingTurn {
    * ask POST /api/onboarding (2.5 s) and, on a valid answer, run the interpreter again with a "classified" input instead
    * of applying this turn. Otherwise this turn (with its «لم ألتقطها جيداً…» reply) is applied as is.
    */
-  readonly unmapped: { readonly question: QuestionId; readonly text: string } | null;
+  readonly unmapped: { readonly question: OnboardingStepId; readonly text: string } | null;
 }
 
 export interface OnboardingClassifyRequest {
   readonly v: typeof PROTOCOL_VERSION;
-  readonly question: QuestionId;
+  readonly question: OnboardingStepId;
   /** At most 300 characters. */
   readonly text: string;
 }
 
 export type OnboardingEvent =
   /** Option ids valid for that question (anything else was dropped by the server). */
-  | { readonly type: "classified"; readonly question: QuestionId; readonly options: readonly string[] }
+  | { readonly type: "classified"; readonly question: OnboardingStepId; readonly options: readonly string[] }
   | { readonly type: "unclassified" }
   | { readonly type: "done"; readonly mode: BrainMode }
   | { readonly type: "error"; readonly code: "bad_request" | "brain_failed" };
@@ -440,7 +467,7 @@ export const TIMEOUTS_MS = {
   /**
    * The provider must send its first event within this, or the local brain answers (5.5 rule 11). Was 2.5 s; live
    * Gemini Flash-Lite (18 Nov 2026) answered in 1.0-2.0 s but crossed 2.5 s on about 1 turn in 4, so the user got the
-   * local "out of scope" line for questions Gemini handles. The panel shows «دليل يفكّر…» at once and its stall line
+   * local "out of scope" line for questions Gemini handles. The panel shows «دليلك يفكّر…» at once and its stall line
    * after 4 s, so a 6 s wait reads as thinking, not as a hang.
    */
   advisorFirstEvent: 6_000,
@@ -448,7 +475,7 @@ export const TIMEOUTS_MS = {
   providerCooldown: 60_000,
   /**
    * The onboarding classification (4.5); the client also aborts at this. Was 2.5 s: live Gemini crossed it on 1 of 6
-   * typed answers (18 Nov 2026). «دليل» shows his typing dots meanwhile, so 5 s reads as thinking.
+   * typed answers (18 Nov 2026). «دليلك» shows his typing dots meanwhile, so 5 s reads as thinking.
    */
   onboardingClassify: 5_000,
   /** The CV model call (6.3, 6.6); then the local result stands alone. */
