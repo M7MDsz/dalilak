@@ -1,0 +1,77 @@
+# Deploys «دليل» to Vercel (project "dalilak", https://dalilak-one.vercel.app).
+#   push to main        -> production (dalilak-one.vercel.app)
+#   push to any branch  -> a preview link (shown in the run summary, and commented on the branch's open pull request)
+# Needs three repository secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID.
+# No model keys are set on Vercel, so «دليلك» answers with the built-in offline brain.
+name: Vercel
+
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+
+concurrency:
+  group: vercel-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_TELEMETRY_DISABLED: "1"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install the Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Choose production or preview
+        id: target
+        run: |
+          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
+            echo "env=production" >> "$GITHUB_OUTPUT"
+            echo "flag=--prod" >> "$GITHUB_OUTPUT"
+          else
+            echo "env=preview" >> "$GITHUB_OUTPUT"
+            echo "flag=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Pull the project settings
+        run: vercel pull --yes --environment=${{ steps.target.outputs.env }} --token="${{ secrets.VERCEL_TOKEN }}"
+
+      - name: Build
+        run: vercel build ${{ steps.target.outputs.flag }} --token="${{ secrets.VERCEL_TOKEN }}"
+
+      - name: Deploy
+        id: deploy
+        run: |
+          url=$(vercel deploy --prebuilt ${{ steps.target.outputs.flag }} --token="${{ secrets.VERCEL_TOKEN }}")
+          echo "url=${url}" >> "$GITHUB_OUTPUT"
+          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
+            echo "Production: https://dalilak-one.vercel.app (this build: ${url})" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Preview: ${url}" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Comment the preview link on the open pull request
+        if: github.ref != 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pr=$(gh pr list -R "$GITHUB_REPOSITORY" --head "$GITHUB_REF_NAME" --state open --json number --jq '.[0].number')
+          if [ -n "$pr" ]; then
+            gh pr comment "$pr" -R "$GITHUB_REPOSITORY" --body "Preview of this branch: ${{ steps.deploy.outputs.url }}"
+          fi

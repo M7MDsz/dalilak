@@ -34,3 +34,6 @@ design/explore/**/shots/
 # Python bytecode (research generators)
 __pycache__/
 *.pyc
+
+# Vercel CLI (CI pulls project settings here)
+.vercel
