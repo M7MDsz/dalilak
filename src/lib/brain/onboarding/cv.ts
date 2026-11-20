@@ -4,6 +4,7 @@
 // the two CV phases (the offer, the confirm). The screen runs the analysis itself (src/features/welcome/cv-step.tsx).
 import { countNoun } from "@/lib/copy";
 import { SKILLS, getJob, getQuestion, optionLabel } from "@/lib/data";
+import { NEAREST_INTEREST } from "@/lib/engine";
 import { isJobFieldId } from "@/lib/ids";
 import type { CvErrorCode, OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
 import type {
@@ -156,31 +157,6 @@ export function interestFromCv(skills: readonly CvSkill[]): InterestOption | nul
   return NEAREST_INTEREST[best] ?? null;
 }
 
-/** The interest tile nearest to each job field (the six tiles are data, software, design, marketing, business, hr). */
-const NEAREST_INTEREST: Readonly<Record<string, InterestOption>> = {
-  data: "data",
-  software: "software",
-  design: "design",
-  marketing: "marketing",
-  business: "business",
-  hr: "hr",
-  product: "business",
-  "cyber-cloud": "software",
-  gaming: "software",
-  media: "design",
-  communications: "marketing",
-  education: "hr",
-  "sales-supply": "business",
-  engineering: "business",
-  "project-controls": "business",
-  "banking-risk": "business",
-  legal: "business",
-  "real-estate": "business",
-  aviation: "business",
-  "energy-sustainability": "business",
-  "tourism-hospitality": "business",
-  "health-admin": "business",
-};
 
 /** «Excel و SQL» (a space before a Latin name, so it reads apart) · «الإحصاء والبرمجة». */
 function andOf(a: string, b: string): string {
@@ -310,7 +286,7 @@ export function cvInterestQuestion(skills: readonly CvSkill[], suggested: Intere
   // the skills whose field leads to the suggested tile (a civil engineer's Primavera and quantity surveying → «تنظيم الأعمال والمشاريع»)
   const inField = skills.filter((s) => {
     const field = SKILLS.find((k) => k.id === s.skill)?.field;
-    return field !== undefined && NEAREST_INTEREST[field] === suggested;
+    return field !== undefined && isJobFieldId(field) && NEAREST_INTEREST[field] === suggested;
   });
   const [a, b] = strongestSkills(inField);
   const label = optionLabel("interest", suggested) ?? suggested;

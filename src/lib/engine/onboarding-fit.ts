@@ -1,11 +1,12 @@
 // Owner: engine. The onboarding fit score and recommendation (spec 4.6). Never shown as a number (P5).
 import { EXPERIENCE_BANDS, JOB_IDS, isCompanyId, isJobFieldId } from "@/lib/ids";
-import { getCompany, getJob, getJobCity, type Company } from "@/lib/data";
+import { SKILLS, getCompany, getJob, getJobCity, type Company } from "@/lib/data";
 import type {
   CompanyId,
   ExperienceBand,
   ExperienceOption,
   FitBreakdown,
+  InterestOption,
   Job,
   JobFieldId,
   JobId,
@@ -29,7 +30,8 @@ const MAJOR_FIELDS: Readonly<Record<MajorOption, readonly [JobFieldId, JobFieldI
   marketing: ["marketing", "design"],
   hr: ["hr", "business"],
   design: ["design", "marketing"],
-  engineering: ["data", "business"],
+  // 21 Nov 2026 (tester): engineering and project-controls jobs exist now (wave 2), so an engineering major points there
+  engineering: ["engineering", "project-controls"],
   science: ["data", "software"],
   other: null,
 };
@@ -84,8 +86,59 @@ function interestIndex(job: Job, answers: OnboardingAnswers): number {
   return (answers.interest ?? []).findIndex((i) => i === job.field);
 }
 
-function termsOf(job: Job, answers: OnboardingAnswers): FitBreakdown["terms"] {
-  const interestAt = interestIndex(job, answers);
+/**
+ * The interest tile nearest to each job field (the six tiles are data, software, design, marketing, business, hr). A CV
+ * whose strongest field has no tile of its own is offered the nearest one (21 Nov 2026).
+ */
+export const NEAREST_INTEREST: Readonly<Record<JobFieldId, InterestOption>> = {
+  data: "data",
+  software: "software",
+  design: "design",
+  marketing: "marketing",
+  business: "business",
+  hr: "hr",
+  product: "business",
+  "cyber-cloud": "software",
+  gaming: "software",
+  media: "design",
+  communications: "marketing",
+  education: "hr",
+  "sales-supply": "business",
+  engineering: "business",
+  "project-controls": "business",
+  "banking-risk": "business",
+  legal: "business",
+  "real-estate": "business",
+  aviation: "business",
+  "energy-sustainability": "business",
+  "tourism-hospitality": "business",
+  "health-admin": "business",
+};
+
+/** The job field holding the most CV stars (at least 3; ties: catalogue order), or null. */
+export function cvFieldOf(stars: StarMap | undefined): JobFieldId | null {
+  if (stars === undefined) return null;
+  const byField = new Map<JobFieldId, number>();
+  for (const skill of SKILLS) {
+    const held = stars[skill.id] ?? 0;
+    if (held > 0 && isJobFieldId(skill.field)) byField.set(skill.field, (byField.get(skill.field) ?? 0) + held);
+  }
+  let best: JobFieldId | null = null;
+  let most = 0;
+  for (const [field, held] of byField) if (held > most) [best, most] = [field, held];
+  return most >= 3 ? best : null;
+}
+
+function termsOf(job: Job, answers: OnboardingAnswers, stars?: StarMap): FitBreakdown["terms"] {
+  let interestAt = interestIndex(job, answers);
+  // the user took the tile their CV pointed to (a civil engineer's CV → «تنظيم الأعمال والمشاريع»): the CV's own field
+  // counts as that interest, so the path lands on an engineering job, not a business one (tester, 21 Nov 2026)
+  if (interestAt === -1 && stars !== undefined) {
+    const cvField = cvFieldOf(stars);
+    if (cvField !== null && cvField === job.field && NEAREST_INTEREST[cvField] !== cvField && answers.interest?.[0] === NEAREST_INTEREST[cvField]) {
+      interestAt = 0;
+    }
+  }
   const interest = interestAt === 0 ? 40 : interestAt === 1 ? 30 : 0;
   const fields = majorFields(answers);
   const major = fields === null ? 0 : job.field === fields[0] ? 25 : job.field === fields[1] ? 12 : 0;
@@ -114,7 +167,7 @@ export function cvFitPoints(job: Job, stars: StarMap | undefined): number {
  */
 export function fitBreakdown(jobId: JobId, answers: OnboardingAnswers, stars?: StarMap): FitBreakdown {
   const job = getJob(jobId);
-  const terms = termsOf(job, answers);
+  const terms = termsOf(job, answers, stars);
   const score = terms.interest + terms.major + terms.experience + terms.city + terms.priority + cvFitPoints(job, stars);
   const excluded = answers.education !== undefined && GATED_EDUCATION.has(answers.education) && job.band === "mid";
   return { jobId, score, terms, excluded };
