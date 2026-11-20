@@ -3,8 +3,8 @@
 // Internal files: tables.ts (keywords, acknowledgement bank, special replies), read.ts (the 4.3 order of reading).
 // `pendingQuestion` and `onboardingContext` are written in full by the architect (they ARE the "pending" contract).
 import { NEUTRAL_PRINT } from "@/lib/copy";
-import { JOB_CITIES, getCompany, getJob, getJobCity, getQuestion, optionLabel } from "@/lib/data";
-import { companyChoices, companyField, companyJob, jobsAtCompany } from "@/lib/engine";
+import { JOB_CITIES, getCompany, getField, getJob, getJobCity, getQuestion, optionLabel } from "@/lib/data";
+import { companyChoices, companyField, companyJob, companyJobsOutOfReach, companyOtherFieldJob, jobsAtCompany, userBandOf } from "@/lib/engine";
 import { ONBOARDING_STEP_IDS, isOptionOf } from "@/lib/ids";
 import type { CityValue, CompanyId, InterestOption, JobId, OnboardingAnswers, OnboardingStepId, UserState } from "@/lib/types";
 import type { OnboardingChipSet, OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
@@ -119,7 +119,16 @@ function ackCompany(value: CompanyId | "none", answers: OnboardingAnswers): stri
   if (jobsAtCompany(value).length === 0) return ACK.company.noJob(company);
   if (BEFORE_COMPANY.some((q) => answers[q] === undefined)) return ACK.company.early(company);
   const job = companyJob({ ...answers, company: value });
-  return job === null ? ACK.company.noJobInField(company) : ACK.company.job(company, getJob(job).title, whereOf(job));
+  if (job !== null) return ACK.company.job(company, getJob(job).title, whereOf(job));
+  const withCompany = { ...answers, company: value };
+  if (companyJobsOutOfReach(withCompany)) return ACK.company.aboveBand(company);
+  // its jobs are in another field (21 Nov 2026): said positively; the path stays in the user's field
+  const other = companyOtherFieldJob(withCompany);
+  if (other !== null) {
+    const field = companyField(answers);
+    return ACK.company.otherField(company, getJob(other).title, getField(getJob(other).field).name, field === null ? "مجالك" : getField(field).name);
+  }
+  return ACK.company.noJobInField(company);
 }
 
 function recordFound(name: string, found: Found, typed: string | null = null, before: OnboardingAnswers = {}): Recorded {
@@ -157,7 +166,7 @@ function recordFound(name: string, found: Found, typed: string | null = null, be
       return {
         question: "experience",
         answers: { experience: found.value },
-        ack: ACK.experience[found.value],
+        ack: ACK.experience[found.value][variant(name, "experience")],
         extra: found.value === "none" ? label : `خبرتك ${label}`,
       };
     }
@@ -167,13 +176,13 @@ function recordFound(name: string, found: Found, typed: string | null = null, be
       return {
         question: "interest",
         answers: { interest: second ? [first, second] : [first] },
-        ack: ACK.interest[first],
+        ack: ACK.interest[first][variant(name, "interest")],
         extra: `اهتمامك ${labels.join(" و")}`,
       };
     }
     case "priority": {
       const label = chipLabel("priority", found.value);
-      return { question: "priority", answers: { priority: found.value }, ack: ACK.priority[found.value], extra: `أولويتك ${label}` };
+      return { question: "priority", answers: { priority: found.value }, ack: ACK.priority[found.value][variant(name, "priority")], extra: `أولويتك ${label}` };
     }
     case "company": {
       const label = found.value === "none" ? chipLabel("company", "none") : `الشركة اللي في بالك ${getCompany(found.value).short}`;
@@ -250,7 +259,7 @@ function answeredTurn(
       ? `${primary.ack} ${REPLY.alsoRecorded(joinCommaAnd(extras.map((r) => r.extra)))}`
       : primary.ack
     : null;
-  const pending = pendingQuestion(answers);
+  const pending = pendingQuestion(answers, false, context.order);
   const name = firstName(context.name);
   const replies = [
     ...(ack ? [ack] : []),
@@ -393,7 +402,7 @@ export function openingMessages(name: string): readonly string[] {
 
 /** The re-ask after a reload mid-conversation (3.2 "Resumed"): the pending question again. */
 export function resumeMessages(context: OnboardingContext): readonly string[] {
-  const pending = context.pending ?? pendingQuestion(context.answers);
+  const pending = context.pending ?? pendingQuestion(context.answers, false, context.order);
   return pending === null ? [] : [questionText(pending, context.answers)];
 }
 
@@ -404,7 +413,7 @@ export function resumeMessages(context: OnboardingContext): readonly string[] {
  */
 export function questionChips(question: OnboardingStepId, answers: OnboardingAnswers): OnboardingChipSet {
   if (question === "company") {
-    const tiles = companyChoices(companyField(answers)).map((id) => ({ id, label: getCompany(id).short }));
+    const tiles = companyChoices(companyField(answers), 5, answers.experience === undefined ? null : userBandOf(answers)).map((id) => ({ id, label: getCompany(id).short }));
     return { question, options: [...tiles, { id: "none", label: chipLabel("company", "none") }] };
   }
   return { question, options: getQuestion(question).options };
@@ -446,17 +455,29 @@ export function onboardingTurn(context: OnboardingContext, input: OnboardingInpu
  * `completedBefore`: the account finished onboarding before step 7 existed (saved before 20 Nov 2026: completed, no
  * company): it stays complete, its company counts as «لا، مو الحين».
  */
-export function pendingQuestion(answers: OnboardingAnswers, completedBefore = false): OnboardingStepId | null {
-  for (const question of ONBOARDING_STEP_IDS) {
+export function pendingQuestion(answers: OnboardingAnswers, completedBefore = false, order: readonly OnboardingStepId[] = ONBOARDING_STEP_IDS): OnboardingStepId | null {
+  for (const question of order) {
     if (question === "company" && completedBefore) continue;
     if (answers[question] === undefined) return question;
   }
   return null;
 }
 
+/**
+ * The order of the questions after a CV (docs/ONBOARDING-FLOW.md, the owner's order): the CV's answers are confirmed first,
+ * then the interest (asked from the CV's real skills), then whatever the CV did not state (city, education, major,
+ * experience), then company and priority. The same seven answer slots: the engine and the reveal are unchanged.
+ */
+export const CV_QUESTION_ORDER: readonly OnboardingStepId[] = ["interest", "city", "education", "major", "experience", "company", "priority"];
+
+/** The question order of a saved user: the CV order once a CV was read and its answers kept (not after «لا، بعدّل»). */
+export function questionOrder(user: Pick<UserState, "onboarding">): readonly OnboardingStepId[] {
+  return user.onboarding.cv === "analysed" && user.onboarding.cvPrefill?.confirmed === true ? CV_QUESTION_ORDER : ONBOARDING_STEP_IDS;
+}
+
 /** The step a saved user is on: null before the greeting (empty thread) and once onboarding is complete. */
 export function pendingStep(user: Pick<UserState, "answers" | "onboarding" | "onboardingCompletedAt">): OnboardingStepId | null {
-  return user.onboarding.thread.length === 0 ? null : pendingQuestion(user.answers, user.onboardingCompletedAt !== null);
+  return user.onboarding.thread.length === 0 ? null : pendingQuestion(user.answers, user.onboardingCompletedAt !== null, questionOrder(user));
 }
 
 /**
@@ -465,10 +486,12 @@ export function pendingStep(user: Pick<UserState, "answers" | "onboarding" | "on
  * lets a typed first answer be read against it (4.3 step 3), and lets resumeMessages re-ask after a reload.
  */
 export function onboardingContext(user: UserState): OnboardingContext {
+  const order = questionOrder(user);
   return {
     name: user.name,
     answers: user.answers,
     misses: user.onboarding.misses,
     pending: pendingStep(user),
+    ...(order === CV_QUESTION_ORDER ? { order } : {}),
   };
 }

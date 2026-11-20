@@ -1,25 +1,26 @@
 "use client";
 // Owner: applications. One application (spec 3.9 "Application card"), in the spec's reading order: job title · company
-// with «جهة تجريبية» · «رقم الطلب …» · «قدّمت …» · the three-step track · the status note · the match when sent and now
-// (and «ارتفعت من … إلى … منذ التقديم» when it rose) · «قدّم عنك دليلك» · «عرض الوظيفة» · «محاكاة: انقل للحالة التالية»
-// (hidden once shortlisted or closed) · «شاهد الفجوة» when closed.
+// · «رقم الطلب …» · «قدّمت …» · the three-step track · the status note · the match when sent and now
+// (and «ارتفعت من … إلى … منذ التقديم» when it rose) · «قدّم عنك دليلك» · «عرض الوظيفة» · «انقل للخطوة التالية»
+// (hidden at the last step) · «شاهد الفجوة» when closed.
 //
 // `status-advance`: the status is derived (engine applicationStatus, clock refreshed every 5 s by the screen). The card
 // SHOWS a status that follows the real one: on arrival it starts from the status this page last showed for this
-// application (seen.applicationStatus; never shown → «أُرسل», which the user saw on the confirmation) and moves to the real
+// application (seen.applicationStatus; never shown → «محفوظ», which the user saw on the confirmation) and moves to the real
 // one after the page has risen; later changes (the 5 s tick, the simulation control) move it at once. First the track
 // draws and its marker rides to the new step (the cause), then the status label and the note roll (the meaning). The
 // marker is written back to seen.applicationStatus once the change has been shown. data-state is final from frame one.
 //
-// 20 Nov 2026 (real jobs): an application to a REAL posting was prepared here and is sent by the user from the original
-// posting. Its card says so («جهّزه دليلك، وأرسله أنت من الإعلان الأصلي») with the link, and shows no track, no status
-// note and no simulation control: nobody is pretended to review it. The practice job keeps the simulated track.
+// Real jobs: an application to a REAL posting was prepared here and is sent by the user from the original posting. Its
+// card says so («جهّزه دليلك، وأرسله أنت من الإعلان الأصلي») with the link, and shows no track and no status note:
+// nobody is pretended to review it. The practice job keeps a track of the user's own progress («محفوظ» → «جاهز» →
+// «الاستعداد»): no company stands behind it, so no step says it was sent, received or reviewed.
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 import { Avatar } from "@/components/avatars";
 import { DaleelGlyph } from "@/components/chat";
-import { IconArrowForward, IconArrowUp, IconCheckCircle, IconClock, IconExternal, IconFile, IconInfo, IconSend } from "@/components/icons";
+import { IconArrowForward, IconArrowUp, IconCheckCircle, IconClock, IconExternal, IconFile, IconInfo } from "@/components/icons";
 import { NavLink, Roll, useInstant } from "@/components/motion";
 import { Button, buttonStyles, cn } from "@/components/ui";
 import { JobTag } from "@/features/shared";
@@ -193,7 +194,7 @@ function StatusLabel({ jobId, status, shown }: { readonly jobId: JobId; readonly
 function StatusIcon({ status }: { readonly status: ApplicationStatus }): ReactNode {
   switch (status) {
     case "sent":
-      return <IconSend size={18} waypoint="muted" />;
+      return <IconFile size={18} waypoint="muted" />;
     case "review":
       return <IconClock size={18} waypoint="muted" />;
     case "shortlisted":
@@ -292,10 +293,6 @@ function Prepared({ by, url, user }: { readonly by: Application["by"]; readonly 
         <IconExternal size={18} />
         {JOB_SOURCE_COPY.openPosting}
       </a>
-      <p className="flex items-start gap-1.5 text-small text-fg-3">
-        <IconInfo className="mt-0.5 shrink-0" size={16} waypoint="off" />
-        <span>{JOB_SOURCE_COPY.mayHaveClosed}</span>
-      </p>
     </div>
   );
 }
@@ -303,7 +300,7 @@ function Prepared({ by, url, user }: { readonly by: Application["by"]; readonly 
 // ── the shown status ──────────────────────────────────────────────────────────────────────────────────────────────
 
 /**
- * The status the card draws: it starts from what this page last showed (or «أُرسل») and follows the real status; on
+ * The status the card draws: it starts from what this page last showed (or «محفوظ») and follows the real status; on
  * arrival after ARRIVAL_DELAY_MS, later at once. Writes seen.applicationStatus once the shown status is the real one and
  * the change has played. Strict-Mode safe (timers only; the marker is merged into the latest saved record when written).
  */

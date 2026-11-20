@@ -25,7 +25,7 @@ import { cn } from "@/components/ui";
 import { AdvisorRoot } from "@/features/advisor";
 import { useBrainStatus, useAppStore, useUi } from "@/lib/store";
 
-import { useViewport } from "@/features/shared";
+import { useKeyboardViewport, useViewport } from "@/features/shared";
 
 import { OverlayHost } from "./overlay-host";
 import { PHONE_TAB_BAR_HEIGHT, PHONE_TOP_BAR_HEIGHT, PhoneTopBar, TabBar } from "./phone-bars";
@@ -49,6 +49,7 @@ export function AppShell({ children }: { readonly children: ReactNode }): ReactN
     useAppStore.getState().touchDay();
   }, []);
   useShellMetrics(desktop, docked);
+  useKeyboardViewport(!desktop); // phones: the keyboard's box on <html>, so the composer and sheets stay above it
 
   const style = {
     "--content-inset-start": desktop ? SIDE_NAV_WIDTH : "0px",
@@ -81,7 +82,7 @@ export function AppShell({ children }: { readonly children: ReactNode }): ReactN
 function useShellMetrics(desktop: boolean, docked: boolean): void {
   useLayoutEffect(() => {
     const root = document.documentElement.style;
-    root.setProperty("--shell-top", desktop ? TOP_BAR_HEIGHT : PHONE_TOP_BAR_HEIGHT);
+    root.setProperty("--shell-top", desktop ? TOP_BAR_HEIGHT : `calc(${PHONE_TOP_BAR_HEIGHT} + env(safe-area-inset-top))`);
     root.setProperty("--shell-bottom", desktop ? "0px" : `calc(${PHONE_TAB_BAR_HEIGHT} + env(safe-area-inset-bottom))`);
     root.setProperty("--content-inset-start", desktop ? SIDE_NAV_WIDTH : "0px");
     root.setProperty("--content-inset-end", docked ? DOCKED_PANEL_INSET : "0px");

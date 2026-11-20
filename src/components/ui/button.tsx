@@ -16,7 +16,7 @@ export const press =
   "active:scale-[0.97] active:translate-y-0.5 active:transition-none data-pressed:scale-[0.97] data-pressed:translate-y-0.5 data-pressed:transition-none";
 
 const base =
-  "group/button relative inline-flex select-none items-center justify-center whitespace-nowrap font-semibold " +
+  "group/button tap-area relative inline-flex select-none items-center justify-center whitespace-nowrap font-semibold " +
   "transition-[background-color,border-color,border-width,color,background-size,scale,translate] duration-200 ease-out " +
   "disabled:pointer-events-none aria-disabled:pointer-events-none";
 

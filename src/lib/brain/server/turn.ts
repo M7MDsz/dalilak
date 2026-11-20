@@ -20,8 +20,17 @@ import { CAREER_TOOL, CAREER_TOOL_STATUS, runCareerTool } from "../advisor/caree
 import { AdvisorCtx } from "../advisor/context";
 import { openChip, replyForTool, toEvents, type Reply } from "../advisor/replies";
 import { routeAdvisorMessage, type RouterDecision } from "../advisor/router";
-import { asksHowTo, asksToOpen, capReplyLength, claimsUndoneDeed, numbersAreGrounded } from "../advisor/rules";
-import { DISCLOSE_JOBS, THINKING_LINE, TOOL_STATUS } from "../advisor/templates";
+import {
+  asksHowTo,
+  asksToOpen,
+  capReplyLength,
+  claimsUndoneDeed,
+  namesAreGrounded,
+  numbersAreGrounded,
+  scrubIds,
+  userFactsGrounded,
+} from "../advisor/rules";
+import { THINKING_LINE, TOOL_STATUS } from "../advisor/templates";
 import { isToolError, navTargetFromParams, parseToolParams, runTool } from "../advisor/tools";
 import { ProviderFailure, liveSlots, recordLocalOnly, runChain, type ChainHooks, type ChainResult, type ChainSlot } from "./chain";
 import { TOOL_DECLARATIONS, buildSystemPrompt, snapshotDigest, type ModelRunner, type ModelToolCall } from "./model-common";
@@ -35,13 +44,14 @@ export interface TurnDeps {
   readonly hooks: ChainHooks;
   /** Rule 11: some slot's first event (default TIMEOUTS_MS.advisorFirstEvent = 6 s), shared out along the chain. */
   readonly firstEventMs?: number;
-  /** The whole model turn (default 12 s); then the local brain answers. */
+  /** The whole model turn (default 9 s); then the local brain answers. */
   readonly turnMs?: number;
   /** One provider call (default 8 s). */
   readonly perCallMs?: number;
 }
 
-const DEFAULT_TURN_MS = 12_000;
+/** 9 s (was 12 s): the local answer always lands before the panel cuts a stalled request (client ADVISOR_STALL_MS, 10 s). */
+const DEFAULT_TURN_MS = 9_000;
 const DEFAULT_PER_CALL_MS = 8_000;
 /** More tool calls than this in one turn is a runaway loop: stop feeding results. */
 const MAX_TOOL_CALLS = 8;
@@ -130,6 +140,11 @@ function withoutStatus(r: Reply): Reply {
   return { ...r, tools: [] };
 }
 
+/** No internal id reaches the user, whoever wrote the text (21 Nov 2026): every text event goes through scrubIds. */
+export function scrubEvents(events: readonly AdvisorEvent[]): AdvisorEvent[] {
+  return events.map((e) => (e.type === "text" ? { ...e, text: scrubIds(e.text) } : e));
+}
+
 /**
  * The events of a model turn that finished with `rawText` (status lines were already sent). Applies rules 5.4 (offers),
  * 7 (navigation asked for), 8 (numbers grounded), 9 (no done-claim), 10 (cards from data), 17 (length) and the first
@@ -157,9 +172,13 @@ export function finishModelReply(
     if (offer) return toEvents({ ...withoutStatus(offer), ...(action ? { action } : {}) });
   }
 
-  const text = capReplyLength(rawText.trim());
+  const text = capReplyLength(scrubIds(rawText.trim()));
   const emitted = action ? ["navigate"] : [];
-  const grounded = numbersAreGrounded(text, [snapshotDigest(ctx), ...calls.map((c) => c.result), ...careers], ctx.facts);
+  const results = [snapshotDigest(ctx), ...calls.map((c) => c.result), ...careers];
+  // Rule 8 (numbers), and since 21 Nov 2026: every Latin name (certificate, exam, company, tool) is in the app's data or
+  // this turn's results, and nothing is said about the user (experience, a degree) that the snapshot does not hold.
+  const grounded =
+    numbersAreGrounded(text, results, ctx.facts) && namesAreGrounded(text, [...results, ctx.facts]) && userFactsGrounded(text, ctx.facts);
   if (text === "" || !grounded || claimsUndoneDeed(text, emitted)) {
     // Rules 8 and 9: not regenerated; the template for the tool that was called is sent at once.
     const last = [...calls].reverse().find((c) => c.name !== "navigate");
@@ -170,12 +189,10 @@ export function finishModelReply(
   }
 
   const cards = cardsOf(calls);
-  const disclose = !ctx.jobsDisclosed && cards.some((c) => c.kind === "job") && !text.includes("تجريبي");
-  const paragraph = disclose ? `${text} ${DISCLOSE_JOBS}` : text;
   return toEvents({
     tools: [],
     ...(action ? { action } : {}),
-    text: [paragraph],
+    text: [text],
     cards,
     chips: droppedNav ? [openChip(droppedNav)] : [],
   });
@@ -195,14 +212,14 @@ export async function* runTurn(request: AdvisorRequest, signal: AbortSignal, dep
   const online = liveSlots(slots, deps.hooks.coolingDown).live.length > 0;
   const mode: BrainMode = online ? "online" : "local";
   if (decision.kind === "router") {
-    yield* decision.events;
+    yield* scrubEvents(decision.events);
     yield done(mode, "router");
     return;
   }
 
   if (!online) {
     recordLocalOnly("advisor", slots, deps.hooks);
-    yield* decision.local;
+    yield* scrubEvents(decision.local);
     yield done("local", "local");
     return;
   }
@@ -312,7 +329,7 @@ export async function* runTurn(request: AdvisorRequest, signal: AbortSignal, dep
   current = -1; // a slot still running after the chain moved on can add nothing now
   if (!outcome.ok) {
     if (outcome.aborted || signal.aborted) return; // «إيقاف»: what arrived stays; nothing more is sent
-    yield* decision.local;
+    yield* scrubEvents(decision.local);
     yield done("local", "local");
     return;
   }
@@ -324,6 +341,6 @@ export async function* runTurn(request: AdvisorRequest, signal: AbortSignal, dep
     console.error("[brain] model reply could not be checked", error);
     events = [...decision.local];
   }
-  yield* events;
+  yield* scrubEvents(events);
   yield done("online", outcome.slot.provider);
 }

@@ -61,8 +61,6 @@ function after(userText: string, options: Options = {}): readonly ProtocolMessag
   return [...(options.history ?? []), { role: "user", text: userText }, { role: "daleel", text: first.blocks }];
 }
 
-const SAMPLE = "وللعلم: ترى الوظائف هنا إعلانات حقيقية جمعتها في 20 نوفمبر، ويمكن بعضها تسكّر بعدها.";
-
 describe("acknowledgement words («تمام», «طيب», «اوكي»)", () => {
   it("answers them warmly when nothing was offered (never the fallback), and the page chips come back", () => {
     for (const word of ["تمام", "طيب", "اوكي", "أوكي", "ok", "Okay", "زين", "حلو", "ماشي", "خلاص", "ممتاز", "تمام يا دليل", "تمام."]) {
@@ -138,13 +136,15 @@ describe("«وظايف» (ي for ئ)", () => {
 });
 
 describe("real and invented employers", () => {
-  it("applying «في أرامكو» finds no posting, says the jobs are real dated postings; nothing is applied", () => {
+  it("applying «في أرامكو» (a known company with no job in the app) says so with its careers page; nothing is applied", () => {
     const r = route("قدم لي على وظيفة في أرامكو");
     expect(r.decision.kind).toBe("router");
-    expect(r.text).toBe(`ما لقيت وظائف بذي المواصفات. هذي أقرب ثلاث لمهاراتك. ${SAMPLE}`);
+    expect(r.text).toContain("ما عندي الحين وظيفة من أرامكو في المنصة");
+    expect(r.text).toContain("https://www.aramco.jobs/");
     expect(r.actions).toEqual([]);
+    // the three nearest jobs, as plain cards: nothing to apply to by mistake
     expect(r.cards).toHaveLength(3);
-    expect(r.cards.every((c) => c.kind === "job" && c.chip?.label === "قدّم على ذي")).toBe(true);
+    expect(r.cards.every((c) => c.kind === "job" && c.chip === undefined)).toBe(true);
   });
 
   it("a sample company is found, but rule 4 still asks; a city or «أسرع وقت» after «في» is not an employer", () => {
@@ -153,7 +153,9 @@ describe("real and invented employers", () => {
       expect(sample.actions).toEqual([]);
       expect(sample.cards[0]).toMatchObject({ kind: "job", jobId: "data-analyst-riyadh", chip: { label: "قدّم على ذي" } });
     }
-    expect(route("قدّم لي على وظيفة في شركة أرامكو").text.startsWith("ما لقيت وظائف بذي المواصفات.")).toBe(true);
+    expect(route("قدّم لي على وظيفة في شركة أرامكو").text.startsWith("ما عندي الحين وظيفة من أرامكو")).toBe(true);
+    // an employer the app does not know at all is searched and found nowhere
+    expect(route("قدّم لي على وظيفة في شركة جوجل").text.startsWith("ما لقيت وظائف بذي المواصفات.")).toBe(true);
     // a plural «وظائف» with a field is still a search, as before
     expect(route("قدّم لي على وظائف تسويق", { jobsDisclosed: true }).tools).toEqual(["search_jobs"]);
     const which = "أبشر. على أي وظيفة؟ هذي أقرب ثلاث لمهاراتك.";
@@ -168,22 +170,22 @@ describe("real and invented employers", () => {
       const r = route(msg);
       expect(r.decision.kind).toBe("router");
       expect(r.actions).toEqual([]);
-      expect(r.text).toBe(`ما أخترع جهات ولا وظائف: عندي بس الإعلانات اللي جمعتها وتأكدت منها، وما أجهّز إلا على وحدة منها. هذي أقرب ثلاث لمهاراتك. ${SAMPLE}`);
+      expect(r.text).toBe(`ما أخترع جهات ولا وظائف: عندي بس الإعلانات اللي جمعتها وتأكدت منها، وما أجهّز إلا على وحدة منها. هذي أقرب ثلاث لمهاراتك.`);
       expect(r.cards).toHaveLength(3);
       expect(r.cards.every((c) => c.kind === "job" && c.chip?.label === "قدّم على ذي")).toBe(true);
     }
   });
 });
 
-describe("the first job cards of a thread say the data is sample data", () => {
+describe("job cards come with no data-date or sample sentence (removed 21 Nov 2026)", () => {
   it("whichever reply shows them first, once", () => {
     const which = route("قدّم لي على وظيفة");
-    expect(which.text).toBe(`أبشر. على أي وظيفة؟ هذي أقرب ثلاث لمهاراتك. ${SAMPLE}`);
+    expect(which.text).toBe(`أبشر. على أي وظيفة؟ هذي أقرب ثلاث لمهاراتك.`);
     const target = route("اجعل وظيفة هدفي");
-    expect(target.text).toBe(`أبشر. أي وظيفة تبيها هدفك؟ هذي أقرب ثلاث لمهاراتك. ${SAMPLE}`);
+    expect(target.text).toBe(`أبشر. أي وظيفة تبيها هدفك؟ هذي أقرب ثلاث لمهاراتك.`);
     expect(route("اجعل وظيفة هدفي", { jobsDisclosed: true }).text).toBe("أبشر. أي وظيفة تبيها هدفك؟ هذي أقرب ثلاث لمهاراتك.");
     const search = route("اعرض لي وظائف محلل بيانات في الرياض");
-    expect(search.text.split("إعلانات حقيقية").length).toBe(2);
+    expect(search.text.split("إعلانات حقيقية").length).toBe(1);
     // replies without job cards are unchanged
     expect(route("وش أسوي الحين؟").text.includes("إعلانات حقيقية")).toBe(false);
   });

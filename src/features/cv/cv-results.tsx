@@ -1,6 +1,6 @@
 "use client";
 // Owner: cv. The results of /cv (spec 3.6, 6.4) drawn as the haul (docs/GAME-LAYER.md 5.4): what the analysis gave you.
-//   - The header (the heading, «سيرة تجريبية», the engine), then a flat results tile with the three real numbers (skills
+//   - The header (the heading, the engine), then a flat results tile with the three real numbers (skills
 //     found, stars held, the +100 XP of a first analysis) and the collection meter «مجموعتك: 8 من 38 مهارة».
 //   - Every skill found is a loot card (name, stars, «من سيرتك: «…»» marked as evidence, P4), grouped by field (9.1 order,
 //     more stars first). After a show the cards land one after another and each last star lands (LootReveal, star-fill).
@@ -35,7 +35,7 @@ import {
 } from "@/components/icons";
 import type { IconProps } from "@/components/icons/icon-base";
 import { NavLink, NumberTicker, useGo, useInstant } from "@/components/motion";
-import { Button, cn, SampleTag } from "@/components/ui";
+import { Button, cn } from "@/components/ui";
 import { ConfirmTargetDialog } from "@/features/shared";
 import { APPLICATION_STATUS_COPY, ASK_ADVISOR_APPLY_TEXT, BAND_LABEL, historyStamp } from "@/lib/copy";
 import { FIELDS, SKILLS, XP, getJob, getJobCity, getSkill } from "@/lib/data";
@@ -314,7 +314,6 @@ export function CvResults({ fresh, onReanalyse }: { readonly fresh: FreshResult 
           <h2 className="text-h2 outline-none @min-[900px]/content:text-h1" ref={headingRef} tabIndex={-1}>
             {resultsHeading(count, cv.isSample)}
           </h2>
-          {cv.isSample ? <SampleTag data-testid={TID.cv.sampleTag} kind="cv" /> : null}
         </div>
         <p className="text-small text-fg-3" data-testid={TID.cv.engine}>
           {cv.engine === "model" ? CV_COPY.engineModel : CV_COPY.engineLocal}

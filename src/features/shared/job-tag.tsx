@@ -1,11 +1,9 @@
 "use client";
-// Owner: jobs (shared by every screen that draws a job). The honest mark beside a job's company (20 Nov 2026): the one
-// practice job carries the dashed «وظيفة تدريبية» tag (it replaced «جهة تجريبية»); a real posting carries the company's
-// own name, the site it was posted on and «جُمعت في 20 نوفمبر», quietly.
+// Owner: jobs (shared by every screen that draws a job). The quiet mark beside a job's company: a real posting carries the
+// company's own name and the site it was posted on; the practice job carries nothing.
 import type { ReactNode } from "react";
 
-import { SampleTag, cn } from "@/components/ui";
-import { JOB_SOURCE_COPY, dayKeyText } from "@/lib/copy";
+import { cn } from "@/components/ui";
 import { getJob } from "@/lib/data";
 import { companyLogo } from "@/lib/data/company-logos";
 import type { JobId } from "@/lib/types";
@@ -18,7 +16,7 @@ export function jobSiteShort(site: string): string {
 
 export function JobTag({ jobId, className }: { readonly jobId: JobId; readonly className?: string }): ReactNode {
   const job = getJob(jobId);
-  if (!job.real || !job.source) return <SampleTag className={className} kind="practice" />;
+  if (!job.real || !job.source) return null;
   return (
     <span
       className={cn("inline-flex min-w-0 flex-wrap items-center gap-x-1.5 text-caption text-fg-3", className)}
@@ -32,14 +30,12 @@ export function JobTag({ jobId, className }: { readonly jobId: JobId; readonly c
         </>
       ) : null}
       <bdi>{jobSiteShort(job.source.site)}</bdi>
-      <span aria-hidden>·</span>
-      <span>{JOB_SOURCE_COPY.collected(dayKeyText(job.source.checkedAt, false))}</span>
     </span>
   );
 }
 
 /**
- * The employer's logo (public/logos, downloaded from each company's own site on 20 Nov 2026: src/lib/data/company-logos.ts),
+ * The employer's logo (public/logos, downloaded from each company's own site: src/lib/data/company-logos.ts),
  * small and contained on white with rounded corners; a company without one gets a neat monogram (its first letter).
  */
 export function CompanyLogo({

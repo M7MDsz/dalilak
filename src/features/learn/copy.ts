@@ -77,7 +77,6 @@ export const COURSE_COPY = {
   certPlaceholder: "https://",
   certShown: "شهادتك",
   sources: "أين وُجدت التوصية",
-  checked: "فُتحت الروابط في 20 نوفمبر 2026.",
   financialAid: "دعم مالي متاح",
   cert: {
     heading: "الشهادة اللي تثبت مهارتك",
@@ -96,13 +95,12 @@ export const COURSE_COPY = {
 
 const CURRENCY = { USD: "دولار", SAR: "ريال" } as const;
 
-/** «الرسوم: 165 دولار (حسب الموقع الرسمي، 20 نوفمبر)», «الرسوم: مجانية …», «الرسوم: تختلف حسب الدولة …». */
+/** «الرسوم: 165 دولار (حسب الموقع الرسمي)», «الرسوم: مجانية …», «الرسوم: تختلف حسب الدولة …». */
 export function certFeeLine(
   fee: { readonly amount: number; readonly currency: "USD" | "SAR"; readonly qualifier: "from" | "about" | null; readonly per: "month" | null } | null,
   varies: boolean,
-  checkedOn: string,
 ): string | null {
-  const source = `(حسب الموقع الرسمي، ${checkedOn})`;
+  const source = "(حسب الموقع الرسمي)";
   if (fee === null) return varies ? `الرسوم: تختلف حسب الدولة ${source}` : null;
   if (fee.amount === 0) return `الرسوم: مجانية ${source}`;
   const lead = fee.qualifier === "from" ? "من " : fee.qualifier === "about" ? "حوالي " : "";

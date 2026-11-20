@@ -53,14 +53,14 @@ export function Sheet({
     <Dialog.Root open={open} onOpenChange={(next) => onOpenChange(next)} onOpenChangeComplete={onOpenChangeComplete}>
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-0 z-40 min-h-dvh bg-ink/30 transition-opacity duration-200 ease-out data-ending-style:opacity-0 data-ending-style:duration-150 data-ending-style:ease-in data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute" />
-        <Dialog.Viewport className="fixed inset-0 z-50 grid place-items-end overflow-y-auto lg:place-items-center lg:p-6">
+        <Dialog.Viewport className="kb-fit fixed inset-0 z-50 grid place-items-end overflow-y-auto lg:place-items-center lg:p-6">
           <Dialog.Popup
             data-testid={testId}
             data-surface={surface}
             initialFocus={initialFocus}
             finalFocus={finalFocus}
             className={cn(
-              "flex max-h-[88dvh] w-full flex-col overflow-hidden rounded-t-2xl border border-border bg-surface text-fg outline-none",
+              "kb-max flex max-h-[88dvh] w-full flex-col overflow-hidden rounded-t-2xl border border-border bg-surface text-fg outline-none", // kb-*: above a phone keyboard (globals.css)
               "transition-[opacity,translate] duration-200 ease-out",
               "data-starting-style:translate-y-4 data-starting-style:opacity-0",
               "data-ending-style:translate-y-4 data-ending-style:opacity-0 data-ending-style:duration-150 data-ending-style:ease-in",

@@ -66,8 +66,8 @@ export function ApplicationsScreen(): ReactNode {
 }
 
 /**
- * Spec 7.6: «محاكاة: لا توجد جهة حقيقية تراجع طلبك. الحالات تتقدّم تلقائياً لتجربة المتابعة.» One honest label for the
- * page, drawn as the kit draws honesty (a dashed edge), with its first word set apart so it is read first.
+ * The page's one note: «طلبات الوظائف ترسلها أنت من الإعلان الأصلي، ولا نرى ردّ الجهة.», with a dashed edge (a lead before
+ * a colon, if the copy ever has one, is set apart so it is read first).
  */
 function SimulationBanner(): ReactNode {
   const text = SAMPLE_COPY.applicationsBanner;

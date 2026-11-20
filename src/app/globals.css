@@ -290,6 +290,42 @@
   z-index: var(--z-fly);
 }
 
+/* The phone keyboard (src/features/shared/keyboard.ts writes data-keyboard and the --kb-* box on <html> while it is up).
+   Things pinned above the tab bar (--shell-bottom) sit above the keyboard instead; a full-screen layer (`kb-fit`: the
+   advisor panel, a sheet's viewport) shrinks to the visible box so its composer or field stays in view; `kb-max` caps a
+   sheet to that box; the tab bar (`kb-hide`) steps aside. !important: the shell writes --shell-bottom inline. */
+html[data-keyboard] {
+  --shell-bottom: var(--kb-bottom, 0px) !important;
+}
+html[data-keyboard] .kb-fit {
+  top: var(--kb-top, 0px) !important;
+  bottom: auto !important;
+  height: var(--kb-height, 100dvh) !important;
+}
+html[data-keyboard] .kb-max {
+  max-height: calc(var(--kb-height, 100dvh) - 0.75rem) !important;
+}
+html[data-keyboard] .kb-hide {
+  display: none !important;
+}
+
+/* Touch screens: a control drawn smaller than 44 px (a 36 px ghost button, a 32 px chip, a 36 px icon link) gets an
+   invisible hit area of at least 44 × 44 px around its centre; the drawing does not change. The host must be positioned
+   (`relative`) and must not clip (no overflow-hidden). */
+@utility tap-area {
+  @media (pointer: coarse) {
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: max(100%, 44px);
+      height: max(100%, 44px);
+      translate: -50% -50%;
+    }
+  }
+}
+
 /* The focus ring that works on paper and on the stage: 2 px in the surface's own ink, 2 px away from the control. */
 @utility focus-ring {
   outline: 2px solid var(--focus);

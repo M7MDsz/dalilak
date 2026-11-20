@@ -16,13 +16,29 @@
 // One deliberate refinement: a «لماذا … مطابقتي» or «ينقصني» message that names exactly one job title is answered by
 // rows 9/10 for THAT job before row 7 would read the title as a job search (see the brain report).
 import { JOBS, MATCH_LINE, SKILLS, getCourse, getJob, getSkill } from "@/lib/data";
+import { companyOfJob, jobsAtCompany, matchCompany, matchCompanyAlone } from "@/lib/engine";
 import { courseIdFor } from "@/lib/ids";
-import type { Chip, ChipPayload, CourseId, FieldId, JobCityId, JobFieldId, JobId, NavTarget, PageChipSlug, SkillId, ToolName } from "@/lib/types";
+import type {
+  Chip,
+  ChipPayload,
+  CompanyId,
+  CourseId,
+  FieldId,
+  JobCityId,
+  JobFieldId,
+  JobId,
+  NavTarget,
+  PageChipSlug,
+  SkillId,
+  ToolName,
+} from "@/lib/types";
 import type { AdvisorEvent, AdvisorRequest, ToolParams, ToolResults } from "@/lib/brain/protocol";
 
 import { AdvisorCtx } from "./context";
 import {
   applicationsReply,
+  applyCandidatesReply,
+  applyCompanyReply,
   applyOfferReply,
   applyReply,
   applySearchReply,
@@ -35,7 +51,6 @@ import {
   completeForMeReply,
   grantReply,
   inventReply,
-  withJobsDisclosure,
   courseGainReply,
   courseWhatReply,
   courseWhichReply,
@@ -62,10 +77,11 @@ import {
   whyPathReply,
   xpLevelReply,
   type GuideAsk,
+  type GuideLang,
   type GuidePick,
   type Reply,
 } from "./replies";
-import { careerReply, careerSalaryReply } from "./careers";
+import { careerAnswer, careerFirst, careerSalaryReply } from "./careers";
 import { guideByTopic, guideFor } from "./guide";
 import { T } from "./templates";
 import { applyOutcome, isToolError, runTool } from "./tools";
@@ -320,26 +336,84 @@ function employerWords(text: W.Text): string | null {
   return words.join(" ");
 }
 
+/** «ذي» / «ذا» as well as «هذي»: the job on the page. */
+const THIS_JOB_WORDS = [...W.THIS_WORDS, "ذي", "ذا", "ذيك", "هالوظيفة", "هالوظيفه"];
+/** Words around an apply request that name nothing («قدّم عني على الوظيفة الحين لو سمحت»). */
+const APPLY_FILLER = [
+  ...W.JOB_REFERENCES, "وظيفه", "عني", "عنّي", "لي", "بدالي", "الحين", "الآن", "لو", "سمحت", "إذا", "اذا", "بسرعة", "يا", "دليلك", "دليل",
+  "please", "now", "job", "the", "for", "me",
+];
+
 /**
- * Null: not an apply request. Otherwise the one job it is about, or null inside (→ «على أي وظيفة؟»), or `elsewhere`:
- * the employer words of «قدّم لي على وظيفة في أرامكو», searched like row 7 (a real employer finds nothing).
+ * The words an apply request names after «على» (up to في / عند / لدى) that are no job of the app: «قدّم لي على وظيفة
+ * مهندس بترول» → «مهندس بترول». Null when it names nothing but the job reference or «ذي» (the page's job).
  */
-function detectApply(
-  ctx: AdvisorCtx,
-  text: W.Text,
-): { readonly jobId: JobId | null; readonly elsewhere?: string } | null {
+function otherJobWords(text: W.Text): string | null {
+  const on = W.firstHit(text, ["على", "on", "to"]);
+  if (!on) return null;
+  const stop = W.firstHit(W.textOf(text.words.slice(on.end).join(" ")), W.SEARCH_PREPOSITIONS);
+  const span = text.words.slice(on.end, stop ? on.end + stop.start : undefined);
+  const filler = new Set([...W.norm(APPLY_FILLER), ...W.norm(THIS_JOB_WORDS)]);
+  const left = span.filter((w) => !filler.has(w) && !filler.has(w.replace(/^ال/, "")));
+  return left.length > 0 ? left.join(" ") : null;
+}
+
+/**
+ * The jobs a message names, read with the company it names (21 Nov 2026, QA): titles («مهندس برمجيات واجهات أمامية»,
+ * bracketed notes optional) kept to that company's jobs when it names one; with a company and no exact title, its job
+ * whose title words the message says («مهندس الواجهات الأمامية في لوسيديا»).
+ */
+/** A company whose name is also an everyday word («مزن», «مهارة») counts right after في / عند / لدى: «وظيفة في مزن». */
+function companyAfterPreposition(text: W.Text): CompanyId | null {
+  const prep = W.firstHit(text, W.SEARCH_PREPOSITIONS);
+  if (!prep) return null;
+  const generic = W.norm(W.GENERIC_EMPLOYER_WORDS);
+  const rest = text.words.slice(prep.end).filter((w) => !generic.includes(w));
+  return matchCompanyAlone(rest) ?? matchCompanyAlone(rest.slice(0, 1));
+}
+
+function namedJobs(text: W.Text): { readonly ids: readonly JobId[]; readonly company: CompanyId | null } {
+  const company = matchCompany(text.raw) ?? companyAfterPreposition(text);
+  const named = W.jobsNamed(text);
+  if (!company) return { ids: named, company };
+  const at = jobsAtCompany(company);
+  const kept = named.filter((id) => at.includes(id));
+  return { ids: kept.length > 0 ? kept : W.jobsByTitleWords(text, at), company };
+}
+
+type ApplyDetection =
+  | { readonly kind: "job"; readonly jobId: JobId | null }
+  /** Several jobs fit the words: ask which (cards with «قدّم على ذي»), never apply. */
+  | { readonly kind: "which"; readonly jobs: readonly JobId[] }
+  /** A company named and none of its jobs by title: its jobs to choose from, or "no job of it here" and its link. */
+  | { readonly kind: "company"; readonly company: CompanyId }
+  /** Words that are no job or company of the app, searched like row 7 (a real employer finds nothing). */
+  | { readonly kind: "elsewhere"; readonly words: string };
+
+/**
+ * Null: not an apply request. A job or company NAMED in the message always comes before the page's job (21 Nov 2026,
+ * QA: «قدم عني على وظيفة في نيوم» on a job page applied to that page's job): one job named → that job; several → ask
+ * which; a company with none of its jobs named → that company's jobs, or the honest "none here"; other words after «على»
+ * or «في» → searched. Only a request that names nothing («قدّم عني», «قدّم على ذي الوظيفة») means the job on the page;
+ * with no page job it asks «على أي وظيفة؟».
+ */
+function detectApply(ctx: AdvisorCtx, text: W.Text): ApplyDetection | null {
   if (!(W.has(text, W.APPLY_VERBS) || wishToApply(text))) return null;
   if (W.has(text, W.COURSE_WORDS)) return null;
-  const named = W.jobsNamed(text);
+  const { ids: named, company } = namedJobs(text);
   // on a job page «قدّم عني» / «قدّم لي» with nothing else means this job (20 Nov 2026: kept on the router, never a model)
-  const thisJob = ctx.pageJob !== null && (W.has(text, W.THIS_WORDS) || W.has(text, ["عني", "عنّي", "لي"]));
-  if (!(named.length > 0 || W.has(text, W.JOB_REFERENCES) || thisJob)) return null;
-  if (named.length === 1) return { jobId: named[0]! };
-  if (named.length > 1) return { jobId: null };
-  if (thisJob) return { jobId: ctx.pageJob };
-  const elsewhere = employerWords(text);
-  if (elsewhere) return { jobId: null, elsewhere };
-  return { jobId: ctx.pageJob };
+  const thisJob = ctx.pageJob !== null && (W.has(text, THIS_JOB_WORDS) || W.has(text, ["عني", "عنّي", "لي"]));
+  if (!(named.length > 0 || W.has(text, W.JOB_REFERENCES) || thisJob || company)) return null;
+  if (named.length === 1) return { kind: "job", jobId: named[0]! };
+  if (named.length > 1) return { kind: "which", jobs: named };
+  if (company) {
+    const pageCompany = ctx.pageJob ? companyOfJob(getJob(ctx.pageJob)) : null;
+    if (company === pageCompany && W.has(text, THIS_JOB_WORDS)) return { kind: "job", jobId: ctx.pageJob };
+    return { kind: "company", company };
+  }
+  const elsewhere = employerWords(text) ?? otherJobWords(text);
+  if (elsewhere) return { kind: "elsewhere", words: elsewhere };
+  return { kind: "job", jobId: ctx.pageJob };
 }
 
 function detectStart(ctx: AdvisorCtx, text: W.Text): { readonly courseId: CourseId | null } | null {
@@ -460,6 +534,18 @@ function guideAsk(text: W.Text): GuideAsk | null {
   if (W.has(text, W.LEARN_WHERE_WORDS)) return "where";
   // «أفضل كورس SQL», «ترشح لي دورة إكسل؟»
   if (W.has(text, W.COURSE_WORDS) && (W.has(text, W.BEST_WORDS) || W.has(text, W.RECOMMEND_WORDS))) return "where";
+  // «أبي كورس Power BI بالعربي», «ودي دورة SQL» (a skill named; «ابدأ» was row 5's): where to learn it
+  if (W.has(text, W.COURSE_WORDS) && W.skillsAsked(text).length > 0 && (W.has(text, W.WISH_WORDS) || guideLang(text) !== null)) return "where";
+  return null;
+}
+
+const ARABIC_WORDS = ["بالعربي", "عربي", "بالعربية", "العربية", "arabic"];
+const ENGLISH_WORDS = ["بالإنجليزي", "بالانجليزي", "انجليزي", "إنجليزي", "بالإنجليزية", "english"];
+
+/** The language a guide question asks for («بالعربي»), or null. */
+function guideLang(text: W.Text): GuideLang | null {
+  if (W.has(text, ARABIC_WORDS)) return "ar";
+  if (W.has(text, ENGLISH_WORDS)) return "en";
   return null;
 }
 
@@ -758,9 +844,11 @@ function decide(request: AdvisorRequest, ctx: AdvisorCtx): Decision {
   // Rows 4-6: the three state-changing requests (5.4), never from a question.
   if (!W.opensWithQuestion(text)) {
     const apply = detectApply(ctx, text);
-    if (apply?.elsewhere) {
-      return router("apply", applySearchReply(ctx, call(ctx, "search_jobs", { query: apply.elsewhere, limit: 3 })));
+    if (apply?.kind === "elsewhere") {
+      return router("apply", applySearchReply(ctx, call(ctx, "search_jobs", { query: apply.words, limit: 3 })));
     }
+    if (apply?.kind === "which") return router("apply", applyCandidatesReply(ctx, apply.jobs));
+    if (apply?.kind === "company") return router("apply", applyCompanyReply(ctx, apply.company));
     if (apply) return router("apply", applyRoute(ctx, apply.jobId, false));
     const start = detectStart(ctx, text);
     if (start) return router("start-course", startRoute(ctx, start.courseId));
@@ -768,8 +856,8 @@ function decide(request: AdvisorRequest, ctx: AdvisorCtx): Decision {
     if (target) return router("set-target", targetRoute(ctx, target.jobId));
   }
 
-  // Rows 9/10 for a job named in the message (before row 7 reads the title as a search).
-  const named = W.jobsNamed(text);
+  // Rows 9/10 for a job named in the message (before row 7 reads the title as a search), read with its company.
+  const named = namedJobs(text).ids;
   if (named.length === 1) {
     if (W.has(text, W.WHY_WORDS) && asksAboutMatch(text)) return open("explain-match", explainRoute(ctx, named[0]!));
     if (W.has(text, W.GAP_WORDS)) return open("gap", gapRoute(ctx, named[0]!));
@@ -779,8 +867,14 @@ function decide(request: AdvisorRequest, ctx: AdvisorCtx): Decision {
   const ask = guideAsk(text);
   if (ask) {
     const pick = guidePick(ctx, text, ask);
-    return pick ? router("guide", guideReply(ctx, ask, pick)) : router("next-step", nextStepRoute(ctx));
+    return pick ? router("guide", guideReply(ctx, ask, pick, guideLang(text))) : router("next-step", nextStepRoute(ctx));
   }
+
+  // A career question answered from the data (certificates, interview questions, a 30-day plan, entry routes, how to
+  // become one): the router, before row 7 reads «لوظيفة أخصائي موارد بشرية» as a search and before any model (21 Nov
+  // 2026, QA: a model added certificates that are not in the data).
+  const careerSure = careerFirst(ctx, text);
+  if (careerSure) return router("career", careerSure);
 
   // Row 7: job search.
   const search = detectSearch(text);
@@ -810,8 +904,8 @@ function decide(request: AdvisorRequest, ctx: AdvisorCtx): Decision {
   // السيبراني؟»), or a first-month / certificates / entry-route question about the target's family (careers.ts). After
   // every more specific row above, before the general rows (so «وش أسوي أول شهر؟» is not row 11's next step). Online the
   // model answers first, with get_career.
-  const career = careerReply(ctx, text);
-  if (career) return open("career", career);
+  const career = careerAnswer(ctx, text);
+  if (career) return career.sure ? router("career", career.reply) : open("career", career.reply);
 
   const row = openRow(ctx, text);
   // the generic «ذي برّا اللي أقدر عليه» for a message that names a platform feature («وين شاراتي؟»): the guide's
@@ -846,7 +940,7 @@ export function routeAdvisorMessage(request: AdvisorRequest): RouterDecision {
     if (error instanceof NotFound) decision = router("fallback", reply(T.notFound()));
     else throw error;
   }
-  const events = toEvents(withJobsDisclosure(ctx, decision.reply));
+  const events = toEvents(decision.reply);
   return decision.kind === "router"
     ? { kind: "router", intent: decision.intent, events }
     : { kind: "open", intent: decision.intent, local: events };

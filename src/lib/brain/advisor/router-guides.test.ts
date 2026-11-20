@@ -232,11 +232,11 @@ describe("what stays as it was", () => {
     expect(route("كمّل لي يا دليل").decision.intent).not.toBe("refuse-complete");
   });
 
-  it("the honest line: jobs and players are sample data, the guides are real", () => {
+  it("the honest line: most jobs are real postings, the guides are real", () => {
     const text = route("هل الكورسات حقيقية؟").text;
     expect(text).toBe(T.isReal());
-    expect(text).toContain("الوظائف إعلانات حقيقية جمعتها في 20 نوفمبر 2026");
-    expect(text).toContain("أما أدلة التعلّم فحقيقية");
+    expect(text).toContain("أغلب الوظائف هنا إعلانات حقيقية");
+    expect(text).toContain("وأدلة التعلّم حقيقية");
   });
 
   it("the how-to for learning describes the guide flow and opens «دليل التعلّم»", () => {

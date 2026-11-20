@@ -1,11 +1,10 @@
 "use client";
-// Owner: jobs. Small pieces shared by the list and the job page: the flags «هدفك» / «قدّمت», the field icon, the honest
-// sample line, and the «ينقصك: …» line with every Latin skill name isolated for RTL.
+// Owner: jobs. Small pieces shared by the list and the job page: the flags «هدفك» / «قدّمت», the field icon, and the
+// «ينقصك: …» line with every Latin skill name isolated for RTL.
 import type { ComponentProps, ReactNode } from "react";
 
 import {
   IconCheck,
-  IconInfo,
   IconFieldBusiness,
   IconFieldCyberCloud,
   IconFieldData,
@@ -21,7 +20,7 @@ import {
 import type { Requirement as GameRequirement } from "@/components/game";
 import { NavLink } from "@/components/motion";
 import { cn } from "@/components/ui";
-import { BAND_LABEL, SAMPLE_COPY } from "@/lib/copy";
+import { BAND_LABEL } from "@/lib/copy";
 import { getJob, getSkill } from "@/lib/data";
 import type { ExperienceBand, FieldId, JobId, SkillId, StarMap } from "@/lib/types";
 
@@ -91,19 +90,6 @@ export function AppliedFlag({ className }: { className?: string }): ReactNode {
       <IconCheck className="text-ok-fg" size={15} strokeWidth={2.5} waypoint="off" />
       {LIST_COPY.flagApplied}
     </span>
-  );
-}
-
-/**
- * The `/jobs` honesty line (20 Nov 2026): «إعلانات حقيقية جُمعت في 20 نوفمبر 2026، وقد يُغلق بعضها بعد ذلك. «محلل بيانات»
- * وظيفة تدريبية.», quiet, with the info mark.
- */
-export function SampleLine(): ReactNode {
-  return (
-    <p className="flex items-start gap-2 text-small text-fg-3" data-testid="jobs-honesty">
-      <IconInfo className="mt-0.5 shrink-0" size={18} waypoint="muted" />
-      <LtrNumbers text={SAMPLE_COPY.jobsBanner} />
-    </p>
   );
 }
 

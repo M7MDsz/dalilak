@@ -18,7 +18,7 @@ import { IconClose, IconCv, IconFilter, IconLocation, IconSearch } from "@/compo
 import { NavLink, PageTransition, ReorderList, type ReorderRow } from "@/components/motion";
 import { Card, EmptyState, SelectField, TextField, buttonStyles, Button, type SelectItem } from "@/components/ui";
 import { countNoun } from "@/lib/copy";
-import { FIELDS, JOB_CITIES, MATCH_LINE, XP, getSkill } from "@/lib/data";
+import { FIELDS, JOBS, JOB_CITIES, MATCH_LINE, XP, getSkill } from "@/lib/data";
 import { applicationStatus, rankJobs, searchJobs, skillStars, totalStars } from "@/lib/engine";
 import { formatNumber } from "@/lib/format";
 import { JOB_IDS } from "@/lib/ids";
@@ -29,7 +29,7 @@ import type { JobCityId, JobFieldId, JobId, JobQuery, RankedJob, UserState } fro
 
 import { LIST_COPY } from "./copy";
 import { JobCard, type JobCardApplied } from "./job-row";
-import { LtrNumbers, SampleLine } from "./parts";
+import { LtrNumbers } from "./parts";
 
 type CityValue = JobCityId | "all";
 type FieldValue = JobFieldId | "all";
@@ -42,7 +42,10 @@ const CITY_ITEMS: readonly SelectItem<CityValue>[] = [
 const FIELD_ITEMS: readonly SelectItem<FieldValue>[] = [
   { value: "all", label: LIST_COPY.fieldAll },
   ...FIELDS.flatMap((field) =>
-    field.hasJobs && field.id !== "professional" ? [{ value: field.id, label: field.name }] : [],
+    // only fields that really have a job in the list right now (21 Nov 2026, owner: nothing offered that leads nowhere)
+    field.hasJobs && field.id !== "professional" && JOBS.some((job) => job.field === field.id)
+      ? [{ value: field.id, label: field.name }]
+      : [],
   ),
 ];
 
@@ -130,7 +133,6 @@ function JobsList({ user }: { user: UserState }): ReactNode {
             <h1 className="text-h1 text-fg lg:sr-only">{PAGE_HEADINGS.jobs}</h1>
             <p className="text-body text-fg-2">{LIST_COPY.subline}</p>
           </div>
-          <SampleLine />
         </header>
 
         {user.cv === null ? <CvBanner /> : null}

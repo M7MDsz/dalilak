@@ -49,7 +49,9 @@ export function SkillGem({ name, have, need, slots, size = "sm", icon, fresh, fr
   return (
     <span
       className={cn(
-        "inline-flex min-w-0 shrink-0 items-center whitespace-nowrap rounded-[0.625rem] border-[1.5px] wp-quiet",
+        // max-w-full: a long skill name («المعلوماتية الصحية والسجل الطبي الإلكتروني») truncates inside its row instead
+        // of pushing the card, and on a 360 px phone the whole page, sideways
+        "inline-flex min-w-0 max-w-full shrink-0 items-center whitespace-nowrap rounded-[0.625rem] border-[1.5px] wp-quiet",
         size === "sm" ? "h-9 gap-1.5 ps-2.5 pe-2" : "h-11 gap-2 ps-3 pe-2.5",
         state === "locked" ? "border-dashed border-border-strong bg-surface-2 text-fg-2" : "border-fg bg-surface text-fg stage:border-on-stage-3",
         className,

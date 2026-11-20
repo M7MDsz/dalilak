@@ -19,6 +19,7 @@ import { RollingStatus } from "@/components/chat";
 import { useInstant, useShow, useStill, type RevealStepId, type ShowStep } from "@/components/motion";
 import { Button, Card, cn } from "@/components/ui";
 import { REVEAL_SEQUENCE } from "@/lib/data";
+import { skillStars } from "@/lib/engine";
 import { tween } from "@/lib/motion";
 import { hrefFor } from "@/lib/routes";
 import { useAppStore, useOverlayHold, useUi } from "@/lib/store";
@@ -79,7 +80,9 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
   const still = useStill();
   const { desktop } = useViewport();
   const height = useSyncExternalStore(subscribeResize, windowHeight, serverHeight);
-  const data = useMemo(() => revealData(user.answers), [user.answers]);
+  // with a CV read in onboarding, its skills weigh in the choice too (the same rule «دليلك» used for his path line)
+  const cvStars = useMemo(() => (user.cv !== null && user.onboarding.cv === "analysed" ? skillStars(user) : undefined), [user]);
+  const data = useMemo(() => revealData(user.answers, cvStars), [user.answers, cvStars]);
   const firstName = firstNameOf(user.name);
   const lines = useMemo(() => revealLines(firstName), [firstName]);
 

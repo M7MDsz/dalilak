@@ -89,11 +89,11 @@ export const SHEET_COPY = {
   skills: "مهاراتك المطابقة",
   note: "رسالة التقديم",
   cv: "السيرة الذاتية",
-  submit: "أرسل الطلب",
-  submitAnyway: "قدّم على أي حال",
+  submit: "احفظ الطلب",
+  submitAnyway: "احفظه على أي حال",
   cancel: "إلغاء",
   filling: "دليلك يعبّي طلبك…",
-  // a real posting (20 Nov 2026): prepared here, sent by the user from the original posting
+  // a real posting: prepared here, sent by the user from the original posting
   prepare: "جهّز الطلب",
   prepareAnyway: "جهّزه على أي حال",
   preparing: "جارٍ التجهيز…",
@@ -104,13 +104,11 @@ export const SHEET_COPY = {
   preparedLead: "جهّزت طلبك وحفظته في منصة دليل. باقي خطوة وحدة منك: افتح الإعلان الأصلي وقدّم من هناك، وبنسخ لك رسالة التقديم.",
   postedOn: "الإعلان منشور على:",
   copyFailed: "ما قدرت أنسخ الرسالة. تلقاها في «طلباتي».",
-  /** «دليلك»'s honest end of the practice job's moment (Najdi). */
-  practiceLine: "وظيفة تدريبية: في الوظائف الحقيقية أفتح لك الإعلان الأصلي عشان ترسله",
-  /** 7.4 step 5's status line, shown in the sheet while the pressed send goes out. */
-  sendingLine: "أرسل الطلب…",
+  /** 7.4 step 5's status line, shown in the sheet while the pressed save runs (the practice job: saved, never sent). */
+  sendingLine: "أحفظ الطلب…",
   stop: "إيقاف",
-  sending: "جارٍ الإرسال…",
-  sent: "تم إرسال طلبك",
+  sending: "جارٍ الحفظ…",
+  sent: "تم حفظ طلبك",
   numberLabel: "رقم الطلب:",
   matchAtSendLabel: "مطابقتك عند التقديم:",
   xpReason: "تقديم مدروس",

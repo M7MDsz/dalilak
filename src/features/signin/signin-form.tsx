@@ -10,7 +10,7 @@ import { Avatar } from "@/components/avatars";
 import { Logo } from "@/components/brand";
 import { IconArrowForward, IconCheckCircle, IconInfo } from "@/components/icons";
 import { Collapse, useGo } from "@/components/motion";
-import { Button, cn, ContourBackdrop, press, SampleTag, TextField } from "@/components/ui";
+import { Button, cn, ContourBackdrop, press, TextField } from "@/components/ui";
 import { rise } from "@/lib/motion";
 import { useAccounts, useAppStore } from "@/lib/store";
 import { TID } from "@/lib/testids";
@@ -179,10 +179,6 @@ export function SigninForm({ className }: { className?: string }) {
           </p>
         </form>
       </div>
-
-      <footer className="flex">
-        <SampleTag className="h-auto min-h-6 whitespace-normal py-0.5 leading-5">{SIGNIN_COPY.footer}</SampleTag>
-      </footer>
     </section>
   );
 }

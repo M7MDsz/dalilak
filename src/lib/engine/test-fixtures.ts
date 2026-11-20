@@ -121,7 +121,7 @@ export function application(jobId: JobId, sentAt: number, matchAtSend: number, o
     sentAt,
     matchAtSend,
     note: "",
-    cvLine: "مرفقة: السيرة التجريبية",
+    cvLine: "مرفقة: السيرة الجاهزة",
     xpPaid: matchAtSend >= 60 ? 40 : 0,
     by: "advisor",
     manualStatus: null,

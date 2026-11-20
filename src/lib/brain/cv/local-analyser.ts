@@ -25,6 +25,50 @@ export const ADVANCED_WORDS: readonly string[] = [
 /** Spec 6.5 step 6: a following middle word gives 2 stars. */
 export const MIDDLE_WORDS: readonly string[] = ["متوسط", "متوسطة", "جيد جداً", "intermediate"];
 
+/**
+ * A level word right after one of these (up to two words later) grades a degree, not a skill: «بكالوريوس الإحصاء
+ * بتقدير ممتاز», «GPA 4.6 (Excellent)». It does not raise the stars.
+ */
+export const GRADE_WORDS: readonly string[] = ["تقدير", "معدل", "GPA", "grade"];
+
+/**
+ * Phrases in which a skill's alias means something else (a CV-reader test, 21 Nov 2026): an alias hit that lies inside
+ * one of these on the same line does not count. Several of these aliases are fixed by the 9.2 table («استعلامات»,
+ * «Pivot»), so the meaning is told here, by its context, and the alias lists stay as they are.
+ */
+export const NOT_A_SKILL: readonly { readonly skill: SkillId; readonly phrases: readonly string[] }[] = [
+  // Customer or patient inquiries, the information desk.
+  { skill: "sql", phrases: ["استعلامات العملاء", "استعلامات المراجعين", "استعلامات المرضى", "استعلامات الموظفين", "مكتب الاستعلامات", "الرد على الاستعلامات"] },
+  { skill: "excel", phrases: ["career pivot", "pivot to", "pivot into"] },
+  { skill: "react", phrases: ["react to", "react quickly", "react fast", "react promptly"] },
+  { skill: "apis", phrases: ["rest of", "the rest", "at rest", "rest days"] },
+  // Shipping containers.
+  { skill: "devops", phrases: ["شحن الحاويات", "حاويات الشحن", "تخليص الحاويات", "تتبع الحاويات", "متابعة الحاويات", "ساحة الحاويات", "محطة الحاويات"] },
+  // Red / amber / green status reports.
+  { skill: "llm-apps", phrases: ["RAG status", "RAG report", "RAG reports", "RAG rating", "تقرير RAG", "تقارير RAG"] },
+  // Market-basket analysis.
+  { skill: "procurement", phrases: ["سلة المشتريات", "سلة التسوق"] },
+];
+
+/**
+ * A line that is only a contact heading names no skill: «التواصل» is the communication alias of 9.2, and «وسائل
+ * التواصل» the social-media one, but over a phone number and an e-mail they mean "contact".
+ */
+export const CONTACT_HEADINGS: readonly string[] = [
+  "التواصل",
+  "للتواصل",
+  "معلومات التواصل",
+  "بيانات التواصل",
+  "طرق التواصل",
+  "وسائل التواصل",
+  "معلومات الاتصال",
+  "بيانات الاتصال",
+  "contact",
+  "contact information",
+  "contact info",
+  "contact details",
+];
+
 /** Spec 6.5 step 7: the evidence is cut at this many characters, on a word boundary, with «…». */
 export const EVIDENCE_MAX_CHARS = 160;
 
@@ -58,8 +102,13 @@ interface AliasHit {
  */
 function skillHits(text: string): AliasHit[] {
   const all: AliasHit[] = [];
+  const otherMeaning = new Map<SkillId, { start: number; end: number }[]>(
+    NOT_A_SKILL.map(({ skill, phrases }) => [skill, findKeywords(text, phrases)]),
+  );
   SKILLS.forEach((skill, order) => {
+    const contexts = otherMeaning.get(skill.id) ?? [];
     for (const hit of findKeywords(text, skill.aliases)) {
+      if (contexts.some((c) => c.start <= hit.start && hit.end <= c.end)) continue;
       all.push({ skill: skill.id, start: hit.start, end: hit.end, chars: normalizeText(hit.keyword).length, order });
     }
   });
@@ -95,16 +144,28 @@ interface LineFacts {
   readonly middle: ReadonlySet<SkillId>;
 }
 
+/** The line is a contact heading and nothing else (CONTACT_HEADINGS). */
+function isContactHeading(text: string): boolean {
+  const words = tokenize(normalizeText(text)).length;
+  return words <= 3 && findKeywords(text, CONTACT_HEADINGS).some((h) => h.start === 0 && h.end === words);
+}
+
 function lineFacts(text: string): LineFacts {
-  const hits = skillHits(text);
   const named = new Set<SkillId>();
   const advanced = new Set<SkillId>();
   const middle = new Set<SkillId>();
+  if (isContactHeading(text)) return { named, advanced, middle };
+  const hits = skillHits(text);
   if (hits.length === 0) return { named, advanced, middle };
-  // Level words must not be read inside an alias (no alias contains one today; this keeps it that way).
+  // Level words must not be read inside an alias (no alias contains one today; this keeps it that way), nor right
+  // after a grade word («بتقدير ممتاز»).
   const insideAlias = (i: number) => hits.some((h) => i >= h.start && i < h.end);
-  const advancedStarts = findKeywords(text, ADVANCED_WORDS).map((h) => h.start).filter((i) => !insideAlias(i));
-  const middleStarts = findKeywords(text, MIDDLE_WORDS).map((h) => h.start).filter((i) => !insideAlias(i));
+  const gradeEnds = findKeywords(text, GRADE_WORDS).map((h) => h.end);
+  const afterGrade = (i: number) => gradeEnds.some((end) => i >= end && i - end <= 2);
+  const levelStarts = (words: readonly string[]) =>
+    findKeywords(text, words).map((h) => h.start).filter((i) => !insideAlias(i) && !afterGrade(i));
+  const advancedStarts = levelStarts(ADVANCED_WORDS);
+  const middleStarts = levelStarts(MIDDLE_WORDS);
   for (const hit of hits) {
     named.add(hit.skill);
     if (levelWordFollows(hit, hits, advancedStarts)) advanced.add(hit.skill);

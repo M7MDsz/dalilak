@@ -247,10 +247,11 @@ describe("wave 2: guides", () => {
 describe("wave 2: career families (merged in ../careers.ts)", () => {
   it("adds 18 families after the expansion's 16, and 6 entry routes", () => {
     expect(WAVE2_CAREER_FAMILIES.map((f) => f.id)).toEqual([...WAVE2_FAMILY_IDS]);
-    expect(CAREER_FAMILY_IDS).toHaveLength(34);
+    // 34 with wave 2; wave 3 (../wave3) adds 7 after them
+    expect(CAREER_FAMILY_IDS).toHaveLength(41);
     expect(CAREER_FAMILIES.map((f) => f.id)).toEqual([...CAREER_FAMILY_IDS]);
     expect(WAVE2_ENTRY_ROUTES).toHaveLength(6);
-    expect(careersIndexForModel().split("\n")).toHaveLength(34);
+    expect(careersIndexForModel().split("\n")).toHaveLength(41);
   });
 
   it("names only existing skills, fields, jobs and entry routes, with links on every fact and Najdi bot lines", () => {
@@ -283,8 +284,10 @@ describe("wave 2: career families (merged in ../careers.ts)", () => {
 
 describe("wave 2: companies and logos (research/wave2/companies.json)", () => {
   it("knows the 69 new companies (the unverified ones by name only), their logos by name, and «مهارة» first on every new tile set", () => {
-    expect(COMPANY_IDS).toHaveLength(107);
-    for (const id of ["bank-aljazira", "sipchem", "soudah", "flyadeal", "flynas", "riyadh-air", "saudia", "nhc"]) {
+    // 107 with wave 2; wave 3 adds the 34 companies of its postings
+    expect(COMPANY_IDS).toHaveLength(141);
+    // (Riyadh Air's own board opened in wave 3, 21 Nov 2026: ../companies.ts CORRECTIONS)
+    for (const id of ["bank-aljazira", "sipchem", "soudah", "flyadeal", "flynas", "saudia", "nhc"]) {
       const c = COMPANIES.find((x) => x.id === id);
       expect(c?.careersUrl, id).toBeNull();
       expect(c?.note ?? "", id).toContain("not verified");

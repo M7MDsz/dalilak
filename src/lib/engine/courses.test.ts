@@ -9,11 +9,11 @@ import { MINUTE, T0, completed, courseDoneFacts, cvAnalysedFacts, newFacts, onbo
 const t = T0.getTime();
 
 describe("course XP and titles (spec 8.2, «Course titles»)", () => {
-  it("pays 20 XP per hour; 148 courses (59 + the expansion's 21 + wave 2's 68) are 1,512 hours and 30,240 XP", () => {
+  it("pays 20 XP per hour; 185 courses (59 + the expansion's 21 + wave 2's 68 + wave 3's 37) are 1,962 hours and 39,240 XP", () => {
     expect(courseXp(getCourse("c-powerbi-1"))).toBe(200);
     expect(courseXp(getCourse("c-statistics-2"))).toBe(240);
-    expect(COURSES.reduce((sum, c) => sum + c.hours, 0)).toBe(1512);
-    expect(COURSES.reduce((sum, c) => sum + courseXp(c), 0)).toBe(30_240);
+    expect(COURSES.reduce((sum, c) => sum + c.hours, 0)).toBe(1962);
+    expect(COURSES.reduce((sum, c) => sum + courseXp(c), 0)).toBe(39_240);
   });
 
   it("short title = the part before the colon, trimmed; the whole title without one", () => {

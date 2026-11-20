@@ -1,0 +1,126 @@
+{
+  "checkedAt": "2026-11-21",
+  "note": "Real postings of research/wave3 kept out of the app by research/wave3/build.py, with why (the research files' own held lists are in each file).",
+  "held": [
+    {
+      "id": "eram-talent-business-systems-reporting-analyst-dhahran",
+      "from": "tech-jobs.json",
+      "why": "The demo's sample CV would match it at 53%, which changes the jobs list after the CV («مهندس بيانات أول» at 53% must stay third)."
+    },
+    {
+      "id": "eram-talent-mis-data-analysis-coordinator-dhahran",
+      "from": "tech-jobs.json",
+      "why": "The demo's sample CV would match it at 60%, which changes the jobs list after the CV («مهندس بيانات أول» at 53% must stay third)."
+    },
+    {
+      "id": "nahdi-it-coop-saudi-arabia",
+      "from": "tech-jobs.json",
+      "why": "Its city (Saudi Arabia) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "salla-database-administrator-tamheer-madinah",
+      "from": "tech-jobs.json",
+      "why": "Its city (Madinah, Saudi Arabia (hybrid)) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "marriott-clerk-accounts-payable-makkah",
+      "from": "business-jobs.json",
+      "why": "Its city (Makkah, Saudi Arabia) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "accor-cost-controller-umluj",
+      "from": "business-jobs.json",
+      "why": "Its city (Umluj, Tabuk Province) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "accor-paymaster-umluj",
+      "from": "business-jobs.json",
+      "why": "Its city (Umluj, Tabuk Province) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "accor-sales-coordinator-faena-red-sea",
+      "from": "business-jobs.json",
+      "why": "Its city (Red Sea) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "foodics-relationship-management-specialist-madinah",
+      "from": "business-jobs.json",
+      "why": "Its city (Madinah, Al Madinah Province) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "nahdi-commercial-coop",
+      "from": "business-jobs.json",
+      "why": "Its city (Saudi Arabia) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "accor-purchasing-officer-faena-red-sea",
+      "from": "business-jobs.json",
+      "why": "Its city (Red Sea) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "eram-business-analyst-procurement-thuwal",
+      "from": "business-jobs.json",
+      "why": "Its city (Thuwal, Makkah Province) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "sgs-civil-inspector-idi-saudi",
+      "from": "business-jobs.json",
+      "why": "Its city (Saudi Arabia) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "acwa-hse-engineer-ksa",
+      "from": "business-jobs.json",
+      "why": "Its city (SA (plant-based)) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "acwa-hsse-officer-ksa",
+      "from": "business-jobs.json",
+      "why": "Its city (SA (plant-based; \"This position is based out of City\")) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "accor-guest-experience-agent-faena-red-sea",
+      "from": "business-jobs.json",
+      "why": "Its city (Red Sea) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "accor-reservations-agent-novotel-madinah",
+      "from": "business-jobs.json",
+      "why": "Its city (Madinah, Al Madinah Province) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "accor-tamayyaz-front-desk-agent-makkah",
+      "from": "business-jobs.json",
+      "why": "Its city (Makkah, Makkah Province) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "marriott-reservations-agent-ksa",
+      "from": "business-jobs.json",
+      "why": "Its city (Saudi Arabia) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "accor-front-desk-agent-raffles-red-sea",
+      "from": "business-jobs.json",
+      "why": "Its city (Umluj, Tabuk Province) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "almosafer-ct-branch-sales-officer-unaizah",
+      "from": "business-jobs.json",
+      "why": "Its city (Unaizah) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "marriott-housing-coordinator-ksa",
+      "from": "business-jobs.json",
+      "why": "Its city (Saudi Arabia) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "accor-training-coordinator-red-sea",
+      "from": "business-jobs.json",
+      "why": "Its city (Red Sea) is not one of the app's job cities (riyadh, jeddah, dammam, remote)."
+    },
+    {
+      "id": "riyadbank-sustainable-finance-specialist-riyadh",
+      "from": "new-careers.json",
+      "why": "A senior title («Sustainable Finance Senior Specialist»); the app's bands stop at mid (coordinator's rule for wave 3)."
+    }
+  ]
+}

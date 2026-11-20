@@ -9,7 +9,7 @@ import { normalizeText } from "@/lib/text/normalize";
 import type { CompanyId, Job, JobId, OnboardingAnswers } from "@/lib/types";
 
 import { companyField, companyOfJob, jobsAtCompany, matchCompany } from "./companies";
-import { companyJob, dreamCompany, recommend } from "./onboarding-fit";
+import { companyJob, companyJobsOutOfReach, dreamCompany, recommend, withinReach } from "./onboarding-fit";
 
 const DEMO: OnboardingAnswers = {
   city: { value: "riyadh", label: "الرياض" },
@@ -90,7 +90,8 @@ describe("the catalogue and the tiles (research/jobs/jobs-snapshot.json, 20 Nov 
   it("has every company id once, with its link where the careers page opened", () => {
     expect(COMPANIES.map((c) => c.id).sort()).toEqual([...COMPANY_IDS].sort());
     for (const c of COMPANIES) {
-      expect(c.checkedAt, c.id).toBe("2026-11-20");
+      // 20 Nov 2026; wave 3's companies of postings (and Riyadh Air's board) were read on 21 Nov 2026
+      expect(["2026-11-20", "2026-11-21"], c.id).toContain(c.checkedAt);
       expect(c.aliases.length, c.id).toBeGreaterThan(0);
       if (c.source === "careers-page") expect(c.careersUrl, c.id).toMatch(/^https:\/\//);
       else expect(c.careersUrl, c.id).toBeNull();
@@ -132,7 +133,17 @@ describe("a job's company, read from its names (never its id)", () => {
 });
 
 describe("the path aims at the company's job (owner's part 2)", () => {
-  const other = JOB_IDS.find((id) => id !== "data-analyst-riyadh") as JobId;
+  // a job within reach of the demo's experience (21 Nov 2026: a beginner is never aimed at a senior job)
+  const other = JOB_IDS.find((id) => id !== "data-analyst-riyadh" && withinReach(id, DEMO)) as JobId;
+  const senior = JOB_IDS.find((id) => getJob(id).field === "data" && !withinReach(id, DEMO)) as JobId;
+
+  it("never aims a beginner at the company's senior job: none within reach → the ranking decides, and «دليلك» says so", () => {
+    expect(senior).toBeDefined();
+    expect(companyJob({ ...DEMO, company: "qiddiya" }, stub([senior]))).toBeNull();
+    expect(companyJobsOutOfReach({ ...DEMO, company: "qiddiya" }, stub([senior]))).toBe(true);
+    expect(companyJobsOutOfReach({ ...DEMO, company: "qiddiya" }, stub([other]))).toBe(false);
+    expect(recommend({ ...DEMO, company: "qiddiya" }, stub([senior])).recommended).toBe("data-analyst-riyadh");
+  });
   const stub = (jobs: readonly JobId[]) => (id: CompanyId) => (id === "qiddiya" ? jobs : []);
 
   it("recommends the company's job when it has one, the ranking's best two as the alternatives", () => {

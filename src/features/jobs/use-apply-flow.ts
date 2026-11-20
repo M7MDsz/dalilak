@@ -3,8 +3,8 @@
 // performing is reported correctly whatever happens to the sheet.
 //
 // Two ways in:
-// - user: «قدّم بنفسك» or `/jobs/{id}?apply=1` → the sheet opens already filled; «أرسل الطلب» → the record is written
-//   (ARCHITECTURE 5.2: on the press) → «جارٍ الإرسال…» (1.2 s) → the confirmation. From the press until the sheet closes
+// - user: «قدّم بنفسك» or `/jobs/{id}?apply=1` → the sheet opens already filled; «احفظ الطلب» → the record is written
+//   (ARCHITECTURE 5.2: on the press) → «جارٍ الحفظ…» (1.2 s) → the confirmation. From the press until the sheet closes
 //   the overlay queue is held, so the +40 XP and badge toasts follow the receipt instead of landing on it, exactly as
 //   they follow «دليلك»'s run. HoldKey has no key for a manual send (frozen type), so this borrows "advisor-apply": no
 //   advisor run can exist while a user sheet is open (startApplyRun refuses then), so the key never has two holders.
@@ -12,7 +12,7 @@
 //   open 0.5 s · name, city, qualification 0.4 s each · the skills pop 0.7 s · the note types 2.0 s · the send is pressed
 //   and goes out 1.6 s (the record is written at the START of this step) · the confirmation, then the sheet closes itself.
 //   20 Nov 2026 (real jobs): the simulated multi-site step is gone. The PRACTICE job's confirmation stays up longer
-//   (APPLY_PRACTICE_DONE_MS) and ends with the honest line «وظيفة تدريبية: …»; a REAL job's application is PREPARED, not
+//   (APPLY_PRACTICE_DONE_MS) on «تم حفظ طلبك»; a REAL job's application is PREPARED, not
 //   sent: the confirmation shows where the job is posted and ONE action, «افتح الإعلان الأصلي وقدّم» (a new tab + the
 //   note on the clipboard). That needs the user's own press, so for a real job the sheet stays open after the run ends. Every step is reported with setApplyStep(runId, 1..6); «إيقاف» (composer or sheet: requestApplyStop) during
 //   steps 1-4 stops it, leaves what was written, editable, and reports `stopped`. Unmounted mid-run (a nav item, Back),
@@ -83,7 +83,7 @@ const SPEC_STEP: Readonly<Record<FillStepId, ApplyStep>> = {
 export const STEP_ORDER: readonly FillStepId[] = FILL_STEPS_REAL.map((s) => s.id);
 const SEND_INDEX = STEP_ORDER.indexOf("send");
 const FORM_KEYS: readonly FormKey[] = ["name", "city", "education", "note"];
-/** The programmatic press on «أرسل الطلب» (DESIGN 7: the press is seen, then the action follows). */
+/** The programmatic press on «احفظ الطلب» (DESIGN 7: the press is seen, then the action follows). */
 const PRESS_MS = 180;
 
 interface Session {

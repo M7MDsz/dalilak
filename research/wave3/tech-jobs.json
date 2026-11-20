@@ -1,0 +1,3614 @@
+{
+ "checkedAt": "2026-11-21",
+ "label": "جُمعت في 21 نوفمبر 2026",
+ "note": "Wave-3 tech/data postings in Saudi Arabia, in the shape of research/jobs/jobs-snapshot.json `jobs` (plus companyId, family, yearsAsked, missingSkills, note, foundBy). Read only from each company's own careers page or its own public ATS board (Workable, Greenhouse, SmartRecruiters, Oracle HCM, Recruitee, SuccessFactors) on 2026-11-20/21; no aggregator was used. Every evidence line (requirements, missingSkills, bandEvidence) was checked word for word against the fetched posting text. A posting may have closed since. city: riyadh | jeddah | dammam (incl. Khobar/Dhahran) | remote (remote in KSA) | null (another city, see cityText). Held postings (senior/lead/manager titles, 6+ years, or too thin for 5 evidenced skills) are listed under `held` and are not for the app.",
+ "counts": {
+  "postings": 36,
+  "held": 72,
+  "byFamily": {
+   "data-analyst-bi": 3,
+   "data-science-ai": 5,
+   "data-engineering": 3,
+   "frontend": 1,
+   "backend": 2,
+   "fullstack": 2,
+   "mobile": 1,
+   "qa": 2,
+   "integration-support": 1,
+   "product": 2,
+   "ux-ui": 2,
+   "digital-marketing": 4,
+   "cybersecurity": 3,
+   "it-support": 1,
+   "cloud-devops": 4
+  },
+  "byBand": {
+   "mid": 21,
+   "junior": 8,
+   "entry": 7
+  },
+  "byCity": {
+   "dammam": 3,
+   "other": 2,
+   "riyadh": 28,
+   "remote": 3
+  },
+  "byCompany": {
+   "Eram Talent": 3,
+   "Nahdi Medical Company": 1,
+   "Arabic.AI": 3,
+   "InnovationTeam": 2,
+   "MOZN": 1,
+   "Master-Works (Nabeh)": 1,
+   "Tamara": 1,
+   "Lucidya": 4,
+   "Salla": 1,
+   "Squadio": 1,
+   "TAWANTECH": 2,
+   "Master-Works (Adree)": 1,
+   "Moyasar": 1,
+   "LamdaX": 1,
+   "Gathern": 1,
+   "Ninja": 2,
+   "Saudi AZM": 2,
+   "webook.com": 1,
+   "Almosafer": 1,
+   "Jeeny": 1,
+   "Lucid": 1,
+   "Syarah": 1,
+   "Bosch": 1,
+   "DeepSource Technologies": 1,
+   "Master-Works (SOOR)": 1
+  }
+ },
+ "missingSkillsTally": [
+  {
+   "group": "Analytics tools (GA, Amplitude, Tableau, Qlik)",
+   "postings": 5
+  },
+  {
+   "group": "Jira / Confluence / test management",
+   "postings": 4
+  },
+  {
+   "group": "Docker / Kubernetes / MLOps",
+   "postings": 3
+  },
+  {
+   "group": "Database administration (PostgreSQL HA, backup, recovery)",
+   "postings": 3
+  },
+  {
+   "group": "Java / .NET / C#",
+   "postings": 3
+  },
+  {
+   "group": "Test automation (Selenium / Appium / Cypress / Postman)",
+   "postings": 3
+  },
+  {
+   "group": "PyTorch / TensorFlow / CV libraries",
+   "postings": 2
+  },
+  {
+   "group": "Spark / Databricks / BigQuery",
+   "postings": 2
+  },
+  {
+   "group": "ETL / data modelling / Airflow / dbt",
+   "postings": 2
+  },
+  {
+   "group": "Low-code / Odoo / OutSystems",
+   "postings": 2
+  },
+  {
+   "group": "Monitoring (Prometheus / Grafana / SIEM)",
+   "postings": 2
+  },
+  {
+   "group": "GRC frameworks / access management",
+   "postings": 2
+  },
+  {
+   "group": "Firewalls (FortiGate)",
+   "postings": 2
+  },
+  {
+   "group": "Windows Server / IIS / Active Directory",
+   "postings": 2
+  },
+  {
+   "group": "Ruby on Rails / Redis / Sidekiq",
+   "postings": 1
+  },
+  {
+   "group": "Flutter / Dart / mobile",
+   "postings": 1
+  },
+  {
+   "group": "Terraform / CI-CD tools / IaC",
+   "postings": 1
+  }
+ ],
+ "verbatimCheck": {
+  "postings": 36,
+  "evidenceStrings": 290,
+  "failures": 0
+ },
+ "boardsTried": [
+  {
+   "by": "lead",
+   "company": "Salla",
+   "board": "apply.workable.com/salla",
+   "result": "23 roles; kept 1 (DBA Tamheer), rest senior/non-tech or already in app"
+  },
+  {
+   "by": "lead",
+   "company": "Lucidya",
+   "board": "apply.workable.com/lucidya",
+   "result": "36 roles; kept 4 (2 internships, DBA, 10x engineer); entry-level SWE internship held as too thin"
+  },
+  {
+   "by": "lead",
+   "company": "MOZN",
+   "board": "apply.workable.com/mozn-ai",
+   "result": "kept 1; rest senior, non-tech, Egypt or in app"
+  },
+  {
+   "by": "lead",
+   "company": "Ninja",
+   "board": "apply.workable.com/ananinja",
+   "result": "kept 2 (IT governance, integration)"
+  },
+  {
+   "by": "lead",
+   "company": "webook.com",
+   "board": "apply.workable.com/webook",
+   "result": "kept 1 (Product Manager)"
+  },
+  {
+   "by": "lead",
+   "company": "Jeeny",
+   "board": "apply.workable.com/jeeny",
+   "result": "kept 1 (social media)"
+  },
+  {
+   "by": "lead",
+   "company": "Moyasar",
+   "board": "apply.workable.com/moyasar-financial-company-1",
+   "result": "kept 1 (full-stack)"
+  },
+  {
+   "by": "lead",
+   "company": "LamdaX",
+   "board": "apply.workable.com/lamdax",
+   "result": "kept 1 (Flutter internship)"
+  },
+  {
+   "by": "lead",
+   "company": "Syarah",
+   "board": "apply.workable.com/syarah",
+   "result": "kept 1 (IT helpdesk)"
+  },
+  {
+   "by": "lead",
+   "company": "Almosafer",
+   "board": "jobs.almosafer.com",
+   "result": "kept 1 (Specialist - Product Designer); other tech roles are in Amman/Cairo"
+  },
+  {
+   "by": "lead",
+   "company": "Foodics / PetroApp / Mrsool / Tamatem",
+   "board": "apply.workable.com",
+   "result": "no new junior/mid KSA tech role (senior, abroad, or in app)"
+  },
+  {
+   "by": "lead",
+   "company": "Qiddiya / Horizontal Digital / Platinumlist",
+   "board": "apply.workable.com",
+   "result": "no new junior/mid tech role (Qiddiya cyber analyst carries a senior-manager description)"
+  },
+  {
+   "by": "lead",
+   "company": "Saudi Electricity",
+   "board": "jobs.se.com.sa",
+   "result": "listing is script-rendered; nothing readable without a browser"
+  },
+  {
+   "by": "lead",
+   "company": "26 more guessed Workable slugs (jisr, mawdoo3, telfaz11, unifonic-1, noon-1, ...)",
+   "board": "apply.workable.com widget",
+   "result": "404 or zero jobs"
+  },
+  {
+   "company": "Tamara",
+   "board": "Greenhouse EU tamara",
+   "result": "35 jobs, 12 in KSA; kept Builders Program - Data. Generic multi-function Builders Program (4997585101) and Internship Program (4996993101) skipped: not one tech family. Rest non-tech or already in app.",
+   "by": "helperA"
+  },
+  {
+   "company": "Nahdi",
+   "board": "Oracle HCM efan.fa.em3 CX_1",
+   "result": "22 jobs; kept IT Co-op 2727; 2 senior QA/DevOps roles held; 2718 already in app",
+   "by": "helperA"
+  },
+  {
+   "company": "Bosch",
+   "board": "SmartRecruiters BoschGroup country=sa",
+   "result": "1 job (Software Development Intern, released 2025-11-25, still live); kept",
+   "by": "helperA"
+  },
+  {
+   "company": "Lucid",
+   "board": "Greenhouse lucidmotors",
+   "result": "489 jobs, 35 in KSA (mostly KAEC manufacturing); kept Purple Teaming Engineer (at least 5 yrs, borderline mid; posted 2025-11-18); Product Associate is retail sales",
+   "by": "helperA"
+  },
+  {
+   "company": "Devoteam",
+   "board": "SmartRecruiters Devoteam country=sa",
+   "result": "15 KSA jobs; 8 held (senior/architect/7+ yrs). AI Engineer - Tamheer (744000160545250, entry, Riyadh) NOT kept: posting text lists only GPA, communication, English and degree, too thin for 5 evidenced skills. Data Governance Consultant (5+ yrs) skipped: governance consulting, no matching family.",
+   "by": "helperA"
+  },
+  {
+   "company": "Sutherland",
+   "board": "SmartRecruiters Sutherland country=sa",
+   "result": "RECENT IT / IS GRADUATES Riyadh (744000153501389) not kept: only communication + English listed, too thin for 5 skills; other 2 are HR-systems architect roles",
+   "by": "helperA"
+  },
+  {
+   "company": "HungerStation (Delivery Hero)",
+   "board": "SmartRecruiters DeliveryHero country=sa",
+   "result": "26 KSA jobs; tech ones all senior (held); rest ops/sales",
+   "by": "helperA"
+  },
+  {
+   "company": "Lean Technologies",
+   "board": "Ashby LeanTech",
+   "result": "8 jobs, 3 in Riyadh, all senior/staff (held)",
+   "by": "helperA"
+  },
+  {
+   "company": "D360 Bank",
+   "board": "Oracle HCM fa-erqw CX_4001 (URL name D360BankCareerPage)",
+   "result": "13 jobs; 90493/90556 skipped as instructed; tech roles all lead/senior/manager (held)",
+   "by": "helperA"
+  },
+  {
+   "company": "Banque Saudi Fransi",
+   "board": "Oracle HCM fa-epje CX_2001 (URL name BSFCareers)",
+   "result": "API returned TotalJobsCount 0",
+   "by": "helperA"
+  },
+  {
+   "company": "Savola",
+   "board": "Oracle HCM fa-ewxl CX_1001",
+   "result": "82 jobs, none tech in KSA (mostly Egypt/UAE ops)",
+   "by": "helperA"
+  },
+  {
+   "company": "Savvy Games",
+   "board": "Oracle HCM evth CX_1009 (URL name savvy-careers)",
+   "result": "API returned TotalJobsCount 0",
+   "by": "helperA"
+  },
+  {
+   "company": "Mobily",
+   "board": "Oracle HCM careers.mobily.com.sa CX_4002",
+   "result": "Is Oracle. 2 jobs: COOP Trainee (empty description) and Elite Program (grad program; lists only majors + eligibility, no skills) - not kept",
+   "by": "helperA"
+  },
+  {
+   "company": "stc",
+   "board": "SuccessFactors careers.stc.com.sa",
+   "result": "5 jobs, all manager/expert, none in target families",
+   "by": "helperA"
+  },
+  {
+   "company": "Unifonic",
+   "board": "Recruitee jobs.unifonic.com",
+   "result": "13 jobs; KSA tech only Infrastructure Engineering Manager (held)",
+   "by": "helperA"
+  },
+  {
+   "company": "Noon Academy",
+   "board": "Teamtailor careers.learnatnoon.com",
+   "result": "18 jobs; KSA tech only senior/principal (held)",
+   "by": "helperA"
+  },
+  {
+   "company": "Careem",
+   "board": "Greenhouse careem",
+   "result": "11 jobs, 0 in KSA",
+   "by": "helperA"
+  },
+  {
+   "company": "Hala",
+   "board": "own careers SPA careers.hala.com",
+   "result": "listing showed Payment Product Manager, Marketing Operations Specialist, Digital Marketing Manager, IT Risk Manager, Head of Tech in Riyadh; detail pages are JS-only and the backing API was not used, so nothing recorded",
+   "by": "helperA"
+  },
+  {
+   "company": "Al Rajhi Bank",
+   "board": "careers.alrajhibank.com.sa",
+   "result": "Talentera-hosted: link only",
+   "by": "helperA"
+  },
+  {
+   "company": "Arab National Bank",
+   "board": "careers.anb.sa",
+   "result": "Talentera-hosted: link only",
+   "by": "helperA"
+  },
+  {
+   "company": "Tabby, noon, Zid, Rewaa, Nana, Sary, barq, Geidea, Wafeq, Rasan, Jahez, Tamatem, Sanad, Ejar, Lendo, Tweeq, Sahl, Classera, Calo, Floward, Mumzworld, Property Finder, Kitopi, Talabat, Humain, Tarabut, Paymob, PayTabs, Tap, stc pay, HyperPay, Red Sea Global, NEOM, ROSHN, Riyadh Air",
+   "board": "Greenhouse / Greenhouse EU / Lever / Lever EU / Ashby (slug variants); SmartRecruiters for Careem, Noon, Talabat, Geidea, Unifonic, Tabby",
+   "result": "no board found under those slugs; careers pages of Tabby, Zid, Nana, Sary, Geidea show no external ATS link (likely Workable or in-house); Jahez, Floward, Tamatem careers pages return 403",
+   "by": "helperA"
+  },
+  {
+   "company": "Datadog, ServiceNow, thndr, Databricks",
+   "board": "Greenhouse / SmartRecruiters / Ashby",
+   "result": "KSA roles are sales/senior only",
+   "by": "helperA"
+  },
+  {
+   "company": "Master-Works",
+   "board": "Workable masterworksco",
+   "result": "26 jobs; kept 3 (SOOR cloud, Nabeh AI engineer, Adree OutSystems dev); AI Business Analyst and AI Product Manager already in app; rest senior/manager/sales",
+   "by": "helperB"
+  },
+  {
+   "company": "InnovationTeam",
+   "board": "Workable innovationteam",
+   "result": "48 jobs; kept 2 (QA Engineer, Junior AI Engineer); entry roles 'IT Technical Engineer - Fresh Graduate' and 'Associate Consultant (IT Fresh Graduate)' exist but fit no target family; others senior/5+ yrs/integration-specialist",
+   "by": "helperB"
+  },
+  {
+   "company": "TAWANTECH",
+   "board": "Workable tawantech",
+   "result": "52 jobs; kept 2 (Marketing Specialist-Banking, Java Developer); mostly senior banking-IT roles",
+   "by": "helperB"
+  },
+  {
+   "company": "Gathern",
+   "board": "Workable gathern",
+   "result": "9 jobs; kept 1 (QA Engineer); Data Scientist / BI / Tamheer Product Designer seen in search are closed",
+   "by": "helperB"
+  },
+  {
+   "company": "DeepSource Technologies",
+   "board": "Workable deepsource",
+   "result": "21 jobs (Saudi-national infra roles); kept 1 (Cloud Administrator Azure); rest senior or L1/L2 support/NOC",
+   "by": "helperB"
+  },
+  {
+   "company": "Arabic.AI",
+   "board": "Workable arabicai",
+   "result": "35 jobs; kept 3 (Data Engineer, ML Engineer, Operations and Security Engineer) - none state years; Marketing Data Engineer and Data Governance Engineer also open",
+   "by": "helperB"
+  },
+  {
+   "company": "Saudi AZM",
+   "board": "Recruitee azmtalent",
+   "result": "24 offers; kept 2 (DevOps Engineer, Product Manager); AZEM internship program (multi-major, no single tech family); AI Engineer x2 held (6-8+ yrs)",
+   "by": "helperB"
+  },
+  {
+   "company": "Eram Talent (recruiter, employer of record; already in app)",
+   "board": "Workable eramtalent-1",
+   "result": "1382 rows incl. multi-location duplicates; kept 3 Eastern Province roles (MIS/Data Analysis Coordinator, UI/UX Designer, Business Systems & Reporting Analyst)",
+   "by": "helperB"
+  },
+  {
+   "company": "Squadio",
+   "board": "Workable squadio23",
+   "result": "52 rows; kept 1 (odoo FrontEnd Developer, Riyadh); most others remote non-KSA or senior",
+   "by": "helperB"
+  },
+  {
+   "company": "Adree",
+   "board": "Workable adree",
+   "result": "4 jobs, all senior or account manager; mobile/frontend/UI roles seen in search are closed",
+   "by": "helperB"
+  },
+  {
+   "company": "Applus",
+   "board": "Workable applus",
+   "result": "3 jobs, none tech (Data Analyst seen in search is closed)",
+   "by": "helperB"
+  },
+  {
+   "company": "Uxbert Labs",
+   "board": "Workable uxbert-labs-1",
+   "result": "8 jobs, all senior/lead/manager",
+   "by": "helperB"
+  },
+  {
+   "company": "Mirai (Scopely studio)",
+   "board": "Workable playmirai",
+   "result": "3 jobs, all senior/lead/director",
+   "by": "helperB"
+  },
+  {
+   "company": "CodeNinja",
+   "board": "Workable codeninjapk",
+   "result": "10 jobs; KSA tech roles all senior",
+   "by": "helperB"
+  },
+  {
+   "company": "Khibraty",
+   "board": "Workable khibraty",
+   "result": "24 jobs; no KSA tech roles (KSA = business development/sales)",
+   "by": "helperB"
+  },
+  {
+   "company": "Ultimate Peaks",
+   "board": "Workable ultimate-peaks",
+   "result": "21 jobs; no junior/mid tech roles (Product Manager GovTech seen in search is closed)",
+   "by": "helperB"
+  },
+  {
+   "company": "JODAYN",
+   "board": "Workable jodayn-1",
+   "result": "3 jobs; Data Management Consultant 5+ yrs",
+   "by": "helperB"
+  },
+  {
+   "company": "Alkaffary Group",
+   "board": "Workable alkaffary-group",
+   "result": "14 jobs; no tech roles open",
+   "by": "helperB"
+  },
+  {
+   "company": "Ebra",
+   "board": "Workable ebra",
+   "result": "6 jobs; no open junior/mid tech roles",
+   "by": "helperB"
+  },
+  {
+   "company": "Star",
+   "board": "Workable star-sa",
+   "result": "1 job (sales); UI/UX Designer seen in search is closed",
+   "by": "helperB"
+  },
+  {
+   "company": "Qiddiya Investment Company",
+   "board": "Workable qiddiya-investment-company-1",
+   "result": "281 rows; tech roles mostly senior/manager; 'Analyst - Cybersecurity Business Partner' text is a mismatched senior-manager template, not used",
+   "by": "helperB"
+  },
+  {
+   "company": "Chain Reaction",
+   "board": "Workable chain-reaction-1",
+   "result": "no target tech roles in KSA",
+   "by": "helperB"
+  },
+  {
+   "company": "TalentHunt (recruiter)",
+   "board": "Workable talenthuntsa",
+   "result": "2 director roles",
+   "by": "helperB"
+  },
+  {
+   "company": "Innovative Solutions",
+   "board": "Workable is",
+   "result": "1 job (Senior Project Manager, Riyadh); SOC L1 / Cybersecurity Analyst postings seen in search are closed",
+   "by": "helperB"
+  },
+  {
+   "company": "CCDS",
+   "board": "Workable ccds",
+   "result": "0 jobs",
+   "by": "helperB"
+  },
+  {
+   "company": "Managed Services",
+   "board": "Workable managed-services",
+   "result": "0 jobs",
+   "by": "helperB"
+  },
+  {
+   "company": "Sweater",
+   "board": "Workable sweater",
+   "result": "0 jobs",
+   "by": "helperB"
+  },
+  {
+   "company": "Walter",
+   "board": "Workable walter-careers",
+   "result": "0 jobs",
+   "by": "helperB"
+  },
+  {
+   "company": "T63 (multi-company recruiting board)",
+   "board": "Workable t63",
+   "result": "511 rows for many client companies; skipped as a recruiter aggregator",
+   "by": "helperB"
+  },
+  {
+   "company": "Seez, Sanad, Qoyod, marn, Wakeb, Tamkeen Technologies, Sary, Nana, Hala, barq, Resal, Sumerge, Ejada, ELM",
+   "board": "Workable seez, sanad, qoyod, marn, wakeb, tamkeen-technologies, sary-1, nana-1, hala-1, barq-1, resal, sumerge, ejada, elm-1",
+   "result": "boards exist, 0 jobs each",
+   "by": "helperB"
+  },
+  {
+   "company": "Rewaa, Wafeq, Tweeq, Erad, Manafa (and abyan, sulfah, sahl, sadeem, ejar, daftra, nuqtah, rasan-it, thiqah-1, zid-1, rewaa-1, lean-technologies, tweeq-1, wafeq-1, nomu, devoteam-ksa)",
+   "board": "Workable",
+   "result": "HTTP 404 (no Workable board under these slugs)",
+   "by": "helperB"
+  },
+  {
+   "company": "Unifonic",
+   "board": "Recruitee unifonic",
+   "result": "13 offers; KSA tech role only Infrastructure Engineering Manager (held)",
+   "by": "helperB"
+  },
+  {
+   "company": "Sahl",
+   "board": "Recruitee sahl",
+   "result": "7 offers, all Egypt",
+   "by": "helperB"
+  },
+  {
+   "company": "Erad, Elm",
+   "board": "Breezy erad, elm",
+   "result": "0 jobs",
+   "by": "helperB"
+  },
+  {
+   "company": "Manatal careers-page.com boards (exequt, caliberly, join-solutions-2, cbt-12, foregroundllc)",
+   "board": "Manatal open API",
+   "result": "connection failed (no response); not pursued",
+   "by": "helperB"
+  },
+  {
+   "company": "Teamtailor / Zoho Recruit / Personio",
+   "board": "web search discovery",
+   "result": "search engine returned no Saudi boards on these ATS domains",
+   "by": "helperB"
+  }
+ ],
+ "postings": [
+  {
+   "id": "eram-talent-business-systems-reporting-analyst-dhahran",
+   "title": "Business Systems & Reporting Analyst",
+   "titleAr": "محلل أنظمة الأعمال والتقارير",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Eram Talent",
+    "ar": "إرم تالنت"
+   },
+   "companyId": null,
+   "city": "dammam",
+   "cityText": "Dhahran, Eastern Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-09-29",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/eramtalent-1)",
+   "url": "https://apply.workable.com/eramtalent-1/j/70745C572C/",
+   "field": "data",
+   "family": "data-analyst-bi",
+   "band": "mid",
+   "yearsAsked": "Minimum 3+ years of hands-on experience in data analysis, data processing, and business reporting.",
+   "bandEvidence": "Minimum 3+ years of hands-on experience in data analysis, data processing, and business reporting.",
+   "requirements": [
+    {
+     "skill": "excel",
+     "stars": 3,
+     "evidence": "Advanced proficiency in MS Excel (data manipulation, formulas, pivot tables, modeling) and MS PowerPoint."
+    },
+    {
+     "skill": "dataviz",
+     "stars": 1,
+     "evidence": "Reporting & Documentation: Design, build, and maintain scheduled and ad-hoc reporting dashboards and presentations using MS PowerPoint and MS Excel."
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Strong interpersonal, team collaboration, and presentation abilities."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Excellent verbal and written English communication skills."
+    },
+    {
+     "skill": "hr-basics",
+     "stars": 1,
+     "evidence": "Prior work experience within the Learning & Development (L&D) or HR domain is strongly preferred."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "PDF Professional tools",
+     "evidence": "Demonstrated experience with PDF Professional tools for document processing and reporting."
+    },
+    {
+     "name": "PMP certification (preferred)",
+     "evidence": "PMP (Project Management Professional) certification is preferred."
+    }
+   ],
+   "summary": "يعالج سجلات بيانات كبيرة ويحللها ويحوّلها إلى لوحات وتقارير وتوصيات للإدارة، خصوصًا لبرامج التعلّم والتطوير والموارد البشرية.",
+   "tasks": [
+    "استخراج البيانات وتنظيفها وتحليلها في Excel",
+    "بناء لوحات وتقارير دورية وعروض PowerPoint للإدارة",
+    "تقييم أداء برامج التدريب ومؤشراتها مع وحدات الأعمال وتحسين سير إعداد التقارير"
+   ],
+   "note": "Eram Talent is a recruiter and employer of record for client roles (its own board).",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "eram-talent-mis-data-analysis-coordinator-dhahran",
+   "title": "MIS / Data Analysis Coordinator",
+   "titleAr": "منسّق نظم المعلومات الإدارية وتحليل البيانات",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Eram Talent",
+    "ar": "إرم تالنت"
+   },
+   "companyId": null,
+   "city": "dammam",
+   "cityText": "Dhahran, Eastern Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-03-21",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/eramtalent-1)",
+   "url": "https://apply.workable.com/eramtalent-1/j/005FF7E5E6/",
+   "field": "data",
+   "family": "data-analyst-bi",
+   "band": "junior",
+   "yearsAsked": "2+ years of experience in Data Analysis, Data Science, or Business Analytics",
+   "bandEvidence": "2+ years of experience in Data Analysis, Data Science, or Business Analytics",
+   "requirements": [
+    {
+     "skill": "excel",
+     "stars": 2,
+     "evidence": "Proficiency in MS Excel, SQL, and data visualization tools like Power BI or Tableau."
+    },
+    {
+     "skill": "sql",
+     "stars": 1,
+     "evidence": "Proficiency in MS Excel, SQL, and data visualization tools like Power BI or Tableau."
+    },
+    {
+     "skill": "powerbi",
+     "stars": 1,
+     "evidence": "Proficiency in MS Excel, SQL, and data visualization tools like Power BI or Tableau."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong analytical and problem-solving skills."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Excellent communication and interpersonal skills."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Tableau",
+     "evidence": "Proficiency in MS Excel, SQL, and data visualization tools like Power BI or Tableau."
+    },
+    {
+     "name": "Data governance & data quality standards",
+     "evidence": "Familiarity with data governance and data quality standards."
+    }
+   ],
+   "summary": "يجمع البيانات ويعالجها ويتحقق منها ويطوّر تقارير آلية تدعم قرارات الإدارات المختلفة.",
+   "tasks": [
+    "إعداد تقارير لمتابعة التقدم ودعم اتخاذ القرار",
+    "تحليل البيانات لتحسين العمليات ومتابعة الميزانيات",
+    "تدريب الفرق ودعمها على أدوات نظم المعلومات الإدارية وتحليل البيانات"
+   ],
+   "note": "Eram Talent is a recruiter and employer of record for client roles (its own board). Posted 2026-03-21, still open.",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "nahdi-it-coop-saudi-arabia",
+   "title": "Information Technology Co-op",
+   "titleAr": "تدريب تعاوني - تقنية المعلومات",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Nahdi Medical Company",
+    "ar": "شركة النهدي الطبية"
+   },
+   "companyId": "nahdi",
+   "city": null,
+   "cityText": "Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-16",
+   "checkedAt": "2026-11-21",
+   "source": "Oracle HCM CandidateExperience (efan.fa.em3.oraclecloud.com, site CX_1)",
+   "url": "https://efan.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/2727",
+   "field": "data",
+   "family": "data-analyst-bi",
+   "band": "entry",
+   "yearsAsked": null,
+   "bandEvidence": "As an Information Technology Intern, you will get the chance to work in one of the following functions:",
+   "requirements": [
+    {
+     "skill": "excel",
+     "stars": 1,
+     "evidence": "Proficient in Microsoft Office applications, Word, Excel, Power Point, & Outlook."
+    },
+    {
+     "skill": "business-analysis",
+     "stars": 1,
+     "evidence": "Development of business processes and strategies by implementing Business Intelligence Modules, as well as identifying business opportunities and finding out new ways to attract new Guests."
+    },
+    {
+     "skill": "security-fundamentals",
+     "stars": 1,
+     "evidence": "Establish and maintain the information security programs to ensure information assets and associated technology, applications, systems, infrastructure, and processes are adequately protected in the operated digital ecosystem."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Proficient in English."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Excellent written and verbal communication skills for coordinating across teams."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "IT service management (ITSM) / technical support",
+     "evidence": "Manage and lead IT Service Management that delivers software and hardware technical support to Nahdi’s internal Guests."
+    },
+    {
+     "name": "Databases, middleware and system integration",
+     "evidence": "Lead the design and deployment of data management technical infrastructure, database system, middleware, integration and automation of different systems, and ensure its optimization."
+    }
+   ],
+   "summary": "تدريب تعاوني في النهدي لطلاب وحديثي تخرج تخصصات الحاسب (للسعوديين) يعمل فيه المتدرب في أحد مسارات تقنية المعلومات: العمليات أو ذكاء الأعمال أو التطبيقات أو إدارة البيانات أو المخاطر والحوكمة، من يناير إلى يوليو 2027.",
+   "tasks": [
+    "المشاركة في خدمات الدعم الفني للبرمجيات والأجهزة لموظفي الشركة",
+    "دعم تطبيق وحدات ذكاء الأعمال وتطوير العمليات",
+    "المساهمة في برامج أمن المعلومات وحماية الأنظمة والبيانات"
+   ],
+   "note": "Multi-track IT co-op (location 'Saudi Arabia' only); family chosen for its BI track.",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "arabicai-machine-learning-engineer-riyadh",
+   "title": "Machine Learning Engineer",
+   "titleAr": "مهندس تعلّم الآلة",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Arabic.AI",
+    "ar": "أرابيك إيه آي"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-09",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/arabicai)",
+   "url": "https://apply.workable.com/arabicai/j/22EB2DEE67/",
+   "field": "data",
+   "family": "data-science-ai",
+   "band": "mid",
+   "yearsAsked": null,
+   "bandEvidence": "The Python ML stack (pandas, scikit-learn, and one of PyTorch, TensorFlow or XGBoost), with models you have actually run in production",
+   "requirements": [
+    {
+     "skill": "ml",
+     "stars": 1,
+     "evidence": "Qualify and prioritise use cases with the client, then build, deploy and monitor the models."
+    },
+    {
+     "skill": "python-data",
+     "stars": 1,
+     "evidence": "The Python ML stack (pandas, scikit-learn, and one of PyTorch, TensorFlow or XGBoost), with models you have actually run in production"
+    },
+    {
+     "skill": "powerbi",
+     "stars": 3,
+     "evidence": "Power BI: data model, DAX, Power Query, row-level security, scheduled refresh"
+    },
+    {
+     "skill": "statistics",
+     "stars": 2,
+     "evidence": "Statistical analysis and experiment design"
+    },
+    {
+     "skill": "dataviz",
+     "stars": 1,
+     "evidence": "Design and build dashboards and automated reports in Arabic and English."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Qlik Sense",
+     "evidence": "Qlik Sense: load scripts, associative model, set analysis, section access, report automation"
+    },
+    {
+     "name": "Dataiku",
+     "evidence": "Expect around twenty use cases and twenty dashboards over the year, on Python and Dataiku for the models and Qlik, Power BI and Python for the visuals."
+    },
+    {
+     "name": "MLOps",
+     "evidence": "MLOps: reproducible training, deployment, monitoring, retraining"
+    },
+    {
+     "name": "Plotly / Dash / Streamlit",
+     "evidence": "Python reporting and visualisation (Plotly or Dash, Streamlit or similar)"
+    }
+   ],
+   "summary": "ينقل حالات استخدام تعلّم الآلة من الفكرة إلى الإنتاج ويبني لوحات معلومات وتقارير ثنائية اللغة يعتمد عليها صنّاع القرار.",
+   "tasks": [
+    "بناء نماذج التنبؤ والتقسيم والتوصية ونشرها ومراقبتها",
+    "إجراء التحليل الإحصائي لكل حالة استخدام وشرح النتائج لغير المختصين",
+    "تصميم لوحات Power BI وQlik وتقارير آلية بالعربية والإنجليزية"
+   ],
+   "note": "No years stated; band mid is an inference.",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "innovationteam-junior-ai-engineer-computer-vision-riyadh",
+   "title": "Junior AI Engineer",
+   "titleAr": "مهندس ذكاء اصطناعي مبتدئ (رؤية حاسوبية)",
+   "titleArTranslated": true,
+   "company": {
+    "en": "InnovationTeam",
+    "ar": "إنوفيشن تيم"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-02-15",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/innovationteam)",
+   "url": "https://apply.workable.com/innovationteam/j/51E032B93A/",
+   "field": "data",
+   "family": "data-science-ai",
+   "band": "junior",
+   "yearsAsked": "Minimum 2 years of hands-on experience in AI / Machine Learning/Deep learning with a focus on Computer Vision.",
+   "bandEvidence": "Minimum 2 years of hands-on experience in AI / Machine Learning/Deep learning with a focus on Computer Vision.",
+   "requirements": [
+    {
+     "skill": "deep-learning",
+     "stars": 1,
+     "evidence": "Practical experience with CNN-based models and modern CV architectures."
+    },
+    {
+     "skill": "ml",
+     "stars": 1,
+     "evidence": "Understanding of model evaluation, metrics, and performance optimization."
+    },
+    {
+     "skill": "python-data",
+     "stars": 1,
+     "evidence": "Proficiency in Python and common ML/CV libraries (PyTorch or TensorFlow, OpenCV)."
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Deploy AI models into production using APIs and containerized services."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Excellent English communication skills (written and spoken)."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Computer vision libraries (OpenCV, PyTorch/TensorFlow)",
+     "evidence": "Proficiency in Python and common ML/CV libraries (PyTorch or TensorFlow, OpenCV)."
+    },
+    {
+     "name": "Object detection frameworks (YOLO, Detectron2)",
+     "evidence": "Experience with object detection and segmentation frameworks (e.g., YOLO, Detectron2)."
+    },
+    {
+     "name": "Docker / MLOps",
+     "evidence": "Familiarity with Docker and basic MLOps practices."
+    }
+   ],
+   "summary": "يطوّر نماذج رؤية حاسوبية لتحليل الصور والفيديو ويحسّنها وينشرها في بيئات إنتاج حقيقية.",
+   "tasks": [
+    "تدريب نماذج كشف الأجسام وتصنيف الصور والتجزئة والتتبّع",
+    "تجهيز مجموعات البيانات وتنظيفها ووسمها وزيادتها",
+    "نشر النماذج عبر واجهات API وخدمات الحاويات وتوثيق الكود"
+   ],
+   "note": "Posted 2026-02-15, still open.",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "mozn-data-scientist-iii-riyadh",
+   "title": "Data Scientist III",
+   "titleAr": "عالم بيانات (المستوى الثالث)",
+   "titleArTranslated": true,
+   "company": {
+    "en": "MOZN",
+    "ar": "مُزن"
+   },
+   "companyId": "mozn",
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-07-27",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/mozn-ai)",
+   "url": "https://apply.workable.com/mozn-ai/j/EFC26F7C09/",
+   "field": "data",
+   "family": "data-science-ai",
+   "band": "mid",
+   "yearsAsked": "3-5 years",
+   "bandEvidence": "3-5 years of relevant experience as a data scientist, or similar fields that require developing ML/AI models.",
+   "requirements": [
+    {
+     "skill": "statistics",
+     "stars": 2,
+     "evidence": "Good understanding of statistics and probability, such as Bayesian methods and conditional probability."
+    },
+    {
+     "skill": "python-data",
+     "stars": 1,
+     "evidence": "Programming experience over three years, including data manipulation using Python or other languages."
+    },
+    {
+     "skill": "ml",
+     "stars": 1,
+     "evidence": "Applied experience in machine learning, such as conducting model experiments."
+    },
+    {
+     "skill": "deep-learning",
+     "stars": 1,
+     "evidence": "Experience in deep learning frameworks, such as PyTorch."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Communicate highly technical results and methods clearly to a wide variety of external clients."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Spark (big data)",
+     "evidence": "Familiarity with big data technologies, such as Spark."
+    }
+   ],
+   "summary": "تحلّل بيانات معقدة وتبني نماذج تعلّم آلة لحلول مُزن في مكافحة الجرائم المالية وذكاء المعرفة.",
+   "tasks": [
+    "صياغة المشكلات رياضياً وإحصائياً مع العملاء",
+    "تطوير نماذج تعلّم الآلة ونشرها",
+    "عرض النتائج التقنية على العملاء بوضوح"
+   ],
+   "note": "'III' is a grade inside the data-science ladder, not a senior title; 3-5 years asked.",
+   "foundBy": "lead"
+  },
+  {
+   "id": "masterworks-nabeh-ai-engineer-specialist-riyadh",
+   "title": "AI Engineer, Specialist",
+   "titleAr": "أخصائي هندسة الذكاء الاصطناعي",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Master-Works (Nabeh)",
+    "ar": "ماستر وركس (نابه)"
+   },
+   "companyId": "master-works",
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-18",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/masterworksco)",
+   "url": "https://apply.workable.com/masterworksco/j/3843B05203/",
+   "field": "data",
+   "family": "data-science-ai",
+   "band": "mid",
+   "yearsAsked": "3–5 years of hands-on experience in AI/ML engineering and model development.",
+   "bandEvidence": "3–5 years of hands-on experience in AI/ML engineering and model development.",
+   "requirements": [
+    {
+     "skill": "ml",
+     "stars": 1,
+     "evidence": "Design, develop, train, fine-tune, evaluate, and optimize machine learning and deep learning models."
+    },
+    {
+     "skill": "deep-learning",
+     "stars": 1,
+     "evidence": "Strong proficiency in Python and experience with PyTorch or TensorFlow."
+    },
+    {
+     "skill": "python-data",
+     "stars": 1,
+     "evidence": "Experience with REST APIs, SQL, Pandas, and NumPy."
+    },
+    {
+     "skill": "llm-apps",
+     "stars": 1,
+     "evidence": "Build AI solutions across Computer Vision, NLP, Large Language Models (LLMs), Speech-to-Text, and Text-to-Speech."
+    },
+    {
+     "skill": "git",
+     "stars": 1,
+     "evidence": "Familiarity with Git, Docker, and foundational MLOps practices."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "PyTorch / TensorFlow",
+     "evidence": "Strong proficiency in Python and experience with PyTorch or TensorFlow."
+    },
+    {
+     "name": "Docker / MLOps",
+     "evidence": "Familiarity with Git, Docker, and foundational MLOps practices."
+    }
+   ],
+   "summary": "يطوّر نماذج تعلّم الآلة والتعلّم العميق ويدرّبها ويختبرها وينشرها في مجالات الرؤية الحاسوبية ومعالجة اللغة والكلام والذكاء الاصطناعي التوليدي.",
+   "tasks": [
+    "تدريب نماذج تعلّم الآلة والتعلّم العميق وضبطها وتقييمها",
+    "تجهيز البيانات ومعالجتها للتدريب والتحقق",
+    "دمج النماذج في أنظمة المؤسسة عبر REST APIs ومراقبة أدائها"
+   ],
+   "foundBy": "helperB"
+  },
+  {
+   "id": "tamara-builders-program-data-riyadh",
+   "title": "Tamara Builders Program - Data",
+   "titleAr": "برنامج تمارا للخريجين (Builders) - مسار البيانات",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Tamara",
+    "ar": "تمارا"
+   },
+   "companyId": "tamara",
+   "city": "riyadh",
+   "cityText": "Riyadh Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-05",
+   "checkedAt": "2026-11-21",
+   "source": "Greenhouse (job-boards.eu.greenhouse.io/tamara)",
+   "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/5028314101",
+   "field": "data",
+   "family": "data-science-ai",
+   "band": "entry",
+   "yearsAsked": "Up to 2 years of experience, including prior internships or co-ops",
+   "bandEvidence": "Whether you're a recent graduate or early in your career with up to two years of experience, this is where you'll do real meaningful work, alongside some of the most ambitious people in the region.",
+   "requirements": [
+    {
+     "skill": "statistics",
+     "stars": 2,
+     "evidence": "You'll use statistics, experimentation, and advanced analytical techniques to solve problems, uncover opportunities, and shape business decisions."
+    },
+    {
+     "skill": "ml",
+     "stars": 1,
+     "evidence": "You'll explore machine learning models and algorithms that uncover patterns, predict outcomes, and power smarter products and experiences."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong analytical and problem-solving abilities, with a bias toward data-driven decisions"
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Excellent communication skills, written and verbal"
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "A collaborative team player who leads with empathy and respect"
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Data pipelines / data engineering",
+     "evidence": "You'll work on pipelines, platforms, and infrastructure that transform raw data into reliable, accessible insights."
+    }
+   ],
+   "summary": "برنامج سنوي لحديثي التخرج في تمارا بالرياض للعمل في أحد مسارات البيانات: تحليل البيانات أو تعلّم الآلة أو هندسة البيانات أو علم البيانات.",
+   "tasks": [
+    "دعم التحليلات والتقارير التي تساعد الفرق على فهم العملاء وقياس الأثر",
+    "استكشاف نماذج وخوارزميات تعلّم الآلة لاكتشاف الأنماط والتنبؤ بالنتائج",
+    "العمل على خطوط البيانات ومنصاتها لتحويل البيانات الخام إلى رؤى موثوقة"
+   ],
+   "note": "Graduate program (up to 2 years of experience).",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "arabicai-data-engineer-riyadh",
+   "title": "Data Engineer",
+   "titleAr": "مهندس بيانات",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Arabic.AI",
+    "ar": "أرابيك إيه آي"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-09",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/arabicai)",
+   "url": "https://apply.workable.com/arabicai/j/FD139F523F/",
+   "field": "data",
+   "family": "data-engineering",
+   "band": "mid",
+   "yearsAsked": null,
+   "bandEvidence": "Strong Python and SQL, used in production",
+   "requirements": [
+    {
+     "skill": "sql",
+     "stars": 3,
+     "evidence": "Strong Python and SQL, used in production"
+    },
+    {
+     "skill": "python-data",
+     "stars": 1,
+     "evidence": "Strong Python and SQL, used in production"
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Ingesting from APIs, files (SFTP, Excel, CSV) and open data, in batch and streaming"
+    },
+    {
+     "skill": "cloud",
+     "stars": 1,
+     "evidence": "Spark (Databricks or Hadoop) and BigQuery, and comfort with both data-lake and warehouse patterns"
+    },
+    {
+     "skill": "business-analysis",
+     "stars": 1,
+     "evidence": "Work with business owners to reconcile figures and define KPIs, and help write the monthly progress report."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Spark / Databricks / BigQuery",
+     "evidence": "Spark (Databricks or Hadoop) and BigQuery, and comfort with both data-lake and warehouse patterns"
+    },
+    {
+     "name": "ETL tools (Talend, Informatica, NiFi, Denodo)",
+     "evidence": "Hands-on experience with at least two of Talend, Informatica, NiFi and Denodo"
+    },
+    {
+     "name": "Dimensional modelling (star schemas)",
+     "evidence": "Dimensional modelling: star schemas, conformed dimensions, slowly changing dimensions, and the ability to document models at conceptual, logical and physical level"
+    },
+    {
+     "name": "dbt / Airflow (good to have)",
+     "evidence": "dbt, Airflow, Dataflow, Iceberg"
+    }
+   ],
+   "summary": "يبني ويشغّل خطوط البيانات التي تنقل بيانات الأنظمة التشغيلية للعميل إلى مستودع البيانات ويصمم نماذج البيانات التي تعتمد عليها اللوحات والتعلّم الآلي.",
+   "tasks": [
+    "بناء خطوط استيعاب البيانات ومعالجتها وجدولتها ومراقبتها",
+    "تصميم نماذج المستودع (Star Schema) وتوثيقها",
+    "إضافة فحوص جودة البيانات وتتبّع مصدرها وتعريف مؤشرات الأداء مع أصحاب الأعمال"
+   ],
+   "note": "No years stated; band mid is an inference.",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "lucidya-database-administrator-riyadh",
+   "title": "Database Administrator (PostgreSQL & MySQL) - Saudi only",
+   "titleAr": "مسؤول قواعد بيانات (PostgreSQL و MySQL)",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Lucidya",
+    "ar": "لوسيديا"
+   },
+   "companyId": "lucidya",
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-20",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/lucidya)",
+   "url": "https://apply.workable.com/lucidya/j/3A3E2DB67B/",
+   "field": "data",
+   "family": "data-engineering",
+   "band": "mid",
+   "yearsAsked": "3 years",
+   "bandEvidence": "Have 3 years of hands-on PostgreSQL administration experience in production.",
+   "requirements": [
+    {
+     "skill": "sql",
+     "stars": 3,
+     "evidence": "You can troubleshoot slow queries, indexing, locking, and resource utilization."
+    },
+    {
+     "skill": "cloud",
+     "stars": 2,
+     "evidence": "Manage and maintain PostgreSQL and MySQL databases across AWS, GCP, and self-managed environments."
+    },
+    {
+     "skill": "programming",
+     "stars": 1,
+     "evidence": "Can automate database operations using Bash or Python."
+    },
+    {
+     "skill": "security-fundamentals",
+     "stars": 1,
+     "evidence": "Maintain database security, access controls, and auditing."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "You communicate clearly and collaborate effectively with engineering teams."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "PostgreSQL administration (replication, HA, DR)",
+     "evidence": "Understand database performance tuning, replication, high availability, and disaster recovery."
+    },
+    {
+     "name": "AWS Aurora / RDS",
+     "evidence": "Have experience with AWS Aurora, Amazon RDS, MySQL, and self-managed Linux databases."
+    }
+   ],
+   "summary": "تملك صحة قواعد بيانات لوسيديا الإنتاجية على AWS و GCP والاستضافة داخل المملكة: الأداء والتوافر والاستعادة.",
+   "tasks": [
+    "مراقبة أداء قواعد البيانات وتحسين الاستعلامات والفهارس",
+    "إدارة النسخ الاحتياطي والتكرار والاستعادة من الكوارث",
+    "أتمتة العمليات بـ Bash أو Python"
+   ],
+   "foundBy": "lead"
+  },
+  {
+   "id": "salla-database-administrator-tamheer-madinah",
+   "title": "Database Administrator - Tamheer Program",
+   "titleAr": "مسؤول قواعد بيانات - برنامج تمهير",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Salla",
+    "ar": "سلة"
+   },
+   "companyId": "salla",
+   "city": null,
+   "cityText": "Madinah, Saudi Arabia (hybrid)",
+   "remote": false,
+   "postedAt": "2026-08-11",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/salla)",
+   "url": "https://apply.workable.com/salla/j/0BEF7BD0DD/",
+   "field": "data",
+   "family": "data-engineering",
+   "band": "entry",
+   "yearsAsked": null,
+   "bandEvidence": "As a DBA Trainee, you will gain hands-on exposure to production-scale database environments and learn how databases are designed, monitored, optimized, secured, backed up, and recovered.",
+   "requirements": [
+    {
+     "skill": "sql",
+     "stars": 2,
+     "evidence": "The ability to write queries using joins, aggregations, filtering, and subqueries."
+    },
+    {
+     "skill": "programming",
+     "stars": 1,
+     "evidence": "Basic Python programming skills."
+    },
+    {
+     "skill": "linux",
+     "stars": 1,
+     "evidence": "Basic knowledge of Linux and command-line tools."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong critical-thinking and problem-solving abilities."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Good communication and documentation skills."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Database administration (backup, recovery, replication)",
+     "evidence": "Assist with database backup, recovery, replication, and high-availability activities."
+    }
+   ],
+   "summary": "تدريب تمهير في إدارة قواعد البيانات لدى سلة: تحسين الاستعلامات ومراقبة الأداء وأتمتة المهام بـ Python.",
+   "tasks": [
+    "كتابة استعلامات SQL ومراجعتها وتحسينها",
+    "دعم مراقبة قواعد البيانات والنسخ الاحتياطي والاستعادة",
+    "كتابة سكربتات Python لأتمتة المهام المتكررة"
+   ],
+   "note": "Madinah is not one of the app's city filters: city null, place kept as given.",
+   "foundBy": "lead"
+  },
+  {
+   "id": "squadio-odoo-frontend-developer-riyadh",
+   "title": "odoo FrontEnd Developer",
+   "titleAr": "مطوّر واجهات أمامية Odoo",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Squadio",
+    "ar": "سكواديو"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2025-10-06",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/squadio23)",
+   "url": "https://apply.workable.com/squadio23/j/2766EC74BC/",
+   "field": "software",
+   "family": "frontend",
+   "band": "mid",
+   "yearsAsked": "4-5 years of proven experience in Odoo front-end development.",
+   "bandEvidence": "4-5 years of proven experience in Odoo front-end development.",
+   "requirements": [
+    {
+     "skill": "javascript",
+     "stars": 2,
+     "evidence": "Strong proficiency in HTML5, CSS3, JavaScript, Bootstrap, OWL (Odoo Web Library), latest odoo library."
+    },
+    {
+     "skill": "html-css",
+     "stars": 1,
+     "evidence": "Ensure cross-browser compatibility and mobile responsiveness."
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Solid understanding of RESTful APIs, AJAX, and asynchronous programming."
+    },
+    {
+     "skill": "git",
+     "stars": 1,
+     "evidence": "Familiarity with Git or other version control systems."
+    },
+    {
+     "skill": "ui-design",
+     "stars": 1,
+     "evidence": "Experience in UI/UX principles and building user-friendly interfaces."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Odoo (QWeb, OWL)",
+     "evidence": "Ability to customize QWeb and Dynamic reports in Odoo 18 enterprise."
+    },
+    {
+     "name": "Bootstrap",
+     "evidence": "Strong proficiency in HTML5, CSS3, JavaScript, Bootstrap, OWL (Odoo Web Library), latest odoo library."
+    }
+   ],
+   "summary": "يصمم ويطوّر ويخصّص القوالب والوحدات الأمامية في نظام Odoo ويبني واجهات متجاوبة وسهلة الاستخدام.",
+   "tasks": [
+    "تطوير وتخصيص قوالب ووحدات Odoo الأمامية",
+    "بناء واجهات متجاوبة تعمل على مختلف المتصفحات والجوال",
+    "تخصيص تقارير QWeb وبناء عناصر واجهة مخصصة في Odoo"
+   ],
+   "note": "Posted 2025-10-06 and still open; Squadio is a staff-augmentation firm (its own board).",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "lucidya-10x-software-engineer-riyadh",
+   "title": "10x Software Engineer",
+   "titleAr": "مهندس برمجيات (أنظمة موزّعة)",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Lucidya",
+    "ar": "لوسيديا"
+   },
+   "companyId": "lucidya",
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-04-15",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/lucidya)",
+   "url": "https://apply.workable.com/lucidya/j/5294DA8CF4/",
+   "field": "software",
+   "family": "backend",
+   "band": "mid",
+   "yearsAsked": null,
+   "bandEvidence": "Whether you are junior or senior doesn’t matter and what matters is your ability to move faster and think deeper than the average engineer.",
+   "requirements": [
+    {
+     "skill": "programming",
+     "stars": 2,
+     "evidence": "Experience with Rails or Python backends at meaningful scale"
+    },
+    {
+     "skill": "sql",
+     "stars": 3,
+     "evidence": "Optimize PostgreSQL for heavy write workloads, contention management, schema design, triggers, and connection scaling"
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Develop and maintain API gateway layers with advanced routing (multi-upstream, traffic splitting, environment isolation)"
+    },
+    {
+     "skill": "devops",
+     "stars": 1,
+     "evidence": "Contribute to Kubernetes migration and infrastructure modernization"
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Track record debugging complex production issues — not just fixing them, preventing them"
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Distributed systems / message queues (RabbitMQ)",
+     "evidence": "Hands-on experience with event-driven architecture and message queues in production"
+    },
+    {
+     "name": "Elasticsearch",
+     "evidence": "Design and tune Elasticsearch for search, indexing, and real-time Arabic relevance at scale"
+    }
+   ],
+   "summary": "تبني وتشغّل خطوط معالجة موزّعة لمنصة لوسيديا تعالج مليارات البيانات عبر أكثر من 100 خدمة.",
+   "tasks": [
+    "تصميم خطوط معالجة قائمة على الأحداث وطوابير الرسائل",
+    "تحسين PostgreSQL و Elasticsearch تحت الحمل العالي",
+    "قيادة تحليل أسباب أعطال الإنتاج ومنع تكرارها"
+   ],
+   "note": "No years stated and the posting says level does not matter; the expectations are demanding, so band mid is an inference.",
+   "foundBy": "lead"
+  },
+  {
+   "id": "tawantech-java-developer-banking-riyadh",
+   "title": "Java Developer - Banking Experience",
+   "titleAr": "مطوّر Java - خبرة مصرفية",
+   "titleArTranslated": true,
+   "company": {
+    "en": "TAWANTECH",
+    "ar": "تاوان تك"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-10",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/tawantech)",
+   "url": "https://apply.workable.com/tawantech/j/C30CC022DF/",
+   "field": "software",
+   "family": "backend",
+   "band": "mid",
+   "yearsAsked": "4+ years of experience in Java development.",
+   "bandEvidence": "4+ years of experience in Java development.",
+   "requirements": [
+    {
+     "skill": "programming",
+     "stars": 2,
+     "evidence": "Design, develop, and maintain Java applications using the Quarkus framework."
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Develop and enhance RESTful APIs and microservices for banking applications."
+    },
+    {
+     "skill": "git",
+     "stars": 1,
+     "evidence": "Strong knowledge of Java, REST APIs, Microservices, Maven, Git, and SQL."
+    },
+    {
+     "skill": "devops",
+     "stars": 1,
+     "evidence": "Experience with Docker, Kubernetes, and CI/CD pipelines is preferred."
+    },
+    {
+     "skill": "banking-basics",
+     "stars": 1,
+     "evidence": "Previous experience in the banking or financial services industry is mandatory."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Java",
+     "evidence": "4+ years of experience in Java development."
+    },
+    {
+     "name": "Quarkus framework",
+     "evidence": "Hands-on experience with the Quarkus framework."
+    },
+    {
+     "name": "Microservices / Maven",
+     "evidence": "Strong knowledge of Java, REST APIs, Microservices, Maven, Git, and SQL."
+    }
+   ],
+   "summary": "يطوّر تطبيقات مصرفية آمنة وقابلة للتوسع بلغة Java وإطار Quarkus ويدمجها مع الأنظمة المصرفية الأساسية.",
+   "tasks": [
+    "تطوير تطبيقات Java بإطار Quarkus وصيانتها",
+    "بناء واجهات RESTful وخدمات مصغّرة للتطبيقات المصرفية",
+    "مراجعة الكود والاختبار وحل مشكلات بيئة الإنتاج"
+   ],
+   "foundBy": "helperB"
+  },
+  {
+   "id": "masterworks-adree-outsystems-dotnet-developer-riyadh",
+   "title": "OutSystems / .NET, Developer",
+   "titleAr": "مطوّر OutSystems و ‎.NET",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Master-Works (Adree)",
+    "ar": "ماستر وركس (أدري)"
+   },
+   "companyId": "master-works",
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-09-28",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/masterworksco)",
+   "url": "https://apply.workable.com/masterworksco/j/A370737998/",
+   "field": "software",
+   "family": "fullstack",
+   "band": "junior",
+   "yearsAsked": "2–3 years of professional software development experience.",
+   "bandEvidence": "2–3 years of professional software development experience.",
+   "requirements": [
+    {
+     "skill": "programming",
+     "stars": 2,
+     "evidence": "Good knowledge of .NET and C#, object-oriented programming, and software development fundamentals."
+    },
+    {
+     "skill": "sql",
+     "stars": 2,
+     "evidence": "Working knowledge of SQL and relational databases, preferably Microsoft SQL Server."
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Experience with REST APIs, JSON, authentication, and application integration concepts."
+    },
+    {
+     "skill": "agile",
+     "stars": 1,
+     "evidence": "Basic understanding of SDLC, Agile/Scrum, testing, debugging, and source control."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Good written and verbal communication and problem-solving skills."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "OutSystems (low-code)",
+     "evidence": "Hands-on experience developing applications with OutSystems."
+    },
+    {
+     "name": ".NET / C#",
+     "evidence": "Good knowledge of .NET and C#, object-oriented programming, and software development fundamentals."
+    },
+    {
+     "name": "OutSystems Associate Developer certification (preferred)",
+     "evidence": "OutSystems Associate Developer certification or willingness to obtain it."
+    }
+   ],
+   "summary": "يطوّر تطبيقات أعمال للويب والجوال على منصة OutSystems منخفضة الكود ويدمجها مع الأنظمة الأخرى باستخدام ‎.NET وواجهات API.",
+   "tasks": [
+    "بناء الشاشات والنماذج ومنطق الأعمال ونماذج البيانات في OutSystems",
+    "تطوير واجهات REST/SOAP ودمج التطبيقات مع الأنظمة الداخلية والخارجية",
+    "اختبار الوحدات وإصلاح الأخطاء ودعم النشر وتوثيق الميزات"
+   ],
+   "foundBy": "helperB"
+  },
+  {
+   "id": "moyasar-software-engineer-full-stack-riyadh",
+   "title": "Software Engineer - Full Stack",
+   "titleAr": "مهندس برمجيات - تطوير متكامل",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Moyasar",
+    "ar": "ميسر"
+   },
+   "companyId": "moyasar",
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-09-07",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/moyasar-financial-company-1)",
+   "url": "https://apply.workable.com/moyasar-financial-company-1/j/45340798FA/",
+   "field": "software",
+   "family": "fullstack",
+   "band": "junior",
+   "yearsAsked": "2+ years",
+   "bandEvidence": "2+ years of professional software engineering experience.",
+   "requirements": [
+    {
+     "skill": "programming",
+     "stars": 2,
+     "evidence": "Good understanding of MVC architecture and software engineering principles."
+    },
+    {
+     "skill": "html-css",
+     "stars": 1,
+     "evidence": "Experience with frontend web development."
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Experience designing, developing, and consuming RESTful APIs."
+    },
+    {
+     "skill": "sql",
+     "stars": 2,
+     "evidence": "Good knowledge of PostgreSQL and relational database concepts."
+    },
+    {
+     "skill": "git",
+     "stars": 1,
+     "evidence": "Experience with Git and version-control workflows."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Ruby on Rails",
+     "evidence": "Professional experience with Ruby and Ruby on Rails."
+    },
+    {
+     "name": "Redis / Sidekiq background jobs",
+     "evidence": "Experience with background job processing using Sidekiq."
+    },
+    {
+     "name": "Automated testing",
+     "evidence": "Experience writing automated tests."
+    }
+   ],
+   "summary": "تبني خدمات ومزايا منتجات الدفع في ميسر على Ruby on Rails من الواجهة الخلفية إلى واجهة المستخدم.",
+   "tasks": [
+    "تطوير خدمات وواجهات REST بـ Ruby on Rails",
+    "تصميم نماذج البيانات واستعلامات PostgreSQL",
+    "كتابة الاختبارات الآلية والمشاركة في مراجعة الكود"
+   ],
+   "foundBy": "lead"
+  },
+  {
+   "id": "lamdax-mobile-flutter-intern-remote",
+   "title": "Internship - Marketing & Mobile Flutter Development (Unpaid) — Flutter track",
+   "titleAr": "تدريب تطوير تطبيقات الجوال بـ Flutter (غير مدفوع)",
+   "titleArTranslated": true,
+   "company": {
+    "en": "LamdaX",
+    "ar": "لمدا إكس"
+   },
+   "companyId": null,
+   "city": "remote",
+   "cityText": "Saudi Arabia (fully remote)",
+   "remote": true,
+   "postedAt": "2026-11-09",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/lamdax)",
+   "url": "https://apply.workable.com/lamdax/j/50E1AD3859/",
+   "field": "software",
+   "family": "mobile",
+   "band": "entry",
+   "yearsAsked": null,
+   "bandEvidence": "Eligibility: Undergraduate Students",
+   "requirements": [
+    {
+     "skill": "programming",
+     "stars": 1,
+     "evidence": "Basic knowledge of programming fundamentals and object-oriented programming (OOP)."
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Basic knowledge of REST APIs and JSON is an advantage."
+    },
+    {
+     "skill": "git",
+     "stars": 1,
+     "evidence": "Familiarity with Git and version control is a plus."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong problem-solving skills and attention to detail."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Ability to learn quickly, accept feedback, and work collaboratively."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Flutter / Dart",
+     "evidence": "Familiarity with Dart and Flutter, or a strong willingness to learn them."
+    },
+    {
+     "name": "Mobile app development",
+     "evidence": "Basic understanding of mobile application development concepts."
+    }
+   ],
+   "summary": "تدريب جامعي عن بُعد لستة أشهر: تساعد في بناء تطبيقات جوال متعددة المنصات بـ Flutter وربطها بواجهات API.",
+   "tasks": [
+    "تطوير واجهات تطبيقات الجوال بـ Flutter و Dart",
+    "ربط التطبيق بواجهات REST",
+    "اختبار الأعطال وإصلاحها والمشاركة في مراجعة الكود"
+   ],
+   "note": "One posting with two tracks (marketing and Flutter); recorded once, for the Flutter track. Unpaid, undergraduates only.",
+   "foundBy": "lead"
+  },
+  {
+   "id": "gathern-quality-assurance-engineer-riyadh",
+   "title": "Quality Assurance Engineer (Saudi National Only)",
+   "titleAr": "مهندس ضمان الجودة (للسعوديين فقط)",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Gathern",
+    "ar": "جاذر إن"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-29",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/gathern)",
+   "url": "https://apply.workable.com/gathern/j/D7359295F9/",
+   "field": "software",
+   "family": "qa",
+   "band": "junior",
+   "yearsAsked": "1 - 3 years of experience in software quality assurance or a similar role.",
+   "bandEvidence": "1 - 3 years of experience in software quality assurance or a similar role.",
+   "requirements": [
+    {
+     "skill": "agile",
+     "stars": 1,
+     "evidence": "Familiarity with Agile software development and testing practices."
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Experience testing mobile applications (iOS and Android) and backend APIs."
+    },
+    {
+     "skill": "devops",
+     "stars": 1,
+     "evidence": "Basic understanding of test automation tools and CI/CD pipelines."
+    },
+    {
+     "skill": "english",
+     "stars": 1,
+     "evidence": "Fluency in Arabic and good command of English."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong attention to detail, problem-solving skills, and a team-first mindset."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Jira (bug tracking)",
+     "evidence": "Document bugs and test results in Jira with clarity and context."
+    },
+    {
+     "name": "Firebase / Datadog / Postman",
+     "evidence": "Use tools like Firebase, Datadog, and Postman to validate backend behavior, error rates, and app stability."
+    },
+    {
+     "name": "Appium / Cypress (nice to have)",
+     "evidence": "Exposure to automation frameworks (e.g., Appium, Postman, Cypress)."
+    }
+   ],
+   "summary": "يختبر ميزات تطبيقات الجوال والخدمات الخلفية يدويًا ويدعم الاختبار الآلي ويوثّق الأخطاء ضمن فرق Agile.",
+   "tasks": [
+    "تنفيذ حالات الاختبار اليدوية ودعم تطوير الاختبارات الآلية",
+    "التحقق من الميزات خلال السبرنت واختبارات الانحدار والاستكشاف",
+    "توثيق الأخطاء ونتائج الاختبار في Jira بوضوح"
+   ],
+   "foundBy": "helperB"
+  },
+  {
+   "id": "innovationteam-quality-assurance-engineer-riyadh",
+   "title": "Quality Assurance Engineer",
+   "titleAr": "مهندس ضمان الجودة",
+   "titleArTranslated": true,
+   "company": {
+    "en": "InnovationTeam",
+    "ar": "إنوفيشن تيم"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Ar Riyāḍ, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-09-16",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/innovationteam)",
+   "url": "https://apply.workable.com/innovationteam/j/729615A43F/",
+   "field": "software",
+   "family": "qa",
+   "band": "mid",
+   "yearsAsked": "Minimum of 3-4 years of experience in quality assurance/testing roles.",
+   "bandEvidence": "Minimum of 3-4 years of experience in quality assurance/testing roles.",
+   "requirements": [
+    {
+     "skill": "agile",
+     "stars": 1,
+     "evidence": "Strong familiarity with Agile and Scrum methodologies."
+    },
+    {
+     "skill": "sql",
+     "stars": 1,
+     "evidence": "Experience conducting API testing with tools like Postman and performing database testing using SQL queries."
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Experience with API testing and database testing."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Excellent analytical and problem-solving skills."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Excellent communication and teamwork skills, facilitating effective collaboration with developers, product managers, and stakeholders."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Selenium / BDD test automation",
+     "evidence": "Knowledge of test automation frameworks, including Selenium and BDDs, to streamline and enhance test automation processes."
+    },
+    {
+     "name": "JIRA / TFS test management",
+     "evidence": "Expertise in creating, executing, and tracking test cases using tools like JIRA and TFS."
+    },
+    {
+     "name": "Postman (API testing)",
+     "evidence": "Experience conducting API testing with tools like Postman and performing database testing using SQL queries."
+    }
+   ],
+   "summary": "يختبر تطبيقات الويب والجوال يدويًا ووظيفيًا ويتابع العيوب لضمان جودة المنتجات البرمجية.",
+   "tasks": [
+    "كتابة حالات الاختبار وتنفيذها وتتبّع العيوب",
+    "اختبار واجهات API وقواعد البيانات باستعمال Postman واستعلامات SQL",
+    "توثيق نتائج الاختبار واقتراح تحسينات على عمليات الجودة"
+   ],
+   "foundBy": "helperB"
+  },
+  {
+   "id": "ninja-integration-specialist-riyadh",
+   "title": "Integration Specialist",
+   "titleAr": "أخصائي تكامل الأنظمة",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Ninja",
+    "ar": "نينجا"
+   },
+   "companyId": "ninja",
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-19",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/ananinja)",
+   "url": "https://apply.workable.com/ananinja/j/C555B7B4ED/",
+   "field": "software",
+   "family": "integration-support",
+   "band": "junior",
+   "yearsAsked": "2+ years",
+   "bandEvidence": "2+ years of experience in Integration, Technical Operations, Technical Support, Partner Operations, or a similar role.",
+   "requirements": [
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Good understanding of APIs and third-party integrations."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Experience troubleshooting technical and integration-related issues."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Experience working with external partners and cross-functional teams."
+    },
+    {
+     "skill": "customer-success",
+     "stars": 1,
+     "evidence": "Manage the onboarding and activation of new and existing brands."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Coordinate with external partners on branch mapping, menu setup, configurations, and activation."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Integration operations / order-flow troubleshooting",
+     "evidence": "Troubleshoot integration, API, menu sync, order flow, and availability issues."
+    }
+   ],
+   "summary": "تدير ربط أنظمة نينجا بأنظمة العلامات التجارية والشركاء وتحلّ أعطال التكامل اليومية.",
+   "tasks": [
+    "تهيئة وتفعيل تكامل العلامات التجارية الجديدة",
+    "تشخيص أعطال واجهات API ومزامنة القوائم والطلبات",
+    "متابعة المشكلات المتكررة مع الشركاء حتى حلّها"
+   ],
+   "note": "Family integration-support: a technical-operations role next to software (not a developer role).",
+   "foundBy": "lead"
+  },
+  {
+   "id": "saudi-azm-product-manager-riyadh",
+   "title": "Product Manager",
+   "titleAr": "مدير منتج",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Saudi AZM",
+    "ar": "عزم السعودية"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2025-01-07",
+   "checkedAt": "2026-11-21",
+   "source": "Recruitee (azmtalent.recruitee.com)",
+   "url": "https://azmtalent.recruitee.com/o/product-manager",
+   "field": "product",
+   "family": "product",
+   "band": "mid",
+   "yearsAsked": "3–8 years of experience in product management, product ownership, or a related role in a technology environment.",
+   "bandEvidence": "3–8 years of experience in product management, product ownership, or a related role in a technology environment.",
+   "requirements": [
+    {
+     "skill": "agile",
+     "stars": 1,
+     "evidence": "Proven hands-on experience with Agile and Scrum delivery."
+    },
+    {
+     "skill": "product-specs",
+     "stars": 1,
+     "evidence": "Experience writing User Stories and leading UAT cycles."
+    },
+    {
+     "skill": "product-roadmap",
+     "stars": 1,
+     "evidence": "Manage and organize tasks and backlogs using tools such as JIRA."
+    },
+    {
+     "skill": "business-analysis",
+     "stars": 1,
+     "evidence": "Prepare and maintain business requirements and related documentation."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Act as the primary liaison between business and technical teams to ensure product goals are met."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "JIRA",
+     "evidence": "Practical experience using JIRA or similar project management tools."
+    },
+    {
+     "name": "CSPO / PSPO certification (a plus)",
+     "evidence": "Certifications such as CSPO, PSPO, or PMP are a plus."
+    }
+   ],
+   "summary": "يربط بين فرق الأعمال والتقنية لتسليم منتجات تلبي أهداف العمل واحتياجات العملاء، ويملك المتطلبات ويقود التسليم بأسلوب Agile.",
+   "tasks": [
+    "كتابة قصص المستخدم ومتابعة تنفيذها مع فرق التطوير",
+    "إدارة قائمة المهام (Backlog) وترتيبها في JIRA",
+    "قيادة اختبارات قبول المستخدم (UAT) وتوثيق متطلبات الأعمال"
+   ],
+   "note": "Posted 2025-01-07 and still open on 2026-11-21; asks 3-8 years.",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "webook-product-manager-riyadh",
+   "title": "Product Manager",
+   "titleAr": "مدير منتج",
+   "titleArTranslated": true,
+   "company": {
+    "en": "webook.com",
+    "ar": "ويبوك"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-01-21",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/webook)",
+   "url": "https://apply.workable.com/webook/j/4193A86157/",
+   "field": "product",
+   "family": "product",
+   "band": "mid",
+   "yearsAsked": "5+ years",
+   "bandEvidence": "5+ years in product management or adjacent roles, with clear evidence of end to end ownership in a cross functional product squad.",
+   "requirements": [
+    {
+     "skill": "product-discovery",
+     "stars": 1,
+     "evidence": "Proven ability to lead discovery and delivery from problem framing to shipped outcomes, working closely with Engineering and Design."
+    },
+    {
+     "skill": "product-roadmap",
+     "stars": 2,
+     "evidence": "Set direction for your area and turn it into a focused roadmap: clear narrative, clear bets, clear sequencing, and explicit tradeoffs tied to company goals."
+    },
+    {
+     "skill": "product-specs",
+     "stars": 1,
+     "evidence": "Hold a high quality bar from build to launch: acceptance criteria, testing approach, launch readiness, and smooth cross functional rollout."
+    },
+    {
+     "skill": "product-analytics",
+     "stars": 1,
+     "evidence": "Data and user insight fluency: you can define what to measure, interpret results, and iterate based on learning."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Clear communication and influence with technical and non technical partners."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Jira / Confluence / Amplitude",
+     "evidence": "Familiarity with product tooling such as Jira, Confluence, Amplitude, or similar."
+    }
+   ],
+   "summary": "تملك جزءاً من تجربة عملاء منصة التذاكر webook.com وتقود فريقاً متعدد التخصصات من الاكتشاف إلى الإطلاق.",
+   "tasks": [
+    "تحويل اتجاه المنتج إلى خارطة طريق مركّزة",
+    "قيادة الاكتشاف واتخاذ القرار بالبيانات والتجارب",
+    "قياس النتائج بعد الإطلاق والتحسين المستمر"
+   ],
+   "note": "Posted 2026-01-21 and still listed on the board on 2026-11-21. 5+ years kept as mid (hold rule is 6+).",
+   "foundBy": "lead"
+  },
+  {
+   "id": "almosafer-specialist-product-designer-riyadh",
+   "title": "Specialist - Product Designer",
+   "titleAr": "أخصائي تصميم منتجات",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Almosafer",
+    "ar": "المسافر"
+   },
+   "companyId": "almosafer",
+   "city": "riyadh",
+   "cityText": "Riyadh",
+   "remote": false,
+   "postedAt": "2026-11-18",
+   "checkedAt": "2026-11-21",
+   "source": "Almosafer careers (jobs.almosafer.com, SuccessFactors)",
+   "url": "https://jobs.almosafer.com/job/Riyadh-Specialist-Product-Designer/1449352833/",
+   "field": "design",
+   "family": "ux-ui",
+   "band": "mid",
+   "yearsAsked": "3-5 years",
+   "bandEvidence": "You have 3-5 years of product design experience within a consumer focused organization and a proven record of successfully shipped mobile and web experiences.",
+   "requirements": [
+    {
+     "skill": "figma",
+     "stars": 2,
+     "evidence": "Proficient in design and prototyping tools (such as Figma, Framer, Proto.io)"
+    },
+    {
+     "skill": "ux-research",
+     "stars": 1,
+     "evidence": "You are comfortable planning and conducting research from interviews and usability tests to surveys, and you integrate insights into your design process."
+    },
+    {
+     "skill": "ui-design",
+     "stars": 2,
+     "evidence": "A strong visual design background with knowledge of Google Material Guidelines, Apple Human Interface Guidelines and design systems"
+    },
+    {
+     "skill": "prototyping",
+     "stars": 1,
+     "evidence": "You will rapidly and pragmatically produce concepts and prototypes, understanding when further ideation, testing, or changing directions is needed."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "You have the necessary communication skills to tell a story about your work and communicate complex concepts to technical and non-technical stakeholders."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Design portfolio (required to apply)",
+     "evidence": "Applications without a portfolio will not be considered."
+    }
+   ],
+   "summary": "تصمم تجربة حجز وإدارة الرحلات والإقامات والأنشطة في تطبيق وموقع المسافر ضمن فريق منتج متعدد التخصصات.",
+   "tasks": [
+    "فهم احتياجات العملاء عبر المقابلات واختبارات قابلية الاستخدام",
+    "إنتاج مفاهيم ونماذج تفاعلية سريعة",
+    "إجراء تجارب للتحقق من الحلول وتحسينها"
+   ],
+   "note": "A different posting from the Product Designer role (1254555701) already in the app.",
+   "foundBy": "lead"
+  },
+  {
+   "id": "eram-talent-ui-ux-designer-dhahran",
+   "title": "UI/UX Designer",
+   "titleAr": "مصمم واجهات وتجربة المستخدم",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Eram Talent",
+    "ar": "إرم تالنت"
+   },
+   "companyId": null,
+   "city": "dammam",
+   "cityText": "Dhahran, Eastern Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-03-31",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/eramtalent-1)",
+   "url": "https://apply.workable.com/eramtalent-1/j/F459942F2A/",
+   "field": "design",
+   "family": "ux-ui",
+   "band": "mid",
+   "yearsAsked": "Minimum 3 years’ experience as a UI/UX Designer.",
+   "bandEvidence": "Minimum 3 years’ experience as a UI/UX Designer.",
+   "requirements": [
+    {
+     "skill": "figma",
+     "stars": 2,
+     "evidence": "Proficient with design tools (such as Figma, Sketch, Adobe XD, Illustrator, Photoshop)."
+    },
+    {
+     "skill": "ux-research",
+     "stars": 1,
+     "evidence": "A solid understanding of the user-centered design process and related methodologies."
+    },
+    {
+     "skill": "ui-design",
+     "stars": 2,
+     "evidence": "Ability to design highly usable interfaces for multiple devices and channels - internet, intranet, mobile devices, tablets and touch screens etc."
+    },
+    {
+     "skill": "design-basics",
+     "stars": 1,
+     "evidence": "Ability to produce high-quality creative designs to tight deadlines."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "You will collaborate closely with our development team and clients to understand user needs and translate them into effective design solutions."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Sketch / Adobe XD / Illustrator / Photoshop",
+     "evidence": "Proficient with design tools (such as Figma, Sketch, Adobe XD, Illustrator, Photoshop)."
+    }
+   ],
+   "summary": "يصمم واجهات وتجارب مستخدم سهلة وجذابة لمواقع وتطبيقات العملاء بالتعاون مع فريق التطوير.",
+   "tasks": [
+    "تصميم واجهات قابلة للاستخدام للويب والجوال والأجهزة اللوحية",
+    "فهم احتياجات المستخدمين مع العملاء وتحويلها إلى حلول تصميم",
+    "إنتاج تصاميم إبداعية عالية الجودة ضمن مواعيد ضيقة"
+   ],
+   "note": "Eram Talent is a recruiter and employer of record for client roles (its own board). Posted 2026-03-31, still open.",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "jeeny-social-media-communication-specialist-riyadh",
+   "title": "Social Media & Communication Specialist",
+   "titleAr": "أخصائي وسائل التواصل الاجتماعي والاتصال",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Jeeny",
+    "ar": "جيني"
+   },
+   "companyId": "jeeny",
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-10",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/jeeny)",
+   "url": "https://apply.workable.com/jeeny/j/0F2F029951/",
+   "field": "marketing",
+   "family": "digital-marketing",
+   "band": "mid",
+   "yearsAsked": "3- 5+ years",
+   "bandEvidence": "3- 5+ years of hands-on experience in social media management and content creation, in Saudi Arabia.",
+   "requirements": [
+    {
+     "skill": "marketing-basics",
+     "stars": 1,
+     "evidence": "Drive brand awareness, follower growth, engagement, reach, and creative performance against defined KPIs."
+    },
+    {
+     "skill": "content",
+     "stars": 2,
+     "evidence": "Bring the human side of Jeeny to life through authentic storytelling, real people, drivers, customers, and community-led content."
+    },
+    {
+     "skill": "social-media",
+     "stars": 2,
+     "evidence": "Own and execute KSA social media strategy across TikTok, Snapchat, Instagram, and other relevant platforms."
+    },
+    {
+     "skill": "video-editing",
+     "stars": 2,
+     "evidence": "Strong experience in shooting, editing, scripting, and producing short-form video content."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Excellent Arabic communication and storytelling skills, with strong knowledge of Saudi culture."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Social media analytics",
+     "evidence": "Data-driven mindset with experience in social media analytics, reporting, and optimization."
+    },
+    {
+     "name": "AI content tools",
+     "evidence": "Proficiency in AI-powered content creation and productivity tools."
+    }
+   ],
+   "summary": "تملك حضور جيني على تيك توك وسناب شات وإنستغرام في المملكة وتصنع محتواها المرئي داخلياً.",
+   "tasks": [
+    "تنفيذ استراتيجية التواصل الاجتماعي في المملكة",
+    "تصوير ومونتاج ونشر فيديوهات قصيرة",
+    "تحليل الوصول والتفاعل وتحسين المحتوى"
+   ],
+   "foundBy": "lead"
+  },
+  {
+   "id": "lucidya-activations-campaigns-intern-remote",
+   "title": "Activations and Campaigns Intern",
+   "titleAr": "متدرّب تفعيل وحملات تسويقية",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Lucidya",
+    "ar": "لوسيديا"
+   },
+   "companyId": "lucidya",
+   "city": "remote",
+   "cityText": "Riyadh, Saudi Arabia (remote)",
+   "remote": true,
+   "postedAt": "2026-08-31",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/lucidya)",
+   "url": "https://apply.workable.com/lucidya/j/A9D574CFAF/",
+   "field": "marketing",
+   "family": "digital-marketing",
+   "band": "entry",
+   "yearsAsked": null,
+   "bandEvidence": null,
+   "requirements": [
+    {
+     "skill": "marketing-basics",
+     "stars": 1,
+     "evidence": "Support the planning and execution of customer campaigns, promotional initiatives, and growth activations."
+    },
+    {
+     "skill": "content",
+     "stars": 1,
+     "evidence": "Help develop campaign messaging, email communications, event invitations, and supporting creative assets in collaboration with the Growth and Marketing teams."
+    },
+    {
+     "skill": "seo",
+     "stars": 1,
+     "evidence": "Support organic growth activities across SEO and AEO, helping with keyword and content research, on-page optimization, and ongoing best practices research to support the wider organic program."
+    },
+    {
+     "skill": "event-planning",
+     "stars": 1,
+     "evidence": "Help set up and coordinate virtual and in-person events, including webinars, community events, customer sessions, and other activations."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Assist with event logistics, communications, attendee materials, run-of-show documents, and follow-up activities."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "AEO (answer-engine optimisation)",
+     "evidence": "Support organic growth activities across SEO and AEO"
+    }
+   ],
+   "summary": "تدريب تسويقي عن بُعد: تساعد فريق النمو في تخطيط الحملات والفعاليات وتحسين الظهور في محركات البحث.",
+   "tasks": [
+    "المساعدة في تنفيذ حملات العملاء والأنشطة الترويجية",
+    "تنسيق الفعاليات والندوات الإلكترونية وموادها",
+    "دعم أبحاث الكلمات المفتاحية وتحسين الصفحات (SEO)"
+   ],
+   "note": "Internship; band entry inferred from the title (no years stated).",
+   "foundBy": "lead"
+  },
+  {
+   "id": "lucidya-customer-product-marketing-intern-remote",
+   "title": "Customer Marketing & Product Marketing Knowledge Intern",
+   "titleAr": "متدرّب تسويق العملاء والمنتج",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Lucidya",
+    "ar": "لوسيديا"
+   },
+   "companyId": "lucidya",
+   "city": "remote",
+   "cityText": "Saudi Arabia (remote)",
+   "remote": true,
+   "postedAt": "2026-08-31",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/lucidya)",
+   "url": "https://apply.workable.com/lucidya/j/11DC58DD6F/",
+   "field": "marketing",
+   "family": "digital-marketing",
+   "band": "entry",
+   "yearsAsked": null,
+   "bandEvidence": null,
+   "requirements": [
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "The intern will support clear communication between Customer Experience, Product Management, Marketing, and customers by organizing product knowledge, customer feedback, and customer-facing communications."
+    },
+    {
+     "skill": "content",
+     "stars": 1,
+     "evidence": "Support product marketing materials such as product updates, FAQs, release notes, and customer education content."
+    },
+    {
+     "skill": "product-discovery",
+     "stars": 1,
+     "evidence": "Help align CX and Product Management teams by organizing customer feedback, product questions, and feature requests."
+    },
+    {
+     "skill": "customer-success",
+     "stars": 1,
+     "evidence": "Identify recurring customer questions and knowledge gaps, and recommend ways to improve communication and product adoption."
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Maintain shared knowledge resources and provide concise summaries of customer insights to internal teams."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Intercom / in-app messaging",
+     "evidence": "Draft and update customer communications through Intercom, email, in-app messaging"
+    }
+   ],
+   "summary": "تدريب عن بُعد بين فرق تجربة العملاء والمنتج والتسويق: تنظّم معرفة المنتج وتكتب محتوى تحديثاته للعملاء.",
+   "tasks": [
+    "تنظيم ملاحظات العملاء وطلبات الميزات للفريقين",
+    "كتابة تحديثات المنتج والأسئلة الشائعة وملاحظات الإصدار",
+    "تلخيص رؤى العملاء للفرق الداخلية"
+   ],
+   "note": "Internship; band entry inferred from the title (no years stated).",
+   "foundBy": "lead"
+  },
+  {
+   "id": "tawantech-marketing-specialist-banking-riyadh",
+   "title": "Marketing Specialist-Banking",
+   "titleAr": "أخصائي تسويق - القطاع المصرفي",
+   "titleArTranslated": true,
+   "company": {
+    "en": "TAWANTECH",
+    "ar": "تاوان تك"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-08",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/tawantech)",
+   "url": "https://apply.workable.com/tawantech/j/BB94E48868/",
+   "field": "marketing",
+   "family": "digital-marketing",
+   "band": "mid",
+   "yearsAsked": "3–5 years of experience in marketing, preferably within the banking or financial services sector.",
+   "bandEvidence": "3–5 years of experience in marketing, preferably within the banking or financial services sector.",
+   "requirements": [
+    {
+     "skill": "marketing-basics",
+     "stars": 1,
+     "evidence": "Experience in planning, executing, and monitoring marketing campaigns."
+    },
+    {
+     "skill": "social-media",
+     "stars": 1,
+     "evidence": "Knowledge of digital marketing channels, social media platforms, and marketing tools."
+    },
+    {
+     "skill": "banking-basics",
+     "stars": 1,
+     "evidence": "Good understanding of banking products and financial services."
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Excellent communication, presentation, and coordination skills."
+    },
+    {
+     "skill": "project-management",
+     "stars": 1,
+     "evidence": "Ability to manage multiple projects and meet deadlines."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Market research & customer segmentation",
+     "evidence": "Experience in market research, competitor analysis, and customer segmentation."
+    },
+    {
+     "name": "Google Analytics / digital marketing certification (preferred)",
+     "evidence": "Google Analytics or Digital Marketing certifications."
+    }
+   ],
+   "summary": "يخطط وينفّذ حملات تسويقية لمنتجات مصرفية (تمويل شخصي وبطاقات ائتمان وودائع) ويقيس أداءها مقابل مؤشرات الأداء.",
+   "tasks": [
+    "إعداد حملات إطلاق المنتجات والعروض الترويجية واستقطاب العملاء",
+    "إجراء أبحاث السوق وتحليل المنافسين وتقسيم العملاء",
+    "متابعة مؤشرات أداء الحملات وإعداد تقارير الأداء والتوصيات"
+   ],
+   "foundBy": "helperB"
+  },
+  {
+   "id": "arabicai-operations-security-engineer-riyadh",
+   "title": "Operations and Security Engineer",
+   "titleAr": "مهندس العمليات والأمن",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Arabic.AI",
+    "ar": "أرابيك إيه آي"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-09",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/arabicai)",
+   "url": "https://apply.workable.com/arabicai/j/C5718D1144/",
+   "field": "cyber-cloud",
+   "family": "cybersecurity",
+   "band": "mid",
+   "yearsAsked": null,
+   "bandEvidence": null,
+   "requirements": [
+    {
+     "skill": "linux",
+     "stars": 1,
+     "evidence": "Linux and Windows server administration on public and sovereign clouds (GCP, OCI, Deem or similar)"
+    },
+    {
+     "skill": "security-fundamentals",
+     "stars": 2,
+     "evidence": "Encryption at rest and in transit, key management, certificates"
+    },
+    {
+     "skill": "soc-analysis",
+     "stars": 1,
+     "evidence": "Incident management: triage, escalation, root-cause reports"
+    },
+    {
+     "skill": "cloud",
+     "stars": 2,
+     "evidence": "Backup, restore, business continuity and disaster recovery in the cloud"
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "API gateways, OAuth 2.0, OWASP API Security Top Ten"
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "SIEM integration & audit logs",
+     "evidence": "SIEM integration and audit-log design"
+    },
+    {
+     "name": "Identity & access (IAM, MFA, RBAC, SSO)",
+     "evidence": "Identity and access: IAM, MFA, RBAC, SSO integration"
+    },
+    {
+     "name": "Monitoring (Prometheus / Grafana)",
+     "evidence": "Monitoring and alerting (Cloud Logging and Monitoring, Prometheus and Grafana or similar) and runbooks"
+    },
+    {
+     "name": "Security certifications (Google Cloud Security, CISSP, CCSP; good to have)",
+     "evidence": "Google Professional Cloud Security Engineer, CISSP, CCSP or ITIL"
+    }
+   ],
+   "summary": "يراقب المنصة على مدار الساعة ويستجيب للحوادث ويشغّل الضوابط الأمنية (الهوية والتشفير والسجلات وSIEM) ويؤمّن واجهات API.",
+   "tasks": [
+    "مراقبة المنصة والاستجابة للتنبيهات واستعادة الخدمة",
+    "تحديث المكونات وتقويتها وإجراء مراجعات الثغرات بانتظام",
+    "تشغيل سجلات الأمن وتكامل SIEM والنسخ الاحتياطي والتعافي من الكوارث"
+   ],
+   "note": "No years stated; band mid is an inference.",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "lucid-purple-teaming-engineer-riyadh",
+   "title": "Purple Teaming Engineer - Embedded Security",
+   "titleAr": "مهندس الفريق البنفسجي - أمن الأنظمة المدمجة",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Lucid",
+    "ar": "لوسيد"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2025-11-18",
+   "checkedAt": "2026-11-21",
+   "source": "Greenhouse (boards-api.greenhouse.io/lucidmotors, shown on lucidmotors.com/careers)",
+   "url": "https://lucidmotors.com/careers/search/4975699007?gh_jid=4975699007",
+   "field": "cyber-cloud",
+   "family": "cybersecurity",
+   "band": "mid",
+   "yearsAsked": "at least 5 years of professional experience",
+   "bandEvidence": "Bachelor's Degree in Cybersecurity, Information Security, Computer Science, or Information Technology and at least 5 years of professional experience.",
+   "requirements": [
+    {
+     "skill": "security-fundamentals",
+     "stars": 2,
+     "evidence": "Strong knowledge of MITRE ATT&CK, threat simulation tools, and detection principles."
+    },
+    {
+     "skill": "soc-analysis",
+     "stars": 1,
+     "evidence": "Familiarity with SIEM systems (e.g., Splunk, ELK), log analysis."
+    },
+    {
+     "skill": "linux",
+     "stars": 1,
+     "evidence": "Experience working with embedded Linux, Android systems, RTOS, or MCU platforms."
+    },
+    {
+     "skill": "networking",
+     "stars": 1,
+     "evidence": "Exposure to network security, including packet analysis and custom protocol fuzzing."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Strong technical writing and communication skills for documentation and stakeholder engagement."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Python scripting/automation",
+     "evidence": "Proficiency in scripting/automation using Python."
+    },
+    {
+     "name": "Vehicle communication protocols (CAN, UDS, DoIP)",
+     "evidence": "Exposure with vehicle communications (CAN, UDS, DoIP, BLE, MQTT, etc.)."
+    },
+    {
+     "name": "Burp Suite / Ghidra / fuzzers",
+     "evidence": "Familiar with tools like Burp Suite, Ghidra, Binwalk, or custom fuzzers."
+    }
+   ],
+   "summary": "مهندس أمن سيبراني في لوسيد بالرياض ينفّذ تمارين محاكاة الهجمات (الفريق البنفسجي) على أنظمة السيارات المدمجة والمتصلة بالسحابة ويحسّن قدرات الرصد مع فريقي الهجوم ومركز العمليات الأمنية.",
+   "tasks": [
+    "تنفيذ تمارين الفريق البنفسجي ومحاكاة الهجمات على الأنظمة المدمجة والمتصلة بالسحابة",
+    "تحديد مصادر السجلات ومراجعة اكتمالها لرصد الحوادث الأمنية",
+    "إعداد التقارير الفنية وعرض النتائج وخطط المعالجة على أصحاب العلاقة"
+   ],
+   "note": "Borderline: asks at least 5 years and mentions mentoring juniors; kept as mid (hold rule is 6+). Posted 2025-11-18, still open.",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "ninja-it-governance-analyst-riyadh",
+   "title": "IT Governance Analyst",
+   "titleAr": "محلل حوكمة تقنية المعلومات",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Ninja",
+    "ar": "نينجا"
+   },
+   "companyId": "ninja",
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-11-08",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/ananinja)",
+   "url": "https://apply.workable.com/ananinja/j/E032292C56/",
+   "field": "cyber-cloud",
+   "family": "cybersecurity",
+   "band": "junior",
+   "yearsAsked": "1+ year",
+   "bandEvidence": "1+ year of experience in IT Audit, GRC, or IT Compliance.",
+   "requirements": [
+    {
+     "skill": "security-fundamentals",
+     "stars": 1,
+     "evidence": "Basic understanding of COBIT, ITIL, or ISO 27001."
+    },
+    {
+     "skill": "internal-audit",
+     "stars": 1,
+     "evidence": "Collect, organize, and maintain IT control evidence for internal and external audits."
+    },
+    {
+     "skill": "corporate-governance",
+     "stars": 1,
+     "evidence": "Support the development, review, and maintenance of IT policies and procedures."
+    },
+    {
+     "skill": "excel",
+     "stars": 1,
+     "evidence": "Good knowledge of Microsoft Office and Excel."
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Prepare governance reports, compliance dashboards, and materials for IT governance meetings."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "GRC frameworks (COBIT, ITIL, ISO 27001)",
+     "evidence": "Basic understanding of COBIT, ITIL, or ISO 27001."
+    },
+    {
+     "name": "Access control / user access reviews",
+     "evidence": "Understanding of access control and user lifecycle management."
+    }
+   ],
+   "summary": "تدعم حوكمة تقنية المعلومات والالتزام في نينجا: أدلة التدقيق والسياسات ومراجعات صلاحيات الوصول.",
+   "tasks": [
+    "جمع أدلة الضوابط التقنية للتدقيق الداخلي والخارجي",
+    "متابعة سجل المخاطر التقنية وخطط المعالجة",
+    "إعداد تقارير ولوحات الالتزام لاجتماعات الحوكمة"
+   ],
+   "foundBy": "lead"
+  },
+  {
+   "id": "syarah-it-helpdesk-specialist-riyadh",
+   "title": "IT Helpdesk Specialist",
+   "titleAr": "أخصائي دعم فني لتقنية المعلومات",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Syarah",
+    "ar": "سيارة"
+   },
+   "companyId": "syarah",
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-25",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/syarah)",
+   "url": "https://apply.workable.com/syarah/j/BEF3074426/",
+   "field": "cyber-cloud",
+   "family": "it-support",
+   "band": "junior",
+   "yearsAsked": null,
+   "bandEvidence": null,
+   "requirements": [
+    {
+     "skill": "networking",
+     "stars": 1,
+     "evidence": "Advanced network troubleshooting."
+    },
+    {
+     "skill": "security-fundamentals",
+     "stars": 2,
+     "evidence": "Excellent knowledge of FortiGate firewalls and firewall troubleshooting."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Technical troubleshooting and problem-solving."
+    },
+    {
+     "skill": "communication",
+     "stars": 2,
+     "evidence": "Strong communication skills."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Escalate complex or unresolved issues to the appropriate IT team with full details."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "FortiGate firewalls",
+     "evidence": "Excellent knowledge of FortiGate firewalls and firewall troubleshooting."
+    },
+    {
+     "name": "Google Workspace administration",
+     "evidence": "Assist with basic administration of Google Workspace accounts and services."
+    },
+    {
+     "name": "IT asset management",
+     "evidence": "IT asset management."
+    }
+   ],
+   "summary": "دعم فني من الخط الأول لموظفي سيارة: الأجهزة والحسابات والشبكة والجدار الناري.",
+   "tasks": [
+    "استقبال طلبات الدعم وحلّها أو تصعيدها",
+    "تجهيز أجهزة الموظفين وإدارة حسابات Google Workspace",
+    "تشخيص أعطال الشبكة وVPN وجدار FortiGate"
+   ],
+   "note": "No years stated; band junior inferred from 'first-line technical support'.",
+   "foundBy": "lead"
+  },
+  {
+   "id": "bosch-software-development-intern-riyadh",
+   "title": "Software Development Intern",
+   "titleAr": "متدرب تطوير برمجيات",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Bosch",
+    "ar": "بوش"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2025-11-25",
+   "checkedAt": "2026-11-21",
+   "source": "SmartRecruiters (jobs.smartrecruiters.com/BoschGroup)",
+   "url": "https://jobs.smartrecruiters.com/BoschGroup/744000095392835-software-development-intern",
+   "field": "cyber-cloud",
+   "family": "cloud-devops",
+   "band": "entry",
+   "yearsAsked": null,
+   "bandEvidence": "University students or recent graduates in Computer Science, Software Engineering, AI, Data Science, or related fields",
+   "requirements": [
+    {
+     "skill": "programming",
+     "stars": 1,
+     "evidence": "Familiar with basic programming (Python, Java, or C#)"
+    },
+    {
+     "skill": "cloud",
+     "stars": 1,
+     "evidence": "Design and deploy scalable applications on cloud platforms"
+    },
+    {
+     "skill": "devops",
+     "stars": 1,
+     "evidence": "Learn DevOps practices, cloud security, and performance optimization"
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Excellent problem-solvers and communicators"
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Fluent in Arabic and English"
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Java or C#",
+     "evidence": "Familiar with basic programming (Python, Java, or C#)"
+    }
+   ],
+   "summary": "تدريب لطلاب وحديثي تخرج الحاسب والذكاء الاصطناعي في وحدة البرمجيات والحلول الرقمية لدى بوش بالرياض، لبناء تطبيقات سحابية واستكشاف الذكاء الاصطناعي.",
+   "tasks": [
+    "تصميم ونشر تطبيقات قابلة للتوسع على المنصات السحابية",
+    "استكشاف نماذج الذكاء الاصطناعي وتعلّم الآلة وخطوط البيانات وسير الأتمتة",
+    "تعلّم ممارسات DevOps وأمن السحابة وتحسين الأداء مع فرق متعددة التخصصات"
+   ],
+   "note": "Released 2025-11-25 and still open on the board on 2026-11-21.",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "deepsource-cloud-administrator-azure-riyadh",
+   "title": "Cloud Administrator (Azure)- Saudi National- Riyadh, KSA",
+   "titleAr": "مسؤول الحوسبة السحابية (Azure) - للسعوديين",
+   "titleArTranslated": true,
+   "company": {
+    "en": "DeepSource Technologies",
+    "ar": "ديب سورس تكنولوجيز"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-08-26",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/deepsource)",
+   "url": "https://apply.workable.com/deepsource/j/67A41ABF5A/",
+   "field": "cyber-cloud",
+   "family": "cloud-devops",
+   "band": "mid",
+   "yearsAsked": "3–5 years of experience in cloud administration and infrastructure support.",
+   "bandEvidence": "3–5 years of experience in cloud administration and infrastructure support.",
+   "requirements": [
+    {
+     "skill": "cloud",
+     "stars": 2,
+     "evidence": "Hands-on experience with Microsoft Azure and/or Alibaba Cloud."
+    },
+    {
+     "skill": "networking",
+     "stars": 1,
+     "evidence": "Basic networking knowledge including TCP/IP, VLANs, VPNs, routing, and switching."
+    },
+    {
+     "skill": "security-fundamentals",
+     "stars": 1,
+     "evidence": "Implement and maintain cloud security best practices and compliance requirements."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong troubleshooting and problem-solving skills."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "Good communication and documentation skills."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Windows Server / Active Directory",
+     "evidence": "Good understanding of Windows Server Administration, Active Directory, DNS, DHCP, and virtualization technologies."
+    },
+    {
+     "name": "Fortinet (FortiGate firewalls)",
+     "evidence": "Experience with Fortinet solutions, particularly FortiGate firewalls and/or FortiSwitches."
+    }
+   ],
+   "summary": "يدير بيئات Azure و/أو Alibaba Cloud ويراقبها ويحافظ على أمنها وأدائها مع دعم البنية التحتية والشبكات.",
+   "tasks": [
+    "إدارة الأجهزة الافتراضية والتخزين والشبكات والنسخ الاحتياطي في السحابة",
+    "مراقبة أداء الأنظمة وتوافرها وحل أعطال السحابة والخوادم والاتصال",
+    "تطبيق أفضل ممارسات الأمن السحابي وتوثيق الإجراءات"
+   ],
+   "foundBy": "helperB"
+  },
+  {
+   "id": "masterworks-soor-cloud-infrastructure-engineer-riyadh",
+   "title": "Cloud & Infrastructure, Engineer",
+   "titleAr": "مهندس الحوسبة السحابية والبنية التحتية",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Master-Works (SOOR)",
+    "ar": "ماستر وركس (سور)"
+   },
+   "companyId": "master-works",
+   "city": "riyadh",
+   "cityText": "Riyadh, Riyadh Province, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-10-25",
+   "checkedAt": "2026-11-21",
+   "source": "Workable (apply.workable.com/masterworksco)",
+   "url": "https://apply.workable.com/masterworksco/j/FB83008A4A/",
+   "field": "cyber-cloud",
+   "family": "cloud-devops",
+   "band": "mid",
+   "yearsAsked": "Minimum of 5 years of experience.",
+   "bandEvidence": "Minimum of 5 years of experience.",
+   "requirements": [
+    {
+     "skill": "networking",
+     "stars": 1,
+     "evidence": "Good knowledge of Windows Server, networking, web hosting, and cybersecurity controls."
+    },
+    {
+     "skill": "security-fundamentals",
+     "stars": 2,
+     "evidence": "Experience managing SSL certificates, IIS security, authentication, and access controls."
+    },
+    {
+     "skill": "sql",
+     "stars": 1,
+     "evidence": "Strong hands-on experience with IIS and SQL Server administration and troubleshooting."
+    },
+    {
+     "skill": "apis",
+     "stars": 1,
+     "evidence": "Experience with Apache, Tomcat, Java-based applications, APIs, load balancing, and WAF."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "Strong problem-solving skills and ability to work with cross-functional technical teams."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Windows Server / IIS administration",
+     "evidence": "Strong experience in IIS, Windows Server, SQL Server, and application hosting."
+    },
+    {
+     "name": "Backup & disaster recovery",
+     "evidence": "Knowledge of backup, disaster recovery, and recovery testing."
+    }
+   ],
+   "summary": "يدير ويدعم ويراقب ويؤمّن بيئات استضافة التطبيقات المؤسسية (IIS وWindows Server وSQL Server) لضمان توافرها وأدائها.",
+   "tasks": [
+    "إدارة خوادم IIS وقواعد SQL Server واستكشاف أعطالها",
+    "دعم تطبيقات الويب في بيئات الإنتاج وتحليل جذور الحوادث",
+    "إدارة شهادات SSL وضوابط الوصول والنسخ الاحتياطي والتعافي من الكوارث"
+   ],
+   "note": "Asks a minimum of 5 years; kept as mid (hold rule is 6+).",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "saudi-azm-devops-engineer-riyadh",
+   "title": "DevOps Engineer",
+   "titleAr": "مهندس DevOps",
+   "titleArTranslated": true,
+   "company": {
+    "en": "Saudi AZM",
+    "ar": "عزم السعودية"
+   },
+   "companyId": null,
+   "city": "riyadh",
+   "cityText": "Riyadh, Saudi Arabia",
+   "remote": false,
+   "postedAt": "2026-09-03",
+   "checkedAt": "2026-11-21",
+   "source": "Recruitee (azmtalent.recruitee.com)",
+   "url": "https://azmtalent.recruitee.com/o/devops-engineer-2",
+   "field": "cyber-cloud",
+   "family": "cloud-devops",
+   "band": "mid",
+   "yearsAsked": null,
+   "bandEvidence": "Proven experience in DevOps, cloud engineering, site reliability engineering, or systems administration.",
+   "requirements": [
+    {
+     "skill": "devops",
+     "stars": 1,
+     "evidence": "Hands-on knowledge of Docker and container-orchestration platforms."
+    },
+    {
+     "skill": "cloud",
+     "stars": 2,
+     "evidence": "Experience with at least one major cloud platform: AWS, Microsoft Azure, or Google Cloud."
+    },
+    {
+     "skill": "linux",
+     "stars": 1,
+     "evidence": "Strong knowledge of Linux administration and networking fundamentals."
+    },
+    {
+     "skill": "programming",
+     "stars": 1,
+     "evidence": "Scripting experience using Python, Bash, or PowerShell."
+    },
+    {
+     "skill": "security-fundamentals",
+     "stars": 1,
+     "evidence": "Understanding of secrets management, identity and access management, and cloud security principles."
+    }
+   ],
+   "missingSkills": [
+    {
+     "name": "Terraform / Infrastructure as Code",
+     "evidence": "Proficiency with Infrastructure as Code tools such as Terraform, CloudFormation, or Pulumi."
+    },
+    {
+     "name": "CI/CD tools (GitHub Actions, GitLab CI/CD, Jenkins)",
+     "evidence": "Experience with CI/CD tools such as GitHub Actions, GitLab CI/CD, Jenkins, or Azure DevOps."
+    },
+    {
+     "name": "Ansible / Puppet / Chef",
+     "evidence": "Experience with configuration-management tools such as Ansible, Puppet, or Chef."
+    },
+    {
+     "name": "Monitoring (Prometheus, Grafana, ELK)",
+     "evidence": "Familiarity with monitoring and observability tools such as Prometheus, Grafana, Datadog, Splunk, or the ELK Stack."
+    }
+   ],
+   "summary": "يصمم ويدير خطوط CI/CD ويؤتمت البنية التحتية بالكود ويشغّل التطبيقات في الحاويات على السحابة والخوادم المحلية.",
+   "tasks": [
+    "بناء خطوط CI/CD وإدارتها",
+    "أتمتة تجهيز البنية التحتية وإدارة الحاويات بـ Docker وKubernetes",
+    "مراقبة التوافر والأداء والمشاركة في الاستجابة للحوادث وتحليل أسبابها"
+   ],
+   "note": "No years stated; band mid is an inference.",
+   "foundBy": "helperB"
+  }
+ ],
+ "held": [
+  {
+   "id": "salla-cloud-native-data-ops-madinah",
+   "title": "Cloud Native Data Ops",
+   "company": "Salla",
+   "url": "https://apply.workable.com/salla/j/CC7B11DB9D/",
+   "reason": "8+ years in SRE / DevOps / Infrastructure Engineering roles (posting text)",
+   "foundBy": "lead"
+  },
+  {
+   "id": "salla-senior-integration-support-specialist-makkah",
+   "title": "Senior Integration Support Specialist",
+   "company": "Salla",
+   "url": "https://apply.workable.com/salla/j/CCA9551525/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "salla-senior-backend-engineer-paylink-jeddah",
+   "title": "Senior Backend Engineer - PayLink",
+   "company": "Salla",
+   "url": "https://apply.workable.com/salla/j/B1DB6B1A8A/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "salla-lead-backend-engineer-paylink-makkah",
+   "title": "Lead Backend Engineer - PayLink",
+   "company": "Salla",
+   "url": "https://apply.workable.com/salla/j/2B4600D833/",
+   "reason": "lead title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "salla-senior-product-manager-catalog-jeddah",
+   "title": "Senior Product Manager - Catalog and Store",
+   "company": "Salla",
+   "url": "https://apply.workable.com/salla/j/12B456E831/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "lucidya-product-marketing-manager-agentic-ai-riyadh",
+   "title": "Product Marketing Manager - Agentic AI",
+   "company": "Lucidya",
+   "url": "https://apply.workable.com/lucidya/j/26425C6FB1/",
+   "reason": "manager title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "lucidya-senior-devops-engineer-ksa",
+   "title": "Senior DevOps Engineer",
+   "company": "Lucidya",
+   "url": "https://apply.workable.com/lucidya/j/7E05EE4321/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "lucidya-ai-tech-lead-riyadh",
+   "title": "AI Tech Lead",
+   "company": "Lucidya",
+   "url": "https://apply.workable.com/lucidya/j/22AEF7E88E/",
+   "reason": "lead title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "lucidya-entry-level-software-engineer-intern-riyadh",
+   "title": "Entry-Level Software Engineer (Internship, Fresh Graduate)",
+   "company": "Lucidya",
+   "url": "https://apply.workable.com/lucidya/j/972E263571/",
+   "reason": "entry-level, but the posting lists no requirements beyond 'strong programming skills': too thin for 5 evidenced skills",
+   "foundBy": "lead"
+  },
+  {
+   "id": "mozn-senior-site-reliability-engineer-riyadh",
+   "title": "Senior Site Reliability Engineer",
+   "company": "MOZN",
+   "url": "https://apply.workable.com/mozn-ai/j/9B9809BAAC/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "mozn-senior-seo-organic-growth-riyadh",
+   "title": "Senior SEO, Organic Growth & Website Experience Specialist",
+   "company": "MOZN",
+   "url": "https://apply.workable.com/mozn-ai/j/A3E95ACEB6/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "moyasar-senior-software-engineer-full-stack-riyadh",
+   "title": "Senior Software Engineer - Full Stack",
+   "company": "Moyasar",
+   "url": "https://apply.workable.com/moyasar-financial-company-1/j/29EB15ADEF/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "ninja-senior-it-operation-specialist-riyadh",
+   "title": "Senior IT Operation Specialist",
+   "company": "Ninja",
+   "url": "https://apply.workable.com/ananinja/j/3AAD1D8A72/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "foodics-senior-forward-deployed-engineer-riyadh",
+   "title": "Senior Forward Deployed Engineer (FDE)",
+   "company": "Foodics",
+   "url": "https://apply.workable.com/foodics/j/A165F5C263/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "foodics-global-cybersecurity-grc-manager-riyadh",
+   "title": "Global Cybersecurity GRC Manager",
+   "company": "Foodics",
+   "url": "https://apply.workable.com/foodics/j/6B8790DE1A/",
+   "reason": "manager title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "webook-senior-product-designer-riyadh",
+   "title": "Senior Product Designer",
+   "company": "webook.com",
+   "url": "https://apply.workable.com/webook/j/A357234BDE/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "petroapp-senior-product-manager-riyadh",
+   "title": "Senior Product Manager",
+   "company": "PetroApp",
+   "url": "https://apply.workable.com/petroapp/j/48E0758868/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "almosafer-senior-specialist-product-designer-riyadh",
+   "title": "Senior Specialist - Product Designer",
+   "company": "Almosafer",
+   "url": "https://jobs.almosafer.com/job/Riyadh-Senior-Specialist-Product-Designer/1366745633/",
+   "reason": "senior title",
+   "foundBy": "lead"
+  },
+  {
+   "id": "deliveryhero-senior-android-engineer-riyadh",
+   "title": "Senior Android Engineer (Saudi National)",
+   "company": "HungerStation (Delivery Hero)",
+   "url": "https://jobs.smartrecruiters.com/DeliveryHero/744000162276859",
+   "reason": "senior title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "deliveryhero-senior-security-engineer-riyadh",
+   "title": "Senior Security Engineer I",
+   "company": "HungerStation (Delivery Hero)",
+   "url": "https://jobs.smartrecruiters.com/DeliveryHero/744000162229146",
+   "reason": "senior title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "deliveryhero-senior-product-design-manager-riyadh",
+   "title": "Senior Product Design Manager",
+   "company": "HungerStation (Delivery Hero)",
+   "url": "https://jobs.smartrecruiters.com/DeliveryHero/744000158236671",
+   "reason": "senior manager title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "lean-senior-data-scientist-riyadh",
+   "title": "Senior Data Scientist",
+   "company": "Lean Technologies",
+   "url": "https://jobs.ashbyhq.com/LeanTech/c91018c7-8c82-4c05-83e3-821ae9ade49c",
+   "reason": "senior title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "lean-staff-engineer-riyadh",
+   "title": "Staff Engineer",
+   "company": "Lean Technologies",
+   "url": "https://jobs.ashbyhq.com/LeanTech/bd9a8374-9e27-41eb-bdb6-e5ba586d4bd9",
+   "reason": "staff title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "d360-lead-ux-designer-riyadh",
+   "title": "Lead UX Designer",
+   "company": "D360 Bank",
+   "url": "https://fa-erqw-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/D360BankCareerPage/job/90561",
+   "reason": "lead title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "d360-principal-platforms-manager-riyadh",
+   "title": "Principal Platforms Manager",
+   "company": "D360 Bank",
+   "url": "https://fa-erqw-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/D360BankCareerPage/job/90553",
+   "reason": "principal/manager title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "d360-manager-siem-threat-intel-riyadh",
+   "title": "Manager - SIEM and Threat Intelligence",
+   "company": "D360 Bank",
+   "url": "https://fa-erqw-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/D360BankCareerPage/job/90554",
+   "reason": "manager title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "d360-senior-manager-iam-engineering-riyadh",
+   "title": "Senior Manager - IAM Engineering",
+   "company": "D360 Bank",
+   "url": "https://fa-erqw-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/D360BankCareerPage/job/90557",
+   "reason": "senior manager title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "d360-senior-software-engineer-backend-riyadh",
+   "title": "Senior Software Engineer - Backend",
+   "company": "D360 Bank",
+   "url": "https://fa-erqw-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/D360BankCareerPage/job/90495",
+   "reason": "senior title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "d360-senior-technical-project-manager-riyadh",
+   "title": "Senior Technical Project Manager",
+   "company": "D360 Bank",
+   "url": "https://fa-erqw-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/D360BankCareerPage/job/90509",
+   "reason": "senior manager title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "nahdi-apps-qa-devops-senior-specialist-jeddah",
+   "title": "Applications Quality Assurance & DevOps Senior Specialist (2023793)",
+   "company": "Nahdi Medical Company",
+   "url": "https://efan.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/2703",
+   "reason": "senior title; 5+ years of experience in software quality assurance",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "nahdi-apps-coe-qa-senior-manager-jeddah",
+   "title": "Applications CoE and Quality Assurance Senior Manager (2023792)",
+   "company": "Nahdi Medical Company",
+   "url": "https://efan.fa.em3.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/2702",
+   "reason": "senior manager title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "unifonic-infrastructure-engineering-manager-riyadh",
+   "title": "Infrastructure Engineering Manager",
+   "company": "Unifonic",
+   "url": "https://jobs.unifonic.com/o/infrastructure-engineering-manager-2",
+   "reason": "manager title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "noonacademy-principal-product-designer-riyadh",
+   "title": "Principal Product Designer",
+   "company": "Noon Academy",
+   "url": "https://careers.learnatnoon.com/jobs/8527951-principal-product-designer",
+   "reason": "principal title",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "noonacademy-senior-product-engineer-riyadh",
+   "title": "Senior Product Engineer",
+   "company": "Noon Academy",
+   "url": "https://careers.learnatnoon.com/jobs/6604576-senior-product-engineer",
+   "reason": "senior title (posted 2025-10-13)",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "devoteam-gis-developer-riyadh",
+   "title": "GIS Developer",
+   "company": "Devoteam",
+   "url": "https://jobs.smartrecruiters.com/Devoteam/744000153692045-gis-developer",
+   "reason": "7+ years of experience in GIS development",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "devoteam-devops-engineer-riyadh",
+   "title": "DevOps Engineer",
+   "company": "Devoteam",
+   "url": "https://jobs.smartrecruiters.com/Devoteam/744000146341189-devops-engineer",
+   "reason": "lead-level: strategic leader for a DevOps transformation (Mid-Senior Level)",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "devoteam-gis-data-expert-riyadh",
+   "title": "GIS Data Expert",
+   "company": "Devoteam",
+   "url": "https://jobs.smartrecruiters.com/Devoteam/744000150052809-gis-data-expert-",
+   "reason": "7+ years of hands-on experience",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "devoteam-senior-ai-engineer-consultant-riyadh",
+   "title": "Senior AI Engineer Consultant",
+   "company": "Devoteam",
+   "url": "https://jobs.smartrecruiters.com/Devoteam/744000153709344",
+   "reason": "senior title (details not fetched)",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "devoteam-infra-cloud-architect-gcp-riyadh",
+   "title": "Infrastructure & Cloud Architect (GCP)",
+   "company": "Devoteam",
+   "url": "https://jobs.smartrecruiters.com/Devoteam/744000162301828",
+   "reason": "architect level (details not fetched)",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "devoteam-cloud-solutions-architect-aws-riyadh",
+   "title": "Cloud Solutions Architect (AWS)",
+   "company": "Devoteam",
+   "url": "https://jobs.smartrecruiters.com/Devoteam/744000157145269",
+   "reason": "architect level (details not fetched)",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "devoteam-cloud-solutions-architect-gcp-riyadh",
+   "title": "Cloud Solutions Architect (Google Cloud)",
+   "company": "Devoteam",
+   "url": "https://jobs.smartrecruiters.com/Devoteam/744000147849039",
+   "reason": "architect level (details not fetched)",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "devoteam-enterprise-data-architect-riyadh",
+   "title": "Enterprise Data Architect",
+   "company": "Devoteam",
+   "url": "https://jobs.smartrecruiters.com/Devoteam/744000161072840",
+   "reason": "architect level (details not fetched)",
+   "foundBy": "helperA"
+  },
+  {
+   "id": "arabicai-forward-deployed-software-engineer-riyadh",
+   "title": "Forward Deployed Software Engineer",
+   "company": "Arabic.AI",
+   "url": "https://apply.workable.com/arabicai/j/910F8C2E45/",
+   "reason": "7+ years of experience in software engineering (posting text)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "tawantech-agentic-ai-contact-center-riyadh",
+   "title": "Agentic AI in Contact Center",
+   "company": "TAWANTECH",
+   "url": "https://apply.workable.com/tawantech/j/06C2D6E522/",
+   "reason": "Experience:10–12 years (posting text)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "tawantech-ai-quality-assurance-engineer-riyadh",
+   "title": "AI Quality Assurance Engineer",
+   "company": "TAWANTECH",
+   "url": "https://apply.workable.com/tawantech/j/E76856D6D4/",
+   "reason": "5+ years asked (borderline; not kept to stay within 3 per company)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "tawantech-oracle-apex-developer-riyadh",
+   "title": "Oracle APEX Developer",
+   "company": "TAWANTECH",
+   "url": "https://apply.workable.com/tawantech/j/4C9AC3BF83/",
+   "reason": "5+ years of Oracle development asked; experienced ERP/HCM techno-functional role",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "saudi-azm-ai-engineer-riyadh",
+   "title": "AI Engineer",
+   "company": "Saudi AZM",
+   "url": "https://azmtalent.recruitee.com/o/ai-engineer-1",
+   "reason": "6–8+ years in software, DevOps, or platform engineering (posting text); team-lead duties",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "saudi-azm-ai-engineer-2-riyadh",
+   "title": "AI Engineer",
+   "company": "Saudi AZM",
+   "url": "https://azmtalent.recruitee.com/o/ai-engineer",
+   "reason": "6–8+ years in software, DevOps, or platform engineering (posting text)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "saudi-azm-application-support-resident-engineer-jeddah",
+   "title": "Application Support Resident Engineer",
+   "company": "Saudi AZM",
+   "url": "https://azmtalent.recruitee.com/o/application-support-resident-engineer",
+   "reason": "5+ years of experience in application support; IT support, not a target family",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "eram-talent-associate-data-scientist-dhahran",
+   "title": "Associate Data Scientist (Saudi Arabia)",
+   "company": "Eram Talent",
+   "url": "https://apply.workable.com/eramtalent-1/j/A71125BE11/",
+   "reason": "More than 5 years of relevant professional experience asked despite 'Associate' title",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "eram-talent-associate-cybersecurity-analyst-dhahran",
+   "title": "Associate Cybersecurity Analyst",
+   "company": "Eram Talent",
+   "url": "https://apply.workable.com/eramtalent-1/j/6B9517EBC2/",
+   "reason": "Entry-level (0–6 years) but posting too thin for 5 distinct verbatim skill requirements; also Eram already at 3 postings",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "eram-talent-digital-marketing-specialist-real-estate-khobar",
+   "title": "Digital Marketing Specialist - Real Estate",
+   "company": "Eram Talent",
+   "url": "https://apply.workable.com/eramtalent-1/j/01ED6C7BE3/",
+   "reason": "5+ years of proven experience in digital marketing",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "innovationteam-ai-engineer-riyadh",
+   "title": "AI Engineer",
+   "company": "InnovationTeam",
+   "url": "https://apply.workable.com/innovationteam/j/E00E73D422/",
+   "reason": "5 years ML/AI engineering in production LLM deployment",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "innovationteam-software-performance-tester-riyadh",
+   "title": "Software Performance Tester",
+   "company": "InnovationTeam",
+   "url": "https://apply.workable.com/innovationteam/j/592B44DE7E/",
+   "reason": "Minimum 5+ years of experience in performance testing using JMeter",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "innovationteam-senior-front-end-engineer-riyadh",
+   "title": "Senior Front-End Engineer",
+   "company": "InnovationTeam",
+   "url": "https://apply.workable.com/innovationteam/j/3C64660A9B/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "innovationteam-ai-team-lead-riyadh",
+   "title": "AI Team Lead",
+   "company": "InnovationTeam",
+   "url": "https://apply.workable.com/innovationteam/j/BE5C345015/",
+   "reason": "lead title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "jodayn-data-management-consultant-riyadh",
+   "title": "Data Management Consultant",
+   "company": "JODAYN",
+   "url": "https://apply.workable.com/jodayn-1/j/E9A2E8EBE4/",
+   "reason": "5+ years of experience in data governance, data architecture, or data quality management",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "masterworks-ai-product-senior-engineer-llm-riyadh",
+   "title": "AI Product, Senior Engineer (LLM & Agentic AI)",
+   "company": "Master-Works (Nabeh)",
+   "url": "https://apply.workable.com/masterworksco/j/5CEC40606F/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "masterworks-penetration-tester-senior-riyadh",
+   "title": "Penetration Tester, Senior Engineer",
+   "company": "Master-Works (SOOR)",
+   "url": "https://apply.workable.com/masterworksco/j/8666936EED/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "masterworks-network-security-senior-riyadh",
+   "title": "Network Security, Senior Engineer",
+   "company": "Master-Works (SOOR)",
+   "url": "https://apply.workable.com/masterworksco/j/9B24683BAE/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "gathern-senior-devops-engineer-riyadh",
+   "title": "Senior DevOps Engineer",
+   "company": "Gathern",
+   "url": "https://apply.workable.com/gathern/j/3F9AAF5244/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "adree-devops-engineer-senior-riyadh",
+   "title": "Devops Engineer, Senior",
+   "company": "Adree",
+   "url": "https://apply.workable.com/adree/j/33D9AE32E5/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "adree-software-quality-control-senior-riyadh",
+   "title": "Software Quality Control, Senior Engineer",
+   "company": "Adree",
+   "url": "https://apply.workable.com/adree/j/0D635A3887/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "uxbert-mobile-lead-riyadh",
+   "title": "Mobile Lead",
+   "company": "Uxbert Labs",
+   "url": "https://apply.workable.com/uxbert-labs-1/j/44DCC952D6/",
+   "reason": "lead title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "uxbert-senior-ai-engineer-riyadh",
+   "title": "Senior AI Engineer",
+   "company": "Uxbert Labs",
+   "url": "https://apply.workable.com/uxbert-labs-1/j/0EF7F9B0BA/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "playmirai-qa-automation-lead-riyadh",
+   "title": "QA Automation Lead",
+   "company": "Mirai (playmirai)",
+   "url": "https://apply.workable.com/playmirai/j/F143EEE6D7/",
+   "reason": "lead title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "playmirai-senior-software-engineer-ai-platform-riyadh",
+   "title": "Senior Software Engineer, AI Platform",
+   "company": "Mirai (playmirai)",
+   "url": "https://apply.workable.com/playmirai/j/98FFA501AC/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "tawantech-senior-backend-software-engineer-riyadh",
+   "title": "Senior Backend Software Engineer (Node.js / TypeScript)",
+   "company": "TAWANTECH",
+   "url": "https://apply.workable.com/tawantech/j/359C581BAF/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "tawantech-senior-data-scientist-riyadh",
+   "title": "Senior Data Scientist",
+   "company": "TAWANTECH",
+   "url": "https://apply.workable.com/tawantech/j/A3047EC91A/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "deepsource-senior-cloud-engineer-riyadh",
+   "title": "Senior Cloud Engineer - (Saudi National)- Riyadh, KSA",
+   "company": "DeepSource Technologies",
+   "url": "https://apply.workable.com/deepsource/j/89D9C01FD5/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "codeninja-senior-sqa-automation-engineer-riyadh",
+   "title": "Senior SQA Automation Engineer",
+   "company": "CodeNinja",
+   "url": "https://apply.workable.com/codeninjapk/j/6DA9FC5661/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  },
+  {
+   "id": "squadio-senior-ui-ux-designer-riyadh",
+   "title": "Senior UI UX Designer",
+   "company": "Squadio",
+   "url": "https://apply.workable.com/squadio23/j/973CF5EC83/",
+   "reason": "senior title (not fetched)",
+   "foundBy": "helperB"
+  }
+ ]
+}

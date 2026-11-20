@@ -119,13 +119,17 @@ function CatalogueFor({ user }: { readonly user: UserState }): ReactNode {
       </header>
 
       <div className="flex flex-col gap-4">
-        <PillTabs
-          active={tab}
-          className="self-start"
-          label={LEARN_COPY.tabsLabel}
-          onPick={(id) => show({ tab: id })}
-          tabs={TAB_ORDER.map((id) => ({ id, label: LEARN_COPY.tabs[id], testId: TID.learn.tab(id) }))}
-        />
+        {/* a row that can scroll sideways, as on «المهارات»: in the «لعبة» design the three tabs are wider than a 360 px
+            phone's content and pushed the page sideways */}
+        <div className="-mx-gutter overflow-x-auto px-gutter [scrollbar-width:none] [&::-webkit-scrollbar]:hidden @min-[900px]/content:mx-0 @min-[900px]/content:overflow-visible @min-[900px]/content:px-0">
+          <PillTabs
+            active={tab}
+            className="min-w-max"
+            label={LEARN_COPY.tabsLabel}
+            onPick={(id) => show({ tab: id })}
+            tabs={TAB_ORDER.map((id) => ({ id, label: LEARN_COPY.tabs[id], testId: TID.learn.tab(id) }))}
+          />
+        </div>
         <div aria-label={LEARN_COPY.filtersLabel} className="flex flex-wrap items-center gap-2" role="group">
           {(["ar", "en"] as const).map((lang) => (
             <Chip
@@ -146,7 +150,7 @@ function CatalogueFor({ user }: { readonly user: UserState }): ReactNode {
         {tab !== "explore" ? null : (
         <div
           aria-label={LEARN_COPY.fieldsLabel}
-          className="-mx-gutter flex gap-2 overflow-x-auto px-gutter pb-1 [scrollbar-width:none] @min-[900px]/content:mx-0 @min-[900px]/content:flex-wrap @min-[900px]/content:overflow-visible @min-[900px]/content:px-0 [&::-webkit-scrollbar]:hidden"
+          className="-mx-gutter -mt-1.5 -mb-0.5 flex gap-2 overflow-x-auto px-gutter pt-1.5 pb-1.5 [scrollbar-width:none] @min-[900px]/content:mx-0 @min-[900px]/content:flex-wrap @min-[900px]/content:overflow-visible @min-[900px]/content:px-0 [&::-webkit-scrollbar]:hidden"
           role="group"
         >
           <Chip data-testid={TID.learn.filter("all")} onClick={() => show({ field: null })} selected={field === null} size="sm">

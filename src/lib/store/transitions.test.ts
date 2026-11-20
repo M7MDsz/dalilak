@@ -481,7 +481,7 @@ describe("applications (7.4, 7.5)", () => {
 
   it("records the CV line of the sample CV", () => {
     const { applied } = journey();
-    expect(applied.application.cvLine).toBe("مرفقة: السيرة التجريبية");
+    expect(applied.application.cvLine).toBe("مرفقة: السيرة الجاهزة");
   });
 });
 

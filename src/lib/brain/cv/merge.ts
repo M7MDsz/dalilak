@@ -4,7 +4,7 @@ import { SKILLS } from "@/lib/data";
 import { isSkillId } from "@/lib/ids";
 import type { CvSkill, SkillId, StarSlot } from "@/lib/types";
 
-import type { CvLine } from "./clean";
+import { cleanCvText, type CvLine } from "./clean";
 import { cvWords, evidenceText } from "./local-analyser";
 
 /** A quoted evidence sentence must have at least this many words (a sentence, not a bare skill name). */
@@ -12,7 +12,8 @@ export const MODEL_EVIDENCE_MIN_WORDS = 3;
 
 /** The first cleaned line whose words contain the evidence's words, in order and side by side (4.3 normalisation). */
 export function evidenceLineIndex(lines: readonly CvLine[], evidence: string): number {
-  const needle = cvWords(evidence);
+  // Cleaned like the lines (NFKC, Persian look-alikes folded): a quote of the raw text must still be found.
+  const needle = cvWords(cleanCvText(evidence));
   if (needle.length < MODEL_EVIDENCE_MIN_WORDS) return -1;
   return lines.findIndex((line) => {
     const hay = cvWords(line.text);

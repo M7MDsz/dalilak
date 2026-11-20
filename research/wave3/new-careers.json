@@ -1,0 +1,4096 @@
+{
+ "checkedAt": "2026-11-21",
+ "note": "Wave 3 research: 7 new career families (ESG / sustainability, property & facilities management, insurance, mobile development, telecom / networks, airline & airport operations, PR / communications), 21 new skills, 4 real postings. Ready-to-merge data in the shape of research/expansion/expansion.json and research/wave2/*.json; not wired into the app. App «دليل», chatbot «دليلك». `courses` titles are Dalil's own (hand-written course names, not real providers); every other item has a source URL opened on 2026-11-21.",
+ "method": "Jobs: company-owned boards only (Lever public JSON for Flow; Riyad Bank's careers page; Riyadh Air's iCIMS board), read with plain curl on 2026-11-21 and every evidence / bandEvidence string checked by script as a verbatim substring of the page text (whitespace collapsed). No LinkedIn, Indeed, Bayt or aggregators. Guides: two web-only research sub-agents (WebSearch + WebFetch; parts merged here). Salary: Hays Saudi Arabia Salary Guide 2026 PDF (text layer, pp. 34, 38, 46); Michael Page KSA web figures held (period unclear). Skill order: the published guideline named in each family's path.",
+ "fields": [
+  {
+   "id": "energy-sustainability",
+   "name": "الاستدامة والطاقة"
+  },
+  {
+   "id": "real-estate",
+   "name": "العقار وإدارة المرافق"
+  },
+  {
+   "id": "aviation",
+   "name": "الطيران وعمليات المطارات"
+  },
+  {
+   "id": "communications",
+   "name": "العلاقات العامة والاتصال المؤسسي"
+  }
+ ],
+ "skills": [
+  {
+   "id": "esg-fundamentals",
+   "name": "أساسيات الاستدامة و ESG",
+   "field": "energy-sustainability",
+   "maxStars": 1,
+   "prereqs": [],
+   "description": "فهم البيئة والمجتمع والحوكمة وأطر الاستدامة ومبادرة السعودية الخضراء.",
+   "aliases": [
+    "ESG",
+    "الاستدامة المؤسسية",
+    "الحوكمة البيئية والاجتماعية",
+    "مبادرة السعودية الخضراء",
+    "Saudi Green Initiative",
+    "corporate sustainability",
+    "استراتيجية الاستدامة"
+   ]
+  },
+  {
+   "id": "esg-reporting",
+   "name": "تقارير الاستدامة (GRI)",
+   "field": "energy-sustainability",
+   "maxStars": 2,
+   "prereqs": [
+    "esg-fundamentals"
+   ],
+   "description": "كتابة تقرير استدامة وفق معايير GRI وإفصاحات ISSB.",
+   "aliases": [
+    "GRI",
+    "معايير GRI",
+    "تقرير الاستدامة",
+    "تقارير الاستدامة",
+    "sustainability report",
+    "sustainability reporting",
+    "ESG reporting",
+    "ISSB"
+   ]
+  },
+  {
+   "id": "carbon-accounting",
+   "name": "حساب البصمة الكربونية",
+   "field": "energy-sustainability",
+   "maxStars": 2,
+   "prereqs": [
+    "esg-fundamentals"
+   ],
+   "description": "حصر انبعاثات الشركة المباشرة وغير المباشرة وفق بروتوكول غازات الاحتباس الحراري.",
+   "aliases": [
+    "البصمة الكربونية",
+    "carbon footprint",
+    "GHG Protocol",
+    "بروتوكول غازات الاحتباس الحراري",
+    "انبعاثات غازات الاحتباس الحراري",
+    "carbon accounting",
+    "Scope 3",
+    "GHG inventory"
+   ]
+  },
+  {
+   "id": "property-management",
+   "name": "إدارة الأملاك والتأجير",
+   "field": "real-estate",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "تأجير الوحدات وتوثيق عقود الإيجار ومتابعة المستأجرين والتحصيل.",
+   "aliases": [
+    "إدارة الأملاك",
+    "إدارة الأملاك العقارية",
+    "عقود الإيجار",
+    "منصة إيجار",
+    "Ejar",
+    "property management",
+    "leasing coordinator",
+    "رخصة فال"
+   ]
+  },
+  {
+   "id": "facilities-management",
+   "name": "إدارة المرافق والصيانة",
+   "field": "real-estate",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "تخطيط الصيانة وإدارة عقود الخدمات ومؤشرات أداء المرافق.",
+   "aliases": [
+    "إدارة المرافق",
+    "facilities management",
+    "facility management",
+    "FMP",
+    "CAFM",
+    "الصيانة الوقائية",
+    "preventive maintenance",
+    "IFMA"
+   ]
+  },
+  {
+   "id": "real-estate-valuation",
+   "name": "التقييم العقاري",
+   "field": "real-estate",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "تقدير قيمة العقار بأساليب السوق والدخل والتكلفة وفق معايير التقييم الدولية.",
+   "aliases": [
+    "التقييم العقاري",
+    "مقيّم عقاري",
+    "مقيم عقاري",
+    "real estate valuation",
+    "property valuation",
+    "تقييم العقارات",
+    "IVS"
+   ]
+  },
+  {
+   "id": "insurance-basics",
+   "name": "أساسيات التأمين",
+   "field": "banking-risk",
+   "maxStars": 1,
+   "prereqs": [],
+   "description": "مبادئ التأمين وأنواعه وأنظمة هيئة التأمين في السعودية.",
+   "aliases": [
+    "أساسيات التأمين",
+    "IFCE",
+    "insurance fundamentals",
+    "هيئة التأمين",
+    "Insurance Authority",
+    "التأمين التكافلي"
+   ]
+  },
+  {
+   "id": "underwriting",
+   "name": "الاكتتاب التأميني",
+   "field": "banking-risk",
+   "maxStars": 2,
+   "prereqs": [
+    "insurance-basics"
+   ],
+   "description": "تقييم الخطر وتسعير وثيقة التأمين وقبولها حسب سياسة الشركة.",
+   "aliases": [
+    "الاكتتاب التأميني",
+    "مكتتب تأمين",
+    "insurance underwriting",
+    "underwriter",
+    "تسعير وثائق التأمين",
+    "underwriting officer"
+   ]
+  },
+  {
+   "id": "insurance-claims",
+   "name": "تسوية المطالبات وتقدير الأضرار",
+   "field": "banking-risk",
+   "maxStars": 2,
+   "prereqs": [
+    "insurance-basics"
+   ],
+   "description": "استلام مطالبات المركبات والممتلكات وتقدير الضرر وكشف مؤشرات الاحتيال.",
+   "aliases": [
+    "تسوية المطالبات",
+    "تقدير الأضرار",
+    "claims handling",
+    "claims adjuster",
+    "loss adjusting",
+    "مطالبات المركبات",
+    "motor claims"
+   ]
+  },
+  {
+   "id": "flutter",
+   "name": "تطوير التطبيقات بـ Flutter",
+   "field": "software",
+   "maxStars": 2,
+   "prereqs": [
+    "programming"
+   ],
+   "description": "بناء تطبيق جوال واحد يعمل على أندرويد و iOS بلغة Dart.",
+   "aliases": [
+    "Flutter",
+    "فلاتر",
+    "Dart",
+    "cross-platform mobile"
+   ]
+  },
+  {
+   "id": "ios-swift",
+   "name": "تطوير تطبيقات iOS بـ Swift",
+   "field": "software",
+   "maxStars": 2,
+   "prereqs": [
+    "programming"
+   ],
+   "description": "بناء تطبيقات آيفون بلغة Swift وواجهات SwiftUI ونشرها في App Store.",
+   "aliases": [
+    "Swift",
+    "SwiftUI",
+    "Xcode",
+    "UIKit",
+    "iOS development",
+    "تطوير تطبيقات iOS"
+   ]
+  },
+  {
+   "id": "android-kotlin",
+   "name": "تطوير تطبيقات Android بـ Kotlin",
+   "field": "software",
+   "maxStars": 2,
+   "prereqs": [
+    "programming"
+   ],
+   "description": "بناء تطبيقات أندرويد بلغة Kotlin وواجهات Jetpack Compose.",
+   "aliases": [
+    "Kotlin",
+    "كوتلن",
+    "Jetpack Compose",
+    "Android Studio",
+    "Android development",
+    "تطوير تطبيقات أندرويد"
+   ]
+  },
+  {
+   "id": "routing-switching",
+   "name": "التوجيه والتحويل",
+   "field": "cyber-cloud",
+   "maxStars": 2,
+   "prereqs": [
+    "networking"
+   ],
+   "description": "إعداد الموجّهات والمحوّلات والشبكات الافتراضية وبروتوكولات التوجيه.",
+   "aliases": [
+    "التوجيه والتحويل",
+    "routing and switching",
+    "OSPF",
+    "BGP",
+    "VLAN",
+    "Cisco IOS",
+    "MPLS"
+   ]
+  },
+  {
+   "id": "mobile-networks",
+   "name": "شبكات الاتصالات المتنقلة (4G/5G)",
+   "field": "cyber-cloud",
+   "maxStars": 2,
+   "prereqs": [
+    "networking"
+   ],
+   "description": "تخطيط شبكات الراديو وتحسين أدائها وقراءة مؤشراتها.",
+   "aliases": [
+    "شبكات الجيل الخامس",
+    "5G",
+    "LTE",
+    "RAN",
+    "RF optimization",
+    "RF planning",
+    "drive test",
+    "تحسين شبكات الراديو"
+   ]
+  },
+  {
+   "id": "fiber-optics",
+   "name": "الألياف البصرية",
+   "field": "cyber-cloud",
+   "maxStars": 1,
+   "prereqs": [
+    "networking"
+   ],
+   "description": "تمديد الألياف ولحامها وفحصها لشبكات الألياف المنزلية.",
+   "aliases": [
+    "الألياف البصرية",
+    "fiber optics",
+    "fibre optics",
+    "FTTH",
+    "OTDR",
+    "fusion splicing",
+    "CFOT"
+   ]
+  },
+  {
+   "id": "aviation-ops",
+   "name": "عمليات المطارات وشركات الطيران",
+   "field": "aviation",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "تشغيل الرحلات والمطار يومياً ومتابعة التأخير والاضطرابات من مركز العمليات.",
+   "aliases": [
+    "عمليات المطارات",
+    "airport operations",
+    "airline operations",
+    "IOCC",
+    "operations control centre",
+    "عمليات شركات الطيران",
+    "IATA"
+   ]
+  },
+  {
+   "id": "ground-handling",
+   "name": "الخدمات الأرضية وخدمة المسافرين",
+   "field": "aviation",
+   "maxStars": 2,
+   "prereqs": [
+    "aviation-ops"
+   ],
+   "description": "إنهاء إجراءات المسافرين والأمتعة وتنسيق الخدمات الأرضية للطائرة.",
+   "aliases": [
+    "الخدمات الأرضية",
+    "ground handling",
+    "ground operations",
+    "passenger services",
+    "خدمة المسافرين",
+    "load control",
+    "departure control system"
+   ]
+  },
+  {
+   "id": "flight-dispatch",
+   "name": "مراقبة العمليات الجوية وتخطيط الرحلات",
+   "field": "aviation",
+   "maxStars": 1,
+   "prereqs": [
+    "aviation-ops"
+   ],
+   "description": "تخطيط الرحلة ومتابعتها وقراءة النوتام بالوزن والاتزان ورخصة الهيئة.",
+   "aliases": [
+    "مراقب العمليات الجوية",
+    "flight dispatcher",
+    "flight dispatch",
+    "dispatch license",
+    "NOTAM",
+    "flight following",
+    "weight and balance"
+   ]
+  },
+  {
+   "id": "public-relations",
+   "name": "العلاقات العامة والإعلام",
+   "field": "communications",
+   "maxStars": 2,
+   "prereqs": [],
+   "description": "بناء العلاقة مع الإعلام وكتابة البيانات الصحفية ومتابعة التغطية.",
+   "aliases": [
+    "العلاقات العامة",
+    "public relations",
+    "media relations",
+    "العلاقات الإعلامية",
+    "بيان صحفي",
+    "press release",
+    "PRSA"
+   ]
+  },
+  {
+   "id": "corporate-communications",
+   "name": "الاتصال المؤسسي والداخلي",
+   "field": "communications",
+   "maxStars": 2,
+   "prereqs": [
+    "public-relations"
+   ],
+   "description": "رسائل الشركة الداخلية والخارجية وإدارة اتصال الأزمات بصوت واحد.",
+   "aliases": [
+    "الاتصال المؤسسي",
+    "corporate communications",
+    "internal communications",
+    "الاتصال الداخلي",
+    "crisis communication",
+    "اتصال الأزمات"
+   ]
+  },
+  {
+   "id": "government-relations",
+   "name": "العلاقات الحكومية",
+   "field": "communications",
+   "maxStars": 1,
+   "prereqs": [],
+   "description": "إنجاز معاملات الشركة مع الجهات الحكومية ومتابعة الأنظمة التي تمسّها.",
+   "aliases": [
+    "العلاقات الحكومية",
+    "government relations",
+    "الشؤون الحكومية",
+    "public affairs",
+    "Qiwa",
+    "Muqeem",
+    "معقّب"
+   ]
+  }
+ ],
+ "courses": [
+  {
+   "id": "c-esg-fundamentals-1",
+   "skill": "esg-fundamentals",
+   "star": 1,
+   "title": "الاستدامة و ESG للمبتدئ: المحاور الثلاثة والأهمية النسبية ومبادرة السعودية الخضراء",
+   "hours": 8
+  },
+  {
+   "id": "c-esg-reporting-1",
+   "skill": "esg-reporting",
+   "star": 1,
+   "title": "تقرير الاستدامة وفق GRI: المعايير العامة والموضوعات الجوهرية",
+   "hours": 10
+  },
+  {
+   "id": "c-esg-reporting-2",
+   "skill": "esg-reporting",
+   "star": 2,
+   "title": "من GRI إلى ISSB: إفصاحات المناخ وتقرير جاهز للنشر",
+   "hours": 14
+  },
+  {
+   "id": "c-carbon-accounting-1",
+   "skill": "carbon-accounting",
+   "star": 1,
+   "title": "البصمة الكربونية: النطاق الأول والثاني ومعاملات الانبعاث",
+   "hours": 8
+  },
+  {
+   "id": "c-carbon-accounting-2",
+   "skill": "carbon-accounting",
+   "star": 2,
+   "title": "انبعاثات سلسلة القيمة (النطاق الثالث) وخطة خفض واقعية",
+   "hours": 12
+  },
+  {
+   "id": "c-property-management-1",
+   "skill": "property-management",
+   "star": 1,
+   "title": "إدارة الأملاك للمبتدئ: التأجير وعقود إيجار وخدمة المستأجر",
+   "hours": 8
+  },
+  {
+   "id": "c-property-management-2",
+   "skill": "property-management",
+   "star": 2,
+   "title": "تشغيل محفظة عقارية: التحصيل والتجديد والإشغال ورخصة فال",
+   "hours": 12
+  },
+  {
+   "id": "c-facilities-management-1",
+   "skill": "facilities-management",
+   "star": 1,
+   "title": "إدارة المرافق: الصيانة الوقائية وأوامر العمل وعقود الخدمات",
+   "hours": 10
+  },
+  {
+   "id": "c-facilities-management-2",
+   "skill": "facilities-management",
+   "star": 2,
+   "title": "مدير المرافق: الميزانية ومؤشرات الأداء ونظام CAFM",
+   "hours": 14
+  },
+  {
+   "id": "c-real-estate-valuation-1",
+   "skill": "real-estate-valuation",
+   "star": 1,
+   "title": "أساسيات التقييم العقاري: أسلوب السوق والدخل والتكلفة",
+   "hours": 10
+  },
+  {
+   "id": "c-real-estate-valuation-2",
+   "skill": "real-estate-valuation",
+   "star": 2,
+   "title": "تقرير تقييم كامل وفق معايير التقييم الدولية ومسار تقييم",
+   "hours": 16
+  },
+  {
+   "id": "c-insurance-basics-1",
+   "skill": "insurance-basics",
+   "star": 1,
+   "title": "أساسيات التأمين في السعودية: المبادئ والمنتجات والأنظمة",
+   "hours": 10
+  },
+  {
+   "id": "c-underwriting-1",
+   "skill": "underwriting",
+   "star": 1,
+   "title": "الاكتتاب للمبتدئ: قراءة الخطر وطلب التأمين وشروط الوثيقة",
+   "hours": 10
+  },
+  {
+   "id": "c-underwriting-2",
+   "skill": "underwriting",
+   "star": 2,
+   "title": "تسعير وثائق المركبات والممتلكات والطبي وقرار القبول",
+   "hours": 14
+  },
+  {
+   "id": "c-insurance-claims-1",
+   "skill": "insurance-claims",
+   "star": 1,
+   "title": "المطالبات للمبتدئ: من البلاغ إلى التسوية",
+   "hours": 8
+  },
+  {
+   "id": "c-insurance-claims-2",
+   "skill": "insurance-claims",
+   "star": 2,
+   "title": "تقدير الأضرار وكشف الاحتيال وتسوية المطالبات المعقدة",
+   "hours": 12
+  },
+  {
+   "id": "c-flutter-1",
+   "skill": "flutter",
+   "star": 1,
+   "title": "Flutter من الصفر: Dart والعناصر وأول تطبيق",
+   "hours": 20
+  },
+  {
+   "id": "c-flutter-2",
+   "skill": "flutter",
+   "star": 2,
+   "title": "تطبيق Flutter كامل: إدارة الحالة وربط Firebase والنشر",
+   "hours": 30
+  },
+  {
+   "id": "c-ios-swift-1",
+   "skill": "ios-swift",
+   "star": 1,
+   "title": "Swift و SwiftUI من الصفر: أول تطبيق آيفون",
+   "hours": 20
+  },
+  {
+   "id": "c-ios-swift-2",
+   "skill": "ios-swift",
+   "star": 2,
+   "title": "تطبيق iOS كامل: البيانات والشبكة والنشر في App Store",
+   "hours": 30
+  },
+  {
+   "id": "c-android-kotlin-1",
+   "skill": "android-kotlin",
+   "star": 1,
+   "title": "Kotlin و Jetpack Compose من الصفر: أول تطبيق أندرويد",
+   "hours": 20
+  },
+  {
+   "id": "c-android-kotlin-2",
+   "skill": "android-kotlin",
+   "star": 2,
+   "title": "تطبيق أندرويد كامل: التنقل والإنترنت وحفظ البيانات",
+   "hours": 30
+  },
+  {
+   "id": "c-routing-switching-1",
+   "skill": "routing-switching",
+   "star": 1,
+   "title": "التوجيه والتحويل للمبتدئ: الشبكات الافتراضية والتوجيه الثابت",
+   "hours": 16
+  },
+  {
+   "id": "c-routing-switching-2",
+   "skill": "routing-switching",
+   "star": 2,
+   "title": "التوجيه الديناميكي وخدمات IP وأمن الشبكة استعداداً لـ CCNA",
+   "hours": 30
+  },
+  {
+   "id": "c-mobile-networks-1",
+   "skill": "mobile-networks",
+   "star": 1,
+   "title": "شبكات الجوال: من الجيل الرابع إلى الخامس ببساطة",
+   "hours": 10
+  },
+  {
+   "id": "c-mobile-networks-2",
+   "skill": "mobile-networks",
+   "star": 2,
+   "title": "تخطيط الراديو وتحسينه: مؤشرات الأداء واختبار القيادة",
+   "hours": 20
+  },
+  {
+   "id": "c-fiber-optics-1",
+   "skill": "fiber-optics",
+   "star": 1,
+   "title": "الألياف البصرية: التمديد واللحام والفحص بجهاز OTDR",
+   "hours": 12
+  },
+  {
+   "id": "c-aviation-ops-1",
+   "skill": "aviation-ops",
+   "star": 1,
+   "title": "عمليات المطارات وشركات الطيران: يوم في مركز العمليات",
+   "hours": 10
+  },
+  {
+   "id": "c-aviation-ops-2",
+   "skill": "aviation-ops",
+   "star": 2,
+   "title": "إدارة الاضطرابات: التأخير والتحويل والإلغاء وقرار الشبكة",
+   "hours": 14
+  },
+  {
+   "id": "c-ground-handling-1",
+   "skill": "ground-handling",
+   "star": 1,
+   "title": "الخدمات الأرضية: إنهاء إجراءات المسافرين والأمتعة",
+   "hours": 8
+  },
+  {
+   "id": "c-ground-handling-2",
+   "skill": "ground-handling",
+   "star": 2,
+   "title": "خدمات الساحة وتحميل الطائرة والتوازن الأساسي",
+   "hours": 12
+  },
+  {
+   "id": "c-flight-dispatch-1",
+   "skill": "flight-dispatch",
+   "star": 1,
+   "title": "مراقبة العمليات الجوية: خطة الرحلة والنوتام والوزن والاتزان",
+   "hours": 16
+  },
+  {
+   "id": "c-public-relations-1",
+   "skill": "public-relations",
+   "star": 1,
+   "title": "العلاقات العامة للمبتدئ: البيان الصحفي وقائمة الإعلاميين",
+   "hours": 8
+  },
+  {
+   "id": "c-public-relations-2",
+   "skill": "public-relations",
+   "star": 2,
+   "title": "خطة علاقات عامة كاملة: البحث والتنفيذ وقياس الأثر",
+   "hours": 12
+  },
+  {
+   "id": "c-corporate-communications-1",
+   "skill": "corporate-communications",
+   "star": 1,
+   "title": "الاتصال الداخلي: رسائل الموظفين ونشرة الشركة",
+   "hours": 8
+  },
+  {
+   "id": "c-corporate-communications-2",
+   "skill": "corporate-communications",
+   "star": 2,
+   "title": "اتصال الأزمات: خطة الرد والمتحدث الرسمي وصوت الشركة",
+   "hours": 12
+  },
+  {
+   "id": "c-government-relations-1",
+   "skill": "government-relations",
+   "star": 1,
+   "title": "العلاقات الحكومية في السعودية: قوى ومقيم والسجل التجاري",
+   "hours": 8
+  }
+ ],
+ "jobs": [
+  {
+   "id": "flow-leasing-coordinator-riyadh",
+   "title": "منسّق تأجير",
+   "titleEn": "Leasing Coordinator",
+   "field": "real-estate",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "junior",
+   "company": "فلو",
+   "companyEn": "Flow",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف فلو (Lever)",
+    "url": "https://jobs.lever.co/flowlife/f23b0af7-7a12-4096-ad4b-525ffbe9ec9e",
+    "postedAt": "2026-07-20",
+    "checkedAt": "2026-11-21",
+    "note": "Read from Lever's public postings JSON for flowlife (createdAt 2026-07-20; still listed on 2026-11-21). MENA - Operations and Revenue, salaried full-time. Arabic company name is Dalil's transliteration."
+   },
+   "bandEvidence": "1–2 years of experience in administration, customer service, sales support, real estate or a similar coordination role.",
+   "requirements": [
+    {
+     "skill": "property-management",
+     "stars": 2,
+     "evidence": "Prepare and process EJAR contracts, ensuring all required documents are received and lease details are accurate before submission."
+    },
+    {
+     "skill": "customer-success",
+     "stars": 1,
+     "evidence": "Provide timely administrative support and excellent customer service to prospective residents, current residents, and internal stakeholders."
+    },
+    {
+     "skill": "sales",
+     "stars": 1,
+     "evidence": "Maintain accurate prospect, resident, and lease information within CRM systems and internal trackers."
+    },
+    {
+     "skill": "excel",
+     "stars": 1,
+     "evidence": "Comfortable using CRM systems, Microsoft Excel, Google Workspace, WhatsApp, Slack, and other communication tools."
+    },
+    {
+     "skill": "english",
+     "stars": 2,
+     "evidence": "Fluent in English with excellent written and verbal communication skills."
+    }
+   ],
+   "summary": "ينسّق عملية التأجير في مجمعات سكنية من الحجز إلى السكن: العروض وعقود إيجار والمستندات وخدمة السكان.",
+   "tasks": [
+    "تجهيز عروض التأجير وعقود إيجار",
+    "متابعة المستندات حتى يسكن المستأجر",
+    "تحديث بيانات العملاء في نظام إدارة العملاء"
+   ],
+   "family": "real-estate-fm",
+   "sampleCvMatch": 40
+  },
+  {
+   "id": "riyadbank-sustainable-finance-specialist-riyadh",
+   "title": "أخصائي أول التمويل المستدام",
+   "titleEn": "Sustainable Finance Senior Specialist",
+   "field": "energy-sustainability",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "بنك الرياض",
+   "companyEn": "Riyad Bank",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف بنك الرياض",
+    "url": "https://careers.riyadbank.com/en/saudi-arabia/jobs/sustainable-finance-senior-specialist-1100083508/",
+    "postedAt": "2026-04-28",
+    "checkedAt": "2026-11-21",
+    "note": "Page shows «Apply Now» and Career Level «Mid Career» on 2026-11-21. Asks 4-6 years (top of the app's mid band); banking-basics capped at the skill's maximum."
+   },
+   "bandEvidence": "4-6 Years of relevant experience in Sustainable Finance or Investment, the majority of it in a banking environment",
+   "requirements": [
+    {
+     "skill": "esg-fundamentals",
+     "stars": 1,
+     "evidence": "Understanding of sustainability market trends and themes – particularly sustainable finance and investment"
+    },
+    {
+     "skill": "esg-reporting",
+     "stars": 2,
+     "evidence": "In-depth knowledge of international disclosure regimes and rating agencies"
+    },
+    {
+     "skill": "banking-basics",
+     "stars": 1,
+     "evidence": "In-depth knowledge on the banking sector in KSA and the region"
+    },
+    {
+     "skill": "dataviz",
+     "stars": 1,
+     "evidence": "Advanced data modelling, graphical representations and data visualizations skills"
+    },
+    {
+     "skill": "presentation",
+     "stars": 1,
+     "evidence": "Ability to effectively present information to top management"
+    }
+   ],
+   "summary": "يقود منتجات التمويل المستدام في البنك مع وحدات الأعمال ويتابع التزامات الاستدامة ويمثّل البنك في منظومة ESG.",
+   "tasks": [
+    "دعم صفقات التمويل المرتبط بالاستدامة",
+    "متابعة التقدم في التزامات الاستدامة بلوحة بسيطة",
+    "إعداد مواد تسويق منتجات التمويل المستدام"
+   ],
+   "family": "esg-sustainability",
+   "sampleCvMatch": 20
+  },
+  {
+   "id": "riyadhair-flight-following-specialist-riyadh",
+   "title": "أخصائي متابعة الرحلات",
+   "titleEn": "Flight Following Specialist",
+   "field": "aviation",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "طيران الرياض",
+   "companyEn": "Riyadh Air",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف طيران الرياض (iCIMS)",
+    "url": "https://careers-riyadhair.icims.com/jobs/6275/flight-following-specialist/job",
+    "postedAt": "2026-11-19",
+    "checkedAt": "2026-11-21",
+    "note": "Job ID 2026-6275, SA-Riyadh, Integrated Operations Control Centre (IOCC); datePosted from the page's JSON-LD. Needs a valid Dispatch License."
+   },
+   "bandEvidence": "Degree qualified, you will demonstrate at least 3 years of relevant work experience in flight dispatch or flight watch.",
+   "requirements": [
+    {
+     "skill": "aviation-ops",
+     "stars": 2,
+     "evidence": "This role is central to 24-hour flight tracking support within the Integrated Operations Control Centre (IOCC)."
+    },
+    {
+     "skill": "flight-dispatch",
+     "stars": 1,
+     "evidence": "You are expected to possess a valid Dispatch License."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "This includes assessing weather and technical hazards and communicating critical updates to operating crews when needed."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Working closely with dispatch and operational stakeholders, the role manages the flow of flight tracking information across the operation."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "You will bring strong flight progress monitoring, flight data analysis, NOTAM awareness, and operational coordination skills, along with sound judgment, clear communication, collaboration, and the ability to perform accurately under pressure."
+    }
+   ],
+   "summary": "يتابع رحلات الشركة لحظة بلحظة من مركز العمليات من الدفع حتى الوصول، ويبلّغ الأطقم بأي خطر جوي أو فني.",
+   "tasks": [
+    "مراقبة موقع الطائرة ومسارها وتنبيهات التتبع",
+    "متابعة النوتام وإبلاغ المعنيين",
+    "دعم مراقب العمليات الجوية المناوب"
+   ],
+   "family": "aviation-ops",
+   "sampleCvMatch": 40
+  },
+  {
+   "id": "riyadhair-operations-controller-riyadh",
+   "title": "مراقب عمليات تشغيلية",
+   "titleEn": "Operations Controller",
+   "field": "aviation",
+   "city": "riyadh",
+   "place": "Riyadh",
+   "band": "mid",
+   "company": "طيران الرياض",
+   "companyEn": "Riyadh Air",
+   "real": true,
+   "source": {
+    "site": "صفحة وظائف طيران الرياض (iCIMS)",
+    "url": "https://careers-riyadhair.icims.com/jobs/6272/operations-controller/job",
+    "postedAt": "2026-11-19",
+    "checkedAt": "2026-11-21",
+    "note": "Job ID 2026-6272, SA-Riyadh, day-of-operations network control in the IOCC; datePosted from the page's JSON-LD. Dispatcher licence is a plus, not required."
+   },
+   "bandEvidence": "Diploma qualified at minimum, you will demonstrate a minimum of 4 years of experience in airline operations within an IOCC/OCC, network control, flight dispatch, crew control, operations planning, airport operations, or a comparable environment.",
+   "requirements": [
+    {
+     "skill": "aviation-ops",
+     "stars": 2,
+     "evidence": "A core part of the role is monitoring the flying program, aircraft rotations, and operational systems to identify emerging risks early."
+    },
+    {
+     "skill": "flight-dispatch",
+     "stars": 1,
+     "evidence": "We’d love to hear from you even more if you have possession of a valid Flight Dispatcher License."
+    },
+    {
+     "skill": "problem-solving",
+     "stars": 1,
+     "evidence": "You will bring strong operational monitoring, disruption recovery, and prioritisation skills, along with clear communication, sound procedural discipline, systems confidence, and excellent attention to detail under pressure."
+    },
+    {
+     "skill": "teamwork",
+     "stars": 1,
+     "evidence": "Working closely with internal teams, stations, handling partners, and external agencies, the role coordinates approved actions from operational readiness to flight completion."
+    },
+    {
+     "skill": "communication",
+     "stars": 1,
+     "evidence": "The role also supports stakeholder notifications, handovers, operational reports, and aircraft allocation information in line with approved procedures."
+    }
+   ],
+   "summary": "يدير تشغيل شبكة الرحلات يوم التشغيل: يتابع جدول الطيران ودوران الطائرات ويعالج التأخير والإلغاء والتحويل.",
+   "tasks": [
+    "مراقبة برنامج الرحلات ودوران الطائرات",
+    "تنسيق قرارات التأخير والإلغاء مع المحطات",
+    "تحديث سجلات الرحلات والتقارير لحظياً"
+   ],
+   "family": "aviation-ops",
+   "sampleCvMatch": 40
+  }
+ ],
+ "guides": [
+  {
+   "skill": "esg-fundamentals",
+   "depth": "full",
+   "topPick": {
+    "title": "ESG Essentials for Sustainable Business",
+    "provider": "Duke University (Coursera)",
+    "url": "https://www.coursera.org/learn/esg-essentials-sustainable-business",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 2,
+    "certificate": true,
+    "star": 1,
+    "why": "مدخل قصير من Duke يفكّ مفهوم ESG: الأبعاد الثلاثة وكيف تُقاس استدامة الشركات، في ساعتين.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "GRI Standards (الترجمة العربية الرسمية)",
+     "provider": "Global Reporting Initiative (GRI)",
+     "url": "https://www.globalreporting.org/standards/download-the-standards/",
+     "lang": "ar",
+     "price": "free",
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "اقرأ GRI 1 وGRI 3 بالعربية مجاناً لتفهم أساس الإفصاح وكيف تُحدَّد الموضوعات الجوهرية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "مبادرة السعودية الخضراء",
+     "platform": "الموقع الرسمي",
+     "url": "https://www.sgi.gov.sa/",
+     "why": "المنصة الرسمية لمستهدفات المملكة المناخية: خفض الانبعاثات وزراعة 10 مليارات شجرة وحماية الأراضي والبحار.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://www.sgi.gov.sa/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Environmental, social, and governance",
+     "author": null,
+     "site": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Environmental,_social,_and_governance",
+     "lang": "en",
+     "why": "تعريف شامل لـESG وأطره الدولية مثل TCFD وGRI وSASB وPRI في مقال واحد.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "GRI Standards",
+     "author": null,
+     "site": "globalreporting.org",
+     "url": "https://www.globalreporting.org/standards/",
+     "lang": "en",
+     "why": "يشرح بنية معايير GRI: العامة والقطاعية والموضوعية، ومنها تفهم فكرة الأهمية النسبية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "اختر شركة سعودية مدرجة في تداول، واستخرج من تقرير استدامتها أهم 10 موضوعات جوهرية، ورتّبها في مصفوفة أهمية نسبية (أثر على الشركة/على أصحاب المصلحة) مع ربط كل موضوع بمستهدف من مبادرة السعودية الخضراء، في عرض من 5 شرائح.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "none",
+    "proof": "مصفوفة أهمية نسبية لشركة سعودية مدرجة مربوطة بمستهدفات مبادرة السعودية الخضراء، تعرضها في المقابلة.",
+    "proofUrl": "https://www.globalreporting.org/standards/",
+    "why": "لا توجد شهادة سعودية معتمدة لأساسيات ESG؛ الشهادة المعروفة (GRI) تأتي في مستوى إعداد التقارير.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "esg-reporting",
+   "depth": "full",
+   "topPick": {
+    "title": "Reporting with the GRI Standards",
+    "provider": "GRI Academy",
+    "url": "https://www.globalreporting.org/Academy/Course?id=473",
+    "lang": "en",
+    "price": "paid",
+    "hours": 3.5,
+    "certificate": true,
+    "star": 1,
+    "why": "دورة GRI الرسمية: نظام المعايير وتحديد الموضوعات الجوهرية وصياغة الإفصاحات وفهرس المحتوى، 3.5 ساعات.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "ISSB Standards e-learning (IFRS Sustainability Knowledge Hub)",
+     "provider": "IFRS Foundation",
+     "url": "https://www.ifrs.org/sustainability/knowledge-hub/courses/",
+     "lang": "en",
+     "price": "free",
+     "hours": null,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: أربع وحدات مجانية عن IFRS S1 وS2 بشهادة بعد اختبار قصير (تتطلب حساب ifrs.org).",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "IFRS Sustainability Disclosure Standards",
+     "provider": "IFC مع UN SSE ومؤسسة IFRS (World Bank Academy)",
+     "url": "https://academy.worldbank.org/en/planet/environment/ifrs-sustainability-disclosure-standards",
+     "lang": "en",
+     "price": "free",
+     "hours": 3.5,
+     "certificate": null,
+     "star": 2,
+     "why": "دورة مجانية تشرح S1 وS2 وأفضل ممارسات الإفصاح المناخي، 3.5 ساعات عبر البورصات الشريكة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "المبادرة العالمية لإعداد التقارير (GRI)",
+     "platform": "الموقع الرسمي",
+     "url": "https://www.globalreporting.org/standards/",
+     "why": "الجهة التي تضع معايير GRI الأكثر استخداماً في تقارير الاستدامة، وتنشر ترجمتها العربية مجاناً.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://www.globalreporting.org/standards/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "IFRS S1 General Requirements for Disclosure of Sustainability-related Financial Information",
+     "author": null,
+     "site": "ifrs.org",
+     "url": "https://www.ifrs.org/issued-standards/ifrs-sustainability-standards-navigator/ifrs-s1-general-requirements/",
+     "lang": "en",
+     "why": "ملخص رسمي لمتطلبات IFRS S1: الحوكمة والاستراتيجية وإدارة المخاطر والمقاييس والمستهدفات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "GRI Standards English Language",
+     "author": null,
+     "site": "globalreporting.org",
+     "url": "https://www.globalreporting.org/how-to-use-the-gri-standards/gri-standards-english-language/",
+     "lang": "en",
+     "why": "القائمة الرسمية لكل معايير GRI بأرقامها (GRI 1-3 ثم 201-418) لتعرف ما يُفصح عنه في كل موضوع.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "اكتب تقرير استدامة مختصراً (8-10 صفحات) لشركة سعودية حقيقية أو افتراضية وفق GRI: قائمة الموضوعات الجوهرية (GRI 3)، وإفصاحات GRI 2 الأساسية، وثلاثة إفصاحات موضوعية مثل 305 و403 و405، مع فهرس محتوى GRI في النهاية.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "GRI Certified Sustainability Professional",
+    "short": "GRI Certified Sustainability Professional",
+    "issuer": "GRI (عبر GRI Academy)",
+    "code": null,
+    "type": "exam",
+    "url": "https://www.globalreporting.org/academy/certification/",
+    "fee": {
+     "amount": 1250,
+     "currency": "EUR",
+     "qualifier": null,
+     "per": null,
+     "note": "globalreporting.org: «GRI Professional Certification Program 1250.00 € * VAT may apply» — يشمل الدورات الأربع والاختبار"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.globalreporting.org/Academy/Course?id=473",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "اختبار GRI الرسمي (40 سؤالاً في 60 دقيقة، النجاح 75%) بعد أربع دورات، ويُجدَّد سنوياً بأربع وحدات تعليم مستمر.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "carbon-accounting",
+   "depth": "full",
+   "topPick": {
+    "title": "Corporate Standard Recorded Webinar",
+    "provider": "GHG Protocol (WRI وWBCSD)",
+    "url": "https://ghgprotocol.org/e-learning-opportunities",
+    "lang": "en",
+    "price": "free",
+    "hours": null,
+    "certificate": false,
+    "star": 1,
+    "why": "المدخل الرسمي المجاني من GHG Protocol لحساب انبعاثات الشركة: الحدود والنطاقات 1 و2 و3.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "Reporting on Scope 3 Emissions: From Basics to Best Practices",
+     "provider": "GRI Academy",
+     "url": "https://www.globalreporting.org/academy/courses",
+     "lang": "en",
+     "price": "paid",
+     "hours": 2,
+     "certificate": null,
+     "star": 2,
+     "why": "للنجمة الثانية: النطاق 3 (سلسلة القيمة) من الأساسيات إلى أفضل الممارسات، ساعتان بـ199 يورو.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "GHG Protocol",
+     "platform": "الموقع الرسمي",
+     "url": "https://ghgprotocol.org/corporate-standard",
+     "why": "واضع معايير حساب الغازات الدفيئة التي تبني عليها الشركات النطاقات 1 و2 و3 وتقاريرها.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://ghgprotocol.org/corporate-standard"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Scope 1 and Scope 2 Inventory Guidance",
+     "author": null,
+     "site": "epa.gov",
+     "url": "https://www.epa.gov/climateleadership/scope-1-and-scope-2-inventory-guidance",
+     "lang": "en",
+     "why": "أدلة حساب النطاقين 1 و2: الاحتراق الثابت والمتنقل والكهرباء المشتراة وتسرب غازات التبريد.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Corporate Standard",
+     "author": null,
+     "site": "ghgprotocol.org",
+     "url": "https://ghgprotocol.org/corporate-standard",
+     "lang": "en",
+     "why": "الصفحة الرسمية للمعيار: الغازات السبعة المشمولة وإرشادات النطاق 2 وصلته بمعيار النطاق 3.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "احسب البصمة الكربونية لمكتب صغير أو مقهى لسنة كاملة: الكهرباء من الفواتير (نطاق 2)، ووقود سيارات التوصيل (نطاق 1)، وسفر الموظفين (نطاق 3)، في جدول Excel يوضح عامل الانبعاث ومصدره والنتيجة بطن CO2e، مع ملخص من صفحة واحدة.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "Corporate Value Chain (Scope 3) Standard E-Learning",
+    "short": "GHG Protocol Scope 3 e-learning",
+    "issuer": "GHG Protocol (WRI وWBCSD)",
+    "code": null,
+    "type": "course",
+    "url": "https://ghgprotocol.org/e-learning-opportunities",
+    "fee": {
+     "amount": 600,
+     "currency": "USD",
+     "qualifier": null,
+     "per": null,
+     "note": "ghgprotocol.org: «Corporate Value Chain (Scope 3) Standard E-Learning … $600 … Certificate: Yes»"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://ghgprotocol.org/e-learning-opportunities",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "شهادة إتمام من واضع المعيار نفسه، وشرطها حضور ويبينار المعيار المؤسسي المجاني أولاً.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "property-management",
+   "depth": "full",
+   "topPick": {
+    "title": "Real Estate Property Management: Manage Profitability and Efficiency",
+    "provider": "Starweaver (Coursera)",
+    "url": "https://www.coursera.org/learn/real-estate-property-management",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 2,
+    "certificate": true,
+    "star": 1,
+    "why": "مدخل قصير لأساسيات إدارة الأملاك: الربحية والكفاءة التشغيلية وأدوات التقنية الحديثة، في ساعتين.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "المستوى التأسيسي للوساطة العقارية",
+     "provider": "المعهد العقاري السعودي (SREI)",
+     "url": "https://srei.sa/doc/masar2.html",
+     "lang": "ar",
+     "price": "paid",
+     "hours": null,
+     "certificate": null,
+     "star": 2,
+     "why": "المسار المعتمد من الهيئة العامة للعقار لرخصة فال للوساطة والتسويق، إلزامي من 1 سبتمبر 2026.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "الهيئة العامة للعقار (REGA)",
+     "platform": "الموقع الرسمي",
+     "url": "https://rega.gov.sa/en/the-library/frequently-asked-questions/",
+     "why": "الجهة المنظمة للقطاع العقاري ومُصدرة رخصة فال لأنشطة الوساطة وإدارة الأملاك والمرافق.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://rega.gov.sa/en/the-library/frequently-asked-questions/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Frequently Asked Questions (FAL licence)",
+     "author": null,
+     "site": "rega.gov.sa",
+     "url": "https://rega.gov.sa/en/the-library/frequently-asked-questions/",
+     "lang": "en",
+     "why": "إجابات الهيئة عن رخصة فال: الوساطة وإدارة الأملاك والمرافق والمزادات وشروط الحصول عليها.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Property management",
+     "author": null,
+     "site": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Property_management",
+     "lang": "en",
+     "why": "يلخّص مهام مدير الأملاك: فرز المستأجرين وصياغة عقود الإيجار وتحصيل الإيجارات وترتيب الصيانة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "أعد ملف إدارة لعمارة سكنية افتراضية من 8 شقق: عقد إيجار موحد مملوء بصيغة «إيجار»، وجدول تحصيل شهري يبرز المتأخرات، وسجل طلبات صيانة، وتقرير شهري للمالك من صفحة واحدة.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "رخصة فال للوساطة والتسويق العقاري",
+    "short": "رخصة فال",
+    "issuer": "الهيئة العامة للعقار (REGA)",
+    "code": null,
+    "type": "licence",
+    "url": "https://rega.gov.sa/en/the-library/frequently-asked-questions/",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://srei.sa/doc/masar2.html",
+    "prepLabel": "المستوى التأسيسي للوساطة العقارية – المعهد العقاري السعودي",
+    "level": "beginner",
+    "star": 2,
+    "why": "ترخيص الهيئة لمزاولة النشاط العقاري؛ للفرد يُشترط اجتياز برنامج التأهيل، ورخصة إدارة الأملاك نفسها للمنشآت.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "facilities-management",
+   "depth": "full",
+   "topPick": {
+    "title": "أساسيات إدارة المرافق",
+    "provider": "المعهد العقاري السعودي (SREI)",
+    "url": "https://srei.sa/ProfessionalCertificates/Details?Cert_Id=2588",
+    "lang": "ar",
+    "price": "paid",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "شهادة المعهد العقاري السعودي، الذراع الأكاديمية للهيئة العامة للعقار، في أساسيات إدارة المرافق بالعربية.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "FMP – Operations & Maintenance",
+     "provider": "IFMA",
+     "url": "https://www.ifma.org/fmp",
+     "lang": "en",
+     "price": "paid",
+     "hours": 15,
+     "certificate": null,
+     "star": 2,
+     "why": "للنجمة الثانية: وحدة التشغيل والصيانة من برنامج FMP، 15 ساعة ذاتية مع اختبارات قصيرة ودراسات حالة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "IFMA (International Facility Management Association)",
+     "platform": "الموقع الرسمي",
+     "url": "https://www.ifma.org/about/what-is-facility-management/",
+     "why": "أكبر جمعية مهنية لإدارة المرافق ومُصدرة شهادة FMP، وتعرّف المهنة وكفاءاتها الأساسية.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://www.ifma.org/about/what-is-facility-management/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "What Is Facility Management? Definition and Skills",
+     "author": null,
+     "site": "ifma.org",
+     "url": "https://www.ifma.org/about/what-is-facility-management/",
+     "lang": "en",
+     "why": "تعريف IFMA لإدارة المرافق وفق معيار ISO: تنسيق الناس والمساحات وسير العمل لدعم النشاط الأساسي.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Computer-aided facility management",
+     "author": null,
+     "site": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Computer-aided_facility_management",
+     "lang": "en",
+     "why": "يشرح أنظمة CAFM ودورها في إدارة بيانات المرافق وصلتها بأنظمة CMMS وIWMS.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "ضع خطة صيانة وقائية سنوية لمبنى مكاتب من 4 أدوار: سجل أصول (تكييف ومصاعد ومولد وإطفاء) بتكرار صيانة كل أصل، ونطاق عمل مختصر لعقد صيانة، و5 مؤشرات أداء مثل زمن الاستجابة ونسبة الوقائي إلى الطارئ، في Excel وملخص PDF.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "Facility Management Professional (FMP)",
+    "short": "IFMA FMP",
+    "issuer": "IFMA",
+    "code": "FMP",
+    "type": "course",
+    "url": "https://www.ifma.org/fmp",
+    "fee": {
+     "amount": 2150,
+     "currency": "USD",
+     "qualifier": null,
+     "per": null,
+     "note": "ifma.org/fmp: «FMP Bundle: $1,850 USD/Full Members … $2,150 USD/STANDARD PRICE»"
+    },
+    "feeVaries": true,
+    "prepUrl": "https://www.ifma.org/fmp",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "شهادة IFMA بلا متطلبات مسبقة: أربع وحدات (المالية، التشغيل والصيانة، القيادة، المشاريع) بنهاية كل منها اختبار.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "real-estate-valuation",
+   "depth": "full",
+   "topPick": {
+    "title": "مبادئ التقييم العقاري الأساسية (102)",
+    "provider": "الهيئة السعودية للمقيّمين المعتمدين (تقييم)",
+    "url": "https://taqeem.gov.sa/en/training-course/13120",
+    "lang": "ar",
+    "price": "paid",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "دورة «تقييم» الأساسية لفرع العقار حضورياً في الرياض وجدة أو عن بعد، ورسومها 2500 ريال حسب الصفحة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "الأطر التنظيمية لمهنة التقييم ومعايير التقييم الدولية (001)",
+     "provider": "الهيئة السعودية للمقيّمين المعتمدين (تقييم)",
+     "url": "https://taqeem.gov.sa/en/training-course/13119",
+     "lang": "ar",
+     "price": "paid",
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "تعلّم ذاتي عن نظام المهنة ومعايير IVS، أول دورة في قائمة فرع العقار ورسومها 1700 ريال.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "التقييم العقاري باستخدام أسلوبي السوق والدخل (105)",
+     "provider": "الهيئة السعودية للمقيّمين المعتمدين (تقييم)",
+     "url": "https://taqeem.gov.sa/en/training-prg",
+     "lang": "ar",
+     "price": "paid",
+     "hours": null,
+     "certificate": null,
+     "star": 2,
+     "why": "للنجمة الثانية: أسلوبا السوق والدخل ضمن مسار دورات فرع العقار في أكاديمية تقييم.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "الهيئة السعودية للمقيّمين المعتمدين (تقييم)",
+     "platform": "الموقع الرسمي",
+     "url": "https://taqeem.gov.sa/",
+     "why": "الجهة التي ترخّص المقيّمين في المملكة وتنشر خطوات الترخيص ودورات فرع العقار المعتمدة.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://taqeem.gov.sa/"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "International Standards For International Markets",
+     "author": null,
+     "site": "ivsc.org",
+     "url": "https://www.ivsc.org/standards/",
+     "lang": "en",
+     "why": "صفحة مجلس معايير التقييم الدولية: المعايير العامة IVS 100-106 ومعيار العقار IVS 400.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Real estate appraisal",
+     "author": null,
+     "site": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Real_estate_appraisal",
+     "lang": "en",
+     "why": "يشرح أساليب التقييم الثلاثة: المقارنة بالمبيعات والتكلفة والدخل مع طريقة كل منها.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "قيّم شقة معروضة للبيع في حيّك بأسلوب المقارنة باستخدام 5 صفقات أو عروض موثقة مع جدول تسويات (المساحة والدور والعمر)، ثم تحقق بأسلوب الدخل من إيجار السوق، في تقرير من 4 صفحات يتبع عناصر IVS 106.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "ترخيص مزاولة مهنة التقييم – فرع العقار",
+    "short": "ترخيص تقييم (عقار)",
+    "issuer": "الهيئة السعودية للمقيّمين المعتمدين (تقييم)",
+    "code": null,
+    "type": "licence",
+    "url": "https://taqeem.gov.sa/",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://taqeem.gov.sa/en/training-prg",
+    "prepLabel": "دورات فرع العقار في أكاديمية تقييم",
+    "level": "intermediate",
+    "star": 2,
+    "why": "الطريق الرسمي: تسجيل، دورات معتمدة، عضوية منتسب بفرع العقار، عمل في منشأة مرخصة وتوثيق الساعات ثم الترخيص.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "insurance-basics",
+   "depth": "full",
+   "topPick": {
+    "title": "الشهادة المهنية لأساسيات التأمين (IFCE) – البرنامج التحضيري",
+    "provider": "الأكاديمية المالية",
+    "url": "https://fa.gov.sa/en/Services/ProgramDetails/9c32ab34-98e6-480f-8085-b3f600e08cd8",
+    "lang": "ar",
+    "price": "paid",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "التحضير الرسمي لاختبار IFCE: 11 وحدة من الخطر والتأمين ومبدأ التعويض إلى عمليات التأمين في المملكة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "منتجات التأمين في السوق السعودي",
+     "provider": "الأكاديمية المالية",
+     "url": "https://www.fa.gov.sa/en/Services/ProgramDetails/ea6ccfc5-a909-4750-b600-ae5200cf3150",
+     "lang": "ar",
+     "price": "paid",
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "منتجات السوق السعودي للأفراد والشركات: المركبات والصحي والممتلكات والهندسي وتغطياتها واستثناءاتها.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "هيئة التأمين",
+     "platform": "الموقع الرسمي وX وLinkedIn وYouTube",
+     "url": "https://www.ia.gov.sa/",
+     "why": "الجهة المنظمة لقطاع التأمين في المملكة: الترخيص واعتماد المنتجات وتقارير السوق وبرامج الخريجين.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://www.ia.gov.sa/",
+      "x": "https://x.com/ia_gov",
+      "linkedin": "https://www.linkedin.com/company/%D9%87%D9%8A%D8%A6%D8%A9-%D8%A7%D9%84%D8%AA%D8%A3%D9%85%D9%8A%D9%86/",
+      "youtube": "https://www.youtube.com/@IA_GOV"
+     },
+     "linkedinSource": "https://www.ia.gov.sa/"
+    },
+    {
+     "name": "الأكاديمية المالية",
+     "platform": "الموقع الرسمي وX وLinkedIn وYouTube",
+     "url": "https://fa.gov.sa/en/Services/ExamDetails/80d975a1-166d-433e-b377-ab4000a876af",
+     "why": "الجهة التي تقدم اختبارات التأمين المهنية الإلزامية وبرامجها التحضيرية في المملكة.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "x": "https://x.com/thefaksa",
+      "linkedin": "https://www.linkedin.com/company/thefaksa/",
+      "youtube": "https://www.youtube.com/@thefaksa"
+     },
+     "linkedinSource": "https://fa.gov.sa/en/Services/ExamDetails/80d975a1-166d-433e-b377-ab4000a876af"
+    }
+   ],
+   "articles": [
+    {
+     "title": "تأمين",
+     "author": null,
+     "site": "ar.wikipedia.org",
+     "url": "https://ar.wikipedia.org/wiki/تأمين",
+     "lang": "ar",
+     "why": "مقال عربي شامل: تعريف التأمين وتاريخه ووظائفه وأنواعه وعقد التأمين وتنظيمه.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "هيئة التأمين تشارك الأكاديمية المالية إطلاق 5 برامج لحديثي التخرج",
+     "author": null,
+     "site": "ia.gov.sa",
+     "url": "https://www.ia.gov.sa/ar/media-center/news/132",
+     "lang": "ar",
+     "why": "خبر 28 سبتمبر 2026 عن خمسة برامج تدريبية تؤهل أكثر من 125 خريجاً لقطاع التأمين بدعم «هدف».",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "قارن ثلاث وثائق تأمين مركبات شاملة من شركات سعودية في جدول واحد: التغطيات والاستثناءات ونسبة التحمل والقسط لنفس السيارة، ثم اكتب صفحة تشرح فيها مبادئ التعويض والحلول والمصلحة التأمينية بأمثلة من الوثائق.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "الشهادة المهنية في أساسيات التأمين (IFCE)",
+    "short": "IFCE الأكاديمية المالية",
+    "issuer": "الأكاديمية المالية (Financial Academy)",
+    "code": "IFCE",
+    "type": "exam",
+    "url": "https://fa.gov.sa/en/Services/ExamDetails/2a0ac99a-301a-4370-9277-ade30102ab33",
+    "fee": {
+     "amount": 1000,
+     "currency": "SAR",
+     "qualifier": null,
+     "per": null,
+     "note": "fa.gov.sa: «رسوم الامتحان 1000.00 ريال» (صفحة البرنامج التحضيري: المحاولة الأولى «مجاناً» ثم 1,000 ر.س لكل محاولة)"
+    },
+    "feeVaries": true,
+    "prepUrl": "https://fa.gov.sa/en/Services/ProgramDetails/9c32ab34-98e6-480f-8085-b3f600e08cd8",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "اختبار إلزامي للعاملين في شركات التأمين: 120 دقيقة بالعربية أو الإنجليزية، والنجاح 70%.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "underwriting",
+   "depth": "full",
+   "topPick": {
+    "title": "التأمينات العامة",
+    "provider": "الأكاديمية المالية",
+    "url": "https://fa.gov.sa/en/Services/ProgramDetails/bd8f20e2-0dd9-4833-9843-b39b00acaba4",
+    "lang": "ar",
+    "price": "paid",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "تأمين الممتلكات: الحريق والسرقة والهندسي والمسؤولية وشروطها وتقييم الممتلكات، لموظفي الاكتتاب.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "Complete Insurance Underwriting & Risk Management Specialization",
+     "provider": "EDUCBA (Coursera)",
+     "url": "https://www.coursera.org/specializations/complete-insurance-underwriting-risk-management",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": null,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: أربع دورات في الاكتتاب والتسعير المبني على الخطر والمطالبات (أمثلتها من السوق الهندي).",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "الأكاديمية المالية",
+     "platform": "الموقع الرسمي وX وLinkedIn وYouTube",
+     "url": "https://fa.gov.sa/en/Services/ExamDetails/b8243ed7-fbc8-44cf-bbf4-ad3400928955",
+     "why": "تقدم الاختبار المهني لمسؤول الاكتتاب وبرامج التأمين العام والمنتجات بالعربية.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "x": "https://x.com/thefaksa",
+      "linkedin": "https://www.linkedin.com/company/thefaksa/",
+      "youtube": "https://www.youtube.com/@thefaksa"
+     },
+     "linkedinSource": "https://fa.gov.sa/en/Services/ExamDetails/80d975a1-166d-433e-b377-ab4000a876af"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Underwriting",
+     "author": null,
+     "site": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Underwriting",
+     "lang": "en",
+     "why": "دور المكتتب: تقييم خطر طالب التأمين وتحديد التغطية والقسط، أو الرفض، أو إضافة استثناءات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "الاختبار المهني لمسؤول الاكتتاب – النسخة الثانية (محاور الاختبار)",
+     "author": null,
+     "site": "fa.gov.sa",
+     "url": "https://fa.gov.sa/en/Services/ExamDetails/b8243ed7-fbc8-44cf-bbf4-ad3400928955",
+     "lang": "ar",
+     "why": "محاور الاكتتاب بأوزانها: قياس الخطر، الاكتتاب، علاقته بإعادة التأمين، وتسعير المنتجات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "اكتتب في 5 طلبات تأمين مركبات افتراضية: جدول عوامل الخطر (عمر السائق والمدينة وسجل الحوادث ونوع المركبة) بأوزان، وقرار قبول أو رفض أو شروط لكل طلب، وتسعير مبدئي للقسط مع التبرير، في Excel ومذكرة من صفحة.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "الاختبار المهني لمسؤول الاكتتاب – النسخة الثانية",
+    "short": "اختبار مسؤول الاكتتاب – الأكاديمية المالية",
+    "issuer": "الأكاديمية المالية (Financial Academy)",
+    "code": null,
+    "type": "exam",
+    "url": "https://fa.gov.sa/en/Services/ExamDetails/b8243ed7-fbc8-44cf-bbf4-ad3400928955",
+    "fee": {
+     "amount": 2300,
+     "currency": "SAR",
+     "qualifier": null,
+     "per": null,
+     "note": "fa.gov.sa: «رسوم الامتحان 2300.00 ريال»"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://fa.gov.sa/en/Services/ProgramDetails/bd8f20e2-0dd9-4833-9843-b39b00acaba4",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "اختبار سعودي لكل العاملين في الاكتتاب: تحليل الخطر والاكتتاب وإعادة التأمين وتسعير المنتجات.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "insurance-claims",
+   "depth": "full",
+   "topPick": {
+    "title": "منتجات التأمين في السوق السعودي",
+    "provider": "الأكاديمية المالية",
+    "url": "https://www.fa.gov.sa/en/Services/ProgramDetails/ea6ccfc5-a909-4750-b600-ae5200cf3150",
+    "lang": "ar",
+    "price": "paid",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "تغطيات وشروط واستثناءات وثائق المركبات والممتلكات وغيرها، وهي أساس قرار قبول المطالبة أو رفضها.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "Complete Insurance Operations & Risk Management",
+     "provider": "EDUCBA (Coursera)",
+     "url": "https://www.coursera.org/learn/complete-insurance-operations-risk-management",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": 12,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: وحدة كاملة عن إدارة المطالبات وتسويتها ورقمنتها (الإطار التنظيمي فيها هندي).",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "هيئة التأمين",
+     "platform": "الموقع الرسمي وX وLinkedIn وYouTube",
+     "url": "https://www.ia.gov.sa/",
+     "why": "الجهة المنظمة التي تضع قواعد سلوك سوق التأمين وحماية حقوق حملة الوثائق في المطالبات.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://www.ia.gov.sa/",
+      "x": "https://x.com/ia_gov",
+      "linkedin": "https://www.linkedin.com/company/%D9%87%D9%8A%D8%A6%D8%A9-%D8%A7%D9%84%D8%AA%D8%A3%D9%85%D9%8A%D9%86/",
+      "youtube": "https://www.youtube.com/@IA_GOV"
+     },
+     "linkedinSource": "https://www.ia.gov.sa/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Background on: Insurance fraud",
+     "author": "Insurance Information Institute (Triple-I)",
+     "site": "iii.org",
+     "url": "https://www.iii.org/article/background-on-insurance-fraud",
+     "lang": "en",
+     "why": "أنماط احتيال المطالبات: تضخيم المطالبة والحوادث المفتعلة والإصابات المختلقة وأمثلة المركبات والممتلكات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Insurance (قسم تسوية المطالبات)",
+     "author": null,
+     "site": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Claims_adjuster",
+     "lang": "en",
+     "why": "يشرح عمل مسوّي المطالبات: التحقق من تغطية الوثيقة وتقدير قيمة الخسارة واعتماد الدفع.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "عالج ملف مطالبة مركبة افتراضي كاملاً: قائمة المستندات المطلوبة (تقرير نجم أو المرور وصور وتقديرات ورش)، وتحقق من التغطية في نص وثيقة حقيقية، وتقدير التعويض بعد التحمل، وقائمة 6 مؤشرات احتيال مع قرار مسبب، في مذكرة من صفحتين.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "أعمال التأمين العام (IF2) - CII",
+    "short": "CII IF2 عبر الأكاديمية المالية",
+    "issuer": "Chartered Insurance Institute (CII) عبر الأكاديمية المالية",
+    "code": "IF2",
+    "type": "exam",
+    "url": "https://fa.gov.sa/en/Services/ExamDetails/67eb485c-1f4c-48f6-a7fc-ab4100907b6f",
+    "fee": {
+     "amount": 2173.5,
+     "currency": "SAR",
+     "qualifier": null,
+     "per": null,
+     "note": "fa.gov.sa: «رسوم الامتحان 2173.50 ريال»"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.fa.gov.sa/en/Services/ProgramDetails/ea6ccfc5-a909-4750-b600-ae5200cf3150",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "اختبار CII من 100 سؤال، منها 21 عن المطالبات في التأمين العام وسؤالان عن شروط الوثيقة المؤثرة فيها.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "public-relations",
+   "depth": "full",
+   "topPick": {
+    "title": "The Nuts and Bolts of Public Relations",
+    "provider": "University of Colorado Boulder (Coursera)",
+    "url": "https://www.coursera.org/learn/the-nuts-and-bolts-of-public-relations",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 5,
+    "certificate": true,
+    "star": 1,
+    "why": "كتابة مواد العلاقات العامة: الرسالة والمؤثرون وربطها برسالة العلامة، 5 ساعات من CU Boulder.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "Working with the Media",
+     "provider": "University of Colorado Boulder (Coursera)",
+     "url": "https://www.coursera.org/learn/working-with-the-media",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": 9,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: إدارة القضايا والأزمات وحراسة البوابة الإعلامية وفن كتابة البيان الصحفي، 9 ساعات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "Public Relations Society of America (PRSA)",
+     "platform": "الموقع الرسمي",
+     "url": "https://www.prsa.org/about/all-about-pr",
+     "why": "أكبر جمعية مهنية للعلاقات العامة ومرجع شهادتي APR والمبادئ لحديثي التخرج.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://www.prsa.org/about/all-about-pr"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "About Public Relations",
+     "author": null,
+     "site": "prsa.org",
+     "url": "https://www.prsa.org/about/all-about-pr",
+     "lang": "en",
+     "why": "تعريف PRSA الرسمي للعلاقات العامة: عملية تواصل استراتيجية تبني علاقات نافعة للطرفين.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "How to write a press release [free press release template + examples]",
+     "author": "Mandy Bray",
+     "site": "blog.hubspot.com",
+     "url": "https://blog.hubspot.com/marketing/press-release-template-ht",
+     "lang": "en",
+     "why": "قالب وأمثلة حقيقية لبناء البيان الصحفي: العنوان والمقدمة والاقتباسات والنبذة الختامية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "اكتب بياناً صحفياً عربياً (300-400 كلمة) عن إطلاق خدمة لجهة سعودية حقيقية بأسلوب الهرم المقلوب مع اقتباس ونبذة ختامية، ومعه قائمة 10 صحفيين ومنصات سعودية مستهدفة، ورسالة عرض قصيرة لكل نوع منصة.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "Certificate in Principles of Public Relations",
+    "short": "PRSA Certificate in Principles of PR",
+    "issuer": "Universal Accreditation Board (PRSA)",
+    "code": null,
+    "type": "exam",
+    "url": "https://accreditation.prsa.org/MyAPR/Content/Apply/Certificate/About_the_Certificate.aspx",
+    "fee": {
+     "amount": 150,
+     "currency": "USD",
+     "qualifier": null,
+     "per": null,
+     "note": "accreditation.prsa.org: «The certificate program costs $150 ($25 application fee plus $125 examination fee).»"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.coursera.org/learn/the-nuts-and-bolts-of-public-relations",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "شهادة مبتدئة لطلاب العلاقات العامة يُتقدَّم لها قبل مضي ستة أشهر على التخرج، باختبار واحد.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "corporate-communications",
+   "depth": "full",
+   "topPick": {
+    "title": "Internal Communications Framework",
+    "provider": "University of California, Irvine (Coursera)",
+    "url": "https://www.coursera.org/learn/internal-communications-framework",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 6,
+    "certificate": true,
+    "star": 1,
+    "why": "الاتصال الداخلي: تفاعل الموظفين وبناء الثقافة وتواصل القادة وأفضل ممارسات اتصال الأزمات، 6 ساعات.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "Introduction to Crisis Management and Crisis Communication",
+     "provider": "University of Colorado Boulder (Coursera)",
+     "url": "https://www.coursera.org/learn/introduction-to-crisis-management-and-crisis-communication",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": 8,
+     "certificate": true,
+     "star": 2,
+     "why": "للنجمة الثانية: أساسيات إدارة الأزمة ودقائقها الأولى وبناء خطة أزمة، 8 ساعات من CU Boulder.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "Public Relations Society of America (PRSA)",
+     "platform": "الموقع الرسمي",
+     "url": "https://www.prsa.org/apr",
+     "why": "تنشر إطار كفاءات APR الذي يغطي إدارة القضايا والأزمات والعلاقات الداخلية والسمعة.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://www.prsa.org/apr"
+     },
+     "linkedinSource": null
+    }
+   ],
+   "articles": [
+    {
+     "title": "Crisis communication",
+     "author": null,
+     "site": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Crisis_communication",
+     "lang": "en",
+     "why": "مراحل الأزمة الثلاث ونظرية SCCT التي تختار الرد حسب مسؤولية المنظمة في نظر الجمهور.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Internal communications",
+     "author": null,
+     "site": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Internal_communications",
+     "lang": "en",
+     "why": "يعرّف الاتصال الداخلي وقنواته الرسمية وغير الرسمية ودوره في رفع تفاعل الموظفين.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "أعد دليل اتصال أزمات لشركة سعودية افتراضية في 5 صفحات: سيناريو أزمة (تسرّب بيانات عملاء)، وبيان أولي خلال ساعة، ورسالة داخلية للموظفين، وأسئلة وأجوبة للمتحدث الرسمي، وجدول أصحاب المصلحة والقنوات بنبرة العلامة نفسها.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "none",
+    "proof": "دليل اتصال أزمات مع رسالة داخلية وبيان أولي ودليل نبرة العلامة، تعرضه كعيّنة أعمال.",
+    "proofUrl": "https://www.prsa.org/docs/default-source/accreditation-site/apr-ksas-tested.pdf",
+    "why": "لا توجد شهادة سعودية معتمدة؛ شهادة APR للممارسين وتتطلب عرضاً أمام لجنة واختباراً، فالأنسب للخريج ملف أعمال.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "government-relations",
+   "depth": "full",
+   "topPick": {
+    "title": "Stakeholder Relations and Reporting",
+    "provider": "Microsoft (Coursera)",
+    "url": "https://www.coursera.org/learn/stakeholder-relations-and-reporting",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 20,
+    "certificate": true,
+    "star": 1,
+    "why": "فيها وحدة كاملة عن العلاقات الحكومية والمجتمعية: تخطيط استراتيجي وبناء علاقات مع المسؤولين.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [],
+   "people": [
+    {
+     "name": "وزارة الاستثمار (MISA)",
+     "platform": "الموقع الرسمي وX وLinkedIn",
+     "url": "https://misa.gov.sa/",
+     "why": "بوابة خدمات المستثمرين: تسجيل الاستثمار والمقرات الإقليمية وتأشيرة المستثمر ودليل الخدمات.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://misa.gov.sa/",
+      "x": "https://twitter.com/MISA",
+      "linkedin": "https://www.linkedin.com/company/ministry-of-investment-ksa/"
+     },
+     "linkedinSource": "https://misa.gov.sa/"
+    },
+    {
+     "name": "وزارة التجارة",
+     "platform": "الموقع الرسمي وX وLinkedIn وYouTube",
+     "url": "https://mc.gov.sa/ar",
+     "why": "خدمات السجل التجاري وحجز الأسماء التجارية وأدلة الإجراءات التي يتابعها موظف العلاقات الحكومية.",
+     "arab": true,
+     "saudiBased": true,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://mc.gov.sa/ar",
+      "x": "https://x.com/mcgovsa",
+      "linkedin": "https://www.linkedin.com/company/ministry-of-commerce-saudiarabia",
+      "youtube": "https://www.youtube.com/user/SaudiMCI"
+     },
+     "linkedinSource": "https://mc.gov.sa/ar"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Public affairs industry",
+     "author": null,
+     "site": "en.wikipedia.org",
+     "url": "https://en.wikipedia.org/wiki/Public_affairs_industry",
+     "lang": "en",
+     "why": "يشرح عمل الشؤون العامة: إدارة علاقة المنظمة بالحكومة وأصحاب المصلحة، والضغط جزء صغير منه.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "وزارة التجارة – الخدمات والأدلة",
+     "author": null,
+     "site": "mc.gov.sa",
+     "url": "https://mc.gov.sa/ar",
+     "lang": "ar",
+     "why": "الصفحة الرسمية لخدمات السجل التجاري والاستعلام عنه وحجز الاسم التجاري وأدلة الإجراءات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "أعد دليل إجراءات من 5 صفحات لشركة ناشئة توظف أول موظف أجنبي: خطوات السجل التجاري عبر المركز السعودي للأعمال، ونطاقات وتصريح العمل في «قوى»، وإصدار الإقامة في «مقيم»، مع الرسوم والمدد والروابط من المواقع الرسمية.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "none",
+    "proof": "دليل إجراءات موثق لتأسيس منشأة وتوظيف أول موظف أجنبي عبر منصات وزارة التجارة وقوى ومقيم.",
+    "proofUrl": "https://mc.gov.sa/ar",
+    "why": "لا توجد شهادة معتمدة لمسؤول العلاقات الحكومية في المملكة؛ تُثبت الكفاءة بإتقان المنصات الحكومية والإجراءات.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "flutter",
+   "depth": "full",
+   "topPick": {
+    "title": "Dart and Flutter Getting Started learning pathway",
+    "provider": "Flutter (Google)",
+    "url": "https://docs.flutter.dev/learn/pathway",
+    "lang": "en",
+    "price": "free",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "المسار الرسمي من فريق Flutter: لغة Dart ثم الـWidgets والتخطيط والحالة وطلبات HTTP والتنقل.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "Flutter and Dart: Developing iOS, Android, and Mobile Apps",
+     "provider": "IBM (Coursera)",
+     "url": "https://www.coursera.org/learn/flutter-and-dart-developing-ios-android-mobile-apps",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": 20,
+     "certificate": true,
+     "star": 1,
+     "why": "خمس وحدات من IBM: لغة Dart ثم Flutter الأساسي والمتقدم ومشروع نهائي، بشهادة قابلة للمشاركة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Get to know Firebase for Flutter",
+     "provider": "Google Firebase (Codelab)",
+     "url": "https://firebase.google.com/codelabs/firebase-get-to-know-flutter",
+     "lang": "en",
+     "price": "free",
+     "hours": null,
+     "certificate": null,
+     "star": 2,
+     "why": "تبني تطبيق فعاليات فيه تسجيل دخول Firebase Auth ودردشة لحظية في Firestore مع قواعد الأمان.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "Andrea Bizzotto",
+     "platform": "Code With Andrea",
+     "url": "https://codewithandrea.com/",
+     "why": "خبير Google Developer Expert في Dart وFlutter، يكتب دروساً مجانية عن المعمارية والحالة وFirebase.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://codewithandrea.com/",
+      "x": "https://twitter.com/biz84",
+      "github": "https://github.com/bizz84/"
+     },
+     "linkedinSource": "https://codewithandrea.com/about/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Flutter App Architecture with Riverpod: An Introduction",
+     "author": "Andrea Bizzotto",
+     "site": "codewithandrea.com",
+     "url": "https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/",
+     "lang": "en",
+     "why": "يشرح تقسيم تطبيق Flutter إلى أربع طبقات: البيانات والمجال والتطبيق والواجهة، مع Riverpod.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "State management",
+     "author": null,
+     "site": "docs.flutter.dev",
+     "url": "https://docs.flutter.dev/data-and-backend/state-mgmt/intro",
+     "lang": "en",
+     "why": "مدخل Flutter الرسمي لإدارة الحالة: التفكير التصريحي والفرق بين حالة الشاشة وحالة التطبيق.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "ابنِ تطبيق Flutter لإدارة المهام فيه تسجيل دخول Firebase وحفظ المهام في Firestore وإدارة حالة بـProvider أو Riverpod، وانشره على GitHub مع README وملف APK وفيديو عرض دقيقة واحدة.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "none",
+    "proof": "تطبيق Flutter منشور (ملف APK أو رابط متجر) مع مستودع GitHub مرتب يثبت الـWidgets والحالة وربط Firebase.",
+    "proofUrl": "https://firebase.google.com/codelabs/firebase-get-to-know-flutter",
+    "why": "جوجل لا تقدم شهادة رسمية لـFlutter؛ صفحات التعلم الرسمية لا تذكر أي شهادة، والمتداول من جهات تدريب خاصة.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "ios-swift",
+   "depth": "full",
+   "topPick": {
+    "title": "Develop in Swift Tutorials",
+    "provider": "Apple",
+    "url": "https://developer.apple.com/tutorials/develop-in-swift/",
+    "lang": "en",
+    "price": "free",
+    "hours": null,
+    "certificate": null,
+    "star": 1,
+    "why": "منهج Apple الرسمي: SwiftUI ونمذجة البيانات والحفظ، وينتهي بـTestFlight وتقديم التطبيق للمتجر.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "100 Days of SwiftUI",
+     "provider": "Hacking with Swift (Paul Hudson)",
+     "url": "https://www.hackingwithswift.com/100/swiftui",
+     "lang": "en",
+     "price": "free",
+     "hours": null,
+     "certificate": null,
+     "star": 1,
+     "why": "ساعة يومياً لمئة يوم: أساسيات Swift ثم مشاريع SwiftUI متدرجة وSwiftData واختبار نهائي.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Meta iOS Developer Professional Certificate",
+     "provider": "Meta (Coursera)",
+     "url": "https://www.coursera.org/professional-certificates/meta-ios-developer",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": null,
+     "certificate": true,
+     "star": 2,
+     "why": "12 دورة من Meta: Swift وSwiftUI والبيانات ثم مشروع تخرج ينتهي بنشر التطبيق في App Store.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "Paul Hudson",
+     "platform": "Hacking with Swift",
+     "url": "https://www.hackingwithswift.com/",
+     "why": "مؤسس Hacking with Swift ومؤلف أكثر من 20 كتاباً، ودروسه المجانية مرجع شائع لمتعلمي SwiftUI.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://www.hackingwithswift.com/",
+      "x": "https://twitter.com/twostraws"
+     },
+     "linkedinSource": "https://www.hackingwithswift.com/about"
+    }
+   ],
+   "articles": [
+    {
+     "title": "App Review Guidelines",
+     "author": null,
+     "site": "developer.apple.com",
+     "url": "https://developer.apple.com/app-store/review/guidelines/",
+     "lang": "en",
+     "why": "شروط Apple لقبول التطبيق في المتجر: السلامة والأداء والأعمال والتصميم والجوانب القانونية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "What is SwiftUI?",
+     "author": "Paul Hudson",
+     "site": "hackingwithswift.com",
+     "url": "https://www.hackingwithswift.com/quick-start/swiftui/what-is-swiftui",
+     "lang": "en",
+     "why": "شرح مختصر لفكرة SwiftUI التصريحية: تصف الواجهة والإطار يحدّثها كلما تغيرت الحالة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "ابنِ تطبيق iOS بـSwiftUI لتتبع العادات اليومية يحفظ البيانات بـSwiftData ويعرض قائمة وتفاصيل ورسماً بسيطاً للتقدم، وارفعه إلى TestFlight وانشر الكود على GitHub مع لقطات شاشة.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "App Development with Swift Certified User",
+    "short": "Swift Certified User",
+    "issuer": "Apple (يصدرها Certiport من Pearson VUE)",
+    "code": null,
+    "type": "exam",
+    "url": "https://certiport.pearsonvue.com/Certifications/Apple/App-Dev-With-Swift/Certify",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": "https://developer.apple.com/tutorials/develop-in-swift/",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "اختبار من Apple عبر Certiport يثبت أساسيات Swift وSwiftUI، ويوصى قبله بـ150 ساعة تعلّم.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "android-kotlin",
+   "depth": "full",
+   "topPick": {
+    "title": "Android Basics with Compose",
+    "provider": "Google (Android Developers)",
+    "url": "https://developer.android.com/courses/android-basics-compose/course",
+    "lang": "en",
+    "price": "free",
+    "hours": 100,
+    "certificate": null,
+    "star": 1,
+    "why": "دورة جوجل الرسمية في 8 وحدات: Kotlin وJetpack Compose والتنقل والإنترنت وحفظ البيانات وWorkManager.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "Meta Android Developer Professional Certificate",
+     "provider": "Meta (Coursera)",
+     "url": "https://www.coursera.org/professional-certificates/meta-android-developer",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": null,
+     "certificate": true,
+     "star": 2,
+     "why": "12 دورة من Meta: Kotlin الأساسي والمتقدم وبناء الواجهة في Android Studio والبيانات ومشروع تخرج.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "Philipp Lackner",
+     "platform": "PL Coding (YouTube)",
+     "url": "https://pl-coding.com/",
+     "why": "مطور Android بخبرة 14 سنة، يشرح Kotlin وCompose والمعمارية والاختبارات في قناته ودوراته.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://pl-coding.com/",
+      "youtube": "https://youtube.com/PhilippLackner"
+     },
+     "linkedinSource": "https://pl-coding.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "Guide to app architecture",
+     "author": null,
+     "site": "developer.android.com",
+     "url": "https://developer.android.com/topic/architecture",
+     "lang": "en",
+     "why": "دليل جوجل لمعمارية تطبيق Android: طبقة الواجهة وطبقة البيانات ومصدر الحقيقة الواحد وتدفق البيانات.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Thinking in Compose",
+     "author": null,
+     "site": "developer.android.com",
+     "url": "https://developer.android.com/develop/ui/compose/mental-model",
+     "lang": "en",
+     "why": "يشرح طريقة التفكير في Compose: الدوال القابلة للتركيب وإعادة التركيب ولماذا تتجنب الآثار الجانبية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "ابنِ تطبيق Android بـKotlin وJetpack Compose يعرض قائمة من API عامة (مثل أوقات الصلاة) مع ViewModel وتخزين محلي بـRoom ووضع عدم الاتصال، وانشره على GitHub مع APK ولقطات شاشة.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "none",
+    "proof": "تطبيق Android منشور على Google Play أو ملف APK مع مستودع GitHub يثبت Compose وViewModel وRoom.",
+    "proofUrl": "https://developer.android.com/courses/android-basics-compose/course",
+    "why": "شهادة Associate Android Developer من جوجل أُوقفت: صفحتها تقول إن الاختبار متقاعد ولا تقبل تسجيلات جديدة.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "routing-switching",
+   "depth": "full",
+   "topPick": {
+    "title": "Networking Basics",
+    "provider": "Cisco Networking Academy",
+    "url": "https://www.netacad.com/courses/networking-basics?courseLang=en-US",
+    "lang": "en",
+    "price": "free",
+    "hours": 22,
+    "certificate": null,
+    "star": 1,
+    "why": "دورة سيسكو المجانية الذاتية للمبتدئ في أساسيات الشبكات، 22 ساعة، وتمهّد مباشرة لمسار CCNA.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "CCNA Complete Course",
+     "provider": "Jeremy's IT Lab",
+     "url": "https://courses.jeremysitlab.com/",
+     "lang": "en",
+     "price": "paid",
+     "hours": null,
+     "certificate": null,
+     "star": 2,
+     "why": "دورة CCNA كاملة من مدرّب حاصل على CCNP بسعر 69 دولاراً، مع سلسلة مختبرات واختبارات تجريبية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [
+    {
+     "name": "Jeremy (Jeremy's IT Lab)",
+     "platform": "YouTube و jeremysitlab.com",
+     "url": "https://www.jeremysitlab.com/",
+     "why": "حاصل على CCNP، وقناته من أشهر مصادر شرح CCNA 200-301 بالمختبرات خطوة بخطوة.",
+     "arab": false,
+     "saudiBased": false,
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21",
+     "links": {
+      "website": "https://www.jeremysitlab.com/",
+      "youtube": "https://www.youtube.com/JeremysITLab"
+     },
+     "linkedinSource": "https://www.jeremysitlab.com/"
+    }
+   ],
+   "articles": [
+    {
+     "title": "What is Routing?",
+     "author": null,
+     "site": "cisco.com",
+     "url": "https://www.cisco.com/site/us/en/learn/topics/networking/what-is-routing.html",
+     "lang": "en",
+     "why": "شرح سيسكو لاختيار أفضل مسار لحزم IP داخل الشبكات وبينها وأنواع التوجيه الأساسية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Packet Traveling",
+     "author": "Ed Harmoush",
+     "site": "practicalnetworking.net",
+     "url": "https://www.practicalnetworking.net/series/packet-traveling/packet-traveling/",
+     "lang": "en",
+     "why": "سلسلة تتبع رحلة الحزمة عبر الشبكة: دور كل جهاز من السويتش إلى الراوتر وكيف تعمل معاً.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "صمّم في Cisco Packet Tracer شبكة فرع بثلاث شبكات VLAN وتوجيه بينها وOSPF بين راوترين وDHCP وقائمة ACL، وصدّر ملف .pkt مع مخطط وتقرير صفحة يشرح الإعدادات ونتائج اختبار ping.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "Cisco Certified Network Associate",
+    "short": "CCNA",
+    "issuer": "Cisco",
+    "code": "200-301",
+    "type": "exam",
+    "url": "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html",
+    "fee": {
+     "amount": 300,
+     "currency": "USD",
+     "qualifier": null,
+     "per": null,
+     "note": "$US300, or use Cisco Learning Credits"
+    },
+    "feeVaries": false,
+    "prepUrl": "https://www.netacad.com/courses/networking-basics?courseLang=en-US",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "intermediate",
+    "star": 2,
+    "why": "اختبار سيسكو المعروف عالمياً للشبكات: أساسيات الشبكة والوصول واتصال IP والخدمات والأمن والأتمتة.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "mobile-networks",
+   "depth": "full",
+   "topPick": {
+    "title": "5G for Everyone",
+    "provider": "Qualcomm Academy (Coursera)",
+    "url": "https://www.coursera.org/learn/5g-training-qualcomm",
+    "lang": "en",
+    "price": "paid",
+    "financialAid": true,
+    "hours": 10,
+    "certificate": true,
+    "star": 1,
+    "why": "مدخل مبتدئ من Qualcomm: الاتصالات الخلوية والطيف وmmWave وMassive MIMO وشبكة الوصول الراديوي RAN.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "4G Network Fundamentals",
+     "provider": "Institut Mines-Télécom (Coursera)",
+     "url": "https://www.coursera.org/learn/4g-network-fundamentals",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": 20,
+     "certificate": true,
+     "star": 2,
+     "why": "معمارية LTE/EPC والواجهة الراديوية وإدارة تدفق البيانات والتنقل والأمن، بمستوى متوسط.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Principles and Technologies of 5G Mobile Networks",
+     "provider": "LearnQuest (Coursera)",
+     "url": "https://www.coursera.org/learn/5g-mobile-networks-technology-architecture-and-protocols-first-course-1",
+     "lang": "en",
+     "price": "paid",
+     "financialAid": true,
+     "hours": 7,
+     "certificate": true,
+     "star": 2,
+     "why": "سبع ساعات عن معمارية شبكات 5G ومكوّنات الشبكة الأساسية والراديوية والتقنيات التي تشغّلها.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [],
+   "articles": [
+    {
+     "title": "5G System Overview",
+     "author": "Alain Sultan (MCC, 3GPP)",
+     "site": "3gpp.org",
+     "url": "https://www.3gpp.org/technologies/5g-system-overview",
+     "lang": "en",
+     "why": "من جهة المعايير نفسها: معمارية 5G ووظائف الشبكة وراديو NR وخيارات SA وNSA والتقطيع الشبكي.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "What is 5G? How it transforms our world.",
+     "author": null,
+     "site": "ericsson.com",
+     "url": "https://www.ericsson.com/en/5g/what-is-5g",
+     "lang": "en",
+     "why": "عرض من Ericsson، أحد كبار موردي شبكات stc وموبايلي وزين، لما يضيفه 5G مقارنة بـ4G.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "نفّذ اختبار مشي في حيّك بتطبيق قياس شبكة على جوال Android، سجّل RSRP وRSRQ وSINR على 30 نقطة، ثم ارسم خريطة تغطية وتقريراً من صفحتين يحدد المناطق الضعيفة ويقترح حلولاً.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "none",
+    "proof": "تقرير اختبار تغطية (Walk/Drive Test) بمؤشرات RSRP وSINR مع شهادة إتمام دورة 4G أو 5G، تعرضه في المقابلة.",
+    "proofUrl": "https://www.coursera.org/learn/4g-network-fundamentals",
+    "why": "ما تحققنا من شهادة مستقلة لشبكات 4G/5G لحديث التخرج؛ شهادات الموردين (Nokia وHuawei) لم تفتح صفحاتها الرسمية.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "fiber-optics",
+   "depth": "full",
+   "topPick": {
+    "title": "Fiber U Basics of Fiber Optics",
+    "provider": "The Fiber Optic Association (FOA)",
+    "url": "https://www.fiberu.org/basic/",
+    "lang": "en",
+    "price": "free",
+    "hours": null,
+    "certificate": true,
+    "star": 1,
+    "why": "دورة FOA المجانية: الألياف والكيابل واللحام والتوصيل والاختبار والتصميم، مع اختبار مجاني لشهادة إتمام.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "FTTX: Fiber To The Home, Curb, Business, etc.",
+     "provider": "The Fiber Optic Association (FOA)",
+     "url": "https://www.fiberu.org/FTTX/index.html",
+     "lang": "en",
+     "price": "free",
+     "hours": null,
+     "certificate": true,
+     "star": 1,
+     "why": "سبعة دروس عن شبكات FTTH: المعماريات وPON والتصميم والتركيب والاختبار وإدارة المشروع.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [],
+   "articles": [
+    {
+     "title": "The FOA Reference For Fiber Optics - OTDRs",
+     "author": null,
+     "site": "thefoa.org",
+     "url": "https://www.thefoa.org/tech/ref/testing/OTDR/OTDR.html",
+     "lang": "en",
+     "why": "كيف يعمل جهاز OTDR وكيف تقرأ المنحنى وتقيس الفقد والانعكاس وتتجنب الأخطاء الشائعة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "The FOA Reference For Fiber Optics - Fiber To The Home PON Types",
+     "author": null,
+     "site": "thefoa.org",
+     "url": "https://www.thefoa.org/tech/ref/appln/FTTH-PON.html",
+     "lang": "en",
+     "why": "مقارنة أنواع شبكات PON للمنازل مثل GPON وEPON وترقياتها ومزايا كل نوع وعيوبه.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "أعدّ ميزانية فقد (Loss Budget) لرابط FTTH افتراضي من المقسم حتى المنزل بمقسّم 1:32 ووصلات لحام وموصلات، وقارنها بمنحنى OTDR نموذجي تقرؤه وتشرح أحداثه في تقرير من صفحتين.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "Certified Fiber Optic Technician",
+    "short": "FOA CFOT",
+    "issuer": "The Fiber Optic Association (FOA)",
+    "code": null,
+    "type": "exam",
+    "url": "https://thefoa.org/cfot.htm",
+    "fee": null,
+    "feeVaries": true,
+    "prepUrl": "https://www.fiberu.org/basic/",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 1,
+    "why": "الشهادة الأساسية لفنيي الألياف: اختبار مكتوب من 100 سؤال عبر مدرسة معتمدة من FOA، والرسوم تحددها المدرسة.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "aviation-ops",
+   "depth": "full",
+   "topPick": {
+    "title": "Airport Operations Fundamentals course",
+    "provider": "IATA Training",
+    "url": "https://www.iata.org/training-APC001EBEN01",
+    "lang": "en",
+    "price": "paid",
+    "hours": 45,
+    "certificate": true,
+    "star": 1,
+    "why": "دورة IATA للمبتدئين: وظائف المطار التشغيلية والإنقاذ والإطفاء وتحديات المطارات والتقنيات الجديدة.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "Flight Operations Management - Introduction",
+     "provider": "IATA Training",
+     "url": "https://www.iata.org/training-talp03",
+     "lang": "en",
+     "price": "paid",
+     "hours": 40,
+     "certificate": true,
+     "star": 2,
+     "why": "تنظيم إدارة العمليات الجوية ومركز العمليات وأنظمة إدارة السلامة SMS والجودة والعوامل البشرية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [],
+   "articles": [
+    {
+     "title": "Airport collaborative decision-making (A-CDM)",
+     "author": null,
+     "site": "eurocontrol.int",
+     "url": "https://www.eurocontrol.int/concept/airport-collaborative-decision-making",
+     "lang": "en",
+     "why": "كيف يتشارك المطار وشركات الطيران والخدمات الأرضية والمراقبة الجوية البيانات لضبط الدوران والإقلاع.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Worldwide Airport Slots",
+     "author": null,
+     "site": "iata.org",
+     "url": "https://www.iata.org/en/programs/ops-infra/slots/",
+     "lang": "en",
+     "why": "كيف توزّع المطارات المزدحمة مواعيد الإقلاع والهبوط بين الشركات وفق إرشادات WASG العالمية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "حلّل يوم تشغيل افتراضياً لمطار سعودي من 40 رحلة: ارسم جدول توزيع البوابات وحدد ثلاث مخاطر سلامة في ساحة الطائرات مع إجراءات تخفيف وفق منهج SMS، في عرض من 8 شرائح.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "Airport Operations Foundation Diploma",
+    "short": "IATA Airport Ops Foundation Diploma",
+    "issuer": "IATA",
+    "code": "DIPL-98",
+    "type": "course",
+    "url": "https://www.iata.org/en/training/courses/diploma_programs/airport-operations-foundation-diploma-self-study/98",
+    "fee": null,
+    "feeVaries": true,
+    "prepUrl": "https://www.iata.org/training-APC001EBEN01",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 2,
+    "why": "دبلوم IATA للجدد في عمليات المطار: أربع دورات تختارها خلال 3 سنوات، والرسوم مجموع رسوم الدورات.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "ground-handling",
+   "depth": "full",
+   "topPick": {
+    "title": "Passenger Ground Services",
+    "provider": "IATA Training",
+    "url": "https://www.iata.org/en/training-talp51",
+    "lang": "en",
+    "price": "paid",
+    "hours": 45,
+    "certificate": true,
+    "star": 1,
+    "why": "دورة IATA لوكيل خدمة المسافرين: أنظمة الحجز وDCS وإجراءات تسجيل الركاب والأمتعة والصعود.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "Airport Ramp Services with IGOM",
+     "provider": "IATA Training",
+     "url": "https://www.iata.org/training-GOC006EBEN01",
+     "lang": "en",
+     "price": "paid",
+     "hours": 44,
+     "certificate": true,
+     "star": 2,
+     "why": "خدمات ساحة الطائرات وفق دليل IGOM: خطة الدوران ومعدات الخدمة الأرضية والإجراءات وسلامة الساحة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [],
+   "articles": [
+    {
+     "title": "IATA - Ground Operations",
+     "author": null,
+     "site": "iata.org",
+     "url": "https://www.iata.org/en/programs/ops-infra/ground-operations/",
+     "lang": "en",
+     "why": "صفحة IATA للخدمات الأرضية: دليل IGOM وتدقيق ISAGO ومعدات الخدمة الأرضية والأمتعة والسلامة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Airport collaborative decision-making (A-CDM)",
+     "author": null,
+     "site": "eurocontrol.int",
+     "url": "https://www.eurocontrol.int/concept/airport-collaborative-decision-making",
+     "lang": "en",
+     "why": "يوضح دور الخدمات الأرضية في دوران الطائرة وكيف تؤثر بياناتها على دقة موعد الإقلاع.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "اكتب إجراء تشغيل قياسي (SOP) من صفحتين لتسجيل رحلة دولية من 180 راكباً: فتح الكاونتر وفحص الوثائق والأمتعة الزائدة والبضائع الخطرة وإغلاق الرحلة، مع قائمة تحقق وجدول زمني للدوران.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "Airport Operations Foundation Diploma",
+    "short": "IATA Airport Ops Foundation Diploma",
+    "issuer": "IATA",
+    "code": "DIPL-98",
+    "type": "course",
+    "url": "https://www.iata.org/en/training/courses/diploma_programs/airport-operations-foundation-diploma-self-study/98",
+    "fee": null,
+    "feeVaries": true,
+    "prepUrl": "https://www.iata.org/en/training-talp51",
+    "prepLabel": "ابدأ بالدورة المقترحة في هذا الدليل",
+    "level": "beginner",
+    "star": 2,
+    "why": "دبلوم IATA للجدد في الخدمات الأرضية، من خياراته خدمة المسافرين وDCS والساحة مع IGOM وAHM.",
+    "checkedAt": "2026-11-21"
+   }
+  },
+  {
+   "skill": "flight-dispatch",
+   "depth": "full",
+   "topPick": {
+    "title": "Dangerous Goods Regulations (DGR) for Flight Operations Personnel and Flight Dispatchers",
+    "provider": "IATA Training",
+    "url": "https://www.iata.org/training-DGC006ELEN01",
+    "lang": "en",
+    "price": "paid",
+    "hours": 4,
+    "certificate": true,
+    "star": 1,
+    "why": "دورة IATA قصيرة لمراقب العمليات الجوية: البضائع الخطرة على الرحلة وقراءة إشعار NOTOC للطيار.",
+    "recommendedBy": null,
+    "checkedAt": "2026-11-21"
+   },
+   "alternatives": [
+    {
+     "title": "Flight Operations Management - Introduction",
+     "provider": "IATA Training",
+     "url": "https://www.iata.org/training-talp03",
+     "lang": "en",
+     "price": "paid",
+     "hours": 40,
+     "certificate": true,
+     "star": 1,
+     "why": "تعريف بقسم العمليات الجوية ومركز العمليات والأنظمة التي يعمل داخلها مراقب العمليات الجوية.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "people": [],
+   "articles": [
+    {
+     "title": "GACAR Part 65 – Certification: Aircraft Dispatchers and Cabin Crew Members",
+     "author": null,
+     "site": "gaca.gov.sa",
+     "url": "https://gaca.gov.sa/-/media/Files/PDF/LawsAndRegulation/Aviation-Safety-and-Environmental-Sustainability/GACAR-Safety-Regulations/GACARS/Part_65.pdf",
+     "lang": "en",
+     "why": "اللائحة السعودية لرخصة مراقب العمليات الجوية: العمر والاختبارات والإنجليزية والدورة المعتمدة.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    },
+    {
+     "title": "Worldwide Airport Slots",
+     "author": null,
+     "site": "iata.org",
+     "url": "https://www.iata.org/en/programs/ops-infra/slots/",
+     "lang": "en",
+     "why": "خلفية عن مواعيد المطارات التي يراعيها مخطط الرحلات عند بناء جدول التشغيل وتعديله.",
+     "recommendedBy": null,
+     "checkedAt": "2026-11-21"
+    }
+   ],
+   "proof": {
+    "task": "أعدّ ملف تخطيط رحلة افتراضية الرياض-جدة على A320: حساب الوقود (رحلة واحتياطي وبديل) والوزن والتوازن من بيانات نموذجية، وملخص للطقس وإشعارات NOTAM، في ملف PDF من 3 صفحات.",
+    "dataset": null,
+    "checkedAt": "2026-11-21"
+   },
+   "recommendedBy": null,
+   "checkedAt": "2026-11-21",
+   "certification": {
+    "kind": "official",
+    "name": "Aircraft Dispatcher Certificate (GACAR Part 65)",
+    "short": "رخصة مراقب العمليات الجوية - GACA",
+    "issuer": "الهيئة العامة للطيران المدني (GACA)",
+    "code": "GACAR Part 65",
+    "type": "licence",
+    "url": "https://gaca.gov.sa/-/media/Files/PDF/LawsAndRegulation/Aviation-Safety-and-Environmental-Sustainability/GACAR-Safety-Regulations/GACARS/Part_65.pdf",
+    "fee": null,
+    "feeVaries": false,
+    "prepUrl": null,
+    "prepLabel": null,
+    "level": "intermediate",
+    "star": 1,
+    "why": "رخصة سعودية إلزامية للعمل مراقباً: عمر 21 واختبار نظري وعملي وإنجليزية مستوى 4 ودورة معتمدة Part 143.",
+    "checkedAt": "2026-11-21"
+   }
+  }
+ ],
+ "knowledge": {
+  "entryRoutes": [],
+  "entryRoutesReused": [
+   "tamheer",
+   "doroob",
+   "hrdf-coop",
+   "hrdf-professional-certificates"
+  ],
+  "families": [
+   {
+    "id": "esg-sustainability",
+    "title": "محلل استدامة و ESG",
+    "titleEn": "Sustainability / ESG Analyst",
+    "fields": [
+     "energy-sustainability"
+    ],
+    "isNew": true,
+    "what": "يقيس أثر الشركة على البيئة والمجتمع وحوكمتها: يحسب انبعاثاتها، ويكتب تقرير الاستدامة، ويتابع أهدافها مع مبادرة السعودية الخضراء.",
+    "dayToDay": [
+     "يجمع بيانات الطاقة والمياه والانبعاثات من الإدارات",
+     "يحسب البصمة الكربونية للنطاقات الثلاثة",
+     "يكتب أجزاء تقرير الاستدامة وفق معايير GRI",
+     "يتابع مؤشرات الاستدامة ويعرضها على الإدارة"
+    ],
+    "path": {
+     "skills": [
+      "esg-fundamentals",
+      "esg-reporting",
+      "carbon-accounting",
+      "excel",
+      "presentation"
+     ],
+     "basedOnLine": "المسار مبني على: ترتيب معايير GRI (العامة ثم الموضوعات الجوهرية ثم المعايير الموضوعية ومنها الانبعاثات) وبروتوكول غازات الاحتباس الحراري",
+     "basedOnLinks": [
+      "https://www.globalreporting.org/how-to-use-the-gri-standards/gri-standards-english-language/",
+      "https://ghgprotocol.org/corporate-standard"
+     ],
+     "orderNote": "GRI publishes the Universal Standards (GRI 1 Foundation, GRI 2 General Disclosures, GRI 3 Material Topics) before the Topic Standards, where GRI 305 Emissions sits; so ESG basics and materiality come first, reporting second, and carbon accounting (the GHG Protocol's Corporate Standard, then Scope 2, then Scope 3) third. Excel and presentation are Dalil's call: the Riyad Bank posting asks data visualisation and presenting to top management.",
+     "guidelines": [
+      {
+       "name": "GRI Standards",
+       "provider": "Global Reporting Initiative (GRI)",
+       "url": "https://www.globalreporting.org/how-to-use-the-gri-standards/gri-standards-english-language/",
+       "orderedTopics": [
+        "1 Universal Standards: GRI 1: Foundation 2021",
+        "2 GRI 2: General Disclosures 2021",
+        "3 GRI 3: Material Topics 2021",
+        "4 Sector Standards (GRI 11 Oil and Gas, GRI 12 Coal, GRI 13 Agriculture, GRI 14 Mining)",
+        "5 Topic Standards (economic 201-207, environmental 101-103 and 301-308 incl. GRI 305: Emissions, social 401-418)"
+       ],
+       "checkedAt": "2026-11-21"
+      },
+      {
+       "name": "GHG Protocol Corporate Accounting and Reporting Standard",
+       "provider": "GHG Protocol (WRI وWBCSD)",
+       "url": "https://ghgprotocol.org/corporate-standard",
+       "orderedTopics": [
+        "1 Corporate Standard: corporate-level GHG inventory (seven Kyoto gases)",
+        "2 Scope 2 Guidance: purchased electricity, steam, heat and cooling",
+        "3 Corporate Value Chain (Scope 3) Standard"
+       ],
+       "checkedAt": "2026-11-21"
+      }
+     ]
+    },
+    "jobs": [
+     "riyadbank-sustainable-finance-specialist-riyadh"
+    ],
+    "employers": [
+     {
+      "name": "بنك الرياض",
+      "nameEn": "Riyad Bank",
+      "careersUrl": "https://careers.riyadbank.com/en/saudi-arabia/jobs/sustainable-finance-senior-specialist-1100083508/",
+      "checkedAt": "2026-11-21",
+      "note": "وظيفة التمويل المستدام المفتوحة"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates"
+    ],
+    "certificates": [
+     {
+      "name": "GRI Certified Sustainability Professional",
+      "issuer": "GRI (عبر GRI Academy)",
+      "url": "https://www.globalreporting.org/academy/certification/",
+      "level": "associate",
+      "priceText": "1,250 EUR (globalreporting.org: «GRI Professional Certification Program 1250.00 € * VAT may apply» — يشمل الدورات الأربع والاختبار)",
+      "arabicAvailable": null,
+      "why": "اختبار GRI الرسمي (40 سؤالاً في 60 دقيقة، النجاح 75%) بعد أربع دورات، ويُجدَّد سنوياً بأربع وحدات تعليم مستمر.",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "name": "Corporate Value Chain (Scope 3) Standard E-Learning",
+      "issuer": "GHG Protocol (WRI وWBCSD)",
+      "url": "https://ghgprotocol.org/e-learning-opportunities",
+      "level": "associate",
+      "priceText": "600 USD (ghgprotocol.org: «Corporate Value Chain (Scope 3) Standard E-Learning … $600 … Certificate: Yes»)",
+      "arabicAvailable": null,
+      "why": "شهادة إتمام من واضع المعيار نفسه، وشرطها حضور ويبينار المعيار المؤسسي المجاني أولاً.",
+      "checkedAt": "2026-11-21"
+     }
+    ],
+    "salary": null,
+    "salaryHeld": {
+     "role": "Sustainability Manager (Property & Construction, Client Side)",
+     "low": 30000,
+     "medium": 35000,
+     "high": 45000,
+     "currency": "SAR",
+     "sourceName": "Michael Page Saudi Arabia Salary Guide (web)",
+     "url": "https://www.michaelpage.ae/salary-guide-sa/sa/property-construction/client-side-sustainability-manager",
+     "checkedAt": "2026-11-21",
+     "why": "The page's own heading says «Yearly salary» but prints SAR 30.000 / 35.000 / 45.000, which reads as a monthly figure; the period is therefore unclear and the number is held for the coordinator, not shown. Manager level, so a ceiling, not a graduate wage."
+    },
+    "interviewQuestions": [
+     "وش الفرق بين النطاق الأول والثاني والثالث في الانبعاثات؟ عطني مثال من شركة اتصالات.",
+     "كيف تحدد الموضوعات الجوهرية لشركة قبل ما تكتب تقرير الاستدامة؟",
+     "وش تعرف عن مبادرة السعودية الخضراء وأهدافها؟",
+     "لو بيانات الكهرباء ناقصة لفرع كامل، كيف تتصرف في حساب البصمة؟",
+     "كيف تشرح مؤشر استدامة لمدير ما عنده خلفية بيئية؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: اقرأ GRI 1 و GRI 2 و GRI 3 وطلّع منها قائمة الإفصاحات العامة",
+     "الأسبوع 2: احسب النطاق الأول والثاني لشركة وهمية في Excel بمعاملات انبعاث منشورة",
+     "الأسبوع 3: اقرأ تقرير استدامة لشركة سعودية مدرجة وقارن فهرسه بمعايير GRI",
+     "الأسبوع 4: اكتب صفحتين: الموضوعات الجوهرية ولوحة مؤشرات بسيطة، واعرضها في خمس دقائق"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "محلل الاستدامة يحسب أثر الشركة على البيئة والمجتمع: انبعاثاتها، استهلاكها للطاقة والمويه، وحوكمتها، ويطلّعها في تقرير استدامة.",
+     "أنا «دليلك» رتّبت لك المسار على معايير GRI: تبدأ بأساسيات ESG والأهمية النسبية، بعدين كتابة التقرير، بعدين حساب البصمة الكربونية بالنطاقات الثلاثة.",
+     "الطلب عليه طالع مع مبادرة السعودية الخضراء، والبنوك والشركات المدرجة صارت تبي ناس يفهمون الإفصاح."
+    ],
+    "sources": [
+     {
+      "label": "Global Reporting Initiative (GRI): GRI Standards",
+      "url": "https://www.globalreporting.org/how-to-use-the-gri-standards/gri-standards-english-language/",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "label": "GHG Protocol (WRI وWBCSD): GHG Protocol Corporate Accounting and Reporting Standard",
+      "url": "https://ghgprotocol.org/corporate-standard",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "label": "Riyad Bank: وظيفة riyadbank-sustainable-finance-specialist-riyadh",
+      "url": "https://careers.riyadbank.com/en/saudi-arabia/jobs/sustainable-finance-senior-specialist-1100083508/",
+      "checkedAt": "2026-11-21"
+     }
+    ]
+   },
+   {
+    "id": "real-estate-fm",
+    "title": "إدارة الأملاك والمرافق والتقييم العقاري",
+    "titleEn": "Property & Facilities Management / Valuation",
+    "fields": [
+     "real-estate"
+    ],
+    "isNew": true,
+    "what": "يشغّل العقار بعد ما ينبني: يؤجّر الوحدات ويوثّق العقود في منصة إيجار، ويخطط صيانة المرافق، ومع الخبرة يقدّر قيمة العقار بترخيص من تقييم.",
+    "dayToDay": [
+     "يجهّز عروض التأجير وعقود إيجار ويتابع المستندات",
+     "يتابع طلبات الصيانة وعقود شركات الخدمات",
+     "يرد على المستأجرين ويتابع التحصيل والتجديد",
+     "يحدّث بيانات الوحدات والإشغال في النظام"
+    ],
+    "path": {
+     "skills": [
+      "property-management",
+      "facilities-management",
+      "real-estate-valuation",
+      "customer-success",
+      "excel"
+     ],
+     "basedOnLine": "المسار مبني على: أنشطة رخصة فال من الهيئة العامة للعقار، ومحاور شهادة IFMA FMP لإدارة المرافق، وخطوات الترخيص المهني في الهيئة السعودية للمقيّمين المعتمدين (تقييم)",
+     "basedOnLinks": [
+      "https://www.ifma.org/fmp",
+      "https://taqeem.gov.sa/",
+      "https://rega.gov.sa/en/the-library/frequently-asked-questions/"
+     ],
+     "orderNote": "REGA's FAL licence lists brokerage and marketing first, then property management and facility management (both for establishments); IFMA's FMP covers Finance & Business, Operations & Maintenance, Leadership & Strategy and Project Management. Taqeem's licence is a later step (accredited courses, membership, practice hours at a licensed firm, then the licence), so valuation comes last. Customer service and Excel are Dalil's call from the Flow posting.",
+     "guidelines": [
+      {
+       "name": "Facility Management Professional (FMP)",
+       "provider": "IFMA",
+       "url": "https://www.ifma.org/fmp",
+       "orderedTopics": [
+        "1 Finance & Business",
+        "2 Operations & Maintenance",
+        "3 Leadership & Strategy",
+        "4 Project Management"
+       ],
+       "checkedAt": "2026-11-21"
+      },
+      {
+       "name": "مسار الترخيص المهني للمقيّمين (تقييم)",
+       "provider": "الهيئة السعودية للمقيّمين المعتمدين (تقييم)",
+       "url": "https://taqeem.gov.sa/",
+       "orderedTopics": [
+        "1 التسجيل في بوابة الخدمات الإلكترونية",
+        "2 إكمال الدورات التدريبية المعتمدة",
+        "3 الحصول على العضوية (منتسب) في الفرع المطلوب",
+        "4 الانضمام إلى منشأة تقييم مرخصة",
+        "5 الممارسة وتوثيق ساعات الخبرة",
+        "6 طلب الترخيص النهائي"
+       ],
+       "checkedAt": "2026-11-21"
+      },
+      {
+       "name": "أنشطة رخصة فال",
+       "provider": "الهيئة العامة للعقار (REGA)",
+       "url": "https://rega.gov.sa/en/the-library/frequently-asked-questions/",
+       "orderedTopics": [
+        "1 Brokerage and marketing",
+        "2 Property management (establishments)",
+        "3 Facility management (establishments)",
+        "4 Auctions (establishments)",
+        "5 Consultations and analyses",
+        "6 Advertising"
+       ],
+       "checkedAt": "2026-11-21"
+      }
+     ]
+    },
+    "jobs": [
+     "flow-leasing-coordinator-riyadh"
+    ],
+    "employers": [
+     {
+      "name": "فلو",
+      "nameEn": "Flow",
+      "careersUrl": "https://jobs.lever.co/flowlife",
+      "checkedAt": "2026-11-21",
+      "note": "صفحة وظائفها على Lever (وظائف الرياض: منسّق تأجير، محلل عقاري أول)"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates"
+    ],
+    "certificates": [
+     {
+      "name": "رخصة فال للوساطة والتسويق العقاري",
+      "issuer": "الهيئة العامة للعقار (REGA)",
+      "url": "https://rega.gov.sa/en/the-library/frequently-asked-questions/",
+      "level": "entry",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "ترخيص الهيئة لمزاولة النشاط العقاري؛ للفرد يُشترط اجتياز برنامج التأهيل، ورخصة إدارة الأملاك نفسها للمنشآت.",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "name": "Facility Management Professional (FMP)",
+      "issuer": "IFMA",
+      "url": "https://www.ifma.org/fmp",
+      "level": "associate",
+      "priceText": "2,150 USD (ifma.org/fmp: «FMP Bundle: $1,850 USD/Full Members … $2,150 USD/STANDARD PRICE»)",
+      "arabicAvailable": null,
+      "why": "شهادة IFMA بلا متطلبات مسبقة: أربع وحدات (المالية، التشغيل والصيانة، القيادة، المشاريع) بنهاية كل منها اختبار.",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "name": "ترخيص مزاولة مهنة التقييم – فرع العقار",
+      "issuer": "الهيئة السعودية للمقيّمين المعتمدين (تقييم)",
+      "url": "https://taqeem.gov.sa/",
+      "level": "associate",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "الطريق الرسمي: تسجيل، دورات معتمدة، عضوية منتسب بفرع العقار، عمل في منشأة مرخصة وتوثيق الساعات ثم الترخيص.",
+      "checkedAt": "2026-11-21"
+     }
+    ],
+    "salary": {
+     "role": "Property Manager",
+     "minSAR": 18000,
+     "maxSAR": 40000,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 34, table «Construction & property» (Monthly salary ranges and average values (SAR)); average 29,000",
+     "checkedAt": "2026-11-21",
+     "note": "الراتب الشهري بالريال حسب دليل Hays للرواتب في السعودية 2026، بلا تقسيم حسب الخبرة؛ مسمى مدير أملاك، فهو سقف للمسار لا راتب خريج."
+    },
+    "interviewQuestions": [
+     "وش الخطوات من حجز الوحدة لين يسكن المستأجر؟",
+     "كيف توثّق عقد إيجار في منصة إيجار، ووش المستندات اللي تطلبها؟",
+     "مستأجر متأخر في السداد شهرين، كيف تتعامل معه؟",
+     "وش الفرق بين الصيانة الوقائية والصيانة التصحيحية؟",
+     "وش هي أساليب التقييم العقاري الثلاثة؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: اقرأ أسئلة رخصة فال الشائعة في موقع الهيئة العامة للعقار وافهم أنواع الرخص",
+     "الأسبوع 2: سوِّ في Excel متتبع إشغال وتحصيل لعمارة من عشر شقق",
+     "الأسبوع 3: اكتب خطة صيانة وقائية سنوية لنفس العمارة (تكييف، مصاعد، حريق)",
+     "الأسبوع 4: قيّم شقة بأسلوب المقارنة بثلاث صفقات مشابهة واكتب صفحة تشرح النتيجة"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "إدارة الأملاك يعني تشغّل العقار: تؤجّر الوحدات، توثّق العقود في منصة إيجار، وتتابع المستأجرين والصيانة.",
+     "أنا «دليلك» رتّبتها لك: تبدأ بالتأجير وإدارة الأملاك، بعدين إدارة المرافق والصيانة، ومع الخبرة التقييم العقاري بترخيص من تقييم.",
+     "انتبه: رخصة فال لإدارة الأملاك والمرافق للمنشآت، والفرد يبدأ برخصة الوساطة والتسويق بعد برنامج التأهيل."
+    ],
+    "sources": [
+     {
+      "label": "IFMA: Facility Management Professional (FMP)",
+      "url": "https://www.ifma.org/fmp",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "label": "الهيئة السعودية للمقيّمين المعتمدين (تقييم): مسار الترخيص المهني للمقيّمين (تقييم)",
+      "url": "https://taqeem.gov.sa/",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "label": "الهيئة العامة للعقار (REGA): أنشطة رخصة فال",
+      "url": "https://rega.gov.sa/en/the-library/frequently-asked-questions/",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "label": "Flow: وظيفة flow-leasing-coordinator-riyadh",
+      "url": "https://jobs.lever.co/flowlife/f23b0af7-7a12-4096-ad4b-525ffbe9ec9e",
+      "checkedAt": "2026-11-21"
+     }
+    ]
+   },
+   {
+    "id": "insurance",
+    "title": "التأمين: الاكتتاب والمطالبات",
+    "titleEn": "Insurance: Underwriting & Claims",
+    "fields": [
+     "banking-risk"
+    ],
+    "isNew": true,
+    "what": "يقرر شركة التأمين تقبل الخطر وبكم تسعّره (الاكتتاب)، ويسوّي المطالبات لما يصير الحادث، تحت أنظمة هيئة التأمين وباختبارات الأكاديمية المالية.",
+    "dayToDay": [
+     "يراجع طلبات التأمين ويقيّم الخطر",
+     "يسعّر الوثيقة حسب دليل الاكتتاب في الشركة",
+     "يستلم المطالبة ويطلب المستندات ويقدّر الضرر",
+     "يكتشف مؤشرات الاحتيال ويرفعها"
+    ],
+    "path": {
+     "skills": [
+      "insurance-basics",
+      "underwriting",
+      "insurance-claims",
+      "excel",
+      "communication"
+     ],
+     "basedOnLine": "المسار مبني على: محاور اختبار الشهادة المهنية في أساسيات التأمين (IFCE) من الأكاديمية المالية",
+     "basedOnLinks": [
+      "https://fa.gov.sa/en/Services/ExamDetails/2a0ac99a-301a-4370-9277-ade30102ab33"
+     ],
+     "orderNote": "The IFCE chapters go from risk and insurance basics, the Saudi market and products, to technical and legal principles and then insurance procedures and policies; underwriting and claims are the two procedure tracks after the basics. Dalil's call puts underwriting before claims because the Financial Academy offers an underwriting-officer exam of its own, while claims is examined through CII IF2.",
+     "guidelines": [
+      {
+       "name": "الشهادة المهنية في أساسيات التأمين (IFCE) – محاور الاختبار",
+       "provider": "الأكاديمية المالية",
+       "url": "https://fa.gov.sa/en/Services/ExamDetails/2a0ac99a-301a-4370-9277-ade30102ab33",
+       "orderedTopics": [
+        "1 الفصل الأول: أساسيات إدارة الخطر والتأمين (10%)",
+        "2 الفصل الثاني: طبيعة قطاع التأمين في المملكة العربية السعودية (20%)",
+        "3 الفصل الثالث: منتجات التأمين والخدمات المرتبطة بها (20%)",
+        "4 الفصل الرابع: المبادئ الفنية والقانونية في التأمين (20%)",
+        "5 الفصل الخامس: إجراءات وسياسات التأمين (10%)",
+        "6 الفصل السادس: المخاطر والمعوقات في عمل شركات التأمين (20%)"
+       ],
+       "checkedAt": "2026-11-21"
+      }
+     ]
+    },
+    "jobs": [],
+    "employers": [],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates"
+    ],
+    "certificates": [
+     {
+      "name": "الشهادة المهنية في أساسيات التأمين (IFCE)",
+      "issuer": "الأكاديمية المالية (Financial Academy)",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/2a0ac99a-301a-4370-9277-ade30102ab33",
+      "level": "entry",
+      "priceText": "1,000 SAR (fa.gov.sa: «رسوم الامتحان 1000.00 ريال» (صفحة البرنامج التحضيري: المحاولة الأولى «مجاناً» ثم 1,000 ر.س لكل محاولة))",
+      "arabicAvailable": null,
+      "why": "اختبار إلزامي للعاملين في شركات التأمين: 120 دقيقة بالعربية أو الإنجليزية، والنجاح 70%.",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "name": "الاختبار المهني لمسؤول الاكتتاب – النسخة الثانية",
+      "issuer": "الأكاديمية المالية (Financial Academy)",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/b8243ed7-fbc8-44cf-bbf4-ad3400928955",
+      "level": "associate",
+      "priceText": "2,300 SAR (fa.gov.sa: «رسوم الامتحان 2300.00 ريال»)",
+      "arabicAvailable": null,
+      "why": "اختبار سعودي لكل العاملين في الاكتتاب: تحليل الخطر والاكتتاب وإعادة التأمين وتسعير المنتجات.",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "name": "أعمال التأمين العام (IF2) - CII",
+      "issuer": "Chartered Insurance Institute (CII) عبر الأكاديمية المالية",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/67eb485c-1f4c-48f6-a7fc-ab4100907b6f",
+      "level": "associate",
+      "priceText": "2,173.5 SAR (fa.gov.sa: «رسوم الامتحان 2173.50 ريال»)",
+      "arabicAvailable": null,
+      "why": "اختبار CII من 100 سؤال، منها 21 عن المطالبات في التأمين العام وسؤالان عن شروط الوثيقة المؤثرة فيها.",
+      "checkedAt": "2026-11-21"
+     }
+    ],
+    "salary": null,
+    "salaryHeld": {
+     "role": "Senior Associate, Insurance",
+     "low": 30000,
+     "medium": 40000,
+     "high": 50000,
+     "currency": "SAR",
+     "sourceName": "Michael Page Saudi Arabia Salary Guide (web)",
+     "url": "https://www.michaelpage.ae/salary-guide-sa/sa/banking-and-financial-services/insurance-senior-associate",
+     "checkedAt": "2026-11-21",
+     "why": "Page heading says «Yearly salary» but the figures read as monthly; period unclear, held for the coordinator. Senior level."
+    },
+    "interviewQuestions": [
+     "وش مبدأ حسن النية ومبدأ التعويض في التأمين؟",
+     "كيف تقيّم خطر سيارة قبل ما تسعّر وثيقتها؟",
+     "وش أول شي تسويه لما توصلك مطالبة حادث مركبة؟",
+     "وش هي علامات الاحتيال اللي تخليك توقف مطالبة للتدقيق؟",
+     "وش الفرق بين التأمين التعاوني والتكافلي في السوق السعودي؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: اقرأ محاور اختبار IFCE في صفحة الأكاديمية المالية وسجّل للاختبار",
+     "الأسبوع 2: لخّص منتجات التأمين الإلزامية في السعودية (المركبات والصحي) في صفحة",
+     "الأسبوع 3: سوِّ في Excel جدول تسعير بسيط لوثيقة مركبات بثلاثة عوامل خطر",
+     "الأسبوع 4: اكتب مسار مطالبة حادث من البلاغ إلى التسوية مع قائمة المستندات ونقاط الاحتيال"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "التأمين فيه طريقين للخريج: الاكتتاب، يعني تقرر تقبل الخطر وبكم، والمطالبات، يعني تسوّي التعويض لما يصير الحادث.",
+     "أنا «دليلك» أنصحك تبدأ باختبار أساسيات التأمين IFCE من الأكاديمية المالية، بعدين تختار اكتتاب أو مطالبات.",
+     "ما لقيت لك اليوم إعلان مفتوح لهالمسار في صفحة شركة تأمين نقدر نقرأها؛ أول ما ألقى بضيفه لك."
+    ],
+    "sources": [
+     {
+      "label": "الأكاديمية المالية: الشهادة المهنية في أساسيات التأمين (IFCE) – محاور الاختبار",
+      "url": "https://fa.gov.sa/en/Services/ExamDetails/2a0ac99a-301a-4370-9277-ade30102ab33",
+      "checkedAt": "2026-11-21"
+     }
+    ]
+   },
+   {
+    "id": "mobile-dev",
+    "title": "مطوّر تطبيقات جوال (iOS / Android / Flutter)",
+    "titleEn": "Mobile App Developer (iOS / Android / Flutter)",
+    "fields": [
+     "software"
+    ],
+    "isNew": true,
+    "what": "يبني تطبيقات الجوال اللي نستخدمها كل يوم: إما أصلية لكل نظام (Swift لآيفون و Kotlin لأندرويد) أو بكود واحد للنظامين بـ Flutter.",
+    "dayToDay": [
+     "يبني شاشات التطبيق من تصميم Figma",
+     "يربط التطبيق بواجهات API الخلفية",
+     "يصلّح الأعطال ويختبر على أجهزة مختلفة",
+     "يرفع التحديثات على App Store و Google Play"
+    ],
+    "path": {
+     "skills": [
+      "programming",
+      "git",
+      "android-kotlin",
+      "ios-swift",
+      "flutter",
+      "apis"
+     ],
+     "basedOnLine": "المسار مبني على: وحدات دورة Android Basics with Compose من Google بالترتيب",
+     "basedOnLinks": [
+      "https://developer.android.com/courses/android-basics-compose/course"
+     ],
+     "orderNote": "Google's course goes Your first Android app → Building app UI → lists and Material Design → navigation and architecture → Connect to the internet → Data persistence; so programming basics come first, one platform skill next, and APIs (connect to the internet) after the UI. The three platform skills are alternatives: pick one (Dalil's call), as each covers the same app work on its own platform.",
+     "guidelines": [
+      {
+       "name": "Android Basics with Compose",
+       "provider": "Google (Android Developers)",
+       "url": "https://developer.android.com/courses/android-basics-compose/course",
+       "orderedTopics": [
+        "1 Your first Android app",
+        "2 Building app UI",
+        "3 Display lists and use Material Design",
+        "4 Navigation and app architecture",
+        "5 Connect to the internet",
+        "6 Data persistence",
+        "7 WorkManager",
+        "8 Views and Compose"
+       ],
+       "checkedAt": "2026-11-21"
+      }
+     ]
+    },
+    "jobs": [],
+    "employers": [],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates"
+    ],
+    "certificates": [
+     {
+      "name": "App Development with Swift Certified User",
+      "issuer": "Apple (يصدرها Certiport من Pearson VUE)",
+      "url": "https://certiport.pearsonvue.com/Certifications/Apple/App-Dev-With-Swift/Certify",
+      "level": "entry",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "اختبار من Apple عبر Certiport يثبت أساسيات Swift وSwiftUI، ويوصى قبله بـ150 ساعة تعلّم.",
+      "checkedAt": "2026-11-21"
+     }
+    ],
+    "salary": null,
+    "salaryHeld": {
+     "role": "iOS Developer / Android Developer (Technology, Development)",
+     "low": 20000,
+     "medium": 25000,
+     "high": 30000,
+     "currency": "SAR",
+     "sourceName": "Michael Page Saudi Arabia Salary Guide (web)",
+     "url": "https://www.michaelpage.ae/salary-guide-sa/sa/technology/development-ios-developer",
+     "checkedAt": "2026-11-21",
+     "why": "Same figures on the Android page (https://www.michaelpage.ae/salary-guide-sa/sa/technology/development-android-developer). Heading says «Yearly salary» but figures read as monthly; held for the coordinator."
+    },
+    "interviewQuestions": [
+     "وش الفرق بين التطبيق الأصلي (Native) وتطبيق Flutter؟ ومتى تختار كل واحد؟",
+     "كيف تدير حالة الشاشة (state) لما يرجع المستخدم من الخلفية؟",
+     "كيف تتعامل مع واجهة API ترجع خطأ أو تتأخر؟",
+     "وش تسوي عشان تطبيقك ما يستهلك البطارية؟",
+     "اشرح لنا تطبيق بنيته ونزّلته، ولو تجربة."
+    ],
+    "first30Days": [
+     "الأسبوع 1: اختر منصة وحدة وخلّص أول وحدتين من الدورة الرسمية (Android أو Swift أو Flutter)",
+     "الأسبوع 2: ابنِ شاشة قائمة وتفاصيل من تصميم جاهز",
+     "الأسبوع 3: اربط التطبيق بواجهة API مفتوحة واعرض البيانات واحفظها",
+     "الأسبوع 4: ارفع الكود على GitHub بملف README وصور، وسجّل فيديو قصير للتطبيق"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "مطوّر الجوال يبني التطبيقات اللي بجوالك: إما لكل نظام لحاله، Swift للآيفون و Kotlin للأندرويد، أو بكود واحد للنظامين بـ Flutter.",
+     "أنا «دليلك» أقول لك: اختر منصة وحدة وأتقنها، ورتّبت لك المسار على دورة Google الرسمية: الواجهة أول، بعدين الربط بالإنترنت والبيانات.",
+     "أهم شي عندهم تطبيق حقيقي على GitHub تقدر تفتحه في المقابلة."
+    ],
+    "sources": [
+     {
+      "label": "Google (Android Developers): Android Basics with Compose",
+      "url": "https://developer.android.com/courses/android-basics-compose/course",
+      "checkedAt": "2026-11-21"
+     }
+    ]
+   },
+   {
+    "id": "telecom-network",
+    "title": "مهندس شبكات واتصالات",
+    "titleEn": "Telecom / Network Engineer",
+    "fields": [
+     "cyber-cloud"
+    ],
+    "isNew": true,
+    "what": "يخلي الشبكة شغّالة: يعدّ الموجّهات والمحوّلات، ويمدّ الألياف ويفحصها، ويحسّن أداء شبكات الجوال 4G و5G عند شركات الاتصالات وموردينها.",
+    "dayToDay": [
+     "يعدّ ويراقب الموجّهات والمحوّلات",
+     "يحلّل مؤشرات أداء الشبكة ويحل الأعطال",
+     "يتابع تمديد الألياف وفحصها",
+     "يكتب تقارير التحسين ويطبّق التغييرات"
+    ],
+    "path": {
+     "skills": [
+      "networking",
+      "routing-switching",
+      "fiber-optics",
+      "mobile-networks",
+      "linux"
+     ],
+     "basedOnLine": "المسار مبني على: مواضيع اختبار CCNA 200-301 من Cisco بالترتيب، وشهادة فنّي الألياف CFOT",
+     "basedOnLinks": [
+      "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html",
+      "https://thefoa.org/cfot.htm"
+     ],
+     "orderNote": "Cisco's CCNA topics run Network fundamentals → Network access → IP connectivity → IP services → Security fundamentals → Automation and programmability; networking basics come first and routing & switching (network access + IP connectivity) second. Fiber and mobile networks follow as the two physical / radio tracks (Dalil's call; no single guideline orders them). Linux is Dalil's call for automation.",
+     "guidelines": [
+      {
+       "name": "Implementing and Administering Cisco Solutions (200-301 CCNA) exam topics",
+       "provider": "Cisco",
+       "url": "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html",
+       "orderedTopics": [
+        "1 Network fundamentals",
+        "2 Network access",
+        "3 IP connectivity",
+        "4 IP services",
+        "5 Security fundamentals",
+        "6 Automation and programmability"
+       ],
+       "checkedAt": "2026-11-21"
+      }
+     ]
+    },
+    "jobs": [],
+    "employers": [
+     {
+      "name": "stc",
+      "nameEn": "stc",
+      "careersUrl": "https://careers.stc.com.sa/",
+      "checkedAt": "2026-11-21",
+      "note": "بوابة وظائفها (لم تكن فيها وظائف شبكات مفتوحة يوم 21 نوفمبر)"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates"
+    ],
+    "certificates": [
+     {
+      "name": "Cisco Certified Network Associate",
+      "issuer": "Cisco",
+      "url": "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html",
+      "level": "associate",
+      "priceText": "300 USD ($US300, or use Cisco Learning Credits)",
+      "arabicAvailable": null,
+      "why": "اختبار سيسكو المعروف عالمياً للشبكات: أساسيات الشبكة والوصول واتصال IP والخدمات والأمن والأتمتة.",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "name": "Certified Fiber Optic Technician",
+      "issuer": "The Fiber Optic Association (FOA)",
+      "url": "https://thefoa.org/cfot.htm",
+      "level": "entry",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "الشهادة الأساسية لفنيي الألياف: اختبار مكتوب من 100 سؤال عبر مدرسة معتمدة من FOA، والرسوم تحددها المدرسة.",
+      "checkedAt": "2026-11-21"
+     }
+    ],
+    "salary": {
+     "role": "Network Engineer",
+     "minSAR": 15000,
+     "maxSAR": 27500,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 46, table «Cloud, infrastructure & networking» (Monthly salary ranges and average values (SAR)); average 22,500",
+     "checkedAt": "2026-11-21",
+     "note": "الراتب الشهري بالريال حسب دليل Hays للرواتب في السعودية 2026، بلا تقسيم حسب الخبرة."
+    },
+    "interviewQuestions": [
+     "وش الفرق بين الموجّه (Router) والمحوّل (Switch)؟",
+     "اشرح لي VLAN وليش نستخدمها.",
+     "كيف يشتغل OSPF باختصار؟",
+     "وش تقيس بجهاز OTDR في الألياف؟",
+     "لو مؤشر انقطاع المكالمات طالع في خلية، وش أول شي تشيكه؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: خلّص وحدات Networking Basics المجانية في Cisco NetAcad",
+     "الأسبوع 2: ابنِ في Packet Tracer شبكة بثلاث VLAN وتوجيه بينها",
+     "الأسبوع 3: اقرأ دورة FOA المجانية عن الألياف وارسم شبكة FTTH لحي صغير",
+     "الأسبوع 4: اقرأ أساسيات 5G واكتب صفحة عن مؤشرات أداء شبكة الراديو"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "مهندس الشبكات والاتصالات يخلي النت والجوال شغّالة: يعدّ الأجهزة، يمدّ الألياف، ويحسّن شبكة 4G و5G.",
+     "أنا «دليلك» رتّبت لك المسار على مواضيع CCNA: أساسيات الشبكات، بعدين التوجيه والتحويل، بعدين الألياف وشبكات الجوال.",
+     "شهادة CCNA معروفة عند كل الشركات، وتقدر تتدرّب مجاناً على Packet Tracer قبلها."
+    ],
+    "sources": [
+     {
+      "label": "Cisco: Implementing and Administering Cisco Solutions (200-301 CCNA) exam topics",
+      "url": "https://www.cisco.com/site/us/en/learn/training-certifications/exams/ccna.html",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-21"
+     }
+    ]
+   },
+   {
+    "id": "aviation-ops",
+    "title": "عمليات الطيران والمطارات",
+    "titleEn": "Airline & Airport Operations",
+    "fields": [
+     "aviation"
+    ],
+    "isNew": true,
+    "what": "يشغّل الرحلات يوم بيوم: يتابع الطائرات من مركز العمليات، ويعالج التأخير والإلغاء، ويخطط الرحلة كمراقب عمليات جوية برخصة من هيئة الطيران المدني.",
+    "dayToDay": [
+     "يتابع الرحلات من مركز العمليات من الإقلاع إلى الهبوط",
+     "يعالج التأخير والإلغاء والتحويل مع المحطات",
+     "يقرأ النوتام والطقس ويبلغ الأطقم",
+     "يحدّث سجلات الرحلات والتقارير لحظياً"
+    ],
+    "path": {
+     "skills": [
+      "aviation-ops",
+      "ground-handling",
+      "flight-dispatch",
+      "english",
+      "communication"
+     ],
+     "basedOnLine": "المسار مبني على: مواضيع دبلوم IATA لأساسيات عمليات المطارات، ومتطلبات رخصة مراقب العمليات الجوية في لائحة GACAR الجزء 65",
+     "basedOnLinks": [
+      "https://www.iata.org/en/training/courses/diploma_programs/airport-operations-foundation-diploma-self-study/98",
+      "https://gaca.gov.sa/-/media/Files/PDF/LawsAndRegulation/Aviation-Safety-and-Environmental-Sustainability/GACAR-Safety-Regulations/GACARS/Part_65.pdf"
+     ],
+     "orderNote": "IATA's DIPL-98 runs Airfield operations → Airside Safety → Airport Security → Ramp Handling → Passenger Handling, so airport/airline operations come first and ground handling second. The dispatcher licence (GACAR Part 65: age 21, knowledge and practical tests, an approved course) is the specialised third step. English and communication are Dalil's call: both Riyadh Air postings ask clear communication.",
+     "guidelines": [
+      {
+       "name": "Airport Operations Foundation Diploma (self-study) DIPL-98",
+       "provider": "IATA Training",
+       "url": "https://www.iata.org/en/training/courses/diploma_programs/airport-operations-foundation-diploma-self-study/98",
+       "orderedTopics": [
+        "1 Airfield operations",
+        "2 Airside Safety",
+        "3 Airport Security",
+        "4 Ramp Handling",
+        "5 Passenger Handling"
+       ],
+       "checkedAt": "2026-11-21"
+      }
+     ]
+    },
+    "jobs": [
+     "riyadhair-flight-following-specialist-riyadh",
+     "riyadhair-operations-controller-riyadh"
+    ],
+    "employers": [
+     {
+      "name": "طيران الرياض",
+      "nameEn": "Riyadh Air",
+      "careersUrl": "https://careers-riyadhair.icims.com/jobs/search",
+      "checkedAt": "2026-11-21",
+      "note": "بوابة وظائفها على iCIMS (وظائف مركز العمليات في الرياض نُشرت 19 نوفمبر)"
+     }
+    ],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates"
+    ],
+    "certificates": [
+     {
+      "name": "Airport Operations Foundation Diploma",
+      "issuer": "IATA",
+      "url": "https://www.iata.org/en/training/courses/diploma_programs/airport-operations-foundation-diploma-self-study/98",
+      "level": "entry",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "دبلوم IATA للجدد في عمليات المطار: أربع دورات تختارها خلال 3 سنوات، والرسوم مجموع رسوم الدورات.",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "name": "Aircraft Dispatcher Certificate (GACAR Part 65)",
+      "issuer": "الهيئة العامة للطيران المدني (GACA)",
+      "url": "https://gaca.gov.sa/-/media/Files/PDF/LawsAndRegulation/Aviation-Safety-and-Environmental-Sustainability/GACAR-Safety-Regulations/GACARS/Part_65.pdf",
+      "level": "associate",
+      "priceText": null,
+      "arabicAvailable": null,
+      "why": "رخصة سعودية إلزامية للعمل مراقباً: عمر 21 واختبار نظري وعملي وإنجليزية مستوى 4 ودورة معتمدة Part 143.",
+      "checkedAt": "2026-11-21"
+     }
+    ],
+    "salary": null,
+    "interviewQuestions": [
+     "وش يصير في مركز العمليات لما تتأخر رحلة بسبب عطل فني؟",
+     "وش هو النوتام وليش يهم مراقب العمليات؟",
+     "كيف تعطي أولوية بين رحلتين متأخرتين وطاقم واحد؟",
+     "وش الفرق بين الخدمات الأرضية وعمليات الساحة؟",
+     "وش متطلبات رخصة مراقب العمليات الجوية عند هيئة الطيران المدني؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: اقرأ مواضيع دبلوم IATA لعمليات المطارات وافهم أدوار المطار",
+     "الأسبوع 2: تابع رحلة حقيقية على موقع تتبع واكتب يومية بالتأخير وسببه",
+     "الأسبوع 3: اقرأ متطلبات رخصة مراقب العمليات في لائحة GACAR الجزء 65",
+     "الأسبوع 4: اكتب خطة تعامل مع تحويل رحلة لمطار بديل بسبب الطقس في صفحة"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "عمليات الطيران هي اللي تخلي الرحلات تمشي: مركز عمليات يتابع كل طيارة، ويحل التأخير والإلغاء، ويبلغ الأطقم بالطقس والنوتام.",
+     "أنا «دليلك» رتّبتها لك على دبلوم IATA: عمليات المطار أول، بعدين الخدمات الأرضية، وبعدها رخصة مراقب العمليات الجوية من هيئة الطيران المدني.",
+     "طيران الرياض فاتحة وظائف في مركز العمليات بالرياض، بس تبي خبرة من ثلاث سنين وفوق؛ ابدأ بالخدمات الأرضية أو برنامج تعاوني."
+    ],
+    "sources": [
+     {
+      "label": "IATA Training: Airport Operations Foundation Diploma (self-study) DIPL-98",
+      "url": "https://www.iata.org/en/training/courses/diploma_programs/airport-operations-foundation-diploma-self-study/98",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "label": "Riyadh Air: وظيفة riyadhair-flight-following-specialist-riyadh",
+      "url": "https://careers-riyadhair.icims.com/jobs/6275/flight-following-specialist/job",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "label": "Riyadh Air: وظيفة riyadhair-operations-controller-riyadh",
+      "url": "https://careers-riyadhair.icims.com/jobs/6272/operations-controller/job",
+      "checkedAt": "2026-11-21"
+     }
+    ]
+   },
+   {
+    "id": "pr-communications",
+    "title": "العلاقات العامة والاتصال المؤسسي والعلاقات الحكومية",
+    "titleEn": "PR, Corporate Communications & Government Relations",
+    "fields": [
+     "communications"
+    ],
+    "isNew": true,
+    "what": "يتكلم باسم الشركة: يبني علاقتها مع الإعلام ويكتب بياناتها، ويوحّد رسائلها الداخلية والخارجية، وينجز معاملاتها مع الجهات الحكومية.",
+    "dayToDay": [
+     "يكتب البيانات الصحفية والرسائل الداخلية",
+     "يتواصل مع الإعلاميين ويتابع التغطية",
+     "يجهّز خطة الرد وقت الأزمات",
+     "يتابع معاملات الشركة في المنصات الحكومية"
+    ],
+    "path": {
+     "skills": [
+      "public-relations",
+      "corporate-communications",
+      "government-relations",
+      "content",
+      "communication"
+     ],
+     "basedOnLine": "المسار مبني على: المعارف والمهارات المختبرة في اعتماد العلاقات العامة APR من مجلس الاعتماد الموحد (PRSA)",
+     "basedOnLinks": [
+      "https://www.prsa.org/docs/default-source/accreditation-site/apr-ksas-tested.pdf"
+     ],
+     "orderNote": "The APR KSAs start with researching, planning, implementing and evaluating programmes, then ethics and law, then managing issues and crisis communications, then theory, leading the PR function and managing relationships; so PR basics come first and corporate / crisis communication second. Government relations has no published guideline; it is a separate Saudi track (Dalil's call) placed last. Writing (content) is Dalil's call.",
+     "guidelines": [
+      {
+       "name": "Detailed KSAs Tested on the Computer-based Examination for Accreditation in Public Relations (approved July 2024)",
+       "provider": "Universal Accreditation Board / PRSA",
+       "url": "https://www.prsa.org/docs/default-source/accreditation-site/apr-ksas-tested.pdf",
+       "orderedTopics": [
+        "1 Researching, Planning, Implementing and Evaluating Programs (30%)",
+        "2 Applying Ethics and Law (15%)",
+        "3 Managing Issues and Crisis Communications (15%)",
+        "4 Understanding Theories, Models and Concepts of Public Relations (5%)",
+        "5 Leading the Public Relations Function (20%)",
+        "6 Managing Relationships (15%)"
+       ],
+       "checkedAt": "2026-11-21"
+      }
+     ]
+    },
+    "jobs": [],
+    "employers": [],
+    "entryRoutes": [
+     "tamheer",
+     "doroob",
+     "hrdf-coop",
+     "hrdf-professional-certificates"
+    ],
+    "certificates": [
+     {
+      "name": "Certificate in Principles of Public Relations",
+      "issuer": "Universal Accreditation Board (PRSA)",
+      "url": "https://accreditation.prsa.org/MyAPR/Content/Apply/Certificate/About_the_Certificate.aspx",
+      "level": "entry",
+      "priceText": "150 USD (accreditation.prsa.org: «The certificate program costs $150 ($25 application fee plus $125 examination fee).»)",
+      "arabicAvailable": null,
+      "why": "شهادة مبتدئة لطلاب العلاقات العامة يُتقدَّم لها قبل مضي ستة أشهر على التخرج، باختبار واحد.",
+      "checkedAt": "2026-11-21"
+     }
+    ],
+    "salary": {
+     "role": "Marketing & Communications Manager",
+     "minSAR": 46000,
+     "maxSAR": 56000,
+     "period": "monthly",
+     "level": "not stated (Hays lists job titles only, no seniority band)",
+     "sourceName": "Hays Saudi Arabia Salary Guide 2026",
+     "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+     "page": "p. 38, table «Generalist Marketing» (Monthly salary ranges and average values (SAR)); average 51,000",
+     "checkedAt": "2026-11-21",
+     "note": "الراتب الشهري بالريال حسب دليل Hays للرواتب في السعودية 2026؛ مسمى مدير، فهو سقف للمسار لا راتب خريج."
+    },
+    "interviewQuestions": [
+     "اكتب لنا عنوان بيان صحفي عن إطلاق خدمة جديدة في سطر واحد.",
+     "وش أول ثلاث خطوات تسويها لو انتشر مقطع سلبي عن الشركة؟",
+     "وش الفرق بين العلاقات العامة والتسويق؟",
+     "كيف تقيس نجاح حملة علاقات عامة؟",
+     "وش المنصات الحكومية اللي يتعامل معها مسؤول العلاقات الحكومية يومياً؟"
+    ],
+    "first30Days": [
+     "الأسبوع 1: اكتب بيانين صحفيين لخبرين حقيقيين بأسلوب الصحافة السعودية",
+     "الأسبوع 2: سوِّ قائمة إعلاميين لقطاع واحد مع وسيلة كل واحد",
+     "الأسبوع 3: اكتب خطة اتصال أزمة من صفحة لموقف افتراضي",
+     "الأسبوع 4: لخّص خدمات قوى ومقيم والسجل التجاري اللي تحتاجها شركة صغيرة"
+    ],
+    "writtenByDalil": "أسئلة المقابلة وخطة أول 30 يوم كتبها «دليل» من مواضيع المسار المنشور ومن نصوص الإعلانات؛ ليست من شركة بعينها.",
+    "botLines": [
+     "العلاقات العامة يعني تكون صوت الشركة: تكتب بياناتها، تبني علاقتها مع الإعلام، وتتصرف صح وقت الأزمات.",
+     "أنا «دليلك» رتّبتها لك على معارف اعتماد APR: العلاقات العامة أول، بعدين الاتصال المؤسسي والأزمات، والعلاقات الحكومية مسار سعودي لحاله.",
+     "أهم شي عندهم كتابتك؛ جهّز ملف فيه بيانات صحفية كتبتها بنفسك."
+    ],
+    "sources": [
+     {
+      "label": "Universal Accreditation Board / PRSA: Detailed KSAs Tested on the Computer-based Examination for Accreditation in Public Relations (approved July 2024)",
+      "url": "https://www.prsa.org/docs/default-source/accreditation-site/apr-ksas-tested.pdf",
+      "checkedAt": "2026-11-21"
+     },
+     {
+      "label": "Hays Saudi Arabia Salary Guide 2026",
+      "url": "https://www.hays.ae/documents/d/hays-salary-guide-ae/hays-saudi-arabia-salary-guide-2026",
+      "checkedAt": "2026-11-21"
+     }
+    ]
+   }
+  ]
+ },
+ "demandEvidence": {
+  "_method": "WebSearch result lists on 2026-11-21. Aggregator pages (Sabbar, Bayt, GulfTalent, Naukrigulf, jobs.workable.com) were NOT opened; they are listed only as signals of demand and never used as jobs.",
+  "esg-sustainability": [
+   "Search results named Riyadh roles at KEO International Consultants (iCIMS: ESG Specialist, Sustainability Carbon Manager), Bureau Veritas (Sustainability Associate), Ma'aden (Senior Specialist Sustainability & Energy Solutions), Riyadh Air (Manager Sustainability). KEO 10402 and the Bureau Veritas page opened as closed (HTTP 410 / not available)."
+  ],
+  "real-estate-fm": [
+   "Search results named Leasing Specialist roles at Awtad and Bayut | dubizzle and a Regional Property Manager at Rgheeb (all Workable); the posting pages returned 404 (closed) and Workable's board API was rate-limited (HTTP 1015)."
+  ],
+  "insurance": [
+   "Search results named underwriting / claims roles in Riyadh only on aggregators (Cigna Saudi underwriter and actuarial analyst, Allied Cooperative Insurance Group head of motor, Faithful Executive claims supervisor); no insurer's own careers page with an open entry or mid posting could be read on 2026-11-21."
+  ],
+  "mobile-dev": [
+   "Delivery Hero (SmartRecruiters) lists a «Senior Android Engineer (Saudi National)» in Riyadh (senior; not used). The parallel wave-3 tech-postings agent is collecting mobile postings; merge there."
+  ],
+  "telecom-network": [
+   "Search results named Ericsson RF Design SME, RAN Feature and Solution Integration Engineer and BO Transmission Engineer roles in Riyadh, but only on aggregators; Ericsson's own job API refused («Not authorized»). Atheer ACT's RF/Network Operation Engineer (Workable) returned 404. stc's career site had no network roles."
+  ],
+  "aviation-ops": [
+   "Riyadh Air's iCIMS board lists 39 roles (21 Nov), most senior or abroad; flynas announced a Dispatcher Cadet Program for Saudi licence holders (flynas.com news, Feb 2026, not opened)."
+  ],
+  "pr-communications": [
+   "ZATCA's «Media Relations Lead Specialist» (careers.zatca.gov.sa) opened as «Sorry, this position has been filled.»; Qiddiya's «Specialist - Media Relations» appeared only on jobs.workable.com and Qiddiya's Workable widget returned no jobs."
+  ]
+ },
+ "heldJobs": [],
+ "notOpened": [
+  {
+   "url": "https://www.saudiexchange.sa/wps/portal/saudiexchange/listing/issuer-guides/esg-guidelines?locale=en",
+   "why": "HTTP 403 — Tadawul ESG Disclosure Guidelines page did not open"
+  },
+  {
+   "url": "https://www.cipr.co.uk/common/Uploaded files/Qualifications/CIPR Public Relations and Communication Foundation.pdf",
+   "why": "PDF fetched but no extractable text; used PRSA APR KSAs instead"
+  },
+  {
+   "url": "https://www.praccreditation.org/apply/certificate",
+   "why": "expired TLS certificate; used accreditation.prsa.org page instead"
+  },
+  {
+   "url": "https://www.ejar.sa/",
+   "why": "HTTP 403"
+  },
+  {
+   "url": "https://www.qiwa.sa/en",
+   "why": "JavaScript-only page, only 'Loading' text returned"
+  },
+  {
+   "url": "https://www.muqeem.sa/",
+   "why": "DNS lookup failed"
+  },
+  {
+   "url": "https://www.investopedia.com/terms/e/environmental-social-and-governance-esg-criteria.asp",
+   "why": "domain blocked for fetching"
+  },
+  {
+   "url": "https://www.investopedia.com/terms/p/property-manager.asp",
+   "why": "domain blocked for fetching"
+  },
+  {
+   "url": "https://instituteforpr.org/crisis-management-and-communications/",
+   "why": "HTTP 403"
+  },
+  {
+   "url": "https://www.ready.gov/business/emergency-plans/crisis-communications-plan",
+   "why": "HTTP 404"
+  },
+  {
+   "url": "https://www.coursera.org/articles/internal-communications",
+   "why": "HTTP 404"
+  },
+  {
+   "url": "https://rega.gov.sa/en/electronic-services/saudi-real-estate-institute",
+   "why": "HTTP 404 error page"
+  },
+  {
+   "url": "https://certiport.pearsonvue.com/Certifications/Apple/App-Development-with-Swift/Overview",
+   "why": "404; used the App-Dev-With-Swift/Certify page instead"
+  },
+  {
+   "url": "https://certiport.pearsonvue.com/Certifications/Apple/App-Dev-With-Swift/Exam-details",
+   "why": "404; exam length, objective domains and fee not confirmed"
+  },
+  {
+   "url": "https://tuwaiq.edu.sa/",
+   "why": "403 Forbidden"
+  },
+  {
+   "url": "https://developeracademy.tuwaiq.edu.sa/programs/foundation",
+   "why": "403 Forbidden (Apple Developer Academy at Tuwaiq, women only per press; could not verify)"
+  },
+  {
+   "url": "https://www.coursera.org/professional-certificates/meta-android-developer-ar",
+   "why": "404 (Arabic Meta Android certificate appears withdrawn)"
+  },
+  {
+   "url": "https://www.coursera.org/specializations/meta-android-developer-ar",
+   "why": "404"
+  },
+  {
+   "url": "https://www.coursera.org/professional-certificates/meta-ios-developer-ar",
+   "why": "404 (Arabic Meta iOS certificate appears withdrawn)"
+  },
+  {
+   "url": "https://www.coursera.org/learn/introduction-to-ios-mobile-application-development-ar",
+   "why": "404"
+  },
+  {
+   "url": "https://www.coursera.org/learn/introduction-to-android-mobile-application-development-ar",
+   "why": "404"
+  },
+  {
+   "url": "https://learningnetwork.cisco.com/s/ccna-exam-topics",
+   "why": "JS-only page, no content returned (domain weights not confirmed from Cisco)"
+  },
+  {
+   "url": "https://www.thefoa.org/CFOT.htm",
+   "why": "404; lowercase thefoa.org/cfot.htm opened instead"
+  },
+  {
+   "url": "https://maharatech.gov.eg/course/view.php?id=1419",
+   "why": "Arabic CCNA course on ITI Mahara-Tech: 'currently unavailable to students'"
+  },
+  {
+   "url": "https://www.netacad.com/courses/ccna-introduction-networks",
+   "why": "JS page returned title only; cost/hours not confirmed, so not used"
+  },
+  {
+   "url": "https://www.nokia.com/learning/5g/bell-labs/associate-certification/",
+   "why": "403; Nokia Bell Labs 5G Associate exam fee not confirmed from issuer"
+  },
+  {
+   "url": "https://www.nokia.com/networks/training/5g/bell-labs/certifications/associate-certification/",
+   "why": "403"
+  },
+  {
+   "url": "https://gaca.gov.sa/web/en-gb/department/flight-operation-flight-dispatch",
+   "why": "redirects to gaca.gov.sa/ar home"
+  },
+  {
+   "url": "https://gaca.gov.sa/web/en-gb/e-service/issue-of-aircraft-dispatcher-certificate-request",
+   "why": "redirects to gaca.gov.sa/ar home (fee for dispatcher certificate not confirmed)"
+  },
+  {
+   "url": "https://gaca.gov.sa/web/en-gb/department/saudi-academy-of-civil-aviation",
+   "why": "redirects to gaca.gov.sa/ar home"
+  },
+  {
+   "url": "https://saca.edu.sa/",
+   "why": "TLS certificate mismatch; www.saca.edu.sa opened but lists no dispatch or ground-handling programmes"
+  },
+  {
+   "url": "https://www.flynas.com/en/media-center/news-updates/flynas-launches-dispatcher-cadet-program-to-empower-saudi-talent/",
+   "why": "403"
+  },
+  {
+   "url": "https://www.eau.ac.ae/en/programmes/professional-education/professional-education/flight-dispatcher-initial-course-fdic",
+   "why": "page loaded without course details"
+  },
+  {
+   "url": "https://skybrary.aero/articles/safety-management-system",
+   "why": "bot check page (SuperJS), no content"
+  },
+  {
+   "url": "https://skybrary.aero/articles/notice-airmen-notam",
+   "why": "bot check page (SuperJS), no content"
+  },
+  {
+   "url": "https://www.faa.gov/about/initiatives/notam/what_is_a_notam",
+   "why": "403"
+  },
+  {
+   "url": "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/weight_balance_handbook",
+   "why": "403"
+  },
+  {
+   "url": "https://www.iata.org/en/publications/igom/",
+   "why": "404"
+  },
+  {
+   "url": "https://www.iata.org/en/programs/ops-infra/ground-operations/igom/",
+   "why": "404"
+  },
+  {
+   "url": "https://www.cloudflare.com/learning/network-layer/what-is-routing/",
+   "why": "403"
+  },
+  {
+   "url": "https://www.thefoa.org/foa_aff.htm",
+   "why": "404 (wanted a page for a fiber-optics person)"
+  },
+  {
+   "url": "https://jobs.workable.com/api/v1/jobs?query=sustainability&location=Saudi%20Arabia",
+   "why": "Workable's cross-company search (an aggregator) was refused by the session's permission check; not used."
+  },
+  {
+   "url": "https://apply.workable.com/api/v3/accounts/{awtad,bayutdubizzle,rgheeb-1,atheer-act}/jobs",
+   "why": "HTTP 1015 (Cloudflare rate limit, shared with parallel agents)."
+  },
+  {
+   "url": "https://apply.workable.com/awtad/jobs/view/01947E7AF6.md",
+   "why": "HTTP 404 (closed)."
+  },
+  {
+   "url": "https://apply.workable.com/atheer-act/jobs/view/CFC1627660.md",
+   "why": "HTTP 404 (closed)."
+  },
+  {
+   "url": "https://careers-systra.icims.com/jobs/10431/telecom-engineer-%28system%29-%28saudi-national%29/job",
+   "why": "HTTP 410 (closed)."
+  },
+  {
+   "url": "https://ukcareers-fishercareers.icims.com/jobs/17789/investor-responsibility-%26-engagement-analyst---saudi-arabia/job",
+   "why": "HTTP 410 (closed)."
+  },
+  {
+   "url": "https://careers-keo.icims.com/jobs/10402/sustainability-design-engineer-%28saudi-nationals-only%29/job",
+   "why": "HTTP 410 (closed)."
+  },
+  {
+   "url": "https://careers-riyadhair.icims.com/jobs/2586/operations-support-officer/job",
+   "why": "HTTP 410 (closed)."
+  },
+  {
+   "url": "https://careers-riyadhair.icims.com/jobs/4842/crew-duty-controller/job",
+   "why": "HTTP 410 (closed)."
+  },
+  {
+   "url": "https://careers.bureauveritas.com/SaudiArabia/job/Riyadh-Sustainability-Associate-%28CER%29-1-Ar-R/1435373733/",
+   "why": "«You can't view this job because it's not available at this time.»"
+  },
+  {
+   "url": "https://careers.zatca.gov.sa/job/Riyadh-Media-Relations-Lead-Specialist/857289223/",
+   "why": "«Sorry, this position has been filled.»"
+  },
+  {
+   "url": "https://jobs.ericsson.com/api/apply/v2/jobs?domain=ericsson.com&location=Riyadh",
+   "why": "«Not authorized for PCSX»."
+  }
+ ],
+ "guideNotes": [
+  "sgi.gov.sa opened (three targets: reduce emissions, 10 billion trees, protect land and sea). Tadawul ESG Guidelines page returned 403.",
+  "SREI pages (srei.sa/ProfessionalCertificates Cert_Id=2588 and 2587) open but show no hours, fee, topics or issuer details; facilities-management topPick and property-management alternative carry price 'paid' by convention (same as Financial Academy programs in wave 2), not from a stated fee.",
+  "Financial Academy program pages (9c32ab34, bd8f20e2, ea6ccfc5) show no program price; 'paid' follows the wave-2 convention. IFCE: exam page says 1000 SAR; the IFCE prep-program page says first attempt free («مجاناً») then 1,000 SAR per attempt, hence feeVaries true. A second FA exam 'الاختبار المهني في أساسيات التأمين' (80d975a1) lists 550 SAR; it is a different exam (8 chapters), not IFCE.",
+  "No Financial Academy claims-officer exam was found; insurance-claims cert uses CII IF2 sold by FA (2173.50 SAR), which has 21 claims questions out of 100. Not medical billing.",
+  "Taqeem: fees appear only on course pages (102 = 2500 SAR, 001 = 1700 SAR); membership/licence fees not stated on service-guide page, so licence fee null. The 105 course alternative links to the training-program list page (taqeem.gov.sa/en/training-prg), where it is listed, because the 105 detail page itself was not opened.",
+  "REGA FAQ: property management and facility management FAL licences are for establishments; individuals need to pass the qualification programme for each activity. The cert chosen is the FAL brokerage/marketing licence for individuals; fee amounts not stated (marketing and advertising licences exempt from fees).",
+  "carbon-accounting alternative (GRI 'Reporting on Scope 3 Emissions', 199 €, 2 h) links to the GRI Academy course list page where it was seen; the course detail page (id=1103) was not opened.",
+  "IFRS ISSB e-learning: free with ifrs.org login, certificate after module assessments; total hours not stated (each module under one hour). World Bank/IFC ISSB course: free 3.5 h, certificate not stated, offered via UN SSE partner exchanges.",
+  "PRSA Certificate in Principles of PR: page does not say whether non-US students may apply; eligibility = PR or related majors, junior status/60 credits, apply within six months after graduation.",
+  "EDUCBA Coursera insurance courses (underwriting and claims alternatives) use Indian IRDAI regulation examples; flagged in their 'why'. Underwriting specialization hours null because the page is inconsistent (4 weeks vs 22-23 weeks).",
+  "government-relations has no alternative course: no Saudi GR officer course was found on reachable official pages (Qiwa JS-only, Muqeem DNS failure). Coursera Microsoft course hours = 20 from '2 weeks at 10 hours a week' (module times sum to 22).",
+  "Two guideline entries for esg-sustainability (GRI + GHG Protocol) and three for real-estate-fm (IFMA FMP, Taqeem licensing steps, REGA FAL activities). CII Certificate in Insurance site was not attempted for time; FA IFCE chapters used as the insurance guideline.",
+  "The insurance-claims second article URL (en.wikipedia.org/wiki/Claims_adjuster) redirects to the 'Insurance' article; the claims-adjusting section was used.",
+  "No usable Arabic/Saudi course was found for any of the 9 skills: Satr, Rwaq and Edraak searches returned nothing for Flutter/Swift/Kotlin/CCNA; Tuwaiq pages return 403; the Arabic Meta iOS/Android Coursera certificates now 404; the Mahara-Tech Arabic CCNA is closed. All picks are English.",
+  "Prices: docs.flutter.dev pathway, Firebase codelab, Apple Develop in Swift and Android Basics with Compose pages do not print a price; they are open official docs/tutorials with no paywall, so price was set to 'free'. Fiber U home page states 'All Fiber U self-study courses are free'.",
+  "Android Basics with Compose hours=100 is the sum of the 8 unit durations printed on the course page (10+21+15+28+9+10+3+4); the page gives no single total.",
+  "Networking Basics hours=22 comes from Cisco's own NetAcad page on cisco.com (https://www.cisco.com/site/us/en/learn/training-certifications/training/netacad/index.html), which also says the courses are free; the netacad.com page itself only rendered its title.",
+  "Meta iOS/Android Professional Certificates state '8 months at 7 hours a week' rather than an hour total, so hours=null.",
+  "5G for Everyone hours=10 from '1 week at 10 hours a week'; 4G Network Fundamentals hours=20 from '2 weeks at 10 hours a week'; IATA Flight Operations Management - Introduction hours=40 from the classroom version ('5-day (40 hours)'); prices there are USD 1,418-2,025.",
+  "Flutter cert=none: no Google page states a Flutter certification. Android cert=none: Google's Associate Android Developer page says 'This exam has been retired. We are no longer accepting new registrations.' (https://developers.google.com/training/certification/associate-android-developer).",
+  "Swift Certified User: Certiport's Certify page lists both 'App Development with Swift Associate' and 'App Development with Swift Certified User' and says candidates should have about 150 hours of instruction; no fee on the issuer page, so fee=null.",
+  "CCNA: Cisco says CCNA v2.0 starts 3 Feb 2027 with the same 200-301 code and fee; v1.1 topics are used for the guideline order.",
+  "mobile-networks cert=none because the Nokia Bell Labs 5G Associate (BL0-100, EUR 125 per search snippets only) and Huawei HCIA-5G pages could not be opened.",
+  "Aviation: aviation-ops and ground-handling share the IATA Airport Operations Foundation Diploma (DIPL-98) as certification because it is explicitly for 'Newcomers in Airport and Ground Operations'; the diploma page states no price. Course prices on IATA pages: Airport Operations Fundamentals USD 515 regular / 430 dev. nations; Passenger Ground Services USD 495 / 420; Airport Ramp Services with IGOM USD 600 / 505; DGR for Flight Dispatchers USD 170.",
+  "flight-dispatch: the GACA Aircraft Dispatcher Certificate requirements were read from the GACAR Part 65 v5.0 PDF (§65.45: age 21, knowledge test on Appendix C of Part 143 within 90 days of course graduation, practical test within 12 months, high school, English ICAO Level 4; §65.49: 2 years' experience or a GACAR Part 143 approved dispatcher course or an air-operator training programme). No full approved dispatcher course page could be opened (PSAA is reported licensed by GACA for dispatcher training but its site was not opened), so topPick is a narrow IATA dispatcher e-learning and the alternative is shared with aviation-ops.",
+  "people[] left empty for mobile-networks, fiber-optics and the three aviation skills: no individual with a self-controlled page was verified in time. Jeremy's IT Lab page does not give Jeremy's surname."
+ ],
+ "mergeNotes": [
+  "New fields: energy-sustainability, real-estate, aviation, communications. Insurance skills sit in the existing banking-risk field, mobile skills in software (prereq programming), telecom skills in cyber-cloud (prereq networking), so every prereq stays inside its field.",
+  "insurance-claims is named «تسوية المطالبات وتقدير الأضرار» because health-claims already owns the alias «المطالبات التأمينية».",
+  "routing-switching does not carry «CCNA»: networking already owns that alias.",
+  "ios-swift carries the alias «Swift», which can also match SWIFT bank-payment messages in a banking CV; drop it if that matters.",
+  "No job reaches the sample-CV limit (53%): see each job's sampleCvMatch (dropped by the builder before merge if not wanted).",
+  "Families insurance, mobile-dev, telecom-network and pr-communications have no real job yet (see demandEvidence); their skills and guides are complete."
+ ]
+}

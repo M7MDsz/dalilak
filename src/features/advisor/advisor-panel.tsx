@@ -185,7 +185,7 @@ export function AdvisorPanel({ phone, entered, glyphSlotRef, panelRef, glyphHidd
       aria-modal={phone ? true : undefined}
       className={cn(
         "fixed z-panel flex flex-col overflow-hidden bg-surface text-fg",
-        phone ? "inset-0 origin-bottom" : "inset-y-2 end-2 w-[420px] origin-bottom-left rounded-sheet border border-border shadow-float",
+        phone ? "kb-fit inset-0 origin-bottom" : "inset-y-2 end-2 w-[420px] origin-bottom-left rounded-sheet border border-border shadow-float",
         entered ? IN : phone ? OUT_PHONE : OUT_DESKTOP,
       )}
       data-entered={entered ? "" : undefined}
@@ -196,6 +196,8 @@ export function AdvisorPanel({ phone, entered, glyphSlotRef, panelRef, glyphHidd
       ref={panelRef}
       role="dialog"
     >
+      {/* phone: `kb-fit` (globals.css) shrinks the sheet to the visible box while the keyboard is up, so the composer
+          rides on the keyboard instead of hiding behind it (src/features/shared/keyboard.ts) */}
       <header className={cn("flex shrink-0 items-center gap-3 py-3 ps-4 pe-2.5", phone && "pt-[max(0.75rem,env(safe-area-inset-top))]")}>
         {/* the glyph slot never moves: the travelling glyph lands exactly here (the words beside it rise) */}
         <span className="inline-flex shrink-0" ref={glyphSlotRef}>

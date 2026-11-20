@@ -17,6 +17,28 @@ import type { FieldId, SkillId, SkillNodeState, StarCount, StarMap } from "@/lib
 export const GRID_COLUMNS = 12;
 /** Two neighbours in one tier keep their centres this many columns apart (their boxes never overlap). */
 const MIN_SEPARATION = 4;
+/** At most this many nodes side by side; a wider depth wraps onto more rows (see layoutOf). */
+const MAX_PER_ROW = 3;
+
+/**
+ * The rows of one depth, at most MAX_PER_ROW each, in data order, the later rows taking the extra node: wave 3 (21 Nov
+ * 2026) gives «أساسيات البرمجة» five children (HTML/CSS and Git, then the three mobile skills), «الشبكات» five and banking
+ * four, so the older skills keep the first row and the newer ones sit in the row under them.
+ */
+function wrapRow(ids: readonly SkillId[]): SkillId[][] {
+  const count = Math.ceil(ids.length / MAX_PER_ROW);
+  if (count <= 1) return [[...ids]];
+  const base = Math.floor(ids.length / count);
+  const extra = ids.length % count;
+  const rows: SkillId[][] = [];
+  let at = 0;
+  for (let r = 0; r < count; r++) {
+    const size = base + (r >= count - extra ? 1 : 0);
+    rows.push(ids.slice(at, at + size));
+    at += size;
+  }
+  return rows;
+}
 
 export interface PlacedSkill {
   readonly skill: SkillId;
@@ -98,7 +120,10 @@ function layoutOf(field: FieldId): FieldLayout {
 
   const centre = new Map<SkillId, number>();
   const tiers: PlacedSkill[][] = [];
-  byTier.forEach((ids, tier) => {
+  // a depth wider than three nodes wraps onto more rows; every row is a tier of the drawing (a line that crosses a row
+  // walks around its nodes, like any line spanning tiers)
+  const rows = byTier.flatMap((ids) => (ids ? wrapRow(ids) : []));
+  rows.forEach((ids, tier) => {
     let order = ids;
     let centres: number[];
     if (tier === 0) {
@@ -116,7 +141,8 @@ function layoutOf(field: FieldId): FieldLayout {
     } else {
       const want = (id: SkillId) => {
         const parents = getSkill(id).prereqs.map((p) => centre.get(p) ?? 6);
-        return parents.reduce((s, x) => s + x, 0) / parents.length;
+        // a root wrapped onto a second row has no prerequisite to follow: the middle
+        return parents.length === 0 ? 6 : parents.reduce((s, x) => s + x, 0) / parents.length;
       };
       // Order by where each node wants to be (data order breaks ties), so lines do not cross needlessly.
       order = [...ids].sort((a, b) => want(a) - want(b) || ids.indexOf(a) - ids.indexOf(b));

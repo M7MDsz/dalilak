@@ -67,9 +67,15 @@ function added<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
   return next;
 }
 
-export function CvShow({ run, outcome, onFinished }: { readonly run: ShowRun; readonly outcome: Outcome | null; readonly onFinished: () => void }): ReactNode {
+/**
+ * `compact` (20 Nov 2026, docs/ONBOARDING-FLOW.md): the same show as a card inside the onboarding chat: the phone layout
+ * at any width (the read document folds away once its sentences have flown), a shorter document window, no page height,
+ * and the card keeps its bottom in view as it grows (the chat thread scrolls, the page never moves).
+ */
+export function CvShow({ run, outcome, onFinished, compact = false }: { readonly run: ShowRun; readonly outcome: Outcome | null; readonly onFinished: () => void; readonly compact?: boolean }): ReactNode {
   const instant = useInstant();
-  const wide = useContentWide();
+  const contentWide = useContentWide();
+  const wide = compact ? false : contentWide;
   const user = useCurrentUser();
   const ok = outcome?.kind === "ok" ? outcome : null;
 
@@ -238,13 +244,20 @@ export function CvShow({ run, outcome, onFinished }: { readonly run: ShowRun; re
   const docOpen = wide || at < 2;
   const ringsRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (instant || at !== 4) return;
+    if (instant || at !== 4 || compact) return;
     ringsRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
-  }, [at, instant]);
+  }, [at, instant, compact]);
+  // compact: the card's bottom follows each stage inside the chat thread (it grows as the tray fills and the rings draw)
+  const endRef = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    if (!compact) return;
+    const timer = window.setTimeout(() => endRef.current?.scrollIntoView({ block: "end", behavior: instant ? "auto" : "smooth" }), 120);
+    return () => window.clearTimeout(timer);
+  }, [compact, at, landed.size, instant]);
 
   // ── status ────────────────────────────────────────────────────────────────────────────────────────────────────
   const skillCount = ok?.analysis.skills.length ?? 0;
-  const label = stageLine(stepId, skillCount, JOBS.length);
+  const label = stageLine(stepId, skillCount, JOBS.length, compact);
   const glyph: DaleelState = stepId === "done" ? "done" : stepId === "read" ? "thinking" : "working";
 
   const overlay = (
@@ -282,8 +295,9 @@ export function CvShow({ run, outcome, onFinished }: { readonly run: ShowRun; re
       as="section"
       aria-label={label}
       className={cn(
-        "rounded-sheet p-4 @min-[900px]/content:px-6 @min-[900px]/content:py-5",
-        "@min-[900px]/content:min-h-[calc(100dvh-var(--shell-top,5.5rem)-2.5rem)]",
+        compact
+          ? "rounded-card p-3.5"
+          : ["rounded-sheet p-4 @min-[900px]/content:px-6 @min-[900px]/content:py-5", "@min-[900px]/content:min-h-[calc(100dvh-var(--shell-top,5.5rem)-2.5rem)]"],
       )}
       contour="faint"
       data-testid={TID.cv.show}
@@ -304,7 +318,7 @@ export function CvShow({ run, outcome, onFinished }: { readonly run: ShowRun; re
               <span className="sr-only" role="status">
                 {label}
               </span>
-              <Roll className="min-w-0 text-title font-semibold @min-[900px]/content:text-h3" id={label}>
+              <Roll className={cn("min-w-0 text-title font-semibold", !compact && "@min-[900px]/content:text-h3")} id={label}>
                 <span aria-hidden className={stepId === "done" ? "text-fg" : "shimmer-text"}>
                   {label}
                 </span>
@@ -321,7 +335,7 @@ export function CvShow({ run, outcome, onFinished }: { readonly run: ShowRun; re
           >
             <div className={cn("min-h-0", !wide && "overflow-clip")}>
               <CvDocument
-                boxClassName="max-h-[min(50svh,26rem)] @min-[900px]/content:max-h-[calc(100dvh-var(--shell-top,5.5rem)-5rem)]"
+                boxClassName={compact ? "max-h-[min(34svh,15rem)]" : "max-h-[min(50svh,26rem)] @min-[900px]/content:max-h-[calc(100dvh-var(--shell-top,5.5rem)-5rem)]"}
                 boxRef={boxRef}
                 lines={run.lines}
                 lit={litNow}
@@ -387,9 +401,11 @@ export function CvShow({ run, outcome, onFinished }: { readonly run: ShowRun; re
           {/* the comparison with every job */}
           {/* scroll margin: clear of the phone tab bar, and of the desktop launcher in the bottom corner */}
           <div className="scroll-mb-[calc(var(--shell-bottom,4.5rem)+1rem)] [grid-area:rings] @min-[900px]/content:scroll-mb-24" ref={ringsRef}>
-            {at >= 4 && ranked.length > 0 ? <MatchRings keep={keep || at > 4} ranked={ranked} restored={at > 4 && !matchPlayed} /> : null}
+            {/* compact (the chat card): the best 24 rings, three short rows, instead of every job */}
+            {at >= 4 && ranked.length > 0 ? <MatchRings keep={keep || at > 4} ranked={compact ? ranked.slice(0, 24) : ranked} restored={at > 4 && !matchPlayed} /> : null}
           </div>
         </div>
+        <span aria-hidden className="block h-px scroll-mb-4" ref={endRef} />
       </SkillTagGroup>
     </Stage>
   );

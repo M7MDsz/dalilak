@@ -16,13 +16,19 @@ import { analyseCvLocal } from "../local-analyser";
 
 /** The CV text sent to a provider is cut here (a CV is far shorter; this only bounds a pasted wall of text). */
 const MODEL_INPUT_CHARS = 20_000;
-/** Pairs read from one reply (the catalogue has 38 skills). */
-const MAX_CANDIDATES = 38;
+/** Pairs read from one reply (at most one per catalogue skill). */
+const MAX_CANDIDATES = SKILL_IDS.length;
 
 type Candidate = { readonly skill: SkillId; readonly evidence: string };
 
-/** JSON Schema of the reply. Anthropic structured outputs need additionalProperties: false on every object. */
-function replySchema(strict: boolean): Record<string, unknown> {
+/**
+ * JSON Schema of the reply. Anthropic structured outputs need additionalProperties: false on every object. The skill id
+ * is a plain string, NOT an enum of the catalogue: with 114 ids Gemini refuses the schema («too much branching for
+ * serving», HTTP 400; CV-reader test, 21 Nov 2026), and a 400 cooled down every Gemini slot, so the onboarding and
+ * advisor chats went local for a minute after each CV. The ids are listed in the system prompt and checked by
+ * readCandidates (isSkillId).
+ */
+export function replySchema(strict: boolean): Record<string, unknown> {
   const closed = strict ? { additionalProperties: false } : {};
   return {
     type: "object",
@@ -31,7 +37,7 @@ function replySchema(strict: boolean): Record<string, unknown> {
         type: "array",
         items: {
           type: "object",
-          properties: { skill: { type: "string", enum: [...SKILL_IDS] }, evidence: { type: "string" } },
+          properties: { skill: { type: "string" }, evidence: { type: "string" } },
           required: ["skill", "evidence"],
           ...closed,
         },

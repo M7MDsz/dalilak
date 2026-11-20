@@ -31,6 +31,8 @@ export interface ProfileTrailProps {
   readonly values: Readonly<Record<OnboardingStepId, string | null>>;
   /** The question «دليلك» is waiting on (your position), or null. */
   readonly pending: OnboardingStepId | null;
+  /** Answers filled from the CV (docs/ONBOARDING-FLOW.md): tagged «من سيرتك». */
+  readonly fromCv?: ReadonlySet<OnboardingStepId>;
 }
 
 function stateOf(q: OnboardingStepId, values: ProfileTrailProps["values"], pending: OnboardingStepId | null): SlotState {
@@ -80,7 +82,7 @@ const NODE_PX = 22;
  * it the seven slots on their trail; at its foot the one real reward of this page, «تكسب +50 XP» (spec 8.1
  * `onboarding_completed`), which turns earned (and lands once) when the last answer is accepted.
  */
-export function ProfileCard({ name, avatar, values, pending }: ProfileTrailProps) {
+export function ProfileCard({ name, avatar, values, pending, fromCv }: ProfileTrailProps) {
   const { fresh, settled, settle } = useFreshFills(values);
   const states = ONBOARDING_STEP_IDS.map((q) => stateOf(q, values, pending));
   const filled = states.filter((s) => s === "filled").length;
@@ -131,7 +133,14 @@ export function ProfileCard({ name, avatar, values, pending }: ProfileTrailProps
               <li className="flex items-center gap-3.5" data-state={state} data-testid={TID.welcome.slot(q)} key={q} style={{ height: ROW }}>
                 <Node appear={fresh(q)} state={state} />
                 <div className="flex min-w-0 flex-1 flex-col">
-                  <span className={cn("text-small", state === "current" ? "font-semibold text-fg" : "text-fg-3")}>{getQuestion(q).slot}</span>
+                  <span className={cn("flex items-center gap-2 text-small", state === "current" ? "font-semibold text-fg" : "text-fg-3")}>
+                    {getQuestion(q).slot}
+                    {value && fromCv?.has(q) ? (
+                      <span className="rounded-full border border-border px-2 text-caption leading-5 text-fg-2" data-testid={`welcome-slot-cv-${q}`}>
+                        من سيرتك
+                      </span>
+                    ) : null}
+                  </span>
                   <span className="min-w-0 text-title leading-7 text-fg" data-welcome-answer={value ? q : undefined}>
                     {value ? (
                       <Roll className="max-w-full" id={value}>

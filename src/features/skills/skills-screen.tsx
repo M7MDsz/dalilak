@@ -40,10 +40,10 @@ type FieldChoice = FieldId | "all";
 /**
  * The landscape's placement (three columns, ≥ 1060 px of content): rows read in display order, heights balanced; wave 2's
  * nine fields add three rows of three (engineering · project controls · tourism, health · education · banking, legal ·
- * media · gaming).
+ * media · gaming); wave 3's four add a row of three (energy · real estate · aviation) and communications alone.
  */
 const LANDSCAPE =
-  "@min-[1060px]/content:grid-cols-3 @min-[1060px]/content:[grid-template-areas:'data_software_design'_'data_software_design'_'data_software_design'_'data_business_design'_'marketing_business_hr'_'marketing_professional_hr'_'marketing_professional_hr'_'product_cyber-cloud_sales-supply'_'product_cyber-cloud_sales-supply'_'engineering_project-controls_tourism-hospitality'_'engineering_project-controls_tourism-hospitality'_'health-admin_education_banking-risk'_'health-admin_education_banking-risk'_'legal_media_gaming'_'legal_media_gaming']";
+  "@min-[1060px]/content:grid-cols-3 @min-[1060px]/content:[grid-template-areas:'data_software_design'_'data_software_design'_'data_software_design'_'data_business_design'_'marketing_business_hr'_'marketing_professional_hr'_'marketing_professional_hr'_'product_cyber-cloud_sales-supply'_'product_cyber-cloud_sales-supply'_'engineering_project-controls_tourism-hospitality'_'engineering_project-controls_tourism-hospitality'_'health-admin_education_banking-risk'_'health-admin_education_banking-risk'_'legal_media_gaming'_'legal_media_gaming'_'energy-sustainability_real-estate_aviation'_'energy-sustainability_real-estate_aviation'_'communications_._.'_'communications_._.']";
 const AREA: Readonly<Record<FieldId, string>> = {
   data: "@min-[1060px]/content:[grid-area:data]",
   software: "@min-[1060px]/content:[grid-area:software]",
@@ -64,6 +64,11 @@ const AREA: Readonly<Record<FieldId, string>> = {
   legal: "@min-[1060px]/content:[grid-area:legal]",
   media: "@min-[1060px]/content:[grid-area:media]",
   gaming: "@min-[1060px]/content:[grid-area:gaming]",
+  // wave 3: a row of three, then communications
+  "energy-sustainability": "@min-[1060px]/content:[grid-area:energy-sustainability]",
+  "real-estate": "@min-[1060px]/content:[grid-area:real-estate]",
+  aviation: "@min-[1060px]/content:[grid-area:aviation]",
+  communications: "@min-[1060px]/content:[grid-area:communications]",
   professional: "@min-[1060px]/content:[grid-area:professional]",
 };
 

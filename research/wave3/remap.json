@@ -1,0 +1,54 @@
+{
+  "note": "Wave-3 postings whose own line names one of the new skills of new-careers.json (the research agents listed it under missingSkills because the skill did not exist yet). The line, verbatim from missingSkills[].evidence, becomes that skill's evidence; the named requirement is dropped so five stay; `field` moves the posting where the new skill is its core. Read by research/wave3/build.py and src/lib/data/data.test.ts. The mobile one: the only mobile posting kept (the two other mobile roles found were held as senior/lead in tech-jobs.json).",
+  "remap": {
+    "lamdax-mobile-flutter-intern-remote": {
+      "drop": "teamwork",
+      "add": {
+        "skill": "flutter",
+        "stars": 1,
+        "evidence": "Familiarity with Dart and Flutter, or a strong willingness to learn them."
+      },
+      "why": "The posting's own line on Dart and Flutter is the new flutter skill; teamwork dropped to keep five."
+    },
+    "accor-government-relations-supervisor-riyadh": {
+      "drop": "excel",
+      "field": "communications",
+      "add": {
+        "skill": "government-relations",
+        "stars": 1,
+        "evidence": "Hands-on experience with Qiwa, Muqeem, Absher Business, GOSI, Mudad, and other relevant government platforms."
+      },
+      "why": "The posting's own line on Qiwa, Muqeem and Absher Business is the new government-relations skill; excel dropped to keep five; field communications (a government-relations role)."
+    },
+    "qiddiya-analyst-government-relations-riyadh": {
+      "drop": "problem-solving",
+      "field": "communications",
+      "add": {
+        "skill": "government-relations",
+        "stars": 1,
+        "evidence": "Familiarity with platforms such as Qiwa, Muqeem, GOSI, Mudad, Absher, and Ministry of Commerce portals."
+      },
+      "why": "The posting's own line on Qiwa, Muqeem and Absher is the new government-relations skill; problem-solving dropped to keep five; field communications (a government-relations role)."
+    },
+    "jodayn-tamheer-internal-communications-riyadh": {
+      "drop": "event-planning",
+      "field": "communications",
+      "add": {
+        "skill": "corporate-communications",
+        "stars": 1,
+        "evidence": "Gather employee feedback and assist in evaluating internal communication effectiveness."
+      },
+      "why": "The posting's own line on internal communication is the new corporate-communications skill; event-planning dropped to keep five; field communications (an internal-communications role)."
+    },
+    "eram-media-content-creation-riyadh": {
+      "drop": "design-basics",
+      "field": "communications",
+      "add": {
+        "skill": "public-relations",
+        "stars": 1,
+        "evidence": "Monitor local, regional, and international media channels and identify important information, news, trends, and developments related to the Gas Business."
+      },
+      "why": "The posting's own line on media monitoring is the new public-relations skill; design-basics dropped to keep five; field communications (press releases and media monitoring)."
+    }
+  }
+}

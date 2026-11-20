@@ -6,7 +6,7 @@ import { answerText, companyCityLine, revealReasonText } from "@/lib/copy";
 import { FIELDS, JOBS, SKILLS, getField, getJob, getQuestion, getSkill } from "@/lib/data";
 import { canonicalStages, dreamCompany, pathSummary, rankByFit, recommend } from "@/lib/engine";
 import { QUESTION_IDS } from "@/lib/ids";
-import type { FieldId, JobId, OnboardingAnswers, QuestionId, SkillId, StarSlot } from "@/lib/types";
+import type { FieldId, JobId, OnboardingAnswers, QuestionId, SkillId, StarMap, StarSlot } from "@/lib/types";
 
 export interface RevealStageInfo {
   /** 1-based, canonical order (`reveal-path-node-{n}`). Before a CV this is also the map's displayed order. */
@@ -59,9 +59,10 @@ function jobCard(id: JobId): RevealJobCard {
   };
 }
 
-export function revealData(answers: OnboardingAnswers): RevealData {
-  const rec = recommend(answers);
-  const ranked = rankByFit(answers).filter((b) => !b.excluded);
+/** `stars`: the CV's skills when the user read a CV in onboarding (21 Nov 2026, owner: the path is built on the CV too). */
+export function revealData(answers: OnboardingAnswers, stars?: StarMap): RevealData {
+  const rec = recommend(answers, undefined, stars);
+  const ranked = rankByFit(answers, stars).filter((b) => !b.excluded);
   const top = ranked[0]?.score ?? 0;
   const chosen = new Set<JobId>([rec.recommended, ...rec.alternatives]);
   // "the ones that fit the answers stay stronger": the three chosen, and every job that scores close to the best

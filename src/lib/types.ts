@@ -350,7 +350,7 @@ export interface Application {
   readonly matchAtSend: number;
   /** The note as sent (template of 7.4, possibly edited by the user). */
   readonly note: string;
-  /** «مرفقة: {file name}» · «مرفقة: السيرة التجريبية» · «لا توجد سيرة مرفقة» (copy `cvAttachmentLine`). */
+  /** «مرفقة: {file name}» · «مرفقة: السيرة الجاهزة» · «لا توجد سيرة مرفقة» (copy `cvAttachmentLine`). */
   readonly cvLine: string;
   /** 40 when sent at a match of 60% or more, else 0 (spec 8.1). */
   readonly xpPaid: 0 | 40;
@@ -409,6 +409,11 @@ export interface OnboardingMessage {
   readonly from: "daleel" | "user";
   readonly text: string;
   readonly at: number;
+  /**
+   * 20 Nov 2026 (docs/ONBOARDING-FLOW.md): "cv" = «دليلك»'s CV card (the live analysis in the chat, drawn at rest from
+   * `user.cv` after a reload); its `text` is the plain summary for screen readers. Absent on every other line.
+   */
+  readonly card?: "cv";
 }
 
 /** Where the advisor (or a card, or a chip) can take the user. `hrefFor` in src/lib/routes.ts turns it into a URL. */
@@ -506,6 +511,17 @@ export interface OnboardingProgress {
   readonly misses: Readonly<Partial<Record<OnboardingStepId, number>>>;
   /** Saved when step 6 of the path reveal starts (spec 3.3). */
   readonly revealPlayed: boolean;
+  /**
+   * 20 Nov 2026, the CV step in front of the questions (docs/ONBOARDING-FLOW.md): "offered" with the greeting, then
+   * "analysed" (a CV with skills was recorded in the chat) or "skipped". Absent on accounts that started before it: they
+   * keep the seven questions only.
+   */
+  readonly cv?: "offered" | "analysed" | "skipped";
+  /**
+   * The answers the CV stated clearly (written into `answers` at once, so the profile card shows them filled), and
+   * whether the user has confirmed them («إيه، صح»). «لا، بعدّل» takes them out of `answers` again and drops this.
+   */
+  readonly cvPrefill?: { readonly slots: readonly OnboardingStepId[]; readonly confirmed: boolean };
 }
 
 /** The advisor thread and its in-flight marker (spec 3.14, 7.4). */

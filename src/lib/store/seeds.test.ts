@@ -194,7 +194,7 @@ describe("seed details", () => {
       manualStatus: "review",
       pinned: true,
       note: DEMO_NOTE,
-      cvLine: "مرفقة: السيرة التجريبية",
+      cvLine: "مرفقة: السيرة الجاهزة",
     });
     if (!app) throw new Error("no application");
     expect(applicationStatus(app, CLOCK.now + 10 * 60_000)).toBe("review");

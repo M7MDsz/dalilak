@@ -45,7 +45,7 @@ export function joinWithAnd(items: readonly string[]): string {
   }, "");
 }
 
-/** «وادي الغيم للبيانات · الرياض» (reveal cards, roadmap header, job cards and page; the tag «جهة تجريبية» is separate). */
+/** «وادي الغيم للبيانات · الرياض» (reveal cards, roadmap header, job cards and page). */
 export function companyCityLine(jobId: JobId): string {
   const job = getJob(jobId);
   return `${job.company} · ${getJobCity(job.city).name}`;
@@ -237,12 +237,12 @@ export function applicationNote(jobId: JobId, facts: UserFacts): string {
 }
 
 /**
- * Spec 3.8 field 6: «مرفقة: {file name}» · «مرفقة: السيرة التجريبية» · «لا توجد سيرة مرفقة». A pasted CV (no file name,
+ * Spec 3.8 field 6: «مرفقة: {file name}» · «مرفقة: السيرة الجاهزة» · «لا توجد سيرة مرفقة». A pasted CV (no file name,
  * not the sample) prints «مرفقة: نص السيرة» (ARCHITECTURE §17 open question 1, provisional).
  */
 export function cvAttachmentLine(cv: CvRecord | null): string {
   if (!cv) return "لا توجد سيرة مرفقة";
-  if (cv.isSample) return "مرفقة: السيرة التجريبية";
+  if (cv.isSample) return "مرفقة: السيرة الجاهزة";
   if (cv.fileName) return `مرفقة: ${cv.fileName}`;
   return "مرفقة: نص السيرة";
 }
@@ -288,7 +288,7 @@ export function targetChangedToast(jobId: JobId): string {
   return `هدفك الآن: ${getJob(jobId).title}`;
 }
 
-/** «قدّمت · {status} · محاكاة» (spec 3.8 applied chip, 7.6). */
+/** «قدّمت · {status}» (spec 3.8 applied chip). */
 export function appliedChip(status: ApplicationStatus): string {
-  return `قدّمت · ${APPLICATION_STATUS_COPY[status].label} · محاكاة`;
+  return `قدّمت · ${APPLICATION_STATUS_COPY[status].label}`;
 }

@@ -1073,9 +1073,15 @@ a.dm-peak:hover .dm-lb > b {
   border-radius: 24px 24px 0 0;
   border-width: 1.5px 0 0;
   box-shadow: none;
-  padding: 22px 18px 16px;
+  /* the bottom keeps clear of the tab bar's «دليلك» button, which stands 20 px above the bar (the layer lives inside
+     #app-content's stacking context, so the button paints over the sheet: it covered the bottom of «افتح الدليل») */
+  padding: 22px 18px 38px;
   gap: 10px;
   pointer-events: auto;
+}
+/* with the keyboard up the tab bar is gone (globals.css `kb-hide`) */
+html[data-keyboard] .dm-sheet-layer .dm-card {
+  padding-bottom: 16px;
 }
 .dm-sheet-layer .dm-card::before {
   content: "";
@@ -1135,6 +1141,9 @@ a.dm-peak:hover .dm-lb > b {
   position: absolute;
   top: 0;
   transform: translate(0, -50%);
+  /* hidden where the strip left the nodes (they stand ~40 px apart there, so labels beside them overlapped, worst on a
+     phone); each label fades in on the second half of its node's travel, once the nodes have spread out */
+  opacity: 0;
   white-space: nowrap;
   padding: 1px 6px 3px;
   border-radius: 7px;

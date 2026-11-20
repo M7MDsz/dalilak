@@ -237,8 +237,9 @@ export function Composer({
               {attachment}
             </motion.div>
           ) : null}
+          {/* the Enter / Shift+Enter hint means nothing on a touch keyboard: kept for screen readers, not painted */}
           {showHint ? (
-            <motion.span animate={{ opacity: 1 }} className="min-w-0 truncate ps-2 text-caption text-fg-3" exit={{ opacity: 0, transition: tween.exit }} id={`${id}-hint`} initial={{ opacity: 0 }} key="hint" transition={{ ...tween.fast, delay: 0.08 }}>
+            <motion.span animate={{ opacity: 1 }} className="min-w-0 truncate ps-2 text-caption text-fg-3 pointer-coarse:invisible" exit={{ opacity: 0, transition: tween.exit }} id={`${id}-hint`} initial={{ opacity: 0 }} key="hint" transition={{ ...tween.fast, delay: 0.08 }}>
               {keyHint}
             </motion.span>
           ) : null}

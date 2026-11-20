@@ -195,7 +195,9 @@ function MissingMark(): ReactNode {
 // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 /** Rail geometry: the line runs 17 px from the rail's inline-end edge; nodes are centred on it. */
-const RAIL = "relative w-[3.25rem] shrink-0 @min-[600px]/content:w-[5.25rem]";
+// On a phone the rail must hold «100%» beside its node (10 px + the 16 px node + the 6 px gap + the label): at 3.25rem
+// the label ran 5-9 px past the screen's edge.
+const RAIL = "relative w-[4.5rem] shrink-0 @min-[600px]/content:w-[5.25rem]";
 const LINE = "pointer-events-none absolute end-[17px] w-0 border-s-2 border-dotted border-border-strong";
 
 function QuestTrail({
@@ -256,7 +258,7 @@ function TrailNode({
   return (
     <span
       className={cn(
-        "absolute inset-x-0 z-raised flex items-center justify-end gap-2 pe-[10px]",
+        "absolute inset-x-0 z-raised flex items-center justify-end gap-1.5 pe-[10px]",
         top ? "top-0 -translate-y-1/2" : "bottom-0 translate-y-1/2",
       )}
     >

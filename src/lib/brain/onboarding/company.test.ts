@@ -5,11 +5,11 @@
 import { describe, expect, it } from "vitest";
 
 import { getCompany, getJob, getJobCity } from "@/lib/data";
-import { companyJob, jobsAtCompany, makeClock } from "@/lib/engine";
+import { companyJob, companyJobsOutOfReach, companyOtherFieldJob, jobsAtCompany, makeClock } from "@/lib/engine";
 import { COMPANY_IDS } from "@/lib/ids";
 import { appendOnboardingMessages, applyOnboardingTurn, newUser } from "@/lib/store/transitions";
 import type { OnboardingContext, OnboardingInput } from "@/lib/brain/protocol";
-import type { CompanyId, OnboardingAnswers, UserState } from "@/lib/types";
+import type { CompanyId, JobId, OnboardingAnswers, UserState } from "@/lib/types";
 
 import { onboardingContext, onboardingTurn, openingMessages, pendingQuestion, questionChips } from "./index";
 
@@ -134,8 +134,18 @@ describe("what «دليلك» says when a company is named", () => {
         expect(reply, id).toBe(
           `${short}، اختيار زين! بس ما عندي الحين وظيفة منهم في قائمتي، فبرسم مسارك لأقرب وظيفة تناسبك، وتقدر تغيّر الشركة من «ملفي» متى ما بغيت.`,
         );
+      } else if (job === null && companyJobsOutOfReach({ ...FIVE, company: id })) {
+        // it has jobs in the field, but all need more experience (21 Nov 2026): the next goal, never the path now
+        expect(reply, id).toBe(`${short} عندهم وظايف في مجالك، بس تبي خبرة أكثر. نخليها هدفك الجاي، وأرسم لك مسار يوصلك لها.`);
+      } else if (job === null && companyOtherFieldJob({ ...FIVE, company: id }) !== null) {
+        // its jobs are in another field: said positively, the path stays in the data field (21 Nov 2026)
+        const other = getJob(companyOtherFieldJob({ ...FIVE, company: id }) as JobId);
+        expect(other.field, id).not.toBe("data");
+        expect(reply, id).toMatch(new RegExp(`^${short}، اختيار زين! عندهم وظيفة «`));
+        expect(reply, id).toContain(`«${other.title}»`);
+        expect(reply, id).toContain("ومسارك الأساسي يبقى في البيانات والتحليل.");
       } else if (job === null) {
-        // it has jobs, but none in the field the user asked for: never aimed at another field (20 Nov 2026)
+        // it has jobs, but none in the field the user asked for and none within reach: never aimed at another field
         expect(jobsAtCompany(id).every((j) => getJob(j).field !== "data"), id).toBe(true);
         expect(reply, id).toBe(
           `${short}، اختيار زين! بس ما عندي الحين وظيفة منهم في المجال اللي تبيه، فبرسم مسارك لأقرب وظيفة تناسبك، ووظايفهم الثانية تلقاها في «الوظائف».`,

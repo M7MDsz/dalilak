@@ -13,6 +13,7 @@ import type { Skill, SkillId } from "@/lib/types";
 
 import { EXPANSION_SKILLS } from "./expansion/skills";
 import { WAVE2_SKILLS } from "./wave2/skills";
+import { WAVE3_SKILLS } from "./wave3/skills";
 
 /** The 38 skills of spec 9.2. */
 const SPEC_SKILLS: readonly Skill[] = [
@@ -398,8 +399,11 @@ const SPEC_SKILLS: readonly Skill[] = [
   },
 ];
 
-/** Every skill (the 38 of spec 9.2, the expansion's 16 and wave 2's 39 in ./wave2/skills.ts), in SKILL_IDS order. */
-export const SKILLS: readonly Skill[] = [...SPEC_SKILLS, ...EXPANSION_SKILLS, ...WAVE2_SKILLS].sort(
+/**
+ * Every skill (the 38 of spec 9.2, the expansion's 16, wave 2's 39 in ./wave2/skills.ts and wave 3's 21 in
+ * ./wave3/skills.ts), in SKILL_IDS order.
+ */
+export const SKILLS: readonly Skill[] = [...SPEC_SKILLS, ...EXPANSION_SKILLS, ...WAVE2_SKILLS, ...WAVE3_SKILLS].sort(
   (a, b) => SKILL_IDS.indexOf(a.id) - SKILL_IDS.indexOf(b.id),
 );
 

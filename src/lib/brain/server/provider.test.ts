@@ -196,7 +196,7 @@ describe("cooldown per slot (rule 11, part 7)", () => {
       markProviderFailure("timeout", "gemini-1");
       markProviderFailure("timeout", "gemini-2"); // another slot's timeout does not count for gemini-1
     });
-    expect(chainState().slots.map((s) => s.coolingDownMs)).toEqual([0, 0, 0]);
+    expect(chainState().slots.map((s) => s.coolingDownMs)).toEqual([0, 0, 0, 0, 0]); // five slots since 21 Nov 2026 (gemini-1..4, anthropic);
     expect(chainState().slots[0]?.lastFailure?.failure).toBe("timeout");
     quietly(() => markProviderFailure("timeout", "gemini-1"));
     expect(chainState().slots[0]?.coolingDownMs).toBeGreaterThan(0);

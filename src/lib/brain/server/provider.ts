@@ -8,6 +8,9 @@
 //   gemini-2   GEMINI_API_KEY_2 (a key from ANOTHER Google project: the free limit is counted per project), or until it
 //              is set, GEMINI_API_KEY again; with GEMINI_MODEL_2 (default "gemini-3.1-flash-lite": each model has its
 //              own daily limit). Left out when it would be the very same key and model as gemini-1.
+//   gemini-3   GEMINI_API_KEY_3 with GEMINI_MODEL (21 Nov 2026, owner: "once the limit is reached, use the next key"),
+//   gemini-4   GEMINI_API_KEY_4 with GEMINI_MODEL; each skipped while empty. A key that hits its limit (429) cools down
+//              and the next one answers the same reply; it is tried again when its cooldown ends.
 //   anthropic  ANTHROPIC_API_KEY with ANTHROPIC_MODEL (default "claude-haiku-5-5", STACK-NOTES 6.2)
 //   then the built-in brain.
 // AI_PROVIDER gemini = the two Gemini slots only; anthropic = Claude only; local = none; auto (or anything else) = all.
@@ -73,6 +76,8 @@ function slotPlans(): SlotPlan[] {
   const s = scope();
   const key1 = envValue("GEMINI_API_KEY");
   const key2 = envValue("GEMINI_API_KEY_2");
+  const key3 = envValue("GEMINI_API_KEY_3");
+  const key4 = envValue("GEMINI_API_KEY_4");
   const model1 = envValue("GEMINI_MODEL") ?? DEFAULT_GEMINI_MODEL;
   const model2 = envValue("GEMINI_MODEL_2") ?? DEFAULT_GEMINI_MODEL_2;
   const geminiScope = s === "auto" || s === "gemini";
@@ -89,6 +94,18 @@ function slotPlans(): SlotPlan[] {
       configured: (key2 ?? key1) !== null,
       inScope: geminiScope,
       duplicate: key2 === null && key1 !== null && model2 === model1,
+    },
+    {
+      slot: { id: "gemini-3", provider: "gemini", model: model1, keyEnv: "GEMINI_API_KEY_3", modelEnv: "GEMINI_MODEL" },
+      configured: key3 !== null,
+      inScope: geminiScope,
+      duplicate: key3 !== null && (key3 === key1 || key3 === key2),
+    },
+    {
+      slot: { id: "gemini-4", provider: "gemini", model: model1, keyEnv: "GEMINI_API_KEY_4", modelEnv: "GEMINI_MODEL" },
+      configured: key4 !== null,
+      inScope: geminiScope,
+      duplicate: key4 !== null && (key4 === key1 || key4 === key2 || key4 === key3),
     },
     {
       slot: { id: "anthropic", provider: "anthropic", model: envValue("ANTHROPIC_MODEL") ?? DEFAULT_ANTHROPIC_MODEL, keyEnv: "ANTHROPIC_API_KEY", modelEnv: "ANTHROPIC_MODEL" },

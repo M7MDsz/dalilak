@@ -1,21 +1,21 @@
-// Owner: applications. The strings of spec 3.9 that only this screen uses, verbatim. Shared strings (status labels and
-// notes, the banner, «جهة تجريبية») come from @/lib/copy.
+// Owner: applications. The strings of spec 3.9 that only this screen uses. Shared strings (status labels and notes, the
+// banner) come from @/lib/copy.
 import { formatPercent } from "@/lib/format";
 
 export const APPLICATIONS_COPY = {
   heading: "طلباتي",
   subline: "تابع كل طلب قدّمته.",
-  /** The three-step track: «أُرسل» → «قيد المراجعة» → «النتيجة». */
-  track: ["أُرسل", "قيد المراجعة", "النتيجة"] as const,
+  /** The practice job's three-step track, the user's own progress: «محفوظ» → «جاهز» → «الاستعداد». */
+  track: ["محفوظ", "جاهز", "الاستعداد"] as const,
   numberLabel: "رقم الطلب",
   sentPrefix: "قدّمت",
   matchThen: "مطابقتك عند التقديم",
   matchNow: "مطابقتك الآن",
   byAdvisor: "قدّم عنك دليلك",
-  /** A real job's application (20 Nov 2026): prepared here, sent by the user from the posting. */
+  /** A real job's application: prepared here, sent by the user from the posting. */
   prepared: "جاهز للإرسال",
   openJob: "عرض الوظيفة",
-  advance: "محاكاة: انقل للحالة التالية",
+  advance: "انقل للخطوة التالية",
   seeGap: "شاهد الفجوة",
   emptyTitle: "لم تقدّم على أي وظيفة بعد.",
   emptyBody: "ابدأ بالوظائف الأقرب لمهاراتك، أو اطلب من دليلك أن يقدّم عنك.",

@@ -1,5 +1,5 @@
 "use client";
-// Owner: applications. The three-step track of spec 3.9 («أُرسل» → «قيد المراجعة» → «النتيجة»), drawn in Darb's trail
+// Owner: applications. The three-step track of spec 3.9 («محفوظ» → «جاهز» → «الاستعداد»), drawn in Darb's trail
 // language: the covered stretch is a solid ink line, the way ahead is dotted, and one marker stands on the current step.
 // `status-advance` (playbook 3.7): when the status moves on, the solid line draws to the next step (growing from the
 // inline-start edge) and the marker rides its head there (one shared layoutId, the same tween as the line, so it never

@@ -10,7 +10,8 @@ import { useState, type ReactNode } from "react";
 import { IconCheck, IconChevronDown, IconExternal } from "@/components/icons";
 import { Collapse } from "@/components/motion";
 import { cn } from "@/components/ui";
-import { dayMonth, hoursText } from "@/lib/copy";
+import { hoursText } from "@/lib/copy";
+import { formatNumber } from "@/lib/format";
 import type { GuideArticle, GuideCertification, GuideCourse, GuidePerson, GuidePersonLinks } from "@/lib/data";
 
 import { COURSE_COPY, certFeeLine, othersLine, profileLinkLabel } from "./copy";
@@ -326,7 +327,7 @@ export function PlanStepper({ steps }: { readonly steps: readonly { readonly id:
                 s.state === "current" ? "bg-solid text-on-solid" : s.state === "done" ? "bg-ok-bg text-ok-fg" : "border border-border-strong",
               )}
             >
-              {s.state === "done" ? <IconCheck size={16} waypoint="off" /> : (i + 1).toLocaleString("ar-SA")}
+              {s.state === "done" ? <IconCheck size={16} waypoint="off" /> : formatNumber(i + 1)}
             </span>
             {COURSE_COPY.plan[s.id]}
           </span>
@@ -360,7 +361,7 @@ export function PlanCard({
       data-testid={testId}
     >
       <h2 className="flex items-center gap-2 text-title text-fg">
-        {state === "done" ? <IconCheck className="text-ok-fg" size={20} waypoint="off" /> : <span className="text-fg-3">{n.toLocaleString("ar-SA")}</span>}
+        {state === "done" ? <IconCheck className="text-ok-fg" size={20} waypoint="off" /> : <span className="text-fg-3">{formatNumber(n)}</span>}
         <span aria-hidden className="text-fg-3">
           ·
         </span>
@@ -414,7 +415,7 @@ function ProfileIcons({ links, name }: { readonly links: GuidePersonLinks; reado
         return (
           <OutLink
             aria-label={label}
-            className="inline-grid size-9 place-items-center rounded-full border border-border text-fg-2 transition-[border-color,color] duration-200 hover:border-fg hover:text-fg"
+            className="tap-area relative inline-grid size-9 place-items-center rounded-full border border-border text-fg-2 transition-[border-color,color] duration-200 hover:border-fg hover:text-fg"
             href={href}
             key={kind}
             title={label}
@@ -454,12 +455,6 @@ function PersonProfiles({ person }: { readonly person: GuidePerson }): ReactNode
 
 // ── «الشهادة اللي تثبت مهارتك» ──────────────────────────────────────────────────────────────────────────────────────
 
-/** «20 نوفمبر» from an ISO date. */
-function checkedOn(iso: string): string {
-  const [y, m, d] = iso.split("-").map(Number);
-  return dayMonth(new Date(y ?? 2026, (m ?? 1) - 1, d ?? 1).getTime());
-}
-
 function Chip({ children, strong = false }: { readonly children: ReactNode; readonly strong?: boolean }): ReactNode {
   return (
     <span className={cn("inline-flex h-7 items-center rounded-full border px-2.5 text-small font-medium whitespace-nowrap", strong ? "border-fg text-fg" : "border-border text-fg-2")}>
@@ -470,7 +465,7 @@ function Chip({ children, strong = false }: { readonly children: ReactNode; read
 
 /**
  * The certificate block: issuer, name, «رسمي» + exam code + level chips, why it counts, the fee as the official page
- * states it («الرسوم: … (حسب الموقع الرسمي، 20 نوفمبر)»), and the two links (how to prepare, the certificate's page).
+ * states it («الرسوم: … (حسب الموقع الرسمي)»), and the two links (how to prepare, the certificate's page).
  * When the skill has no recognised certificate it says so and gives the practical proof instead.
  */
 export function CertificateCard({ cert }: { readonly cert: GuideCertification }): ReactNode {
@@ -495,7 +490,7 @@ export function CertificateCard({ cert }: { readonly cert: GuideCertification })
       </section>
     );
   }
-  const fee = certFeeLine(cert.fee, cert.feeVaries, checkedOn(cert.checkedAt));
+  const fee = certFeeLine(cert.fee, cert.feeVaries);
   return (
     <section aria-labelledby="guide-cert" className="flex flex-col gap-4 rounded-card border border-border bg-surface p-card" data-kind="official" data-testid="course-certification">
       <h2 className="text-title text-fg" id="guide-cert">

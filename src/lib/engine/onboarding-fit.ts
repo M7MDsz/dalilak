@@ -13,10 +13,12 @@ import type {
   OnboardingAnswers,
   Recommendation,
   RevealReason,
+  StarMap,
   UserFacts,
 } from "@/lib/types";
 
 import { jobsAtCompany } from "./companies";
+import { matchPercent } from "./match";
 
 /** Spec 4.6 "Major → fields": primary, then secondary; `other` has none. */
 const MAJOR_FIELDS: Readonly<Record<MajorOption, readonly [JobFieldId, JobFieldId] | null>> = {
@@ -49,6 +51,19 @@ function bandIndex(band: ExperienceBand): number {
 
 function userBand(answers: OnboardingAnswers): ExperienceBand {
   return BAND_OF_EXPERIENCE[answers.experience ?? "none"];
+}
+
+/** The user's experience band (spec 4.6): none / under1 → entry, 1to3 → junior, over3 → mid (unanswered: entry). */
+export function userBandOf(answers: OnboardingAnswers): ExperienceBand {
+  return userBand(answers);
+}
+
+/**
+ * 21 Nov 2026 (tester): a job is within reach when its band is at most one above the user's (entry → entry or junior;
+ * junior → up to mid). A beginner who names a company is never aimed at its senior job.
+ */
+export function withinReach(jobId: JobId, answers: OnboardingAnswers): boolean {
+  return bandIndex(getJob(jobId).band) - bandIndex(userBand(answers)) <= 1;
 }
 
 function majorFields(answers: OnboardingAnswers): readonly [JobFieldId, JobFieldId] | null {
@@ -85,11 +100,22 @@ function termsOf(job: Job, answers: OnboardingAnswers): FitBreakdown["terms"] {
   return { interest, major, experience, city, priority };
 }
 
-/** The five terms of 4.6 for one job (interest 40/30/0, major 25/12/0, experience 15/7/0, city 10/6/0, priority 10/0) and the education gate. */
-export function fitBreakdown(jobId: JobId, answers: OnboardingAnswers): FitBreakdown {
+/**
+ * 20 Nov 2026 (docs/ONBOARDING-FLOW.md): the CV term, added to the score when the user's real stars are known (a CV read
+ * in onboarding): the match with those stars / 10, rounded (0-10). It never outweighs the answers (interest alone is 40).
+ */
+export function cvFitPoints(job: Job, stars: StarMap | undefined): number {
+  return stars === undefined ? 0 : Math.round(matchPercent(job.requirements, stars) / 10);
+}
+
+/**
+ * The five terms of 4.6 for one job (interest 40/30/0, major 25/12/0, experience 15/7/0, city 10/6/0, priority 10/0) and the
+ * education gate; with `stars` (a CV), the CV term (0-10) is added to the score (the terms stay the five of 4.6).
+ */
+export function fitBreakdown(jobId: JobId, answers: OnboardingAnswers, stars?: StarMap): FitBreakdown {
   const job = getJob(jobId);
   const terms = termsOf(job, answers);
-  const score = terms.interest + terms.major + terms.experience + terms.city + terms.priority;
+  const score = terms.interest + terms.major + terms.experience + terms.city + terms.priority + cvFitPoints(job, stars);
   const excluded = answers.education !== undefined && GATED_EDUCATION.has(answers.education) && job.band === "mid";
   return { jobId, score, terms, excluded };
 }
@@ -105,8 +131,8 @@ export function compareFit(a: FitBreakdown, b: FitBreakdown): number {
 }
 
 /** Jobs not excluded by the gate, highest score first; ties: higher interest term, lower experience band, data order. */
-export function rankByFit(answers: OnboardingAnswers): readonly FitBreakdown[] {
-  return JOB_IDS.map((id) => fitBreakdown(id, answers))
+export function rankByFit(answers: OnboardingAnswers, stars?: StarMap): readonly FitBreakdown[] {
+  return JOB_IDS.map((id) => fitBreakdown(id, answers, stars))
     .filter((f) => !f.excluded)
     .sort(compareFit);
 }
@@ -148,16 +174,17 @@ export type CompanyJobs = (id: CompanyId) => readonly JobId[];
  * (the company is asked before «الأولوية», and «دليلك» names this job in his reply right then, so the reveal must land on
  * the same one); a job the education gate would leave out comes only after the others (the user chose the company).
  */
-export function companyJob(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobsAtCompany): JobId | null {
+export function companyJob(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobsAtCompany, stars?: StarMap): JobId | null {
   const company = answers.company;
   if (company === undefined || company === "none" || !isCompanyId(company)) return null;
   // 20 Nov 2026: only the company's jobs in the fields the user asked for (a websites user who names Tamara is not sent
   // to its collections job); none there → null, and the ranking decides as if no company was named.
   const wanted = wantedFields(answers);
-  const ids = jobsAt(company).filter((id) => wanted === null || wanted.has(getJob(id).field));
+  // and only the ones within reach of the user's experience (21 Nov 2026: no senior job for a beginner)
+  const ids = jobsAt(company).filter((id) => (wanted === null || wanted.has(getJob(id).field)) && withinReach(id, answers));
   if (ids.length === 0) return null;
   const withoutPriority: OnboardingAnswers = { ...answers, priority: undefined };
-  const fits = ids.map((id) => fitBreakdown(id, withoutPriority));
+  const fits = ids.map((id) => fitBreakdown(id, withoutPriority, stars));
   fits.sort((a, b) => Number(a.excluded) - Number(b.excluded) || compareFit(a, b));
   return fits[0]?.jobId ?? null;
 }
@@ -166,10 +193,11 @@ export function companyJob(answers: OnboardingAnswers, jobsAt: CompanyJobs = job
  * Recommended (rank 1), alternative 1 (rank 2), alternative 2 (best remaining job of another field) and fitReasons(recommended).
  * When the user named a company that has a job in the data, that job is the recommended one (the path reveal ends on it)
  * and the ranking's best two others are the alternatives; otherwise the ranking decides, as before.
+ * `stars`: the user's real stars when a CV was read in onboarding (the CV term of `fitBreakdown`).
  */
-export function recommend(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobsAtCompany): Recommendation {
-  const ranked = rankByFit(answers);
-  const aimed = companyJob(answers, jobsAt);
+export function recommend(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobsAtCompany, stars?: StarMap): Recommendation {
+  const ranked = rankByFit(answers, stars);
+  const aimed = companyJob(answers, jobsAt, stars);
   if (aimed !== null) {
     const rest = ranked.filter((f) => f.jobId !== aimed);
     const field = getJob(aimed).field;
@@ -185,6 +213,30 @@ export function recommend(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobs
   const third = ranked.slice(2).find((f) => getJob(f.jobId).field !== field) ?? ranked[2];
   if (third === undefined) throw new Error("engine: no second alternative");
   return { recommended: first.jobId, alternatives: [second.jobId, third.jobId], reasons: fitReasons(first.jobId, answers) };
+}
+
+/**
+ * The company has jobs in the fields the user asked for, but none within reach of their experience (all more senior):
+ * «دليلك» says so honestly and the path goes to the best reachable job (21 Nov 2026).
+ */
+export function companyJobsOutOfReach(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobsAtCompany): boolean {
+  const company = answers.company;
+  if (company === undefined || company === "none" || !isCompanyId(company)) return false;
+  const wanted = wantedFields(answers);
+  const inField = jobsAt(company).filter((id) => wanted === null || wanted.has(getJob(id).field));
+  return inField.length > 0 && inField.every((id) => !withinReach(id, answers));
+}
+
+/**
+ * 21 Nov 2026 (tester, «مهارة» first in every field): the company's best job OUTSIDE the fields the user asked for that is
+ * within reach of their experience (data order), or null. The path stays in the user's field; «دليلك» names this job
+ * positively and it is pinned first among the map's jobs.
+ */
+export function companyOtherFieldJob(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobsAtCompany): JobId | null {
+  const company = answers.company;
+  if (company === undefined || company === "none" || !isCompanyId(company)) return null;
+  const wanted = wantedFields(answers);
+  return jobsAt(company).find((id) => (wanted === null || !wanted.has(getJob(id).field)) && withinReach(id, answers)) ?? null;
 }
 
 /** The company the user has in mind, with its jobs in the data and the one the path aims at. */

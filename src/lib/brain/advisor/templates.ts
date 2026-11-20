@@ -44,7 +44,7 @@ export const TOOL_STATUS: Readonly<Record<ToolName, string>> = {
 };
 
 /**
- * Step 1 «أفتح نموذج التقديم…» · steps 2-4 «أعبّي بياناتك…» · step 5 «أرسل الطلب…» (a real posting: «أجهّز الطلب…», it is
+ * Step 1 «أفتح نموذج التقديم…» · steps 2-4 «أعبّي بياناتك…» · step 5 «أحفظ الطلب…» (a real posting: «أجهّز الطلب…», it is
  * prepared, never sent by «دليلك») · 0 and 6: null (7.4).
  */
 export function applyStatusLine(step: ApplyStep, real = false): string | null {
@@ -56,7 +56,7 @@ export function applyStatusLine(step: ApplyStep, real = false): string | null {
     case 4:
       return "أعبّي بياناتك…";
     case 5:
-      return real ? "أجهّز الطلب…" : "أرسل الطلب…";
+      return real ? "أجهّز الطلب…" : "أحفظ الطلب…";
     default:
       return null;
   }
@@ -151,14 +151,6 @@ export function blockedActionReply(action: AdvisorAction, facts: UserFacts): { r
 
 const pct = (n: number): string => `${formatNumber(n)}%`;
 
-/**
- * The honesty sentence after applying to the PRACTICE job (5.5 rule 16; 20 Nov 2026: the simulated multi-site step is
- * gone, and this says what happens on a real job instead).
- */
-export const HONESTY_APPLY = "وللأمانة: ذي وظيفة تدريبية، وما وصل طلبك لأي جهة. في الوظائف الحقيقية أفتح لك الإعلان الأصلي عشان ترسله.";
-/** The jobs sentence, the first time jobs come up in a thread (5.1, 5.9): real postings, dated, may have closed. */
-export const DISCLOSE_JOBS = "وللعلم: ترى الوظائف هنا إعلانات حقيقية جمعتها في 20 نوفمبر، ويمكن بعضها تسكّر بعدها.";
-
 /** Interest labels inside the why-path sentence: «يوافق اهتمامك بالأرقام والبيانات». */
 function interestPhrase(reason: Extract<RevealReason, { kind: "interest" }>): string {
   const label = optionLabel("interest", reason.interest) ?? "";
@@ -218,7 +210,7 @@ export const T = {
   openPathBeforeCv: (): string => "تفضّل، هذا مسارك. وأول خطوة فيه ترفع سيرتك الذاتية.",
   openPathComplete: (): string => "تفضّل، هذا مسارك، وخلّصته كله.",
   openCv: (): string =>
-    "أبشر. فتحت لك صفحة السيرة: ارفع ملف PDF أو Word، أو الصق النص. وإذا ما هي جاهزة جرّب السيرة التجريبية.",
+    "أبشر. فتحت لك صفحة السيرة: ارفع ملف PDF أو Word، أو الصق النص. وإذا ما هي جاهزة جرّب السيرة الجاهزة عندي.",
   openPage: (page: string): string => `تفضّل، فتحت لك ${page}.`,
 
   // ── Jobs ───────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -227,8 +219,6 @@ export const T = {
   searchOne: (title: string, match: number): string => `لقيت وظيفة وحدة: ${q(title)}، ومطابقتك معها ${pct(match)}.`,
   searchNone: (): string => "ما لقيت وظائف بذي المواصفات. هذي أقرب ثلاث لمهاراتك.",
   searchShowed: (): string => "فتحت لك القائمة.",
-  searchShowedAndDisclosed: (): string =>
-    "فتحت لك القائمة، وللعلم: ترى الوظائف هنا إعلانات حقيقية جمعتها في 20 نوفمبر، ويمكن بعضها تسكّر بعدها.",
   bestJob: (title: string, match: number, t2: string, t3: string): string =>
     `أنسب وظيفة لمهاراتك الحين ${q(title)} بمطابقة ${pct(match)}، وبعدها ${q(t2)} و${q(t3)}.`,
   bestJobNoStars: (title: string): string =>
@@ -246,11 +236,14 @@ export const T = {
   gapNone: (title: string): string => `ما ينقصك شي لوظيفة ${q(title)}. مطابقتك 100%.`,
 
   // ── Applying (apply_to_job) ────────────────────────────────────────────────────────────────────────────────────
-  /** The PRACTICE job (the demo's «محلل بيانات»): saved in Dalilak, nothing reaches anyone, and it says so. */
+  /**
+   * The PRACTICE job (the demo's «محلل بيانات»): saved in Dalilak only. No company stands behind it, so the line says it
+   * was saved, never that it was sent, received or is under review.
+   */
   applySent: (title: string, number: string, match: number, xp: number): string =>
     xp > 0
-      ? `تم، قدّمت لك على ${q(title)} برقم ${number} ومطابقتك ${pct(match)}، وكسبت ${formatNumber(xp)} XP. ${HONESTY_APPLY} تقدر تتابعه من «طلباتي».`
-      : `تم، قدّمت لك على ${q(title)} برقم ${number} ومطابقتك ${pct(match)}، وبدون نقاط لأن المطابقة أقل من 60%. ${HONESTY_APPLY} تقدر تتابعه من «طلباتي».`,
+      ? `حفظت طلبك على ${q(title)} في «طلباتي» برقم ${number} ومطابقتك ${pct(match)}، وكسبت ${formatNumber(xp)} XP.`
+      : `حفظت طلبك على ${q(title)} في «طلباتي» برقم ${number} ومطابقتك ${pct(match)}، وبدون نقاط لأن المطابقة أقل من 60%.`,
   /**
    * A REAL posting (20 Nov 2026): «دليلك» filled and saved it, the user sends it from the original posting. He never says
    * he sent it: «جهّزت»; the button and the copied note are named.
@@ -260,6 +253,19 @@ export const T = {
       ? `أبشر، جهّزت طلبك على ${q(title)} عند ${company} برقم ${number} ومطابقتك ${pct(match)}، وكسبت ${formatNumber(xp)} XP. الإرسال عليك: اضغط «افتح الإعلان الأصلي وقدّم»، وأنسخ لك رسالة التقديم عشان تلصقها هناك. وتلقاه في «طلباتي».`
       : `أبشر، جهّزت طلبك على ${q(title)} عند ${company} برقم ${number} ومطابقتك ${pct(match)}، وبدون نقاط لأن المطابقة أقل من 60%. الإرسال عليك: اضغط «افتح الإعلان الأصلي وقدّم»، وأنسخ لك رسالة التقديم عشان تلصقها هناك. وتلقاه في «طلباتي».`,
   applyWhich: (): string => "أبشر. على أي وظيفة؟ هذي أقرب ثلاث لمهاراتك.",
+  /** Several jobs fit the words of an apply request (21 Nov 2026): ask, never apply. */
+  applyWhichOf: (): string => "لقيت أكثر من وظيفة تطابق اللي قلته. على أي وحدة أقدّم لك؟",
+  /** A company named in an apply request, with its jobs in the app to choose from (none of them named by title). */
+  applyCompanyWhich: (company: string, count: number): string =>
+    count === 1
+      ? `عند ${company} وظيفة وحدة في المنصة. أقدّم لك عليها؟ اضغط «قدّم على ذي» إذا تبيها.`
+      : `عند ${company} ${countNoun(count, "job", "object")} في المنصة. على أي وحدة أقدّم لك؟`,
+  /** A company named in an apply request that has no job in the app: said plainly, with its careers page when known. */
+  applyCompanyNone: (company: string, url: string | null): string =>
+    url
+      ? `ما عندي الحين وظيفة من ${company} في المنصة، فما أقدر أقدّم لك على شي عندهم. تقدر تشوف وظايفهم في صفحة التوظيف حقتهم: ${url}`
+      : `ما عندي الحين وظيفة من ${company} في المنصة، فما أقدر أقدّم لك على شي عندهم، وما عندي رابط صفحة التوظيف حقتهم.`,
+  applyCompanyNoneTail: (): string => "وهذي أقرب ثلاث وظايف لمهاراتك هنا، لو تبي تشوفها.",
   applyLowMatch: (match: number): string =>
     `مطابقتك مع ذي الوظيفة ${pct(match)} بس، أقل من 60%. الأحسن نسدّ الفجوة أول. تبيني أقدّم ولو كذا؟`,
   applyOffer: (title: string): string => `أقدّم لك على ${q(title)}؟`,
@@ -326,6 +332,12 @@ export const T = {
     lead
       ? `أحسن مكان تتعلّمها منه ${q(top)} من ${provider}، ${facts}.`
       : `أحسن مكان تتعلّم منه ${skill}: ${q(top)} من ${provider}، ${facts}.`,
+  /** «بالعربي»: the guide's course in that language when it is not the top pick (21 Nov 2026). */
+  guideInLang: (skill: string, lang: "ar" | "en", top: string, provider: string, facts: string): string =>
+    `${lang === "ar" ? "بالعربي" : "بالإنجليزي"}، أحسن ما عندي لـ${skill} ${q(top)} من ${provider}، ${facts}.`,
+  /** «بالعربي» and the guide has no course in that language: said plainly, then the top pick. */
+  guideNoLang: (skill: string, lang: "ar" | "en"): string =>
+    `للأمانة ما في دليل ${skill} كورس ${lang === "ar" ? "بالعربي" : "بالإنجليزي"}.`,
   /** The pick's reason, from the data. */
   guideWhy: (why: string): string => `ليش هو؟ ${why}`,
   /** The tails: `guide` is the guide just opened, or null when it is already on screen (5.2: nothing to open). */
@@ -387,10 +399,10 @@ export const T = {
   badgesAll: (): string => "جمعت الشارات كلها. ما شاء الله عليك.",
   applicationsNone: (): string => "للحين ما قدّمت على أي وظيفة. لو تبي أقدّم عنك.",
   applicationsOne: (title: string, status: string): string =>
-    `عندك طلب واحد: ${q(title)}، وحالته الحين ${q(status)}. وللتذكير: متابعة الطلبات هنا محاكاة، وما فيه جهة حقيقية تراجعه.`,
+    `عندك طلب واحد: ${q(title)}، وحالته الحين ${q(status)}.`,
   applicationsMore: (count: number, title: string, status: string): string =>
-    `عندك ${countNoun(count, "application", "object")}، وآخرها ${q(title)} وحالته ${q(status)}. وللتذكير: متابعة الطلبات هنا محاكاة.`,
-  /** The newest application is to a REAL posting (20 Nov 2026): prepared here, sent by the user; no company status is known. */
+    `عندك ${countNoun(count, "application", "object")}، وآخرها ${q(title)} وحالته ${q(status)}.`,
+  /** The newest application is to a REAL posting: prepared here, sent by the user; no company status is known. */
   applicationsOneReal: (title: string, company: string): string =>
     `عندك طلب واحد: ${q(title)} عند ${company}. جهّزته لك، وباقي ترسله أنت من الإعلان الأصلي، وما أقدر أشوف رد الشركة.`,
   applicationsMoreReal: (count: number, title: string, company: string): string =>
@@ -408,9 +420,9 @@ export const T = {
   who: (): string =>
     "أنا دليلك إلى وظيفتك. أشرح لك مسارك، وأدلّك وين تتعلّم كل مهارة، وأفتح لك الصفحات، وأقدّم على الوظائف إذا طلبت. أما التعلّم فعليك أنت.",
   notNow: (): string => "تمام، متى ما بغيت.",
-  /** 20 Nov 2026: the guides' courses, people and articles are real (links opened that day); the rest is still sample. */
+  /** «هل هي حقيقية؟»: what is real, with no collection date and no sample label (the practice job is never called real). */
   isReal: (): string =>
-    "للأمانة: الوظائف إعلانات حقيقية جمعتها في 20 نوفمبر 2026، ولكل وحدة رابط إعلانها الأصلي، إلا «محلل بيانات» فهي وظيفة تدريبية. وفي الوظائف الحقيقية أجهّز لك الطلب وترسله أنت من الإعلان. أما أدلة التعلّم فحقيقية: الكورسات والناس والمقالات كلها حقيقية، وتأكدنا من روابطها في 20 نوفمبر 2026. والمتسابقين الباقين بيانات تجريبية، واللي ينحسب فعلاً مهاراتك ومطابقتك ومسارك.",
+    "للأمانة: أغلب الوظائف هنا إعلانات حقيقية، ولكل وحدة رابط إعلانها الأصلي، وفيها أجهّز لك الطلب وترسله أنت من الإعلان. وأدلة التعلّم حقيقية: الكورسات والناس والمقالات كلها حقيقية. واللي ينحسب فعلاً مهاراتك ومطابقتك ومسارك.",
   realNumbers: (): string =>
     "سؤال في محله، بس ما عندي أرقام موثوقة عن سوق العمل أو الرواتب، وما أحب أعطيك شي من عندي. اللي أعرفه بالضبط مطابقتك ومهاراتك وخطوتك الجاية، وتقدر تسألني عنها.",
   completeForMe: (): string =>
@@ -462,7 +474,7 @@ export const T = {
     "النجمة الأولى لمهارة مذكورة في سيرتك، والثانية إذا طلعت في خبرة أو مشروع، والثالثة إذا انوصفت إنها متقدمة. وبعدها كل خطوة تعلّم تخلّصها تزيدك نجمة.",
   cvWhat: (): string => "أدوّر على 38 مهارة بأسمائها، وأحفظ لكل مهارة الجملة اللي تثبتها عشان تشوفها بنفسك.",
   cvNone: (): string =>
-    "ولا يهمك. الصق أي نص يوصف دراستك وخبرتك، أو جرّب السيرة التجريبية، أو ابدأ مسارك بدون سيرة.",
+    "ولا يهمك. الصق أي نص يوصف دراستك وخبرتك، أو جرّب السيرة الجاهزة، أو ابدأ مسارك بدون سيرة.",
   levelHow: (toNext: number | null, nextLevel: number | null): string =>
     toNext === null || nextLevel === null
       ? "المستوى يرتفع بالـ XP، وأكثر شي يجيبه إنك تخلّص خطوات التعلّم."

@@ -1,17 +1,26 @@
 // Owner: brain-advisor. The checks of spec 5.5 applied to a MODEL's reply (pure).
+import { guideTitle } from "@/lib/copy";
 import {
   APPLICATION_TIMING,
   CATALOGUE_COUNTS,
+  COMPANIES,
+  COURSES,
+  FIELDS,
+  GUIDES,
+  JOBS,
   LEADERBOARD_SIZE,
   LESSONS_BY_HOURS,
   LEVEL_THRESHOLDS,
   MATCH_LINE,
   POINTS_PER_SKILL,
+  SKILLS,
   XP,
 } from "@/lib/data";
+import { CAREER_FAMILIES, ENTRY_ROUTES, knowledgeForModel } from "@/lib/data/careers";
 import { LIMITS } from "@/lib/brain/protocol";
 import type { UserFacts } from "@/lib/types";
 
+import { guideForModel } from "./guide";
 import * as W from "./words";
 
 // ── Rule 8: numbers and money come from data ──────────────────────────────────────────────────────────────────────
@@ -189,4 +198,127 @@ export function asksHowTo(message: string): boolean {
     if (how.has(words[i] ?? "") && /^[اأإآ]/.test(next) && next.length >= 3) return true;
   }
   return false;
+}
+
+// ── Internal ids never reach the user (21 Nov 2026, QA: «(c-powerbi-1)», «(data-analyst-riyadh)» in replies) ────────
+
+let idNames: ReadonlyMap<string, string> | null = null;
+
+/** Every internal id of the data, with the name the user knows it by. */
+function idNameMap(): ReadonlyMap<string, string> {
+  if (idNames) return idNames;
+  const map = new Map<string, string>();
+  for (const f of FIELDS) map.set(f.id, f.name);
+  for (const r of ENTRY_ROUTES) map.set(r.id, `«${r.nameAr}»`);
+  for (const f of CAREER_FAMILIES) map.set(f.id, `«${f.title}»`);
+  for (const c of COMPANIES) map.set(c.id, c.short);
+  for (const s of SKILLS) map.set(s.id, s.name);
+  for (const c of COURSES) map.set(c.id, `«${guideTitle(c.id)}»`);
+  for (const j of JOBS) map.set(j.id, `«${j.title}»`);
+  idNames = map;
+  return map;
+}
+
+const URL_RE = /https?:\/\/[^\s«»()]+/g;
+/** A lowercase token with hyphens: «data-analyst-riyadh», «c-powerbi-1», «html-css». */
+const KEBAB = /(?<![A-Za-z0-9-])[a-z0-9]+(?:-[a-z0-9]+)+(?![A-Za-z0-9-])/g;
+/** An id alone in brackets or quotes: «(c-powerbi-1)», «[excel]», ««data-analyst-riyadh»». */
+const WRAPPED = /\s*[(\[]\s*([a-z0-9][a-z0-9-]*)\s*[)\]]/g;
+const QUOTED = /«\s*([a-z0-9][a-z0-9-]*)\s*»/g;
+
+function scrubPart(part: string): string {
+  const names = idNameMap();
+  const isId = (token: string): boolean => names.has(token) || token.split("-").length >= 3;
+  return part
+    .replace(WRAPPED, (all, token: string) => (isId(token) ? "" : all))
+    .replace(QUOTED, (all, token: string) => (names.has(token) ? (names.get(token) ?? "") : isId(token) ? "" : all))
+    .replace(KEBAB, (token) => names.get(token) ?? (token.split("-").length >= 3 ? "" : token))
+    .replace(/«»/g, "")
+    .replace(/[ \t]{2,}/g, " ")
+    .replace(/ +([،,.؟?!:؛])/g, "$1");
+}
+
+/**
+ * Takes every internal id out of a reply shown to the user: an id in brackets is dropped (the name is said beside it),
+ * a bare one becomes its name («data-analyst-riyadh» → «محلل بيانات»), and any other lowercase token of three hyphenated
+ * parts is dropped. Links are left as they are. Applied to every text «دليلك» sends.
+ */
+export function scrubIds(text: string): string {
+  let out = "";
+  let last = 0;
+  for (const match of text.matchAll(URL_RE)) {
+    const at = match.index ?? 0;
+    out += scrubPart(text.slice(last, at)) + match[0];
+    last = at + match[0].length;
+  }
+  return (out + scrubPart(text.slice(last))).trim();
+}
+
+// ── Names come from the data (21 Nov 2026, QA: a model named certificates the data does not have) ─────────────────
+
+/** Latin words of a text, lower-cased, starting with a letter («Security+», «C#», «PL-300» → «pl»). */
+function latinWords(text: string): string[] {
+  return text.toLowerCase().match(/[a-z][a-z0-9+#]*/g) ?? [];
+}
+
+/** Words of the product itself a reply may use. */
+const PRODUCT_WORDS = ["xp", "cv", "pdf", "word", "ok", "ai", "dalil", "dalilak", "daleel", "linkedin", "github", "youtube", "online"];
+
+let dataWords: ReadonlySet<string> | null = null;
+
+/** Every Latin word of the app's checked data: careers (certificates, employers, routes), guides, companies, jobs, skills. */
+function dataWordSet(): ReadonlySet<string> {
+  if (dataWords) return dataWords;
+  const words = new Set<string>(PRODUCT_WORDS);
+  const add = (value: unknown): void => {
+    for (const w of latinWords(allText(value))) words.add(w);
+  };
+  add(knowledgeForModel());
+  add(GUIDES);
+  add(COMPANIES);
+  add(JOBS);
+  add(SKILLS);
+  add(COURSES);
+  add(FIELDS);
+  add(guideForModel());
+  dataWords = words;
+  return words;
+}
+
+/**
+ * Every Latin name in a model's reply (a certificate, exam, programme, company, tool: «CompTIA Security+») must be in the
+ * app's data or in this turn's tool results and facts. A certificate or company from the model's own memory fails, and
+ * the reply is replaced by the local answer.
+ */
+export function namesAreGrounded(reply: string, sources: readonly unknown[]): boolean {
+  const known = dataWordSet();
+  let turn: Set<string> | null = null;
+  for (const word of latinWords(reply)) {
+    if (known.has(word)) continue;
+    turn ??= new Set(latinWords(allText(sources)));
+    if (!turn.has(word)) return false;
+  }
+  return true;
+}
+
+// ── Facts about the user come from the snapshot (21 Nov 2026, QA: «مع خبرتك» to a user with no experience) ─────────
+
+const CLAIMS_EXPERIENCE = ["خبرتك", "خبراتك", "سنوات خبرتك", "خبرتك العملية", "خبرة عندك", "your experience"];
+const CLAIMS_NO_EXPERIENCE = ["ما عندك خبرة", "ماعندك خبرة", "ما عندك أي خبرة", "بدون خبرة", "no experience"];
+const CLAIMS_DEGREE = ["شهادتك الجامعية", "بكالوريوسك", "تخرجك", "تخرّجك", "تخرجت", "تخرّجت", "your degree"];
+
+/**
+ * A model may say only what the snapshot holds about the user: no work experience unless the onboarding answer gives
+ * some (and no "no experience" when it gives years), no university degree unless the answer is a bachelor or higher.
+ */
+export function userFactsGrounded(reply: string, facts: UserFacts): boolean {
+  const text = W.textOf(reply);
+  const experience = facts.answers.experience;
+  const hasExperience = experience === "under1" || experience === "1to3" || experience === "over3";
+  if (!hasExperience && W.has(text, CLAIMS_EXPERIENCE)) return false;
+  if ((experience === "1to3" || experience === "over3") && W.has(text, CLAIMS_NO_EXPERIENCE)) return false;
+  const education = facts.answers.education;
+  const degree = education === "bachelor" || education === "postgrad";
+  if (!degree && W.has(text, CLAIMS_DEGREE)) return false;
+  return true;
 }

@@ -11,10 +11,10 @@ import type { OnboardingAnswers, UserFacts } from "@/lib/types";
 
 describe("contract", () => {
   it("has the spec's id counts", () => {
-    expect(FIELD_IDS).toHaveLength(19);
-    expect(SKILL_IDS).toHaveLength(93);
-    expect(COURSE_IDS).toHaveLength(148);
-    expect(JOB_IDS).toHaveLength(84);
+    expect(FIELD_IDS).toHaveLength(23);
+    expect(SKILL_IDS).toHaveLength(114);
+    expect(COURSE_IDS).toHaveLength(185);
+    expect(JOB_IDS).toHaveLength(170);
     expect(BADGE_IDS).toHaveLength(12);
     expect(LEADERBOARD_USER_IDS).toHaveLength(24);
   });

@@ -118,7 +118,7 @@ export const TID = {
     goPath: "cv-go-path",
     goJobs: "cv-go-jobs",
     reanalyse: "cv-reanalyse",
-    /** architect: the empty result block and its two buttons («عدّل النص», «جرّب بسيرة ذاتية تجريبية»). */
+    /** architect: the empty result block and its two buttons («عدّل النص», «جرّب بسيرة جاهزة»). */
     empty: "cv-empty",
     emptyEdit: "cv-empty-edit",
     emptySample: "cv-empty-sample",

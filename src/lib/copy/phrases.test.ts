@@ -139,7 +139,6 @@ describe("shared strings", () => {
     }
     expect(XP_REASON_ONBOARDING_AND_TARGET).toBe("التعارف واختيار الهدف");
     expect(ASK_ADVISOR_APPLY_TEXT).toBe("قدّم لي على هذه الوظيفة");
-    expect(SAMPLE_COPY.company).toBe("جهة تجريبية");
     expect(NAV_LABEL.path).toBe("مساري");
   });
 });
@@ -293,7 +292,7 @@ describe("application note (7.4)", () => {
 describe("other phrases", () => {
   it("prints the CV line of the apply sheet (3.8 field 6)", () => {
     expect(cvAttachmentLine(null)).toBe("لا توجد سيرة مرفقة");
-    expect(cvAttachmentLine(SAMPLE_CV)).toBe("مرفقة: السيرة التجريبية");
+    expect(cvAttachmentLine(SAMPLE_CV)).toBe("مرفقة: السيرة الجاهزة");
     expect(cvAttachmentLine({ ...SAMPLE_CV, isSample: false, fileName: "khalid-cv.pdf" })).toBe("مرفقة: khalid-cv.pdf");
     expect(cvAttachmentLine({ ...SAMPLE_CV, isSample: false, fileName: null })).toBe("مرفقة: نص السيرة");
   });
@@ -320,8 +319,8 @@ describe("other phrases", () => {
     expect(hoursText(12)).toBe("12 ساعة");
     expect(hoursText(2)).toBe("ساعتان");
     expect(targetChangedToast("ninja-real-estate-performance-analyst-riyadh")).toBe("هدفك الآن: محلل أداء عقاري");
-    expect(appliedChip("review")).toBe("قدّمت · قيد المراجعة · محاكاة");
-    expect(appliedChip("shortlisted")).toBe("قدّمت · مرشّح للمقابلة · محاكاة");
+    expect(appliedChip("review")).toBe("قدّمت · جاهز");
+    expect(appliedChip("shortlisted")).toBe("قدّمت · مستعدّ للمقابلة");
     expect(companyCityLine("data-analyst-riyadh")).toBe("وادي الغيم للبيانات · الرياض");
     expect(companyCityLine("salla-senior-data-scientist-remote")).toBe("سلة · عن بُعد");
   });

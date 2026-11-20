@@ -2,15 +2,15 @@
 // and the event order of protocol.ts (status* → action? → text+ → card* → chips?). Used by the router (every mode) and
 // by the model turn when a model's reply must be replaced by "the template for that tool" (5.5 rules 8, 9, 11). Pure.
 import { APPLICATION_STATUS_COPY, guideTitle, nextStepLabel } from "@/lib/copy";
-import { XP, getBadge, getCourse, getField, getGuide, getJob, getSkill } from "@/lib/data";
-import { courseOnPath, courseState, fitReasons } from "@/lib/engine";
-import type { AdvisorCard, Chip, ChipPayload, CourseId, FieldId, JobId, NavTarget, ToolName } from "@/lib/types";
+import { COMPANIES, XP, getBadge, getCourse, getField, getGuide, getJob, getSkill } from "@/lib/data";
+import type { GuideCourse, GuideLang } from "@/lib/data";
+import { courseOnPath, courseState, fitReasons, jobsAtCompany } from "@/lib/engine";
+import type { AdvisorCard, Chip, ChipPayload, CompanyId, CourseId, FieldId, JobId, NavTarget, ToolName } from "@/lib/types";
 import type { AdvisorAction, AdvisorEvent, ToolParams, ToolResults } from "@/lib/brain/protocol";
 
 import type { AdvisorCtx } from "./context";
 import { guideCourseFacts, joinAnd, openChipLabel, pageName } from "./phrasing";
 import {
-  DISCLOSE_JOBS,
   T,
   TOOL_STATUS,
   applyAlreadyReply,
@@ -171,9 +171,7 @@ export function searchReply(
   }
   const first = result.jobs[0]!;
   const base = result.total === 1 ? T.searchOne(first.title, first.match) : T.searchSeveral(result.total, first.title, first.match);
-  const disclose = !ctx.jobsDisclosed;
-  const addition = show ? (disclose ? T.searchShowedAndDisclosed() : T.searchShowed()) : disclose ? DISCLOSE_JOBS : "";
-  const text = addition ? `${base} ${addition}` : base;
+  const text = show ? `${base} ${T.searchShowed()}` : base;
   const cards = result.jobs.map((j) => jobCard(j.id));
   const r = reply(text, { tools, cards, ...(show ? { action: { type: "navigate", to: show } as const } : {}) });
   return guardBlocked(ctx, r);
@@ -182,13 +180,12 @@ export function searchReply(
 export function bestJobReply(ctx: AdvisorCtx, result: ToolResults["search_jobs"]): Reply {
   const [a, b, c] = result.jobs;
   if (!a) return reply(T.searchNone(), { tools: ["search_jobs"] });
-  const disclose = ctx.jobsDisclosed ? "" : ` ${DISCLOSE_JOBS}`;
   const text = !ctx.holdsAnyStar
     ? T.bestJobNoStars(a.title)
     : b && c
       ? T.bestJob(a.title, a.match, b.title, c.title)
       : T.searchOne(a.title, a.match);
-  return reply(`${text}${disclose}`, { tools: ["search_jobs"], cards: result.jobs.map((j) => jobCard(j.id)) });
+  return reply(text, { tools: ["search_jobs"], cards: result.jobs.map((j) => jobCard(j.id)) });
 }
 
 export function explainReply(result: ToolResults["explain_match"], tools: readonly ToolName[] = ["explain_match"]): Reply {
@@ -273,16 +270,37 @@ export function applySearchReply(ctx: AdvisorCtx, result: ToolResults["search_jo
   return reply(text, { tools, cards: result.jobs.slice(0, 3).map((j) => jobCard(j.id, APPLY_CARD(j.id))) });
 }
 
+/** The jobs in the order of the user's match (rankJobs), the ones it leaves out last. */
+function byMatch(ctx: AdvisorCtx, jobs: readonly JobId[]): JobId[] {
+  const order = new Map(ctx.ranked.map((j, i) => [j.jobId, i] as const));
+  return [...jobs].sort((a, b) => (order.get(a) ?? 999) - (order.get(b) ?? 999));
+}
+
+/** Several jobs fit an apply request's words (21 Nov 2026): «على أي وحدة؟» with each one's «قدّم على ذي»; nothing runs. */
+export function applyCandidatesReply(ctx: AdvisorCtx, jobs: readonly JobId[]): Reply {
+  const shown = byMatch(ctx, jobs).slice(0, 4);
+  return reply(T.applyWhichOf(), { tools: ["search_jobs"], cards: shown.map((id) => jobCard(id, APPLY_CARD(id))) });
+}
+
 /**
- * 5.1 / 5.9: the first reply of a thread that shows job cards says the data is sample data, whichever reply it is
- * (which job, a target choice, a search, the best job, a refusal), unless its text already says so.
+ * An apply request that names a company and none of its jobs by title (21 Nov 2026, QA: «قدم عني على وظيفة في نيوم» on
+ * a job page applied to that page's job). Its jobs in the app: which one (cards with «قدّم على ذي»); none: said plainly,
+ * with its careers page when companies.ts has one, and the three nearest jobs as plain cards. Never applies.
  */
-export function withJobsDisclosure(ctx: AdvisorCtx, r: Reply): Reply {
-  if (ctx.jobsDisclosed || !r.cards.some((c) => c.kind === "job")) return r;
-  if (r.text.some((t) => t.includes(DISCLOSE_JOBS) || t.includes("تجريبي"))) return r;
-  const last = r.text.length - 1;
-  if (last < 0) return { ...r, text: [DISCLOSE_JOBS] };
-  return { ...r, text: r.text.map((t, i) => (i === last ? `${t} ${DISCLOSE_JOBS}` : t)) };
+export function applyCompanyReply(ctx: AdvisorCtx, companyId: CompanyId): Reply {
+  const company = COMPANIES.find((c) => c.id === companyId);
+  const name = company?.short ?? companyId;
+  const jobs = byMatch(ctx, jobsAtCompany(companyId));
+  if (jobs.length > 0) {
+    return reply(T.applyCompanyWhich(name, jobs.length), {
+      tools: ["search_jobs"],
+      cards: jobs.slice(0, 4).map((id) => jobCard(id, APPLY_CARD(id))),
+    });
+  }
+  return reply([T.applyCompanyNone(name, company?.careersUrl ?? null), T.applyCompanyNoneTail()], {
+    tools: ["search_jobs"],
+    cards: topJobs(ctx, 3).map((id) => jobCard(id)),
+  });
 }
 
 /** A model asked to apply (5.4): the call becomes an offer; one tap confirms it. */
@@ -562,6 +580,8 @@ export function levelHowReply(ctx: AdvisorCtx): Reply {
 /** What a guide question asks for: where to learn (the top pick), who to follow (people), what to read (articles). */
 export type GuideAsk = "where" | "follow" | "read";
 
+export type { GuideLang };
+
 /**
  * Why «دليلك» picked the skill: the user named it, it is their next step, or it is their nearest skill in the field they
  * named. `courseId` is the step whose guide opens (the course of the user's next star in that skill).
@@ -586,7 +606,7 @@ function guideNote(ctx: AdvisorCtx, courseId: CourseId): string | null {
  * A guide question answered from the guide data (real courses, people, articles; nothing invented: hours, price and a
  * certificate only when the data has them), and the guide page opens beside the chat (navigate, 5.5 rule 7 applies).
  */
-export function guideReply(ctx: AdvisorCtx, ask: GuideAsk, pick: GuidePick): Reply {
+export function guideReply(ctx: AdvisorCtx, ask: GuideAsk, pick: GuidePick, lang: GuideLang | null = null): Reply {
   const courseId = pick.courseId;
   const course = getCourse(courseId);
   const skill = getSkill(course.skill).name;
@@ -608,10 +628,18 @@ export function guideReply(ctx: AdvisorCtx, ask: GuideAsk, pick: GuidePick): Rep
     lead = true;
   }
   switch (ask) {
-    case "where":
-      text.push(`${T.guideTop(skill, top.title, top.provider, guideCourseFacts(top), lead)} ${T.guideWhy(top.why)}`);
+    case "where": {
+      // «بالعربي»: the guide's course in that language (the top pick first), or an honest "none" and the top pick
+      const inLang: GuideCourse | undefined = lang ? [top, ...guide.alternatives].find((c) => c.lang === lang) : top;
+      if (lang && inLang && inLang !== top) {
+        text.push(`${T.guideInLang(skill, lang, inLang.title, inLang.provider, guideCourseFacts(inLang))} ${T.guideWhy(inLang.why)}`);
+      } else {
+        const none = lang && !inLang ? `${T.guideNoLang(skill, lang)} ` : "";
+        text.push(`${none}${T.guideTop(skill, top.title, top.provider, guideCourseFacts(top), lead)} ${T.guideWhy(top.why)}`);
+      }
       text.push(T.guideTopTail(title));
       break;
+    }
     case "follow": {
       const people = guide.people.slice(0, 3);
       if (people.length === 0) {

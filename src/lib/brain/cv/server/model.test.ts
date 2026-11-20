@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 
 import { ProviderFailure, type BrainFailure, type ChainHooks, type ChainSlot, type ReplyRecord, type SlotId } from "@/lib/brain/server/chain";
 
-import { modelCvSkillsWith, type CvSlotCall } from "./model";
+import { modelCvSkillsWith, readCandidates, replySchema, type CvSlotCall } from "./model";
 
 const G1: ChainSlot = { id: "gemini-1", provider: "gemini", model: "m1", keyEnv: "GEMINI_API_KEY", modelEnv: "GEMINI_MODEL" };
 const CL: ChainSlot = { id: "anthropic", provider: "anthropic", model: "c", keyEnv: "ANTHROPIC_API_KEY", modelEnv: "ANTHROPIC_MODEL" };
@@ -65,5 +65,15 @@ describe("modelCvSkillsWith (part 7)", () => {
     expect(await modelCvSkillsWith(CV, new AbortController().signal, { slots: () => [G1, CL], call, hooks: hooks([], [], ["gemini-1", "anthropic"]) })).toBeNull();
     expect(await modelCvSkillsWith(CV, new AbortController().signal, { slots: () => [], call, hooks: hooks([], []) })).toBeNull();
     expect(asked).toEqual([]);
+  });
+});
+
+describe("the reply schema (CV-reader test, 21 Nov 2026)", () => {
+  it("has no enum anywhere (Gemini refuses an enum of the whole catalogue with a 400), and unknown ids are dropped in code", () => {
+    for (const strict of [false, true]) expect(JSON.stringify(replySchema(strict))).not.toContain("enum");
+    expect(replySchema(true)).toMatchObject({ additionalProperties: false });
+    expect(readCandidates(JSON.stringify({ skills: [{ skill: "excel", evidence: "Built pivot tables" }, { skill: "juggling", evidence: "x y z" }] }))).toEqual([
+      { skill: "excel", evidence: "Built pivot tables" },
+    ]);
   });
 });

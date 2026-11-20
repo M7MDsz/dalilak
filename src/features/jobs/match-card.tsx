@@ -2,8 +2,8 @@
 // Owner: jobs. The job page's action card (spec 3.8 "Match" and "Actions"; DESIGN 4.0: the 340 px column, sticky):
 // the ring with the caption «مطابقتك» (the card's label, cut into its border line) · «كل مهارة من الخمس تساوي 20% من
 // المطابقة.» · «كيف تُحسب؟» (an explainer that draws each skill's share) · «دع دليلك يقدّم عنك» (primary) · «قدّم بنفسك»
-// (text button) · «اجعلها هدفي» or «هدفك الحالي» · «اسأل دليلك عن هذه الوظيفة». Applied: the chip «قدّمت · {status} ·
-// محاكاة» and «تابع الطلب» replace the two apply buttons. A REAL job (20 Nov 2026) is prepared, not sent: «دع دليلك يجهّز
+// (text button) · «اجعلها هدفي» or «هدفك الحالي» · «اسأل دليلك عن هذه الوظيفة». Applied: the chip «قدّمت · {status}»
+// and «تابع الطلب» replace the two apply buttons. A REAL job is prepared, not sent: «دع دليلك يجهّز
 // طلبك» / «جهّز طلبك بنفسك», and once prepared «جاهز للإرسال من الإعلان الأصلي» with «افتح الإعلان الأصلي» (no simulated status).
 // The ring takes a `preview` from the course rows (gain-preview): an accent dotted leg to the match those courses reach.
 // The reward for applying is shown where it is earned (docs/GAME-LAYER.md 4): «تكسب +40 XP عند التقديم» from 60%, the

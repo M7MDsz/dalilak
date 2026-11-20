@@ -25,8 +25,8 @@ Built for the Maharah hackathon («مهاراثون»), November 2026.
 - **A roadmap you can play.** Your path is a map from «البداية» to the job, with a 3D flight to each station, a skill tree,
   XP, levels, a daily streak, 12 badges and a leaderboard.
 - **An advisor that acts.** «دليلك» answers questions about your path, jobs, courses and the platform itself, opens the
-  page you need, and can fill and send an application for you (simulated: Dalilak, LinkedIn, بيت.كوم, Indeed and the
-  company site, one after another).
+  page you need, and can fill an application for you: on a real posting he prepares it and you send it from the original
+  posting.
 - **Two designs.** A calm design and a game-board design; the user switches between them in the side menu or on «ملفي».
 - **Works offline.** With no internet or no AI key, «دليلك» runs on a built-in local brain. With a Gemini key, free
   questions are answered by Gemini, inside rules enforced in code (every number must come from the user's own data).
@@ -35,9 +35,11 @@ Built for the Maharah hackathon («مهاراثون»), November 2026.
 
 - **Real:** the conversation and its scoring, reading the CV and the evidence for each skill, the match formula, the
   roadmap, XP, levels, streak, badges, the ranking, and «دليلك» opening pages and acting when asked.
-- **Sample data, labelled as such on screen:** the 20 jobs, the companies («جهة تجريبية»), the 59 courses and the other
-  leaderboard players. Applying sends nothing to anyone, and the app says so. Sign-in is by name only, and everything is
-  stored in the browser.
+- **Real postings and guides:** the jobs are real postings with their source links (except one practice job,
+  «محلل بيانات», kept so the demo numbers stay), and the learning guides link to real courses, people and articles.
+- **Not real:** the practice job and the other leaderboard players. Nothing on screen labels them, and nothing claims an
+  application reached a company: the practice job's application is only saved in «طلباتي». Sign-in is by name only, and
+  everything is stored in the browser.
 
 ## Run it
 

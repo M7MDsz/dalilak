@@ -14,7 +14,9 @@ const collapse = (text: string): string => text.replace(/\s+/gu, " ").trim();
 export function isSampleCv(raw: string): boolean {
   const body = collapse(cleanCvText(SAMPLE_CV_BODY));
   if (body === "") return false;
-  const lines = cleanCvText(raw).split("\n");
+  // the printed sample (public/samples/cv-ar.pdf) still marks its two invented organisations «(جهة تجريبية)»; the text
+  // no longer does (owner, 21 Nov 2026: no sample labels): the same CV either way
+  const lines = cleanCvText(raw.replaceAll(" (جهة تجريبية)", "")).split("\n");
   const first = lines.findIndex((line) => line.trim() !== "");
   if (first < 0) return false;
   return collapse(lines.slice(first + 1).join("\n")) === body;

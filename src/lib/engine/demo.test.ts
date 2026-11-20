@@ -5,7 +5,7 @@
 import { describe, expect, it } from "vitest";
 
 import { getJob } from "@/lib/data";
-import type { BadgeId, Clock, UserFacts } from "@/lib/types";
+import type { BadgeId, Clock, OnboardingAnswers, UserFacts } from "@/lib/types";
 
 import {
   addDays,
@@ -17,6 +17,7 @@ import {
   dailyReward,
   defaultAvatar,
   jobGap,
+  jobMatch,
   leaderboard,
   levelFor,
   matchBreakdown,
@@ -92,15 +93,24 @@ function row(facts: UserFacts, clock: Clock): Row {
   };
 }
 
-describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
+/**
+ * 20 Nov 2026 (docs/ONBOARDING-FLOW.md): the CV is read INSIDE onboarding, before the questions it answers. The sample CV
+ * states الرياض · بكالوريوس · نظم معلومات إدارية · a four-month co-op («أقل من سنة»); the user then taps «الأرقام والبيانات»,
+ * «لا، مو الحين» and «أول وظيفة».
+ */
+const CV_ANSWERS: OnboardingAnswers = { ...DEMO_ANSWERS, experience: "under1", company: "none" };
+
+describe("the 2-minute demo, step by step (spec 10.2 / 10.4, CV in onboarding)", () => {
   // Step 1: sign in as «خالد» (21:00)
   const s1 = newFacts({ avatar: defaultAvatar("خالد") });
-  // Step 2: six chips → onboarding_completed (+50)
-  const s2 = finalize(onboarded(s1, t + MINUTE), clockAt(1));
-  // Step 4: «ابدأ هذا المسار» → target_set (+30)
-  const s4 = finalize(targeted(s2, recommend(DEMO_ANSWERS).recommended, t + 2 * MINUTE), clockAt(2));
-  // Step 6: the sample CV → cv_analysed (+100); the +80 news and two badges were shown on /path first
-  const s6 = finalize(withCv(announce(s4), t + 3 * MINUTE), clockAt(3));
+  // Step 2a: «جرّب بسيرة جاهزة» in the chat → cv_analysed (+100); its toast shows in the chat (announced there)
+  const s2a = finalize(withCv(s1, t + MINUTE / 2), clockAt(0.5));
+  // Step 2b: the questions left → onboarding_completed (+50)
+  const s2 = finalize(onboarded(announce(s2a), t + MINUTE, CV_ANSWERS), clockAt(1));
+  // Step 4: «ابدأ هذا المسار» → target_set (+30): the reveal's job, ranked with the CV's stars
+  const s4 = finalize(targeted(s2, recommend(CV_ANSWERS, undefined, skillStars(s2)).recommended, t + 2 * MINUTE), clockAt(2));
+  // Step 6 (the old order's CV step): nothing left to do; the map opens on the CV's catch-up
+  const s6 = announce(s4);
   // Step 8: course started (pays nothing)
   const s8 = started(announce(s6), "c-powerbi-1", t + 4 * MINUTE);
   // Step 9: course completed → course_completed (+200)
@@ -117,12 +127,18 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
     expect(dailyReward(s1, CLOCK).due).toBe(false);
   });
 
-  it("step 2: +50 → 50, rank 23, «الخطوة الأولى»", () => {
-    expect(row(s2, clockAt(1))).toEqual({ xp: 50, level: 1, title: "مبتدئ", match: null, rank: 23, badges: ["first-steps"] });
+  it("step 2: the CV in the chat +100 → 100, «سيرة مقروءة», 8 skills · 11 stars; then the questions +50 → 150, level 2", () => {
+    expect(row(s2a, clockAt(0.5))).toMatchObject({ xp: 100, level: 1, title: "مبتدئ", match: null, badges: ["cv-scanned"] });
+    expect(skillTreeSummary(s2a)).toMatchObject({ skillsHeld: 8, starsHeld: 11 });
+    expect(row(s2, clockAt(1))).toMatchObject({ xp: 150, level: 2, title: "مستكشف", match: null, badges: ["cv-scanned", "first-steps"] });
   });
 
-  it("step 3: the reveal recommends «محلل بيانات» with 8 stages · 74 hours and the two alternatives with their counts", () => {
+  it("step 3: the reveal recommends «محلل بيانات» with 8 stages · 74 hours and the two alternatives, with or without the CV", () => {
+    const withStars = recommend(CV_ANSWERS, undefined, skillStars(s2));
+    expect([withStars.recommended, ...withStars.alternatives]).toEqual(["data-analyst-riyadh", "qiddiya-hr-analytics-analyst-riyadh", "syarah-financial-analyst-tamheer-riyadh"]);
+    expect(jobMatch("data-analyst-riyadh", s2)).toBe(70);
     const rec = recommend(DEMO_ANSWERS);
+    expect([rec.recommended, ...rec.alternatives]).toEqual([withStars.recommended, ...withStars.alternatives]);
     expect(rec.recommended).toBe("data-analyst-riyadh");
     expect(getJob(rec.recommended).company).toBe("وادي الغيم للبيانات");
     expect(pathSummary(rec.recommended)).toMatchObject({ stages: 8, hours: 74 });
@@ -132,44 +148,51 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
     ]);
   });
 
-  it("step 4: +30 → 80, match 0%, rank 22, two badges; on /path one +80 toast with no rank line and two badge toasts", () => {
-    expect(row(s4, clockAt(2))).toEqual({ xp: 80, level: 1, title: "مبتدئ", match: 0, rank: 22, badges: ["first-steps", "goal-set"] });
+  it("step 4: +30 → 180, level 2 «مستكشف», match 70%, rank 18; on /path one +80 toast (rank line 18, the level-up) and two badge toasts", () => {
+    expect(row(s4, clockAt(2))).toEqual({
+      xp: 180,
+      level: 2,
+      title: "مستكشف",
+      match: 70,
+      rank: 18,
+      badges: ["cv-scanned", "first-steps", "goal-set"],
+    });
+    // the CV's +100 (and its badge) were announced in the chat; the map merges the onboarding +50 and the target +30
     expect(pendingNews(s4, clockAt(2))).toEqual({
-      xp: { eventIds: ["onboarding_completed", "target_set"], amount: 80, types: ["onboarding_completed", "target_set"], rankLine: null, levelUp: null },
+      xp: {
+        eventIds: ["onboarding_completed", "target_set"],
+        amount: 80,
+        types: ["onboarding_completed", "target_set"],
+        rankLine: 18,
+        levelUp: { level: 2, title: "مستكشف", xpToNext: 170 },
+      },
       badges: ["first-steps", "goal-set"],
     });
-    expect(levelFor(80)).toMatchObject({ next: 150 });
-    const map = buildRoadmap(s4);
-    expect(map).toMatchObject({ match: 0, gate: "current", currentN: null, doneCount: 0, total: 8, hoursLeft: 74 });
-    expect(nextStep(s4)).toEqual({ rule: 1 });
     const board = leaderboard(s4, clockAt(2));
     expect(board.top3.map((r) => [r.name, r.weeklyXp])).toEqual([
       ["فيصل ق.", 980],
       ["سلطان م.", 910],
       ["مشعل ر.", 860],
     ]);
-    expect(board.me).toMatchObject({ rank: 22, weeklyXp: 80 });
-    expect(board.rows.find((r) => r.me)).toMatchObject({ name: "خالد", rank: 22 });
+    expect(board.me).toMatchObject({ rank: 18, weeklyXp: 180 });
+    expect(board.rows.find((r) => r.me)).toMatchObject({ name: "خالد", rank: 18 });
   });
 
-  it("step 6: +100 → 180, level 2 «مستكشف», match 70%, rank 18, «سيرة مقروءة»; toast with rank 18 and the level-up", () => {
+  it("step 6: the map opens at 180, level 2 «مستكشف», match 70%, rank 18, with the CV's 8 skills and nothing left to announce", () => {
     expect(row(s6, clockAt(3))).toEqual({
       xp: 180,
       level: 2,
       title: "مستكشف",
       match: 70,
       rank: 18,
-      badges: ["first-steps", "goal-set", "cv-scanned"],
+      badges: ["cv-scanned", "first-steps", "goal-set"],
     });
-    expect(pendingNews(s6, clockAt(3))).toEqual({
-      xp: { eventIds: ["cv_analysed"], amount: 100, types: ["cv_analysed"], rankLine: 18, levelUp: { level: 2, title: "مستكشف", xpToNext: 170 } },
-      badges: ["cv-scanned"],
-    });
+    expect(pendingNews(s6, clockAt(3))).toEqual({ xp: null, badges: [] });
     expect(skillTreeSummary(s6)).toMatchObject({ skillsHeld: 8, starsHeld: 11 });
     expect(rankJobs(s6).slice(0, 3).map((r) => [getJob(r.jobId).title, r.match])).toEqual([
       ["محلل بيانات", 70],
-      ["محلل مالي (برنامج تمهير)", 60],
       ["مهندس بيانات أول", 53],
+      ["مدير نمو - رؤى وتحليلات", 47],
     ]);
   });
 
@@ -182,7 +205,7 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
   });
 
   it("step 8: starting the course pays nothing; the next step becomes «أكمل دورة…»", () => {
-    expect(row(s8, clockAt(4))).toEqual({ ...row(s6, clockAt(3)), badges: ["first-steps", "goal-set", "cv-scanned"] });
+    expect(row(s8, clockAt(4))).toEqual({ ...row(s6, clockAt(3)), badges: ["cv-scanned", "first-steps", "goal-set"] });
     expect(nextStep(s8)).toEqual({ rule: 2, courseId: "c-powerbi-1", ticked: 0, total: 5 });
     expect(courseOnPath("c-powerbi-1", s8)).toMatchObject({ stageN: 7, matchNow: 70, matchAfter: 90 });
   });
@@ -194,7 +217,7 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
       title: "مجتهد",
       match: 90,
       rank: 10,
-      badges: ["first-steps", "goal-set", "cv-scanned", "first-course", "top-ten"],
+      badges: ["cv-scanned", "first-steps", "goal-set", "first-course", "top-ten"],
     });
     expect(skillStars(s8).powerbi).toBe(0);
     expect(skillStars(s9).powerbi).toBe(1);
@@ -223,7 +246,7 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
       title: "مجتهد",
       match: 90,
       rank: 10,
-      badges: ["first-steps", "goal-set", "cv-scanned", "first-course", "top-ten", "first-application"],
+      badges: ["cv-scanned", "first-steps", "goal-set", "first-course", "top-ten", "first-application"],
     });
     expect(pendingNews(s11, clockAt(6))).toEqual({
       xp: { eventIds: ["job_applied:data-analyst-riyadh"], amount: 40, types: ["job_applied"], rankLine: null, levelUp: null },
@@ -250,14 +273,14 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
     ]);
   });
 
-  it("step 13: skill tree 9 of 93 · 12 of 148 (38 · 59 before the 20 Nov expansion, 54 · 80 before wave 2), Power BI fills and «تصوير البيانات» opens; profile 6 of 12 badges, history +40 +200 +100 +30 +50", () => {
-    expect(skillTreeSummary(s11)).toEqual({ skillsHeld: 9, skillsTotal: 93, starsHeld: 12, starsTotal: 148 });
+  it("step 13: skill tree 9 of 114 · 12 of 185 (38 · 59 before the 20 Nov expansion, 54 · 80 before wave 2, 93 · 148 before wave 3), Power BI fills and «تصوير البيانات» opens; profile 6 of 12 badges, history +40 +200 +100 +30 +50", () => {
+    expect(skillTreeSummary(s11)).toEqual({ skillsHeld: 9, skillsTotal: 114, starsHeld: 12, starsTotal: 185 });
     const baseline = starsBeforeLatestStar(s11);
     expect([baseline.powerbi, totalStars(baseline)]).toEqual([0, 11]);
     expect(skillNode("dataviz", s11).state).toBe("available");
     expect(levelFor(420)).toMatchObject({ level: 3, title: "مجتهد", next: 600 });
     expect(s11.badges).toHaveLength(6);
-    expect([...s11.xpEvents].reverse().map((e) => e.amount)).toEqual([40, 200, 100, 30, 50]);
+    expect([...s11.xpEvents].reverse().map((e) => e.amount)).toEqual([40, 200, 30, 50, 100]);
     expect(totalStars(skillStars(s11))).toBe(12);
     expect(streakInfo(s11, clockAt(7)).current).toBe(1);
     expect(dailyReward(s11, clockAt(7)).tomorrow).toBe(40);
@@ -270,7 +293,7 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4)", () => {
       title: "متمكّن",
       match: 100,
       rank: 6,
-      badges: ["first-steps", "goal-set", "cv-scanned", "first-course", "top-ten", "first-application", "job-ready"],
+      badges: ["cv-scanned", "first-steps", "goal-set", "first-course", "top-ten", "first-application", "job-ready"],
     });
     expect(matchBreakdown(getJob("data-analyst-riyadh"), skillStars(s14)).total).toBe(100);
     expect(buildRoadmap(s14)).toMatchObject({ complete: true, currentN: null, doneCount: 8 });

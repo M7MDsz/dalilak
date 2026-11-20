@@ -1,7 +1,8 @@
 // Owner: welcome. Every string of /welcome that is used by this screen alone, copied verbatim from the spec
 // (PRODUCT-SPEC 3.2, 3.3, 4.7). «دليلك»'s own lines (greeting, acknowledgements, replies) come from @/lib/brain/onboarding.
 import { countNoun } from "@/lib/copy";
-import { CATALOGUE_COUNTS } from "@/lib/data";
+import { CATALOGUE_COUNTS, COMPANIES } from "@/lib/data";
+import { jobsAtCompany } from "@/lib/engine";
 import { formatNumber } from "@/lib/format";
 import type { RevealStepId } from "@/components/motion";
 
@@ -44,7 +45,16 @@ export const RESULT_COPY = {
   /** 20 Nov 2026: under the recommended job, when the user named a company (onboarding step 7). */
   // 21 Nov 2026 (tester): «دليلك» speaks Najdi, so the company line does too (it was Fusha)
   companyAimed: (company: string) => `في ${company}، الشركة اللي اخترتها`,
-  companyNoJob: (company: string) => `ما عندي الحين وظيفة من ${company} في المجال اللي تبيه، فهذي الأقرب لك.`,
+  /**
+   * The company named has no job on this path (21 Nov 2026, tester): a company with jobs elsewhere in the app is said
+   * positively (its jobs are pinned first among the map's jobs); only a company with no job at all gets the honest line.
+   */
+  companyNoJob: (company: string) => {
+    const known = COMPANIES.find((c) => c.short === company);
+    return known && jobsAtCompany(known.id).length > 0
+      ? `وظايف ${company} حطيتها لك أول وحدة في وظائفك، ومسارك يبقى في مجالك.`
+      : `ما عندي الحين وظيفة من ${company}، فهذي الأقرب لك.`;
+  },
   /** «8 مراحل · 74 ساعة تعلّم». */
   summary: (stages: number, hours: number) => `${countNoun(stages, "stage")} · ${countNoun(hours, "hour")} تعلّم`,
 } as const;

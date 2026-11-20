@@ -28,7 +28,7 @@ export const PHONE_TAB_BAR_HEIGHT = "4.5rem";
 
 export function PhoneTopBar({ className }: { readonly className?: string }): ReactNode {
   return (
-    <header className={cn("sticky top-0 z-sticky flex h-16 items-center justify-between gap-3 bg-bg px-gutter", className)}>
+    <header className={cn("sticky top-0 z-sticky flex h-[calc(4rem+env(safe-area-inset-top))] items-center justify-between gap-3 bg-bg px-gutter pt-[env(safe-area-inset-top)]", className)}>
       <NavLink className="flex h-11 items-center rounded-control" href={hrefFor({ screen: "path" })}>
         <Logo size={26} />
       </NavLink>
@@ -46,7 +46,7 @@ export function TabBar({ className }: { readonly className?: string }): ReactNod
     <>
       <nav
         className={cn(
-          "fixed inset-x-0 bottom-0 z-sticky border-t border-border bg-surface pb-[env(safe-area-inset-bottom)]",
+          "kb-hide fixed inset-x-0 bottom-0 z-sticky border-t border-border bg-surface pb-[env(safe-area-inset-bottom)]", // steps aside for the keyboard (globals.css)
           className,
         )}
       >

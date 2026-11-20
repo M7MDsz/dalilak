@@ -234,3 +234,49 @@ describe("stars and evidence (spec 6.5 steps 5-7)", () => {
     expect(analysis.isSample).toBe(false);
   });
 });
+
+// ─── 21 Nov 2026, CV-reader test: false positives and PDF letters ────────────────────────────────────────────────
+
+describe("what the CV-reader test found", () => {
+  const ids = (text: string) => analyseCvLocal(text).skills.map((s) => s.skill);
+
+  it("folds the Persian look-alike letters Chrome's PDF printer gives (ی ھ ک) back to Arabic", () => {
+    expect(cleanCvText("المھارات: بیانات، علی، کتابة")).toBe("المهارات: بيانات، على، كتابة");
+    const analysis = analyseCvLocal("المھارات\nالتفكیر التحلیلي، Excel\nاللغات\nالإنجلیزیة: متوسطة");
+    expect(analysis.lines[0]).toBe("المهارات");
+    expect(skillOf(analysis, "problem-solving")).toBeDefined();
+    expect(skillOf(analysis, "english")).toMatchObject({ stars: 2, evidence: "الإنجليزية: متوسطة" });
+  });
+
+  it("does not read an alias inside a phrase that means something else", () => {
+    const text = [
+      "الخبرات",
+      "الرد على استعلامات العملاء عن حالة الشحنات.",
+      "متابعة شحن الحاويات في ميناء جدة وإعداد تقارير RAG أسبوعية.",
+      "تحليل سلة المشتريات لاقتراح العروض.",
+      "Took over the rest of the accounts and learned to react quickly to complaints.",
+      "Summary: a career pivot into data after eight years of teaching.",
+    ].join("\n");
+    expect(ids(text)).toEqual([]);
+  });
+
+  it("still reads the same aliases where they name the skill", () => {
+    const text = ["Experience", "كتابة استعلامات SQL لتقارير المخزون.", "Built REST APIs and a React app with Docker.", "Excel pivot tables; RAG chatbot with LangChain.", "إدارة المشتريات والمناقصات."].join("\n");
+    expect(ids(text)).toEqual(expect.arrayContaining(["sql", "apis", "react", "devops", "excel", "llm-apps", "procurement"]));
+  });
+
+  it("takes a contact heading for a heading, not for the communication skill", () => {
+    const analysis = analyseCvLocal(["التواصل", "0550000000", "معلومات التواصل", "المهارات", "مهارات الاتصال، العمل الجماعي"].join("\n"));
+    expect(analysis.skills.map((s) => [s.skill, s.line])).toEqual([
+      ["communication", 4],
+      ["teamwork", 4],
+    ]);
+  });
+
+  it("does not take a degree's grade for a skill level («بتقدير ممتاز», «GPA … Excellent»)", () => {
+    const analysis = analyseCvLocal(["التعليم", "بكالوريوس الإحصاء، 2020، بتقدير ممتاز.", "المهارات", "Excel (متقدم)، SQL"].join("\n"));
+    expect(skillOf(analysis, "statistics")?.stars).toBe(1);
+    expect(skillOf(analysis, "excel")?.stars).toBe(3);
+    expect(skillOf(analysis, "english")).toBeUndefined();
+  });
+});

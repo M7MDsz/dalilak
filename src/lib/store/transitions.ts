@@ -26,6 +26,8 @@ import type {
   LockReason,
   OnboardingAnswers,
   OnboardingMessage,
+  OnboardingProgress,
+  OnboardingStepId,
   SeenMarkers,
   StarChange,
   TargetMatch,
@@ -206,6 +208,52 @@ export function appendOnboardingMessages(user: UserState, texts: readonly string
   return { ...user, onboarding: { ...user.onboarding, thread: [...thread, ...added] } };
 }
 
+/**
+ * The greeting of a fresh account WITH the CV offer (docs/ONBOARDING-FLOW.md): the lines, and `onboarding.cv` "offered".
+ * A thread that already started is left alone (Strict Mode's second effect run, or a second tab).
+ */
+export function openOnboardingWithCv(user: UserState, texts: readonly string[], clock: Clock): UserState {
+  if (user.onboarding.thread.length > 0 || texts.length === 0) return user;
+  const opened = appendOnboardingMessages(user, texts, clock);
+  return { ...opened, onboarding: { ...opened.onboarding, cv: "offered" } };
+}
+
+/**
+ * The CV read inside onboarding (docs/ONBOARDING-FLOW.md): recordCvAnalysis (+100 the first time, cv-scanned), the user's
+ * bubble and «دليلك»'s CV card in the thread, the answers the CV states clearly written into `answers` (the profile card
+ * shows them filled) with `cvPrefill` waiting for the user's yes (confirmed at once when the CV stated nothing), and
+ * `onboarding.cv` "analysed". Null for an analysis with no skill (nothing is saved, as on /cv).
+ */
+export function recordOnboardingCv(
+  user: UserState,
+  input: {
+    readonly analysis: CvAnalysis;
+    readonly fileName: string | null;
+    readonly bubble: string;
+    readonly cardText: string;
+    readonly prefill: { readonly answers: OnboardingAnswers; readonly slots: readonly OnboardingStepId[] };
+  },
+  clock: Clock,
+): Transition | null {
+  const recorded = recordCvAnalysis(user, { analysis: input.analysis, fileName: input.fileName }, clock);
+  if (recorded === null) return null;
+  const after = recorded.user;
+  const thread = after.onboarding.thread;
+  const added: OnboardingMessage[] = [
+    onboardingMessage(thread.length, "user", input.bubble, clock),
+    { ...onboardingMessage(thread.length + 1, "daleel", input.cardText, clock), card: "cv" },
+  ];
+  const slots = input.prefill.slots.filter((q) => after.answers[q] === undefined);
+  const prefilled: OnboardingAnswers = { ...after.answers };
+  for (const q of slots) Object.assign(prefilled, { [q]: input.prefill.answers[q] });
+  const next: UserState = {
+    ...after,
+    answers: prefilled,
+    onboarding: { ...after.onboarding, thread: [...thread, ...added], cv: "analysed", cvPrefill: { slots, confirmed: slots.length === 0 } },
+  };
+  return finalize(user, next, clock, recorded.consequence.xp.events);
+}
+
 /** The facts of the sixth answer: answers, completion time, `onboarding_completed` +50 once (8.1). */
 function completedOnboarding(
   user: UserState,
@@ -234,11 +282,14 @@ export function applyOnboardingTurn(user: UserState, turn: OnboardingTurn, clock
     onboardingMessage(thread.length, "user", turn.userText, clock),
     ...turn.replies.map((text, i) => onboardingMessage(thread.length + 1 + i, "daleel", text, clock)),
   ];
-  const answered: UserState = {
-    ...user,
-    answers: turn.answers,
-    onboarding: { ...user.onboarding, thread: [...thread, ...added], misses: turn.misses },
-  };
+  const step = turn.cvStep;
+  const progress: { -readonly [K in keyof OnboardingProgress]: OnboardingProgress[K] } = { ...user.onboarding, thread: [...thread, ...added], misses: turn.misses };
+  if (step?.cv !== undefined) progress.cv = step.cv;
+  if (step?.prefill !== undefined) {
+    if (step.prefill === null) delete progress.cvPrefill;
+    else progress.cvPrefill = step.prefill;
+  }
+  const answered: UserState = { ...user, answers: turn.answers, onboarding: progress };
   if (!turn.done) return finalize(user, answered, clock, []);
   const { after, written } = completedOnboarding(answered, turn.answers, clock);
   return finalize(user, after, clock, written);
@@ -442,7 +493,7 @@ export function submitApplication(
   return { ok: true, application, transition: finalize(user, after, clock, written) };
 }
 
-/** «محاكاة: انقل للحالة التالية» (7.5): manualStatus = the next status; no-op at shortlisted / closed. */
+/** «انقل للخطوة التالية» (7.5): manualStatus = the next status; no-op at shortlisted / closed. */
 export function advanceApplication(user: UserState, jobId: JobId, clock: Clock): UserState {
   const app = user.applications.find((a) => a.jobId === jobId);
   if (!app) return user;

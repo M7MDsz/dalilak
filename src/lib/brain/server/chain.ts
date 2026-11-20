@@ -27,11 +27,11 @@ export class ProviderFailure extends Error {
 }
 
 /** The slots of the chain, in their fixed order. */
-export const SLOT_IDS = ["gemini-1", "gemini-2", "anthropic"] as const;
+export const SLOT_IDS = ["gemini-1", "gemini-2", "gemini-3", "gemini-4", "anthropic"] as const;
 export type SlotId = (typeof SLOT_IDS)[number];
 
 /** Env variable NAMES (never values) a slot reads; shown in logs so the owner knows what to check. */
-export type KeyEnv = "GEMINI_API_KEY" | "GEMINI_API_KEY_2" | "ANTHROPIC_API_KEY";
+export type KeyEnv = "GEMINI_API_KEY" | "GEMINI_API_KEY_2" | "GEMINI_API_KEY_3" | "GEMINI_API_KEY_4" | "ANTHROPIC_API_KEY";
 export type ModelEnv = "GEMINI_MODEL" | "GEMINI_MODEL_2" | "ANTHROPIC_MODEL";
 
 /** One configured provider slot: a key that is set, and the model it calls. */

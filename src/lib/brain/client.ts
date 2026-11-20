@@ -12,16 +12,75 @@ import type {
 
 const LOCAL_STATUS: BrainStatus = { configured: false, provider: null, mode: "local" };
 
-/** POST /api/advisor and yield its events. Abort with `signal` («إيقاف»): what arrived is kept by the caller. */
-export async function* streamAdvisor(request: AdvisorRequest, signal: AbortSignal): AsyncGenerator<AdvisorEvent> {
-  const response = await fetch("/api/advisor", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(request),
-    signal,
-    cache: "no-store",
-  });
-  yield* readNdjson<AdvisorEvent>(response);
+/**
+ * The longest the panel waits on the server for the next event (21 Nov 2026, QA: a stalled request left «دليلك يفكّر…»
+ * counting past 20 s). The server's own model turn ends by 9 s with the local brain's answer (turn.ts), so a gap this long
+ * is a stall: the request is cut and the turn ends with an error event, which the panel shows as its retry line.
+ */
+export const ADVISOR_STALL_MS = 10_000;
+
+export interface StreamAdvisorOptions {
+  /** Default ADVISOR_STALL_MS. */
+  readonly stallMs?: number;
+  /** Default the global fetch (tests pass a stalling one). */
+  readonly fetcher?: typeof fetch;
+}
+
+/**
+ * POST /api/advisor and yield its events. Abort with `signal` («إيقاف»): what arrived is kept by the caller. When the
+ * server sends nothing for `stallMs` (the time the caller spends on an event, e.g. an action, does not count), the request
+ * is aborted and `{ type: "error", code: "brain_failed" }` is yielded, so the turn ends instead of waiting forever.
+ */
+export async function* streamAdvisor(
+  request: AdvisorRequest,
+  signal: AbortSignal,
+  options: StreamAdvisorOptions = {},
+): AsyncGenerator<AdvisorEvent> {
+  const stallMs = options.stallMs ?? ADVISOR_STALL_MS;
+  const fetcher = options.fetcher ?? fetch;
+  const stall = new AbortController();
+  let timer: ReturnType<typeof setTimeout> | null = null;
+  const disarm = (): void => {
+    if (timer !== null) clearTimeout(timer);
+    timer = null;
+  };
+  const arm = (): void => {
+    disarm();
+    timer = setTimeout(() => stall.abort(), stallMs);
+  };
+  let reader: AsyncIterator<AdvisorEvent> | null = null;
+  let finished = false;
+  arm();
+  try {
+    const response = await fetcher("/api/advisor", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(request),
+      signal: anySignal([signal, stall.signal]),
+      cache: "no-store",
+    });
+    reader = readNdjson<AdvisorEvent>(response)[Symbol.asyncIterator]();
+    for (;;) {
+      arm();
+      const step = await reader.next();
+      disarm();
+      if (step.done) {
+        finished = true;
+        return;
+      }
+      yield step.value; // the caller's time on this event (an action, the pacing) is not the server's
+    }
+  } catch (error) {
+    if (stall.signal.aborted && !signal.aborted) {
+      finished = true;
+      yield { type: "error", code: "brain_failed" };
+      return;
+    }
+    throw error;
+  } finally {
+    disarm();
+    if (reader && !finished) await reader.return?.();
+  }
 }
 
 /** One AbortSignal that fires when any of the given ones does (AbortSignal.any where available). */

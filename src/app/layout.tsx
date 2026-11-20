@@ -25,7 +25,9 @@ export const metadata: Metadata = {
   description: "دليل: من مهاراتك إلى وظيفتك",
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, colorScheme: "light" };
+// viewport-fit=cover: the page reaches under the notch and the home indicator, so the env(safe-area-inset-*) paddings of
+// the phone bars, the sheets and the advisor panel take effect (without it they are always 0).
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", colorScheme: "light" };
 
 // Providers: direction, motion (reduced motion, ?still=1), tooltips and the one toast viewport (src/components/providers.tsx).
 // The <head> script sets the user's design (data-theme) before the first paint, so it never flashes (src/lib/theme.ts);

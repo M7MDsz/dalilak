@@ -14,27 +14,34 @@ Start from a clean state with **http://localhost:3040/?seed=fresh**. Any page al
 `?seed=onboarded`, `cv-analysed`, `course-done`, `mid-path`, `job-ready` or `returning`. Useful if a step goes wrong on
 stage: jump straight to the state you need.
 
-«دليلك» answers free questions with Gemini when `GEMINI_API_KEY` is set in `.env.local` (see `.env.example`). The scripted lines below, the answer tiles and the sample CV always use the built-in brain, so the numbers
-never change. With no internet, or once the free daily allowance is used up, he falls back to the built-in brain by himself.
-An Anthropic key can go in `ANTHROPIC_API_KEY=` the same way.
+«دليلك» leads the onboarding with Gemini when `GEMINI_API_KEY` is set (in `.env.local`, and on the Vercel project): he
+reads every typed answer, answers side questions («وش فايدة السيرة؟»، «ليش تسأل عن المدينة؟») and words his replies himself,
+each checked against the facts and replaced by the built-in line if it is slow (3.5 s) or adds anything
+(`docs/ONBOARDING-FLOW.md`). The tiles, the sample CV, the XP and the recommended job never depend on the model, so the
+numbers never change. With no internet, or once the free daily allowance is used up, he falls back to the built-in brain by
+himself. An Anthropic key can go in `ANTHROPIC_API_KEY=` the same way.
 
-## The 2-minute walk (about 85 seconds of clicks, the rest is talking)
+## The 2-minute walk (about 75 seconds of clicks, the rest is talking)
+
+The CV now comes first, inside the conversation (owner, 20 Nov 2026; the flow is `docs/ONBOARDING-FLOW.md`).
 
 | # | Clock | You do | The audience sees |
 |---|---|---|---|
-| 1 | 0:00 | Type «خالد», press «ابدأ رحلتك» | Sign-in: the name box on the right, the moving showcase on the left; «دليلك» greets Khalid |
-| 2 | 0:06 | Tap the seven answers (الرياض · بكالوريوس · نظم معلومات إدارية · بدون خبرة بعد · البيانات · **لا، مو الحين** · أول وظيفة). The sixth asks «وفيه شركة أو وظيفة معيّنة في بالك؟» with real employers of the field (مهارة first, then أرامكو، stc، سابك، القدية، سلة); for the demo tap «لا، مو الحين» so the path stays «محلل بيانات» | «دليلك» answers each one at once; the player card fills (7 slots). Optional to show: type a company instead (e.g. «سلة»): he names its real job and the reveal ends on it; change or clear it later on «ملفي» («الشركة اللي في بالك») |
-| 3 | 0:27 | Watch | The path-reveal show: jobs sweep, skills light up, the path draws itself to «محلل بيانات» |
-| 4 | 0:37 | Press «ابدأ هذا المسار» | The map opens: the winding road draws, the flag rises; beside it the real jobs that suit you, each with «باقي لك X%» and the skills you are missing; +80 XP; level 1 |
-| 5 | 0:43 | Press the first station «اكتشف مهاراتك» (ارفع سيرتك الذاتية) | The CV page |
-| 6 | 0:46 | Press «جرّب بسيرة ذاتية تجريبية», then «حلّل سيرتي» | The analysis show: sentences light up, 8 skills fly out with their stars; +100 XP; level 2; match 70% |
-| 7 | 0:58 | Press «اذهب إلى مساري» | The map catches up: six stations done from the CV; «أنت هنا» at 70%; the real-job cards now show what is left for each |
-| 8 | 1:04 | Press station 7 (Power BI), then «افتح الدليل» on its card | The 3D camera flight to the station and its card; the Power BI guide opens: «ليش ذي الخطوة» (70% → 90% مع «محلل بيانات», +200 XP), the plan ① تعلّم → ② طبّق → ③ خلّصتها, the real top pick («ابدأ بهذا»: Microsoft Learn, بالعربي، مجاني), who to follow and what to read beside it |
-| 9 | 1:09 | Press «خلّصتها» (step ③; no need to open the course: it opens a new tab and needs the internet) | The celebration: +200 XP, the stamp, the star, the match rises 70% → 90%, level 3, up 8 places to rank 10 |
-| 10 | 1:17 | Press «رجوع لمساري» | The map at 90%; on the real-job cards «باقي لك» counts down (a card's «وش ناقصني؟» opens that job's missing skills) |
-| 11 | 1:21 | Open «اسأل دليلك» (or Ctrl+K), type «قدّم لي على وظيفة محلل بيانات», Enter | «دليلك» opens the job page beside the chat, fills the form himself, sends it: DL-2026-0001, +40 XP; «محلل بيانات» is the one practice job («وظيفة تدريبية»), so the receipt ends with his honest line «وظيفة تدريبية: في الوظائف الحقيقية أفتح لك الإعلان الأصلي عشان ترسله» (on a real job he prepares the application and hands over «افتح الإعلان الأصلي وقدّم») |
-| 12 | 1:41 | Press «المتصدرون» | The leaderboard: you climb from 18 to 10 |
-| 13 | 1:48 | If time allows: «المهارات», then «ملفي» | The skill tree (wait ~3 s for it to settle on 9 of 93); badges 6 of 12 |
+| 1 | 0:00 | Type «خالد», press «ابدأ رحلتك» | Sign-in: the name box on the right, the moving showcase on the left; «دليلك» greets Khalid and asks «عندك سيرة ذاتية؟ ارفعها وأختصر عليك نص الأسئلة» |
+| 2 | 0:06 | Tap «جرّب بسيرة جاهزة» (or upload a PDF / Word file, or paste the text) | The analysis plays INSIDE the chat as «دليلك»'s card: «أقرا سيرتك سطر سطر…», each proving sentence lights up and its skills fly out, the stars land, «أقارن مهاراتك مع … وظيفة» (the rings), «خلصت: لقيت 8 مهارات»; the +100 XP toast; the profile card fills الرياض · بكالوريوس · نظم معلومات إدارية · أقل من سنة, each tagged «من سيرتك» |
+| 3 | 0:16 | Read «دليلك»'s reaction, tap «إيه، صح» | He names what he found («لقيت في سيرتك 8 مهارات، أقواها Excel و SQL») and confirms what the CV says («فهمت من سيرتك إنك خريج نظم معلومات إدارية (بكالوريوس) من الرياض…. صح؟»); then only the questions left, starting with «من سيرتك أشوف إن الأرقام والبيانات أقرب لك…» |
+| 4 | 0:20 | Tap «الأرقام والبيانات» · «لا، مو الحين» · «أول وظيفة بأسرع وقت» | He answers each one in his own words; his last line proposes the path himself: «محلل بيانات», why, and «مطابقتك له الحين 70%» |
+| 5 | 0:30 | Watch | The path-reveal show: jobs sweep, skills light up, the path draws itself to «محلل بيانات» |
+| 6 | 0:40 | Press «ابدأ هذا المسار» | The map opens already caught up with the CV: six stations done, «أنت هنا» at 70%; +80 XP (onboarding + target) and the level-up to level 2; XP 180, weekly rank 18; beside it the real jobs with «باقي لك X%» |
+| 7 | 0:50 | Press station 7 (Power BI), then «افتح الدليل» on its card | The 3D camera flight to the station and its card; the Power BI guide opens: «ليش ذي الخطوة» (70% → 90% مع «محلل بيانات», +200 XP), the plan ① تعلّم → ② طبّق → ③ خلّصتها, the top pick, who to follow |
+| 8 | 0:55 | Press «خلّصتها» (step ③) | The celebration: +200 XP, the stamp, the star, the match rises 70% → 90%, level 3, up 8 places to rank 10 (XP 380) |
+| 9 | 1:03 | Press «رجوع لمساري» | The map at 90%; on the job cards «باقي لك» counts down |
+| 10 | 1:07 | Open «اسأل دليلك» (or Ctrl+K), type «قدّم لي على وظيفة محلل بيانات», Enter | «دليلك» opens the job page beside the chat, fills the form himself and saves it in «طلباتي»: «تم حفظ طلبك», DL-2026-0001, +40 XP (XP 420) |
+| 11 | 1:27 | Press «المتصدرون» | The leaderboard: you climb from 18 to 10 |
+| 12 | 1:34 | If time allows: «المهارات», then «ملفي» | The skill tree (wait ~3 s for it to settle on 9 of 93); badges 6 of 12 |
+
+Without a CV: tap «ما عندي سيرة الحين» at step 2 and the seven questions follow as before (+50 XP, the reveal, the map);
+the map's first station «اكتشف مهاراتك» still opens /cv, which also re-analyses for anyone.
 
 Spoken one-liner (from the idea file): "Upload your CV, and in seconds you know where you stand, where you're going, and
 the next step. Every step you take is measured progress toward the job you chose."
@@ -58,9 +65,12 @@ SmartRecruiters boards and the company career pages of Salla, Lucidya, Foodics, 
 PetroApp, Mozn, Qiddiya and others), each with its company, source site,
 posting date, link (opens in a new tab) and, for every requirement, the posting's own sentence
 (`research/jobs/jobs-snapshot.json`, `research/jobs/maharah.json`, `src/lib/data/jobs.ts`). A posting may have closed
-since; the job page says so. On a real job «دليلك» never sends anything: he fills and saves the application (+40 XP), then
+since (no screen shows the collection date or a "may have closed" note any more). On a real job «دليلك» never sends anything: he fills and saves the application (+40 XP), then
 the user opens the original posting with the cover note copied.
 
-Simulated: «محلل بيانات» (data-analyst-riyadh), the one practice job («وظيفة تدريبية», fictional company, kept so the
-demo numbers stay), and its simulated status track in «طلباتي»; the 24 other leaderboard users («بيانات تجريبية»);
+Not real: «محلل بيانات» (data-analyst-riyadh), the one practice job (fictional company, kept so the demo numbers stay);
+the 24 other leaderboard users. Since 21 Nov 2026 nothing on screen labels them (no «تجريبي» / «تدريبية» / «محاكاة»
+tags, no collection dates), and nothing says the practice application was sent, received or reviewed: it is saved in
+«طلباتي» («تم حفظ طلبك»; «دليلك»: «حفظت طلبك على «محلل بيانات» في «طلباتي» برقم DL-2026-0001…») and its card tracks
+the user's own steps «محفوظ» → «جاهز» → «الاستعداد».
 finishing a step is self-reported («خلّصتها», with an optional certificate link); sign-in is by name only.

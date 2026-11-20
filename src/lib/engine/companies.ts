@@ -3,9 +3,9 @@
 // company. Jobs are found by the company NAME they carry (`company`, `companyEn`), never by job id, so the job data can
 // change under it. Pure.
 import { COMPANIES, JOBS, companyTiles, getJob } from "@/lib/data";
-import { isJobFieldId } from "@/lib/ids";
+import { EXPERIENCE_BANDS, isJobFieldId } from "@/lib/ids";
 import { findKeywords, normalizeText, tokenize } from "@/lib/text/normalize";
-import type { CompanyId, Job, JobFieldId, JobId, OnboardingAnswers } from "@/lib/types";
+import type { CompanyId, ExperienceBand, Job, JobFieldId, JobId, OnboardingAnswers } from "@/lib/types";
 
 /** Every spelling «دليلك» knows, with its company (the order of COMPANIES, then of each company's aliases). */
 export const COMPANY_KEYWORDS: readonly { readonly keyword: string; readonly id: CompanyId }[] = COMPANIES.flatMap((c) =>
@@ -86,14 +86,17 @@ export function jobsAtCompany(id: CompanyId): readonly JobId[] {
  * break ties), at most `max` of them; «مهارة», the hackathon's organiser, always leads (owner's request). With no field
  * («لم أحدّد بعد»), the companies with the most jobs overall.
  */
-export function companyChoices(field: JobFieldId | null, max = 5): readonly CompanyId[] {
+export function companyChoices(field: JobFieldId | null, max = 5, band: ExperienceBand | null = null): readonly CompanyId[] {
+  // 21 Nov 2026 (tester): with the user's band, only jobs within reach count (at most one band above), so a company whose
+  // jobs in the field are all senior is not offered to a beginner
+  const reach = (jobId: JobId): boolean => band === null || EXPERIENCE_BANDS.indexOf(getJob(jobId).band) - EXPERIENCE_BANDS.indexOf(band) <= 1;
   const curated = companyTiles(field);
   const rank = (id: CompanyId): number => {
     const at = curated.indexOf(id);
     return at === -1 ? curated.length : at;
   };
   const counted = COMPANIES.filter((c) => c.id !== "maharah")
-    .map((c, order) => ({ id: c.id, order, n: jobsAtCompany(c.id).filter((j) => field === null || getJob(j).field === field).length }))
+    .map((c, order) => ({ id: c.id, order, n: jobsAtCompany(c.id).filter((j) => (field === null || getJob(j).field === field) && reach(j)).length }))
     .filter((c) => c.n > 0)
     .sort((a, b) => b.n - a.n || rank(a.id) - rank(b.id) || a.order - b.order);
   return ["maharah", ...counted.slice(0, max).map((c) => c.id)];

@@ -56,13 +56,14 @@ export const LEADERBOARD_SIZE = 25;
 export const CATALOGUE_COUNTS = {
   // spec 9 (7 / 38 / 59 / 59 / 566 / 28) plus the 20 Nov 2026 expansion (3 fields: product, cyber-cloud, sales-supply;
   // 16 skills, 21 courses of 218 hours, 18 real jobs: src/lib/data/expansion) plus wave 2 (9 fields, 39 skills of 68 star
-  // slots, 68 courses of 728 hours, 38 real jobs: src/lib/data/wave2)
-  fields: 19,
-  skills: 93,
-  starSlots: 148,
-  courses: 148,
-  courseHours: 1512,
-  jobs: 84,
+  // slots, 68 courses of 728 hours, 38 real jobs: src/lib/data/wave2) plus wave 3 (4 fields, 21 skills of 37 star slots,
+  // 37 courses of 450 hours, 86 real jobs: src/lib/data/wave3)
+  fields: 23,
+  skills: 114,
+  starSlots: 185,
+  courses: 185,
+  courseHours: 1962,
+  jobs: 170,
   badges: 12,
   levels: 7,
   leaderboardUsers: 24,

@@ -33,11 +33,21 @@ export const CITY_ENTRIES: readonly CityEntry[] = [
   { keyword: "dammam", value: "dammam", label: null },
   { keyword: "الخبر", value: "dammam", label: "الخبر" },
   { keyword: "khobar", value: "dammam", label: "الخبر" },
+  { keyword: "al khobar", value: "dammam", label: "الخبر" },
+  { keyword: "alkhobar", value: "dammam", label: "الخبر" },
+  { keyword: "dhahran", value: "dammam", label: "الظهران" },
   { keyword: "الظهران", value: "dammam", label: "الظهران" },
   { keyword: "مكة", value: "makkah", label: null },
   { keyword: "مكة المكرمة", value: "makkah", label: null },
   { keyword: "المدينة المنورة", value: "madinah", label: null },
   { keyword: "المدينه", value: "madinah", label: null },
+  // English spellings people type (tester, 21 Nov 2026: «I live in Yanbu»)
+  { keyword: "makkah", value: "makkah", label: null },
+  { keyword: "mecca", value: "makkah", label: null },
+  { keyword: "makka", value: "makkah", label: null },
+  { keyword: "madinah", value: "madinah", label: null },
+  { keyword: "medina", value: "madinah", label: null },
+  { keyword: "madina", value: "madinah", label: null },
 ];
 
 /**
@@ -69,13 +79,16 @@ export function placeSpellings(name: string): string[] {
 function placeEntries(): PlaceEntry[] {
   const core = new Set(CITY_ENTRIES.map((e) => e.keyword));
   const out: PlaceEntry[] = [];
-  const add = (label: string, place: SaPlace, region: SaRegion | null) => {
-    for (const keyword of placeSpellings(label)) if (!core.has(keyword)) out.push({ keyword, place, label, region });
+  const add = (spelling: string, place: SaPlace, region: SaRegion | null, label: string) => {
+    for (const keyword of placeSpellings(spelling)) if (!core.has(keyword)) out.push({ keyword, place, label, region });
   };
-  for (const place of SA_PLACES) for (const name of [place.name, ...(place.aliases ?? [])]) add(name, place, null);
+  // an English spelling («Yanbu») is kept under the place's Arabic name, so «دليلك» says «ينبع» back
+  const latin = (word: string): boolean => /[A-Za-z]/.test(word);
+  for (const place of SA_PLACES) for (const name of [place.name, ...(place.aliases ?? [])]) add(name, place, null, latin(name) ? place.name : name);
   for (const region of SA_REGIONS) {
     const seat = findSaPlace(region.seat);
-    if (seat) for (const alias of region.aliases) add(alias, seat, region);
+    const arabic = region.aliases.find((a) => !latin(a)) ?? region.name;
+    if (seat) for (const alias of region.aliases) add(alias, seat, region, latin(alias) ? arabic : alias);
   }
   return out;
 }
@@ -376,7 +389,7 @@ export const ACK = {
     (city: string): string => `تمام، ${city}. وفيه بعد فرص عن بُعد لو تبي.`,
   ],
   cityNoJobs: (city: string): string =>
-    `${city}، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في البيانات التجريبية، فبضيف لك وظائف عن بُعد تناسبك.`,
+    `${city}، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في قائمتي، فبضيف لك وظائف عن بُعد تناسبك.`,
   /** Any other Saudi city, governorate or region (20 Nov 2026): «شقراء، حيّاك الله! محافظة في منطقة الرياض، …». */
   cityPlace: (a: PlaceAck): string =>
     `${a.label}، حيّاك الله! ${placeWhere(a)}${placeNear(a)}. وفيه بعد وظائف عن بُعد تقدر تشتغلها من مكانك.`,
@@ -392,27 +405,29 @@ export const ACK = {
     (major: string): string => `${major}، تخصص له مستقبل. بربطه لك بأقرب الوظائف له.`,
   ],
   majorOther: "ولا يهمك، التخصص ما يحدّنا، وبعتمد أكثر على اللي تحبه.",
+  // 20 Nov 2026 (docs/ONBOARDING-FLOW.md 4): three variants each, picked like the city ones (name + question number); the
+  // variant «خالد» gets is the line the demo always had.
   experience: {
-    none: "ولا يهمك، كلنا بدينا من هنا. بختار لك وظائف تناسب البدايات.",
-    under1: "بداية طيبة، وكل شهر خبرة ينحسب لك.",
-    "1to3": "ما شاء الله، خبرة زينة. بدوّر لك على خطوة أعلى، مو بداية من الصفر.",
-    over3: "ما شاء الله، خبرة تستاهل مسار يليق فيها.",
-  } satisfies Record<ExperienceOption, string>,
+    none: ["كلنا بدينا من الصفر، وهذا مو عيب. بدوّر لك على وظائف تفتح الباب للبدايات.", "ما عليه، أول خطوة أهم خطوة، وبختار لك فرص تناسب البداية.", "ولا يهمك، كلنا بدينا من هنا. بختار لك وظائف تناسب البدايات."],
+    under1: ["حلو، عندك بداية، وكل شهر خبرة يفرق.", "زين، خبرة قصيرة بس تنحسب لك، ونبني عليها.", "بداية طيبة، وكل شهر خبرة ينحسب لك."],
+    "1to3": ["زين، عندك أساس قوي. بدوّر لك على خطوة أعلى من البداية.", "حلو، خبرة تفرق معك، وبختار لك وظائف تبني عليها.", "ما شاء الله، خبرة زينة. بدوّر لك على خطوة أعلى، مو بداية من الصفر."],
+    over3: ["خبرة طويلة، ما شاء الله. بختار لك مسار يناسب مستواك.", "زين، خبرة تفتح لك أبواب أعلى، وبدوّر لك عليها.", "ما شاء الله، خبرة تستاهل مسار يليق فيها."],
+  } satisfies Record<ExperienceOption, readonly [string, string, string]>,
   interest: {
-    data: "الأرقام والبيانات، اختيار حلو. اللي يقرا الأرقام ينسمع رأيه.",
-    software: "بناء المواقع والتطبيقات، ممتاز. وما أحلى إنك تبني شي يستخدمه الناس.",
-    design: "التصميم والإبداع، حلو. العين اللي تلقط التفاصيل مطلوبة.",
-    marketing: "التسويق والمحتوى، تمام. الكلمة الصح تفتح أبواب.",
-    business: "تنظيم الأعمال والمشاريع، ممتاز. كل فريق يحتاج أحد يرتّب الطريق.",
-    hr: "الشغل مع الناس وتطويرهم، حلو. هذا أثر يبقى.",
-    unsure: "ولا يهمك، طبيعي ما تكون متأكد. بعتمد على تخصصك وخبرتك، وتقدر تغيّر الاتجاه متى ما بغيت.",
-  } satisfies Record<InterestOption, string>,
+    data: ["الأرقام والبيانات، اختيار حلو. اللي يقرا الأرقام ينسمع رأيه.", "البيانات؟ زين، كل قرار كبير يبدأ من رقم.", "حلو، الأرقام والبيانات مجال مطلوب وممتع."],
+    software: ["بناء المواقع والتطبيقات، ممتاز. وما أحلى إنك تبني شي يستخدمه الناس.", "زين، البرمجة تخليك تبني أفكارك بيدك.", "حلو، المواقع والتطبيقات شغل تشوف أثره على طول."],
+    design: ["التصميم والإبداع، حلو. العين اللي تلقط التفاصيل مطلوبة.", "زين، الذوق الحلو يفرق في كل منتج.", "حلو، التصميم يخلي الفكرة تنفهم من أول نظرة."],
+    marketing: ["التسويق والمحتوى، تمام. الكلمة الصح تفتح أبواب.", "زين، المحتوى الحلو يوصل للناس بسرعة.", "حلو، التسويق مجال يحب الأفكار الجديدة."],
+    business: ["تنظيم الأعمال والمشاريع، ممتاز. كل فريق يحتاج أحد يرتّب الطريق.", "زين، اللي يرتب الشغل يرتاح معه الفريق كله.", "حلو، إدارة المشاريع تفتح لك أبواب كثيرة."],
+    hr: ["الشغل مع الناس وتطويرهم، حلو. هذا أثر يبقى.", "زين، الناس هم أساس أي شركة.", "حلو، تطوير الناس شغل له طعم."],
+    unsure: ["ولا يهمك، طبيعي ما تكون متأكد. بعتمد على تخصصك وخبرتك، وتقدر تغيّر الاتجاه متى ما بغيت.", "ما عليه، نكتشفها سوا، وبعتمد الحين على تخصصك وخبرتك.", "طبيعي، كثير يبدون كذا. بعتمد على تخصصك وخبرتك، والاتجاه تقدر تغيّره بعدين."],
+  } satisfies Record<InterestOption, readonly [string, string, string]>,
   priority: {
-    "first-job": "أول وظيفة، هدف واضح. بختار لك أقصر طريق لها.",
-    switch: "تغيير المجال يبي له شجاعة، وأنت قدها. برسم لك جسر من مهاراتك الحالية.",
-    grow: "قرار موفق، تتطوّر في مجالك وتبني على اللي عندك.",
-    explore: "الاستكشاف بداية ذكية. بوريك ثلاث اتجاهات والاختيار لك.",
-  } satisfies Record<PriorityOption, string>,
+    "first-job": ["زين، نركّز على أقرب وظيفة لك. بختار أقصر طريق.", "تمام، أول وظيفة هي الهدف، وبمشي معك له خطوة خطوة.", "أول وظيفة، هدف واضح. بختار لك أقصر طريق لها."],
+    switch: ["تغيير المجال يبي له شجاعة، وأنت قدها. برسم لك جسر من مهاراتك الحالية.", "زين، بنستفيد من اللي عندك ونعبر به للمجال الجديد.", "حلو، التغيير قرار كبير، وبسهّله لك من مهاراتك الحالية."],
+    grow: ["زين، نبني على اللي عندك ونطلع فيه خطوة.", "حلو، التطوّر في مجالك أقصر طريق لخطوة أعلى.", "قرار موفق، تتطوّر في مجالك وتبني على اللي عندك."],
+    explore: ["زين، بوريك أكثر من اتجاه والاختيار لك.", "حلو، الاستكشاف يخليك تختار عن قناعة.", "الاستكشاف بداية ذكية. بوريك ثلاث اتجاهات والاختيار لك."],
+  } satisfies Record<PriorityOption, readonly [string, string, string]>,
   /**
    * 20 Nov 2026, step 7: the company the user has in mind. `job`: the job of that company the path will aim at (engine
    * `companyJob`), «في الرياض» or «عن بُعد»; `noJob`: the job data has none of its jobs, so the path goes to the closest
@@ -426,6 +441,15 @@ export const ACK = {
     /** It has jobs in the data, but none in the field the user asked for (20 Nov 2026): never aimed at another field. */
     noJobInField: (company: string): string =>
       `${company}، اختيار زين! بس ما عندي الحين وظيفة منهم في المجال اللي تبيه، فبرسم مسارك لأقرب وظيفة تناسبك، ووظايفهم الثانية تلقاها في «الوظائف».`,
+    /**
+     * Its jobs are in another field (21 Nov 2026, tester: «مهارة» leads every field): said positively, the job pinned first
+     * among the map's jobs, the path still in the user's field.
+     */
+    otherField: (company: string, title: string, field: string, mine: string): string =>
+      `${company}، اختيار زين! عندهم وظيفة «${title}» في ${field}، حطيتها لك أول وحدة في وظائفك، ومسارك الأساسي يبقى في ${mine}.`,
+    /** It has jobs in the field, but all need more experience (21 Nov 2026): the next goal, never the path now. */
+    aboveBand: (company: string): string =>
+      `${company} عندهم وظايف في مجالك، بس تبي خبرة أكثر. نخليها هدفك الجاي، وأرسم لك مسار يوصلك لها.`,
     early: (company: string): string => `${company}، سجّلتها! عندهم وظايف في قائمتي، وبعد ما أعرفك أكثر أختار لك أنسبها.`,
     none: "ولا يهمك، نخليها مفتوحة، وتقدر تضيفها بعدين من «ملفي».",
     /** The second miss: a name «دليلك» does not know is never guessed (4.5: it never loops). */

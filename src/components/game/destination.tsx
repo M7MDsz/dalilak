@@ -7,7 +7,6 @@ import type { ReactNode } from "react";
 import { IconExperience } from "@/components/icons";
 import { Ring } from "@/components/motion";
 import { cn } from "@/components/ui/cn";
-import { SampleTag } from "@/components/ui";
 import { formatPercent } from "@/lib/format";
 
 import { SkillGem } from "./gem";
@@ -38,7 +37,7 @@ export interface DestinationCardProps extends Omit<TileProps, "children" | "stat
   readonly skills: readonly Requirement[];
   /** The user's target job: the accent (your destination), the ribbon «هدفك». */
   readonly target?: boolean;
-  /** Applied: the status line («قيد المراجعة · محاكاة») and the XP it paid (40 or 0). The card lies flat, settled. */
+  /** Applied: the status line («جاهز») and the XP it paid (40 or 0). The card lies flat, settled. */
   readonly applied?: { readonly status: ReactNode; readonly xp: number };
   /** The reward for applying. Default { xp: 40, threshold: 60 }; `null` hides it. */
   readonly applyReward?: ApplyReward | null;
@@ -52,7 +51,7 @@ export interface DestinationCardProps extends Omit<TileProps, "children" | "stat
   readonly action?: ReactNode;
   readonly testId?: string;
   readonly matchTestId?: string;
-  /** The mark beside the company (default «جهة تجريبية»; the jobs board passes the job's own: practice tag or source). */
+  /** The mark beside the company (default none; the jobs board passes the job's own source). */
   readonly tag?: ReactNode;
   /** Drawn as-is in place of the bordered `icon` token (the jobs board: the employer's logo or monogram). */
   readonly emblem?: ReactNode;
@@ -141,7 +140,7 @@ export function DestinationCard({
             <span>
               {company} · {city}
             </span>
-            {tag === undefined ? <SampleTag kind="company" /> : tag}
+            {tag}
           </p>
           {applied ? <p className="mt-1 text-small font-medium text-ok-fg">{applied.status}</p> : null}
         </div>

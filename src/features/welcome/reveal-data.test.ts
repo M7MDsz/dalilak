@@ -80,6 +80,8 @@ describe("sampleTiles", () => {
 describe("RESULT_COPY company line", () => {
   it("speaks Najdi, as «دليلك» does", () => {
     expect(RESULT_COPY.companyAimed("سلة")).toBe("في سلة، الشركة اللي اخترتها");
-    expect(RESULT_COPY.companyNoJob("القدية")).toBe("ما عندي الحين وظيفة من القدية في المجال اللي تبيه، فهذي الأقرب لك.");
+    // a company with jobs elsewhere in the app is said positively; one with no job at all, honestly (21 Nov 2026)
+    expect(RESULT_COPY.companyNoJob("مهارة")).toBe("وظايف مهارة حطيتها لك أول وحدة في وظائفك، ومسارك يبقى في مجالك.");
+    expect(RESULT_COPY.companyNoJob("شركة غير معروفة")).toBe("ما عندي الحين وظيفة من شركة غير معروفة، فهذي الأقرب لك.");
   });
 });

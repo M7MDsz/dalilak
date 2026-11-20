@@ -61,9 +61,9 @@ export const GUIDE: readonly GuideEntry[] = [
     // upload verbs only: «كيف أكتب سيرة ذاتية قوية؟» wants advice (T.cvTips), not this page
     ask: ["أرفع", "ارفع", "أحلل", "احلل", "أحلّل", "أضيف", "اضيف", "upload"],
     to: { screen: "cv" },
-    how: "تفضّل، فتحت لك صفحة السيرة. ارفع ملف PDF أو Word أو الصق النص، واضغط «حلّل سيرتي». وإذا ما عندك سيرة جاهزة اضغط «جرّب بسيرة ذاتية تجريبية».",
+    how: "تفضّل، فتحت لك صفحة السيرة. ارفع ملف PDF أو Word أو الصق النص، واضغط «حلّل سيرتي». وإذا ما عندك سيرة اضغط «جرّب بسيرة جاهزة».",
     routed: true,
-    hint: "Upload / analyse a CV: CV page (سيرتي) → upload a PDF or Word file or paste the text → «حلّل سيرتي»; «جرّب بسيرة ذاتية تجريبية» for the sample; «حلّل سيرة أخرى» to redo. navigate screen=cv.",
+    hint: "Upload / analyse a CV: CV page (سيرتي) → upload a PDF or Word file or paste the text → «حلّل سيرتي»; «جرّب بسيرة جاهزة» for the sample; «حلّل سيرة أخرى» to redo. navigate screen=cv.",
   },
   {
     // 20 Nov 2026: Dalilak guides, it does not host courses. A step of the path opens the guide of its skill.
@@ -81,9 +81,9 @@ export const GUIDE: readonly GuideEntry[] = [
     topic: ["أقدّم", "اقدم", "أقدم", "التقديم", "تقديم", "apply"],
     ask: HOW,
     to: { screen: "jobs" },
-    how: "تفضّل، فتحت لك الوظائف. افتح الوظيفة واضغط «قدّم بنفسك»، أو اضغط «دع دليلك يقدّم عنك» وأنا أقدّم عنك في منصة دليل وLinkedIn وبيت.كوم وIndeed وموقع الجهة (تقديم تجريبي).",
+    how: "تفضّل، فتحت لك الوظائف. افتح الوظيفة واضغط «دع دليلك يجهّز طلبك» وأنا أعبّيه عنك، أو «جهّز طلبك بنفسك»، وبعدها ترسله أنت من الإعلان الأصلي.",
     routed: true,
-    hint: "Apply to a job: job page → «قدّم بنفسك» (the user fills it), or «دع دليلك يقدّم عنك» / the user asks you and you call apply_to_job: you fill it and also apply on LinkedIn, بيت.كوم, Indeed and the company site (all simulated). navigate screen=jobs.",
+    hint: "Apply to a job: job page → «جهّز طلبك بنفسك» (the user fills it), or «دع دليلك يجهّز طلبك» / the user asks you and you call apply_to_job: the app fills and saves it, then the user sends it from the original posting («افتح الإعلان الأصلي وقدّم»). The practice job «محلل بيانات» (no posting) shows «قدّم بنفسك» / «دع دليلك يقدّم عنك» and is only saved in «طلباتي». navigate screen=jobs.",
   },
   {
     id: "history",
@@ -99,9 +99,9 @@ export const GUIDE: readonly GuideEntry[] = [
     topic: ["معلوماتي", "مدينتي", "تخصصي", "مؤهلي", "خبرتي", "إجاباتي", "اجاباتي", "بياناتي"],
     ask: [...CHANGE, "وين", "فين", "أشوف", "اشوف", "where"],
     to: { screen: "profile" },
-    how: "تفضّل، فتحت لك «ملفي». معلوماتك تحت «معلوماتي»، وهي من أسئلة البداية وما تنعدّل من هنا. لو تبي تغيّرها، «إعادة ضبط العرض» في آخر الصفحة يبديك من جديد، وترى يمسح تقدّمك.",
+    how: "تفضّل، فتحت لك «ملفي». معلوماتك تحت «معلوماتي»، وهي من أسئلة البداية وما تنعدّل من هنا. لو تبي تغيّرها، «ابدأ من جديد» في آخر الصفحة يبديك من جديد، وترى يمسح تقدّمك.",
     routed: true,
-    hint: "Onboarding answers (city, education, major, experience, interest, priority): profile «معلوماتي», read-only; only «إعادة ضبط العرض» starts over (it deletes progress). navigate screen=profile.",
+    hint: "Onboarding answers (city, education, major, experience, interest, priority): profile «معلوماتي», read-only; only «ابدأ من جديد» starts over (it deletes progress). navigate screen=profile.",
   },
   {
     id: "signout",
@@ -118,9 +118,9 @@ export const GUIDE: readonly GuideEntry[] = [
     topic: ["إعادة ضبط", "اعادة ضبط", "من جديد", "من الصفر", "أصفر", "اصفر", "reset"],
     ask: [...HOW, "أبدأ", "ابدأ", "أبي", "ابي"],
     to: { screen: "profile" },
-    how: "تفضّل، فتحت لك «ملفي». في آخر الصفحة اضغط «إعادة ضبط العرض»، وترى يمسح تقدّمك ونقاطك من ذا المتصفح.",
+    how: "تفضّل، فتحت لك «ملفي». في آخر الصفحة اضغط «ابدأ من جديد»، وترى يمسح تقدّمك ونقاطك من ذا المتصفح.",
     routed: true,
-    hint: "Start over: profile page, at the bottom → «إعادة ضبط العرض» (deletes progress and XP in this browser). navigate screen=profile.",
+    hint: "Start over: profile page, at the bottom → «ابدأ من جديد» (deletes progress and XP in this browser). navigate screen=profile.",
   },
   {
     id: "new-chat",
@@ -193,9 +193,9 @@ export const GUIDE: readonly GuideEntry[] = [
     topic: ["طلباتي", "الطلبات", "طلبي"],
     ask: HOW,
     to: { screen: "applications" },
-    how: "تفضّل، فتحت لك «طلباتي». تشوف حالة كل طلب ووين انرسل، وفيه زر «محاكاة: انقل للحالة التالية».",
+    how: "تفضّل، فتحت لك «طلباتي». تشوف كل طلب جهّزته برقمه ومطابقتك فيه، ورابط إعلانه الأصلي عشان ترسله منه.",
     routed: false,
-    hint: "Applications (طلباتي): each one's status track «أُرسل» → «قيد المراجعة» → «النتيجة», where it was sent, and «محاكاة: انقل للحالة التالية». navigate screen=applications.",
+    hint: "Applications (طلباتي): each application with its number and the match then and now; a real job's card links to the original posting, where the user sends it; the practice job's card shows the user's own progress «محفوظ» → «جاهز» → «الاستعداد» with «انقل للخطوة التالية». navigate screen=applications.",
   },
 ];
 

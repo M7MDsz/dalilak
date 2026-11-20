@@ -3,7 +3,8 @@
 // routes (Tamheer, Doroob, Tuwaiq…), all read from src/lib/data/careers.ts (the expansion's families and wave 2's; never
 // restated here). Two users: the router (a family named, or the user's target family for a few specific asks) and the
 // model's get_career tool (its result carries the pay figure, so rule 8 accepts it only when that tool was called). Pure.
-import { JOBS, getJob, getSkill } from "@/lib/data";
+import { COMPANIES, JOBS, getJob, getSkill } from "@/lib/data";
+import { matchCompany } from "@/lib/engine";
 import { SKILL_IDS, courseIdFor } from "@/lib/ids";
 import {
   CAREER_FAMILIES,
@@ -12,6 +13,7 @@ import {
   careersIndexForModel,
   getCareerFamily,
   knowledgeForModel,
+  saudizationForModel,
   type CareerFamily,
   type CareerFamilyId,
   type EntryRoute,
@@ -32,6 +34,44 @@ import * as W from "./words";
  * (src/lib/data/wave2/knowledge.ts) come first with phrases no older family uses.
  */
 const FAMILY_SAYINGS: readonly (readonly [CareerFamilyId, readonly string[]])[] = [
+  // ── wave 3 (21 Nov 2026, src/lib/data/wave3/knowledge.ts): phrases no older family uses (no bare «الاتصالات»: stc's name) ──
+  ["esg-sustainability", ["محلل استدامة", "محللة استدامة", "الاستدامة", "استدامة", "البصمة الكربونية", "تقارير الاستدامة", "esg", "sustainability"]],
+  [
+    "real-estate-fm",
+    [
+      "مدير أملاك", "إدارة الأملاك", "إدارة أملاك", "إدارة المرافق", "مدير مرافق", "منسق تأجير", "مقيم عقاري", "مقيّم عقاري",
+      "التقييم العقاري", "العقار", "العقارات", "real estate", "property manager", "property management", "facilities management", "leasing",
+    ],
+  ],
+  ["insurance", ["مكتتب تأمين", "مكتتب", "الاكتتاب", "اكتتاب", "تسوية المطالبات", "مقدر أضرار", "التأمين", "تأمين", "insurance", "underwriter", "underwriting", "claims adjuster"]],
+  [
+    "mobile-dev",
+    [
+      "مطور تطبيقات جوال", "مطور تطبيقات", "تطوير تطبيقات", "تطبيقات الجوال", "مطور جوال", "مطور موبايل", "فلاتر", "أندرويد", "اندرويد",
+      "mobile developer", "mobile development", "mobile app", "flutter", "android", "ios",
+    ],
+  ],
+  [
+    "telecom-network",
+    [
+      "مهندس شبكات", "مهندسة شبكات", "شبكات الاتصالات", "مهندس اتصالات", "قطاع الاتصالات", "الألياف البصرية", "الجيل الخامس",
+      "network engineer", "telecom", "telecommunications", "ccna", "5g",
+    ],
+  ],
+  [
+    "aviation-ops",
+    [
+      "مراقب عمليات جوية", "مراقب العمليات الجوية", "عمليات الطيران", "عمليات المطارات", "الخدمات الأرضية", "الطيران", "طيران", "مطار",
+      "flight dispatcher", "flight dispatch", "aviation", "airline", "airport",
+    ],
+  ],
+  [
+    "pr-communications",
+    [
+      "أخصائي علاقات عامة", "العلاقات العامة", "علاقات عامة", "الاتصال المؤسسي", "الاتصال الداخلي", "العلاقات الحكومية", "علاقات حكومية",
+      "متحدث رسمي", "public relations", "corporate communications", "government relations", "pr",
+    ],
+  ],
   // ── wave 2 (20 Nov 2026) ──
   ["civil-site-engineer", ["مهندس موقع", "مهندس مدني", "مهندسة مدنية", "الهندسة المدنية", "هندسة مدنية", "site engineer", "civil engineer"]],
   ["mep-engineer", ["مهندس ميكانيكا", "مهندس ميكانيكي", "مهندس كهرباء", "مهندس تكييف", "مهندس mep", "mep engineer", "mep", "hvac"]],
@@ -39,11 +79,11 @@ const FAMILY_SAYINGS: readonly (readonly [CareerFamilyId, readonly string[]])[] 
   ["hse-officer", ["السلامة المهنية", "الصحة والسلامة", "مهندس سلامة", "أخصائي سلامة", "hse", "safety officer", "safety engineer"]],
   ["planning-engineer", ["مهندس تخطيط", "مهندس جدولة", "بريمافيرا", "primavera", "planning engineer", "scheduling engineer"]],
   ["quantity-surveyor", ["حاسب كميات", "حصر الكميات", "حساب الكميات", "مهندس تكاليف", "مهندس عقود", "quantity surveyor", "cost engineer", "cost controller"]],
-  ["guest-experience", ["الضيافة", "ضيافة", "الفنادق", "فندق", "موظف استقبال", "خدمة الضيوف", "hospitality", "front desk", "guest relations"]],
-  ["events", ["تنظيم الفعاليات", "منظم فعاليات", "منسق فعاليات", "إدارة الفعاليات", "الفعاليات", "event planner", "event management", "events coordinator"]],
+  ["guest-experience", ["الضيافة", "ضيافة", "الفنادق", "فندق", "موظف استقبال", "خدمة الضيوف", "hospitality", "front desk", "guest relations", "علاقات الضيوف", "guest experience", "guest service"]],
+  ["events", ["تنظيم الفعاليات", "منظم فعاليات", "منسق فعاليات", "إدارة الفعاليات", "الفعاليات", "event planner", "event management", "events coordinator", "event coordinator", "events planner"]],
   ["medical-coding-rcm", ["الترميز الطبي", "ترميز طبي", "مرمز طبي", "المطالبات الطبية", "دورة الإيرادات", "medical coding", "medical coder", "rcm"]],
   ["learning-design", ["التصميم التعليمي", "مصمم تعليمي", "مصممة تعليمية", "مدرب", "مدربة", "instructional designer", "instructional design", "trainer"]],
-  ["cx-quality", ["تجربة العملاء", "تجربة العميل", "خدمة العملاء", "مركز الاتصال", "كول سنتر", "customer experience", "call center", "contact center", "cx"]],
+  ["cx-quality", ["تجربة العملاء", "تجربة العميل", "خدمة العملاء", "مركز الاتصال", "كول سنتر", "customer experience", "call center", "contact center", "customer service", "customer care", "cx"]],
   ["credit-risk", ["محلل ائتمان", "الائتمان", "ائتمان", "مخاطر ائتمانية", "مخاطر الائتمان", "credit analyst", "credit risk"]],
   ["compliance-aml", ["مسؤول التزام", "مسؤول الالتزام", "الامتثال", "غسل الأموال", "مكافحة غسل الأموال", "compliance officer", "compliance", "aml"]],
   ["audit", ["مراجع داخلي", "المراجعة الداخلية", "التدقيق الداخلي", "مدقق حسابات", "مراجع حسابات", "auditor", "internal audit", "audit"]],
@@ -172,6 +212,8 @@ const ROUTE_SAYINGS: readonly (readonly [EntryRouteId, readonly string[]])[] = [
   ["tuwaiq-bootcamps", ["طويق", "tuwaiq"]],
   ["hrdf-coop", ["تعاوني", "coop"]],
   ["misk-career-essentials", ["مسك", "misk"]],
+  // wave 3 (src/lib/data/wave3/knowledge.ts)
+  ["sdaia-academy", ["أكاديمية سدايا", "sdaia academy"]],
 ];
 
 /** Messages another row answers better (the CV, the gap, the match, feelings, XP, badges, the leaderboard). */
@@ -248,8 +290,10 @@ interface Offer {
 
 function jobsOffer(f: CareerFamily): Offer | null {
   const jobs = jobsOf(f);
+  // 21 Nov 2026 (owner: everything offered must have jobs): a family with no posting in the app says so honestly
+  if (jobs[0] === undefined) return { line: "للأمانة ما فيه الحين وظيفة لها في المنصة، وأول ما ينزل إعلان لها بتلقاه في «الوظائف».", chips: [] };
   const to = jobsTarget(jobs);
-  if (!to || jobs[0] === undefined) return null;
+  if (!to) return null;
   const line =
     jobs.length === 1
       ? `فيه وظيفة لها في المنصة: ${q(getJob(jobs[0]).title)}. تبيني أفتحها لك؟`
@@ -323,13 +367,73 @@ function certsReply(f: CareerFamily): Reply {
   );
 }
 
-function salaryReply(f: CareerFamily): Reply {
+// The published row and the family it stands for (21 Nov 2026, QA: «كم راتب أخصائي التسويق في سلة؟» got a Social Media
+// Manager figure with no word that it is the nearest published role and not Salla's figure).
+const ROLE_GENERIC = new Set(["analyst", "engineer", "developer", "specialist", "officer", "designer", "associate", "generalist", "and", "of", "the"]);
+const ROLE_LEVEL = new Set(["senior", "head", "manager", "lead", "director", "principal", "chief"]);
+const roleTokens = (s: string): string[] => s.toLowerCase().split(/[^a-z0-9]+/).filter((t) => t.length > 0);
+
+/**
+ * True when the published row IS the family's role: its specific words are all in the family's English title, and it is
+ * not a more senior row (Manager, Senior, Head…) than the title says. «Data Analyst» for «Data / BI Analyst» is the role;
+ * «Social Media Manager» for «Digital Marketing Specialist» is only the nearest published one.
+ */
+export function salaryRowIsTheRole(f: CareerFamily): boolean {
+  const role = f.salary?.role;
+  if (!role) return false;
+  const title = new Set(roleTokens(f.titleEn));
+  const words = roleTokens(role);
+  if (words.some((w) => ROLE_LEVEL.has(w) && !title.has(w))) return false;
+  const specific = words.filter((w) => !ROLE_GENERIC.has(w) && !ROLE_LEVEL.has(w));
+  return specific.length > 0 && specific.every((w) => title.has(w));
+}
+
+/** True when the published row is a more senior role than the family («Construction Manager» for a site engineer). */
+export function salaryRowIsSenior(f: CareerFamily): boolean {
+  const role = f.salary?.role;
+  if (!role) return false;
+  const title = new Set(roleTokens(f.titleEn));
+  return roleTokens(role).some((w) => ROLE_LEVEL.has(w) && !title.has(w));
+}
+
+/** Words after «في / عند / لدى» that are a place, not an employer («في السعودية», «في الرياض»). */
+const NOT_AN_EMPLOYER = ["السعودية", "السعوديه", "المملكة", "السوق", "سوق", "saudi", "ksa", "الخليج", "العالم", ...Object.values(W.CITY_WORDS).flat()];
+
+/** The employer a pay question names: a known company's everyday name, else the words after في / عند / لدى; or null. */
+function employerAsked(text: W.Text): string | null {
+  const id = matchCompany(text.raw);
+  if (id) return COMPANIES.find((c) => c.id === id)?.short ?? null;
+  const prep = W.firstHit(text, W.SEARCH_PREPOSITIONS);
+  if (!prep) return null;
+  const rest = text.raw
+    .replace(/[؟?!.,،]/g, " ")
+    .trim()
+    .split(/\s+/)
+    .slice(prep.end);
+  const head = rest[0];
+  if (head === undefined || W.has(W.textOf(rest.join(" ")), NOT_AN_EMPLOYER) || W.has(W.textOf(head), [...W.GENERIC_EMPLOYER_WORDS, ...W.NOT_EMPLOYER_WORDS])) {
+    return null;
+  }
+  return rest.slice(0, 3).join(" ");
+}
+
+function salaryReply(f: CareerFamily, employer: string | null = null): Reply {
   const line = payLine(f);
   if (!line) {
-    return withOffer([`للأمانة ما لقيت رقم منشور من مصدر سعودي موثوق لراتب ${q(f.title)}، وما أحب أعطيك رقم من عندي.`], jobsOffer(f));
+    const at = employer ? ` ولا لرواتب ${employer}` : "";
+    return withOffer([`للأمانة ما لقيت رقم منشور من مصدر سعودي موثوق لراتب ${q(f.title)}${at}، وما أحب أعطيك رقم من عندي.`], jobsOffer(f));
   }
-  const banded = f.salary?.level && !/^not stated/i.test(f.salary.level);
-  return withOffer([line, banded ? null : "والدليل ما يقسّمه حسب سنوات الخبرة، فخذه كصورة عامة."], jobsOffer(f));
+  const s = f.salary!;
+  const banded = s.level && !/^not stated/i.test(s.level);
+  const nearest = salaryRowIsTheRole(f)
+    ? null
+    : salaryRowIsSenior(f)
+      ? `وترى الرقم لمسمّى ${s.role} بالذات، وهو مسمّى أعلى رتبة من ${q(f.title)}: أقرب مسمّى منشور لقيته، فلا تعتبره راتب البداية.`
+      : `وترى الرقم لمسمّى ${s.role} بالذات، وهو أقرب مسمّى منشور لقيته لـ${q(f.title)}، فخذه كتقدير تقريبي.`;
+  const company = employer
+    ? `وهو رقم عام من الدليل للسوق السعودي، مو راتب ${employer}: ما عندي رواتب منشورة لشركة بعينها.`
+    : null;
+  return withOffer([line, nearest, company, banded ? null : "والدليل ما يقسّمه حسب سنوات الخبرة، فخذه كصورة عامة."], jobsOffer(f));
 }
 
 function interviewReply(f: CareerFamily): Reply {
@@ -410,7 +514,46 @@ function answer(ctx: AdvisorCtx, ask: CareerAsk, f: CareerFamily, text: W.Text):
 export function careerSalaryReply(text: W.Text): Reply | null {
   if (!isSalaryAsk(text)) return null;
   const id = familiesNamed(text)[0];
-  return id ? salaryReply(getCareerFamily(id)) : null;
+  return id ? salaryReply(getCareerFamily(id), employerAsked(text)) : null;
+}
+
+/** «كيف أصير …؟» said outright (not «أبي» / «ودي», which may lead to a job or an apply request). */
+const BECOME_SURE = ["أصير", "أكون", "أصبح", "أتحول", "أتحوّل", "become"];
+const HOW_START = ["كيف", "شلون", "how"];
+const START_INTO = ["أدخل", "ادخل", "أبدأ", "ابدأ"];
+
+/** Asks whose answer is a list from the data (certificates, questions, a plan, routes): never left to a model. */
+const SURE_ASKS: ReadonlySet<CareerAsk> = new Set(["salary", "certs", "interview", "plan", "routes"]);
+
+function sureAsk(ask: CareerAsk, text: W.Text): boolean {
+  if (SURE_ASKS.has(ask)) return true;
+  if (ask === "become") return W.has(text, BECOME_SURE) || (W.has(text, HOW_START) && W.has(text, START_INTO));
+  return false;
+}
+
+/**
+ * A career question whose answer must come from the data, answered by the router before a job search or a model could
+ * take it (21 Nov 2026, QA: a model listed certificates that are not in the data; «وش أسئلة المقابلة لوظيفة أخصائي موارد
+ * بشرية؟» became a job list): a family named and asked for its certificates, interview questions, 30-day plan, entry
+ * routes or how to become one. A job or open word with «كيف أصير» still goes to the rows after. Null otherwise.
+ */
+export function careerFirst(ctx: AdvisorCtx, text: W.Text): Reply | null {
+  if (W.has(text, NOT_CAREER)) return null;
+  const first = familiesNamed(text)[0];
+  if (first === undefined) return null;
+  const ask = askOf(text);
+  if (!sureAsk(ask, text)) return null;
+  if (ask === "become" && (W.has(text, W.JOBS_PLURAL) || W.has(text, W.OPEN_WORDS))) return null;
+  return answer(ctx, ask, getCareerFamily(first), text);
+}
+
+/** careerReply, and whether its answer is a data list the router keeps (true) or a description a model may phrase. */
+export function careerAnswer(ctx: AdvisorCtx, text: W.Text): { readonly reply: Reply; readonly sure: boolean } | null {
+  const r = careerReply(ctx, text);
+  if (!r) return null;
+  const ask = askOf(text);
+  const twoFamilies = ask === "what" && familiesNamed(text).length > 1;
+  return { reply: r, sure: !twoFamilies && sureAsk(ask, text) };
 }
 
 /**
@@ -460,6 +603,8 @@ export interface CareerToolResult {
   readonly knowledge: string;
   /** The only pay sentence «دليلك» may say, with its source, or the honest "no published figure". */
   readonly pay: string;
+  /** Official Saudization / labour-law / SANED facts and the open Tuwaiq bootcamps (wave 3), each with its link. */
+  readonly labour: string;
 }
 
 export function runCareerTool(args: unknown): CareerToolResult | ToolError {
@@ -473,5 +618,6 @@ export function runCareerTool(args: unknown): CareerToolResult | ToolError {
     title: f.title,
     knowledge: knowledgeForModel([f.id]),
     pay: payLine(f) ?? `لا يوجد رقم منشور من مصدر سعودي موثوق لراتب ${q(f.title)}: قل ذلك بصراحة ولا تذكر أي رقم.`,
+    labour: saudizationForModel(f.id),
   };
 }

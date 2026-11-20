@@ -9,9 +9,31 @@ import mammoth from "mammoth";
 import { LIMITS } from "@/lib/brain/protocol";
 import type { CvExtractResponse } from "@/lib/brain/protocol";
 
-import { pdfItemsToText, type PdfTextItem } from "./pdf-lines";
+import { foldArabicLookalikes } from "../clean";
+
+import { applyLigatureFixes, ligatureFixes, pdfItemsToText, type PdfTextItem } from "./pdf-lines";
 
 const nonSpaceLength = (text: string): number => text.replace(/\s+/gu, "").length;
+
+/** The page's text-drawing runs, as drawn: each glyph's text, or a number for a spacing adjustment. [] on any failure. */
+async function glyphRuns(page: { getOperatorList: () => Promise<{ fnArray: number[]; argsArray: unknown[] }> }): Promise<(string | number)[][]> {
+  try {
+    const ops = await page.getOperatorList();
+    const runs: (string | number)[][] = [];
+    for (const args of ops.argsArray) {
+      if (!Array.isArray(args) || !Array.isArray(args[0])) continue;
+      const run: (string | number)[] = [];
+      for (const glyph of args[0] as readonly unknown[]) {
+        if (typeof glyph === "number") run.push(glyph);
+        else if (typeof glyph === "object" && glyph !== null && "unicode" in glyph && typeof glyph.unicode === "string") run.push(glyph.unicode);
+      }
+      if (run.some((g) => typeof g === "string")) runs.push(run);
+    }
+    return runs;
+  } catch {
+    return [];
+  }
+}
 
 /** PDF bytes → document text, or an error code. Exported for the extraction test. */
 export async function extractPdfText(
@@ -40,10 +62,16 @@ export async function extractPdfText(
         if (typeof x !== "number" || typeof y !== "number") continue;
         items.push({ str: item.str, x, y, width: item.width, height: item.height, dir: item.dir });
       }
-      pages.push(items);
+      // Word-made PDFs: ligature glyphs come out with their letters swapped (pdf-lines.ts, ligatureFixes). Only pages
+      // with Arabic items pay for the operator list.
+      if (items.some((i) => i.dir === "rtl")) {
+        const fixes = ligatureFixes(await glyphRuns(page));
+        if (fixes.size > 0) pages.push(items.map((i) => (i.dir === "rtl" ? { ...i, str: applyLigatureFixes(i.str, fixes) } : i)));
+        else pages.push(items);
+      } else pages.push(items);
       page.cleanup();
     }
-    return { ok: true, text: pdfItemsToText(pages).normalize("NFKC"), pages: pdf.numPages };
+    return { ok: true, text: foldArabicLookalikes(pdfItemsToText(pages).normalize("NFKC")), pages: pdf.numPages };
   } catch {
     return { ok: false, error: "unreadable" };
   } finally {

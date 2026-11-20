@@ -45,6 +45,11 @@ const TERRAIN: Readonly<Record<FieldId, { seed: number; x: number; y: number }>>
   legal: { seed: 149, x: 0.36, y: 0.38 },
   media: { seed: 151, x: 0.74, y: 0.7 },
   gaming: { seed: 157, x: 0.5, y: 0.25 },
+  // wave 3
+  "energy-sustainability": { seed: 163, x: 0.64, y: 0.34 },
+  "real-estate": { seed: 167, x: 0.32, y: 0.66 },
+  aviation: { seed: 173, x: 0.56, y: 0.22 },
+  communications: { seed: 179, x: 0.4, y: 0.58 },
 };
 
 const f = (n: number) => n.toFixed(1);

@@ -3,10 +3,12 @@
 import type { Field, FieldId } from "@/lib/types";
 
 import { WAVE2_FIELDS } from "./wave2/skills";
+import { WAVE3_FIELDS } from "./wave3/skills";
 
 /**
  * Display order: data, software, design, marketing, business, hr, product, cyber-cloud, sales-supply, the nine of wave 2
- * (./wave2/skills.ts: engineering … gaming), professional.
+ * (./wave2/skills.ts: engineering … gaming), the four of wave 3 (./wave3/skills.ts: energy-sustainability, real-estate,
+ * aviation, communications), professional.
  */
 export const FIELDS: readonly Field[] = [
   { id: "data", name: "البيانات والتحليل", hasJobs: true },
@@ -21,6 +23,8 @@ export const FIELDS: readonly Field[] = [
   { id: "sales-supply", name: "المبيعات وسلاسل الإمداد", hasJobs: true },
   // wave 2 (./wave2/skills.ts)
   ...WAVE2_FIELDS,
+  // wave 3 (./wave3/skills.ts)
+  ...WAVE3_FIELDS,
   { id: "professional", name: "المهارات المهنية", hasJobs: false },
 ];
 

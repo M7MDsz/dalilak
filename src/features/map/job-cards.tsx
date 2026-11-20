@@ -12,11 +12,11 @@ import { IconChevronForward } from "@/components/icons";
 import { NavLink, NumberTicker } from "@/components/motion";
 import { cn } from "@/components/ui";
 import { CompanyLogo } from "@/features/shared";
-import { JOBS, JOBS_CHECKED_AT, getJob, getJobCity, getSkill } from "@/lib/data";
-import { dreamCompany, matchPercent, skillStars } from "@/lib/engine";
+import { JOBS, getJob, getJobCity, getSkill } from "@/lib/data";
+import { dreamCompany, matchPercent, skillStars, wantedFields } from "@/lib/engine";
 import { formatNumber, formatPercent } from "@/lib/format";
 import { hrefFor } from "@/lib/routes";
-import type { Job, JobId, UserState } from "@/lib/types";
+import type { Job, JobFieldId, JobId, UserState } from "@/lib/types";
 
 import { BASED_ON_LEAD, basedOnFor } from "./based-on";
 
@@ -50,11 +50,26 @@ function dreamJobIds(user: UserState): ReadonlySet<JobId> {
   }
 }
 
-/** The real postings for this user: the dream company's first, then the highest match; ties keep the data order. */
+/**
+ * The fields whose jobs suit this user (21 Nov 2026, tester: a data path listed a field-sales job): the target job's field,
+ * then the fields they asked for (interests, else their major's fields). Empty when nothing is known yet.
+ */
+function suitedFields(user: UserState): ReadonlySet<JobFieldId> {
+  const fields = new Set<JobFieldId>();
+  if (user.targetJobId !== null) fields.add(getJob(user.targetJobId).field);
+  for (const field of wantedFields(user.answers) ?? []) fields.add(field);
+  return fields;
+}
+
+/**
+ * The real postings for this user: the dream company's first, then the jobs in the fields that suit them (highest match
+ * first), then — only to fill the column up to six — the closest others; ties keep the data order.
+ */
 export function jobAds(user: UserState): readonly JobAd[] {
   const stars = skillStars(user);
   const dream = dreamJobIds(user);
-  return JOBS.flatMap((job, order) => (job.real ? [{ job, order }] : []))
+  const suited = suitedFields(user);
+  const ranked = JOBS.flatMap((job, order) => (job.real ? [{ job, order }] : []))
     .map(({ job, order }) => {
       const fills = job.requirements.map((r) => Math.min(stars[r.skill], r.stars) / r.stars);
       const missing = job.requirements.filter((r) => stars[r.skill] < r.stars).map((r) => getSkill(r.skill).name);
@@ -62,6 +77,10 @@ export function jobAds(user: UserState): readonly JobAd[] {
     })
     .sort((a, b) => Number(b.ad.dream) - Number(a.ad.dream) || b.ad.match - a.ad.match || a.order - b.order)
     .map((row) => row.ad);
+  if (suited.size === 0) return ranked;
+  const inField = ranked.filter((ad) => ad.dream || suited.has(ad.job.field));
+  const others = ranked.filter((ad) => !ad.dream && !suited.has(ad.job.field));
+  return inField.length >= 6 ? inField : [...inField, ...others.slice(0, 6 - inField.length)];
 }
 
 /** «Excel وSQL» · «Excel، SQL وPower BI» · «Excel، SQL و3 غيرها» (never «و1 غيرها»: three names are shown in full). */
@@ -69,15 +88,6 @@ export function missingText(names: readonly string[]): string {
   if (names.length <= 1) return names.join("");
   if (names.length <= 3) return `${names.slice(0, -1).join("، ")} و${names[names.length - 1]}`;
   return `${names.slice(0, 2).join("، ")} و${formatNumber(names.length - 2)} غيرها`;
-}
-
-const MONTHS = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"] as const;
-
-/** «جُمعت في 20 نوفمبر» from the day the postings were checked. */
-function checkedLine(day: string): string {
-  const [, month, date] = day.split("-").map(Number);
-  const name = month !== undefined ? MONTHS[month - 1] : undefined;
-  return name !== undefined && date !== undefined ? `جُمعت في ${formatNumber(date)} ${name}` : "";
 }
 
 /**
@@ -171,7 +181,7 @@ function JobCard({ ad, compact }: { readonly ad: JobAd; readonly compact: boolea
 }
 
 /**
- * The column (wide layouts): a heading, the source line, and the cards in a list that scrolls past the first four. On a
+ * The column (wide layouts): a heading and the cards in a list that scrolls past the first four. On a
  * phone (and beside the docked panel) the same cards are a row that scrolls sideways, three of them, above the map.
  */
 export function JobCards({ user, layout, className }: { readonly user: UserState; readonly layout: "column" | "row"; readonly className?: string }): ReactNode {
@@ -183,9 +193,8 @@ export function JobCards({ user, layout, className }: { readonly user: UserState
     <section aria-labelledby="path-jobs-title" className={cn("flex min-h-0 min-w-0 flex-col", row ? "gap-2" : "gap-2.5", className)} data-testid={JOB_CARDS_TID.list}>
       <header className={cn("flex items-baseline justify-between gap-3", row ? "px-1" : "px-1 pt-1")}>
         <h2 className="text-title font-bold text-fg" id="path-jobs-title">
-          وظائف حقيقية تناسبك
+          وظائف تناسبك
         </h2>
-        <span className="shrink-0 text-caption text-fg-3">{checkedLine(JOBS_CHECKED_AT)}</span>
       </header>
       {row ? (
         <div className="-mx-3 flex snap-x snap-mandatory gap-2.5 overflow-x-auto px-3 pb-1 [scrollbar-width:none]">

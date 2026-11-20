@@ -17,7 +17,7 @@ import { tween } from "@/lib/motion";
 import { useCurrentUser } from "@/lib/store";
 import { TID } from "@/lib/testids";
 import type { UserState } from "@/lib/types";
-import { useViewport } from "@/features/shared";
+import { useKeyboardViewport, useViewport } from "@/features/shared";
 
 import { Conversation, pendingOf, type AnswerRects } from "./conversation";
 import { CHAT_COPY } from "./copy";
@@ -44,6 +44,8 @@ export function WelcomeScreen() {
 function WelcomeFlow({ user }: { user: UserState }) {
   const instant = useInstant();
   const { desktop } = useViewport();
+  // phones: track the visible area while the keyboard is up, so it never covers the chat composer (phone agent, 21 Nov)
+  useKeyboardViewport(!desktop);
   const [phase, setPhase] = useState<Phase>(() => initialPhase(user));
   const [night, setNight] = useState(false);
   const [leaving, setLeaving] = useState(false);

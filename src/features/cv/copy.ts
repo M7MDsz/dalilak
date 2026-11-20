@@ -18,7 +18,7 @@ export const CV_COPY = {
   pasteLabel: "أو الصق نص السيرة",
   pastePlaceholder: "الصق هنا نص سيرتك الذاتية…",
   pasteShort: "النص قصير. أضف خبراتك ومهاراتك (80 حرفاً على الأقل).",
-  sample: "جرّب بسيرة ذاتية تجريبية",
+  sample: "جرّب بسيرة جاهزة",
   analyse: "حلّل سيرتي",
   privacy: "تُقرأ سيرتك لاستخراج المهارات فقط، ويُحفظ نصها ونتيجتها في متصفحك.",
   privacyModel: "يُرسل نص السيرة إلى مزوّد نموذج الذكاء الاصطناعي لقراءته فقط.",
@@ -36,7 +36,7 @@ export const CV_COPY = {
   reanalyse: "حلّل سيرة أخرى",
   // empty result, in «دليلك»'s voice
   emptyTitle: "لم ألتقط مهارات واضحة في هذا النص.",
-  emptyBody: "أضف خبراتك ودوراتك ومهاراتك بأسمائها، أو جرّب السيرة التجريبية لترى كيف يعمل التحليل.",
+  emptyBody: "أضف خبراتك ودوراتك ومهاراتك بأسمائها، أو جرّب السيرة الجاهزة لترى كيف يعمل التحليل.",
   emptyEdit: "عدّل النص",
 } as const;
 
@@ -50,8 +50,24 @@ export const CV_ERROR_COPY = {
   request_failed: "تعذّر التحليل الآن. جرّب مرة أخرى.",
 } as const satisfies Record<CvErrorCode, string>;
 
-/** The status line of each show stage (spec 6.3), in «دليلك»'s voice. */
-export function stageLine(step: CvStepId, skills: number, jobs: number): string {
+/** The status line of each show stage (spec 6.3), in «دليلك»'s voice; `najdi` in the onboarding chat (he speaks Najdi there). */
+export function stageLine(step: CvStepId, skills: number, jobs: number, najdi = false): string {
+  if (najdi) {
+    switch (step) {
+      case "read":
+        return "أقرا سيرتك سطر سطر…";
+      case "extract":
+        return "ألقط المهارات من كلامك…";
+      case "evidence":
+        return "أربط كل مهارة بالجملة اللي تثبتها…";
+      case "level":
+        return "أقدّر مستوى كل مهارة بالنجوم…";
+      case "match":
+        return `أقارن مهاراتك مع ${countNoun(jobs, "job", "object")}…`;
+      case "done":
+        return `خلصت: لقيت ${countNoun(skills, "skill", "object")}.`;
+    }
+  }
   switch (step) {
     case "read":
       return "أقرأ سيرتك سطراً سطراً…";
@@ -68,9 +84,9 @@ export function stageLine(step: CvStepId, skills: number, jobs: number): string 
   }
 }
 
-/** «في سيرتك 8 مهارات» · with the sample CV «في السيرة التجريبية 8 مهارات». */
+/** «في سيرتك 8 مهارات» · with the sample CV «في السيرة الجاهزة 8 مهارات». */
 export function resultsHeading(skills: number, isSample: boolean): string {
-  return `${isSample ? "في السيرة التجريبية" : "في سيرتك"} ${countNoun(skills, "skill")}`;
+  return `${isSample ? "في السيرة الجاهزة" : "في سيرتك"} ${countNoun(skills, "skill")}`;
 }
 
 /** «مطابقتك مع هدفك «محلل بيانات»: » (the percentage follows, counted). */

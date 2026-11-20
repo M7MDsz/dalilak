@@ -174,6 +174,11 @@ export const FIELD_WORDS: Readonly<Record<JobFieldId, readonly string[]>> = {
   legal: ["قانون", "القانون", "قانوني", "قانونية", "محاماة", "legal", "law"],
   media: ["إعلام", "الإعلام", "المونتاج", "مونتاج", "موشن جرافيك", "الترجمة", "media", "video editing", "translation"],
   gaming: ["ألعاب", "الألعاب", "قيمنق", "الرياضات الإلكترونية", "gaming", "games", "esports"],
+  // wave 3 fields (src/lib/data/wave3)
+  "energy-sustainability": ["الاستدامة", "استدامة", "الطاقة", "قطاع الطاقة", "sustainability", "energy", "esg"],
+  "real-estate": ["العقار", "عقار", "العقارات", "عقارات", "إدارة الأملاك", "إدارة المرافق", "real estate", "property", "facilities"],
+  aviation: ["الطيران", "طيران", "المطارات", "مطار", "aviation", "airline", "airport"],
+  communications: ["العلاقات العامة", "علاقات عامة", "الاتصال المؤسسي", "العلاقات الحكومية", "public relations", "communications", "pr"],
 };
 
 export const CITY_WORDS: Readonly<Record<JobCityId, readonly string[]>> = {
@@ -307,8 +312,18 @@ let courseTitles: readonly Entity<CourseId>[] | null = null;
 let skillNames: readonly Entity<SkillId>[] | null = null;
 let skillSayings: readonly Entity<SkillId>[] | null = null;
 
+/** A title without its bracketed notes: «مهندس برمجيات واجهات أمامية (للسعوديين فقط)» → «مهندس برمجيات واجهات أمامية». */
+export function titleCore(title: string): string {
+  return title.replace(/\s*\([^)]*\)/g, " ").replace(/\s+/g, " ").trim();
+}
+
+/** Each job by its full title and, when it has bracketed notes nobody types («(للسعوديين فقط)»), by its title without them. */
 function jobEntities(): readonly Entity<JobId>[] {
-  jobTitles ??= JOBS.map((job) => ({ id: job.id, key: normalizeText(job.title) }));
+  jobTitles ??= JOBS.flatMap((job) => {
+    const full = normalizeText(job.title);
+    const core = normalizeText(titleCore(job.title));
+    return core && core !== full ? [{ id: job.id, key: full }, { id: job.id, key: core }] : [{ id: job.id, key: full }];
+  });
   return jobTitles;
 }
 
@@ -377,8 +392,63 @@ export function skillsAsked(text: Text): readonly SkillId[] {
 
 /** The span of the job title found in the text (used to keep its words out of the field and city readings). */
 export function jobTitleHit(text: Text, jobId: JobId): KeywordHit | null {
-  const entity = jobEntities().find((e) => e.id === jobId);
-  return entity ? findKeyword(text.n, entity.key) : null;
+  for (const entity of jobEntities()) {
+    if (entity.id !== jobId) continue;
+    const hit = findKeyword(text.n, entity.key);
+    if (hit) return hit;
+  }
+  return null;
+}
+
+// ── A job named with its company («مهندس الواجهات الأمامية في لوسيديا») ─────────────────────────────────────────────
+
+/** Words of a job title that say nothing on their own (seniority, nationality notes, joiners). */
+const TITLE_FILLER: ReadonlySet<string> = new Set(
+  [
+    "أول", "اول", "مبتدئ", "مشارك", "حديث", "التخرج", "للسعوديين", "فقط", "السعوديين", "برنامج", "في", "و", "من", "على", "ل",
+    "senior", "junior", "lead", "saudi", "only", "nationals", "national", "the", "and", "of", "for", "x", "ksa",
+  ].map((w) => normalizeText(w)),
+);
+
+const stripAl = (w: string): string => (w.startsWith("ال") && w.length > 3 ? w.slice(2) : w);
+
+/** The words that carry a title's meaning, «ال» removed: «مهندس برمجيات واجهات أمامية» → مهندس، برمجيات، واجهات، اماميه. */
+function titleWords(title: string): string[] {
+  return tokenize(normalizeText(title.replace(/\([^)]*\)/g, " ").replace(/\s[-–:]\s.*$/, "")))
+    .map(stripAl)
+    .filter((w) => w.length > 1 && !TITLE_FILLER.has(w));
+}
+
+/**
+ * Among `candidates` (one company's jobs), the jobs whose title the message names closely: at least two of the title's
+ * meaning words (or its only one) are in the message, Arabic or English title, «ال» and one prefix letter aside. The best
+ * score wins; ties are all returned (the caller asks which). Empty when none comes close.
+ */
+export function jobsByTitleWords(text: Text, candidates: readonly JobId[]): readonly JobId[] {
+  const said = new Set<string>();
+  for (const w of text.words) {
+    said.add(stripAl(w));
+    const first = w.charAt(0);
+    if ("وفبلك".includes(first) && w.length >= 4) said.add(stripAl(w.slice(1)));
+    if (w.startsWith("لل") && w.length >= 5) said.add(w.slice(2));
+  }
+  let best: { ids: JobId[]; score: number } = { ids: [], score: 0 };
+  for (const id of candidates) {
+    const job = JOBS.find((j) => j.id === id);
+    if (!job) continue;
+    let score = 0;
+    for (const title of [job.title, job.titleEn ?? ""]) {
+      const words = titleWords(title);
+      if (words.length === 0) continue;
+      const hit = words.filter((w) => said.has(w)).length;
+      const need = Math.min(2, words.length);
+      if (hit >= need) score = Math.max(score, hit / words.length + hit * 0.01);
+    }
+    if (score === 0) continue;
+    if (score > best.score + 1e-9) best = { ids: [id], score };
+    else if (Math.abs(score - best.score) <= 1e-9) best.ids.push(id);
+  }
+  return best.ids;
 }
 
 /** Word index of the first occurrence of any of the words, or -1. */

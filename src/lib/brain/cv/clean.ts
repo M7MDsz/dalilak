@@ -26,15 +26,28 @@ const TATWEEL = /\u0640/g;
 /** Arabic-Indic (spec: ٠-٩) and Extended Arabic-Indic digits. */
 const ARABIC_DIGITS = /[\u0660-\u0669\u06F0-\u06F9]/g;
 
+/** Farsi yeh «ی» at the end of a word (its dotless final form is the shape of «ى»). */
+const FARSI_YEH_FINAL = /ی(?![\p{L}\p{M}])/gu;
+const LOOKALIKES: Readonly<Record<string, string>> = { "ی": "ي", "ھ": "ه", "ہ": "ه", "ۃ": "ة", "ک": "ك" };
+
+/**
+ * Persian and Urdu letters that share a glyph with an Arabic letter, back to the Arabic letter. Chrome's PDF printer
+ * (Arial, Tahoma) maps the shared joining forms to the Persian code points, so an Arabic CV printed to PDF reads
+ * «بیانات», «المھارات» (U+06CC, U+06BE): no alias, heading or sample check matched them. A final «ی» is «ى» (the
+ * dotless final shape); elsewhere it is «ي». An Arabic CV has no Persian letters of its own.
+ */
+export function foldArabicLookalikes(text: string): string {
+  return text.replace(FARSI_YEH_FINAL, "ى").replace(/[یھہۃک]/gu, (ch) => LOOKALIKES[ch] ?? ch);
+}
+
 /**
  * Spec 6.5 step 1 on the whole text: Unicode NFKC (folds the presentation-form letters and ligatures many PDFs give
- * back into ordinary letters), the direction marks and the stretching mark (tatweel) removed, ٠-٩ → 0-9, line breaks
- * as "\n", tabs as spaces. Diacritics are KEPT: this is the text that is displayed.
+ * back into ordinary letters), Persian look-alike letters folded to Arabic (foldArabicLookalikes), the direction marks
+ * and the stretching mark (tatweel) removed, ٠-٩ → 0-9, line breaks as "\n", tabs as spaces. Diacritics are KEPT:
+ * this is the text that is displayed.
  */
 export function cleanCvText(raw: string): string {
-  return raw
-    .replace(LINE_BREAKS, "\n")
-    .normalize("NFKC")
+  return foldArabicLookalikes(raw.replace(LINE_BREAKS, "\n").normalize("NFKC"))
     .replace(INVISIBLE_MARKS, "")
     .replace(TATWEEL, "")
     .replace(ARABIC_DIGITS, (d) => {

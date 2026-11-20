@@ -13,6 +13,7 @@ import type { Job, JobId } from "@/lib/types";
 
 import { EXPANSION_JOBS } from "./expansion/jobs";
 import { WAVE2_JOBS } from "./wave2/jobs";
+import { WAVE3_JOBS } from "./wave3/jobs";
 
 /** When the real postings were collected («جُمعت في 20 نوفمبر»). */
 export const JOBS_CHECKED_AT = "2026-11-20";
@@ -775,9 +776,10 @@ const FIRST_JOBS: readonly Job[] = [
 /**
  * Every job in JOB_IDS order: the first collection and the 20 real postings of the 20 Nov 2026 expansion
  * (./expansion/jobs.ts: product, cyber security, cloud, AI, sales and procurement), each after its field's first jobs, and
- * the 38 of wave 2 (./wave2/jobs.ts: three old fields and the nine new ones).
+ * the 38 of wave 2 (./wave2/jobs.ts: three old fields and the nine new ones), and the 86 of wave 3 (./wave3/jobs.ts, after
+ * every older job).
  */
-export const JOBS: readonly Job[] = [...FIRST_JOBS, ...EXPANSION_JOBS, ...WAVE2_JOBS].sort((a, b) => JOB_IDS.indexOf(a.id) - JOB_IDS.indexOf(b.id));
+export const JOBS: readonly Job[] = [...FIRST_JOBS, ...EXPANSION_JOBS, ...WAVE2_JOBS, ...WAVE3_JOBS].sort((a, b) => JOB_IDS.indexOf(a.id) - JOB_IDS.indexOf(b.id));
 
 export function getJob(id: JobId): Job {
   const job = JOBS.find((j) => j.id === id);

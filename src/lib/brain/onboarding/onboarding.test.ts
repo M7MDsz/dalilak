@@ -104,7 +104,7 @@ describe("the opening and the six demo chips (spec 4.1, 10.2 steps 1-2)", () => 
 
   it("uses the special acknowledgements (a city with no jobs, a student, another major)", () => {
     expect(play([{ kind: "chip", question: "city", option: "makkah" }])[0]?.replies[0]).toBe(
-      "مكة المكرمة، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في البيانات التجريبية، فبضيف لك وظائف عن بُعد تناسبك.",
+      "مكة المكرمة، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في قائمتي، فبضيف لك وظائف عن بُعد تناسبك.",
     );
     const student = onboardingTurn(ctx({ city: { value: "riyadh", label: "الرياض" } }), { kind: "chip", question: "education", option: "student" });
     expect(student.replies[0]).toBe("ما شاء الله، للحين تدرس؟ هذا أحسن وقت تبدأ فيه مسارك.");
@@ -276,7 +276,7 @@ describe("every other message (spec 4.5)", () => {
 
     const second = onboardingTurn(ctx({}, "خالد", first.misses), text("دبي"));
     expect(second.answers.city).toEqual({ value: "other", label: "دبي" });
-    expect(second.replies[0]).toBe("دبي، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في البيانات التجريبية، فبضيف لك وظائف عن بُعد تناسبك.");
+    expect(second.replies[0]).toBe("دبي، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في قائمتي، فبضيف لك وظائف عن بُعد تناسبك.");
     expect(second.pending).toBe("education");
 
     const majorBase: OnboardingAnswers = { city: { value: "riyadh", label: "الرياض" }, education: "bachelor" };

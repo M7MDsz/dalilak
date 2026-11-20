@@ -85,6 +85,13 @@ export interface AppActions {
    * derived (brain/onboarding `pendingQuestion`), so nothing else is written.
    */
   appendOnboardingMessages(texts: readonly string[]): void;
+  /** The greeting of a fresh account with the CV offer (docs/ONBOARDING-FLOW.md): sets `onboarding.cv` "offered". */
+  openOnboardingWithCv(texts: readonly string[]): void;
+  /**
+   * The CV read inside onboarding: records the analysis (+100 the first time), the bubble and the CV card, and the
+   * answers the CV states (waiting for the user's yes). `{ ok: false }` when it found no skill (nothing saved).
+   */
+  recordOnboardingCv(input: Parameters<typeof T.recordOnboardingCv>[1]): RecordCvResult;
   /** Applies an interpreted turn; when it completes onboarding, pays +50 and unlocks first-steps (news held until /path). */
   applyOnboardingTurn(turn: OnboardingTurn): Consequence | null;
   /** Saved when reveal step 6 starts. */
@@ -116,7 +123,7 @@ export interface AppActions {
   // ── Applications (spec 3.8, 3.9, 7.4, 7.5) ─────────────────────────────────────────────────────────────────────
   /** Called by the apply sheet: on «أرسل الطلب» (by user) or at the START of step 5 (by advisor). */
   submitApplication(input: { readonly jobId: JobId; readonly note: string; readonly by: "user" | "advisor" }): SubmitApplicationResult;
-  /** «محاكاة: انقل للحالة التالية». */
+  /** «انقل للخطوة التالية». */
   advanceApplication(jobId: JobId): void;
   /** The persisted in-flight marker of «دليلك» applying (set by the dispatcher at start, cleared at sent / stopped). */
   setApplyInFlight(jobId: JobId | null): void;
@@ -223,6 +230,16 @@ export const useAppStore = create<AppStore>()(
 
         // ── Onboarding ────────────────────────────────────────────────────────────────────────────────────────────
         appendOnboardingMessages: (texts) => write((user, clock) => T.appendOnboardingMessages(user, texts, clock)),
+        openOnboardingWithCv: (texts) => write((user, clock) => T.openOnboardingWithCv(user, texts, clock)),
+        recordOnboardingCv: (input) => {
+          const out = onUser((user, clock) => {
+            const done = T.recordOnboardingCv(user, input, clock);
+            return done === null ? { user, result: null } : { user: done.user, result: done.consequence };
+          });
+          if (out === null) return { ok: false, reason: "no_user" };
+          if (out.result === null) return { ok: false, reason: "empty" };
+          return { ok: true, consequence: out.result };
+        },
         applyOnboardingTurn: (turn) => transition((user, clock) => T.applyOnboardingTurn(user, turn, clock)),
         markRevealPlayed: () => write((user) => T.markRevealPlayed(user)),
 

@@ -2,15 +2,17 @@
 import { JOB_IDS } from "@/lib/ids";
 import { getField, getJob, getJobCity, getSkill } from "@/lib/data";
 import { normalizeText, tokenize, wordForms } from "@/lib/text/normalize";
-import type { FitBreakdown, Job, JobId, JobQuery, RankedJob, SkillId, UserFacts } from "@/lib/types";
+import type { FitBreakdown, Job, JobFieldId, JobId, JobQuery, RankedJob, SkillId, UserFacts } from "@/lib/types";
 
 import { matchPercent } from "./match";
-import { compareFit, fitBreakdown } from "./onboarding-fit";
+import { compareFit, fitBreakdown, wantedFields } from "./onboarding-fit";
 import { skillStars, totalStars } from "./stars";
 
 /**
- * All the jobs ranked (7.2): higher match first; ties: the target · a job in the user's city · a job whose field is one of
- * the interests · data order. While the user holds no star: by the onboarding fit score (4.6) instead (its own ties; the
+ * All the jobs ranked (7.2): 21 Nov 2026 (owner: "the jobs shown to choose between should be related to the path or what
+ * you entered") the jobs in the fields that suit the user come first — the target's field and the fields they asked for
+ * (interests, else their major's) —, then the rest; inside each group higher match first; ties: the target · a job in the
+ * user's city · a job whose field is one of the interests · data order. While the user holds no star: by the onboarding fit score (4.6) instead (its own ties; the
  * jobs the education gate leaves out of the recommendation come last, in fit order, so the list still holds them all).
  */
 export function rankJobs(facts: UserFacts): readonly RankedJob[] {
@@ -37,8 +39,12 @@ export function rankJobs(facts: UserFacts): readonly RankedJob[] {
     const interests = facts.answers.interest ?? [];
     const inCity = (job: Job) => city !== undefined && city === job.city;
     const inInterest = (job: Job) => interests.some((i) => i === job.field);
+    const suited = new Set<JobFieldId>(wantedFields(facts.answers) ?? []);
+    if (facts.targetJobId !== null) suited.add(getJob(facts.targetJobId).field);
+    const inSuited = (job: Job) => suited.size === 0 || suited.has(job.field);
     rows.sort(
       (a, b) =>
+        Number(inSuited(b.job)) - Number(inSuited(a.job)) ||
         b.ranked.match - a.ranked.match ||
         Number(b.ranked.isTarget) - Number(a.ranked.isTarget) ||
         Number(inCity(b.job)) - Number(inCity(a.job)) ||

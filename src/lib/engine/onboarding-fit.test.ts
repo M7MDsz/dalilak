@@ -28,9 +28,11 @@ describe("fit score (spec 4.6)", () => {
     expect(rankByFit(DEMO_ANSWERS).slice(0, 5).map((f) => [f.jobId, f.score])).toEqual([
       ["data-analyst-riyadh", 100],
       ["qiddiya-hr-analytics-analyst-riyadh", 100],
+      // wave 3 (21 Nov 2026): Tamara's entry data programme in Riyadh also scores 100; it sits after every older job in data
+      // order, so the two the reveal names stay first
+      ["tamara-builders-program-data-riyadh", 100],
       ["lamdax-ai-engineer-remote", 96],
       ["ninja-real-estate-performance-analyst-riyadh", 82],
-      ["jeeny-growth-insights-analytics-riyadh", 75],
     ]);
   });
 
@@ -116,10 +118,16 @@ describe("fit score (spec 4.6)", () => {
     const scores = ranked.map((f) => f.score);
     expect(scores).toEqual([...scores].sort((x, y) => y - x));
     // frontend 40+25+15+0 = 80; the expansion's junior AI engineer 40+25+7+0 = 72; backend and QA 40+25+0+6 = 71 each
-    // (both mid, remote): data order puts backend first
-    expect(ranked.slice(0, 4).map((f) => [f.jobId, f.score])).toEqual([
+    // (both mid, remote): data order puts backend first. Wave 3 (21 Nov 2026): the entry remote Flutter intern 40+25+15+6 =
+    // 86 leads, and four junior Riyadh software postings join the AI engineer at 72, after it in data order
+    expect(ranked.slice(0, 9).map((f) => [f.jobId, f.score])).toEqual([
+      ["lamdax-mobile-flutter-intern-remote", 86],
       ["lucidya-frontend-engineer-dammam", 80],
       ["foodics-ai-engineer-riyadh", 72],
+      ["masterworks-adree-outsystems-dotnet-developer-riyadh", 72],
+      ["moyasar-software-engineer-full-stack-riyadh", 72],
+      ["gathern-quality-assurance-engineer-riyadh", 72],
+      ["ninja-integration-specialist-riyadh", 72],
       ["salla-senior-backend-checkout-remote", 71],
       ["salla-senior-qa-engineer-remote", 71],
     ]);

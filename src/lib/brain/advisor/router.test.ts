@@ -96,7 +96,7 @@ describe("5.6 examples, no key (the local brain and the router)", () => {
   it("3. show me data analyst jobs in Riyadh", () => {
     const r = route("اعرض لي وظائف محلل بيانات في الرياض");
     expect(r.text).toBe(
-      "لقيت 4 وظائف. الأقرب لمهاراتك «محلل بيانات» بمطابقة 70%. فتحت لك القائمة، وللعلم: ترى الوظائف هنا إعلانات حقيقية جمعتها في 20 نوفمبر، ويمكن بعضها تسكّر بعدها.",
+      "لقيت 4 وظائف. الأقرب لمهاراتك «محلل بيانات» بمطابقة 70%. فتحت لك القائمة.",
     );
     expect(r.tools).toEqual(["search_jobs"]);
     expect(r.actions).toEqual([{ type: "navigate", to: { screen: "jobs", q: "محلل بيانات", city: "riyadh" } }]);
@@ -117,7 +117,7 @@ describe("5.6 examples, no key (the local brain and the router)", () => {
       { type: "apply", jobId: "data-analyst-riyadh", expect: { number: "DL-2026-0001", match: 90, xp: 40 } },
     ]);
     expect(r.text).toBe(
-      "تم، قدّمت لك على «محلل بيانات» برقم DL-2026-0001 ومطابقتك 90%، وكسبت 40 XP. وللأمانة: ذي وظيفة تدريبية، وما وصل طلبك لأي جهة. في الوظائف الحقيقية أفتح لك الإعلان الأصلي عشان ترسله. تقدر تتابعه من «طلباتي».",
+      "حفظت طلبك على «محلل بيانات» في «طلباتي» برقم DL-2026-0001 ومطابقتك 90%، وكسبت 40 XP.",
     );
     expect(r.cards).toEqual([{ kind: "application", jobId: "data-analyst-riyadh" }]);
     expect(r.chips.map((c) => [c.label, c.role, c.slug])).toEqual([
@@ -203,7 +203,7 @@ describe("5.6 examples, no key (the local brain and the router)", () => {
 
   it("12. is it real (also «هل مطابقتي حقيقية؟»)", () => {
     const expected =
-      "للأمانة: الوظائف إعلانات حقيقية جمعتها في 20 نوفمبر 2026، ولكل وحدة رابط إعلانها الأصلي، إلا «محلل بيانات» فهي وظيفة تدريبية. وفي الوظائف الحقيقية أجهّز لك الطلب وترسله أنت من الإعلان. أما أدلة التعلّم فحقيقية: الكورسات والناس والمقالات كلها حقيقية، وتأكدنا من روابطها في 20 نوفمبر 2026. والمتسابقين الباقين بيانات تجريبية، واللي ينحسب فعلاً مهاراتك ومطابقتك ومسارك.";
+      "للأمانة: أغلب الوظائف هنا إعلانات حقيقية، ولكل وحدة رابط إعلانها الأصلي، وفيها أجهّز لك الطلب وترسله أنت من الإعلان. وأدلة التعلّم حقيقية: الكورسات والناس والمقالات كلها حقيقية. واللي ينحسب فعلاً مهاراتك ومطابقتك ومسارك.";
     expect(route("هل وادي الغيم شركة حقيقية؟ قل لي أي شركة كبيرة توظّف الآن").text).toBe(expected);
     expect(route("هل مطابقتي حقيقية؟").text).toBe(expected);
   });
@@ -234,7 +234,7 @@ describe("5.6 examples, no key (the local brain and the router)", () => {
   it("16. my applications (after example 4, status in review)", () => {
     const r = route("ما حالة طلبي؟", { facts: persona("mid-path") });
     expect(r.text).toBe(
-      "عندك طلب واحد: «محلل بيانات»، وحالته الحين «قيد المراجعة». وللتذكير: متابعة الطلبات هنا محاكاة، وما فيه جهة حقيقية تراجعه.",
+      "عندك طلب واحد: «محلل بيانات»، وحالته الحين «جاهز».",
     );
     expect(r.tools).toEqual(["list_applications"]);
     expect(r.cards).toEqual([{ kind: "application", jobId: "data-analyst-riyadh" }]);
@@ -243,7 +243,7 @@ describe("5.6 examples, no key (the local brain and the router)", () => {
   it("17. upload my CV (before any CV)", () => {
     const r = route("أريد أن أرفع سيرتي", { facts: persona("onboarded") });
     expect(r.text).toBe(
-      "أبشر. فتحت لك صفحة السيرة: ارفع ملف PDF أو Word، أو الصق النص. وإذا ما هي جاهزة جرّب السيرة التجريبية.",
+      "أبشر. فتحت لك صفحة السيرة: ارفع ملف PDF أو Word، أو الصق النص. وإذا ما هي جاهزة جرّب السيرة الجاهزة عندي.",
     );
     expect(r.actions).toEqual([{ type: "navigate", to: { screen: "cv" } }]);
   });
@@ -251,14 +251,15 @@ describe("5.6 examples, no key (the local brain and the router)", () => {
   it("18. an unclear request to apply (on /path): which job, three cards with «قدّم على هذه»", () => {
     const r = route("قدّم لي على وظيفة", { jobsDisclosed: true });
     expect(r.text).toBe("أبشر. على أي وظيفة؟ هذي أقرب ثلاث لمهاراتك.");
-    // the first job cards of a thread carry the sample-data sentence (5.1, 5.9)
-    expect(route("قدّم لي على وظيفة").text).toBe("أبشر. على أي وظيفة؟ هذي أقرب ثلاث لمهاراتك. وللعلم: ترى الوظائف هنا إعلانات حقيقية جمعتها في 20 نوفمبر، ويمكن بعضها تسكّر بعدها.");
+    // the first job cards of a thread carry no data sentence (removed 21 Nov 2026)
+    expect(route("قدّم لي على وظيفة").text).toBe("أبشر. على أي وظيفة؟ هذي أقرب ثلاث لمهاراتك.");
     expect(r.tools).toEqual(["search_jobs"]);
     expect(r.actions).toEqual([]);
     expect(r.cards.map((c) => (c.kind === "job" ? c.jobId : c.kind))).toEqual([
       "data-analyst-riyadh",
-      "syarah-financial-analyst-tamheer-riyadh",
+      // 21 Nov 2026: the jobs page ranks the target's field first, so the next two are data jobs
       "master-works-data-senior-engineer-riyadh",
+      "jeeny-growth-insights-analytics-riyadh",
     ]);
     for (const card of r.cards) {
       expect(card.kind === "job" && card.chip?.label).toBe("قدّم على ذي");
@@ -355,7 +356,7 @@ describe("5.8: every page chip answers, in code", () => {
       "النجمة الأولى لمهارة مذكورة في سيرتك، والثانية إذا طلعت في خبرة أو مشروع، والثالثة إذا انوصفت إنها متقدمة. وبعدها كل خطوة تعلّم تخلّصها تزيدك نجمة.",
     );
     expect(answer("cv-what")).toBe("أدوّر على 38 مهارة بأسمائها، وأحفظ لكل مهارة الجملة اللي تثبتها عشان تشوفها بنفسك.");
-    expect(answer("cv-none")).toBe("ولا يهمك. الصق أي نص يوصف دراستك وخبرتك، أو جرّب السيرة التجريبية، أو ابدأ مسارك بدون سيرة.");
+    expect(answer("cv-none")).toBe("ولا يهمك. الصق أي نص يوصف دراستك وخبرتك، أو جرّب السيرة الجاهزة، أو ابدأ مسارك بدون سيرة.");
     expect(answer("level-how")).toBe("المستوى يرتفع بالـ XP، وأكثر شي يجيبه إنك تخلّص خطوات التعلّم. باقي لك 170 XP للمستوى 3.");
     // Typed, the fixed answers come before the general intents («كم بقي على هدفي؟» is not the next step).
     expect(route("كم بقي على هدفي؟").text).toBe(answer("remaining"));
@@ -373,11 +374,11 @@ describe("5.8: every page chip answers, in code", () => {
     const riyadh = route("", { chip: { intent: "page", slug: "jobs-data-riyadh" } });
     expect(riyadh.actions).toEqual([{ type: "navigate", to: { screen: "jobs", city: "riyadh", field: "data" } }]);
     expect(riyadh.text).toBe(
-      "لقيت 6 وظائف. الأقرب لمهاراتك «محلل بيانات» بمطابقة 70%. فتحت لك القائمة، وللعلم: ترى الوظائف هنا إعلانات حقيقية جمعتها في 20 نوفمبر، ويمكن بعضها تسكّر بعدها.",
+      "لقيت 13 وظيفة. الأقرب لمهاراتك «محلل بيانات» بمطابقة 70%. فتحت لك القائمة.",
     );
     const best = route("", { chip: { intent: "page", slug: "best-job" }, jobsDisclosed: true });
     expect(best.actions).toEqual([]);
-    expect(best.text).toBe("أنسب وظيفة لمهاراتك الحين «محلل بيانات» بمطابقة 70%، وبعدها «محلل مالي (برنامج تمهير)» و«مهندس بيانات أول».");
+    expect(best.text).toBe("أنسب وظيفة لمهاراتك الحين «محلل بيانات» بمطابقة 70%، وبعدها «مهندس بيانات أول» و«مدير نمو - رؤى وتحليلات».");
     expect(best.cards).toHaveLength(3);
   });
 
@@ -446,14 +447,19 @@ describe("5.4 consent: what counts as the user asking", () => {
   it("creates nothing for a second application to the same job", () => {
     const r = route("قدّم لي على وظيفة محلل بيانات", { facts: persona("mid-path") });
     expect(r.actions).toEqual([]);
-    expect(r.text).toBe("قدّمت على ذي الوظيفة من قبل، وحالة طلبك «قيد المراجعة».");
+    expect(r.text).toBe("قدّمت على ذي الوظيفة من قبل، وحالة طلبك «جاهز».");
     expect(r.chips.map((c) => c.label)).toEqual(["افتح طلباتي"]);
   });
 
   it("asks which job when two titles are named, and which course when none is", () => {
     const two = route("قدّم لي على وظيفة مهندس بيانات أول أو محلل أداء عقاري", { jobsDisclosed: true });
     expect(two.actions).toEqual([]);
-    expect(two.text).toBe("أبشر. على أي وظيفة؟ هذي أقرب ثلاث لمهاراتك.");
+    // 21 Nov 2026: the jobs named are the ones offered (each with «قدّم على ذي»); nothing is applied
+    expect(two.text).toBe("لقيت أكثر من وظيفة تطابق اللي قلته. على أي وحدة أقدّم لك؟");
+    expect(two.cards.map((c) => (c.kind === "job" ? c.jobId : null)).sort()).toEqual(
+      ["master-works-data-senior-engineer-riyadh", "ninja-real-estate-performance-analyst-riyadh"].sort(),
+    );
+    expect(two.cards.every((c) => c.kind === "job" && c.chip?.label === "قدّم على ذي")).toBe(true);
     const course = route("ابدأ الدورة");
     expect(course.actions).toEqual([]);
     expect(course.text).toBe("أبشر. وش تبي تتعلّم؟ هذي خطوات مسارك.");
@@ -546,9 +552,9 @@ describe("other 5.9 replies", () => {
     expect(route("سلسلتي").text).toBe("سلسلتك الحين يوماً واحداً. ادخل كل يوم عشان تكبر مكافأتك: 20 XP عن كل يوم، لين 100.");
   });
 
-  it("a job search with nothing found answers with three cards and the jobs sentence (real postings, dated)", () => {
+  it("a job search with nothing found answers with three cards", () => {
     const r = route("وظائف في أرامكو");
-    expect(r.text).toBe("ما لقيت وظائف بذي المواصفات. هذي أقرب ثلاث لمهاراتك. وللعلم: ترى الوظائف هنا إعلانات حقيقية جمعتها في 20 نوفمبر، ويمكن بعضها تسكّر بعدها.");
+    expect(r.text).toBe("ما لقيت وظائف بذي المواصفات. هذي أقرب ثلاث لمهاراتك.");
     expect(r.cards).toHaveLength(3);
     expect(r.actions).toEqual([]);
   });

@@ -11,8 +11,8 @@
 // appears, the send button lights up and is pressed in front of the user, then the confirmation lands as a stamped receipt.
 // 20 Nov 2026: a REAL posting is prepared, never sent: its buttons say «جهّز الطلب», and the confirmation shows where the
 // job is posted and ONE big action, «افتح الإعلان الأصلي وقدّم» (the posting in a new tab, the note on the clipboard,
-// then «نسخت لك رسالة التقديم»). The PRACTICE job keeps its moment and ends with «دليلك»'s honest line instead of the old
-// simulated multi-site step.
+// then «نسخت لك رسالة التقديم»). The PRACTICE job keeps its moment: it is saved in «طلباتي» («احفظ الطلب» → «تم حفظ
+// طلبك»), never said to be sent to anyone.
 import { Dialog } from "@base-ui/react/dialog";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
@@ -133,8 +133,12 @@ export function ApplySheet({
                 <Dialog.Title className="text-h3 text-fg">{SHEET_COPY.title(job.title)}</Dialog.Title>
                 <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-fg-2">
                   <span>{job.company}</span>
-                  <span aria-hidden>·</span>
-                  <JobTag jobId={jobId} />
+                  {job.real ? (
+                    <>
+                      <span aria-hidden>·</span>
+                      <JobTag jobId={jobId} />
+                    </>
+                  ) : null}
                 </p>
               </div>
               {closable ? (
@@ -311,8 +315,10 @@ function FormBody({
         </div>
       </div>
 
-      <footer className="flex flex-col gap-3 border-t border-border px-5 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] lg:px-6">
-        <p className="flex items-center gap-2 text-small text-fg-3">
+      {/* phone: the sheet ends above the tab bar, which already keeps clear of the home indicator (no safe-area padding
+          here); with the keyboard up only the buttons stay, so the field being typed in keeps its room (globals.css kb-hide) */}
+      <footer className="flex flex-col gap-3 border-t border-border px-5 pt-4 pb-5 lg:px-6 lg:pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+        <p className="kb-hide flex items-center gap-2 text-small text-fg-3">
           <IconInfo className="shrink-0" size={18} waypoint="muted" />
           {flow.real ? SAMPLE_COPY.applySheetReal : SAMPLE_COPY.applySheet}
         </p>
@@ -358,7 +364,7 @@ function FormBody({
             </Button>
           ) : null}
           {/* the reward this application pays, on the send row (docs/GAME-LAYER.md 5.3.6; spec 8.1: locked under 60%) */}
-          {sending ? null : <ApplyReward className="w-full justify-start sm:ms-auto sm:w-auto" match={match} />}
+          {sending ? null : <ApplyReward className="kb-hide w-full justify-start sm:ms-auto sm:w-auto" match={match} />}
         </div>
       </footer>
     </>
@@ -409,7 +415,7 @@ function SkillsField({ have, shown, active }: { have: Gap["have"]; shown: boolea
   );
 }
 
-/** Field 6 «السيرة الذاتية»: «مرفقة: {file name}» · «مرفقة: السيرة التجريبية» · «لا توجد سيرة مرفقة». */
+/** Field 6 «السيرة الذاتية»: «مرفقة: {file name}» · «مرفقة: السيرة الجاهزة» · «لا توجد سيرة مرفقة». */
 function CvField({ line, shown }: { line: string; shown: boolean }): ReactNode {
   return (
     <div className="flex min-w-0 flex-col gap-2">
@@ -443,8 +449,7 @@ function CvField({ line, shown }: { line: string; shown: boolean }): ReactNode {
  * The confirmation (spec 3.8), drawn as a receipt: the stamp lands (`sent-mark`), the number rolls in, the rows are
  * separated by the dotted trail: «رقم الطلب: DL-2026-0001» · «مطابقتك عند التقديم: 90%» · «+40 XP · تقديم مدروس» (or
  * «بدون نقاط: المطابقة أقل من 60%»).
- * - The practice job: «تم إرسال طلبك», then «دليلك»'s honest line «وظيفة تدريبية: في الوظائف الحقيقية أفتح لك الإعلان
- *   الأصلي عشان ترسله» · «تابع طلباتي» and «إغلاق».
+ * - The practice job: «تم حفظ طلبك» · «تابع طلباتي» and «إغلاق».
  * - A real job: «طلبك جاهز» and «دليلك»'s line (prepared, saved, one step left), the receipt, where the job is posted, and
  *   the one big action «افتح الإعلان الأصلي وقدّم»: a link (so the new tab opens on the press itself) that also copies
  *   the note; then «نسخت لك رسالة التقديم». «تابع طلباتي» and «إغلاق» stay quieter.
@@ -568,14 +573,8 @@ function Confirmation({
               </motion.p>
             ) : null}
           </AnimatePresence>
-          <p className="flex items-start gap-2 text-small text-fg-3">
-            <IconInfo className="mt-0.5 shrink-0" size={18} waypoint="off" />
-            <span>{JOB_SOURCE_COPY.mayHaveClosed}</span>
-          </p>
         </motion.div>
-      ) : (
-        <DaleelLine testId="apply-practice-note" text={SHEET_COPY.practiceLine} />
-      )}
+      ) : null}
 
       <div className="flex w-full max-w-md flex-col-reverse gap-3 sm:flex-row sm:justify-center">
         <Button
@@ -594,7 +593,7 @@ function Confirmation({
   );
 }
 
-/** One line in «دليلك»'s own voice (Najdi), with his mark: the confirmation's hand-off and the practice job's honest end. */
+/** One line in «دليلك»'s own voice (Najdi), with his mark: the confirmation's hand-off. */
 function DaleelLine({ text, testId }: { text: string; testId: string }): ReactNode {
   return (
     <motion.p

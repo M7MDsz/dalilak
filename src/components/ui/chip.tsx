@@ -24,7 +24,7 @@ export function Chip({ selected = false, size = "md", icon, pressed = false, cla
     <button
       aria-pressed={selected}
       className={cn(
-        "skin-chip wp-quiet inline-flex select-none items-center whitespace-nowrap rounded-full border-[1.5px] font-medium",
+        "skin-chip wp-quiet tap-area relative inline-flex select-none items-center whitespace-nowrap rounded-full border-[1.5px] font-medium",
         "transition-[background-color,border-color,color,scale,translate] duration-200 ease-out disabled:pointer-events-none",
         press,
         size === "md" ? "h-10 gap-2 px-4 text-[0.9375rem] leading-[1.2]" : "h-8 gap-1.5 px-3 text-small leading-[1.2]",

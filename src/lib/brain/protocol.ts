@@ -363,6 +363,12 @@ export interface OnboardingContext {
   readonly misses: Readonly<Partial<Record<OnboardingStepId, number>>>;
   /** Derived, never stored: null while the thread is empty (before the greeting), else `pendingQuestion(answers)`. */
   readonly pending: OnboardingStepId | null;
+  /**
+   * 20 Nov 2026 (docs/ONBOARDING-FLOW.md): the order the questions left are asked in. After a CV whose answers were
+   * confirmed: the interest first (asked from the CV's skills), then what the CV did not state, then company and priority.
+   * Absent: the seven steps in their fixed order.
+   */
+  readonly order?: readonly OnboardingStepId[];
 }
 
 export type OnboardingInput =
@@ -399,6 +405,14 @@ export interface OnboardingTurn {
    * of applying this turn. Otherwise this turn (with its «لم ألتقطها جيداً…» reply) is applied as is.
    */
   readonly unmapped: { readonly question: OnboardingStepId; readonly text: string } | null;
+  /**
+   * 20 Nov 2026, the CV step (docs/ONBOARDING-FLOW.md): what the store writes on `user.onboarding` besides the thread and
+   * answers. `cv`: the step's new status; `prefill`: the confirmed CV answers, or null when «لا، بعدّل» dropped them.
+   */
+  readonly cvStep?: {
+    readonly cv?: "offered" | "analysed" | "skipped";
+    readonly prefill?: { readonly slots: readonly OnboardingStepId[]; readonly confirmed: boolean } | null;
+  };
 }
 
 export interface OnboardingClassifyRequest {

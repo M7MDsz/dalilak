@@ -457,8 +457,62 @@ export function IconFieldGaming(props: IconProps) {
   );
 }
 
-/** The wave-2 field icons by field id, spread into every field-icon map (cv-results, jobs, learn, skills, the reveal). */
+/* The four fields of wave 3 (21 Nov 2026, src/lib/data/wave3) */
+
+// A leaf on its stem with the midrib; the waypoint is the sun it grows toward.
+export function IconFieldEnergy(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M5 19.5c0-7.5 4.5-12 12.5-12.5.5 8-4 12.5-11.5 12.5zM5 19.5l7-7" />
+      <circle className="wp" cx="18.5" cy="17.5" r="1.75" />
+    </IconBase>
+  );
+}
+
+// A house beside a tower block on one ground line; the waypoint is the house's door.
+export function IconFieldRealEstate(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M3.5 20.5h17M5 20.5v-7l4.5-4 4.5 4v7M14 20.5v-15h5.5v15M16.5 9h1M16.5 12.5h1" />
+      <circle className="wp" cx="9.5" cy="17" r="1.5" />
+    </IconBase>
+  );
+}
+
+// An airliner seen from above: fuselage, wings and tailplane; the waypoint is the destination ahead of it.
+export function IconFieldAviation(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M12 6.5c.8 0 1.3.7 1.3 1.8v3.2l5.7 3.3v1.7l-5.7-1.8v3.4l1.9 1.4v1.3L12 20l-3.2.8v-1.3l1.9-1.4v-3.4L5 16.5v-1.7l5.7-3.3V8.3c0-1.1.5-1.8 1.3-1.8z" />
+      <circle className="wp" cx="12" cy="3.25" r="1.5" />
+    </IconBase>
+  );
+}
+
+// A megaphone with its handle and a sound arc; the waypoint is the message going out.
+export function IconFieldCommunications(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path d="M4 10v4h3l7.5 4.5v-13L7 10zM7 14l1.5 5h2.5l-1.2-4.2M17.5 9a4 4 0 0 1 0 6" />
+      <circle className="wp" cx="20" cy="6" r="1.5" />
+    </IconBase>
+  );
+}
+
+/** The wave-3 field icons by field id (spread into WAVE2_FIELD_ICONS below, so every field-icon map gets them). */
+export const WAVE3_FIELD_ICONS = {
+  "energy-sustainability": IconFieldEnergy,
+  "real-estate": IconFieldRealEstate,
+  aviation: IconFieldAviation,
+  communications: IconFieldCommunications,
+} as const;
+
+/**
+ * The field icons added after the first fields (wave 2's nine and, since 21 Nov 2026, wave 3's four), spread into every
+ * field-icon map (cv-results, jobs, learn, skills, the reveal).
+ */
 export const WAVE2_FIELD_ICONS = {
+  ...WAVE3_FIELD_ICONS,
   engineering: IconFieldEngineering,
   "project-controls": IconFieldProjectControls,
   "tourism-hospitality": IconFieldTourism,

@@ -33,6 +33,8 @@ import "./map.css";
 
 /** The pause between the sheet being ready and the opening's first beat. */
 const START_BEAT_MS = 180;
+/** After the full opening comes to rest, the overlay queue (toasts) waits this long more. */
+const TOASTS_AFTER_OPEN_MS = 450;
 
 type Phase = "wait" | "play" | "rest";
 type Handover = MapHandover & { readonly id: number };
@@ -110,7 +112,15 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
   const [playId, setPlayId] = useState(0);
   const [fullEnded, setFullEnded] = useState(false);
   const [counted, setCounted] = useState(false);
-  useOverlayHold("map-open-full", opening === "full" && !fullEnded);
+  // The toasts of the onboarding (+80 XP and its badges) wait for the whole full opening, plus a beat once the sheet is
+  // at rest, so they never drop over the road while it draws (21 Nov 2026: they covered stations 5-8 and the flag).
+  const [fullSettled, setFullSettled] = useState(false);
+  useEffect(() => {
+    if (!fullEnded) return;
+    const timer = window.setTimeout(() => setFullSettled(true), TOASTS_AFTER_OPEN_MS);
+    return () => window.clearTimeout(timer);
+  }, [fullEnded]);
+  useOverlayHold("map-open-full", opening === "full" && !fullSettled);
 
   // ── the sheet's size: the drawing is computed for the pixels it has ──
   const mainRef = useRef<HTMLElement>(null);
@@ -411,6 +421,9 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
   const shownMatch = counted || instant ? roadmap.match : ringFrom;
   const matchCount = useMemo(() => ({ value: shownMatch, from: ringFrom, delay: T !== null ? T.count : 0, duration: T !== null && T.countD > 0 ? T.countD : 0.6 }), [shownMatch, ringFrom, T]);
   const sign = geometry?.sign ?? null;
+  // Out of the reveal the page does not fade in as a whole (PageTransition has no animation then): the jobs beside the
+  // map arrive with the shell's own short rise instead of popping in on the first frame.
+  const arrive = handover !== null && !instant ? "animate-rise [animation-delay:300ms]" : undefined;
 
   return (
     <PageTransition className={handover !== null ? "[animation:none]" : undefined}>
@@ -418,7 +431,7 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
         <h1 className="sr-only">مسارك</h1>
         <div className="grid items-start gap-x-5 gap-y-2 @min-[900px]/content:grid-cols-[minmax(0,1fr)_21.25rem]" style={{ ["--lead" as string]: `${lead}px` } as CSSProperties}>
           {wide === false ? (
-            <div className="min-w-0" ref={leadRef}>
+            <div className={cn("min-w-0", arrive)} ref={leadRef}>
               <JobCards layout="row" user={user} />
             </div>
           ) : null}
@@ -485,7 +498,7 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
           {wide === null ? null : wide ? (
             // the real jobs, as tall as the map less the corner under the column (the launcher «اسأل دليلك» stands there);
             // the list scrolls past the first four
-            <aside className="flex min-w-0 flex-col @min-[900px]/content:sticky @min-[900px]/content:top-[calc(var(--shell-top)+0.5rem)] @min-[900px]/content:max-h-[calc(100dvh-var(--shell-top)-6.75rem)]">
+            <aside className={cn("flex min-w-0 flex-col", arrive, "@min-[900px]/content:sticky @min-[900px]/content:top-[calc(var(--shell-top)+0.5rem)] @min-[900px]/content:max-h-[calc(100dvh-var(--shell-top)-6.75rem)]")}>
               <JobCards className="min-h-0 flex-1" layout="column" user={user} />
               <BasedOnLine className="mt-2 px-1" jobId={roadmap.jobId} />
             </aside>
@@ -596,7 +609,12 @@ function HandoverDots({
       if (ring !== null) animations.push(ring.animate([{ transform: "scale(1)" }, { transform: `scale(${((2 * to.r) / d).toFixed(3)})` }], travel));
       // the label keeps its distance from the ring's edge while the ring changes size: it ends where the station's label is
       const label = node.querySelector(".dm-ho-lb");
-      if (label !== null) animations.push(label.animate([{ transform: "translate(0,-50%)" }, { transform: `translate(${(d / 2 - to.r).toFixed(1)}px,-50%)` }], travel));
+      if (label !== null) {
+        animations.push(label.animate([{ transform: "translate(0,-50%)" }, { transform: `translate(${(d / 2 - to.r).toFixed(1)}px,-50%)` }], travel));
+        // map.css hides the labels where the strip left them (side by side they overlapped): each fades in on the
+        // second half of the travel, when the nodes have spread out, and stays until its node hands over to the station
+        animations.push(label.animate([{ opacity: 0 }, { opacity: 0, offset: 0.5 }, { opacity: 1 }], { duration: travelS * 1000, fill: "forwards", easing: "linear" }));
+      }
     });
     return () => {
       for (const a of animations) a.cancel();

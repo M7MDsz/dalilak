@@ -3,7 +3,7 @@
 // a Latin run drawn left to right as a unit, mirrored brackets, diacritics as separate zero-width items.
 import { describe, expect, it } from "vitest";
 
-import { pdfItemsToText, type PdfTextItem } from "./pdf-lines";
+import { applyLigatureFixes, ligatureFixes, pdfItemsToText, type PdfTextItem } from "./pdf-lines";
 
 type Seg =
   | { readonly rtl: string } // Arabic letters, one item per letter
@@ -168,5 +168,99 @@ describe("pdfItemsToText: Latin documents", () => {
       { str: "dash", x: 96.2, y: 700, width: 24, height: 10, dir: "ltr" },
     ];
     expect(text([page])).toBe("Power BIdash");
+  });
+});
+
+// ─── 21 Nov 2026, CV-reader test: real Chrome, Word and Canva-style PDFs ─────────────────────────────────────────
+
+/** One LTR item per string, left edge at x. */
+const ltr = (str: string, x: number, y: number): PdfTextItem => ({ str, x, y, width: str.length * W, height: 10, dir: "ltr" });
+
+describe("pdfItemsToText: what the CV-reader test found", () => {
+  it("reads the tatweel of «لـ» as Arabic, so the number after it stays in place", () => {
+    const segs: Seg[] = [{ rtl: "إعداد" }, { sp: true }, { rtl: "لـ" }, { sp: true }, { ltr: "3" }, { sp: true }, { rtl: "أقسام" }];
+    expect(text([rtlLine(segs, 700)])).toBe("إعداد لـ 3 أقسام");
+  });
+
+  it("puts a year range in an Arabic line back in logical order, and keeps «2020-2022» and «4.8» whole", () => {
+    const range: Seg[] = [{ rtl: "شركة" }, { sp: true }, { n: "|" }, { sp: true }, { ltr: "2020" }, { sp: true }, { n: "-" }, { sp: true }, { ltr: "2022" }];
+    expect(text([rtlLine(range, 700)])).toBe("شركة | 2020 - 2022");
+    expect(text([rtlLine([{ rtl: "من" }, { sp: true }, { ltr: "2020-2022" }, { sp: true }, { rtl: "بمعدل" }, { sp: true }, { ltr: "4.8" }], 700)])).toBe(
+      "من 2020-2022 بمعدل 4.8",
+    );
+  });
+
+  it("keeps the spaces inside a Word item, even next to a tab-wide space item", () => {
+    const page: PdfTextItem[] = [
+      { str: "CV", x: 72, y: 708, width: 13, height: 12, dir: "ltr" },
+      { str: " ", x: 85, y: 708, width: 376, height: 0, dir: "ltr" },
+      { str: "مهندس مدني بخبرة", x: 480, y: 690, width: 73, height: 12, dir: "rtl" },
+      { str: "7", x: 470, y: 690, width: 6, height: 12, dir: "ltr" },
+      { str: "سنوات في الإشراف على التنفيذ", x: 340, y: 690, width: 126, height: 12, dir: "rtl" },
+    ];
+    expect(text([page])).toBe("CV\nمهندس مدني بخبرة 7 سنوات في الإشراف على التنفيذ");
+  });
+
+  it("does not mirror a bracket inside a Word item (already logical), but still un-mirrors Chrome's", () => {
+    const word: PdfTextItem[] = [{ str: "شركة الصفوة (جهة تجريبية)", x: 300, y: 700, width: 110, height: 12, dir: "rtl" }];
+    expect(text([word])).toBe("شركة الصفوة (جهة تجريبية)");
+    expect(text([rtlLine(words("شركة الصفوة (جهة تجريبية)"), 700)])).toBe("شركة الصفوة (جهة تجريبية)");
+  });
+
+  it("starts a new paragraph where a line moves more than an em off the line above (a bullet drawn as a shape)", () => {
+    const page = [
+      ltr("Frontend Developer - Wadi Tech (sample company), Jeddah", 50, 700),
+      ltr("Built the checkout flow in React and TypeScript, cutting", 68, 686),
+      ltr("drop-off by 18%.", 68, 672),
+    ];
+    expect(text([page])).toBe(
+      "Frontend Developer - Wadi Tech (sample company), Jeddah\n\nBuilt the checkout flow in React and TypeScript, cutting\ndrop-off by 18%.",
+    );
+  });
+
+  it("reads a two-column page column by column, header first, even where the baselines line up", () => {
+    const side = ["Contact", "Riyadh", "0550000000", "Skills", "Salesforce CRM", "Excel", "Negotiation", "Languages", "English"];
+    const main = ["Summary", "Sales representative with six years", "Experience", "Senior Sales Representative", "Exceeded the quota by 22%", "Managed sixty accounts", "Education", "BBA in Marketing", "Central Plains University"];
+    const page: PdfTextItem[] = [ltr("Omar Al-Harthy, Senior Sales Representative, Riyadh", 40, 760)];
+    side.forEach((str, i) => page.push(ltr(str, 40, 730 - i * 13)));
+    main.forEach((str, i) => page.push(ltr(str, 200, 730 - i * 17))); // its own line spacing: some baselines meet, most do not
+    expect(text([page])).toBe(["Omar Al-Harthy, Senior Sales Representative, Riyadh", "", ...side, "", ...main].join("\n"));
+  });
+
+  it("reads an Arabic two-column page right column first", () => {
+    const rtlAt = (str: string, right: number, y: number): PdfTextItem => ({ str, x: right - str.length * W, y, width: str.length * W, height: 10, dir: /[0-9]/.test(str) ? "ltr" : "rtl" });
+    const side = ["التواصل", "الدمام", "0550000000", "المهارات", "التسويق الرقمي", "كتابة المحتوى", "تحسين محركات البحث", "اللغات", "الإنجليزية"];
+    const main = ["الملخص", "أخصائية تسويق رقمي بخبرة أربع سنوات", "الخبرة العملية", "أخصائية تسويق رقمي في وكالة", "إدارة الحملات الإعلانية", "رفع الزيارات العضوية للموقع", "التعليم", "بكالوريوس التسويق", "جامعة الساحل الشرقي"];
+    const page: PdfTextItem[] = [];
+    side.forEach((str, i) => page.push(rtlAt(str, 540, 730 - i * 13)));
+    main.forEach((str, i) => page.push(rtlAt(str, 380, 730 - i * 17)));
+    expect(text([page])).toBe([...side, "", ...main].join("\n"));
+  });
+
+  it("does not split a label | value table (both cells on every line)", () => {
+    const rows = [["Name:", "Omar"], ["City:", "Riyadh"], ["Phone:", "0550000000"], ["Email:", "omar@example.com"], ["Born:", "1999"], ["Status:", "Single"]];
+    const page = rows.flatMap(([a = "", b = ""], i) => [ltr(a, 40, 700 - i * 14), ltr(b, 200, 700 - i * 14)]);
+    expect(text([page])).toBe(rows.map(([a, b]) => `${a} ${b}`).join("\n"));
+  });
+});
+
+describe("ligatureFixes: Word-made PDFs (ligature glyphs mapped to their letters)", () => {
+  it("knows the swapped spelling PDF.js gives each word holding a ligature glyph, and fixes only that word", () => {
+    // As drawn, left to right: «الآن» = ن | لآ | ا ; «ريال» = one glyph; «المال» = separate glyphs (no ligature).
+    const fixes = ligatureFixes([["ن", "لآ", "ا", " ", "ريال", -40, " ", "ل", "ا", "م", "ل", "ا"]]);
+    expect([...fixes]).toEqual([
+      ["اآلن", "الآن"],
+      ["لاير", "ريال"],
+    ]);
+    expect(applyLigatureFixes("حتى اآلن مليون لاير من المال", fixes)).toBe("حتى الآن مليون ريال من المال");
+    expect(applyLigatureFixes("Excel 2021", fixes)).toBe("Excel 2021");
+  });
+
+  it("treats a large spacing adjustment as a word gap, and finds nothing in a Chrome PDF (presentation forms)", () => {
+    expect([...ligatureFixes([["ن", "لآ", "ا", -300, "ة", "ر", "ا", "د", "لإ", "ا"]])]).toEqual([
+      ["اآلن", "الآن"],
+      ["اإلدارة", "الإدارة"],
+    ]);
+    expect(ligatureFixes([["ﻻ", "ﺎ"]]).size).toBe(0);
   });
 });

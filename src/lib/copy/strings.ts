@@ -2,49 +2,31 @@
 // used by one screen stays in that screen's files, copied verbatim from the spec. Pure module.
 import type { ApplicationStatus, CourseState, ExperienceBand, StageState, XpEventType } from "@/lib/types";
 
-/** Spec 7.6 (v3, including the home leaderboard preview's label). */
+/** The notes that say how a screen works (where an application is sent, how a step is marked done, how rank is counted). */
 export const SAMPLE_COPY = {
-  /** «جهة تجريبية» (tag after every company name). */
-  company: "جهة تجريبية",
-  /** «بيانات تجريبية» (short tag: home leaderboard preview, banners' tag form). */
-  data: "بيانات تجريبية",
-  /** Sign-in footer: what is real (jobs, learning guides) and what is a sample (the other players, the practice job). */
-  signinFooter: "الوظائف إعلانات حقيقية جُمعت في 20 نوفمبر، وأدلة التعلّم حقيقية. المتسابقون ووظيفة «محلل بيانات» تجريبية.",
-  /** Side navigation footer «عرض تجريبي · بيانات تجريبية». */
-  navFooter: "عرض تجريبي · بيانات تجريبية",
-  /** The jobs board (20 Nov 2026): real postings, one practice job. */
-  jobsBanner: "إعلانات حقيقية جُمعت في 20 نوفمبر 2026، وقد يُغلق بعضها بعد ذلك. «محلل بيانات» وظيفة تدريبية.",
   /** The apply sheet of the practice job. */
-  applySheet: "وظيفة تدريبية: لن يُرسل شيء إلى أي جهة.",
+  applySheet: "يُحفظ طلبك في «طلباتي» لتتابعه منها.",
   /** The apply sheet of a real job. */
   applySheetReal: "دليلك يجهّز طلبك هنا، وترسله أنت من الإعلان الأصلي.",
-  applicationsBanner: "طلبات الوظائف الحقيقية ترسلها أنت من الإعلان الأصلي، ولا نرى ردّ الجهة. طلب الوظيفة التدريبية محاكاة تتقدّم حالته تلقائياً.",
-  /** The learning guide: real courses, people and articles (links opened 20 Nov 2026); finishing a step is self-reported. */
-  learnBanner: "مصادر حقيقية فُتحت روابطها في 20 نوفمبر 2026. تتعلّم عندهم، وتضغط «خلّصتها» هنا.",
-  coursePage: "روابط حقيقية فُتحت في 20 نوفمبر 2026. الإكمال تؤكّده أنت بضغطة «خلّصتها».",
-  leaderboardNote: "المتسابقون الآخرون بيانات تجريبية. ترتيبك يُحسب من نقاطك أنت.",
-  /** «سيرة تجريبية». */
-  sampleCvTag: "سيرة تجريبية",
+  applicationsBanner: "طلبات الوظائف ترسلها أنت من الإعلان الأصلي، ولا نرى ردّ الجهة.",
+  /** The learning guide: real courses, people and articles; finishing a step is self-reported. */
+  learnBanner: "مصادر حقيقية: تتعلّم عندهم، وتضغط «خلّصتها» هنا.",
+  coursePage: "روابط حقيقية، والإكمال تؤكّده أنت بضغطة «خلّصتها».",
+  leaderboardNote: "ترتيبك يُحسب من نقاطك أنت.",
 } as const satisfies Record<string, string>;
 
-/** Real jobs (the 20 Nov 2026 snapshot) and the one practice job: the words every screen that shows a job uses. */
+/** Real jobs and the one practice job: the words every screen that shows a job uses. */
 export const JOB_SOURCE_COPY = {
-  /** The tag of the practice job (it replaces «جهة تجريبية»). */
-  practice: "وظيفة تدريبية",
-  /** «جُمعت في 20 نوفمبر». */
-  collected: (day: string) => `جُمعت في ${day}`,
   /** «نُشرت في 29 سبتمبر 2026». */
   posted: (day: string) => `نُشرت في ${day}`,
   sourceLabel: "المصدر",
   openPosting: "افتح الإعلان الأصلي",
-  mayHaveClosed: "قد يكون الإعلان أُغلق بعد تاريخ جمعه.",
   placeLabel: "الموقع في الإعلان",
   titleLabel: "المسمى في الإعلان",
   evidenceTitle: "المتطلبات من نص الإعلان",
   evidenceLine: "كل مهارة ومعها الجملة التي وردت في الإعلان.",
   /** Where reading the posting as Dalilak's skills needed a judgement, the note says how (kept with the source). */
   sourceNote: "ملاحظة عن قراءة المهارات من الإعلان:",
-  practiceNote: "وظيفة تدريبية لتجربة المسار والتقديم، وجهتها غير حقيقية.",
   /** A real job's application: Dalilak prepared it, the user sends it from the original posting (nothing is simulated). */
   preparedByAdvisor: "جهّزه دليلك، وأرسله أنت من الإعلان الأصلي",
   preparedByUser: "جهّزته هنا، وأرسله أنت من الإعلان الأصلي",
@@ -86,14 +68,17 @@ export const COURSE_STATE_LABEL = {
   locked: "مقفلة",
 } as const satisfies Record<CourseState, string>;
 
-/** Spec 3.9 status labels and notes. */
+/**
+ * The practice job's tracking steps (spec 3.9, reworded 21 Nov 2026): the user's own progress, never a company's review
+ * (no company stands behind the practice job, so nothing says it was sent, received or reviewed).
+ */
 export const APPLICATION_STATUS_COPY = {
-  sent: { label: "أُرسل الطلب", note: "وصل طلبك وينتظر المراجعة." },
-  review: { label: "قيد المراجعة", note: "طلبك قيد المراجعة." },
-  shortlisted: { label: "مرشّح للمقابلة", note: "رُشّحت للمقابلة. راجع مهارات الوظيفة واستعدّ." },
+  sent: { label: "محفوظ", note: "حفظت طلبك في «طلباتي»." },
+  review: { label: "جاهز", note: "طلبك جاهز. راجع مهارات الوظيفة." },
+  shortlisted: { label: "مستعدّ للمقابلة", note: "مطابقتك قوية. راجع مهارات الوظيفة واستعدّ للمقابلة." },
   closed: {
-    label: "لم يُرشّح هذه المرة",
-    note: "لم يُرشّح طلبك هذه المرة. سدّ الفجوة لتقوى فرصك في الوظائف القادمة.",
+    label: "يحتاج تقوية",
+    note: "مطابقتك أقل من 60%. سدّ الفجوة لتقوى فرصك في الوظائف القادمة.",
   },
 } as const satisfies Record<ApplicationStatus, { label: string; note: string }>;
 

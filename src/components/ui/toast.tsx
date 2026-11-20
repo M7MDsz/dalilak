@@ -10,8 +10,10 @@ import { formatGain } from "@/lib/format";
 import { BadgeMedal } from "./badge-medal";
 import { XpGlyph } from "./xp";
 
-// One toast position for the whole app: top centre, under the top bar (playbook 3.13), on desktop and phone. Newest on top,
-// at most three, each on its own timer. Enter: drops 8 px and fades in, 200 ms. Leave: fades, 150 ms.
+// One toast position for the whole app, under the top bar (playbook 3.13): top centre on a phone; from 1024 px under the
+// user chip, at the content's top inline-end corner (21 Nov 2026: the centre sat over the middle of the map on «مساري»),
+// clear of the docked advisor panel (--content-inset-end). Newest on top, at most three, each on its own timer.
+// Enter: drops 8 px and fades in, 200 ms. Leave: fades, 150 ms.
 
 export type ToastData =
   | { readonly kind: "xp"; readonly amount: number; readonly reason: string; readonly rank?: number | null }
@@ -181,7 +183,7 @@ export function Toaster() {
   return (
     <Toast.Portal>
       <Toast.Viewport
-        className="fixed inset-x-0 top-[calc(var(--shell-top)+0.75rem)] z-toast mx-auto w-[min(26rem,calc(100vw-2rem))] outline-none"
+        className="fixed inset-x-0 top-[calc(var(--shell-top)+0.75rem)] z-toast mx-auto w-[min(26rem,calc(100vw-2rem))] outline-none lg:start-auto lg:end-[calc(var(--content-inset-end,0px)+2rem)] lg:mx-0"
         data-surface="paper"
       >
         <ToastList />

@@ -12,11 +12,15 @@ function guard<T extends string>(list: readonly T[]): (value: unknown) => value 
  * السيبراني والسحابة» (cyber-cloud) and «المبيعات وسلاسل الإمداد» (sales-supply) after hr, so the seven original fields
  * keep their places (src/lib/data/expansion). Wave 2 (20 Nov 2026, src/lib/data/wave2): nine more fields (engineering,
  * project controls, tourism, health administration, education, banking and risk, legal, media, gaming) before professional.
+ * Wave 3 (21 Nov 2026, src/lib/data/wave3): four more (energy and sustainability, real estate and facilities, aviation,
+ * public relations and corporate communications), after wave 2's and before professional.
  */
 export const FIELD_IDS = [
   "data", "software", "design", "marketing", "business", "hr", "product", "cyber-cloud", "sales-supply",
   // wave 2 (src/lib/data/wave2)
   "engineering", "project-controls", "tourism-hospitality", "health-admin", "education", "banking-risk", "legal", "media", "gaming",
+  // wave 3 (src/lib/data/wave3)
+  "energy-sustainability", "real-estate", "aviation", "communications",
   "professional",
 ] as const;
 export type FieldId = (typeof FIELD_IDS)[number];
@@ -26,6 +30,7 @@ export const isFieldId = guard(FIELD_IDS);
 export const JOB_FIELD_IDS = [
   "data", "software", "design", "marketing", "business", "hr", "product", "cyber-cloud", "sales-supply",
   "engineering", "project-controls", "tourism-hospitality", "health-admin", "education", "banking-risk", "legal", "media", "gaming",
+  "energy-sustainability", "real-estate", "aviation", "communications",
 ] as const;
 export type JobFieldId = (typeof JOB_FIELD_IDS)[number];
 export const isJobFieldId = guard(JOB_FIELD_IDS);
@@ -52,6 +57,12 @@ export const SKILL_IDS = [
   "health-informatics", "instructional-design", "elearning-dev", "training-delivery", "banking-basics", "credit-analysis",
   "aml-compliance", "internal-audit", "legal-research", "contract-drafting", "corporate-governance", "video-editing",
   "motion-graphics", "translation", "arabic-editing", "game-design", "game-testing", "esports-community",
+  // wave 3 (src/lib/data/wave3/skills.ts): the new fields' skills, and insurance (banking-risk), mobile (software) and
+  // telecom (cyber-cloud) skills of older fields, all after wave 2's so every older index stays
+  "esg-fundamentals", "esg-reporting", "carbon-accounting", "property-management", "facilities-management", "real-estate-valuation",
+  "insurance-basics", "underwriting", "insurance-claims", "flutter", "ios-swift", "android-kotlin", "routing-switching",
+  "mobile-networks", "fiber-optics", "aviation-ops", "ground-handling", "flight-dispatch", "public-relations",
+  "corporate-communications", "government-relations",
   "communication", "english", "problem-solving", "presentation", "teamwork",
 ] as const;
 export type SkillId = (typeof SKILL_IDS)[number];
@@ -140,11 +151,116 @@ export const JOB_IDS = [
   "platinumlist-en-ar-content-manager-riyadh",
   // gaming
   "qiddiya-gaming-esports-strategy-am-riyadh",
+  // wave 3 (src/lib/data/wave3/jobs.ts): after every older job (so no tie of the demo's reveal moves), by field
+  // data
+  "arabicai-machine-learning-engineer-riyadh",
+  "innovationteam-junior-ai-engineer-computer-vision-riyadh",
+  "mozn-data-scientist-iii-riyadh",
+  "masterworks-nabeh-ai-engineer-specialist-riyadh",
+  "tamara-builders-program-data-riyadh",
+  "arabicai-data-engineer-riyadh",
+  "lucidya-database-administrator-riyadh",
+  // software
+  "squadio-odoo-frontend-developer-riyadh",
+  "lucidya-10x-software-engineer-riyadh",
+  "tawantech-java-developer-banking-riyadh",
+  "masterworks-adree-outsystems-dotnet-developer-riyadh",
+  "moyasar-software-engineer-full-stack-riyadh",
+  "lamdax-mobile-flutter-intern-remote",
+  "gathern-quality-assurance-engineer-riyadh",
+  "innovationteam-quality-assurance-engineer-riyadh",
+  "ninja-integration-specialist-riyadh",
+  // design
+  "almosafer-specialist-product-designer-riyadh",
+  "eram-talent-ui-ux-designer-dhahran",
+  // marketing
+  "jeeny-social-media-communication-specialist-riyadh",
+  "lucidya-activations-campaigns-intern-remote",
+  "lucidya-customer-product-marketing-intern-remote",
+  "tawantech-marketing-specialist-banking-riyadh",
+  // business
+  "qiddiya-analyst-feasibilities-riyadh",
+  "accor-income-auditor-jeddah",
+  "aljomaih-accountant-saudi-nationals-dammam",
+  "clear-general-accountant-riyadh",
+  "mozn-revenue-assurance-officer-riyadh",
+  "ninja-invoice-matching-officer-jeddah",
+  "eram-accounts-payable-analyst-riyadh",
+  "eram-contracts-financial-analyst-jeddah",
+  // hr
+  "segadty-hr-coop-trainee-riyadh",
+  "accor-people-culture-executive-riyadh",
+  "lucid-payroll-analyst-riyadh",
+  "eram-smp-associate-hr-analyst-dhahran",
+  "ey-resource-management-workforce-planning-specialist-riyadh",
+  // product
+  "saudi-azm-product-manager-riyadh",
+  "webook-product-manager-riyadh",
+  // cyber-cloud
+  "arabicai-operations-security-engineer-riyadh",
+  "lucid-purple-teaming-engineer-riyadh",
+  "ninja-it-governance-analyst-riyadh",
+  "syarah-it-helpdesk-specialist-riyadh",
+  "bosch-software-development-intern-riyadh",
+  "deepsource-cloud-administrator-azure-riyadh",
+  "masterworks-soor-cloud-infrastructure-engineer-riyadh",
+  "saudi-azm-devops-engineer-riyadh",
+  // sales-supply
+  "moomoo-brokerage-services-support-specialist-riyadh",
+  "rentokil-contact-center-specialist-riyadh",
+  "tamara-customer-care-advisor-non-voice-riyadh",
+  "hungerstation-account-manager-jeddah",
+  "marriott-sales-coordinator-riyadh",
+  "marriott-sales-executive-jeddah",
+  "thechefz-customer-care-specialist-riyadh",
+  "ninja-outbound-officer-jeddah",
+  "hungerstation-3pl-management-specialist-riyadh",
+  "syarah-fleet-purchasing-officer-riyadh",
+  "acwa-store-keeper-afif",
+  // engineering
+  "sgs-junior-civil-structural-design-review-engineer-riyadh",
+  "teefnajd-junior-architect-engineer-riyadh",
+  "ultimate-peaks-quality-safety-officer-riyadh",
+  "accor-health-safety-fire-protection-specialist-riyadh",
+  // tourism-hospitality
+  "gathern-host-relations-associate-riyadh",
+  "marriott-voyage-food-beverage-jeddah",
+  "accor-sales-executive-social-events-weddings-al-khobar",
+  "eram-community-startups-coordinator-riyadh",
+  "eram-events-engagement-officer-jeddah",
+  "marriott-event-executive-riyadh",
+  // health-admin
+  "alborg-customer-care-officer-riyadh",
+  // education
+  "aanaab-early-years-arabic-teacher-jeddah",
+  "accor-training-supervisor-riyadh",
+  "abbvie-national-field-trainer-riyadh",
+  "eram-academic-program-administrator-jeddah",
+  "eram-program-development-evaluation-analyst-riyadh",
+  // banking-risk
+  "bank-of-jordan-financial-credit-analyst-riyadh",
+  "moyasar-aml-specialist-riyadh",
+  "ultimate-peaks-internal-auditor-operations-riyadh",
+  // legal
+  "bayut-dubizzle-legal-coordinator-tamheer-riyadh",
+  "khayira-legal-administrative-specialist-riyadh",
+  "alkaffary-legal-coordinator-riyadh",
+  "rawafid-governance-prequalification-officer-jeddah",
+  // real-estate
+  "flow-leasing-coordinator-riyadh",
+  // aviation
+  "riyadhair-flight-following-specialist-riyadh",
+  "riyadhair-operations-controller-riyadh",
+  // communications
+  "accor-government-relations-supervisor-riyadh",
+  "qiddiya-analyst-government-relations-riyadh",
+  "jodayn-tamheer-internal-communications-riyadh",
+  "eram-media-content-creation-riyadh",
 ] as const;
 export type JobId = (typeof JOB_IDS)[number];
 export const isJobId = guard(JOB_IDS);
 
-/** Spec 9.4: one course per star slot, `c-{skill}-{star}`, in table order. 59 ids, plus the expansion's 21 and wave 2's 68 (148). */
+/** Spec 9.4: one course per star slot, `c-{skill}-{star}`, in table order. 59 ids, plus the expansion's 21, wave 2's 68 and wave 3's 37 (185). */
 export const COURSE_IDS = [
   "c-excel-1", "c-excel-2", "c-excel-3", "c-sql-1", "c-sql-2", "c-sql-3", "c-statistics-1", "c-statistics-2",
   "c-powerbi-1", "c-powerbi-2", "c-powerbi-3", "c-dataviz-1", "c-python-data-1", "c-ml-1", "c-deep-learning-1",
@@ -176,6 +292,15 @@ export const COURSE_IDS = [
   "c-corporate-governance-1", "c-video-editing-1", "c-video-editing-2", "c-motion-graphics-1", "c-motion-graphics-2",
   "c-translation-1", "c-translation-2", "c-arabic-editing-1", "c-game-design-1", "c-game-design-2",
   "c-game-testing-1", "c-game-testing-2", "c-esports-community-1",
+  // wave 3 (src/lib/data/wave3/courses.ts)
+  "c-esg-fundamentals-1", "c-esg-reporting-1", "c-esg-reporting-2", "c-carbon-accounting-1", "c-carbon-accounting-2",
+  "c-property-management-1", "c-property-management-2", "c-facilities-management-1", "c-facilities-management-2",
+  "c-real-estate-valuation-1", "c-real-estate-valuation-2", "c-insurance-basics-1", "c-underwriting-1", "c-underwriting-2",
+  "c-insurance-claims-1", "c-insurance-claims-2", "c-flutter-1", "c-flutter-2", "c-ios-swift-1", "c-ios-swift-2",
+  "c-android-kotlin-1", "c-android-kotlin-2", "c-routing-switching-1", "c-routing-switching-2", "c-mobile-networks-1",
+  "c-mobile-networks-2", "c-fiber-optics-1", "c-aviation-ops-1", "c-aviation-ops-2", "c-ground-handling-1",
+  "c-ground-handling-2", "c-flight-dispatch-1", "c-public-relations-1", "c-public-relations-2",
+  "c-corporate-communications-1", "c-corporate-communications-2", "c-government-relations-1",
   "c-communication-1", "c-communication-2", "c-english-1", "c-english-2", "c-presentation-1", "c-teamwork-1",
   "c-problem-solving-1",
 ] as const;
@@ -254,6 +379,11 @@ export const COMPANY_IDS = [
   "seera", "americana", "bindawood", "extra", "jarir", "nahdi", "savola", "dallah-health",
   "hmg", "lean-health", "mouwasat", "nupco", "saudi-german-health", "hrdf", "monshaat", "nhc",
   "efg", "manga-productions", "mbc", "savvy-games", "srmg",
+  // wave 3: the companies of the wave-3 real postings (research/wave3, 21 Nov 2026)
+  "arabic-ai", "innovationteam", "squadio", "tawantech", "lamdax", "saudi-azm", "webook", "lucid-motors", "bosch", "deepsource",
+  "eram-talent", "gathern", "accor", "marriott", "aljomaih-energy-water", "clear", "segadty", "ey", "moomoo", "rentokil",
+  "thechefz", "sgs", "teef-najd", "ultimate-peaks", "alborg", "aanaab", "abbvie", "bank-of-jordan", "bayut-dubizzle", "khayira",
+  "alkaffary", "rawafid", "jodayn", "flow",
 ] as const;
 export type CompanyId = (typeof COMPANY_IDS)[number];
 export const isCompanyId = guard(COMPANY_IDS);

@@ -6,7 +6,7 @@
 // skill's guide («دليل Power BI» and its real top pick; 20 Nov 2026): never the internal course title or its hours.
 import type { ReactNode } from "react";
 
-import { Chip as ChipButton, Button, Card, SampleTag, SkillStars, XpValue } from "@/components/ui";
+import { Chip as ChipButton, Button, Card, SkillStars, XpValue } from "@/components/ui";
 import { IconArrowForward, IconCheckCircle, IconClock } from "@/components/icons";
 import { Ring } from "@/components/motion";
 import { JobTag, useNextStepAction } from "@/features/shared";
@@ -118,11 +118,13 @@ function CourseCard({ courseId, chip, actions }: { courseId: CourseId; chip?: Ch
           </span>
           {info && info.state !== "available" ? <span className="shrink-0 text-small font-medium text-fg-3">{courseStateLabel(info)}</span> : null}
         </span>
+        {/* the thread keeps every <bdi> on one line ([&_bdi]:whitespace-nowrap, for numbers and short names): a long
+            guide or course title must wrap instead, or it runs out of the card on a phone */}
         <span className="text-title text-fg">
-          <bdi>{title}</bdi>
+          <bdi className="whitespace-normal!">{title}</bdi>
         </span>
         <span className="line-clamp-2 text-small text-fg-2">
-          ابدأ بـ «<bdi>{top.title}</bdi>» · <bdi>{top.provider}</bdi>
+          ابدأ بـ «<bdi className="whitespace-normal!">{top.title}</bdi>» · <bdi>{top.provider}</bdi>
         </span>
         <span className="flex flex-wrap items-center gap-x-4 gap-y-1 text-small text-fg-2">
           {info?.state === "credited" ? null : <XpValue gain size="sm" value={courseXp(course)} />}
@@ -226,7 +228,6 @@ function ApplicationCard({ jobId, actions }: { jobId: JobId; actions: CardAction
                 {APPLICATION_STATUS_COPY[status].label}
               </span>
               {app.by === "advisor" ? <span className="text-small text-fg-2">قدّم عنك دليلك</span> : null}
-              <SampleTag className="ms-auto">محاكاة</SampleTag>
             </>
           )}
         </span>

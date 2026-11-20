@@ -13,9 +13,9 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 import { Tile, UnlockMeter, type Requirement as GameRequirement } from "@/components/game";
-import { IconAdvisor, IconArrowBack, IconCompany, IconExperience, IconExternal, IconInfo } from "@/components/icons";
+import { IconAdvisor, IconArrowBack, IconCompany, IconExperience, IconExternal } from "@/components/icons";
 import { NavLink, PageTransition } from "@/components/motion";
-import { Button, SampleTag, buttonStyles } from "@/components/ui";
+import { Button, buttonStyles } from "@/components/ui";
 import { CompanyLogo, ConfirmTargetDialog, NotFoundBlock, useViewport } from "@/features/shared";
 import { ASK_ADVISOR_APPLY_TEXT, BAND_LABEL, JOB_SOURCE_COPY, companyCityLine, countNounBare, dayKeyText } from "@/lib/copy";
 import { getField, getJob, getSkill } from "@/lib/data";
@@ -191,8 +191,8 @@ function JobDetail({ jobId, user }: { jobId: JobId; user: UserState }): ReactNod
 
 /**
  * Header (spec 3.8): job title · «{company} · {city}» (a real job: the company's own name in small type) · tags: the field,
- * the experience label, and for the practice job «وظيفة تدريبية». A real job then shows where it was posted: the site, the
- * posting date, «جُمعت في 20 نوفمبر 2026», «افتح الإعلان الأصلي» (a new tab) and the quiet note that it may have closed. Under it the
+ * the experience label. A real job then shows where it was posted: the site, the posting date and «افتح الإعلان الأصلي»
+ * (a new tab). Under it the
  * destination's lock: the unlock meter, one segment per requirement filled by the stars held ÷ the stars required (spec
  * 7.2), the skills written under their segments (from 640 px; on a phone the gems below name them), «تستوفي 3 من 5
  * متطلبات», and the lock that opens at 100%.
@@ -233,9 +233,8 @@ function JobHeader({
           <IconExperience className="text-fg-2" size={17} waypoint="muted" />
           <LtrNumbers text={BAND_LABEL[job.band]} />
         </span>
-        {job.real ? null : <SampleTag className="h-8 px-2.5 text-small" kind="practice" />}
       </div>
-      {job.real ? <PostingSource jobId={jobId} /> : <p className="text-small text-fg-3">{JOB_SOURCE_COPY.practiceNote}</p>}
+      {job.real ? <PostingSource jobId={jobId} /> : null}
       <Tile className="mt-3" faceClassName="px-card pt-4 pb-3.5" interactive={false}>
         <UnlockMeter labels size="md" skills={requirements} testId="job-unlock" value={match} />
       </Tile>
@@ -243,7 +242,7 @@ function JobHeader({
   );
 }
 
-/** A real job's source: the site, the dates, the link to the original posting (a new tab), the quiet note. */
+/** A real job's source: the site, the posting date, the link to the original posting (a new tab). */
 function PostingSource({ jobId }: { jobId: JobId }): ReactNode {
   const job = getJob(jobId);
   const source = job.source;
@@ -262,10 +261,6 @@ function PostingSource({ jobId }: { jobId: JobId }): ReactNode {
             <span>{JOB_SOURCE_COPY.posted(dayKeyText(source.postedAt))}</span>
           </>
         ) : null}
-        <span aria-hidden className="text-fg-4">
-          ·
-        </span>
-        <span data-testid="job-collected">{JOB_SOURCE_COPY.collected(dayKeyText(source.checkedAt))}</span>
       </div>
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <a
@@ -278,10 +273,6 @@ function PostingSource({ jobId }: { jobId: JobId }): ReactNode {
           {JOB_SOURCE_COPY.openPosting}
           <IconExternal size={18} waypoint="off" />
         </a>
-        <span className="inline-flex items-center gap-1.5 text-small text-fg-3">
-          <IconInfo className="shrink-0" size={16} waypoint="off" />
-          {JOB_SOURCE_COPY.mayHaveClosed}
-        </span>
       </div>
     </div>
   );

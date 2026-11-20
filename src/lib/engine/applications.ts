@@ -30,7 +30,7 @@ export function applicationStatus(application: Application, now: number): Applic
   return STEP[manual] >= STEP[byTime] ? manual : byTime;
 }
 
-/** The status «محاكاة: انقل للحالة التالية» moves to (sent → review → shortlisted|closed by the 60% line), or null at the end. */
+/** The status «انقل للخطوة التالية» moves to (sent → review → shortlisted|closed by the 60% line), or null at the end. */
 export function nextApplicationStatus(application: Application, now: number): ApplicationStatus | null {
   if (isPreparedOnly(application)) return null;
   const current = applicationStatus(application, now);

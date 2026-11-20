@@ -66,5 +66,9 @@ describe("mergeModelSkills (spec 6.6)", () => {
     const arabic = cleanCvLines("الخبرات\nقابلت عشرين متسوقاً وحولت ملاحظاتهم إلى تصميم جديد.");
     expect(evidenceLineIndex(arabic, "قابلت عشرين متسوقا وحولت ملاحظاتهم")).toBe(1);
     expect(evidenceLineIndex(arabic, "قابلت عشرين")).toBe(-1); // too short to be a sentence
+    // A quote of the raw text of a Chrome-printed PDF (Persian look-alike letters) still finds its cleaned line.
+    const printed = cleanCvLines("الخبرات\nبناء لوحات معلومات تفاعلیة لمتابعة المبیعات.");
+    expect(printed[1]?.text).toBe("بناء لوحات معلومات تفاعلية لمتابعة المبيعات.");
+    expect(evidenceLineIndex(printed, "لوحات معلومات تفاعلیة لمتابعة المبیعات")).toBe(1);
   });
 });
