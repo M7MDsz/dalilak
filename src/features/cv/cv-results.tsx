@@ -130,7 +130,9 @@ export function CvResults({ fresh, onReanalyse }: { readonly fresh: FreshResult 
 
   const cv = user?.cv ?? null;
   const groups = useMemo(() => groupsOf(cv?.skills ?? []), [cv]);
-  const best = useMemo(() => (user ? rankJobs(user).slice(0, 3) : []), [user]);
+  // «أفضل الوظائف لمهاراتك»: the CV's skills decide here (highest match first, the usual ties), not the goal's field
+  // (the jobs page puts the goal's field first; this heading promises jobs for the skills, CV tester 21 Nov 2026)
+  const best = useMemo(() => (user ? [...rankJobs(user)].sort((a, b) => b.match - a.match).slice(0, 3) : []), [user]);
   const stars = useMemo(() => (user ? skillStars(user) : null), [user]);
   const step = useMemo(() => (user ? nextStep(user) : null), [user]);
 
