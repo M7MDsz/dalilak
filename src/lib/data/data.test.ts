@@ -736,7 +736,7 @@ describe("jobs (9.3, 9.8 checks 3 and 9; real postings of 20 Nov 2026)", () => {
     expect(SKILL_IDS.filter((s) => !required.has(s))).toEqual(["ads", "bim-revit", "tour-guiding", "medical-terminology", "game-design", "game-testing"]);
   });
 
-  it("splits the jobs by field 8/5/5/5/5/5/3/6/9, by city 67/7/6/4 and by band 12/27/45 (wave 2 included)", () => {
+  it("splits the jobs by field 8/5/5/5/5/5/3/6/9, by city 67/7/6/4 and by band 12/26/46 (wave 2 included)", () => {
     const count = <K extends string>(key: (j: Job) => K, value: K) => JOBS.filter((j) => key(j) === value).length;
     expect(
       ["data", "software", "design", "marketing", "business", "hr", "product", "cyber-cloud", "sales-supply"].map((f) =>
@@ -744,7 +744,7 @@ describe("jobs (9.3, 9.8 checks 3 and 9; real postings of 20 Nov 2026)", () => {
       ),
     ).toEqual([8, 5, 5, 5, 5, 5, 3, 6, 9]);
     expect(JOB_CITY_IDS.map((c) => count((j) => j.city, c))).toEqual([67, 7, 6, 4]);
-    expect(["entry", "junior", "mid"].map((b) => count((j) => j.band, b))).toEqual([12, 27, 45]);
+    expect(["entry", "junior", "mid"].map((b) => count((j) => j.band, b))).toEqual([12, 26, 46]);
   });
 
   it("gives every job's stage count and prep count (the reveal's three: 8/74, 8/64, 5/38)", () => {

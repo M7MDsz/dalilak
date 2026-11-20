@@ -633,7 +633,7 @@ export const WAVE2_JOBS: readonly Job[] = [
     titleEn: "HSE Engineer",
     field: "engineering",
     city: "dammam",
-    place: "Riyadh",
+    place: "Dammam (the posting's work location; Workable lists it under Riyadh)",
     band: "mid",
     company: "فوكو",
     companyEn: "Fuku",

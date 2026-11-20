@@ -6,7 +6,13 @@ import { Suspense } from "react";
 
 import { JobScreen } from "@/features/jobs";
 import { getJob } from "@/lib/data";
+import { JOB_IDS } from "@/lib/ids";
 import { PAGE_HEADINGS, asJobId, pageTitle } from "@/lib/routes";
+
+/** Every job page is built ahead (no cold start on a first visit while presenting); other ids still render on demand. */
+export function generateStaticParams(): { id: string }[] {
+  return JOB_IDS.map((id) => ({ id }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;

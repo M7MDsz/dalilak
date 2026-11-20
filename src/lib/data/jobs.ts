@@ -447,7 +447,7 @@ const FIRST_JOBS: readonly Job[] = [
     field: "marketing",
     city: "riyadh",
     place: "Riyadh",
-    band: "junior",
+    band: "mid",
     company: "لوسيديا",
     companyEn: "Lucidya",
     real: true,

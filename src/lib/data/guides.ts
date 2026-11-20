@@ -1794,7 +1794,7 @@ export const GUIDES: readonly Guide[] = [
         recommendedBy: null,
         checkedAt: "2026-11-20",
         links: {
-          linkedin: "https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=jakobnielsenphd",
+          linkedin: "https://www.linkedin.com/in/jakobnielsenphd/",
           x: "https://x.com/uxtigersdotcom",
           youtube: "https://www.youtube.com/@UXtigers",
         },

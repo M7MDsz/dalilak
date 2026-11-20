@@ -1720,7 +1720,7 @@ export const WAVE2_GUIDES: readonly Guide[] = [
         saudiBased: false,
         recommendedBy: null,
         checkedAt: "2026-11-20",
-        links: { x: "http://twitter.com/annettefranz" },
+        links: { x: "https://x.com/annettefranz" },
       },
       {
         name: "Jeanne Bliss",
@@ -1931,7 +1931,7 @@ export const WAVE2_GUIDES: readonly Guide[] = [
         checkedAt: "2026-11-20",
         links: {
           youtube: "https://youtube.com/medicalcodingcert",
-          linkedin: "http://www.linkedin.com/company/ccous",
+          linkedin: "https://www.linkedin.com/company/ccous",
         },
       },
     ],
@@ -2431,7 +2431,7 @@ export const WAVE2_GUIDES: readonly Guide[] = [
         saudiBased: null,
         recommendedBy: null,
         checkedAt: "2026-11-20",
-        links: { linkedin: "http://www.linkedin.com/in/cindyhuggett", x: "https://twitter.com/cindyhugg/" },
+        links: { linkedin: "https://www.linkedin.com/in/cindyhuggett", x: "https://twitter.com/cindyhugg/" },
       },
       {
         name: "The Bob Pike Group (Creative Training Techniques)",
