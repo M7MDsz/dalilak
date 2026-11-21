@@ -2,6 +2,7 @@
 // Owner: profile. «معلوماتي» (spec 3.13): the six onboarding answers as they print everywhere (copy answerText; neutral
 // answers per 4.3) and «الوظيفة المستهدفة» with the link «غيّر الهدف» (the jobs list, where any job can become the target
 // through «اجعلها هدفي»). And «عن هذا العرض»: the honest paragraph, plus one sentence when an AI key is configured.
+import { pathTitleOf } from "@/lib/engine";
 import type { ReactNode } from "react";
 
 import { IconArrowForward } from "@/components/icons";
@@ -68,7 +69,7 @@ export function AnswersSection({ user, className }: { readonly user: UserState; 
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 pt-3 @min-[640px]/content:col-span-2">
           <div className="flex min-w-0 flex-1 items-baseline justify-between gap-4 @min-[640px]/content:justify-start">
             <dt className="shrink-0 text-small text-fg-2">{PROFILE_COPY.target}</dt>
-            <dd className="min-w-0 text-end text-body font-semibold text-fg @min-[640px]/content:text-start">{target ? target.title : "—"}</dd>
+            <dd className="min-w-0 text-end text-body font-semibold text-fg @min-[640px]/content:text-start">{target ? pathTitleOf(target.id) : "—"}</dd>
           </div>
           <dd className="flex w-full justify-end @min-[640px]/content:w-auto">
             <NavLink className={buttonStyles({ variant: "ghost", size: "sm" })} data-testid={TID.profile.changeTarget} href={hrefFor({ screen: "jobs" })}>

@@ -18,4 +18,5 @@ export * from "./roadmap";
 export * from "./stars";
 export * from "./streak";
 export * from "./tracks";
+export * from "./path-title";
 export * from "./xp";

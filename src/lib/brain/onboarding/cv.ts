@@ -4,7 +4,7 @@
 // the two CV phases (the offer, the confirm). The screen runs the analysis itself (src/features/welcome/cv-step.tsx).
 import { countNoun } from "@/lib/copy";
 import { SKILLS, getJob, optionLabel } from "@/lib/data";
-import { NEAREST_INTEREST, switchesFrom, trackFromText } from "@/lib/engine";
+import { NEAREST_INTEREST, switchesFrom, trackFromText, pathTitleOf } from "@/lib/engine";
 import { isJobFieldId } from "@/lib/ids";
 import type { CvErrorCode, OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
 import type {
@@ -428,7 +428,7 @@ export function reasonClauses(reasons: readonly RevealReason[]): string[] {
  * real match (docs/ONBOARDING-FLOW.md 2, «Path suggestion»). `match` null: no CV was read.
  */
 export function pathLine(name: string, job: JobId, match: number | null, reasons: readonly RevealReason[] = []): string {
-  const title = getJob(job).title;
+  const title = pathTitleOf(job);
   // «أتطوّر في مجالي» (21 Nov 2026, owner: upgrade the current career): the next step in their own specialisation, plainly
   const step = reasons.find((r): r is Extract<RevealReason, { kind: "step-up" }> => r.kind === "step-up");
   if (step) {

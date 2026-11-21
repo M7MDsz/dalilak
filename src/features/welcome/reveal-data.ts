@@ -17,7 +17,7 @@ import {
   trackOf,
   userBandOf,
   withinReach,
-  type Track,
+  type Track, pathTitleOf, jobsOnPath
 } from "@/lib/engine";
 import { EXPERIENCE_BANDS, QUESTION_IDS, isJobFieldId } from "@/lib/ids";
 import type { FieldId, JobFieldId, JobId, OnboardingAnswers, QuestionId, SkillId, StarMap, StarSlot, UserFacts } from "@/lib/types";
@@ -34,6 +34,10 @@ export interface RevealStageInfo {
 export interface RevealJobCard {
   readonly id: JobId;
   readonly title: string;
+  /** 21 Nov 2026 (owner: the path is the role asked for, not one posting): «مطوّر واجهات خلفية». */
+  readonly path: string;
+  /** The real postings that lead to the same role (listed in the map's «وظائف تناسبك»). */
+  readonly jobsOnPath: number;
   /** «وادي الغيم للبيانات · الرياض». 21 Nov 2026 (owner): no sample or practice label is drawn beside any job. */
   readonly companyCity: string;
   readonly field: string;
@@ -97,6 +101,8 @@ function jobCard(id: JobId): RevealJobCard {
   return {
     id,
     title: job.title,
+    path: pathTitleOf(id),
+    jobsOnPath: jobsOnPath(id),
     companyCity: companyCityLine(id),
     field: getField(job.field).name,
     fieldId: job.field,

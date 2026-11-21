@@ -14,7 +14,7 @@ import { Button, EmptyState, cn, toast } from "@/components/ui";
 import { ConfirmTargetDialog, useViewport } from "@/features/shared";
 import { TOAST_COPY, countNoun } from "@/lib/copy";
 import { BADGES, getJob, getSkill } from "@/lib/data";
-import { buildRoadmap, canonicalStages, courseState, dailyReward, levelFor, skillStars, streakInfo, totalXp } from "@/lib/engine";
+import { buildRoadmap, canonicalStages, courseState, dailyReward, levelFor, skillStars, streakInfo, totalXp, pathTitleOf } from "@/lib/engine";
 import { formatNumber } from "@/lib/format";
 import { hrefFor } from "@/lib/routes";
 import { useAppStore, useClock, useCurrentUser, useOverlayHold, useUi } from "@/lib/store";
@@ -438,7 +438,7 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
             </div>
           ) : null}
           <section
-            aria-label={`مسارك نحو ${job.title}`}
+            aria-label={`مسارك نحو ${pathTitleOf(job.id)}`}
             className={cn(
               "dm relative h-[calc(100dvh-var(--shell-top)-var(--shell-bottom,0px)-var(--lead,0px)-1rem)]",
               "@min-[900px]/content:sticky @min-[900px]/content:top-[calc(var(--shell-top)+0.5rem)] @min-[900px]/content:h-[calc(100dvh-var(--shell-top)-2rem)]",
@@ -460,7 +460,7 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
                   avatar={user.avatar}
                   branches={branches}
                   g={geometry}
-                  jobTitle={job.title}
+                  jobTitle={pathTitleOf(job.id)}
                   level={level}
                   match={matchCount}
                   onBranch={onBranch}
@@ -475,7 +475,7 @@ function MapHome({ user, roadmap }: { readonly user: UserState; readonly roadmap
             {sign !== null ? (
               <div className="dm-sign dm-furniture dm-q" style={{ maxWidth: sign.maxWidth }}>
                 <div className="dm-e">مسارك نحو</div>
-                <h2>{job.title}</h2>
+                <h2>{pathTitleOf(job.id)}</h2>
                 <div className="dm-pg">
                   <span>
                     <b>{formatNumber(roadmap.doneCount)}</b> من {countNoun(roadmap.total, "stage")}
@@ -638,7 +638,7 @@ function HandoverDots({
             </i>
             <span className="dm-ho-lb" style={{ right: d / 2 + LABEL_GAP_PX }}>
               {kind === "start" ? <span className="dm-ho-start">البداية</span> : null}
-              {kind === "goal" ? <b>{getJob(roadmap.jobId).title}</b> : null}
+              {kind === "goal" ? <b>{pathTitleOf(roadmap.jobId)}</b> : null}
               {c !== undefined ? (
                 <b>
                   <bdi>{getSkill(c.skill).name}</bdi>

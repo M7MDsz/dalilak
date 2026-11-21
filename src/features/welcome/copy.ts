@@ -33,6 +33,8 @@ export function revealLines(firstName: string): Record<RevealStepId, string> {
 export const RESULT_COPY = {
   /** 21 Nov 2026: a specialisation card whose job sits above a beginner's experience. */
   needsExperience: "تحتاج خبرة",
+  /** «4 وظائف حقيقية لهذا المسار»: the role's real postings, listed in the map's «وظائف تناسبك». */
+  jobsOnPath: (n: number) => (n === 1 ? "وظيفة حقيقية لهذا المسار" : n === 2 ? "وظيفتان حقيقيتان لهذا المسار" : n <= 10 ? `${n} وظائف حقيقية لهذا المسار` : `${n} وظيفة حقيقية لهذا المسار`),
   heading: (firstName: string) => `مسارك يا ${firstName}`,
   recommendedLabel: "الأنسب لك",
   why: "لماذا هذا المسار؟",

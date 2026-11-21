@@ -11,7 +11,7 @@ import {
   streakInfo,
   targetMatch,
   totalXp,
-  weeklyXp,
+  weeklyXp, pathTitleOf
 } from "@/lib/engine";
 import type { Clock, JobId, Leaderboard, LevelInfo, NextStep, RankedJob, Roadmap, StarMap, UserFacts } from "@/lib/types";
 import type { AdvisorRequest, PageContext } from "@/lib/brain/protocol";
@@ -59,7 +59,7 @@ export class AdvisorCtx {
   }
 
   get targetTitle(): string | null {
-    return this.target ? getJob(this.target).title : null;
+    return this.target ? pathTitleOf(this.target) : null;
   }
 
   /** The job on screen (`/jobs/[id]`), or null. */

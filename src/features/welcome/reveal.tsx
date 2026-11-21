@@ -241,7 +241,7 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
                 stages={data.stages}
                 summary={RESULT_COPY.summary(data.recommended.stages, data.recommended.hours)}
                 note={data.cvCover ? RESULT_COPY.cvCovered(data.cvCover.done, data.cvCover.total, data.cvCover.match) : undefined}
-                title={data.recommended.title}
+                title={data.recommended.path}
                 titleTravels={!startOnResult && !instant && !skipped && index >= 4}
               />
             </motion.div>
@@ -405,11 +405,14 @@ function RecommendedCard({ job, company }: { job: RevealJobCard; company: Reveal
   return (
     <Card data-testid={TID.reveal.recommended} data-value={job.id} label={RESULT_COPY.recommendedLabel}>
       <div className="flex flex-col gap-2 pt-1">
-        <h2 className="text-h2 text-fg">{job.title}</h2>
-        <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-fg-2">
-          <IconCompany className="shrink-0 text-fg-3" size={18} waypoint="muted" />
-          <span>{job.companyCity}</span>
-        </p>
+        <h2 className="text-h2 text-fg">{job.path}</h2>
+        {/* the path is the role; its real jobs are listed in the map's «وظائف تناسبك» (owner, 21 Nov 2026) */}
+        {job.jobsOnPath > 0 ? (
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-fg-2">
+            <IconCompany className="shrink-0 text-fg-3" size={18} waypoint="muted" />
+            <span>{RESULT_COPY.jobsOnPath(job.jobsOnPath)}</span>
+          </p>
+        ) : null}
         <p className="flex items-center gap-2 text-small text-fg-2">
           <FieldIcon className="shrink-0 text-fg-3" field={job.fieldId} size={18} />
           <span>{job.field}</span>
@@ -452,10 +455,25 @@ function TrackCard({ track, index, onChoose, disabled, visible }: { track: Revea
         <div className="flex flex-col gap-0.5">
           <h3 className="text-title text-fg">{step ? job.title : track.name}</h3>
           <p className="text-small text-fg-2">
-            <span className="font-medium text-fg">{step ? track.name : job.title}</span>
-            <span aria-hidden> · </span>
-            {/* the company and city wrap together (a lone city on the next line read as a stray) */}
-            <span className="whitespace-nowrap">{job.companyCity}</span>
+            {step ? (
+              <>
+                <span className="font-medium text-fg">{track.name}</span>
+                <span aria-hidden> · </span>
+                {/* the company and city wrap together (a lone city on the next line read as a stray) */}
+                <span className="whitespace-nowrap">{job.companyCity}</span>
+              </>
+            ) : (
+              <>
+                {/* a specialisation is a role, not one posting: its role and how many real jobs lead to it */}
+                <span className="font-medium text-fg">{job.path}</span>
+                {job.jobsOnPath > 0 ? (
+                  <>
+                    <span aria-hidden> · </span>
+                    <span className="whitespace-nowrap">{RESULT_COPY.jobsOnPath(job.jobsOnPath)}</span>
+                  </>
+                ) : null}
+              </>
+            )}
           </p>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">

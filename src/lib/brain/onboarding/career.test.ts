@@ -108,7 +108,7 @@ describe("«أتطوّر في مجالي»: the path is the next step up in the 
     expect(trackOf(rec.recommended).id).toBe("software/back-end");
     expect(getJob(rec.recommended).band).toBe("mid");
     expect(rec.reasons.map(revealReasonText)[0]).toBe("خطوتك الجاية في واجهات خلفية");
-    expect(pathLine("خالد", rec.recommended, null, rec.reasons)).toBe(`الخطوة الجاية لك في واجهات خلفية: «${getJob(rec.recommended).title}». لحظات وأرسمها لك.`);
+    expect(pathLine("خالد", rec.recommended, null, rec.reasons)).toBe("الخطوة الجاية لك في واجهات خلفية: «مطوّر واجهات خلفية». لحظات وأرسمها لك."); // the path names the role (21 Nov 2026)
     const data = revealData(answers);
     expect(data.mode).toBe("grow");
     expect(data.tracks[0]?.job.id).toBe(rec.recommended);
