@@ -115,6 +115,22 @@ export const NEAREST_INTEREST: Readonly<Record<JobFieldId, InterestOption>> = {
   "health-admin": "business",
 };
 
+/**
+ * The fields whose jobs suit this user, for the job lists (the map's column, the jobs page): the target's field, every
+ * interest that is a job field, the major's main field and the CV's strongest field (21 Nov 2026, tester: a civil
+ * engineer who took the «تنظيم الأعمال» tile saw business jobs at 0% while engineering jobs existed).
+ */
+export function suitedFieldsOf(facts: Pick<UserFacts, "answers" | "targetJobId">, stars?: StarMap): ReadonlySet<JobFieldId> {
+  const fields = new Set<JobFieldId>();
+  if (facts.targetJobId !== null) fields.add(getJob(facts.targetJobId).field);
+  for (const interest of facts.answers.interest ?? []) if (isJobFieldId(interest)) fields.add(interest);
+  const major = majorFields(facts.answers)?.[0]; // the major's main field only (its second is too wide: mis → business)
+  if (major !== undefined) fields.add(major);
+  const cv = cvFieldOf(stars);
+  if (cv !== null) fields.add(cv);
+  return fields;
+}
+
 /** The job field holding the most CV stars (at least 3; ties: catalogue order), or null. */
 export function cvFieldOf(stars: StarMap | undefined): JobFieldId | null {
   if (stars === undefined) return null;

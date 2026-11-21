@@ -145,3 +145,9 @@ describe("a CV whose strongest field is not an interest tile (tester, 21 Nov 202
     expect(question).toContain("تنظيم الأعمال والمشاريع");
   });
 });
+
+describe("years of experience written as a word in a CV (tester, 21 Nov 2026)", () => {
+  it("reads «خبرة سنتين» as one to three years", () => {
+    expect(cvFacts(["سارة", "الرياض", "الخبرات", "مطورة واجهات أمامية، شركة ناشئة في جدة، خبرة سنتين."]).answers.experience).toBe("1to3");
+  });
+});

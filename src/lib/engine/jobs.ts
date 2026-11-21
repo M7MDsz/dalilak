@@ -5,7 +5,7 @@ import { normalizeText, tokenize, wordForms } from "@/lib/text/normalize";
 import type { FitBreakdown, Job, JobFieldId, JobId, JobQuery, RankedJob, SkillId, UserFacts } from "@/lib/types";
 
 import { matchPercent } from "./match";
-import { compareFit, fitBreakdown, wantedFields } from "./onboarding-fit";
+import { compareFit, fitBreakdown, suitedFieldsOf } from "./onboarding-fit";
 import { skillStars, totalStars } from "./stars";
 
 /** Spec 4.6: the experience answer as a job band (none and under a year are entry level). */
@@ -42,8 +42,7 @@ export function rankJobs(facts: UserFacts): readonly RankedJob[] {
     const interests = facts.answers.interest ?? [];
     const inCity = (job: Job) => city !== undefined && city === job.city;
     const inInterest = (job: Job) => interests.some((i) => i === job.field);
-    const suited = new Set<JobFieldId>(wantedFields(facts.answers) ?? []);
-    if (facts.targetJobId !== null) suited.add(getJob(facts.targetJobId).field);
+    const suited = suitedFieldsOf(facts, stars);
     const inSuited = (job: Job) => suited.size === 0 || suited.has(job.field);
     // within reach of the user's experience (at most one band above): a senior «أول» role goes after the reachable ones
     // for a new graduate (the user's own target is never pushed down), the same rule as the onboarding company tiles and the

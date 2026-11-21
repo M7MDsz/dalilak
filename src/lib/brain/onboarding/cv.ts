@@ -71,6 +71,10 @@ function yearsOfExperience(lines: readonly string[]): number | null {
     const en = line.match(/(\d{1,2})\s*\+?\s*years?\s+(?:of\s+)?experience/i);
     const hit = ar ?? en;
     if (hit?.[1]) return Number(hit[1]);
+    // the dual with no digit: «خبرة سنتين» / «سنتين خبرة» / «عامين» (two years; tester, 21 Nov 2026)
+    if (/خبر\S*\s*(?:لمدة\s*)?(?:سنتين|سنتان|عامين|عامان)|(?:سنتين|سنتان|عامين|عامان)\s*(?:من\s*)?(?:ال)?خبر/u.test(line)) return 2;
+    // a single year written as a word: «خبرة سنة» / «سنة خبرة»
+    if (/خبر\S*\s*(?:لمدة\s*)?(?:سنة|عام)(?:\s+واحدة)?(?:[\s.،]|$)|(?:^|\s)(?:سنة|عام)(?:\s+واحدة)?\s*(?:من\s*)?(?:ال)?خبر/u.test(line)) return 1;
   }
   return null;
 }

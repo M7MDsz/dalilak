@@ -2,6 +2,7 @@
 // at the foot of the path page, each named source a link that opens in a new tab. Generated from
 // research/paths/paths-guidelines.json (`basedOnLine`, `basedOnLinks`, `jobs`); static text, so it works offline.
 // A job is read from that file's job lists first, then from its field (and, in data, its title). Pure module.
+import { CAREER_FAMILIES } from "@/lib/data/careers";
 import type { Job } from "@/lib/types";
 
 export type PathFamily = "data-analyst-bi" | "data-science" | "frontend-web" | "backend" | "qa" | "ui-ux-product-design" | "ux-research" | "digital-marketing" | "business-pm-finance" | "hr-recruitment";
@@ -15,7 +16,8 @@ export interface BasedOnSource {
 }
 
 export interface BasedOn {
-  readonly family: PathFamily;
+  /** A PathFamily of this file, or a career family id of the knowledge base (fields added on 20-21 Nov 2026). */
+  readonly family: string;
   /** The family's name («محلل بيانات / ذكاء الأعمال»). */
   readonly label: string;
   /** In the line's order; the line reads «المسار مبني على: A، وB، وC». */
@@ -140,7 +142,7 @@ const FAMILY_OF_JOB: Readonly<Record<string, PathFamily>> = {
 };
 
 /** A job the file does not name: by its field, and in data and software by what its title says. */
-function familyByField(job: Job): PathFamily {
+function familyByField(job: Job): PathFamily | null {
   const title = `${job.title} ${job.titleEn ?? ""}`.toLowerCase();
   switch (job.field) {
     case "data":
@@ -157,11 +159,27 @@ function familyByField(job: Job): PathFamily {
     case "hr":
       return "hr-recruitment";
     default:
-      return "data-analyst-bi";
+      return null;
   }
 }
 
-/** What the path to this job is built on. */
-export function basedOnFor(job: Job): BasedOn {
-  return BASED_ON[FAMILY_OF_JOB[job.id] ?? familyByField(job)];
+/**
+ * A job of a field added on 20-21 Nov 2026 (engineering, cyber and cloud, banking, legal…): the published guidelines its
+ * career family's path follows (the knowledge base), or null — never another field's sources (tester, 21 Nov 2026: a
+ * civil-engineering path showed the data analyst's PL-300 line).
+ */
+function fromCareers(job: Job): BasedOn | null {
+  const family = CAREER_FAMILIES.find((f) => f.jobs.includes(job.id) && f.path.guidelines.length > 0);
+  if (!family) return null;
+  return {
+    family: family.id,
+    label: family.title,
+    sources: family.path.guidelines.slice(0, 3).map((g) => ({ name: g.name, short: g.provider.length <= 28 ? g.provider : g.name, url: g.url })),
+  };
+}
+
+/** What the path to this job is built on; null when no checked guideline covers it (the line is then left out). */
+export function basedOnFor(job: Job): BasedOn | null {
+  const known = FAMILY_OF_JOB[job.id] ?? familyByField(job);
+  return known ? BASED_ON[known] : fromCareers(job);
 }

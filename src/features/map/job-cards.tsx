@@ -14,7 +14,7 @@ import { cn } from "@/components/ui";
 import { CompanyLogo } from "@/features/shared";
 import { JOBS, getJob, getJobCity, getSkill } from "@/lib/data";
 import { EXPERIENCE_BANDS } from "@/lib/ids";
-import { dreamCompany, matchPercent, skillStars, wantedFields } from "@/lib/engine";
+import { dreamCompany, matchPercent, skillStars, suitedFieldsOf } from "@/lib/engine";
 import { formatNumber, formatPercent } from "@/lib/format";
 import { hrefFor } from "@/lib/routes";
 import type { Job, JobFieldId, JobId, UserState } from "@/lib/types";
@@ -55,14 +55,11 @@ function dreamJobIds(user: UserState): ReadonlySet<JobId> {
 const BAND_OF = { none: "entry", under1: "entry", "1to3": "junior", over3: "mid" } as const;
 
 /**
- * The fields whose jobs suit this user (21 Nov 2026, tester: a data path listed a field-sales job): the target job's field,
- * then the fields they asked for (interests, else their major's fields). Empty when nothing is known yet.
+ * The fields whose jobs suit this user (21 Nov 2026, tester): the target's field, the interests, the major's main field and
+ * the CV's strongest field (engine suitedFieldsOf, shared with the jobs page). Empty when nothing is known yet.
  */
 function suitedFields(user: UserState): ReadonlySet<JobFieldId> {
-  const fields = new Set<JobFieldId>();
-  if (user.targetJobId !== null) fields.add(getJob(user.targetJobId).field);
-  for (const field of wantedFields(user.answers) ?? []) fields.add(field);
-  return fields;
+  return suitedFieldsOf(user, skillStars(user));
 }
 
 /**
@@ -236,6 +233,7 @@ export function JobCards({ user, layout, className }: { readonly user: UserState
  */
 export function BasedOnLine({ jobId, className }: { readonly jobId: JobId; readonly className?: string }): ReactNode {
   const based = basedOnFor(getJob(jobId));
+  if (based === null) return null;
   return (
     <p className={cn("text-caption leading-[1.7] text-fg-3", className)} data-testid={JOB_CARDS_TID.basedOn} data-value={based.family}>
       {BASED_ON_LEAD}{" "}
