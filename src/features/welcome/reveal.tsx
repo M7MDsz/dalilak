@@ -301,14 +301,17 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
               className={cn("flex min-w-0 flex-col gap-3", desktop ? "col-start-3 row-span-4 row-start-1 pt-3" : "pt-2")}
               style={{ visibility: visible ? "visible" : "hidden" }}
             >
+              {/* nothing else to choose (a specialisation with one job): no section that only repeats the job above */}
+              {data.tracks.length > 1 ? (
               <motion.div animate={state} className="flex flex-col gap-1" custom={0.32} initial={startOnResult ? false : "hidden"} variants={block}>
                 <h2 className="text-h3 text-fg" id="reveal-alts">
                   {data.mode === "grow" ? RESULT_COPY.stepsHeading : RESULT_COPY.tracksHeading}
                 </h2>
                 <p className="text-small text-fg-2">{data.mode === "grow" ? RESULT_COPY.stepsLead : RESULT_COPY.tracksLead}</p>
               </motion.div>
-              {data.tracks.map((track, i) => (
-                <motion.div animate={state} custom={0.4 + i * 0.04} initial={startOnResult ? false : "hidden"} key={track.id} variants={block}>
+              ) : null}
+              {(data.tracks.length > 1 ? data.tracks : []).map((track, i) => (
+                <motion.div animate={state} custom={0.4 + i * 0.04} initial={startOnResult ? false : "hidden"} key={`${track.id}-${track.job.id}`} variants={block}>
                   <TrackCard
                     disabled={leaving}
                     index={i - 1}

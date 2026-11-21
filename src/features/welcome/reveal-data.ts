@@ -217,7 +217,9 @@ function growChoices(answers: OnboardingAnswers, order: readonly JobId[], recomm
   const track = growTrackOf(answers);
   const own = EXPERIENCE_BANDS.indexOf(userBandOf(answers));
   const above = (id: JobId) => EXPERIENCE_BANDS.indexOf(getJob(id).band) > own;
-  const inField = order.filter((id) => id !== recommended && getJob(id).field === field);
+  // an upgrade is never an unpaid training or a step below the user's level (owner: «upgrade, not something new»)
+  const unpaid = (id: JobId) => /غير مدفوع|unpaid/i.test(`${getJob(id).title} ${getJob(id).titleEn ?? ""}`);
+  const inField = order.filter((id) => id !== recommended && getJob(id).field === field && !unpaid(id) && EXPERIENCE_BANDS.indexOf(getJob(id).band) >= own);
   const sameTrack = (id: JobId) => track === null || trackOf(id).id === track;
   const band = (id: JobId) => EXPERIENCE_BANDS.indexOf(getJob(id).band);
   const reach = (ids: JobId[]) => [...ids.filter((id) => withinReach(id, answers)), ...ids.filter((id) => !withinReach(id, answers))];
@@ -229,14 +231,21 @@ function growChoices(answers: OnboardingAnswers, order: readonly JobId[], recomm
   const closest = (ids: JobId[]) => ids.map((id, i) => ({ id, i, n: shared(id) })).sort((a, b) => b.n - a.n || a.i - b.i).map((x) => x.id);
   // in this order, each only while fewer than two cards were found: their own specialisation a band up, then at their
   // level; then (only to make two) the rest of the field a band up, at their level, any; then anything
-  const stages: { readonly ids: JobId[]; readonly fill: boolean }[] = [
-    { ids: reach(inField.filter((id) => above(id) && sameTrack(id))), fill: true },
-    { ids: inField.filter((id) => band(id) === own && sameTrack(id)), fill: true },
-    { ids: reach(closest(inField.filter(above))), fill: false },
-    { ids: closest(inField.filter((id) => band(id) >= own)), fill: false },
-    { ids: closest(inField), fill: false },
-    { ids: order.filter((id) => id !== recommended), fill: false },
-  ];
+  // a named specialisation: ONLY its own jobs (21 Nov 2026, owner: other specialisations as filler read as «something
+  // new»); fewer cards is fine. «غير كذا»: the whole field, as before.
+  const stages: { readonly ids: JobId[]; readonly fill: boolean }[] =
+    track !== null
+      ? [
+          { ids: reach(inField.filter((id) => above(id) && sameTrack(id))), fill: true },
+          { ids: inField.filter((id) => band(id) === own && sameTrack(id)), fill: true },
+        ]
+      : [
+          { ids: reach(inField.filter((id) => above(id) && sameTrack(id))), fill: true },
+          { ids: inField.filter((id) => band(id) === own && sameTrack(id)), fill: true },
+          { ids: reach(closest(inField.filter(above))), fill: false },
+          { ids: closest(inField.filter((id) => band(id) >= own)), fill: false },
+          { ids: closest(inField), fill: false },
+        ];
   const picked: JobId[] = [];
   for (const stage of stages) {
     if (picked.length >= 2) break;

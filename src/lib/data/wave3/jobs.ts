@@ -2051,7 +2051,7 @@ export const WAVE3_JOBS: readonly Job[] = [
   },
   {
     id: "bosch-software-development-intern-riyadh",
-    title: "متدرب تطوير برمجيات",
+    title: "متدرب تطوير برمجيات سحابية",
     titleEn: "Software Development Intern",
     field: "cyber-cloud",
     city: "riyadh",

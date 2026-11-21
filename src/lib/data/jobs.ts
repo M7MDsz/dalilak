@@ -786,7 +786,8 @@ const FIRST_JOBS: readonly Job[] = [
 const WHO_MAY_APPLY = /\s*(?:\((?:[^()]*?)(?:للسعوديين|للسعوديات|سعوديين فقط|لمواطني الخليج|للمواطنين|Saudis? only|Saudi nationals)(?:[^()]*?)\)|[-–]\s*(?:للسعوديين|للسعوديات)(?:\s*فقط)?)\s*/giu;
 
 export function cleanJobTitle(title: string): string {
-  return title.replace(WHO_MAY_APPLY, " ").replace(/\s{2,}/g, " ").trim();
+  // and a trailing country tag («… - السعودية»): every job here is in Saudi Arabia
+  return title.replace(WHO_MAY_APPLY, " ").replace(/\s*[-–]\s*(?:السعودية|KSA|Saudi Arabia)\s*$/u, "").replace(/\s{2,}/g, " ").trim();
 }
 
 export const JOBS: readonly Job[] = [...FIRST_JOBS, ...EXPANSION_JOBS, ...WAVE2_JOBS, ...WAVE3_JOBS]
