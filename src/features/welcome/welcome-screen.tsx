@@ -10,7 +10,7 @@ import { Logo, LogoMark } from "@/components/brand";
 import { StepTrail } from "@/components/game";
 import { PageTransition, Roll, useInstant } from "@/components/motion";
 import { ContourBackdrop, Stage } from "@/components/ui";
-import { getQuestion } from "@/lib/data";
+import { stepNumber, stepsFor } from "@/lib/brain/onboarding";
 import { ASKED_STEP_IDS } from "@/lib/ids";
 import { formatNumber } from "@/lib/format";
 import { tween } from "@/lib/motion";
@@ -57,7 +57,9 @@ function WelcomeFlow({ user }: { user: UserState }) {
   const pending = user.onboarding.thread.length === 0 ? ASKED_STEP_IDS[0] : pendingOf(user);
   // while the CV card reads, the counter keeps the number it had before it (the conversation holds it until «خلصت…»)
   const [heldStep, setHeldStep] = useState<number | null>(null);
-  const step = heldStep ?? (pending ? getQuestion(pending).n : ASKED_STEP_IDS.length);
+  // 21 Nov 2026: counted over the steps that apply (seven with «مجالك» after «أتطوّر» / «أغيّر», else six)
+  const steps = stepsFor(user.answers);
+  const step = heldStep ?? (pending ? stepNumber(user.answers) : steps.length);
 
   return (
     <PageTransition>
@@ -102,11 +104,12 @@ function WelcomeFlow({ user }: { user: UserState }) {
                           {formatNumber(step)}
                         </span>
                       </Roll>
-                      <span>{CHAT_COPY.stepAfter}</span>
+                      {/* «من 6» / «من 7»: the steps that apply (CHAT_COPY.stepAfter is the fixed «من 7») */}
+                      <span>من {formatNumber(steps.length)}</span>
                     </span>
                   }
                   testId={TID.welcome.step}
-                  total={ASKED_STEP_IDS.length}
+                  total={steps.length}
                 />
               </motion.div>
             ) : null}

@@ -21,7 +21,8 @@ import { WordsIn, type CvStepId } from "@/components/motion";
 import { cn, toast } from "@/components/ui";
 import { cleanCvLines } from "@/lib/brain/cv";
 import { analyseCvText, extractCvFile, precheckCvFile } from "@/lib/brain/cv/client";
-import { onboardingContext, onboardingTurn, pendingStep, questionChips, resumeMessages } from "@/lib/brain/onboarding";
+import { onboardingContext, onboardingTurn, pendingStep, questionChips, questionText, resumeMessages, stepNumber, stepsFor } from "@/lib/brain/onboarding";
+import { CAREER_LINES } from "@/lib/brain/onboarding/tables";
 import {
   CV_CONFIRM_CHIPS,
   CV_LINES,
@@ -57,7 +58,7 @@ import { PROTOCOL_VERSION, type CvErrorCode, type OnboardingContext, type Onboar
 import { answerText, xpNewsReason } from "@/lib/copy";
 import { ONBOARDING_TIMING, companyAnswerLabel, getBadge, getCompany, getJob, getQuestion, getSkill, sampleCvText } from "@/lib/data";
 import { jobMatch, recommend, skillStars } from "@/lib/engine";
-import { ASKED_STEP_IDS, QUESTION_IDS, isCompanyId, isFieldId } from "@/lib/ids";
+import { QUESTION_IDS, isCompanyId, isFieldId } from "@/lib/ids";
 import { focusIn, group, sleep, tween } from "@/lib/motion";
 import { selectCurrentUser, useAppStore, useBrainStatus } from "@/lib/store";
 import { TID } from "@/lib/testids";
@@ -131,7 +132,7 @@ export function pendingOf(user: UserState): OnboardingStepId | null {
 /** How each of the seven answers prints in «ملفك يتكوّن» (null while unanswered). */
 export function stepValues(answers: OnboardingAnswers): Record<OnboardingStepId, string | null> {
   const values = Object.fromEntries(QUESTION_IDS.map((q) => [q, answerText(answers, q)])) as Record<QuestionId, string | null>;
-  return { ...values, company: companyAnswerLabel(answers.company) };
+  return { ...values, company: companyAnswerLabel(answers.company), current: answers.current?.label ?? null };
 }
 
 /** The interest the user's CV leans to (null without a CV read in onboarding). */
@@ -164,9 +165,14 @@ function confirmAsk(user: UserState): string {
   return cvConfirmQuestion(user.answers, user.cvDocument ? cvFacts(user.cvDocument.lines).experienceNote : undefined);
 }
 
-/** The interest question as «دليلك» asks it after a CV: from its real skills (the owner's order), else the usual one. */
+/**
+ * The interest question as «دليلك» asks it: after «أغيّر مجالي», built on the current career (the fields closest to it);
+ * after a CV, from its real skills (the owner's order); else the usual one.
+ */
 function interestAsk(user: UserState): string {
-  return (user.cv ? cvInterestQuestion(user.cv.skills, suggestedInterest(user)) : null) ?? getQuestion("interest").text;
+  const asked = questionText("interest", user.answers);
+  if (asked !== getQuestion("interest").text) return asked;
+  return (user.cv ? cvInterestQuestion(user.cv.skills, suggestedInterest(user)) : null) ?? asked;
 }
 
 /** Swaps the plain interest question for the CV-built one (when the interpreter asked it plainly). */
@@ -184,6 +190,10 @@ function phraseRequestFor(context: OnboardingContext, turn: OnboardingTurn, user
   if (!recorded || turn.replies.length === 0 || turn.replies.length > 3) return null;
   // a named company's line carries facts (its job, or where its jobs are): said exactly as the template has it
   if (context.pending === "company" && turn.answers.company !== undefined && turn.answers.company !== "none") return null;
+  // the current career's turn carries the owner's lines (grow: «تمام، نطوّرك في مجالك: …»; switch: the closest fields to
+  // move to, named in the interest question): said exactly as the template has them (21 Nov 2026)
+  const shift = turn.answers.priority === "grow" || turn.answers.priority === "switch";
+  if (turn.answers.current !== undefined && (context.pending === "current" || (context.pending === "priority" && shift))) return null;
   const facts: { -readonly [K in keyof PhraseFacts]: PhraseFacts[K] } = { answer: turn.userText };
   let moment: PhraseMoment = "ack";
   if (turn.pending !== null) facts.nextQuestion = turn.replies[turn.replies.length - 1];
@@ -390,7 +400,8 @@ export function Conversation({
     // «إيه» to «…تبي تكمل في الأرقام والبيانات ولا تفكر بمجال ثاني؟» is the field the CV suggested
     const user0 = currentUser();
     const suggested = user0 ? suggestedInterest(user0) : null;
-    if (input.kind === "text" && pending === "interest" && suggested !== null && local.answers.interest === undefined && saysYes(input.text)) {
+    const cvAsked = questionText("interest", context.answers) === getQuestion("interest").text;
+    if (input.kind === "text" && pending === "interest" && cvAsked && suggested !== null && local.answers.interest === undefined && saysYes(input.text)) {
       local = onboardingTurn(context, { kind: "classified", question: "interest", options: [suggested], text: input.text });
       return local;
     }
@@ -493,7 +504,7 @@ export function Conversation({
     setThinking(null);
     setCvMode("reading");
     const before = pendingOf(now);
-    setHeld({ answers: now.answers, slots: now.onboarding.cvPrefill?.slots ?? [], step: before ? getQuestion(before).n : ASKED_STEP_IDS.length });
+    setHeld({ answers: now.answers, slots: now.onboarding.cvPrefill?.slots ?? [], step: before ? stepNumber(now.answers) : stepsFor(now.answers).length });
     setCvStage(null);
     setLive({ cardId, bubbleId, bubble, travelId, run: { id: n, lines: cleanCvLines(text), ready, text, fileName }, outcome: null });
     void analyseCvText({ v: PROTOCOL_VERSION, text, fileName }).then((response) => {
@@ -638,6 +649,12 @@ export function Conversation({
       composer.current?.focus();
       return;
     }
+    if (pending === "current" && option.id === "other") {
+      // «مجال آخر»: the job in the user's own words («كاشير», «فني مختبر»), read like any typed answer
+      setPlaceholder(CAREER_LINES.otherPlaceholder);
+      composer.current?.focus();
+      return;
+    }
     void runTurn((context) => questionTurn(context, { kind: "chip", question: pending, option: option.id }), option.label, quickReplyId(pending, option.id));
   };
 
@@ -688,6 +705,8 @@ export function Conversation({
   }, [heldStep, onStepHold]);
   useEffect(() => () => onStepHold?.(null), [onStepHold]);
   const values = stepValues(holding ? holding.answers : user.answers);
+  // the trail shows the steps that apply («مجالك» only after «أتطوّر» / «أغيّر»)
+  const steps = stepsFor(holding ? holding.answers : user.answers);
   const shownSlots = holding ? holding.slots : user.onboarding.cvPrefill?.slots;
   const fromCv = useMemo(() => new Set<OnboardingStepId>(shownSlots ?? []), [shownSlots]);
 
@@ -749,7 +768,7 @@ export function Conversation({
     <div className="relative flex h-[calc(100dvh-4rem)] flex-col overflow-clip lg:h-[calc(100dvh-72px)] [html[data-keyboard]_&]:h-[calc(var(--kb-height)-4rem)]">
       {!desktop ? (
         <div className="px-gutter pt-1 pb-3">
-          <ProfileRow avatar={user.avatar} fromCv={fromCv} name={user.name} pending={asking ? pending : null} values={values} />
+          <ProfileRow avatar={user.avatar} fromCv={fromCv} name={user.name} pending={asking ? pending : null} steps={steps} values={values} />
         </div>
       ) : null}
       <div className="mx-auto flex min-h-0 w-full max-w-[72rem] flex-1 gap-10 px-gutter">
@@ -817,7 +836,7 @@ export function Conversation({
                   testId: TID.welcome.chip(chips.question, o.id),
                   // the field emblems ride on the desktop pieces; on a phone they would cost the list a fourth line
                   icon:
-                    desktop && chips.question === "interest" ? (
+                    desktop && (chips.question === "interest" || chips.question === "current") ? (
                       <InterestIcon option={o.id} size={20} />
                     ) : chips.question === "company" && isCompanyId(o.id) ? (
                       // the companies carry their logo (a monogram when there is none), on a phone too: it is the name
@@ -846,7 +865,7 @@ export function Conversation({
         </section>
         {desktop ? (
           <aside className="w-[21.25rem] shrink-0 pt-8">
-            <ProfileCard avatar={user.avatar} fromCv={fromCv} name={user.name} pending={asking ? pending : null} values={values} />
+            <ProfileCard avatar={user.avatar} fromCv={fromCv} name={user.name} pending={asking ? pending : null} steps={steps} values={values} />
           </aside>
         ) : null}
       </div>

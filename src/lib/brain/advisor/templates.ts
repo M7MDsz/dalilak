@@ -177,6 +177,8 @@ function reasonClause(reason: RevealReason): string {
         : reason.priority === "switch"
           ? "ينقلك من مجالك للي تحبه"
           : "يطوّرك في مجالك";
+    case "bridge":
+      return `مهاراتك من ${reason.from} تنفعك فيه`;
     case "none":
       return "بداية زينة تستكشف فيها خياراتك";
   }

@@ -61,7 +61,7 @@ function groundedProfile(profile: CvProfile | null, text: string): CvProfile | n
   if (profile === null) return null;
   const hay = text.toLowerCase().replace(/\s+/g, " ");
   const inText = (v: string | null): string | null => (v !== null && hay.includes(v.toLowerCase().replace(/\s+/g, " ")) ? v : null);
-  const out: CvProfile = { ...profile, city: inText(profile.city), major: inText(profile.major) };
+  const out: CvProfile = { ...profile, city: inText(profile.city), major: inText(profile.major), currentRole: inText(profile.currentRole ?? null) };
   return out.city === null && out.status === null && out.degree === null && out.major === null && out.years === null ? null : out;
 }
 

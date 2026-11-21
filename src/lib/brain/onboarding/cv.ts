@@ -3,8 +3,8 @@
 // lines for it (Najdi, each with 2-3 variants picked by a stable hash so a run looks the same twice), and the turns of
 // the two CV phases (the offer, the confirm). The screen runs the analysis itself (src/features/welcome/cv-step.tsx).
 import { countNoun } from "@/lib/copy";
-import { SKILLS, getJob, getQuestion, optionLabel } from "@/lib/data";
-import { NEAREST_INTEREST } from "@/lib/engine";
+import { SKILLS, getJob, optionLabel } from "@/lib/data";
+import { NEAREST_INTEREST, switchesFrom } from "@/lib/engine";
 import { isJobFieldId } from "@/lib/ids";
 import type { CvErrorCode, OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
 import type {
@@ -19,7 +19,7 @@ import type {
   UserState,
 } from "@/lib/types";
 
-import { CV_QUESTION_ORDER, onboardingTurn, pendingQuestion, questionChips } from "./index";
+import { CV_QUESTION_ORDER, onboardingTurn, pendingQuestion, questionChips, questionText as questionAsk } from "./index";
 import { Reading, readPending } from "./read";
 import { REPLY } from "./tables";
 
@@ -40,7 +40,7 @@ function firstName(name: string): string {
 // ── What the CV states clearly ─────────────────────────────────────────────────────────────────────────────────────
 
 /** The CV slots «دليلك» may fill, in question order. */
-export const CV_SLOTS = ["city", "education", "major", "experience"] as const satisfies readonly OnboardingStepId[];
+export const CV_SLOTS = ["city", "education", "major", "experience", "current"] as const satisfies readonly OnboardingStepId[];
 
 export interface CvFacts {
   /** Only what is clearly written; the rest stays a question. */
@@ -196,6 +196,21 @@ export function cvFacts(lines: readonly string[], profile?: CvProfile | null): C
     }
   }
 
+  // 21 Nov 2026: the field of their current (or latest) job, only for real work (a year or more: a co-op is not a career):
+  // the model's `currentRole`, else the first line of the experience section
+  if (answers.experience === "1to3" || answers.experience === "over3") {
+    const start = lines.findIndex((l) => isHeader(l) && new Reading(l).mentions(EXPERIENCE_HEADERS));
+    const firstJob = start >= 0 ? lines.slice(start + 1).find((l) => l.trim() !== "" && !isHeader(l)) : undefined;
+    for (const text of [profile?.currentRole, firstJob]) {
+      if (!text) continue;
+      const found = readPending(new Reading(text), "current");
+      if (found?.question === "current" && found.value !== "other") {
+        answers.current = { value: found.value, label: found.label ?? optionLabel("current", found.value) ?? found.value };
+        break;
+      }
+    }
+  }
+
   return { answers, slots: CV_SLOTS.filter((q) => answers[q] !== undefined), ...(note !== null && answers.experience === "under1" ? { experienceNote: note } : {}) };
 }
 
@@ -213,8 +228,8 @@ export function interestFromCv(skills: readonly CvSkill[]): InterestOption | nul
   let most = 0;
   for (const [field, stars] of byField) if (stars > most) [best, most] = [field, stars];
   if (best === null || most < 3 || !isJobFieldId(best)) return null;
-  // 21 Nov 2026 (tester): a field that is not one of the six interest tiles (a civil-engineering CV → project-controls)
-  // is suggested as the nearest tile, so «دليلك» names a real option (never a raw id) and a plain «إيه» records it
+  // 21 Nov 2026 (tester): a field that is not one of the interest tiles (a civil-engineering CV → project-controls →
+  // «الهندسة والإنشاءات») is suggested as the nearest tile, so «دليلك» names a real option (never a raw id) and a plain «إيه» records it
   return NEAREST_INTEREST[best] ?? null;
 }
 
@@ -333,6 +348,7 @@ export function cvConfirmQuestion(answers: OnboardingAnswers, note?: string): st
   else if (city) clauses.push(`إنك ${city}`);
   if (answers.experience && note && answers.experience === "under1") clauses.push(clauses.length > 0 ? `ومعك ${note}` : `إن معك ${note}`);
   else if (answers.experience) clauses.push(EXPERIENCE_CLAUSE[answers.experience][clauses.length > 0 ? 0 : 1]);
+  if (answers.current && answers.current.value !== "other") clauses.push(clauses.length > 0 ? `وشغلك الحين في ${answers.current.label}` : `إن شغلك الحين في ${answers.current.label}`);
   return `فهمت من سيرتك ${clauses.join("، ")}. صح؟`;
 }
 
@@ -386,7 +402,10 @@ export function reasonClauses(reasons: readonly RevealReason[]): string[] {
         out.push("تنشغل عن بُعد");
         break;
       case "priority":
-        out.push(r.priority === "first-job" ? "توصلك لأول وظيفة بسرعة" : r.priority === "switch" ? "تنقلك لمجال جديد" : "تطوّرك في مجالك");
+        out.push(r.priority === "first-job" ? "توصلك لأول وظيفة بسرعة" : r.priority === "switch" ? "تبي تنتقل لمجال جديد" : "تبي تتطوّر في مجالك");
+        break;
+      case "bridge":
+        out.push(`مهاراتك من ${r.from} تنفعك فيها`);
         break;
       case "none":
         break;
@@ -434,8 +453,7 @@ function withStep(turn: OnboardingTurn, cvStep: NonNullable<OnboardingTurn["cvSt
 }
 
 function questionText(question: OnboardingStepId, answers: OnboardingAnswers): string {
-  const q = getQuestion(question);
-  return question === "major" && answers.education === "secondary" && q.textAfterSecondary ? q.textAfterSecondary : q.text;
+  return questionAsk(question, answers);
 }
 
 /** The next question (the screen words the interest question from the CV's skills: `cvInterestQuestion`). */
@@ -521,7 +539,8 @@ export function cvNextQuestion(answers: OnboardingAnswers, suggested: InterestOp
 /** The interest tiles with the CV's suggestion first. */
 export function interestChipsWithCv(answers: OnboardingAnswers, suggested: InterestOption | null): ReturnType<typeof questionChips> {
   const chips = questionChips("interest", answers);
-  if (suggested === null) return chips;
+  // «أغيّر مجالي»: the fields closest to the current career already lead (the CV's field may be the one they leave)
+  if (suggested === null || switchesFrom(answers) !== null) return chips;
   const first = chips.options.find((o) => o.id === suggested);
   return first ? { ...chips, options: [first, ...chips.options.filter((o) => o.id !== suggested)] } : chips;
 }

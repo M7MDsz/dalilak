@@ -355,15 +355,18 @@ export const isQuestionId = guard(QUESTION_IDS);
  * and, right after «الاهتمام», the optional «فيه شركة أو وظيفة معيّنة في بالك؟» (`company`, stored as `answers.company`).
  * The seventh stays out of QUESTION_IDS: the profile's «معلوماتي», the copy and the advisor print the six.
  */
-export const ONBOARDING_STEP_IDS = ["city", "education", "major", "experience", "interest", "company", "priority"] as const;
+export const ONBOARDING_STEP_IDS = ["city", "education", "major", "experience", "interest", "company", "priority", "current"] as const;
 export type OnboardingStepId = (typeof ONBOARDING_STEP_IDS)[number];
 export const isOnboardingStepId = guard(ONBOARDING_STEP_IDS);
 
 /**
  * 21 Nov 2026 (owner: «delete the companies question»): the steps «دليلك» actually ASKS, in order: the six questions. The
  * company step stays a type (saved answers and the profile can still hold one) but is never asked.
+ * 21 Nov 2026 (owner: «when you shift your career it should ask what you are interested in and give a suggestion based on
+ * his current career»): the priority comes BEFORE the interest, and right after it «وش مجال شغلك الحين؟» (`current`), asked
+ * only for «أتطوّر في مجالي» / «أغيّر مجالي» (brain/onboarding `stepApplies`).
  */
-export const ASKED_STEP_IDS: readonly OnboardingStepId[] = ["city", "education", "major", "experience", "interest", "priority"];
+export const ASKED_STEP_IDS: readonly OnboardingStepId[] = ["city", "education", "major", "experience", "priority", "current", "interest"];
 
 /**
  * Real employers in Saudi Arabia «دليلك» knows by name (src/lib/data/companies.ts, checked 20 Nov 2026): the ones with a
@@ -405,13 +408,26 @@ export const MAJOR_OPTIONS = [
 export type MajorOption = (typeof MAJOR_OPTIONS)[number];
 export const EXPERIENCE_OPTIONS = ["none", "under1", "1to3", "over3"] as const;
 export type ExperienceOption = (typeof EXPERIENCE_OPTIONS)[number];
-export const INTEREST_OPTIONS = ["data", "software", "design", "marketing", "business", "hr", "unsure"] as const;
+/**
+ * 21 Nov 2026 (owner: «when I choose product management he should give you a role of product management»): five more
+ * tiles, each a job field's own id (so an interest IS its field everywhere): product, cyber-cloud, sales-supply,
+ * engineering, banking-risk. The old seven keep their ids and order; «لم أحدّد بعد» (`unsure`) stays last.
+ */
+export const INTEREST_OPTIONS = [
+  "data", "software", "design", "marketing", "business", "hr",
+  "product", "cyber-cloud", "sales-supply", "engineering", "banking-risk",
+  "unsure",
+] as const;
 export type InterestOption = (typeof INTEREST_OPTIONS)[number];
 export const PRIORITY_OPTIONS = ["first-job", "switch", "grow", "explore"] as const;
 export type PriorityOption = (typeof PRIORITY_OPTIONS)[number];
 /** The seventh step: every company «دليلك» knows (the tiles show the ones of the user's field) and «لا، مو الحين» (`none`). */
 export const COMPANY_OPTIONS = [...COMPANY_IDS, "none"] as const;
 export type CompanyOption = (typeof COMPANY_OPTIONS)[number];
+
+/** «وش مجال شغلك الحين؟»: every job field (the tiles show the common ones) and «مجال آخر» (`other`). */
+export const CURRENT_OPTIONS = [...JOB_FIELD_IDS, "other"] as const;
+export type CurrentOption = (typeof CURRENT_OPTIONS)[number];
 
 /** Option ids per step, for generic code (`OPTIONS_BY_QUESTION[q]`; the model's onboarding classification checks ids here). */
 export const OPTIONS_BY_QUESTION = {
@@ -422,6 +438,7 @@ export const OPTIONS_BY_QUESTION = {
   interest: INTEREST_OPTIONS,
   company: COMPANY_OPTIONS,
   priority: PRIORITY_OPTIONS,
+  current: CURRENT_OPTIONS,
 } as const satisfies Record<OnboardingStepId, readonly string[]>;
 export interface OptionsByQuestion {
   city: CityOption;
@@ -431,6 +448,7 @@ export interface OptionsByQuestion {
   interest: InterestOption;
   company: CompanyOption;
   priority: PriorityOption;
+  current: CurrentOption;
 }
 export function isOptionOf<Q extends OnboardingStepId>(question: Q, value: unknown): value is OptionsByQuestion[Q] {
   return typeof value === "string" && (OPTIONS_BY_QUESTION[question] as readonly string[]).includes(value);

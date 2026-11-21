@@ -3,16 +3,27 @@
 // Internal files: tables.ts (keywords, acknowledgement bank, special replies), read.ts (the 4.3 order of reading).
 // `pendingQuestion` and `onboardingContext` are written in full by the architect (they ARE the "pending" contract).
 import { NEUTRAL_PRINT } from "@/lib/copy";
-import { JOB_CITIES, getCompany, getField, getJob, getJobCity, getQuestion, optionLabel } from "@/lib/data";
-import { companyChoices, companyField, companyJob, companyJobsOutOfReach, companyOtherFieldJob, jobsAtCompany, userBandOf } from "@/lib/engine";
-import { ASKED_STEP_IDS, isOptionOf } from "@/lib/ids";
-import type { CityValue, CompanyId, InterestOption, JobId, OnboardingAnswers, OnboardingStepId, UserState } from "@/lib/types";
+import { CURRENT_TILES, JOB_CITIES, getCompany, getField, getJob, getJobCity, getQuestion, optionLabel } from "@/lib/data";
+import {
+  NEAREST_INTEREST,
+  closeFields,
+  companyChoices,
+  companyField,
+  companyJob,
+  companyJobsOutOfReach,
+  companyOtherFieldJob,
+  jobsAtCompany,
+  switchesFrom,
+  userBandOf,
+} from "@/lib/engine";
+import { ASKED_STEP_IDS, isJobFieldId, isOptionOf } from "@/lib/ids";
+import type { CityValue, CompanyId, InterestOption, JobFieldId, JobId, OnboardingAnswers, OnboardingStepId, UserState } from "@/lib/types";
 import type { OnboardingChipSet, OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
 import { LIMITS } from "@/lib/brain/protocol";
 import { normalizeText } from "@/lib/text/normalize";
 
 import { Reading, readGreeting, readNeutral, readOthers, readPending, readQuestion, type Found, type Special } from "./read";
-import { ACK, FILLER_WORDS, LEAD_OTHER, LEAD_SALAM, QUESTION_NUMBER, REPLY } from "./tables";
+import { ACK, CAREER_LINES, FILLER_WORDS, LEAD_OTHER, LEAD_SALAM, QUESTION_NUMBER, REPLY } from "./tables";
 
 // ── Small helpers ──────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -22,11 +33,43 @@ function firstName(name: string): string {
   return first && first.length > 0 ? first : name.trim();
 }
 
-/** The question as «دليلك» asks it (q3 after `secondary` has its own wording, 4.2). */
-function questionText(question: OnboardingStepId, answers: OnboardingAnswers): string {
+/**
+ * The question as «دليلك» asks it (q3 after `secondary` has its own wording, 4.2; the interest after «أغيّر مجالي» names the
+ * fields closest to the user's current career: «من شغلك في المحاسبة، أقرب مجالات تنتقل لها: … أو …، وش يشدّك؟»).
+ */
+export function questionText(question: OnboardingStepId, answers: OnboardingAnswers): string {
   const q = getQuestion(question);
   if (question === "major" && answers.education === "secondary" && q.textAfterSecondary) return q.textAfterSecondary;
+  const from = question === "interest" ? switchesFrom(answers) : null;
+  if (from !== null && answers.current) {
+    return CAREER_LINES.switchAsk(answers.current.label, closeFields(from).map((f) => optionLabel("interest", f) ?? f));
+  }
   return q.text;
+}
+
+/** The interest tile of a job field: the field itself when it is a tile, else the nearest one (engineering → its tile). */
+function interestOfField(field: JobFieldId): InterestOption {
+  return isOptionOf("interest", field) ? field : NEAREST_INTEREST[field];
+}
+
+/**
+ * 21 Nov 2026: «وش مجال شغلك الحين؟» is asked only after «أتطوّر في مجالي» / «أغيّر مجالي», and not to someone who said they
+ * have no work experience; every other step always applies.
+ */
+export function stepApplies(question: OnboardingStepId, answers: OnboardingAnswers): boolean {
+  if (question !== "current") return true;
+  return (answers.priority === "grow" || answers.priority === "switch") && answers.experience !== "none";
+}
+
+/** The steps that apply to these answers, in the asked order (the profile trail and «السؤال n من total»). */
+export function stepsFor(answers: OnboardingAnswers): OnboardingStepId[] {
+  return ASKED_STEP_IDS.filter((q) => stepApplies(q, answers));
+}
+
+/** The number of the question being asked: the applying steps already answered + 1 (their count once all are answered). */
+export function stepNumber(answers: OnboardingAnswers): number {
+  const steps = stepsFor(answers);
+  return Math.min(steps.filter((q) => answers[q] !== undefined).length + 1, steps.length);
 }
 
 function chipLabel(question: OnboardingStepId, option: string): string {
@@ -66,6 +109,10 @@ function neutralAnswer(question: OnboardingStepId): { readonly answers: Onboardi
       return { answers: { priority: "explore" }, label: chipLabel("priority", "explore") };
     case "company":
       return { answers: { company: "none" }, label: chipLabel("company", "none") };
+    case "current": {
+      const label = chipLabel("current", "other");
+      return { answers: { current: { value: "other", label } }, label };
+    }
   }
 }
 
@@ -188,6 +235,19 @@ function recordFound(name: string, found: Found, typed: string | null = null, be
       const label = found.value === "none" ? chipLabel("company", "none") : `الشركة اللي في بالك ${getCompany(found.value).short}`;
       return { question: "company", answers: { company: found.value }, ack: ackCompany(found.value, before), extra: label };
     }
+    case "current": {
+      const label = found.label ?? (found.value === "other" && typed ? typed : chipLabel("current", found.value));
+      const known = isJobFieldId(found.value);
+      // «أتطوّر في مجالي»: the interest is the field they work in (recorded in answeredTurn), said in this line
+      const ack = !known
+        ? CAREER_LINES.other
+        : before.priority === "grow"
+          ? CAREER_LINES.grow[variant(name, "current")](label)
+          : before.priority === "switch"
+            ? CAREER_LINES.switch[variant(name, "current")](label)
+            : CAREER_LINES.noted(label);
+      return { question: "current", answers: { current: { value: found.value, label } }, ack, extra: `شغلك في ${label}` };
+    }
   }
 }
 
@@ -214,6 +274,8 @@ function chipFound(question: OnboardingStepId, option: string): Found | null {
       return isOptionOf("priority", option) ? { question, value: option } : null;
     case "company":
       return isOptionOf("company", option) ? { question, value: option } : null;
+    case "current":
+      return isOptionOf("current", option) ? { question, value: option, label: null } : null;
   }
 }
 
@@ -241,7 +303,34 @@ function merge(answers: OnboardingAnswers, recorded: readonly Recorded[]): Onboa
 }
 
 function unansweredIn(answers: OnboardingAnswers): OnboardingStepId[] {
-  return ASKED_STEP_IDS.filter((q) => answers[q] === undefined);
+  return stepsFor(answers).filter((q) => answers[q] === undefined);
+}
+
+/**
+ * «أتطوّر في مجالي» with a known current field: the interest IS that field, recorded without asking (the owner: «it should
+ * give you about your career»). Null when nothing is to be added.
+ */
+function grownInterest(answers: OnboardingAnswers): OnboardingAnswers | null {
+  const value = answers.current?.value;
+  if (answers.priority !== "grow" || answers.interest !== undefined || value === undefined || !isJobFieldId(value)) return null;
+  return { ...answers, interest: [interestOfField(value)] };
+}
+
+/**
+ * «أغيّر مجالي»: the interest must be a NEW field. The field they work in now is left out of what was typed; when nothing
+ * else is left, «دليلك» says so and asks again (the tiles never offer it).
+ */
+function withoutCurrentField(context: OnboardingContext, recorded: readonly Recorded[]): Recorded[] | "same" {
+  const from = switchesFrom(context.answers);
+  const at = recorded.findIndex((r) => r.question === "interest");
+  const values = recorded[at]?.answers.interest;
+  if (from === null || at < 0 || values === undefined || !values.includes(from as InterestOption)) return [...recorded];
+  const kept = values.filter((v) => v !== from);
+  const [first] = kept;
+  if (first === undefined) return "same";
+  const out = [...recorded];
+  out[at] = recordFound(context.name, { question: "interest", values: [first] }, null, context.answers);
+  return out;
 }
 
 /** The turn after answers were recorded: acknowledgement (+ extras), then the next question or the closing line. */
@@ -252,12 +341,21 @@ function answeredTurn(
   misses: OnboardingContext["misses"],
   unmapped: OnboardingTurn["unmapped"] = null,
 ): OnboardingTurn {
-  const answers = merge(context.answers, recorded);
-  const [primary, ...extras] = recorded;
+  const checked = withoutCurrentField(context, recorded);
+  if (checked === "same" && context.pending !== null) {
+    return sideTurn(context, context.pending, userText, CAREER_LINES.sameField(context.answers.current?.label ?? ""), misses, unmapped);
+  }
+  const kept = checked === "same" ? [...recorded] : checked;
+  const merged = merge(context.answers, kept);
+  const grown = grownInterest(merged);
+  const answers = grown ?? merged;
+  const [primary, ...extras] = kept;
+  const growLine =
+    grown !== null && primary?.question !== "current" && answers.current ? ` ${CAREER_LINES.grow[variant(context.name, "current")](answers.current.label)}` : "";
   const ack = primary
     ? extras.length > 0
-      ? `${primary.ack} ${REPLY.alsoRecorded(joinCommaAnd(extras.map((r) => r.extra)))}`
-      : primary.ack
+      ? `${primary.ack} ${REPLY.alsoRecorded(joinCommaAnd(extras.map((r) => r.extra)))}${growLine}`
+      : `${primary.ack}${growLine}`
     : null;
   const pending = pendingQuestion(answers, false, context.order);
   const name = firstName(context.name);
@@ -367,7 +465,10 @@ function readAnswers(context: OnboardingContext, pending: OnboardingStepId, user
   else if (readNeutral(reading)) recorded.push(recordNeutral(pending));
 
   // Step 4: the other unanswered questions.
-  const others = unansweredIn(context.answers).filter((q) => q !== pending);
+  // a job named with a word that says they work now («أشتغل محاسب») is kept even before the priority makes it a question
+  // (read first, so «محاسب» is the job, not an interest)
+  const early: OnboardingStepId[] = context.answers.current === undefined && !stepApplies("current", context.answers) ? ["current"] : [];
+  const others = [...early, ...unansweredIn(context.answers)].filter((q) => q !== pending);
   for (const found of readOthers(reading, others)) recorded.push(recordFound(context.name, found, null, context.answers));
 
   if (recorded.length > 0) return answeredTurn(context, userText, recorded, context.misses);
@@ -382,10 +483,15 @@ function readAnswers(context: OnboardingContext, pending: OnboardingStepId, user
   if (pending === "company") {
     return answeredTurn(context, userText, [{ ...recordNeutral("company"), ack: ACK.company.unknown }], misses, unmapped);
   }
-  if (pending === "city" || pending === "major") {
+  if (pending === "city" || pending === "major" || pending === "current") {
     const typed = typedLabel(userText);
     if (typed) {
-      const found: Found = pending === "city" ? { question: "city", value: "other", label: typed } : { question: "major", value: "other" };
+      const found: Found =
+        pending === "city"
+          ? { question: "city", value: "other", label: typed }
+          : pending === "current"
+            ? { question: "current", value: "other", label: typed }
+            : { question: "major", value: "other" };
       return answeredTurn(context, userText, [recordFound(context.name, found, typed, context.answers)], misses, unmapped);
     }
   }
@@ -412,6 +518,17 @@ export function resumeMessages(context: OnboardingContext): readonly string[] {
  * several fields), then «لا، مو الحين».
  */
 export function questionChips(question: OnboardingStepId, answers: OnboardingAnswers): OnboardingChipSet {
+  if (question === "current") {
+    const options = getQuestion("current").options;
+    return { question, options: CURRENT_TILES.flatMap((id) => options.filter((o) => o.id === id)) };
+  }
+  // «أغيّر مجالي»: the fields closest to the current career lead the tiles; the current field itself is not offered
+  const from = question === "interest" ? switchesFrom(answers) : null;
+  if (from !== null) {
+    const options = getQuestion("interest").options;
+    const close: readonly string[] = closeFields(from);
+    return { question, options: [...close.flatMap((id) => options.filter((o) => o.id === id)), ...options.filter((o) => !close.includes(o.id) && o.id !== from)] };
+  }
   if (question === "company") {
     const tiles = companyChoices(companyField(answers), 5, answers.experience === undefined ? null : userBandOf(answers)).map((id) => ({ id, label: getCompany(id).short }));
     return { question, options: [...tiles, { id: "none", label: chipLabel("company", "none") }] };
@@ -458,6 +575,8 @@ export function onboardingTurn(context: OnboardingContext, input: OnboardingInpu
 export function pendingQuestion(answers: OnboardingAnswers, completedBefore = false, order: readonly OnboardingStepId[] = ASKED_STEP_IDS): OnboardingStepId | null {
   for (const question of order) {
     if (question === "company" && completedBefore) continue;
+    // the current career: only after «أتطوّر» / «أغيّر» (an account that finished before it existed stays finished)
+    if (question === "current" && (completedBefore || !stepApplies("current", answers))) continue;
     if (answers[question] === undefined) return question;
   }
   return null;
@@ -465,10 +584,11 @@ export function pendingQuestion(answers: OnboardingAnswers, completedBefore = fa
 
 /**
  * The order of the questions after a CV (docs/ONBOARDING-FLOW.md, the owner's order): the CV's answers are confirmed first,
- * then the interest (asked from the CV's real skills), then whatever the CV did not state (city, education, major,
- * experience), then company and priority. The same seven answer slots: the engine and the reveal are unchanged.
+ * then the priority (21 Nov 2026: before the interest, which builds on it), the current career when it applies (unless the
+ * CV showed it), the interest (asked from the CV's real skills, or from the current career after «أغيّر مجالي»), then
+ * whatever the CV did not state (city, education, major, experience).
  */
-export const CV_QUESTION_ORDER: readonly OnboardingStepId[] = ["interest", "city", "education", "major", "experience", "priority"];
+export const CV_QUESTION_ORDER: readonly OnboardingStepId[] = ["priority", "current", "interest", "city", "education", "major", "experience"];
 
 /** The question order of a saved user: the CV order once a CV was read and its answers kept (not after «لا، بعدّل»). */
 export function questionOrder(user: Pick<UserState, "onboarding">): readonly OnboardingStepId[] {

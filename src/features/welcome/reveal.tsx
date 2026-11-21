@@ -31,7 +31,7 @@ import type { AnswerRects } from "./conversation";
 import { RESULT_COPY, firstNameOf, revealLines } from "./copy";
 import { PathSheet, type SheetMode } from "./path-sheet";
 import { AnswerCluster, FieldIcon, JobSweep, NarrowToThree, SkillLandscape } from "./reveal-scenes";
-import { revealData, type RevealData, type RevealJobCard } from "./reveal-data";
+import { revealData, type RevealData, type RevealJobCard, type RevealTrackCard } from "./reveal-data";
 
 type Phase = "show" | "result" | "leaving";
 
@@ -294,21 +294,31 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
               </ul>
             </motion.section>
 
-            {/* 5. the two other directions (desktop: the inline-end column) */}
+            {/* 5. «اختر تخصصك»: the specialisations of the user's field, each with its best job (desktop: the inline-end
+                column). The recommended job's own track comes first and its button is the main «ابدأ هذا المسار». */}
             <section
               aria-labelledby="reveal-alts"
-              className={cn("flex min-w-0 flex-col gap-4", desktop ? "col-start-3 row-span-4 row-start-1 pt-3" : "pt-2")}
+              className={cn("flex min-w-0 flex-col gap-3", desktop ? "col-start-3 row-span-4 row-start-1 pt-3" : "pt-2")}
               style={{ visibility: visible ? "visible" : "hidden" }}
             >
-              <motion.h2 animate={state} className="text-h3 text-fg" custom={0.32} id="reveal-alts" initial={startOnResult ? false : "hidden"} variants={block}>
-                {RESULT_COPY.altHeading}
-              </motion.h2>
-              {[...data.alternatives, ...data.more].map((job, i) => (
-                <motion.div animate={state} custom={0.4 + i * 0.04} initial={startOnResult ? false : "hidden"} key={job.id} variants={block}>
-                  <AlternativeCard disabled={leaving} index={i} job={job} onChoose={() => choose(job.id, false)} visible={visible} />
+              <motion.div animate={state} className="flex flex-col gap-1" custom={0.32} initial={startOnResult ? false : "hidden"} variants={block}>
+                <h2 className="text-h3 text-fg" id="reveal-alts">
+                  {RESULT_COPY.tracksHeading}
+                </h2>
+                <p className="text-small text-fg-2">{RESULT_COPY.tracksLead}</p>
+              </motion.div>
+              {data.tracks.map((track, i) => (
+                <motion.div animate={state} custom={0.4 + i * 0.04} initial={startOnResult ? false : "hidden"} key={track.id} variants={block}>
+                  <TrackCard
+                    disabled={leaving}
+                    index={i - 1}
+                    onChoose={() => choose(track.job.id, track.best)}
+                    track={track}
+                    visible={visible}
+                  />
                 </motion.div>
               ))}
-              <motion.p animate={state} className="text-small text-fg-3" custom={0.48 + data.more.length * 0.04} initial={startOnResult ? false : "hidden"} variants={block}>
+              <motion.p animate={state} className="text-small text-fg-3" custom={0.44 + data.tracks.length * 0.04} initial={startOnResult ? false : "hidden"} variants={block}>
                 {RESULT_COPY.footer}
               </motion.p>
             </section>
@@ -417,25 +427,45 @@ function RecommendedCard({ job, company }: { job: RevealJobCard; company: Reveal
   );
 }
 
-function AlternativeCard({ job, index, onChoose, disabled, visible }: { job: RevealJobCard; index: number; onChoose: () => void; disabled: boolean; visible: boolean }) {
+/**
+ * One specialisation: its name big, then its best job for the user (title · company · city), the path's size and the
+ * choice. The recommended job's track is labelled «الأنسب لك» in its border (as the recommended card is) and its button
+ * is the main «ابدأ هذا المسار»; `index` numbers the others (`reveal-alt-{index}`).
+ */
+function TrackCard({ track, index, onChoose, disabled, visible }: { track: RevealTrackCard; index: number; onChoose: () => void; disabled: boolean; visible: boolean }) {
+  const { job, best } = track;
   return (
-    <article className="flex flex-col gap-3 rounded-card border border-border bg-surface p-card" data-testid={visible ? TID.reveal.alt(index) : undefined} data-value={job.id}>
-      <div className="flex flex-col gap-1">
-        <h3 className="text-title text-fg">{job.title}</h3>
-        <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-small text-fg-2">
-          <span>{job.companyCity}</span>
-        </p>
-        <p className="flex items-center gap-2 text-small text-fg-2">
-          <FieldIcon className="shrink-0 text-fg-3" field={job.fieldId} size={16} />
-          <span>{job.field}</span>
-        </p>
+    <Card
+      data-testid={visible ? (best ? TID.reveal.trackBest : TID.reveal.alt(index)) : undefined}
+      data-track={track.id}
+      data-value={job.id}
+      dot={best ? "accent" : "muted"}
+      label={best ? RESULT_COPY.recommendedLabel : undefined}
+      padding="none"
+    >
+      <div className={cn("flex flex-col gap-2 px-card", best ? "pt-1.5 pb-4" : "py-4")}>
+        <div className="flex flex-col gap-0.5">
+          <h3 className="text-title text-fg">{track.name}</h3>
+          <p className="text-small text-fg-2">
+            <span className="font-medium text-fg">{job.title}</span>
+            <span aria-hidden> · </span>
+            {/* the company and city wrap together (a lone city on the next line read as a stray) */}
+            <span className="whitespace-nowrap">{job.companyCity}</span>
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+          <p className="text-small font-semibold text-fg">{RESULT_COPY.summary(job.stages, job.hours)}</p>
+          <Button
+            data-testid={visible ? (best ? TID.reveal.trackBestChoose : TID.reveal.altChoose(index)) : undefined}
+            disabled={disabled}
+            onClick={onChoose}
+            size="sm"
+            variant={best ? "primary" : "secondary"}
+          >
+            {best ? RESULT_COPY.accept : RESULT_COPY.trackChoose}
+          </Button>
+        </div>
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-small font-semibold text-fg">{RESULT_COPY.summary(job.stages, job.hours)}</p>
-        <Button data-testid={visible ? TID.reveal.altChoose(index) : undefined} disabled={disabled} onClick={onChoose} size="sm" variant="secondary">
-          {RESULT_COPY.altChoose}
-        </Button>
-      </div>
-    </article>
+    </Card>
   );
 }

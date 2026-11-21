@@ -3,6 +3,7 @@
 import { describe, expect, it } from "vitest";
 
 import { JOBS, REVEAL_SEQUENCE } from "@/lib/data";
+import { tracksOf } from "@/lib/engine";
 import type { JobId, OnboardingAnswers } from "@/lib/types";
 
 import { RESULT_COPY } from "./copy";
@@ -34,15 +35,61 @@ describe("REVEAL_SEQUENCE", () => {
 describe("revealData (the demo answers)", () => {
   const data = revealData(DEMO_ANSWERS);
 
+  // 21 Nov 2026 (owner: choose a specialisation of the field): the show's two others are the best jobs of the next two
+  // specialisations, so the second changed from the Tamara graduate programme (data's general track, now offered after the
+  // named ones) to the AI track's best job.
   it("recommends «محلل بيانات» with the two demo alternatives", () => {
     expect(data.recommended.id).toBe("data-analyst-riyadh");
-    expect(data.alternatives.map((a) => a.id)).toEqual(["qiddiya-hr-analytics-analyst-riyadh", "tamara-builders-program-data-riyadh"]);
+    expect(data.recommended).toMatchObject({ stages: 8, hours: 74 });
+    expect(data.alternatives.map((a) => a.id)).toEqual(["qiddiya-hr-analytics-analyst-riyadh", "lamdax-ai-engineer-remote"]);
+  });
+
+  it("offers the specialisations of data, «تحليل البيانات» first with the recommended job", () => {
+    expect(data.tracks.map((t) => t.id)).toEqual(["data/analysis", "data/bi", "data/ai", "data/general", "data/engineering"]); // reachable tracks before senior-only ones
+    expect(data.tracks[0]).toMatchObject({ name: "تحليل البيانات", best: true, job: { id: "data-analyst-riyadh" } });
+    expect(data.tracks.slice(1).every((t) => !t.best)).toBe(true);
+    // the show lands on what the result offers
+    expect(data.tracks.slice(1, 3).map((t) => t.job.id)).toEqual(data.alternatives.map((a) => a.id));
   });
 
   it("gathers the six answers and draws a tile for every job of the catalogue", () => {
     expect(data.answers).toHaveLength(6);
     expect(data.answers.every((a) => a.text.length > 0)).toBe(true);
     expect(data.tiles).toHaveLength(JOBS.length);
+  });
+});
+
+describe("revealData tracks (owner: web → full stack, front end, back end; the same for other jobs)", () => {
+  const answersFor = (interest: OnboardingAnswers["interest"], major: "cs" | "design" | "hr" = "cs"): OnboardingAnswers => ({
+    ...DEMO_ANSWERS,
+    major: { value: major, label: "x" },
+    interest,
+  });
+
+  it("gives a software user 3 to 5 software specialisations, front end, back end and full stack among them", () => {
+    const data = revealData(answersFor(["software"]));
+    const ids = data.tracks.map((t) => t.id);
+    expect(ids.length).toBeGreaterThanOrEqual(3);
+    expect(ids.length).toBeLessThanOrEqual(5);
+    expect(ids.every((id) => id.startsWith("software/"))).toBe(true);
+    for (const id of ["software/front-end", "software/back-end", "software/full-stack"]) expect(ids).toContain(id);
+    expect(data.tracks[0]?.job.id).toBe(data.recommended.id);
+    expect(new Set(data.tracks.map((t) => t.job.id)).size).toBe(data.tracks.length);
+  });
+
+  it("keeps two of the second interest's specialisations", () => {
+    const data = revealData(answersFor(["data", "software"]));
+    expect(data.tracks).toHaveLength(5);
+    expect(data.tracks.filter((t) => t.id.startsWith("software/")).length).toBe(2);
+    expect(data.tracks.filter((t) => t.id.startsWith("data/")).length).toBe(3);
+  });
+
+  it("stays in the asked field, offering as many of its specialisations as it has (up to five)", () => {
+    for (const interest of ["data", "software", "design", "marketing", "business", "hr"] as const) {
+      const data = revealData(answersFor([interest]));
+      expect(data.tracks.every((t) => t.job.fieldId === interest), interest).toBe(true);
+      expect(data.tracks.length, interest).toBe(Math.min(5, tracksOf(interest).length));
+    }
   });
 });
 

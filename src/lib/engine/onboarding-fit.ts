@@ -18,6 +18,7 @@ import type {
   UserFacts,
 } from "@/lib/types";
 
+import { bridgeSkills, careerBand, growsInField, switchesFrom } from "./career-shift";
 import { jobsAtCompany } from "./companies";
 import { matchPercent } from "./match";
 
@@ -72,13 +73,19 @@ function majorFields(answers: OnboardingAnswers): readonly [JobFieldId, JobField
   return answers.major === undefined ? null : MAJOR_FIELDS[answers.major.value];
 }
 
-/** The fields the user asked for: their interests, else their major's two fields; null when they named neither. */
+/**
+ * The fields the user asked for: their interests, else their major's two fields; null when they named neither.
+ * 21 Nov 2026 (career shift): «أتطوّر في مجالي» with a known current field → that field; «أغيّر مجالي» → never it.
+ */
 export function wantedFields(answers: OnboardingAnswers): ReadonlySet<JobFieldId> | null {
+  const grows = growsInField(answers);
+  if (grows !== null) return new Set([grows]);
+  const leaving = switchesFrom(answers);
   const interests = new Set<JobFieldId>();
-  for (const interest of answers.interest ?? []) if (isJobFieldId(interest)) interests.add(interest);
+  for (const interest of answers.interest ?? []) if (isJobFieldId(interest) && interest !== leaving) interests.add(interest);
   if (interests.size > 0) return interests;
-  const fields = majorFields(answers);
-  return fields === null ? null : new Set(fields);
+  const fields = majorFields(answers)?.filter((f) => f !== leaving);
+  return fields === undefined || fields.length === 0 ? null : new Set(fields);
 }
 
 /** Which interest the job's field is: 0 first, 1 second, or -1. */
@@ -87,7 +94,8 @@ function interestIndex(job: Job, answers: OnboardingAnswers): number {
 }
 
 /**
- * The interest tile nearest to each job field (the six tiles are data, software, design, marketing, business, hr). A CV
+ * The interest tile nearest to each job field (the eleven field tiles: data, software, design, marketing, business, hr
+ * and, 21 Nov 2026, product, cyber-cloud, sales-supply, engineering, banking-risk; a tile's id is its field's id). A CV
  * whose strongest field has no tile of its own is offered the nearest one (21 Nov 2026).
  */
 export const NEAREST_INTEREST: Readonly<Record<JobFieldId, InterestOption>> = {
@@ -97,21 +105,21 @@ export const NEAREST_INTEREST: Readonly<Record<JobFieldId, InterestOption>> = {
   marketing: "marketing",
   business: "business",
   hr: "hr",
-  product: "business",
-  "cyber-cloud": "software",
+  product: "product",
+  "cyber-cloud": "cyber-cloud",
   gaming: "software",
   media: "design",
   communications: "marketing",
   education: "hr",
-  "sales-supply": "business",
-  engineering: "business",
-  "project-controls": "business",
-  "banking-risk": "business",
+  "sales-supply": "sales-supply",
+  engineering: "engineering",
+  "project-controls": "engineering",
+  "banking-risk": "banking-risk",
   legal: "business",
   "real-estate": "business",
   aviation: "business",
   "energy-sustainability": "business",
-  "tourism-hospitality": "business",
+  "tourism-hospitality": "sales-supply",
   "health-admin": "business",
 };
 
@@ -158,18 +166,24 @@ function termsOf(job: Job, answers: OnboardingAnswers, stars?: StarMap): FitBrea
       interestAt = 0;
     }
   }
+  // 21 Nov 2026 (career shift): growing → the field they work in IS the interest; switching → it never counts as one
+  const grows = growsInField(answers);
+  const leaving = switchesFrom(answers);
+  if (grows !== null) interestAt = job.field === grows ? 0 : -1;
+  else if (leaving !== null && job.field === leaving) interestAt = -1;
   const interest = interestAt === 0 ? 40 : interestAt === 1 ? 30 : 0;
   const fields = majorFields(answers);
   const major = fields === null ? 0 : job.field === fields[0] ? 25 : job.field === fields[1] ? 12 : 0;
-  const distance = Math.abs(bandIndex(userBand(answers)) - bandIndex(job.band));
+  // the band the path aims at: the user's own, one above when growing in their field, one below when switching
+  const distance = Math.abs(bandIndex(careerBand(answers)) - bandIndex(job.band));
   const experience = distance === 0 ? 15 : distance === 1 ? 7 : 0;
   const cityValue = answers.city?.value;
   const city = cityValue !== undefined && cityValue === job.city ? 10 : job.city === "remote" ? 6 : 0;
   let priority = 0;
   // «أول وظيفة بأسرع وقت»: an entry job, but not an unpaid internship (tester, 21 Nov 2026)
   if (answers.priority === "first-job") priority = job.band === "entry" && !UNPAID.test(`${job.title} ${job.titleEn ?? ""}`) ? 10 : 0;
-  else if (answers.priority === "switch") priority = interestAt >= 0 && job.field !== fields?.[0] ? 10 : 0;
-  else if (answers.priority === "grow") priority = fields !== null && job.field === fields[0] ? 10 : 0;
+  else if (answers.priority === "switch") priority = interestAt >= 0 && job.field !== (leaving ?? fields?.[0]) ? 10 : 0;
+  else if (answers.priority === "grow") priority = grows !== null ? (job.field === grows ? 10 : 0) : fields !== null && job.field === fields[0] ? 10 : 0;
   return { interest, major, experience, city, priority };
 }
 
@@ -222,10 +236,17 @@ export function fitReasons(jobId: JobId, answers: OnboardingAnswers): readonly R
   const reasons: RevealReason[] = [];
   const interest = answers.interest?.[interestIndex(job, answers)];
   if (terms.interest > 0 && interest !== undefined) reasons.push({ kind: "interest", interest });
+  // «أغيّر مجالي»: the new field's job asks for skills the user's current career already uses («مهاراتك من … تنفعك فيه»)
+  const leaving = switchesFrom(answers);
+  if (leaving !== null && job.field !== leaving && answers.current && bridgeSkills(jobId, leaving).length > 0) {
+    reasons.push({ kind: "bridge", from: answers.current.label });
+  }
+  const grows = growsInField(answers);
   if (terms.major > 0 && answers.major !== undefined) {
     reasons.push({ kind: "major", tier: terms.major === 25 ? "primary" : "secondary", majorLabel: answers.major.label });
   }
-  if (terms.experience === 15) reasons.push({ kind: "experience", band: job.band });
+  // growing a step up: the job's band is above the user's own, so it is not «يناسب خبرتك» (the priority reason says it)
+  if (terms.experience === 15 && (grows === null || job.band === userBand(answers))) reasons.push({ kind: "experience", band: job.band });
   if (terms.city === 10) {
     // a place recorded as its nearest job market («شقراء» → riyadh, 20 Nov 2026) is near the job's city, not in it
     const cityName = getJobCity(job.city).name;
@@ -234,7 +255,11 @@ export function fitReasons(jobId: JobId, answers: OnboardingAnswers): readonly R
   }
   else if (terms.city === 6) reasons.push({ kind: "remote" });
   const priority = answers.priority;
-  if (terms.priority > 0 && priority !== undefined && priority !== "explore") reasons.push({ kind: "priority", priority });
+  if (terms.priority > 0 && priority !== undefined && priority !== "explore") {
+    // growing in their field: «تطوّر داخل مجالك» is the point of the path, said second (right after the interest)
+    if (grows !== null) reasons.splice(Math.min(1, reasons.length), 0, { kind: "priority", priority });
+    else reasons.push({ kind: "priority", priority });
+  }
   return reasons.length === 0 ? [{ kind: "none" }] : reasons.slice(0, 3);
 }
 
@@ -288,13 +313,17 @@ export function recommend(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobs
  */
 export function choiceOrder(answers: OnboardingAnswers, ranked: readonly JobId[]): JobId[] {
   const wanted = wantedFields(answers);
+  // 21 Nov 2026 (career shift): growing → the next step up in their field comes first, then their own band; switching →
+  // a new field starts at entry or junior, never mid
+  const step = growsInField(answers) !== null ? careerBand(answers) : null;
+  const switching = switchesFrom(answers) !== null;
   const tier = (id: JobId): number => {
     const job = getJob(id);
     const inField = wanted === null || wanted.has(job.field);
-    const good = withinReach(id, answers) && !UNPAID.test(`${job.title} ${job.titleEn ?? ""}`);
-    return inField ? (good ? 0 : 1) : good ? 2 : 3;
+    const good = withinReach(id, answers) && !UNPAID.test(`${job.title} ${job.titleEn ?? ""}`) && !(switching && job.band === "mid");
+    return inField ? (good ? (step !== null && job.band !== step ? 1 : 0) : 2) : good ? 3 : 4;
   };
-  return [0, 1, 2, 3].flatMap((t) => ranked.filter((id) => tier(id) === t));
+  return [0, 1, 2, 3, 4].flatMap((t) => ranked.filter((id) => tier(id) === t));
 }
 
 /**

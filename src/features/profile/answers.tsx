@@ -49,6 +49,13 @@ export function AnswersSection({ user, className }: { readonly user: UserState; 
             <dd className="min-w-0 text-end text-body font-medium text-fg">{answerText(user.answers, question) ?? neutralPrint(question)}</dd>
           </div>
         ))}
+        {/* «مجال شغلك» (21 Nov 2026): only when the user told it (after «أتطوّر» / «أغيّر») */}
+        {user.answers.current ? (
+          <div className="flex items-baseline justify-between gap-4 border-b border-border py-3">
+            <dt className="shrink-0 text-small text-fg-2">{PROFILE_COPY.current}</dt>
+            <dd className="min-w-0 text-end text-body font-medium text-fg">{user.answers.current.label}</dd>
+          </div>
+        ) : null}
         {/* «الشركة اللي في بالك» (onboarding step 7, 20 Nov 2026): across both columns, with change and clear */}
         <CompanyRow user={user} />
         {/* the target job, across both columns, with the way to change it */}

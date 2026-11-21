@@ -10,6 +10,7 @@ import type {
   CityOption,
   CompanyId,
   CourseId,
+  CurrentOption,
   EducationOption,
   ExperienceBand,
   ExperienceOption,
@@ -31,6 +32,7 @@ import type {
 } from "./ids";
 
 export type {
+  CurrentOption,
   ApplicationStatus,
   AvatarId,
   BadgeId,
@@ -275,6 +277,12 @@ export interface OnboardingAnswers {
    * `pendingQuestion`), and engine `dreamCompany` reads it as no company.
    */
   readonly company?: CompanyId | "none";
+  /**
+   * 21 Nov 2026 (owner: «when you shift your career…»): the field the user works in now, asked after «أتطوّر في مجالي» /
+   * «أغيّر مجالي» (or read from the CV's current job). `label` is how it is said back: the chip label, or the field the typed
+   * job title names («محاسب» → business, «المحاسبة»); «مجال آخر» (`other`) keeps the typed words.
+   */
+  readonly current?: { readonly value: CurrentOption; readonly label: string };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -324,6 +332,8 @@ export interface CvProfile {
   readonly major: string | null;
   /** Total years of paid work (internships count by their months), or null. */
   readonly years: number | null;
+  /** 21 Nov 2026: their current (or latest) paid job title, in the CV's own words (not an internship), or null. */
+  readonly currentRole?: string | null;
 }
 
 /** The latest successful CV analysis (≥ 1 skill), as a fact. The document text lives in UserState.cvDocument. */
@@ -834,6 +844,8 @@ export type RevealReason =
   | { readonly kind: "city"; readonly cityLabel: string; readonly near?: boolean }
   | { readonly kind: "remote" }
   | { readonly kind: "priority"; readonly priority: Exclude<PriorityOption, "explore"> }
+  /** «أغيّر مجالي» (21 Nov 2026): the new field's job shares skills with the user's current career (`from`: its label). */
+  | { readonly kind: "bridge"; readonly from: string }
   | { readonly kind: "none" };
 
 /** Spec 4.6: recommended = rank 1; alternative 1 = rank 2; alternative 2 = best remaining job of another field. */

@@ -41,8 +41,9 @@ export function replySchema(strict: boolean): Record<string, unknown> {
           degree: { type: "string" },
           major: { type: "string" },
           years: { type: "number" },
+          currentRole: { type: "string" },
         },
-        required: ["city", "status", "degree", "major", "years"],
+        required: ["city", "status", "degree", "major", "years", "currentRole"],
         ...closed,
       },
       skills: {
@@ -78,6 +79,8 @@ function systemPrompt(found: readonly SkillId[]): string {
     "- major: the field of that degree, copied as written.",
     "- years: total years of paid work, internships and co-op counted by their months (6 months = 0.5); education is not",
     `  work; 0 when the CV clearly has no work; -1 when unclear. Today is ${new Date().toISOString().slice(0, 7)}.`,
+    "- currentRole: the title of their current or most recent PAID job (not an internship, co-op or training), copied as",
+    "  written; \"\" when there is none.",
     "",
     "Catalogue (id: name):",
     catalogue,
@@ -136,6 +139,7 @@ export function readProfile(json: string | undefined): CvProfile | null {
     degree: degree === "secondary" || degree === "diploma" || degree === "bachelor" || degree === "postgrad" ? degree : null,
     major: text(get("major")),
     years: typeof years === "number" && Number.isFinite(years) && years >= 0 && years <= 50 ? years : null,
+    currentRole: text(get("currentRole")),
   };
 }
 

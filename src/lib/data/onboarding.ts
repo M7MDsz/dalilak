@@ -83,6 +83,12 @@ export const ONBOARDING_QUESTIONS: readonly OnboardingQuestion[] = [
       { id: "marketing", label: "التسويق والمحتوى" },
       { id: "business", label: "تنظيم الأعمال والمشاريع" },
       { id: "hr", label: "العمل مع الناس وتطويرهم" },
+      // 21 Nov 2026 (owner): a tile per job field with a real path (each id is its field's id)
+      { id: "product", label: "إدارة المنتجات" },
+      { id: "cyber-cloud", label: "الأمن السيبراني والسحابة" },
+      { id: "sales-supply", label: "المبيعات وخدمة العملاء" },
+      { id: "engineering", label: "الهندسة والإنشاءات" },
+      { id: "banking-risk", label: "البنوك والتدقيق" },
       { id: "unsure", label: "لم أحدّد بعد" },
     ],
   },
@@ -90,7 +96,8 @@ export const ONBOARDING_QUESTIONS: readonly OnboardingQuestion[] = [
     id: "priority",
     n: 6,
     slot: "الأولوية",
-    text: "وآخر سؤال، وش أولويتك الحين؟",
+    // 21 Nov 2026: asked before the interest now (the interest builds on it), so it is no longer «وآخر سؤال»
+    text: "وش أولويتك الحين؟",
     textAfterSecondary: null,
     options: [
       { id: "first-job", label: "أول وظيفة بأسرع وقت" },
@@ -115,9 +122,54 @@ export const COMPANY_QUESTION: OnboardingQuestion<"company"> = {
   options: [...COMPANIES.map((c) => ({ id: c.id, label: c.short })), { id: "none", label: COMPANY_NONE_LABEL }],
 };
 
+/**
+ * 21 Nov 2026 (owner: «when you shift your career it should ask what you are interested in and give a suggestion based on
+ * his current career»): «وش مجال شغلك الحين؟», asked right after the priority, only for «أتطوّر في مجالي» / «أغيّر مجالي».
+ * Its options are every job field (the model's classification of a typed job reads them) and «مجال آخر»; the tiles show
+ * the common ones (CURRENT_TILES). Each label is the field as a person says where they work.
+ */
+export const CURRENT_QUESTION: OnboardingQuestion<"current"> = {
+  id: "current",
+  n: 7,
+  slot: "مجالك",
+  text: "وش مجال شغلك الحين؟",
+  textAfterSecondary: null,
+  options: [
+    { id: "data", label: "البيانات والتحليل" },
+    { id: "software", label: "البرمجة والتقنية" },
+    { id: "design", label: "التصميم" },
+    { id: "marketing", label: "التسويق" },
+    { id: "business", label: "المحاسبة والمالية" },
+    { id: "hr", label: "الموارد البشرية" },
+    { id: "product", label: "إدارة المنتجات" },
+    { id: "cyber-cloud", label: "الأمن السيبراني والشبكات" },
+    { id: "sales-supply", label: "المبيعات وخدمة العملاء" },
+    { id: "engineering", label: "الهندسة" },
+    { id: "project-controls", label: "التخطيط وضبط المشاريع" },
+    { id: "tourism-hospitality", label: "السياحة والضيافة" },
+    { id: "health-admin", label: "القطاع الصحي" },
+    { id: "education", label: "التعليم والتدريب" },
+    { id: "banking-risk", label: "البنوك والتدقيق" },
+    { id: "legal", label: "القانون" },
+    { id: "media", label: "الإعلام والإنتاج" },
+    { id: "gaming", label: "الألعاب" },
+    { id: "energy-sustainability", label: "الطاقة والاستدامة" },
+    { id: "real-estate", label: "العقار والمرافق" },
+    { id: "aviation", label: "الطيران" },
+    { id: "communications", label: "العلاقات العامة" },
+    { id: "other", label: "مجال آخر" },
+  ],
+};
+
+/** The tiles of «وش مجال شغلك الحين؟», in the order shown (the common fields of work), then «مجال آخر». */
+export const CURRENT_TILES = [
+  "business", "sales-supply", "hr", "marketing", "software", "data", "design", "engineering", "education", "banking-risk", "other",
+] as const satisfies readonly (typeof CURRENT_QUESTION.options)[number]["id"][];
+
 /** The question with this id, the seventh step included (narrow its options by checking `question.id`). */
 export function getQuestion(id: OnboardingStepId): OnboardingQuestion {
   if (id === "company") return COMPANY_QUESTION;
+  if (id === "current") return CURRENT_QUESTION;
   const question = ONBOARDING_QUESTIONS.find((q) => q.id === id);
   if (!question) throw new Error(`data: unknown question ${id}`);
   return question;
@@ -125,7 +177,7 @@ export function getQuestion(id: OnboardingStepId): OnboardingQuestion {
 
 /** The label of an option id of a question («riyadh» → «الرياض»), or null when the id is not an option. */
 export function optionLabel(question: OnboardingStepId, option: string): string | null {
-  const found = question === "company" ? COMPANY_QUESTION : ONBOARDING_QUESTIONS.find((q) => q.id === question);
+  const found = question === "company" ? COMPANY_QUESTION : question === "current" ? CURRENT_QUESTION : ONBOARDING_QUESTIONS.find((q) => q.id === question);
   const opt = found?.options.find((o) => o.id === option);
   return opt ? opt.label : null;
 }

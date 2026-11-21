@@ -35,14 +35,14 @@ function play(inputs: readonly OnboardingInput[], name = "خالد"): Onboarding
   return turns;
 }
 
+// 21 Nov 2026 (owner: career shift): the priority is asked BEFORE the interest (the company step is no longer asked)
 const DEMO_CHIPS: readonly OnboardingInput[] = [
   { kind: "chip", question: "city", option: "riyadh" },
   { kind: "chip", question: "education", option: "bachelor" },
   { kind: "chip", question: "major", option: "mis" },
   { kind: "chip", question: "experience", option: "none" },
-  { kind: "chip", question: "interest", option: "data" },
-  { kind: "chip", question: "company", option: "none" },
   { kind: "chip", question: "priority", option: "first-job" },
+  { kind: "chip", question: "interest", option: "data" },
 ];
 
 describe("the opening and the six demo chips (spec 4.1, 10.2 steps 1-2)", () => {
@@ -61,25 +61,27 @@ describe("the opening and the six demo chips (spec 4.1, 10.2 steps 1-2)", () => 
       "بكالوريوس، ممتاز. أساس زين نبني عليه.",
       "زين، نظم معلومات إدارية. فيه مهارات كثيرة تنحسب لك من الحين.",
       "ولا يهمك، كلنا بدينا من هنا. بختار لك وظائف تناسب البدايات.",
-      "الأرقام والبيانات، اختيار حلو. اللي يقرا الأرقام ينسمع رأيه.",
-      "ولا يهمك، نخليها مفتوحة، وتقدر تضيفها بعدين من «ملفي».",
       "أول وظيفة، هدف واضح. بختار لك أقصر طريق لها.",
+      "الأرقام والبيانات، اختيار حلو. اللي يقرا الأرقام ينسمع رأيه.",
     ]);
     expect(turns.map((t) => t.userText)).toEqual([
       "الرياض",
       "بكالوريوس",
       "نظم معلومات إدارية",
       "بدون خبرة بعد",
-      "الأرقام والبيانات",
-      "لا، مو الحين",
       "أول وظيفة بأسرع وقت",
+      "الأرقام والبيانات",
     ]);
     // Each turn asks the next question with its chips; the last one closes.
     expect(turns[0]?.replies[1]).toBe("وش آخر شهادة دراسية أخذتها؟");
     expect(turns[0]?.chips?.question).toBe("education");
-    const last = turns[6];
+    expect(turns[3]?.replies[1]).toBe("وش أولويتك الحين؟");
+    expect(turns[3]?.chips?.question).toBe("priority");
+    expect(turns[4]?.replies[1]).toBe("وش نوع الشغل اللي يشدّك أكثر؟");
+    expect(turns[4]?.chips?.question).toBe("interest");
+    const last = turns[5];
     expect(last?.replies).toEqual([
-      "أول وظيفة، هدف واضح. بختار لك أقصر طريق لها.",
+      "الأرقام والبيانات، اختيار حلو. اللي يقرا الأرقام ينسمع رأيه.",
       "يعطيك العافية يا خالد، اكتملت الصورة. لحظات وأرسم لك مسارك.",
     ]);
     expect(last?.done).toBe(true);
@@ -90,9 +92,8 @@ describe("the opening and the six demo chips (spec 4.1, 10.2 steps 1-2)", () => 
       education: "bachelor",
       major: { value: "mis", label: "نظم معلومات إدارية" },
       experience: "none",
-      interest: ["data"],
-      company: "none",
       priority: "first-job",
+      interest: ["data"],
     });
   });
 
@@ -161,11 +162,13 @@ describe("free text (spec 4.3)", () => {
   });
 
   it("understands simple English for the interest question", () => {
+    // 21 Nov 2026: the interest comes after the priority
     const at = ctx({
       city: { value: "riyadh", label: "الرياض" },
       education: "bachelor",
       major: { value: "mis", label: "نظم معلومات إدارية" },
       experience: "none",
+      priority: "first-job",
     });
     expect(onboardingTurn(at, text("I like data")).answers.interest).toEqual(["data"]);
     expect(onboardingTurn(at, text("programming and design")).answers.interest).toEqual(["software", "design"]);
@@ -271,7 +274,9 @@ describe("every other message (spec 4.5)", () => {
       experience: "none",
     };
     expect(onboardingTurn(ctx(four), text("كم باقي؟")).replies[0]).toBe("باقي سؤالين بس.");
-    expect(onboardingTurn(ctx({ ...four, interest: ["data"] }), text("كم باقي")).replies[0]).toBe("باقي سؤال واحد بس.");
+    expect(onboardingTurn(ctx({ ...four, priority: "first-job" }), text("كم باقي")).replies[0]).toBe("باقي سؤال واحد بس.");
+    // «أتطوّر» / «أغيّر» add «وش مجال شغلك الحين؟» to what is left (21 Nov 2026)
+    expect(onboardingTurn(ctx({ ...four, experience: "1to3", priority: "switch" }), text("كم باقي")).replies[0]).toBe("باقي سؤالين بس.");
     expect(onboardingTurn(ctx(), text("كم الراتب في جدة؟")).replies).toEqual(["سؤال في محله، ونرجع له بعد ما نرسم مسارك.", q1]);
   });
 
@@ -487,7 +492,7 @@ describe("the pending question is derived (ARCHITECTURE 8.5)", () => {
   it("pendingQuestion: {} → city; city + major → education; all six → null", () => {
     expect(pendingQuestion({})).toBe("city");
     expect(pendingQuestion({ city: { value: "jeddah", label: "جدة" }, major: { value: "marketing", label: "تسويق" } })).toBe("education");
-    expect(play(DEMO_CHIPS)[6]?.pending).toBeNull();
+    expect(play(DEMO_CHIPS)[5]?.pending).toBeNull();
   });
 
   it("onboardingContext: empty thread → null; after the greeting → city", () => {
@@ -538,11 +543,18 @@ describe("the onboarding flow end to end through the local brain and the store's
     expect(state.answers.major?.value).toBe("finance");
     say("بكالوريوس");
     say("سنتين");
-    say("التسويق والمحتوى");
-    say("لا، مو الحين");
-    const last = say("أغيّر مجالي");
+    // 21 Nov 2026: the priority before the interest; «أغيّر مجالي» asks the current career and suggests from it
+    expect(say("أغيّر مجالي").replies[1]).toBe("وش مجال شغلك الحين؟");
+    expect(say("أشتغل محاسبة").replies[1]).toMatch(/^من شغلك في المحاسبة، أقرب مجالات تنتقل لها: /);
+    const last = say("التسويق والمحتوى");
     expect(last.done).toBe(true);
-    expect(state.answers).toMatchObject({ education: "bachelor", experience: "1to3", interest: ["marketing"], priority: "switch" });
+    expect(state.answers).toMatchObject({
+      education: "bachelor",
+      experience: "1to3",
+      priority: "switch",
+      current: { value: "business", label: "المحاسبة" },
+      interest: ["marketing"],
+    });
     expect(state.onboardingCompletedAt).not.toBeNull();
   });
 });

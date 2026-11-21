@@ -72,7 +72,7 @@ function asProfile(value: unknown): CvProfile | null {
   const status = STATUSES.find((s) => s === value.status) ?? null;
   const degree = DEGREES.find((d) => d === value.degree) ?? null;
   const years = typeof value.years === "number" && Number.isFinite(value.years) && value.years >= 0 && value.years <= 50 ? value.years : null;
-  return { city: text(value.city), status, degree, major: text(value.major), years };
+  return { city: text(value.city), status, degree, major: text(value.major), years, currentRole: text(value.currentRole) };
 }
 
 function asAnalyseResponse(data: unknown): CvAnalyseResponse | null {

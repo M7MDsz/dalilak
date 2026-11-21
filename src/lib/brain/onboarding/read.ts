@@ -7,6 +7,7 @@ import { findKeywords, normalizeText, tokenize } from "@/lib/text/normalize";
 import type {
   CityOption,
   CompanyId,
+  CurrentOption,
   EducationOption,
   ExperienceOption,
   InterestOption,
@@ -21,6 +22,8 @@ import {
   COMPANY_GATE_WORDS,
   COMPANY_NONE_PHRASES,
   COUNT_PHRASES,
+  CURRENT_GATE_WORDS,
+  CURRENT_KEYWORDS,
   EDUCATION_KEYWORDS,
   EXPERIENCE_GATE_WORDS,
   EXPERIENCE_MONTH_WORDS,
@@ -158,7 +161,8 @@ export type Found =
   | { readonly question: "experience"; readonly value: ExperienceOption }
   | { readonly question: "interest"; readonly values: readonly [InterestOption] | readonly [InterestOption, InterestOption] }
   | { readonly question: "priority"; readonly value: PriorityOption }
-  | { readonly question: "company"; readonly value: CompanyId | "none" };
+  | { readonly question: "company"; readonly value: CompanyId | "none" }
+  | { readonly question: "current"; readonly value: CurrentOption; readonly label: string | null };
 
 /** The earliest hit (longer first at the same start) of a keyword table, used up. */
 function earliestOf<V>(reading: Reading, table: readonly { readonly keyword: string; readonly value: V }[], skip?: (v: V) => boolean): { value: V; keyword: string } | null {
@@ -317,6 +321,10 @@ function readInterest(reading: Reading): Found | null {
   for (const hit of hits) {
     const entry = INTEREST_KEYWORDS.find((k) => nk(k.keyword) === hit.keyword);
     if (!entry) continue;
+    // a word already read by a longer phrase is not read again («إدارة المنتجات» is product, not also «إدارة» business)
+    let taken = false;
+    for (let i = hit.start; i < hit.end; i++) taken ||= reading.isUsed(i);
+    if (taken) continue;
     reading.use(hit.start, hit.end);
     if (!values.includes(entry.value)) values.push(entry.value);
   }
@@ -360,6 +368,16 @@ function readCompany(reading: Reading): Found | null {
   return { question: "company", value: "none" };
 }
 
+/** 21 Nov 2026: «وش مجال شغلك الحين؟»: the earliest job title or field named (CURRENT_KEYWORDS), said back by its label. */
+function readCurrent(reading: Reading): Found | null {
+  const byKeyword = new Map(CURRENT_KEYWORDS.map((k) => [nk(k.keyword), k] as const));
+  const hit = reading.find([...byKeyword.keys()])[0];
+  const entry = hit ? byKeyword.get(hit.keyword) : undefined;
+  if (!hit || !entry) return null;
+  reading.use(hit.start, hit.end);
+  return { question: "current", value: entry.value, label: entry.label };
+}
+
 const READERS: Readonly<Record<OnboardingStepId, (reading: Reading) => Found | null>> = {
   city: readCity,
   education: readEducation,
@@ -368,6 +386,7 @@ const READERS: Readonly<Record<OnboardingStepId, (reading: Reading) => Found | n
   interest: readInterest,
   company: readCompany,
   priority: readPriority,
+  current: readCurrent,
 };
 
 /** Step 3: the pending question. */
@@ -392,8 +411,10 @@ export function readOthers(reading: Reading, unanswered: readonly OnboardingStep
   const wish = reading.mentions(WISH_WORDS);
   const yearOrExperience = reading.mentions(EXPERIENCE_GATE_WORDS);
   const companyWish = reading.mentions(COMPANY_GATE_WORDS);
+  const works = reading.mentions(CURRENT_GATE_WORDS);
   const found: Found[] = [];
   for (const question of unanswered) {
+    if (question === "current" && !works) continue;
     if ((question === "interest" || question === "priority") && !wish) continue;
     if (question === "experience" && !yearOrExperience) continue;
     if (question === "company") {

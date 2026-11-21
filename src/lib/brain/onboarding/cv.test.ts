@@ -35,11 +35,11 @@ describe("the sample CV in onboarding", () => {
     expect(cvConfirmQuestion(facts.answers, facts.experienceNote)).toBe("فهمت من سيرتك إنك خريج نظم معلومات إدارية (بكالوريوس) من الرياض، ومعك تدريب تعاوني أربعة أشهر. صح؟");
   });
 
-  it("yes confirms and asks the interest with the CV's hint; change takes the CV answers out; a typed correction replaces only what it names", () => {
+  it("yes confirms and asks the priority (21 Nov 2026: before the interest), then the interest with the CV's hint; change takes the CV answers out; a typed correction replaces only what it names", () => {
     const yes = cvConfirmTurn(ctx(facts.answers), facts.slots, { kind: "chip", option: "yes" }, "data");
     expect(yes.cvStep).toEqual({ prefill: { slots: facts.slots, confirmed: true } });
-    expect(yes.pending).toBe("interest");
-    expect(yes.replies[1]).toBe("وش نوع الشغل اللي يشدّك أكثر؟");
+    expect(yes.pending).toBe("priority");
+    expect(yes.replies[1]).toBe("وش أولويتك الحين؟");
     expect(cvInterestQuestion(analysis.skills, "data")).toBe("عندك Excel و SQL قوية، تبي تكمل في الأرقام والبيانات ولا تفكر بمجال ثاني؟");
     const change = cvConfirmTurn(ctx(facts.answers), facts.slots, { kind: "chip", option: "change" }, "data");
     expect(change.cvStep).toEqual({ prefill: null });
@@ -139,10 +139,11 @@ describe("a CV whose strongest field is not an interest tile (tester, 21 Nov 202
   ] as const;
 
   it("suggests the nearest tile, never a raw field id", () => {
-    expect(interestFromCv(civil as never)).toBe("business");
+    // 21 Nov 2026 (owner): engineering has its own tile now, and project controls is nearest to it
+    expect(interestFromCv(civil as never)).toBe("engineering");
     const question = cvInterestQuestion(civil as never, interestFromCv(civil as never)) ?? "";
     expect(question).not.toMatch(/[a-z]+-[a-z]+/);
-    expect(question).toContain("تنظيم الأعمال والمشاريع");
+    expect(question).toContain("الهندسة والإنشاءات");
   });
 });
 

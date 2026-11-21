@@ -9,6 +9,7 @@ import {
   CITY_OPTIONS,
   COMPANY_OPTIONS,
   COURSE_IDS,
+  CURRENT_OPTIONS,
   EDUCATION_OPTIONS,
   EXPERIENCE_OPTIONS,
   FIELD_IDS,
@@ -79,6 +80,8 @@ const answers = z.object({
   priority: z.enum(PRIORITY_OPTIONS).optional(),
   /** 20 Nov 2026: the company the user has in mind (onboarding step 7), or "none". */
   company: z.enum(COMPANY_OPTIONS).optional(),
+  /** 21 Nov 2026: the field the user works in now (asked after «أتطوّر» / «أغيّر»). */
+  current: z.object({ value: z.enum(CURRENT_OPTIONS), label: z.string().max(60) }).optional(),
 });
 
 const cvRecord = z.object({

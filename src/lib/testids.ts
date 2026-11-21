@@ -52,8 +52,12 @@ export const TID = {
     path: "reveal-path",
     pathNode: (n: number) => `reveal-path-node-${n}`,
     accept: "reveal-accept",
+    /** 21 Nov 2026: the other specialisations' cards («اختر تخصصك»), after the recommended one's, and their buttons. */
     alt: (index: number) => `reveal-alt-${index}`,
     altChoose: (index: number) => `reveal-alt-choose-${index}`,
+    /** The recommended job's own specialisation card («الأنسب لك»); its button starts the path like `accept`. */
+    trackBest: "reveal-track-best",
+    trackBestChoose: "reveal-track-best-choose",
     /** architect (20 Nov 2026): the line under the recommended job about the company the user has in mind. */
     company: "reveal-company",
   },

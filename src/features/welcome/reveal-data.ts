@@ -4,9 +4,20 @@
 // "stay stronger" in the sweep and which fields stay lit.
 import { answerText, companyCityLine, revealReasonText } from "@/lib/copy";
 import { FIELDS, JOBS, SKILLS, getField, getJob, getQuestion, getSkill } from "@/lib/data";
-import { canonicalStages, choiceOrder, dreamCompany, pathSummary, rankByFit, recommend, roadmapFor, wantedFields } from "@/lib/engine";
-import { QUESTION_IDS } from "@/lib/ids";
-import type { FieldId, JobId, OnboardingAnswers, QuestionId, SkillId, StarMap, StarSlot, UserFacts } from "@/lib/types";
+import {
+  canonicalStages,
+  choiceOrder,
+  dreamCompany,
+  pathSummary,
+  rankByFit,
+  recommend,
+  roadmapFor,
+  trackOf,
+  withinReach,
+  type Track,
+} from "@/lib/engine";
+import { QUESTION_IDS, isJobFieldId } from "@/lib/ids";
+import type { FieldId, JobFieldId, JobId, OnboardingAnswers, QuestionId, SkillId, StarMap, StarSlot, UserFacts } from "@/lib/types";
 
 export interface RevealStageInfo {
   /** 1-based, canonical order (`reveal-path-node-{n}`). Before a CV this is also the map's displayed order. */
@@ -28,15 +39,30 @@ export interface RevealJobCard {
   readonly hours: number;
 }
 
+/** One specialisation of the user's field on the result («اختر تخصصك»): the track and its best job for this user. */
+export interface RevealTrackCard {
+  /** The engine's track id («software/front-end»). */
+  readonly id: string;
+  /** «واجهات أمامية». */
+  readonly name: string;
+  /** The recommended job's own track: first, «الأنسب لك», and choosing it is the main «ابدأ هذا المسار». */
+  readonly best: boolean;
+  readonly job: RevealJobCard;
+}
+
 export interface RevealData {
   readonly answers: readonly { readonly question: QuestionId; readonly slot: string; readonly text: string }[];
   readonly recommended: RevealJobCard;
+  /** The show's two others beside the recommended one: the best jobs of the next two tracks (else the engine's). */
   readonly alternatives: readonly [RevealJobCard, RevealJobCard];
   /**
-   * 21 Nov 2026 (owner: «at the end of the questions, choose between multiple jobs based on the answers»): up to two more
-   * jobs to choose from, the next best fits of the answers in the fields they asked for and within reach of their
-   * experience, never a title already offered.
+   * 21 Nov 2026 (owner: «if I choose web and building, he should give you the path of web and then let him choose between
+   * full stack, front end, back end — the same for other jobs»): the specialisations of the user's field (and of their
+   * second interest's), 3 to 5, each with its best job for this user in the engine's order. The recommended job's track
+   * is first and holds the recommended job.
    */
+  readonly tracks: readonly RevealTrackCard[];
+  /** The jobs of the tracks after the show's three (the result draws them inside `tracks`; kept for probes and tests). */
   readonly more: readonly RevealJobCard[];
   readonly reasons: readonly string[];
   /**
@@ -82,7 +108,12 @@ export function revealData(answers: OnboardingAnswers, stars?: StarMap, facts?: 
   const rec = recommend(answers, undefined, stars);
   const ranked = rankByFit(answers, stars).filter((b) => !b.excluded);
   const top = ranked[0]?.score ?? 0;
-  const chosen = new Set<JobId>([rec.recommended, ...rec.alternatives]);
+  const tracks = trackChoices(answers, choiceOrder(answers, ranked.map((b) => b.jobId)), rec.recommended);
+  // the show lands on what the result offers: the recommended job between the best jobs of the next two tracks
+  const others: JobId[] = tracks.slice(1, 3).map((t) => t.job);
+  for (const id of rec.alternatives) if (others.length < 2 && !others.includes(id)) others.push(id);
+  const [alt0, alt1] = others as [JobId, JobId];
+  const chosen = new Set<JobId>([rec.recommended, alt0, alt1]);
   // "the ones that fit the answers stay stronger": the three chosen, and every job that scores close to the best
   const fitting = new Set<JobId>(ranked.filter((b) => b.score > 0 && b.score >= top * 0.6).map((b) => b.jobId));
   for (const id of chosen) fitting.add(id);
@@ -98,8 +129,9 @@ export function revealData(answers: OnboardingAnswers, stars?: StarMap, facts?: 
       text: answerText(answers, question) ?? "",
     })),
     recommended: jobCard(rec.recommended),
-    alternatives: [jobCard(rec.alternatives[0]), jobCard(rec.alternatives[1])],
-    more: moreChoices(answers, ranked.map((b) => b.jobId), [rec.recommended, ...rec.alternatives]).map(jobCard),
+    alternatives: [jobCard(alt0), jobCard(alt1)],
+    tracks: tracks.map((t, i) => ({ id: t.track.id, name: t.track.name, best: i === 0, job: jobCard(t.job) })),
+    more: tracks.filter((t) => !chosen.has(t.job)).map((t) => jobCard(t.job)),
     reasons: rec.reasons.map(revealReasonText),
     company: dream ? { name: dream.company.short, aimed: dream.job !== null && dream.job === rec.recommended } : null,
     stages: (facts ? roadmapFor(rec.recommended, facts).stages : canonicalStages(rec.recommended)).map((s, i) => ({
@@ -120,20 +152,41 @@ export function revealData(answers: OnboardingAnswers, stars?: StarMap, facts?: 
   };
 }
 
-/** The next best fits after the three offered: in the asked fields only, a title not offered yet (at most `n`). */
-function moreChoices(answers: OnboardingAnswers, ranked: readonly JobId[], offered: readonly JobId[], n = 2): JobId[] {
-  const wanted = wantedFields(answers);
-  const titles = new Set(offered.map((id) => getJob(id).title));
-  const out: JobId[] = [];
-  for (const id of choiceOrder(answers, ranked)) {
-    if (out.length >= n) break;
-    const job = getJob(id);
-    if (offered.includes(id) || titles.has(job.title)) continue;
-    if (wanted !== null && !wanted.has(job.field)) break; // the asked fields are exhausted: never pad with another field
-    titles.add(job.title);
-    out.push(id);
+/** The result offers at most 5 specialisations (3 or more wherever the field has them). */
+const MAX_TRACKS = 5;
+
+/**
+ * The specialisations offered on the result, the recommended job's own track first (holding that job). The fields: the
+ * recommended job's, plus the user's other interest field (two tracks of it are kept, so it is never crowded out); never
+ * another field (owner: every choice stays in what the user asked for), so a field with two tracks offers two. Each
+ * track's job is its first in `order` (the engine's choiceOrder: in-field, within reach and paid first); the tracks
+ * follow their jobs' order, a field's general track after its named ones.
+ */
+function trackChoices(answers: OnboardingAnswers, order: readonly JobId[], recommended: JobId): { track: Track; job: JobId }[] {
+  const recTrack = trackOf(recommended);
+  const best = new Map<string, { track: Track; job: JobId; at: number }>();
+  order.forEach((id, at) => {
+    const track = trackOf(id);
+    if (!best.has(track.id)) best.set(track.id, { track, job: id, at });
+  });
+  best.delete(recTrack.id);
+  const of = (fields: readonly JobFieldId[]) =>
+    [...best.values()]
+      .filter((t) => fields.includes(t.track.field))
+      // a track whose best job is out of reach (a senior role for a beginner) after the reachable ones (21 Nov 2026)
+      .sort((a, b) => Number(!withinReach(a.job, answers)) - Number(!withinReach(b.job, answers)) || Number(a.track.general) - Number(b.track.general) || a.at - b.at);
+
+  const field = recTrack.field;
+  const second: JobFieldId[] = [];
+  for (const interest of answers.interest ?? []) if (isJobFieldId(interest) && interest !== field) second.push(interest);
+  const primary = of([field]);
+  const secondary = of(second);
+  const picked = secondary.length > 0 ? [...primary.slice(0, 2), ...secondary.slice(0, 2)] : primary.slice(0, MAX_TRACKS - 1);
+  for (const t of [...primary, ...secondary].sort((a, b) => a.at - b.at)) {
+    if (picked.length >= MAX_TRACKS - 1) break;
+    if (!picked.includes(t)) picked.push(t);
   }
-  return out;
+  return [{ track: recTrack, job: recommended }, ...picked.map(({ track, job }) => ({ track, job }))];
 }
 
 /** `k` items spread evenly through `list` (its first, its last and the ones between), in list order. */

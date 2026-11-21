@@ -29,6 +29,8 @@ export const PROFILE_COPY = {
     interest: "الاهتمام",
     priority: "الأولوية",
   },
+  /** 21 Nov 2026: the field the user works in now (asked after «أتطوّر في مجالي» / «أغيّر مجالي»). */
+  current: "مجال شغلك",
   target: "الوظيفة المستهدفة",
   changeTarget: "غيّر الهدف",
   /** 20 Nov 2026: the company the user has in mind (onboarding step 7). */

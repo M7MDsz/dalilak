@@ -35,7 +35,7 @@ const say = (t: string, answers: OnboardingAnswers = FIVE, misses: OnboardingCon
 const tap = (option: string, answers: OnboardingAnswers = FIVE) =>
   onboardingTurn(ctx(answers), { kind: "chip", question: "company", option } satisfies OnboardingInput);
 
-const PRIORITY_Q = "وآخر سؤال، وش أولويتك الحين؟";
+const PRIORITY_Q = "وش أولويتك الحين؟";
 const NONE_ACK = "ولا يهمك، نخليها مفتوحة، وتقدر تضيفها بعدين من «ملفي».";
 
 describe("the company step: where it sits and its tiles", () => {

@@ -36,8 +36,10 @@ export const RESULT_COPY = {
   why: "لماذا هذا المسار؟",
   start: "البداية",
   accept: "ابدأ هذا المسار",
-  altHeading: "أو اختر وظيفة ثانية تناسب إجاباتك",
-  altChoose: "اختر هذا المسار",
+  /** 21 Nov 2026 (owner: web → full stack / front end / back end): the specialisations of the user's field. */
+  tracksHeading: "اختر تخصصك",
+  tracksLead: "لكل تخصص أنسب وظيفة لك فيه.",
+  trackChoose: "اختر هذا التخصص",
   footer: "تستطيع تغيير هدفك في أي وقت من صفحة الوظائف.",
   cvLine: "بعد قراءة سيرتك قد تجد أنك قطعت جزءاً منها.",
   /** With a CV read in onboarding (21 Nov 2026, tester): what it already covers, instead of the line above. */

@@ -1123,7 +1123,8 @@ describe("onboarding questions (4.2, 3.2)", () => {
     expect(ONBOARDING_QUESTIONS.map((q) => q.n)).toEqual([1, 2, 3, 4, 5, 6]);
     expect(ONBOARDING_QUESTIONS.map((q) => q.slot)).toEqual(["المدينة", "المؤهل", "التخصص", "الخبرة", "الاهتمام", "الأولوية"]);
     expect(getQuestion("city").text).toBe("في أي مدينة أنت الحين؟");
-    expect(getQuestion("priority").text).toBe("وآخر سؤال، وش أولويتك الحين؟");
+    // 21 Nov 2026: asked before the interest now, so no longer «وآخر سؤال»
+    expect(getQuestion("priority").text).toBe("وش أولويتك الحين؟");
   });
 
   it("offers each question's chips in the order of the ids, and only question 3 has a variant", () => {
