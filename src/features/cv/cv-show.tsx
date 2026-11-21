@@ -12,7 +12,7 @@
 // Desktop: the document on the right, the status, tray and rings on the left. Phone: status, document, then the tray in
 // a column under it; the read document folds away once its sentences have flown, so the tray has the screen.
 import { motion } from "motion/react";
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useEffectEvent, useMemo, useRef, useState, type ReactNode } from "react";
 
 import { DaleelGlyph, type DaleelState } from "@/components/chat";
 import { CV_STEPS, resultOnly, Roll, SkillTagGroup, useInstant, useShow, type CvStepId } from "@/components/motion";
@@ -71,11 +71,33 @@ function added<T>(set: ReadonlySet<T>, value: T): ReadonlySet<T> {
  * `compact` (20 Nov 2026, docs/ONBOARDING-FLOW.md): the same show as a card inside the onboarding chat: the phone layout
  * at any width (the read document folds away once its sentences have flown), a shorter document window, no page height,
  * and the card keeps its bottom in view as it grows (the chat thread scrolls, the page never moves).
+ * `phone` (with compact; 21 Nov 2026, a tester on a 390 px phone never saw «دليلك»'s status line: the card was taller than
+ * the screen and the thread kept its bottom in view, so the paper's top and its flying tags were cut off under the step
+ * bar, above an empty skeleton): the status line is sticky at the top of the card (it stays on screen while the card
+ * scrolls under it), the paper window is shorter, the tray comes in only with the first tags (no skeleton while it reads,
+ * no dotted sentence lines until `evidence`), and while it reads (`read`, `extract`) the card keeps its TOP in view (the
+ * conversation holds the thread's own following meanwhile, from `onStage`); from `evidence` it follows the bottom again.
+ * `onStage`: each stage as it starts (the conversation shows the CV's answers in the profile from `done`).
  */
-export function CvShow({ run, outcome, onFinished, compact = false }: { readonly run: ShowRun; readonly outcome: Outcome | null; readonly onFinished: () => void; readonly compact?: boolean }): ReactNode {
+export function CvShow({
+  run,
+  outcome,
+  onFinished,
+  compact = false,
+  phone = false,
+  onStage,
+}: {
+  readonly run: ShowRun;
+  readonly outcome: Outcome | null;
+  readonly onFinished: () => void;
+  readonly compact?: boolean;
+  readonly phone?: boolean;
+  readonly onStage?: (step: CvStepId) => void;
+}): ReactNode {
   const instant = useInstant();
   const contentWide = useContentWide();
   const wide = compact ? false : contentWide;
+  const tight = compact && phone;
   const user = useCurrentUser();
   const ok = outcome?.kind === "ok" ? outcome : null;
 
@@ -88,6 +110,10 @@ export function CvShow({ run, outcome, onFinished, compact = false }: { readonly
   const show = useShow(steps, true, () => setEnded(true));
   const stepId: CvStepId = show.done ? "done" : (show.id ?? "read");
   const at = STEP_INDEX[stepId];
+  const stageStarted = useEffectEvent((step: CvStepId) => onStage?.(step));
+  useEffect(() => {
+    stageStarted(stepId);
+  }, [stepId]);
 
   const finished = useRef(false);
   useEffect(() => {
@@ -247,13 +273,22 @@ export function CvShow({ run, outcome, onFinished, compact = false }: { readonly
     if (instant || at !== 4 || compact) return;
     ringsRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }, [at, instant, compact]);
-  // compact: the card's bottom follows each stage inside the chat thread (it grows as the tray fills and the rings draw)
+  // compact: the card's bottom follows each stage inside the chat thread (it grows as the tray fills and the rings draw);
+  // on a phone, while it reads, its top stays in view instead (the status line and the whole paper window, where the
+  // tags pop): set once per stage, so a reader who scrolls down to the tray is not pulled back up at every tag
   const endRef = useRef<HTMLSpanElement>(null);
+  const topRef = useRef<HTMLSpanElement>(null);
+  const holdTop = tight && at < 2;
   useEffect(() => {
-    if (!compact) return;
+    if (!compact || holdTop) return;
     const timer = window.setTimeout(() => endRef.current?.scrollIntoView({ block: "end", behavior: instant ? "auto" : "smooth" }), 120);
     return () => window.clearTimeout(timer);
-  }, [compact, at, landed.size, instant]);
+  }, [compact, holdTop, at, landed.size, instant]);
+  useEffect(() => {
+    if (!holdTop) return;
+    const timer = window.setTimeout(() => topRef.current?.scrollIntoView({ block: "start", behavior: instant ? "auto" : "smooth" }), 120);
+    return () => window.clearTimeout(timer);
+  }, [holdTop, at, instant]);
 
   // ── status ────────────────────────────────────────────────────────────────────────────────────────────────────
   const skillCount = ok?.analysis.skills.length ?? 0;
@@ -288,6 +323,7 @@ export function CvShow({ run, outcome, onFinished, compact = false }: { readonly
   );
 
   const evidenceStep = Math.min(0.08, 0.48 / Math.max(plan.groups.length, 1));
+  const trayShown = !tight || (ok !== null && at >= 1);
 
   return (
     <Stage
@@ -296,22 +332,33 @@ export function CvShow({ run, outcome, onFinished, compact = false }: { readonly
       aria-label={label}
       className={cn(
         compact
-          ? "rounded-card p-3.5"
+          ? ["rounded-card p-3.5", tight && "overflow-clip"]
           : ["rounded-sheet p-4 @min-[900px]/content:px-6 @min-[900px]/content:py-5", "@min-[900px]/content:min-h-[calc(100dvh-var(--shell-top,5.5rem)-2.5rem)]"],
       )}
       contour="faint"
       data-testid={TID.cv.show}
     >
       <SkillTagGroup id={`cv-show-${run.id}`}>
+        {/* phone, while it reads: the thread scrolls to here (the card's top edge, a little air above it) */}
+        <span aria-hidden className="block h-0 scroll-mt-6" ref={topRef} />
         <div
           className={cn(
             "relative grid gap-4 [grid-template-areas:'status'_'doc'_'tray'_'rings']",
             "@min-[900px]/content:grid-cols-[minmax(0,1fr)_minmax(22rem,27.5rem)] @min-[900px]/content:grid-rows-[auto_auto_1fr] @min-[900px]/content:gap-x-8",
             "@min-[900px]/content:[grid-template-areas:'doc_status'_'doc_tray'_'doc_rings']",
+            // phone card: only the rows it has yet (no empty rows, whose gaps would leave a blank band under the paper)
+            tight && !trayShown && "[grid-template-areas:'status'_'doc']",
+            tight && trayShown && at < 4 && "[grid-template-areas:'status'_'doc'_'tray']",
           )}
         >
-          {/* the voice: «دليلك»'s glyph and the rolling status line, the trail of the six stages under it */}
-          <div className="flex flex-col gap-3 [grid-area:status]" data-testid={TID.cv.showStage} data-value={stepId}>
+          {/* the voice: «دليلك»'s glyph and the rolling status line, the trail of the six stages under it. Phone: sticky
+              at the top of the thread (the Stage clips instead of hiding its overflow, so it can stick), on the stage's
+              own ground, so what scrolls under it never shows through */}
+          <div
+            className={cn("flex flex-col gap-3 [grid-area:status]", tight && "sticky top-0 z-sticky -mt-2 bg-bg pt-2 pb-2.5")}
+            data-testid={TID.cv.showStage}
+            data-value={stepId}
+          >
             <div className="flex min-h-11 items-center gap-3">
               <DaleelGlyph framed size={40} state={glyph} />
               {/* the rolling status line (RollingStatus's roll and light), except that the light stops on «انتهيت…» */}
@@ -335,7 +382,7 @@ export function CvShow({ run, outcome, onFinished, compact = false }: { readonly
           >
             <div className={cn("min-h-0", !wide && "overflow-clip")}>
               <CvDocument
-                boxClassName={compact ? "max-h-[min(34svh,15rem)]" : "max-h-[min(50svh,26rem)] @min-[900px]/content:max-h-[calc(100dvh-var(--shell-top,5.5rem)-5rem)]"}
+                boxClassName={tight ? "max-h-[min(24svh,13rem)]" : compact ? "max-h-[min(34svh,15rem)]" : "max-h-[min(50svh,26rem)] @min-[900px]/content:max-h-[calc(100dvh-var(--shell-top,5.5rem)-5rem)]"}
                 boxRef={boxRef}
                 lines={run.lines}
                 lit={litNow}
@@ -348,66 +395,82 @@ export function CvShow({ run, outcome, onFinished, compact = false }: { readonly
           </div>
 
           {/* the tray: one row per proving sentence. Its slots are dotted (the way ahead) until the tags land; then the
-              sentence that proves them comes in under them, then each tag's stars land. */}
-          <div className="rounded-card border border-border bg-surface/70 px-4 py-1.5 [grid-area:tray]">
-            <ol className="flex flex-col divide-y divide-border">
-              {ok === null
-                ? Array.from({ length: PLACEHOLDER_ROWS }, (_, i) => <TraySlots key={i} />)
-                : plan.groups.map((group, g) => {
-                    const evidence = ok.analysis.skills.find((s) => s.line === group.line)?.evidence ?? "";
-                    const landedHere = group.skills.some(inTray);
-                    const delay = g * evidenceStep;
-                    return (
-                      <li className="flex flex-col gap-1.5 py-2" data-line={group.line} key={group.line}>
-                        <div className="flex min-h-8 flex-wrap items-center gap-x-4 gap-y-2">
-                          {landedHere ? (
-                            group.skills.map((id) => {
-                              if (!inTray(id)) return null;
-                              const skill = getSkill(id);
-                              const shown = at > 3 ? (starsFound.get(id) ?? 0) : (stars[id] ?? 0);
-                              return (
-                                <span className="inline-flex items-center gap-2" data-skill={id} key={id}>
-                                  <FoundTag id={id} name={skill.name} restored={!flew(id)} where="tray" />
-                                  {/* the slots are there from the landing (so nothing shifts), shown from `evidence` */}
-                                  <motion.span animate={{ opacity: at >= 2 ? 1 : 0 }} initial={false} transition={{ ...tween.move, delay: at > 2 ? 0 : delay }}>
-                                    <SkillStars fresh={at > 3 ? undefined : shown || undefined} size="sm" slots={skill.maxStars} value={shown} />
-                                  </motion.span>
-                                </span>
-                              );
-                            })
-                          ) : (
-                            <span aria-hidden className="h-8 w-28 rounded-full border-[1.5px] border-dashed border-border-strong opacity-60" />
+              sentence that proves them comes in under them, then each tag's stars land. Phone: it comes in with the
+              first tags (no skeleton while the paper is read), its rows one line each until the sentences come in. */}
+          {trayShown ? (
+            <TrayBox fadeIn={tight}>
+              <ol className="flex flex-col divide-y divide-border">
+                {ok === null
+                  ? Array.from({ length: PLACEHOLDER_ROWS }, (_, i) => <TraySlots key={i} />)
+                  : plan.groups.map((group, g) => {
+                      const evidence = ok.analysis.skills.find((s) => s.line === group.line)?.evidence ?? "";
+                      const landedHere = group.skills.some(inTray);
+                      const delay = g * evidenceStep;
+                      return (
+                        <li className="flex flex-col gap-1.5 py-2" data-line={group.line} key={group.line}>
+                          <div className="flex min-h-8 flex-wrap items-center gap-x-4 gap-y-2">
+                            {landedHere ? (
+                              group.skills.map((id) => {
+                                if (!inTray(id)) return null;
+                                const skill = getSkill(id);
+                                const shown = at > 3 ? (starsFound.get(id) ?? 0) : (stars[id] ?? 0);
+                                return (
+                                  <span className="inline-flex items-center gap-2" data-skill={id} key={id}>
+                                    <FoundTag id={id} name={skill.name} restored={!flew(id)} where="tray" />
+                                    {/* the slots are there from the landing (so nothing shifts), shown from `evidence` */}
+                                    <motion.span animate={{ opacity: at >= 2 ? 1 : 0 }} initial={false} transition={{ ...tween.move, delay: at > 2 ? 0 : delay }}>
+                                      <SkillStars fresh={at > 3 ? undefined : shown || undefined} size="sm" slots={skill.maxStars} value={shown} />
+                                    </motion.span>
+                                  </span>
+                                );
+                              })
+                            ) : (
+                              <span aria-hidden className="h-8 w-28 rounded-full border-[1.5px] border-dashed border-border-strong opacity-60" />
+                            )}
+                          </div>
+                          {at >= 2 ? (
+                            <motion.p
+                              animate={{ opacity: 1, y: 0 }}
+                              className="line-clamp-2 text-small text-fg-2 @min-[900px]/content:line-clamp-1"
+                              dir={textDir(evidence)}
+                              initial={at > 2 ? false : { opacity: 0, y: 8 }}
+                              transition={{ ...tween.move, delay: delay + 0.04 }}
+                            >
+                              «<Bidi text={evidence} />»
+                            </motion.p>
+                          ) : tight ? null : (
+                            <TrailLine />
                           )}
-                        </div>
-                        {at >= 2 ? (
-                          <motion.p
-                            animate={{ opacity: 1, y: 0 }}
-                            className="line-clamp-2 text-small text-fg-2 @min-[900px]/content:line-clamp-1"
-                            dir={textDir(evidence)}
-                            initial={at > 2 ? false : { opacity: 0, y: 8 }}
-                            transition={{ ...tween.move, delay: delay + 0.04 }}
-                          >
-                            «<Bidi text={evidence} />»
-                          </motion.p>
-                        ) : (
-                          <TrailLine />
-                        )}
-                      </li>
-                    );
-                  })}
-            </ol>
-          </div>
+                        </li>
+                      );
+                    })}
+              </ol>
+            </TrayBox>
+          ) : null}
 
           {/* the comparison with every job */}
           {/* scroll margin: clear of the phone tab bar, and of the desktop launcher in the bottom corner */}
-          <div className="scroll-mb-[calc(var(--shell-bottom,4.5rem)+1rem)] [grid-area:rings] @min-[900px]/content:scroll-mb-24" ref={ringsRef}>
-            {/* compact (the chat card): the best 24 rings, three short rows, instead of every job */}
-            {at >= 4 && ranked.length > 0 ? <MatchRings keep={keep || at > 4} ranked={compact ? ranked.slice(0, 24) : ranked} restored={at > 4 && !matchPlayed} /> : null}
-          </div>
+          {!tight || at >= 4 ? (
+            <div className="scroll-mb-[calc(var(--shell-bottom,4.5rem)+1rem)] [grid-area:rings] @min-[900px]/content:scroll-mb-24" ref={ringsRef}>
+              {/* compact (the chat card): the best 24 rings, three short rows, instead of every job */}
+              {at >= 4 && ranked.length > 0 ? <MatchRings keep={keep || at > 4} ranked={compact ? ranked.slice(0, 24) : ranked} restored={at > 4 && !matchPlayed} /> : null}
+            </div>
+          ) : null}
         </div>
         <span aria-hidden className="block h-px scroll-mb-4" ref={endRef} />
       </SkillTagGroup>
     </Stage>
+  );
+}
+
+/** The tray's box; on a phone card it fades in with the first tags. */
+function TrayBox({ fadeIn, children }: { readonly fadeIn: boolean; readonly children: ReactNode }) {
+  const className = "rounded-card border border-border bg-surface/70 px-4 py-1.5 [grid-area:tray]";
+  if (!fadeIn) return <div className={className}>{children}</div>;
+  return (
+    <motion.div animate={{ opacity: 1 }} className={className} initial={{ opacity: 0 }} transition={tween.move}>
+      {children}
+    </motion.div>
   );
 }
 

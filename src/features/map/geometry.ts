@@ -73,8 +73,11 @@ export interface MapGeometry {
   readonly roomy: boolean;
   readonly start: { readonly x: number; readonly y: number; readonly r: number };
   readonly summit: { readonly x: number; readonly y: number; readonly r: number };
-  /** The waypoint «أنت هنا». At 100% it is the summit itself. */
-  readonly you: { readonly x: number; readonly y: number; readonly atSummit: boolean };
+  /**
+   * The waypoint «أنت هنا». At 100% it is the summit itself. `side` = where its tag hangs: right of the road (1), or left
+   * (-1) on a narrow phone sheet whose right side is too short for it; `room` = the px the tag may take on that side.
+   */
+  readonly you: { readonly x: number; readonly y: number; readonly atSummit: boolean; readonly side: 1 | -1; readonly room: number };
   readonly stations: readonly StationGeo[];
   /** The road bed from the start to the summit, then its three legs: covered (solid), your next leg, the way ahead. */
   readonly dRoad: string;
@@ -91,7 +94,11 @@ export interface MapGeometry {
     readonly crosses: string;
     readonly marks: readonly { readonly x: number; readonly y: number; readonly pct: number }[];
   };
-  readonly peaks: readonly { readonly x: number; readonly y: number; readonly d: string }[];
+  /**
+   * The branch peaks. `label` (phone sheet only): its title stays between the sheet's edge and the goal's flag. `room` =
+   * how far it may run from where it hangs before it slides toward the edge, `max` = the most it may take (cut beyond).
+   */
+  readonly peaks: readonly { readonly x: number; readonly y: number; readonly d: string; readonly label: { readonly room: number; readonly max: number } | null }[];
   readonly flag: { readonly w: number; readonly h: number; readonly pen: number };
   readonly youH: number;
   /**
@@ -300,6 +307,16 @@ export function minSheetHeight(roadmap: Roadmap, small: boolean): number {
 /** The trailhead sign's corner: its inset from the sheet's edges, the height it may take, the room it needs. */
 const SIGN = { inset: 18, height: 118, minWidth: 250, maxWidth: 272 } as const;
 
+/** No tag or branch label runs closer than this to the sheet's side edges. */
+const EDGE = 6;
+/**
+ * «أنت هنا»'s tag: its distance from the waypoint (map.css .dm-pill `left`) and its width with the full second line
+ * «مطابقتك 90%» in the wider of the two themes' type (the game theme's), on the phone sheet and on a wide one.
+ */
+const YOU_TAG = { gapSmall: 14, gapWide: 22, small: 140, wide: 180 } as const;
+/** A phone branch label hangs this far past its peak's centre (map.css: 14 px beyond the 24 px peak box). */
+const PEAK_HANG = 26;
+
 // ── The sheet ────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 export function buildGeometry(roadmap: Roadmap, size: SheetSize): MapGeometry {
@@ -405,7 +422,18 @@ export function buildGeometry(roadmap: Roadmap, size: SheetSize): MapGeometry {
   const prevOfNow = nowIndex > 0 ? placed[nowIndex - 1] : undefined;
   const prevY = prevOfNow !== undefined ? prevOfNow.y : yS;
   const wayY = now !== undefined ? r1(prevY - (prevY - now.y) * 0.47) : yT;
-  const you = { x: r1(sway(wayY)), y: wayY, atSummit: now === undefined };
+  const youX = r1(sway(wayY));
+  const atSummit = now === undefined;
+  // «أنت هنا»'s tag hangs right of the road, above the waypoint (the side the road has already left). On a narrow phone
+  // sheet (360-390 px) that side is shorter than the tag: it then hangs LEFT of the road, just under the lit station's
+  // card and over the covered station's label (the road there runs off to the right, so nothing passes under it). At
+  // the summit the goal's label holds the left: the tag stays right, and map.css fits it to its room (it drops the word
+  // «مطابقتك» before it would leave the sheet).
+  const tagGap = small ? YOU_TAG.gapSmall : atSummit ? summit.r + YOU_TAG.gapSmall : YOU_TAG.gapWide;
+  const roomRight = Math.floor(W - EDGE - youX - tagGap);
+  const roomLeft = Math.floor(youX - tagGap - EDGE);
+  const youSide: 1 | -1 = small && !atSummit && roomRight < YOU_TAG.small && roomLeft >= YOU_TAG.small ? -1 : 1;
+  const you = { x: youX, y: wayY, atSummit, side: youSide, room: youSide < 0 ? roomLeft : roomRight };
 
   // the trail as a fine polyline, bottom to top
   const poly = (ya: number, yb: number): [number, number][] => {
@@ -605,10 +633,24 @@ export function buildGeometry(roadmap: Roadmap, size: SheetSize): MapGeometry {
         { x: W * 0.331, y: 58 },
         { x: W * 0.904, y: 72 },
       ];
-  const peaks = peakAt.map((p) => ({
+  const flag = small ? { w: 32, h: 52, pen: 20 } : { w: 46, h: 74, pen: 28 };
+  // phone: the branch titles hang under their peaks, in the very band where the goal's pennant flies (it points left from
+  // the pole, its tip flag.w - 6 px left of the summit). The left title ends 4 px before that tip, the right one starts
+  // clear of the pole; each slides toward the sheet's edge only as far as it must, and a longer title is cut (map.css).
+  const labelSpan = (side: number, x: number) => {
+    if (!small) return null;
+    if (side === 0) {
+      const end = summit.x - flag.w + 2;
+      return { room: r1(end - (x - PEAK_HANG)), max: r1(end - EDGE) };
+    }
+    const begin = summit.x + 8;
+    return { room: r1(x + PEAK_HANG - begin), max: r1(W - EDGE - begin) };
+  };
+  const peaks = peakAt.map((p, i) => ({
     x: r1(p.x),
     y: p.y,
     d: `M${summit.x} ${summit.y}Q${r1(mid(summit.x, p.x))} ${r1(summit.y - (summit.y - p.y) * 0.25 - 14)} ${r1(p.x)} ${p.y + 6}`,
+    label: labelSpan(i, p.x),
   }));
 
   const focus = small
@@ -649,7 +691,7 @@ export function buildGeometry(roadmap: Roadmap, size: SheetSize): MapGeometry {
     dot: small ? 9.6 : 11,
     terrain: { bleed: small ? [220, 420, 240] : [300, 640, 280], cliff, bands, hairs, crosses, marks },
     peaks,
-    flag: small ? { w: 32, h: 52, pen: 20 } : { w: 46, h: 74, pen: 28 },
+    flag,
     youH,
     sign,
     focus,

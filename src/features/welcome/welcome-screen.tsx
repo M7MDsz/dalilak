@@ -55,7 +55,9 @@ function WelcomeFlow({ user }: { user: UserState }) {
   // before «دليلك» has greeted, nothing is pending yet (pendingStep is null on an empty thread): show step 1 with every
   // stop still ahead, not «7 من 7» all ticked rolling down to 1 (tester, 21 Nov 2026)
   const pending = user.onboarding.thread.length === 0 ? ONBOARDING_STEP_IDS[0] : pendingOf(user);
-  const step = pending ? getQuestion(pending).n : ONBOARDING_STEP_IDS.length;
+  // while the CV card reads, the counter keeps the number it had before it (the conversation holds it until «خلصت…»)
+  const [heldStep, setHeldStep] = useState<number | null>(null);
+  const step = heldStep ?? (pending ? getQuestion(pending).n : ONBOARDING_STEP_IDS.length);
 
   return (
     <PageTransition>
@@ -91,7 +93,7 @@ function WelcomeFlow({ user }: { user: UserState }) {
                     words only: the slot row under the bar is already the six-stop trail there. */}
                 <StepTrail
                   className={desktop ? "w-[22rem]" : "[&>ol]:hidden"}
-                  current={pending ? step : step + 1}
+                  current={pending || heldStep !== null ? step : step + 1}
                   label={
                     <span className="inline-flex items-center gap-1.5 text-fg-2">
                       <span>{CHAT_COPY.stepBefore}</span>
@@ -116,7 +118,7 @@ function WelcomeFlow({ user }: { user: UserState }) {
         <AnimatePresence initial={false} mode="popLayout">
           {phase.kind === "chat" ? (
             <motion.div className="relative z-10" exit={{ opacity: 0, transition: tween.exit }} key="chat">
-              <Conversation onDone={(rects) => setPhase({ kind: "reveal", rects, startOnResult: instant })} user={user} />
+              <Conversation onDone={(rects) => setPhase({ kind: "reveal", rects, startOnResult: instant })} onStepHold={setHeldStep} user={user} />
             </motion.div>
           ) : (
             <motion.div className="relative z-10" key="reveal">

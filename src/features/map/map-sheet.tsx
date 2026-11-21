@@ -361,16 +361,19 @@ function MapSheetImpl({ g, roadmap, jobTitle, avatar, level, match, branches, st
 
       <span
         className="dm-bb dm-you"
+        data-side={g.you.side < 0 ? "left" : undefined}
         data-summit={g.you.atSummit ? "" : undefined}
-        style={{ ...at(g.you.x, g.you.y, g.youH / 2), ["--sr" as string]: `${g.summit.r}px` }}
+        style={{ ...at(g.you.x, g.you.y, g.youH / 2), ["--sr" as string]: `${g.summit.r}px`, ["--room" as string]: `${g.you.room}px` }}
       >
         {g.you.atSummit ? null : <i className="dm-wp" />}
         <span className="dm-pill" data-surface="stage">
           <Avatar id={avatar} level={level} size={g.small ? 30 : 40} />
           <span className="dm-tx">
             <b>أنت هنا</b>
+            {/* the word and the match are two pieces: with too little room the word wraps away (map.css); the space stays with
+                the word (a no-break space, which a flex item keeps), so the line reads as before */}
             <small>
-              مطابقتك{" "}
+              <span>مطابقتك&nbsp;</span>
               <bdi dir="ltr">
                 <NumberTicker delay={match.delay} duration={match.duration} format={formatPercent} from={match.from} value={match.value} />
               </bdi>
@@ -382,6 +385,7 @@ function MapSheetImpl({ g, roadmap, jobTitle, avatar, level, match, branches, st
       {branches.map((b, i) => {
         const p = g.peaks[i];
         if (p === undefined) return null;
+        const style: CSSProperties = p.label === null ? peakBox(p.x, p.y) : { ...peakBox(p.x, p.y), ["--lb-room" as string]: `${p.label.room}px`, ["--lb-max" as string]: `${p.label.max}px` };
         const drawing = (
           <>
             <svg aria-hidden height={22} viewBox="0 0 24 22" width={24}>
@@ -407,11 +411,11 @@ function MapSheetImpl({ g, roadmap, jobTitle, avatar, level, match, branches, st
           </>
         );
         return peaksAreControls ? (
-          <button className="dm-bb dm-peak" data-side={i === 0 ? "a" : "b"} data-testid={TID.path.branch(b.jobId)} data-value={b.after} key={b.jobId} onClick={() => onBranch(b.jobId)} style={peakBox(p.x, p.y)} type="button">
+          <button className="dm-bb dm-peak" data-side={i === 0 ? "a" : "b"} data-testid={TID.path.branch(b.jobId)} data-value={b.after} key={b.jobId} onClick={() => onBranch(b.jobId)} style={style} type="button">
             {drawing}
           </button>
         ) : (
-          <span aria-hidden className="dm-bb dm-peak" data-side={i === 0 ? "a" : "b"} key={b.jobId} style={peakBox(p.x, p.y)}>
+          <span aria-hidden className="dm-bb dm-peak" data-side={i === 0 ? "a" : "b"} key={b.jobId} style={style}>
             {drawing}
           </span>
         );

@@ -17,7 +17,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { AdvisorMessage, ChatThread, Composer, DaleelGlyph, UserMessage, quickReplyId, type ComposerHandle } from "@/components/chat";
 import { BadgeEmblem } from "@/components/emblems";
 import { IconBranch } from "@/components/icons";
-import { WordsIn } from "@/components/motion";
+import { WordsIn, type CvStepId } from "@/components/motion";
 import { cn, toast } from "@/components/ui";
 import { cleanCvLines } from "@/lib/brain/cv";
 import { analyseCvText, extractCvFile, precheckCvFile } from "@/lib/brain/cv/client";
@@ -57,7 +57,7 @@ import { PROTOCOL_VERSION, type CvErrorCode, type OnboardingContext, type Onboar
 import { answerText, xpNewsReason } from "@/lib/copy";
 import { ONBOARDING_TIMING, companyAnswerLabel, getBadge, getCompany, getJob, getQuestion, getSkill, sampleCvText } from "@/lib/data";
 import { jobMatch, recommend, skillStars } from "@/lib/engine";
-import { QUESTION_IDS, isCompanyId, isFieldId } from "@/lib/ids";
+import { ONBOARDING_STEP_IDS, QUESTION_IDS, isCompanyId, isFieldId } from "@/lib/ids";
 import { focusIn, group, sleep, tween } from "@/lib/motion";
 import { selectCurrentUser, useAppStore, useBrainStatus } from "@/lib/store";
 import { TID } from "@/lib/testids";
@@ -197,7 +197,27 @@ function phraseRequestFor(context: OnboardingContext, turn: OnboardingTurn, user
   return { v: PROTOCOL_VERSION, moment, name: firstNameOf(context.name), lines: turn.replies, facts };
 }
 
-export function Conversation({ user, onDone }: { readonly user: UserState; readonly onDone: (rects: AnswerRects) => void }) {
+/**
+ * While the CV card reads (until its «خلصت…»), the profile and the step counter show what they showed before it: the
+ * CV's answers are recorded with the analysis (before `extract`), but they appear when the card says it is done.
+ */
+interface HeldProfile {
+  readonly answers: OnboardingAnswers;
+  readonly slots: readonly OnboardingStepId[];
+  /** The step counter's number before the CV. */
+  readonly step: number;
+}
+
+export function Conversation({
+  user,
+  onDone,
+  onStepHold,
+}: {
+  readonly user: UserState;
+  readonly onDone: (rects: AnswerRects) => void;
+  /** The step counter's number to show instead of the live one while the CV card reads (null: the live one). */
+  readonly onStepHold?: (step: number | null) => void;
+}) {
   const { desktop } = useViewport();
   const brain = useBrainStatus();
   const thread = user.onboarding.thread;
@@ -215,6 +235,9 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
   /** The CV step's screen state: the paste box open, or an analysis running in the chat. */
   const [cvMode, setCvMode] = useState<"idle" | "paste" | "reading">("idle");
   const [live, setLive] = useState<LiveCv | null>(null);
+  /** The live card's stage (null before its first), and the profile as it stood before the card. */
+  const [cvStage, setCvStage] = useState<CvStepId | null>(null);
+  const [held, setHeld] = useState<HeldProfile | null>(null);
   const travel = useRef(new Map<string, string>()); // message id → the chip it travelled from
   const busy = useRef(false);
   const queued = useRef<string | null>(null);
@@ -469,6 +492,9 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
     setOptimistic(null);
     setThinking(null);
     setCvMode("reading");
+    const before = pendingOf(now);
+    setHeld({ answers: now.answers, slots: now.onboarding.cvPrefill?.slots ?? [], step: before ? getQuestion(before).n : ONBOARDING_STEP_IDS.length });
+    setCvStage(null);
     setLive({ cardId, bubbleId, bubble, travelId, run: { id: n, lines: cleanCvLines(text), ready, text, fileName }, outcome: null });
     void analyseCvText({ v: PROTOCOL_VERSION, text, fileName }).then((response) => {
       if (!response.ok) {
@@ -651,8 +677,19 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
   const reading = cvMode === "reading" || live !== null;
   const asking = phase === null && !reading;
   const chips = asking && pending ? (pending === "interest" ? interestChipsWithCv(user.answers, suggested) : questionChips(pending, user.answers)) : null;
-  const values = stepValues(user.answers);
-  const fromCv = useMemo(() => new Set<OnboardingStepId>(user.onboarding.cvPrefill?.slots ?? []), [user.onboarding.cvPrefill]);
+  // the CV card reading: the profile as it was before it, until «خلصت…» (then the CV's answers fill their slots); on a phone
+  // the card keeps its own top in view while it reads the paper (`read`, `extract`), so the thread does not follow meanwhile
+  const holding = live !== null && cvStage !== "done" ? held : null;
+  // phones AND laptops (a 900 px screen shows the same problem): hold the thread so the card's status line stays in view
+  const holdThread = live !== null && (cvStage === null || cvStage === "read" || cvStage === "extract");
+  const heldStep = holding?.step ?? null;
+  useEffect(() => {
+    onStepHold?.(heldStep);
+  }, [heldStep, onStepHold]);
+  useEffect(() => () => onStepHold?.(null), [onStepHold]);
+  const values = stepValues(holding ? holding.answers : user.answers);
+  const shownSlots = holding ? holding.slots : user.onboarding.cvPrefill?.slots;
+  const fromCv = useMemo(() => new Set<OnboardingStepId>(shownSlots ?? []), [shownSlots]);
 
   // one keyed array, so a message keeps its element from "thinking" to "answer" (the glyph settles in place)
   // «دليلك»'s name and glyph head each group of his turns (a CV card and the reaction under it are one group)
@@ -672,7 +709,7 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
     if (row.kind === "cv") {
       const card =
         live && live.cardId === row.id ? (
-          <CvLiveCard live={live} onFinished={onCardFinished} />
+          <CvLiveCard live={live} onFinished={onCardFinished} onStage={setCvStage} phone />
         ) : user.cv ? (
           <CvSummaryCard skills={user.cv.skills} />
         ) : null;
@@ -725,6 +762,7 @@ export function Conversation({ user, onDone }: { readonly user: UserState; reado
             busy={thinking !== null || reading}
             className="wl-thread -mx-2"
             contentClassName={cn("mx-auto min-h-full w-full max-w-[42rem] justify-end gap-6 px-2", desktop ? "pt-8 pb-6" : "pt-2 pb-4")}
+            follow={!holdThread}
             testId={TID.welcome.thread}
           >
             {items}

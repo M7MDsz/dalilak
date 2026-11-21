@@ -89,6 +89,42 @@ describe("the trailhead sign has one corner", () => {
   });
 });
 
+describe("the summit and «أنت هنا» on a narrow phone sheet (21 Nov: the pennant sat on a branch title at 360-390 px)", () => {
+  // the sheet is the phone's width less the page's 12 px gutters: 360, 390 and 430 px phones
+  for (const width of [336, 366, 406]) {
+    it(`keeps the branch titles off the flag and on the sheet at ${width} px`, () => {
+      const g = buildGeometry(MID_PATH, { width, height: 600 });
+      const a = g.peaks[0];
+      const b = g.peaks[1];
+      if (a === undefined || b === undefined || a.label === null || b.label === null) throw new Error("the phone sheet gives both branch titles a span");
+      // the left title ends before the pennant's tip (flag.w - 6 px left of the pole); the right one starts after the pole
+      const leftEnd = a.x - 26 + a.label.room;
+      expect(leftEnd).toBeLessThanOrEqual(g.summit.x - g.flag.w + 6 - 4);
+      expect(leftEnd - a.label.max).toBeGreaterThanOrEqual(6);
+      const rightBegin = b.x + 26 - b.label.room;
+      expect(rightBegin).toBeGreaterThanOrEqual(g.summit.x + 6);
+      expect(rightBegin + b.label.max).toBeLessThanOrEqual(width - 6);
+    });
+
+    it(`keeps «أنت هنا» on the sheet at ${width} px`, () => {
+      for (const roadmap of [CV_ANALYSED, MID_PATH]) {
+        const g = buildGeometry(roadmap, { width, height: 600 });
+        if (g.you.side > 0) expect(g.you.x + 14 + g.you.room).toBeLessThanOrEqual(width - 6);
+        else expect(g.you.x - 14 - g.you.room).toBeGreaterThanOrEqual(6);
+        // the tag with its full second line fits on the side it hangs (138 px in the game theme's wider type)
+        expect(g.you.room).toBeGreaterThanOrEqual(138);
+      }
+    });
+  }
+
+  it("hangs «أنت هنا» left of the road only where the right side is short, never on a wide sheet", () => {
+    expect(buildGeometry(CV_ANALYSED, { width: 336, height: 600 }).you.side).toBe(-1);
+    expect(buildGeometry(CV_ANALYSED, { width: 406, height: 600 }).you.side).toBe(1);
+    expect(buildGeometry(CV_ANALYSED, { width: 790, height: 780 }).you.side).toBe(1);
+    expect(buildGeometry(CV_ANALYSED, { width: 790, height: 780 }).peaks.every((p) => p.label === null)).toBe(true);
+  });
+});
+
 describe("labels keep their extras only where they fit", () => {
   it("is roomy on a desktop sheet and beside the docked panel at 1440, not at 1280 or on the phone", () => {
     expect(buildGeometry(CV_ANALYSED, { width: 790, height: 780 }).roomy).toBe(true);

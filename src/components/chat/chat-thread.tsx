@@ -7,6 +7,8 @@
 // The user's own message, a first paint and a scroller squeezed by the composer snap instead. Only the reader's own gesture (wheel, touch, keys,
 // the scrollbar) unpins it; reaching the end again pins it. The scroller has `layoutScroll`, so a chip that travels in
 // from outside (QuickReplies) measures correctly.
+// `follow={false}` holds the scroll where it is (nothing glides or snaps) while a card steers it itself: the onboarding CV
+// card keeps its own top in view while it reads on a phone. Following resumes (still pinned) when it turns true again.
 import { AnimatePresence, motion } from "motion/react";
 import { Children, isValidElement, useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 
@@ -34,13 +36,17 @@ export interface ChatThreadProps {
   readonly testId?: string;
   /** Something at the very top that scrolls with the thread (a date line, the mode line). */
   readonly header?: ReactNode;
+  /** false: do not follow new content for now (a card steers the scroll itself). Default true. */
+  readonly follow?: boolean;
 }
 
 /** The scrolling transcript of «دليلك» and the user. Give it `min-h-0 flex-1` room inside a flex column. */
-export function ChatThread({ children, label = "المحادثة مع دليلك", busy = false, className, contentClassName, testId, header }: ChatThreadProps) {
+export function ChatThread({ children, label = "المحادثة مع دليلك", busy = false, className, contentClassName, testId, header, follow = true }: ChatThreadProps) {
   const scroller = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
   const pinned = useRef(true);
+  const following = useRef(follow);
+  following.current = follow;
   const [away, setAway] = useState(false); // scrolled up while something new arrived
   const items = Children.toArray(children);
   const count = items.length;
@@ -71,7 +77,7 @@ export function ChatThread({ children, label = "المحادثة مع دليلك
     const from = el.scrollTop;
     const t0 = performance.now();
     const step = (now: number) => {
-      if (!pinned.current) {
+      if (!pinned.current || !following.current) {
         raf.current = 0;
         return;
       }
@@ -95,9 +101,10 @@ export function ChatThread({ children, label = "المحادثة مع دليلك
     if (!el || !pinned.current) return;
     if (!mounted.current || instant) {
       mounted.current = true;
-      snap();
+      if (following.current) snap();
       return;
     }
+    if (!following.current) return;
     if (el.scrollHeight - el.clientHeight - el.scrollTop <= 1) return;
     // the user's own message snaps (it pops out of the composer right under it; a travelling chip lands where it will
     // stay); «دليلك»'s content glides
@@ -120,7 +127,7 @@ export function ChatThread({ children, label = "المحادثة مع دليلك
     const inner = content.current;
     if (!el || !inner) return;
     const observer = new ResizeObserver((entries) => {
-      if (!pinned.current) return;
+      if (!pinned.current || !following.current) return;
       if (entries.some((e) => e.target === el) || instant || userLast.current) snap();
       else glide();
     });

@@ -496,6 +496,9 @@ a.dm-peak:hover .dm-lb > b {
   flex-direction: row-reverse;
   align-items: center;
   gap: 9px;
+  /* as wide as its content, up to the room geometry.ts gives it on its side of the road: it never leaves the sheet */
+  width: max-content;
+  max-width: var(--room, none);
   height: 48px;
   padding: 4px 16px 4px 4px;
   border-radius: 24px;
@@ -529,13 +532,23 @@ a.dm-peak:hover .dm-lb > b {
   display: block;
   font: 700 15px/1.3 var(--font-sans);
 }
+/* the second line is two pieces, «مطابقتك» and the match: with too little room the word wraps onto a hidden line and the
+   match stays under «أنت هنا» (the padding keeps the glyphs' tails inside the clip) */
 .dm-pill .dm-tx small {
-  display: block;
+  display: flex;
+  flex-flow: row-reverse wrap;
+  justify-content: flex-end;
+  row-gap: 10px;
+  height: calc(1.3em + 6px);
+  margin-block: -3px;
+  padding-block: 3px;
+  overflow: hidden;
   font: 400 14px/1.3 var(--font-sans);
   color: var(--color-on-stage-2);
 }
 /* the match: the same number as the ring, in the stage's ink (brass is XP only, DESIGN 3.2) */
 .dm-pill .dm-tx small bdi {
+  order: -1;
   font-weight: 700;
   color: var(--color-on-stage);
 }
@@ -750,6 +763,22 @@ a.dm-peak:hover .dm-lb > b {
 .dm[data-small] .dm-pill .dm-tx small {
   font-size: 13px;
   line-height: 1.2;
+  height: calc(1.2em + 6px);
+}
+/* a narrow phone sheet (geometry.ts `you.side`): the tag hangs left of the road, its top just above the waypoint, under
+   the lit station's card; the avatar keeps to the road's side */
+.dm[data-small] .dm-you[data-side="left"] .dm-pill {
+  left: auto;
+  right: 14px;
+  top: -14px;
+  flex-direction: row;
+  padding: 3px 3px 3px 9px;
+}
+.dm[data-small] .dm-you[data-side="left"] .dm-pill::before {
+  left: auto;
+  right: -8px;
+  top: 13px;
+  width: 12px;
 }
 .dm[data-small] .dm-wp {
   left: -7.5px;
@@ -1174,16 +1203,21 @@ html[data-keyboard] .dm-sheet-layer .dm-card {
   pointer-events: none;
 }
 
-/* phone: each branch label hangs from its own side, so a long job title never leaves the sheet */
+/* phone: each branch label hangs from its own side, so a long job title never leaves the sheet; it keeps between the
+   sheet's edge and the goal's flag (geometry.ts `peaks[].label`): when the title is longer than its room it slides
+   toward the edge just as far as it must (the left one never reaches the pennant, the right one never the pole), and a
+   title longer than the whole span is cut */
 .dm[data-small] .dm-peak[data-side="a"] .dm-lb {
   left: -14px;
-  translate: none;
+  translate: min(0px, calc(var(--lb-room, 100vw) - 100%)) 0;
+  max-width: var(--lb-max, none);
   text-align: start;
 }
 .dm[data-small] .dm-peak[data-side="b"] .dm-lb {
   left: auto;
   right: -14px;
-  translate: none;
+  translate: max(0px, calc(100% - var(--lb-room, 100vw))) 0;
+  max-width: var(--lb-max, none);
   text-align: end;
 }
 .dm[data-small] .dm-peak .dm-lb > b {

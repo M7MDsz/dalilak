@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { useState, type ReactNode, type RefObject } from "react";
 
 import { Button, SkillStars, cn } from "@/components/ui";
+import type { CvStepId } from "@/components/motion";
 import { CvShow, type Outcome, type ShowRun } from "@/features/cv/cv-show";
 import { CV_COPY } from "@/features/cv/copy";
 import { cvCardText } from "@/lib/brain/onboarding/cv";
@@ -25,11 +26,21 @@ export interface LiveCv {
   readonly outcome: Outcome | null;
 }
 
-/** The live card: the CV show, compact, inside «دليلك»'s turn. */
-export function CvLiveCard({ live, onFinished }: { readonly live: LiveCv; readonly onFinished: () => void }): ReactNode {
+/** The live card: the CV show, compact, inside «دليلك»'s turn (`phone`: its phone form, see CvShow). */
+export function CvLiveCard({
+  live,
+  onFinished,
+  onStage,
+  phone,
+}: {
+  readonly live: LiveCv;
+  readonly onFinished: () => void;
+  readonly onStage: (step: CvStepId) => void;
+  readonly phone: boolean;
+}): ReactNode {
   return (
     <div className="w-full" data-testid="welcome-cv-card" data-state="live">
-      <CvShow compact onFinished={onFinished} outcome={live.outcome} run={live.run} />
+      <CvShow compact onFinished={onFinished} onStage={onStage} outcome={live.outcome} phone={phone} run={live.run} />
     </div>
   );
 }
