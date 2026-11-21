@@ -2,7 +2,7 @@
 import { isSkillId } from "@/lib/ids";
 import { LIMITS, TIMEOUTS_MS } from "@/lib/brain/protocol";
 import type { CvAnalyseRequest, CvAnalyseResponse, CvErrorCode, CvExtractResponse } from "@/lib/brain/protocol";
-import type { CvAnalysis, CvSkill } from "@/lib/types";
+import type { CvAnalysis, CvProfile, CvSkill } from "@/lib/types";
 
 type RequestFailed = { readonly ok: false; readonly error: "request_failed" };
 const REQUEST_FAILED: RequestFailed = { ok: false, error: "request_failed" };
@@ -58,7 +58,21 @@ function asAnalysis(value: unknown): CvAnalysis | null {
     if (skill === null || skill.line >= lines.length) return null;
     parsed.push(skill);
   }
-  return { skills: parsed, lines, engine, isSample };
+  const profile = asProfile(value.profile);
+  return { skills: parsed, lines, engine, isSample, ...(profile ? { profile } : {}) };
+}
+
+const STATUSES = ["graduated", "studying", "incomplete"] as const;
+const DEGREES = ["secondary", "diploma", "bachelor", "postgrad"] as const;
+
+/** The model's profile, field by field (a bad field is dropped, never the whole analysis). */
+function asProfile(value: unknown): CvProfile | null {
+  if (!isRecord(value)) return null;
+  const text = (v: unknown): string | null => (typeof v === "string" && v.trim() !== "" && v.length <= 120 ? v.trim() : null);
+  const status = STATUSES.find((s) => s === value.status) ?? null;
+  const degree = DEGREES.find((d) => d === value.degree) ?? null;
+  const years = typeof value.years === "number" && Number.isFinite(value.years) && value.years >= 0 && value.years <= 50 ? value.years : null;
+  return { city: text(value.city), status, degree, major: text(value.major), years };
 }
 
 function asAnalyseResponse(data: unknown): CvAnalyseResponse | null {

@@ -5,7 +5,7 @@
 // reveal moves), no salary row printed in AED quoted as SAR, and no day of collection in what «دليلك» is given.
 import { describe, expect, it } from "vitest";
 
-import { COMPANIES, COMPANY_TILES, COURSES, getGuide, JOBS, SAMPLE_CV_BODY, SKILLS } from "@/lib/data";
+import { cleanJobTitle, COMPANIES, COMPANY_TILES, COURSES, getGuide, JOBS, SAMPLE_CV_BODY, SKILLS } from "@/lib/data";
 import { ADVANCED_WORDS, MIDDLE_WORDS } from "@/lib/brain/cv/local-analyser";
 import { jobsAtCompany } from "@/lib/engine/companies";
 import { COMPANY_IDS, COURSE_IDS, FIELD_IDS, JOB_FIELD_IDS, JOB_IDS, SKILL_IDS } from "@/lib/ids";
@@ -191,7 +191,7 @@ describe("wave 3: real jobs", () => {
     expect(new Set(WAVE3_JOB_IDS).size).toBe(86);
     for (const j of WAVE3_JOBS) {
       expect((JOB_IDS as readonly string[]).includes(j.id), j.id).toBe(true);
-      expect(JOBS.find((x) => x.id === j.id), j.id).toBe(j);
+      expect(JOBS.find((x) => x.id === j.id), j.id).toEqual({ ...j, title: cleanJobTitle(j.title) });
     }
     const first = Math.min(...WAVE3_JOB_IDS.map((id) => (JOB_IDS as readonly string[]).indexOf(id)));
     const lastOld = Math.max(...WAVE2_JOB_IDS.map((id) => (JOB_IDS as readonly string[]).indexOf(id)));

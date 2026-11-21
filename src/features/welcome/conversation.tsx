@@ -57,7 +57,7 @@ import { PROTOCOL_VERSION, type CvErrorCode, type OnboardingContext, type Onboar
 import { answerText, xpNewsReason } from "@/lib/copy";
 import { ONBOARDING_TIMING, companyAnswerLabel, getBadge, getCompany, getJob, getQuestion, getSkill, sampleCvText } from "@/lib/data";
 import { jobMatch, recommend, skillStars } from "@/lib/engine";
-import { ONBOARDING_STEP_IDS, QUESTION_IDS, isCompanyId, isFieldId } from "@/lib/ids";
+import { ASKED_STEP_IDS, QUESTION_IDS, isCompanyId, isFieldId } from "@/lib/ids";
 import { focusIn, group, sleep, tween } from "@/lib/motion";
 import { selectCurrentUser, useAppStore, useBrainStatus } from "@/lib/store";
 import { TID } from "@/lib/testids";
@@ -493,7 +493,7 @@ export function Conversation({
     setThinking(null);
     setCvMode("reading");
     const before = pendingOf(now);
-    setHeld({ answers: now.answers, slots: now.onboarding.cvPrefill?.slots ?? [], step: before ? getQuestion(before).n : ONBOARDING_STEP_IDS.length });
+    setHeld({ answers: now.answers, slots: now.onboarding.cvPrefill?.slots ?? [], step: before ? getQuestion(before).n : ASKED_STEP_IDS.length });
     setCvStage(null);
     setLive({ cardId, bubbleId, bubble, travelId, run: { id: n, lines: cleanCvLines(text), ready, text, fileName }, outcome: null });
     void analyseCvText({ v: PROTOCOL_VERSION, text, fileName }).then((response) => {
@@ -507,7 +507,7 @@ export function Conversation({
         cvProblem(bubble, CV_LINES.empty);
         return;
       }
-      const facts = cvFacts(response.analysis.lines);
+      const facts = cvFacts(response.analysis.lines, response.analysis.profile);
       const recorded = useAppStore.getState().recordOnboardingCv({
         analysis: response.analysis,
         fileName,

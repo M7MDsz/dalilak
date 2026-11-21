@@ -6,13 +6,14 @@
 // Any failure on the model side (timeout, error, refusal, empty list, a provider module that throws) is silent: the
 // local result stands alone.
 import type { CvAnalyseRequest, CvAnalyseResponse } from "@/lib/brain/protocol";
+import type { CvProfile } from "@/lib/types";
 import { providerCoolingDown, resolveProvider } from "@/lib/brain/server/provider";
 
 import { cleanCvLines } from "../clean";
 import { analyseCvLocal } from "../local-analyser";
 import { mergeModelSkills } from "../merge";
 
-import { modelCvSkills } from "./model";
+import { modelCvSkills, type CvModelReply } from "./model";
 
 function providerOnline(): boolean {
   try {
@@ -41,15 +42,27 @@ export async function analyseCvWith(request: CvAnalyseRequest, signal: AbortSign
     online = false;
   }
   if (!online) return { ok: true, analysis: local };
-  let candidates: Awaited<ReturnType<typeof modelCvSkills>> = null;
+  let reply: Awaited<ReturnType<typeof modelCvSkills>> = null;
   try {
-    candidates = await deps.model(request.text, signal);
+    reply = await deps.model(request.text, signal);
   } catch {
-    candidates = null;
+    reply = null;
   }
-  if (candidates === null || candidates.length === 0) return { ok: true, analysis: local };
+  const candidates = reply === null ? null : Array.isArray(reply) ? reply : (reply as CvModelReply).skills;
+  const profile = reply === null || Array.isArray(reply) ? null : groundedProfile((reply as CvModelReply).profile, request.text);
+  const withProfile = profile ? { profile } : {};
+  if (candidates === null || candidates.length === 0) return { ok: true, analysis: { ...local, ...withProfile } };
   const merged = mergeModelSkills(local.skills, cleanCvLines(request.text), candidates);
-  return { ok: true, analysis: { ...local, skills: merged.skills, engine: "model" } };
+  return { ok: true, analysis: { ...local, skills: merged.skills, engine: "model", ...withProfile } };
+}
+
+/** The model's profile with its city and major kept only when the CV's own text holds them (never an invented word). */
+function groundedProfile(profile: CvProfile | null, text: string): CvProfile | null {
+  if (profile === null) return null;
+  const hay = text.toLowerCase().replace(/\s+/g, " ");
+  const inText = (v: string | null): string | null => (v !== null && hay.includes(v.toLowerCase().replace(/\s+/g, " ")) ? v : null);
+  const out: CvProfile = { ...profile, city: inText(profile.city), major: inText(profile.major) };
+  return out.city === null && out.status === null && out.degree === null && out.major === null && out.years === null ? null : out;
 }
 
 export async function analyseCv(request: CvAnalyseRequest, signal: AbortSignal): Promise<CvAnalyseResponse> {

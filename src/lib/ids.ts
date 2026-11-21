@@ -360,6 +360,12 @@ export type OnboardingStepId = (typeof ONBOARDING_STEP_IDS)[number];
 export const isOnboardingStepId = guard(ONBOARDING_STEP_IDS);
 
 /**
+ * 21 Nov 2026 (owner: «delete the companies question»): the steps «دليلك» actually ASKS, in order: the six questions. The
+ * company step stays a type (saved answers and the profile can still hold one) but is never asked.
+ */
+export const ASKED_STEP_IDS: readonly OnboardingStepId[] = ["city", "education", "major", "experience", "interest", "priority"];
+
+/**
  * Real employers in Saudi Arabia «دليلك» knows by name (src/lib/data/companies.ts, checked 20 Nov 2026): the ones with a
  * careers page that opened, the companies of the real postings, and big names whose careers page did not open.
  */

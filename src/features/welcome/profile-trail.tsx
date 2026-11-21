@@ -16,7 +16,7 @@ import { Edge, Roll, StatusMark } from "@/components/motion";
 import { cn } from "@/components/ui";
 import { getQuestion, XP } from "@/lib/data";
 import { formatNumber } from "@/lib/format";
-import { ONBOARDING_STEP_IDS } from "@/lib/ids";
+import { ASKED_STEP_IDS } from "@/lib/ids";
 import { TID } from "@/lib/testids";
 import type { OnboardingStepId } from "@/lib/types";
 
@@ -42,7 +42,7 @@ function stateOf(q: OnboardingStepId, values: ProfileTrailProps["values"], pendi
 
 /** Answers that became filled while this component was on screen draw their check and their leg (the rest are at rest). */
 function useFreshFills(values: ProfileTrailProps["values"]) {
-  const [initial] = useState(() => new Set(ONBOARDING_STEP_IDS.filter((q) => values[q] !== null)));
+  const [initial] = useState(() => new Set(ASKED_STEP_IDS.filter((q) => values[q] !== null)));
   const [settled, setSettled] = useState<ReadonlySet<OnboardingStepId>>(() => new Set());
   const fresh = (q: OnboardingStepId) => values[q] !== null && !initial.has(q);
   const settle = (q: OnboardingStepId) => setSettled((s) => (s.has(q) ? s : new Set(s).add(q)));
@@ -84,9 +84,9 @@ const NODE_PX = 22;
  */
 export function ProfileCard({ name, avatar, values, pending, fromCv }: ProfileTrailProps) {
   const { fresh, settled, settle } = useFreshFills(values);
-  const states = ONBOARDING_STEP_IDS.map((q) => stateOf(q, values, pending));
+  const states = ASKED_STEP_IDS.map((q) => stateOf(q, values, pending));
   const filled = states.filter((s) => s === "filled").length;
-  const complete = filled === ONBOARDING_STEP_IDS.length;
+  const complete = filled === ASKED_STEP_IDS.length;
   // the reward lands only when it is earned in front of the user (a restored, complete sheet shows it at rest)
   const [completeOnArrival] = useState(complete);
   return (
@@ -97,18 +97,18 @@ export function ProfileCard({ name, avatar, values, pending, fromCv }: ProfileTr
           <p className="min-w-0 truncate text-title text-fg">{name}</p>
           <p className="text-small text-fg-2">{CHAT_COPY.profileCard}</p>
         </div>
-        <p aria-label={`${formatNumber(filled)} من ${formatNumber(ONBOARDING_STEP_IDS.length)}`} className="flex shrink-0 items-baseline gap-1 tabular-nums">
+        <p aria-label={`${formatNumber(filled)} من ${formatNumber(ASKED_STEP_IDS.length)}`} className="flex shrink-0 items-baseline gap-1 tabular-nums">
           <Roll className="h-[1.6em] text-h3 font-bold text-fg" id={filled}>
             {formatNumber(filled)}
           </Roll>
-          <span className="text-small font-semibold text-fg-3">من {formatNumber(ONBOARDING_STEP_IDS.length)}</span>
+          <span className="text-small font-semibold text-fg-3">من {formatNumber(ASKED_STEP_IDS.length)}</span>
         </p>
       </div>
       <div className="border-t border-border px-card py-2">
       <div className="relative">
         {/* the legs, in one svg down the node column (inline-start side) */}
-        <svg aria-hidden className="pointer-events-none absolute top-0 start-0 overflow-visible" height={ROW * ONBOARDING_STEP_IDS.length} width={NODE_PX}>
-          {ONBOARDING_STEP_IDS.slice(1).map((q, i) => {
+        <svg aria-hidden className="pointer-events-none absolute top-0 start-0 overflow-visible" height={ROW * ASKED_STEP_IDS.length} width={NODE_PX}>
+          {ASKED_STEP_IDS.slice(1).map((q, i) => {
             const y1 = ROW * i + ROW / 2 + NODE_PX / 2 + 3;
             const y2 = ROW * (i + 1) + ROW / 2 - NODE_PX / 2 - 3;
             const from = states[i] ?? "ahead";
@@ -126,7 +126,7 @@ export function ProfileCard({ name, avatar, values, pending, fromCv }: ProfileTr
           })}
         </svg>
         <ol className="relative flex flex-col">
-          {ONBOARDING_STEP_IDS.map((q, i) => {
+          {ASKED_STEP_IDS.map((q, i) => {
             const state = states[i] ?? "ahead";
             const value = values[q];
             return (
@@ -173,7 +173,7 @@ export function ProfileCard({ name, avatar, values, pending, fromCv }: ProfileTr
 
 export function ProfileRow({ values, pending }: ProfileTrailProps) {
   const { fresh, settled, settle } = useFreshFills(values);
-  const states = ONBOARDING_STEP_IDS.map((q) => stateOf(q, values, pending));
+  const states = ASKED_STEP_IDS.map((q) => stateOf(q, values, pending));
   const box = useRef<HTMLOListElement>(null);
   const [width, setWidth] = useState(0);
   useEffect(() => {
@@ -184,7 +184,7 @@ export function ProfileRow({ values, pending }: ProfileTrailProps) {
     setWidth(el.clientWidth);
     return () => observer.disconnect();
   }, []);
-  const col = width / ONBOARDING_STEP_IDS.length;
+  const col = width / ASKED_STEP_IDS.length;
   // physical x of station k (RTL: the first question sits at the right)
   const xOf = (k: number) => width - col * (k + 0.5);
   const NODE_ROW = 20;
@@ -193,7 +193,7 @@ export function ProfileRow({ values, pending }: ProfileTrailProps) {
     <div aria-label={CHAT_COPY.profileCard} className="relative" role="group">
       {width > 0 ? (
         <svg aria-hidden className="pointer-events-none absolute inset-x-0 top-0 overflow-visible" height={NODE_ROW} width={width}>
-          {ONBOARDING_STEP_IDS.slice(1).map((q, i) => {
+          {ASKED_STEP_IDS.slice(1).map((q, i) => {
             const from = states[i] ?? "ahead";
             const to = states[i + 1] ?? "ahead";
             return (
@@ -210,7 +210,7 @@ export function ProfileRow({ values, pending }: ProfileTrailProps) {
         </svg>
       ) : null}
       <ol className="relative grid grid-cols-7" ref={box}>
-        {ONBOARDING_STEP_IDS.map((q, i) => {
+        {ASKED_STEP_IDS.map((q, i) => {
           const state = states[i] ?? "ahead";
           return (
             <li className="flex flex-col items-center gap-1" data-state={state} data-testid={TID.welcome.slot(q)} key={q}>

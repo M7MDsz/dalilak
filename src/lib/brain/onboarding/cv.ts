@@ -8,6 +8,7 @@ import { NEAREST_INTEREST } from "@/lib/engine";
 import { isJobFieldId } from "@/lib/ids";
 import type { CvErrorCode, OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
 import type {
+  CvProfile,
   CvSkill,
   EducationOption,
   InterestOption,
@@ -51,11 +52,41 @@ export interface CvFacts {
 }
 
 const HEADER_WORDS = ["نبذة", "الملخص", "ملخص", "التعليم", "المؤهلات", "الخبرة", "الخبرات", "المشاريع", "المهارات", "اللغات", "الدورات", "الشهادات", "summary", "education", "experience", "projects", "skills", "languages"];
-const DEGREE_WORDS = ["بكالوريوس", "بكالريوس", "ماجستير", "دكتوراه", "دبلوم", "تخرجت", "تخرّجت", "خريج", "خريجة", "تخصص", "تخصصي", "bachelor", "master", "degree", "bsc", "diploma"];
+const DEGREE_WORDS = ["بكالوريوس", "بكالريوس", "ماجستير", "دكتوراه", "دبلوم", "تخرجت", "تخرّجت", "خريج", "خريجة", "تخصص", "تخصصي", "bachelor", "bachelors", "bachelor's", "master", "masters", "master's", "degree", "bsc", "b.sc", "msc", "m.sc", "mba", "phd", "diploma", "high school"];
 const EXPERIENCE_HEADERS = ["الخبرة", "الخبرات", "الخبرة العملية", "experience"];
 const MONTH_WORDS = ["تدريب", "تعاوني", "أشهر", "شهور", "internship", "months"];
 const NEW_GRAD_WORDS = ["حديث تخرج", "حديث التخرج", "خريج جديد", "خريجة جديدة", "fresh graduate"];
 const EDUCATION_RANK: Readonly<Record<EducationOption, number>> = { postgrad: 4, bachelor: 3, diploma: 2, secondary: 1, student: 0 };
+
+/**
+ * 21 Nov 2026 (owner: a friend still in his bachelor was read as a graduate): the words that say a degree is still being
+ * studied, on its line or the two lines under it (where its dates usually sit).
+ */
+const STUDYING = /\b(?:present|current(?:ly)?|expected|ongoing|in progress|till now|to date|now|undergraduate|student|(?:1st|2nd|3rd|4th|first|second|third|fourth|final|senior|junior) year|level \d+)\b|حالي|الآن|الان|للآن|حتى تاريخه|متوقع|المتوقع|قيد الدراسة|أدرس|ادرس|طالب|طالبة|لم أتخرج|ما تخرجت|المستوى\s+\S+|السنة\s+(?:الأولى|الثانية|الثالثة|الرابعة|الخامسة|الأخيرة)/iu;
+/** The words that say a degree was left without finishing. */
+const INCOMPLETE = /\b(?:incomplete|not completed|did not complete|withdrew|discontinued|dropped)\b|لم أكمل|لم يكتمل|ما كملت|انسحبت|منسحب/iu;
+
+/** The latest year written on a line («2021 - 2027» → 2027), or null. */
+function lastYear(line: string): number | null {
+  const years = [...line.matchAll(/(?:^|\D)((?:19|20)\d{2})(?!\d)/g)].map((m) => Number(m[1]));
+  return years.length > 0 ? Math.max(...years) : null;
+}
+
+/** The state of the degree on line `i`: still studying, left unfinished, or (nothing says otherwise) finished. */
+function degreeState(lines: readonly string[], i: number): "studying" | "incomplete" | "finished" {
+  const near = [lines[i] ?? ""];
+  for (let j = i + 1; j <= i + 2 && j < lines.length; j++) {
+    const line = lines[j] ?? "";
+    if (isHeader(line) || new Reading(line).mentions(DEGREE_WORDS)) break; // the next section or the next degree
+    near.push(line);
+  }
+  const text = near.join(" ");
+  if (INCOMPLETE.test(text)) return "incomplete";
+  if (STUDYING.test(text)) return "studying";
+  const year = lastYear(text);
+  if (year !== null && year > new Date().getFullYear()) return "studying";
+  return "finished";
+}
 
 /** A section title: a short line (1-3 words), no sentence punctuation, that names a CV section. */
 function isHeader(line: string): boolean {
@@ -85,7 +116,7 @@ function yearsOfExperience(lines: readonly string[]): number | null {
  * «خبرة»; else a co-op, internship or months in the experience section → «أقل من سنة»; else «خريج جديد» → none).
  * `lines` are the cleaned CV lines (the analysis' `lines`; the first one is the name).
  */
-export function cvFacts(lines: readonly string[]): CvFacts {
+export function cvFacts(lines: readonly string[], profile?: CvProfile | null): CvFacts {
   const answers: { -readonly [K in keyof OnboardingAnswers]: OnboardingAnswers[K] } = {};
   let note: string | null = null;
   const firstHeader = lines.findIndex((l, i) => i > 0 && isHeader(l));
@@ -99,16 +130,29 @@ export function cvFacts(lines: readonly string[]): CvFacts {
     }
   }
 
+  // the highest FINISHED degree; a degree still being studied makes the user a student (never «خريج»), one left
+  // unfinished is not counted at all (the question is asked)
   let education: EducationOption | null = null;
-  for (const line of lines.slice(1)) {
-    const reading = new Reading(line);
+  let studying = false;
+  for (let i = 1; i < lines.length; i++) {
+    const reading = new Reading(lines[i] ?? "");
     if (!reading.mentions(DEGREE_WORDS)) continue;
     const found = readPending(reading, "education");
-    if (found?.question === "education" && found.value !== "student" && (education === null || EDUCATION_RANK[found.value] > EDUCATION_RANK[education])) {
-      education = found.value;
-    }
+    if (found?.question !== "education" || found.value === "student") continue;
+    const state = degreeState(lines, i);
+    if (state === "studying") studying = true;
+    else if (state === "finished" && (education === null || EDUCATION_RANK[found.value] > EDUCATION_RANK[education])) education = found.value;
   }
-  if (education !== null) answers.education = education;
+  // the model's reading settles what the lines leave open: its degree still being studied (or left) is not a finished one
+  if (profile?.status === "studying" || profile?.status === "incomplete") {
+    if (profile.status === "studying") studying = true;
+    if (education !== null && profile.degree !== null && education === profile.degree) education = null;
+  } else if (profile?.status === "graduated" && education === null && profile.degree !== null && !studying) {
+    education = profile.degree;
+  }
+  // a finished degree below the one being studied (a bachelor while in a master's) is still the last one taken
+  if (studying && (education === null || education === "secondary")) answers.education = "student";
+  else if (education !== null) answers.education = education;
 
   for (const line of lines.slice(1)) {
     const reading = new Reading(line);
@@ -118,6 +162,14 @@ export function cvFacts(lines: readonly string[]): CvFacts {
       answers.major = { value: found.value, label: optionLabel("major", found.value) ?? found.value };
       break;
     }
+  }
+  if (answers.major === undefined && profile?.major) {
+    const found = readPending(new Reading(profile.major), "major");
+    if (found?.question === "major" && found.value !== "other") answers.major = { value: found.value, label: optionLabel("major", found.value) ?? found.value };
+  }
+  if (answers.city === undefined && profile?.city) {
+    const found = readPending(new Reading(profile.city), "city");
+    if (found?.question === "city" && found.value !== "other") answers.city = { value: found.value, label: found.label ?? optionLabel("city", found.value) ?? profile.city };
   }
 
   const years = yearsOfExperience(lines);
@@ -137,6 +189,11 @@ export function cvFacts(lines: readonly string[]): CvFacts {
       }
     }
     if (answers.experience === undefined && lines.some((l) => new Reading(l).mentions(NEW_GRAD_WORDS))) answers.experience = "none";
+    // the model's count of the years of work, when the lines say nothing
+    if (answers.experience === undefined && profile?.years != null) {
+      const y = profile.years;
+      answers.experience = y === 0 ? "none" : y < 1 ? "under1" : y <= 3 ? "1to3" : "over3";
+    }
   }
 
   return { answers, slots: CV_SLOTS.filter((q) => answers[q] !== undefined), ...(note !== null && answers.experience === "under1" ? { experienceNote: note } : {}) };
@@ -267,7 +324,11 @@ export function cvConfirmQuestion(answers: OnboardingAnswers, note?: string): st
   const edu = answers.education ? optionLabel("education", answers.education) : null;
   const city = answers.city ? `من ${answers.city.label}` : null;
   const clauses: string[] = [];
-  if (answers.major) clauses.push(`إنك خريج ${answers.major.label}${edu ? ` (${edu})` : ""}${city ? ` ${city}` : ""}`);
+  const graduate = answers.education !== undefined && answers.education !== "student" && answers.education !== "unknown";
+  if (answers.major && answers.education === "student") clauses.push(`إنك للحين تدرس ${answers.major.label}${city ? ` ${city}` : ""}`);
+  else if (answers.major && graduate) clauses.push(`إنك خريج ${answers.major.label}${edu ? ` (${edu})` : ""}${city ? ` ${city}` : ""}`);
+  else if (answers.major) clauses.push(`إن تخصصك ${answers.major.label}${city ? `، وإنك ${city}` : ""}`);
+  else if (answers.education === "student") clauses.push(`إنك للحين تدرس${city ? ` ${city}` : ""}`);
   else if (edu) clauses.push(`إن مؤهلك ${edu}${city ? `، وإنك ${city}` : ""}`);
   else if (city) clauses.push(`إنك ${city}`);
   if (answers.experience && note && answers.experience === "under1") clauses.push(clauses.length > 0 ? `ومعك ${note}` : `إن معك ${note}`);

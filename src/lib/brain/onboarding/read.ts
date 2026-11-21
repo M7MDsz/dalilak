@@ -232,7 +232,7 @@ function readEducation(reading: Reading): Found | null {
 
 /** The generic major words: they decide only when no specific major is named (21 Nov 2026, tester: «بكالوريوس علوم
  * الحاسب» read as science, «إدارة الموارد البشرية» as business). */
-const GENERIC_MAJOR_WORDS: ReadonlySet<string> = new Set(["إدارة", "علوم", "هندسة"]);
+const GENERIC_MAJOR_WORDS: ReadonlySet<string> = new Set(["إدارة", "علوم", "هندسة", "science", "engineering", "management", "business"]);
 const SPECIFIC_MAJORS = MAJOR_KEYWORDS.filter((k) => !GENERIC_MAJOR_WORDS.has(k.keyword));
 /** «الحاسب», «الموارد البشرية», «التسويق»…: the specific Arabic keywords with the article too. */
 const SPECIFIC_MAJORS_WITH_AL = [

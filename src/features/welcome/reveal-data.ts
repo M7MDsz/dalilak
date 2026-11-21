@@ -4,7 +4,7 @@
 // "stay stronger" in the sweep and which fields stay lit.
 import { answerText, companyCityLine, revealReasonText } from "@/lib/copy";
 import { FIELDS, JOBS, SKILLS, getField, getJob, getQuestion, getSkill } from "@/lib/data";
-import { canonicalStages, dreamCompany, pathSummary, rankByFit, recommend, roadmapFor } from "@/lib/engine";
+import { canonicalStages, choiceOrder, dreamCompany, pathSummary, rankByFit, recommend, roadmapFor, wantedFields } from "@/lib/engine";
 import { QUESTION_IDS } from "@/lib/ids";
 import type { FieldId, JobId, OnboardingAnswers, QuestionId, SkillId, StarMap, StarSlot, UserFacts } from "@/lib/types";
 
@@ -32,6 +32,12 @@ export interface RevealData {
   readonly answers: readonly { readonly question: QuestionId; readonly slot: string; readonly text: string }[];
   readonly recommended: RevealJobCard;
   readonly alternatives: readonly [RevealJobCard, RevealJobCard];
+  /**
+   * 21 Nov 2026 (owner: «at the end of the questions, choose between multiple jobs based on the answers»): up to two more
+   * jobs to choose from, the next best fits of the answers in the fields they asked for and within reach of their
+   * experience, never a title already offered.
+   */
+  readonly more: readonly RevealJobCard[];
   readonly reasons: readonly string[];
   /**
    * 20 Nov 2026 (owner's part 2): the company the user has in mind. `aimed`: the recommended job is that company's (the
@@ -93,6 +99,7 @@ export function revealData(answers: OnboardingAnswers, stars?: StarMap, facts?: 
     })),
     recommended: jobCard(rec.recommended),
     alternatives: [jobCard(rec.alternatives[0]), jobCard(rec.alternatives[1])],
+    more: moreChoices(answers, ranked.map((b) => b.jobId), [rec.recommended, ...rec.alternatives]).map(jobCard),
     reasons: rec.reasons.map(revealReasonText),
     company: dream ? { name: dream.company.short, aimed: dream.job !== null && dream.job === rec.recommended } : null,
     stages: (facts ? roadmapFor(rec.recommended, facts).stages : canonicalStages(rec.recommended)).map((s, i) => ({
@@ -111,6 +118,22 @@ export function revealData(answers: OnboardingAnswers, stars?: StarMap, facts?: 
       lit: field.id === recommendedField || interests.has(field.id),
     })),
   };
+}
+
+/** The next best fits after the three offered: in the asked fields only, a title not offered yet (at most `n`). */
+function moreChoices(answers: OnboardingAnswers, ranked: readonly JobId[], offered: readonly JobId[], n = 2): JobId[] {
+  const wanted = wantedFields(answers);
+  const titles = new Set(offered.map((id) => getJob(id).title));
+  const out: JobId[] = [];
+  for (const id of choiceOrder(answers, ranked)) {
+    if (out.length >= n) break;
+    const job = getJob(id);
+    if (offered.includes(id) || titles.has(job.title)) continue;
+    if (wanted !== null && !wanted.has(job.field)) break; // the asked fields are exhausted: never pad with another field
+    titles.add(job.title);
+    out.push(id);
+  }
+  return out;
 }
 
 /** `k` items spread evenly through `list` (its first, its last and the ones between), in list order. */

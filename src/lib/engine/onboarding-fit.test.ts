@@ -36,10 +36,10 @@ describe("fit score (spec 4.6)", () => {
     ]);
   });
 
-  it("recommends the data analyst, the HR-analytics analyst, and the financial analyst from another field, with three reasons", () => {
+  it("recommends the data analyst, then two more data jobs (21 Nov 2026, owner: every choice in the field the user asked for), with three reasons", () => {
     expect(recommend(DEMO_ANSWERS)).toEqual({
       recommended: "data-analyst-riyadh",
-      alternatives: ["qiddiya-hr-analytics-analyst-riyadh", "syarah-financial-analyst-tamheer-riyadh"],
+      alternatives: ["qiddiya-hr-analytics-analyst-riyadh", "tamara-builders-program-data-riyadh"],
       reasons: [
         { kind: "interest", interest: "data" },
         { kind: "major", tier: "primary", majorLabel: "نظم معلومات إدارية" },

@@ -88,7 +88,7 @@ export const ONBOARDING_QUESTIONS: readonly OnboardingQuestion[] = [
   },
   {
     id: "priority",
-    n: 7,
+    n: 6,
     slot: "الأولوية",
     text: "وآخر سؤال، وش أولويتك الحين؟",
     textAfterSecondary: null,
@@ -108,7 +108,7 @@ export const ONBOARDING_QUESTIONS: readonly OnboardingQuestion[] = [
  */
 export const COMPANY_QUESTION: OnboardingQuestion<"company"> = {
   id: "company",
-  n: 6,
+  n: 7,
   slot: "الشركة",
   text: "وفيه شركة أو وظيفة معيّنة في بالك؟",
   textAfterSecondary: null,

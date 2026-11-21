@@ -9,6 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   BADGES,
+  cleanJobTitle,
   COMPANIES,
   CATALOGUE_COUNTS,
   COURSES,
@@ -866,7 +867,7 @@ describe("jobs (9.3, 9.8 checks 3 and 9; real postings of 20 Nov 2026)", () => {
       expect(job.source.postedAt).toBe(snap.postedAt);
       expect((job.source.postedAt ?? "") <= job.source.checkedAt, job.id).toBe(true);
       expect(job.source.site.length, job.id).toBeGreaterThan(0);
-      expect(job.title).toBe(snap.titleAr);
+      expect(job.title).toBe(cleanJobTitle(snap.titleAr));
       expect(job.titleEn).toBe(snap.title);
       expect(job.company).toBe(snap.company.ar);
       expect(job.companyEn).toBe(snap.company.en);
@@ -1119,7 +1120,7 @@ describe("levels and badges (8.3, 8.6)", () => {
 describe("onboarding questions (4.2, 3.2)", () => {
   it("asks the six questions in order, with the 3.2 slot labels", () => {
     expect(ONBOARDING_QUESTIONS.map((q) => q.id)).toEqual([...QUESTION_IDS]);
-    expect(ONBOARDING_QUESTIONS.map((q) => q.n)).toEqual([1, 2, 3, 4, 5, 7]);
+    expect(ONBOARDING_QUESTIONS.map((q) => q.n)).toEqual([1, 2, 3, 4, 5, 6]);
     expect(ONBOARDING_QUESTIONS.map((q) => q.slot)).toEqual(["المدينة", "المؤهل", "التخصص", "الخبرة", "الاهتمام", "الأولوية"]);
     expect(getQuestion("city").text).toBe("في أي مدينة أنت الحين؟");
     expect(getQuestion("priority").text).toBe("وآخر سؤال، وش أولويتك الحين؟");

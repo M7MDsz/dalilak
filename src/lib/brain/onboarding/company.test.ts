@@ -6,7 +6,7 @@ import { describe, expect, it } from "vitest";
 
 import { getCompany, getJob, getJobCity } from "@/lib/data";
 import { companyJob, companyJobsOutOfReach, companyOtherFieldJob, jobsAtCompany, makeClock } from "@/lib/engine";
-import { COMPANY_IDS } from "@/lib/ids";
+import { COMPANY_IDS, ONBOARDING_STEP_IDS } from "@/lib/ids";
 import { appendOnboardingMessages, applyOnboardingTurn, newUser } from "@/lib/store/transitions";
 import type { OnboardingContext, OnboardingInput } from "@/lib/brain/protocol";
 import type { CompanyId, JobId, OnboardingAnswers, UserState } from "@/lib/types";
@@ -25,7 +25,9 @@ const FIVE: OnboardingAnswers = {
 };
 
 function ctx(answers: OnboardingAnswers = FIVE, misses: OnboardingContext["misses"] = {}): OnboardingContext {
-  return { name: "خالد", answers, misses, pending: pendingQuestion(answers) };
+  // 21 Nov 2026 (owner): the company step is no longer asked; these tests keep the dormant step working by asking it
+  // explicitly (the seven-step order)
+  return { name: "خالد", answers, misses, pending: pendingQuestion(answers, false, ONBOARDING_STEP_IDS), order: ONBOARDING_STEP_IDS };
 }
 
 const say = (t: string, answers: OnboardingAnswers = FIVE, misses: OnboardingContext["misses"] = {}) =>
@@ -194,8 +196,8 @@ describe("misses and reading ahead", () => {
     const four: OnboardingAnswers = { ...FIVE, interest: undefined };
     const ahead = onboardingTurn(ctx(four), { kind: "text", text: "أحب البيانات وأبي أشتغل في سابك" });
     expect(ahead.answers.interest).toEqual(["data"]);
-    expect(ahead.answers.company).toBe("sabic");
-    expect(ahead.pending).toBe("priority");
+    // 21 Nov 2026 (owner): the company question is gone, so a company is no longer read ahead of a step that is never asked
+    expect(ahead.answers.company).toBeUndefined();
     const now = onboardingTurn(ctx({ ...four, experience: undefined }), { kind: "text", text: "عندي سنة خبرة في stc" });
     expect(now.answers.experience).toBe("1to3");
     expect(now.answers.company).toBeUndefined();
@@ -208,7 +210,8 @@ describe("accounts saved before the step existed (20 Nov 2026) stay complete", (
   const six: OnboardingAnswers = { ...FIVE, priority: "first-job" };
 
   it("pendingQuestion: six answers → company for a conversation in progress, null for a completed account", () => {
-    expect(pendingQuestion(six)).toBe("company");
+    expect(pendingQuestion(six)).toBeNull(); // 21 Nov 2026: the company step is no longer asked
+    expect(pendingQuestion(six, false, ONBOARDING_STEP_IDS)).toBe("company");
     expect(pendingQuestion(six, true)).toBeNull();
     expect(pendingQuestion({ ...six, company: "none" })).toBeNull();
   });

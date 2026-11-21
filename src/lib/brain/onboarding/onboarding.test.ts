@@ -49,7 +49,7 @@ describe("the opening and the six demo chips (spec 4.1, 10.2 steps 1-2)", () => 
   it("greets, says what comes, then asks question 1 in its own message", () => {
     expect(openingMessages("خالد")).toEqual([
       "هلا والله يا خالد، أنا دليلك إلى وظيفتك. بكون معك من أول خطوة لآخرها.",
-      "بسألك سبع أسئلة قصيرة، وعلى ضوئها أرسم لك مسار يناسبك أنت.",
+      "بسألك ست أسئلة قصيرة، وعلى ضوئها أرسم لك مسار يناسبك أنت.",
       "نبدأ بالسهل: في أي مدينة أنت الحين؟",
     ]);
   });
@@ -157,7 +157,7 @@ describe("free text (spec 4.3)", () => {
     expect(taif.replies[0]?.startsWith("وعليكم السلام. الطائف، حيّاك الله!")).toBe(true);
     expect(onboardingTurn(ctx(), text("هلا، أنا من جدة")).replies[0]?.startsWith("هلا والله. ")).toBe(true);
     expect(onboardingTurn(ctx(), text("أنا من الرياض")).replies[0]).toBe("تمام، الرياض. وفيه بعد فرص عن بُعد لو تبي.");
-    expect(onboardingTurn(ctx(), text("مرحبا، كم باقي؟")).replies[0]).toBe("هلا والله. باقي 7 أسئلة بس.");
+    expect(onboardingTurn(ctx(), text("مرحبا، كم باقي؟")).replies[0]).toBe("هلا والله. باقي 6 أسئلة بس.");
   });
 
   it("understands simple English for the interest question", () => {
@@ -263,15 +263,15 @@ describe("every other message (spec 4.5)", () => {
     expect(onboardingTurn(ctx(), text("ماذا ستفعل بإجاباتي")).replies[0]).toBe(
       "أسأل عشان أختار لك من 20 وظيفة اللي يناسب مدينتك وتخصصك وخبرتك واللي تحبه. وترى إجاباتك تنحفظ في متصفحك.",
     );
-    expect(onboardingTurn(ctx({ city: { value: "riyadh", label: "الرياض" } }), text("كم سؤالاً بقي؟")).replies[0]).toBe("باقي 6 أسئلة بس.");
+    expect(onboardingTurn(ctx({ city: { value: "riyadh", label: "الرياض" } }), text("كم سؤالاً بقي؟")).replies[0]).toBe("باقي 5 أسئلة بس.");
     const four: OnboardingAnswers = {
       city: { value: "riyadh", label: "الرياض" },
       education: "bachelor",
       major: { value: "mis", label: "نظم معلومات إدارية" },
       experience: "none",
     };
-    expect(onboardingTurn(ctx(four), text("كم باقي؟")).replies[0]).toBe("باقي 3 أسئلة بس.");
-    expect(onboardingTurn(ctx({ ...four, interest: ["data"] }), text("كم باقي")).replies[0]).toBe("باقي سؤالين بس.");
+    expect(onboardingTurn(ctx(four), text("كم باقي؟")).replies[0]).toBe("باقي سؤالين بس.");
+    expect(onboardingTurn(ctx({ ...four, interest: ["data"] }), text("كم باقي")).replies[0]).toBe("باقي سؤال واحد بس.");
     expect(onboardingTurn(ctx(), text("كم الراتب في جدة؟")).replies).toEqual(["سؤال في محله، ونرجع له بعد ما نرسم مسارك.", q1]);
   });
 

@@ -52,8 +52,8 @@ export const TID = {
     path: "reveal-path",
     pathNode: (n: number) => `reveal-path-node-${n}`,
     accept: "reveal-accept",
-    alt: (index: 0 | 1) => `reveal-alt-${index}`,
-    altChoose: (index: 0 | 1) => `reveal-alt-choose-${index}`,
+    alt: (index: number) => `reveal-alt-${index}`,
+    altChoose: (index: number) => `reveal-alt-choose-${index}`,
     /** architect (20 Nov 2026): the line under the recommended job about the company the user has in mind. */
     company: "reveal-company",
   },

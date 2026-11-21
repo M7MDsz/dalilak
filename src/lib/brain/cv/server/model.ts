@@ -10,7 +10,7 @@ import { SKILL_IDS, isSkillId } from "@/lib/ids";
 import { TIMEOUTS_MS } from "@/lib/brain/protocol";
 import { ProviderFailure, liveSlots, runChain, type ChainHooks, type ChainSlot } from "@/lib/brain/server/chain";
 import { CHAIN_HOOKS, anthropicClientFor, chainSlots, geminiClientFor, geminiDeadlineMs } from "@/lib/brain/server/provider";
-import type { SkillId } from "@/lib/types";
+import type { CvProfile, SkillId } from "@/lib/types";
 
 import { analyseCvLocal } from "../local-analyser";
 
@@ -33,6 +33,18 @@ export function replySchema(strict: boolean): Record<string, unknown> {
   return {
     type: "object",
     properties: {
+      profile: {
+        type: "object",
+        properties: {
+          city: { type: "string" },
+          status: { type: "string" },
+          degree: { type: "string" },
+          major: { type: "string" },
+          years: { type: "number" },
+        },
+        required: ["city", "status", "degree", "major", "years"],
+        ...closed,
+      },
       skills: {
         type: "array",
         items: {
@@ -43,7 +55,7 @@ export function replySchema(strict: boolean): Record<string, unknown> {
         },
       },
     },
-    required: ["skills"],
+    required: ["skills", "profile"],
     ...closed,
   };
 }
@@ -56,6 +68,16 @@ function systemPrompt(found: readonly SkillId[]): string {
     `Do not return these, they were already found: ${found.length > 0 ? found.join(", ") : "none"}.`,
     "For each skill give its id and one sentence copied word for word from the CV that proves it. Never paraphrase.",
     "Do not guess: if nothing is clearly shown, return an empty list. Do not rate levels.",
+    "",
+    'Also fill `profile`, the person as the CV states them (use "" / "unknown" / -1 when it is not clearly written):',
+    "- city: the city they live in (contact line or header), copied as written.",
+    "- degree: their HIGHEST degree level (secondary, diploma, bachelor, postgrad).",
+    "- status of that degree: graduated = finished (an end year in the past, 'graduated', 'خريج'); studying = still in it",
+    "  ('present', 'current', 'expected', 'متوقع', 'حتى الآن', 'حالياً', a future end year, 'طالب', a year/level number);",
+    "  incomplete = left without finishing. A student is NEVER graduated. If unsure, unknown.",
+    "- major: the field of that degree, copied as written.",
+    "- years: total years of paid work, internships and co-op counted by their months (6 months = 0.5); education is not",
+    `  work; 0 when the CV clearly has no work; -1 when unclear. Today is ${new Date().toISOString().slice(0, 7)}.`,
     "",
     "Catalogue (id: name):",
     catalogue,
@@ -85,11 +107,48 @@ export function readCandidates(json: string | undefined): Candidate[] | null {
 
 type CvCandidates = readonly { readonly skill: SkillId; readonly evidence: string }[];
 
+/** The model's whole reply: the extra skills, and its reading of the person (null when the reply had none). */
+export interface CvModelReply {
+  readonly skills: CvCandidates;
+  readonly profile: CvProfile | null;
+}
+
+/** The reply's profile, field by field; a field the model left empty or "unknown" is null. */
+export function readProfile(json: string | undefined): CvProfile | null {
+  if (json === undefined) return null;
+  let data: unknown;
+  try {
+    data = JSON.parse(json);
+  } catch {
+    return null;
+  }
+  if (typeof data !== "object" || data === null || !("profile" in data)) return null;
+  const p: unknown = data.profile;
+  if (typeof p !== "object" || p === null) return null;
+  const get = (k: string): unknown => (k in p ? (p as Record<string, unknown>)[k] : undefined);
+  const text = (v: unknown): string | null => (typeof v === "string" && v.trim() !== "" && v.trim().toLowerCase() !== "unknown" && v.length <= 120 ? v.trim() : null);
+  const status = get("status");
+  const degree = get("degree");
+  const years = get("years");
+  return {
+    city: text(get("city")),
+    status: status === "graduated" || status === "studying" || status === "incomplete" ? status : null,
+    degree: degree === "secondary" || degree === "diploma" || degree === "bachelor" || degree === "postgrad" ? degree : null,
+    major: text(get("major")),
+    years: typeof years === "number" && Number.isFinite(years) && years >= 0 && years <= 50 ? years : null,
+  };
+}
+
+function readReply(json: string | undefined): CvModelReply | null {
+  const skills = readCandidates(json);
+  return skills === null ? null : { skills, profile: readProfile(json) };
+}
+
 /**
  * One slot's answer: the pairs, or null for a reply that came back but is of no use (a refusal, a cut-off reply, another
  * shape). That is not an outage: no cooldown, no next slot, the local result stands alone. Throws on a real failure.
  */
-export type CvSlotCall = (slot: ChainSlot, input: string, system: string, signal: AbortSignal, shareMs: number) => Promise<CvCandidates | null>;
+export type CvSlotCall = (slot: ChainSlot, input: string, system: string, signal: AbortSignal, shareMs: number) => Promise<CvCandidates | CvModelReply | null>;
 
 const callSlot: CvSlotCall = async (slot, input, system, signal, shareMs) => {
   if (slot.provider === "gemini") {
@@ -106,7 +165,7 @@ const callSlot: CvSlotCall = async (slot, input, system, signal, shareMs) => {
         httpOptions: { timeout: geminiDeadlineMs(TIMEOUTS_MS.cvModel) },
       },
     });
-    return readCandidates(response.text);
+    return readReply(response.text);
   }
   const client = anthropicClientFor(slot);
   if (client === null) throw new ProviderFailure("auth", `${slot.id}: no client`);
@@ -122,7 +181,7 @@ const callSlot: CvSlotCall = async (slot, input, system, signal, shareMs) => {
   );
   if (message.stop_reason === "refusal" || message.stop_reason === "max_tokens") return null;
   const block = message.content.find((b) => b.type === "text");
-  return readCandidates(block?.type === "text" ? block.text : undefined);
+  return readReply(block?.type === "text" ? block.text : undefined);
 };
 
 /** What the CV model call needs from the outside (a seam so the chain is tested without a key or a network). */
@@ -134,7 +193,7 @@ export interface CvModelDeps {
   readonly budgetMs?: number;
 }
 
-export async function modelCvSkillsWith(text: string, signal: AbortSignal, deps: CvModelDeps): Promise<CvCandidates | null> {
+export async function modelCvSkillsWith(text: string, signal: AbortSignal, deps: CvModelDeps): Promise<CvCandidates | CvModelReply | null> {
   let slots: readonly ChainSlot[];
   try {
     slots = deps.slots();
@@ -144,7 +203,7 @@ export async function modelCvSkillsWith(text: string, signal: AbortSignal, deps:
   }
   const input = text.slice(0, MODEL_INPUT_CHARS);
   const system = systemPrompt(analyseCvLocal(text).skills.map((s) => s.skill));
-  const result = await runChain<CvCandidates | null>({
+  const result = await runChain<CvCandidates | CvModelReply | null>({
     task: "cv",
     slots,
     signal,
@@ -155,7 +214,7 @@ export async function modelCvSkillsWith(text: string, signal: AbortSignal, deps:
   return result.ok ? result.value : null;
 }
 
-export async function modelCvSkills(text: string, signal: AbortSignal): Promise<CvCandidates | null> {
+export async function modelCvSkills(text: string, signal: AbortSignal): Promise<CvCandidates | CvModelReply | null> {
   try {
     return await modelCvSkillsWith(text, signal, { slots: chainSlots, call: callSlot, hooks: CHAIN_HOOKS });
   } catch {

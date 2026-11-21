@@ -11,7 +11,7 @@ import { StepTrail } from "@/components/game";
 import { PageTransition, Roll, useInstant } from "@/components/motion";
 import { ContourBackdrop, Stage } from "@/components/ui";
 import { getQuestion } from "@/lib/data";
-import { ONBOARDING_STEP_IDS } from "@/lib/ids";
+import { ASKED_STEP_IDS } from "@/lib/ids";
 import { formatNumber } from "@/lib/format";
 import { tween } from "@/lib/motion";
 import { useCurrentUser } from "@/lib/store";
@@ -54,10 +54,10 @@ function WelcomeFlow({ user }: { user: UserState }) {
 
   // before «دليلك» has greeted, nothing is pending yet (pendingStep is null on an empty thread): show step 1 with every
   // stop still ahead, not «7 من 7» all ticked rolling down to 1 (tester, 21 Nov 2026)
-  const pending = user.onboarding.thread.length === 0 ? ONBOARDING_STEP_IDS[0] : pendingOf(user);
+  const pending = user.onboarding.thread.length === 0 ? ASKED_STEP_IDS[0] : pendingOf(user);
   // while the CV card reads, the counter keeps the number it had before it (the conversation holds it until «خلصت…»)
   const [heldStep, setHeldStep] = useState<number | null>(null);
-  const step = heldStep ?? (pending ? getQuestion(pending).n : ONBOARDING_STEP_IDS.length);
+  const step = heldStep ?? (pending ? getQuestion(pending).n : ASKED_STEP_IDS.length);
 
   return (
     <PageTransition>
@@ -106,7 +106,7 @@ function WelcomeFlow({ user }: { user: UserState }) {
                     </span>
                   }
                   testId={TID.welcome.step}
-                  total={ONBOARDING_STEP_IDS.length}
+                  total={ASKED_STEP_IDS.length}
                 />
               </motion.div>
             ) : null}

@@ -779,7 +779,19 @@ const FIRST_JOBS: readonly Job[] = [
  * the 38 of wave 2 (./wave2/jobs.ts: three old fields and the nine new ones), and the 86 of wave 3 (./wave3/jobs.ts, after
  * every older job).
  */
-export const JOBS: readonly Job[] = [...FIRST_JOBS, ...EXPANSION_JOBS, ...WAVE2_JOBS, ...WAVE3_JOBS].sort((a, b) => JOB_IDS.indexOf(a.id) - JOB_IDS.indexOf(b.id));
+/**
+ * 21 Nov 2026 (owner: «don't include words like for Saudis only»): the qualifiers of a posting about who may apply
+ * («(للسعوديين فقط)», «- للسعوديين», «(لمواطني الخليج)») are left out of the title the app shows; the posting keeps them.
+ */
+const WHO_MAY_APPLY = /\s*(?:\((?:[^()]*?)(?:للسعوديين|للسعوديات|سعوديين فقط|لمواطني الخليج|للمواطنين|Saudis? only|Saudi nationals)(?:[^()]*?)\)|[-–]\s*(?:للسعوديين|للسعوديات)(?:\s*فقط)?)\s*/giu;
+
+export function cleanJobTitle(title: string): string {
+  return title.replace(WHO_MAY_APPLY, " ").replace(/\s{2,}/g, " ").trim();
+}
+
+export const JOBS: readonly Job[] = [...FIRST_JOBS, ...EXPANSION_JOBS, ...WAVE2_JOBS, ...WAVE3_JOBS]
+  .map((job) => (cleanJobTitle(job.title) === job.title ? job : { ...job, title: cleanJobTitle(job.title) }))
+  .sort((a, b) => JOB_IDS.indexOf(a.id) - JOB_IDS.indexOf(b.id));
 
 export function getJob(id: JobId): Job {
   const job = JOBS.find((j) => j.id === id);

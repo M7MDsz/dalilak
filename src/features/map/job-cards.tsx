@@ -62,9 +62,40 @@ function suitedFields(user: UserState): ReadonlySet<JobFieldId> {
   return suitedFieldsOf(user, skillStars(user));
 }
 
+/** The words of a title that name the role («محلل بيانات مبتدئ» → محلل، بيانات), small connecting words left out. */
+function roleWords(title: string): Set<string> {
+  const skip = new Set(["في", "من", "و", "مع", "أول", "اول", "مبتدئ", "متدرب", "خريج", "حديث", "التخرج", "برنامج", "تدريب", "تمهير", "عن", "بعد"]);
+  return new Set(
+    title
+      .replace(/[()«»\-–—/،,|:]/g, " ")
+      .split(/\s+/)
+      .map((w) => w.replace(/^ال/, ""))
+      .filter((w) => w.length > 1 && !skip.has(w)),
+  );
+}
+
 /**
- * The real postings for this user: the dream company's first, then the jobs in the fields that suit them (highest match
- * first), then — only to fill the column up to six — the closest others; ties keep the data order.
+ * How close a posting is to the path «دليلك» chose (21 Nov 2026, owner: «the positions on the main page related to the
+ * position he chose for you»): 3 = the same role (its title shares the target's role words), 2 = the same field and at
+ * least two of the target's skills, 1 = three shared skills in another field, 0 = not related.
+ */
+export function relatedness(job: Job, target: Job | null): 0 | 1 | 2 | 3 {
+  if (target === null) return 0;
+  const targetSkills = new Set(target.requirements.map((r) => r.skill));
+  const shared = job.requirements.filter((r) => targetSkills.has(r.skill)).length;
+  const words = roleWords(target.title);
+  const own = roleWords(job.title);
+  const sharedWords = [...words].filter((w) => own.has(w)).length;
+  if (job.field === target.field && (sharedWords >= Math.min(2, words.size) || (sharedWords >= 1 && shared >= 2))) return 3;
+  if (job.field === target.field && shared >= 2) return 2;
+  if (shared >= 3) return 1;
+  return 0;
+}
+
+/**
+ * The real postings for this user: the dream company's first, then the ones closest to the chosen path (the same role,
+ * then the same field and skills), then the jobs in the fields that suit them (highest match first), then — only to fill
+ * the column up to six — the closest others; within reach before out of reach; ties keep the data order.
  */
 export function jobAds(user: UserState): readonly JobAd[] {
   const stars = skillStars(user);
@@ -88,9 +119,19 @@ export function jobAds(user: UserState): readonly JobAd[] {
     ...ranked.filter((ad) => !ad.dream && reachable(ad)),
     ...ranked.filter((ad) => !ad.dream && !reachable(ad)),
   ];
-  if (suited.size === 0) return byReach;
-  const inField = byReach.filter((ad) => ad.dream || suited.has(ad.job.field));
-  const others = byReach.filter((ad) => !ad.dream && !suited.has(ad.job.field));
+  const target = user.targetJobId === null ? null : getJob(user.targetJobId);
+  const closeness = new Map(byReach.map((ad) => [ad.job.id, relatedness(ad.job, target)] as const));
+  const close = (ad: JobAd) => closeness.get(ad.job.id) ?? 0;
+  // the dream company's first, then the same role, the same field and skills, a few shared skills (each reachable first,
+  // the order above kept inside each group)
+  const byPath = [
+    ...byReach.filter((ad) => ad.dream),
+    ...[true, false].flatMap((inReach) => [3, 2, 1].flatMap((level) => byReach.filter((ad) => !ad.dream && reachable(ad) === inReach && close(ad) === level))),
+  ];
+  const rest = byReach.filter((ad) => !ad.dream && close(ad) === 0);
+  if (suited.size === 0) return [...byPath, ...rest];
+  const inField = [...byPath, ...rest.filter((ad) => suited.has(ad.job.field))];
+  const others = rest.filter((ad) => !suited.has(ad.job.field));
   return inField.length >= 6 ? inField : [...inField, ...others.slice(0, 6 - inField.length)];
 }
 

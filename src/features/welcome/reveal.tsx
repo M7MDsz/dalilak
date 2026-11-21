@@ -303,12 +303,12 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
               <motion.h2 animate={state} className="text-h3 text-fg" custom={0.32} id="reveal-alts" initial={startOnResult ? false : "hidden"} variants={block}>
                 {RESULT_COPY.altHeading}
               </motion.h2>
-              {data.alternatives.map((job, i) => (
+              {[...data.alternatives, ...data.more].map((job, i) => (
                 <motion.div animate={state} custom={0.4 + i * 0.04} initial={startOnResult ? false : "hidden"} key={job.id} variants={block}>
-                  <AlternativeCard disabled={leaving} index={i as 0 | 1} job={job} onChoose={() => choose(job.id, false)} visible={visible} />
+                  <AlternativeCard disabled={leaving} index={i} job={job} onChoose={() => choose(job.id, false)} visible={visible} />
                 </motion.div>
               ))}
-              <motion.p animate={state} className="text-small text-fg-3" custom={0.48} initial={startOnResult ? false : "hidden"} variants={block}>
+              <motion.p animate={state} className="text-small text-fg-3" custom={0.48 + data.more.length * 0.04} initial={startOnResult ? false : "hidden"} variants={block}>
                 {RESULT_COPY.footer}
               </motion.p>
             </section>
@@ -417,7 +417,7 @@ function RecommendedCard({ job, company }: { job: RevealJobCard; company: Reveal
   );
 }
 
-function AlternativeCard({ job, index, onChoose, disabled, visible }: { job: RevealJobCard; index: 0 | 1; onChoose: () => void; disabled: boolean; visible: boolean }) {
+function AlternativeCard({ job, index, onChoose, disabled, visible }: { job: RevealJobCard; index: number; onChoose: () => void; disabled: boolean; visible: boolean }) {
   return (
     <article className="flex flex-col gap-3 rounded-card border border-border bg-surface p-card" data-testid={visible ? TID.reveal.alt(index) : undefined} data-value={job.id}>
       <div className="flex flex-col gap-1">

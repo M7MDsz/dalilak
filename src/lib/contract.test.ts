@@ -43,7 +43,7 @@ describe("contract", () => {
         interest: ["data"],
         priority: "first-job",
       }),
-    ).toBe("company");
+    ).toBeNull(); // 21 Nov 2026 (owner): the company step is no longer asked
     // 20 Nov 2026: the seventh step (the company, «لا، مو الحين» = "none") completes it
     const seven: OnboardingAnswers = {
       city: { value: "riyadh", label: "الرياض" },

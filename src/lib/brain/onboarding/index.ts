@@ -5,7 +5,7 @@
 import { NEUTRAL_PRINT } from "@/lib/copy";
 import { JOB_CITIES, getCompany, getField, getJob, getJobCity, getQuestion, optionLabel } from "@/lib/data";
 import { companyChoices, companyField, companyJob, companyJobsOutOfReach, companyOtherFieldJob, jobsAtCompany, userBandOf } from "@/lib/engine";
-import { ONBOARDING_STEP_IDS, isOptionOf } from "@/lib/ids";
+import { ASKED_STEP_IDS, isOptionOf } from "@/lib/ids";
 import type { CityValue, CompanyId, InterestOption, JobId, OnboardingAnswers, OnboardingStepId, UserState } from "@/lib/types";
 import type { OnboardingChipSet, OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
 import { LIMITS } from "@/lib/brain/protocol";
@@ -241,7 +241,7 @@ function merge(answers: OnboardingAnswers, recorded: readonly Recorded[]): Onboa
 }
 
 function unansweredIn(answers: OnboardingAnswers): OnboardingStepId[] {
-  return ONBOARDING_STEP_IDS.filter((q) => answers[q] === undefined);
+  return ASKED_STEP_IDS.filter((q) => answers[q] === undefined);
 }
 
 /** The turn after answers were recorded: acknowledgement (+ extras), then the next question or the closing line. */
@@ -455,7 +455,7 @@ export function onboardingTurn(context: OnboardingContext, input: OnboardingInpu
  * `completedBefore`: the account finished onboarding before step 7 existed (saved before 20 Nov 2026: completed, no
  * company): it stays complete, its company counts as «لا، مو الحين».
  */
-export function pendingQuestion(answers: OnboardingAnswers, completedBefore = false, order: readonly OnboardingStepId[] = ONBOARDING_STEP_IDS): OnboardingStepId | null {
+export function pendingQuestion(answers: OnboardingAnswers, completedBefore = false, order: readonly OnboardingStepId[] = ASKED_STEP_IDS): OnboardingStepId | null {
   for (const question of order) {
     if (question === "company" && completedBefore) continue;
     if (answers[question] === undefined) return question;
@@ -468,11 +468,11 @@ export function pendingQuestion(answers: OnboardingAnswers, completedBefore = fa
  * then the interest (asked from the CV's real skills), then whatever the CV did not state (city, education, major,
  * experience), then company and priority. The same seven answer slots: the engine and the reveal are unchanged.
  */
-export const CV_QUESTION_ORDER: readonly OnboardingStepId[] = ["interest", "city", "education", "major", "experience", "company", "priority"];
+export const CV_QUESTION_ORDER: readonly OnboardingStepId[] = ["interest", "city", "education", "major", "experience", "priority"];
 
 /** The question order of a saved user: the CV order once a CV was read and its answers kept (not after «لا، بعدّل»). */
 export function questionOrder(user: Pick<UserState, "onboarding">): readonly OnboardingStepId[] {
-  return user.onboarding.cv === "analysed" && user.onboarding.cvPrefill?.confirmed === true ? CV_QUESTION_ORDER : ONBOARDING_STEP_IDS;
+  return user.onboarding.cv === "analysed" && user.onboarding.cvPrefill?.confirmed === true ? CV_QUESTION_ORDER : ASKED_STEP_IDS;
 }
 
 /** The step a saved user is on: null before the greeting (empty thread) and once onboarding is complete. */

@@ -116,6 +116,8 @@ const NAMED: readonly string[] = [
   ...COMPANIES.flatMap((c) => [c.short, c.name]),
 ].filter((n) => n.length >= 3 && !EVERYDAY.has(n));
 
+const GRADUATE_WORDS = ["خريج", "خريجة", "متخرج", "متخرجة", "تخرجت", "تخرّجت", "graduate", "graduated"];
+
 function allowedText(request: OnboardingPhraseRequest): string {
   return `${request.lines.join(" ")} ${JSON.stringify(request.facts)} ${request.name}`;
 }
@@ -136,6 +138,8 @@ export function lineProblem(line: string, allowed: string, template: string | nu
   if (reading.mentions(MONEY) && !new Reading(allowed).mentions(MONEY)) return "money";
   // whole words, normalised (a name inside a longer word is not that name: «سار» in «مسار»)
   const allowedReading = new Reading(allowed);
+  // 21 Nov 2026 (owner: a student was called a graduate): «خريج» only when the template or the facts say so
+  if (reading.mentions(GRADUATE_WORDS) && !allowedReading.mentions(GRADUATE_WORDS)) return "graduate";
   for (const name of NAMED) if (text.includes(name) && reading.mentions([name]) && !allowedReading.mentions([name])) return `named ${name}`;
   const allowedLower = allowed.toLowerCase();
   for (const word of text.match(/[A-Za-z][A-Za-z.+#-]*/g) ?? []) if (!allowedLower.includes(word.toLowerCase())) return `latin ${word}`;

@@ -305,6 +305,25 @@ export interface CvAnalysis {
   readonly engine: CvEngine;
   /** True when the text was the sample CV (spec 6.1 test); the sample is always read locally. */
   readonly isSample: boolean;
+  /**
+   * 21 Nov 2026 (owner: «if something is already in the CV he should answer it»; a friend's CV was read as a graduate
+   * while the bachelor was not finished): the model's reading of who the person is, when the model answered. The browser
+   * checks every field again against the CV's own words (onboarding cvFacts) before it fills a question.
+   */
+  readonly profile?: CvProfile;
+}
+
+/** The model's reading of the CV's person (each field null when the CV does not state it clearly). */
+export interface CvProfile {
+  /** The city they live in, in the CV's own words. */
+  readonly city: string | null;
+  /** Their highest degree's state: finished, still studying (expected / present), or left without finishing. */
+  readonly status: "graduated" | "studying" | "incomplete" | null;
+  readonly degree: "secondary" | "diploma" | "bachelor" | "postgrad" | null;
+  /** The major, in the CV's own words. */
+  readonly major: string | null;
+  /** Total years of paid work (internships count by their months), or null. */
+  readonly years: number | null;
 }
 
 /** The latest successful CV analysis (≥ 1 skill), as a fact. The document text lives in UserState.cvDocument. */

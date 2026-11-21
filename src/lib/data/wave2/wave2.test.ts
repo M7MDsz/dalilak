@@ -7,7 +7,7 @@
 // sample CV, so the jobs list after the CV (demo step 6) does not move.
 import { describe, expect, it } from "vitest";
 
-import { COMPANIES, COMPANY_TILES, COURSES, getGuide, JOBS, SAMPLE_CV_BODY, SKILLS } from "@/lib/data";
+import { cleanJobTitle, COMPANIES, COMPANY_TILES, COURSES, getGuide, JOBS, SAMPLE_CV_BODY, SKILLS } from "@/lib/data";
 import { ADVANCED_WORDS, MIDDLE_WORDS } from "@/lib/brain/cv/local-analyser";
 import { COMPANY_IDS, COURSE_IDS, FIELD_IDS, JOB_FIELD_IDS, JOB_IDS, SKILL_IDS } from "@/lib/ids";
 import { findKeywords, normalizeText } from "@/lib/text/normalize";
@@ -183,7 +183,7 @@ describe("wave 2: real jobs", () => {
     expect(new Set(WAVE2_JOB_IDS).size).toBe(38);
     for (const j of WAVE2_JOBS) {
       expect((JOB_IDS as readonly string[]).includes(j.id), j.id).toBe(true);
-      expect(JOBS.find((x) => x.id === j.id), j.id).toBe(j);
+      expect(JOBS.find((x) => x.id === j.id), j.id).toEqual({ ...j, title: cleanJobTitle(j.title) });
     }
     const later = WAVE2_JOBS.filter((j) => j.field !== "design" && j.field !== "marketing").map((j) => (JOB_IDS as readonly string[]).indexOf(j.id));
     expect(JOB_IDS.indexOf("syarah-financial-analyst-tamheer-riyadh")).toBeLessThan(Math.min(...later));

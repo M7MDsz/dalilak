@@ -36,7 +36,7 @@ describe("revealData (the demo answers)", () => {
 
   it("recommends «محلل بيانات» with the two demo alternatives", () => {
     expect(data.recommended.id).toBe("data-analyst-riyadh");
-    expect(data.alternatives.map((a) => a.id)).toEqual(["qiddiya-hr-analytics-analyst-riyadh", "syarah-financial-analyst-tamheer-riyadh"]);
+    expect(data.alternatives.map((a) => a.id)).toEqual(["qiddiya-hr-analytics-analyst-riyadh", "tamara-builders-program-data-riyadh"]);
   });
 
   it("gathers the six answers and draws a tile for every job of the catalogue", () => {

@@ -269,23 +269,32 @@ export function companyJob(answers: OnboardingAnswers, jobsAt: CompanyJobs = job
  * `stars`: the user's real stars when a CV was read in onboarding (the CV term of `fitBreakdown`).
  */
 export function recommend(answers: OnboardingAnswers, jobsAt: CompanyJobs = jobsAtCompany, stars?: StarMap): Recommendation {
-  const ranked = rankByFit(answers, stars);
+  const ranked = rankByFit(answers, stars).map((f) => f.jobId);
   const aimed = companyJob(answers, jobsAt, stars);
-  if (aimed !== null) {
-    const rest = ranked.filter((f) => f.jobId !== aimed);
-    const field = getJob(aimed).field;
-    const second = rest[0];
-    const third = rest.slice(1).find((f) => getJob(f.jobId).field !== field) ?? rest[1];
-    if (second === undefined || third === undefined) throw new Error("engine: no alternatives");
-    return { recommended: aimed, alternatives: [second.jobId, third.jobId], reasons: fitReasons(aimed, answers) };
-  }
-  const first = ranked[0];
-  const second = ranked[1];
-  if (first === undefined || second === undefined) throw new Error("engine: fewer than two jobs to recommend");
-  const field = getJob(first.jobId).field;
-  const third = ranked.slice(2).find((f) => getJob(f.jobId).field !== field) ?? ranked[2];
-  if (third === undefined) throw new Error("engine: no second alternative");
-  return { recommended: first.jobId, alternatives: [second.jobId, third.jobId], reasons: fitReasons(first.jobId, answers) };
+  const order = choiceOrder(answers, ranked);
+  const first = aimed ?? order[0];
+  if (first === undefined) throw new Error("engine: no job to recommend");
+  const [second, third] = order.filter((id) => id !== first && getJob(id).title !== getJob(first).title);
+  if (second === undefined || third === undefined) throw new Error("engine: fewer than two alternatives");
+  return { recommended: first, alternatives: [second, third], reasons: fitReasons(first, answers) };
+}
+
+/**
+ * 21 Nov 2026 (owner: «I put I'm interested in something and what he gave me is not related to it»): the order the jobs
+ * are offered in. The ranking's order, but the fields the user asked for come first (their interests, else their major's;
+ * the old second alternative was picked from ANOTHER field on purpose, and that is what read as unrelated), and inside
+ * them a paid job within reach of their experience before an unpaid or senior one. Every job stays in the list, so a
+ * field with few jobs still fills the choices.
+ */
+export function choiceOrder(answers: OnboardingAnswers, ranked: readonly JobId[]): JobId[] {
+  const wanted = wantedFields(answers);
+  const tier = (id: JobId): number => {
+    const job = getJob(id);
+    const inField = wanted === null || wanted.has(job.field);
+    const good = withinReach(id, answers) && !UNPAID.test(`${job.title} ${job.titleEn ?? ""}`);
+    return inField ? (good ? 0 : 1) : good ? 2 : 3;
+  };
+  return [0, 1, 2, 3].flatMap((t) => ranked.filter((id) => tier(id) === t));
 }
 
 /**
