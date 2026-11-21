@@ -103,7 +103,7 @@ const CV_ANSWERS: OnboardingAnswers = { ...DEMO_ANSWERS, experience: "under1", c
 describe("the 2-minute demo, step by step (spec 10.2 / 10.4, CV in onboarding)", () => {
   // Step 1: sign in as «خالد» (21:00)
   const s1 = newFacts({ avatar: defaultAvatar("خالد") });
-  // Step 2a: «جرّب بسيرة جاهزة» in the chat → cv_analysed (+100); its toast shows in the chat (announced there)
+  // Step 2a: «جرّب سيرة افتراضية» in the chat → cv_analysed (+100); its toast shows in the chat (announced there)
   const s2a = finalize(withCv(s1, t + MINUTE / 2), clockAt(0.5));
   // Step 2b: the questions left → onboarding_completed (+50)
   const s2 = finalize(onboarded(announce(s2a), t + MINUTE, CV_ANSWERS), clockAt(1));

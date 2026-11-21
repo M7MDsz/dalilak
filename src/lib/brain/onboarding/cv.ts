@@ -268,9 +268,9 @@ export function cvPhase(user: Pick<UserState, "onboarding">): CvPhase {
 
 /** The offer chips (test ids `welcome-chip-cv-{id}`) and the confirm chips (`welcome-chip-cv-confirm-{id}`). */
 export const CV_OFFER_CHIPS = [
+  { id: "sample", label: "جرّب سيرة افتراضية" },
   { id: "upload", label: "ارفع ملف سيرتك" },
   { id: "paste", label: "الصق نص سيرتك" },
-  { id: "sample", label: "جرّب بسيرة جاهزة" },
   { id: "none", label: "ما عندي سيرة الحين" },
 ] as const;
 export type CvOfferChip = (typeof CV_OFFER_CHIPS)[number]["id"];
@@ -286,7 +286,7 @@ export const CV_LINES = {
   skip: ["ولا يهمك، نمشي بالأسئلة، وتقدر ترفعها بعدين من خريطتك.", "ما عليه، الأسئلة تكفي الحين، وإذا جهزت سيرتك ترفعها من خريطتك.", "تمام، نكمل بالأسئلة، والسيرة تقدر تضيفها بعدين من خريطتك."],
   skipShort: "ولا يهمك، نمشي بالأسئلة.",
   yesHint: "حلو! اختر «ارفع ملف سيرتك» تحت، أو الصق نصها.",
-  bubbleSample: "جرّب بسيرة جاهزة",
+  bubbleSample: "جرّب سيرة افتراضية",
   bubblePaste: "لصقت نص سيرتي",
   bubbleFile: (fileName: string): string => `سيرتي: ${fileName}`,
   confirmed: ["تمام، سجّلتها.", "زين، اعتمدتها.", "أبشر، ثبّتها لك."],

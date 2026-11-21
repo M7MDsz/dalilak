@@ -61,9 +61,9 @@ export const GUIDE: readonly GuideEntry[] = [
     // upload verbs only: «كيف أكتب سيرة ذاتية قوية؟» wants advice (T.cvTips), not this page
     ask: ["أرفع", "ارفع", "أحلل", "احلل", "أحلّل", "أضيف", "اضيف", "upload"],
     to: { screen: "cv" },
-    how: "تفضّل، فتحت لك صفحة السيرة. ارفع ملف PDF أو Word أو الصق النص، واضغط «حلّل سيرتي». وإذا ما عندك سيرة اضغط «جرّب بسيرة جاهزة».",
+    how: "تفضّل، فتحت لك صفحة السيرة. ارفع ملف PDF أو Word أو الصق النص، واضغط «حلّل سيرتي». وإذا ما عندك سيرة اضغط «جرّب سيرة افتراضية».",
     routed: true,
-    hint: "Upload / analyse a CV: CV page (سيرتي) → upload a PDF or Word file or paste the text → «حلّل سيرتي»; «جرّب بسيرة جاهزة» for the sample; «حلّل سيرة أخرى» to redo. navigate screen=cv.",
+    hint: "Upload / analyse a CV: CV page (سيرتي) → upload a PDF or Word file or paste the text → «حلّل سيرتي»; «جرّب سيرة افتراضية» for the sample; «حلّل سيرة أخرى» to redo. navigate screen=cv.",
   },
   {
     // 20 Nov 2026: Dalilak guides, it does not host courses. A step of the path opens the guide of its skill.
