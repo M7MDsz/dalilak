@@ -389,7 +389,7 @@ export const ACK = {
     (city: string): string => `تمام، ${city}. وفيه بعد فرص عن بُعد لو تبي.`,
   ],
   cityNoJobs: (city: string): string =>
-    `${city}، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في قائمتي، فبضيف لك وظائف عن بُعد تناسبك.`,
+    `${city}، يا حيّ أهلها! ترى الفرص القريبة منك قليلة في قائمتي، فبختار لك الأنسب من أقرب المدن والوظائف عن بُعد.`,
   /** Any other Saudi city, governorate or region (20 Nov 2026): «شقراء، حيّاك الله! محافظة في منطقة الرياض، …». */
   cityPlace: (a: PlaceAck): string =>
     `${a.label}، حيّاك الله! ${placeWhere(a)}${placeNear(a)}. وفيه بعد وظائف عن بُعد تقدر تشتغلها من مكانك.`,

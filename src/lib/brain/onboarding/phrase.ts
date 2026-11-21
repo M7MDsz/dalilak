@@ -296,6 +296,15 @@ export function understandPrompt(request: OnboardingUnderstandRequest): { readon
   return { system, user };
 }
 
+/** The company's name, short name, English name or one of its spellings is written in the user's text. */
+function companyNamed(id: string, text: string): boolean {
+  const company = COMPANIES.find((c) => c.id === id);
+  if (!company) return false;
+  const reading = new Reading(text);
+  const names = [company.name, company.short, company.en, ...company.aliases, ...(company.aliasesAlone ?? [])].filter((n): n is string => typeof n === "string" && n.trim() !== "");
+  return reading.find(names).length > 0;
+}
+
 /** The model's decision, kept only when valid: ids from the options, a side reply that passes `lineProblem`. */
 export function checkUnderstood(request: OnboardingUnderstandRequest, raw: string): UnderstandResult | null {
   const json = raw.slice(raw.indexOf("{"), raw.lastIndexOf("}") + 1);
@@ -310,7 +319,10 @@ export function checkUnderstood(request: OnboardingUnderstandRequest, raw: strin
   const r = parsed as Record<string, unknown>;
   if (r.type === "answer" && Array.isArray(r.options)) {
     const ids = new Set(request.options.map((o) => o.id));
-    const valid = [...new Set(r.options.filter((o): o is string => typeof o === "string" && ids.has(o)))].slice(0, request.many ? 2 : 1);
+    let valid = [...new Set(r.options.filter((o): o is string => typeof o === "string" && ids.has(o)))].slice(0, request.many ? 2 : 1);
+    // a company is taken only when the user wrote it: its name or one of its spellings must be in the text (21 Nov 2026,
+    // tester: «أي بنك كويس» was read as Al Rajhi). «لا، مو الحين» needs no name.
+    if (request.step === "company") valid = valid.filter((id) => id === "none" || companyNamed(id, request.text));
     return valid.length > 0 ? { type: "answer", options: valid } : { type: "none" };
   }
   if (r.type === "question" && typeof r.reply === "string") {

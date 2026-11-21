@@ -131,6 +131,9 @@ export function suitedFieldsOf(facts: Pick<UserFacts, "answers" | "targetJobId">
   return fields;
 }
 
+/** A posting that says it is unpaid («غير مدفوع», "unpaid"). */
+const UNPAID = /غير مدفوع|unpaid/i;
+
 /** The job field holding the most CV stars (at least 3; ties: catalogue order), or null. */
 export function cvFieldOf(stars: StarMap | undefined): JobFieldId | null {
   if (stars === undefined) return null;
@@ -163,7 +166,8 @@ function termsOf(job: Job, answers: OnboardingAnswers, stars?: StarMap): FitBrea
   const cityValue = answers.city?.value;
   const city = cityValue !== undefined && cityValue === job.city ? 10 : job.city === "remote" ? 6 : 0;
   let priority = 0;
-  if (answers.priority === "first-job") priority = job.band === "entry" ? 10 : 0;
+  // «أول وظيفة بأسرع وقت»: an entry job, but not an unpaid internship (tester, 21 Nov 2026)
+  if (answers.priority === "first-job") priority = job.band === "entry" && !UNPAID.test(`${job.title} ${job.titleEn ?? ""}`) ? 10 : 0;
   else if (answers.priority === "switch") priority = interestAt >= 0 && job.field !== fields?.[0] ? 10 : 0;
   else if (answers.priority === "grow") priority = fields !== null && job.field === fields[0] ? 10 : 0;
   return { interest, major, experience, city, priority };

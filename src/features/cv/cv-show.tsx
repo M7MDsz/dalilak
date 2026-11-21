@@ -365,7 +365,8 @@ export function CvShow({
               <span className="sr-only" role="status">
                 {label}
               </span>
-              <Roll className={cn("min-w-0 text-title font-semibold", !compact && "@min-[900px]/content:text-h3")} id={label}>
+              {/* phone: a touch smaller with room at the end, so the longest line keeps its «…» at 360 px (tester, 21 Nov) */}
+              <Roll className={cn("min-w-0 text-title font-semibold", tight && "pe-2 text-[0.95rem]", !compact && "@min-[900px]/content:text-h3")} id={label}>
                 <span aria-hidden className={stepId === "done" ? "text-fg" : "shimmer-text"}>
                   {label}
                 </span>
