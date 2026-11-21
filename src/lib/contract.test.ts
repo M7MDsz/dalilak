@@ -14,7 +14,7 @@ describe("contract", () => {
     expect(FIELD_IDS).toHaveLength(23);
     expect(SKILL_IDS).toHaveLength(114);
     expect(COURSE_IDS).toHaveLength(185);
-    expect(JOB_IDS).toHaveLength(170);
+    expect(JOB_IDS).toHaveLength(176); // wave 4: 6 beginner roles (21 Nov 2026)
     expect(BADGE_IDS).toHaveLength(12);
     expect(LEADERBOARD_USER_IDS).toHaveLength(24);
   });

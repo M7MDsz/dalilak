@@ -63,7 +63,7 @@ export const CATALOGUE_COUNTS = {
   starSlots: 185,
   courses: 185,
   courseHours: 1962,
-  jobs: 170,
+  jobs: 176,
   badges: 12,
   levels: 7,
   leaderboardUsers: 24,

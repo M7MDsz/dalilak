@@ -1,0 +1,67 @@
+[
+  {
+    "id": "smart-technology-solutions-it-trainee-jeddah",
+    "track": "cyber-cloud/support",
+    "title": "IT Trainee",
+    "titleAr": "متدرب تقنية المعلومات (دعم فني)",
+    "titleArTranslated": true,
+    "company": {
+      "en": "Smart Technology Solutions",
+      "ar": "سمارت تكنولوجي سوليوشنز"
+    },
+    "companyId": null,
+    "city": "jeddah",
+    "cityText": "Jeddah, Makkah Province, Saudi Arabia",
+    "remote": false,
+    "postedAt": "2026-11-04",
+    "checkedAt": "2026-11-21",
+    "source": "Workable (jobs.workable.com)",
+    "url": "https://jobs.workable.com/view/6D54KZ8jTbn7a5MvUEyniP/it-trainee-in-jeddah-at-smart-technology-solutions",
+    "field": "cyber-cloud",
+    "family": "it-support",
+    "band": "entry",
+    "yearsAsked": null,
+    "bandEvidence": "IT or Computer Science student or fresh graduate",
+    "requirements": [
+      {
+        "skill": "networking",
+        "stars": 1,
+        "evidence": "foundation in hardware, Windows, and networking basics"
+      },
+      {
+        "skill": "cloud",
+        "stars": 1,
+        "evidence": "Background in cloud infrastructure fundamentals (Microsoft Azure, AWS, or OCI)"
+      },
+      {
+        "skill": "problem-solving",
+        "stars": 1,
+        "evidence": "Good IT troubleshooting skills and proficiency in Microsoft Office"
+      },
+      {
+        "skill": "english",
+        "stars": 1,
+        "evidence": "Good command of English (reading, writing, and communication)"
+      },
+      {
+        "skill": "communication",
+        "stars": 1,
+        "evidence": "Fast learner with strong communication skills"
+      }
+    ],
+    "missingSkills": [
+      {
+        "name": "Hardware maintenance (laptops, printers)",
+        "evidence": "Laptop maintenance and repair,Handling computers and printers"
+      }
+    ],
+    "summary": "يقدّم الدعم الفني للمستخدمين ويشخّص المشكلات التقنية ويصلحها ويتابع صيانة الأجهزة وأعطالها.",
+    "tasks": [
+      "تقديم الدعم الفني للمستخدمين",
+      "تشخيص المشكلات التقنية وحلها",
+      "صيانة الأجهزة ومتابعة أعطالها"
+    ],
+    "note": "Trainee role for IT/CS students or fresh graduates. The English title is only 'IT Trainee'; «(دعم فني)» in the Arabic title is taken from the posting's own duties ('Provide technical support to users') so it lands in cyber-cloud/support, drop it if the integrator wants a literal title (it would then fall into cyber-cloud/general). Arabic company name is a transliteration (the posting gives none).",
+    "foundBy": "wave4-tech"
+  }
+]

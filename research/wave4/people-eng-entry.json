@@ -1,0 +1,114 @@
+[
+ {
+  "id": "maharah-mechanical-engineer-fresh-graduate-riyadh",
+  "track": "engineering/mep",
+  "title": "مهندس ميكانيكي",
+  "titleEn": "Mechanical Engineer",
+  "field": "engineering",
+  "city": "riyadh",
+  "place": "Riyadh, Riyadh Province",
+  "band": "entry",
+  "company": "شركة مهارة للموارد البشرية",
+  "companyEn": "Maharah Human Resources Company",
+  "real": true,
+  "source": {
+   "site": "صفحة وظائف شركة مهارة للموارد البشرية (Workable)",
+   "url": "https://jobs.workable.com/view/hgVUDupgUjLa39VJzSU3CW/mechanical-engineer-in-riyadh-at-maharah-human-resources-company",
+   "postedAt": "2026-10-22",
+   "checkedAt": "2026-11-21",
+   "note": "Read from Workable's public job search (jobs.workable.com/api/v1/jobs), the company's own Workable board; state published on 2026-11-21. Fresh-graduate posting: 'Fresh graduate with no previous work experience required.' and 'Must not be currently employed.' Arabic company name as already in the app."
+  },
+  "bandEvidence": "Fresh graduate with no previous work experience required.",
+  "requirements": [
+   {
+    "skill": "engineering-drawings",
+    "stars": 1,
+    "evidence": "Assist in reviewing mechanical drawings, designs, and technical specifications."
+   },
+   {
+    "skill": "mep-systems",
+    "stars": 1,
+    "evidence": "Support the coordination and follow-up of HVAC, fire protection, and plumbing systems."
+   },
+   {
+    "skill": "site-execution",
+    "stars": 1,
+    "evidence": "Participate in occasional site visits when required."
+   },
+   {
+    "skill": "communication",
+    "stars": 1,
+    "evidence": "Strong communication, teamwork, and problem-solving skills."
+   },
+   {
+    "skill": "teamwork",
+    "stars": 1,
+    "evidence": "Coordinate with relevant teams to support project requirements and resolve technical issues."
+   }
+  ],
+  "summary": "يدعم تصميم وتركيب وصيانة أنظمة التكييف ومكافحة الحريق والسباكة في مشاريع الشركة، والوظيفة لحديثي التخرج بلا خبرة سابقة.",
+  "tasks": [
+   "مراجعة المخططات والتصاميم والمواصفات الميكانيكية",
+   "متابعة أنظمة التكييف ومكافحة الحريق والسباكة",
+   "زيارات ميدانية للمواقع عند الحاجة"
+  ],
+  "family": "engineering-construction-hse",
+  "sampleCvMatch": 40
+ },
+ {
+  "id": "maharah-electrical-engineer-fresh-graduate-riyadh",
+  "track": "engineering/mep",
+  "title": "مهندس كهربائي",
+  "titleEn": "Electrical Engineer",
+  "field": "engineering",
+  "city": "riyadh",
+  "place": "Riyadh, Riyadh Province",
+  "band": "entry",
+  "company": "شركة مهارة للموارد البشرية",
+  "companyEn": "Maharah Human Resources Company",
+  "real": true,
+  "source": {
+   "site": "صفحة وظائف شركة مهارة للموارد البشرية (Workable)",
+   "url": "https://jobs.workable.com/view/6sfqWvpvmNqJUchj5ESvVr/electrical-engineer-in-riyadh-at-maharah-human-resources-company",
+   "postedAt": "2026-10-22",
+   "checkedAt": "2026-11-21",
+   "note": "Read from Workable's public job search (jobs.workable.com/api/v1/jobs), the company's own Workable board; state published on 2026-11-21. Fresh-graduate posting: 'Fresh graduate with no previous work experience required.' and 'Must not be currently employed.' Arabic company name as already in the app."
+  },
+  "bandEvidence": "Fresh graduate with no previous work experience required.",
+  "requirements": [
+   {
+    "skill": "engineering-drawings",
+    "stars": 1,
+    "evidence": "Review electrical drawings, technical specifications, and project documentation."
+   },
+   {
+    "skill": "mep-systems",
+    "stars": 1,
+    "evidence": "Basic knowledge of electrical systems, power distribution, and electrical design principles."
+   },
+   {
+    "skill": "site-execution",
+    "stars": 1,
+    "evidence": "Participate in site inspections and follow up on field activities when required."
+   },
+   {
+    "skill": "hse",
+    "stars": 1,
+    "evidence": "Ensure compliance with electrical safety procedures, quality standards, and project requirements."
+   },
+   {
+    "skill": "communication",
+    "stars": 1,
+    "evidence": "Good communication, teamwork, and problem-solving skills."
+   }
+  ],
+  "summary": "يساعد في تصميم الأنظمة والشبكات الكهربائية لمشاريع الشركة وتركيبها والإشراف عليها، والوظيفة لحديثي التخرج بلا خبرة سابقة.",
+  "tasks": [
+   "مراجعة المخططات والمواصفات الكهربائية ووثائق المشروع",
+   "دعم تركيب المعدات الكهربائية واختبارها وتشغيلها",
+   "المشاركة في التفتيش الميداني ومتابعة أعمال الموقع"
+  ],
+  "family": "engineering-construction-hse",
+  "sampleCvMatch": 20
+ }
+]

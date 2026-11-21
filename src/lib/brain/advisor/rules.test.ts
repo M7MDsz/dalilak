@@ -22,7 +22,7 @@ describe("rule 8: numbers and money come from data", () => {
 
   it("accepts numbers found in this turn's tool results, the snapshot digest and the product constants", () => {
     expect(numbersAreGrounded("مطابقتك 70%، ودورة Power BI توصلك إلى 90%.", [explain], facts())).toBe(true);
-    expect(numbersAreGrounded("في المنصة 170 وظيفة و185 دورة و114 مهارة.", [], facts())).toBe(true);
+    expect(numbersAreGrounded("في المنصة 176 وظيفة و185 دورة و114 مهارة.", [], facts())).toBe(true);
     expect(numbersAreGrounded("تحتاج 60% على الأقل لتأخذ 40 XP.", [], facts())).toBe(true);
     expect(numbersAreGrounded("عندك 180 XP.", [{ totalXp: 180 }], facts())).toBe(true);
     expect(numbersAreGrounded("مطابقتك ٧٠٪.", [explain], facts())).toBe(true);

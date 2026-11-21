@@ -2,7 +2,7 @@
 // their field, the sample CV text, the onboarding questions, levels and badges. Check 4 (the sample CV read by the
 // analyser) belongs to brain-cv and check 5 / 6 (matches, fit) to the engine; here the aliases are only sanity-checked
 // against the sample CV so brain-cv's acceptance test cannot fail because of the data.
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 import { describe, expect, it } from "vitest";
@@ -748,6 +748,13 @@ const JOB_TABLE: Readonly<Record<JobId, { reqs: string; stages: number; preps: n
   "qiddiya-analyst-government-relations-riyadh": { reqs: "legal-research:1 corporate-governance:1 labor-law:1 communication:1 government-relations:1", stages: 6, preps: 1 },
   "jodayn-tamheer-internal-communications-riyadh": { reqs: "content:1 arabic-editing:1 communication:2 english:1 corporate-communications:1", stages: 9, preps: 3 },
   "eram-media-content-creation-riyadh": { reqs: "content:2 video-editing:1 english:2 presentation:1 public-relations:1", stages: 9, preps: 2 },
+  // wave 4 (21 Nov 2026): beginner roles
+  "smart-social-media-trainee-jeddah": { reqs: "marketing-basics:1 content:1 social-media:1 ads:1 communication:1", stages: 5, preps: 0 },
+  "innovationteam-junior-accountant-riyadh": { reqs: "accounting:1 financial-analysis:1 excel:1 problem-solving:1 english:1", stages: 5, preps: 0 },
+  "zaintech-business-development-associate-intern-riyadh": { reqs: "sales:1 customer-success:1 business-analysis:1 communication:1 english:2", stages: 6, preps: 0 },
+  "maharah-mechanical-engineer-fresh-graduate-riyadh": { reqs: "engineering-drawings:1 mep-systems:1 site-execution:1 communication:1 teamwork:1", stages: 5, preps: 0 },
+  "maharah-electrical-engineer-fresh-graduate-riyadh": { reqs: "engineering-drawings:1 mep-systems:1 site-execution:1 hse:1 communication:1", stages: 5, preps: 0 },
+  "smart-technology-solutions-it-trainee-jeddah": { reqs: "networking:1 cloud:1 problem-solving:1 english:1 communication:1", stages: 5, preps: 0 },
 };
 
 /** The snapshots the real jobs were written from (20 Nov 2026): the job boards, and Maharah's own careers board. */
@@ -821,6 +828,27 @@ function readWave3Jobs(): (ReturnType<typeof readSnapshot>["jobs"][number] & { r
     })),
   ];
 }
+/** Wave 4's files (research/wave4, 21 Nov 2026), in either research shape, read as snapshot rows (checked that day). */
+function readWave4Jobs(): (ReturnType<typeof readSnapshot>["jobs"][number] & { readonly checkedAt: string })[] {
+  const dir = path.join(import.meta.dirname, "../../../research/wave4");
+  type Raw = { id: string; title: string; titleAr?: string; titleEn?: string; url?: string; postedAt?: string; company: string | { en: string; ar: string }; companyEn?: string; source?: { url: string; postedAt: string }; requirements: readonly Wave3Req[] };
+  return readdirSync(dir)
+    .filter((f) => f.endsWith(".json") && f !== "held.json")
+    .flatMap((f) => {
+      const doc = JSON.parse(readFileSync(path.join(dir, f), "utf8")) as Raw[] | { postings?: Raw[]; jobs?: Raw[] };
+      const list = Array.isArray(doc) ? doc : (doc.postings ?? doc.jobs ?? []);
+      return list.map((j) => ({
+        id: j.id,
+        title: j.titleAr !== undefined ? j.title : (j.titleEn ?? ""),
+        titleAr: j.titleAr ?? j.title,
+        url: j.url ?? j.source?.url ?? "",
+        postedAt: j.postedAt ?? j.source?.postedAt ?? "",
+        company: typeof j.company === "object" ? j.company : { en: j.companyEn ?? "", ar: j.company },
+        requirements: j.requirements,
+        checkedAt: "2026-11-21",
+      }));
+    });
+}
 const SNAPSHOT = {
   checkedAt: readSnapshot("jobs-snapshot.json").checkedAt,
   jobs: [
@@ -833,14 +861,16 @@ const SNAPSHOT = {
     ...readSnapshot("../wave2/companies-jobs.json").jobs,
     // wave 3 (21 Nov 2026), each row with its own day
     ...readWave3Jobs(),
+    // wave 4 (21 Nov 2026): the beginner roles of research/wave4
+    ...readWave4Jobs(),
   ],
 };
 
 describe("jobs (9.3, 9.8 checks 3 and 9; real postings of 20 Nov 2026)", () => {
-  it("has 170 jobs in data order (28 + the expansion's 18 + wave 2's 38 + wave 3's 86) with five requirements each, as listed", () => {
+  it("has 176 jobs in data order (28 + the expansion's 18 + wave 2's 38 + wave 3's 86 + wave 4's 6) with five requirements each, as listed", () => {
     expect(JOBS.map((j) => j.id)).toEqual([...JOB_IDS]);
     expect(CATALOGUE_COUNTS.jobs).toBe(JOBS.length);
-    expect(JOBS).toHaveLength(170);
+    expect(JOBS).toHaveLength(176);
     for (const job of JOBS) {
       expect(job.requirements, job.id).toHaveLength(5);
       expect(job.requirements.map((r) => `${r.skill}:${r.stars}`).join(" "), job.id).toBe(JOB_TABLE[job.id].reqs);
@@ -848,12 +878,12 @@ describe("jobs (9.3, 9.8 checks 3 and 9; real postings of 20 Nov 2026)", () => {
     }
   });
 
-  it("keeps ONE practice job (the demo's «محلل بيانات») and 169 real postings", () => {
+  it("keeps ONE practice job (the demo's «محلل بيانات») and 175 real postings", () => {
     expect(JOBS.filter((j) => !j.real).map((j) => j.id)).toEqual(["data-analyst-riyadh"]);
     const practice = getJob("data-analyst-riyadh");
     expect(practice.source).toBeUndefined();
     expect(practice.requirements.every((r) => r.evidence === undefined)).toBe(true);
-    expect(JOBS.filter((j) => j.real)).toHaveLength(169);
+    expect(JOBS.filter((j) => j.real)).toHaveLength(175);
   });
 
   it("gives every real job its source, link, dates, both names and the posting's own sentence per requirement, as in the snapshot", () => {
@@ -900,10 +930,10 @@ describe("jobs (9.3, 9.8 checks 3 and 9; real postings of 20 Nov 2026)", () => {
     }
   });
 
-  it("requires 95 of the 114 skills in at least one job (no posting asks for paid ads; four wave-2 and 14 wave-3 skills have no open posting yet)", () => {
+  it("requires 96 of the 114 skills in at least one job (wave 4's social media trainee asks for paid ads; four wave-2 and 14 wave-3 skills have no open posting yet)", () => {
     const required = new Set(JOBS.flatMap((j) => j.requirements.map((r) => r.skill)));
     expect(SKILL_IDS.filter((s) => !required.has(s))).toEqual([
-      "ads", "tour-guiding", "medical-terminology", "game-design", "game-testing",
+      "tour-guiding", "medical-terminology", "game-design", "game-testing",
       // wave 3 (bim-revit now has a posting: Teef Najd's junior architect)
       "esg-fundamentals", "esg-reporting", "carbon-accounting", "facilities-management", "real-estate-valuation", "insurance-basics",
       "underwriting", "insurance-claims", "ios-swift", "android-kotlin", "routing-switching", "mobile-networks", "fiber-optics",
@@ -911,15 +941,15 @@ describe("jobs (9.3, 9.8 checks 3 and 9; real postings of 20 Nov 2026)", () => {
     ]);
   });
 
-  it("splits the jobs by field 15/14/7/9/13/10/5/14/20, by city 135/18/10/7 and by band 30/61/79 (waves 2 and 3 included)", () => {
+  it("splits the jobs by field 15/14/7/10/15/10/5/15/20, by city 139/20/10/7 and by band 36/61/79 (waves 2, 3 and 4 included)", () => {
     const count = <K extends string>(key: (j: Job) => K, value: K) => JOBS.filter((j) => key(j) === value).length;
     expect(
       ["data", "software", "design", "marketing", "business", "hr", "product", "cyber-cloud", "sales-supply"].map((f) =>
         count((j) => j.field, f),
       ),
-    ).toEqual([15, 14, 7, 9, 13, 10, 5, 14, 20]);
-    expect(JOB_CITY_IDS.map((c) => count((j) => j.city, c))).toEqual([135, 18, 10, 7]);
-    expect(["entry", "junior", "mid"].map((b) => count((j) => j.band, b))).toEqual([30, 61, 79]);
+    ).toEqual([15, 14, 7, 10, 15, 10, 5, 15, 20]);
+    expect(JOB_CITY_IDS.map((c) => count((j) => j.city, c))).toEqual([139, 20, 10, 7]);
+    expect(["entry", "junior", "mid"].map((b) => count((j) => j.band, b))).toEqual([36, 61, 79]);
   });
 
   it("gives every job's stage count and prep count (the reveal's three: 8/74, 8/64, 5/38)", () => {

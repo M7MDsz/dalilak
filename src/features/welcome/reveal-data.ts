@@ -56,6 +56,8 @@ export interface RevealTrackCard {
    * the user's own specialisation or field: its title leads, the track under it); "track" (default) = «اختر تخصصك».
    */
   readonly kind?: "track" | "step";
+  /** 21 Nov 2026 (owner: beginner roles): the job sits above the user's experience (a senior role for a beginner): the card says «تحتاج خبرة». */
+  readonly needsExperience?: boolean;
 }
 
 export interface RevealData {
@@ -146,7 +148,7 @@ export function revealData(answers: OnboardingAnswers, stars?: StarMap, facts?: 
     tracks: tracks.map((t, i) =>
       growing
         ? { id: `${t.track.id}#${t.job}`, name: t.track.name, best: i === 0, job: jobCard(t.job), kind: "step" as const }
-        : { id: t.track.id, name: t.track.name, best: i === 0, job: jobCard(t.job) },
+        : { id: t.track.id, name: t.track.name, best: i === 0, job: jobCard(t.job), ...(withinReach(t.job, answers) ? {} : { needsExperience: true }) },
     ),
     more: tracks.filter((t) => !chosen.has(t.job)).map((t) => jobCard(t.job)),
     reasons: rec.reasons.map(revealReasonText),

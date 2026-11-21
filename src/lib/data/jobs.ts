@@ -14,6 +14,7 @@ import type { Job, JobId } from "@/lib/types";
 import { EXPANSION_JOBS } from "./expansion/jobs";
 import { WAVE2_JOBS } from "./wave2/jobs";
 import { WAVE3_JOBS } from "./wave3/jobs";
+import { WAVE4_JOBS } from "./wave4/jobs";
 
 /** When the real postings were collected («جُمعت في 20 نوفمبر»). */
 export const JOBS_CHECKED_AT = "2026-11-20";
@@ -790,7 +791,7 @@ export function cleanJobTitle(title: string): string {
   return title.replace(WHO_MAY_APPLY, " ").replace(/\s*[-–]\s*(?:السعودية|KSA|Saudi Arabia)\s*$/u, "").replace(/\s{2,}/g, " ").trim();
 }
 
-export const JOBS: readonly Job[] = [...FIRST_JOBS, ...EXPANSION_JOBS, ...WAVE2_JOBS, ...WAVE3_JOBS]
+export const JOBS: readonly Job[] = [...FIRST_JOBS, ...EXPANSION_JOBS, ...WAVE2_JOBS, ...WAVE3_JOBS, ...WAVE4_JOBS]
   .map((job) => (cleanJobTitle(job.title) === job.title ? job : { ...job, title: cleanJobTitle(job.title) }))
   .sort((a, b) => JOB_IDS.indexOf(a.id) - JOB_IDS.indexOf(b.id));
 

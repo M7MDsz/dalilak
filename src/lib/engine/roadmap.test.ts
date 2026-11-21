@@ -224,6 +224,13 @@ describe("canonical stages (spec 3.4, 9.3)", () => {
       "qiddiya-analyst-government-relations-riyadh": [6, 1],
       "jodayn-tamheer-internal-communications-riyadh": [9, 3],
       "eram-media-content-creation-riyadh": [9, 2],
+      // wave 4 (21 Nov 2026): beginner roles
+      "smart-social-media-trainee-jeddah": [5, 0],
+      "innovationteam-junior-accountant-riyadh": [5, 0],
+      "zaintech-business-development-associate-intern-riyadh": [6, 0],
+      "maharah-mechanical-engineer-fresh-graduate-riyadh": [5, 0],
+      "maharah-electrical-engineer-fresh-graduate-riyadh": [5, 0],
+      "smart-technology-solutions-it-trainee-jeddah": [5, 0],
     };
     for (const id of JOB_IDS) {
       const { stages, prep } = pathSummary(id);

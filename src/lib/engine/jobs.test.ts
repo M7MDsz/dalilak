@@ -64,6 +64,9 @@ describe("rankJobs (spec 7.2)", () => {
       "bayut-dubizzle-legal-coordinator-tamheer-riyadh",
       "khayira-legal-administrative-specialist-riyadh",
       "flow-leasing-coordinator-riyadh",
+      "innovationteam-junior-accountant-riyadh",
+      "zaintech-business-development-associate-intern-riyadh",
+      "maharah-mechanical-engineer-fresh-graduate-riyadh",
       "lucidya-customer-product-marketing-intern-remote",
       "accor-income-auditor-jeddah",
       "hungerstation-account-manager-jeddah",
@@ -71,6 +74,7 @@ describe("rankJobs (spec 7.2)", () => {
       "ninja-outbound-officer-jeddah",
       "aanaab-early-years-arabic-teacher-jeddah",
       "rawafid-governance-prequalification-officer-jeddah",
+      "smart-technology-solutions-it-trainee-jeddah",
       "almajed-mobile-developer-riyadh",
       "hungerstation-senior-product-designer-riyadh",
       "lucidya-social-media-analyst-riyadh",
@@ -110,6 +114,7 @@ describe("rankJobs (spec 7.2)", () => {
       "ninja-outbound-officer-jeddah",
       "aanaab-early-years-arabic-teacher-jeddah",
       "rawafid-governance-prequalification-officer-jeddah",
+      "smart-technology-solutions-it-trainee-jeddah",
       "maharah-qa-analyst-riyadh",
       "rentokil-customer-experience-specialist-riyadh",
       "hanmiglobal-hse-engineer-riyadh",
@@ -134,6 +139,9 @@ describe("rankJobs (spec 7.2)", () => {
       "bayut-dubizzle-legal-coordinator-tamheer-riyadh",
       "khayira-legal-administrative-specialist-riyadh",
       "flow-leasing-coordinator-riyadh",
+      "innovationteam-junior-accountant-riyadh",
+      "zaintech-business-development-associate-intern-riyadh",
+      "maharah-mechanical-engineer-fresh-graduate-riyadh",
       "eram-academic-program-administrator-jeddah",
       "almajed-mobile-developer-riyadh",
       "hungerstation-senior-product-designer-riyadh",
@@ -284,6 +292,7 @@ describe("searchJobs (spec 7.1)", () => {
     );
     // the Tamheer role (within reach of a new graduate) before the SEO manager (mid), 21 Nov 2026
     expect(searchJobs(f, { field: "marketing", city: "jeddah" }).map((r) => r.jobId)).toEqual([
+      "smart-social-media-trainee-jeddah", // wave 4: a beginner role
       "salla-marketing-specialist-tamheer-jeddah",
       "salla-mahally-seo-manager-jeddah",
     ]);
@@ -332,6 +341,6 @@ describe("jobsRequiringSkill (spec 3.5)", () => {
       "arabicai-machine-learning-engineer-riyadh", "innovationteam-junior-ai-engineer-computer-vision-riyadh", "mozn-data-scientist-iii-riyadh",
       "masterworks-nabeh-ai-engineer-specialist-riyadh", "tamara-builders-program-data-riyadh",
     ]);
-    expect(jobsRequiringSkill("ads")).toEqual([]);
+    expect(jobsRequiringSkill("ads")).toEqual(["smart-social-media-trainee-jeddah"]); // wave 4
   });
 });

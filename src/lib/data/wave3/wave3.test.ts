@@ -196,7 +196,7 @@ describe("wave 3: real jobs", () => {
     const first = Math.min(...WAVE3_JOB_IDS.map((id) => (JOB_IDS as readonly string[]).indexOf(id)));
     const lastOld = Math.max(...WAVE2_JOB_IDS.map((id) => (JOB_IDS as readonly string[]).indexOf(id)));
     expect(first).toBe(lastOld + 1);
-    expect(JOB_IDS.slice(first)).toEqual([...WAVE3_JOB_IDS]);
+    expect(JOB_IDS.slice(first, first + WAVE3_JOB_IDS.length)).toEqual([...WAVE3_JOB_IDS]); // wave 4 follows
   });
 
   it("gives every job five distinct requirements within the skill's stars, in roadmap order, with the posting's evidence", () => {

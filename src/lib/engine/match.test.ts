@@ -257,6 +257,13 @@ describe("match with the catalogue", () => {
       "qiddiya-analyst-government-relations-riyadh": 20,
       "jodayn-tamheer-internal-communications-riyadh": 30,
       "eram-media-content-creation-riyadh": 40,
+      // wave 4 (21 Nov 2026): beginner roles
+      "smart-social-media-trainee-jeddah": 20,
+      "innovationteam-junior-accountant-riyadh": 40,
+      "zaintech-business-development-associate-intern-riyadh": 40,
+      "maharah-mechanical-engineer-fresh-graduate-riyadh": 40,
+      "maharah-electrical-engineer-fresh-graduate-riyadh": 20,
+      "smart-technology-solutions-it-trainee-jeddah": 40,
     };
     const facts = cvAnalysedFacts();
     for (const id of JOB_IDS) expect(jobMatch(id, facts), id).toBe(expected[id]);

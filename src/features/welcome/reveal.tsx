@@ -459,7 +459,12 @@ function TrackCard({ track, index, onChoose, disabled, visible }: { track: Revea
           </p>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-          <p className="text-small font-semibold text-fg">{RESULT_COPY.summary(job.stages, job.hours)}</p>
+          <p className="flex flex-wrap items-center gap-2 text-small font-semibold text-fg">
+            {RESULT_COPY.summary(job.stages, job.hours)}
+            {track.needsExperience ? (
+              <span className="inline-flex h-5.5 items-center rounded-tag border border-border px-1.5 text-caption font-normal text-fg-2">{RESULT_COPY.needsExperience}</span>
+            ) : null}
+          </p>
           <Button
             data-testid={visible ? (best ? TID.reveal.trackBestChoose : TID.reveal.altChoose(index)) : undefined}
             disabled={disabled}

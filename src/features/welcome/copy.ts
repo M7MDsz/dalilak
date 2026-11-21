@@ -31,6 +31,8 @@ export function revealLines(firstName: string): Record<RevealStepId, string> {
 
 /** Spec 3.3, the reveal result. */
 export const RESULT_COPY = {
+  /** 21 Nov 2026: a specialisation card whose job sits above a beginner's experience. */
+  needsExperience: "تحتاج خبرة",
   heading: (firstName: string) => `مسارك يا ${firstName}`,
   recommendedLabel: "الأنسب لك",
   why: "لماذا هذا المسار؟",
