@@ -164,6 +164,18 @@ function familyByField(job: Job): PathFamily | null {
 }
 
 /**
+ * A short link text for a source (21 Nov 2026, final check: a long English name overflowed the column): the acronym in
+ * brackets («American Institute of Constructors (AIC)» → «AIC»), else a short provider name, else the first words.
+ */
+function shortSource(provider: string, name: string): string {
+  const acronym = /\(([A-Za-z0-9&.\- ]{2,12})\)/.exec(provider)?.[1] ?? /\(([A-Za-z0-9&.\- ]{2,12})\)/.exec(name)?.[1];
+  if (acronym) return acronym.trim();
+  if (provider.length <= 28) return provider;
+  const words = provider.split(/\s+/);
+  return words.length > 3 ? `${words.slice(0, 3).join(" ")}…` : provider;
+}
+
+/**
  * A job of a field added on 20-21 Nov 2026 (engineering, cyber and cloud, banking, legal…): the published guidelines its
  * career family's path follows (the knowledge base), or null — never another field's sources (tester, 21 Nov 2026: a
  * civil-engineering path showed the data analyst's PL-300 line).
@@ -174,7 +186,7 @@ function fromCareers(job: Job): BasedOn | null {
   return {
     family: family.id,
     label: family.title,
-    sources: family.path.guidelines.slice(0, 3).map((g) => ({ name: g.name, short: g.provider.length <= 28 ? g.provider : g.name, url: g.url })),
+    sources: family.path.guidelines.slice(0, 3).map((g) => ({ name: g.name, short: shortSource(g.provider, g.name), url: g.url })),
   };
 }
 
