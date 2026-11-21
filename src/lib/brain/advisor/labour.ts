@@ -105,12 +105,18 @@ function articleReply(a: Article): Reply {
   return reply([`${a.botLine} (${a.article.replace(/\s*\(.*\)\s*$/, "")} من نظام العمل)`, sourceLine(a.source.label)]);
 }
 
+/**
+ * SANED in «دليلك»'s Najdi (21 Nov 2026, tester: the GOSI facts pasted as-is read as Fusha). Every figure is one of the
+ * GOSI facts in the data (labour.test.ts checks each against WAVE3_SAUDIZATION.saned.facts).
+ */
+export const SANED_LINES = [
+  "التأمين ضد التعطل عن العمل (ساند) للموظفين السعوديين المشتركين في التأمينات، إذا انقطع شغلك لظروف خارجة عن إرادتك.",
+  "لازم تقدّم خلال 90 يوم من ترك العمل، ويصرفون لك 60% من متوسط أجرك المشترك فيه آخر سنتين في أول ثلاث أشهر، و50% بعدها.",
+  "أعلى تعويض 9,000 ريال بالشهر في أول ثلاث أشهر و7,500 بعدها، وأقصى مدة للصرف 12 شهر.",
+] as const;
+
 function sanedReply(): Reply {
-  const z = WAVE3_SAUDIZATION.saned;
-  const facts: readonly string[] = z.facts;
-  const who = facts.find((f) => f.startsWith("ساند")) ?? null;
-  const rest = facts.filter((f) => f !== who && !/الاشتراك/.test(f)).slice(0, 4);
-  return reply([who ? `${z.name}: ${who}` : z.name, rest.join(" "), sourceLine(z.source.label)]);
+  return reply([...SANED_LINES, sourceLine(WAVE3_SAUDIZATION.saned.source.label)]);
 }
 
 function bootcampsCount(n: number): string {
@@ -125,6 +131,7 @@ function tuwaiqReply(text: W.Text): Reply {
     ...(head ? [head] : []),
     `من المعسكرات المفتوحة للتسجيل الحين: ${open.join("، ")}.`,
     `وعندهم ${bootcampsCount(WAVE3_TUWAIQ_BOOTCAMPS.length)} للتسجيل، وتواريخ كل معسكر وشروطه في صفحته عندهم.`,
+    sourceLine("أكاديمية طويق: صفحات المعسكرات المفتوحة للتسجيل (tuwaiq.edu.sa)"),
   ]);
 }
 

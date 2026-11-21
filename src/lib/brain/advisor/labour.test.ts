@@ -189,3 +189,13 @@ describe("model replies on these topics", () => {
     expect(finishModelReply(ctx, "وش أسوي الحين؟", "خطوتك الجاية روز Power BI.", [], local)).toEqual(local);
   });
 });
+
+describe("SANED in Najdi keeps the data's figures (tester, 21 Nov 2026)", () => {
+  it("every figure of the Najdi lines is one of the GOSI facts", async () => {
+    const { SANED_LINES } = await import("./labour");
+    const { WAVE3_SAUDIZATION } = await import("@/lib/data/wave3/knowledge");
+    const facts = WAVE3_SAUDIZATION.saned.facts.join(" ");
+    for (const line of SANED_LINES) for (const n of line.match(/\d[\d,]*/g) ?? []) expect(facts, n).toContain(n);
+    expect(SANED_LINES.join(" ")).not.toMatch(/يجب|يُصرف|وألا/);
+  });
+});
