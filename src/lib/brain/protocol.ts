@@ -369,6 +369,11 @@ export interface OnboardingContext {
    * Absent: the seven steps in their fixed order.
    */
   readonly order?: readonly OnboardingStepId[];
+  /**
+   * 21 Nov 2026 (owner: «أتطوّر في مجالي» should know the field from the CV, and ask only when it cannot): the field the
+   * CV's skills lean to (and the specialisation its lines name), filled in for «وش مجال شغلك الحين؟» instead of asking.
+   */
+  readonly cvCurrent?: { readonly value: string; readonly label: string; readonly track?: { readonly id: string; readonly name: string } };
 }
 
 export type OnboardingInput =

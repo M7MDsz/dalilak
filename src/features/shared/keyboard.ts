@@ -12,7 +12,7 @@ import { useEffect } from "react";
 /** Less than this between the layout and the visual viewport is browser chrome (the URL bar), not a keyboard. */
 const MIN_KEYBOARD_PX = 120;
 
-const VARS = ["--kb-top", "--kb-height", "--kb-bottom"] as const;
+const VARS = ["--kb-top", "--kb-height", "--kb-bottom", "--kb-page-top"] as const;
 
 function clear(root: HTMLElement): void {
   for (const name of VARS) root.style.removeProperty(name);
@@ -25,7 +25,8 @@ function revealFocusedField(): void {
   field.scrollIntoView({ block: "nearest", inline: "nearest" });
 }
 
-export function useKeyboardViewport(enabled: boolean): void {
+export function useKeyboardViewport(enabled: boolean, options: { readonly pinPageTop?: boolean } = {}): void {
+  const pinPageTop = options.pinPageTop === true;
   useEffect(() => {
     const vv = window.visualViewport;
     if (!enabled || !vv) return;
@@ -41,10 +42,17 @@ export function useKeyboardViewport(enabled: boolean): void {
         return;
       }
       root.style.setProperty("--kb-top", `${Math.round(vv.offsetTop)}px`);
+      // the visible box's top in PAGE coordinates (the page's scroll + the visual viewport's pan): a page in normal flow
+      // (the onboarding chat) shifts down by it to sit exactly in the visible box, however iOS scrolled or panned
+      root.style.setProperty("--kb-page-top", `${Math.max(0, Math.round(vv.pageTop))}px`);
       root.style.setProperty("--kb-height", `${Math.round(vv.height)}px`);
       root.style.setProperty("--kb-bottom", `${Math.max(0, Math.round(layout - vv.offsetTop - vv.height))}px`);
       const opening = !root.hasAttribute("data-keyboard");
       root.setAttribute("data-keyboard", "");
+      // a page that shrinks to the visible box (the onboarding chat): iOS scrolled the page to show the field while the
+      // keyboard rose, and that scroll stayed after the page shrank, leaving the composer at the top over a blank page
+      // (owner's screenshot, 21 Nov 2026): scroll it back so the page and the visible box line up
+      if (pinPageTop && (window.scrollY !== 0 || vv.offsetTop !== 0)) window.requestAnimationFrame(() => window.scrollTo(0, 0));
       // the layer just shrank around the field being typed in: keep that field in sight (a sheet's input at the end of
       // its scrolling body would otherwise sit under the new bottom edge)
       if (opening) window.requestAnimationFrame(revealFocusedField);
@@ -61,5 +69,5 @@ export function useKeyboardViewport(enabled: boolean): void {
       if (frame !== 0) window.cancelAnimationFrame(frame);
       clear(root);
     };
-  }, [enabled]);
+  }, [enabled, pinPageTop]);
 }

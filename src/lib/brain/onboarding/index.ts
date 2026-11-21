@@ -18,6 +18,8 @@ import {
   trackFromText,
   userBandOf,
   majorFieldOf,
+  cvFieldOf,
+  skillStars,
 } from "@/lib/engine";
 import { ASKED_STEP_IDS, isJobFieldId, isOptionOf } from "@/lib/ids";
 import type { CityValue, CompanyId, InterestOption, JobFieldId, JobId, OnboardingAnswers, OnboardingStepId, UserState } from "@/lib/types";
@@ -349,6 +351,20 @@ function merge(answers: OnboardingAnswers, recorded: readonly Recorded[]): Onboa
   return out;
 }
 
+/** «من سيرتك أشوف إن مجالك البيانات والتحليل.» / «وتخصصك فيه تحليل البيانات.» */
+const CV_FIELD_LINE = (label: string, track: string | null): string => `من سيرتك أشوف إن مجالك ${label}${track ? `، وتخصصك فيه ${track}` : ""}.`;
+const CV_GROW_NEXT = "بدوّر لك على الخطوة اللي بعدها فيه.";
+
+/** The CV's hint for «وش مجال شغلك الحين؟»: the field its skills lean to (3+ stars), and a specialisation its lines name. */
+function cvCurrentHint(user: UserState): OnboardingContext["cvCurrent"] {
+  if (!user.cv || user.onboarding.cv !== "analysed") return undefined;
+  const field = cvFieldOf(skillStars(user));
+  if (field === null) return undefined;
+  const label = optionLabel("current", field) ?? getField(field).name;
+  const track = trackFromText(field, user.cvDocument?.lines.join(" ") ?? "");
+  return { value: field, label, ...(track ? { track: { id: track.id, name: track.name } } : {}) };
+}
+
 function unansweredIn(answers: OnboardingAnswers): OnboardingStepId[] {
   return stepsFor(answers).filter((q) => answers[q] === undefined);
 }
@@ -395,14 +411,36 @@ function answeredTurn(
   const kept = checked === "same" ? [...recorded] : checked;
   const merged = merge(context.answers, kept);
   const grown = grownInterest(merged);
-  const answers = grown ?? merged;
+  let answers = grown ?? merged;
+  // the CV already says the field (and maybe the specialisation): filled in and said, never asked (owner, 21 Nov 2026)
+  const fromCv: string[] = [];
+  const hint = context.cvCurrent;
+  if (hint && isJobFieldId(hint.value) && answers.current === undefined && stepApplies("current", answers) && !kept.some((r) => r.question === "current")) {
+    const rec = recordFound(context.name, { question: "current", value: hint.value, label: hint.label }, null, answers);
+    answers = { ...answers, ...rec.answers };
+    answers = grownInterest(answers) ?? answers;
+    let trackName: string | null = null;
+    if (hint.track && answers.currentTrack === undefined && stepApplies("currentTrack", answers)) {
+      const tr = recordFound(context.name, { question: "currentTrack", value: hint.track.id, label: hint.track.name }, null, answers);
+      answers = { ...answers, ...tr.answers };
+      trackName = hint.track.name;
+    }
+    // growing: one plain line («من سيرتك أشوف إن مجالك …، وتخصصك فيه …. بدوّر لك على الخطوة اللي بعدها فيه.»);
+    // switching: the field, then the switch line (its closest fields come with the interest question)
+    fromCv.push(
+      answers.priority === "grow"
+        ? `${CV_FIELD_LINE(hint.label, trackName)} ${CV_GROW_NEXT}`
+        : `${CV_FIELD_LINE(hint.label, null)} ${rec.ack}`,
+    );
+  }
   const [primary, ...extras] = kept;
   const growLine =
     grown !== null && primary?.question !== "current" && answers.current ? ` ${CAREER_LINES.grow[variant(context.name, "current")](answers.current.label)}` : "";
+  const cvLine = fromCv.length > 0 ? ` ${fromCv.join(" ")}` : "";
   const ack = primary
     ? extras.length > 0
-      ? `${primary.ack} ${REPLY.alsoRecorded(joinCommaAnd(extras.map((r) => r.extra)))}${growLine}`
-      : `${primary.ack}${growLine}`
+      ? `${primary.ack} ${REPLY.alsoRecorded(joinCommaAnd(extras.map((r) => r.extra)))}${growLine}${cvLine}`
+      : `${primary.ack}${growLine}${cvLine}`
     : null;
   const pending = pendingQuestion(answers, false, context.order);
   const name = firstName(context.name);
@@ -670,5 +708,9 @@ export function onboardingContext(user: UserState): OnboardingContext {
     misses: user.onboarding.misses,
     pending: pendingStep(user),
     ...(order === CV_QUESTION_ORDER ? { order } : {}),
+    ...(() => {
+      const cvCurrent = cvCurrentHint(user);
+      return cvCurrent ? { cvCurrent } : {};
+    })(),
   };
 }

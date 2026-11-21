@@ -45,7 +45,7 @@ function WelcomeFlow({ user }: { user: UserState }) {
   const instant = useInstant();
   const { desktop } = useViewport();
   // phones: track the visible area while the keyboard is up, so it never covers the chat composer (phone agent, 21 Nov)
-  useKeyboardViewport(!desktop);
+  useKeyboardViewport(!desktop, { pinPageTop: true });
   const [phase, setPhase] = useState<Phase>(() => initialPhase(user));
   const [night, setNight] = useState(false);
   const [leaving, setLeaving] = useState(false);
@@ -63,7 +63,11 @@ function WelcomeFlow({ user }: { user: UserState }) {
 
   return (
     <PageTransition>
-      <div className="relative isolate min-h-dvh bg-paper text-fg" data-surface={night ? "stage" : "paper"}>
+      {/* keyboard up (phone): exactly the visible box, so nothing below it can be scrolled into view */}
+      <div
+        className="relative isolate min-h-dvh bg-paper text-fg [html[data-keyboard]_&]:top-[var(--kb-page-top,0px)] [html[data-keyboard]_&]:h-[var(--kb-height)] [html[data-keyboard]_&]:min-h-0 [html[data-keyboard]_&]:overflow-hidden"
+        data-surface={night ? "stage" : "paper"}
+      >
         {/* the paper's contours (always there, under everything) */}
         <div aria-hidden className="pointer-events-none fixed inset-0 -z-20" data-surface="paper">
           <ContourBackdrop intensity="faint" rings={HILL.rings} seed={HILL.seed} summit={HILL.summit} />
