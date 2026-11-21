@@ -135,7 +135,7 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4, CV in onboarding)",
 
   it("step 3: the reveal recommends «محلل بيانات» with 8 stages · 74 hours and the two alternatives, with or without the CV", () => {
     const withStars = recommend(CV_ANSWERS, undefined, skillStars(s2));
-    expect([withStars.recommended, ...withStars.alternatives]).toEqual(["data-analyst-riyadh", "qiddiya-hr-analytics-analyst-riyadh", "tamara-builders-program-data-riyadh"]);
+    expect([withStars.recommended, ...withStars.alternatives]).toEqual(["data-analyst-riyadh", "qiddiya-hr-analytics-analyst-riyadh", "ninja-real-estate-performance-analyst-riyadh"]);
     expect(jobMatch("data-analyst-riyadh", s2)).toBe(70);
     const rec = recommend(DEMO_ANSWERS);
     expect([rec.recommended, ...rec.alternatives]).toEqual([withStars.recommended, ...withStars.alternatives]);
@@ -144,7 +144,7 @@ describe("the 2-minute demo, step by step (spec 10.2 / 10.4, CV in onboarding)",
     expect(pathSummary(rec.recommended)).toMatchObject({ stages: 8, hours: 74 });
     expect(rec.alternatives.map((id) => [getJob(id).title, pathSummary(id).stages, pathSummary(id).hours])).toEqual([
       ["محلل تحليلات وتقارير الموارد البشرية", 8, 64],
-      ["برنامج تمارا للخريجين (Builders) - مسار البيانات", 10, 84],
+      ["محلل أداء عقاري", 8, 70],
     ]);
   });
 

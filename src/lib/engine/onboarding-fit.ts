@@ -345,8 +345,22 @@ export function choiceOrder(answers: OnboardingAnswers, ranked: readonly JobId[]
     if (sameTrack) return good ? (job.band === step ? 0 : 1) : 2;
     return good ? 3 : 4;
   };
-  return [0, 1, 2, 3, 4, 5, 6].flatMap((t) => ranked.filter((id) => tier(id) === t));
+  // what the tile itself says first (owner, 21 Nov 2026: «web» must give web, not an AI engineer): «بناء المواقع
+  // والتطبيقات» → front-end, full-stack, back-end, mobile before AI / QA / cloud; «الأرقام والبيانات» → analysis and BI
+  // before data science / engineering / AI. Not when growing (their own specialisation decides).
+  const core = step === null ? new Set((answers.interest ?? []).flatMap((i) => CORE_TRACKS[i] ?? [])) : new Set<string>();
+  const isCore = (id: JobId) => core.size === 0 || core.has(trackOf(id).id);
+  return [0, 1, 2, 3, 4, 5, 6].flatMap((t) => {
+    const ids = ranked.filter((id) => tier(id) === t);
+    return [...ids.filter(isCore), ...ids.filter((id) => !isCore(id))];
+  });
 }
+
+/** The specialisations an interest tile names in its own words (the rest of its field comes after them). */
+const CORE_TRACKS: Partial<Record<string, readonly string[]>> = {
+  software: ["software/front-end", "software/full-stack", "software/back-end", "software/mobile"],
+  data: ["data/analysis", "data/bi"],
+};
 
 /**
  * The company has jobs in the fields the user asked for, but none within reach of their experience (all more senior):

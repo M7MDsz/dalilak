@@ -70,11 +70,37 @@ const ROLE_OF_TRACK: Readonly<Record<string, string>> = {
   "communications/media": "أخصائي إعلام ومحتوى",
 };
 
+/** A job no specialisation keyword places (its field's general track): the field's own role, never the posting's title. */
+const ROLE_OF_FIELD: Readonly<Record<string, string>> = {
+  data: "محلل بيانات",
+  software: "مطوّر برمجيات",
+  design: "مصمم",
+  marketing: "أخصائي تسويق",
+  business: "أخصائي أعمال",
+  hr: "أخصائي موارد بشرية",
+  product: "مدير منتج",
+  "cyber-cloud": "أخصائي تقنية معلومات",
+  "sales-supply": "أخصائي مبيعات وعمليات",
+  engineering: "مهندس",
+  "project-controls": "أخصائي إدارة مشاريع",
+  "tourism-hospitality": "أخصائي ضيافة وسياحة",
+  "health-admin": "أخصائي إدارة صحية",
+  education: "أخصائي تعليم وتدريب",
+  "banking-risk": "أخصائي مصرفي",
+  legal: "أخصائي قانوني",
+  media: "صانع محتوى إعلامي",
+  communications: "أخصائي اتصال",
+  gaming: "أخصائي ألعاب ورياضات إلكترونية",
+  "real-estate": "أخصائي عقارات",
+  aviation: "أخصائي عمليات طيران",
+  "energy-sustainability": "أخصائي طاقة واستدامة",
+};
+
 /** The path's name for the job it is built on: the role of its specialisation (the practice job keeps its own title). */
 export function pathTitleOf(jobId: JobId): string {
   const job = getJob(jobId);
   if (!job.real) return job.title;
-  return ROLE_OF_TRACK[trackOf(job).id] ?? job.title;
+  return ROLE_OF_TRACK[trackOf(job).id] ?? ROLE_OF_FIELD[job.field] ?? job.title;
 }
 
 /** How many real postings in the data lead to the same role (the same specialisation): the overview lists them. */
