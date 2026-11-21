@@ -355,7 +355,7 @@ export const isQuestionId = guard(QUESTION_IDS);
  * and, right after «الاهتمام», the optional «فيه شركة أو وظيفة معيّنة في بالك؟» (`company`, stored as `answers.company`).
  * The seventh stays out of QUESTION_IDS: the profile's «معلوماتي», the copy and the advisor print the six.
  */
-export const ONBOARDING_STEP_IDS = ["city", "education", "major", "experience", "interest", "company", "priority", "current"] as const;
+export const ONBOARDING_STEP_IDS = ["city", "education", "major", "experience", "interest", "company", "priority", "current", "currentTrack"] as const;
 export type OnboardingStepId = (typeof ONBOARDING_STEP_IDS)[number];
 export const isOnboardingStepId = guard(ONBOARDING_STEP_IDS);
 
@@ -366,7 +366,7 @@ export const isOnboardingStepId = guard(ONBOARDING_STEP_IDS);
  * his current career»): the priority comes BEFORE the interest, and right after it «وش مجال شغلك الحين؟» (`current`), asked
  * only for «أتطوّر في مجالي» / «أغيّر مجالي» (brain/onboarding `stepApplies`).
  */
-export const ASKED_STEP_IDS: readonly OnboardingStepId[] = ["city", "education", "major", "experience", "priority", "current", "interest"];
+export const ASKED_STEP_IDS: readonly OnboardingStepId[] = ["city", "education", "major", "experience", "priority", "current", "currentTrack", "interest"];
 
 /**
  * Real employers in Saudi Arabia «دليلك» knows by name (src/lib/data/companies.ts, checked 20 Nov 2026): the ones with a
@@ -439,6 +439,8 @@ export const OPTIONS_BY_QUESTION = {
   company: COMPANY_OPTIONS,
   priority: PRIORITY_OPTIONS,
   current: CURRENT_OPTIONS,
+  /** The tracks of the user's current field (engine `namedTracksOf`, by slug) and «غير كذا» (`other`): known per field only. */
+  currentTrack: [] as readonly string[],
 } as const satisfies Record<OnboardingStepId, readonly string[]>;
 export interface OptionsByQuestion {
   city: CityOption;
@@ -449,6 +451,7 @@ export interface OptionsByQuestion {
   company: CompanyOption;
   priority: PriorityOption;
   current: CurrentOption;
+  currentTrack: string;
 }
 export function isOptionOf<Q extends OnboardingStepId>(question: Q, value: unknown): value is OptionsByQuestion[Q] {
   return typeof value === "string" && (OPTIONS_BY_QUESTION[question] as readonly string[]).includes(value);

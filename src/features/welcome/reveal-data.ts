@@ -8,15 +8,18 @@ import {
   canonicalStages,
   choiceOrder,
   dreamCompany,
+  growTrackOf,
+  growsInField,
   pathSummary,
   rankByFit,
   recommend,
   roadmapFor,
   trackOf,
+  userBandOf,
   withinReach,
   type Track,
 } from "@/lib/engine";
-import { QUESTION_IDS, isJobFieldId } from "@/lib/ids";
+import { EXPERIENCE_BANDS, QUESTION_IDS, isJobFieldId } from "@/lib/ids";
 import type { FieldId, JobFieldId, JobId, OnboardingAnswers, QuestionId, SkillId, StarMap, StarSlot, UserFacts } from "@/lib/types";
 
 export interface RevealStageInfo {
@@ -48,9 +51,16 @@ export interface RevealTrackCard {
   /** The recommended job's own track: first, «الأنسب لك», and choosing it is the main «ابدأ هذا المسار». */
   readonly best: boolean;
   readonly job: RevealJobCard;
+  /**
+   * 21 Nov 2026 (owner: «أتطوّر في مجالي» must upgrade the current career): "step" = a «خطوتك الجاية» card (a higher job in
+   * the user's own specialisation or field: its title leads, the track under it); "track" (default) = «اختر تخصصك».
+   */
+  readonly kind?: "track" | "step";
 }
 
 export interface RevealData {
+  /** "grow": the cards are «خطوتك الجاية» (the next steps in the user's own career); "tracks": «اختر تخصصك». */
+  readonly mode: "tracks" | "grow";
   readonly answers: readonly { readonly question: QuestionId; readonly slot: string; readonly text: string }[];
   readonly recommended: RevealJobCard;
   /** The show's two others beside the recommended one: the best jobs of the next two tracks (else the engine's). */
@@ -108,7 +118,9 @@ export function revealData(answers: OnboardingAnswers, stars?: StarMap, facts?: 
   const rec = recommend(answers, undefined, stars);
   const ranked = rankByFit(answers, stars).filter((b) => !b.excluded);
   const top = ranked[0]?.score ?? 0;
-  const tracks = trackChoices(answers, choiceOrder(answers, ranked.map((b) => b.jobId)), rec.recommended);
+  const order = choiceOrder(answers, ranked.map((b) => b.jobId));
+  const growing = growsInField(answers) !== null;
+  const tracks = growing ? growChoices(answers, order, rec.recommended) : trackChoices(answers, order, rec.recommended);
   // the show lands on what the result offers: the recommended job between the best jobs of the next two tracks
   const others: JobId[] = tracks.slice(1, 3).map((t) => t.job);
   for (const id of rec.alternatives) if (others.length < 2 && !others.includes(id)) others.push(id);
@@ -123,6 +135,7 @@ export function revealData(answers: OnboardingAnswers, stars?: StarMap, facts?: 
   const dream = dreamCompany({ answers });
 
   return {
+    mode: growing ? "grow" : "tracks",
     answers: QUESTION_IDS.map((question) => ({
       question,
       slot: getQuestion(question).slot,
@@ -130,7 +143,11 @@ export function revealData(answers: OnboardingAnswers, stars?: StarMap, facts?: 
     })),
     recommended: jobCard(rec.recommended),
     alternatives: [jobCard(alt0), jobCard(alt1)],
-    tracks: tracks.map((t, i) => ({ id: t.track.id, name: t.track.name, best: i === 0, job: jobCard(t.job) })),
+    tracks: tracks.map((t, i) =>
+      growing
+        ? { id: `${t.track.id}#${t.job}`, name: t.track.name, best: i === 0, job: jobCard(t.job), kind: "step" as const }
+        : { id: t.track.id, name: t.track.name, best: i === 0, job: jobCard(t.job) },
+    ),
     more: tracks.filter((t) => !chosen.has(t.job)).map((t) => jobCard(t.job)),
     reasons: rec.reasons.map(revealReasonText),
     company: dream ? { name: dream.company.short, aimed: dream.job !== null && dream.job === rec.recommended } : null,
@@ -187,6 +204,49 @@ function trackChoices(answers: OnboardingAnswers, order: readonly JobId[], recom
     if (!picked.includes(t)) picked.push(t);
   }
   return [{ track: recTrack, job: recommended }, ...picked.map(({ track, job }) => ({ track, job }))];
+}
+
+/**
+ * 21 Nov 2026 (owner: «when you put I want to upgrade my career it should upgrade your career, not give something new»):
+ * «خطوتك الجاية» for «أتطوّر في مجالي». The recommended job first, then the other jobs ABOVE the user's experience in their
+ * own specialisation, then above it in the rest of their field (within reach first, in the engine's order); jobs of their
+ * own band in the field only when there are no higher ones; never another field unless the field has nothing else.
+ */
+function growChoices(answers: OnboardingAnswers, order: readonly JobId[], recommended: JobId): { track: Track; job: JobId }[] {
+  const field = growsInField(answers);
+  const track = growTrackOf(answers);
+  const own = EXPERIENCE_BANDS.indexOf(userBandOf(answers));
+  const above = (id: JobId) => EXPERIENCE_BANDS.indexOf(getJob(id).band) > own;
+  const inField = order.filter((id) => id !== recommended && getJob(id).field === field);
+  const sameTrack = (id: JobId) => track === null || trackOf(id).id === track;
+  const band = (id: JobId) => EXPERIENCE_BANDS.indexOf(getJob(id).band);
+  const reach = (ids: JobId[]) => [...ids.filter((id) => withinReach(id, answers)), ...ids.filter((id) => !withinReach(id, answers))];
+  // another specialisation, when one is needed: the closest to the recommended job first (most skills in common: an
+  // accountant's next card is a financial analyst, not an AI business analyst)
+  const skillsOf = (id: JobId) => new Set(getJob(id).requirements.map((r) => r.skill));
+  const mine = skillsOf(recommended);
+  const shared = (id: JobId) => [...skillsOf(id)].filter((s) => mine.has(s)).length;
+  const closest = (ids: JobId[]) => ids.map((id, i) => ({ id, i, n: shared(id) })).sort((a, b) => b.n - a.n || a.i - b.i).map((x) => x.id);
+  // in this order, each only while fewer than two cards were found: their own specialisation a band up, then at their
+  // level; then (only to make two) the rest of the field a band up, at their level, any; then anything
+  const stages: { readonly ids: JobId[]; readonly fill: boolean }[] = [
+    { ids: reach(inField.filter((id) => above(id) && sameTrack(id))), fill: true },
+    { ids: inField.filter((id) => band(id) === own && sameTrack(id)), fill: true },
+    { ids: reach(closest(inField.filter(above))), fill: false },
+    { ids: closest(inField.filter((id) => band(id) >= own)), fill: false },
+    { ids: closest(inField), fill: false },
+    { ids: order.filter((id) => id !== recommended), fill: false },
+  ];
+  const picked: JobId[] = [];
+  for (const stage of stages) {
+    if (picked.length >= 2) break;
+    for (const id of stage.ids) {
+      if (picked.length >= (stage.fill ? MAX_TRACKS - 1 : 2)) break;
+      // one card per title (a posting repeated in two cities reads as the same step)
+      if (!picked.includes(id) && !picked.some((p) => getJob(p).title === getJob(id).title) && getJob(id).title !== getJob(recommended).title) picked.push(id);
+    }
+  }
+  return [recommended, ...picked].map((job) => ({ track: trackOf(job), job }));
 }
 
 /** `k` items spread evenly through `list` (its first, its last and the ones between), in list order. */

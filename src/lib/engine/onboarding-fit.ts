@@ -18,9 +18,10 @@ import type {
   UserFacts,
 } from "@/lib/types";
 
-import { bridgeSkills, careerBand, growsInField, switchesFrom } from "./career-shift";
+import { bridgeSkills, careerBand, growTrackOf, growsInField, switchesFrom } from "./career-shift";
 import { jobsAtCompany } from "./companies";
 import { matchPercent } from "./match";
+import { trackOf } from "./tracks";
 
 /** Spec 4.6 "Major → fields": primary, then secondary; `other` has none. */
 const MAJOR_FIELDS: Readonly<Record<MajorOption, readonly [JobFieldId, JobFieldId] | null>> = {
@@ -67,6 +68,11 @@ export function userBandOf(answers: OnboardingAnswers): ExperienceBand {
  */
 export function withinReach(jobId: JobId, answers: OnboardingAnswers): boolean {
   return bandIndex(getJob(jobId).band) - bandIndex(userBand(answers)) <= 1;
+}
+
+/** The major's main job field, or null («تخصص آخر», no major yet). */
+export function majorFieldOf(answers: OnboardingAnswers): JobFieldId | null {
+  return answers.major === undefined ? null : (MAJOR_FIELDS[answers.major.value]?.[0] ?? null);
 }
 
 function majorFields(answers: OnboardingAnswers): readonly [JobFieldId, JobFieldId] | null {
@@ -255,6 +261,13 @@ export function fitReasons(jobId: JobId, answers: OnboardingAnswers): readonly R
   }
   else if (terms.city === 6) reasons.push({ kind: "remote" });
   const priority = answers.priority;
+  // growing in their own specialisation: «خطوتك الجاية في …» says it all, first (the interest was not theirs to pick)
+  const track = growTrackOf(answers);
+  if (track !== null && trackOf(job).id === track && answers.currentTrack) {
+    const rest = reasons.filter((r) => r.kind !== "interest");
+    const step: RevealReason = { kind: "step-up", track: answers.currentTrack.label };
+    return [step, ...rest].slice(0, 3);
+  }
   if (terms.priority > 0 && priority !== undefined && priority !== "explore") {
     // growing in their field: «تطوّر داخل مجالك» is the point of the path, said second (right after the interest)
     if (grows !== null) reasons.splice(Math.min(1, reasons.length), 0, { kind: "priority", priority });
@@ -316,14 +329,23 @@ export function choiceOrder(answers: OnboardingAnswers, ranked: readonly JobId[]
   // 21 Nov 2026 (career shift): growing → the next step up in their field comes first, then their own band; switching →
   // a new field starts at entry or junior, never mid
   const step = growsInField(answers) !== null ? careerBand(answers) : null;
+  // growing in a named specialisation (owner: upgrade the current career, not something new): its jobs first, a band up
+  // first, then its own band; then the rest of the field the same way
+  const track = growTrackOf(answers);
   const switching = switchesFrom(answers) !== null;
   const tier = (id: JobId): number => {
     const job = getJob(id);
     const inField = wanted === null || wanted.has(job.field);
     const good = withinReach(id, answers) && !UNPAID.test(`${job.title} ${job.titleEn ?? ""}`) && !(switching && job.band === "mid");
-    return inField ? (good ? (step !== null && job.band !== step ? 1 : 0) : 2) : good ? 3 : 4;
+    if (!inField) return good ? 5 : 6;
+    if (step === null) return good ? 0 : 4;
+    // the specialisation they work in comes before the rest of their field even when its jobs sit higher than their
+    // experience (owner, 21 Nov 2026: a data-science pick was answered with a real-estate analyst)
+    const sameTrack = track === null || trackOf(job).id === track;
+    if (sameTrack) return good ? (job.band === step ? 0 : 1) : 2;
+    return good ? 3 : 4;
   };
-  return [0, 1, 2, 3, 4].flatMap((t) => ranked.filter((id) => tier(id) === t));
+  return [0, 1, 2, 3, 4, 5, 6].flatMap((t) => ranked.filter((id) => tier(id) === t));
 }
 
 /**

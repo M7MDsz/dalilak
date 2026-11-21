@@ -40,6 +40,10 @@ export const RESULT_COPY = {
   tracksHeading: "اختر تخصصك",
   tracksLead: "لكل تخصص أنسب وظيفة لك فيه.",
   trackChoose: "اختر هذا التخصص",
+  /** 21 Nov 2026 (owner: «أتطوّر في مجالي» upgrades the current career): the higher jobs in the user's own field. */
+  stepsHeading: "خطوتك الجاية",
+  stepsLead: "وظايف أعلى في تخصصك ومجالك، تبني على خبرتك.",
+  stepChoose: "اختر هذي الوظيفة",
   footer: "تستطيع تغيير هدفك في أي وقت من صفحة الوظائف.",
   cvLine: "بعد قراءة سيرتك قد تجد أنك قطعت جزءاً منها.",
   /** With a CV read in onboarding (21 Nov 2026, tester): what it already covers, instead of the line above. */

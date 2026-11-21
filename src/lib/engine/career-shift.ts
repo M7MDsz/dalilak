@@ -96,6 +96,16 @@ export function growsInField(answers: OnboardingAnswers): JobFieldId | null {
   return answers.priority === "grow" ? currentField(answers) : null;
 }
 
+/**
+ * «أتطوّر في مجالي» with a known specialisation of that field (21 Nov 2026, owner: upgrade the current career, not something
+ * new): its engine track id («software/back-end»), else null («غير كذا», or not asked).
+ */
+export function growTrackOf(answers: OnboardingAnswers): string | null {
+  const field = growsInField(answers);
+  const track = answers.currentTrack?.value;
+  return field !== null && track !== undefined && track.startsWith(`${field}/`) ? track : null;
+}
+
 /** «أغيّر مجالي» with a known current field. */
 export function switchesFrom(answers: OnboardingAnswers): JobFieldId | null {
   return answers.priority === "switch" ? currentField(answers) : null;

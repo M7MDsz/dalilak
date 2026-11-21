@@ -303,9 +303,9 @@ export function RevealFlow({ user, rects, startOnResult, onNight, onLeaving }: R
             >
               <motion.div animate={state} className="flex flex-col gap-1" custom={0.32} initial={startOnResult ? false : "hidden"} variants={block}>
                 <h2 className="text-h3 text-fg" id="reveal-alts">
-                  {RESULT_COPY.tracksHeading}
+                  {data.mode === "grow" ? RESULT_COPY.stepsHeading : RESULT_COPY.tracksHeading}
                 </h2>
-                <p className="text-small text-fg-2">{RESULT_COPY.tracksLead}</p>
+                <p className="text-small text-fg-2">{data.mode === "grow" ? RESULT_COPY.stepsLead : RESULT_COPY.tracksLead}</p>
               </motion.div>
               {data.tracks.map((track, i) => (
                 <motion.div animate={state} custom={0.4 + i * 0.04} initial={startOnResult ? false : "hidden"} key={track.id} variants={block}>
@@ -434,6 +434,8 @@ function RecommendedCard({ job, company }: { job: RevealJobCard; company: Reveal
  */
 function TrackCard({ track, index, onChoose, disabled, visible }: { track: RevealTrackCard; index: number; onChoose: () => void; disabled: boolean; visible: boolean }) {
   const { job, best } = track;
+  // «خطوتك الجاية» (grow): the job's title leads, its specialisation · company · city under it
+  const step = track.kind === "step";
   return (
     <Card
       data-testid={visible ? (best ? TID.reveal.trackBest : TID.reveal.alt(index)) : undefined}
@@ -445,9 +447,9 @@ function TrackCard({ track, index, onChoose, disabled, visible }: { track: Revea
     >
       <div className={cn("flex flex-col gap-2 px-card", best ? "pt-1.5 pb-4" : "py-4")}>
         <div className="flex flex-col gap-0.5">
-          <h3 className="text-title text-fg">{track.name}</h3>
+          <h3 className="text-title text-fg">{step ? job.title : track.name}</h3>
           <p className="text-small text-fg-2">
-            <span className="font-medium text-fg">{job.title}</span>
+            <span className="font-medium text-fg">{step ? track.name : job.title}</span>
             <span aria-hidden> · </span>
             {/* the company and city wrap together (a lone city on the next line read as a stray) */}
             <span className="whitespace-nowrap">{job.companyCity}</span>
@@ -462,7 +464,7 @@ function TrackCard({ track, index, onChoose, disabled, visible }: { track: Revea
             size="sm"
             variant={best ? "primary" : "secondary"}
           >
-            {best ? RESULT_COPY.accept : RESULT_COPY.trackChoose}
+            {best ? RESULT_COPY.accept : step ? RESULT_COPY.stepChoose : RESULT_COPY.trackChoose}
           </Button>
         </div>
       </div>

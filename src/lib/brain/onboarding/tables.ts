@@ -533,7 +533,7 @@ export const FILLER_WORDS = [
 // ── 4.4: acknowledgements; 4.5: special replies ────────────────────────────────────────────────────────────────────
 
 /** The variant key of each step (fixed: the acknowledgement a name gets does not move when the order changes). */
-export const QUESTION_NUMBER: Readonly<Record<OnboardingStepId, 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8>> = {
+export const QUESTION_NUMBER: Readonly<Record<OnboardingStepId, 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9>> = {
   city: 1,
   education: 2,
   major: 3,
@@ -542,6 +542,7 @@ export const QUESTION_NUMBER: Readonly<Record<OnboardingStepId, 1 | 2 | 3 | 4 | 
   company: 6,
   priority: 7,
   current: 8,
+  currentTrack: 9,
 };
 
 export const ACK = {
@@ -802,6 +803,14 @@ export const CAREER_LINES = {
       : `من شغلك في ${from}، أقرب مجالات تنتقل لها: ${close.length === 1 ? close[0] : `${close.slice(0, -1).join("، ")} أو ${close[close.length - 1]}`}، وش يشدّك؟`,
   /** «أغيّر مجالي» and the interest typed is the field they work in now. */
   sameField: (field: string): string => `${field} هو مجالك الحين، وأنت تبي تغيّره. اختر مجال جديد من الخيارات تحت.`,
+  /** «وش تخصصك فيه بالضبط؟» answered (grow): the path line right after names the next step in it. */
+  track: [
+    (track: string): string => `زين، ${track}.`,
+    (track: string): string => `تمام، ${track}.`,
+    (track: string): string => `حلو، ${track}.`,
+  ],
+  /** «غير كذا»: the next step is looked for across the whole field. */
+  trackOther: "ولا يهمك، أدوّر لك الخطوة الجاية في مجالك كله.",
   /** The placeholder after «مجال آخر» (the composer takes the job in the user's words). */
   otherPlaceholder: "اكتب شغلك، مثلاً: محاسب أو مبرمج",
 } as const;

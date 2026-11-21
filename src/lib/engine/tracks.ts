@@ -222,3 +222,36 @@ export function tracksOf(field: JobFieldId): readonly Track[] {
   const used = new Set(JOBS.filter((job) => job.field === field).map((job) => trackOf(job).id));
   return trackCatalogue(field).filter((t) => used.has(t.id));
 }
+
+/**
+ * 21 Nov 2026 (owner: «أتطوّر في مجالي» must upgrade the user's current career): the named tracks of a field that have
+ * jobs (its general track left out): the choices of «وش تخصصك فيه بالضبط؟».
+ */
+export function namedTracksOf(field: JobFieldId): readonly Track[] {
+  return tracksOf(field).filter((t) => !t.general);
+}
+
+/** Everyday spellings of the English track words («باك إند», «فل ستاك»): read as the English the keywords know. */
+const SPOKEN: readonly (readonly [RegExp, string])[] = [
+  [/باك ?[اإأ]ند/g, "back end"],
+  [/فرو?نت ?[اإأ]ند/g, "front end"],
+  [/فل ?ستا?ك/g, "full stack"],
+  [/موبا?يل/g, "mobile"],
+  [/ديف ?[اأ]وبس/g, "devops"],
+  [/سوشي?ال ?ميديا/g, "social"],
+  [/داتا ?سا?ينس/g, "data science"],
+  [/تستر|تستنق|تيستنق/g, "test"],
+];
+
+/**
+ * The named track of `field` a text names (a typed answer, or a CV's job title: «محاسب», «مطوّر واجهات خلفية», «back-end
+ * developer»), by the same keywords that classify the jobs; null when none of the field's tracks with jobs fits.
+ */
+export function trackFromText(field: JobFieldId, text: string): Track | null {
+  let clean = text.replace(MARKS, "");
+  for (const [spoken, english] of SPOKEN) clean = clean.replace(spoken, english);
+  const offered = new Set(namedTracksOf(field).map((t) => t.id));
+  const all = trackCatalogue(field);
+  const at = defsOf(field).tracks.findIndex(([slug, , match]) => offered.has(`${field}/${slug}`) && match.test(clean));
+  return at >= 0 ? (all[at] ?? null) : null;
+}

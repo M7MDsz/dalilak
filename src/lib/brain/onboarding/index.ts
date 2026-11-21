@@ -13,8 +13,11 @@ import {
   companyJobsOutOfReach,
   companyOtherFieldJob,
   jobsAtCompany,
+  namedTracksOf,
   switchesFrom,
+  trackFromText,
   userBandOf,
+  majorFieldOf,
 } from "@/lib/engine";
 import { ASKED_STEP_IDS, isJobFieldId, isOptionOf } from "@/lib/ids";
 import type { CityValue, CompanyId, InterestOption, JobFieldId, JobId, OnboardingAnswers, OnboardingStepId, UserState } from "@/lib/types";
@@ -57,8 +60,42 @@ function interestOfField(field: JobFieldId): InterestOption {
  * have no work experience; every other step always applies.
  */
 export function stepApplies(question: OnboardingStepId, answers: OnboardingAnswers): boolean {
+  if (question === "currentTrack") {
+    // «وش تخصصك فيه بالضبط؟»: growing in a known field that has more than one specialisation with jobs
+    const field = answers.priority === "grow" && answers.current !== undefined && isJobFieldId(answers.current.value) ? answers.current.value : null;
+    return field !== null && namedTracksOf(field).length > 1;
+  }
   if (question !== "current") return true;
-  return (answers.priority === "grow" || answers.priority === "switch") && answers.experience !== "none";
+  // 21 Nov 2026 (owner: «improve in my current field gave another field»): asked after «أتطوّر» / «أغيّر» ALWAYS, even
+  // with no work yet (then it is the field they studied or trained in); skipping it sent the path to the interest field
+  return answers.priority === "grow" || answers.priority === "switch";
+}
+
+/** The field the user works in, when they named one (the tracks of «وش تخصصك فيه بالضبط؟» are its). */
+function fieldOfCurrent(answers: OnboardingAnswers): JobFieldId | null {
+  const value = answers.current?.value;
+  return value !== undefined && isJobFieldId(value) ? value : null;
+}
+
+/** A track chip's option (its slug, or «غير كذا») as an answer, checked against the user's field. */
+function trackFound(option: string, answers: OnboardingAnswers): Found | null {
+  if (option === "other") return { question: "currentTrack", value: "other", label: chipLabel("currentTrack", "other") };
+  const field = fieldOfCurrent(answers);
+  const track = field === null ? undefined : namedTracksOf(field).find((t) => t.id === `${field}/${option}`);
+  return track ? { question: "currentTrack", value: track.id, label: track.name } : null;
+}
+
+/** A track chip's label («back-end» → «واجهات خلفية»). */
+function trackLabel(option: string, answers: OnboardingAnswers): string | null {
+  const found = trackFound(option, answers);
+  return found?.question === "currentTrack" ? found.label : null;
+}
+
+/** «وش تخصصك فيه بالضبط؟» typed: the field's track the words name («باك إند», «محاسب»), by the tracks' own keywords. */
+function readTrack(answers: OnboardingAnswers, text: string): Found | null {
+  const field = fieldOfCurrent(answers);
+  const track = field === null ? null : trackFromText(field, text);
+  return track ? { question: "currentTrack", value: track.id, label: track.name } : null;
 }
 
 /** The steps that apply to these answers, in the asked order (the profile trail and «السؤال n من total»). */
@@ -112,6 +149,10 @@ function neutralAnswer(question: OnboardingStepId): { readonly answers: Onboardi
     case "current": {
       const label = chipLabel("current", "other");
       return { answers: { current: { value: "other", label } }, label };
+    }
+    case "currentTrack": {
+      const label = chipLabel("currentTrack", "other");
+      return { answers: { currentTrack: { value: "other", label } }, label };
     }
   }
 }
@@ -248,6 +289,10 @@ function recordFound(name: string, found: Found, typed: string | null = null, be
             : CAREER_LINES.noted(label);
       return { question: "current", answers: { current: { value: found.value, label } }, ack, extra: `شغلك في ${label}` };
     }
+    case "currentTrack": {
+      const ack = found.value === "other" ? CAREER_LINES.trackOther : CAREER_LINES.track[variant(name, "currentTrack")](found.label);
+      return { question: "currentTrack", answers: { currentTrack: { value: found.value, label: found.label } }, ack, extra: `تخصصك ${found.label}` };
+    }
   }
 }
 
@@ -258,7 +303,7 @@ function recordNeutral(question: OnboardingStepId): Recorded {
 }
 
 /** A chip's option id as an answer (4.2: recorded directly, never parsed). Null for an id that is not an option. */
-function chipFound(question: OnboardingStepId, option: string): Found | null {
+function chipFound(question: OnboardingStepId, option: string, answers: OnboardingAnswers = {}): Found | null {
   switch (question) {
     case "city":
       return isOptionOf("city", option) ? { question, value: option, label: null } : null;
@@ -276,11 +321,13 @@ function chipFound(question: OnboardingStepId, option: string): Found | null {
       return isOptionOf("company", option) ? { question, value: option } : null;
     case "current":
       return isOptionOf("current", option) ? { question, value: option, label: null } : null;
+    case "currentTrack":
+      return trackFound(option, answers);
   }
 }
 
 /** Model-classified option ids as an answer (interest: up to two; others: the first valid id). */
-function classifiedFound(question: OnboardingStepId, options: readonly string[]): Found | null {
+function classifiedFound(question: OnboardingStepId, options: readonly string[], answers: OnboardingAnswers = {}): Found | null {
   if (question === "interest") {
     const valid = options.filter((o): o is InterestOption => isOptionOf("interest", o));
     const [a, b] = [...new Set(valid)];
@@ -288,7 +335,7 @@ function classifiedFound(question: OnboardingStepId, options: readonly string[])
     return { question, values: b ? [a, b] : [a] };
   }
   for (const option of options) {
-    const found = chipFound(question, option);
+    const found = chipFound(question, option, answers);
     if (found) return found;
   }
   return null;
@@ -460,7 +507,7 @@ function readAnswers(context: OnboardingContext, pending: OnboardingStepId, user
 
   // Step 3: the pending question; for it, «لا أعرف» is itself an answer (its neutral value).
   const recorded: Recorded[] = [];
-  const pendingFound = readPending(reading, pending);
+  const pendingFound = pending === "currentTrack" ? readTrack(context.answers, userText) : readPending(reading, pending);
   if (pendingFound) recorded.push(recordFound(context.name, pendingFound, null, context.answers));
   else if (readNeutral(reading)) recorded.push(recordNeutral(pending));
 
@@ -520,7 +567,17 @@ export function resumeMessages(context: OnboardingContext): readonly string[] {
 export function questionChips(question: OnboardingStepId, answers: OnboardingAnswers): OnboardingChipSet {
   if (question === "current") {
     const options = getQuestion("current").options;
-    return { question, options: CURRENT_TILES.flatMap((id) => options.filter((o) => o.id === id)) };
+    // the major's main field first (an MIS graduate sees «البيانات والتحليل» first), then the usual order
+    const first = majorFieldOf(answers);
+    const tiles: readonly string[] = CURRENT_TILES;
+    const order = first !== null && tiles.includes(first) ? [first, ...tiles.filter((id) => id !== first)] : tiles;
+    return { question, options: order.flatMap((id) => options.filter((o) => o.id === id)) };
+  }
+  if (question === "currentTrack") {
+    // the field's specialisations with jobs (by slug: test ids `welcome-chip-currentTrack-back-end`), then «غير كذا»
+    const field = fieldOfCurrent(answers);
+    const tracks = field === null ? [] : namedTracksOf(field).map((t) => ({ id: t.id.slice(field.length + 1), label: t.name }));
+    return { question, options: [...tracks, ...getQuestion("currentTrack").options] };
   }
   // «أغيّر مجالي»: the fields closest to the current career lead the tiles; the current field itself is not offered
   const from = question === "interest" ? switchesFrom(answers) : null;
@@ -546,18 +603,18 @@ export function onboardingTurn(context: OnboardingContext, input: OnboardingInpu
   }
 
   if (input.kind === "chip") {
-    const userText = chipLabel(input.question, input.option);
+    const userText = input.question === "currentTrack" ? (trackLabel(input.option, context.answers) ?? input.option) : chipLabel(input.question, input.option);
     // «مدينة أخرى» is never sent (it focuses the composer); an unknown id is read as typed text instead.
     if (input.question === "city" && input.option === "other") {
       return { userText: "", replies: [], answers: context.answers, misses: context.misses, pending, chips: questionChips(pending, context.answers), done: false, unmapped: null };
     }
-    const found = chipFound(input.question, input.option);
+    const found = chipFound(input.question, input.option, context.answers);
     if (!found) return textTurn(context, pending, userText);
     return answeredTurn(context, userText, [recordFound(context.name, found, null, context.answers)], context.misses);
   }
 
   if (input.kind === "classified") {
-    const found = classifiedFound(input.question, input.options);
+    const found = classifiedFound(input.question, input.options, context.answers);
     const typed = typedLabel(input.text);
     if (!found) return textTurn(context, pending, input.text);
     return withLead(answeredTurn(context, input.text.trim(), [recordFound(context.name, found, typed, context.answers)], context.misses), greetingLead(input.text));
@@ -576,7 +633,7 @@ export function pendingQuestion(answers: OnboardingAnswers, completedBefore = fa
   for (const question of order) {
     if (question === "company" && completedBefore) continue;
     // the current career: only after «أتطوّر» / «أغيّر» (an account that finished before it existed stays finished)
-    if (question === "current" && (completedBefore || !stepApplies("current", answers))) continue;
+    if ((question === "current" || question === "currentTrack") && (completedBefore || !stepApplies(question, answers))) continue;
     if (answers[question] === undefined) return question;
   }
   return null;
@@ -588,7 +645,7 @@ export function pendingQuestion(answers: OnboardingAnswers, completedBefore = fa
  * CV showed it), the interest (asked from the CV's real skills, or from the current career after «أغيّر مجالي»), then
  * whatever the CV did not state (city, education, major, experience).
  */
-export const CV_QUESTION_ORDER: readonly OnboardingStepId[] = ["priority", "current", "interest", "city", "education", "major", "experience"];
+export const CV_QUESTION_ORDER: readonly OnboardingStepId[] = ["priority", "current", "currentTrack", "interest", "city", "education", "major", "experience"];
 
 /** The question order of a saved user: the CV order once a CV was read and its answers kept (not after «لا، بعدّل»). */
 export function questionOrder(user: Pick<UserState, "onboarding">): readonly OnboardingStepId[] {

@@ -283,6 +283,11 @@ export interface OnboardingAnswers {
    * job title names («محاسب» → business, «المحاسبة»); «مجال آخر» (`other`) keeps the typed words.
    */
   readonly current?: { readonly value: CurrentOption; readonly label: string };
+  /**
+   * 21 Nov 2026 (owner: «أتطوّر في مجالي» must upgrade the current career): the specialisation of that field they work in
+   * (an engine track id, «software/back-end»), or "other" for «غير كذا». Asked after `current` for grow only.
+   */
+  readonly currentTrack?: { readonly value: string; readonly label: string };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -846,6 +851,8 @@ export type RevealReason =
   | { readonly kind: "priority"; readonly priority: Exclude<PriorityOption, "explore"> }
   /** «أغيّر مجالي» (21 Nov 2026): the new field's job shares skills with the user's current career (`from`: its label). */
   | { readonly kind: "bridge"; readonly from: string }
+  /** «أتطوّر في مجالي» (21 Nov 2026): the job is the next step in the user's own specialisation (`track`: its name). */
+  | { readonly kind: "step-up"; readonly track: string }
   | { readonly kind: "none" };
 
 /** Spec 4.6: recommended = rank 1; alternative 1 = rank 2; alternative 2 = best remaining job of another field. */

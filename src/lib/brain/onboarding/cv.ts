@@ -4,7 +4,7 @@
 // the two CV phases (the offer, the confirm). The screen runs the analysis itself (src/features/welcome/cv-step.tsx).
 import { countNoun } from "@/lib/copy";
 import { SKILLS, getJob, optionLabel } from "@/lib/data";
-import { NEAREST_INTEREST, switchesFrom } from "@/lib/engine";
+import { NEAREST_INTEREST, switchesFrom, trackFromText } from "@/lib/engine";
 import { isJobFieldId } from "@/lib/ids";
 import type { CvErrorCode, OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
 import type {
@@ -40,7 +40,7 @@ function firstName(name: string): string {
 // ── What the CV states clearly ─────────────────────────────────────────────────────────────────────────────────────
 
 /** The CV slots «دليلك» may fill, in question order. */
-export const CV_SLOTS = ["city", "education", "major", "experience", "current"] as const satisfies readonly OnboardingStepId[];
+export const CV_SLOTS = ["city", "education", "major", "experience", "current", "currentTrack"] as const satisfies readonly OnboardingStepId[];
 
 export interface CvFacts {
   /** Only what is clearly written; the rest stays a question. */
@@ -206,6 +206,9 @@ export function cvFacts(lines: readonly string[], profile?: CvProfile | null): C
       const found = readPending(new Reading(text), "current");
       if (found?.question === "current" && found.value !== "other") {
         answers.current = { value: found.value, label: found.label ?? optionLabel("current", found.value) ?? found.value };
+        // and the specialisation the same title names («محاسب» → المحاسبة, «Backend Developer» → واجهات خلفية)
+        const track = isJobFieldId(found.value) ? trackFromText(found.value, text) : null;
+        if (track) answers.currentTrack = { value: track.id, label: track.name };
         break;
       }
     }
@@ -348,7 +351,10 @@ export function cvConfirmQuestion(answers: OnboardingAnswers, note?: string): st
   else if (city) clauses.push(`إنك ${city}`);
   if (answers.experience && note && answers.experience === "under1") clauses.push(clauses.length > 0 ? `ومعك ${note}` : `إن معك ${note}`);
   else if (answers.experience) clauses.push(EXPERIENCE_CLAUSE[answers.experience][clauses.length > 0 ? 0 : 1]);
-  if (answers.current && answers.current.value !== "other") clauses.push(clauses.length > 0 ? `وشغلك الحين في ${answers.current.label}` : `إن شغلك الحين في ${answers.current.label}`);
+  if (answers.current && answers.current.value !== "other") {
+    const track = answers.currentTrack && answers.currentTrack.value !== "other" && answers.currentTrack.label !== answers.current.label ? ` (${answers.currentTrack.label})` : "";
+    clauses.push(`${clauses.length > 0 ? "وشغلك" : "إن شغلك"} الحين في ${answers.current.label}${track}`);
+  }
   return `فهمت من سيرتك ${clauses.join("، ")}. صح؟`;
 }
 
@@ -407,6 +413,9 @@ export function reasonClauses(reasons: readonly RevealReason[]): string[] {
       case "bridge":
         out.push(`مهاراتك من ${r.from} تنفعك فيها`);
         break;
+      case "step-up":
+        out.push(`تبي تتطوّر في ${r.track}`);
+        break;
       case "none":
         break;
     }
@@ -420,6 +429,12 @@ export function reasonClauses(reasons: readonly RevealReason[]): string[] {
  */
 export function pathLine(name: string, job: JobId, match: number | null, reasons: readonly RevealReason[] = []): string {
   const title = getJob(job).title;
+  // «أتطوّر في مجالي» (21 Nov 2026, owner: upgrade the current career): the next step in their own specialisation, plainly
+  const step = reasons.find((r): r is Extract<RevealReason, { kind: "step-up" }> => r.kind === "step-up");
+  if (step) {
+    const fit = match === null ? "" : `، ومطابقتك لها الحين ${match}%`;
+    return `الخطوة الجاية لك في ${step.track}: «${title}»${fit}. لحظات وأرسمها لك.`;
+  }
   const clauses = reasonClauses(reasons);
   const why = clauses.length > 0 ? `، لأنك ${clauses.join("، و")}` : "";
   if (match === null) {

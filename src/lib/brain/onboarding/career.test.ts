@@ -7,11 +7,12 @@ import { describe, expect, it } from "vitest";
 import { analyseCvLocal } from "@/lib/brain/cv";
 import { revealReasonText } from "@/lib/copy";
 import { getJob, sampleCvText } from "@/lib/data";
-import { closeFields, recommend } from "@/lib/engine";
+import { closeFields, recommend, trackOf } from "@/lib/engine";
+import { revealData } from "@/features/welcome/reveal-data";
 import type { OnboardingContext, OnboardingInput, OnboardingTurn } from "@/lib/brain/protocol";
 import type { OnboardingAnswers, OnboardingStepId } from "@/lib/types";
 
-import { cvConfirmQuestion, cvConfirmTurn, cvFacts } from "./cv";
+import { cvConfirmQuestion, cvConfirmTurn, cvFacts, pathLine } from "./cv";
 import { CV_QUESTION_ORDER, onboardingTurn, pendingQuestion, questionChips, stepNumber, stepsFor } from "./index";
 
 const BASE: OnboardingAnswers = {
@@ -48,11 +49,11 @@ describe("the priority comes before the interest", () => {
     expect(stepsFor(turns[1]!.answers)).toEqual(["city", "education", "major", "experience", "priority", "interest"]);
   });
 
-  it("asks «وش مجال شغلك الحين؟» only after grow / switch, and not to someone with no work experience", () => {
+  it("asks «وش مجال شغلك الحين؟» only after grow / switch, ALWAYS (21 Nov 2026, owner: with no work it is the field they studied)", () => {
     expect(pendingQuestion({ ...BASE, priority: "grow" })).toBe("current");
     expect(pendingQuestion({ ...BASE, priority: "switch" })).toBe("current");
     expect(pendingQuestion({ ...BASE, priority: "explore" })).toBe("interest");
-    expect(pendingQuestion({ ...BASE, experience: "none", priority: "switch" })).toBe("interest");
+    expect(pendingQuestion({ ...BASE, experience: "none", priority: "switch" })).toBe("current");
     // an account that finished before the question existed stays finished
     expect(pendingQuestion({ ...BASE, priority: "grow", interest: ["data"] }, true)).toBeNull();
     expect(stepsFor({ ...BASE, priority: "grow" })).toEqual(["city", "education", "major", "experience", "priority", "current", "interest"]);
@@ -71,14 +72,68 @@ describe("the priority comes before the interest", () => {
 describe("«أتطوّر في مجالي»: the path is the next step up in the field they work in", () => {
   const grow: OnboardingAnswers = { ...BASE, major: { value: "cs", label: "حاسب وتقنية معلومات" } };
 
-  it("records the interest itself, says so, and closes", () => {
-    const [priority, current] = play(grow, [chip("priority", "grow"), chip("current", "software")]);
+  it("records the interest itself, says so, asks the specialisation, and closes", () => {
+    const [priority, current, track] = play(grow, [chip("priority", "grow"), chip("current", "software"), chip("currentTrack", "back-end")]);
     expect(priority?.replies).toEqual(["قرار موفق، تتطوّر في مجالك وتبني على اللي عندك.", "وش مجال شغلك الحين؟"]);
     expect(priority?.chips?.question).toBe("current");
     expect(current?.answers.current).toEqual({ value: "software", label: "البرمجة والتقنية" });
     expect(current?.answers.interest).toEqual(["software"]);
-    expect(current?.replies[0]).toBe("تمام، نطوّرك في مجالك: البرمجة والتقنية. بدوّر لك على الخطوة اللي بعدها فيه.");
-    expect(current?.done).toBe(true);
+    expect(current?.replies).toEqual(["تمام، نطوّرك في مجالك: البرمجة والتقنية. بدوّر لك على الخطوة اللي بعدها فيه.", "وش تخصصك فيه بالضبط؟"]);
+    // the field's specialisations with jobs, then «غير كذا» (21 Nov 2026, owner: upgrade the current career)
+    expect(current?.chips?.options.map((o) => o.id)).toEqual(["full-stack", "front-end", "mobile", "qa", "ai", "back-end", "other"]);
+    expect(track?.userText).toBe("واجهات خلفية");
+    expect(track?.answers.currentTrack).toEqual({ value: "software/back-end", label: "واجهات خلفية" });
+    expect(track?.replies[0]).toBe("تمام، واجهات خلفية.");
+    expect(track?.done).toBe(true);
+    expect(stepsFor(track!.answers)).toEqual(["city", "education", "major", "experience", "priority", "current", "currentTrack", "interest"]);
+  });
+
+  it("reads a typed specialisation («باك إند»), and «غير كذا» keeps the whole field", () => {
+    const at = ctx({ ...grow, priority: "grow", current: { value: "software", label: "البرمجة والتقنية" }, interest: ["software"] });
+    expect(at.pending).toBe("currentTrack");
+    expect(onboardingTurn(at, { kind: "text", text: "باك إند" }).answers.currentTrack?.value).toBe("software/back-end");
+    expect(onboardingTurn(at, { kind: "text", text: "front end developer" }).answers.currentTrack?.value).toBe("software/front-end");
+    expect(onboardingTurn(at, chip("currentTrack", "other")).answers.currentTrack).toEqual({ value: "other", label: "غير كذا" });
+  });
+
+  it("recommends the next step in their OWN specialisation, says so, and offers only higher jobs of it", () => {
+    const answers: OnboardingAnswers = {
+      ...grow,
+      priority: "grow",
+      current: { value: "software", label: "البرمجة والتقنية" },
+      currentTrack: { value: "software/back-end", label: "واجهات خلفية" },
+      interest: ["software"],
+    };
+    const rec = recommend(answers);
+    expect(trackOf(rec.recommended).id).toBe("software/back-end");
+    expect(getJob(rec.recommended).band).toBe("mid");
+    expect(rec.reasons.map(revealReasonText)[0]).toBe("خطوتك الجاية في واجهات خلفية");
+    expect(pathLine("خالد", rec.recommended, null, rec.reasons)).toBe(`الخطوة الجاية لك في واجهات خلفية: «${getJob(rec.recommended).title}». لحظات وأرسمها لك.`);
+    const data = revealData(answers);
+    expect(data.mode).toBe("grow");
+    expect(data.tracks[0]?.job.id).toBe(rec.recommended);
+    expect(data.tracks.length).toBeGreaterThanOrEqual(3);
+    for (const card of data.tracks) {
+      expect(trackOf(card.job.id).id, card.job.id).toBe("software/back-end");
+      expect(getJob(card.job.id).band, card.job.id).toBe("mid");
+    }
+    expect(data.alternatives.map((a) => a.id)).toEqual(data.tracks.slice(1, 3).map((t) => t.job.id));
+  });
+
+  it("an accountant with over three years: an accounting job at their level, then the field at their level (never a junior one)", () => {
+    const answers: OnboardingAnswers = {
+      ...BASE,
+      experience: "over3",
+      priority: "grow",
+      current: { value: "business", label: "المحاسبة والمالية" },
+      currentTrack: { value: "business/accounting", label: "المحاسبة" },
+      interest: ["business"],
+    };
+    const rec = recommend(answers);
+    expect(trackOf(rec.recommended).id).toBe("business/accounting");
+    expect(getJob(rec.recommended).band).toBe("mid");
+    const data = revealData(answers);
+    expect(data.tracks.every((t) => getJob(t.job.id).field === "business" && getJob(t.job.id).band === "mid")).toBe(true);
   });
 
   it("aims one band above the user's experience in that field (1to3 → mid), and says it grows them", () => {
@@ -150,13 +205,30 @@ describe("with a CV", () => {
     const lines = ["سارة", "الرياض", "الخبرة العملية", "محاسبة، شركة الندى للتجارة، 2021 - الآن", "خبرة 4 سنوات في إعداد القوائم المالية."];
     const facts = cvFacts(lines);
     expect(facts.answers.current).toEqual({ value: "business", label: "المحاسبة" });
+    expect(facts.answers.currentTrack).toEqual({ value: "business/accounting", label: "المحاسبة" });
     expect(cvConfirmQuestion(facts.answers)).toBe("فهمت من سيرتك إنك من الرياض، وعندك خبرة أكثر من 3 سنوات، وشغلك الحين في المحاسبة. صح؟");
     const yes = cvConfirmTurn({ name: "سارة", answers: facts.answers, misses: {}, pending: null }, facts.slots, { kind: "chip", option: "yes" }, null);
     expect(yes.pending).toBe("priority");
-    expect(CV_QUESTION_ORDER.slice(0, 3)).toEqual(["priority", "current", "interest"]);
+    expect(CV_QUESTION_ORDER.slice(0, 4)).toEqual(["priority", "current", "currentTrack", "interest"]);
     // «أغيّر مجالي» then skips the question the CV answered and asks the interest with the suggestion
     const sw = onboardingTurn({ name: "سارة", answers: yes.answers, misses: {}, pending: "priority", order: CV_QUESTION_ORDER }, chip("priority", "switch"));
     expect(sw.pending).toBe("interest");
     expect(sw.replies[sw.replies.length - 1]).toMatch(/^من شغلك في المحاسبة، أقرب مجالات تنتقل لها: /);
+  });
+});
+
+describe("«أتطوّر في مجالي» with a CV whose latest job is «محاسب» (4 years)", () => {
+  it("reads the specialisation from the job title, skips both questions, and closes on the next accounting step", () => {
+    const lines = ["سارة", "الرياض", "الخبرة العملية", "محاسب، شركة الندى للتجارة، 2021 - الآن", "خبرة 4 سنوات في إعداد القوائم المالية."];
+    const facts = cvFacts(lines);
+    const yes = cvConfirmTurn({ name: "سارة", answers: facts.answers, misses: {}, pending: null }, facts.slots, { kind: "chip", option: "yes" }, null);
+    const grow = onboardingTurn({ name: "سارة", answers: yes.answers, misses: {}, pending: "priority", order: CV_QUESTION_ORDER }, chip("priority", "grow"));
+    // the education and major the CV did not state are still asked, after the career
+    expect(grow.answers.interest).toEqual(["business"]);
+    expect(grow.replies[0]).toMatch(/تمام، نطوّرك في مجالك: المحاسبة\./);
+    expect(grow.pending).toBe("education");
+    const rec = recommend({ ...grow.answers, education: "bachelor", major: { value: "finance", label: "مالية ومحاسبة" } });
+    expect(trackOf(rec.recommended).id).toBe("business/accounting");
+    expect(getJob(rec.recommended).band).toBe("mid");
   });
 });

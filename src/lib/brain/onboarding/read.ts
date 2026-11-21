@@ -162,7 +162,9 @@ export type Found =
   | { readonly question: "interest"; readonly values: readonly [InterestOption] | readonly [InterestOption, InterestOption] }
   | { readonly question: "priority"; readonly value: PriorityOption }
   | { readonly question: "company"; readonly value: CompanyId | "none" }
-  | { readonly question: "current"; readonly value: CurrentOption; readonly label: string | null };
+  | { readonly question: "current"; readonly value: CurrentOption; readonly label: string | null }
+  /** `value`: an engine track id («software/back-end») or "other"; `label`: the track's name. */
+  | { readonly question: "currentTrack"; readonly value: string; readonly label: string };
 
 /** The earliest hit (longer first at the same start) of a keyword table, used up. */
 function earliestOf<V>(reading: Reading, table: readonly { readonly keyword: string; readonly value: V }[], skip?: (v: V) => boolean): { value: V; keyword: string } | null {
@@ -387,6 +389,8 @@ const READERS: Readonly<Record<OnboardingStepId, (reading: Reading) => Found | n
   company: readCompany,
   priority: readPriority,
   current: readCurrent,
+  // the tracks depend on the field: read in brain/onboarding with the answers (`readTrack`)
+  currentTrack: () => null,
 };
 
 /** Step 3: the pending question. */

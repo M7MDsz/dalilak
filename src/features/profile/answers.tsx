@@ -53,7 +53,13 @@ export function AnswersSection({ user, className }: { readonly user: UserState; 
         {user.answers.current ? (
           <div className="flex items-baseline justify-between gap-4 border-b border-border py-3">
             <dt className="shrink-0 text-small text-fg-2">{PROFILE_COPY.current}</dt>
-            <dd className="min-w-0 text-end text-body font-medium text-fg">{user.answers.current.label}</dd>
+            <dd className="min-w-0 text-end text-body font-medium text-fg">
+              {user.answers.current.label}
+              {/* its specialisation, when told (grow) and not the same words */}
+              {user.answers.currentTrack && user.answers.currentTrack.value !== "other" && user.answers.currentTrack.label !== user.answers.current.label
+                ? ` · ${user.answers.currentTrack.label}`
+                : null}
+            </dd>
           </div>
         ) : null}
         {/* «الشركة اللي في بالك» (onboarding step 7, 20 Nov 2026): across both columns, with change and clear */}

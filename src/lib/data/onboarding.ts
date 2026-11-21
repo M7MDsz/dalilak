@@ -166,10 +166,25 @@ export const CURRENT_TILES = [
   "business", "sales-supply", "hr", "marketing", "software", "data", "design", "engineering", "education", "banking-risk", "other",
 ] as const satisfies readonly (typeof CURRENT_QUESTION.options)[number]["id"][];
 
+/**
+ * 21 Nov 2026 (owner: «أتطوّر في مجالي» must upgrade the current career): «وش تخصصك فيه بالضبط؟», after the current field,
+ * for grow only. Its options depend on the field (brain/onboarding `questionChips`: the field's tracks with jobs, then
+ * «غير كذا»), so the static list holds only «غير كذا».
+ */
+export const CURRENT_TRACK_QUESTION: OnboardingQuestion<"currentTrack"> = {
+  id: "currentTrack",
+  n: 7,
+  slot: "دورك",
+  text: "وش تخصصك فيه بالضبط؟",
+  textAfterSecondary: null,
+  options: [{ id: "other", label: "غير كذا" }],
+};
+
 /** The question with this id, the seventh step included (narrow its options by checking `question.id`). */
 export function getQuestion(id: OnboardingStepId): OnboardingQuestion {
   if (id === "company") return COMPANY_QUESTION;
   if (id === "current") return CURRENT_QUESTION;
+  if (id === "currentTrack") return CURRENT_TRACK_QUESTION;
   const question = ONBOARDING_QUESTIONS.find((q) => q.id === id);
   if (!question) throw new Error(`data: unknown question ${id}`);
   return question;
@@ -177,7 +192,7 @@ export function getQuestion(id: OnboardingStepId): OnboardingQuestion {
 
 /** The label of an option id of a question («riyadh» → «الرياض»), or null when the id is not an option. */
 export function optionLabel(question: OnboardingStepId, option: string): string | null {
-  const found = question === "company" ? COMPANY_QUESTION : question === "current" ? CURRENT_QUESTION : ONBOARDING_QUESTIONS.find((q) => q.id === question);
+  const found = question === "company" ? COMPANY_QUESTION : question === "current" ? CURRENT_QUESTION : question === "currentTrack" ? CURRENT_TRACK_QUESTION : ONBOARDING_QUESTIONS.find((q) => q.id === question);
   const opt = found?.options.find((o) => o.id === option);
   return opt ? opt.label : null;
 }

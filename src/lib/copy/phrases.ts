@@ -147,6 +147,9 @@ export function revealReasonText(reason: RevealReason): string {
       return "عن بُعد: يناسب أي مدينة";
     case "priority":
       return PRIORITY_REASON[reason.priority];
+    case "step-up":
+      // «أتطوّر في مجالي» (21 Nov 2026): the next step in the user's own specialisation
+      return `خطوتك الجاية في ${reason.track}`;
     case "bridge":
       // «أغيّر مجالي» (21 Nov 2026): the new field's job asks for skills the user's current career uses
       return `مهاراتك من ${reason.from} تنفعك فيه`;

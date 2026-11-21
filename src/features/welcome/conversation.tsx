@@ -132,7 +132,7 @@ export function pendingOf(user: UserState): OnboardingStepId | null {
 /** How each of the seven answers prints in «ملفك يتكوّن» (null while unanswered). */
 export function stepValues(answers: OnboardingAnswers): Record<OnboardingStepId, string | null> {
   const values = Object.fromEntries(QUESTION_IDS.map((q) => [q, answerText(answers, q)])) as Record<QuestionId, string | null>;
-  return { ...values, company: companyAnswerLabel(answers.company), current: answers.current?.label ?? null };
+  return { ...values, company: companyAnswerLabel(answers.company), current: answers.current?.label ?? null, currentTrack: answers.currentTrack?.label ?? null };
 }
 
 /** The interest the user's CV leans to (null without a CV read in onboarding). */
@@ -193,7 +193,7 @@ function phraseRequestFor(context: OnboardingContext, turn: OnboardingTurn, user
   // the current career's turn carries the owner's lines (grow: «تمام، نطوّرك في مجالك: …»; switch: the closest fields to
   // move to, named in the interest question): said exactly as the template has them (21 Nov 2026)
   const shift = turn.answers.priority === "grow" || turn.answers.priority === "switch";
-  if (turn.answers.current !== undefined && (context.pending === "current" || (context.pending === "priority" && shift))) return null;
+  if (turn.answers.current !== undefined && (context.pending === "current" || context.pending === "currentTrack" || (context.pending === "priority" && shift))) return null;
   const facts: { -readonly [K in keyof PhraseFacts]: PhraseFacts[K] } = { answer: turn.userText };
   let moment: PhraseMoment = "ack";
   if (turn.pending !== null) facts.nextQuestion = turn.replies[turn.replies.length - 1];
@@ -406,7 +406,8 @@ export function Conversation({
       return local;
     }
     if (input.kind !== "text" || pending === null || !brainOnline.current) return local;
-    const options = getQuestion(pending).options.filter((o) => !(pending === "city" && o.id === "other"));
+    // the specialisations depend on the field: the model reads the tiles shown (by slug), «غير كذا» included
+    const options = (pending === "currentTrack" ? questionChips(pending, context.answers).options : getQuestion(pending).options).filter((o) => !(pending === "city" && o.id === "other"));
     const asked = pending === "interest" && user0 ? interestAsk(user0) : getQuestion(pending).text;
     const understood = await understand(context, pending, asked, options, input.text, pending === "interest");
     const before = Object.keys(context.answers).length;
