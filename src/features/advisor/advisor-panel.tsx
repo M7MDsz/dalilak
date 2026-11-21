@@ -4,9 +4,9 @@
 // Desktop (≥ 1024 px): a floating sheet on the inline-end side (the left), 420 px wide, inset 8 px, that docks at
 // ≥ 1280 px (the shell gives the content `padding-inline-end: 436px`) and overlays without a scrim below that. It never
 // traps focus: the page beside it stays usable, and «دليلك» changes that page while the panel stays put.
-// Phone: a full-screen sheet that traps focus. Both arrive the same way, Dalilak's form of the side-panel chat opening: 16 px
-// from their edge plus a fade, 200 ms in, 150 ms out (the phone sheet rises 24 px); inside, the header, the thread and
-// the composer rise 60 ms apart, and on desktop «دليلك»'s glyph travels from the launcher into the header (AdvisorRoot).
+// Phone: a full-screen sheet that traps focus. Desktop arrives as Dalilak's form of the side-panel chat opening: it grows
+// out of the launcher with a fade; inside, the header, the thread and the composer rise 60 ms apart, and «دليلك»'s glyph
+// travels from the launcher into the header (AdvisorRoot). The phone sheet only fades in place (see OUT_PHONE).
 //
 // The panel stays mounted when closed (hidden and inert), so the thread keeps its scroll and a reply that lands while
 // it is closed is simply there when it opens again: the thread is restored, never replayed.
@@ -35,7 +35,7 @@ const PRESS_MS = 160;
 // The arrival is a CSS transition of opacity and translate, which the browser runs on the compositor: a busy main
 // thread (the docking reflow beside it, a dev-server render) can never freeze or skip it. In: 200 ms, ease-out. Out:
 // 150 ms, ease-in, and only then hidden. The panel sits at the inline-end (the physical left), so it comes 16 px from
-// further left; the phone sheet rises 24 px. (Playbook 3.12's decided fallback route, in the same register.)
+// further left. (Playbook 3.12's decided fallback route, in the same register.)
 // 18 Nov (Mohammed: "make a cool transition, the site feels heavy when you open the chatbot"): the page no longer
 // squeezes to dock the panel (AppShell), and on desktop the panel now GROWS OUT OF THE LAUNCHER: its origin is the
 // launcher's corner (bottom, physical left), it scales up from 94% while it slides 12 px in and fades, 280 ms on the
@@ -44,8 +44,13 @@ const IN =
   "visible opacity-100 translate-x-0 translate-y-0 scale-100 [transition:opacity_180ms_var(--ease-out),translate_280ms_var(--ease-out),scale_280ms_var(--ease-out),visibility_0s]";
 const OUT_DESKTOP =
   "invisible opacity-0 -translate-x-3 translate-y-4 scale-[0.94] [transition:opacity_140ms_var(--ease-in),translate_160ms_var(--ease-in),scale_160ms_var(--ease-in),visibility_0s_linear_160ms]";
-const OUT_PHONE =
-  "invisible opacity-0 translate-y-6 scale-[0.98] [transition:opacity_150ms_var(--ease-in),translate_150ms_var(--ease-in),scale_150ms_var(--ease-in),visibility_0s_linear_150ms]";
+// 21 Nov (Mohammed: "in the phone ui when you open the chat, the current chat goes up"): the phone sheet IS the screen,
+// so its 24 px rise, its scale from 98% at the bottom edge and the inner 8 px rises carried the whole conversation about
+// 35 px up the screen on every opening (and on every return after «دليلك» showed a page), the composer starting under
+// the bottom edge. The phone sheet now only fades, 180 ms in, 150 ms out, with nothing inside rising: the conversation,
+// its newest message and the composer are where they rest from the first frame it shows. Desktop is unchanged.
+const IN_PHONE = "visible opacity-100 [transition:opacity_180ms_var(--ease-out),visibility_0s]";
+const OUT_PHONE = "invisible opacity-0 [transition:opacity_150ms_var(--ease-in),visibility_0s_linear_150ms]";
 
 export interface AdvisorPanelProps {
   readonly phone: boolean;
@@ -175,8 +180,9 @@ export function AdvisorPanel({ phone, entered, glyphSlotRef, panelRef, glyphHidd
     }
   };
 
-  // each opening replays the inner rise (CSS: removing and adding the animation restarts it)
-  const rise = entered ? "animate-rise" : "";
+  // each opening replays the inner rise (CSS: removing and adding the animation restarts it); desktop only: on a phone
+  // the sheet is the whole screen and nothing in it moves as it arrives
+  const rise = entered && !phone ? "animate-rise" : "";
 
   return (
     <section
@@ -185,8 +191,8 @@ export function AdvisorPanel({ phone, entered, glyphSlotRef, panelRef, glyphHidd
       aria-modal={phone ? true : undefined}
       className={cn(
         "fixed z-panel flex flex-col overflow-hidden bg-surface text-fg",
-        phone ? "kb-fit inset-0 origin-bottom" : "inset-y-2 end-2 w-[420px] origin-bottom-left rounded-sheet border border-border shadow-float",
-        entered ? IN : phone ? OUT_PHONE : OUT_DESKTOP,
+        phone ? "kb-fit inset-0" : "inset-y-2 end-2 w-[420px] origin-bottom-left rounded-sheet border border-border shadow-float",
+        phone ? (entered ? IN_PHONE : OUT_PHONE) : entered ? IN : OUT_DESKTOP,
       )}
       data-entered={entered ? "" : undefined}
       data-state={open ? "open" : "closed"}
